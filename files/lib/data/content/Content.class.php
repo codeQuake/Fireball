@@ -1,8 +1,7 @@
 <?php
 namespace cms\data\content;
-use linklist\data\LINKLISTDatabaseObject;
+use cms\data\CMSDatabaseObject;
 use wcf\data\IMessage;
-use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\WCF;
 use wcf\system\request\LinkHandler;
@@ -25,7 +24,6 @@ class Content extends CMSDatabaseObject implements IMessage{
     }
     
     public function getFormattedMessage(){
-        AttachmentBBCode::setObjectID($this->contentID);
         MessageParser::getInstance()->setOutputType('text/html');
         return MessageParser::getInstance()->parse($this->message, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
     }
@@ -55,5 +53,15 @@ class Content extends CMSDatabaseObject implements IMessage{
     
     public function isVisible(){
         return true;
+    }
+    
+    public function getTime(){
+        return $this->time;
+    }
+    public function getUserID(){
+        return $this->userID;
+    }
+    public function getUsername(){
+        return $this->username;
     }
 }

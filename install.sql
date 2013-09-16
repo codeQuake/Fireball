@@ -1,4 +1,20 @@
---links
+--pages
+DROP TABLE IF EXISTS cms1_page;
+CREATE TABLE cms1_page (
+pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+publicationDate INT(10) NOT NULL
+);
+
+DROP TABLE IF EXISTS cms1_layout;
+CREATE TABLE cms1_layout (
+layoutID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+pageID INT(10) NOT NULL,
+code TEXT, NOT NULL
+);
+
+--content
 DROP TABLE IF EXISTS cms1_content;
 CREATE TABLE cms1_content (
 contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -22,3 +38,4 @@ cumulativeLikes MEDIUMINT(7) NOT NULL DEFAULT 0
 --foreign keys
 ALTER TABLE cms1_content ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE cms1_content ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE SET NULL;
+ALTER TABLE cms1_layout ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
