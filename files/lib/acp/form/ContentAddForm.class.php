@@ -3,6 +3,7 @@ namespace cms\acp\form;
 
 use cms\data\content\ContentAction;
 use cms\data\content\ContentEditor;
+use cms\system\cache\builder\ContentAttachmentCacheBuilder;
 use wcf\system\WCF;
 use wcf\form\RecaptchaForm;
 use wcf\system\menu\acp\ACPMenu;
@@ -13,7 +14,7 @@ use wcf\form\MessageForm;
 class ContentAddForm extends MessageForm{
     public $templateName = 'contentAdd';
     public $neededPermissions = array(
-        'admin.content.cms.canAddContent'
+        'admin.cms.content.canAddContent'
     );
     public $activeMenuItem = 'cms.acp.menu.link.cms.content.add';
     

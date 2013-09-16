@@ -27,7 +27,7 @@ class ContentAttachmentObjectType extends AbstractAttachmentObjectType {
         return false;
     }
     
-    public function canUpload() {
+    public function canUpload($objectID, $parentObjectID = 0) {
         return WCF::getSession()->getPermission('admin.content.cms.canUploadAttachment');
     }
     

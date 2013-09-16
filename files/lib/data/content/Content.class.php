@@ -1,6 +1,6 @@
 <?php
 namespace cms\data\content;
-use linklist\data\LINKLISTDatabaseObject;
+use cms\data\CMSDatabaseObject;
 use wcf\data\IMessage;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
@@ -55,5 +55,15 @@ class Content extends CMSDatabaseObject implements IMessage{
     
     public function isVisible(){
         return true;
+    }
+    
+    public function getTime(){
+        return $this->time;
+    }
+    public function getUserID(){
+        return $this->userID;
+    }
+    public function getUsername(){
+        return $this->username;
     }
 }
