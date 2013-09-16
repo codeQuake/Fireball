@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/acpMenu.xsd">
+  <import>
+    <acpmenuitem name="cms.acp.menu.link.cms">
+      <parent>wcf.acp.menu.link.content</parent>
+    </acpmenuitem>
+
+    <acpmenuitem name="cms.acp.menu.link.cms.content.list">
+      <parent>cms.acp.menu.link.cms</parent>
+      <controller><![CDATA[cms\acp\form\ContentListPage]]></controller>
+      <permissions>admin.cms.content.canListContent</permissions>
+    </acpmenuitem>
+
+    <acpmenuitem name="cms.acp.menu.link.cms.content.add">
+      <parent>cms.acp.menu.link.cms</parent>
+      <controller><![CDATA[cms\acp\form\ContentAddForm]]></controller>
+      <permissions>admin.cms.content.canAddContent</permissions>
+    </acpmenuitem>
+  </import>
+</data>
