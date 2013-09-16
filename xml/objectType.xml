@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
+  <import>
+    <!-- Attachments -->
+    <type>
+      <name>de.codequake.cms.content</name>
+      <definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
+      <classname>cms\system\attachment\ContentAttachmentObjectType</classname>
+    </type>
+    <!-- /Attachments -->
+  </import>
+</data>
