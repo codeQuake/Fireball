@@ -5,16 +5,16 @@
       <parent>wcf.acp.menu.link.content</parent>
     </acpmenuitem>
 
-    <acpmenuitem name="cms.acp.menu.link.cms.content.list">
+    <acpmenuitem name="cms.acp.menu.link.cms.page.list">
       <parent>cms.acp.menu.link.cms</parent>
-      <controller><![CDATA[cms\acp\form\ContentListPage]]></controller>
-      <permissions>admin.cms.content.canListContent</permissions>
+      <controller><![CDATA[cms\acp\form\PageListPage]]></controller>
+      <permissions>admin.cms.page.canListPage</permissions>
     </acpmenuitem>
 
-    <acpmenuitem name="cms.acp.menu.link.cms.content.add">
+    <acpmenuitem name="cms.acp.menu.link.cms.page.add">
       <parent>cms.acp.menu.link.cms</parent>
-      <controller><![CDATA[cms\acp\form\ContentAddForm]]></controller>
-      <permissions>admin.cms.content.canAddContent</permissions>
+      <controller><![CDATA[cms\acp\form\PageAddForm]]></controller>
+      <permissions>admin.cms.page.canAddPage</permissions>
     </acpmenuitem>
   </import>
 </data>

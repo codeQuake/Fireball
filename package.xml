@@ -23,12 +23,10 @@
 
     <!--tar-->
     <instruction type="file">files.tar</instruction>
-    <instruction type="acpTemplate">acptemplates.tar</instruction>
 
     <!--xml-->
-    <instruction type="objectType">xml/objectType.xml</instruction>
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
-    <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+    <instruction type="userGroupOption">xml\userGroupOption.xml</instruction>
 
     <!--others-->
     <instruction type="sql">install.sql</instruction>

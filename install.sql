@@ -1,41 +1,45 @@
---pages
+--page
 DROP TABLE IF EXISTS cms1_page;
 CREATE TABLE cms1_page (
 pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-name VARCHAR(255) NOT NULL,
-publicationDate INT(10) NOT NULL
-);
-
-DROP TABLE IF EXISTS cms1_layout;
-CREATE TABLE cms1_layout (
-layoutID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-name VARCHAR(255) NOT NULL,
-pageID INT(10) NOT NULL,
-code TEXT, NOT NULL
+parentID INT(10) NOT NULL DEFAULT 0,
+userID INT(10) NOT NULL DEFAULT 0,
+title VARCHAR(255) NOT NULL,
+description MEDIUMTEXT,
+metaDescription MEDIUMTEXT,
+metaKeywords VARCHAR(255),
+contentType TINYINT(1) NOT NULL DEFAULT 1,
+invisible TINYINT(1) DEFAULT 0,
+robots ENUM('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow') NOT NULL DEFAULT 'index,follow'
+showOrder INT(10) DEFAULT 0,
+cssID VARCHAR(255),
+cssClasses VARCHAR(255)
 );
 
 --content
 DROP TABLE IF EXISTS cms1_content;
-CREATE TABLE cms1_content (
+CREATE TABLE cms1_content(
 contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-subject	VARCHAR(255) NOT NULL,
-message	TEXT,
-userID	INT(10),
-username	VARCHAR(255),
-time INT(10) NOT NULL,
-languageID INT(10),
-isActive	TINYINT(1) NOT NULL DEFAULT 0,
-isDeleted	TINYINT(1) NOT NULL DEFAULT 0,
-deleteTime INT(10) NULL,
-lastChangeTime	INT(10),
-attachments SMALLINT(5) NOT NULL DEFAULT 0,
-enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
-enableHtml TINYINT(1) NOT NULL DEFAULT 0,
-enableBBCodes	TINYINT(1) NOT NULL DEFAULT 1,
-cumulativeLikes MEDIUMINT(7) NOT NULL DEFAULT 0
+pageID INT(10),
+title VARCHAR(255) NOT NULL,
+showOrder INT(10) DEFAULT 0,
+cssID VARCHAR(255),
+cssClasses VARCHAR(255)
 );
 
+--section
+DROP TABLE IF EXISTS cms1_content_section;
+CREATE TABLE cms1_content_section(
+sectionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+contentID INT(10),
+sectionType INT(10) DEFAULT 1,
+sectionData MEDIUMTEXT,
+showOrder INT(10) DEFAULT 0,
+cssID VARCHAR (255),
+cssClasses VARCHAR(255)
+));
+
 --foreign keys
-ALTER TABLE cms1_content ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE cms1_content ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE SET NULL;
-ALTER TABLE cms1_layout ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
+ALTER TABLE cms1_page ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
+ALTER TABLE cms1_content_section ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE SET NULL;
