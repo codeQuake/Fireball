@@ -16,5 +16,17 @@
       <controller><![CDATA[cms\acp\form\PageAddForm]]></controller>
       <permissions>admin.cms.page.canAddPage</permissions>
     </acpmenuitem>
+
+    <acpmenuitem name="cms.acp.menu.link.cms.content.list">
+      <parent>cms.acp.menu.link.cms</parent>
+      <controller><![CDATA[cms\acp\form\ContentListPage]]></controller>
+      <permissions>admin.cms.content.canListContent</permissions>
+    </acpmenuitem>
+    
+    <acpmenuitem name="cms.acp.menu.link.cms.content.add">
+      <parent>cms.acp.menu.link.cms</parent>
+      <controller><![CDATA[cms\acp\form\ContentAddForm]]></controller>
+      <permissions>admin.cms.content.canAddContent</permissions>
+    </acpmenuitem>
   </import>
 </data>

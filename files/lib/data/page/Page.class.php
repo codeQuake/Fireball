@@ -53,4 +53,26 @@ class Page extends CMSDatabaseObject{
         return false;
     }
     
+    public function countChildren(){
+        if($this->isRoot()){
+            $list = new PageList();
+            $list->getConditionBuilder()->add('page.parentID = ?', array($this->pageID));
+            $list->sqlOrderBy = 'page.showOrder';
+            $list->readObjects();
+            return $list->countObjects();
+        }
+        return 0;
+    }
+    
+    public function getChildren(){
+        if($this->isRoot()){
+            $list = new PageList();
+            $list->getConditionBuilder()->add('page.parentID = ?', array($this->pageID));
+            $list->sqlOrderBy = 'page.showOrder';
+            $list->readObjects();
+            return $list->getObjects();
+        }
+        return null;
+    }
+    
 }

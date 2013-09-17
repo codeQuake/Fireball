@@ -6,7 +6,7 @@
     <packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
     <isapplication>1</isapplication>
     <version>1.0.0 Alpha 1</version>
-    <date>2013-08-04</date>
+    <date>2013-09-17</date>
   </packageinformation>
   <authorinformation>
     <author><![CDATA[Jens Krumsieck]]></author>
@@ -23,10 +23,11 @@
 
     <!--tar-->
     <instruction type="file">files.tar</instruction>
+    <instruction type="acpTemplate">acptemplates.tar</instruction>
 
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
-    <instruction type="userGroupOption">xml\userGroupOption.xml</instruction>
+    <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 
     <!--others-->
     <instruction type="sql">install.sql</instruction>

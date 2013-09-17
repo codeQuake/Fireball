@@ -7,11 +7,12 @@ use wcf\system\language\I18nHandler;
 use wcf\form\AbstractForm;
 use wcf\util\StringUtil;
 use wcf\system\exception\UserInputException;
+use wcf\system\WCF;
 
 class PageAddForm extends AbstractForm{
     
     public $templateName = 'pageAdd';
-    public $neededPermissions = array();
+    public $neededPermissions = array('admin.cms.page.canAddPage');
     public $activeMenuItem = 'cms.acp.menu.link.cms.page.add';
     
     public $enableMultilangualism = true;
@@ -67,14 +68,14 @@ class PageAddForm extends AbstractForm{
                        'metaDescription' => $this->metaDescription,
                        'metaKeywords' => $this->metaKeywords,
                        'contentType' => $this->contentType,
-                       'invisible' => $this->invisble,
+                       'invisible' => $this->invisible,
                        'robots' => $this->robots,
                        'showOrder' => $this->showOrder,
                        'cssID' => $this->cssID,
                        'cssClasses' => $this->cssClasses);
         $objectAction = new PageAction(array(), 'create', array('data' => $data));
         $objectAction->executeAction();
-        $returnValues = $this->objectAction->getReturnValues();
+        $returnValues = $objectAction->getReturnValues();
         $pageID = $returnValues['returnValues']->contentID;
         $update = array();
         
@@ -99,7 +100,7 @@ class PageAddForm extends AbstractForm{
             $editor->update($update);
         }
         
-        $this->saved;
+        $this->saved();
         WCF::getTPL()->assign('success', true);
         
         $this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->cssID = $this->cssClasses = $this->contentType = $this->robots = '';
@@ -112,7 +113,7 @@ class PageAddForm extends AbstractForm{
         I18nHandler::getInstance()->assignVariables();
         WCF::getTPL()->assign(array('action' => 'add',
                                     'contentType' => $this->contentType,
-                                    'invisible' => $this->invisble,
+                                    'invisible' => $this->invisible,
                                     'robots' => $this->robots,
                                     'showOrder' => $this->showOrder,
                                     'cssID' => $this->cssID,

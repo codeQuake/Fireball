@@ -3,14 +3,14 @@ DROP TABLE IF EXISTS cms1_page;
 CREATE TABLE cms1_page (
 pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 parentID INT(10) NOT NULL DEFAULT 0,
-userID INT(10) NOT NULL DEFAULT 0,
+userID INT(10),
 title VARCHAR(255) NOT NULL,
 description MEDIUMTEXT,
 metaDescription MEDIUMTEXT,
 metaKeywords VARCHAR(255),
 contentType TINYINT(1) NOT NULL DEFAULT 1,
 invisible TINYINT(1) DEFAULT 0,
-robots ENUM('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow') NOT NULL DEFAULT 'index,follow'
+robots ENUM('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow') NOT NULL DEFAULT 'index,follow',
 showOrder INT(10) DEFAULT 0,
 cssID VARCHAR(255),
 cssClasses VARCHAR(255)
