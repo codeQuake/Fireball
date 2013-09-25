@@ -21,13 +21,8 @@ class PageAddForm extends AbstractForm{
     public $description = '';
     public $metaDescription = '';
     public $metaKeywords = '';
-    public $contentType = 0;
     public $invisible = 0;
     public $robots = 'index,follow';
-    public $showOrder = 0;
-    public $cssID = '';
-    public $cssClasses = '';
-    public $parentID = 0;
 
    public function readParameters(){
         parent::readParameters();
@@ -45,13 +40,8 @@ class PageAddForm extends AbstractForm{
         if (I18nHandler::getInstance()->isPlainValue('metaDescription')) $this->metaDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('metaDescription'));
         if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
         
-        if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
-        if(isset($_POST['contentType'])) $this->contentType = intval($_POST['contentType']);
         if(isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
         if(isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
-        if(isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
-        if(isset($_POST['cssID'])) $this->cssID = StringUtil::trim($_POST['cssID']);
-        if(isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
     }
     
     public function validate(){
@@ -61,18 +51,13 @@ class PageAddForm extends AbstractForm{
     
     public function save(){
         parent::save();
-        $data = array('parentID' => $this->parentID,
-                       'userID' => WCF::getUser()->userID,
+        $data = array('userID' => WCF::getUser()->userID,
                        'title' => $this->title,
                        'description' => $this->description,
                        'metaDescription' => $this->metaDescription,
                        'metaKeywords' => $this->metaKeywords,
-                       'contentType' => $this->contentType,
                        'invisible' => $this->invisible,
-                       'robots' => $this->robots,
-                       'showOrder' => $this->showOrder,
-                       'cssID' => $this->cssID,
-                       'cssClasses' => $this->cssClasses);
+                       'robots' => $this->robots);
         $objectAction = new PageAction(array(), 'create', array('data' => $data));
         $objectAction->executeAction();
         $returnValues = $objectAction->getReturnValues();
@@ -103,8 +88,8 @@ class PageAddForm extends AbstractForm{
         $this->saved();
         WCF::getTPL()->assign('success', true);
         
-        $this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->cssID = $this->cssClasses = $this->contentType = $this->robots = '';
-        $this->parentID = $this->invisible = $this->showOrder = 0;
+        $this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = '';
+        $this->invisible = 0;
         I18nHandler::getInstance()->reset();
     }
     
@@ -112,12 +97,8 @@ class PageAddForm extends AbstractForm{
         parent::assignVariables();
         I18nHandler::getInstance()->assignVariables();
         WCF::getTPL()->assign(array('action' => 'add',
-                                    'contentType' => $this->contentType,
                                     'invisible' => $this->invisible,
-                                    'robots' => $this->robots,
-                                    'showOrder' => $this->showOrder,
-                                    'cssID' => $this->cssID,
-                                    'cssClasses' => $this->cssClasses));
+                                    'robots' => $this->robots));
     }
     
     

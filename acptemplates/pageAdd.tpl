@@ -59,22 +59,6 @@
             </dl>
         </fieldset>
         <fieldset>
-            <legend>{lang}cms.acp.page.contentType{/lang}</legend>
-            <dl>
-                <dt><label for="ctRoot">{lang}cms.acp.page.contentType.root{/lang}</label></dt>
-                <dd>
-                    <input type="radio" name="contentType" id="ctRoot" value="0" {if $contentType ="0"} checked="checked"{/if} />
-                </dd>
-            </dl>
-            <dl>
-                <dt><label for="ctPage">{lang}cms.acp.page.contentType.page{/lang}</label></dt>
-                <dd>
-                    <input type="radio" name="contentType" id="ctPage" value="1" {if $contentType ="1"} checked="checked"{/if} />
-                </dd>
-            </dl>
-        </fieldset>
-
-        <fieldset>
             <legend>{lang}cms.acp.page.meta{/lang}</legend>
             <dl>
                 <dt><label for="metaDescription">{lang}cms.acp.page.meta.metaDescription{/lang}</label></dt>
@@ -111,47 +95,10 @@
                 </dd>
             </dl>
         </fieldset>
-
         <fieldset>
-            <legend>{lang}cms.acp.page.css{/lang}</legend>
+            <legend>{lang}cms.acp.page.visibility{/lang}</legend>
             <dl>
-                <dt><label for="cssID">{lang}cms.acp.page.css.cssID{/lang}</label></dt>
-                <dd>
-                    <input type="text" id="cssID" name="cssID" value="{$cssID}" />
-                    {if $errorField == 'cssID'}
-                        <small class="innerError">
-                            {lang}cms.acp.page.cssID.error.{@$errorType}{/lang}
-                        </small>
-                    {/if}
-                </dd>
-            </dl>
-            <dl>
-                <dt><label for="cssClasses">{lang}cms.acp.page.css.cssClasses{/lang}</label></dt>
-                <dd>
-                    <input type="text" id="cssClasses" name="cssClasses" value="{$cssClasses}" />
-                    {if $errorField == 'cssClasses'}
-                        <small class="innerError">
-                            {lang}cms.acp.page.cssClasses.error.{@$errorType}{/lang}
-                        </small>
-                    {/if}
-                </dd>
-            </dl>
-        </fieldset>
-        <fieldset>
-            <legend>{lang}cms.acp.page.optional{/lang}</legend>
-            <dl>
-                <dt><label for="showOrder">{lang}cms.acp.page.optional.showOrder{/lang}</label></dt>
-                <dd>
-                    <input type="text" id="showOrder" name="showOrder" value="{$showOrder}" />
-                    {if $errorField == 'showOrder'}
-                        <small class="innerError">
-                            {lang}cms.acp.page.showOrder.error.{@$errorType}{/lang}
-                        </small>
-                    {/if}
-                </dd>
-            </dl>
-            <dl>
-                <dt><label for="invisible">{lang}cms.acp.page.optional.invisible{/lang}</label></dt>
+                <dt><label for="invisible">{lang}cms.acp.page.visibility.invisible{/lang}</label></dt>
                 <dd>
                     <input type="checkbox" name="invisible" id="invisible" value="1" {if $invisible == 1}checked="checked"{/if} />
                 </dd>

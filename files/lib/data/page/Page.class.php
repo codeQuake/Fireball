@@ -10,8 +10,6 @@ class Page extends CMSDatabaseObject{
     protected static $databaseTableIndexName = 'pageID';
     public $contentList = null;
     
-    const TYPE_ROOT = 0;
-    const TYPE_PAGE = 1;
     
     public function __construct($id, $row = null, $object = null){
         if ($id !== null) {
@@ -32,47 +30,11 @@ class Page extends CMSDatabaseObject{
         return $this->title;
     }
     
-    public function isRoot(){
-        if($this->contentType == self::TYPE_ROOT){
-            return true;
-        }
-        return false;
-    }
-    
-    public function isPage(){
-        if($this->contentType == self::TYPE_PAGE){
-            return true;
-        }
-        return false;
-    }
-    
     public function isVisible(){
         if($this->invisible == 0) {
             return true;
         }
         return false;
-    }
-    
-    public function countChildren(){
-        if($this->isRoot()){
-            $list = new PageList();
-            $list->getConditionBuilder()->add('page.parentID = ?', array($this->pageID));
-            $list->sqlOrderBy = 'page.showOrder';
-            $list->readObjects();
-            return $list->countObjects();
-        }
-        return 0;
-    }
-    
-    public function getChildren(){
-        if($this->isRoot()){
-            $list = new PageList();
-            $list->getConditionBuilder()->add('page.parentID = ?', array($this->pageID));
-            $list->sqlOrderBy = 'page.showOrder';
-            $list->readObjects();
-            return $list->getObjects();
-        }
-        return null;
     }
     
 }
