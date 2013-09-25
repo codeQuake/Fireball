@@ -8,6 +8,9 @@
       <category name="admin.cms.page">
         <parent>admin.cms</parent>
       </category>
+      <category name="admin.cms.content">
+        <parent>admin.cms</parent>
+      </category>
     </categories>
 
     <options>
@@ -19,6 +22,18 @@
       </option>
       <option name="admin.cms.page.canAddPage">
         <categoryname>admin.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="admin.cms.content.canListContent">
+        <categoryname>admin.cms.content</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="admin.cms.content.canAddContent">
+        <categoryname>admin.cms.content</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>

@@ -46,7 +46,14 @@ class PageAddForm extends AbstractForm{
     
     public function validate(){
         parent::validate();
-        if(empty($this->title)) throw new UserInputException('title');
+        if (!I18nHandler::getInstance()->validateValue('title')) {
+			if (I18nHandler::getInstance()->isPlainValue('title')) {
+				throw new UserInputException('title');
+			}
+			else {
+				throw new UserInputException('title', 'multilingual');
+			}
+		}
     }
     
     public function save(){
@@ -61,7 +68,7 @@ class PageAddForm extends AbstractForm{
         $objectAction = new PageAction(array(), 'create', array('data' => $data));
         $objectAction->executeAction();
         $returnValues = $objectAction->getReturnValues();
-        $pageID = $returnValues['returnValues']->contentID;
+        $pageID = $returnValues['returnValues']->pageID;
         $update = array();
         
         if (!I18nHandler::getInstance()->isPlainValue('title')) {

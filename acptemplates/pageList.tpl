@@ -44,13 +44,13 @@
 				{foreach from=$objects item=page}
 					<tr class="jsPageRow">
 						<td class="columnIcon">
-							<a href="{link controller='PageEdit' object=$page applicaton='linklist'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+							<a href="{link controller='PageEdit' object=$page applicaton='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
-							
+							<a href="{link controller='ContentList' object=$page application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$page->pageID}</td>
-						<td class="columnTitle columnPage"><a href="{link controller='PageEdit' object=$page application='linklist'}{/link}">{$page->title}</a></td>
+						<td class="columnTitle columnPage"><a href="{link controller='PageEdit' object=$page application='cms'}{/link}">{$page->title}</a></td>
 						
 						{event name='columns'}
 					</tr>
