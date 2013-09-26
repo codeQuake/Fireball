@@ -3,6 +3,8 @@ namespace cms\acp\form;
 
 use cms\data\page\PageAction;
 use cms\data\page\PageEditor;
+use cms\data\page\Page;
+use cms\data\page\PageList;
 use wcf\system\language\I18nHandler;
 use wcf\form\AbstractForm;
 use wcf\util\StringUtil;
@@ -23,6 +25,10 @@ class PageAddForm extends AbstractForm{
     public $metaKeywords = '';
     public $invisible = 0;
     public $robots = 'index,follow';
+    public $showOrder = 0;
+    public $parentID = 0;
+    
+    public $pageList = null;
 
    public function readParameters(){
         parent::readParameters();
@@ -31,7 +37,13 @@ class PageAddForm extends AbstractForm{
         I18nHandler::getInstance()->register('metaDescription');
         I18nHandler::getInstance()->register('metaKeywords');
     }
-    
+    public function readData(){
+        parent::readData();
+        if(isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
+        $this->pageList = new PageList();
+        $this->pageList->readObjects();
+        $this->pageList = $this->pageList->getObjects();
+    }
     public function readFormParameters(){
         parent::readFormParameters();
         I18nHandler::getInstance()->readValues();
@@ -39,9 +51,10 @@ class PageAddForm extends AbstractForm{
         if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
         if (I18nHandler::getInstance()->isPlainValue('metaDescription')) $this->metaDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('metaDescription'));
         if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
-        
+        if(isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
         if(isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
         if(isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
+        if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
     }
     
     public function validate(){
@@ -54,6 +67,8 @@ class PageAddForm extends AbstractForm{
 				throw new UserInputException('title', 'multilingual');
 			}
 		}
+        $page = new Page($this->parentID);
+        if($page === null) throw new UserInputException('parentID', 'invalid');
     }
     
     public function save(){
@@ -64,7 +79,10 @@ class PageAddForm extends AbstractForm{
                        'metaDescription' => $this->metaDescription,
                        'metaKeywords' => $this->metaKeywords,
                        'invisible' => $this->invisible,
+                       'showOrder' => $this->showOrder,
+                       'parentID' => $this->parentID,
                        'robots' => $this->robots);
+                       
         $objectAction = new PageAction(array(), 'create', array('data' => $data));
         $objectAction->executeAction();
         $returnValues = $objectAction->getReturnValues();
@@ -96,7 +114,7 @@ class PageAddForm extends AbstractForm{
         WCF::getTPL()->assign('success', true);
         
         $this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = '';
-        $this->invisible = 0;
+        $this->invisible = $this->parentID= $this->showOrder = 0;
         I18nHandler::getInstance()->reset();
     }
     
@@ -105,7 +123,10 @@ class PageAddForm extends AbstractForm{
         I18nHandler::getInstance()->assignVariables();
         WCF::getTPL()->assign(array('action' => 'add',
                                     'invisible' => $this->invisible,
-                                    'robots' => $this->robots));
+                                    'robots' => $this->robots,
+                                    'parentID' => $this->parentID,
+                                    'showOrder' => $this->showOrder,
+                                    'pageList' => $this->pageList));
     }
     
     

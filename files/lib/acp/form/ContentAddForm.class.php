@@ -31,7 +31,7 @@ class ContentAddForm extends AbstractForm{
     public function readParameters(){
         parent::readParameters();
         I18nHandler::getInstance()->register('title');
-        if(isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
+        if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
     }
     
     public function readData(){

@@ -31,6 +31,18 @@
     <div class="container containerPadding marginTop shadow">
         <fieldset>
             <legend>{lang}cms.acp.page.general{/lang}</legend>
+			{if $pageList != null}
+			<dl {if $errorField == 'parentID'}class="formError"{/if}>
+				<dt><label for="parentID">{lang}cms.acp.page.general.parentID{/lang}</label></dt>
+				<dd>
+					<select id="parentID" name="parentID">
+						{foreach from=$pageList item='item'}
+						<option value="{$item->pageID}" {if $item->pageID == $parentID}selected="selected"{/if}>{$item->title|language}</option>
+						{/foreach}
+					</select>
+				</dd>
+			</dl>
+			{/if}
             <dl {if $errorField == 'title'}class="formError"{/if}>
                 <dt><label for="title">{lang}cms.acp.page.general.title{/lang}</label></dt>
                 <dd>
@@ -96,11 +108,22 @@
             </dl>
         </fieldset>
         <fieldset>
-            <legend>{lang}cms.acp.page.visibility{/lang}</legend>
+            <legend>{lang}cms.acp.page.optional{/lang}</legend>
             <dl>
-                <dt><label for="invisible">{lang}cms.acp.page.visibility.invisible{/lang}</label></dt>
+                <dt><label for="invisible">{lang}cms.acp.page.optional.invisible{/lang}</label></dt>
                 <dd>
                     <input type="checkbox" name="invisible" id="invisible" value="1" {if $invisible == 1}checked="checked"{/if} />
+                </dd>
+            </dl>
+			<dl>
+                <dt><label for="showOrder">{lang}cms.acp.page.optional.showOrder{/lang}</label></dt>
+                <dd>
+                     <input type="text" id="showOrder" name="showOrder" value="{$showOrder}" class="long" />
+                    {if $errorField == 'showOrder'}
+                        <small class="innerError">
+                            {lang}cms.acp.page.showOrder.error.{@$errorType}{/lang}
+                        </small>
+                    {/if}
                 </dd>
             </dl>
         </fieldset>
