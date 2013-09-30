@@ -50,7 +50,7 @@
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$page->pageID}</td>
-						<td class="columnTitle columnPage"><a href="{link controller='PageEdit' id=$page->pageID application='cms'}{/link}">{$page->title}</a></td>
+						<td class="columnTitle columnPage"><a href="{link controller='PageEdit' id=$page->pageID application='cms'}{/link}">{$page->title|language}</a></td>
 						
 						{event name='columns'}
 					</tr>

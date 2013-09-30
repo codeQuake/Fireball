@@ -36,6 +36,7 @@
 				<dt><label for="parentID">{lang}cms.acp.page.general.parentID{/lang}</label></dt>
 				<dd>
 					<select id="parentID" name="parentID">
+						<option value="0" {if parentID == 0} selected="selected"{/if}>{lang}cms.acp.page.general.parentID.no{/lang}</option>
 						{foreach from=$pageList item='item'}
 						<option value="{$item->pageID}" {if $item->pageID == $parentID}selected="selected"{/if}>{$item->title|language}</option>
 						{/foreach}

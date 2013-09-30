@@ -34,12 +34,12 @@
 						<td class="columnIcon">
                             <a href="{link controller='ContentEdit' id=$content->contentID applicaton='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
                             <span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
-							<a href="{link controller='ContentSectionAdd' id=$content->contentID application='cms'}{/link}" title="{lang}cms.acp.content.section.add{/lang}" class="jsTooltip"><span class="icon icon16 icon-plus-sign"></span></a>
-                            <a href="{link controller='ContentSectionList' id=$content->contentID application='cms'}{/link}" title="{lang}cms.acp.content.section.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-list-alt"></span></a>
+							<a href="{link controller='ContentSectionAdd' id=$content->contentID application='cms'}{/link}" title="{lang}cms.acp.content.content.section.add{/lang}" class="jsTooltip"><span class="icon icon16 icon-plus-sign"></span></a>
+                            <a href="{link controller='ContentSectionList' id=$content->contentID application='cms'}{/link}" title="{lang}cms.acp.content.content.section.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-list-alt"></span></a>
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$content->contentID}</td>
-						<td class="columnTitle columnContent"><a href="{link controller='ContentEdit' id=$content->contentID application='cms'}{/link}">{$content->title}</a></td>
+						<td class="columnTitle columnContent"><a href="{link controller='ContentEdit' id=$content->contentID application='cms'}{/link}">{$content->title|language}</a></td>
 						
 						{event name='columns'}
 					</tr>
@@ -70,7 +70,7 @@
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$page->pageID}</td>
-						<td class="columnTitle columnPage"><a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}">{$page->title}</a></td>
+						<td class="columnTitle columnPage"><a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}">{$page->title|language}</a></td>
 						
 						{event name='columns'}
 					</tr>
