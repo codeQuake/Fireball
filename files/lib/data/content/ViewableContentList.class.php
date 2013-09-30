@@ -1,5 +1,5 @@
 <?php
-namespace cms\data\Content;
+namespace cms\data\content;
 
 use cms\data\content\ContentList;
 
