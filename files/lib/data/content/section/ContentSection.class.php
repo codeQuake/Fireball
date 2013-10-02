@@ -28,7 +28,4 @@ class ContentSection extends CMSDatabaseObject{
         return new Content($this->contentID);
     }
     
-    public function getType(){
-        return new ContentSectionType($this->sectionTypeID);
-    }
 }
