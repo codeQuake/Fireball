@@ -3,6 +3,8 @@ namespace cms\data\content\section\type;
 
 interface IContentSectionType{
     
+    public $formData = array();
+    
     //reads form data 
     public function readFormData(){ }
     
