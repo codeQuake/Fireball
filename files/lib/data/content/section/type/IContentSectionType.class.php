@@ -4,6 +4,7 @@ namespace cms\data\content\section\type;
 interface IContentSectionType{
     
     public $formData = array();
+    public $objectType = '';
     
     //reads form data 
     public function readFormData(){ }

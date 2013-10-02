@@ -4,6 +4,8 @@ use wcf\util\StringUtil;
 
 class TextContentSectionType implements IContentSectionType{
 
+    public $objectType = 'de.codequake.cms.section.type.text';
+    
     public function readFormData(){
         if(isset($_POST['text'])) $this->formData['text'] = StringUtil::trim($_POST['text']);
     }
