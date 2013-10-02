@@ -3,6 +3,7 @@ namespace cms\data\content\section;
 use cms\data\CMSDatabaseObject;
 use wcf\system\WCF;
 use cms\data\content\Content;
+use cms\data\content\section\type\ContentSectionType;
 
 class ContentSection extends CMSDatabaseObject{
     protected static $databaseTableName = 'content_section';
@@ -27,5 +28,7 @@ class ContentSection extends CMSDatabaseObject{
         return new Content($this->contentID);
     }
     
-    
+    public function getType(){
+        return new ContentSectionType($this->sectionTypeID);
+    }
 }
