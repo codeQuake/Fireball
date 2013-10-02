@@ -28,6 +28,8 @@
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+    <instruction type="objectTypeDefinition">xml\objectTypeDefinition.xml</instruction>
+    <instruction type="objectType">xml\objectType.xml</instruction>
 
     <!--others-->
     <instruction type="sql">install.sql</instruction>
@@ -43,5 +45,7 @@
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+    <instruction type="objectTypeDefinition">xml\objectTypeDefinition.xml</instruction>
+    <instruction type="objectType">xml\objectType.xml</instruction>
   </instructions>
 </package>

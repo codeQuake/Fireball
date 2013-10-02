@@ -2,8 +2,8 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/objectTypeDefinition.xsd">
   <import>
     <definition>
-      <name>de.codequake.cms.content.section</name>
-      <interfacename><![CDATA[cms\data\content\section\type]]></interfacename>
+      <name>de.codequake.cms.section.type</name>
+      <interfacename><![CDATA[cms\data\content\section\type\IContentSectionType]]></interfacename>
     </definition>
   </import>
 </data>

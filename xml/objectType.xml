@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
+  <import>
+    <!--section types-->
+    <type>
+      <name>de.codequake.cms.section.type.text</name>
+      <definitionname>de.codequake.cms.section.type</definitionname>
+      <classname>cms\data\content\section\type\TextContentSectionType</classname>
+    </type>
+  </import>
+</data>
