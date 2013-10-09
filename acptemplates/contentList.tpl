@@ -12,6 +12,17 @@
 	</script>
 </header>
 
+<div class="contentNavigation">
+	{pages print=true assign=pagesLinks application='cms' id=$pageID controller="ContentList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+	<nav>
+		<ul>
+			<li><a href="{link controller='ContentAdd' application='cms' id=$pageID}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></a></li>
+			
+			{event name='contentNavigationButtonsTop'}
+		</ul>
+	</nav>
+</div>
+
 {if $objects|count}
     {if $pageID != 0}
         <div class="tabularBox tabularBoxTitle marginTop">
