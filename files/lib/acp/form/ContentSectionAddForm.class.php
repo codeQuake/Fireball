@@ -16,6 +16,7 @@ class ContentSectionAddForm extends AbstractForm{
     public $enableMultilangualism = true;
     
     public $objectType = null;
+    public $objectTypeList = array();
     public $contentID = 0;
     public $showOrder = 0;
     public $cssID = '';
@@ -30,7 +31,8 @@ class ContentSectionAddForm extends AbstractForm{
 
     public function readData(){
         parent::readData();
-       if(isset($_REQUEST['contentID'])) $this->contentID = intval($_REQUEST['contentID']);
+        $this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.section.type');
+        if(isset($_REQUEST['contentID'])) $this->contentID = intval($_REQUEST['contentID']);
     }
     
     public function readFormParameters(){
@@ -76,6 +78,7 @@ class ContentSectionAddForm extends AbstractForm{
                                     'cssClasses' => $this->cssClasses,
                                     'contentID' => $this->contentID,
                                     'showOrder' => $this->showOrder,
-                                    'objectType' => isset($this->objectType) ? $this->objectType : ''));
+                                    'objectType' => isset($this->objectType) ? $this->objectType : '',
+                                    'objectTypeList' => $this->objectTypeList));
     }
 }
