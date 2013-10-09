@@ -7,5 +7,10 @@
       <definitionname>de.codequake.cms.section.type</definitionname>
       <classname>cms\data\content\section\type\TextContentSectionType</classname>
     </type>
+    <type>
+      <name>de.codequake.cms.section.type.headline</name>
+      <definitionname>de.codequake.cms.section.type</definitionname>
+      <classname>cms\data\content\section\type\HeadlineContentSectionType</classname>
+    </type>
   </import>
 </data>
