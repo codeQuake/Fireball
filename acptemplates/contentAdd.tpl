@@ -24,7 +24,7 @@
     </nav>
 </div>
 
-<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd'}{/link}{else}{link application='cms' controller='ContentEdit'}{/link}{/if}">
+<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd'}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}{/link}{/if}">
     <div class="container containerPadding marginTop shadow">
         <fieldset>
             <legend>{lang}cms.acp.content.general{/lang}</legend>
