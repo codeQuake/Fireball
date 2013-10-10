@@ -96,6 +96,11 @@ class ContentSectionAddForm extends AbstractForm{
         
         
         $this->saved();
+        
+         WCF::getTPL()->assign('success', true);
+        
+        $this->showOrder = 0;
+        $this->cssID = $this->cssClasses = '';
     }
     
     public function assignVariables(){

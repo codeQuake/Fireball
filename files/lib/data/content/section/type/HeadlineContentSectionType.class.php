@@ -4,9 +4,9 @@ use wcf\system\language\I18nHandler;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\util\StringUtil;
 
-class TextContentSectionType extends AbstractContentSectionType{
+class HeadlineContentSectionType extends AbstractContentSectionType{
 
-    public $objectType = 'de.codequake.cms.section.type.text';
+    public $objectType = 'de.codequake.cms.section.type.headline';
     public $isMultilingual = true;
     
     public function readParameters(){
@@ -34,7 +34,7 @@ class TextContentSectionType extends AbstractContentSectionType{
     }
     
     public function getFormTemplate(){
-        return 'textSectionType';
+        return 'headlineSectionType';
     }
     
     public function saved($returnValues){

@@ -47,6 +47,32 @@
         </fieldset>
         {/if}
         
+
+		<fieldset>
+			<legend>{lang}cms.acp.content.section.css{/lang}</legend>
+			<dl>
+				<dt><label for="cssID">{lang}cms.acp.content.section.css.cssID{/lang}</label></dt>
+				<dd>
+					<input type="text" name="cssID" id="cssID" class="long" value="{$cssID}" />
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="cssClasses">{lang}cms.acp.content.section.css.cssClasses{/lang}</label></dt>
+				<dd>
+					<input type="text" name="cssClasses" id="cssClasses" class="long" value="{$cssClasses}" />
+				</dd>
+			</dl>
+		</fieldset>
+
+		<fieldset>
+			<legend>{lang}cms.acp.content.section.showOrder{/lang}</legend>
+			<dl>
+				<dt><label for="showOrder">{lang}cms.acp.content.section.showOrder.showOrder{/lang}</label></dt>
+				<dd>
+					<input type="text" name="showOrder" id="showOrder" value="{$showOrder}" />
+				</dd>
+			</dl>
+		</fieldset>
     </div>
     <div class="formSubmit">
         <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
