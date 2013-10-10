@@ -6,6 +6,7 @@
     <item name="cms.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
     <item name="cms.acp.menu.link.cms.content.list"><![CDATA[Inhalte auflisten]]></item>
     <item name="cms.acp.menu.link.cms.content.add"><![CDATA[Inhalt hinzufügen]]></item>
+    <item name="cms.acp.menu.link.cms.content.section.list"><![CDATA[Inhaltsabschnitt hinzufügen]]></item>
   </category>
   <category name="cms.acp">
     <item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
@@ -43,6 +44,19 @@
     <item name="cms.acp.content.content.section.list"><![CDATA[Inhaltsabschnitte von '{$content->title|language}' auflisten]]></item>
     <item name="cms.acp.content.list"><![CDATA[Inhalte auflisten]]></item>
     <item name="cms.acp.content.page.list"><![CDATA[Seite wählen...]]></item>
+    <item name="cms.acp.content.section.general"><![CDATA[Allgemeine Einstellungen]]></item>
+    <item name="cms.acp.content.section.general.objectType"><![CDATA[Inhaltstyp]]></item>
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.headline"><![CDATA[Überschrift]]></item>
+    <item name="cms.acp.content.section.data"><![CDATA[Inhalt]]></item>
+    <item name="cms.acp.content.section.data.text"><![CDATA[Text]]></item>
+    <item name="cms.acp.content.section.data.headline"><![CDATA[Überschrift]]></item>
+    <item name="cms.acp.content.section.css"><![CDATA[CSS-Einstellungen]]></item>
+    <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
+    <item name="cms.acp.content.section.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
+    <item name="cms.acp.content.section.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
+    <item name="cms.acp.content.section.showOrder.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
+    <item name="cms.acp.content.section.add"><![CDATA[Inhaltsabschnitt hinzufügen]]></item>
   </category>
 
   <category name="wcf.acp.group">
@@ -56,4 +70,5 @@
     <item name="wcf.acp.group.option.admin.cms.page.canListPage"><![CDATA[Kann Seiten auflisten]]></item>
     <item name="wcf.acp.group.option.admin.cms.page.canAddPage"><![CDATA[Kann Seiten hinzufügen]]></item>
   </category>
+ 
 </language>
