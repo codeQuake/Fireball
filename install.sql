@@ -38,7 +38,7 @@ cssClasses VARCHAR(255)
 
 
 --foreign keys
-ALTER TABLE cms1_page ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
-ALTER TABLE cms1_content_section ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE SET NULL;
-ALTER TABLE cms1_content_section ADD FOREIGN KEY (sectionTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE SET NULL;
+ALTER TABLE cms1_page ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
+ALTER TABLE cms1_content_section ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
+ALTER TABLE cms1_content_section ADD FOREIGN KEY (sectionTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
