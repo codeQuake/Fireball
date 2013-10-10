@@ -2,13 +2,15 @@
 namespace cms\data\content\section;
 use cms\data\CMSDatabaseObject;
 use wcf\system\WCF;
-use cms\data\content\Content;
-use cms\data\content\section\type\ContentSectionType;
+use wcf\data\object\type\ObjectTypeCache;
+
 
 class ContentSection extends CMSDatabaseObject{
     protected static $databaseTableName = 'content_section';
     protected static $databaseTableIndexName = 'sectionID';
 
+    public $objectType = null;
+    
     public function __construct($id, $row = null, $object = null){
         if ($id !== null) {
              $sql = "SELECT *
@@ -24,8 +26,10 @@ class ContentSection extends CMSDatabaseObject{
         parent::__construct(null, $row, $object);
     }
     
-    public function getContent(){
-        return new Content($this->contentID);
+    public function getOutput(){
+        $this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->sectionTypeID);
+        return $this->objectType->getProcessor()->getOutput($this->sectionID);
     }
+    
     
 }

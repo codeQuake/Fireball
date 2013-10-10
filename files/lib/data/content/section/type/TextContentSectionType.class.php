@@ -3,6 +3,7 @@ namespace cms\data\content\section\type;
 use wcf\system\language\I18nHandler;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\util\StringUtil;
+use cms\data\content\section\ContentSection;
 
 class TextContentSectionType extends AbstractContentSectionType{
 
@@ -56,5 +57,10 @@ class TextContentSectionType extends AbstractContentSectionType{
             
             }
         I18nHandler::getInstance()->reset();
+    }
+    
+    public function getOutput($sectionID){
+        $section = new ContentSection($sectionID);
+        return $section->sectionData;
     }
 }

@@ -31,4 +31,8 @@ class AbstractContentSectionType implements IContentSectionType{
     
     //after saving, it works with the returnvalues
     public function saved($returnValues){ }
+    
+    public function getOutput($sectionID){
+        return '';
+    }
 }

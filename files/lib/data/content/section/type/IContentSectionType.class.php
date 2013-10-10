@@ -26,4 +26,7 @@ interface IContentSectionType{
     
     //after saving, it works with the returnvalues
     public function saved($returnValues);
+    
+    //gets the Output
+    public function getOutput($sectionID);
 }

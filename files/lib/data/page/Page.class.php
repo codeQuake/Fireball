@@ -1,10 +1,11 @@
 <?php
 namespace cms\data\page;
-
+use cms\data\content\PageContentList;
+use wcf\system\request\IRouteController;
 use cms\data\CMSDatabaseObject;
 use wcf\system\WCF;
 
-class Page extends CMSDatabaseObject{
+class Page extends CMSDatabaseObject implements IRouteController{
 
     protected static $databaseTableName = 'page';
     protected static $databaseTableIndexName = 'pageID';
@@ -37,4 +38,9 @@ class Page extends CMSDatabaseObject{
         return false;
     }
     
+    public function getContentList(){
+        $this->contentList =  new PageContentList($this->pageID);
+        $this->contentList->readObjects();
+        return $this->contentList->getObjects();
+    }
 }
