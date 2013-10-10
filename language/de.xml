@@ -6,7 +6,7 @@
     <item name="cms.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
     <item name="cms.acp.menu.link.cms.content.list"><![CDATA[Inhalte auflisten]]></item>
     <item name="cms.acp.menu.link.cms.content.add"><![CDATA[Inhalt hinzufügen]]></item>
-    <item name="cms.acp.menu.link.cms.content.section.list"><![CDATA[Inhaltsabschnitt hinzufügen]]></item>
+    <item name="cms.acp.menu.link.cms.content.section.list"><![CDATA[Inhaltsabschnitte auflisten]]></item>
   </category>
   <category name="cms.acp">
     <item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
