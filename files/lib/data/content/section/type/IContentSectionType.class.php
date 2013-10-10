@@ -3,6 +3,9 @@ namespace cms\data\content\section\type;
 
 interface IContentSectionType{
     
+    //reads form parameters before saving
+    public function readParameters();
+    
     //reads form data 
     public function readFormData();
     
@@ -17,4 +20,10 @@ interface IContentSectionType{
     
     //provides an individual template for each type
     public function getFormTemplate();
+    
+    //gets formdata
+    public function getFormData();
+    
+    //after saving, it works with the returnvalues
+    public function saved($returnValues);
 }

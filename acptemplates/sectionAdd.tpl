@@ -1,7 +1,6 @@
 {capture assign='pageTitle'}{lang}cms.acp.content.section.{@$action}{/lang}{/capture}
 {include file='header'}
 
-{include file='multipleLanguageInputJavascript' elementIdentifier='sectionData' forceSelection=false}
 
 <header class="boxHeadline">
     <h1>{lang}cms.acp.content.section.{@$action}{/lang}</h1>
@@ -32,7 +31,6 @@
                 <dt><label for="objectType">{lang}cms.acp.content.section.general.objectType{/lang}</label></dt>
                 <dd>
                     <select id="objectType" name="objectType" onchange="this.form.submit()">
-                        <option value="">{lang}cms.acp.content.section.type.none{/lang}</option>
                         {foreach from=$objectTypeList item='item'}
 						<option value="{$item->objectType}" {if $item->objectType == $objectTypeName}selected="selected"{/if}>{lang}cms.acp.content.section.type.{$item->objectType}{/lang}</option>
 						{/foreach}

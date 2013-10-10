@@ -1,8 +1,6 @@
 <?php
 namespace cms\acp\form;
-use wcf\system\language\I18nHandler;
 use wcf\form\AbstractForm;
-use cms\data\content\section\ContentSectionEditor;
 use cms\data\content\section\ContentSectionAction;
 use wcf\system\event\EventHandler;
 use wcf\data\object\type\ObjectTypeCache;
@@ -28,10 +26,12 @@ class ContentSectionAddForm extends AbstractForm{
     public $send = false;
     
     public function readParameters(){
-        I18nHandler::getInstance()->register('sectionData');
          //getObjectTypeByName($definitionName, $objectTypeName);
         if(isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.section.type', $_REQUEST['objectType']);
-        $this->objectTypeProcessor = $this->objectType->getProcessor();
+        if($this->objectType != null) {
+            $this->objectTypeProcessor = $this->objectType->getProcessor();
+            $this->objectTypeProcessor->readParameters();
+        }
     }
 
     public function readData(){
@@ -79,35 +79,28 @@ class ContentSectionAddForm extends AbstractForm{
     
     public function save(){
         parent::save();
+        $this->objectTypeProcessor->saveFormData();
+        
         $data = array('contentID' => $this->contentID,
                     'showOrder' => $this->showOrder,
                     'cssID' => $this->cssID,
                     'cssClasses' => $this->cssClasses,
-                    'sectionTypeID' => $this->objectType->objectTypeID,
-                    'sectionData' => $this->objectTypeProcessor->getFormData()['sectionData']);
+                    'sectionTypeID' => $this->objectType->objectTypeID);
         $objectAction = new ContentSectionAction(array(), 'create', array('data' => $data));
         $objectAction->executeAction();
         $returnValues = $objectAction->getReturnValues();
         
-        $sectionID = $returnValues['returnValues']->sectionID;
-        $this->objectTypeProcessor->saveFormData();
-        if($this->objectTypeProcessor->isMultilingual){
-            $update = array();
-            if (!I18nHandler::getInstance()->isPlainValue('sectionData')) {
-                I18nHandler::getInstance()->save('sectionData', 'cms.content.section.'.$sectionID.'.sectionData', 'cms.content.section', PACKAGE_ID);
-                $update['sectionData'] = 'cms.content.section.'.$sectionID.'.sectionData';
-            }
-            if (!empty($update)) {
-                $editor = new ContentSectionEditor($returnValues['returnValues']);
-                $editor->update($update);
-            }
-        }
+        $this->objectTypeProcessor->saved($returnValues);
+        
+        
+        
+        
+        $this->saved();
     }
     
     public function assignVariables(){
         parent::assignVariables();
         
-        I18nHandler::getInstance()->assignVariables();
         
         if($this->objectType != null) $this->objectTypeProcessor->assignFormVariables();
         

@@ -1,3 +1,4 @@
+{include file='multipleLanguageInputJavascript' elementIdentifier='sectionData' forceSelection=false}
 <dl>
     <dt><label for="sectionData">{lang}cms.acp.content.section.data.text{/lang}</label></dt>
     <dd>

@@ -7,6 +7,9 @@ class AbstractContentSectionType implements IContentSectionType{
     public $formData = array();
     public $objectType = "";
     
+    //reads parameters at the beginning
+    public function readParameters(){ }
+    
     //reads form data 
     public function readFormData(){ }
     
@@ -25,4 +28,7 @@ class AbstractContentSectionType implements IContentSectionType{
     public function getFormData() {
 		return $this->formData;
 	}
+    
+    //after saving, it works with the returnvalues
+    public function saved($returnValues){ }
 }
