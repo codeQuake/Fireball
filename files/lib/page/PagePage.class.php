@@ -20,7 +20,6 @@ class PagePage extends AbstractPage{
     public function readData(){
         parent::readData();
         $this->contentList = $this->page->getContentList();
-        print_r($this->contentList);
     }
     
     public function assignVariables(){
