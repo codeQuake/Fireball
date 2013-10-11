@@ -57,6 +57,11 @@
     <item name="cms.acp.content.section.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.section.showOrder.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.section.add"><![CDATA[Inhaltsabschnitt hinzufügen]]></item>
+    <item name="cms.acp.content.section.data.hlType"><![CDATA[Überschriftstyp]]></item>
+    <item name="cms.acp.content.section.data.h1"><![CDATA[Überschrift 1]]></item>
+    <item name="cms.acp.content.section.data.h2"><![CDATA[Überschrift 2]]></item>
+    <item name="cms.acp.content.section.data.h3"><![CDATA[Überschrift 3]]></item>
+    <item name="cms.acp.content.section.data.h4"><![CDATA[Überschrift 4]]></item>
   </category>
 
   <category name="cms.page">
