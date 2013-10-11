@@ -34,7 +34,7 @@ sectionData MEDIUMTEXT,
 showOrder INT(10) DEFAULT 0,
 cssID VARCHAR (255),
 cssClasses VARCHAR(255),
-additonalData MEDIUMTEXT DEFAULT NULL
+additionalData MEDIUMTEXT DEFAULT NULL
 );
 
 
