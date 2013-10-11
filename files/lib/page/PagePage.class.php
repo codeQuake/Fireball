@@ -13,6 +13,7 @@ class PagePage extends AbstractPage{
     public function readParameters(){
         parent::readParameters();
         if(isset($_REQUEST['id'])) $pageID = intval($_REQUEST['id']);
+        if(!isset($pageID)) throw new IllegalLinkException();
         $this->page = new Page($pageID);
         if($this->page->pageID == 0) throw new IllegalLinkException();
     }
