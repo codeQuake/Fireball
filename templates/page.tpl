@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-    <title>{$page->getTitle()|language}</title>
+    <title>{$page->getTitle()|language} - {PAGE_TITLE}</title>
     
     {include file='pageHeadInclude' application='cms' sandbox=false}
     <link rel="canonical" href="{link application='cms' controller='Page' object=$page}{/link}" />
