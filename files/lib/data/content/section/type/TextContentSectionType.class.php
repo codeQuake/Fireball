@@ -138,6 +138,6 @@ class TextContentSectionType extends AbstractContentSectionType{
         $additionalData = @unserialize($section->additionalData);
         if(!is_array($additionalData)) $additionalData = array();
 		MessageParser::getInstance()->setOutputType('text/html');
-		return MessageParser::getInstance()->parse($section->sectionData, $additionalData['enableSmilies'], $additionalData['enableHtml'], $additonalData['enableBBCodes']);
+		return MessageParser::getInstance()->parse($section->sectionData, $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']);
 	}
 }
