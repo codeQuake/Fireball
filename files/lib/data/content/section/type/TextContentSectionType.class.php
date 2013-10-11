@@ -108,9 +108,9 @@ class TextContentSectionType extends AbstractContentSectionType{
         $additionalData['enableBBCodes'] = $this->enableBBCodes;
         $additionalData['enableHtml'] = $this->enableHtml;
         $data = array();
+        $data['additionalData'] = serialize($additionalData);
         if(I18nHandler::getInstance()->isPlainValue('sectionData')) {
             $data['sectionData'] = $this->formData['sectionData'];
-            $data['additionalData'] = serialize($additionalData);
             $editor = new ContentSectionEditor($returnValues['returnValues']);
             $editor->update($data);
         }

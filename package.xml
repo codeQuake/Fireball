@@ -5,7 +5,7 @@
     <!--codename: Fireball-->
     <packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
     <isapplication>1</isapplication>
-    <version>1.0.0 Alpha 1</version>
+    <version>1.0.0 Alpha 2</version>
     <date>2013-09-17</date>
   </packageinformation>
   <authorinformation>
@@ -25,12 +25,14 @@
     <!--tar-->
     <instruction type="file">files.tar</instruction>
     <instruction type="acpTemplate">acptemplates.tar</instruction>
+    <instruction type="template">templates.tar</instruction>
 
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     <instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
     <instruction type="objectType">xml/objectType.xml</instruction>
+    <instruction type="templateListener">xml/templateListener.xml</instruction>
 
     <!--others-->
     <instruction type="sql">install.sql</instruction>
@@ -42,11 +44,13 @@
     <!--tar-->
     <instruction type="file">files.tar</instruction>
     <instruction type="acpTemplate">acptemplates.tar</instruction>
+    <instruction type="template">templates.tar</instruction>
 
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     <instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
     <instruction type="objectType">xml/objectType.xml</instruction>
+    <instruction type="templateListener">xml/templateListener.xml</instruction>
   </instructions>
 </package>

@@ -59,6 +59,11 @@
     <item name="cms.acp.content.section.add"><![CDATA[Inhaltsabschnitt hinzufügen]]></item>
   </category>
 
+  <category name="cms.page">
+    <item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" title="">Software: <strong>Fireball CMS {@PACKAGE_VERSION}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]>
+    </item>
+  </category>
+  
   <category name="wcf.acp.group">
     <item name="wcf.acp.group.option.category.admin.cms"><![CDATA[CMS]]></item>
     <item name="wcf.acp.group.option.category.admin.cms.content"><![CDATA[Inhalte]]></item>

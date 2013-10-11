@@ -4,11 +4,15 @@ use wcf\system\language\I18nHandler;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\util\StringUtil;
 use cms\data\content\section\ContentSection;
+use wcf\system\WCF;
 
 class HeadlineContentSectionType extends AbstractContentSectionType{
 
     public $objectType = 'de.codequake.cms.section.type.headline';
     public $isMultilingual = true;
+    
+    public $hlType = '';
+    public $additionalData = array();
     
     public function readParameters(){
         I18nHandler::getInstance()->register('sectionData');
@@ -17,6 +21,7 @@ class HeadlineContentSectionType extends AbstractContentSectionType{
     public function readFormData(){
         I18nHandler::getInstance()->readValues();
         if (I18nHandler::getInstance()->isPlainValue('sectionData')) $this->formData['sectionData'] = StringUtil::trim(I18nHandler::getInstance()->getValue('sectionData'));
+        if(isset($_POST['hlType'])) $this->hlType = StringUtil::trim($_POST['hlType']);
     }
     
     public function validateFormData(){
@@ -32,6 +37,7 @@ class HeadlineContentSectionType extends AbstractContentSectionType{
     
     public function assignFormVariables(){
         I18nHandler::getInstance()->assignVariables();
+        WCF::getTPL()->assign(array('hlType' => $this->hlType));
     }
     
     public function getFormTemplate(){
@@ -39,8 +45,12 @@ class HeadlineContentSectionType extends AbstractContentSectionType{
     }
     
     public function saved($returnValues){
+        $additionalData = array();
+        $additionalData['hlType'] = $this->hlType;
+        $data = array();
+        $data['additionalData'] = serialize($additionalData);
         if(I18nHandler::getInstance()->isPlainValue('sectionData')) {
-            $data = array('sectionData' => $this->formData['sectionData']);
+            $data['sectionData'] = $this->formData['sectionData'];
             $editor = new ContentSectionEditor($returnValues['returnValues']);
             $editor->update($data);
         }
@@ -61,6 +71,9 @@ class HeadlineContentSectionType extends AbstractContentSectionType{
     
     public function getOutput($sectionID){
         $section = new ContentSection($sectionID);
-        return '<h2>'.$section->sectionData.'</h2>';
+        $additionalData = @unserialize($section->additionalData);
+        if(!is_array($additionalData)) $additionalData = array();
+        
+        return '<'.$additionalData['hlType'].'>'.$section->sectionData.'</'.$additionalData['hlType'].'>';
     }
 }
