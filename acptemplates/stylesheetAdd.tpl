@@ -9,8 +9,17 @@
 	<p class="success">{lang}wcf.global.success.{$action}{/lang}</p>
 {/if}
 
+<div class="contentNavigation">
+    <nav>
+        <ul>
+            <li><a href="{link application='cms' controller='StylesheetList'}{/link}" title="{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}</span></a></li>
+            {event name='contentNavigationButtons'}
+        </ul>
+    </nav>
+</div>
+
 <form method="post" action="{link controller='StyleSheetAdd' application='cms'}{/link}">
-    <div class="container containerPadding">  
+    <div class="container containerPadding marginTop">  
         <fieldset>
 			<legend>{lang}cms.acp.stylesheet.general{/lang}</legend>
 				<dl>
