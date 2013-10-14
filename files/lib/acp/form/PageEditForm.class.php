@@ -6,6 +6,7 @@ use cms\data\page\PageEditor;
 use cms\data\page\Page;
 use cms\data\page\PageList;
 use wcf\system\language\I18nHandler;
+use wcf\system\acl\ACLHandler;
 use wcf\form\AbstractForm;
 use wcf\util\StringUtil;
 use wcf\system\exception\UserInputException;
@@ -16,7 +17,7 @@ class PageEditForm extends AbstractForm{
     public $templateName = 'pageAdd';
     public $neededPermissions = array('admin.cms.page.canAddPage');
     public $activeMenuItem = 'cms.acp.menu.link.cms.page.add';
-    
+    public $objectTypeID = 0;
     public $enableMultilangualism = true;
     
     public $title = '';
@@ -36,6 +37,7 @@ class PageEditForm extends AbstractForm{
         I18nHandler::getInstance()->register('description');
         I18nHandler::getInstance()->register('metaDescription');
         I18nHandler::getInstance()->register('metaKeywords');
+        $this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
     }
     public function readData(){
         parent::readData();
@@ -102,7 +104,10 @@ class PageEditForm extends AbstractForm{
                                                                                            'robots' => $this->robots)));
         $objectAction->executeAction();
         $update = array();
-        
+        //save ACL
+        ACLHandler::getInstance()->save($pageID, $this->objectTypeID);
+        ACLHandler::getInstance()->disableAssignVariables();
+        //update I18n
         if (!I18nHandler::getInstance()->isPlainValue('title')) {
             I18nHandler::getInstance()->save('title', 'cms.page.title'.$this->pageID, 'cms.page', PACKAGE_ID);
             $update['title'] = 'cms.page.title'.$this->pageID;
@@ -133,7 +138,9 @@ class PageEditForm extends AbstractForm{
     public function assignVariables(){
         parent::assignVariables();
         I18nHandler::getInstance()->assignVariables(!empty($_POST));
+        I18nHandler::getInstance()->assignVariables();
         WCF::getTPL()->assign(array('action' => 'edit',
+                                    'objectTypeID' => $this->objectTypeID,
                                     'invisible' => $this->invisible,
                                     'robots' => $this->robots,
                                     'parentID' => $this->parentID,
