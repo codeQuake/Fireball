@@ -11,7 +11,7 @@ use wcf\util\StringUtil;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 
-class PageAddForm extends AbstractForm{
+class PageEditForm extends AbstractForm{
     
     public $templateName = 'pageAdd';
     public $neededPermissions = array('admin.cms.page.canAddPage');
@@ -26,8 +26,8 @@ class PageAddForm extends AbstractForm{
     public $invisible = 0;
     public $robots = 'index,follow';
     public $showOrder = 0;
-    public $parentID = 0;
-    
+    public $pageID = 0;
+    public $page = null;
     public $pageList = null;
 
    public function readParameters(){
@@ -39,7 +39,23 @@ class PageAddForm extends AbstractForm{
     }
     public function readData(){
         parent::readData();
-        if(isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
+        //reading data
+        if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
+        $this->page = new Page($this->pageID);
+        I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->page->title, 'cms.page.title\d+');
+        $this->title = $this->page->title;
+        I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->page->description, 'cms.page.description\d+');
+        $this->description = $this->page->description;
+        I18nHandler::getInstance()->setOptions('metaDescription', PACKAGE_ID, $this->page->metaDescription, 'cms.page.metaDescription\d+');
+        $this->metaDescription = $this->page->metaDescription;
+        I18nHandler::getInstance()->setOptions('metaKeywords', PACKAGE_ID, $this->page->metaKeywords, 'cms.page.metaKeywords\d+');
+        $this->metaKeywords = $this->page->metaKeywords;
+        
+        $this->parentID = $this->page->parentID;
+        $this->showOrder = $this->page->showOrder;
+        $this->invisible = $this->page->invisible;
+        $this->robots = $this->page->robots;
+        
         $this->pageList = new PageList();
         $this->pageList->readObjects();
         $this->pageList = $this->pageList->getObjects();
@@ -69,6 +85,7 @@ class PageAddForm extends AbstractForm{
 		}
         $page = new Page($this->parentID);
         if($page === null) throw new UserInputException('parentID', 'invalid');
+        if($this->parentID == $this->pageID) throw new UserInputException('parentID', 'invalid');
     }
     
     public function save(){
@@ -83,27 +100,27 @@ class PageAddForm extends AbstractForm{
                        'parentID' => $this->parentID,
                        'robots' => $this->robots);
                        
-        $objectAction = new PageAction(array(), 'create', array('data' => $data));
+        $objectAction = new PageAction(array(), 'update', array('data' => $data));
         $objectAction->executeAction();
         $returnValues = $objectAction->getReturnValues();
         $pageID = $returnValues['returnValues']->pageID;
         $update = array();
         
         if (!I18nHandler::getInstance()->isPlainValue('title')) {
-            I18nHandler::getInstance()->save('title', 'cms.page.title'.$pageID, 'cms.page', PACKAGE_ID);
-            $update['title'] = 'cms.page.title'.$pageID;
+            I18nHandler::getInstance()->save('title', 'cms.page.'.$pageID.'.title', 'cms.page', PACKAGE_ID);
+            $update['title'] = 'cms.page.'.$pageID.'.title';
         }
         if (!I18nHandler::getInstance()->isPlainValue('description')) {
-            I18nHandler::getInstance()->save('description', 'cms.page.description'.$pageID, 'cms.page', PACKAGE_ID);
-            $update['description'] = 'cms.page.description'.$pageID;
+            I18nHandler::getInstance()->save('description', 'cms.page.'.$pageID.'.description', 'cms.page', PACKAGE_ID);
+            $update['description'] = 'cms.page.'.$pageID.'.description';
         }
         if (!I18nHandler::getInstance()->isPlainValue('metaDescription')) {
-            I18nHandler::getInstance()->save('metaDescription', 'cms.page.metaDescription'.$pageID, 'cms.page', PACKAGE_ID);
-            $update['metaDescription'] = 'cms.page..metaDescription'.$pageID;
+            I18nHandler::getInstance()->save('metaDescription', 'cms.page.'.$pageID.'.metaDescription', 'cms.page', PACKAGE_ID);
+            $update['metaDescription'] = 'cms.page.'.$pageID.'.metaDescription';
         }
         if (!I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
-            I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords'.$pageID, 'cms.page', PACKAGE_ID);
-            $update['metaKeywords'] = 'cms.page.metaKeywords'.$pageID;
+            I18nHandler::getInstance()->save('metaKeywords', 'cms.page.'.$pageID.'.metaKeywords', 'cms.page', PACKAGE_ID);
+            $update['metaKeywords'] = 'cms.page.'.$pageID.'.metaKeywords';
         }
         if (!empty($update)) {
             $editor = new PageEditor($returnValues['returnValues']);
@@ -113,20 +130,23 @@ class PageAddForm extends AbstractForm{
         $this->saved();
         WCF::getTPL()->assign('success', true);
         
-        $this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = '';
-        $this->invisible = $this->parentID= $this->showOrder = 0;
-        I18nHandler::getInstance()->reset();
+       
     }
     
     public function assignVariables(){
         parent::assignVariables();
-        I18nHandler::getInstance()->assignVariables();
-        WCF::getTPL()->assign(array('action' => 'add',
+        I18nHandler::getInstance()->assignVariables(!empty($_POST));
+        WCF::getTPL()->assign(array('action' => 'edit',
                                     'invisible' => $this->invisible,
                                     'robots' => $this->robots,
                                     'parentID' => $this->parentID,
                                     'showOrder' => $this->showOrder,
-                                    'pageList' => $this->pageList));
+                                    'pageList' => $this->pageList,
+                                    'pageID' => $this->pageID,
+                                    'title' =>$this->title,
+                                    'description' => $this->description,
+                                    'metaDescription' => $this->metaDescription,
+                                    'metaKeywords' => $this->metaKeywords));
     }
     
     
