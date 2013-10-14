@@ -105,7 +105,7 @@ class PageEditForm extends AbstractForm{
         $objectAction->executeAction();
         $update = array();
         //save ACL
-        ACLHandler::getInstance()->save($pageID, $this->objectTypeID);
+        ACLHandler::getInstance()->save($this->pageID, $this->objectTypeID);
         ACLHandler::getInstance()->disableAssignVariables();
         //update I18n
         if (!I18nHandler::getInstance()->isPlainValue('title')) {
@@ -137,8 +137,8 @@ class PageEditForm extends AbstractForm{
     
     public function assignVariables(){
         parent::assignVariables();
-        I18nHandler::getInstance()->assignVariables(!empty($_POST));
-        I18nHandler::getInstance()->assignVariables();
+        I18nHandler::getInstance()->assignVariables(!empty($_POST));        
+        ACLHandler::getInstance()->assignVariables($this->objectTypeID);
         WCF::getTPL()->assign(array('action' => 'edit',
                                     'objectTypeID' => $this->objectTypeID,
                                     'invisible' => $this->invisible,
