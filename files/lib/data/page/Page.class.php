@@ -3,6 +3,7 @@ namespace cms\data\page;
 use cms\data\content\PageContentList;
 use wcf\system\request\IRouteController;
 use cms\data\CMSDatabaseObject;
+use cms\system\page\PagePermissionHandler;
 use wcf\system\WCF;
 
 class Page extends CMSDatabaseObject implements IRouteController{
@@ -32,7 +33,7 @@ class Page extends CMSDatabaseObject implements IRouteController{
     }
     
     public function isVisible(){
-        if($this->invisible == 0) {
+        if($this->invisible == 0 && $this->getPermission('canViewPage')) {
             return true;
         }
         return false;
@@ -43,4 +44,16 @@ class Page extends CMSDatabaseObject implements IRouteController{
         $this->contentList->readObjects();
         return $this->contentList->getObjects();
     }
+    
+    public function getPermission($permission = 'canViewPage') {
+		return PagePermissionHandler::getInstance()->getPermission($this->pageID, $permission);
+	}
+    
+    public function checkPermission(array $permissions = array('canViewPage')) {
+		foreach ($permissions as $permission) {
+			if (!$this->getPermission($permission)) {
+				throw new PermissionDeniedException();
+			}
+		}
+	}
 }

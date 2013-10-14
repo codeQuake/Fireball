@@ -3,6 +3,7 @@ namespace cms\data\page;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
 use cms\data\content\ContentAction;
+use cms\system\cache\builder\PagePermissionCacheBuilder;
 
 class PageAction extends AbstractDatabaseObjectAction{
 
@@ -10,6 +11,16 @@ class PageAction extends AbstractDatabaseObjectAction{
     protected $permissionsDelete = array('admin.cms.page.canAddPage');
     protected $requireACP = array('delete');
    
+    public function create(){
+        parent::create();
+        PagePermissionCacheBuilder::getInstance()->reset();
+    }
+    
+    public function update(){
+        parent::update();
+        PagePermissionCacheBuilder::getInstance()->reset();
+    }
+    
     public function delete(){
     
         //delete all contents beloning to the pages

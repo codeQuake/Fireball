@@ -137,7 +137,7 @@ class PageEditForm extends AbstractForm{
     
     public function assignVariables(){
         parent::assignVariables();
-        I18nHandler::getInstance()->assignVariables(!empty($_POST));        
+        I18nHandler::getInstance()->assignVariables(!empty($_POST));
         ACLHandler::getInstance()->assignVariables($this->objectTypeID);
         WCF::getTPL()->assign(array('action' => 'edit',
                                     'objectTypeID' => $this->objectTypeID,
