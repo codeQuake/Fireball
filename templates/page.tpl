@@ -19,9 +19,9 @@
 </header>
     
     {foreach from=$contentList item=content}
-        <div {if $content->cssID != ''}id="{$content->cssID}"{/if} {if $content->cssClasses != ''}class="{$content->cssClasses}"{/if}>
+        <div {if $content->cssID != ''}id="{$content->cssID}"{/if} {if $content->cssClasses != ''}class="contentItem {$content->cssClasses}"{/if}>
             {foreach from=$content->getSections() item=section}
-                <div {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section>cssClasses != ''} class="{$section->cssClasses}"{/if}>
+                <div {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section>cssClasses != ''} class="contentSectionItem {$section->cssClasses}"{/if}>
                     {@$section->getOutput()|language}
                 </div>
             {/foreach}
