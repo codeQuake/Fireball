@@ -71,6 +71,7 @@ class PageEditForm extends AbstractForm{
         if(isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
         if(isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
         if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
+        if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
     }
     
     public function validate(){
@@ -83,47 +84,43 @@ class PageEditForm extends AbstractForm{
 				throw new UserInputException('title', 'multilingual');
 			}
 		}
-        $page = new Page($this->parentID);
-        if($page === null) throw new UserInputException('parentID', 'invalid');
-        if($this->parentID == $this->pageID) throw new UserInputException('parentID', 'invalid');
+        $parent = new Page($this->parentID);
+        if($parent === null) throw new UserInputException('parentID', 'invalid');
     }
     
     public function save(){
         parent::save();
-        $data = array('userID' => WCF::getUser()->userID,
-                       'title' => $this->title,
-                       'description' => $this->description,
-                       'metaDescription' => $this->metaDescription,
-                       'metaKeywords' => $this->metaKeywords,
-                       'invisible' => $this->invisible,
-                       'showOrder' => $this->showOrder,
-                       'parentID' => $this->parentID,
-                       'robots' => $this->robots);
                        
-        $objectAction = new PageAction(array(), 'update', array('data' => $data));
+        $objectAction = new PageAction(array($this->pageID), 'update', array('data' => array('userID' => WCF::getUser()->userID,
+                                                                                           'title' => $this->title,
+                                                                                           'description' => $this->description,
+                                                                                           'metaDescription' => $this->metaDescription,
+                                                                                           'metaKeywords' => $this->metaKeywords,
+                                                                                           'invisible' => $this->invisible,
+                                                                                           'showOrder' => $this->showOrder,
+                                                                                           'parentID' => $this->parentID,
+                                                                                           'robots' => $this->robots)));
         $objectAction->executeAction();
-        $returnValues = $objectAction->getReturnValues();
-        $pageID = $returnValues['returnValues']->pageID;
         $update = array();
         
         if (!I18nHandler::getInstance()->isPlainValue('title')) {
-            I18nHandler::getInstance()->save('title', 'cms.page.'.$pageID.'.title', 'cms.page', PACKAGE_ID);
-            $update['title'] = 'cms.page.'.$pageID.'.title';
+            I18nHandler::getInstance()->save('title', 'cms.page.title'.$this->pageID, 'cms.page', PACKAGE_ID);
+            $update['title'] = 'cms.page.title'.$this->pageID;
         }
         if (!I18nHandler::getInstance()->isPlainValue('description')) {
-            I18nHandler::getInstance()->save('description', 'cms.page.'.$pageID.'.description', 'cms.page', PACKAGE_ID);
-            $update['description'] = 'cms.page.'.$pageID.'.description';
+            I18nHandler::getInstance()->save('description', 'cms.page.description'.$this->pageID, 'cms.page', PACKAGE_ID);
+            $update['description'] = 'cms.page.description'.$this->pageID;
         }
         if (!I18nHandler::getInstance()->isPlainValue('metaDescription')) {
-            I18nHandler::getInstance()->save('metaDescription', 'cms.page.'.$pageID.'.metaDescription', 'cms.page', PACKAGE_ID);
-            $update['metaDescription'] = 'cms.page.'.$pageID.'.metaDescription';
+            I18nHandler::getInstance()->save('metaDescription', 'cms.page.metaDescription'.$this->pageID, 'cms.page', PACKAGE_ID);
+            $update['metaDescription'] = 'cms.page..metaDescription'.$this->pageID;
         }
         if (!I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
-            I18nHandler::getInstance()->save('metaKeywords', 'cms.page.'.$pageID.'.metaKeywords', 'cms.page', PACKAGE_ID);
-            $update['metaKeywords'] = 'cms.page.'.$pageID.'.metaKeywords';
+            I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords'.$this->pageID, 'cms.page', PACKAGE_ID);
+            $update['metaKeywords'] = 'cms.page.metaKeywords'.$this->pageID;
         }
         if (!empty($update)) {
-            $editor = new PageEditor($returnValues['returnValues']);
+            $editor = new PageEditor(new Page($this->pageID));
             $editor->update($update);
         }
         

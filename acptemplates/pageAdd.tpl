@@ -59,7 +59,7 @@
                     {/if}
                 </dd>
             </dl>
-            <dl>
+            <dl  {if $errorField == 'description'}class="formError"{/if}>
                 <dt><label for="description">{lang}cms.acp.page.general.description{/lang}</label></dt>
                 <dd>
                     <textarea id="description" name="description" rows="5" cols="40" class="long">{$i18nPlainValues['description']}</textarea>
@@ -73,7 +73,7 @@
         </fieldset>
         <fieldset>
             <legend>{lang}cms.acp.page.meta{/lang}</legend>
-            <dl>
+            <dl  {if $errorField == 'metaDescription'}class="formError"{/if}>
                 <dt><label for="metaDescription">{lang}cms.acp.page.meta.metaDescription{/lang}</label></dt>
                 <dd>
                     <textarea id="metaDescription" name="metaDescription" rows="5" cols="40" class="long">{$i18nPlainValues['metaDescription']}</textarea>
@@ -84,7 +84,7 @@
                     {/if}
                 </dd>
             </dl>
-            <dl>
+            <dl  {if $errorField == 'metaKeywords'}class="formError"{/if}>
                 <dt><label for="metaKeywords">{lang}cms.acp.page.meta.metaKeywords{/lang}</label></dt>
                 <dd>
                      <input type="text" id="metaKeywords" name="metaKeywords" value="{$i18nPlainValues['metaKeywords']}" class="long" />
@@ -96,7 +96,7 @@
                 </dd>
             </dl>
 
-            <dl>
+            <dl  {if $errorField == 'robots'}class="formError"{/if}>
                 <dt><label for="robots">{lang}cms.acp.page.meta.robots{/lang}</label></dt>
                 <dd>
                     <select id="robots" name="robots">
@@ -110,13 +110,13 @@
         </fieldset>
         <fieldset>
             <legend>{lang}cms.acp.page.optional{/lang}</legend>
-            <dl>
+            <dl  {if $errorField == 'invisible'}class="formError"{/if}>
                 <dt><label for="invisible">{lang}cms.acp.page.optional.invisible{/lang}</label></dt>
                 <dd>
                     <input type="checkbox" name="invisible" id="invisible" value="1" {if $invisible == 1}checked="checked"{/if} />
                 </dd>
             </dl>
-			<dl>
+			<dl  {if $errorField == 'showOrder'}class="formError"{/if}>
                 <dt><label for="showOrder">{lang}cms.acp.page.optional.showOrder{/lang}</label></dt>
                 <dd>
                      <input type="text" id="showOrder" name="showOrder" value="{$showOrder}" class="long" />
