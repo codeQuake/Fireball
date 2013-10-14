@@ -37,6 +37,13 @@ cssClasses VARCHAR(255),
 additionalData MEDIUMTEXT DEFAULT NULL
 );
 
+--stylesheet
+DROP TABLE IF EXISTS cms1_stylesheet;
+CREATE TABLE cms1_stylesheet(
+sheetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(255) NOT NULL,
+less MEDIUMTEXT
+);
 
 --foreign keys
 ALTER TABLE cms1_page ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;

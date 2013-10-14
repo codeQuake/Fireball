@@ -11,6 +11,9 @@
       <category name="admin.cms.content">
         <parent>admin.cms</parent>
       </category>
+      <category name="admin.cms.stylesheet">
+        <parent>admin.cms</parent>
+      </category>
     </categories>
 
     <options>
@@ -46,6 +49,18 @@
       </option>
       <option name="admin.cms.content.canAddContentSection">
         <categoryname>admin.cms.content</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="admin.cms.stylesheet.canAddStylesheet">
+        <categoryname>admin.cms.stylesheet</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+    <option name="admin.cms.stylesheet.canListStylesheet">
+        <categoryname>admin.cms.stylesheet</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
