@@ -11,6 +11,7 @@
   <category name="cms.acp">
     <item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
     <item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
+    <item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
     <item name="cms.acp.page.title"><![CDATA[Seitentitel]]></item>
     <item name="cms.acp.page.content.list"><![CDATA[Inhalte von '{$page->title|language}' auflisten]]></item>
     <item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
@@ -89,5 +90,4 @@
     <item name="wcf.acl.option.de.codequake.cms.page.canEnterPage"><![CDATA[Kann Seite betreten]]></item>
     <item name="wcf.acl.option.category.de.codequake.cms.page.user.cms.page"><![CDATA[Benutzerrechte]]></item>
   </category>
- 
 </language>
