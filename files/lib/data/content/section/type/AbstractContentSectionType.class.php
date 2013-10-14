@@ -35,4 +35,8 @@ class AbstractContentSectionType implements IContentSectionType{
     public function getOutput($sectionID){
         return '';
     }
+    
+    public function getPreview($sectionID){
+        return '###'.$this->objectType.'###';
+    }
 }

@@ -76,4 +76,11 @@ class HeadlineContentSectionType extends AbstractContentSectionType{
         
         return '<'.$additionalData['hlType'].'>'.$section->sectionData.'</'.$additionalData['hlType'].'>';
     }
+    
+    public function getPreview($sectionID){
+        $section = new ContentSection($sectionID);
+        $additionalData = @unserialize($section->additionalData);
+        if(!is_array($additionalData)) $additionalData = array();
+        return WCF::getLanguage()->get('cms.acp.content.section.type.de.codequake.cms.section.type.headline').' '.$additionalData['hlType'].' -> '.$section->sectionData;
+    }
 }

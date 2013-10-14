@@ -140,4 +140,17 @@ class TextContentSectionType extends AbstractContentSectionType{
 		MessageParser::getInstance()->setOutputType('text/html');
 		return MessageParser::getInstance()->parse($section->sectionData, $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']);
 	}
+    
+    public function getPreview($sectionID){
+        $section = new ContentSection($sectionID);
+        return $this->getExcerpt($section);
+    }
+    
+    public function getExcerpt($section, $maxLength = 255 ){
+        $additionalData = @unserialize($section->additionalData);
+        if(!is_array($additionalData)) $additionalData = array();
+        MessageParser::getInstance()->setOutputType('text/simplified-html');
+        return StringUtil::truncateHTML(MessageParser::getInstance()->parse($section->sectionData, $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']), $maxLength);
+
+    }
 }

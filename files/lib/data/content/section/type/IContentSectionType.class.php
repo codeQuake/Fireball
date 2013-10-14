@@ -29,4 +29,7 @@ interface IContentSectionType{
     
     //gets the Output
     public function getOutput($sectionID);
+    
+    //preview
+    public function getPreview($sectionID);
 }

@@ -31,5 +31,10 @@ class ContentSection extends CMSDatabaseObject{
         return $this->objectType->getProcessor()->getOutput($this->sectionID);
     }
     
+    public function getPreview(){
+        $this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->sectionTypeID);
+        return $this->objectType->getProcessor()->getPreview($this->sectionID);
+    }
+    
     
 }
