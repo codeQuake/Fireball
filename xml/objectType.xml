@@ -12,5 +12,11 @@
       <definitionname>de.codequake.cms.section.type</definitionname>
       <classname>cms\data\content\section\type\HeadlineContentSectionType</classname>
     </type>
+    
+    <!--ACL-->
+    <type>
+      <name>de.codequake.cms.page</name>
+      <definitionname>com.woltlab.wcf.acl</definitionname>
+    </type>
   </import>
 </data>

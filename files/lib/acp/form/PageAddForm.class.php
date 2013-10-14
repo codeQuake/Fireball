@@ -6,6 +6,7 @@ use cms\data\page\PageEditor;
 use cms\data\page\Page;
 use cms\data\page\PageList;
 use wcf\system\language\I18nHandler;
+use wcf\system\acl\ACLHandler;
 use wcf\form\AbstractForm;
 use wcf\util\StringUtil;
 use wcf\system\exception\UserInputException;
@@ -16,6 +17,7 @@ class PageAddForm extends AbstractForm{
     public $templateName = 'pageAdd';
     public $neededPermissions = array('admin.cms.page.canAddPage');
     public $activeMenuItem = 'cms.acp.menu.link.cms.page.add';
+    public $objectTypeID = 0;
     
     public $enableMultilangualism = true;
     
@@ -36,6 +38,7 @@ class PageAddForm extends AbstractForm{
         I18nHandler::getInstance()->register('description');
         I18nHandler::getInstance()->register('metaDescription');
         I18nHandler::getInstance()->register('metaKeywords');
+        $this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
     }
     public function readData(){
         parent::readData();
@@ -87,6 +90,10 @@ class PageAddForm extends AbstractForm{
         $objectAction->executeAction();
         $returnValues = $objectAction->getReturnValues();
         $pageID = $returnValues['returnValues']->pageID;
+        //save ACL
+        ACLHandler::getInstance()->save($pageID, $this->objectTypeID);
+        ACLHandler::getInstance()->disableAssignVariables();
+        //update I18n
         $update = array();
         
         if (!I18nHandler::getInstance()->isPlainValue('title')) {
@@ -121,6 +128,7 @@ class PageAddForm extends AbstractForm{
     public function assignVariables(){
         parent::assignVariables();
         I18nHandler::getInstance()->assignVariables();
+        ACLHandler::getInstance()->assignVariables($this->objectTypeID);
         WCF::getTPL()->assign(array('action' => 'add',
                                     'invisible' => $this->invisible,
                                     'robots' => $this->robots,
