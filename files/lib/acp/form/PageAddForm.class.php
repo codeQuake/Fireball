@@ -130,6 +130,7 @@ class PageAddForm extends AbstractForm{
         I18nHandler::getInstance()->assignVariables();
         ACLHandler::getInstance()->assignVariables($this->objectTypeID);
         WCF::getTPL()->assign(array('action' => 'add',
+                                    'objectTypeID' => $this->objectTypeID,
                                     'invisible' => $this->invisible,
                                     'robots' => $this->robots,
                                     'parentID' => $this->parentID,

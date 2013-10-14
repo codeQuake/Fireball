@@ -29,12 +29,12 @@
 
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
-    <instruction type="aclOption">xml/aclOption.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     <instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
     <instruction type="objectType">xml/objectType.xml</instruction>
     <instruction type="templateListener">xml/templateListener.xml</instruction>
-
+    <instruction type="aclOption">xml/aclOption.xml</instruction>
+    
     <!--others-->
     <instruction type="sql">install.sql</instruction>
   </instructions>
@@ -49,10 +49,10 @@
 
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
-    <instruction type="aclOption">xml/aclOption.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     <instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
     <instruction type="objectType">xml/objectType.xml</instruction>
     <instruction type="templateListener">xml/templateListener.xml</instruction>
+    <instruction type="aclOption">xml/aclOption.xml</instruction>
   </instructions>
 </package>

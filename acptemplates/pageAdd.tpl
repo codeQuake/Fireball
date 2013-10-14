@@ -18,7 +18,7 @@
 	{include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*' objectID=$pageID}
 {else}
 	{include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*'}
-{/if
+{/if}
 
 <header class="boxHeadline">
     <h1>{lang}cms.acp.page.{@$action}{/lang}</h1>
@@ -46,7 +46,7 @@
 		<nav class="tabMenu">
 			<ul>
 				<li><a href="{@$__wcf->getAnchor('general')}">{lang}wbb.acp.board.category.general{/lang}</a></li>
-				<li><a href="{@$__wcf->getAnchor('userPermissions')}">{lang}wbb.acp.board.category.userPermissions{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('userPermissions')}">{lang}cms.acp.page.userPermissions{/lang}</a></li>
 				{event name='tabMenuTabs'}
 			</ul>
 		</nav>
@@ -152,13 +152,6 @@
 				</fieldset>
 				{event name='fieldsets'}
 			</div>
-			<div class="formSubmit">
-				<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
-				<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-				{@SID_INPUT_TAG}
-				<input type="hidden" name="action" value="{@$action}" />
-				{if $pageID|isset}<input type="hidden" name="id" value="{@$pageID}" />{/if}
-			</div>
 			<div id="userPermissions" class="container containerPadding tabMenuContent">
 				<fieldset>
 					<legend>{lang}cms.acp.page.userPermissions{/lang}</legend>
@@ -170,6 +163,13 @@
 			</div>
 			{event name='tabMenuContents'}
 		</div>
+			<div class="formSubmit">
+				<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+				{@SID_INPUT_TAG}
+				<input type="hidden" name="action" value="{@$action}" />
+				{if $pageID|isset}<input type="hidden" name="id" value="{@$pageID}" />{/if}
+			</div>
+			
 </form>
 
 {include file='footer'}

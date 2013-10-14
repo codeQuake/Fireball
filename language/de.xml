@@ -64,6 +64,7 @@
     <item name="cms.acp.content.section.data.h4"><![CDATA[Überschrift 4]]></item>
     <item name="cms.acp.content.section.list"><![CDATA[Inhaltsabschnitte von '{$content->getTitle()}']]></item>
     <item name="cms.acp.content.section.content"><![CDATA[Inhaltsvorschau]]></item>
+    <item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
   </category>
 
   <category name="cms.page">
@@ -81,6 +82,12 @@
     <item name="wcf.acp.group.option.category.admin.cms.page"><![CDATA[Seiten]]></item>
     <item name="wcf.acp.group.option.admin.cms.page.canListPage"><![CDATA[Kann Seiten auflisten]]></item>
     <item name="wcf.acp.group.option.admin.cms.page.canAddPage"><![CDATA[Kann Seiten hinzufügen]]></item>
+  </category>
+  
+  <category name="wcf.acl.option">
+    <item name="wcf.acl.option.de.codequake.cms.page.canViewPage"><![CDATA[Kann Seite sehen]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.page.canEnterPage"><![CDATA[Kann Seite betreten]]></item>
+    <item name="wcf.acl.option.category.de.codequake.cms.page.user.cms.page"><![CDATA[Benutzerrechte]]></item>
   </category>
  
 </language>
