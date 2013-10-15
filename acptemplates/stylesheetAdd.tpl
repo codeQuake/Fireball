@@ -18,7 +18,7 @@
     </nav>
 </div>
 
-<form method="post" action="{link controller='StyleSheetAdd' application='cms'}{/link}">
+<form method="post" action="{if $action == 'add'}{link controller='StyleSheetAdd' application='cms'}{/link}{else}{link controller='StyleSheetEdit' id=$sheetID application='cms'}{/link}{/if}">
     <div class="container containerPadding marginTop">  
         <fieldset>
 			<legend>{lang}cms.acp.stylesheet.general{/lang}</legend>
