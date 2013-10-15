@@ -14,10 +14,17 @@ class PagePage extends AbstractPage{
     
     public function readParameters(){
         parent::readParameters();
+        $pageID = 0;
         if(isset($_REQUEST['id'])) $pageID = intval($_REQUEST['id']);
-        if(!isset($pageID)) throw new IllegalLinkException();
         $this->page = new Page($pageID);
-        if($this->page->pageID == 0) throw new IllegalLinkException();
+        if($this->page->pageID == 0) {
+            $sql  = "SELECT pageID FROM cms".WCF_N."_page WHERE isHome = ?";
+            $statement = WCF::getDB()->prepareStatement($sql);
+            $statement->execute(array(1));
+            $row = $statement->fetchArray();
+            $this->pageID = $row['pageID'];
+            $this->page = new Page($this->pageID);
+        }
     }
     
     public function readData(){

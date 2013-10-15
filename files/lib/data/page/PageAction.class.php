@@ -4,6 +4,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
 use cms\data\content\ContentAction;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
+use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\system\WCF;
 
 class PageAction extends AbstractDatabaseObjectAction{
@@ -54,5 +55,13 @@ class PageAction extends AbstractDatabaseObjectAction{
     
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
+        $data = array('isDisabled' => 0,
+                       'menuItem' => $this->pageEditor->title,
+                       'menuItemController' => 'cms\page\PagePage',
+                       'menuPosition' => 'header',
+                       'parentMenuItem' => '',
+                       'showOrder' => 1);
+        $action = new PageMenuItemAction(array(), 'create', array('data' => $data));
+        $action->executeAction();
 	}
 }
