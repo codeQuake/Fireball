@@ -4,12 +4,13 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
 use cms\data\content\ContentAction;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
+use wcf\system\WCF;
 
 class PageAction extends AbstractDatabaseObjectAction{
 
     protected $className = 'cms\data\page\PageEditor';
     protected $permissionsDelete = array('admin.cms.page.canAddPage');
-    protected $requireACP = array('delete');
+    protected $requireACP = array('delete', 'setAsHome');
    
     public function create(){
         $page = parent::create();
@@ -37,4 +38,21 @@ class PageAction extends AbstractDatabaseObjectAction{
         }
         parent::delete();
     }
+    
+    
+	public function validateSetAsHome() {
+		WCF::getSession()->checkPermissions(array('admin.cms.page.canAddPage'));
+		
+		$this->pageEditor = $this->getSingleObject();
+		if (!$this->pageEditor->pageID) {
+			throw new UserInputException('objectIDs');
+		}
+		else if ($this->pageEditor->isPrimary) {
+			throw new PermissionDeniedException();
+		}
+	}
+    
+	public function setAsHome() {
+		$this->pageEditor->setAsHome();
+	}
 }

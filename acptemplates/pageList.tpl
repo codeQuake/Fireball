@@ -35,7 +35,7 @@
 				<tr>
 					<th class="columnID columnPageID{if $sortField == 'pageID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='PageList' application='cms'}pageNo={@$pageNo}&sortField=pageID&sortOrder={if $sortField == 'pageID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
 					<th class="columnTitle columnPage{if $sortField == 'title'} active {@$sortOrder}{/if}"><a href="{link controller='PageList' application='cms'}pageNo={@$pageNo}&sortField=title&sortOrder={if $sortField == 'title' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.page.title{/lang}</a></th>
-					
+					<th class="columnDescription">{lang}cms.acp.page.description{/lang}</th>
 					{event name='columnHeads'}
 				</tr>
 			</thead>
@@ -50,8 +50,18 @@
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$page->pageID}</td>
-						<td class="columnTitle columnPage"><a href="{link controller='PageEdit' id=$page->pageID application='cms'}{/link}">{$page->title|language}</a></td>
-						
+						<td class="columnTitle columnPage"><a href="{link controller='PageEdit' id=$page->pageID application='cms'}{/link}">{$page->title|language}</a>
+						{if $page->isHome}
+						<aside class="statusDisplay">
+								<ul class="statusIcons">
+									<li><span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span></li>
+								</ul>
+							 {/if}
+						 </aside>
+						</td>
+						<td>
+							<span class="description">{$page->description}</span>
+						</td>
 						{event name='columns'}
 					</tr>
 				{/foreach}

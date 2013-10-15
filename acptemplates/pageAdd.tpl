@@ -14,6 +14,26 @@
 	//]]>
 </script>
 
+{if $action != 'add'}
+	{if !$page->isHome}
+	
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS.js"></script>
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
+		<script data-relocate="true">
+			//<![CDATA[
+			$(function() {
+				WCF.Language.addObject({
+					'cms.acp.page.homePage': '{lang}cms.acp.page.homePage{/lang}',
+					'cms.acp.page.setAsHome.confirmMessage': '{lang}cms.acp.page.setAsHome.confirmMessage{/lang}'
+				});
+			
+				new CMS.ACP.Page.SetAsHome({@$pageID});
+			});
+			//]]>
+		</script>
+	{/if}
+{/if}
+
 {if $pageID|isset}
 	{include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*' objectID=$pageID}
 {else}
@@ -21,7 +41,7 @@
 {/if}
 
 <header class="boxHeadline">
-    <h1>{lang}cms.acp.page.{@$action}{/lang}</h1>
+    <h1>{lang}cms.acp.page.{@$action}{/lang}{if $action != 'add'}{if $page->isHome} <span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>{/if}{/if}</h1>
 </header>
 
 {if $errorField}
@@ -35,6 +55,11 @@
 <div class="contentNavigation">
     <nav>
         <ul>
+		{if $action != 'add'}
+			{if !$page->isHome}
+				<li><a id="setAsHome" class="button"><span class="icon icon16 icon-home"></span> <span>{lang}cms.acp.page.setAsHome{/lang}</span></a></li>
+			{/if}
+		{/if}
             <li><a href="{link application='cms' controller='PageList'}{/link}" title="{lang}cms.acp.menu.link.cms.page.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.page.list{/lang}</span></a></li>
             {event name='contentNavigationButtons'}
         </ul>

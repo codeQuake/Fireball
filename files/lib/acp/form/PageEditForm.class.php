@@ -150,7 +150,8 @@ class PageEditForm extends AbstractForm{
                                     'title' =>$this->title,
                                     'description' => $this->description,
                                     'metaDescription' => $this->metaDescription,
-                                    'metaKeywords' => $this->metaKeywords));
+                                    'metaKeywords' => $this->metaKeywords,
+                                    'page' => $this->page));
     }
     
     
