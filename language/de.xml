@@ -19,6 +19,10 @@
     <item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
     <item name="cms.acp.page.title"><![CDATA[Seitentitel]]></item>
     <item name="cms.acp.page.content.list"><![CDATA[Inhalte von '{$page->title|language}' auflisten]]></item>
+    <item name="cms.acp.page.description"><![CDATA[Beschreibung]]></item>
+    <item name="cms.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
+    <item name="cms.acp.page.setAsHome.confirmMessage"><![CDATA[Möchten sie diese Seite als Startseite des CMS festlegen?]]></item>
+    <item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
     <item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
     <item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
     <item name="cms.acp.page.general.parentID.no"><![CDATA[-------------]]></item>
