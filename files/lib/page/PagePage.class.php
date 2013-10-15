@@ -4,7 +4,8 @@ use cms\data\page\Page;
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
 use wcf\system\exception\IllegalLinkException;
-use cms\data\layout\Layout;
+use wcf\system\request\LinkHandler;
+use wcf\system\breadcrumb\Breadcrumb;
 
 class PagePage extends AbstractPage{
 
@@ -22,6 +23,12 @@ class PagePage extends AbstractPage{
     public function readData(){
         parent::readData();
         $this->contentList = $this->page->getContentList();
+        
+        foreach($this->page->getParentPages() as $page){
+            WCF::getBreadcrumbs()->add(new Breadcrumb($page->getTitle(), 
+                                                            LinkHandler::getInstance()->getLink('Page', array('application' => 'cms',
+                                                                                                                'object' => $page))));
+        }
     }
     
     public function assignVariables(){

@@ -39,6 +39,31 @@ class Page extends CMSDatabaseObject implements IRouteController{
         return false;
     }
     
+    public function isChild(){
+        if($this->parentID == 0) return false;
+        return true;
+    }
+    
+    public function getParentPage(){
+       if($this->isChild()){
+            return new Page($this->parentID);
+       }
+       return null;
+    }
+    
+    public function getParentPages(){
+        if($this->isChild()){
+            $parentPages = array();
+            $parent = $this;
+            while ($parent = $parent->getParentPage()) {
+				$parentPages[] = $parent;
+			}
+            $parentPages = array_reverse($parentPages);
+            return $parentPages;
+        }
+        return array();
+    }
+    
     public function getContentList(){
         $this->contentList =  new PageContentList($this->pageID);
         $this->contentList->readObjects();
