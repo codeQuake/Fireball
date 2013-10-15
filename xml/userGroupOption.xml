@@ -59,7 +59,19 @@
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
       </option>
-    <option name="admin.cms.style.canListStylesheet">
+      <option name="admin.cms.style.canListStylesheet">
+        <categoryname>admin.cms.style</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+     <option name="admin.cms.style.canAddLayout">
+        <categoryname>admin.cms.style</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="admin.cms.style.canListLayout">
         <categoryname>admin.cms.style</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>

@@ -73,6 +73,7 @@
     <item name="cms.acp.stylesheet.title"><![CDATA[Titel]]></item>
     <item name="cms.acp.stylesheet.general"><![CDATA[Allgemeine Einstellungen]]></item>
     <item name="cms.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
+    <item name="cms.acp.stylesheet.edit"><![CDATA[Stylesheet bearbeiten]]></item>
     <item name="cms.acp.stylesheet.less"><![CDATA[CSS & Less]]></item>
     <item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Sie haben zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins.]]></item>
   </category>
