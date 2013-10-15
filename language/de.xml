@@ -7,7 +7,10 @@
     <item name="cms.acp.menu.link.cms.content.list"><![CDATA[Inhalte auflisten]]></item>
     <item name="cms.acp.menu.link.cms.content.add"><![CDATA[Inhalt hinzufügen]]></item>
     <item name="cms.acp.menu.link.cms.content.section.list"><![CDATA[Inhaltsabschnitte auflisten]]></item>
+    <item name="cms.acp.menu.link.cms.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
+    <item name="cms.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
   </category>
+  
   <category name="cms.acp">
     <item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
     <item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
@@ -66,6 +69,12 @@
     <item name="cms.acp.content.section.list"><![CDATA[Inhaltsabschnitte von '{$content->getTitle()}']]></item>
     <item name="cms.acp.content.section.content"><![CDATA[Inhaltsvorschau]]></item>
     <item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
+    <item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
+    <item name="cms.acp.stylesheet.title"><![CDATA[Titel]]></item>
+    <item name="cms.acp.stylesheet.general"><![CDATA[Allgemeine Einstellungen]]></item>
+    <item name="cms.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
+    <item name="cms.acp.stylesheet.less"><![CDATA[CSS & Less]]></item>
+    <item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Sie haben zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins.]]></item>
   </category>
 
   <category name="cms.page">

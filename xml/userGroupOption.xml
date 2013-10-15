@@ -53,13 +53,13 @@
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
       </option>
-      <option name="admin.cms.stylesheet.canAddStylesheet">
+      <option name="admin.cms.style.canAddStylesheet">
         <categoryname>admin.cms.style</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
       </option>
-    <option name="admin.cms.stylesheet.canListStylesheet">
+    <option name="admin.cms.style.canListStylesheet">
         <categoryname>admin.cms.style</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
