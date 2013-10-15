@@ -8,7 +8,7 @@
     <item name="cms.acp.menu.link.cms.content.add"><![CDATA[Inhalt hinzufügen]]></item>
     <item name="cms.acp.menu.link.cms.content.section.list"><![CDATA[Inhaltsabschnitte auflisten]]></item>
     <item name="cms.acp.menu.link.cms.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
-    <item name="cms.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
+    <item name="cms.acp.menu.link.cms.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
   </category>
   
   <category name="cms.acp">

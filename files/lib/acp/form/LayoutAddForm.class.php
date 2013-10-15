@@ -4,6 +4,7 @@ use cms\data\stylesheet\StylesheetList;
 use cms\data\layout\LayoutAction;
 use wcf\form\AbstractForm;
 use wcf\util\StringUtil;
+use wcf\system\WCF;
 
 class LayoutAddForm extends AbstractForm{
 
