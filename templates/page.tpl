@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-    <title>{$page->getTitle()|language} - {PAGE_TITLE}</title>
+    <title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->title}{$page->getTitle()|language} - {/if}{PAGE_TITLE}</title>
     
     {include file='pageHeadInclude' application='cms' sandbox=false}
     <link rel="canonical" href="{link application='cms' controller='Page' object=$page}{/link}" />

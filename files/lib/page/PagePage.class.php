@@ -6,6 +6,7 @@ use wcf\system\WCF;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\request\LinkHandler;
 use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\menu\page\PageMenu;
 
 class PagePage extends AbstractPage{
 
@@ -29,6 +30,10 @@ class PagePage extends AbstractPage{
     
     public function readData(){
         parent::readData();
+        if (PageMenu::getInstance()->getLandingPage()->menuItem == $this->page->title) {
+			WCF::getBreadcrumbs()->remove(0);
+		}
+        
         $this->contentList = $this->page->getContentList();
         
         foreach($this->page->getParentPages() as $page){
