@@ -7,7 +7,7 @@ use wcf\system\WCF;
 
 class StylesheetAddForm extends AbstractForm{
     public $templateName = 'stylesheetAdd';
-    public $neededPermissions = array('admin.cms.stylesheet.canAddStylesheet');
+    public $neededPermissions = array('admin.cms.style.canAddStylesheet');
     public $activeMenuItem = 'cms.acp.menu.link.cms.stylesheet.add';
     
     public $title = '';

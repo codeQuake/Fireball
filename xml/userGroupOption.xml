@@ -11,7 +11,7 @@
       <category name="admin.cms.content">
         <parent>admin.cms</parent>
       </category>
-      <category name="admin.cms.stylesheet">
+      <category name="admin.cms.style">
         <parent>admin.cms</parent>
       </category>
     </categories>
@@ -54,13 +54,13 @@
         <admindefaultvalue>1</admindefaultvalue>
       </option>
       <option name="admin.cms.stylesheet.canAddStylesheet">
-        <categoryname>admin.cms.stylesheet</categoryname>
+        <categoryname>admin.cms.style</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
       </option>
     <option name="admin.cms.stylesheet.canListStylesheet">
-        <categoryname>admin.cms.stylesheet</categoryname>
+        <categoryname>admin.cms.style</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>

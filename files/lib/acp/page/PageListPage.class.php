@@ -1,6 +1,5 @@
 <?php
 namespace cms\acp\page;
-use cms\data\page\PageList;
 use wcf\page\SortablePage;
 
 class PageListPage extends SortablePage{
@@ -11,6 +10,5 @@ class PageListPage extends SortablePage{
     public $templateName = 'pageList';
     public $defaultSortfield = 'pageID';
     public $validSortFields = array('pageID', 'title');
-    public $objectList = array();
     
 }

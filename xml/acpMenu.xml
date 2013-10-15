@@ -32,13 +32,13 @@
     <acpmenuitem name="cms.acp.menu.link.cms.stylesheet.add">
       <parent>cms.acp.menu.link.cms</parent>
       <controller><![CDATA[cms\acp\form\StylesheetAddForm]]></controller>
-      <permissions>admin.cms.stylsheet.canAddStylesheet</permissions>
+      <permissions>admin.cms.style.canAddStylesheet</permissions>
     </acpmenuitem>
     
     <acpmenuitem name="cms.acp.menu.link.cms.stylesheet.list">
       <parent>cms.acp.menu.link.cms</parent>
       <controller><![CDATA[cms\acp\form\StylesheetListPage]]></controller>
-      <permissions>admin.cms.stylsheet.canListStylesheet</permissions>
+      <permissions>admin.cms.style.canListStylesheet</permissions>
     </acpmenuitem>
   </import>
 </data>
