@@ -72,7 +72,7 @@
     <item name="cms.acp.content.section.data.h2"><![CDATA[Überschrift 2]]></item>
     <item name="cms.acp.content.section.data.h3"><![CDATA[Überschrift 3]]></item>
     <item name="cms.acp.content.section.data.h4"><![CDATA[Überschrift 4]]></item>
-    <item name="cms.acp.content.section.list"><![CDATA[Inhaltsabschnitte von '{$content->getTitle()}']]></item>
+    <item name="cms.acp.content.section.list"><![CDATA[Inhaltsabschnitte von '{$content->getTitle()|language}']]></item>
     <item name="cms.acp.content.section.content"><![CDATA[Inhaltsvorschau]]></item>
     <item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
     <item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
