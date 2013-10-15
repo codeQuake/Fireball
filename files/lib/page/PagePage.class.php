@@ -6,7 +6,6 @@ use wcf\system\WCF;
 use wcf\system\exception\IllegalLinkException;
 use cms\data\layout\Layout;
 
-use cms\system\layout\LayoutCompiler;
 class PagePage extends AbstractPage{
 
     public $contentList = array();
