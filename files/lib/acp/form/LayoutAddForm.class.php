@@ -36,7 +36,7 @@ class LayoutAddForm extends AbstractForm{
         
         $objectAction = new LayoutAction(array(), 'create', array('data' => array('title' => $this->title, 'data' => serialize($this->data))));
         $objectAction->executeAction();
-        
+       
         $this->saved();
         WCF::getTPL()->assign('success', true);
         

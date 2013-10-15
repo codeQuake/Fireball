@@ -12,8 +12,9 @@ class PageAction extends AbstractDatabaseObjectAction{
     protected $requireACP = array('delete');
    
     public function create(){
-        parent::create();
+        $page = parent::create();
         PagePermissionCacheBuilder::getInstance()->reset();
+        return $page;
     }
     
     public function update(){

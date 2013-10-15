@@ -41,7 +41,7 @@
                     <dd>
                         <select name="data[]" multiple="multiple" id="stylesheets" size="10">
                             {foreach from=$sheetList item=$sheet}
-                                <option value="{$sheet->sheetID}">{$sheet->title}</option>
+                                <option value="{$sheet->sheetID}" {if $sheet->sheetID|in_array:$data}selected="selected"{/if}>{$sheet->title}</option>
                             {/foreach}
                         </select>
                         <small>{lang}wcf.global.multiSelect{/lang}</small>

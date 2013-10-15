@@ -88,6 +88,7 @@ class PageAddForm extends AbstractForm{
                        
         $objectAction = new PageAction(array(), 'create', array('data' => $data));
         $objectAction->executeAction();
+        
         $returnValues = $objectAction->getReturnValues();
         $pageID = $returnValues['returnValues']->pageID;
         //save ACL
