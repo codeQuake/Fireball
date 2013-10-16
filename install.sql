@@ -11,7 +11,8 @@ metaKeywords VARCHAR(255),
 invisible TINYINT(1) DEFAULT 0,
 robots ENUM('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow') NOT NULL DEFAULT 'index,follow',
 showOrder INT(10) DEFAULT 0,
-isHome INT(1) DEFAULT 0
+isHome INT(1) DEFAULT 0,
+menuItem MEDIUMTEXT
 );
 
 --content

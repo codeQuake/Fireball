@@ -163,6 +163,12 @@
 							<input type="checkbox" name="invisible" id="invisible" value="1" {if $invisible == 1}checked="checked"{/if} />
 						</dd>
 					</dl>
+					<dl  {if $errorField == 'menuItem'}class="formError"{/if}>
+						<dt><label for="invisible">{lang}cms.acp.page.optional.menuItem{/lang}</label></dt>
+						<dd>
+							<input type="checkbox" name="menuItem" id="menuItem" value="1" {if $menuItem == 1}checked="checked"{/if} />
+						</dd>
+					</dl>
 					<dl  {if $errorField == 'showOrder'}class="formError"{/if}>
 						<dt><label for="showOrder">{lang}cms.acp.page.optional.showOrder{/lang}</label></dt>
 						<dd>

@@ -29,7 +29,7 @@ class PageAddForm extends AbstractForm{
     public $robots = 'index,follow';
     public $showOrder = 0;
     public $parentID = 0;
-    
+    public $menuItem = array();
     public $pageList = null;
 
    public function readParameters(){
@@ -42,6 +42,7 @@ class PageAddForm extends AbstractForm{
     }
     public function readData(){
         parent::readData();
+        $this->menuItem['has'] = 0;
         if(isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
         $this->pageList = new PageList();
         $this->pageList->readObjects();
@@ -56,6 +57,7 @@ class PageAddForm extends AbstractForm{
         if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
         if(isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
         if(isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
+        if(isset($_POST['menuItem'])) $this->menuItem['has'] = intval($_POST['menuItem']);
         if(isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
         if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
     }
@@ -82,6 +84,7 @@ class PageAddForm extends AbstractForm{
                        'metaDescription' => $this->metaDescription,
                        'metaKeywords' => $this->metaKeywords,
                        'invisible' => $this->invisible,
+                       'menuItem' => serialize($this->menuItem),
                        'showOrder' => $this->showOrder,
                        'parentID' => $this->parentID,
                        'robots' => $this->robots);
@@ -123,6 +126,7 @@ class PageAddForm extends AbstractForm{
         
         $this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = '';
         $this->invisible = $this->parentID= $this->showOrder = 0;
+        $this->menuItem = array();
         I18nHandler::getInstance()->reset();
     }
     
@@ -136,6 +140,7 @@ class PageAddForm extends AbstractForm{
                                     'robots' => $this->robots,
                                     'parentID' => $this->parentID,
                                     'showOrder' => $this->showOrder,
+                                    'menuItem' => $this->menuItem['has'],
                                     'pageList' => $this->pageList));
     }
     

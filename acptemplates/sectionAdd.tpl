@@ -31,6 +31,7 @@
                 <dt><label for="objectType">{lang}cms.acp.content.section.general.objectType{/lang}</label></dt>
                 <dd>
                     <select id="objectType" name="objectType" onchange="this.form.submit()">
+						<option value="none"></option>
                         {foreach from=$objectTypeList item='item'}
 						<option value="{$item->objectType}" {if $item->objectType == $objectTypeName}selected="selected"{/if}>{lang}cms.acp.content.section.type.{$item->objectType}{/lang}</option>
 						{/foreach}

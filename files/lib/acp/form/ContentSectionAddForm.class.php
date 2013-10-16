@@ -42,8 +42,9 @@ class ContentSectionAddForm extends AbstractForm{
     
     public function readFormParameters(){
         parent::readFormParameters();
+        
         if(isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.section.type', $_REQUEST['objectType']);
-        $this->objectTypeProcessor = $this->objectType->getProcessor();
+        if($this->objectType != null) $this->objectTypeProcessor = $this->objectType->getProcessor();
         if(isset($_POST['send'])) $this->send = (boolean) $_POST['send'];
         if(isset($_POST['id'])) $this->contentID = intval($_POST['id']);
         if(isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
@@ -53,7 +54,8 @@ class ContentSectionAddForm extends AbstractForm{
     
     public function validate(){
         parent::validate();
-        $this->objectTypeProcessor->validateFormData();
+        if($this->objectType != null) $this->objectTypeProcessor->validateFormData();
+        else throw new UserInputException('objectType');
     }
     
     public function submit() {
@@ -65,7 +67,7 @@ class ContentSectionAddForm extends AbstractForm{
 		try {
 			// send message or save as draft
 			if ($this->send) {
-                $this->objectTypeProcessor->readFormData();
+                if($this->objectType != null) $this->objectTypeProcessor->readFormData();
 				$this->validate();
 				// no errors
 				$this->save();
