@@ -1,0 +1,66 @@
+<?php
+namespace cms\acp\form;
+use wcf\form\AbstractForm;
+use cms\data\content\Content;
+use cms\data\content\ContentEditor;
+use cms\data\content\ContentAction;
+use wcf\system\language\I18nHandler;
+use wcf\system\WCF;
+
+class ContentEditForm extends ContentAddForm{
+    public $contentID = 0;
+    public $content = null;
+    
+    public function readData(){
+        parent::readData();
+        if(isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
+        $this->content = new Content($this->contentID);
+        I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
+        $this->title = $this->content->title;
+        $this->pageID = $this->content->pageID;
+        $this->cssID = $this->content->cssID;
+        $this->cssClasses = $this->content->cssClasses;
+        $this->showOrder = $this->content->showOrder;
+    }
+    
+    public function readParameters(){
+        AbstractForm::readParameters();
+        I18nHandler::getInstance()->register('title');
+    }
+    
+    public function readFormParameters(){
+        parent::readFormParameters();
+        if(isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
+        $this->content = new Content($this->contentID);
+    }
+    
+    public function save(){
+        AbstractForm::save();
+        $data = array('title' => $this->title,
+                    'pageID' => $this->pageID,
+                    'cssID' => $this->cssID,
+                    'cssClasses' => $this->cssClasses,
+                    'showOrder' => $this->showOrder);
+        $objectAction = new ContentAction(array($this->contentID), 'update', array('data' => $data));
+        $objectAction->executeAction();
+        $update = array();
+        if (!I18nHandler::getInstance()->isPlainValue('title')) {
+            I18nHandler::getInstance()->save('title', 'cms.content.'.$this->contentID.'.title', 'cms.content', PACKAGE_ID);
+            $update['title'] = 'cms.content.'.$this->contentID.'.title';
+        }
+        if (!empty($update)) {
+            $editor = new ContentEditor(new Content($this->contentID));
+            $editor->update($update);
+        }
+        $this->saved();
+        WCF::getTPL()->assign('success', true);
+    }
+    
+    public function assignVariables(){
+        parent::assignVariables();
+        
+        I18nHandler::getInstance()->assignVariables(!empty($_POST));
+        WCF::getTPL()->assign(array('contentID' => $this->contentID,
+                                    'action' => 'edit'));
+    }
+}

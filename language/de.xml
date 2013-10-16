@@ -45,7 +45,7 @@
     <item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
     <item name="cms.acp.content.general.title"><![CDATA[Titel]]></item>
     <item name="cms.acp.content.css"><![CDATA[CSS-Einstellungen]]></item>
-    <item name="cms.acp.content.css.cssID"><![CDATA[CSS-IDs]]></item>
+    <item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
     <item name="cms.acp.content.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.showOrder.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
@@ -67,6 +67,7 @@
     <item name="cms.acp.content.section.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.section.showOrder.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.section.add"><![CDATA[Inhaltsabschnitt hinzufügen]]></item>
+    <item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
     <item name="cms.acp.content.section.data.hlType"><![CDATA[Überschriftstyp]]></item>
     <item name="cms.acp.content.section.data.h1"><![CDATA[Überschrift 1]]></item>
     <item name="cms.acp.content.section.data.h2"><![CDATA[Überschrift 2]]></item>
