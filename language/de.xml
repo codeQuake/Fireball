@@ -94,8 +94,8 @@
   </category>
 
   <category name="cms.page">
-    <item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" title="">Software: <strong>Fireball CMS {@PACKAGE_VERSION}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]>
-    </item>
+    <item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" title="">Software: <strong>Fireball CMS {@PACKAGE_VERSION}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
+    <item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
   </category>
   
   <category name="wcf.acp.group">

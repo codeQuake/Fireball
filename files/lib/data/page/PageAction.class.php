@@ -131,5 +131,15 @@ class PageAction extends AbstractDatabaseObjectAction{
     
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
+        
+        //get Home Menu Item
+        $sql = "SELECT menuItemID FROM wcf".WCF_N."_page_menu_item WHERE menuItemController = ?";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array('cms\page\PagePage'));
+        $row = $statement->fetchArray();
+        $item = new PageMenuItem($row['menuItemID']);
+        
+        $action = new PageMenuItemAction(array($item->menuItemID), 'update', array('data' => array('menuItem' => $this->pageEditor->title)));
+        $action->executeAction();
 	}
 }
