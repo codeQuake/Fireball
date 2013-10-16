@@ -5,6 +5,7 @@ use cms\data\page\PageAction;
 use cms\data\page\PageEditor;
 use cms\data\page\Page;
 use cms\data\page\PageList;
+use cms\data\layout\LayoutList;
 use wcf\system\language\I18nHandler;
 use wcf\system\acl\ACLHandler;
 use wcf\form\AbstractForm;
@@ -25,12 +26,14 @@ class PageEditForm extends AbstractForm{
     public $metaDescription = '';
     public $metaKeywords = '';
     public $invisible = 0;
+    public $layoutID = 0;
     public $robots = 'index,follow';
     public $showOrder = 0;
     public $menuItem = array();
     public $pageID = 0;
     public $page = null;
     public $pageList = null;
+    public $layoutList = null;
 
    public function readParameters(){
         parent::readParameters();
@@ -59,12 +62,17 @@ class PageEditForm extends AbstractForm{
         $this->showOrder = $this->page->showOrder;
         $this->invisible = $this->page->invisible;
         $this->robots = $this->page->robots;
+        $this->layoutID = $this->page->layoutID;
         $this->menuItem = @unserialize($this->page->menuItem);
         if(!isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
         
         $this->pageList = new PageList();
         $this->pageList->readObjects();
         $this->pageList = $this->pageList->getObjects();
+        
+        $this->layoutList = new LayoutList();
+        $this->layoutList->readObjects();
+        $this->layoutList = $this->layoutList->getObjects();
     }
     public function readFormParameters(){
         parent::readFormParameters();
@@ -78,6 +86,7 @@ class PageEditForm extends AbstractForm{
         if(isset($_POST['menuItem'])) $this->menuItem['has'] = intval($_POST['menuItem']);
         if(isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
         if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
+        if(isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
         if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
         if(isset($_REQUEST['menuID'])) $this->menuItem['id'] = intval($_REQUEST['menuID']);
     }
@@ -107,6 +116,7 @@ class PageEditForm extends AbstractForm{
                                                                                            'showOrder' => $this->showOrder,
                                                                                            'menuItem' => serialize($this->menuItem),
                                                                                            'parentID' => $this->parentID,
+                                                                                           'layoutID' => $this->layoutID,
                                                                                            'robots' => $this->robots)));
         $objectAction->executeAction();
         
@@ -154,13 +164,15 @@ class PageEditForm extends AbstractForm{
                                     'showOrder' => $this->showOrder,
                                     'pageList' => $this->pageList,
                                     'pageID' => $this->pageID,
+                                    'layoutID' => $this->layoutID,
                                     'title' =>$this->title,
                                     'description' => $this->description,
                                     'metaDescription' => $this->metaDescription,
                                     'metaKeywords' => $this->metaKeywords,
                                     'menuItem' => $this->menuItem['has'],
                                     'menuID' => isset($this->menuItem['id']) ? $this->menuItem['id'] : 0,
-                                    'page' => $this->page));
+                                    'page' => $this->page,
+                                    'layoutList' => $this->layoutList));
     }
     
     

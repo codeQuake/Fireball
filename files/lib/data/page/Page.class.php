@@ -3,6 +3,7 @@ namespace cms\data\page;
 use cms\data\content\PageContentList;
 use wcf\system\request\IRouteController;
 use cms\data\CMSDatabaseObject;
+use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
 use wcf\system\WCF;
 
@@ -30,6 +31,14 @@ class Page extends CMSDatabaseObject implements IRouteController{
     
     public function getTitle(){
         return $this->title;
+    }
+    
+    public function getLayout(){
+        if($this->layoutID != 0){
+            return LayoutHandler::getInstance()->getStylesheet($this->layoutID);
+        }
+        
+        return '';
     }
     
     public function isVisible(){

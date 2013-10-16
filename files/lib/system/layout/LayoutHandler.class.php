@@ -1,5 +1,6 @@
 <?php
 namespace cms\system\layout;
+use cms\data\layout\Layout;
 use wcf\system\SingletonFactory;
 use cms\data\layout\LayoutList;
 
@@ -19,8 +20,8 @@ class LayoutHandler extends SingletonFactory{
     }
     
     public function getStylesheet($layoutID){
-        $filename = CMS_DIR.'style/layout-'.$layoutID.'.css';
-        if (!file_exists(WCF_DIR.$filename)) {
+        $filename = RELATIVE_CMS_DIR.'style/layout-'.$layoutID.'.css';
+        if (!file_exists($filename)) {
             LayoutCompiler::getInstance()->compile(new Layout($layoutID));
         }
         return '<link rel="stylesheet" type="text/css" href="'.$filename.'" />';

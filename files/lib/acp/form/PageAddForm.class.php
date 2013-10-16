@@ -5,6 +5,7 @@ use cms\data\page\PageAction;
 use cms\data\page\PageEditor;
 use cms\data\page\Page;
 use cms\data\page\PageList;
+use cms\data\layout\LayoutList;
 use wcf\system\language\I18nHandler;
 use wcf\system\acl\ACLHandler;
 use wcf\form\AbstractForm;
@@ -31,6 +32,8 @@ class PageAddForm extends AbstractForm{
     public $parentID = 0;
     public $menuItem = array();
     public $pageList = null;
+    public $layoutList = null;
+    public $layoutID = 0;
 
    public function readParameters(){
         parent::readParameters();
@@ -47,6 +50,10 @@ class PageAddForm extends AbstractForm{
         $this->pageList = new PageList();
         $this->pageList->readObjects();
         $this->pageList = $this->pageList->getObjects();
+        
+        $this->layoutList = new LayoutList();
+        $this->layoutList->readObjects();
+        $this->layoutList = $this->layoutList->getObjects();
     }
     public function readFormParameters(){
         parent::readFormParameters();
@@ -60,6 +67,7 @@ class PageAddForm extends AbstractForm{
         if(isset($_POST['menuItem'])) $this->menuItem['has'] = intval($_POST['menuItem']);
         if(isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
         if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
+        if(isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
     }
     
     public function validate(){
@@ -86,6 +94,7 @@ class PageAddForm extends AbstractForm{
                        'invisible' => $this->invisible,
                        'menuItem' => serialize($this->menuItem),
                        'showOrder' => $this->showOrder,
+                       'layoutID' => $this->layoutID,
                        'parentID' => $this->parentID,
                        'robots' => $this->robots);
                        
@@ -141,7 +150,9 @@ class PageAddForm extends AbstractForm{
                                     'parentID' => $this->parentID,
                                     'showOrder' => $this->showOrder,
                                     'menuItem' => $this->menuItem['has'],
-                                    'pageList' => $this->pageList));
+                                    'layoutID' => $this->layoutID,
+                                    'pageList' => $this->pageList,
+                                    'layoutList' => $this->layoutList));
     }
     
     

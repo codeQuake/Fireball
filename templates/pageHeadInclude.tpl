@@ -55,6 +55,7 @@
 
 <!-- Stylesheets -->
 {@$__wcf->getStyleHandler()->getStylesheet()}
+{@$page->getLayout()}
 {event name='stylesheets'}
 
 <!-- Icons -->

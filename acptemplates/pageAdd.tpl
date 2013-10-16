@@ -169,6 +169,19 @@
 							<input type="checkbox" name="menuItem" id="menuItem" value="1" {if $menuItem == 1}checked="checked"{/if} />
 						</dd>
 					</dl>
+					{if $layoutList != null}
+					<dl {if $errorField == 'layoutID'}class="formError"{/if}>
+						<dt><label for="layoutID">{lang}cms.acp.page.optional.layoutID{/lang}</label></dt>
+						<dd>
+							<select id="layoutID" name="layoutID">
+								<option value="0" {if layoutID == 0} selected="selected"{/if}></option>
+								{foreach from=$layoutList item='item'}
+								<option value="{$item->layoutID}" {if $item->layoutID == $layoutID}selected="selected"{/if}>{$item->title|language}</option>
+								{/foreach}
+							</select>
+						</dd>
+					</dl>
+					{/if}
 					<dl  {if $errorField == 'showOrder'}class="formError"{/if}>
 						<dt><label for="showOrder">{lang}cms.acp.page.optional.showOrder{/lang}</label></dt>
 						<dd>

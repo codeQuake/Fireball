@@ -41,6 +41,7 @@
     <item name="cms.acp.page.optional.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.page.optional.menuItem"><![CDATA[Menüitem erstellen?]]></item>
     <item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
+    <item name="cms.acp.page.optional.layoutID"><![CDATA[Layout auswählen]]></item>
     <item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
     <item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
     <item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
@@ -88,7 +89,7 @@
     <item name="cms.acp.layout.list"><![CDATA[Layouts]]></item>
     <item name="cms.acp.layout.title"><![CDATA[Titel]]></item>
     <item name="cms.acp.layout.add"><![CDATA[Layout hinzufügen]]></item>
-    <item name="cms.acp.layout.general"><![CDATA[Allgemeine Einstellunge]]></item>
+    <item name="cms.acp.layout.general"><![CDATA[Allgemeine Einstellungen]]></item>
     <item name="cms.acp.layout.options"><![CDATA[Optionen]]></item>
     <item name="cms.acp.layout.stylesheets"><![CDATA[Stylesheets auswählen]]></item>
   </category>
