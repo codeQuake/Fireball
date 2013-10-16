@@ -5,8 +5,8 @@ use wcf\page\AbstractPage;
 use wcf\system\WCF;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\request\LinkHandler;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
+use wcf\system\breadcrumb\Breadcrumb;
 
 class PagePage extends AbstractPage{
 
@@ -48,5 +48,10 @@ class PagePage extends AbstractPage{
         
         WCF::getTPL()->assign(array('contentList' => $this->contentList,
                                     'page' => $this->page));
+    }
+    
+    public function show(){
+        if($this->page->hasMenuItem()) $this->activeMenuItem = $this->page->title;
+        parent::show();
     }
 }

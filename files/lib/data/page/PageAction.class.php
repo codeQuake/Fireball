@@ -4,6 +4,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
 use cms\data\content\ContentAction;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
+use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\page\menu\item\PageMenuItemEditor;
 use wcf\system\request\LinkHandler;
@@ -20,11 +21,24 @@ class PageAction extends AbstractDatabaseObjectAction{
         PagePermissionCacheBuilder::getInstance()->reset();
         $menuItem = @unserialize($page->menuItem);
         if(isset($menuItem['has']) && $menuItem['has'] == 1){
+        
+            //check if has parents
+            $parentItem = '';
+            if($page->isChild()){
+                $parent = $page->getParentPage();
+                $temp = @unserialize($parent->menuItem);
+                if(isset($temp['has']) && $temp['has'] ==1){
+                    if($temp['id'] != 0) $parentItem = new PageMenuItem($temp['id']);
+                    $parentItem = $parentItem->menuItem;
+                }
+            }
+            
+            //create
             $data = array('isDisabled' => 0,
                        'menuItem' => $page->title,
                        'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','object' => $page, 'isACP' => 0)),
                        'menuPosition' => 'header',
-                       'parentMenuItem' => '',
+                       'parentMenuItem' => $parentItem,
                        'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header'));
             $action = new PageMenuItemAction(array(), 'create', array('data' => $data));
             $action->executeAction();
