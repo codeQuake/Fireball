@@ -53,6 +53,16 @@ class PagePage extends AbstractPage{
     
     public function show(){
         if($this->page->hasMenuItem()) $this->activeMenuItem = $this->page->title;
+        else{
+            //activate startpage-item
+            $sql  = "SELECT pageID FROM cms".WCF_N."_page WHERE isHome = ?";
+            $statement = WCF::getDB()->prepareStatement($sql);
+            $statement->execute(array(1));
+            $row = $statement->fetchArray();
+            $startPageID = $row['pageID'];
+            $startPage = new Page($startPageID);
+            $this->activeMenuItem = $startPage->title;
+        }
         parent::show();
     }
 }
