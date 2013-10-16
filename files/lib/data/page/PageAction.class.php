@@ -67,11 +67,21 @@ class PageAction extends AbstractDatabaseObjectAction{
                 }
                 //create new
                 else{
+                    //check if has parents
+                    $parentItem = '';
+                    if($page->isChild()){
+                        $parent = $page->getParentPage();
+                        $temp = @unserialize($parent->menuItem);
+                        if(isset($temp['has']) && $temp['has'] ==1){
+                            if($temp['id'] != 0) $parentItem = new PageMenuItem($temp['id']);
+                            $parentItem = $parentItem->menuItem;
+                        }
+                    }
                     $data = array('isDisabled' => 0,
                        'menuItem' => $page->title,
                        'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','object' => $page, 'isACP' => 0)),
                        'menuPosition' => 'header',
-                       'parentMenuItem' => '',
+                       'parentMenuItem' => $parentItem,
                        'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header'));
                     $action = new PageMenuItemAction(array(), 'create', array('data' => $data));
                     $action->executeAction();
