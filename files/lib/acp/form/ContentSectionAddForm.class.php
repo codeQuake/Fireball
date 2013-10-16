@@ -14,7 +14,6 @@ class ContentSectionAddForm extends AbstractForm{
     public $neededPermissions = array('admin.cms.content.canAddContentSection');
     public $activeMenuItem = 'cms.acp.menu.link.cms.content.add';
     public $enableMultilangualism = true;
-    
     public $objectType = null;
     public $objectTypeList = array();
     public $objectTypeProcessor = null;
@@ -26,6 +25,7 @@ class ContentSectionAddForm extends AbstractForm{
     public $send = false;
     
     public function readParameters(){
+        parent::readParameters();
          //getObjectTypeByName($definitionName, $objectTypeName);
         if(isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.section.type', $_REQUEST['objectType']);
         if($this->objectType != null) {
@@ -90,7 +90,7 @@ class ContentSectionAddForm extends AbstractForm{
         $objectAction->executeAction();
         $returnValues = $objectAction->getReturnValues();
         
-        $this->objectTypeProcessor->saved($returnValues);
+        $this->objectTypeProcessor->saved($returnValues['returnValues']);
         
         
         

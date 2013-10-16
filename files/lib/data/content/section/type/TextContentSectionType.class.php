@@ -3,6 +3,7 @@ namespace cms\data\content\section\type;
 use wcf\system\language\I18nHandler;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\util\MessageUtil;
+use wcf\system\exception\UserInputException;
 use wcf\system\bbcode\BBCodeHandler;
 use wcf\data\smiley\SmileyCache;
 use wcf\util\StringUtil;
@@ -56,6 +57,16 @@ class TextContentSectionType extends AbstractContentSectionType{
 		}
     }
     
+    public function readData($sectionID){
+        $section = new ContentSection($sectionID);
+        $data = @unserialize($section->additionalData);
+        $this->enableSmilies = $data['enableSmilies'];
+        $this->enableBBCodes = $data['enableBBCodes'];
+        $this->enableHtml = $data['enableHtml'];
+        $this->formData['sectionData'] = $section->sectionData;
+        I18nHandler::getInstance()->setOptions('sectionData', PACKAGE_ID, $section->sectionData, 'cms.content.section.sectionData\d+');
+    }
+    
     public function readFormData(){
         I18nHandler::getInstance()->readValues();
         if (I18nHandler::getInstance()->isPlainValue('sectionData')) $this->formData['sectionData'] = MessageUtil::stripCrap(StringUtil::trim(I18nHandler::getInstance()->getValue('sectionData')));
@@ -84,6 +95,9 @@ class TextContentSectionType extends AbstractContentSectionType{
     
     public function assignFormVariables(){
         I18nHandler::getInstance()->assignVariables();
+        
+        
+        I18nHandler::getInstance()->assignVariables(!empty($_POST));
         WCF::getTPL()->assign(array('attachmentHandler' => $this->attachmentHandler,
                                     'defaultSmilies' => $this->defaultSmilies,
 			                        'enableBBCodes' => $this->enableBBCodes,
@@ -102,7 +116,7 @@ class TextContentSectionType extends AbstractContentSectionType{
         return 'textSectionType';
     }
     
-    public function saved($returnValues){
+    public function saved($section){
         $additionalData = array();
         $additionalData['enableSmilies'] = $this->enableSmilies;
         $additionalData['enableBBCodes'] = $this->enableBBCodes;
@@ -111,18 +125,18 @@ class TextContentSectionType extends AbstractContentSectionType{
         $data['additionalData'] = serialize($additionalData);
         if(I18nHandler::getInstance()->isPlainValue('sectionData')) {
             $data['sectionData'] = $this->formData['sectionData'];
-            $editor = new ContentSectionEditor($returnValues['returnValues']);
+            $editor = new ContentSectionEditor($section);
             $editor->update($data);
         }
         
-        $sectionID = $returnValues['returnValues']->sectionID;
+        $sectionID = $section->sectionID;
             $update = array();
             if (!I18nHandler::getInstance()->isPlainValue('sectionData')) {
-                I18nHandler::getInstance()->save('sectionData', 'cms.content.section.'.$sectionID.'.sectionData', 'cms.content.section', PACKAGE_ID);
-                $update['sectionData'] = 'cms.content.section.'.$sectionID.'.sectionData';
+                I18nHandler::getInstance()->save('sectionData', 'cms.content.section..sectionData'.$sectionID, 'cms.content.section', PACKAGE_ID);
+                $update['sectionData'] = 'cms.content.section.sectionData'.$sectionID;
             }
             if (!empty($update)) {
-                $editor = new ContentSectionEditor($returnValues['returnValues']);
+                $editor = new ContentSectionEditor($section);
                 $editor->update($update);
             
             }

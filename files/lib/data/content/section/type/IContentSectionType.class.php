@@ -6,6 +6,9 @@ interface IContentSectionType{
     //reads form parameters before saving
     public function readParameters();
     
+    //reads data for edits
+    public function readData($sectionID);
+    
     //reads form data 
     public function readFormData();
     
@@ -25,7 +28,7 @@ interface IContentSectionType{
     public function getFormData();
     
     //after saving, it works with the returnvalues
-    public function saved($returnValues);
+    public function saved($section);
     
     //gets the Output
     public function getOutput($sectionID);

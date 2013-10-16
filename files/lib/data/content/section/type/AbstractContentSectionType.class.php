@@ -10,6 +10,9 @@ class AbstractContentSectionType implements IContentSectionType{
     //reads parameters at the beginning
     public function readParameters(){ }
     
+    //reads data for edits
+    public function readData($sectionID){ }
+    
     //reads form data 
     public function readFormData(){ }
     
@@ -30,7 +33,7 @@ class AbstractContentSectionType implements IContentSectionType{
 	}
     
     //after saving, it works with the returnvalues
-    public function saved($returnValues){ }
+    public function saved($section){ }
     
     public function getOutput($sectionID){
         return '';

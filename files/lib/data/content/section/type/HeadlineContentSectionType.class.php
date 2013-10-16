@@ -5,6 +5,7 @@ use cms\data\content\section\ContentSectionEditor;
 use wcf\util\StringUtil;
 use cms\data\content\section\ContentSection;
 use wcf\system\WCF;
+use wcf\system\exception\UserInputException;
 
 class HeadlineContentSectionType extends AbstractContentSectionType{
 
@@ -16,6 +17,14 @@ class HeadlineContentSectionType extends AbstractContentSectionType{
     
     public function readParameters(){
         I18nHandler::getInstance()->register('sectionData');
+    }
+    
+    public function readData($sectionID){
+        $section = new ContentSection($sectionID);
+        $data = @unserialize($section->additionalData);
+        $this->hlType = $data['hlType'];
+        I18nHandler::getInstance()->setOptions('sectionData', PACKAGE_ID, $section->sectionData, 'cms.content.section.sectionData\d+');
+        $this->formData['sectionData'] = $section->sectionData;
     }
     
     public function readFormData(){
@@ -37,6 +46,8 @@ class HeadlineContentSectionType extends AbstractContentSectionType{
     
     public function assignFormVariables(){
         I18nHandler::getInstance()->assignVariables();
+        
+        I18nHandler::getInstance()->assignVariables(!empty($_POST));
         WCF::getTPL()->assign(array('hlType' => $this->hlType));
     }
     
@@ -44,25 +55,25 @@ class HeadlineContentSectionType extends AbstractContentSectionType{
         return 'headlineSectionType';
     }
     
-    public function saved($returnValues){
+    public function saved($section){
         $additionalData = array();
         $additionalData['hlType'] = $this->hlType;
         $data = array();
         $data['additionalData'] = serialize($additionalData);
         if(I18nHandler::getInstance()->isPlainValue('sectionData')) {
             $data['sectionData'] = $this->formData['sectionData'];
-            $editor = new ContentSectionEditor($returnValues['returnValues']);
+            $editor = new ContentSectionEditor($section);
             $editor->update($data);
         }
         
-        $sectionID = $returnValues['returnValues']->sectionID;
+        $sectionID = $section->sectionID;
             $update = array();
             if (!I18nHandler::getInstance()->isPlainValue('sectionData')) {
-                I18nHandler::getInstance()->save('sectionData', 'cms.content.section.'.$sectionID.'.sectionData', 'cms.content.section', PACKAGE_ID);
-                $update['sectionData'] = 'cms.content.section.'.$sectionID.'.sectionData';
+                I18nHandler::getInstance()->save('sectionData', 'cms.content.section.sectionData'.$sectionID, 'cms.content.section', PACKAGE_ID);
+                $update['sectionData'] = 'cms.content.section.sectionData'.$sectionID;
             }
             if (!empty($update)) {
-                $editor = new ContentSectionEditor($returnValues['returnValues']);
+                $editor = new ContentSectionEditor($section);
                 $editor->update($update);
             
             }
