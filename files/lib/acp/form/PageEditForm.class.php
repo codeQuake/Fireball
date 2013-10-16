@@ -61,6 +61,7 @@ class PageEditForm extends AbstractForm{
         $this->robots = $this->page->robots;
         $this->menuItem = @unserialize($this->page->menuItem);
         if(!isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
+        
         $this->pageList = new PageList();
         $this->pageList->readObjects();
         $this->pageList = $this->pageList->getObjects();
@@ -78,6 +79,7 @@ class PageEditForm extends AbstractForm{
         if(isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
         if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
         if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
+        if(isset($_REQUEST['menuID'])) $this->menuItem['id'] = intval($_REQUEST['menuID']);
     }
     
     public function validate(){
@@ -96,7 +98,6 @@ class PageEditForm extends AbstractForm{
     
     public function save(){
         parent::save();
-                       
         $objectAction = new PageAction(array($this->pageID), 'update', array('data' => array('userID' => WCF::getUser()->userID,
                                                                                            'title' => $this->title,
                                                                                            'description' => $this->description,
@@ -108,6 +109,7 @@ class PageEditForm extends AbstractForm{
                                                                                            'parentID' => $this->parentID,
                                                                                            'robots' => $this->robots)));
         $objectAction->executeAction();
+        
         $update = array();
         //save ACL
         ACLHandler::getInstance()->save($this->pageID, $this->objectTypeID);
@@ -157,6 +159,7 @@ class PageEditForm extends AbstractForm{
                                     'metaDescription' => $this->metaDescription,
                                     'metaKeywords' => $this->metaKeywords,
                                     'menuItem' => $this->menuItem['has'],
+                                    'menuID' => $this->menuItem['id'],
                                     'page' => $this->page));
     }
     

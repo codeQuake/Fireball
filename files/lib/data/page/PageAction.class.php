@@ -5,6 +5,8 @@ use wcf\system\exception\UserInputException;
 use cms\data\content\ContentAction;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
 use wcf\data\page\menu\item\PageMenuItemAction;
+use wcf\data\page\menu\item\PageMenuItemEditor;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 class PageAction extends AbstractDatabaseObjectAction{
@@ -16,12 +18,36 @@ class PageAction extends AbstractDatabaseObjectAction{
     public function create(){
         $page = parent::create();
         PagePermissionCacheBuilder::getInstance()->reset();
+        $menuItem = @unserialize($page->menuItem);
+        if(isset($menuItem['has']) && $menuItem['has'] == 1){
+            $data = array('isDisabled' => 0,
+                       'menuItem' => $page->title,
+                       'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','object' => $page, 'isACP' => 0)),
+                       'menuPosition' => 'header',
+                       'parentMenuItem' => '',
+                       'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header'));
+            $action = new PageMenuItemAction(array(), 'create', array('data' => $data));
+            $action->executeAction();
+            $returnValues = $action->getReturnValues();
+            $menuItem['id'] = $returnValues['returnValues']->menuItemID;
+            $menuItem = serialize($menuItem);
+            $pageEditor = new PageEditor($page);
+            $pageEditor->update(array('menuItem' => $menuItem));
+        }
         return $page;
     }
     
     public function update(){
         parent::update();
         PagePermissionCacheBuilder::getInstance()->reset();
+        foreach($this->objectIDs as $objectID) {
+            $page = new Page($objectID);
+             $menuItem = @unserialize($page->menuItem);
+            if(isset($menuItem['has']) && $menuItem['has'] == 1){
+                $action = new PageMenuItemAction(array($menuItem['id']), 'update', array('data' => array('menuItem' => $page->title)));
+                $action->executeAction();
+            }
+        }
     }
     
     public function delete(){
@@ -37,9 +63,15 @@ class PageAction extends AbstractDatabaseObjectAction{
             $action = new ContentAction($contentIDs, 'delete', array());
             $action->executeAction();
         }
+        
+        //delete menuItem
+        $menuItem = @unserialize($page->menuItem);
+        if(isset($menuItem['has']) && $menuItem['has'] == 1){
+            $action = new PageMenuItemAction(array($menuItem['id']), 'delete', array());
+            $action->executeAction();
+        }
         parent::delete();
     }
-    
     
 	public function validateSetAsHome() {
 		WCF::getSession()->checkPermissions(array('admin.cms.page.canAddPage'));
@@ -55,13 +87,5 @@ class PageAction extends AbstractDatabaseObjectAction{
     
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
-        $data = array('isDisabled' => 0,
-                       'menuItem' => $this->pageEditor->title,
-                       'menuItemController' => 'cms\page\PagePage',
-                       'menuPosition' => 'header',
-                       'parentMenuItem' => '',
-                       'showOrder' => 1);
-        $action = new PageMenuItemAction(array(), 'create', array('data' => $data));
-        $action->executeAction();
 	}
 }

@@ -199,6 +199,7 @@
 				{@SID_INPUT_TAG}
 				<input type="hidden" name="action" value="{@$action}" />
 				{if $pageID|isset}<input type="hidden" name="id" value="{@$pageID}" />{/if}
+				{if $menuID|isset}<input type="hidden" name="menuID" value="{@$menuID}" />{/if}
 			</div>
 			
 </form>
