@@ -164,9 +164,15 @@
 						</dd>
 					</dl>
 					<dl  {if $errorField == 'menuItem'}class="formError"{/if}>
-						<dt><label for="invisible">{lang}cms.acp.page.optional.menuItem{/lang}</label></dt>
+						<dt><label for="menuItem">{lang}cms.acp.page.optional.menuItem{/lang}</label></dt>
 						<dd>
 							<input type="checkbox" name="menuItem" id="menuItem" value="1" {if $menuItem == 1}checked="checked"{/if} />
+						</dd>
+					</dl>					
+					<dl  {if $errorField == 'showSidebar'}class="formError"{/if}>
+						<dt><label for="showSidebar">{lang}cms.acp.page.optional.showSidebar{/lang}</label></dt>
+						<dd>
+							<input type="checkbox" name="showSidebar" id="showSidebar" value="1" {if $showSidebar == 1}checked="checked"{/if} />
 						</dd>
 					</dl>
 					{if $layoutList != null}

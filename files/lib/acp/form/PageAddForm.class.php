@@ -28,6 +28,7 @@ class PageAddForm extends AbstractForm{
     public $metaKeywords = '';
     public $invisible = 0;
     public $robots = 'index,follow';
+    public $showSidebar = 0;
     public $showOrder = 0;
     public $parentID = 0;
     public $menuItem = array();
@@ -68,6 +69,7 @@ class PageAddForm extends AbstractForm{
         if(isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
         if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
         if(isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
+        if(isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
     }
     
     public function validate(){
@@ -96,6 +98,7 @@ class PageAddForm extends AbstractForm{
                        'showOrder' => $this->showOrder,
                        'layoutID' => $this->layoutID,
                        'parentID' => $this->parentID,
+                       'showSidebar' =>$this->showSidebar,
                        'robots' => $this->robots);
                        
         $objectAction = new PageAction(array(), 'create', array('data' => $data));
@@ -134,7 +137,7 @@ class PageAddForm extends AbstractForm{
         WCF::getTPL()->assign('success', true);
         
         $this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = '';
-        $this->invisible = $this->parentID= $this->showOrder = 0;
+        $this->invisible = $this->parentID= $this->showOrder = $this->showSidebar = 0;
         $this->menuItem = array();
         I18nHandler::getInstance()->reset();
     }
@@ -151,6 +154,7 @@ class PageAddForm extends AbstractForm{
                                     'showOrder' => $this->showOrder,
                                     'menuItem' => $this->menuItem['has'],
                                     'layoutID' => $this->layoutID,
+                                    'showSidebar' => $this->showSidebar,
                                     'pageList' => $this->pageList,
                                     'layoutList' => $this->layoutList));
     }

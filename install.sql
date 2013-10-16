@@ -12,6 +12,7 @@ invisible TINYINT(1) DEFAULT 0,
 robots ENUM('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow') NOT NULL DEFAULT 'index,follow',
 showOrder INT(10) DEFAULT 0,
 isHome INT(1) DEFAULT 0,
+showSidebar INT(1) DEFAULT 0,
 layoutID INT(10),
 menuItem MEDIUMTEXT
 );

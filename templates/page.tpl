@@ -9,6 +9,11 @@
 
 <body id="{$templateName|ucfirst}_{$page->getTitle()|language}">
 
+{if $page->showSidebar == 1}
+	{capture assign='sidebar'}
+		{@$__boxSidebar}
+	{/capture}
+{/if}
 {include file='header' sidebarOrientation='right'}
 
 

@@ -24,6 +24,7 @@ class PageEditForm extends AbstractForm{
     public $title = '';
     public $description = '';
     public $metaDescription = '';
+    public $showSidebar = 0;
     public $metaKeywords = '';
     public $invisible = 0;
     public $layoutID = 0;
@@ -63,6 +64,7 @@ class PageEditForm extends AbstractForm{
         $this->invisible = $this->page->invisible;
         $this->robots = $this->page->robots;
         $this->layoutID = $this->page->layoutID;
+        $this->showSidebar = $this->page->showSidebar;
         $this->menuItem = @unserialize($this->page->menuItem);
         if(!isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
         
@@ -89,6 +91,7 @@ class PageEditForm extends AbstractForm{
         if(isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
         if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
         if(isset($_REQUEST['menuID'])) $this->menuItem['id'] = intval($_REQUEST['menuID']);
+        if(isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
     }
     
     public function validate(){
@@ -117,6 +120,7 @@ class PageEditForm extends AbstractForm{
                                                                                            'menuItem' => serialize($this->menuItem),
                                                                                            'parentID' => $this->parentID,
                                                                                            'layoutID' => $this->layoutID,
+                                                                                            'showSidebar' =>$this->showSidebar,
                                                                                            'robots' => $this->robots)));
         $objectAction->executeAction();
         
@@ -170,6 +174,7 @@ class PageEditForm extends AbstractForm{
                                     'metaDescription' => $this->metaDescription,
                                     'metaKeywords' => $this->metaKeywords,
                                     'menuItem' => $this->menuItem['has'],
+                                    'showSidebar' =>$this->showSidebar,
                                     'menuID' => isset($this->menuItem['id']) ? $this->menuItem['id'] : 0,
                                     'page' => $this->page,
                                     'layoutList' => $this->layoutList));

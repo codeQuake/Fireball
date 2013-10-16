@@ -18,5 +18,13 @@
       <name>de.codequake.cms.page</name>
       <definitionname>com.woltlab.wcf.acl</definitionname>
     </type>
+
+    <!--Dashboard-->
+    <type>
+      <name>de.codequake.cms.page</name>
+      <definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+      <allowcontent>0</allowcontent>
+      <allowsidebar>1</allowsidebar>
+    </type>
   </import>
 </data>
