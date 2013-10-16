@@ -159,7 +159,7 @@ class PageEditForm extends AbstractForm{
                                     'metaDescription' => $this->metaDescription,
                                     'metaKeywords' => $this->metaKeywords,
                                     'menuItem' => $this->menuItem['has'],
-                                    'menuID' => $this->menuItem['id'],
+                                    'menuID' => isset($this->menuItem['id']) ? $this->menuItem['id'] : 0,
                                     'page' => $this->page));
     }
     

@@ -40,12 +40,42 @@ class PageAction extends AbstractDatabaseObjectAction{
     public function update(){
         parent::update();
         PagePermissionCacheBuilder::getInstance()->reset();
+        
+        //update menu item
         foreach($this->objectIDs as $objectID) {
             $page = new Page($objectID);
              $menuItem = @unserialize($page->menuItem);
+             //update
             if(isset($menuItem['has']) && $menuItem['has'] == 1){
-                $action = new PageMenuItemAction(array($menuItem['id']), 'update', array('data' => array('menuItem' => $page->title)));
+                if($menuItem['id'] != 0){
+                    $action = new PageMenuItemAction(array($menuItem['id']), 'update', array('data' => array('menuItem' => $page->title)));
+                    $action->executeAction();
+                }
+                //create new
+                else{
+                    $data = array('isDisabled' => 0,
+                       'menuItem' => $page->title,
+                       'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','object' => $page, 'isACP' => 0)),
+                       'menuPosition' => 'header',
+                       'parentMenuItem' => '',
+                       'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header'));
+                    $action = new PageMenuItemAction(array(), 'create', array('data' => $data));
+                    $action->executeAction();
+                    $returnValues = $action->getReturnValues();
+                    $menuItem['id'] = $returnValues['returnValues']->menuItemID;
+                    $menuItem = serialize($menuItem);
+                    $pageEditor = new PageEditor($page);
+                    $pageEditor->update(array('menuItem' => $menuItem));
+                }
+            }
+            //delete if unchecked 
+            elseif($menuItem['id'] != 0){
+                $action = new PageMenuItemAction(array($menuItem['id']), 'delete', array());
                 $action->executeAction();
+                $menuItem['id'] = 0;
+                $menuItem = serialize($menuItem);
+                $pageEditor = new PageEditor($page);
+                $pageEditor->update(array('menuItem' => $menuItem));
             }
         }
     }
