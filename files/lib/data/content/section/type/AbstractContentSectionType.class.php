@@ -5,6 +5,7 @@ class AbstractContentSectionType implements IContentSectionType{
     
     public $isMultilingual = false;
     public $formData = array();
+    public $action;
     public $objectType = "";
     
     //reads parameters at the beginning
@@ -41,5 +42,9 @@ class AbstractContentSectionType implements IContentSectionType{
     
     public function getPreview($sectionID){
         return '###'.$this->objectType.'###';
+    }
+    
+    public function setAction($action){
+        $this->action = $action;
     }
 }

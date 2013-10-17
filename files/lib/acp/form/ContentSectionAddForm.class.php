@@ -30,6 +30,7 @@ class ContentSectionAddForm extends AbstractForm{
         if(isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.section.type', $_REQUEST['objectType']);
         if($this->objectType != null) {
             $this->objectTypeProcessor = $this->objectType->getProcessor();
+            $this->objectTypeProcessor->setAction('add');
             $this->objectTypeProcessor->readParameters();
         }
     }

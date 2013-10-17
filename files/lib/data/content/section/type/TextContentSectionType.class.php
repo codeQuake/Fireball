@@ -140,7 +140,9 @@ class TextContentSectionType extends AbstractContentSectionType{
                 $editor->update($update);
             
             }
-        I18nHandler::getInstance()->reset();
+        if ($this->action == 'add'){
+                I18nHandler::getInstance()->reset();
+            }
     }
     
     public function getOutput($sectionID){

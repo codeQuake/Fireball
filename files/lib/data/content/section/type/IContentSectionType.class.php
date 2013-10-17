@@ -35,4 +35,7 @@ interface IContentSectionType{
     
     //preview
     public function getPreview($sectionID);
+    
+    //add or edit?
+    public function setAction($action);
 }
