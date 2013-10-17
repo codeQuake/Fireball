@@ -25,6 +25,9 @@
     <category name="user.cms.page">
       <parent>user.cms</parent>
     </category>
+    <category name="user.cms.content">
+      <parent>user.cms</parent>
+    </category>
     </categories>
       
     <options>
@@ -119,6 +122,12 @@ pdf]]></admindefaultvalue>
       </option>
       <option name="user.cms.page.canEnterPage">
         <categoryname>user.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="user.cms.content.canDowloadFile">
+        <categoryname>user.cms.content</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>

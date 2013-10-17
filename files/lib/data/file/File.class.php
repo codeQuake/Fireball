@@ -29,4 +29,8 @@ class File extends CMSDatabaseObject implements IRouteController{
         return $this->title;
     }
     
+    public function getPermission($permission = 'canDownloadFile'){
+        return WCF::getSession()->getPermission('user.cms.content.'.$permission);
+    }
+    
 }

@@ -120,6 +120,8 @@
     <item name="wcf.acp.group.option.category.admin.cms"><![CDATA[CMS]]></item>
     <item name="wcf.acp.group.option.category.user.cms"><![CDATA[CMS]]></item>
     <item name="wcf.acp.group.option.category.admin.cms.content"><![CDATA[Inhalte]]></item>
+    <item name="wcf.acp.group.option.category.user.cms.content"><![CDATA[Inhalte]]></item>    
+    <item name="wcf.acp.group.option.user.cms.content.canDownloadFile"><![CDATA[Kann Dateien herunterladen]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.canAddContent"><![CDATA[Kann Inhalte hinzufügen]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.canListContent"><![CDATA[Kann Inhalte verwalten]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.canListContentSection"><![CDATA[Kann Inhaltsabschnitte auflisten]]></item>

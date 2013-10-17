@@ -5,6 +5,7 @@ use cms\data\file\File;
 use cms\data\file\FileEditor;
 use wcf\util\FileReader;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\PermissionDeniedException;
 
 class FileDownloadPage extends AbstractPage{
     
@@ -19,7 +20,8 @@ class FileDownloadPage extends AbstractPage{
         if(isset($_REQUEST['id'])) $fileID = intval($_REQUEST['id']);
         $this->file = new File($fileID);        
         if($this->file === null) throw new IllegalLinkException();
-        //todo permission check
+        
+        if(!$this->file->getPermission('canDownloadFile')) throw new PermissionDeniedException();
     }
     
     public function readData(){
@@ -36,8 +38,6 @@ class FileDownloadPage extends AbstractPage{
         $editor = new FileEditor($this->file);
         $downloads = $this->file->downloads + 1;
         $editor->update(array('downloads' => $downloads));
-        
-        
     }
     
     public function show(){
