@@ -6,5 +6,6 @@
 						<option value="{$item->fileID}" {if $item->fileID == $fileID}selected="selected"{/if}>{$item->title|language}</option>
 						{/foreach}
 					</select>
+                    <p class="description">{lang}cms.acp.content.section.data.fileID.description{/lang}</p>
 				</dd>
 			</dl>

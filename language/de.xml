@@ -66,6 +66,7 @@
     <item name="cms.acp.content.section.data"><![CDATA[Inhalt]]></item>
     <item name="cms.acp.content.section.data.text"><![CDATA[Text]]></item>
     <item name="cms.acp.content.section.data.headline"><![CDATA[Überschrift]]></item>
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
     <item name="cms.acp.content.section.css"><![CDATA[CSS-Einstellungen]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.section.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
@@ -79,6 +80,8 @@
     <item name="cms.acp.content.section.data.h3"><![CDATA[Überschrift 3]]></item>
     <item name="cms.acp.content.section.data.h4"><![CDATA[Überschrift 4]]></item>
     <item name="cms.acp.content.section.list"><![CDATA[Inhaltsabschnitte von '{$content->getTitle()|language}']]></item>
+    <item name="cms.acp.content.section.data.fileID"><![CDATA[Datei auswählen]]></item>
+    <item name="cms.acp.content.section.data.fileID.description"><![CDATA[Diese Datei muss vorher über die Dateiverwaltung hochgeladen werden.]]></item>
     <item name="cms.acp.content.section.content"><![CDATA[Inhaltsvorschau]]></item>
     <item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
     <item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
@@ -110,7 +113,7 @@
   </category>
   
   <category name="cms.content">
-    <item name="cms.content.file.details"><![CDATA[({$file->getSize()|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
+    <item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
   </category>
   
   <category name="wcf.acp.group">

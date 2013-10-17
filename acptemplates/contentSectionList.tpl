@@ -31,7 +31,7 @@
 			<span class="sortableNodeLabel">
 				<a href="{link controller='ContentSectionEdit' id=$section->sectionID application='cms'}{/link}">{@$section->getPreview()}</a>
 				<span class="statusDisplay sortableButtonContainer">
-					<a href="{link controller='ContentSectionEdit' id=$section->sectionID applicaton='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+					<a href="{link controller='ContentSectionEdit' id=$section->sectionID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 					<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$section->sectionID}" data-confirm-message="{lang}cms.acp.content.section.delete.sure{/lang}"></span>
 				</span>
 			</span>

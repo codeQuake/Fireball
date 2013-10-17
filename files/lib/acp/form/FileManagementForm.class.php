@@ -11,6 +11,7 @@ class FileManagementForm extends AbstractForm{
     
     public $templateName = 'fileAdd';
     public $neededPermissions = array('admin.cms.file.canAddFile');
+     public $activeMenuItem = 'cms.acp.menu.link.cms.file.management';
     
     public $file = null;
     public $fileList = array();
