@@ -2,6 +2,7 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/userGroupOption.xsd">
   <import>
     <categories>
+      <!--admin-->
       <category name="admin.cms">
         <parent>admin</parent>
       </category>
@@ -17,9 +18,17 @@
     <category name="admin.cms.file">
         <parent>admin.cms</parent>
       </category>
+    <!--user-->
+    <category name="user.cms">
+      <parent>user</parent>
+    </category>
+    <category name="user.cms.page">
+      <parent>user.cms</parent>
+    </category>
     </categories>
-
+      
     <options>
+      <!--admin-->
       <option name="admin.cms.page.canListPage">
         <categoryname>admin.cms.page</categoryname>
         <optiontype>boolean</optiontype>
@@ -55,8 +64,7 @@
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
-      </option>
-      <option name="admin.cms.style.canAddStylesheet">
+      </option>      <option name="admin.cms.style.canAddStylesheet">
         <categoryname>admin.cms.style</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
@@ -100,6 +108,20 @@ zip
 txt
 pdf]]></admindefaultvalue>
       <wildcard><![CDATA[*]]></wildcard>
+      </option>
+    
+      <!--user-->
+      <option name="user.cms.page.canViewPage">
+        <categoryname>user.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="user.cms.page.canSeePage">
+        <categoryname>user.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
       </option>
     </options>
   </import>
