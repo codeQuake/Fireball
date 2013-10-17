@@ -33,12 +33,15 @@ class FileDownloadPage extends AbstractPage{
                                                                         'expirationDate' => TIME_NOW + 31536000,
                                                                         'maxAge' => 31536000));
         
+        $editor = new FileEditor($this->file);
+        $downloads = $this->file->downloads + 1;
+        $editor->update(array('downloads' => $downloads));
+        
+        
     }
     
     public function show(){
         parent::show();
-        $editor = new FileEditor($this->file);
-        $editor->update(array('downloads' => $this->file->downloads++));
         $this->fileReader->send();
         exit;
     }
