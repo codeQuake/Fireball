@@ -42,7 +42,8 @@ class FileManagementForm extends AbstractForm{
         
         $data = array('title' => $this->file['name'],
                       'filename' => $filename,
-                      'type' => $this->file['type']);
+                      'type' => $this->file['type'],
+                      'size' => $this->file['size']);
         $action = new FileAction(array(), 'create', array('data' => $data));
         $action->executeAction();
         

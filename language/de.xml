@@ -109,6 +109,10 @@
     <item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
   </category>
   
+  <category name="cms.content">
+    <item name="cms.content.file.details"><![CDATA[({$file->getSize()|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
+  </category>
+  
   <category name="wcf.acp.group">
     <item name="wcf.acp.group.option.category.admin.cms"><![CDATA[CMS]]></item>
     <item name="wcf.acp.group.option.category.user.cms"><![CDATA[CMS]]></item>

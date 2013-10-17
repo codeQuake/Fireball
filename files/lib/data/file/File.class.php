@@ -28,4 +28,5 @@ class File extends CMSDatabaseObject implements IRouteController{
     public function getTitle(){
         return $this->title;
     }
+    
 }
