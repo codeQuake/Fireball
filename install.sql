@@ -69,7 +69,7 @@ downloads INT(10) DEFAULT 0
 
 --foreign keys
 ALTER TABLE cms1_page ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE cms1_page ADD FOREIGN KEY (layoutID) REFERENCES cms1_layout (layoutID) ON DELETE CASCADE;
+ALTER TABLE cms1_page ADD FOREIGN KEY (layoutID) REFERENCES cms1_layout (layoutID) ON DELETE SET 0;
 ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE cms1_content_section ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE cms1_content_section ADD FOREIGN KEY (sectionTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;

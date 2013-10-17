@@ -5,6 +5,14 @@
     <h1>{lang}cms.acp.file.management{/lang}</h1>
 </header>
 
+<script data-relocate="true">
+    //<![CDATA[
+    $(function () {
+        new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow');
+    });
+    //]]>
+</script>
+
 {if $errorField}
 <p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}

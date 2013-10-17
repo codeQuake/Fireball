@@ -8,7 +8,13 @@ class FileAction extends AbstractDatabaseObjectAction{
     protected $permissionsDelete = array('admin.cms.file.canAddFile');
     protected $requireACP = array('delete');
     
-    public function create(){
-        parent::create();
+    public function delete(){
+        //del files
+        foreach($this->objectIDs as $objectID){
+            $file = new File($objectID);
+            unlink(CMS_DIR.'files/'.$file->filename);
+        }
+        parent::delete();
     }
+    
 }

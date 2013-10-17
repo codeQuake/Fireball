@@ -37,4 +37,8 @@ class LayoutCompiler extends SingletonFactory{
         file_put_contents(CMS_DIR.'style/layout-'.$layout->layoutID.'.css', $content);
 		FileUtil::makeWritable(CMS_DIR.'style/layout-'.$layout->layoutID.'.css');
     }
+    
+    public function kill(Layout $layout){
+        unlink(CMS_DIR.'style/layout-'.$layout->layoutID.'.css');
+    }
 }

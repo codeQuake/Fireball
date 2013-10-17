@@ -88,6 +88,7 @@
     <item name="cms.acp.stylesheet.less"><![CDATA[CSS & Less]]></item>
     <item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Sie haben zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins.]]></item>
     <item name="cms.acp.layout.list"><![CDATA[Layouts]]></item>
+    <item name="cms.acp.layout.edit"><![CDATA[Layout bearbeiten]]></item>
     <item name="cms.acp.layout.title"><![CDATA[Titel]]></item>
     <item name="cms.acp.layout.add"><![CDATA[Layout hinzufügen]]></item>
     <item name="cms.acp.layout.general"><![CDATA[Allgemeine Einstellungen]]></item>

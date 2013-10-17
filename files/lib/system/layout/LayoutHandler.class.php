@@ -26,4 +26,11 @@ class LayoutHandler extends SingletonFactory{
         }
         return '<link rel="stylesheet" type="text/css" href="'.$filename.'" />';
     }
+    
+    public function deleteStylesheet($layoutID){
+        $filename = RELATIVE_CMS_DIR.'style/layout-'.$layoutID.'.css';
+        if (file_exists($filename)) {
+            LayoutCompiler::getInstance()->kill(new Layout($layoutID));
+        }
+    }
 }
