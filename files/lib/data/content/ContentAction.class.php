@@ -10,7 +10,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 
     protected $className = 'cms\data\content\ContentEditor';
     protected $permissionsDelete = array('admin.cms.content.canAddContent');
-    protected $requireACP = array('delete');
+    protected $requireACP = array('delete', 'updatePosition');
     
     public function delete(){
     
