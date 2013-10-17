@@ -101,6 +101,7 @@
     <item name="cms.acp.file.type"><![CDATA[Typ]]></item>
     <item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
     <item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
+    <item name="cms.acp.file.management"><![CDATA[Dateiverwaltung]]></item>
   </category>
 
   <category name="cms.page">

@@ -28,8 +28,8 @@ class ContentSectionEditForm extends ContentSectionAddForm{
         if(isset($_REQUEST['id'])) $this->sectionID = intval($_REQUEST['id']);
         $this->section  = new ContentSection($this->sectionID);
         $this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->section->sectionTypeID);
+        $this->objectTypeProcessor = $this->objectType->getProcessor();        
         $this->objectTypeProcessor->setAction('edit');
-        $this->objectTypeProcessor = $this->objectType->getProcessor();
         $this->objectTypeProcessor->readParameters();
         $this->objectTypeProcessor->readData($this->sectionID);
         $this->submit();

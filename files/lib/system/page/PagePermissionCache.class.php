@@ -19,7 +19,7 @@ class PagePermissionCache extends SingletonFactory{
         if ($user->userID) {
         
             //no cache
-            if ($data[$user->userID] === null) {
+            if ($this->permissions[$user->userID] === null) {
                 $permissions = array();
                 $sql = "SELECT	option_to_user.objectID AS pageID, option_to_user.optionValue,
 						acl_option.optionName AS permission, acl_option.categoryName

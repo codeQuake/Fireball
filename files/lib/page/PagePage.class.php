@@ -9,7 +9,7 @@ use wcf\system\menu\page\PageMenu;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
-
+use wcf\system\exception\PermissionDeniedException;
 
 class PagePage extends AbstractPage{
 
@@ -34,6 +34,7 @@ class PagePage extends AbstractPage{
     
     public function readData(){
         parent::readData();
+        if(!$this->page->isVisible()) throw new PermissionDeniedException();
         if (PageMenu::getInstance()->getLandingPage()->menuItem == $this->page->title) {
 			WCF::getBreadcrumbs()->remove(0);
 		}

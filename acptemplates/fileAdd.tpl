@@ -18,7 +18,7 @@
 {/if}
 
 {if $success|isset}
-<p class="success">{lang}wcf.global.success.{@$action}{/lang}</p>
+<p class="success">{lang}wcf.global.success.add{/lang}</p>
 {/if}
 
 <form method="post" enctype="multipart/form-data" action="{link controller='FileManagement' application='cms'}{/link}">
