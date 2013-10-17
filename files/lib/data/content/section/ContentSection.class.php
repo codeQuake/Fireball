@@ -36,5 +36,9 @@ class ContentSection extends CMSDatabaseObject{
         return $this->objectType->getProcessor()->getPreview($this->sectionID);
     }
     
+    public function getEditor(){
+        return new ContentSectionEditor($this);
+    }
+    
     
 }
