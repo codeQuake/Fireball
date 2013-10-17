@@ -14,6 +14,9 @@
       <category name="admin.cms.style">
         <parent>admin.cms</parent>
       </category>
+    <category name="admin.cms.file">
+        <parent>admin.cms</parent>
+      </category>
     </categories>
 
     <options>
@@ -76,6 +79,27 @@
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
+      </option>
+    
+      <option name="admin.cms.file.canAddFile">
+        <categoryname>admin.cms.file</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="admin.cms.file.allowedTypes">
+        <categoryname>admin.cms.file</categoryname>
+        <optiontype>textarea</optiontype>
+        <defaultvalue></defaultvalue>
+        <admindefaultvalue><![CDATA[gif
+jpg
+jpeg
+png
+bmp
+zip
+txt
+pdf]]></admindefaultvalue>
+      <wildcard><![CDATA[*]]></wildcard>
       </option>
     </options>
   </import>

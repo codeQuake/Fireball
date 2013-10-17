@@ -93,6 +93,11 @@
     <item name="cms.acp.layout.general"><![CDATA[Allgemeine Einstellungen]]></item>
     <item name="cms.acp.layout.options"><![CDATA[Optionen]]></item>
     <item name="cms.acp.layout.stylesheets"><![CDATA[Stylesheets auswählen]]></item>
+    <item name="cms.acp.file.error.invalid"><![CDATA[Ungültige Dateiendung]]></item>
+    <item name="cms.acp.file.file"><![CDATA[Datei]]></item>
+    <item name="cms.acp.file.title"><![CDATA[Titel]]></item>
+    <item name="cms.acp.file.type"><![CDATA[Typ]]></item>
+    <item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
   </category>
 
   <category name="cms.page">
