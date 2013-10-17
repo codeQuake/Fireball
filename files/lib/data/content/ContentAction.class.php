@@ -1,11 +1,12 @@
 <?php
 namespace cms\data\content;
-
+use wcf\system\WCF;
+use wcf\data\ISortableAction;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
 use cms\data\content\section\ContentSectionAction;
 
-class ContentAction extends AbstractDatabaseObjectAction{
+class ContentAction extends AbstractDatabaseObjectAction implements ISortableAction{
 
     protected $className = 'cms\data\content\ContentEditor';
     protected $permissionsDelete = array('admin.cms.content.canAddContent');
@@ -25,6 +26,52 @@ class ContentAction extends AbstractDatabaseObjectAction{
             $action->executeAction();
         }
         parent::delete();
+    }
+    
+    public function validateUpdatePosition(){
+        WCF::getSession()->checkPermissions(array('admin.cms.content.canAddContentSection'));
+        
+        //check parameters
+        if (!isset($this->parameters['data']['structure'])) {
+            throw new SystemException("Missing 'structure' parameter.");
+        }
+        if (!is_array($this->parameters['data']['structure'])) {
+            throw new SystemException("'structure' parameter is no array.");
+        }
+        
+		$itemIDs = array();
+        foreach ($this->parameters['data']['structure'] as $items) {
+			$itemIDs = array_merge($itemIDs, $items);
+		}
+        
+        //createList
+        $list = new ContentList();
+        $list->getConditionBuilder()->add('content.contentID IN (?)', array($itemIDs));
+        $list->readObjects();
+        $this->items = $list->getObjects();
+        
+        //check number of items
+        if (count($items) != count($itemIDs)) {
+			throw new UserInputException('structure');
+		}
+        
+    }
+    
+    public function updatePosition(){
+        $sql = "UPDATE cms".WCF_N."_content
+                SET showOrder = ?
+                WHERE contentID = ?";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        WCF::getDB()->beginTransaction();
+        foreach ($this->parameters['data']['structure'] as $parentContentID => $contentIDs) {
+			foreach ($contentIDs as $showOrder => $contentID) {
+				$this->items[$contentID]->getEditor()->update(array(
+					'showOrder' => $showOrder + 1
+				));
+			}
+		}
+        WCF::getDB()->commitTransaction();
+    
     }
    
 }

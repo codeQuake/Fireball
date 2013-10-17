@@ -31,6 +31,10 @@ class Content extends CMSDatabaseObject implements IRouteController{
         return new Page($this->pageID);
     }
     
+    public function getEditor(){
+        return new ContentEditor($this);
+    }
+    
     public function getTitle(){
         return $this->title;
     }

@@ -5,7 +5,7 @@
     <script data-relocate="true">
         //<![CDATA[
         $(function () {
-            new WCF.Action.Delete('cms\\data\\content\\section\\ContentSectionAction', '.jsContentSectionRow');
+            new WCF.Action.Delete('cms\\data\\content\\section\\ContentSectionAction', '.jsSectionNode');
 			new WCF.Sortable.List('sectionList', 'cms\\data\\content\\section\\ContentSectionAction');
         });
         //]]>
@@ -27,7 +27,7 @@
 <div id="sectionList" class="container containerPadding sortableListContainer marginTop">
 	<ol id="sectionContainer0" class="sortableList" data-object-id="0">
 		{foreach from=$objects item=section}
-		<li class="sortableNode" data-object-id="{$section->sectionID}">
+		<li class="sortableNode jsSectionNode" data-object-id="{$section->sectionID}">
 			<span class="sortableNodeLabel">
 				<a href="{link controller='ContentSectionEdit' id=$section->sectionID application='cms'}{/link}">{@$section->getPreview()}</a>
 				<span class="statusDisplay sortableButtonContainer">
