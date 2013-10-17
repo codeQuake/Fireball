@@ -11,10 +11,18 @@ class LayoutAction extends AbstractDatabaseObjectAction{
     
 
     public function delete(){
-        //delete less files
+        //delete css files
         foreach($this->objectIDs as $objectID){
             LayoutHandler::getInstance()->deleteStylesheet($objectID);
         }
         parent::delete();
+    }
+    
+    public function update(){        
+        parent::update();
+        //delete css files
+        foreach($this->objectIDs as $objectID){
+            LayoutHandler::getInstance()->deleteStylesheet($objectID);
+        }
     }
 }
