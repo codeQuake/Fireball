@@ -34,7 +34,7 @@ class PagePage extends AbstractPage{
     
     public function readData(){
         parent::readData();
-        if(!$this->page->isVisible()) throw new PermissionDeniedException();
+        if(!$this->page->isVisible() || !$this->page->isAccessible()) throw new PermissionDeniedException();
         if (PageMenu::getInstance()->getLandingPage()->menuItem == $this->page->title) {
 			WCF::getBreadcrumbs()->remove(0);
 		}

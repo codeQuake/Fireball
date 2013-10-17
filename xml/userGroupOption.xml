@@ -117,7 +117,7 @@ pdf]]></admindefaultvalue>
         <defaultvalue>1</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
       </option>
-      <option name="user.cms.page.canSeePage">
+      <option name="user.cms.page.canEnterPage">
         <categoryname>user.cms.page</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>

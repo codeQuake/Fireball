@@ -48,6 +48,11 @@ class Page extends CMSDatabaseObject implements IRouteController{
         return false;
     }
     
+    public function isAccessible(){
+        if($this->getPermission('canEnterPage')) return true; 
+        return false;
+    }
+    
     public function isChild(){
         if($this->parentID == 0) return false;
         return true;
