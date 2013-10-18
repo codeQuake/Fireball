@@ -126,7 +126,7 @@ pdf]]></admindefaultvalue>
         <defaultvalue>1</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
       </option>
-      <option name="user.cms.content.canDowloadFile">
+      <option name="user.cms.content.canDownloadFile">
         <categoryname>user.cms.content</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
