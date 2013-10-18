@@ -5,7 +5,7 @@
         {if $link != ''}
            <a href="{$link}"><img src="{$__wcf->getPath('cms')}files/{$image->filename}" style="max-width: 350px; max-height: 250px;" alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip" /></a>
         {else}
-             <a href="{$__wcf->getPath('cms')}files/{$image->filename}" class="jsImageViewer"><img src="{$__wcf->getPath('cms')}files/{$image->filename}" style="max-width: 350px; max-height: 250px;" alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip jsResizeImage" /></a>
+             <a href="{$__wcf->getPath('cms')}files/{$image->filename}" class="jsImageViewer"><img src="{$__wcf->getPath('cms')}files/{$image->filename}" style="max-width: 350px; max-height: 250px;" alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip" /></a>
         {/if}
             {if $subtitle != ''}
             <div title="{$subtitle}">
@@ -13,7 +13,7 @@
                 <small>{$image->type} - {$image->size|filesize}</small>
                 </div>
             {/if}
-         </div></li></ul>
+         </div>
        </div>
     {else}
         {if $link != ''}

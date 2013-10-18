@@ -7,7 +7,7 @@
     <link rel="canonical" href="{link application='cms' controller='Page' object=$page}{/link}" />
 </head>
 
-<body id="{$templateName|ucfirst}_{$page->getTitle()|language}">
+<body id="{$templateName|ucfirst}">
 
 {if $page->showSidebar == 1}
 	{capture assign='sidebar'}

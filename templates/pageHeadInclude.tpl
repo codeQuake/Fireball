@@ -5,7 +5,7 @@
 <meta name="robots" content="{$page->robots}" />
 <meta name="description" content="{$page->metaDescription|language}" />
 <meta name="keywords" content="{$page->metaKeywords|language}" />
-<meta name="generator" content="Fireball CMS">
+<meta name="generator" content="Fireball CMS" />
 {event name='metaTags'}
 
 <script data-relocate="true">
