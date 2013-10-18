@@ -3,7 +3,7 @@
 <head>
     <title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->title}{$page->getTitle()|language} - {/if}{PAGE_TITLE}</title>
     
-    {include file='pageHeadInclude' application='cms' sandbox=false}
+    {include file='headInclude' application='cms' sandbox=false}
     <link rel="canonical" href="{link application='cms' controller='Page' object=$page}{/link}" />
 </head>
 
