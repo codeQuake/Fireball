@@ -1,7 +1,7 @@
 <?php
 namespace cms\system\page;
 
-use cms\system\cache\builder\pagePermissionCacheBuilder;
+use cms\system\cache\builder\PagePermissionCacheBuilder;
 use wcf\data\user\User;
 use wcf\system\acl\ACLHandler;
 use wcf\system\user\storage\UserStorageHandler;
