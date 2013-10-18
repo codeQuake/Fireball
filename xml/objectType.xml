@@ -17,6 +17,11 @@
       <definitionname>de.codequake.cms.section.type</definitionname>
       <classname>cms\data\content\section\type\FileContentSectionType</classname>
     </type>
+    <type>
+      <name>de.codequake.cms.section.type.image</name>
+      <definitionname>de.codequake.cms.section.type</definitionname>
+      <classname>cms\data\content\section\type\ImageContentSectionType</classname>
+    </type>
     
     <!--ACL-->
     <type>
