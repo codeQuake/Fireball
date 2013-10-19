@@ -35,7 +35,7 @@ class PageAction extends AbstractDatabaseObjectAction{
             
             //create
             $data = array('isDisabled' => 0,
-                       'menuItem' => $page->title,
+                       'menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title,
                        'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','object' => $page, 'isACP' => 0)),
                        'menuPosition' => 'header',
                        'parentMenuItem' => $parentItem,
@@ -47,7 +47,7 @@ class PageAction extends AbstractDatabaseObjectAction{
             $menuItem = serialize($menuItem);
             $pageEditor = new PageEditor($page);
             $pageEditor->update(array('menuItem' => $menuItem));
-        }
+            }
         return $page;
     }
     
@@ -62,7 +62,7 @@ class PageAction extends AbstractDatabaseObjectAction{
              //update
             if(isset($menuItem['has']) && $menuItem['has'] == 1){
                 if($menuItem['id'] != 0){
-                    $action = new PageMenuItemAction(array($menuItem['id']), 'update', array('data' => array('menuItem' => $page->title)));
+                    $action = new PageMenuItemAction(array($menuItem['id']), 'update', array('data' => array('menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title)));
                     $action->executeAction();
                 }
                 //create new
@@ -78,7 +78,7 @@ class PageAction extends AbstractDatabaseObjectAction{
                         }
                     }
                     $data = array('isDisabled' => 0,
-                       'menuItem' => $page->title,
+                       'menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title,
                        'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','object' => $page, 'isACP' => 0)),
                        'menuPosition' => 'header',
                        'parentMenuItem' => $parentItem,
