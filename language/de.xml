@@ -157,5 +157,9 @@
   <category name="wcf.dashboard">
     <item name="wcf.dashboard.objectType.de.codequake.cms.page"><![CDATA[CMS: Seiten]]></item>
   </category>
+
+  <category name="wcf.acp.index">
+    <item name="wcf.acp.index.system.software.cmsVersion"><![CDATA[Fireball CMS-Version]]></item>
+  </category>
   
 </language>
