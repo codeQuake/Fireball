@@ -102,7 +102,7 @@ PRIMARY KEY (categoryID, newsID)
 ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE cms1_content_section ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE cms1_content_section ADD FOREIGN KEY (sectionTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
-ALTER TABLE cms1_news ADD FOREIGN KEY(userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE cms1_news ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE cms1_news ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE SET NULL;
 ALTER TABLE cms1_news_to_category ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
 ALTER TABLE cms1_news_to_category ADD FOREIGN KEY (newsID) REFERENCES cms1_news (newsID) ON DELETE CASCADE;

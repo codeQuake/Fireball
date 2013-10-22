@@ -8,6 +8,7 @@ use wcf\page\SortablePage;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 
 class NewsListPage extends SortablePage{
@@ -16,6 +17,8 @@ class NewsListPage extends SortablePage{
     public $enableTracking = true;
     //public $itemsPerPage = CMS_NEWS_PER_PAGE;
     public $objectListClassName = 'cms\data\news\CategoryNewsPage';
+    public $sqlOrderBy = 'time';
+    public $sortOder = 'DESC';
     public $validSortFields = array('username', 'newsID', 'time', 'subject', 'clicks', 'comments');
 
     

@@ -5,9 +5,12 @@ use wcf\system\WCF;
 
 class CategoryNewsList extends ViewableNewsList{
 
+
     public function __construct(array $categoryIDs) {
         parent::__construct();
-        $this->getConditionBuilder()->add('news_to_category.categoryID IN (?)', array($categoryIDs));
+        $this->sqlSelects .=  "news_to_category.*";
+        $this->sqlConditionJoins .= " LEFT JOIN cms".WCF_N."_news_to_category news_to_category ON news_to_category.newsID = news.newsID";
+        $this->getConditionBuilder()->add('news_to_category.categoryID IN (?)', array($categoryIDs));        
         $this->getConditionBuilder()->add('news.newsID = news_to_category.newsID');
         if (!WCF::getSession()->getPermission('mod.cms.news.canModerateNews')) $this->getConditionBuilder()->add('news.isDisabled = 0');
         if (!WCF::getSession()->getPermission('mod.cms.news.canModerateNews')) $this->getConditionBuilder()->add('news.isDeleted = 0');
@@ -30,7 +33,7 @@ class CategoryNewsList extends ViewableNewsList{
     
     public function countObjects() {
 		$sql = "SELECT	COUNT(*) AS count
-			FROM	cms".WCF_N."_news_to_category news_to_category,
+			FROM
 				cms".WCF_N."_news news
 			".$this->sqlConditionJoins."
 			".$this->getConditionBuilder();

@@ -22,7 +22,8 @@
 	<h1>{$page->getTitle()|language}</h1>
 
 </header>
-    
+{include file='userNotice'}
+
     {foreach from=$contentList item=content}
         <div {if $content->cssID != ''}id="{$content->cssID}"{/if} {if $content->cssClasses != ''}class="contentItem {$content->cssClasses}"{/if}>
             {foreach from=$content->getSections() item=section}

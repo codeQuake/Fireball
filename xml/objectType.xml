@@ -47,6 +47,11 @@
       <allowcontent>0</allowcontent>
       <allowsidebar>1</allowsidebar>
     </type>
-
+    <type>
+    <name>de.codequake.cms.news.newsList</name>
+    <definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+    <allowcontent>0</allowcontent>
+    <allowsidebar>1</allowsidebar>
+    </type>
   </import>
 </data>

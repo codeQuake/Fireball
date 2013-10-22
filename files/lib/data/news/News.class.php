@@ -148,4 +148,8 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 		
 		return '';
 	}
+    
+    public function isVisible(){
+        return true;
+    }
 }
