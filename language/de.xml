@@ -12,6 +12,8 @@
     <item name="cms.acp.menu.link.cms.layout.list"><![CDATA[Layouts auflisten]]></item>
     <item name="cms.acp.menu.link.cms.layout.add"><![CDATA[Layout hinzufügen]]></item>
     <item name="cms.acp.menu.link.cms.file.management"><![CDATA[Dateiverwaltung]]></item>
+    <item name="cms.acp.menu.link.cms.news.category.add"><![CDATA[Neuigkeiten Kategorie hinzufügen]]></item>
+    <item name="cms.acp.menu.link.cms.news.category.list"><![CDATA[Neuigkeiten Kategorien auflisten]]></item>
   </category>
   
   <category name="cms.acp">
@@ -116,6 +118,7 @@
   <category name="cms.page">
     <item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" title="">Software: <strong>Fireball CMS {@PACKAGE_VERSION}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
     <item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
+    <item name="cms.page.news"><![CDATA[News]]></item>
   </category>
   
   <category name="cms.content">
@@ -152,6 +155,10 @@
     <item name="wcf.acl.option.de.codequake.cms.page.canViewPage"><![CDATA[Kann Seite sehen]]></item>
     <item name="wcf.acl.option.de.codequake.cms.page.canEnterPage"><![CDATA[Kann Seite betreten]]></item>
     <item name="wcf.acl.option.category.de.codequake.cms.page.user.cms.page"><![CDATA[Benutzerrechte]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.category.news.canViewCategory"><![CDATA[Kann Kategorie sehen]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.category.news.canViewNews"><![CDATA[Kann News sehen]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.category.news.canAddNews"><![CDATA[Kann News hinzufügen]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[News Moderationsrecht]]></item>
   </category>
 
   <category name="wcf.dashboard">

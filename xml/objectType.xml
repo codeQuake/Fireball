@@ -36,7 +36,7 @@
       <definitionname>com.woltlab.wcf.acl</definitionname>
     </type>
     <type>
-      <name>de.codequake.category.news</name>
+      <name>de.codequake.cms.category.news</name>
       <definitionname>com.woltlab.wcf.acl</definitionname>
     </type>
 

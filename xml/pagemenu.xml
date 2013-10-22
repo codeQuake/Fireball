@@ -6,7 +6,7 @@
 			<position>header</position>
 		</pagemenuitem>
     <pagemenuitem name="cms.page.news">
-      <controller><![CDATA[cms\page\NewsPage]]></controller>
+      <controller><![CDATA[cms\page\NewsCategoryListPage]]></controller>
       <position>header</position>
     </pagemenuitem>
 	</import>
