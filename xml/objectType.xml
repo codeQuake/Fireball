@@ -22,10 +22,21 @@
       <definitionname>de.codequake.cms.section.type</definitionname>
       <classname>cms\data\content\section\type\ImageContentSectionType</classname>
     </type>
+
+    <!-- Category -->
+    <type>
+      <name>de.codequake.cms.category.news</name>
+      <definitionname>com.woltlab.wcf.category</definitionname>
+      <classname>cms\system\category\NewsCategoryType</classname>
+    </type>
     
     <!--ACL-->
     <type>
       <name>de.codequake.cms.page</name>
+      <definitionname>com.woltlab.wcf.acl</definitionname>
+    </type>
+    <type>
+      <name>de.codequake.category.news</name>
       <definitionname>com.woltlab.wcf.acl</definitionname>
     </type>
 
@@ -36,5 +47,6 @@
       <allowcontent>0</allowcontent>
       <allowsidebar>1</allowsidebar>
     </type>
+
   </import>
 </data>

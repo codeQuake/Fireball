@@ -8,6 +8,7 @@
     </categories>
 
     <options>
+      <!--page-->
       <option name="canViewPage">
         <categoryname>user.cms.page</categoryname>
         <objecttype>de.codequake.cms.page</objecttype>
@@ -15,6 +16,19 @@
       <option name="canEnterPage">
         <categoryname>user.cms.page</categoryname>
         <objecttype>de.codequake.cms.page</objecttype>
+      </option>
+      <!--news-->.
+      <option name="canViewCategory">
+        <objecttype>de.codequake.cms.category.news</objecttype>
+      </option>
+      <option name="canViewNews">
+        <objecttype>de.codequake.cms.category.news</objecttype>
+      </option>
+      <option name="canAddNews">
+        <objecttype>de.codequake.cms.category.news</objecttype>
+      </option>
+      <option name="canModerateNews">
+        <objecttype>de.codequake.cms.category.news</objecttype>
       </option>
     </options>
   </import>
