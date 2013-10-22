@@ -110,8 +110,7 @@ class PageEditForm extends AbstractForm{
     
     public function save(){
         parent::save();
-        $objectAction = new PageAction(array($this->pageID), 'update', array('data' => array('userID' => WCF::getUser()->userID,
-                                                                                           'title' => $this->title,
+        $objectAction = new PageAction(array($this->pageID), 'update', array('data' => array('title' => $this->title,
                                                                                            'description' => $this->description,
                                                                                            'metaDescription' => $this->metaDescription,
                                                                                            'metaKeywords' => $this->metaKeywords,

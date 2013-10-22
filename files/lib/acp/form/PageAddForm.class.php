@@ -88,8 +88,7 @@ class PageAddForm extends AbstractForm{
     
     public function save(){
         parent::save();
-        $data = array('userID' => WCF::getUser()->userID,
-                       'title' => $this->title,
+        $data = array('title' => $this->title,
                        'description' => $this->description,
                        'metaDescription' => $this->metaDescription,
                        'metaKeywords' => $this->metaKeywords,
