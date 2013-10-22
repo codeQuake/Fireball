@@ -1,6 +1,10 @@
 <?php
 namespace cms\page;
 use cms\data\category\NewsCategoryNodeTree;
+use wcf\system\menu\page\PageMenu;
+use wcf\system\request\LinkHandler;
+use wcf\system\MetaTagHandler;
+use wcf\system\WCF;
 use wcf\page\AbstractPage;
 
 class NewsCategoryListPage extends AbstractPage{

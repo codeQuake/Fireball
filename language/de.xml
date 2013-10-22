@@ -120,6 +120,11 @@
     <item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
     <item name="cms.page.news"><![CDATA[News]]></item>
   </category>
+
+  <category name="cms.news">
+    <item name="cms.news.category.categories"><![CDATA[Kategorien]]></item>
+    <item name="cms.news.add"><![CDATA[Nachricht hinzufügen]]></item>
+  </category>
   
   <category name="cms.content">
     <item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
