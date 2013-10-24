@@ -72,6 +72,25 @@
 
 {include file='newsListing' application='cms'}
 
+{if $objects|count}
+<div class="contentNavigation">
+  {pages print=true assign=pagesLinks controller="NewsCategory" application="cms" id=$categoryID link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+  {if $category->getPermission('canAddNews')}
+  <nav>
+    <ul>
+      <li>
+        <a href="{link application='cms' controller='NewsAdd' id=$categoryID}{/link}" title="{lang}cms.news.add{/lang}" class="button">
+          <span class="icon icon16 icon-plus"></span>
+          <span>{lang}cms.news.add{/lang}</span>
+        </a>
+      </li>
+      {event name='contentNavigationButtonsTop'}
+    </ul>
+  </nav>
+  {/if}
+</div>
+{/if}
+
 {include file='footer' sandbox=false}
 </body>
 </html>

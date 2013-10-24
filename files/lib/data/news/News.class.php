@@ -9,6 +9,8 @@ use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\IMessage;
 use wcf\system\bbcode\AttachmentBBCode;
 use cms\data\CMSDatabaseObject;
+use wcf\data\user\User;
+use wcf\data\user\UserProfile;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 use wcf\util\UserUtil;
@@ -82,6 +84,10 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
     
     public function getUsername() {
         return $this->username;
+    }
+    
+    public function getUserProfile(){
+        return new UserProfile(new User($this->userID));
     }
     
     public function getTime() {
