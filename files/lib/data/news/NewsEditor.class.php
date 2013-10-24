@@ -27,7 +27,7 @@ class NewsEditor extends DatabaseObjectEditor{
 			foreach ($categoryIDs as $categoryID) {
 				$statement->execute(array(
 						$categoryID,
-						$this->news
+						$this->newsID
 				));
 			}
 			
