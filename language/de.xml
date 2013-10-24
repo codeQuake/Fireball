@@ -124,6 +124,8 @@
   <category name="cms.news">
     <item name="cms.news.category.categories"><![CDATA[Kategorien]]></item>
     <item name="cms.news.add"><![CDATA[Nachricht hinzufügen]]></item>
+    <item name="cms.news.comments.count "><![CDATA[{#$news->comments} Kommentar{if $news->comments > 1}e{/if}]]></item>
+    <item name="cms.news.read"><![CDATA[Weiterlesen]]></item>
   </category>
   
   <category name="cms.content">
