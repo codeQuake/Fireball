@@ -123,8 +123,11 @@
 
   <category name="cms.news">
     <item name="cms.news.category.categories"><![CDATA[Kategorien]]></item>
+    <item name="cms.news.category.categories.description"><![CDATA[Wählen Sie die passenden Kategorien für die Nachricht!]]></item>
+    <item name="cms.news.general"><![CDATA[Allgemeine Informationen]]></item>
+    <item name="cms.news.message"><![CDATA[Nachricht]]></item>
     <item name="cms.news.add"><![CDATA[Nachricht hinzufügen]]></item>
-    <item name="cms.news.comments.count "><![CDATA[{#$news->comments} Kommentar{if $news->comments > 1}e{/if}]]></item>
+    <item name="cms.news.comments.count"><![CDATA[{#$news->comments} Kommentar{if $news->comments > 1}e{/if}]]></item>
     <item name="cms.news.read"><![CDATA[Weiterlesen]]></item>
   </category>
   

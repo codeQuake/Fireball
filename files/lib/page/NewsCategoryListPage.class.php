@@ -4,14 +4,19 @@ use cms\data\category\NewsCategoryNodeTree;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\MetaTagHandler;
+use cms\data\news\ViewableNewsList;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\WCF;
-use wcf\page\AbstractPage;
+use wcf\page\SortablePage;
 
-class NewsCategoryListPage extends AbstractPage{
+class NewsCategoryListPage extends SortablePage{
 
     public $activeMenuItem = 'cms.page.news';
     public $enableTracking = true;
-    
+    public $objectListClassName = 'cms\data\news\ViewableNewsList';    
+    public $itemsPerPage = CMS_NEWS_PER_PAGE;
+    public $limit = 10;
     public $categoryList = null;
     
     
@@ -29,14 +34,19 @@ class NewsCategoryListPage extends AbstractPage{
             MetaTagHandler::getInstance()->addTag('og:title', 'og:title', WCF::getLanguage()->get(PAGE_TITLE), true);
             MetaTagHandler::getInstance()->addTag('og:description', 'og:description', WCF::getLanguage()->get(PAGE_DESCRIPTION), true);
         }
+        
     }
     
     public function assignVariables(){
         parent::assignVariables();
-
+        
+        DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.news.newsList', $this);
+        
         WCF::getTPL()->assign(array(
             'categoryList' => $this->categoryList,
-            'allowSpidersToIndexThisPage' => true
+            'allowSpidersToIndexThisPage' => true,
+            'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.news.newsList'),
+			'sidebarName' => 'de.codequake.cms.news.newsList'
             ));
     }
 }

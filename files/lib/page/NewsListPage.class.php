@@ -5,6 +5,8 @@ use cms\data\category\NewsCategory;
 use cms\data\category\NewsCategoryNodeTree;
 use wcf\system\category\CategoryHandler;
 use wcf\page\SortablePage;
+use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\request\LinkHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -15,8 +17,7 @@ class NewsListPage extends SortablePage{
 
     public $activeMenuItem = 'cms.page.news';
     public $enableTracking = true;
-    //public $itemsPerPage = CMS_NEWS_PER_PAGE;
-    public $objectListClassName = 'cms\data\news\CategoryNewsPage';
+    public $itemsPerPage = CMS_NEWS_PER_PAGE;
     public $sqlOrderBy = 'time';
     public $sortOder = 'DESC';
     public $validSortFields = array('username', 'newsID', 'time', 'subject', 'clicks', 'comments');
@@ -48,7 +49,9 @@ class NewsListPage extends SortablePage{
     
     public function readData() {
 		parent::readData();
-		
+		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), 
+                                                            LinkHandler::getInstance()->getLink('NewsCategoryList', array('application' => 'cms'))));
+        
 		// get categories
 		$categoryTree = new NewsCategoryNodeTree('de.codequake.cms.category.news');
 		$this->categoryList = $categoryTree->getIterator();

@@ -8,7 +8,38 @@
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
+{capture assign='sidebar'}
+	{hascontent}
+		<fieldset>
+			<legend>{lang}cms.news.category.categories{/lang}</legend>
+			
+			<ol class="sidebarNestedCategoryList">
+				{content}
+					{foreach from=$categoryList item=categoryItem}
+						<li>
+							<a href="{link application='cms' controller='NewsList' object=$categoryItem->getDecoratedObject()}{/link}">{$categoryItem->getTitle()}</a>
 
+							{if $categoryItem->hasChildren()}
+								<ol>
+									{foreach from=$categoryItem item=subCategoryItem}
+										<li class="active">
+											<a href="{link application='cms' controller='NewsList' object=$subCategoryItem->getDecoratedObject()}{/link}">{$subCategoryItem->getTitle()}</a>
+											
+										</li>
+									{/foreach}
+								</ol>
+							{/if}
+						</li>
+					{/foreach}
+				{/content}
+			</ol>
+		</fieldset>
+	{/hascontent}
+
+	{event name='boxes'}
+
+	{@$__boxSidebar}
+{/capture}
 
 {include file='header' sidebarOrientation='right'}
 
@@ -27,6 +58,7 @@
 
 
 <div class="contentNavigation">
+	{pages print=true assign=pagesLinks controller="NewsCategoryList" application="cms" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	{hascontent}
 		<nav>
 			<ul>
@@ -39,35 +71,11 @@
 	{/hascontent}
 </div>
 
-<div class="container containerPadding marginTop">
-	<fieldset>
-		<legend>{lang}cms.news.category.categories{/lang}</legend>
+{include file='newsListing' application='cms'}
 
-		<ol class="nestedCategoryList doubleColumned">
-			{foreach from=$categoryList item=categoryItem}
-				<li data-category-id="{@$categoryItem->categoryID}">
-					<div>
-						<div class="containerHeadline">
-							<h3><a href="{link application='cms' controller='NewsList' object=$categoryItem->getDecoratedObject()}{/link}"{if $categoryItem->getDescription()} class="jsTooltip" title="{$categoryItem->getDescription()}"{/if}>{$categoryItem->getTitle()}</a></h3>
-						</div>
-						
-						{if $categoryItem->hasChildren()}
-							<ol>
-								{foreach from=$categoryItem item=subCategoryItem}
-									<li data-category-id="{@$subCategoryItem->categoryID}">
-										<a href="{link application='cms' controller='NewsList' object=$subCategoryItem->getDecoratedObject()}{/link}"{if $subCategoryItem->getDescription()} class="jsTooltip" title="{$subCategoryItem->getDescription()}"{/if}>{$subCategoryItem->getTitle()}</a>
-									</li>
-								{/foreach}
-							</ol>
-						{/if}
-					</div>
-				</li>
-			{/foreach}
-		</ol>
-	</fieldset>
-</div>
-
+{if $objects|count}
 <div class="contentNavigation">
+	{pages print=true assign=pagesLinks controller="NewsCategoryList" application="cms"  link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	{hascontent}
 		<nav>
 			<ul>
@@ -79,7 +87,7 @@
 		</nav>
 	{/hascontent}
 </div>
-
+{/if}
 
 {include file='footer'}
 

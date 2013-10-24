@@ -6,6 +6,7 @@ use cms\data\news\NewsAction;
 use wcf\form\MessageForm;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
+use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\request\LinkHandler;
 use wcf\system\category\CategoryHandler;
 use wcf\util\ArrayUtil;
@@ -27,6 +28,9 @@ class NewsAddForm extends MessageForm{
     }
     public function readData(){
         parent::readData();
+         WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), 
+                                                            LinkHandler::getInstance()->getLink('NewsCategoryList', array('application' => 'cms'))));
+        
         $excludedCategoryIDs = array_diff(NewsCategory::getAccessibleCategoryIDs(), NewsCategory::getAccessibleCategoryIDs(array('canAddNews')));
         $categoryTree = new NewsCategoryNodeTree('de.codequake.cms.category.news', 0, false, $excludedCategoryIDs);
         $this->categoryList = $categoryTree->getIterator();

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
+  <import>
+    <categories>
+      <category name="cms"></category>
+      <category name="cms.news">
+        <parent>cms</parent>
+      </category>
+    </categories>
+
+    <options>
+      <option name="cms_news_per_page">
+        <optiontype>integer</optiontype>
+        <categoryname>cms.news</categoryname>
+        <defaultvalue>10</defaultvalue>
+      </option>
+    </options>
+  </import>
+</data>

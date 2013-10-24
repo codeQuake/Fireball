@@ -3,6 +3,7 @@
   <import>
     <acpmenuitem name="cms.acp.menu.link.cms">
       <parent>wcf.acp.menu.link.content</parent>
+      <showorder>1</showorder>
     </acpmenuitem>
 
     <acpmenuitem name="cms.acp.menu.link.cms.page.list">

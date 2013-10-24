@@ -29,6 +29,7 @@
 
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
+    <instruction type="option">xml/option.xml</instruction>
     <instruction type="pageMenu">xml/pagemenu.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     <instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
@@ -50,6 +51,7 @@
 
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
+    <instruction type="option">xml/option.xml</instruction>
     <instruction type="pageMenu">xml/pagemenu.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     <instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>

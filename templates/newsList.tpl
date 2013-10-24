@@ -59,7 +59,7 @@
     <ul>
       <li>
         <a href="{link application='cms' controller='NewsAdd' id=$categoryID}{/link}" title="{lang}cms.news.add{/lang}" class="button">
-          <span class="icon icon16 icon-plus"></span>
+          <span class="icon icon16 icon-asterisk"></span>
           <span>{lang}cms.news.add{/lang}</span>
         </a>
       </li>
@@ -80,7 +80,7 @@
     <ul>
       <li>
         <a href="{link application='cms' controller='NewsAdd' id=$categoryID}{/link}" title="{lang}cms.news.add{/lang}" class="button">
-          <span class="icon icon16 icon-plus"></span>
+          <span class="icon icon16 icon-asterisk"></span>
           <span>{lang}cms.news.add{/lang}</span>
         </a>
       </li>
