@@ -168,8 +168,38 @@ pdf]]></admindefaultvalue>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
       </option>
+      <option name="user.cms.news.canAddComment">
+        <categoryname>user.cms.news</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+      </option>
+      <option name="user.cms.news.canDeleteComment">
+        <categoryname>user.cms.news</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+      </option>
+      <option name="user.cms.news.canEditComment">
+        <categoryname>user.cms.news</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+      </option>
       <!--mod-->
       <option name="mod.cms.news.canModerateNews">
+        <categoryname>mod.cms.news</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+      </option>
+      <option name="mod.cms.news.canModerateComment">
+        <categoryname>mod.cms.news</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+      </option>
+      <option name="mod.cms.news.canEditComment">
+        <categoryname>mod.cms.news</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+      </option>
+      <option name="mod.cms.news.canDeleteComment">
         <categoryname>mod.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
