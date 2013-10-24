@@ -2,72 +2,83 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/acpMenu.xsd">
   <import>
     <acpmenuitem name="cms.acp.menu.link.cms">
-      <parent>wcf.acp.menu.link.content</parent>
-      <showorder>1</showorder>
+      <showorder>6</showorder>
+    </acpmenuitem>
+
+    <acpmenuitem name="cms.acp.menu.link.cms.content">
+      <parent>cms.acp.menu.link.cms</parent>
+    </acpmenuitem>
+
+    <acpmenuitem name="cms.acp.menu.link.cms.style">
+      <parent>cms.acp.menu.link.cms</parent>
+    </acpmenuitem>
+
+    <acpmenuitem name="cms.acp.menu.link.cms.news">
+      <parent>cms.acp.menu.link.cms</parent>
     </acpmenuitem>
 
     <acpmenuitem name="cms.acp.menu.link.cms.page.list">
-      <parent>cms.acp.menu.link.cms</parent>
+      <parent>cms.acp.menu.link.cms.content</parent>
       <controller><![CDATA[cms\acp\form\PageListPage]]></controller>
       <permissions>admin.cms.page.canListPage</permissions>
     </acpmenuitem>
 
     <acpmenuitem name="cms.acp.menu.link.cms.page.add">
-      <parent>cms.acp.menu.link.cms</parent>
+      <parent>cms.acp.menu.link.cms.content</parent>
       <controller><![CDATA[cms\acp\form\PageAddForm]]></controller>
       <permissions>admin.cms.page.canAddPage</permissions>
     </acpmenuitem>
 
     <acpmenuitem name="cms.acp.menu.link.cms.content.list">
-      <parent>cms.acp.menu.link.cms</parent>
+      <parent>cms.acp.menu.link.cms.content</parent>
       <controller><![CDATA[cms\acp\form\ContentListPage]]></controller>
       <permissions>admin.cms.content.canListContent</permissions>
     </acpmenuitem>
     
     <acpmenuitem name="cms.acp.menu.link.cms.content.add">
-      <parent>cms.acp.menu.link.cms</parent>
+      <parent>cms.acp.menu.link.cms.content</parent>
       <controller><![CDATA[cms\acp\form\ContentAddForm]]></controller>
       <permissions>admin.cms.content.canAddContent</permissions>
     </acpmenuitem>
 
     <acpmenuitem name="cms.acp.menu.link.cms.file.management">
-      <parent>cms.acp.menu.link.cms</parent>
+      <parent>cms.acp.menu.link.cms.content</parent>
       <controller><![CDATA[cms\acp\form\FileManagementForm]]></controller>
       <permissions>admin.cms.file.canAddFile</permissions>
     </acpmenuitem>
     
       <acpmenuitem name="cms.acp.menu.link.cms.stylesheet.list">
-        <parent>cms.acp.menu.link.cms</parent>
+        <parent>cms.acp.menu.link.cms.style</parent>
         <controller><![CDATA[cms\acp\page\StylesheetListPage]]></controller>
         <permissions>admin.cms.style.canListStylesheet</permissions>
       </acpmenuitem>
   
     <acpmenuitem name="cms.acp.menu.link.cms.stylesheet.add">
-      <parent>cms.acp.menu.link.cms</parent>
+      <parent>cms.acp.menu.link.cms.style</parent>
       <controller><![CDATA[cms\acp\form\StylesheetAddForm]]></controller>
       <permissions>admin.cms.style.canAddStylesheet</permissions>
     </acpmenuitem>
         
      <acpmenuitem name="cms.acp.menu.link.cms.layout.list">
-        <parent>cms.acp.menu.link.cms</parent>
+        <parent>cms.acp.menu.link.cms.style</parent>
         <controller><![CDATA[cms\acp\page\LayoutListPage]]></controller>
         <permissions>admin.cms.style.canListLayout</permissions>
      </acpmenuitem>
     
       <acpmenuitem name="cms.acp.menu.link.cms.layout.add">
-        <parent>cms.acp.menu.link.cms</parent>
+        <parent>cms.acp.menu.link.cms.style</parent>
         <controller><![CDATA[cms\acp\page\LayoutAddPage]]></controller>
         <permissions>admin.cms.style.canAddLayout</permissions>
      </acpmenuitem>
 
     <acpmenuitem name="cms.acp.menu.link.cms.news.category.list">
-      <parent>cms.acp.menu.link.cms</parent>
+      <parent>cms.acp.menu.link.cms.news</parent>
       <controller><![CDATA[cms\acp\page\NewsCategoryListPage]]></controller>
       <permissions>admin.cms.news.canManageCategory</permissions>
     </acpmenuitem>
 
     <acpmenuitem name="cms.acp.menu.link.cms.news.category.add">
-      <parent>cms.acp.menu.link.cms</parent>
+      <parent>cms.acp.menu.link.cms.news</parent>
       <controller><![CDATA[cms\acp\page\NewsCategoryAddPage]]></controller>
       <permissions>admin.cms.news.canManageCategory</permissions>
     </acpmenuitem>

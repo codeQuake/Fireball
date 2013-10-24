@@ -12,8 +12,11 @@
     <item name="cms.acp.menu.link.cms.layout.list"><![CDATA[Layouts auflisten]]></item>
     <item name="cms.acp.menu.link.cms.layout.add"><![CDATA[Layout hinzufügen]]></item>
     <item name="cms.acp.menu.link.cms.file.management"><![CDATA[Dateiverwaltung]]></item>
-    <item name="cms.acp.menu.link.cms.news.category.add"><![CDATA[Neuigkeiten Kategorie hinzufügen]]></item>
-    <item name="cms.acp.menu.link.cms.news.category.list"><![CDATA[Neuigkeiten Kategorien auflisten]]></item>
+    <item name="cms.acp.menu.link.cms.news.category.add"><![CDATA[Kategorie hinzufügen]]></item>
+    <item name="cms.acp.menu.link.cms.news.category.list"><![CDATA[Kategorien auflisten]]></item>
+    <item name="cms.acp.menu.link.cms.style"><![CDATA[Darstellungsoptionen]]></item>
+    <item name="cms.acp.menu.link.cms.content"><![CDATA[Seiten verwalten]]></item>
+    <item name="cms.acp.menu.link.cms.news"><![CDATA[Nachrichten]]></item>
   </category>
   
   <category name="cms.acp">
@@ -127,7 +130,7 @@
     <item name="cms.news.general"><![CDATA[Allgemeine Informationen]]></item>
     <item name="cms.news.message"><![CDATA[Nachricht]]></item>
     <item name="cms.news.add"><![CDATA[Nachricht hinzufügen]]></item>
-    <item name="cms.news.comments.count"><![CDATA[{#$news->comments} Kommentar{if $news->comments > 1}e{/if}]]></item>
+    <item name="cms.news.comments.count"><![CDATA[{#$news->comments} {if $news->comments == 1}Kommentar{else}Kommentare{/if}]]></item>
     <item name="cms.news.read"><![CDATA[Weiterlesen]]></item>
   </category>
   
