@@ -4,6 +4,8 @@ use cms\data\news\News;
 use wcf\page\AbstractPage;
 use wcf\system\comment\CommentHandler;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\WCF;
@@ -42,12 +44,17 @@ class NewsPage extends AbstractPage{
     public function assignVariables(){
         parent::assignVariables();
         
+        
+        DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.news.news', $this);
+        
         WCF::getTPL()->assign(array('newsID' => $this->newsID,
                                     'news' => $this->news,
                                     'commentCanAdd' => (WCF::getUser()->userID && WCF::getSession()->getPermission('user.cms.news.canAddComment')),
                                     'commentList' => $this->commentList,
                                     'commentObjectTypeID' => $this->commentObjectTypeID,
                                     'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),
-                                    'allowSpidersToIndexThisPage' => true));
+                                    'allowSpidersToIndexThisPage' => true,
+                                    'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.news.news'),
+                                    'sidebarName' => 'de.codequake.cms.news.news'));
     }
 }

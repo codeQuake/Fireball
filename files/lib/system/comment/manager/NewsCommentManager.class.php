@@ -40,7 +40,7 @@ class NewsCommentManager extends AbstractCommentManager{
     
     public function updateCounter($objectID, $value) {
 		$news = new News($objectID);
-		$editor = new Newsditor($news);
+		$editor = new NewsEditor($news);
 		$editor->update(array(
 			'comments' => ($news->comments + $value)
 		));
