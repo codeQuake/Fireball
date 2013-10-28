@@ -72,5 +72,12 @@
       <name>de.codequake.cms.news</name>
       <definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
     </type>
+    
+    <!--Recent Activity-->
+    <type>
+      <name>de.codequake.cms.news.recentActivityEvent</name>
+      <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+      <classname>cms\system\user\activity\event\NewsUserActivityEvent</classname>
+    </type>
   </import>
 </data>

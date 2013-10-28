@@ -184,5 +184,9 @@
   <category name="wcf.acp.index">
     <item name="wcf.acp.index.system.software.cmsVersion"><![CDATA[Fireball CMS-Version]]></item>
   </category>
+
+  <category name="wcf.user.profile">
+    <item name="wcf.user.profile.recentActivity.news"><![CDATA[hat die Nachricht &raquo;<a class="cmsNewsLink" data-news-id="{$news->newsID}" href="{link controller=News application='cms' object=$news}{/link}">{$news->getTitle()|language}</a>&laquo; verfasst.]]></item>
+  </category>
   
 </language>

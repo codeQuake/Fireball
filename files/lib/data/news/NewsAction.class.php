@@ -6,6 +6,7 @@ use wcf\util\UserUtil;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\visitTracker\VisitTracker;
 use wcf\system\language\LanguageFactory;
+use wcf\system\user\activity\event\UserActivityEventHandler;
 
 class NewsAction extends AbstractDatabaseObjectAction{
 
@@ -38,7 +39,10 @@ class NewsAction extends AbstractDatabaseObjectAction{
         
         //langID != 0
         $languageID = (!isset($this->parameters['data']['languageID']) || ($this->parameters['data']['languageID'] === null)) ? LanguageFactory::getInstance()->getDefaultLanguageID() : $this->parameters['data']['languageID'];
+        $newsEditor->update(array('languageID' => $languageID));
         
+        //recent
+        UserActivityEventHandler::getInstance()->fireEvent('de.codequake.cms.news.recentActivityEvent', $news->newsID, $news->languageID, $news->userID, $news->time);
         return $news;
         
     }
