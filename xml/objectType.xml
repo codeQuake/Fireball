@@ -79,5 +79,15 @@
       <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
       <classname>cms\system\user\activity\event\NewsUserActivityEvent</classname>
     </type>
+    <type>
+        <name>de.codequake.cms.news.comment.recentActivityEvent</name>
+        <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+        <classname>cms\system\user\activity\event\NewsCommentUserActivityEvent</classname>
+      </type>
+      <type>
+        <name>de.codequake.cms.news.comment.response.recentActivityEvent</name>
+        <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+        <classname>cms\system\user\activity\event\NewsCommentResponseUserActivityEvent</classname>
+      </type>
   </import>
 </data>

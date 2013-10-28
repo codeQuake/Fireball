@@ -187,6 +187,8 @@
 
   <category name="wcf.user.profile">
     <item name="wcf.user.profile.recentActivity.news"><![CDATA[hat die Nachricht &raquo;<a class="cmsNewsLink" data-news-id="{$news->newsID}" href="{link controller=News application='cms' object=$news}{/link}">{$news->getTitle()|language}</a>&laquo; verfasst.]]></item>
+    <item name="wcf.user.profile.recentActivity.linkComment"><![CDATA[hat die Nachricht &raquo;<a class="cmsNewsLink" data-news-id="{$news->newsID}" href="{link controller=News application='cms' object=$news}{/link}">{$news->getTitle()}</a>&laquo; kommentiert.]]></item>
+    <item name="wcf.user.profile.recentActivity.linkCommentResponse"><![CDATA[hat auf den Kommentar von <a class="userLink" data-user-id="{$author->userID}"href="{link controller=User object=$author}{/link}">{$author->username}</a> zur Nachricht &raquo;<a class="cmsNewsLink" data-news-id="{$news->newsID}" href="{link controller=News application='cms' object=$news}#comments{/link}">{$news->getTitle()}</a>&laquo; geantwortet.]]></item>
   </category>
   
 </language>

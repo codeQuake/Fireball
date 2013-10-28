@@ -1,0 +1,55 @@
+<?php
+namespace cms\system\user\activity\event;
+
+use wcf\system\user\activity\event\IUserActivityEvent;
+use wcf\system\SingletonFactory;
+use wcf\system\WCF;
+use wcf\data\comment\CommentList;
+use cms\data\news\NewsList;
+
+class NewsCommentUserActivityEvent extends SingletonFactory implements IUserActivityEvent{
+    public function prepare(array $events){
+        $objectIDs = array();
+        foreach ($events as $event) {
+            $objectIDs[] = $event->objectID;
+        }
+        
+        //comments
+        $commentList = new CommentList();
+        $commentList->getConditionBuilder()->add("comment.commentID IN (?)", array (
+        $objectIDs ));
+        $commentList->readObjects();
+        $comments = $commentList->getObjects();
+        
+        //get news
+        $newsIDs = array ();
+        foreach($comments as $comment) {
+            $newsIDs[] = $comment->objectID;
+            }
+            
+        $list = new NewsList();
+        $list->getConditionBuilder()->add("news.newsID IN (?)", array($newsIDs));
+        $list->readObjects();
+        $newss = $list->getObjects();
+        
+        
+        foreach($events as $event){
+            if(isset($comments[$event->objectID]))
+            {
+                $comment = $comments[$event->objectID];
+                if(isset($newss[$comment->objectID])){
+                    $news = $newss[$comment->objectID];
+                    $text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.newsComment', array(
+                        'news' => $news));
+                    $event->setTitle($text);
+                    $event->setDescription($comment->getFormattedMessage());
+                    $event->setIsAccessible();
+                }
+            }
+            else {$event->setIsOrphaned();}  
+            
+        }
+        
+    }
+
+}
