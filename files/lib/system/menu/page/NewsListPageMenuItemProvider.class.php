@@ -54,7 +54,7 @@ class NewsListPageMenuItemProvider extends DefaultPageMenuItemProvider {
 						$row = $statement->fetchArray();
 						$this->notifications = $row['count'];
 					}
-					
+                    
 					// update storage data
 					UserStorageHandler::getInstance()->update(WCF::getUser()->userID, 'cmsUnreadNews', $this->notifications);
 				}

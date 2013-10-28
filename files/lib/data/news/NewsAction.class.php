@@ -3,6 +3,8 @@ namespace cms\data\news;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\WCF;
 use wcf\util\UserUtil;
+use wcf\system\user\storage\UserStorageHandler;
+use wcf\system\visitTracker\VisitTracker;
 use wcf\system\language\LanguageFactory;
 
 class NewsAction extends AbstractDatabaseObjectAction{
@@ -52,6 +54,38 @@ class NewsAction extends AbstractDatabaseObjectAction{
 		}
     }
     
+    
+    public function validateMarkAsRead() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+			
+			if (empty($this->objects)) {
+				throw new UserInputException('objectIDs');
+			}
+		}
+	}
+	
+	public function markAsRead() {
+		if (empty($this->parameters['visitTime'])) {
+			$this->parameters['visitTime'] = TIME_NOW;
+		}
+		
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		$newsIDs = array();
+		foreach ($this->objects as $news) {
+			$newsIDs[] = $news->newsID;
+			VisitTracker::getInstance()->trackObjectVisit('de.codequake.cms.news', $news->newsID, $this->parameters['visitTime']);
+		}
+		
+		// reset storage
+		if (WCF::getUser()->userID) {
+			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'cmsUnreadNews');
+		}
+	}
+	
     public function validateGetIpLog() {
 		if (!LOG_IP_ADDRESS) {
 			throw new PermissionDeniedException();
@@ -68,7 +102,6 @@ class NewsAction extends AbstractDatabaseObjectAction{
 			throw new PermissionDeniedException();
 		}
 	}
-	
     
     public function getIpLog() {
 		// get ip addresses of the author

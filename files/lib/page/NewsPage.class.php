@@ -1,7 +1,9 @@
 <?php
 namespace cms\page;
 use cms\data\news\News;
+use cms\data\news\ViewableNews;
 use cms\data\news\NewsEditor;
+use cms\data\news\NewsAction;
 use wcf\page\AbstractPage;
 use wcf\system\comment\CommentHandler;
 use wcf\system\exception\IllegalLinkException;
@@ -30,7 +32,7 @@ class NewsPage extends AbstractPage{
         parent::readParameters();
         
         if(isset($_REQUEST['id'])) $this->newsID = intval($_REQUEST['id']);
-        $this->news = new News($this->newsID);
+        $this->news = ViewableNews::getNews($this->newsID);
         if($this->news->newsID == 0) throw new IllegalLinkException();
     }
     
@@ -44,12 +46,19 @@ class NewsPage extends AbstractPage{
         $this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->commentObjectTypeID, $this->newsID);
         
         MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->news->subject . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
-		MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('News', array('application' => 'cms', 'object' => $this->news)), true);
+		MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('News', array('application' => 'cms', 'object' => $this->news->getDecoratedObject())), true);
 		MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'article', true);
 		MetaTagHandler::getInstance()->addTag('og:description', 'og:description', StringUtil::decodeHTML(StringUtil::stripHTML($this->news->getExcerpt())), true);
         
-        $newsEditor = new NewsEditor($this->news);
+        $newsEditor = new NewsEditor($this->news->getDecoratedObject());
         $newsEditor->update(array('clicks' => $this->news->clicks+1));
+        
+        //if ($this->news->isNew()) {
+			$newsAction = new NewsAction(array($this->news->getDecoratedObject()), 'markAsRead', array(
+				'viewableNews' => $this->news
+			));
+			$newsAction->executeAction();
+		//}
     }
     
     public function assignVariables(){

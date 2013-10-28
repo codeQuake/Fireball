@@ -2,6 +2,7 @@
 namespace cms\data\news;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\visitTracker\VisitTracker;
+use wcf\system\WCF;
 
 class ViewableNews extends DatabaseObjectDecorator{
     protected static $baseClass = 'cms\data\news\News';
@@ -31,6 +32,15 @@ class ViewableNews extends DatabaseObjectDecorator{
 		}
 		
 		return false;
+	}
+    
+    public static function getNews($newsID) {
+		$list = new ViewableNewsList();
+		$list->setObjectIDs(array($newsID));
+		$list->readObjects();
+		$objects = $list->getObjects();
+		if (isset($objects[$newsID])) return $objects[$newsID];
+		return null;
 	}
 	
 }
