@@ -168,6 +168,10 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
         return WCF::getSession()->getPermission('user.cms.news.canAddNews');
     }
     
+    public function canModerate(){
+        return WCF::getSession()->getPermission('mod.cms.news.canModerateNews');
+    }
+    
     public static function getIpAddressByAuthor($userID, $username = '', $notIpAddress = '', $limit = 10) {
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("userID = ?", array($userID));
