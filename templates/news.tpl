@@ -10,6 +10,16 @@
     <script data-relocate="true">
         //<![CDATA[
         $(function () {
+			WCF.Language.addObject({
+				'wcf.message.share': '{lang}wcf.message.share{/lang}',
+				'wcf.message.share.facebook': '{lang}wcf.message.share.facebook{/lang}',
+				'wcf.message.share.google': '{lang}wcf.message.share.google{/lang}',
+				'wcf.message.share.permalink': '{lang}wcf.message.share.permalink{/lang}',
+				'wcf.message.share.permalink.bbcode': '{lang}wcf.message.share.permalink.bbcode{/lang}',
+				'wcf.message.share.permalink.html': '{lang}wcf.message.share.permalink.html{/lang}',
+				'wcf.message.share.reddit': '{lang}wcf.message.share.reddit{/lang}',
+				'wcf.message.share.twitter': '{lang}wcf.message.share.twitter{/lang}'
+			});
             new WCF.Action.Delete('cms\\data\\news\\NewsAction', '.jsNews');
 			new WCF.Message.Share.Content();
 			{if LOG_IP_ADDRESS && $__wcf->session->getPermission('admin.user.canViewIpAddress')}new CMS.News.IPAddressHandler();{/if}
@@ -21,6 +31,24 @@
 <body id="tpl{$templateName|ucfirst}">
 
 {capture assign='sidebar'}
+	<fieldset>
+		<legend>{lang}cms.news.general{/lang}</legend>
+		<dl class="plain inlineDataList">
+			<dt>{lang}cms.news.clicks{/lang}</dt>
+			<dd>{$news->clicks}</dd>
+		</dl>
+	</fieldset>
+	{if $news->getCategories()|count}
+		<fieldset>
+			<legend>{lang}cms.news.category.categories{/lang}</legend>
+			
+			<ul>
+				{foreach from=$news->getCategories() item=category}
+					<li><a href="{link application='cms' controller='NewsCategoryList' object=$category}{/link}" class="jsTooltip" title="{lang}cms.news.categorizedFiles{/lang}">{$category->getTitle()}</a></li>
+				{/foreach}
+			</ul>
+		</fieldset>
+	{/if}
 
     {event name='boxes'}
     {@$__boxSidebar}

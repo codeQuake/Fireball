@@ -1,6 +1,7 @@
 <?php
 namespace cms\page;
 use cms\data\news\News;
+use cms\data\news\NewsEditor;
 use wcf\page\AbstractPage;
 use wcf\system\comment\CommentHandler;
 use wcf\system\exception\IllegalLinkException;
@@ -8,6 +9,8 @@ use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\MetaTagHandler;
+use wcf\util\StringUtil;
 use wcf\system\WCF;
 
 class NewsPage extends AbstractPage{
@@ -39,11 +42,18 @@ class NewsPage extends AbstractPage{
         $this->commentObjectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.codequake.cms.news.comment');
         $this->commentManager = CommentHandler::getInstance()->getObjectType($this->commentObjectTypeID)->getProcessor();
         $this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->commentObjectTypeID, $this->newsID);
+        
+        MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->news->subject . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
+		MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('News', array('application' => 'cms', 'object' => $this->news)), true);
+		MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'article', true);
+		MetaTagHandler::getInstance()->addTag('og:description', 'og:description', StringUtil::decodeHTML(StringUtil::stripHTML($this->news->getExcerpt())), true);
+        
+        $newsEditor = new NewsEditor($this->news);
+        $newsEditor->update(array('clicks' => $this->news->clicks+1));
     }
     
     public function assignVariables(){
         parent::assignVariables();
-        
         
         DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.news.news', $this);
         
