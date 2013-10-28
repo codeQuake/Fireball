@@ -3,6 +3,7 @@ namespace cms\data\news;
 use wcf\system\request\IRouteController;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\data\attachment\Attachment;
 use wcf\data\attachment\GroupedAttachmentList;
@@ -166,4 +167,47 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
     public function canAdd(){
         return WCF::getSession()->getPermission('user.cms.news.canAddNews');
     }
+    
+    public static function getIpAddressByAuthor($userID, $username = '', $notIpAddress = '', $limit = 10) {
+		$conditions = new PreparedStatementConditionBuilder();
+		$conditions->add("userID = ?", array($userID));
+		if (!empty($username) && !$userID) $conditions->add("username = ?", array($username));
+		if (!empty($notIpAddress)) $conditions->add("ipAddress <> ?", array($notIpAddress));
+		$conditions->add("ipAddress <> ''");
+		
+		$sql = "SELECT		DISTINCT ipAddress
+			FROM		cms".WCF_N."_news
+			".$conditions."
+			ORDER BY	time DESC";
+		$statement = WCF::getDB()->prepareStatement($sql, $limit);
+		$statement->execute($conditions->getParameters());
+		
+		$ipAddresses = array();
+		while ($row = $statement->fetchArray()) {
+			$ipAddresses[] = $row['ipAddress'];
+		}
+		
+		return $ipAddresses;
+	}
+    
+    public static function getAuthorByIpAddress($ipAddress, $notUserID = 0, $notUsername = '', $limit = 10) {
+		$conditions = new PreparedStatementConditionBuilder();
+		$conditions->add("ipAddress = ?", array($ipAddress));
+		if ($notUserID) $conditions->add("userID <> ?", array($notUserID));
+		if (!empty($notUsername)) $conditions->add("username <> ?", array($notUsername));
+		
+		$sql = "SELECT		DISTINCT username, userID
+			FROM		cms".WCF_N."_news
+			".$conditions."
+			ORDER BY	time DESC";
+		$statement = WCF::getDB()->prepareStatement($sql, $limit);
+		$statement->execute($conditions->getParameters());
+		
+		$users = array();
+		while ($row = $statement->fetchArray()) {
+			$users[] = $row;
+		}
+		
+		return $users;
+	}
 }

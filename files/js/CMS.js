@@ -1,8 +1,8 @@
-CMS = {};
+var CMS = {};
 
 CMS.News = {};
 
-CMS.News.IPAdressHandler = Class.extend({
+CMS.News.IPAddressHandler = Class.extend({
     _cache: {},
     _dialog: null,
     _proxy: null,
@@ -33,9 +33,9 @@ CMS.News.IPAdressHandler = Class.extend({
     },
 
     _click: function (event) {
-        var $postID = $(event.currentTarget).data('newsID');
+        var $newsID = $(event.currentTarget).data('newsID');
 
-        if (this._cache[$postID]) {
+        if (this._cache[$newsID]) {
             this._showDialog($newsID);
         }
         else {
@@ -43,7 +43,7 @@ CMS.News.IPAdressHandler = Class.extend({
                 actionName: 'getIpLog',
                 className: 'cms\\data\\news\\NewsAction',
                 parameters: {
-                    postID: $newsID
+                    newsID: $newsID
                 }
             });
             this._proxy.sendRequest();
