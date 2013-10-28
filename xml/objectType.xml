@@ -66,5 +66,11 @@
       <definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
       <classname>cms\system\comment\manager\NewsCommentManager</classname>
     </type>
+    
+    <!--Visit Tracker-->
+    <type>
+      <name>de.codequake.cms.news</name>
+      <definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
+    </type>
   </import>
 </data>

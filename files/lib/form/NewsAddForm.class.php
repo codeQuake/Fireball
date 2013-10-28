@@ -78,7 +78,8 @@ class NewsAddForm extends MessageForm{
                        'username' => WCF::getUser()->username,
                        'enableBBCodes' => $this->enableBBCodes,
 			           'enableHtml' => $this->enableHtml,
-			           'enableSmilies' => $this->enableSmilies);
+			           'enableSmilies' => $this->enableSmilies,
+                       'lastChangeTime' => TIME_NOW);
         $newsData = array('data' => $data,
                           'categoryIDs' => $this->categoryIDs);
         $action = new NewsAction(array(), 'create', $newsData);

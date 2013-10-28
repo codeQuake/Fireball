@@ -43,7 +43,10 @@ class NewsEditForm extends NewsAddForm{
                        'message' => $this->text,
                        'enableBBCodes' => $this->enableBBCodes,
 			           'enableHtml' => $this->enableHtml,
-			           'enableSmilies' => $this->enableSmilies);
+			           'enableSmilies' => $this->enableSmilies,
+                       'lastChangeTime' => TIME_NOW,
+                       'lastEditor' => WCF::getUser()->username,
+                       'lastEditorID' => WCF::getUser()->userID);
         $newsData = array('data' => $data,
                           'categoryIDs' => $this->categoryIDs);
                           
