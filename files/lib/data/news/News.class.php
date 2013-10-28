@@ -162,4 +162,8 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
     public function canRead(){
         return WCF::getSession()->getPermission('user.cms.news.canViewCategory');
     }
+    
+    public function canAdd(){
+        return WCF::getSession()->getPermission('user.cms.news.canAddNews');
+    }
 }

@@ -10,6 +10,7 @@
         //<![CDATA[
         $(function () {
 			new WCF.Message.Share.Content();
+			{if LOG_IP_ADDRESS && $__wcf->session->getPermission('admin.user.canViewIpAddress')}new CMS.News.IPAddressHandler();{/if}
         });
 		//]]>
 	</script>
@@ -22,6 +23,7 @@
     {event name='boxes'}
     {@$__boxSidebar}
 {/capture}
+{if !$anchor|isset}{assign var=anchor value=$__wcf->getAnchor('top')}{/if}
 
 {include file='header' sidebarOrientation='right'}
 
@@ -63,17 +65,14 @@
                                 <div>
                                     {@$news->getFormattedMessage()}
                                 </div>
-                                <div class="messageFooter">
-                                    <p class="messageFooterNote">
-                                        <a href="{link controller='News' object=$news application='cms'}{/link}">
-                                            {lang}cms.news.comments.count{/lang}
-                                        </a>
-                                    </p>
-                                </div>
+                               
                                 <footer class="messageOptions">
                                     <nav class="buttonGroupNavigation jsMobileNavigation">
                                         <ul class="smallButtons buttonGroup">
-                                            {event name='messageOptions'}
+											{if $news->canAdd()}<li><a href="{link controller='NewsEdit' application='cms' object=$news}{/link}" class="button jsMessageEditButton" title="{lang}wcf.global.button.edit{/lang}"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}
+											{if LOG_IP_ADDRESS && $news->ipAddress && $__wcf->session->getPermission('admin.user.canViewIpAddress')}<li class="jsIpAddress jsOnly" data-news-id="{@$news->newsID}"><a title="{lang}cms.news.ipAddress{/lang}" class="button jsTooltip"><span class="icon icon16 icon-globe"></span> <span class="invisible">{lang}cms.news.ipAddress{/lang}</span></a></li>{/if}
+											event name='messageOptions'}
+											<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 icon-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>
                                             
                                         </ul>
                                     </nav>
