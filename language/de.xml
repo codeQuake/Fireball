@@ -130,6 +130,7 @@
     <item name="cms.news.general"><![CDATA[Allgemeine Informationen]]></item>
     <item name="cms.news.message"><![CDATA[Nachricht]]></item>
     <item name="cms.news.add"><![CDATA[Nachricht hinzufügen]]></item>
+    <item name="cms.news.edit"><![CDATA[Nachricht &raquo;{$news->getTitle()|language}&laquo; bearbeiten]]></item>
     <item name="cms.news.comments.count"><![CDATA[{#$news->comments} {if $news->comments == 1}Kommentar{else}Kommentare{/if}]]></item>
     <item name="cms.news.read"><![CDATA[Weiterlesen]]></item>
   </category>

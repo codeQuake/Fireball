@@ -41,6 +41,17 @@ class NewsAction extends AbstractDatabaseObjectAction{
         
     }
     
+    public function update(){
+        parent::update();
+        
+        $objectIDs = array();
+		foreach ($this->objects as $news) {
+			if (isset($this->parameters['categoryIDs'])) {
+				$news->updateCategoryIDs($this->parameters['categoryIDs']);
+			}
+		}
+    }
+    
     public function validateGetIpLog() {
 		if (!LOG_IP_ADDRESS) {
 			throw new PermissionDeniedException();

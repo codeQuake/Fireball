@@ -20,7 +20,7 @@
 
 {include file='userNotice'}
 
-    <form id="messageContainer" class="jsFormGuard" method="post" action="{if $action == 'add'}{link controller='NewsAdd' application='cms'}{/link}{else}{link controller='NewsEdit' application='cms' id='$newsID'}{/link}{/if}">
+    <form id="messageContainer" class="jsFormGuard" method="post" action="{if $action == 'add'}{link controller='NewsAdd' application='cms'}{/link}{else}{link controller='NewsEdit' application='cms' id=$newsID}{/link}{/if}">
         <div class="container containerPadding marginTop">
             <fieldset>
                 <legend>{lang}cms.news.category.categories{/lang}</legend>
@@ -60,7 +60,7 @@
 
             <fieldset>
                 <legend>{lang}cms.news.general{/lang}</legend>
-                {include file='messageFormMultilingualism'}
+                {if $action =='add'}{include file='messageFormMultilingualism'}{/if}
 
                 <dl{if $errorField == 'subject'} class="formError"{/if}>
 				    <dt><label for="subject">{lang}wcf.global.title{/lang}</label></dt>

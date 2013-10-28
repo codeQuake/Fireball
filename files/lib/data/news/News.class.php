@@ -1,6 +1,8 @@
 <?php
 namespace cms\data\news;
 use wcf\system\request\IRouteController;
+use cms\data\category\NewsCategory;
+use wcf\system\category\CategoryHandler;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
