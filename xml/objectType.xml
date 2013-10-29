@@ -89,5 +89,13 @@
         <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
         <classname>cms\system\user\activity\event\NewsCommentResponseUserActivityEvent</classname>
       </type>
+  
+      <!--Activity Points-->
+      <type>
+        <name>de.codequake.cms.activityPointEvent.news</name>
+        <definitionname>com.woltlab.wcf.user.activityPointEvent</definitionname>
+        <points>5</points>
+        <classname>cms\system\user\activity\point\NewsUserActivityPointObjectProcessor</classname>
+      </type>
   </import>
 </data>

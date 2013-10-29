@@ -7,6 +7,7 @@ use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\visitTracker\VisitTracker;
 use wcf\system\language\LanguageFactory;
 use wcf\system\user\activity\event\UserActivityEventHandler;
+use wcf\system\user\activity\point\UserActivityPointHandler;
 
 class NewsAction extends AbstractDatabaseObjectAction{
 
@@ -43,6 +44,8 @@ class NewsAction extends AbstractDatabaseObjectAction{
         
         //recent
         UserActivityEventHandler::getInstance()->fireEvent('de.codequake.cms.news.recentActivityEvent', $news->newsID, $news->languageID, $news->userID, $news->time);
+        UserActivityPointHandler::getInstance()->fireEvent('de.codequake.cms.activityPointEvent.news', $news->newsID, $news->userID);
+            
         return $news;
         
     }
@@ -56,6 +59,12 @@ class NewsAction extends AbstractDatabaseObjectAction{
 				$news->updateCategoryIDs($this->parameters['categoryIDs']);
 			}
 		}
+    }
+    
+    public function delete(){
+        UserActivityPointHandler::getInstance()->removeEvents('de.codequake.cms.activityPointEvent.news', $this->objectIDs);
+        parent::delete(); 
+        
     }
     
     
