@@ -95,7 +95,7 @@
                                 <div>
                                     {@$news->getFormattedMessage()}
                                 </div>
-                               
+                               <div class="messageFooter"></div>
                                 <footer class="messageOptions">
                                     <nav class="buttonGroupNavigation jsMobileNavigation">
                                         <ul class="smallButtons buttonGroup">
