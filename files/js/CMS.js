@@ -2,6 +2,54 @@ var CMS = {};
 
 CMS.News = {};
 
+CMS.News.Like = WCF.Like.extend({
+
+    _getContainers: function () {
+        return $('article.message');
+    },
+
+    _getObjectID: function (containerID) {
+        return this._containers[containerID].data('newsID');
+    },
+
+    _buildWidget: function (containerID, likeButton, dislikeButton, badge, summary) {
+        var $widgetContainer = this._getWidgetContainer(containerID);
+        if (this._canLike) {
+            var $smallButtons = this._containers[containerID].find('.smallButtons');
+            likeButton.insertBefore($smallButtons.find('.toTopLink'));
+            dislikeButton.insertBefore($smallButtons.find('.toTopLink'));
+            dislikeButton.find('a').addClass('button');
+            likeButton.find('a').addClass('button');
+        }
+
+        if (summary) {
+            summary.appendTo(this._containers[containerID].find('.messageBody > .messageFooter'));
+            summary.addClass('messageFooterNote');
+        }
+        $widgetContainer.find('.permalink').after(badge);
+    },
+
+
+    _getWidgetContainer: function (containerID) {
+        return this._containers[containerID].find('.messageHeader');
+    },
+
+    _addWidget: function (containerID, widget) { },
+
+    _setActiveState: function(likeButton, dislikeButton, likeStatus) {
+    likeButton = likeButton.find('.button').removeClass('active');
+    dislikeButton = dislikeButton.find('.button').removeClass('active');
+		
+    if (likeStatus == 1) {
+        likeButton.addClass('active');
+    }
+    else if (likeStatus == -1) {
+        dislikeButton.addClass('active');
+    }
+},
+	
+
+});
 CMS.News.IPAddressHandler = Class.extend({
     _cache: {},
     _dialog: null,

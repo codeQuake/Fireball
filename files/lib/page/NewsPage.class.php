@@ -10,6 +10,7 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\request\LinkHandler;
+use wcf\system\like\LikeHandler;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\MetaTagHandler;
 use wcf\util\StringUtil;
@@ -27,6 +28,7 @@ class NewsPage extends AbstractPage{
     public $commentManager = null;
     public $commentList = null;
     
+    public $likeData = array();
     
     public function readParameters(){
         parent::readParameters();
@@ -53,12 +55,19 @@ class NewsPage extends AbstractPage{
         $newsEditor = new NewsEditor($this->news->getDecoratedObject());
         $newsEditor->update(array('clicks' => $this->news->clicks+1));
         
-        //if ($this->news->isNew()) {
+        if ($this->news->isNew()) {
 			$newsAction = new NewsAction(array($this->news->getDecoratedObject()), 'markAsRead', array(
 				'viewableNews' => $this->news
 			));
 			$newsAction->executeAction();
-		//}
+		}
+        
+        // fetch likes
+		if (MODULE_LIKE) {
+			$objectType = LikeHandler::getInstance()->getObjectType('de.codequake.cms.likeableNews');
+			LikeHandler::getInstance()->loadLikeObjects($objectType, array($this->newsID));
+			$this->likeData = LikeHandler::getInstance()->getLikeObjects($objectType);
+		}
     }
     
     public function assignVariables(){
@@ -68,6 +77,8 @@ class NewsPage extends AbstractPage{
         
         WCF::getTPL()->assign(array('newsID' => $this->newsID,
                                     'news' => $this->news,
+                                    'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : array()),
+                                    'newsLikeData' => $this->likeData,
                                     'commentCanAdd' => (WCF::getUser()->userID && WCF::getSession()->getPermission('user.cms.news.canAddComment')),
                                     'commentList' => $this->commentList,
                                     'commentObjectTypeID' => $this->commentObjectTypeID,
