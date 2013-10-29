@@ -8,8 +8,8 @@ class CategoryNewsList extends ViewableNewsList{
 
     public function __construct(array $categoryIDs) {
         parent::__construct();
-        $this->sqlSelects .=  "news_to_category.*";
-        $this->sqlJoins = $this->sqlConditionJoins = ", cms".WCF_N."_news_to_category news_to_category".$this->sqlConditionJoins;
+        $this->sqlSelects .=  ", news_to_category.*";
+        $this->sqlJoins .= $this->sqlConditionJoins = ", cms".WCF_N."_news_to_category news_to_category".$this->sqlConditionJoins;
         $this->getConditionBuilder()->add('news_to_category.categoryID IN (?)', array($categoryIDs));        
         $this->getConditionBuilder()->add('news.newsID = news_to_category.newsID');
         if (!WCF::getSession()->getPermission('mod.cms.news.canModerateNews')) $this->getConditionBuilder()->add('news.isDisabled = 0');
