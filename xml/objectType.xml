@@ -97,5 +97,12 @@
         <points>5</points>
         <classname>cms\system\user\activity\point\NewsUserActivityPointObjectProcessor</classname>
       </type>
+  
+       <!--Like-->
+      <type>
+        <name>de.codequake.cms.likeableNews</name>
+        <definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
+        <classname>cms\data\news\LikeableNewsProvider</classname>
+      </type>
   </import>
 </data>

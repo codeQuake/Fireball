@@ -89,6 +89,7 @@ lastChangeTime INT(10) NOT NULL DEFAULT 0,
 lastEditor VARCHAR (255) NOT NULL DEFAULT '',
 lastEditorID INT(10) NOT NULL DEFAULT 0,
 ipAddress VARCHAR(39) NOT NULL DEFAULT '',
+cumulativeLikes INT(10) NOT NULL DEFAULT 0
 );
 
 
