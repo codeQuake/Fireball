@@ -62,7 +62,11 @@ class NewsAction extends AbstractDatabaseObjectAction{
     }
     
     public function delete(){
-        UserActivityPointHandler::getInstance()->removeEvents('de.codequake.cms.activityPointEvent.news', $this->objectIDs);
+        $newsIDs = array();
+        foreach ($this->objects as $news) {
+			$newsIDs[] = $news->newsID;
+        }
+        UserActivityPointHandler::getInstance()->removeEvents('de.codequake.cms.activityPointEvent.news', $newsIDs);
         parent::delete(); 
         
     }
