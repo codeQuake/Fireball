@@ -73,6 +73,8 @@
     <item name="cms.acp.content.section.data.headline"><![CDATA[Überschrift]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Bild]]></item>
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>
+    <item name="cms.acp.content.section.news.small"><![CDATA[Kompakte Auflistung]]></item>
     <item name="cms.acp.content.section.css"><![CDATA[CSS-Einstellungen]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.section.css.cssClasses"><![CDATA[CSS-Klassen]]></item>

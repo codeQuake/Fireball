@@ -22,6 +22,11 @@
       <definitionname>de.codequake.cms.section.type</definitionname>
       <classname>cms\data\content\section\type\ImageContentSectionType</classname>
     </type>
+    <type>
+      <name>de.codequake.cms.section.type.news</name>
+      <definitionname>de.codequake.cms.section.type</definitionname>
+      <classname>cms\data\content\section\type\NewsContentSectionType</classname>
+    </type>
 
     <!-- Category -->
     <type>
