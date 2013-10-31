@@ -2,9 +2,9 @@
 <ul class="plainList">
     {foreach from=$newsList item=news}
     <li>
-        <div class="box24">
+        <div class="box32">
             <a class="framed" href="{link controller='User' object=$news->getUserProfile()}{/link}">
-                {@$news->getUserProfile()->getAvatar()->getImageTag(24)}
+                {@$news->getUserProfile()->getAvatar()->getImageTag(32)}
              </a>
             <div>
                 <div class="containerHeadline">
