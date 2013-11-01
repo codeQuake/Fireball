@@ -5,9 +5,7 @@
     <h1>{lang}cms.acp.layout.{@$action}{/lang}</h1>
 </header>
 
-{if $errorField}
-<p class="error">{lang}wcf.global.form.error{/lang}</p>
-{/if}
+{include file='formError'}
 
 {if $success|isset}
 <p class="success">{lang}wcf.global.success.{@$action}{/lang}</p>
@@ -51,7 +49,7 @@
     </div>
     <div class="formSubmit">
 				<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-				{@SID_INPUT_TAG}
+				 {@SECURITY_TOKEN_INPUT_TAG}
 				<input type="hidden" name="action" value="{@$action}" />
 			</div>
 </form>

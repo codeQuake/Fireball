@@ -5,6 +5,8 @@
 	<h1>{lang}cms.acp.stylesheet.{$action}{/lang}</h1>
 </header>
 
+{include file='formError'}
+
 {if $success|isset}
 	<p class="success">{lang}wcf.global.success.{$action}{/lang}</p>
 {/if}
@@ -41,6 +43,7 @@
     {include file='codemirror' codemirrorMode='less' codemirrorSelector='#less'}
     <div class="formSubmit">
 		    <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+			 {@SECURITY_TOKEN_INPUT_TAG}
 	    </div>
 </form>
 

@@ -19,6 +19,7 @@
 </header>
 
 {include file='userNotice'}
+{include file='formError'}
 
     <form id="messageContainer" class="jsFormGuard" method="post" action="{if $action == 'add'}{link controller='NewsAdd' application='cms'}{/link}{else}{link controller='NewsEdit' application='cms' id=$newsID}{/link}{/if}">
         <div class="container containerPadding marginTop">
@@ -114,6 +115,7 @@
 
         <div class="formSubmit">
 		    <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+			{@SECURITY_TOKEN_INPUT_TAG}
 		    {include file='messageFormPreviewButton'}
 	    </div>
     </form>

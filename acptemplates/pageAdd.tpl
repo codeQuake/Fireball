@@ -44,9 +44,7 @@
     <h1>{lang}cms.acp.page.{@$action}{/lang}{if $action != 'add'}{if $page->isHome} <span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>{/if}{/if}</h1>
 </header>
 
-{if $errorField}
-<p class="error">{lang}wcf.global.form.error{/lang}</p>
-{/if}
+{include file='formError'}
 
 {if $success|isset}
 <p class="success">{lang}wcf.global.success.{@$action}{/lang}</p>
@@ -215,7 +213,7 @@
 		</div>
 			<div class="formSubmit">
 				<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-				{@SID_INPUT_TAG}
+				 {@SECURITY_TOKEN_INPUT_TAG}
 				<input type="hidden" name="action" value="{@$action}" />
 				{if $pageID|isset}<input type="hidden" name="id" value="{@$pageID}" />{/if}
 				{if $menuID|isset}<input type="hidden" name="menuID" value="{@$menuID}" />{/if}
