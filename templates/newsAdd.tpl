@@ -7,6 +7,7 @@
         $(function () {
             new WCF.Category.NestedList();
             new WCF.Message.FormGuard();
+			WCF.Message.Submit.registerButton('text', $('#messageContainer > .formSubmit > input[type=submit]'));
         });
         //]]>
 	</script>
@@ -19,6 +20,11 @@
 </header>
 
 {include file='userNotice'}
+
+{if $success|isset}
+<p class="success">{lang}wcf.global.success.{@$action}{/lang}</p>
+{/if}
+
 {include file='formError'}
 
     <form id="messageContainer" class="jsFormGuard" method="post" action="{if $action == 'add'}{link controller='NewsAdd' application='cms'}{/link}{else}{link controller='NewsEdit' application='cms' id=$newsID}{/link}{/if}">
