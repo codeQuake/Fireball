@@ -87,4 +87,13 @@ class NewsPage extends AbstractPage{
                                     'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.news.news'),
                                     'sidebarName' => 'de.codequake.cms.news.news'));
     }
+    
+    
+    public function getObjectType() {
+        return 'de.codequake.cms.news';
+    }
+    public function getObjectID() {
+        return $this->newsID;
+    }
+
 }

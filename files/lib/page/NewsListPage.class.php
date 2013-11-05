@@ -78,4 +78,14 @@ class NewsListPage extends SortablePage{
 			'categoryList' => $this->categoryList
 		));
 	}
+    
+    
+    public function getObjectType() {
+        return 'de.codequake.cms.category.news';
+    }
+
+    public function getObjectID() {
+        return $this->categoryID;
+    }
+
 }

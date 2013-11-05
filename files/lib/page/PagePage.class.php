@@ -15,6 +15,7 @@ class PagePage extends AbstractPage{
 
     public $contentList = array();
     public $page = null;
+    public $enableTracking = true;
     
     public function readParameters(){
         parent::readParameters();
@@ -73,5 +74,13 @@ class PagePage extends AbstractPage{
             $this->activeMenuItem = $startPage->title;
         }
         parent::show();
+    }
+   
+    public function getObjectType(){
+        return 'de.codequake.cms.page';
+    }
+    
+    public function getObjectID() {
+        return $this->page->pageID;
     }
 }

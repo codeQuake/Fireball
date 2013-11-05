@@ -27,6 +27,41 @@
       <definitionname>de.codequake.cms.section.type</definitionname>
       <classname>cms\data\content\section\type\NewsContentSectionType</classname>
     </type>
+    
+    <!--user online location-->
+    <type>
+      <name>de.codequake.cms.page</name>
+      <definitionname>com.woltlab.wcf.user.online.location</definitionname>
+      <controller>cms\page\PagePage</controller>
+      <classname>cms\system\user\online\location\PageLocation</classname>
+      <languagevariable>cms.user.usersOnline.location.page</languagevariable>
+    </type>
+    <type>
+      <name>de.codequake.cms.news</name>
+      <definitionname>com.woltlab.wcf.user.online.location</definitionname>
+      <controller>cms\page\NewsPage</controller>
+      <classname>cms\system\user\online\location\NewsLocation</classname>
+      <languagevariable>cms.user.usersOnline.location.newsPage</languagevariable>
+    </type>
+    <type>
+      <name>de.codequake.cms.newsAdd</name>
+      <definitionname>com.woltlab.wcf.user.online.location</definitionname>
+      <controller>cms\form\NewsAddForm</controller>
+      <languagevariable>cms.user.usersOnline.location.newsAddForm</languagevariable>
+    </type>
+    <type>
+      <name>de.codequake.cms.newsCategoryList</name>
+      <definitionname>com.woltlab.wcf.user.online.location</definitionname>
+      <controller>cms\page\NewsCategoryListPage</controller>
+      <languagevariable>cms.user.usersOnline.location.newsCategoryListPage</languagevariable>
+    </type>
+    <type>
+      <name>de.codequake.cms.newsList</name>
+      <definitionname>com.woltlab.wcf.user.online.location</definitionname>
+      <controller>cms\page\NewsListPage</controller>
+      <classname>cms\system\user\online\location\NewsCategoryLocation</classname>
+      <languagevariable>cms.user.usersOnline.location.newsListPage</languagevariable>
+    </type>
 
     <!-- Category -->
     <type>

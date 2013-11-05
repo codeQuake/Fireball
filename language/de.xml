@@ -142,6 +142,14 @@
   <category name="cms.content">
     <item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
   </category>
+
+  <category name="cms.user">
+    <item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{link controller='Page' application='cms' object=$page}{/link}">{@$page->getTitle()|language}</a>]]></item>
+    <item name="cms.user.usersOnline.location.newsPage"><![CDATA[<a href="{link controller='News' application='cms' object=$news}{/link}">Nachricht: {$news->getTitle()|language}</a>]]></item>
+    <item name="cms.user.usersOnline.location.newsAddForm"><![CDATA[Neue Nachricht verfassen]]></item>
+    <item name="cms.user.usersOnline.location.newsCategoryListPage"><![CDATA[Nachrichten]]></item>
+    <item name="cms.user.usersOnline.location.newsListPage"><![CDATA[Nachrichtenrubrik: <a href="{link controller='NewsList' application='cms' object=$category}{/link}">„{$category->title|language}“</a>]]></item>
+  </category>
   
   <category name="wcf.acp.group">
     <item name="wcf.acp.group.option.category.admin.cms"><![CDATA[CMS]]></item>
