@@ -5,10 +5,7 @@ use wcf\system\WCF;
 $package = $this->installation->getPackage();
 
 //default values
-DashboardHandler::setDefaultValues('de.codequake.cms.NewsCategoryListPage', array(
-    'de.codequake.cms.latestNews' => 1
-));
-DashboardHandler::setDefaultValues('de.codequake.linklist.NewsList', array(
+DashboardHandler::setDefaultValues('de.codequake.cms.news.newsList', array(
     'de.codequake.cms.latestNews' => 1
 ));
 

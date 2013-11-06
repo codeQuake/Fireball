@@ -1,7 +1,7 @@
 {hascontent}
 	<ul class="sidebarBoxList">
 		{content}
-			{foreach from=$latestNws item=news}
+			{foreach from=$latestNews item=news}
 				<li class="box24">
 					<a href="{link application='cms' controller='News' object=$news->getDecoratedObject()}{/link}" class="framed">{@$news->getUserProfile()->getAvatar()->getImageTag(24)}</a>
 					

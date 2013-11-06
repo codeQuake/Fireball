@@ -191,6 +191,7 @@
     <item name="wcf.dashboard.objectType.de.codequake.cms.page"><![CDATA[CMS: Seiten]]></item>
     <item name="wcf.dashboard.objectType.de.codequake.cms.news.newsList"><![CDATA[CMS: Newsauflistung]]></item>
     <item name="wcf.dashboard.objectType.de.codequake.cms.news.news"><![CDATA[CMS: News]]></item>
+    <item name="wcf.dashboard.box.de.codequake.cms.latestNews"><![CDATA[Neuste Nachrichten]]></item>
   </category>
 
   <category name="wcf.acp.index">

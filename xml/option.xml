@@ -14,7 +14,7 @@
         <categoryname>cms.news</categoryname>
         <defaultvalue>10</defaultvalue>
       </option>
-      <option name="cms_news_lastest_limit">
+      <option name="cms_news_latest_limit">
         <optiontype>integer</optiontype>
         <categoryname>cms.news</categoryname>
         <defaultvalue>10</defaultvalue>

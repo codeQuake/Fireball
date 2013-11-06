@@ -12,7 +12,7 @@ class LatestNewsDashboardBox extends AbstractSidebarDashboardBox {
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
 		
-		$this->latestNews = new LatestNewwsList();
+		$this->latestNews = new LatestNewsList();
 		$this->latestNews->readObjects();
 	}
 
