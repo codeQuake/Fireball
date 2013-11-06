@@ -15,6 +15,9 @@
                                         <h1>
                                             <a href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a>
                                         </h1>
+										{if $news->isNew()}
+										<p class="newMessageBadge">{lang}wcf.message.new{/lang}</p>
+										{/if}
                                         <p>
                                             <span class="username">
                                                 <a class="userLink" data-user-id="{$news->userID}" href="{link controller='User' object=$news->getUserProfile()}{/link}">

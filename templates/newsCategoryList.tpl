@@ -18,12 +18,13 @@
 					{foreach from=$categoryList item=categoryItem}
 						<li>
 							<a href="{link application='cms' controller='NewsList' object=$categoryItem->getDecoratedObject()}{/link}">{$categoryItem->getTitle()}</a>
-
+							{if $categoryItem->getUnreadNews() != 0}<span class="badge">{#$categoryItem->getUnreadNews()}</span>{/if}
 							{if $categoryItem->hasChildren()}
 								<ol>
 									{foreach from=$categoryItem item=subCategoryItem}
-										<li class="active">
+										<li>
 											<a href="{link application='cms' controller='NewsList' object=$subCategoryItem->getDecoratedObject()}{/link}">{$subCategoryItem->getTitle()}</a>
+											{if $categoryItem->getUnreadNews() != 0}<span class="badge">{#$categoryItem->getUnreadNews()}</span>{/if}
 											
 										</li>
 									{/foreach}

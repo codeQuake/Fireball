@@ -17,13 +17,14 @@
 					{foreach from=$categoryList item=categoryItem}
 						<li{if $category && $category->categoryID == $categoryItem->categoryID} class="active"{/if}>
 							<a href="{link application='cms' controller='NewsList' object=$categoryItem->getDecoratedObject()}{/link}">{$categoryItem->getTitle()}</a>
+							{if $categoryItem->getUnreadNews() != 0}<span class="badge">{#$categoryItem->getUnreadNews()}</span>{/if}
 
 							{if $category && ($category->categoryID == $categoryItem->categoryID || $category->parentCategoryID == $categoryItem->categoryID) && $categoryItem->hasChildren()}
 								<ol>
 									{foreach from=$categoryItem item=subCategoryItem}
 										<li{if $category && $category->categoryID == $subCategoryItem->categoryID} class="active"{/if}>
 											<a href="{link application='cms' controller='NewsList' object=$subCategoryItem->getDecoratedObject()}{/link}">{$subCategoryItem->getTitle()}</a>
-											
+											{if $categoryItem->getUnreadNews() != 0}<span class="badge">{#$categoryItem->getUnreadNews()}</span>{/if}
 										</li>
 									{/foreach}
 								</ol>
