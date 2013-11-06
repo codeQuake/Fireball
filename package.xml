@@ -6,7 +6,7 @@
     <packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
     <isapplication>1</isapplication>
     <version>1.0.0 Alpha 1</version>
-    <date>2013-11-05</date>
+    <date>2013-11-06</date>
   </packageinformation>
   <authorinformation>
     <author><![CDATA[Jens Krumsieck]]></author>
@@ -30,16 +30,19 @@
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="option">xml/option.xml</instruction>
+    <instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
     <instruction type="pageMenu">xml/pagemenu.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     <instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
     <instruction type="objectType">xml/objectType.xml</instruction>
     <instruction type="templateListener">xml/templateListener.xml</instruction>
     <instruction type="aclOption">xml/aclOption.xml</instruction>
+    <instruction type="script">acp/install_de.codequake.cms.php</instruction>
     
     <!--others-->
     <instruction type="sql">install.sql</instruction>
   </instructions>
+  
   <instructions type="update" fromversion="1.0.0 Alpha *">
     <!--lang-->
     <instruction type="language">language/*.xml</instruction>
@@ -51,6 +54,7 @@
 
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
+    <instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
     <instruction type="option">xml/option.xml</instruction>
     <instruction type="pageMenu">xml/pagemenu.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>

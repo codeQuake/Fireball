@@ -14,6 +14,16 @@
         <categoryname>cms.news</categoryname>
         <defaultvalue>10</defaultvalue>
       </option>
+      <option name="cms_news_lastest_limit">
+        <optiontype>integer</optiontype>
+        <categoryname>cms.news</categoryname>
+        <defaultvalue>10</defaultvalue>
+      </option>
+      
+      <option name="cms_install_date">
+        <optiontype>hidden</optiontype>
+        <categoryname>cms</categoryname>
+      </option>
     </options>
   </import>
 </data>
