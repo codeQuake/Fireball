@@ -13,7 +13,8 @@ showOrder INT(10) DEFAULT 0,
 isHome INT(1) DEFAULT 0,
 showSidebar INT(1) DEFAULT 0,
 layoutID INT(10),
-menuItem MEDIUMTEXT
+menuItem MEDIUMTEXT,
+isCommentable TINYINT(1) NOT NULL DEFAULT 0
 );
 
 --content
@@ -37,8 +38,7 @@ sectionData MEDIUMTEXT,
 showOrder INT(10) DEFAULT 0,
 cssID VARCHAR (255),
 cssClasses VARCHAR(255),
-additionalData MEDIUMTEXT DEFAULT NULL,
-isCommentable TINYINT(1) NOT NULL DEFAULT 0
+additionalData MEDIUMTEXT DEFAULT NULL
 );
 
 --stylesheet
