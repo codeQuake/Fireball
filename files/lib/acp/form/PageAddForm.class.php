@@ -35,6 +35,7 @@ class PageAddForm extends AbstractForm{
     public $pageList = null;
     public $layoutList = null;
     public $layoutID = 0;
+    public $isCommentable = 0;
 
    public function readParameters(){
         parent::readParameters();
@@ -70,6 +71,7 @@ class PageAddForm extends AbstractForm{
         if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
         if(isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
         if(isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
+        if(isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
     }
     
     public function validate(){
@@ -98,7 +100,8 @@ class PageAddForm extends AbstractForm{
                        'layoutID' => $this->layoutID,
                        'parentID' => $this->parentID,
                        'showSidebar' =>$this->showSidebar,
-                       'robots' => $this->robots);
+                       'robots' => $this->robots,
+                       'isCommentable' => $this->isCommentable);
                        
         $objectAction = new PageAction(array(), 'create', array('data' => $data));
         $objectAction->executeAction();
@@ -155,7 +158,8 @@ class PageAddForm extends AbstractForm{
                                     'layoutID' => $this->layoutID,
                                     'showSidebar' => $this->showSidebar,
                                     'pageList' => $this->pageList,
-                                    'layoutList' => $this->layoutList));
+                                    'layoutList' => $this->layoutList,
+                                    'isCommentable' => $this->isCommentable));
     }
     
     

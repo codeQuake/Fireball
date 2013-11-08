@@ -17,6 +17,10 @@ class PagePage extends AbstractPage{
     public $page = null;
     public $enableTracking = true;
     
+    public $commentObjectTypeID = 0;
+    public $commentManager = null;
+    public $commentList = null;
+    
     public function readParameters(){
         parent::readParameters();
         $pageID = 0;
@@ -47,12 +51,23 @@ class PagePage extends AbstractPage{
                                                             LinkHandler::getInstance()->getLink('Page', array('application' => 'cms',
                                                                                                                 'object' => $page))));
         }
+        
+        if($this->page->isCommentable){
+            $this->commentObjectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.codequake.cms.page.comment');
+            $this->commentManager = CommentHandler::getInstance()->getObjectType($this->commentObjectTypeID)->getProcessor();
+            $this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->commentObjectTypeID, $this->pageID);
+        }
     }
     
     public function assignVariables(){
         parent::assignVariables();
         WCF::getTPL()->assign(array('contentList' => $this->contentList,
-                                    'page' => $this->page));
+                                    'page' => $this->page,
+                                    'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : array()),
+                                    'commentCanAdd' => (WCF::getUser()->userID && WCF::getSession()->getPermission('user.cms.page.canAddComment')),
+                                    'commentList' => $this->commentList,
+                                    'commentObjectTypeID' => $this->commentObjectTypeID,
+                                    'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0)));
                                     
         if($this->page->showSidebar == 1) {
             DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.page', $this);

@@ -35,6 +35,7 @@ class PageEditForm extends AbstractForm{
     public $page = null;
     public $pageList = null;
     public $layoutList = null;
+    public $isCommentable = 0;
 
    public function readParameters(){
         parent::readParameters();
@@ -91,7 +92,8 @@ class PageEditForm extends AbstractForm{
         if(isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
         if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
         if(isset($_REQUEST['menuID'])) $this->menuItem['id'] = intval($_REQUEST['menuID']);
-        if(isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
+        if(isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);        
+        if(isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
     }
     
     public function validate(){
@@ -120,7 +122,8 @@ class PageEditForm extends AbstractForm{
                                                                                            'parentID' => $this->parentID,
                                                                                            'layoutID' => $this->layoutID,
                                                                                             'showSidebar' =>$this->showSidebar,
-                                                                                           'robots' => $this->robots)));
+                                                                                           'robots' => $this->robots,
+                                                                                            'isCommentable' => $this->isCommentable)));
         $objectAction->executeAction();
         
         $update = array();
@@ -176,7 +179,8 @@ class PageEditForm extends AbstractForm{
                                     'showSidebar' =>$this->showSidebar,
                                     'menuID' => isset($this->menuItem['id']) ? $this->menuItem['id'] : 0,
                                     'page' => $this->page,
-                                    'layoutList' => $this->layoutList));
+                                    'layoutList' => $this->layoutList,
+                                    'isCommentable' => $this->isCommentable));
     }
     
     

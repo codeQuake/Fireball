@@ -25,6 +25,9 @@
       <category name="mod.cms">
         <parent>mod</parent>
       </category>
+      <category name="mod.cms.page">
+        <parent>mod.cms</parent>
+      </category>
       <category name="mod.cms.news">
         <parent>mod.cms</parent>
       </category>
@@ -80,7 +83,8 @@
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
-      </option>      <option name="admin.cms.style.canAddStylesheet">
+      </option>      
+      <option name="admin.cms.style.canAddStylesheet">
         <categoryname>admin.cms.style</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
@@ -152,6 +156,21 @@ pdf]]></admindefaultvalue>
         <defaultvalue>1</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
       </option>
+      <option name="user.cms.page.canAddComment">
+        <categoryname>user.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+      </option>
+      <option name="user.cms.page.canDeleteComment">
+        <categoryname>user.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+      </option>
+      <option name="user.cms.page.canEditComment">
+        <categoryname>user.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+      </option>
 
       <option name="user.cms.news.canViewCategory">
         <categoryname>user.cms.news</categoryname>
@@ -184,6 +203,30 @@ pdf]]></admindefaultvalue>
         <defaultvalue>1</defaultvalue>
       </option>
       <!--mod-->
+      <option name="mod.cms.page.canModeratepage">
+        <categoryname>mod.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="mod.cms.page.canModerateComment">
+        <categoryname>mod.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="mod.cms.page.canEditComment">
+        <categoryname>mod.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="mod.cms.page.canDeleteComment">
+        <categoryname>mod.cms.page</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>0</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
       <option name="mod.cms.news.canModerateNews">
         <categoryname>mod.cms.news</categoryname>
         <optiontype>boolean</optiontype>

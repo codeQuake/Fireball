@@ -107,6 +107,11 @@
       <classname>cms\system\comment\manager\NewsCommentManager</classname>
     </type>
     
+    <type>
+      <name>de.codequake.cms.page.comment</name>
+      <definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
+      <classname>cms\system\comment\manager\PageCommentManager</classname>
+    </type>
     <!--Visit Tracker-->
     <type>
       <name>de.codequake.cms.news</name>

@@ -14,7 +14,8 @@ isHome INT(1) DEFAULT 0,
 showSidebar INT(1) DEFAULT 0,
 layoutID INT(10),
 menuItem MEDIUMTEXT,
-isCommentable TINYINT(1) NOT NULL DEFAULT 0
+isCommentable TINYINT(1) NOT NULL DEFAULT 0,
+comments INT(10) NOT NULL DEFAULT 0
 );
 
 --content

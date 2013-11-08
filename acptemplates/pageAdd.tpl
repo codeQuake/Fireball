@@ -173,6 +173,12 @@
 							<input type="checkbox" name="showSidebar" id="showSidebar" value="1" {if $showSidebar == 1}checked="checked"{/if} />
 						</dd>
 					</dl>
+					<dl  {if $errorField == 'isCommentable'}class="formError"{/if}>
+						<dt><label for="isCommentable">{lang}cms.acp.page.optional.isCommentable{/lang}</label></dt>
+						<dd>
+							<input type="checkbox" name="isCommentable" id="isCommentable" value="1" {if $isCommentable == 1}checked="checked"{/if} />
+						</dd>
+					</dl>
 					{if $layoutList != null}
 					<dl {if $errorField == 'layoutID'}class="formError"{/if}>
 						<dt><label for="layoutID">{lang}cms.acp.page.optional.layoutID{/lang}</label></dt>
