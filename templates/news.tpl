@@ -51,7 +51,15 @@
 			</ul>
 		</fieldset>
 	{/if}
-
+	{if $tags|count}
+		<fieldset>
+			<legend>{lang}wcf.tagging.tags{/lang}</legend>
+			 <ul class="tagList">
+ 			{foreach from=$tags item=tag}
+ 				<li><a href="{link controller='Tagged' object=$tag}objectType=de.codequake.cms.news{/link}" class="badge tag jsTooltip" title="{lang}wcf.tagging.taggedObjects.de.codequake.cms.news{/lang}">{$tag->name}</a></li>
+			{/foreach}
+		</fieldset>
+	{/if}
     {event name='boxes'}
     {@$__boxSidebar}
 {/capture}

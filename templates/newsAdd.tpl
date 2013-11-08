@@ -86,7 +86,7 @@
 					    {/if}
 				    </dd>
 			    </dl>
-                
+                {if MODULE_TAGGING}{include file='tagInput'}{/if}
 			{event name='informationFields'}
             </fieldset>
             <fieldset>

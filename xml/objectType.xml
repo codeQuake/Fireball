@@ -144,5 +144,13 @@
         <definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
         <classname>cms\data\news\LikeableNewsProvider</classname>
       </type>
+    
+      <!--Tagging-->
+      <type>
+        <name>de.codequake.cms.news</name>
+        <definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
+        <classname>cms\system\tagging\TaggableNews</classname>
+    </type>
+
   </import>
 </data>

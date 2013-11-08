@@ -207,4 +207,8 @@
     <item name="wcf.user.profile.recentActivity.newsCommentResponse"><![CDATA[hat auf den Kommentar von <a class="userLink" data-user-id="{$author->userID}"href="{link controller=User object=$author}{/link}">{$author->username}</a> zur Nachricht &raquo;<a class="cmsNewsLink" data-news-id="{$news->newsID}" href="{link controller=News application='cms' object=$news}#comments{/link}">{$news->getTitle()}</a>&laquo; geantwortet.]]></item>
   </category>
 
+  <category name="wcf.tagging">
+    <item name="wcf.tagging.taggedObjects.de.codequake.cms.news"><![CDATA[Nachrichten mit dem Tag „{$tag->name}“]]></item>
+    <item name="wcf.tagging.objectType.de.codequake.cms.news"><![CDATA[Nachrichten]]></item>
+  </category>
 </language>

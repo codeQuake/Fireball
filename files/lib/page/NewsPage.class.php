@@ -29,6 +29,7 @@ class NewsPage extends AbstractPage{
     public $commentList = null;
     
     public $likeData = array();
+    public $tags = array();
     
     public function readParameters(){
         parent::readParameters();
@@ -54,6 +55,11 @@ class NewsPage extends AbstractPage{
         
         $newsEditor = new NewsEditor($this->news->getDecoratedObject());
         $newsEditor->update(array('clicks' => $this->news->clicks+1));
+        
+        //get Tags
+        if (MODULE_TAGGING ) {
+            $this->tags = $this->news->getTags();
+        }
         
         if ($this->news->isNew()) {
 			$newsAction = new NewsAction(array($this->news->getDecoratedObject()), 'markAsRead', array(
@@ -82,6 +88,7 @@ class NewsPage extends AbstractPage{
                                     'commentCanAdd' => (WCF::getUser()->userID && WCF::getSession()->getPermission('user.cms.news.canAddComment')),
                                     'commentList' => $this->commentList,
                                     'commentObjectTypeID' => $this->commentObjectTypeID,
+                                    'tags' => $this->tags,
                                     'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),
                                     'allowSpidersToIndexThisPage' => true,
                                     'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.news.news'),

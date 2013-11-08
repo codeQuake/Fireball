@@ -4,6 +4,7 @@ use cms\data\news\News;
 use cms\data\news\NewsAction;
 use wcf\form\MessageForm;
 use wcf\system\breadcrumb\Breadcrumb;
+use wcf\util\ArrayUtil;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
@@ -13,7 +14,7 @@ class NewsEditForm extends NewsAddForm{
     public $news = null;
     public $templateName = 'newsAdd';
     public $action = 'edit';
-    
+    public $tags = array();
     
     public function readParameters(){
         parent::readParameters();
@@ -35,6 +36,15 @@ class NewsEditForm extends NewsAddForm{
         foreach ($this->news->getCategories() as $category) {
 				$this->categoryIDs[] = $category->categoryID;
 			}
+            
+       // tagging
+       if (MODULE_TAGGING) {
+            $tags = $this->news->getTags();
+                foreach ($tags as $tag) {
+                    $this->tags[] = $tag->name;
+                }
+      }
+
     }
     
     public function save(){
@@ -48,7 +58,8 @@ class NewsEditForm extends NewsAddForm{
                        'lastEditor' => WCF::getUser()->username,
                        'lastEditorID' => WCF::getUser()->userID);
         $newsData = array('data' => $data,
-                          'categoryIDs' => $this->categoryIDs);
+                          'categoryIDs' => $this->categoryIDs,
+                          'tags' => $this->tags);
                           
         $action = new NewsAction(array($this->newsID), 'update', $newsData);
         $resultValues = $action->executeAction();

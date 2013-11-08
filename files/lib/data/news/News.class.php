@@ -12,6 +12,8 @@ use wcf\data\attachment\GroupedAttachmentList;
 use wcf\data\IMessage;
 use wcf\system\bbcode\AttachmentBBCode;
 use cms\data\CMSDatabaseObject;
+use wcf\system\tagging\TagEngine;
+use wcf\system\language\LanguageFactory;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\system\WCF;
@@ -46,6 +48,16 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
     
     public function getMessage() {
         return $this->message;
+    }
+    
+    public function getTags(){
+        $tags = TagEngine::getInstance()->getObjectTags(
+            'de.codequake.cms.news',
+            $this->newsID,
+            array(($this->languageID === null ? LanguageFactory::getInstance()->getDefaultLanguageID() : ""))
+            );
+            return $tags;
+
     }
     
     public function getFormattedMessage() {

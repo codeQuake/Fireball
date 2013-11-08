@@ -8,6 +8,7 @@ use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\request\LinkHandler;
+use wcf\system\exception\UserInputException;
 use wcf\system\category\CategoryHandler;
 use wcf\util\ArrayUtil;
 
@@ -21,6 +22,15 @@ class NewsAddForm extends MessageForm{
     public $enableTracking = true;
     public $neededPermissions = array('user.cms.news.canAddNews');
     public $enableMultilingualism = true;
+    
+    
+    public $tags = array();
+    
+    public function readFormParameters(){
+        parent::readFormParameters();
+        if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tags = ArrayUtil::trim($_POST['tags']);
+    }
+    
     
     public function readParameters(){
         parent::readParameters();
@@ -81,7 +91,10 @@ class NewsAddForm extends MessageForm{
 			           'enableSmilies' => $this->enableSmilies,
                        'lastChangeTime' => TIME_NOW);
         $newsData = array('data' => $data,
+                          'tags' => array(),
                           'categoryIDs' => $this->categoryIDs);
+        $newsData['tags'] = $this->tags;
+        
         $action = new NewsAction(array(), 'create', $newsData);
         $resultValues = $action->executeAction();
         $this->saved();
@@ -97,6 +110,7 @@ class NewsAddForm extends MessageForm{
         parent::assignVariables();
         WCF::getTPL()->assign(array('categoryList' => $this->categoryList,
                                     'categoryIDs' => $this->categoryIDs,
-                                    'action' => $this->action));
+                                    'action' => $this->action,
+                                    'tags'      => $this->tags,));
     }
 }

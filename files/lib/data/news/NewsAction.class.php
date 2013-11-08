@@ -6,6 +6,7 @@ use wcf\util\UserUtil;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\visitTracker\VisitTracker;
 use wcf\system\language\LanguageFactory;
+use wcf\system\tagging\TagEngine;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\activity\point\UserActivityPointHandler;
 
@@ -31,9 +32,14 @@ class NewsAction extends AbstractDatabaseObjectAction{
             }
         }
         
+        
         $news = call_user_func(array($this->className,'create'), $data);
         $newsEditor = new NewsEditor($news);
 		
+        //tags
+        if (!empty($this->parameters['tags'])) {
+            TagEngine::getInstance()->addObjectTags('de.codequake.cms.news', $news->newsID, $this->parameters['tags'], $news->languageID);
+        }
 		// handle categories
 		$newsEditor->updateCategoryIDs($this->parameters['categoryIDs']);
 		$newsEditor->setCategoryIDs($this->parameters['categoryIDs']);
@@ -58,6 +64,18 @@ class NewsAction extends AbstractDatabaseObjectAction{
 			if (isset($this->parameters['categoryIDs'])) {
 				$news->updateCategoryIDs($this->parameters['categoryIDs']);
 			}
+            
+            // update tags
+            $tags = array();
+            if (isset($this->parameters['tags'])) {
+                $tags = $this->parameters['tags'];
+                unset($this->parameters['tags']);
+            }
+            if (!empty($tags)) {
+
+                $languageID = (!isset($this->parameters['data']['languageID']) || ($this->parameters['data']['languageID'] === null)) ? LanguageFactory::getInstance()->getDefaultLanguageID() : $this->parameters['data']['languageID'];
+                TagEngine::getInstance()->addObjectTags('de.codequake.cms.news', $news->newsID, $tags, $languageID);
+            }
 		}
     }
     
