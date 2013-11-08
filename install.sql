@@ -37,7 +37,8 @@ sectionData MEDIUMTEXT,
 showOrder INT(10) DEFAULT 0,
 cssID VARCHAR (255),
 cssClasses VARCHAR(255),
-additionalData MEDIUMTEXT DEFAULT NULL
+additionalData MEDIUMTEXT DEFAULT NULL,
+isCommentable TINYINT(1) NOT NULL DEFAULT 0
 );
 
 --stylesheet
