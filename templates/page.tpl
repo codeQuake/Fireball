@@ -3,7 +3,9 @@
 <head>
     <title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->title}{$page->getTitle()|language} - {/if}{PAGE_TITLE}</title>
     
-    {include file='headInclude' application='cms' sandbox=false}
+    {include file='headInclude' application='wcf' sandbox=false}
+    <script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Moderation{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+	
     <link rel="canonical" href="{link application='cms' controller='Page' object=$page}{/link}" />
 </head>
 

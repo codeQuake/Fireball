@@ -66,6 +66,7 @@ class PageEditForm extends AbstractForm{
         $this->robots = $this->page->robots;
         $this->layoutID = $this->page->layoutID;
         $this->showSidebar = $this->page->showSidebar;
+        $this->isCommentable = $this->page->isCommentable;
         $this->menuItem = @unserialize($this->page->menuItem);
         if(!isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
         

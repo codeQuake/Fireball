@@ -48,6 +48,7 @@
     <item name="cms.acp.page.optional.menuItem"><![CDATA[Menüitem erstellen?]]></item>
     <item name="cms.acp.page.optional.showSidebar"><![CDATA[Sidebar anzeigen?]]></item>
     <item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
+    <item name="cms.acp.page.optional.isCommentable"><![CDATA[Kommentare erlauben]]></item>
     <item name="cms.acp.page.optional.layoutID"><![CDATA[Layout auswählen]]></item>
     <item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
     <item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
@@ -124,6 +125,7 @@
     <item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" title="">Software: <strong>Fireball CMS {@PACKAGE_VERSION}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
     <item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
     <item name="cms.page.news"><![CDATA[News]]></item>
+    <item name="cms.page.comments"><![CDATA[Kommentare]]></item>
   </category>
 
   <category name="cms.news">
@@ -188,6 +190,11 @@
     <item name="wcf.acl.option.de.codequake.cms.category.news.canViewNews"><![CDATA[Kann News sehen]]></item>
     <item name="wcf.acl.option.de.codequake.cms.category.news.canAddNews"><![CDATA[Kann News hinzufügen]]></item>
     <item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[News Moderationsrecht]]></item>
+  </category>
+
+  <category name="wcf.acp.option">
+    <item name="wcf.acp.option.cms"><![CDATA[CMS]]></item>
+    <item name="wcf.acp.option.category.cms.news"><![CDATA[Nachrichten]]></item>
   </category>
 
   <category name="wcf.dashboard">

@@ -3,6 +3,8 @@ namespace cms\page;
 use cms\data\page\Page;
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
+use wcf\system\comment\CommentHandler;
+use wcf\system\MetaTagHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\request\LinkHandler;
 use wcf\system\menu\page\PageMenu;
@@ -43,20 +45,33 @@ class PagePage extends AbstractPage{
         if (PageMenu::getInstance()->getLandingPage()->menuItem == $this->page->title) {
 			WCF::getBreadcrumbs()->remove(0);
 		}
+               
         
-        $this->contentList = $this->page->getContentList();
-        
+        //breadcrumbs
         foreach($this->page->getParentPages() as $page){
             WCF::getBreadcrumbs()->add(new Breadcrumb($page->getTitle(), 
                                                             LinkHandler::getInstance()->getLink('Page', array('application' => 'cms',
                                                                                                                 'object' => $page))));
         }
         
+        //get Contents
+        $this->contentList = $this->page->getContentList();
+        
+        //comments
         if($this->page->isCommentable){
             $this->commentObjectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.codequake.cms.page.comment');
             $this->commentManager = CommentHandler::getInstance()->getObjectType($this->commentObjectTypeID)->getProcessor();
-            $this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->commentObjectTypeID, $this->pageID);
+            $this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->commentObjectTypeID, $this->page->pageID);
         }
+        
+        //meta tags
+        if($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', $this->page->metaKeywords);
+        if($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('description', 'description', $this->page->metaDescription);
+        if($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('og:description', 'og:description', $this->page->metaDescription, true);
+        MetaTagHandler::getInstance()->addTag('robots', 'robots', $this->page->robots);
+        MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->page->getTitle() . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
+        MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('Page', array('application' => 'cms', 'object' => $this->page)), true);
+        MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'article', true);
     }
     
     public function assignVariables(){
@@ -67,7 +82,8 @@ class PagePage extends AbstractPage{
                                     'commentCanAdd' => (WCF::getUser()->userID && WCF::getSession()->getPermission('user.cms.page.canAddComment')),
                                     'commentList' => $this->commentList,
                                     'commentObjectTypeID' => $this->commentObjectTypeID,
-                                    'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0)));
+                                    'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),
+                                    'allowSpidersToIndexThisPage' => true));
                                     
         if($this->page->showSidebar == 1) {
             DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.page', $this);
