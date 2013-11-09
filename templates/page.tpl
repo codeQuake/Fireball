@@ -34,7 +34,9 @@
         </div>
     {/foreach}
 
-
+	{if $page->isCommentable}
+    {include file='pageCommentList' application='cms'}
+	{/if}
 {include file='footer' sandbox=false}
 </body>
 </html>
