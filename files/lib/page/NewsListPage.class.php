@@ -17,6 +17,7 @@ class NewsListPage extends SortablePage{
 
     public $activeMenuItem = 'cms.page.news';
     public $enableTracking = true;
+    public $neededModules = array('MODULE_NEWS');
     public $itemsPerPage = CMS_NEWS_PER_PAGE;
     public $sqlOrderBy = 'time';
     public $sortOder = 'DESC';

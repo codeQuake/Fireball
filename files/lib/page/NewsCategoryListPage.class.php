@@ -13,7 +13,8 @@ use wcf\page\SortablePage;
 class NewsCategoryListPage extends SortablePage{
 
     public $activeMenuItem = 'cms.page.news';
-    public $enableTracking = true;
+    public $enableTracking = true;    
+    public $neededModules = array('MODULE_NEWS');
     public $objectListClassName = 'cms\data\news\ViewableNewsList';    
     public $itemsPerPage = CMS_NEWS_PER_PAGE;
     public $limit = 10;

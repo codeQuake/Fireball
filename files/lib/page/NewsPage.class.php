@@ -21,6 +21,7 @@ class NewsPage extends AbstractPage{
     public $activeMenuItem = 'cms.page.news';
     public $enableTracking = true;
     
+    public $neededModules = array('MODULE_NEWS');
     public $newsID = 0;
     public $news = null;
     
