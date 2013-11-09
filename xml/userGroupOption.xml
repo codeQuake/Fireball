@@ -203,7 +203,7 @@ pdf]]></admindefaultvalue>
         <defaultvalue>1</defaultvalue>
       </option>
       <!--mod-->
-      <option name="mod.cms.page.canModeratepage">
+      <option name="mod.cms.page.canModeratePage">
         <categoryname>mod.cms.page</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
