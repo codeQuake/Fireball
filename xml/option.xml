@@ -28,6 +28,7 @@
       <option name="module_news">
         <optiontype>boolean</optiontype>
         <categoryname>module.community</categoryname>
+        <defaultvalue>1</defaultvalue>
       </option>
     </options>
   </import>
