@@ -5,6 +5,7 @@
       <category name="cms"></category>
       <category name="cms.news">
         <parent>cms</parent>
+        <options>module_news</options>
       </category>
     </categories>
 
@@ -13,11 +14,13 @@
         <optiontype>integer</optiontype>
         <categoryname>cms.news</categoryname>
         <defaultvalue>10</defaultvalue>
+        <options>module_news</options>
       </option>
       <option name="cms_news_latest_limit">
         <optiontype>integer</optiontype>
         <categoryname>cms.news</categoryname>
         <defaultvalue>10</defaultvalue>
+        <options>module_news</options>
       </option>
       
       <option name="cms_install_date">

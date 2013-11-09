@@ -20,6 +20,7 @@
       </category>
       <category name="admin.cms.news">
         <parent>admin.cms</parent>
+        <options>module_news</options>
       </category>
       <!--mod-->
       <category name="mod.cms">
@@ -30,6 +31,7 @@
       </category>
       <category name="mod.cms.news">
         <parent>mod.cms</parent>
+        <options>module_news</options>
       </category>
     <!--user-->
       <category name="user.cms">
@@ -43,6 +45,7 @@
       </category>
       <category name="user.cms.news">
         <parent>user.cms</parent>
+        <options>module_news</options>
       </category>
     </categories>
       
@@ -135,6 +138,7 @@ pdf]]></admindefaultvalue>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
+        <options>module_news</options>
       </option>
     
       <!--user-->
@@ -176,31 +180,37 @@ pdf]]></admindefaultvalue>
         <categoryname>user.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
+        <options>module_news</options>
       </option>
       <option name="user.cms.news.canViewNews">
         <categoryname>user.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
+        <options>module_news</options>
       </option>
       <option name="user.cms.news.canAddNews">
         <categoryname>user.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
+        <options>module_news</options>
       </option>
       <option name="user.cms.news.canAddComment">
         <categoryname>user.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
+        <options>module_news</options>
       </option>
       <option name="user.cms.news.canDeleteComment">
         <categoryname>user.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
+        <options>module_news</options>
       </option>
       <option name="user.cms.news.canEditComment">
         <categoryname>user.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
+        <options>module_news</options>
       </option>
       <!--mod-->
       <option name="mod.cms.page.canModeratePage">
@@ -232,24 +242,28 @@ pdf]]></admindefaultvalue>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
+        <options>module_news</options>
       </option>
       <option name="mod.cms.news.canModerateComment">
         <categoryname>mod.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
+        <options>module_news</options>
       </option>
       <option name="mod.cms.news.canEditComment">
         <categoryname>mod.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
+        <options>module_news</options>
       </option>
       <option name="mod.cms.news.canDeleteComment">
         <categoryname>mod.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
+        <options>module_news</options>
       </option>
     </options>
   </import>
