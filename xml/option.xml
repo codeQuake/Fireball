@@ -24,6 +24,11 @@
         <optiontype>hidden</optiontype>
         <categoryname>cms</categoryname>
       </option>
+      
+      <option name="module_news">
+        <optiontype>boolean</optiontype>
+        <categoryname>module.community</categoryname>
+      </option>
     </options>
   </import>
 </data>

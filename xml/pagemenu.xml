@@ -9,6 +9,7 @@
       <controller><![CDATA[cms\page\NewsCategoryListPage]]></controller>
       <position>header</position>
       <classname>cms\system\menu\page\NewsListPageMenuItemProvider</classname>
+      <options>module_news</options>
     </pagemenuitem>
 	</import>
 </data>

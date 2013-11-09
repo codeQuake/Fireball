@@ -216,7 +216,7 @@
   </category>
 
   <category name="wcf.acp.option">
-    <item name="wcf.acp.option.cms"><![CDATA[CMS]]></item>
+    <item name="wcf.acp.option.category.cms"><![CDATA[CMS]]></item>
     <item name="wcf.acp.option.category.cms.news"><![CDATA[Nachrichten]]></item>
     <item name="wcf.acp.option.cms_news_per_page"><![CDATA[Nachrichten pro Seite]]></item>
     <item name="wcf.acp.option.cms_news_latest_limit"><![CDATA[Anzahl neuster Nachrichten]]></item>
