@@ -124,6 +124,7 @@
       <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
       <classname>cms\system\user\activity\event\NewsUserActivityEvent</classname>
     </type>
+    
     <type>
         <name>de.codequake.cms.news.comment.recentActivityEvent</name>
         <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
@@ -134,7 +135,17 @@
         <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
         <classname>cms\system\user\activity\event\NewsCommentResponseUserActivityEvent</classname>
       </type>
-  
+
+    <type>
+      <name>de.codequake.cms.page.comment.recentActivityEvent</name>
+      <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+      <classname>cms\system\user\activity\event\PageCommentUserActivityEvent</classname>
+    </type>
+    <type>
+      <name>de.codequake.cms.page.comment.response.recentActivityEvent</name>
+      <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+      <classname>cms\system\user\activity\event\PageCommentResponseUserActivityEvent</classname>
+    </type>
       <!--Activity Points-->
       <type>
         <name>de.codequake.cms.activityPointEvent.news</name>

@@ -238,6 +238,8 @@
     <item name="wcf.user.profile.recentActivity.news"><![CDATA[hat die Nachricht &raquo;<a class="cmsNewsLink" data-news-id="{$news->newsID}" href="{link controller=News application='cms' object=$news}{/link}">{$news->getTitle()|language}</a>&laquo; verfasst.]]></item>
     <item name="wcf.user.profile.recentActivity.newsComment"><![CDATA[hat die Nachricht &raquo;<a class="cmsNewsLink" data-news-id="{$news->newsID}" href="{link controller=News application='cms' object=$news}{/link}">{$news->getTitle()}</a>&laquo; kommentiert.]]></item>
     <item name="wcf.user.profile.recentActivity.newsCommentResponse"><![CDATA[hat auf den Kommentar von <a class="userLink" data-user-id="{$author->userID}"href="{link controller=User object=$author}{/link}">{$author->username}</a> zur Nachricht &raquo;<a class="cmsNewsLink" data-news-id="{$news->newsID}" href="{link controller=News application='cms' object=$news}#comments{/link}">{$news->getTitle()}</a>&laquo; geantwortet.]]></item>
+    <item name="wcf.user.profile.recentActivity.pageComment"><![CDATA[hat einen Kommenatre auf der Seite &raquo;<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=Page application='cms' object=$page}{/link}">{$page->getTitle()}</a>&laquo; hinzugefügt.]]></item>
+    <item name="wcf.user.profile.recentActivity.pageCommentResponse"><![CDATA[hat auf den Kommentar von <a class="userLink" data-user-id="{$author->userID}"href="{link controller=User object=$author}{/link}">{$author->username}</a> auf der Seite &raquo;<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=Page application='cms' object=$page}#comments{/link}">{$page->getTitle()}</a>&laquo; geantwortet.]]></item>
   </category>
 
   <category name="wcf.tagging">
