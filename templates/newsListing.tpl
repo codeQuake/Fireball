@@ -13,7 +13,7 @@
                                     </a>
                                     <div class="messageHeadline">
                                         <h1>
-                                            <a class="newsLink" data-news-id="{$news->newsID}" href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a>
+                                            <a href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a>
                                         </h1>
 										{if $news->isNew()}
 										<p class="newMessageBadge">{lang}wcf.message.new{/lang}</p>
