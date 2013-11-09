@@ -247,4 +247,9 @@
     <item name="wcf.tagging.taggedObjects.de.codequake.cms.news"><![CDATA[Nachrichten mit dem Tag „{$tag->name}“]]></item>
     <item name="wcf.tagging.objectType.de.codequake.cms.news"><![CDATA[Nachrichten]]></item>
   </category>
+
+  <category name="wcf.page">
+    <item name="wcf.page.sitemap.cms"><![CDATA[Seiten]]></item>
+    <item name="wcf.page.sitemap.news"><![CDATA[Nachrichten]]></item>
+  </category>
 </language>

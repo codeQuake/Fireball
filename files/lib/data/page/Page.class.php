@@ -58,6 +58,21 @@ class Page extends CMSDatabaseObject implements IRouteController{
         return true;
     }
     
+    public function hasChildren(){
+        $list = new PageList();
+        $list->getConditionBuilder()->add('page.parentID = (?)', array($this->pageID));
+        if($list->countObjects() != 0) return true;
+        return false;
+    }
+    
+    public function getChildren(){
+        $list = new PageList();
+        $list->getConditionBuilder()->add('page.parentID = (?)', array($this->pageID));
+        $list->readObjects();
+        $list = $list->getObjects();
+        return $list;
+    }
+    
     public function hasMenuItem(){
         $menuItem = @unserialize($this->menuItem);
         if(isset($menuItem['has']) && $menuItem['has'] != 0) return true;
