@@ -8,7 +8,7 @@
              </a>
             <div>
                 <div class="containerHeadline">
-                    <h3><a href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a></h3>
+                    <h3><a class="newsLink" data-news-id="{$news->newsID}" href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a></h3>
                     <small>
                         <span class="username">
                                                 <a class="userLink" data-user-id="{$news->userID}" href="{link controller='User' object=$news->getUserProfile()}{/link}">

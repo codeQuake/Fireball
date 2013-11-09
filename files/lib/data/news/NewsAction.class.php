@@ -14,6 +14,7 @@ class NewsAction extends AbstractDatabaseObjectAction{
 
     protected $className = 'cms\data\news\NewsEditor';
     protected $permissionsDelete = array('mod.cms.news.canModerateNews');
+    protected $allowGuestAccess = array('getNewsPreview');
     
     public $news = null;
     
@@ -198,4 +199,20 @@ class NewsAction extends AbstractDatabaseObjectAction{
 			'template' => WCF::getTPL()->fetch('newsIpAddress', 'cms')
 		);
 	}
+    
+    public function getNewsPreview(){
+            $list = new ViewableNewsList();
+            $list->getConditionBuilder()->add("news.newsID = ?", array($this->news->newsID));
+            $list->readObjects();
+            $news = $list->getObjects();
+            WCF::getTPL()->assign(array('news' => reset($news)));
+            return array('template' => WCF::getTPL()->fetch('newsPreview', 'cms'));
+    }
+    public function validateGetNewsPreview(){
+        $this->news = $this->getSingleObject();
+        // check if board may be entered and thread can be read
+        foreach($this->news->getCategories() as $category){
+            $category->getPermission('canViewNews');
+        }
+    }
 }

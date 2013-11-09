@@ -2,6 +2,54 @@ var CMS = {};
 
 CMS.News = {};
 
+CMS.News.Preview = WCF.Popover.extend({
+    /**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+    _proxy: null,
+
+    /**
+	 * list of links
+	 * @var	object
+	 */
+    _newss: {},
+
+    /**
+	 * @see	WCF.Popover.init()
+	 */
+    init: function () {
+        this._super('.newsLink');
+
+        this._proxy = new WCF.Action.Proxy({
+            showLoadingOverlay: false
+        });
+        WCF.DOMNodeInsertedHandler.addCallback('CMS.News.Preview', $.proxy(this._initContainers, this));
+    },
+
+    /**
+	 * @see	WCF.Popover._loadContent()
+	 */
+    _loadContent: function () {
+        var $news = $('#' + this._activeElementID);
+
+        this._proxy.setOption('data', {
+            actionName: 'getNewsPreview',
+            className: 'cms\\data\\news\\NewsAction',
+            objectIDs: [$news.data('newsID')]
+        });
+
+        var $elementID = this._activeElementID;
+        var self = this;
+        this._proxy.setOption('success', function (data, textStatus, jqXHR) {
+            self._insertContent($elementID, data.returnValues.template, true);
+        });
+        this._proxy.sendRequest();
+
+
+    }
+});
+
 CMS.News.Like = WCF.Like.extend({
 
     _getContainers: function () {
