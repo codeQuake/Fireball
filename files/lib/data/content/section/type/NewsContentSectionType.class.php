@@ -48,7 +48,10 @@ class NewsContentSectionType extends AbstractContentSectionType{
         $data['additionalData'] = serialize($this->additionalData);
         $editor = new ContentSectionEditor($section);
         $editor->update($data);
-        $this->formData = array();
+        if ($this->action == 'add'){
+            $this->formData = array();
+            $this->additionalData = array();
+        }
     }
     
     public function getOutput($sectionID){

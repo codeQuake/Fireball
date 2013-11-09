@@ -43,7 +43,9 @@ class FileContentSectionType extends AbstractContentSectionType{
         $data['sectionData'] = $this->formData['sectionData'];
         $editor = new ContentSectionEditor($section);
         $editor->update($data);
-        $this->formData = array();
+        if ($this->action == 'add'){
+            $this->formData = array();
+        }
     }
     
     public function getOutput($sectionID){
