@@ -124,11 +124,12 @@
   <category name="cms.page">
     <item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" title="">Software: <strong>Fireball CMS {@PACKAGE_VERSION}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
     <item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
-    <item name="cms.page.news"><![CDATA[News]]></item>
+    <item name="cms.page.news"><![CDATA[Nachrichten]]></item>
     <item name="cms.page.comments"><![CDATA[Kommentare]]></item>
   </category>
 
   <category name="cms.news">
+    <item name="cms.news.searchNews"><![CDATA[Nachrichten durchsuchen]]></item>
     <item name="cms.news.category.categories"><![CDATA[Kategorien]]></item>
     <item name="cms.news.category.categories.description"><![CDATA[Wählen Sie die passenden Kategorien für die Nachricht!]]></item>
     <item name="cms.news.general"><![CDATA[Allgemeine Informationen]]></item>
@@ -210,9 +211,9 @@
     <item name="wcf.acl.option.de.codequake.cms.page.canEnterPage"><![CDATA[Kann Seite betreten]]></item>
     <item name="wcf.acl.option.category.de.codequake.cms.page.user.cms.page"><![CDATA[Benutzerrechte]]></item>
     <item name="wcf.acl.option.de.codequake.cms.category.news.canViewCategory"><![CDATA[Kann Kategorie sehen]]></item>
-    <item name="wcf.acl.option.de.codequake.cms.category.news.canViewNews"><![CDATA[Kann News sehen]]></item>
-    <item name="wcf.acl.option.de.codequake.cms.category.news.canAddNews"><![CDATA[Kann News hinzufügen]]></item>
-    <item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[News Moderationsrecht]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.category.news.canViewNews"><![CDATA[Kann Nachrichten sehen]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.category.news.canAddNews"><![CDATA[Kann Nachrichten hinzufügen]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[Nachrichten Moderationsrecht]]></item>
   </category>
 
   <category name="wcf.acp.option">
@@ -226,8 +227,8 @@
 
   <category name="wcf.dashboard">
     <item name="wcf.dashboard.objectType.de.codequake.cms.page"><![CDATA[CMS: Seiten]]></item>
-    <item name="wcf.dashboard.objectType.de.codequake.cms.news.newsList"><![CDATA[CMS: Newsauflistung]]></item>
-    <item name="wcf.dashboard.objectType.de.codequake.cms.news.news"><![CDATA[CMS: News]]></item>
+    <item name="wcf.dashboard.objectType.de.codequake.cms.news.newsList"><![CDATA[CMS: Nachrichtenauflistung]]></item>
+    <item name="wcf.dashboard.objectType.de.codequake.cms.news.news"><![CDATA[CMS: Nachrichten]]></item>
     <item name="wcf.dashboard.box.de.codequake.cms.latestNews"><![CDATA[Neuste Nachrichten]]></item>
   </category>
 
@@ -251,5 +252,9 @@
   <category name="wcf.page">
     <item name="wcf.page.sitemap.cms"><![CDATA[Seiten]]></item>
     <item name="wcf.page.sitemap.news"><![CDATA[Nachrichten]]></item>
+  </category>
+
+  <category name="wcf.search">
+    <item name="wcf.search.type.de.codequake.cms.news"><![CDATA[Nachrichten]]></item>
   </category>
 </language>

@@ -160,6 +160,13 @@
         <definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
         <classname>cms\data\news\LikeableNewsProvider</classname>
       </type>
+
+    <!--serach-->
+    <type>
+      <name>de.codequake.cms.news</name>
+      <definitionname>com.woltlab.wcf.searchableObjectType</definitionname>
+      <classname>cms\system\search\NewsSearch</classname>
+    </type>
     
       <!--Tagging-->
       <type>

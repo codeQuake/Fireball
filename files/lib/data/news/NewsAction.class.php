@@ -9,6 +9,7 @@ use wcf\system\language\LanguageFactory;
 use wcf\system\tagging\TagEngine;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\activity\point\UserActivityPointHandler;
+use wcf\system\search\SearchIndexManager;
 
 class NewsAction extends AbstractDatabaseObjectAction{
 
@@ -53,6 +54,12 @@ class NewsAction extends AbstractDatabaseObjectAction{
         UserActivityEventHandler::getInstance()->fireEvent('de.codequake.cms.news.recentActivityEvent', $news->newsID, $news->languageID, $news->userID, $news->time);
         UserActivityPointHandler::getInstance()->fireEvent('de.codequake.cms.activityPointEvent.news', $news->newsID, $news->userID);
             
+        // update search index
+		SearchIndexManager::getInstance()->add('de.codequake.cms.news', $news->newsID, $news->message, $news->subject, $news->time, $news->userID, $news->username, $news->languageID);
+        
+        // reset storage
+		UserStorageHandler::getInstance()->resetAll('cmsUnreadNews');
+        
         return $news;
         
     }
@@ -62,7 +69,14 @@ class NewsAction extends AbstractDatabaseObjectAction{
         
         $objectIDs = array();
 		foreach ($this->objects as $news) {
-			if (isset($this->parameters['categoryIDs'])) {
+			$objectIDs[] = $news->newsID;
+        }
+        if (!empty($objectIDs)) {
+			SearchIndexManager::getInstance()->delete('de.codequake.cms.news', $objectIDs);
+		}
+        
+        foreach ($this->objects as $news) {
+            if (isset($this->parameters['categoryIDs'])) {
 				$news->updateCategoryIDs($this->parameters['categoryIDs']);
 			}
             
@@ -77,7 +91,13 @@ class NewsAction extends AbstractDatabaseObjectAction{
                 $languageID = (!isset($this->parameters['data']['languageID']) || ($this->parameters['data']['languageID'] === null)) ? LanguageFactory::getInstance()->getDefaultLanguageID() : $this->parameters['data']['languageID'];
                 TagEngine::getInstance()->addObjectTags('de.codequake.cms.news', $news->newsID, $tags, $languageID);
             }
+            // update search index
+		    SearchIndexManager::getInstance()->add('de.codequake.cms.news', $news->newsID, $news->message, $news->subject, $news->time, $news->userID, $news->username, $news->languageID);
+        
 		}
+        
+        
+        
     }
     
     public function delete(){
@@ -85,7 +105,13 @@ class NewsAction extends AbstractDatabaseObjectAction{
         foreach ($this->objects as $news) {
 			$newsIDs[] = $news->newsID;
         }
+        //remove activity points
         UserActivityPointHandler::getInstance()->removeEvents('de.codequake.cms.activityPointEvent.news', $newsIDs);
+        
+        // delete old search index entries
+		if (!empty($objectIDs)) {
+			SearchIndexManager::getInstance()->delete('de.codequake.cms.news', $newsIDs);
+		}
         parent::delete(); 
         
     }
