@@ -244,6 +244,14 @@
     <item name="wcf.user.profile.recentActivity.pageCommentResponse"><![CDATA[hat auf den Kommentar von <a class="userLink" data-user-id="{$author->userID}"href="{link controller=User object=$author}{/link}">{$author->username}</a> auf der Seite &raquo;<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=Page application='cms' object=$page}#comments{/link}">{$page->getTitle()}</a>&laquo; geantwortet.]]></item>
   </category>
 
+  <category name="wcf.user.recentActivity">
+    <item name="wcf.user.recentActivity.de.codequake.cms.news.recentActivityEvent"><![CDATA[Nachricht]]></item>
+    <item name="wcf.user.recentActivity.de.codequake.cms.page.comment.recentActivityEvent"><![CDATA[Kommentar (Seite)]]></item>
+    <item name="wcf.user.recentActivity.de.codequake.cms.page.comment.response.recentActivityEvent"><![CDATA[Antwort (Seite)]]></item>
+    <item name="wcf.user.recentActivity.de.codequake.cms.news.comment.recentActivityEvent"><![CDATA[Kommentar (Nachricht)]]></item>
+    <item name="wcf.user.recentActivity.de.codequake.cms.news.comment.response.recentActivityEvent"><![CDATA[Antwort (Nachricht)]]></item>
+  </category>
+  
   <category name="wcf.tagging">
     <item name="wcf.tagging.taggedObjects.de.codequake.cms.news"><![CDATA[Nachrichten mit dem Tag „{$tag->name}“]]></item>
     <item name="wcf.tagging.objectType.de.codequake.cms.news"><![CDATA[Nachrichten]]></item>
