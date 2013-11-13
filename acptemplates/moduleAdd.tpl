@@ -34,7 +34,7 @@
 				
 				<dl class="wide">
 					<dd>
-						<textarea id="php" rows="20" cols="40" name="less">{$php}</textarea>
+						<textarea id="php" rows="20" cols="40" name="php">{$php}</textarea>
 						<small>{lang}cms.acp.module.php.description{/lang}</small>
 					</dd>
 				</dl>
@@ -45,7 +45,7 @@
 				
 				<dl class="wide">
 					<dd>
-						<textarea id="tpl" rows="20" cols="40" name="less">{$tpl}</textarea>
+						<textarea id="tpl" rows="20" cols="40" name="tpl">{$tpl}</textarea>
 						<small>{lang}cms.acp.module.tpl.description{/lang}</small>
 					</dd>
 				</dl>

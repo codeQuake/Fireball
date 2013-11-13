@@ -1,11 +1,12 @@
 <?php
 namespace cms\acp\form;
+use cms\data\module\Module;
 use cms\data\module\ModuleAction;
 use wcf\util\StringUtil;
 use wcf\form\AbstractForm;
 use wcf\system\WCF;
 
-class ModuleAddForm extends AbstractForm{
+class ModuleEditForm extends ModuleAddForm{
     
     public $neededPermissions = array('admin.cms.content.canManageModule');
     public $activeMenuItem = 'cms.acp.menu.link.cms.module.add';
@@ -14,21 +15,31 @@ class ModuleAddForm extends AbstractForm{
     public $title = '';
     public $phpCode = '';
     public $tplCode = '';
+    public $moduleID = 0;
+    public $module = null;
+    
+    public function readData(){
+        parent::readData();
+        if(isset($_REQUEST['id'])) $this->moduleID = intval($_REQUEST['id']);
+        $this->module = new Module($this->moduleID);
+        $this->title = $this->module->moduleTitle;
+        $this->phpCode = $this->module->php;
+        $this->tplCode = $this->module->tpl;
+    }
     
     public function readFormParameters(){
         parent::readFormParameters();
-        if(isset($_POST['php'])) $this->phpCode = StringUtil::trim($_POST['php']);
-        if(isset($_POST['tpl'])) $this->tplCode = StringUtil::trim($_POST['tpl']);
-        if(isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
+        if(isset($_REQUEST['id'])) $this->moduleID = intval($_REQUEST['id']);
+        $this->module = new Module($this->moduleID);
     }
     
     public function save(){
-        parent::save();
+        AbstractForm::save();
         
         $data = array('moduleTitle' => $this->title,
                       'php' => $this->phpCode,
                       'tpl' => $this->tplCode);
-        $action  = new ModuleAction(array(), 'create', array('data' => $data));
+        $action  = new ModuleAction(array($this->sheet), 'update', array('data' => $data));
         $action->executeAction();
         
         $this->saved();
@@ -42,6 +53,7 @@ class ModuleAddForm extends AbstractForm{
         parent::assignVariables();
         WCF::getTPL()->assign(array('title' => $this->title,
                                     'php' => $this->phpCode,
-                                    'tpl' => $this->tplCode));
+                                    'tpl' => $this->tplCode,
+                                    'moduleID' => $this->module->moduleID));
     }
 }
