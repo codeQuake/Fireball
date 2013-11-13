@@ -5,6 +5,8 @@ use cms\data\content\section\ContentSectionEditor;
 use wcf\system\WCF;
 use cms\data\module\ModuleList;
 use cms\data\module\Module;
+use wcf\system\template\TemplateCompiler;
+use wcf\system\template\TemplateEngine;
 
 class ModuleContentSectionType extends AbstractContentSectionType{
 
@@ -52,6 +54,8 @@ class ModuleContentSectionType extends AbstractContentSectionType{
         $module = new Module(intval($section->sectionData));
         eval($module->php);
         WCF::getTPL()->assign('module', $module);
+        $compiler = new TemplateCompiler(TemplateEngine::getInstance());
+        $compiler->compile($module->getTitle(), $module->tpl, '0_cms_'.$module->getTitle().'.php', array());
         return WCF::getTPL()->fetch('moduleSectionTypeOutput', 'cms');
     }
     

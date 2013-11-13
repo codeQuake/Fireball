@@ -41,7 +41,7 @@ class ModuleAddForm extends AbstractForm{
     public function assignVariables(){
         parent::assignVariables();
         WCF::getTPL()->assign(array('title' => $this->title,
-                                    'php' => $this->phpCode,
-                                    'tpl' => $this->tplCode));
+                                    'phpCode' => $this->phpCode,
+                                    'tplCode' => $this->tplCode));
     }
 }

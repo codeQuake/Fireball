@@ -105,7 +105,7 @@
     <item name="cms.acp.module.edit"><![CDATA[Modul bearbeiten]]></item>
     <item name="cms.acp.module.general"><![CDATA[Allgemeine Einstellungen]]></item>
     <item name="cms.acp.module.php"><![CDATA[PHP-Quelltext]]></item>
-    <item name="cms.acp.module.php.description"><![CDATA[Hier können Sie PHP-Quelltext verwenden. <strong>Achtung</strong>: PHP-Fehler können dazu führen, dass Seiten nicht korrekt dargestellt werden. (Kein Start-Tag (<?php) benötigt!)]]></item>
+    <item name="cms.acp.module.php.description"><![CDATA[Hier können Sie PHP-Quelltext verwenden. <strong>Achtung</strong>: PHP-Fehler können dazu führen, dass Seiten nicht korrekt dargestellt werden. (Kein PHP-Start-Tag benötigt!)]]></item>
     <item name="cms.acp.module.tpl"><![CDATA[Template-Quelltext]]></item>
     <item name="cms.acp.module.tpl.description"><![CDATA[Hier können Sie Template-Quelltext verwenden (<a href="http://www.smarty.net/">Dokumentation</a>).]]></item>
     <item name="cms.acp.module.title"><![CDATA[Titel]]></item>

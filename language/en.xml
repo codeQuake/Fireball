@@ -105,7 +105,7 @@
     <item name="cms.acp.module.edit"><![CDATA[Edit module]]></item>
     <item name="cms.acp.module.general"><![CDATA[General]]></item>
     <item name="cms.acp.module.php"><![CDATA[PHP-Source]]></item>
-    <item name="cms.acp.module.php.description"><![CDATA[You can use PHP-Syntax here. <strong>Danger</strong>: PHP-Errors might cause a non functionally site. (No Starttag (<?php) needed!)]]></item>
+    <item name="cms.acp.module.php.description"><![CDATA[You can use PHP-Syntax here. <strong>Danger</strong>: PHP-Errors might cause a non functionally site. (No php-Starttag needed!)]]></item>
     <item name="cms.acp.module.tpl"><![CDATA[Template-Source]]></item>
     <item name="cms.acp.module.tpl.description"><![CDATA[You can use Smarty-Syntax here (<a href="http://www.smarty.net/">Documentation</a>).]]></item>
     <item name="cms.acp.module.title"><![CDATA[Title]]></item>
