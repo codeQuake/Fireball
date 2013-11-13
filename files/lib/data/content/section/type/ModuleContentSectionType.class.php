@@ -58,6 +58,6 @@ class ModuleContentSectionType extends AbstractContentSectionType{
     public function getPreview($sectionID){
         $section = new ContentSection($sectionID);
         $module = new Module(intval($section->sectionData));
-        return '### Module - '.$module->title.'###';
+        return '### Module - '.$module->getTitle().'###';
     }
 }
