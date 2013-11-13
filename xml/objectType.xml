@@ -27,6 +27,12 @@
       <definitionname>de.codequake.cms.section.type</definitionname>
       <classname>cms\data\content\section\type\NewsContentSectionType</classname>
     </type>
+
+    <type>
+      <name>de.codequake.cms.section.type.module</name>
+      <definitionname>de.codequake.cms.section.type</definitionname>
+      <classname>cms\data\content\section\type\ModuleContentSectionType</classname>
+    </type>
     
     <!--user online location-->
     <type>
