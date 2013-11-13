@@ -47,6 +47,17 @@
       <permissions>admin.cms.file.canAddFile</permissions>
     </acpmenuitem>
     
+    <acpmenuitem name="cms.acp.menu.link.cms.module.list">
+      <parent>cms.acp.menu.link.cms.content</parent>
+      <controller><![CDATA[cms\acp\page\ModuleListPage]]></controller>
+      <permissions>admin.cms.content.canManageModule</permissions>
+    </acpmenuitem>
+    <acpmenuitem name="cms.acp.menu.link.cms.module.add">
+      <parent>cms.acp.menu.link.cms.content</parent>
+      <controller><![CDATA[cms\acp\page\ModuleAddForm]]></controller>
+      <permissions>admin.cms.content.canManageModule</permissions>
+    </acpmenuitem>
+    
       <acpmenuitem name="cms.acp.menu.link.cms.stylesheet.list">
         <parent>cms.acp.menu.link.cms.style</parent>
         <controller><![CDATA[cms\acp\page\StylesheetListPage]]></controller>

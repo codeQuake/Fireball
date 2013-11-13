@@ -104,6 +104,15 @@ newsID INT(10) NOT NULL,
 PRIMARY KEY (categoryID, newsID)
 );
 
+--module
+DROP TABLE IF EXISTS cms1_module;
+CREATE TABLE cms1_module(
+moduleID INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+moduleTitle VARCHAR(255) NOT NULL DEFAULT 'modul',
+php MEDIUMTEXT,
+tpl MEDIUMTEXT
+):
+
 --foreign keys
 ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE cms1_content_section ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
