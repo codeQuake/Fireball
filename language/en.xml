@@ -17,6 +17,8 @@
     <item name="cms.acp.menu.link.cms.style"><![CDATA[Displaymanagement]]></item>
     <item name="cms.acp.menu.link.cms.content"><![CDATA[Pagemanagement]]></item>
     <item name="cms.acp.menu.link.cms.news"><![CDATA[News]]></item>
+    <item name="cms.acp.menu.link.cms.module.add"><![CDATA[Add module]]></item>
+    <item name="cms.acp.menu.link.cms.module.list"><![CDATA[List modules]]></item>
   </category>
 
   <category name="cms.acp">
@@ -98,6 +100,15 @@
     <item name="cms.acp.content.section.data.resizable"><![CDATA[Shrink?]]></item>
     <item name="cms.acp.content.section.content"><![CDATA[Preview]]></item>
     <item name="cms.acp.page.userPermissions"><![CDATA[Permissions]]></item>
+    <item name="cms.acp.module.list"><![CDATA[List modules]]></item>
+    <item name="cms.acp.module.add"><![CDATA[Add module]]></item>
+    <item name="cms.acp.module.edit"><![CDATA[Edit module]]></item>
+    <item name="cms.acp.module.general"><![CDATA[General]]></item>
+    <item name="cms.acp.module.php"><![CDATA[PHP-Source]]></item>
+    <item name="cms.acp.module.php.description"><![CDATA[You can use PHP-Syntax here. <strong>Danger</strong>: PHP-Errors might cause a non functionally site. (No Starttag (<?php) needed!)]]></item>
+    <item name="cms.acp.module.tpl"><![CDATA[Template-Source]]></item>
+    <item name="cms.acp.module.tpl.description"><![CDATA[You can use Smarty-Syntax here (<a href="http://www.smarty.net/">Documentation</a>).]]></item>
+    <item name="cms.acp.module.title"><![CDATA[Title]]></item>
     <item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
     <item name="cms.acp.stylesheet.title"><![CDATA[Title]]></item>
     <item name="cms.acp.stylesheet.general"><![CDATA[General]]></item>
