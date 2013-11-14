@@ -25,10 +25,11 @@ class ModuleAddForm extends AbstractForm{
     public function save(){
         parent::save();
         
-        $data = array('moduleTitle' => $this->title,
-                      'php' => $this->phpCode,
-                      'tpl' => $this->tplCode);
-        $action  = new ModuleAction(array(), 'create', array('data' => $data));
+        $data = array('data' => array('moduleTitle' => $this->title),
+                      'source' => array(
+                                      'php' => $this->phpCode,
+                                      'tpl' => $this->tplCode));
+        $action  = new ModuleAction(array(), 'create', $data);
         $action->executeAction();
         
         $this->saved();

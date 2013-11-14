@@ -47,8 +47,8 @@
     <item name="cms.acp.page.optional"><![CDATA[Weitere Einstellungen]]></item>
     <item name="cms.acp.page.optional.invisible"><![CDATA[Seite ist unsichtbar]]></item>
     <item name="cms.acp.page.optional.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
-    <item name="cms.acp.page.optional.menuItem"><![CDATA[Menüitem erstellen?]]></item>
-    <item name="cms.acp.page.optional.showSidebar"><![CDATA[Sidebar anzeigen?]]></item>
+    <item name="cms.acp.page.optional.menuItem"><![CDATA[Menüitem erstellen]]></item>
+    <item name="cms.acp.page.optional.showSidebar"><![CDATA[Sidebar anzeigen]]></item>
     <item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
     <item name="cms.acp.page.optional.isCommentable"><![CDATA[Kommentare erlauben]]></item>
     <item name="cms.acp.page.optional.layoutID"><![CDATA[Layout auswählen]]></item>
@@ -76,7 +76,10 @@
     <item name="cms.acp.content.section.data.headline"><![CDATA[Überschrift]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Bild]]></item>
-    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>    
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Modul]]></item>
+    <item name="cms.acp.content.section.data.moduleID"><![CDATA[Modul auswählen]]></item>
+    <item name="cms.acp.content.section.data.moduleID.description"><![CDATA[Wählen Sie eines ihrer Module aus.]]></item>
     <item name="cms.acp.content.section.news.small"><![CDATA[Kompakte Auflistung]]></item>
     <item name="cms.acp.content.section.css"><![CDATA[CSS-Einstellungen]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
@@ -97,7 +100,7 @@
     <item name="cms.acp.content.section.data.imageID.description"><![CDATA[Diese Datei muss vorher über die Dateiverwaltung hochgeladen werden.]]></item>
     <item name="cms.acp.content.section.data.subtitle"><![CDATA[Untertitel]]></item>
     <item name="cms.acp.content.section.data.link"><![CDATA[Hyperlink]]></item>
-    <item name="cms.acp.content.section.data.resizable"><![CDATA[Verkleinern?]]></item>
+    <item name="cms.acp.content.section.data.resizable"><![CDATA[Verkleinern]]></item>
     <item name="cms.acp.content.section.content"><![CDATA[Inhaltsvorschau]]></item>
     <item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
     <item name="cms.acp.module.list"><![CDATA[Module auflisten]]></item>
@@ -105,7 +108,7 @@
     <item name="cms.acp.module.edit"><![CDATA[Modul bearbeiten]]></item>
     <item name="cms.acp.module.general"><![CDATA[Allgemeine Einstellungen]]></item>
     <item name="cms.acp.module.php"><![CDATA[PHP-Quelltext]]></item>
-    <item name="cms.acp.module.php.description"><![CDATA[Hier können Sie PHP-Quelltext verwenden. <strong>Achtung</strong>: PHP-Fehler können dazu führen, dass Seiten nicht korrekt dargestellt werden. (Kein PHP-Start-Tag benötigt!)]]></item>
+    <item name="cms.acp.module.php.description"><![CDATA[Hier können Sie PHP-Quelltext verwenden. <strong>Achtung</strong>: PHP-Fehler können dazu führen, dass Seiten nicht korrekt dargestellt werden.]]></item>
     <item name="cms.acp.module.tpl"><![CDATA[Template-Quelltext]]></item>
     <item name="cms.acp.module.tpl.description"><![CDATA[Hier können Sie Template-Quelltext verwenden (<a href="http://www.smarty.net/">Dokumentation</a>).]]></item>
     <item name="cms.acp.module.title"><![CDATA[Titel]]></item>

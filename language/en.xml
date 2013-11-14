@@ -47,8 +47,8 @@
     <item name="cms.acp.page.optional"><![CDATA[Optional]]></item>
     <item name="cms.acp.page.optional.invisible"><![CDATA[Invisible]]></item>
     <item name="cms.acp.page.optional.showOrder"><![CDATA[Sortorder]]></item>
-    <item name="cms.acp.page.optional.menuItem"><![CDATA[Add menu item?]]></item>
-    <item name="cms.acp.page.optional.showSidebar"><![CDATA[Show sidebar?]]></item>
+    <item name="cms.acp.page.optional.menuItem"><![CDATA[Add menu item]]></item>
+    <item name="cms.acp.page.optional.showSidebar"><![CDATA[Show sidebar]]></item>
     <item name="cms.acp.page.content.add"><![CDATA[Add contents to'{$page->title|language}']]></item>
     <item name="cms.acp.page.optional.isCommentable"><![CDATA[Allow comments]]></item>
     <item name="cms.acp.page.optional.layoutID"><![CDATA[Choose layout]]></item>
@@ -77,6 +77,9 @@
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[File]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Image]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Newslist]]></item>
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Module]]></item>
+    <item name="cms.acp.content.section.data.moduleID"><![CDATA[Choose module]]></item>
+    <item name="cms.acp.content.section.data.moduleID.description"><![CDATA[]]></item>
     <item name="cms.acp.content.section.news.small"><![CDATA[Small list]]></item>
     <item name="cms.acp.content.section.css"><![CDATA[CSS]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
@@ -97,7 +100,7 @@
     <item name="cms.acp.content.section.data.imageID.description"><![CDATA[This file must be uploaded before in the Filemanagement.]]></item>
     <item name="cms.acp.content.section.data.subtitle"><![CDATA[Subtitle]]></item>
     <item name="cms.acp.content.section.data.link"><![CDATA[Hyperlink]]></item>
-    <item name="cms.acp.content.section.data.resizable"><![CDATA[Shrink?]]></item>
+    <item name="cms.acp.content.section.data.resizable"><![CDATA[Shrink]]></item>
     <item name="cms.acp.content.section.content"><![CDATA[Preview]]></item>
     <item name="cms.acp.page.userPermissions"><![CDATA[Permissions]]></item>
     <item name="cms.acp.module.list"><![CDATA[List modules]]></item>
@@ -105,7 +108,7 @@
     <item name="cms.acp.module.edit"><![CDATA[Edit module]]></item>
     <item name="cms.acp.module.general"><![CDATA[General]]></item>
     <item name="cms.acp.module.php"><![CDATA[PHP-Source]]></item>
-    <item name="cms.acp.module.php.description"><![CDATA[You can use PHP-Syntax here. <strong>Danger</strong>: PHP-Errors might cause a non functionally site. (No php-Starttag needed!)]]></item>
+    <item name="cms.acp.module.php.description"><![CDATA[You can use PHP-Syntax here. <strong>Danger</strong>: PHP-Errors might cause a non functionally site.]]></item>
     <item name="cms.acp.module.tpl"><![CDATA[Template-Source]]></item>
     <item name="cms.acp.module.tpl.description"><![CDATA[You can use Smarty-Syntax here (<a href="http://www.smarty.net/">Documentation</a>).]]></item>
     <item name="cms.acp.module.title"><![CDATA[Title]]></item>

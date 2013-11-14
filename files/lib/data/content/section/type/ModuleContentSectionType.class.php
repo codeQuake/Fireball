@@ -52,11 +52,8 @@ class ModuleContentSectionType extends AbstractContentSectionType{
     public function getOutput($sectionID){
         $section = new ContentSection($sectionID);
         $module = new Module(intval($section->sectionData));
-        eval($module->php);
-        WCF::getTPL()->assign('module', $module);
-        $compiler = new TemplateCompiler(TemplateEngine::getInstance());
-        $compiler->compile($module->getTitle(), $module->tpl, '0_cms_'.$module->getTitle().'.php', array());
-        return WCF::getTPL()->fetch('moduleSectionTypeOutput', 'cms');
+        include(CMS_DIR.'files/php/'.$module->php);
+        return WCF::getTPL()->fetch($module->tpl, 'cms');
     }
     
     public function getPreview($sectionID){
