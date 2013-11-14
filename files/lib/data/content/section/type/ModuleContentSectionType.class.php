@@ -52,7 +52,7 @@ class ModuleContentSectionType extends AbstractContentSectionType{
     public function getOutput($sectionID){
         $section = new ContentSection($sectionID);
         $module = new Module(intval($section->sectionData));
-        include(CMS_DIR.'files/php/'.$module->php);
+        require(CMS_DIR.'files/php/'.$module->php);
         return WCF::getTPL()->fetch($module->tpl, 'cms');
     }
     
