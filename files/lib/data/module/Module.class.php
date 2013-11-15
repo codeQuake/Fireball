@@ -3,6 +3,7 @@ namespace cms\data\module;
 use wcf\system\request\IRouteController;
 use cms\data\CMSDatabaseObject;
 use wcf\system\WCF;
+use wcf\data\template\Template;
 
 class Module extends CMSDatabaseObject implements IRouteController{
 
@@ -27,5 +28,23 @@ class Module extends CMSDatabaseObject implements IRouteController{
     
     public function getTitle(){
         return $this->moduleTitle;
+    }
+    
+    public function getPHPCode(){
+        if($this->php !== null) return implode("",file(CMS_DIR.'/files/php/'.$this->php));
+        return '';
+    }
+    
+    public function getTPLCode(){
+        $sql = "SELECT templateID FROM wcf".WCF_N."_template WHERE templateName = ?";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute(array($this->tpl));
+        $row = $statement->fetchArray();
+        
+        $tpl = new Template($row['templateID']);
+        if($tpl !== null){
+            return $tpl->getSource();
+        }
+        return '';
     }
 }

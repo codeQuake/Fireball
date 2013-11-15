@@ -44,12 +44,12 @@
 				{foreach from=$objects item=module}
 					<tr class="jsModuleRow">
 						<td class="columnIcon">
-							<a href="{link controller='ModuleEdit' id=$module->moduleID applicaton='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+							<a href="{link controller='ModuleEdit' application='cms' id=$module->moduleID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$module->moduleID}" data-confirm-message="{lang}cms.acp.module.delete.sure{/lang}"></span>
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$module->moduleID}</td>
-						<td class="columnTitle columnModule"><a href="{link controller='ModuleEdit' id=$module->moduleID application='cms'}{/link}">{$module->getTitle()}</a></td>
+						<td class="columnTitle columnModule"><a href="{link controller='ModuleEdit'  application='cms' id=$module->moduleID}{/link}">{$module->getTitle()}</a></td>
 						
 						{event name='columns'}
 					</tr>

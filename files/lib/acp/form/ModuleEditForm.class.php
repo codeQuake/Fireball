@@ -10,7 +10,7 @@ class ModuleEditForm extends ModuleAddForm{
     
     public $neededPermissions = array('admin.cms.content.canManageModule');
     public $activeMenuItem = 'cms.acp.menu.link.cms.module.add';
-    public $action = 'add';
+    public $action = 'edit';
     
     public $title = '';
     public $phpCode = '';
@@ -23,8 +23,8 @@ class ModuleEditForm extends ModuleAddForm{
         if(isset($_REQUEST['id'])) $this->moduleID = intval($_REQUEST['id']);
         $this->module = new Module($this->moduleID);
         $this->title = $this->module->moduleTitle;
-        $this->phpCode = $this->module->php;
-        $this->tplCode = $this->module->tpl;
+        $this->phpCode = $this->module->getPHPCode();
+        $this->tplCode = $this->module->getTPLCode();
     }
     
     public function readFormParameters(){
@@ -40,14 +40,13 @@ class ModuleEditForm extends ModuleAddForm{
                       'source' => array(
                                       'php' => $this->phpCode,
                                       'tpl' => $this->tplCode));
-        $action  = new ModuleAction(array($this->sheet), 'update', $data);
+        $action  = new ModuleAction(array($this->module), 'update', $data);
         $action->executeAction();
         
         $this->saved();
         
         WCF::getTPL()->assign('success', true);
         
-        $this->title = $this->phpCode = $this->tplCode = '';
     }
     
     public function assignVariables(){
