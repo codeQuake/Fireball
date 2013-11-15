@@ -97,4 +97,26 @@ class ModuleAction extends AbstractDatabaseObjectAction{
         
         parent::update();
     }
+    
+    
+    public function delete(){
+        foreach ($this->objects as $module){
+            if($module->tpl !== null){
+                //delete TPL
+                $sql = "SELECT templateID FROM wcf".WCF_N."_template WHERE templateName = ?";
+                $statement = WCF::getDB()->prepareStatement($sql);
+                $statement->execute(array($module->tpl));
+                $row = $statement->fetchArray();        
+                $tpl = new Template($row['templateID']);
+                $tplAction = new TemplateAction(array($tpl), 'delete', array());
+                $tplAction->executeAction();
+            }
+            
+            if($module->php !== null){
+                //delete PHP
+                unlink(CMS_DIR.'files/php/'.$module->php);
+            }
+        }
+        parent::delete();
+    }
 }
