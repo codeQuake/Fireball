@@ -34,7 +34,7 @@ class TextContentSectionType extends AbstractContentSectionType{
     public $preParse = 0;
     
     public function readParameters(){
-        I18nHandler::getInstance()->register('sectionData');
+        I18nHandler::getInstance()->register('text');
         if (MODULE_SMILEY) {
 			$this->smileyCategories = SmileyCache::getInstance()->getCategories();
 			foreach ($this->smileyCategories as $index => $category) {
@@ -63,32 +63,32 @@ class TextContentSectionType extends AbstractContentSectionType{
         $this->enableSmilies = $data['enableSmilies'];
         $this->enableBBCodes = $data['enableBBCodes'];
         $this->enableHtml = $data['enableHtml'];
-        $this->formData['sectionData'] = $section->sectionData;
-        I18nHandler::getInstance()->setOptions('sectionData', PACKAGE_ID, $section->sectionData, 'cms.content.section.sectionData\d+');
+        $this->formData['text'] = $section->sectionData;
+        I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $section->sectionData, 'cms.content.section.sectionData\d+');
     }
     
     public function readFormData(){
         I18nHandler::getInstance()->readValues();
-        if (I18nHandler::getInstance()->isPlainValue('sectionData')) $this->formData['sectionData'] = MessageUtil::stripCrap(StringUtil::trim(I18nHandler::getInstance()->getValue('sectionData')));
+        if (I18nHandler::getInstance()->isPlainValue('text')) $this->formData['text'] = MessageUtil::stripCrap(StringUtil::trim(I18nHandler::getInstance()->getValue('text')));
         if (isset($_POST['enableSmilies']) && WCF::getSession()->getPermission($this->permissionCanUseSmilies)) $this->enableSmilies = intval($_POST['enableSmilies']);
         if (isset($_POST['enableHtml']) && WCF::getSession()->getPermission($this->permissionCanUseHtml)) $this->enableHtml = intval($_POST['enableHtml']);
         if (isset($_POST['enableBBCodes']) && WCF::getSession()->getPermission($this->permissionCanUseBBCodes)) $this->enableBBCodes = intval($_POST['enableBBCodes']);
     }
     
     public function validateFormData(){
-        if (!I18nHandler::getInstance()->validateValue('sectionData')) {
-			if (I18nHandler::getInstance()->isPlainValue('sectionData')) {
-				throw new UserInputException('sectionData');
+        if (!I18nHandler::getInstance()->validateValue('text')) {
+			if (I18nHandler::getInstance()->isPlainValue('text')) {
+				throw new UserInputException('text');
 			}
 			else {
-				throw new UserInputException('sectionData', 'multilingual');
+				throw new UserInputException('text', 'multilingual');
 			}
 		}
         if ($this->enableBBCodes && $this->allowedBBCodesPermission) {
-			$disallowedBBCodes = BBCodeParser::getInstance()->validateBBCodes($this->formData['sectionData'], ArrayUtil::trim(explode(',', WCF::getSession()->getPermission($this->allowedBBCodesPermission))));
+			$disallowedBBCodes = BBCodeParser::getInstance()->validateBBCodes($this->formData['text'], ArrayUtil::trim(explode(',', WCF::getSession()->getPermission($this->allowedBBCodesPermission))));
 			if (!empty($disallowedBBCodes)) {
 				WCF::getTPL()->assign('disallowedBBCodes', $disallowedBBCodes);
-				throw new UserInputException('sectionData', 'disallowedBBCodes');
+				throw new UserInputException('text', 'disallowedBBCodes');
 			}
 		}
     }
@@ -123,16 +123,16 @@ class TextContentSectionType extends AbstractContentSectionType{
         $additionalData['enableHtml'] = $this->enableHtml;
         $data = array();
         $data['additionalData'] = serialize($additionalData);
-        if(I18nHandler::getInstance()->isPlainValue('sectionData')) {
-            $data['sectionData'] = $this->formData['sectionData'];
+        if(I18nHandler::getInstance()->isPlainValue('text')) {
+            $data['sectionData'] = $this->formData['text'];
             $editor = new ContentSectionEditor($section);
             $editor->update($data);
         }
         
         $sectionID = $section->sectionID;
             $update = array();
-            if (!I18nHandler::getInstance()->isPlainValue('sectionData')) {
-                I18nHandler::getInstance()->save('sectionData', 'cms.content.section..sectionData'.$sectionID, 'cms.content.section', PACKAGE_ID);
+            if (!I18nHandler::getInstance()->isPlainValue('text')) {
+                I18nHandler::getInstance()->save('text', 'cms.content.section.sectionData'.$sectionID, 'cms.content.section', PACKAGE_ID);
                 $update['sectionData'] = 'cms.content.section.sectionData'.$sectionID;
             }
             if (!empty($update)) {
@@ -159,14 +159,14 @@ class TextContentSectionType extends AbstractContentSectionType{
     
     public function getPreview($sectionID){
         $section = new ContentSection($sectionID);
-        return $this->getExcerpt($section);
+        return WCF::getLanguage()->get($this->getExcerpt($section));
     }
     
     public function getExcerpt($section, $maxLength = 255 ){
         $additionalData = @unserialize($section->additionalData);
         if(!is_array($additionalData)) $additionalData = array();
         MessageParser::getInstance()->setOutputType('text/simplified-html');
-        return StringUtil::truncateHTML(MessageParser::getInstance()->parse($section->sectionData, $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']), $maxLength);
+        return WCF::getLanguage()->get(StringUtil::truncateHTML(MessageParser::getInstance()->parse($section->sectionData, $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']), $maxLength));
 
     }
 }

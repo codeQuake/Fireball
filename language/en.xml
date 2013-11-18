@@ -265,6 +265,10 @@
     <item name="wcf.user.recentActivity.de.codequake.cms.news.comment.recentActivityEvent"><![CDATA[Comment (News)]]></item>
     <item name="wcf.user.recentActivity.de.codequake.cms.news.comment.response.recentActivityEvent"><![CDATA[Response (News)]]></item>
   </category>
+
+  <category name="wcf.user.activityPoint">
+    <item name="wcf.user.activityPoint.objectType.de.codequake.cms.activityPointEvent.news"><![CDATA[News]]></item>
+  </category>
   
   <category name="wcf.tagging">
     <item name="wcf.tagging.taggedObjects.de.codequake.cms.news"><![CDATA[News with the tag „{$tag->name}“]]></item>
