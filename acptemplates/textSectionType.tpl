@@ -7,12 +7,16 @@
 		//]]>
 </script>
 
-{include file='multipleLanguageInputJavascript' elementIdentifier='sectionData' forceSelection=false}
+
 <dl class="wide">
-    <dt><label for="text">{lang}cms.acp.content.section.data.text{/lang}</label></dt>
-    <dd>
-        <textarea id="text" name="sectionData" rows="5" cols="40" class="long">{$i18nPlainValues['sectionData']}</textarea>
-    </dd>
+  <dt>
+    <label for="sectionData">{lang}cms.acp.content.section.data.text{/lang}</label>
+  </dt>
+  <dd>
+    <textarea id="text" name="text" rows="5" cols="40" class="long">{$i18nPlainValues['text']}</textarea>
+  </dd>
 </dl>
 {include file='messageFormTabs' wysiwygContainerID='text'}
 {include file='wysiwyg'}
+
+{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
