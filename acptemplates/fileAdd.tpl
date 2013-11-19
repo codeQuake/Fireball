@@ -24,7 +24,7 @@
         <fieldset>
             <legend>{lang}cms.acp.file.file{/lang}</legend>
             <dl{if $errorField == 'file'} class="formError"{/if}>
-                <dt><label for="filed">{lang}cms.acp.file.file{/lang}</label></dt>
+                <dt><label for="file">{lang}cms.acp.file.file{/lang}</label></dt>
                 <dd>
                     <input type="file" name="file" id="file"  required="required"/>
                     {if $errorField == 'file'}
