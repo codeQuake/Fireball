@@ -22,6 +22,7 @@ comments INT(10) NOT NULL DEFAULT 0
 DROP TABLE IF EXISTS cms1_content;
 CREATE TABLE cms1_content(
 contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body',
 pageID INT(10),
 title VARCHAR(255) NOT NULL,
 showOrder INT(10) DEFAULT 0,

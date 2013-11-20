@@ -17,6 +17,7 @@
 		{@$__boxSidebar}
 	{/capture}
 {/if}
+
 {include file='header' sidebarOrientation='right'}
 
 

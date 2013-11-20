@@ -84,8 +84,7 @@
     <item name="cms.acp.content.section.css"><![CDATA[CSS-Einstellungen]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.section.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
-    <item name="cms.acp.content.section.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
-    <item name="cms.acp.content.section.showOrder.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
+    <item name="cms.acp.content.section.optional.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.section.add"><![CDATA[Inhaltsabschnitt hinzufügen]]></item>
     <item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
     <item name="cms.acp.content.section.data.hlType"><![CDATA[Überschriftstyp]]></item>
@@ -102,6 +101,10 @@
     <item name="cms.acp.content.section.data.link"><![CDATA[Hyperlink]]></item>
     <item name="cms.acp.content.section.data.resizable"><![CDATA[Verkleinern]]></item>
     <item name="cms.acp.content.section.content"><![CDATA[Inhaltsvorschau]]></item>
+    <item name="cms.acp.content.position.body"><![CDATA[Inhaltsbereich]]></item>
+    <item name="cms.acp.content.position.sidebar"><![CDATA[Seitenleiste]]></item>
+    <item name="cms.acp.content.optional"><![CDATA[Erweiterte Optionen]]></item>
+    <item name="cms.acp.content.optional.position"><![CDATA[Position]]></item>
     <item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
     <item name="cms.acp.module.list"><![CDATA[Module auflisten]]></item>
     <item name="cms.acp.module.add"><![CDATA[Modul hinzufügen]]></item>

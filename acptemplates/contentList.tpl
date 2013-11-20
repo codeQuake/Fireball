@@ -31,7 +31,7 @@
 				{foreach from=$objects item=content}
 				<li class="sortableNode jsContentNode" data-object-id="{$content->contentID}">
 					<span class="sortableNodeLabel">
-						<a href="{link controller='ContentEdit' id=$content->contentID application='cms'}{/link}">{@$content->getTitle()|language}</a>
+						<a href="{link controller='ContentEdit' id=$content->contentID application='cms'}{/link}">{@$content->getTitle()|language}</a> <span class="badge">{lang}cms.acp.content.position.{$content->position}{/lang}</span>
 						<span class="statusDisplay sortableButtonContainer">
 							<a href="{link controller='ContentEdit' id=$content->contentID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>

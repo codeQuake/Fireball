@@ -78,9 +78,18 @@
             </dl>
         </fieldset>
         <fieldset>
-            <legend>{lang}cms.acp.content.showOrder{/lang}</legend>
-            <dl>
-                <dt><label for="invisible">{lang}cms.acp.content.showOrder.showOrder{/lang}</label></dt>
+            <legend>{lang}cms.acp.content.optional{/lang}</legend>
+            <dl  {if $errorField == 'position'}class="formError"{/if}>
+						<dt><label for="robots">{lang}cms.acp.content.optional.robots{/lang}</label></dt>
+						<dd>
+							<select id="robots" name="robots">
+								<option value="body" {if $position =="body"}selected="selected"{/if}>{lang}cms.acp.content.position.body{/lang}</option>
+								<option value="sidebar" {if $position =="sidebar"}selected="selected"{/if}">{lang}cms.acp.content.position.sidebar{/lang}</option>
+							</select>
+						</dd>
+			</dl>
+			<dl>
+                <dt><label for="invisible">{lang}cms.acp.content.optional.showOrder{/lang}</label></dt>
                 <dd>
                     <input type="text" name="showOrder" id="showorder" value="{$showOrder}" />
                 </dd>

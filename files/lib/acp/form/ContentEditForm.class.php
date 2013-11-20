@@ -11,6 +11,7 @@ class ContentEditForm extends ContentAddForm{
     public $contentID = 0;
     public $content = null;
     
+    
     public function readData(){
         parent::readData();
         if(isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
@@ -21,6 +22,7 @@ class ContentEditForm extends ContentAddForm{
         $this->cssID = $this->content->cssID;
         $this->cssClasses = $this->content->cssClasses;
         $this->showOrder = $this->content->showOrder;
+        $this->position = $this->content->position;
     }
     
     public function readParameters(){
@@ -40,7 +42,8 @@ class ContentEditForm extends ContentAddForm{
                     'pageID' => $this->pageID,
                     'cssID' => $this->cssID,
                     'cssClasses' => $this->cssClasses,
-                    'showOrder' => $this->showOrder);
+                    'showOrder' => $this->showOrder,
+                    'position' => $this->position);
         $objectAction = new ContentAction(array($this->contentID), 'update', array('data' => $data));
         $objectAction->executeAction();
         $update = array();

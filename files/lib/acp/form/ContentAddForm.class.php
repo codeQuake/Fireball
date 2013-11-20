@@ -25,6 +25,7 @@ class ContentAddForm extends AbstractForm{
     public $showOrder = 0;
     public $cssID = '';
     public $cssClasses ='';
+    public $position  = 'body';
     
     public $pageList = null;
     
@@ -48,6 +49,7 @@ class ContentAddForm extends AbstractForm{
         if(isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
         if(isset($_POST['cssID'])) $this->cssID = StringUtil::trim($_POST['cssID']);
         if(isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
+        if(isset($_POST['position'])) $this->position = StringUtil::trim($_POST['position']);
         if(isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
     }
     
@@ -71,7 +73,8 @@ class ContentAddForm extends AbstractForm{
                     'pageID' => $this->pageID,
                     'cssID' => $this->cssID,
                     'cssClasses' => $this->cssClasses,
-                    'showOrder' => $this->showOrder);
+                    'showOrder' => $this->showOrder,
+                    'position' => $this->position);
         $objectAction = new ContentAction(array(), 'create', array('data' => $data));
         $objectAction->executeAction();
         $returnValues = $objectAction->getReturnValues();
@@ -101,6 +104,7 @@ class ContentAddForm extends AbstractForm{
                                     'cssID' => $this->cssID,
                                     'showOrder' =>$this->showOrder,
                                     'pageID' => $this->pageID,
-                                    'pageList' => $this->pageList));
+                                    'pageList' => $this->pageList,
+                                    'position' => $this->position));
     }
 }
