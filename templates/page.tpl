@@ -28,7 +28,7 @@
 	{/capture}
 {/if}
 
-{include file='header' sidebarOrientation='right'}
+{include file='header' sidebarOrientation='left'}
 
 
 <header class="boxHeadline">
