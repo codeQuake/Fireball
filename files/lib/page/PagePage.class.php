@@ -89,11 +89,11 @@ class PagePage extends AbstractPage{
                                     'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),
                                     'allowSpidersToIndexThisPage' => true));
                                     
-        if($this->page->showSidebar == 1) {
-            DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.page', $this);
+        //sidebar
+        if($this->page->showSidebar == 1)  DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.page', $this);
             WCF::getTPL()->assign(array('sidebarCollapsed'	=> UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.page'),
                                         'sidebarName' => 'de.codequake.cms.page'));
-        }
+        
     }
     
     public function show(){

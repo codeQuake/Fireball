@@ -12,8 +12,7 @@
 
 <body id="{$templateName|ucfirst}">
 
-{if $page->showSidebar == 1}
-	{capture assign='sidebar'}
+{capture assign='sidebar'}
 	{foreach from=$sidebarList item=content}
         <fieldset {if $content->cssID != ''}id="{$content->cssID}"{/if} class="contentItem dashboardBox{if $content->cssClasses != ''}{$content->cssClasses}{/if}">
 			<legend>{$content->getTitle()|language}</legend>
@@ -24,11 +23,14 @@
             {/foreach}
         </fieldset>
     {/foreach}
-		{@$__boxSidebar}
+	
+	{if $page->showSidebar == 1}
+			{@$__boxSidebar}
+	{/if}
 	{/capture}
-{/if}
+{
 
-{include file='header' sidebarOrientation='left'}
+{include file='header' sidebarOrientation=right}
 
 
 <header class="boxHeadline">
