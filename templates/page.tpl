@@ -11,7 +11,7 @@
 </head>
 
 <body id="{$templateName|ucfirst}">
-
+{if $sidebarList|count || $page->showSidebar}
 {capture assign='sidebar'}
 	{foreach from=$sidebarList item=content}
         <fieldset {if $content->cssID != ''}id="{$content->cssID}"{/if} class="contentItem dashboardBox{if $content->cssClasses != ''}{$content->cssClasses}{/if}">
@@ -27,8 +27,8 @@
 	{if $page->showSidebar == 1}
 			{@$__boxSidebar}
 	{/if}
-	{/capture}
-{
+{/capture}
+{/if}
 
 {include file='header' sidebarOrientation=right}
 
