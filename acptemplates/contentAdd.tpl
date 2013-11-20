@@ -80,9 +80,9 @@
         <fieldset>
             <legend>{lang}cms.acp.content.optional{/lang}</legend>
             <dl  {if $errorField == 'position'}class="formError"{/if}>
-						<dt><label for="robots">{lang}cms.acp.content.optional.robots{/lang}</label></dt>
+						<dt><label for="position">{lang}cms.acp.content.optional.position{/lang}</label></dt>
 						<dd>
-							<select id="robots" name="robots">
+							<select id="position" name="position">
 								<option value="body" {if $position =="body"}selected="selected"{/if}>{lang}cms.acp.content.position.body{/lang}</option>
 								<option value="sidebar" {if $position =="sidebar"}selected="selected"{/if}">{lang}cms.acp.content.position.sidebar{/lang}</option>
 							</select>
