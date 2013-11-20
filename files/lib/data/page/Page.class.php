@@ -11,7 +11,6 @@ class Page extends CMSDatabaseObject implements IRouteController{
 
     protected static $databaseTableName = 'page';
     protected static $databaseTableIndexName = 'pageID';
-    public $contentList = null;
     
     
     public function __construct($id, $row = null, $object = null){
@@ -99,10 +98,11 @@ class Page extends CMSDatabaseObject implements IRouteController{
         return array();
     }
     
-    public function getContentList(){
-        $this->contentList =  new PageContentList($this->pageID);
-        $this->contentList->readObjects();
-        return $this->contentList->getObjects();
+    public function getContentList($position = 'body'){
+        $list =  new PageContentList($this->pageID);
+        $list->getConditionBuilder()->add('content.position = ?', array($position));
+        $list->readObjects();
+        return $list->getObjects();
     }
     
     public function getPermission($permission = 'canViewPage') {

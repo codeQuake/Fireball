@@ -14,6 +14,16 @@
 
 {if $page->showSidebar == 1}
 	{capture assign='sidebar'}
+	{foreach from=$sidebarList item=content}
+        <fieldset {if $content->cssID != ''}id="{$content->cssID}"{/if} class="contentItem dashboardBox{if $content->cssClasses != ''}{$content->cssClasses}{/if}">
+			<legend>{$content->getTitle()|language}</legend>
+            {foreach from=$content->getSections() item=section}
+                <div {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section>cssClasses != ''} class="contentSectionItem {$section->cssClasses}"{/if}>
+                    {@$section->getOutput()|language}
+                </div>
+            {/foreach}
+        </fieldset>
+    {/foreach}
 		{@$__boxSidebar}
 	{/capture}
 {/if}
@@ -28,7 +38,7 @@
 </header>
 {include file='userNotice'}
 
-    {foreach from=$contentList item=content}
+    {foreach from=$bodyList item=content}
         <div {if $content->cssID != ''}id="{$content->cssID}"{/if} {if $content->cssClasses != ''}class="contentItem {$content->cssClasses}"{/if}>
             {foreach from=$content->getSections() item=section}
                 <div {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section>cssClasses != ''} class="contentSectionItem {$section->cssClasses}"{/if}>

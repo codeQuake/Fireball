@@ -15,7 +15,8 @@ use wcf\system\exception\PermissionDeniedException;
 
 class PagePage extends AbstractPage{
 
-    public $contentList = array();
+    public $bodyList = array();
+    public $sidebarList = array();
     public $page = null;
     public $enableTracking = true;
     
@@ -55,7 +56,8 @@ class PagePage extends AbstractPage{
         }
         
         //get Contents
-        $this->contentList = $this->page->getContentList();
+        $this->bodyList = $this->page->getContentList();
+        $this->sidebarList = $this->page->getContentList('sidebar');
         
         //comments
         if($this->page->isCommentable){
@@ -77,7 +79,8 @@ class PagePage extends AbstractPage{
     
     public function assignVariables(){
         parent::assignVariables();
-        WCF::getTPL()->assign(array('contentList' => $this->contentList,
+        WCF::getTPL()->assign(array('bodyList' => $this->bodyList,
+                                    'sidebarList' => $this->sidebarList,
                                     'page' => $this->page,
                                     'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : array()),
                                     'commentCanAdd' => (WCF::getUser()->userID && WCF::getSession()->getPermission('user.cms.page.canAddComment')),
