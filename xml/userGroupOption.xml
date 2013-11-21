@@ -208,6 +208,12 @@ pdf]]></admindefaultvalue>
         <defaultvalue>1</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
       </option>
+      <option name="user.cms.content.canDownloadAttachments">
+        <categoryname>user.cms.content</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
       <option name="user.cms.page.canAddComment">
         <categoryname>user.cms.page</categoryname>
         <optiontype>boolean</optiontype>

@@ -23,6 +23,10 @@ class ContentSectionAttachmentObjectType extends AbstractAttachmentObjectType {
 	    return WCF::getSession()->getPermission('user.cms.content.canDownloadAttachments');
     }
     
+    public function canViewPreview($objectID) {
+		return WCF::getSession()->getPermission('user.cms.content.canDownloadAttachments');
+	}
+    
     public function canUpload($objectID, $parentObjectID = 0) {		
 		return WCF::getSession()->getPermission('admin.cms.content.canUploadAttachment');
 	}
