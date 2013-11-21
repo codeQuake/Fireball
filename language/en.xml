@@ -136,6 +136,13 @@
     <item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
     <item name="cms.acp.file.list"><![CDATA[Files]]></item>
     <item name="cms.acp.file.management"><![CDATA[Filemanagement]]></item>
+    <item name="cms.acp.page.delete.sure"><![CDATA[Are you sure you want to delete this page and all of its contents?]]></item>
+    <item name="cms.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content and all of its sections?]]></item>
+    <item name="cms.acp.content.section.delete.sure"><![CDATA[Are you sure you want to delete this section?]]></item>
+    <item name="cms.acp.file.delete.sure"><![CDATA[Are you sure you want to delete this file?]]></item>
+    <item name="cms.acp.module.delete.sure"><![CDATA[Are you sure you want to delete this module?]]></item>
+    <item name="cms.acp.stylesheet.delete.sure"><![CDATA[Are you sure you want to delete this stylesheet?]]></item>
+    <item name="cms.acp.layout.delete.sure"><![CDATA[Are you sure you want to delete this layout?]]></item>
   </category>
 
   <category name="cms.page">
@@ -221,6 +228,12 @@
     <item name="wcf.acp.group.option.admin.cms.file.canAddFile"><![CDATA[Can manage files]]></item>
     <item name="wcf.acp.group.option.admin.cms.file.allowedTypes"><![CDATA[Allowed file extensions]]></item>
     <item name="wcf.acp.group.option.category.admin.cms.file"><![CDATA[Files]]></item>
+    <item name="wcf.acp.group.option.user.cms.content.canDownloadAttachments"><![CDATA[Can download attachments]]></item>
+    <item name="wcf.acp.group.option.admin.cms.content.canManageModule"><![CDATA[Can manage modules]]></item>
+    <item name="wcf.acp.group.option.admin.cms.content.canUploadAttachment"><![CDATA[Can attach files]]></item>
+    <item name="wcf.acp.group.option.admin.cms.content.attachmentMaxSize"><![CDATA[Maximum filesize]]></item>
+    <item name="wcf.acp.group.option.admin.cms.content.maxAttachmentCount"><![CDATA[Maximum number of attachments per content section]]></item>
+    <item name="wcf.acp.group.option.admin.cms.content.allowedAttachmentExtensions"><![CDATA[Allowed file extensions]]></item>
   </category>
 
   <category name="wcf.acl.option">
