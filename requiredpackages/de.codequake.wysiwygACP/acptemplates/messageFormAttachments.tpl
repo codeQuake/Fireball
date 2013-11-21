@@ -3,20 +3,20 @@
 		{foreach from=$attachmentHandler->getAttachmentList() item=$attachment}
 			<li class="box48">
 				{if $attachment->tinyThumbnailType}
-					<img src="{link controller='Attachment' object=$attachment}tiny=1{/link}" alt="" class="attachmentTinyThumbnail" />
+					<img src="{link controller='Attachment' object=$attachment isACP=0}tiny=1{/link}" alt="" class="attachmentTinyThumbnail" />
 				{else}
 					<span class="icon icon48 icon-paper-clip"></span>
 				{/if}
 				
 				<div>
 					<div>
-						<p><a href="{link controller='Attachment' object=$attachment}{/link}"{if $attachment->isImage} title="{$attachment->filename}" class="jsImageViewer"{/if}>{$attachment->filename}</a></p>
+						<p><a href="{link controller='Attachment' object=$attachment isACP=0}{/link}"{if $attachment->isImage} title="{$attachment->filename}" class="jsImageViewer"{/if}>{$attachment->filename}</a></p>
 						<small>{@$attachment->filesize|filesize}</small>
 					</div>
 					
 					<ul>
 						<li><span class="icon icon16 icon-remove pointer jsTooltip jsDeleteButton " title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$attachment->attachmentID}" data-confirm-message="{lang}wcf.attachment.delete.sure{/lang}"></span></li>
-						<li><span class="icon icon16 icon-paste pointer jsTooltip jsButtonInsertAttachment" title="{lang}wcf.attachment.insert{/lang}" data-object-id="{@$attachment->attachmentID}" /></li>
+						<li><span class="icon icon16 icon-paste pointer jsTooltip jsButtonInsertAttachment" title="{lang}wcf.attachment.insert{/lang}" data-object-id="{@$attachment->attachmentID}"></span></li>
 					</ul>
 				</div>
 			</li>

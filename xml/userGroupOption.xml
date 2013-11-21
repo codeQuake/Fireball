@@ -94,6 +94,46 @@
         <defaultvalue>0</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
       </option>
+      <option name="admin.cms.content.canUploadAttachment">
+        <categoryname>admin.cms.content</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+        <enableoptions>admin.cms.content.attachmentMaxSize,admin.cms.content.allowedAttachmentExtensions, admin.cms.content.maxAttachmentCount</enableoptions>
+        <options>module_attachment</options>
+      </option>
+      <option name="admin.cms.content.attachmentMaxSize">
+        <categoryname>admin.cms.content</categoryname>
+        <optiontype>fileSize</optiontype>
+        <defaultvalue>1000000</defaultvalue>
+        <options>module_attachment</options>
+        <minvalue>10000</minvalue>
+      </option>
+
+      <option name="admin.cms.content.allowedAttachmentExtensions">        
+        <categoryname>admin.cms.content</categoryname>
+        <optiontype>textarea</optiontype>
+        <defaultvalue>
+          <![CDATA[gif
+jpg
+jpeg
+png
+bmp
+zip
+txt
+pdf]]>
+        </defaultvalue>
+        <options>module_attachment</options>
+        <wildcard><![CDATA[*]]></wildcard>
+      </option>
+
+      <option name="admin.cms.content.maxAttachmentCount">
+        <categoryname>admin.cms.content</categoryname>
+        <optiontype>integer</optiontype>
+        <defaultvalue>5</defaultvalue>
+        <options>module_attachment</options>
+        <minvalue>1</minvalue>
+        <maxvalue>100</maxvalue>
+      </option>
       
       <option name="admin.cms.style.canAddStylesheet">
         <categoryname>admin.cms.style</categoryname>

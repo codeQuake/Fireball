@@ -34,6 +34,14 @@
       <classname>cms\data\content\section\type\ModuleContentSectionType</classname>
     </type>
     
+    <!--attachments-->
+    <type>
+      <name>de.codequake.cms.content.section</name>
+      <definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
+      <classname>cms\system\attachment\ContentSectionAttachmentObjectType</classname>
+      <private>1</private>
+    </type>
+    
     <!--user online location-->
     <type>
       <name>de.codequake.cms.page</name>
