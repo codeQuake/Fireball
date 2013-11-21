@@ -17,9 +17,10 @@
 				'wcf.message.share.permalink.bbcode': '{lang}wcf.message.share.permalink.bbcode{/lang}',
 				'wcf.message.share.permalink.html': '{lang}wcf.message.share.permalink.html{/lang}',
 				'wcf.message.share.reddit': '{lang}wcf.message.share.reddit{/lang}',
-				'wcf.message.share.twitter': '{lang}wcf.message.share.twitter{/lang}'
-				'cms.news.ipAddress.title': '{lang}cms.news.ipAddress.title{/lang}'
-				'cms.news.ipAddress.news': '{lang}cms.news.ipAddress.news{/lang}
+				'wcf.message.share.twitter': '{lang}wcf.message.share.twitter{/lang}',
+				'cms.news.ipAddress.title': '{lang}cms.news.ipAddress.title{/lang}',
+				'cms.news.ipAddress.news': '{lang}cms.news.ipAddress.news{/lang}',
+				'cms.news.ipAddress.otherUsers': '{lang}cms.news.ipAddress.otherUsers{/lang}'
 			});
             new WCF.Action.Delete('cms\\data\\news\\NewsAction', '.jsNews');
 			new WCF.Message.Share.Content();
