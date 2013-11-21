@@ -25,7 +25,7 @@
     {/foreach}
 	
 	{if $page->showSidebar == 1}
-			{@$__boxSidebar}
+		{@$__boxSidebar}
 	{/if}
 {/capture}
 {/if}
