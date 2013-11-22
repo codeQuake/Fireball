@@ -76,8 +76,11 @@
     <item name="cms.acp.content.section.data.headline"><![CDATA[Überschrift]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Bild]]></item>
-    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>    
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Modul]]></item>
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
+    <item name="cms.acp.content.section.data.boxID"><![CDATA[Dashboardbox]]></item>
+    <item name="cms.acp.content.section.data.boxID.description"><![CDATA[Wählen Sie eine Dashboardbox. Die Auswahl passt sich der Ausrichtung des Inhaltsbereichs an.]]></item>
     <item name="cms.acp.content.section.data.moduleID"><![CDATA[Modul auswählen]]></item>
     <item name="cms.acp.content.section.data.moduleID.description"><![CDATA[Wählen Sie eines ihrer Module aus.]]></item>
     <item name="cms.acp.content.section.news.small"><![CDATA[Kompakte Auflistung]]></item>

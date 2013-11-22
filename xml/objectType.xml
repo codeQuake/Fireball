@@ -33,6 +33,12 @@
       <definitionname>de.codequake.cms.section.type</definitionname>
       <classname>cms\data\content\section\type\ModuleContentSectionType</classname>
     </type>
+
+    <type>
+      <name>de.codequake.cms.section.type.dashboard</name>
+      <definitionname>de.codequake.cms.section.type</definitionname>
+      <classname>cms\data\content\section\type\DashboardContentSectionType</classname>
+    </type>
     
     <!--attachments-->
     <type>

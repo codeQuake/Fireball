@@ -78,6 +78,9 @@
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Image]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Newslist]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Module]]></item>
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
+    <item name="cms.acp.content.section.data.boxID"><![CDATA[Dashboardbox]]></item>
+    <item name="cms.acp.content.section.data.boxID.description"><![CDATA[Choose a Dashboardbox. You can only choose boxes which match your contents position.]]></item>
     <item name="cms.acp.content.section.data.moduleID"><![CDATA[Choose module]]></item>
     <item name="cms.acp.content.section.data.moduleID.description"><![CDATA[]]></item>
     <item name="cms.acp.content.section.news.small"><![CDATA[Small list]]></item>
