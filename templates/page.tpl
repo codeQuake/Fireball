@@ -21,7 +21,7 @@
                     {@$section->getOutput()|language}
                 </div>
             {/foreach}
-        </fieldset>
+		</fieldset>
     {/foreach}
 	
 	{if $page->showSidebar == 1}
