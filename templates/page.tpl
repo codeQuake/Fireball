@@ -14,14 +14,13 @@
 {if $sidebarList|count || $page->showSidebar}
 {capture assign='sidebar'}
 	{foreach from=$sidebarList item=content}
-        <fieldset {if $content->cssID != ''}id="{$content->cssID}"{/if} class="contentItem dashboardBox{if $content->cssClasses != ''}{$content->cssClasses}{/if}">
-			<legend>{$content->getTitle()|language}</legend>
+        <div {if $content->cssID != ''}id="{$content->cssID}"{/if} class="contentItem dashboardBox{if $content->cssClasses != ''}{$content->cssClasses}{/if}">
             {foreach from=$content->getSections() item=section}
                 <div {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section>cssClasses != ''} class="contentSectionItem {$section->cssClasses}"{/if}>
                     {@$section->getOutput()|language}
                 </div>
             {/foreach}
-		</fieldset>
+		</div>
     {/foreach}
 	
 	{if $page->showSidebar == 1}
