@@ -59,8 +59,7 @@
     <item name="cms.acp.content.css"><![CDATA[CSS-Einstellungen]]></item>
     <item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
-    <item name="cms.acp.content.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
-    <item name="cms.acp.content.showOrder.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
+    <item name="cms.acp.content.optional.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.title"><![CDATA[Titel]]></item>
     <item name="cms.acp.content.section.edit"><![CDATA[Inhaltsabschnitt bearbeiten]]></item>
     <item name="cms.acp.content.content.section.add"><![CDATA[Inhaltsabschnitt zu '{$content->title|language}' hinzufügen]]></item>

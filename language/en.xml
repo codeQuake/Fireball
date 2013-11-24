@@ -60,7 +60,6 @@
     <item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Classes]]></item>
     <item name="cms.acp.content.showOrder"><![CDATA[Sortorder]]></item>
-    <item name="cms.acp.content.showOrder.showOrder"><![CDATA[Sortorder]]></item>
     <item name="cms.acp.content.title"><![CDATA[Title]]></item>
     <item name="cms.acp.content.section.edit"><![CDATA[Edit content section]]></item>
     <item name="cms.acp.content.content.section.add"><![CDATA[Add content section to '{$content->title|language}']]></item>
