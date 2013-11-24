@@ -156,6 +156,7 @@
   </category>
 
   <category name="cms.news">
+    <item name="cms.news.comments.noEntries "><![CDATA[No Entries.]]></item>
     <item name="cms.news.searchNews"><![CDATA[Search news]]></item>
     <item name="cms.news.category.categories"><![CDATA[Categories]]></item>
     <item name="cms.news.category.categories.description"><![CDATA[Choose one or more categories]]></item>
