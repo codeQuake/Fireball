@@ -1,5 +1,6 @@
 <?php
 namespace cms\data\content\section;
+use cms\data\content\Content;
 use cms\data\CMSDatabaseObject;
 use wcf\system\WCF;
 use wcf\data\object\type\ObjectTypeCache;
@@ -38,6 +39,10 @@ class ContentSection extends CMSDatabaseObject{
     
     public function getEditor(){
         return new ContentSectionEditor($this);
+    }
+    
+    public function getContent(){
+        return new Content($this->contentID);
     }
     
     
