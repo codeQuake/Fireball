@@ -4,6 +4,7 @@ use cms\data\content\section\ContentSection;
 use cms\data\content\Content;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\system\cache\builder\DashboardBoxCacheBuilder;
+use wcf\data\dashboard\box\DashboardBox;
 use wcf\system\WCF;
 use cms\page\PagePage;
 
@@ -58,8 +59,7 @@ class DashboardContentSectionType extends AbstractContentSectionType{
     
     public function getPreview($sectionID){
         $section = new ContentSection($sectionID);
-        $file = new File(intval($section->sectionData));
-        return '###'.$file->title.'###';
+        return '### DashboardBox-'.$section->sectionData.' ###';
     }
 
 }
