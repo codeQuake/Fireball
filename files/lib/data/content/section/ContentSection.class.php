@@ -4,7 +4,7 @@ use cms\data\content\Content;
 use cms\data\CMSDatabaseObject;
 use wcf\system\WCF;
 use wcf\data\object\type\ObjectTypeCache;
-
+use wcf\data\object\type\ObjectType;
 
 class ContentSection extends CMSDatabaseObject{
     protected static $databaseTableName = 'content_section';
@@ -43,6 +43,11 @@ class ContentSection extends CMSDatabaseObject{
     
     public function getContent(){
         return new Content($this->contentID);
+    }
+    
+    public function getObjectType(){
+        $type =  new ObjectType($this->sectionTypeID);
+        return $type->objectType;
     }
     
     
