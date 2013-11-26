@@ -177,8 +177,8 @@
 						<dt><label for="position">{lang}cms.acp.page.optional.sidebarOrientation{/lang}</label></dt>
 						<dd>
 							<select id="sidebarOrientation" name="sidebarOrientation">
-								<option value="sidebar" {if $sidebarOrientation =="right"}selected="selected"{/if}">{lang}cms.acp.page.sidebarOrientation.right{/lang}</option>
-								<option value="body" {if $sidebarOrientation =="left"}selected="selected"{/if}>{lang}cms.acp.page.sidebarOrientation.left{/lang}</option>
+								<option value="right" {if $sidebarOrientation =="right"}selected="selected"{/if}">{lang}cms.acp.page.sidebarOrientation.right{/lang}</option>
+								<option value="left" {if $sidebarOrientation =="left"}selected="selected"{/if}>{lang}cms.acp.page.sidebarOrientation.left{/lang}</option>
 							</select>
 						</dd>
 					</dl>

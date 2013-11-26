@@ -125,8 +125,8 @@ class PageEditForm extends AbstractForm{
                                                                                            'menuItem' => serialize($this->menuItem),
                                                                                            'parentID' => $this->parentID,
                                                                                            'layoutID' => $this->layoutID,
-                                                                                           'showSidebar' =>$this->showSidebar,
-                                                                                           'sidebarOrientation' =>$this->sidebarOrientation,
+                                                                                           'showSidebar' => $this->showSidebar,
+                                                                                           'sidebarOrientation' => $this->sidebarOrientation,
                                                                                            'robots' => $this->robots,
                                                                                             'isCommentable' => $this->isCommentable)));
         $objectAction->executeAction();
@@ -181,8 +181,8 @@ class PageEditForm extends AbstractForm{
                                     'metaDescription' => $this->metaDescription,
                                     'metaKeywords' => $this->metaKeywords,
                                     'menuItem' => $this->menuItem['has'],
-                                    'showSidebar' =>$this->showSidebar,
-                                    'sidebarOrientation' =>$this->sidebarOrientation,
+                                    'showSidebar' => $this->showSidebar,
+                                    'sidebarOrientation' => $this->sidebarOrientation,
                                     'menuID' => isset($this->menuItem['id']) ? $this->menuItem['id'] : 0,
                                     'page' => $this->page,
                                     'layoutList' => $this->layoutList,

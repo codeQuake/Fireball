@@ -44,7 +44,7 @@
     <instruction type="sql">install.sql</instruction>
   </instructions>
   
-  <instructions type="update" fromversion="1.0.0 Alpha 4">
+  <instructions type="update" fromversion="1.0.0 Alpha 3">
     <!--lang-->
     <instruction type="language">language/*.xml</instruction>
 

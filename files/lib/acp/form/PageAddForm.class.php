@@ -101,8 +101,8 @@ class PageAddForm extends AbstractForm{
                        'showOrder' => $this->showOrder,
                        'layoutID' => $this->layoutID,
                        'parentID' => $this->parentID,
-                       'showSidebar' =>$this->showSidebar,
-                       'sidebarOrientation' =>$this->sidebarOrientation,
+                       'showSidebar' => $this->showSidebar,
+                       'sidebarOrientation' => $this->sidebarOrientation,
                        'robots' => $this->robots,
                        'isCommentable' => $this->isCommentable);
                        
