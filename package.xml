@@ -5,7 +5,7 @@
     <!--codename: Fireball-->
     <packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
     <isapplication>1</isapplication>
-    <version>1.0.0 Beta 1</version>
+    <version>1.0.0 Alpha 4</version>
     <date>2013-11-26</date>
   </packageinformation>
   <authorinformation>
@@ -65,6 +65,6 @@
     <instruction type="aclOption">xml/aclOption.xml</instruction>
     
     <!--sql-->
-    <instruction type="sql">updateA4-B1.sql</instruction>
+    <instruction type="sql">updateA3-A4.sql</instruction>
   </instructions>
 </package>
