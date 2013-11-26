@@ -25,6 +25,7 @@ class PageEditForm extends AbstractForm{
     public $description = '';
     public $metaDescription = '';
     public $showSidebar = 0;
+    public $sidebarOrientation = 'right';
     public $metaKeywords = '';
     public $invisible = 0;
     public $layoutID = 0;
@@ -66,6 +67,7 @@ class PageEditForm extends AbstractForm{
         $this->robots = $this->page->robots;
         $this->layoutID = $this->page->layoutID;
         $this->showSidebar = $this->page->showSidebar;
+        $this->sidebarOrientation = $this->page->sidebarOrientation;
         $this->isCommentable = $this->page->isCommentable;
         $this->menuItem = @unserialize($this->page->menuItem);
         if(!isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
@@ -94,6 +96,7 @@ class PageEditForm extends AbstractForm{
         if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
         if(isset($_REQUEST['menuID'])) $this->menuItem['id'] = intval($_REQUEST['menuID']);
         if(isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);        
+        if(isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);        
         if(isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
     }
     
@@ -122,7 +125,8 @@ class PageEditForm extends AbstractForm{
                                                                                            'menuItem' => serialize($this->menuItem),
                                                                                            'parentID' => $this->parentID,
                                                                                            'layoutID' => $this->layoutID,
-                                                                                            'showSidebar' =>$this->showSidebar,
+                                                                                           'showSidebar' =>$this->showSidebar,
+                                                                                           'sidebarOrientation' =>$this->sidebarOrientation,
                                                                                            'robots' => $this->robots,
                                                                                             'isCommentable' => $this->isCommentable)));
         $objectAction->executeAction();
@@ -178,6 +182,7 @@ class PageEditForm extends AbstractForm{
                                     'metaKeywords' => $this->metaKeywords,
                                     'menuItem' => $this->menuItem['has'],
                                     'showSidebar' =>$this->showSidebar,
+                                    'sidebarOrientation' =>$this->sidebarOrientation,
                                     'menuID' => isset($this->menuItem['id']) ? $this->menuItem['id'] : 0,
                                     'page' => $this->page,
                                     'layoutList' => $this->layoutList,

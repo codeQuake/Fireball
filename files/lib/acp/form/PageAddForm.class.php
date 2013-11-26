@@ -29,6 +29,7 @@ class PageAddForm extends AbstractForm{
     public $invisible = 0;
     public $robots = 'index,follow';
     public $showSidebar = 0;
+    public $sidebarOrientation = 'right';
     public $showOrder = 0;
     public $parentID = 0;
     public $menuItem = array();
@@ -71,6 +72,7 @@ class PageAddForm extends AbstractForm{
         if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
         if(isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
         if(isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
+        if(isset($_POST['sidebarOrientation'])) $this->showSidebar = StringUtil::trim($_POST['sidebarOrientation']);
         if(isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
     }
     
@@ -100,6 +102,7 @@ class PageAddForm extends AbstractForm{
                        'layoutID' => $this->layoutID,
                        'parentID' => $this->parentID,
                        'showSidebar' =>$this->showSidebar,
+                       'sidebarOrientation' =>$this->sidebarOrientation,
                        'robots' => $this->robots,
                        'isCommentable' => $this->isCommentable);
                        
@@ -139,6 +142,7 @@ class PageAddForm extends AbstractForm{
         WCF::getTPL()->assign('success', true);
         
         $this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = '';
+        $this->sidebarOrientation = 'right';
         $this->invisible = $this->parentID= $this->showOrder = $this->showSidebar = 0;
         $this->menuItem = array();
         I18nHandler::getInstance()->reset();
@@ -157,6 +161,7 @@ class PageAddForm extends AbstractForm{
                                     'menuItem' => $this->menuItem['has'],
                                     'layoutID' => $this->layoutID,
                                     'showSidebar' => $this->showSidebar,
+                                    'sidebarOrientation' => $this->sidebarOrientation,
                                     'pageList' => $this->pageList,
                                     'layoutList' => $this->layoutList,
                                     'isCommentable' => $this->isCommentable));

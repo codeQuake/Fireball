@@ -49,6 +49,9 @@
     <item name="cms.acp.page.optional.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.page.optional.menuItem"><![CDATA[Menüitem erstellen]]></item>
     <item name="cms.acp.page.optional.showSidebar"><![CDATA[Sidebar anzeigen]]></item>
+    <item name="cms.acp.page.optional.sidebarOrientation"><![CDATA[Sidebarausrichtung]]></item>
+    <item name="cms.acp.page.sidebarOrientation.right"><![CDATA[Rechts]]></item>
+    <item name="cms.acp.page.sidebarOrientation.left"><![CDATA[Links]]></item>
     <item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
     <item name="cms.acp.page.optional.isCommentable"><![CDATA[Kommentare erlauben]]></item>
     <item name="cms.acp.page.optional.layoutID"><![CDATA[Layout auswählen]]></item>

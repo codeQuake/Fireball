@@ -36,7 +36,7 @@
 {/capture}
 {/if}
 
-{include file='header' sidebarOrientation=right}
+{include file='header' sidebarOrientation=$page->sidebarOrientation}
 
 
 <header class="boxHeadline">

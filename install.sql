@@ -12,6 +12,7 @@ robots ENUM('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollo
 showOrder INT(10) DEFAULT 0,
 isHome INT(1) DEFAULT 0,
 showSidebar INT(1) DEFAULT 0,
+sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
 layoutID INT(10),
 menuItem MEDIUMTEXT,
 isCommentable TINYINT(1) NOT NULL DEFAULT 0,

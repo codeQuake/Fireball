@@ -173,6 +173,15 @@
 							<input type="checkbox" name="showSidebar" id="showSidebar" value="1" {if $showSidebar == 1}checked="checked"{/if} />
 						</dd>
 					</dl>
+					<dl  {if $errorField == 'sidebarOrientation'}class="formError"{/if}>
+						<dt><label for="position">{lang}cms.acp.page.optional.sidebarOrientation{/lang}</label></dt>
+						<dd>
+							<select id="sidebarOrientation" name="sidebarOrientation">
+								<option value="sidebar" {if $sidebarOrientation =="right"}selected="selected"{/if}">{lang}cms.acp.page.sidebarOrientation.right{/lang}</option>
+								<option value="body" {if $sidebarOrientation =="left"}selected="selected"{/if}>{lang}cms.acp.page.sidebarOrientation.left{/lang}</option>
+							</select>
+						</dd>
+					</dl>
 					<dl  {if $errorField == 'isCommentable'}class="formError"{/if}>
 						<dt><label for="isCommentable">{lang}cms.acp.page.optional.isCommentable{/lang}</label></dt>
 						<dd>
