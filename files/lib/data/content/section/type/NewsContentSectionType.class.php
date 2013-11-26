@@ -57,6 +57,7 @@ class NewsContentSectionType extends AbstractContentSectionType{
     public function getOutput($sectionID){
         $section = new ContentSection($sectionID);
         $list = new CategoryNewsList(@unserialize($section->sectionData));
+        $list->sqlLimit = CMS_NEWS_LATEST_LIMIT;
         $list->readObjects();
         $list = $list->getObjects();
         $data = @unserialize($section->additionalData);

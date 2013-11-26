@@ -24,7 +24,8 @@
       </option>
       
       <option name="cms_install_date">
-        <optiontype>hidden</optiontype>
+        <optiontype>integer</optiontype>
+        <hidden>1</hidden>
         <categoryname>cms</categoryname>
       </option>
       
