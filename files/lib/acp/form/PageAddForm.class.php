@@ -72,7 +72,7 @@ class PageAddForm extends AbstractForm{
         if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
         if(isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
         if(isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
-        if(isset($_POST['sidebarOrientation'])) $this->showSidebar = StringUtil::trim($_POST['sidebarOrientation']);
+        if(isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);
         if(isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
     }
     
