@@ -151,7 +151,7 @@
   </category>
 
   <category name="cms.page">
-    <item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" title="">Software: <strong>Fireball CMS {@PACKAGE_VERSION}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
+    <item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
     <item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
     <item name="cms.page.news"><![CDATA[Nachrichten]]></item>
     <item name="cms.page.comments"><![CDATA[Kommentare]]></item>
@@ -257,6 +257,7 @@
   <category name="wcf.acp.option">
     <item name="wcf.acp.option.category.cms"><![CDATA[CMS]]></item>
     <item name="wcf.acp.option.category.cms.news"><![CDATA[Nachrichten]]></item>
+    <item name="wcf.acp.option.category.cms.general"><![CDATA[Allgemeine Einstellungen]]></item>
     <item name="wcf.acp.option.cms_news_per_page"><![CDATA[Nachrichten pro Seite]]></item>
     <item name="wcf.acp.option.cms_news_latest_limit"><![CDATA[Anzahl neuster Nachrichten]]></item>
     <item name="wcf.acp.option.cms_news_latest_limit.description"><![CDATA[Anzahl neuster Nachrichten in der Dashboard Box]]></item>

@@ -3,12 +3,16 @@
   <import>
     <categories>
       <category name="cms"></category>
+      <category name="cms.general">
+        <parent>cms</parent>
+      </category>
       <category name="cms.news">
         <parent>cms</parent>
         <options>module_news</options>
       </category>
+      
     </categories>
-
+    
     <options>
       <option name="cms_news_per_page">
         <optiontype>integer</optiontype>
