@@ -180,7 +180,7 @@ class PageEditForm extends AbstractForm{
                                     'description' => $this->description,
                                     'metaDescription' => $this->metaDescription,
                                     'metaKeywords' => $this->metaKeywords,
-                                    'menuItem' => $this->menuItem['has'],
+                                    'menu' => $this->menuItem['has'],
                                     'showSidebar' => $this->showSidebar,
                                     'sidebarOrientation' => $this->sidebarOrientation,
                                     'menuID' => isset($this->menuItem['id']) ? $this->menuItem['id'] : 0,

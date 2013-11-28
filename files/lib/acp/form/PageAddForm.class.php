@@ -158,7 +158,7 @@ class PageAddForm extends AbstractForm{
                                     'robots' => $this->robots,
                                     'parentID' => $this->parentID,
                                     'showOrder' => $this->showOrder,
-                                    'menuItem' => $this->menuItem['has'],
+                                    'menu' => $this->menuItem['has'],
                                     'layoutID' => $this->layoutID,
                                     'showSidebar' => $this->showSidebar,
                                     'sidebarOrientation' => $this->sidebarOrientation,
