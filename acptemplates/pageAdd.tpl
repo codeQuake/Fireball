@@ -165,7 +165,7 @@
 						<dt><label for="menuItem">{lang}cms.acp.page.optional.menuItem{/lang}</label></dt>
 						<dd>
 							<input type="checkbox" name="menuItem" id="menuItem" value="1" {if $menu == 1}checked="checked"{/if} />
-						</dd>8
+						</dd>
 					</dl>					
 					<dl  {if $errorField == 'showSidebar'}class="formError"{/if}>
 						<dt><label for="showSidebar">{lang}cms.acp.page.optional.showSidebar{/lang}</label></dt>
