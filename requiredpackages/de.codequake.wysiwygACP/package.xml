@@ -6,8 +6,8 @@
         <packagedescription><![CDATA[Stellt den WYSIWYG Editor im ACP zur Verfügung]]></packagedescription>
         
         <isapplication>0</isapplication>
-        <version>1.0.0 Beta 2</version>
-        <date>2013-10-11</date>    
+        <version>1.0.0</version>
+        <date>2013-12-12</date>    
     </packageinformation>
     
     <authorinformation>
@@ -16,7 +16,7 @@
     </authorinformation>
     
     <requiredpackages>
-        <requiredpackage minversion="2.0.0 RC 1">com.woltlab.wcf</requiredpackage>
+        <requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
     </requiredpackages>
     
     <instructions type="install">
@@ -24,7 +24,7 @@
         <instruction type="acpTemplate">acptemplates.tar</instruction>
     </instructions>
 
-    <instructions type="update" fromversion="1.0.0 Beta 1">
+    <instructions type="update" fromversion="1.0.0 Beta 2">
       <!-- tar -->
       <instruction type="acpTemplate">acptemplates.tar</instruction>
     </instructions>
