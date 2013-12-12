@@ -89,7 +89,7 @@
     <item name="cms.acp.content.section.css"><![CDATA[CSS]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.section.css.cssClasses"><![CDATA[CSS-Classes]]></item>
-    <item name="cms.acp.content.section.optional.showOrder"><![CDATA[Sortorder]]></item>
+    <item name="cms.acp.content.section.showOrder.showOrder"><![CDATA[Sortorder]]></item>
     <item name="cms.acp.content.section.add"><![CDATA[Add content section]]></item>
     <item name="cms.acp.content.edit"><![CDATA[Edit content]]></item>
     <item name="cms.acp.content.section.data.hlType"><![CDATA[Headline type]]></item>
