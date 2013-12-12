@@ -39,7 +39,7 @@
 					</dd>
 				</dl>
 		</fieldset>
-
+    {include file='codemirror' codemirrorMode='php' codemirrorSelector='#php'}
         <fieldset class="marginTop">
 				<legend>{lang}cms.acp.module.tpl{/lang}</legend>
 				
@@ -51,7 +51,6 @@
 				</dl>
 		</fieldset>
     </div>
-    {include file='codemirror' codemirrorMode='php' codemirrorSelector='#php'}
     {include file='codemirror' codemirrorMode='smarty' codemirrorSelector='#tpl'}
 <div class="formSubmit">
 		    <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
