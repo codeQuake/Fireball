@@ -141,12 +141,6 @@
       <category>de.codequake.cms</category>
     </type>
     <type>
-      <name>de.codequake.cms.page.comment.notification</name>
-      <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
-      <classname>cms\system\user\notification\object\type\PageCommentUserNotificationObjectType</classname>
-      <category>de.codequake.cms</category>
-    </type>
-    <type>
       <name>de.codequake.cms.news.comment.response.notification</name>
       <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
       <classname>cms\system\user\notification\object\type\NewsCommentResponseUserNotificationObjectType</classname>

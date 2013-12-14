@@ -5,7 +5,7 @@
     <!--codename: Fireball-->
     <packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
     <isapplication>1</isapplication>
-    <version>1.0.0 Beta 2</version>
+    <version>1.0.0 Beta 1</version>
     <date>2013-12-12</date>
   </packageinformation>
   <authorinformation>
@@ -36,6 +36,7 @@
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     <instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
     <instruction type="objectType">xml/objectType.xml</instruction>
+    <instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
     <instruction type="templateListener">xml/templateListener.xml</instruction>
     <instruction type="aclOption">xml/aclOption.xml</instruction>
     <instruction type="script">acp/install_de.codequake.cms.php</instruction>
@@ -44,7 +45,7 @@
     <instruction type="sql">install.sql</instruction>
   </instructions>
   
-  <instructions type="update" fromversion="1.0.0 Beta 1">
+  <instructions type="update" fromversion="1.0.0 Beta 2">
     <!--lang-->
     <instruction type="language">language/*.xml</instruction>
 
@@ -53,5 +54,6 @@
 
     <!--xml-->
     <instruction type="objectType">xml/objectType.xml</instruction>
+    <instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
   </instructions>
 </package>
