@@ -132,6 +132,33 @@
       <definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
       <classname>cms\system\comment\manager\PageCommentManager</classname>
     </type>
+    
+      <!--Notifications-->
+    <type>
+      <name>de.codequake.cms.news.comment.notification</name>
+      <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+      <classname>cms\system\user\notification\object\type\NewsCommentUserNotificationObjectType</classname>
+      <category>de.codequake.cms</category>
+    </type>
+    <type>
+      <name>de.codequake.cms.page.comment.notification</name>
+      <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+      <classname>cms\system\user\notification\object\type\PageCommentUserNotificationObjectType</classname>
+      <category>de.codequake.cms</category>
+    </type>
+    <type>
+      <name>de.codequake.cms.news.comment.response.notification</name>
+      <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+      <classname>cms\system\user\notification\object\type\NewsCommentResponseUserNotificationObjectType</classname>
+      <category>de.codequake.cms</category>
+    </type>
+    <type>
+      <name>de.codequake.cms.page.comment.response.notification</name>
+      <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+      <classname>cms\system\user\notification\object\type\PageCommentResponseUserNotificationObjectType</classname>
+      <category>de.codequake.cms</category>
+    </type>
+    
     <!--Visit Tracker-->
     <type>
       <name>de.codequake.cms.news</name>
@@ -181,7 +208,7 @@
         <classname>cms\data\news\LikeableNewsProvider</classname>
       </type>
 
-    <!--serach-->
+    <!--search-->
     <type>
       <name>de.codequake.cms.news</name>
       <definitionname>com.woltlab.wcf.searchableObjectType</definitionname>

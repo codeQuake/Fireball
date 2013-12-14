@@ -156,6 +156,24 @@
     <item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
     <item name="cms.page.news"><![CDATA[Nachrichten]]></item>
     <item name="cms.page.comments"><![CDATA[Kommentare]]></item>
+    <item name="cms.page.comment.notification.title"><![CDATA[Neuer Kommentar (Seite)]]></item>
+    <item name="cms.page.comment.notification.message"><![CDATA[Hat einen Kommentar auf der Seite „{$page->getTitle()|language}“ hinterlassen.]]></item>
+    <item name="cms.page.comment.notification.mail">
+      <![CDATA[{@$author->username} hat einen Kommentar auf der Seite "{@$page->getTitle()}" hinterlassen:
+{link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}]]>
+    </item>
+    <item name="cms.page.commentResponse.notification.title"><![CDATA[Neue Antwort (Seite)]]></item>
+    <item name="cms.page.commentResponse.notification.message"><![CDATA[Hat eine Antwort zu Ihrem Kommentar auf der Seite „{$page->getTitle()|language}“ verfasst.]]></item>
+    <item name="cms.page.commentResponse.notification.mail">
+      <![CDATA[{@$author->username} hat eine Antwort zu Ihrem Kommentar auf der Seite "{@$page->getTitle|language}" verfasst:
+{link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}]]>
+    </item>
+    <item name="cms.page.commentResponseOwner.notification.title"><![CDATA[Neue Antwort (Seite)]]></item>
+    <item name="cms.page.commentResponseOwner.notification.message"><![CDATA[Hat eine Antwort zum Kommentar von „{$commentAuthor->username}“ auf der Seite „{$page->getTitle()|language}“ verfasst.]]></item>
+    <item name="cms.page.commentResponseOwner.notification.mail">
+      <![CDATA[{@$author->username} hat eine Antwort zum Kommentar von "{@$commentAuthor->username}" auf der Seite "{@$page->getTitle()|language}" verfasst:
+{link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}]]>
+    </item>
   </category>
 
   <category name="cms.news">
@@ -176,6 +194,24 @@
     <item name="cms.news.ipAddress.otherUsers"><![CDATA[Andere Benutzer mit dieser IP->Adresse]]></item>
     <item name="cms.news.delete.sure"><![CDATA[Wollen Sie diese Nachricht wirklich löschen?]]></item>
     <item name="cms.news.comments.noEntries "><![CDATA[Keine Kommentare vorhanden]]></item>
+    <item name="cms.news.comment.notification.title"><![CDATA[Neuer Kommentar (Nachricht)]]></item>
+    <item name="cms.news.comment.notification.message"><![CDATA[Hat einen Kommentar zu Ihrer Nachricht „{$news->subject}“ verfasst.]]></item>
+    <item name="cms.news.comment.notification.mail">
+      <![CDATA[{@$author->username} hat einen Kommentar zu Ihrer Nachricht "{@$news->subject}" verfasst:
+{link application='cms' controller='News' object=$news encode=false forceFrontend=true}#comments{/link}]]>
+    </item>
+    <item name="cms.news.commentResponse.notification.title"><![CDATA[Neue Antwort (Nachricht)]]></item>
+    <item name="cms.news.commentResponse.notification.message"><![CDATA[Hat eine Antwort zu Ihrem Kommentar zur Nachricht „{$news->subject}“ verfasst.]]></item>
+    <item name="cms.news.commentResponse.notification.mail">
+      <![CDATA[{@$author->username} hat eine Antwort zu Ihrem Kommentar zur Nachricht "{@$news->subject}" verfasst:
+{link application='cms' controller='News' object=$news encode=false forceFrontend=true}#comments{/link}]]>
+    </item>
+    <item name="cms.news.commentResponseOwner.notification.title"><![CDATA[Neue Antwort (Nachricht)]]></item>
+    <item name="cms.news.commentResponseOwner.notification.message"><![CDATA[Hat eine Antwort zum Kommentar von „{$commentAuthor->username}“ zur Nachricht „{$news->subject}“ verfasst.]]></item>
+    <item name="cms.news.commentResponseOwner.notification.mail">
+      <![CDATA[{@$author->username} hat eine Antwort zum Kommentar von "{@$commentAuthor->username}" zur Nachricht "{@$news->subject}" verfasst:
+{link application='cms' controller='News' object=$news encode=false forceFrontend=true}#comments{/link}]]>
+    </item>
   </category>
 
   <category name="cms.content">
