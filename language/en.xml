@@ -344,4 +344,11 @@
   <category name="wcf.search">
     <item name="wcf.search.type.de.codequake.cms.news"><![CDATA[News]]></item>
   </category>
+  <<category name="wcf.user.notification">
+    <item name="wcf.user.notification.de.codequake.cms"><![CDATA[CMS]]></item>
+    <item name="wcf.user.notification.de.codequake.cms.news.comment.notification.comment"><![CDATA[New comment to one of your news]]></item>
+    <item name="wcf.user.notification.de.codequake.cms.news.comment.response.notification.commentResponse"><![CDATA[New response to one of your comments to a news]]></item>
+    <item name="wcf.user.notification.de.codequake.cms.news.comment.response.notification.commentResponseOwner"><![CDATA[New response to a comment to one of your news]]></item>
+    <item name="wcf.user.notification.de.codequake.cms.page.comment.response.notification.commentResponse"><![CDATA[New response to a comment on a page]]></item>
+  </category>
 </language>
