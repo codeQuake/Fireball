@@ -19,8 +19,6 @@ class NewsListPage extends SortablePage{
     public $enableTracking = true;
     public $neededModules = array('MODULE_NEWS');
     public $itemsPerPage = CMS_NEWS_PER_PAGE;
-    public $sqlOrderBy = 'time';
-    public $sortOder = 'DESC';
     public $validSortFields = array('username', 'newsID', 'time', 'subject', 'clicks', 'comments');
 
     
@@ -61,7 +59,6 @@ class NewsListPage extends SortablePage{
 	}
     
     protected function readObjects() {
-		$this->sqlOrderBy = 'news.'.$this->sqlOrderBy;
 		parent::readObjects();
 	}
     

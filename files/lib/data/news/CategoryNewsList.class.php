@@ -5,7 +5,6 @@ use wcf\system\WCF;
 
 class CategoryNewsList extends ViewableNewsList{
 
-
     public function __construct(array $categoryIDs) {
         parent::__construct();
         $this->sqlSelects .=  ", news_to_category.*";
