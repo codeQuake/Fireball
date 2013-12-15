@@ -106,6 +106,7 @@
                                 <div>
                                     {@$news->getFormattedMessage()}
                                 </div>
+								{include file='attachments'}
                                <div class="messageFooter"></div>
                                 <footer class="messageOptions">
                                     <nav class="buttonGroupNavigation jsMobileNavigation">
