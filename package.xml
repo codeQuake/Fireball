@@ -55,5 +55,6 @@
     <!--xml-->
     <instruction type="objectType">xml/objectType.xml</instruction>
     <instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
+    <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
   </instructions>
 </package>

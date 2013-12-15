@@ -45,7 +45,11 @@
       <name>de.codequake.cms.content.section</name>
       <definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
       <classname>cms\system\attachment\ContentSectionAttachmentObjectType</classname>
-      <private>1</private>
+    </type>
+    <type>
+      <name>de.codequake.cms.news</name>
+      <definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
+      <classname>cms\system\attachment\NewsAttachmentObjectType</classname>
     </type>
     
     <!--user online location-->
