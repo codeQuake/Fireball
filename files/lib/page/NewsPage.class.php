@@ -42,6 +42,7 @@ class NewsPage extends AbstractPage{
     
     public function readData(){
         parent::readData();
+        
         WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), 
                                                             LinkHandler::getInstance()->getLink('NewsCategoryList', array('application' => 'cms'))));
                                                             
@@ -91,6 +92,7 @@ class NewsPage extends AbstractPage{
                                     'commentObjectTypeID' => $this->commentObjectTypeID,
                                     'tags' => $this->tags,
                                     'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),
+                                    'attachmentList' => $this->news->getAttachments(),
                                     'allowSpidersToIndexThisPage' => true,
                                     'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.news.news'),
                                     'sidebarName' => 'de.codequake.cms.news.news'));

@@ -11,6 +11,7 @@ use wcf\system\request\LinkHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\category\CategoryHandler;
 use wcf\util\ArrayUtil;
+use wcf\util\StringUtil;
 
 class NewsAddForm extends MessageForm{
 

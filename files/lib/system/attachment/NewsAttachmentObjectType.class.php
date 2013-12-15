@@ -5,7 +5,7 @@ use wcf\util\ArrayUtil;
 use cms\data\news\News;
 use wcf\system\attachment\AbstractAttachmentObjectType;
 
-class NewsSectionAttachmentObjectType extends AbstractAttachmentObjectType {
+class NewsAttachmentObjectType extends AbstractAttachmentObjectType {
 
     public function getMaxSize() {
             return WCF::getSession()->getPermission('user.cms.news.attachmentMaxSize');

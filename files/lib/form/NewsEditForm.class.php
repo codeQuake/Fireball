@@ -20,14 +20,15 @@ class NewsEditForm extends NewsAddForm{
     public function readParameters(){
         parent::readParameters();
        if (isset($_REQUEST['id'])) $this->newsID = intval($_REQUEST['id']);
-       if($this->newsID = 0) throw new IllegalLinkException();
-       // set attachment object id
-        $this->attachmentObjectID = $this->newsID;
+       if($this->newsID == 0) throw new IllegalLinkException();
     }
     
     public function readData(){
         parent::readData();
         $this->news = new News($this->newsID);
+        
+       // set attachment object id
+        $this->attachmentObjectID = $this->newsID;
         $this->subject = $this->news->subject;
         $this->text = $this->news->message;
         $this->enableBBCodes = $this->news->enableBBCodes;
