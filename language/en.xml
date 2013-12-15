@@ -273,6 +273,11 @@
     <item name="wcf.acp.group.option.admin.cms.file.canAddFile"><![CDATA[Can manage files]]></item>
     <item name="wcf.acp.group.option.admin.cms.file.allowedTypes"><![CDATA[Allowed file extensions]]></item>
     <item name="wcf.acp.group.option.category.admin.cms.file"><![CDATA[Files]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.canUploadAttachment"><![CDATA[Can attach files]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.attachmentMaxSize"><![CDATA[Maximum filesize]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.allowedAttachmentExtensions"><![CDATA[Allowed file extensions]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.canDownloadAttachments"><![CDATA[Can download attachments]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.maxAttachmentCount"><![CDATA[Maximum number of attachments per news]]></item>
     <item name="wcf.acp.group.option.user.cms.content.canDownloadAttachments"><![CDATA[Can download attachments]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.canManageModule"><![CDATA[Can manage modules]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.canUploadAttachment"><![CDATA[Can attach files]]></item>

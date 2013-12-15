@@ -208,51 +208,7 @@ pdf]]></admindefaultvalue>
         <defaultvalue>1</defaultvalue>
         <admindefaultvalue>1</admindefaultvalue>
       </option>
-      <option name="user.cms.news.canUploadAttachment">
-        <categoryname>user.cms.news</categoryname>
-        <optiontype>boolean</optiontype>
-        <defaultvalue>1</defaultvalue>
-        <enableoptions>user.cms.news.attachmentMaxSize,user.cms.news.allowedAttachmentExtensions, user.cms.news.maxAttachmentCount</enableoptions>
-        <options>module_attachment</options>
-      </option>
-      <option name="user.cms.news.attachmentMaxSize">
-        <categoryname>user.cms.news</categoryname>
-        <optiontype>fileSize</optiontype>
-        <defaultvalue>1000000</defaultvalue>
-        <options>module_attachment</options>
-        <minvalue>10000</minvalue>
-      </option>
-
-      <option name="user.cms.news.allowedAttachmentExtensions">
-        <categoryname>user.cms.news</categoryname>
-        <optiontype>textarea</optiontype>
-        <defaultvalue>
-          <![CDATA[gif
-jpg
-jpeg
-png
-bmp
-zip
-txt
-pdf]]>
-        </defaultvalue>
-        <options>module_attachment</options>
-        <wildcard><![CDATA[*]]></wildcard>
-      </option>
-      <option name="user.cms.news.canDownloadAttachments">
-        <categoryname>user.cms.news</categoryname>
-        <optiontype>boolean</optiontype>
-        <defaultvalue>1</defaultvalue>
-        <admindefaultvalue>1</admindefaultvalue>
-      </option>
-      <option name="user.cms.news.maxAttachmentCount">
-        <categoryname>user.cms.news</categoryname>
-        <optiontype>integer</optiontype>
-        <defaultvalue>5</defaultvalue>
-        <options>module_attachment</options>
-        <minvalue>1</minvalue>
-        <maxvalue>100</maxvalue>
-      </option>
+      
       <option name="user.cms.content.canDownloadAttachments">
         <categoryname>user.cms.content</categoryname>
         <optiontype>boolean</optiontype>
@@ -310,6 +266,51 @@ pdf]]>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
         <options>module_news</options>
+      </option>
+      <option name="user.cms.news.canUploadAttachment">
+        <categoryname>user.cms.news</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+        <enableoptions>user.cms.news.attachmentMaxSize,user.cms.news.allowedAttachmentExtensions, user.cms.news.maxAttachmentCount</enableoptions>
+        <options>module_attachment</options>
+      </option>
+      <option name="user.cms.news.attachmentMaxSize">
+        <categoryname>user.cms.news</categoryname>
+        <optiontype>fileSize</optiontype>
+        <defaultvalue>1000000</defaultvalue>
+        <options>module_attachment</options>
+        <minvalue>10000</minvalue>
+      </option>
+
+      <option name="user.cms.news.allowedAttachmentExtensions">
+        <categoryname>user.cms.news</categoryname>
+        <optiontype>textarea</optiontype>
+        <defaultvalue>
+          <![CDATA[gif
+jpg
+jpeg
+png
+bmp
+zip
+txt
+pdf]]>
+        </defaultvalue>
+        <options>module_attachment</options>
+        <wildcard><![CDATA[*]]></wildcard>
+      </option>
+      <option name="user.cms.news.canDownloadAttachments">
+        <categoryname>user.cms.news</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+        <admindefaultvalue>1</admindefaultvalue>
+      </option>
+      <option name="user.cms.news.maxAttachmentCount">
+        <categoryname>user.cms.news</categoryname>
+        <optiontype>integer</optiontype>
+        <defaultvalue>5</defaultvalue>
+        <options>module_attachment</options>
+        <minvalue>1</minvalue>
+        <maxvalue>100</maxvalue>
       </option>
       <!--mod-->
       <option name="mod.cms.page.canModeratePage">

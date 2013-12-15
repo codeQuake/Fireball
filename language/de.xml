@@ -89,7 +89,7 @@
     <item name="cms.acp.content.section.css"><![CDATA[CSS-Einstellungen]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.section.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
-     <item name="cms.acp.content.section.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
+    <item name="cms.acp.content.section.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.section.showOrder.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.section.add"><![CDATA[Inhaltsabschnitt hinzufügen]]></item>
     <item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
@@ -273,6 +273,11 @@
     <item name="wcf.acp.group.option.admin.cms.file.canAddFile"><![CDATA[Kann Dateien verwalten]]></item>
     <item name="wcf.acp.group.option.admin.cms.file.allowedTypes"><![CDATA[Erlaubte Dateitypen]]></item>
     <item name="wcf.acp.group.option.category.admin.cms.file"><![CDATA[Dateien]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.canUploadAttachment"><![CDATA[Kann Dateien anhängen]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.attachmentMaxSize"><![CDATA[Maximale Dateianhangsgröße]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.allowedAttachmentExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.canDownloadAttachments"><![CDATA[Kann Dateianhänge herunterladen]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.maxAttachmentCount"><![CDATA[Maximale Anzahl an Dateianhängen pro Nachricht]]></item>
     <item name="wcf.acp.group.option.user.cms.content.canDownloadAttachments"><![CDATA[Kann Dateianhänge herunterladen]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.canManageModule"><![CDATA[Kann Module verwalten]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.canUploadAttachment"><![CDATA[Kann Dateien anhängen]]></item>
