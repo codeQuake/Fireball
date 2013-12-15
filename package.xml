@@ -5,8 +5,8 @@
     <!--codename: Fireball-->
     <packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
     <isapplication>1</isapplication>
-    <version>1.0.0 Beta 1</version>
-    <date>2013-12-12</date>
+    <version>1.0.0 Beta 2</version>
+    <date>2013-12-15</date>
   </packageinformation>
   <authorinformation>
     <author><![CDATA[Jens Krumsieck]]></author>
@@ -56,5 +56,7 @@
     <instruction type="objectType">xml/objectType.xml</instruction>
     <instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+    <!--others-->
+    <instruction type="sql">update-b1-b2.sql</instruction>
   </instructions>
 </package>
