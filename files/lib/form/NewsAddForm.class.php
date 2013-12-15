@@ -83,6 +83,7 @@ class NewsAddForm extends MessageForm{
     
     public function save(){
         parent::save();
+        
         $data = array('languageID' => $this->languageID,
                        'subject' => $this->subject,
                        'time' => TIME_NOW,

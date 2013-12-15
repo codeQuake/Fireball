@@ -25,9 +25,6 @@ class NewsAction extends AbstractDatabaseObjectAction{
         // count attachments
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 			$data['attachments'] = count($this->parameters['attachmentHandler']);
-			if ($data['attachments']) {
-				$attachments = $this->parameters['attachmentHandler']->getAttachmentList()->getObjects();
-			}
 		}
         if (LOG_IP_ADDRESS) {
             // add ip address
@@ -45,7 +42,11 @@ class NewsAction extends AbstractDatabaseObjectAction{
         
         $news = call_user_func(array($this->className,'create'), $data);
         $newsEditor = new NewsEditor($news);
-		
+        
+		// update attachments
+		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
+			$this->parameters['attachmentHandler']->updateObjectID($news->newsID);
+		}
         //tags
         if (!empty($this->parameters['tags'])) {
             TagEngine::getInstance()->addObjectTags('de.codequake.cms.news', $news->newsID, $this->parameters['tags'], $news->languageID);
@@ -76,10 +77,6 @@ class NewsAction extends AbstractDatabaseObjectAction{
     // count attachments
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 			$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
-			
-			if ($this->parameters['data']['attachments']) {
-				$attachments = $this->parameters['attachmentHandler']->getAttachmentList()->getObjects();
-			}
 		}
 	
         parent::update();
