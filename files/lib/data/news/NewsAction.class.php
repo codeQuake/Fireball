@@ -9,6 +9,7 @@ use wcf\system\language\LanguageFactory;
 use wcf\system\tagging\TagEngine;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\activity\point\UserActivityPointHandler;
+use wcf\system\attachment\AttachmentHandler;
 use wcf\system\search\SearchIndexManager;
 
 class NewsAction extends AbstractDatabaseObjectAction{
@@ -21,6 +22,13 @@ class NewsAction extends AbstractDatabaseObjectAction{
     
     public function create(){
         $data = $this->parameters['data'];
+        // count attachments
+		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
+			$data['attachments'] = count($this->parameters['attachmentHandler']);
+			if ($data['attachments']) {
+				$attachments = $this->parameters['attachmentHandler']->getAttachmentList()->getObjects();
+			}
+		}
         if (LOG_IP_ADDRESS) {
             // add ip address
             if (!isset($data['ipAddress'])) {
@@ -65,6 +73,15 @@ class NewsAction extends AbstractDatabaseObjectAction{
     }
     
     public function update(){
+    // count attachments
+		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
+			$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
+			
+			if ($this->parameters['data']['attachments']) {
+				$attachments = $this->parameters['attachmentHandler']->getAttachmentList()->getObjects();
+			}
+		}
+	
         parent::update();
         
         $objectIDs = array();
@@ -102,12 +119,17 @@ class NewsAction extends AbstractDatabaseObjectAction{
     
     public function delete(){
         $newsIDs = array();
+        $attachedNewsIDs = array();
         foreach ($this->objects as $news) {
 			$newsIDs[] = $news->newsID;
+            if($news->attachments) $attachedNewsIDs[] = $news->newsID;
         }
         //remove activity points
         UserActivityPointHandler::getInstance()->removeEvents('de.codequake.cms.activityPointEvent.news', $newsIDs);
-        
+        //remove attaches
+        if (!empty($attachedNewsIDs)) {
+			AttachmentHandler::removeAttachments('de.codequake.cms.nwes', $attachedNewsIDs);
+		}
         // delete old search index entries
 		if (!empty($objectIDs)) {
 			SearchIndexManager::getInstance()->delete('de.codequake.cms.news', $newsIDs);

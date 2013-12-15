@@ -7,6 +7,7 @@ use wcf\system\breadcrumb\Breadcrumb;
 use wcf\util\ArrayUtil;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\system\exception\IllegalLinkException;
 
 class NewsEditForm extends NewsAddForm{
 
@@ -19,6 +20,9 @@ class NewsEditForm extends NewsAddForm{
     public function readParameters(){
         parent::readParameters();
        if (isset($_REQUEST['id'])) $this->newsID = intval($_REQUEST['id']);
+       if($this->newsID = 0) throw new IllegalLinkException();
+       // set attachment object id
+        $this->attachmentObjectID = $this->newsID;
     }
     
     public function readData(){
@@ -59,7 +63,8 @@ class NewsEditForm extends NewsAddForm{
                        'lastEditorID' => WCF::getUser()->userID);
         $newsData = array('data' => $data,
                           'categoryIDs' => $this->categoryIDs,
-                          'tags' => $this->tags);
+                          'tags' => $this->tags,
+                          'attachmentHandler' => $this->attachmentHandler);
                           
         $action = new NewsAction(array($this->newsID), 'update', $newsData);
         $resultValues = $action->executeAction();

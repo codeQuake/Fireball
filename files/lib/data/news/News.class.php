@@ -79,8 +79,8 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
             $attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', array($this->newsID));
             $attachmentList->readObjects();
             $attachmentList->setPermissions(array(
-                'canDownload' => WCF::getSession()->getPermission('user.cms.news.canViewAttachments'),
-                'canViewPreview' => WCF::getSession()->getPermission('user.cms.news.canViewAttachments')
+                'canDownload' => WCF::getSession()->getPermission('user.cms.news.canDownloadAttachments'),
+                'canViewPreview' => WCF::getSession()->getPermission('user.cms.news.canDownloadAttachments')
             ));
 
             AttachmentBBCode::setAttachmentList($attachmentList);

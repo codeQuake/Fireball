@@ -23,7 +23,8 @@ class NewsAddForm extends MessageForm{
     public $enableTracking = true;
     public $neededPermissions = array('user.cms.news.canAddNews');
     public $enableMultilingualism = true;
-    
+    public $attachmentObjectType = 'de.codequake.cms.news';
+
     
     public $tags = array();
     
@@ -93,6 +94,7 @@ class NewsAddForm extends MessageForm{
                        'lastChangeTime' => TIME_NOW);
         $newsData = array('data' => $data,
                           'tags' => array(),
+                          'attachmentHandler' => $this->attachmentHandler,
                           'categoryIDs' => $this->categoryIDs);
         $newsData['tags'] = $this->tags;
         
@@ -112,6 +114,7 @@ class NewsAddForm extends MessageForm{
         WCF::getTPL()->assign(array('categoryList' => $this->categoryList,
                                     'categoryIDs' => $this->categoryIDs,
                                     'action' => $this->action,
-                                    'tags'      => $this->tags,));
+                                    'tags'      => $this->tags,
+			                        'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.cms.news.allowedAttachmentExtensions')))));
     }
 }
