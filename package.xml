@@ -52,6 +52,7 @@
     <!--tar-->
     <instruction type="file">files.tar</instruction>
 
+    <instruction type="template">templates.tar</instruction>
     <!--xml-->
     <instruction type="objectType">xml/objectType.xml</instruction>
     <instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
