@@ -119,13 +119,13 @@ class NewsAction extends AbstractDatabaseObjectAction{
         $attachedNewsIDs = array();
         foreach ($this->objects as $news) {
 			$newsIDs[] = $news->newsID;
-            if($news->attachments) $attachedNewsIDs[] = $news->newsID;
+            if($news->attachments != 0) $attachedNewsIDs[] = $news->newsID;
         }
         //remove activity points
         UserActivityPointHandler::getInstance()->removeEvents('de.codequake.cms.activityPointEvent.news', $newsIDs);
         //remove attaches
         if (!empty($attachedNewsIDs)) {
-			AttachmentHandler::removeAttachments('de.codequake.cms.nwes', $attachedNewsIDs);
+			AttachmentHandler::removeAttachments('de.codequake.cms.news', $attachedNewsIDs);
 		}
         // delete old search index entries
 		if (!empty($objectIDs)) {
