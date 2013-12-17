@@ -4,6 +4,7 @@ use cms\data\category\NewsCategoryNodeTree;
 use cms\data\category\NewsCategory;
 use cms\data\news\NewsAction;
 use wcf\form\MessageForm;
+use wcf\system\language\LanguageFactory;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -49,20 +50,23 @@ class NewsAddForm extends MessageForm{
         $this->categoryList = $categoryTree->getIterator();
         $this->categoryList->setMaxDepth(0);
         
-        if (empty($_POST)) {
-			// multilingualism
-			if (!empty($this->availableContentLanguages)) {
-				if (!$this->languageID) {
-					$language = LanguageFactory::getInstance()->getUserLanguage();
-					$this->languageID = $language->languageID;
-				}
-				
-				if (!isset($this->availableContentLanguages[$this->languageID])) {
-					$languageIDs = array_keys($this->availableContentLanguages);
-					$this->languageID = array_shift($languageIDs);
-				}
-			}
-		}
+        // default values
+        if (!count($_POST)) {
+            $this->username = WCF::getSession()->getVar('username');
+
+            // multilingualism
+            if (!empty($this->availableContentLanguages)) {
+                if (!$this->languageID) {
+                    $language = LanguageFactory::getInstance()->getUserLanguage();
+                    $this->languageID = $language->languageID;
+                }
+
+                if (!isset($this->availableContentLanguages[$this->languageID])) {
+                    $languageIDs = array_keys($this->availableContentLanguages);
+                    $this->languageID = array_shift($languageIDs);
+                }
+             }
+        }
     }
     
     public function validate(){
@@ -83,7 +87,9 @@ class NewsAddForm extends MessageForm{
     
     public function save(){
         parent::save();
-        
+        if($this->languageID === null) {
+            $this->languageID = LanguageFactory::getInstance()->getDefaultLanguageID();
+        }
         $data = array('languageID' => $this->languageID,
                        'subject' => $this->subject,
                        'time' => TIME_NOW,
