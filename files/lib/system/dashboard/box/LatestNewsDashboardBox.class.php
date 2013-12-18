@@ -13,6 +13,7 @@ class LatestNewsDashboardBox extends AbstractSidebarDashboardBox {
 		parent::init($box, $page);
 		
 		$this->latestNews = new LatestNewsList();
+        $this->latestNews->sqlLimit = CMS_NEWS_LATEST_LIMIT;
 		$this->latestNews->readObjects();
 	}
 
