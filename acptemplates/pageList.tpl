@@ -60,7 +60,7 @@
 						 </aside>
 						</td>
 						<td>
-							<span class="description">{$page->description}</span>
+							<span class="description">{$page->description|language}</span>
 						</td>
 						{event name='columns'}
 					</tr>
