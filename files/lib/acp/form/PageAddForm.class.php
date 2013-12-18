@@ -106,7 +106,7 @@ class PageAddForm extends AbstractForm{
                        'robots' => $this->robots,
                        'isCommentable' => $this->isCommentable);
                        
-        $objectAction = new PageAction(array(), 'create', array('data' => $data));
+        $objectAction = new PageAction(array(), 'create', array('data' => $data, 'I18n' => I18nHandler::getInstance()->getValues('title')));
         $objectAction->executeAction();
         
         $returnValues = $objectAction->getReturnValues();

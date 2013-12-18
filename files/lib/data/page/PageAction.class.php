@@ -34,9 +34,10 @@ class PageAction extends AbstractDatabaseObjectAction{
             }
             
             //create
+            $url = LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','id' => $page->pageID, 'title' => empty($this->parameters['I18n'][1]) ? $page->title : $this->parameters['I18n'][1], 'isACP' => 0));
             $data = array('isDisabled' => 0,
-                       'menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title,
-                       'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','object' => $page, 'isACP' => 0)),
+                       'menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->getTitle(),
+                       'menuItemLink' => $url,
                        'menuPosition' => 'header',
                        'parentMenuItem' => $parentItem,
                        'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header'));
@@ -62,7 +63,8 @@ class PageAction extends AbstractDatabaseObjectAction{
              //update
             if(isset($menuItem['has']) && $menuItem['has'] == 1){
                 if($menuItem['id'] != 0){
-                    $action = new PageMenuItemAction(array($menuItem['id']), 'update', array('data' => array('menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title)));
+                    $action = new PageMenuItemAction(array($menuItem['id']), 'update', array('data' => array('menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title,
+                                                                                                             'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms', 'id' => $page->pageID, 'title' => empty($this->parameters['I18n'][1]) ? $page->title : $this->parameters['I18n'][1], 'isACP' => 0)))));
                     $action->executeAction();
                 }
                 //create new
@@ -79,7 +81,7 @@ class PageAction extends AbstractDatabaseObjectAction{
                     }
                     $data = array('isDisabled' => 0,
                        'menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title,
-                       'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','object' => $page, 'isACP' => 0)),
+                       'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','id' => $page->pageID, 'title' => empty($this->parameters['I18n'][1]) ? $page->title : $this->parameters['I18n'][1], 'isACP' => 0)),
                        'menuPosition' => 'header',
                        'parentMenuItem' => $parentItem,
                        'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header'));

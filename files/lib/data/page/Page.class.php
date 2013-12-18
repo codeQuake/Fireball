@@ -29,6 +29,7 @@ class Page extends CMSDatabaseObject implements IRouteController{
     }
     
     public function getTitle(){
+        if (preg_match('#cms.page.title#', $this->title)) return WCF::getLanguage()->get($this->title);
         return $this->title;
     }
     

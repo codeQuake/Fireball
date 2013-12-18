@@ -128,7 +128,8 @@ class PageEditForm extends AbstractForm{
                                                                                            'showSidebar' => $this->showSidebar,
                                                                                            'sidebarOrientation' => $this->sidebarOrientation,
                                                                                            'robots' => $this->robots,
-                                                                                            'isCommentable' => $this->isCommentable)));
+                                                                                            'isCommentable' => $this->isCommentable),
+                                                                                'I18n' => I18nHandler::getInstance()->getValues('title')));
         $objectAction->executeAction();
         
         $update = array();
