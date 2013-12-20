@@ -173,8 +173,8 @@ class TextContentSectionType extends AbstractContentSectionType{
     
     public function getOutput($sectionID){
         $section = new ContentSection($sectionID);
-        WCF::getTPL()->assign(array('message' => $this->getFormattedMessage($section),
-                                    'attachmentList'=> $this->getAttachments($section),
+        WCF::getTPL()->assign(array('attachmentList'=> $this->getAttachments($section),
+                                    'message' => $this->getFormattedMessage($section),
                                     'objectID' => $sectionID));
         return WCF::getTPL()->fetch('textSectionTypeOutput', 'cms');
     }
