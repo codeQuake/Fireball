@@ -146,9 +146,9 @@
 						<dd>
 							<select id="robots" name="robots">
 								<option value="index,follow" {if $robots =="index,follow"}selected="selected"{/if}>{lang}cms.acp.page.meta.robots.indexfollow{/lang}</option>
-								<option value="index,nofollow {if $robots =="index,nofollow"}selected="selected"{/if}">{lang}cms.acp.page.meta.robots.indexnofollow{/lang}</option>
-								<option value="noindex,follow {if $robots =="noindex,follow"}selected="selected"{/if}">{lang}cms.acp.page.meta.robots.noindexfollow{/lang}</option>
-								<option value="noindex,nofollow {if $robots =="noindex,nofollow"}selected="selected"{/if}">{lang}cms.acp.page.meta.robots.noindexnofollow{/lang}</option>
+								<option value="index,nofollow" {if $robots =="index,nofollow"}selected="selected"{/if}>{lang}cms.acp.page.meta.robots.indexnofollow{/lang}</option>
+								<option value="noindex,follow" {if $robots =="noindex,follow"}selected="selected"{/if}>{lang}cms.acp.page.meta.robots.noindexfollow{/lang}</option>
+								<option value="noindex,nofollow" {if $robots =="noindex,nofollow"}selected="selected"{/if}>{lang}cms.acp.page.meta.robots.noindexnofollow{/lang}</option>
 							</select>
 						</dd>
 					</dl>
