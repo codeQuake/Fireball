@@ -10,7 +10,7 @@
 <body id="tpl{$templateName|ucfirst}">
 {capture assign='sidebar'}
 	{hascontent}
-		<fieldset>
+		<fieldset class="dashboardBox">
 			<legend>{lang}cms.news.category.categories{/lang}</legend>
 			
 			<ol class="sidebarNestedCategoryList">

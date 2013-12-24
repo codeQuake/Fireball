@@ -179,6 +179,7 @@
   </category>
 
   <category name="cms.news">
+    <item name="cms.news.categorizedNews"><![CDATA[Nachrichten aus der Kategorie „{$category->getTitle()|language}“]]></item>
     <item name="cms.news.searchNews"><![CDATA[Nachrichten durchsuchen]]></item>
     <item name="cms.news.category.categories"><![CDATA[Kategorien]]></item>
     <item name="cms.news.category.categories.description"><![CDATA[Wählen Sie die passenden Kategorien für die Nachricht!]]></item>
