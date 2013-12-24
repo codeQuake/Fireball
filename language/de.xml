@@ -2,6 +2,7 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagename="Deutsch" countrycode="de" languagecode="de">
   <category name="cms.acp.menu">
     <item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
+    <item name="cms.acp.menu.link.cms.page.overview"><![CDATA[Übersicht]]></item>
     <item name="cms.acp.menu.link.cms.page.list"><![CDATA[Seiten auflisten]]></item>
     <item name="cms.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
     <item name="cms.acp.menu.link.cms.content.list"><![CDATA[Inhalte auflisten]]></item>
@@ -22,6 +23,7 @@
   </category>
 
   <category name="cms.acp">
+    <item name="cms.acp.page.overview"><![CDATA[Übersicht]]></item>
     <item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
     <item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
     <item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
