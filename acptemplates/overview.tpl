@@ -29,8 +29,8 @@
                     //]]>
 	        </script>
             <li class="jsPageRow jsCollapsibleCategory marginTop" data-object-id="{$page->pageID}">
-                <span id="pageLabel{$page->pageID}" class="sortableNodeLabel">
-                    <span id="button{$page->pageID}" class="collapsibleButton pointer icon icon16 icon-file-text-alt"></span>
+                <span id="pageLabel{$page->pageID}" class="sortableNodeLabel pointer">
+                    <span id="button{$page->pageID}" class="collapsibleButton icon icon16 icon-file-text-alt"></span>
                     {@$page->getTitle()|language}
                     <span class="statusDisplay sortableButtonContainer">
                         <a href="{link controller='PageEdit' id=$page->pageID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
@@ -40,9 +40,18 @@
                 </span>
                 <ol id="contentContainer{$page->pageID}" class="sortableList" data-object-id="{$page->pageID}" style="display:none;">
                     {foreach from=$page->getContentList('body') item=content}
+                        <script data-relocate="true">
+                            //<![CDATA[
+                            $(function () {
+                                $("#contentLabel{$content->contentID}").click(function () {
+                                    $("#sectionContainer{$content->contentID}").toggle("slow");
+                                });
+                            });
+                            //]]>
+	                    </script>
                         <li class="jsContentRow" data-object-id="{$content->contentID}">
-                            <span class=" sortableNodeLabel">
-                                <span class="collapsibleButton pointer icon icon16 icon-file"></span>
+                            <span id="contentLabel{$content->contentID}" class="sortableNodeLabel pointer">
+                                <span class="collapsibleButton icon icon16 icon-file"></span>
                                 {@$content->getTitle()|language} <span class="badge">{$content->position}</span>
                             
                                 <span class="statusDisplay sortableButtonContainer">
@@ -52,11 +61,11 @@
 							        <a href="{link controller='ContentSectionList' id=$content->contentID application='cms'}{/link}" title="{lang}cms.acp.content.content.section.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-list-alt"></span></a>
 						        </span>
                             </span>
-                            <ol id="sectionContainer{$content->contentID}" class="sortableList" data-object-id="{$content->contentID}">
+                            <ol id="sectionContainer{$content->contentID}" class="sortableList" data-object-id="{$content->contentID}" style="display:none;">
                                 {foreach from=$content->getSections() item=section}
                                     <li class="jsSectionRow  " data-object-id="{$section->sectionID}">
                                        <span class=" sortableNodeLabel">
-                                            <span class="collapsibleButton pointer icon icon16 icon-list-alt"></span>
+                                            <span class="collapsibleButton icon icon16 icon-list-alt"></span>
                                             {@$section->getPreview()}
                                             <span class="statusDisplay sortableButtonContainer">
 					                            <a href="{link controller='ContentSectionEdit' id=$section->sectionID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
@@ -69,16 +78,25 @@
                         </li>
                     {/foreach}
                     {foreach from=$page->getContentList('sidebar') item=content}
+                    <script data-relocate="true">
+                        //<![CDATA[
+                        $(function () {
+                            $("#contentLabel{$content->contentID}").click(function () {
+                                $("#sectionContainer{$content->contentID}").toggle("slow");
+                            });
+                        });
+                        //]]>
+	                    </script>
                         <li class="jsContentRow" data-object-id="{$content->contentID}">
-                            <span class=" sortableNodeLabel">
-                                <span class="collapsibleButton pointer icon icon16 icon-file"></span>
+                            <span id="contentLabel{$content->contentID}" class=" sortableNodeLabel pointer">
+                                <span class="collapsibleButton icon icon16 icon-file"></span>
                                 {@$content->getTitle()|language} <span class="badge">{$content->position}</span>
                             </span>
-                            <ol id="sectionContainer{$content->contentID}" class="sortableList" data-object-id="{$content->contentID}">
+                            <ol id="sectionContainer{$content->contentID}" class="sortableList" data-object-id="{$content->contentID}" style="display:none;">
                                 {foreach from=$content->getSections() item=section}
                                     <li class="jsSectionRow" data-object-id="{$section->sectionID}">
                                         <span class=" sortableNodeLabel">
-                                         <span class="collapsibleButton pointer icon icon16 icon-list-alt"></span>
+                                         <span class="collapsibleButton icon icon16 icon-list-alt"></span>
                                          {@$section->getPreview()}
                                             <span class="statusDisplay sortableButtonContainer">
 					                            <a href="{link controller='ContentSectionEdit' id=$section->sectionID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
