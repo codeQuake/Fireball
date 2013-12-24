@@ -16,6 +16,7 @@
 	{pages print=true assign=pagesLinks application='cms' controller="PageList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	<nav>
 		<ul>
+			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
 			<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
 			
 			{event name='contentNavigationButtonsTop'}
@@ -75,6 +76,7 @@
 		
 		<nav>
 			<ul>
+				<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
 				<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
 				
 				{event name='contentNavigationButtonsBottom'}

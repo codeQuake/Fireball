@@ -17,6 +17,7 @@
 	{pages print=true assign=pagesLinks application='cms' id=$pageID controller="ContentList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	<nav>
 		<ul>
+			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
 			<li><a href="{link controller='ContentAdd' application='cms' id=$pageID}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></a></li>
 			
 			{event name='contentNavigationButtonsTop'}
@@ -79,6 +80,17 @@
 		</table>
         </div>
     {/if}
+	<div class="contentNavigation">
+	{pages print=true assign=pagesLinks application='cms' id=$pageID controller="ContentList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+	<nav>
+		<ul>
+			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
+			<li><a href="{link controller='ContentAdd' application='cms' id=$pageID}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></a></li>
+			
+			{event name='contentNavigationButtonsTop'}
+		</ul>
+	</nav>
+</div>
 {else}
     <p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/if}

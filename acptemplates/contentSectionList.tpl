@@ -16,6 +16,7 @@
 	{pages print=true assign=pagesLinks application='cms' id=$contentID controller="ContentSectionList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	<nav>
 		<ul>
+			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
 			<li><a href="{link controller='ContentSectionAdd' application='cms' id=$contentID}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.section.add{/lang}</span></a></li>
 			
 			{event name='contentNavigationButtonsTop'}
@@ -41,6 +42,17 @@
 </div>
 <div class="formSubmit">
 		<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+</div>
+<div class="contentNavigation">
+	{pages print=true assign=pagesLinks application='cms' id=$contentID controller="ContentSectionList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+	<nav>
+		<ul>
+			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
+			<li><a href="{link controller='ContentSectionAdd' application='cms' id=$contentID}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.section.add{/lang}</span></a></li>
+			
+			{event name='contentNavigationButtonsTop'}
+		</ul>
+	</nav>
 </div>
 {else}
     <p class="info">{lang}wcf.global.noItems{/lang}</p>
