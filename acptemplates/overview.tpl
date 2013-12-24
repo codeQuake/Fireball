@@ -28,11 +28,12 @@
                 });
                     //]]>
 	        </script>
-            <li class="jsPageRow jsCollapsibleCategory marginTop" data-object-id="{$page->pageID}">
+            <li class="jsPageRow  jsCollapsibleCategory marginTop" data-object-id="{$page->pageID}">
                 <span id="pageLabel{$page->pageID}" class="sortableNodeLabel pointer">
                     <span id="button{$page->pageID}" class="collapsibleButton icon icon16 icon-file-text-alt"></span>
-                    {@$page->getTitle()|language}
+                    {@$page->getTitle()|language} {if $page->isHome}<span class="badge red">{lang}cms.acp.page.homePage{/lang}</span>{/if}
                     <span class="statusDisplay sortableButtonContainer">
+						
                         <a href="{link controller='PageEdit' id=$page->pageID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
 							

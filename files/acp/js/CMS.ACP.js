@@ -41,6 +41,7 @@ CMS.ACP.Page.SetAsHome = Class.extend({
                 $headline.html($headline.html() + ' ');
                 $('<span class="icon icon16 icon-home jsTooltip" title="' + WCF.Language.get('cms.acp.page.homePage') + '" />').appendTo($headline);
 
+
                 WCF.DOMNodeInsertedHandler.execute();
             }, this)
         });
