@@ -40,6 +40,18 @@
 	{include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*'}
 {/if}
 
+<nav class="breadcrumbs marginTop">
+	<ul>
+		<li title="{lang}cms.acp.page.overview{/lang}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+			<a href="{link controller='Overview' application='cms'}{/link}" itemprop="url">
+				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
+			</a>
+			<span class="pointer">
+				<span>»</span>
+			</span>
+		</li>
+</nav>
+
 <header class="boxHeadline">
     <h1>{lang}cms.acp.page.{@$action}{/lang}{if $action != 'add'}{if $page->isHome} <span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>{/if}{/if}</h1>
 </header>

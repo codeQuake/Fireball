@@ -105,6 +105,7 @@ class ContentAddForm extends AbstractForm{
                                     'showOrder' =>$this->showOrder,
                                     'pageID' => $this->pageID,
                                     'pageList' => $this->pageList,
+                                    'page' => new Page($this->pageID),
                                     'position' => $this->position));
     }
 }

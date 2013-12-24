@@ -7,6 +7,7 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\util\StringUtil;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
+use cms\data\content\Content;
 
 class ContentSectionAddForm extends AbstractForm{
 
@@ -116,6 +117,7 @@ class ContentSectionAddForm extends AbstractForm{
                                     'cssID' => $this->cssID,
                                     'cssClasses' => $this->cssClasses,
                                     'contentID' => $this->contentID,
+                                    'content' => new Content($this->contentID),
                                     'showOrder' => $this->showOrder,
                                     'objectTypeName' => isset($this->objectType->objectType) ? $this->objectType->objectType : '',
                                     'objectType' => isset($this->objectType) ? $this->objectType : null,

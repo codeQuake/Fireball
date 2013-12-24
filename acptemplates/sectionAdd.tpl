@@ -1,6 +1,34 @@
 {capture assign='pageTitle'}{lang}cms.acp.content.section.{@$action}{/lang}{/capture}
 {include file='header'}
 
+<nav class="breadcrumbs marginTop">
+	<ul>
+		<li title="{lang}cms.acp.page.overview{/lang}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+			<a href="{link controller='Overview' application='cms'}{/link}" itemprop="url">
+				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
+			</a>
+			<span class="pointer">
+				<span>»</span>
+			</span>
+		</li>
+		<li title="{$content->getPage()->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+			<a href="{link controller='PageEdit' application='cms' id=$content->getPage()->pageID}{/link}" itemprop="url">
+				<span itemprop="title">{$content->getPage()->getTitle()|language}</span>
+			</a>
+			<span class="pointer">
+				<span>»</span>
+			</span>
+		</li>
+		<li title="{$content->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+			<a href="{link controller='ContentList' application='cms' id=$content->contentID}{/link}" itemprop="url">
+				<span itemprop="title">{$content->getTitle()|language}</span>
+			</a>
+			<span class="pointer">
+				<span>»</span>
+			</span>
+		</li>
+	</ul>
+</nav>
 
 <header class="boxHeadline">
     <h1>{lang}cms.acp.content.section.{@$action}{/lang}</h1>

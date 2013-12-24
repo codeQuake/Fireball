@@ -64,7 +64,8 @@ class ContentSectionEditForm extends ContentSectionAddForm{
         WCF::getTPL()->assign(array('sectionID' => $this->sectionID,
                                     'action' => 'edit',
                                     'objectType' => $this->objectType,
-                                    'objectTypeName' => $this->objectType->objectType));
+                                    'objectTypeName' => $this->objectType->objectType,
+                                    'content' => $this->section->getContent()));
                                     
     }
     

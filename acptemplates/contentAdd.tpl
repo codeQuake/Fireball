@@ -3,6 +3,30 @@
 
 {include file='multipleLanguageInputJavascript' elementIdentifier='title' forceSelection=false}
 
+<nav class="breadcrumbs marginTop">
+	<ul>
+		<li title="{lang}cms.acp.page.overview{/lang}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+			<a href="{link controller='Overview' application='cms'}{/link}" itemprop="url">
+				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
+			</a>
+			<span class="pointer">
+				<span>»</span>
+			</span>
+		</li>
+		
+    {if $pageID != 0}
+		<li title="{$page->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+			<a href="{link controller='PageEdit' application='cms' id=$page->pageID}{/link}" itemprop="url">
+				<span itemprop="title">{$page->getTitle()|language}</span>
+			</a>
+			<span class="pointer">
+				<span>»</span>
+			</span>
+		</li>
+	{/if}
+	</ul>
+</nav>
+
 <header class="boxHeadline">
     <h1>{lang}cms.acp.content.{@$action}{/lang}</h1>
 </header>

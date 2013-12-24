@@ -2,6 +2,7 @@
 namespace cms\acp\page;
 use cms\data\content\PageContentList;
 use wcf\page\SortablePage;
+use cms\data\page\Page;
 use wcf\system\WCF;
 
 class ContentListPage extends SortablePage{
@@ -31,6 +32,7 @@ class ContentListPage extends SortablePage{
     
     public function assignVariables(){
         parent::assignVariables();
-        WCF::getTPL()->assign(array('pageID' => $this->pageID));
+        WCF::getTPL()->assign(array('pageID' => $this->pageID,
+                                    'page' => new Page($this->pageID)));
     }
 }

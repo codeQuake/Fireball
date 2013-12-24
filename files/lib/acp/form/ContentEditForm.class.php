@@ -6,6 +6,7 @@ use cms\data\content\ContentEditor;
 use cms\data\content\ContentAction;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
+use cms\data\page\Page;
 
 class ContentEditForm extends ContentAddForm{
     public $contentID = 0;
@@ -64,6 +65,7 @@ class ContentEditForm extends ContentAddForm{
         
         I18nHandler::getInstance()->assignVariables(!empty($_POST));
         WCF::getTPL()->assign(array('contentID' => $this->contentID,
-                                    'action' => 'edit'));
+                                    'action' => 'edit',
+                                    'page' => new Page($this->content->pageID)));
     }
 }
