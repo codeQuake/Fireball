@@ -38,8 +38,8 @@
                 });
                     //]]>
 	        </script>
-            <li class="jsPageRow  jsCollapsibleCategory marginTop" data-object-id="{$page->pageID}">
-                <span class="sortableNodeLabel pointer">
+            <li class="jsCollapsibleCategory marginTop" data-object-id="{$page->pageID}">
+                <span class="sortableNodeLabel pointer jsPageRow">
                     <span id="pageLabel{$page->pageID}">
 						<span class="collapsibleButton pointer icon icon16 icon-file-text-alt"></span>
 						{@$page->getTitle()|language} {if $page->isHome}<span class="badge red">{lang}cms.acp.page.homePage{/lang}</span>{/if}
@@ -64,8 +64,8 @@
                             });
                             //]]>
 	                    </script>
-                        <li class="jsContentRow" data-object-id="{$content->contentID}">
-                            <span class="sortableNodeLabel pointer">
+                        <li data-object-id="{$content->contentID}">
+                            <span class="jsContentRow sortableNodeLabel pointer">
                                 <span id="contentLabel{$content->contentID}">
 									<span class="pointer collapsibleButton icon icon16 icon-file"></span>
 									{@$content->getTitle()|language} <span class="badge">{$content->position}</span>
@@ -79,8 +79,8 @@
                             </span>
                             <ol id="sectionContainer{$content->contentID}" class="sortableList" data-object-id="{$content->contentID}" style="display:none;">
                                 {foreach from=$content->getSections() item=section}
-                                    <li class="jsSectionRow" data-object-id="{$section->sectionID}">
-                                       <span class=" sortableNodeLabel">
+                                    <li  data-object-id="{$section->sectionID}">
+                                       <span class="jsSectionRow sortableNodeLabel">
                                             <span class="collapsibleButton icon icon16 icon-list-alt"></span>
                                             {@$section->getPreview()}
                                             <span class="statusDisplay sortableButtonContainer">
