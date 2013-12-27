@@ -44,7 +44,7 @@
 				{foreach from=$objects item=sheet}
 					<tr class="jsStylesheetRow">
 						<td class="columnIcon">
-							<a href="{link controller='StylesheetEdit' id=$sheet->sheetID applicaton='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+							<a href="{link controller='StylesheetEdit' id=$sheet->sheetID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$sheet->sheetID}" data-confirm-message="{lang}cms.acp.stylesheet.delete.sure{/lang}"></span>
 							{event name='rowButtons'}
 						</td>
