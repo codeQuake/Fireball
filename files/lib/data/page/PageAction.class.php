@@ -2,10 +2,13 @@
 namespace cms\data\page;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
+use wcf\system\exception\PermissionDeniedException;
+use wcf\system\exception\NamedUserException;
 use cms\data\content\ContentAction;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
 use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemAction;
+use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\data\page\menu\item\PageMenuItemEditor;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -136,13 +139,26 @@ class PageAction extends AbstractDatabaseObjectAction{
 		if (!$this->pageEditor->pageID) {
 			throw new UserInputException('objectIDs');
 		}
+        
 		else if ($this->pageEditor->isPrimary) {
 			throw new PermissionDeniedException();
 		}
+        //checking for existing item
+        else{
+            //validate menuitem
+            $list = new PageMenuItemList();
+            $list->readObjects();
+            $list = $list->getObjects();
+            foreach($list as $item){
+                if($this->pageEditor->title == $item->menuItem)
+                    throw new NamedUserException(WCF::getLanguage()->get('cms.acp.page.menuItem.error.exists'));
+            }
+        }
 	}
     
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
+        
         
         //get Home Menu Item
         $sql = "SELECT menuItemID FROM wcf".WCF_N."_page_menu_item WHERE menuItemController = ?";
