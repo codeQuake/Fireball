@@ -109,9 +109,9 @@ class PageEditForm extends AbstractForm{
         $list->readObjects();
         $list = $list->getObjects();
         foreach($list as $item){
-            if($this->menuItem['has'] && $this->title == $item->menuItem)
+            if(isset($this->menuItem) && $this->title == $item->menuItem)
                 throw new UserInputException('menuItem', 'exists');
-            if($this->menuItem['has'] && $item->menuItem == 'cms.page.title'.$this->pageID);
+            if(isset($this->menuItem) && $item->menuItem == 'cms.page.title'.$this->pageID);
                 throw new UserInputException('menuItem', 'exists');
         }
         
