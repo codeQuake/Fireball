@@ -31,8 +31,10 @@ class PageAction extends AbstractDatabaseObjectAction{
                 $parent = $page->getParentPage();
                 $temp = @unserialize($parent->menuItem);
                 if(isset($temp['has']) && $temp['has'] ==1){
-                    if($temp['id'] != 0) $parentItem = new PageMenuItem($temp['id']);
-                    $parentItem = $parentItem->menuItem;
+                    if($temp['id'] != 0) {
+                        $parentItem = new PageMenuItem($temp['id']);
+                        $parentItem = $parenItem->menuItem;
+                    }
                 }
             }
             
@@ -78,8 +80,10 @@ class PageAction extends AbstractDatabaseObjectAction{
                         $parent = $page->getParentPage();
                         $temp = @unserialize($parent->menuItem);
                         if(isset($temp['has']) && $temp['has'] ==1){
-                            if($temp['id'] != 0) $parentItem = new PageMenuItem($temp['id']);
-                            $parentItem = $parentItem->menuItem;
+                            if($temp['id'] != 0) {
+                                $parentItem = new PageMenuItem($temp['id']);
+                                $parentItem = $parentItem->menuItem;
+                            }
                         }
                     }
                     $data = array('isDisabled' => 0,

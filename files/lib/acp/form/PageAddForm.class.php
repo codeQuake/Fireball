@@ -84,7 +84,7 @@ class PageAddForm extends AbstractForm{
         $list->readObjects();
         $list = $list->getObjects();
         foreach($list as $item){
-            if($this->menuItem['has'] && $this->title == $item->menuItem)
+            if(isset($this->menuItem) && $this->title == $item->menuItem)
                 throw new UserInputException('menuItem', 'exists');
         }
         if (!I18nHandler::getInstance()->validateValue('title')) {
