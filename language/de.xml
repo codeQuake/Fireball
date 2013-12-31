@@ -57,6 +57,7 @@
     <item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
     <item name="cms.acp.page.optional.isCommentable"><![CDATA[Kommentare erlauben]]></item>
     <item name="cms.acp.page.optional.layoutID"><![CDATA[Layout auswählen]]></item>
+    <item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
     <item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
     <item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
     <item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>

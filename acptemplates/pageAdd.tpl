@@ -177,6 +177,12 @@
 						<dt><label for="menuItem">{lang}cms.acp.page.optional.menuItem{/lang}</label></dt>
 						<dd>
 							<input type="checkbox" name="menuItem" id="menuItem" value="1" {if $menu == 1}checked="checked"{/if} />
+							
+							{if $errorField == 'menuItem'}
+									<small class="innerError">
+										{lang}cms.acp.page.menuItem.error.{@$errorType}{/lang}
+									</small>
+							{/if}
 						</dd>
 					</dl>					
 					<dl  {if $errorField == 'showSidebar'}class="formError"{/if}>

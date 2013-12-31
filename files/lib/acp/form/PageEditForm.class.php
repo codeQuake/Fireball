@@ -6,6 +6,7 @@ use cms\data\page\PageEditor;
 use cms\data\page\Page;
 use cms\data\page\PageList;
 use cms\data\layout\LayoutList;
+use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\system\language\I18nHandler;
 use wcf\system\acl\ACLHandler;
 use wcf\form\AbstractForm;
@@ -102,6 +103,18 @@ class PageEditForm extends AbstractForm{
     
     public function validate(){
         parent::validate();
+        
+        //validate menuitem
+        $list = new PageMenuItemList();
+        $list->readObjects();
+        $list = $list->getObjects();
+        foreach($list as $item){
+            if($this->menuItem['has'] && $this->title == $item->menuItem)
+                throw new UserInputException('menuItem', 'exists');
+            if($this->menuItem['has'] && $item->menuItem == 'cms.page.title'.$this->pageID);
+                throw new UserInputException('menuItem', 'exists');
+        }
+        
         if (!I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
@@ -160,8 +173,6 @@ class PageEditForm extends AbstractForm{
         
         $this->saved();
         WCF::getTPL()->assign('success', true);
-        
-       
     }
     
     public function assignVariables(){

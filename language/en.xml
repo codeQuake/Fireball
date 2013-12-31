@@ -55,6 +55,7 @@
     <item name="cms.acp.page.content.add"><![CDATA[Add contents to'{$page->title|language}']]></item>
     <item name="cms.acp.page.optional.isCommentable"><![CDATA[Allow comments]]></item>
     <item name="cms.acp.page.optional.layoutID"><![CDATA[Choose layout]]></item>
+    <item name="cms.acp.page.menuItem.error.exists"><![CDATA[A Menuitem with this values already exists. For technical reasons you cannnot create a new one.]]></item>
     <item name="cms.acp.content.add"><![CDATA[Add content]]></item>
     <item name="cms.acp.content.general"><![CDATA[General]]></item>
     <item name="cms.acp.content.general.pageID"><![CDATA[Page]]></item>
