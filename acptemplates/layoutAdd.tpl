@@ -34,15 +34,24 @@
         </fieldset>
         <fieldset>
             <legend>{lang}cms.acp.layout.options{/lang}</legend>
-                <dl>
+                <dl {if $errorField == 'data'}class="formError"{/if}>
                     <dt><label for="stylesheets">{lang}cms.acp.layout.stylesheets{/lang}</label></dt>
                     <dd>
-                        <select name="data[]" multiple="multiple" id="stylesheets" size="10">
+                        <select name="data[]" multiple="multiple" id="stylesheets" size="10" required="required">
                             {foreach from=$sheetList item=$sheet}
                                 <option value="{$sheet->sheetID}" {if $sheet->sheetID|in_array:$data}selected="selected"{/if}>{$sheet->title}</option>
                             {/foreach}
                         </select>
                         <small>{lang}wcf.global.multiSelect{/lang}</small>
+						{if $errorField == 'data'}
+								<small class="innerError">
+									{if $errorType == 'empty'}
+									{lang}wcf.global.form.error.empty{/lang}
+									{else}
+									{lang}cms.acp.layout.data.error.{@$errorType}{/lang}
+									{/if}
+								</small>
+							{/if}
                     </dd>
                 </dl>
         </fieldset>

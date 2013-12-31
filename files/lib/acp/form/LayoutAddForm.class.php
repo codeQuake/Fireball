@@ -5,6 +5,7 @@ use cms\data\layout\LayoutAction;
 use wcf\form\AbstractForm;
 use wcf\util\StringUtil;
 use wcf\system\WCF;
+use wcf\system\exception\UserInputException;
 
 class LayoutAddForm extends AbstractForm{
 
@@ -42,6 +43,11 @@ class LayoutAddForm extends AbstractForm{
         
         $this->title = '';
         $this->data = array();
+    }
+    
+    public function validate(){
+        parent::validate();
+        if(empty($this->data)) throw new UserInputException('data', 'empty');
     }
     
     public function assignVariables(){
