@@ -214,6 +214,7 @@
       <![CDATA[{@$author->username} replied to a comment by "{@$commentAuthor->username}" on the news "{@$news->subject}":
 {link application='cms' controller='News' object=$news encode=false forceFrontend=true}#comments{/link}]]>
     </item>
+    <item name="cms.news.comments.noEntries"><![CDATA[No Comments available]]></item>
   </category>
 
   <category name="cms.content">
