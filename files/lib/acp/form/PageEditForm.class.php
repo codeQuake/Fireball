@@ -105,16 +105,17 @@ class PageEditForm extends AbstractForm{
         parent::validate();
         
         //validate menuitem
-        $list = new PageMenuItemList();
-        $list->readObjects();
-        $list = $list->getObjects();
-        foreach($list as $item){
-            if(isset($this->menuItem) && $this->title == $item->menuItem && $item->menuItemID != $this->page->menuItem['id'])
-                throw new UserInputException('menuItem', 'exists');
-            if(isset($this->menuItem) && $item->menuItem == 'cms.page.title'.$this->pageID && $item->menuItemID != $this->page->menuItem['id']);
-                throw new UserInputException('menuItem', 'exists');
+        if ($this->menuItem['has'] == 0){
+            $list = new PageMenuItemList();
+            $list->readObjects();
+            $list = $list->getObjects();
+            foreach($list as $item){
+                if(isset($this->menuItem) && $this->title == $item->menuItem)
+                    throw new UserInputException('menuItem', 'exists');
+                if(isset($this->menuItem) && $item->menuItem == 'cms.page.title'.$this->pageID);
+                    throw new UserInputException('menuItem', 'exists');
+            }
         }
-        
         if (!I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
