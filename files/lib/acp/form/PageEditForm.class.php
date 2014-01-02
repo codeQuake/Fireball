@@ -105,14 +105,15 @@ class PageEditForm extends AbstractForm{
         parent::validate();
         
         //validate menuitem
-        if ($this->menuItem['has'] == 0){
+        $menu = @unserialize($this->page->menuItem);
+        if (isset($this->menuItem['has']) && $this->menuItem['has'] == 1 && isset($menu['id']) == false && $menu['id'] != 0){
             $list = new PageMenuItemList();
             $list->readObjects();
             $list = $list->getObjects();
             foreach($list as $item){
-                if(isset($this->menuItem) && $this->title == $item->menuItem)
+                if(isset($this->menuItem['id']) && $this->title == $item->menuItem)
                     throw new UserInputException('menuItem', 'exists');
-                if(isset($this->menuItem) && $item->menuItem == 'cms.page.title'.$this->pageID);
+                if(isset($this->menuItem['id']) && $item->menuItem == 'cms.page.title'.$this->pageID);
                     throw new UserInputException('menuItem', 'exists');
             }
         }
