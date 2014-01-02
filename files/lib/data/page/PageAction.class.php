@@ -33,7 +33,7 @@ class PageAction extends AbstractDatabaseObjectAction{
                 if(isset($temp['has']) && $temp['has'] ==1){
                     if($temp['id'] != 0) {
                         $parentItem = new PageMenuItem($temp['id']);
-                        $parentItem = $parenItem->menuItem;
+                        $parentItem = $parentItem->menuItem;
                     }
                 }
             }
@@ -129,7 +129,7 @@ class PageAction extends AbstractDatabaseObjectAction{
         
         //delete menuItem
         $menuItem = @unserialize($page->menuItem);
-        if(isset($menuItem['has']) && $menuItem['has'] == 1){
+        if(isset($menuItem['has']) && $menuItem['has'] == 1 && isset($menuItem['id'])){
             $action = new PageMenuItemAction(array($menuItem['id']), 'delete', array());
             $action->executeAction();
         }

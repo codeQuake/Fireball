@@ -144,6 +144,7 @@
     <item name="cms.acp.file.type"><![CDATA[Typ]]></item>
     <item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
     <item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
+    <item name="cms.acp.file.error.empty"><![CDATA[Bitte laden Sie eine gültige Datei hoch.]]></item>
     <item name="cms.acp.file.management"><![CDATA[Dateiverwaltung]]></item>
     <item name="cms.acp.page.delete.sure"><![CDATA[Wollen Sie diese Seite und all ihre Inhalte wirklich löschen?]]></item>
     <item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt und all seine Abschnitte wirklich löschen?]]></item>
