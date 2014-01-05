@@ -158,7 +158,7 @@ class TextContentSectionType extends AbstractContentSectionType{
         $sectionID = $section->sectionID;
             $update = array();
             if (!I18nHandler::getInstance()->isPlainValue('text')) {
-                I18nHandler::getInstance()->save('text', 'cms.content.section.sectionData'.$sectionID, 'cms.content.section', PACKAGE_ID);
+                I18nHandler::getInstance()->save('text', 'cms.content.section.sectionData'.$sectionID, 'cms.content', PACKAGE_ID);
                 $update['sectionData'] = 'cms.content.section.sectionData'.$sectionID;
             }
             if (!empty($update)) {
@@ -184,7 +184,7 @@ class TextContentSectionType extends AbstractContentSectionType{
         if(!is_array($additionalData)) $additionalData = array();
 		AttachmentBBCode::setObjectID($section->sectionID);
 		MessageParser::getInstance()->setOutputType('text/html');
-		return MessageParser::getInstance()->parse($section->sectionData, $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']);
+		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($section->sectionData), $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']);
 	}
     
     public function getPreview($sectionID){
@@ -196,7 +196,7 @@ class TextContentSectionType extends AbstractContentSectionType{
         $additionalData = @unserialize($section->additionalData);
         if(!is_array($additionalData)) $additionalData = array();
         MessageParser::getInstance()->setOutputType('text/simplified-html');
-        return WCF::getLanguage()->get(StringUtil::truncateHTML(MessageParser::getInstance()->parse($section->sectionData, $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']), $maxLength));
+        return WCF::getLanguage()->get(StringUtil::truncateHTML(MessageParser::getInstance()->parse(WCF::getLanguage()->get($section->sectionData), $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']), $maxLength));
     }
     
     public function getAttachments($section) {
