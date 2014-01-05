@@ -105,13 +105,7 @@ class TextContentSectionType extends AbstractContentSectionType{
 				throw new UserInputException('text', 'multilingual');
 			}
 		}
-        if ($this->enableBBCodes && $this->allowedBBCodesPermission) {
-			$disallowedBBCodes = BBCodeParser::getInstance()->validateBBCodes($this->formData['text'], ArrayUtil::trim(explode(',', WCF::getSession()->getPermission($this->allowedBBCodesPermission))));
-			if (!empty($disallowedBBCodes)) {
-				WCF::getTPL()->assign('disallowedBBCodes', $disallowedBBCodes);
-				throw new UserInputException('text', 'disallowedBBCodes');
-			}
-		}
+        
     }
     
     public function assignFormVariables(){
@@ -151,9 +145,9 @@ class TextContentSectionType extends AbstractContentSectionType{
         $data['additionalData'] = serialize($additionalData);
         if(I18nHandler::getInstance()->isPlainValue('text')) {
             $data['sectionData'] = $this->formData['text'];
-            $editor = new ContentSectionEditor($section);
-            $editor->update($data);
         }
+        $editor = new ContentSectionEditor($section);
+        $editor->update($data);
         
         $sectionID = $section->sectionID;
             $update = array();

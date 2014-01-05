@@ -28,12 +28,12 @@ class HeadlineContentSectionType extends AbstractContentSectionType {
         $this->formData['sectionData'] = $section->sectionData;
     }
 
-    public function readFormData() {
+    public function readFormData() {        
+        if (isset($_POST['hlType']))
+            $this->hlType = StringUtil::trim($_POST['hlType']);
         I18nHandler::getInstance()->readValues();
         if (I18nHandler::getInstance()->isPlainValue('sectionData'))
             $this->formData['sectionData'] = StringUtil::trim(I18nHandler::getInstance()->getValue('sectionData'));
-        if (isset($_POST['hlType']))
-            $this->hlType = StringUtil::trim($_POST['hlType']);
     }
 
     public function validateFormData() {
@@ -60,14 +60,14 @@ class HeadlineContentSectionType extends AbstractContentSectionType {
     public function saved($section) {
         $additionalData = array();
         $additionalData['hlType'] = $this->hlType;
-        //$additionalData['hlType'] = "h1";
         $data = array();
         $data['additionalData'] = serialize($additionalData);
         if (I18nHandler::getInstance()->isPlainValue('sectionData')) {
             $data['sectionData'] = $this->formData['sectionData'];
-            $editor = new ContentSectionEditor($section);
-            $editor->update($data);
+            
         }
+        $editor = new ContentSectionEditor($section);
+        $editor->update($data);
 
         $sectionID = $section->sectionID;
         $update = array();
