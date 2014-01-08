@@ -41,10 +41,10 @@
 
 <header class="boxHeadline">
 {if $__wcf->getPageMenu()->getLandingPage()->menuItem == $page->getTitle()}
-	<header class="boxHeadline">
+
 		<h1>{PAGE_TITLE|language}</h1>
 		{hascontent}<p>{content}{PAGE_DESCRIPTION|language}{/content}</p>{/hascontent}
-	</header>
+
 {else}
 	<h1>{$page->getTitle()|language}</h1>
 	<p>{$page->description|language}</p>
