@@ -190,6 +190,7 @@
     <item name="cms.news.add"><![CDATA[Add news]]></item>
     <item name="cms.news.edit"><![CDATA[Edit news &raquo;{$news->getTitle()|language}&laquo;]]></item>
     <item name="cms.news.comments"><![CDATA[Comments]]></item>
+    <item name="cms.news.commentResponse"><![CDATA[Response (Newscomment)]]></item>
     <item name="cms.news.comments.count"><![CDATA[{#$news->comments} {if $news->comments == 1}Comment{else}Comments{/if}]]></item>
     <item name="cms.news.read"><![CDATA[Continue]]></item>
     <item name="cms.news.ipAddress"><![CDATA[IP-Address]]></item>

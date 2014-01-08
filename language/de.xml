@@ -199,6 +199,7 @@
     <item name="cms.news.ipAddress.otherUsers"><![CDATA[Andere Benutzer mit dieser IP->Adresse]]></item>
     <item name="cms.news.delete.sure"><![CDATA[Wollen Sie diese Nachricht wirklich löschen?]]></item>
     <item name="cms.news.comments.noEntries "><![CDATA[Keine Kommentare vorhanden]]></item>
+    <item name="cms.news.commentResponse"><![CDATA[Antwort (Nachrichtenkommentar)]]></item>
     <item name="cms.news.comment.notification.title"><![CDATA[Neuer Kommentar (Nachricht)]]></item>
     <item name="cms.news.comment.notification.message"><![CDATA[Hat einen Kommentar zu Ihrer Nachricht „{$news->subject}“ verfasst.]]></item>
     <item name="cms.news.comment.notification.mail">
