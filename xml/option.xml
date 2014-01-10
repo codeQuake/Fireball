@@ -14,6 +14,12 @@
     </categories>
     
     <options>
+      <option name="cms_news_preview_simplified">
+        <optiontype>boolean</optiontype>
+        <categoryname>cms.news</categoryname>
+        <defaultvalue>0</defaultvalue>
+        <options>module_news</options>
+      </option>
       <option name="cms_news_per_page">
         <optiontype>integer</optiontype>
         <categoryname>cms.news</categoryname>

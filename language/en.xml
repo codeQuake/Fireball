@@ -308,6 +308,7 @@
     <item name="wcf.acp.option.cms_news_latest_limit"><![CDATA[Latest news limit]]></item>
     <item name="wcf.acp.option.cms_news_latest_limit.description"><![CDATA[Amount of latest news in dashboard box]]></item>
     <item name="wcf.acp.option.module_news"><![CDATA[Newssystem]]></item>
+    <item name="wcf.acp.option.cms_news_preview_simplified"><![CDATA[Show a simplified news preview]]></item>
   </category>
 
   <category name="wcf.dashboard">
