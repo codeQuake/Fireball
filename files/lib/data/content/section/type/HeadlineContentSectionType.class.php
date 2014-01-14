@@ -1,13 +1,18 @@
 <?php
-
 namespace cms\data\content\section\type;
-
 use wcf\system\language\I18nHandler;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\util\StringUtil;
 use cms\data\content\section\ContentSection;
 use wcf\system\WCF;
 use wcf\system\exception\UserInputException;
+
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
 
 class HeadlineContentSectionType extends AbstractContentSectionType {
 

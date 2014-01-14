@@ -1,6 +1,5 @@
 <?php
 namespace cms\data\category;
-
 use wcf\data\category\AbstractDecoratedCategory;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
@@ -8,6 +7,13 @@ use wcf\system\category\CategoryHandler;
 use wcf\system\category\CategoryPermissionHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
 
 class NewsCategory extends AbstractDecoratedCategory implements IBreadcrumbProvider{
     

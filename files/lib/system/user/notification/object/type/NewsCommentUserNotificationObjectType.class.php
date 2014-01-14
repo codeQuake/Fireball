@@ -4,6 +4,13 @@ use wcf\system\user\notification\object\type\ICommentUserNotificationObjectType;
 use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
 use wcf\system\WCF;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
+
 class NewsCommentUserNotificationObjectType extends AbstractUserNotificationObjectType implements ICommentUserNotificationObjectType {
     protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentUserNotificationObject';
     protected static $objectClassName = 'wcf\data\comment\Comment';

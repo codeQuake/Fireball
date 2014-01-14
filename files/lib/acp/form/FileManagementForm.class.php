@@ -7,6 +7,13 @@ use wcf\util\ArrayUtil;
 use cms\data\file\FileList;
 use wcf\system\exception\UserInputException;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
+
 class FileManagementForm extends AbstractForm{
     
     public $templateName = 'fileAdd';

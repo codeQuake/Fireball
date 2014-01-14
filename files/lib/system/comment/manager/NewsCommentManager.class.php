@@ -6,6 +6,13 @@ use wcf\system\comment\manager\AbstractCommentManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
+
 class NewsCommentManager extends AbstractCommentManager{
 
     protected $permissionAdd = 'user.cms.news.canAddComment';

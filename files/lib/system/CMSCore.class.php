@@ -7,13 +7,14 @@ use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
- * FireBall core.
+ * Fireball core.
  *
  * @author	Jens Krumsieck
- * @copyright	2013 codeQuake
+ * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.fireball
  */
+ 
 class CMSCore extends AbstractApplication {
 	/**
 	 * @see	AbstractApplication::$abbreviation

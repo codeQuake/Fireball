@@ -1,6 +1,5 @@
 <?php
 namespace cms\acp\form;
-
 use cms\data\content\ContentAction;
 use cms\data\content\ContentEditor;
 use cms\data\page\Page;
@@ -10,6 +9,13 @@ use wcf\form\AbstractForm;
 use wcf\util\StringUtil;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
+
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
 
 class ContentAddForm extends AbstractForm{
 

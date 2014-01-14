@@ -8,6 +8,13 @@ use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 use cms\data\page\Page;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
+
 class ContentEditForm extends ContentAddForm{
     public $contentID = 0;
     public $content = null;

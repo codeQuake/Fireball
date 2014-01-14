@@ -1,6 +1,5 @@
 <?php
 namespace cms\system\search;
-
 use cms\data\category\NewsCategory;
 use cms\data\news\SearchResultNewsList;
 use wcf\form\IForm;
@@ -9,6 +8,13 @@ use wcf\system\exception\PermissionDeniedException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\search\AbstractSearchableObjectType;
 use wcf\system\WCF;
+
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
 
 class NewsSearch extends AbstractSearchableObjectType{
     public $messageCache = array();

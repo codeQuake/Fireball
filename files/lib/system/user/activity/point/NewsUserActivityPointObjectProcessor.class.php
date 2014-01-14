@@ -5,6 +5,13 @@ use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\user\activity\point\IUserActivityPointObjectProcessor;
 use wcf\system\WCF;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
+
 class NewsUserActivityPointObjectProcessor implements IUserActivityPointObjectProcessor{
     public $objectType = null;
     public $limit = 5000;

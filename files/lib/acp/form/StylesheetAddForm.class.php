@@ -5,6 +5,13 @@ use wcf\form\AbstractForm;
 use cms\data\stylesheet\StylesheetAction;
 use wcf\system\WCF;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
+ 
 class StylesheetAddForm extends AbstractForm{
     public $templateName = 'stylesheetAdd';
     public $neededPermissions = array('admin.cms.style.canAddStylesheet');

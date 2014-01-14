@@ -4,6 +4,13 @@ use wcf\data\like\object\ILikeObject;
 use wcf\data\like\ILikeObjectTypeProvider;
 use wcf\data\object\type\AbstractObjectTypeProvider;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
+
 class LikeableNewsProvider extends AbstractObjectTypeProvider implements ILikeObjectTypeProvider {
 
 	public $className = 'cms\data\news\News';

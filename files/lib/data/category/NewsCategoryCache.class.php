@@ -1,11 +1,17 @@
 <?php
 namespace cms\data\category;
-
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\language\LanguageFactory;
 use wcf\system\visitTracker\VisitTracker;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
+
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
 
 class NewsCategoryCache extends SingletonFactory{
     

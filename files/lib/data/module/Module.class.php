@@ -5,6 +5,13 @@ use cms\data\CMSDatabaseObject;
 use wcf\system\WCF;
 use wcf\data\template\Template;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
+
 class Module extends CMSDatabaseObject implements IRouteController{
 
     protected static $databaseTableName = 'module';

@@ -1,6 +1,5 @@
 <?php
 namespace cms\system\user\activity\event;
-
 use wcf\system\user\activity\event\IUserActivityEvent;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -8,6 +7,13 @@ use wcf\data\comment\CommentList;
 use wcf\data\comment\response\CommentResponseList;
 use cms\data\news\NewsList;
 use wcf\data\user\User;
+
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
 
 class NewsCommentResponseUserActivityEvent extends SingletonFactory implements IUserActivityEvent{
     public function prepare(array $events){

@@ -1,11 +1,17 @@
 <?php
 namespace cms\system\user\activity\event;
-
 use wcf\system\user\activity\event\IUserActivityEvent;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 use wcf\data\comment\CommentList;
 use cms\data\page\PageList;
+
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.fireball
+ */
 
 class PageCommentUserActivityEvent extends SingletonFactory implements IUserActivityEvent{
     public function prepare(array $events){
