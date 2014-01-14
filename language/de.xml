@@ -159,7 +159,8 @@
     <item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
     <item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
     <item name="cms.page.news"><![CDATA[Nachrichten]]></item>
-    <item name="cms.page.comments"><![CDATA[Kommentare]]></item>
+    <item name="cms.page.comments"><![CDATA[Kommentare]]></item>    
+    <item name="cms.page.comments.noEntries"><![CDATA[Keine Kommentare vorhanden]]></item>
     <item name="cms.page.comment.notification.title"><![CDATA[Neuer Kommentar (Seite)]]></item>
     <item name="cms.page.comment.notification.message"><![CDATA[Hat einen Kommentar auf der Seite „{$page->getTitle()|language}“ hinterlassen.]]></item>
     <item name="cms.page.comment.notification.mail">
@@ -198,7 +199,7 @@
     <item name="cms.news.ipAddress.news"><![CDATA[IP-Adresse von „{$news->username}“]]></item>
     <item name="cms.news.ipAddress.otherUsers"><![CDATA[Andere Benutzer mit dieser IP->Adresse]]></item>
     <item name="cms.news.delete.sure"><![CDATA[Wollen Sie diese Nachricht wirklich löschen?]]></item>
-    <item name="cms.news.comments.noEntries "><![CDATA[Keine Kommentare vorhanden]]></item>
+    <item name="cms.news.comments.noEntries"><![CDATA[Keine Kommentare vorhanden]]></item>
     <item name="cms.news.commentResponse"><![CDATA[Antwort (Nachrichtenkommentar)]]></item>
     <item name="cms.news.comment.notification.title"><![CDATA[Neuer Kommentar (Nachricht)]]></item>
     <item name="cms.news.comment.notification.message"><![CDATA[Hat einen Kommentar zu Ihrer Nachricht „{$news->subject}“ verfasst.]]></item>

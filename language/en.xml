@@ -161,6 +161,7 @@
     <item name="cms.page.comment.notification.title"><![CDATA[New comment (Page)]]></item>
     <item name="cms.page.comment.notification.message"><![CDATA[commented on „{$page->getTitle()|language}“.]]></item>
     <item name="cms.page.comment.notification.mail">
+    <item name="cms.page.comments.noEntries"><![CDATA[No Entries.]]></item>
       <![CDATA[{@$author->username} commented on "{@$page->getTitle()}":
 {link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}]]>
     </item>
@@ -180,7 +181,7 @@
 
   <category name="cms.news">
     <item name="cms.news.categorizedNews"><![CDATA[News in „{$category->getTitle()|language}“]]></item>
-    <item name="cms.news.comments.noEntries "><![CDATA[No Entries.]]></item>
+    <item name="cms.news.comments.noEntries"><![CDATA[No Entries.]]></item>
     <item name="cms.news.searchNews"><![CDATA[Search news]]></item>
     <item name="cms.news.category.categories"><![CDATA[Categories]]></item>
     <item name="cms.news.category.categories.description"><![CDATA[Choose one or more categories]]></item>

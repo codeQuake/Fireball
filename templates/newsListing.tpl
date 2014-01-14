@@ -1,6 +1,7 @@
 {if $objects|count}
 <ul class="messageList">
     {foreach from=$objects item=news}
+	{assign var="attachments" value=$news->getAttachments()}
         <li>
             <article class="message messageReduced marginTop" data-user-id="{$news->userID}" data-object-id="{$news->newsID}" data-is-deleted="{$news->isDeleted}" data-is-disabled="{$news->isDisabled}">
                 <div>
