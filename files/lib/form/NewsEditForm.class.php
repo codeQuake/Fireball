@@ -5,6 +5,7 @@ use cms\data\news\NewsAction;
 use wcf\form\MessageForm;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\util\ArrayUtil;
+use wcf\util\HeaderUtil;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\system\exception\IllegalLinkException;
@@ -79,7 +80,14 @@ class NewsEditForm extends NewsAddForm{
         $resultValues = $action->executeAction();
         $this->saved();
         
-        WCF::getTPL()->assign('success', true);
+        //re-define after saving
+        $this->news = new News($this->newsID);
+        HeaderUtil::redirect(LinkHandler::getInstance()->getLink('News', array(
+			'application' => 'cms',
+			'object' => $this->news
+		)));
+        
+		exit;
     }
     
     public function assignVariables(){
