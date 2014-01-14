@@ -2,7 +2,7 @@
     {if $resizable == 1}
         <div class="attachmentThumbnail" >
         {if $link != ''}
-           <a href="{$link}"><img src="{$__wcf->getPath('cms')}files/{$image->filename}"  alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip" /></a>
+           <a {if EXTERNAL_LINK_TARGET_BLANK}target="_blank"{/if}  href="{$link}"><img src="{$__wcf->getPath('cms')}files/{$image->filename}"  alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip" /></a>
         {else}
              <a href="{$__wcf->getPath('cms')}files/{$image->filename}" class="jsImageViewer"><img src="{$__wcf->getPath('cms')}files/{$image->filename}" alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip" style="max-width: 280px; max-height: 210px;"/></a>
         {/if}
@@ -15,7 +15,7 @@
        </div>
     {else}
         {if $link != ''}
-            <a href="{$link}"><img src="{$__wcf->getPath('cms')}files/{$image->filename}" alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip jsResizeImage"/></a>
+            <a {if EXTERNAL_LINK_TARGET_BLANK}target="_blank"{/if} href="{$link}"><img src="{$__wcf->getPath('cms')}files/{$image->filename}" alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip jsResizeImage"/></a>
         {else}
             <img src="{$__wcf->getPath('cms')}files/{$image->filename}" alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip jsResizeImage"/>
         {/if}
