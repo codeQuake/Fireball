@@ -73,6 +73,7 @@ class ContentEditForm extends ContentAddForm{
         I18nHandler::getInstance()->assignVariables(!empty($_POST));
         WCF::getTPL()->assign(array('contentID' => $this->contentID,
                                     'action' => 'edit',
-                                    'page' => new Page($this->content->pageID)));
+                                    'page' => new Page($this->content->pageID),
+                                    'content' => $this->content));
     }
 }
