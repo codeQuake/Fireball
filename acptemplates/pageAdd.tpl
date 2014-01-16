@@ -66,7 +66,7 @@
     <nav>
         <ul>
 			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
-			{if $pageID != 0}<li><a href="{link application='cms' controller='ContentList' id=$pageID}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="button"><span class="icon icon24 icon-file"></span> <span>{lang}cms.acp.page.content.list{/lang}</span></a></li>{/if}
+			{if $pageID|isset}<li><a href="{link application='cms' controller='ContentList' id=$pageID}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="button"><span class="icon icon24 icon-file"></span> <span>{lang}cms.acp.page.content.list{/lang}</span></a></li>{/if}
 		{if $action != 'add'}
 			{if !$page->isHome}
 				<li><a id="setAsHome" class="button"><span class="icon icon16 icon-home"></span> <span>{lang}cms.acp.page.setAsHome{/lang}</span></a></li>
