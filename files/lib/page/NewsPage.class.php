@@ -43,6 +43,8 @@ class NewsPage extends AbstractPage{
         parent::readParameters();
         
         if(isset($_REQUEST['id'])) $this->newsID = intval($_REQUEST['id']);
+        else throw new IllegalLinkException();
+        if(!isset($this->newsID) || $this->newsID == 0) throw new IllegalLinkException();
         $this->news = ViewableNews::getNews($this->newsID);
         if($this->news->newsID == 0) throw new IllegalLinkException();
     }
