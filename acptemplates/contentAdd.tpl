@@ -96,7 +96,10 @@
                 <dt><label for="cssClasses">{lang}cms.acp.content.css.cssClasses{/lang}</label></dt>
                 <dd>
                      <input type="text" id="cssClasses" name="cssClasses" value="{$cssClasses}" class="long" />
-                    {if $errorField == 'cssClasses'}
+						<small class="description">
+                            {lang}cms.acp.content.css.cssClasses.description{/lang}
+                        </small>
+					{if $errorField == 'cssClasses'}
                         <small class="innerError">
                             {lang}cms.acp.content.cssClasses.error.{@$errorType}{/lang}
                         </small>

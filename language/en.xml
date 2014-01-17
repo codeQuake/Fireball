@@ -55,6 +55,7 @@
     <item name="cms.acp.page.content.add"><![CDATA[Add contents to'{$page->title|language}']]></item>
     <item name="cms.acp.page.optional.isCommentable"><![CDATA[Allow comments]]></item>
     <item name="cms.acp.page.optional.layoutID"><![CDATA[Choose layout]]></item>
+    <item name="cms.acp.page.optional.layoutID.noItems"><![CDATA[No Layout has been created]]></item>
     <item name="cms.acp.page.menuItem.error.exists"><![CDATA[A Menuitem with this values already exists. For technical reasons you cannnot create a new one.]]></item>
     <item name="cms.acp.content.add"><![CDATA[Add content]]></item>
     <item name="cms.acp.content.general"><![CDATA[General]]></item>
@@ -65,6 +66,7 @@
     <item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Classes]]></item>
     <item name="cms.acp.content.showOrder"><![CDATA[Sortorder]]></item>
     <item name="cms.acp.content.title"><![CDATA[Title]]></item>
+    <item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding"]]></item>
     <item name="cms.acp.content.section.edit"><![CDATA[Edit content section]]></item>
     <item name="cms.acp.content.content.section.add"><![CDATA[Add content section to '{$content->title|language}']]></item>
     <item name="cms.acp.content.content.section.list"><![CDATA[List content sections of '{$content->title|language}']]></item>
