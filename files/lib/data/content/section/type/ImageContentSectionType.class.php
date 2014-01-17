@@ -4,6 +4,7 @@ use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
+use wcf\util\ArrayUtil;
 use cms\data\file\FileList;
 use cms\data\file\File;
 
@@ -30,14 +31,12 @@ class ImageContentSectionType extends AbstractContentSectionType{
     
     public function readData($sectionID){
         $section = new ContentSection($sectionID);
-        $this->formData['sectionData'] = $section->sectionData;
+        $this->formData['sectionData'] = @unserialize($section->sectionData);
         $this->additionalData = @unserialize($section->additionalData);
     }
     
     public function readFormData(){
-        if(isset($_POST['sectionData'])) $this->formData['sectionData'] = intval($_POST['sectionData']);        
-        if(isset($_POST['subtitle'])) $this->additionalData['subtitle'] = StringUtil::trim($_POST['subtitle']);
-        if(isset($_POST['link']))   $this->additionalData['link'] = StringUtil::trim($_POST['link']);
+        if(isset($_POST['sectionData']) &&  is_array($_POST['sectionData'])) $this->formData['sectionData'] = ArrayUtil::trim($_POST['sectionData']);        
         if(isset($_POST['resizable']))   $this->additionalData['resizable'] = intval($_POST['resizable']);
     }
     
@@ -45,10 +44,8 @@ class ImageContentSectionType extends AbstractContentSectionType{
     public function assignFormVariables(){
         
         WCF::getTPL()->assign(array('fileList' => $this->fileList,
-                                    'fileID' => isset($this->formData['sectionData']) ? $this->formData['sectionData']:0,
-                                    'link' => isset($this->additionalData['link']) ? $this->additionalData['link'] : '',
-                                    'resizable' => isset($this->additionalData['resizable']) ? $this->additionalData['resizable'] : 0,
-                                    'subtitle' => isset($this->additionalData['subtitle']) ? $this->additionalData['subtitle'] : ''));
+                                    'fileIDs' => isset($this->formData['sectionData']) ? $this->formData['sectionData'] : array(),
+                                    'resizable' => isset($this->additionalData['resizable']) ? $this->additionalData['resizable'] : 0));
     }
     
     public function getFormTemplate(){
@@ -56,7 +53,7 @@ class ImageContentSectionType extends AbstractContentSectionType{
     }
     
     public function saved($section){
-        $data['sectionData'] = $this->formData['sectionData'];
+        $data['sectionData'] = serialize($this->formData['sectionData']);
         $data['additionalData'] = serialize($this->additionalData);
         $editor = new ContentSectionEditor($section);
         $editor->update($data);
@@ -68,18 +65,19 @@ class ImageContentSectionType extends AbstractContentSectionType{
     
     public function getOutput($sectionID){
         $section = new ContentSection($sectionID);
-        $file = new File(intval($section->sectionData));
+        $fileList = array();
+        $imageIDs = @unserialize($section->sectionData);
+        foreach($imageIDs as $id){
+            $fileList[] = new File(intval($id));
+        }
         $additionalData = @unserialize($section->additionalData);
-        WCF::getTPL()->assign(array('image'=> $file,
-                                    'link' => isset($additionalData['link']) ? $additionalData['link'] : '',
-                                    'subtitle' => isset($additionalData['subtitle']) ? $additionalData['subtitle'] : '',
+        WCF::getTPL()->assign(array('images'=> $fileList,
                                     'resizable' => isset($additionalData['resizable']) ? $additionalData['resizable'] : 0));
         return WCF::getTPL()->fetch('imageSectionTypeOutput', 'cms');
     }
     
     public function getPreview($sectionID){
         $section = new ContentSection($sectionID);
-        $file = new File(intval($section->sectionData));
-        return '###'.$file->title.'###';
+        return '### Images '.$section->sectionData.'###';
     }
 }

@@ -80,7 +80,7 @@
     <item name="cms.acp.content.section.data.text"><![CDATA[Text]]></item>
     <item name="cms.acp.content.section.data.headline"><![CDATA[Headline]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[File]]></item>
-    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Image]]></item>
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Images]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Newslist]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Module]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
@@ -103,9 +103,9 @@
     <item name="cms.acp.content.section.data.h4"><![CDATA[Headline 4]]></item>
     <item name="cms.acp.content.section.list"><![CDATA[Content sections of '{$content->getTitle()|language}']]></item>
     <item name="cms.acp.content.section.data.fileID"><![CDATA[Choose a file]]></item>
-    <item name="cms.acp.content.section.data.imageID"><![CDATA[Choose an image]]></item>
+    <item name="cms.acp.content.section.data.imageID"><![CDATA[Choose images]]></item>
     <item name="cms.acp.content.section.data.fileID.description"><![CDATA[This file must be uploaded before in the Filemanagement.]]></item>
-    <item name="cms.acp.content.section.data.imageID.description"><![CDATA[This file must be uploaded before in the Filemanagement.]]></item>
+    <item name="cms.acp.content.section.data.imageID.description"><![CDATA[This images must be uploaded before in the Filemanagement.]]></item>
     <item name="cms.acp.content.section.data.subtitle"><![CDATA[Subtitle]]></item>
     <item name="cms.acp.content.section.data.link"><![CDATA[Hyperlink]]></item>
     <item name="cms.acp.content.section.data.resizable"><![CDATA[Shrink]]></item>

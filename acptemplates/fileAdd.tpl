@@ -62,7 +62,24 @@
                             <span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
                         </td>
                         <td class="columnID">{@$file->fileID}</td> 
-                        <td class="columnTitle columnFile">{$file->title|language}</td>
+                        <td class="columnTitle columnFile" id="file{$file->fileID}">{$file->title|language}
+							{if $file->type == "image/png" || $file->type == "image/jpg" || $file->type == "image/gif"}
+							<div id="preview{$file->fileID}" style="display:none;">
+									<img src="{$__wcf->getPath('cms')}files/{$file->filename}" style="max-width: 20%; max-height: 20%;"/>
+							</div>
+							{/if}
+						</td>
+						{if $file->type == "image/png" || $file->type == "image/jpg" || $file->type == "image/gif"}
+						<script data-relocate="true">
+						//<![CDATA[
+						$(function () {
+							$("#file{$file->fileID}").click(function () {
+								$("#preview{$file->fileID}").toggle("slow");
+							});
+						});
+							//]]>
+						</script>
+						{/if}
                         <td class="columnType">{$file->type}</td>
                         <td class="columnDownloads">{#$file->downloads}</td>
                     </tr>
