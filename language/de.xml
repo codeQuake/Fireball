@@ -108,6 +108,8 @@
     <item name="cms.acp.content.section.data.imageID"><![CDATA[Bilder auswählen]]></item>
     <item name="cms.acp.content.section.data.fileID.description"><![CDATA[Diese Bilder müssen vorher über die Dateiverwaltung hochgeladen werden.]]></item>
     <item name="cms.acp.content.section.data.imageID.description"><![CDATA[Diese Datei muss vorher über die Dateiverwaltung hochgeladen werden.]]></item>
+    <item name="cms.acp.content.section.data.subtitle"><![CDATA[Untertitel]]></item>
+    <item name="cms.acp.content.section.data.link"><![CDATA[Hyperlink]]></item>
     <item name="cms.acp.content.section.data.resizable"><![CDATA[Verkleinern]]></item>
     <item name="cms.acp.content.section.content"><![CDATA[Inhaltsvorschau]]></item>
     <item name="cms.acp.content.position.body"><![CDATA[Inhaltsbereich]]></item>
