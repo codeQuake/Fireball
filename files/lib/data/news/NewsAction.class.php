@@ -23,7 +23,7 @@ class NewsAction extends AbstractDatabaseObjectAction{
 
     protected $className = 'cms\data\news\NewsEditor';
     protected $permissionsDelete = array('mod.cms.news.canModerateNews');
-    protected $allowGuestAccess = array('getNewsPreview');
+    protected $allowGuestAccess = array('getNewsPreview', 'markAllAsRead');
     
     public $news = null;
     
@@ -173,6 +173,16 @@ class NewsAction extends AbstractDatabaseObjectAction{
 			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'cmsUnreadNews');
 		}
 	}
+    
+    public function validateMarkAllAsRead() { /** Does nothing like a boss **/ }
+    public function markAllAsRead(){
+        
+        VisitTracker::getInstance()->trackTypeVisit('de.codequake.cms.news');
+        // reset storage
+		if (WCF::getUser()->userID) {
+			UserStorageHandler::getInstance()->reset(array(WCF::getUser()->userID), 'cmsUnreadNews');
+		}
+    }
 	
     public function validateGetIpLog() {
 		if (!LOG_IP_ADDRESS) {

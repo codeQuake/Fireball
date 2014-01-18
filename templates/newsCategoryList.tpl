@@ -4,10 +4,25 @@
 	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != 'cms.page.news'}{lang}cms.page.news{/lang} - {/if}{PAGE_TITLE|language}</title>
 	
 	{include file='headInclude' application='wcf'}
-
+	<script data-relocate="true">
+		//<![CDATA[
+		$(function() {
+			new CMS.News.MarkAllAsRead();
+			});
+		//]]>
+	</script>
 </head>
 
 <body id="tpl{$templateName|ucfirst}">
+{capture assign='headerNavigation'}
+	<li class="jsOnly">
+		<a title="{lang}cms.news.markAllAsRead{/lang}" class="markAllAsReadButton jsTooltip">
+			<span class="icon icon16 icon-ok"></span> 
+			<span class="invisible">{lang}cms.news.markAllAsRead{/lang}</span>
+		</a>
+	</li>
+{/capture}
+
 {capture assign='sidebar'}
 	{hascontent}
 		<fieldset class="dashboardBox">
