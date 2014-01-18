@@ -314,6 +314,8 @@
     <item name="wcf.acp.option.cms_news_latest_limit.description"><![CDATA[Anzahl neuster Nachrichten in der Dashboard Box]]></item>
     <item name="wcf.acp.option.module_news"><![CDATA[Nachrichtensystem]]></item>
     <item name="wcf.acp.option.cms_news_preview_simplified"><![CDATA[Nachrichtenvorschau vereinfacht darstellen]]></item>
+    <item name="wcf.acp.option.cms_news_preview_truncate"><![CDATA[Nachrichtenvorschau kürzen]]></item>
+    <item name="wcf.acp.option.cms_news_preview_truncate.description"><![CDATA[Nach wie vielen Zeichen sollen Nachrichten in der Vorschau gekürzt werden?]]></item>
   </category>
 
   <category name="wcf.dashboard">
