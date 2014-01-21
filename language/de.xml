@@ -81,6 +81,7 @@
     <item name="cms.acp.content.section.data"><![CDATA[Inhalt]]></item>
     <item name="cms.acp.content.section.data.text"><![CDATA[Text]]></item>
     <item name="cms.acp.content.section.data.headline"><![CDATA[Überschrift]]></item>
+    <item name="cms.acp.content.section.data.hyperlink"><![CDATA[Hyperlink]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Bilder]]></item>
     <item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>

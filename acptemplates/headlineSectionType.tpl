@@ -16,3 +16,10 @@
 		<input type="text" name="sectionData" id="sectionData" class="long" value="{$i18nPlainValues['sectionData']}" required="required" />
     </dd>
 </dl>
+
+<dl>
+    <dt><label for="hyperlink">{lang}cms.acp.content.section.data.hyperlink{/lang}</label></dt>
+    <dd>
+		<input type="text" name="hyperlink" id="hyperlink" class="long" value="{$hyperlink}" />
+    </dd>
+</dl>

@@ -19,6 +19,7 @@ class HeadlineContentSectionType extends AbstractContentSectionType {
     public $objectType = 'de.codequake.cms.section.type.headline';
     public $isMultilingual = true;
     public $hlType = '';
+    public $hyperlink = '';
     public $additionalData = array();
 
     public function readParameters() {
@@ -28,14 +29,15 @@ class HeadlineContentSectionType extends AbstractContentSectionType {
     public function readData($sectionID) {
         $section = new ContentSection($sectionID);
         $data = @unserialize($section->additionalData);
-        $this->hlType = $data['hlType'];
+        $this->hlType = isset($data['hlType']) ? $data['hlType'] : '';
+        $this->hyperlink = isset($data['hyperlink']) ? $data['hyperlink'] : '';
         I18nHandler::getInstance()->setOptions('sectionData', PACKAGE_ID, $section->sectionData, 'cms.content.section.sectionData\d+');
         $this->formData['sectionData'] = $section->sectionData;
     }
 
     public function readFormData() {        
-        if (isset($_POST['hlType']))
-            $this->hlType = StringUtil::trim($_POST['hlType']);
+        if (isset($_POST['hlType'])) $this->hlType = StringUtil::trim($_POST['hlType']);
+        if (isset($_POST['hyperlink'])) $this->hyperlink = StringUtil::trim($_POST['hyperlink']);
         I18nHandler::getInstance()->readValues();
         if (I18nHandler::getInstance()->isPlainValue('sectionData'))
             $this->formData['sectionData'] = StringUtil::trim(I18nHandler::getInstance()->getValue('sectionData'));
@@ -55,7 +57,9 @@ class HeadlineContentSectionType extends AbstractContentSectionType {
         I18nHandler::getInstance()->assignVariables();
 
         I18nHandler::getInstance()->assignVariables(!empty($_POST));
-        WCF::getTPL()->assign(array('hlType' => $this->hlType));
+        WCF::getTPL()->assign(array('hlType' => $this->hlType,
+                                    'hyperlink' => $this->hyperlink));
+        
     }
 
     public function getFormTemplate() {
@@ -65,6 +69,7 @@ class HeadlineContentSectionType extends AbstractContentSectionType {
     public function saved($section) {
         $additionalData = array();
         $additionalData['hlType'] = $this->hlType;
+        $additionalData['hyperlink'] = $this->hyperlink;
         $data = array();
         $data['additionalData'] = serialize($additionalData);
         if (I18nHandler::getInstance()->isPlainValue('sectionData')) {
@@ -92,11 +97,10 @@ class HeadlineContentSectionType extends AbstractContentSectionType {
     public function getOutput($sectionID) {
         $section = new ContentSection($sectionID);
         $additionalData = @unserialize($section->additionalData);
-        if (!is_array($additionalData))
-            $additionalData = array();
-        if (preg_match('/cms.content./', $section->sectionData))
-            return '<' . $additionalData['hlType'] . '>' . WCF::getLanguage()->get($section->sectionData) . '</' . $additionalData['hlType'] . '>';
-        return '<' . $additionalData['hlType'] . '>' . $section->sectionData . '</' . $additionalData['hlType'] . '>';
+        WCF::getTPL()->assign(array('sectionData' => $section->sectionData,
+                                    'hlType' => $additionalData['hlType'],
+                                    'hyperlink' => isset($additionalData['hyperlink']) ? $additionalData['hyperlink'] : ''));
+        return WCF::getTPL()->fetch('headlineSectionTypeOutput', 'cms');
     }
 
     public function getPreview($sectionID) {
