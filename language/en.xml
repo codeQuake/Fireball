@@ -116,6 +116,7 @@
     <item name="cms.acp.content.optional"><![CDATA[Optional]]></item>
     <item name="cms.acp.content.optional.position"><![CDATA[Position]]></item>
     <item name="cms.acp.content.optional.type"><![CDATA[Type]]></item>
+    <item name="cms.acp.content.optional.type.description"><![CDATA[Has no effect in sidebar]]></item>
     <item name="cms.acp.content.optional.type.div"><![CDATA[Container (default)]]></item>
     <item name="cms.acp.content.optional.type.ul"><![CDATA[Unordered list]]></item>
     <item name="cms.acp.content.optional.type.ol"><![CDATA[Ordered list]]></item>

@@ -118,6 +118,7 @@
     <item name="cms.acp.content.optional"><![CDATA[Erweiterte Optionen]]></item>
     <item name="cms.acp.content.optional.position"><![CDATA[Position]]></item>
     <item name="cms.acp.content.optional.type"><![CDATA[Inhalts-Typ]]></item>
+    <item name="cms.acp.content.optional.type.description"><![CDATA[Hat in der Sidebar keinen Effekt.]]></item>
     <item name="cms.acp.content.optional.type.div"><![CDATA[Container (Empfohlen)]]></item>
     <item name="cms.acp.content.optional.type.ul"><![CDATA[Unsortierte Liste]]></item>
     <item name="cms.acp.content.optional.type.ol"><![CDATA[Sortierte Liste]]></item>

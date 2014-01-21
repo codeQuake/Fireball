@@ -127,6 +127,7 @@
 								<option value="ol" {if $type =="ol"}selected="selected"{/if}">{lang}cms.acp.content.type.ol{/lang}</option>
 							</select>
 						</dd>
+						<small>{lang}cms.acp.content.optional.type.description{/lang}</small>
 			</dl>
 			<dl>
                 <dt><label for="showOrder">{lang}cms.acp.content.optional.showOrder{/lang}</label></dt>

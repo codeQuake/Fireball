@@ -53,13 +53,13 @@
 {include file='userNotice'}
 
     {foreach from=$bodyList item=content}
-        <div {if $content->cssID != ''}id="{$content->cssID}"{/if} {if $content->cssClasses != ''}class="{$content->cssClasses}"{/if}>
+        <{$content->type} {if $content->cssID != ''}id="{$content->cssID}"{/if} {if $content->cssClasses != ''}class="{$content->cssClasses}"{/if}>
             {foreach from=$content->getSections() item=section}
-                <div {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section>cssClasses != ''} class="{$section->cssClasses}"{/if}>
+                <{if $content->type != 'div'}li{else}div{/if} {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section>cssClasses != ''} class="{$section->cssClasses}"{/if}>
                     {@$section->getOutput()|language}
-                </div>
+                </{if $content->type != 'div'}li{else}div{/if}>
             {/foreach}
-        </div>
+        </{$content->type}>
     {/foreach}
 
 	{if $page->isCommentable}
