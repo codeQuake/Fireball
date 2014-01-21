@@ -118,8 +118,18 @@
 							</select>
 						</dd>
 			</dl>
+			<dl  {if $errorField == 'type'}class="formError"{/if}>
+						<dt><label for="type">{lang}cms.acp.content.optional.type{/lang}</label></dt>
+						<dd>
+							<select id="type" name="type">
+								<option value="div" {if $type =="div"}selected="selected"{/if}>{lang}cms.acp.content.type.div{/lang}</option>
+								<option value="ul" {if $type =="ul"}selected="selected"{/if}">{lang}cms.acp.content.type.ul{/lang}</option>
+								<option value="ol" {if $type =="ol"}selected="selected"{/if}">{lang}cms.acp.content.type.ol{/lang}</option>
+							</select>
+						</dd>
+			</dl>
 			<dl>
-                <dt><label for="invisible">{lang}cms.acp.content.optional.showOrder{/lang}</label></dt>
+                <dt><label for="showOrder">{lang}cms.acp.content.optional.showOrder{/lang}</label></dt>
                 <dd>
                     <input type="text" name="showOrder" id="showorder" value="{$showOrder}" />
                 </dd>
