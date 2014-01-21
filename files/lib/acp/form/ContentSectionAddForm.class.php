@@ -74,7 +74,6 @@ class ContentSectionAddForm extends AbstractForm{
 		$this->readFormParameters();
 
 		try {
-			// send message or save as draft
 			if ($this->send) {
                 if($this->objectType != null) $this->objectTypeProcessor->readFormData();
 				$this->validate();
