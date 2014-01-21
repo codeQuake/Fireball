@@ -49,9 +49,8 @@ class Page extends CMSDatabaseObject implements IRouteController{
     }
     
     public function isVisible(){
-        if($this->invisible == 0 && $this->getPermission('canViewPage')) {
-            return true;
-        }
+        if($this->invisible == 0 && $this->getPermission('canViewPage')) return true;
+        if($this->invisible == 1 && $this->getPermission('canViewInvisblePage')) return true;
         return false;
     }
     
