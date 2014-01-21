@@ -28,7 +28,8 @@ title VARCHAR(255) NOT NULL,
 showOrder INT(10) DEFAULT 0,
 cssID VARCHAR(255),
 cssClasses VARCHAR(255),
-position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body'
+position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body',
+type ENUM('div', 'ul', 'ol') NOT NULL DEFAULT 'div'
 );
 
 --section

@@ -31,6 +31,7 @@ class ContentEditForm extends ContentAddForm{
         $this->cssClasses = $this->content->cssClasses;
         $this->showOrder = $this->content->showOrder;
         $this->position = $this->content->position;
+        $this->type = $this->content->type;
     }
     
     public function readParameters(){
@@ -51,7 +52,8 @@ class ContentEditForm extends ContentAddForm{
                     'cssID' => $this->cssID,
                     'cssClasses' => $this->cssClasses,
                     'showOrder' => $this->showOrder,
-                    'position' => $this->position);
+                    'position' => $this->position,
+                    'type' => $this->type);
         $objectAction = new ContentAction(array($this->contentID), 'update', array('data' => $data));
         $objectAction->executeAction();
         $update = array();

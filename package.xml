@@ -55,6 +55,11 @@
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     
     <!--xml-->
+    <instruction type="aclOption">xml/aclOption.xml</instruction>
+    <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     <instruction type="option">xml/option.xml</instruction>
+    
+    <!--others-->
+    <instruction type="sql">Update_RC1_to_RC2.sql</instruction>
   </instructions>
 </package>

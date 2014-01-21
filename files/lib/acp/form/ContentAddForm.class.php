@@ -32,6 +32,7 @@ class ContentAddForm extends AbstractForm{
     public $cssID = '';
     public $cssClasses ='';
     public $position  = 'body';
+    public $type = 'div';
     
     public $pageList = null;
     
@@ -57,6 +58,7 @@ class ContentAddForm extends AbstractForm{
         if(isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
         if(isset($_POST['position'])) $this->position = StringUtil::trim($_POST['position']);
         if(isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
+        if(isset($_POST['type'])) $this->type = StringUtil::trim($_POST['type']);
     }
     
     public function validate(){
@@ -80,7 +82,8 @@ class ContentAddForm extends AbstractForm{
                     'cssID' => $this->cssID,
                     'cssClasses' => $this->cssClasses,
                     'showOrder' => $this->showOrder,
-                    'position' => $this->position);
+                    'position' => $this->position,
+                    'type' => $this->type);
         $objectAction = new ContentAction(array(), 'create', array('data' => $data));
         $objectAction->executeAction();
         $returnValues = $objectAction->getReturnValues();
@@ -99,6 +102,8 @@ class ContentAddForm extends AbstractForm{
          WCF::getTPL()->assign('success', true);
         
         $this->title = $this->cssID = $this->cssClasses = '';
+        $this->position = 'body';
+        $this->type = 'div';
         $this->pageID = $this->showOrder = 0;
         I18nHandler::getInstance()->reset();
     }
@@ -112,6 +117,7 @@ class ContentAddForm extends AbstractForm{
                                     'pageID' => $this->pageID,
                                     'pageList' => $this->pageList,
                                     'page' => new Page($this->pageID),
-                                    'position' => $this->position));
+                                    'position' => $this->position,
+                                    'type' => $this->type));
     }
 }
