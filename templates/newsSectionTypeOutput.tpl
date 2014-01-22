@@ -25,5 +25,5 @@
 </ul>
 {else}
 {assign var=objects value=$newsList}
-{include file='newsListing' application='cms' sandbox='false'}
+{include file='newsListing' application='cms'}
 {/if}
