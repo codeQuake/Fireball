@@ -117,9 +117,9 @@
     <item name="cms.acp.content.optional.position"><![CDATA[Position]]></item>
     <item name="cms.acp.content.optional.type"><![CDATA[Type]]></item>
     <item name="cms.acp.content.optional.type.description"><![CDATA[Has no effect in sidebar]]></item>
-    <item name="cms.acp.content.optional.type.div"><![CDATA[Container (default)]]></item>
-    <item name="cms.acp.content.optional.type.ul"><![CDATA[Unordered list]]></item>
-    <item name="cms.acp.content.optional.type.ol"><![CDATA[Ordered list]]></item>
+    <item name="cms.acp.content.type.div"><![CDATA[Container (default)]]></item>
+    <item name="cms.acp.content.type.ul"><![CDATA[Unordered list]]></item>
+    <item name="cms.acp.content.type.ol"><![CDATA[Ordered list]]></item>
     <item name="cms.acp.page.userPermissions"><![CDATA[Permissions]]></item>
     <item name="cms.acp.module.list"><![CDATA[List modules]]></item>
     <item name="cms.acp.module.add"><![CDATA[Add module]]></item>
