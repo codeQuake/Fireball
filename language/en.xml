@@ -368,6 +368,7 @@
 
   <category name="wcf.search">
     <item name="wcf.search.type.de.codequake.cms.news"><![CDATA[News]]></item>
+    <item name="wcf.search.object.de.codequake.cms.news"><![CDATA[News]]></item>
   </category>
   <category name="wcf.user.notification">
     <item name="wcf.user.notification.de.codequake.cms"><![CDATA[CMS]]></item>
