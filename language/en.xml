@@ -268,7 +268,7 @@
     <item name="wcf.acp.group.option.mod.cms.news.canModerateComment"><![CDATA[Can moderate comments]]></item>
     <item name="wcf.acp.group.option.user.cms.page.canEnterPage"><![CDATA[Can enter pages]]></item>
     <item name="wcf.acp.group.option.user.cms.page.canViewPage"><![CDATA[Can see pages]]></item>
-    <item name="wcf.acp.group.option.user.cms.page.canViewInvisiblePage"><![CDATA[Can see invisible pages]]></item>
+    <item name="wcf.acp.group.option.user.cms.page.canViewInvisible"><![CDATA[Can see invisible pages]]></item>
     <item name="wcf.acp.group.option.user.cms.page.canAddComment"><![CDATA[Can add comments]]></item>
     <item name="wcf.acp.group.option.user.cms.page.canDeleteComment"><![CDATA[Can delete own comments]]></item>
     <item name="wcf.acp.group.option.user.cms.page.canEditComment"><![CDATA[Can edit own comments]]></item>

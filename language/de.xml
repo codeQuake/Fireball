@@ -269,7 +269,7 @@
     <item name="wcf.acp.group.option.mod.cms.news.canModerateComment"><![CDATA[Moderationsrecht für Kommentare]]></item>
     <item name="wcf.acp.group.option.user.cms.page.canEnterPage"><![CDATA[Kann Seiten betreten]]></item>
     <item name="wcf.acp.group.option.user.cms.page.canViewPage"><![CDATA[Kann Seiten sehen]]></item>
-    <item name="wcf.acp.group.option.user.cms.page.canViewInvisiblePage"><![CDATA[Kann unsichtbare Seiten sehen]]></item>
+    <item name="wcf.acp.group.option.user.cms.page.canViewInvisible"><![CDATA[Kann unsichtbare Seiten sehen]]></item>
     <item name="wcf.acp.group.option.user.cms.page.canAddComment"><![CDATA[Kann Kommentare hinzufügen]]></item>
     <item name="wcf.acp.group.option.user.cms.page.canDeleteComment"><![CDATA[Kann eigene Kommentare löschen]]></item>
     <item name="wcf.acp.group.option.user.cms.page.canEditComment"><![CDATA[Kann eigene Kommentare bearbeiten]]></item>
