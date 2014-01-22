@@ -46,7 +46,7 @@ class NewsPage extends AbstractPage{
         else throw new IllegalLinkException();
         if(!isset($this->newsID) || $this->newsID == 0) throw new IllegalLinkException();
         $this->news = ViewableNews::getNews($this->newsID);
-        if($this->news->newsID == 0) throw new IllegalLinkException();
+        if($this->news === null) throw new IllegalLinkException();
     }
     
     public function readData(){
