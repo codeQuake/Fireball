@@ -206,6 +206,7 @@
     <item name="cms.news.ipAddress"><![CDATA[IP-Adresse]]></item>
     <item name="cms.news.ipAddress.title"><![CDATA[IP-Adresse]]></item>
     <item name="cms.news.ipAddress.news"><![CDATA[IP-Adresse von „{$news->username}“]]></item>
+    <item name="cms.news.ipAddress.author"><![CDATA[Weitere IP-Adressen von „{$news->username}“]]></item>
     <item name="cms.news.ipAddress.otherUsers"><![CDATA[Andere Benutzer mit dieser IP->Adresse]]></item>
     <item name="cms.news.delete.sure"><![CDATA[Wollen Sie diese Nachricht wirklich löschen?]]></item>
     <item name="cms.news.comments.noEntries"><![CDATA[Keine Kommentare vorhanden]]></item>
