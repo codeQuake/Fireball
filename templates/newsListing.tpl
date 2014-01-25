@@ -16,6 +16,11 @@
                                         <h1>
                                             <a href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a>
                                         </h1>
+										{if $news->languageID != 0 && CMS_NEWS_LANGUAGEICON}
+										<p class="newMessageBadge" style="margin-top: 30px">
+											{@$news->getLanguageIcon()}
+										</p>
+										{/if}
 										{if $news->isNew()}
 										<p class="newMessageBadge">{lang}wcf.message.new{/lang}</p>
 										{/if}

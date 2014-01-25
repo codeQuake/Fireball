@@ -125,6 +125,16 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
         ));
     }
     
+    public function getLanguage() {
+		if ($this->languageID) return LanguageFactory::getInstance()->getLanguage($this->languageID);
+
+		return null;
+	}
+
+	public function getLanguageIcon() {
+		return '<img src="'.$this->getLanguage()->getIconPath().'" alt="" title="'.$this->getLanguage().'" class="jsTooltip iconFlag" />';
+	}
+    
     public function __toString() {
         return $this->getFormattedMessage();
     }

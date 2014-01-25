@@ -26,6 +26,12 @@
         <defaultvalue>255</defaultvalue>
         <options>module_news</options>
       </option>
+      <option name="cms_news_languageicon">
+        <optiontype>boolean</optiontype>
+        <categoryname>cms.news</categoryname>
+        <defaultvalue>1</defaultvalue>
+        <options>module_news</options>
+      </option>
       <option name="cms_news_per_page">
         <optiontype>integer</optiontype>
         <categoryname>cms.news</categoryname>

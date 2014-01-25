@@ -54,6 +54,7 @@
     <instruction type="template">templates.tar</instruction>
     
     <!--xml-->
+    <instruction type="option">xml/option.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     
   </instructions>
