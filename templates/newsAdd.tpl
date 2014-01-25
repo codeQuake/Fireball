@@ -34,6 +34,7 @@
                 <small>{lang}cms.news.category.categories.description{/lang}</small>
                 <ol class="nestedCategoryList doubleColumned jsCategoryList">
 				{foreach from=$categoryList item=categoryItem}
+					{if $categoryItem->isAccessible()}
 					<li>
 						<div>
 							<div class="containerHeadline">
@@ -43,14 +44,17 @@
 							{if $categoryItem->hasChildren()}
 								<ol>
 									{foreach from=$categoryItem item=subCategoryItem}
+										{if $subCategoryItem->isAccessible()}
 										<li>
 											<label{if $subCategoryItem->getDescription()} class="jsTooltip" title="{$subCategoryItem->getDescription()}"{/if}><input type="checkbox" name="categoryIDs[]" value="{@$subCategoryItem->categoryID}" class="jsChildCategory"{if $subCategoryItem->categoryID|in_array:$categoryIDs}checked="checked" {/if}/> {$subCategoryItem->getTitle()}</label>
 										</li>
+										{/if}
 									{/foreach}
 								</ol>
 							{/if}
 						</div>
 					</li>
+					{/if}
 				{/foreach}
 			</ol>
                 {if $errorField == 'categoryIDs'}

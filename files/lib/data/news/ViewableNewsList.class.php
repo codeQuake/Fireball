@@ -4,6 +4,7 @@ use wcf\system\WCF;
 use wcf\system\visitTracker\VisitTracker;
 use cms\data\news\NewsList;
 use wcf\system\like\LikeHandler;
+use wcf\system\language\LanguageFactory;
 
 /**
  * @author	Jens Krumsieck
@@ -24,8 +25,13 @@ class ViewableNewsList extends NewsList{
 			        $this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_tracked_visit tracked_visit ON (tracked_visit.objectTypeID = ".VisitTracker::getInstance()->getObjectTypeID('de.codequake.cms.news')." AND tracked_visit.objectID = news.newsID AND tracked_visit.userID = ".WCF::getUser()->userID.")";
 		        }
             // get like status
-		if (!empty($this->sqlSelects)) $this->sqlSelects .= ',';
-		$this->sqlSelects .= "like_object.likes, like_object.dislikes";
-		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_like_object like_object ON (like_object.objectTypeID = ".LikeHandler::getInstance()->getObjectType('de.codequake.cms.likeableNews')->objectTypeID." AND like_object.objectID = news.newsID)";
+		    if (!empty($this->sqlSelects)) $this->sqlSelects .= ',';
+		    $this->sqlSelects .= "like_object.likes, like_object.dislikes";
+		    $this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_like_object like_object ON (like_object.objectTypeID = ".LikeHandler::getInstance()->getObjectType('de.codequake.cms.likeableNews')->objectTypeID." AND like_object.objectID = news.newsID)";
+            
+            //language Filter
+		    if (LanguageFactory::getInstance()->multilingualismEnabled() && count(WCF::getUser()->getLanguageIDs())) {
+			    $this->getConditionBuilder()->add('(news.languageID IN (?) OR news.languageID IS NULL)', array(WCF::getUser()->getLanguageIDs()));
+		    }
     }
 }
