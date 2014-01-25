@@ -38,21 +38,25 @@
 			<ol class="sidebarNestedCategoryList">
 				{content}
 					{foreach from=$categoryList item=categoryItem}
+						{if $categoryItem->isAccessible()}
 						<li>
 							<a href="{link application='cms' controller='NewsList' object=$categoryItem->getDecoratedObject()}{/link}">{$categoryItem->getTitle()}</a>
 							{if $categoryItem->getUnreadNews() != 0}<span class="badge">{#$categoryItem->getUnreadNews()}</span>{/if}
 							{if $categoryItem->hasChildren()}
 								<ol>
 									{foreach from=$categoryItem item=subCategoryItem}
+										{if $subCategoryItem->isAccessible()}
 										<li>
 											<a href="{link application='cms' controller='NewsList' object=$subCategoryItem->getDecoratedObject()}{/link}">{$subCategoryItem->getTitle()}</a>
 											{if $categoryItem->getUnreadNews() != 0}<span class="badge">{#$categoryItem->getUnreadNews()}</span>{/if}
 											
 										</li>
+										{/if}
 									{/foreach}
 								</ol>
 							{/if}
 						</li>
+						{/if}
 					{/foreach}
 				{/content}
 			</ol>
