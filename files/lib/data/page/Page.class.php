@@ -48,9 +48,9 @@ class Page extends CMSDatabaseObject implements IRouteController{
         return '';
     }
     
-    public function isVisible(){
+    public function isVisible(){        
+        if($this->invisible == 1 && $this->getPermission('canViewInvisiblePage')) return true;
         if($this->invisible == 0 && $this->getPermission('canViewPage')) return true;
-        if($this->invisible == 1 && $this->getPermission('canViewInvisblePage')) return true;
         return false;
     }
     
@@ -113,7 +113,12 @@ class Page extends CMSDatabaseObject implements IRouteController{
     }
     
     public function getPermission($permission = 'canViewPage') {
-		return PagePermissionHandler::getInstance()->getPermission($this->pageID, $permission);
+		$permissions  = PagePermissionHandler::getInstance()->getPermission($this);
+        if (isset($permissions[$permission])) {
+			return $permissions[$permission];
+		}
+        return WCF::getSession()->getPermission('user.cms.page.'.$permission);
+        
 	}
     
     public function checkPermission(array $permissions = array('canViewPage')) {
