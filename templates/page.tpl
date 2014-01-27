@@ -17,11 +17,11 @@
         <div {if $content->cssID != ''}id="{$content->cssID}"{/if} {if $content->cssClasses != ''}class="{$content->cssClasses}"{/if}>
             {foreach from=$content->getSections() item=section}
 				{if $section->getObjectType() == 'de.codequake.cms.section.type.dashboard'}
-				 <div {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section>cssClasses != ''}class="{$section->cssClasses}"{/if}>
+				 <div {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section->cssClasses != ''}class="{$section->cssClasses}"{/if}>
                     {@$section->getOutput()|language}
                 </div>
 				{else}
-                <fieldset {if $section->cssID != ''}id="{$section->cssID}"{/if} class="dashboardBox{if $section>cssClasses != ''} {$section->cssClasses}{/if}">
+                <fieldset {if $section->cssID != ''}id="{$section->cssID}"{/if} class="dashboardBox{if $section->cssClasses != ''} {$section->cssClasses}{/if}">
 					<legend></legend>
                     {@$section->getOutput()|language}
                 </fieldset>
@@ -56,7 +56,7 @@
 		{assign var=contentTag value=$content->type}
         <{$contentTag} {if $content->cssID != ''}id="{$content->cssID}"{/if} {if $content->cssClasses != ''}class="{$content->cssClasses}"{/if}>
             {foreach from=$content->getSections() item=section}
-                <{if $contentTag != 'div'}li{else}div{/if} {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section>cssClasses != ''} class="{$section->cssClasses}"{/if}>
+                <{if $contentTag != 'div'}li{else}div{/if} {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section->cssClasses != ''} class="{$section->cssClasses}"{/if}>
                     {@$section->getOutput()|language}
                 </{if $contentTag != 'div'}li{else}div{/if}>
             {/foreach}
