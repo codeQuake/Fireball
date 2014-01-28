@@ -14,12 +14,10 @@
 {if $sidebarList|count || $page->showSidebar}
 {capture assign='sidebar'}
 	{foreach from=$sidebarList item=content}
-        <div {if $content->cssID != ''}id="{$content->cssID}"{/if} {if $content->cssClasses != ''}class="{$content->cssClasses}"{/if}>
+        
             {foreach from=$content->getSections() item=section}
 				{if $section->getObjectType() == 'de.codequake.cms.section.type.dashboard'}
-				 <div {if $section->cssID != ''}id="{$section->cssID}"{/if} {if $section->cssClasses != ''}class="{$section->cssClasses}"{/if}>
-                    {@$section->getOutput()|language}
-                </div>
+					{@$section->getOutput()|language}
 				{else}
                 <fieldset {if $section->cssID != ''}id="{$section->cssID}"{/if} class="dashboardBox{if $section->cssClasses != ''} {$section->cssClasses}{/if}">
 					<legend></legend>
@@ -27,7 +25,6 @@
                 </fieldset>
 				{/if}
             {/foreach}
-		</div>
     {/foreach}
 	
 	{if $page->showSidebar == 1}
