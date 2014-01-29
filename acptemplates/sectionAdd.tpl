@@ -112,7 +112,8 @@
          {@SECURITY_TOKEN_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
         {if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}
-		{if $objectTypeName != 'de.codequake.cms.section.type.text'}<input id="previewButton" type="button" class="jsOnly" accesskey="p" value="{lang}wcf.global.button.preview{/lang}" />
+		<!--leave the unused sections here for later ;) -->
+		{if $objectTypeName != 'de.codequake.cms.section.type.text' && $objectTypeName != 'de.codequake.cms.section.type.image' && $objectTypeName != 'de.codequake.cms.section.type.news' && $objectTypeName != 'de.codequake.cms.section.type.module' && $objectTypeName != 'de.codequake.cms.section.type.dashboard'}<input id="previewButton" type="button" class="jsOnly" accesskey="p" value="{lang}wcf.global.button.preview{/lang}" />
 			<script data-relocate="true">
 			//<![CDATA[
 			$(function() {
@@ -123,7 +124,7 @@
 			});
 			//]]>
 			</script>
-		{else}
+		{elseif $objectTypeName == 'de.codequake.cms.section.type.text'}
 		{include file='messageFormPreviewButton'}
 		{/if}
 
