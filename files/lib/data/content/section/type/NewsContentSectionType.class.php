@@ -4,6 +4,7 @@ use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
+use wcf\util\StringUtil;
 use cms\data\news\CategoryNewsList;
 use cms\data\category\NewsCategoryNodeTree;
 use wcf\data\category\Category;
@@ -94,8 +95,15 @@ class NewsContentSectionType extends AbstractContentSectionType{
     public function getPreview($sectionID){
         $section = new ContentSection($sectionID);
         $data = @unserialize($section->additionalData);
+        $categoryIDs = @unserialize($section->sectionData);
+        $categories = array();
+        foreach($categoryIDs as $categoryID){
+            $category = new Category($categoryID);
+            $category = new NewsCategory($category);
+            $categories[] = $category->getTitle();
+        }
         $small = isset($data['small']) && intval($data['small']) == 1 ? 'small' : 'normal';
-        return '### News '.$small.' CIDs: '.implode(@unserialize($section->sectionData.'###'),', ').'###';
+        return StringUtil::truncate('### News: Type: '.$small.'; Categories: '.implode(', ', $categories).'###', 150, "\xE2\x80\xA6", true);;
     }
     
 }
