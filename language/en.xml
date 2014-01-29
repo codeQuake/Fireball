@@ -30,7 +30,7 @@
     <item name="cms.acp.page.content.list"><![CDATA[List contents of '{$page->title|language}']]></item>
     <item name="cms.acp.page.description"><![CDATA[Description]]></item>
     <item name="cms.acp.page.setAsHome"><![CDATA[Set as startpage]]></item>
-    <item name="cms.acp.page.setAsHome.confirmMessage"><![CDATA[Do you want to set this page as your CMS Startpage?]]></item>
+    <item name="cms.acp.page.setAsHome.confirmMessage"><![CDATA[Do you want to set this page as your CMS Startpage? If there is a menu item for this page yet, it will be deleted.]]></item>
     <item name="cms.acp.page.homePage"><![CDATA[Startpage]]></item>
     <item name="cms.acp.page.general"><![CDATA[General]]></item>
     <item name="cms.acp.page.general.parentID"><![CDATA[Parent page]]></item>

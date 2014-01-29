@@ -113,6 +113,7 @@ class PageAction extends AbstractDatabaseObjectAction{
                 $action = new PageMenuItemAction(array($menuItem['id']), 'delete', array());
                 $action->executeAction();
                 $menuItem['id'] = 0;
+                $menuItem['has'] = 0;
                 $menuItem = serialize($menuItem);
                 $pageEditor = new PageEditor($page);
                 $pageEditor->update(array('menuItem' => $menuItem));
@@ -151,25 +152,27 @@ class PageAction extends AbstractDatabaseObjectAction{
 			throw new UserInputException('objectIDs');
 		}
         
-		else if ($this->pageEditor->isPrimary) {
+		else if ($this->pageEditor->isHome) {
 			throw new PermissionDeniedException();
 		}
-        //checking for existing item
-        else{
-            //validate menuitem
-            $list = new PageMenuItemList();
-            $list->readObjects();
-            $list = $list->getObjects();
-            foreach($list as $item){
-                if($this->pageEditor->title == $item->menuItem)
-                    throw new NamedUserException(WCF::getLanguage()->get('cms.acp.page.menuItem.error.exists'));
-            }
-        }
+        
 	}
     
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
         
+        
+        //delete existing menu item
+        $menuItem = @unserialize($this->pageEditor->menuItem);
+        if($this->pageEditor->hasMenuItem() && $menuItem['id'] != 0){
+            $action = new PageMenuItemAction(array($menuItem['id']), 'delete', array());
+            $action->executeAction();
+            $menuItem['id'] = 0;
+            $menuItem['has'] = 0;
+            $menuItem = serialize($menuItem);
+            $pageEditor = new PageEditor($this->pageEditor->getDecoratedObject());
+            $pageEditor->update(array('menuItem' => $menuItem));
+        }
         
         //get Home Menu Item
         $sql = "SELECT menuItemID FROM wcf".WCF_N."_page_menu_item WHERE menuItemController = ?";
