@@ -99,6 +99,12 @@ class ImageContentSectionType extends AbstractContentSectionType{
     
     public function getPreview($sectionID){
         $section = new ContentSection($sectionID);
-        return '### Images '.$section->sectionData.'###';
+        $imageIDs = @unserialize($section->sectionData);
+        $images = array();
+        foreach($imageIDs as $imageID){
+            $file = new File(intval($imageID));
+            $images[] = $file->getTitle();
+        }
+        return StringUtil::truncate('### Images '.implode(', ', $images).'###', 150, "\xE2\x80\xA6", true);
     }
 }
