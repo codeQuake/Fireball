@@ -1,6 +1,10 @@
 {capture assign='pageTitle'}{lang}cms.acp.content.section.{@$action}{/lang}{/capture}
 {include file='header'}
 
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS.js"></script>
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
+	
+
 <nav class="breadcrumbs marginTop">
 	<ul>
 		<li title="{lang}cms.acp.page.overview{/lang}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -50,7 +54,7 @@
     </nav>
 </div>
 
-<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentSectionAdd' id=$contentID}{/link}{else}{link application='cms' controller='ContentSectionEdit' id=$sectionID}{/link}{/if}">
+<form {if $objectTypeName != 'de.codequake.cms.section.type.text'} id="formContainer" {else} id="messageContainer"{/if} method="post" action="{if $action == 'add'}{link application='cms' controller='ContentSectionAdd' id=$contentID}{/link}{else}{link application='cms' controller='ContentSectionEdit' id=$sectionID}{/link}{/if}">
     <div class="container containerPadding marginTop shadow">
         <fieldset>
             <legend>{lang}cms.acp.content.section.general{/lang}</legend>
@@ -108,6 +112,21 @@
          {@SECURITY_TOKEN_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
         {if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}
+		{if $objectTypeName != 'de.codequake.cms.section.type.text'}<input id="previewButton" type="button" class="jsOnly" accesskey="p" value="{lang}wcf.global.button.preview{/lang}" />
+			<script data-relocate="true">
+			//<![CDATA[
+			$(function() {
+				WCF.Language.addObject({
+					'wcf.global.preview': '{lang}wcf.global.preview{/lang}' 
+				});
+				new CMS.ACP.Content.Preview('{$objectTypeName}');
+			});
+			//]]>
+			</script>
+		{else}
+		{include file='messageFormPreviewButton'}
+		{/if}
+
     </div>
 </form>
 

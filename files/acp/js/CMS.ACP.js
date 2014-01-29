@@ -2,7 +2,6 @@
 CMS.ACP = {};
 
 CMS.ACP.Page = { };
-
 CMS.ACP.Page.SetAsHome = Class.extend({
 
     _pageID: 0,
@@ -46,4 +45,38 @@ CMS.ACP.Page.SetAsHome = Class.extend({
             }, this)
         });
     }
+});
+
+
+CMS.ACP.Content = {};
+
+CMS.ACP.Content.Preview = Class.extend({
+    _objectType: '',
+    _proxy: null,
+
+    init: function (objectType) {
+        this._objectType = objectType;
+
+        $('#previewButton').click($.proxy(this._click, this));
+        
+    },
+    _click: function (event) {
+        $('#previewContainer').hide();
+        var $preview = '';
+        var $find = $('#sectionData');
+        var $content = $find.val();
+        switch (this._objectType) {
+            case 'de.codequake.cms.section.type.headline':
+                $preview = '<div class="' + $('#cssClasses').val() + '"><' + $('#hlType').val() + '>' + $content + '</' + $('#hlType').val() + '></div>';
+                break;
+            case 'de.codequake.cms.section.type.file':
+                $preview = '<div class="' + $('#cssClasses').val() + '"><div class="box32"><span class="icon icon32 icon-paper-clip"></span><div><p>' + $('#sectionData option:selected').text() + '</p><small>1.337 kB, <strong>42 Downloads</strong></small></div></div></div>';
+                break;
+        }
+        $previewContainer = $('<div class="container containerPadding marginTop" id="previewContainer"><fieldset><legend>' + WCF.Language.get('wcf.global.preview') + '</legend><div></div></fieldset>').prependTo($('#formContainer')).wcfFadeIn();
+        $previewContainer.find('div:eq(0)').html($preview);
+
+        new WCF.Effect.Scroll().scrollTo($previewContainer);
+    },
+
 });
