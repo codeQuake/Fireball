@@ -6,6 +6,8 @@ use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 use cms\data\news\CategoryNewsList;
 use cms\data\category\NewsCategoryNodeTree;
+use wcf\data\category\Category;
+use cms\data\category\NewsCategory;
 
 /**
  * @author	Jens Krumsieck
@@ -36,6 +38,7 @@ class NewsContentSectionType extends AbstractContentSectionType{
     public function readFormData(){
         if (isset($_REQUEST['categoryIDs']) && is_array($_REQUEST['categoryIDs'])) $this->formData['sectionData'] = ArrayUtil::toIntegerArray($_REQUEST['categoryIDs']);
         if (isset($_REQUEST['small'])) $this->additionalData['small'] = intval($_REQUEST['small']);
+        else $this->additionalData['small'] = 0;
     }
     
     
@@ -63,14 +66,29 @@ class NewsContentSectionType extends AbstractContentSectionType{
     
     public function getOutput($sectionID){
         $section = new ContentSection($sectionID);
-        $list = new CategoryNewsList(@unserialize($section->sectionData));
-        $list->sqlLimit = CMS_NEWS_LATEST_LIMIT;
-        $list->readObjects();
-        $list = $list->getObjects();
-        $data = @unserialize($section->additionalData);
-        $small = isset($data['small']) ? intval($data['small']) : 0;
-        WCF::getTPL()->assign(array('newsList' => $list, 'small' => $small));
-        return WCF::getTPL()->fetch('newsSectionTypeOutput', 'cms');
+        $categoryIDs = @unserialize($section->sectionData);
+        foreach($categoryIDs as $categoryID){
+            $category = new Category($categoryID);
+            $category = new NewsCategory($category);
+            if(!$category->getPermission('canViewNews')){
+                $index = array_search($categoryID, $categoryIDs);
+                if(isset($index)){
+                    unset($categoryIDs[$index]);
+                    $categoryIDs = array_values($categoryIDs);
+                }
+            }
+        }
+        if(!empty($categoryIDs)){
+            $list = new CategoryNewsList($categoryIDs);
+            $list->sqlLimit = CMS_NEWS_LATEST_LIMIT;
+            $list->readObjects();
+            $list = $list->getObjects();
+            $data = @unserialize($section->additionalData);
+            $small = isset($data['small']) ? intval($data['small']) : 0;
+            WCF::getTPL()->assign(array('newsList' => $list, 'small' => $small));
+            return WCF::getTPL()->fetch('newsSectionTypeOutput', 'cms');
+        }
+        return '';
     }
     
     public function getPreview($sectionID){

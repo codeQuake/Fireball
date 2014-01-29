@@ -7,7 +7,7 @@
         <img src="{$__wcf->getPath('cms')}files/{$image->filename}"  alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip" />
         </a>
         {else}
-        <img src="{$__wcf->getPath('cms')}files/{$image->filename}"  alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip" />
+        <a href="{$__wcf->getPath('cms')}files/{$image->filename}" class="jsImageViewer"><img src="{$__wcf->getPath('cms')}files/{$image->filename}"  alt="{$subtitle}"  title="{$subtitle}"  style="max-width: {ATTACHMENT_THUMBNAIL_WIDTH}px; max-height: {ATTACHMENT_THUMBNAIL_HEIGHT}px;" /></a>
         {/if}
         {if $subtitle != ''}
             <div title="{$subtitle}">

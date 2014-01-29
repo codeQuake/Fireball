@@ -44,9 +44,9 @@ class ImageContentSectionType extends AbstractContentSectionType{
     public function readFormData(){
         if(isset($_POST['sectionData']) &&  is_array($_POST['sectionData'])) $this->formData['sectionData'] = ArrayUtil::trim($_POST['sectionData']);        
         if(isset($_POST['resizable']))   $this->additionalData['resizable'] = intval($_POST['resizable']);
+        else $this->additionalData['resizable'] = 0;
         if(isset($_POST['subtitle'])) $this->additionalData['subtitle'] = StringUtil::trim($_POST['subtitle']);
         if(isset($_POST['link']))   $this->additionalData['link'] = StringUtil::trim($_POST['link']);
-
     }
     
     

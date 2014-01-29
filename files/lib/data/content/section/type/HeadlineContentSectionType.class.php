@@ -91,6 +91,9 @@ class HeadlineContentSectionType extends AbstractContentSectionType {
         }
         if ($this->action == 'add') {
             I18nHandler::getInstance()->reset();
+            $this->additionalData = '';
+            $rhis->hyperlink = '';
+            $this->hlType = '';
         }
     }
 

@@ -21,6 +21,6 @@
 			<dl>
 
 			<dl>
-				<dt><label for="resizeable">{lang}cms.acp.content.section.data.resizable{/lang}</label></dt>
+				<dt><label for="resizable">{lang}cms.acp.content.section.data.resizable{/lang}</label></dt>
 				<dd><input type="checkbox" name="resizable" id="resizable" value="1" {if $resizable == 1}checked="checked"{/if} /></dd>
 			</dl>
