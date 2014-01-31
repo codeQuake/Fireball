@@ -143,7 +143,7 @@ class PageAddForm extends AbstractForm{
         }
         if (!I18nHandler::getInstance()->isPlainValue('metaDescription')) {
             I18nHandler::getInstance()->save('metaDescription', 'cms.page.metaDescription'.$pageID, 'cms.page', PACKAGE_ID);
-            $update['metaDescription'] = 'cms.page..metaDescription'.$pageID;
+            $update['metaDescription'] = 'cms.page.metaDescription'.$pageID;
         }
         if (!I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
             I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords'.$pageID, 'cms.page', PACKAGE_ID);

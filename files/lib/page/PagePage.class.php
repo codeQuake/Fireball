@@ -74,9 +74,9 @@ class PagePage extends AbstractPage{
         }
         
         //meta tags
-        if($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', $this->page->metaKeywords);
-        if($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('description', 'description', $this->page->metaDescription);
-        if($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('og:description', 'og:description', $this->page->metaDescription, true);
+        if($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', WCF::getLanguage()->get($this->page->metaKeywords));
+        if($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('description', 'description', WCF::getLanguage()->get($this->page->metaDescription));
+        if($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('og:description', 'og:description', WCF::getLanguage()->get($this->page->metaDescription), true);
         MetaTagHandler::getInstance()->addTag('robots', 'robots', $this->page->robots);
         MetaTagHandler::getInstance()->addTag('generator', 'generator', 'Fireball CMS');
         MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->page->getTitle() . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);

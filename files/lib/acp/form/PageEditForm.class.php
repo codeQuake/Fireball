@@ -150,7 +150,7 @@ class PageEditForm extends AbstractForm{
                                                                                            'showSidebar' => $this->showSidebar,
                                                                                            'sidebarOrientation' => $this->sidebarOrientation,
                                                                                            'robots' => $this->robots,
-                                                                                            'isCommentable' => $this->isCommentable),
+                                                                                           'isCommentable' => $this->isCommentable),
                                                                                 'I18n' => I18nHandler::getInstance()->getValues('title')));
         $objectAction->executeAction();
         
@@ -169,7 +169,7 @@ class PageEditForm extends AbstractForm{
         }
         if (!I18nHandler::getInstance()->isPlainValue('metaDescription')) {
             I18nHandler::getInstance()->save('metaDescription', 'cms.page.metaDescription'.$this->pageID, 'cms.page', PACKAGE_ID);
-            $update['metaDescription'] = 'cms.page..metaDescription'.$this->pageID;
+            $update['metaDescription'] = 'cms.page.metaDescription'.$this->pageID;
         }
         if (!I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
             I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords'.$this->pageID, 'cms.page', PACKAGE_ID);
