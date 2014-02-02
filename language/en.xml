@@ -95,6 +95,7 @@
     <item name="cms.acp.content.section.css"><![CDATA[CSS]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.section.css.cssClasses"><![CDATA[CSS-Classes]]></item>
+    <item name="cms.acp.content.section.css.cssClasses.headlineDescription"><![CDATA[If you like cool headlines, use 'boxHeadline' for headline 1 and 'boxSubHeadline' for headline 2.]]></item>
     <item name="cms.acp.content.section.showOrder"><![CDATA[Sortorder]]></item>
     <item name="cms.acp.content.section.showOrder.showOrder"><![CDATA[Sortorder]]></item>
     <item name="cms.acp.content.section.add"><![CDATA[Add content section]]></item>

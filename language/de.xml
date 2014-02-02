@@ -95,6 +95,7 @@
     <item name="cms.acp.content.section.css"><![CDATA[CSS-Einstellungen]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.section.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
+    <item name="cms.acp.content.section.css.cssClasses.headlineDescription"><![CDATA[Für eine schöne Anzeige der Überschrift nutzen Sie für Überschrift 1 hier 'boxHeadline' und für Überschrift 2 'boxSubHeadline']]></item>
     <item name="cms.acp.content.section.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.section.showOrder.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
     <item name="cms.acp.content.section.add"><![CDATA[Inhaltsabschnitt hinzufügen]]></item>

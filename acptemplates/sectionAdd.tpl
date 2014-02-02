@@ -92,6 +92,9 @@
 				<dt><label for="cssClasses">{lang}cms.acp.content.section.css.cssClasses{/lang}</label></dt>
 				<dd>
 					<input type="text" name="cssClasses" id="cssClasses" class="long" value="{$cssClasses}" />
+					{if $objectTypeName == 'de.codequake.cms.section.type.headline'}
+						<small>{lang}cms.acp.content.section.css.cssClasses.headlineDescription{/lang}</small>
+					{/if}
 				</dd>
 			</dl>
 		</fieldset>
