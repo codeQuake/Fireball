@@ -45,8 +45,8 @@ $objectAction->executeAction();
 //install modules
 
 //JS Slider
-$sliderJS = "<!--Um dieses Modul zu benutzen, geben Sie einer Klasse/einen Inhalt (Liste) die Klasse 'slideshowContainer'-->
-             <!--To use this module please use the css class 'slideshowContainer' in your section oder content (list)-->
+$sliderJS = "<!--Um dieses Modul zu benutzen, geben Sie einem Abschnitt (Liste wie z.B Bilder/Nachrichten) die Klasse 'slideshowContainer'-->
+             <!--To use this module please use the css class 'slideshowContainer' in your section (list like images/news)-->
         <script data-relocate=\"true\">
 		//<![CDATA[
 		$(function() {
