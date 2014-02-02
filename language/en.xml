@@ -68,7 +68,7 @@
     <item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Classes]]></item>
     <item name="cms.acp.content.optional.showOrder"><![CDATA[Sortorder]]></item>
     <item name="cms.acp.content.title"><![CDATA[Title]]></item>
-    <item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding"]]></item>
+    <item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding". For a margin on top use "marginTop".]]></item>
     <item name="cms.acp.content.section.edit"><![CDATA[Edit content section]]></item>
     <item name="cms.acp.content.content.section.add"><![CDATA[Add content section to '{$content->title|language}']]></item>
     <item name="cms.acp.content.content.section.list"><![CDATA[List content sections of '{$content->title|language}']]></item>
