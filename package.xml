@@ -18,6 +18,10 @@
     <requiredpackage minversion="1.0.0 Beta 1" file="requirements/de.codequake.wysiwygACP.tar">de.codequake.wysiwygACP</requiredpackage>
   </requiredpackages>
 
+  <optionalpackages>
+    <optionalpackage file="optionals/de.codequake.bbcode.icon.tar">de.codequake.bbcode.icon</optionalpackage>
+  </optionalpackages>
+
   <instructions type="install">
     <!--lang-->
     <instruction type="language">language/*.xml</instruction>
