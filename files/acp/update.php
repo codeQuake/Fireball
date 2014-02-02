@@ -45,7 +45,9 @@ $objectAction->executeAction();
 //install modules
 
 //JS Slider
-$sliderJS = "<script data-relocate=\"true\">
+$sliderJS = "<!--Um dieses Modul zu benutzen, geben Sie einer Klasse/einen Inhalt (Liste) die Klasse 'slideshowContainer'-->
+             <!--To use this module please use the css class 'slideshowContainer' in your section oder content (list)-->
+        <script data-relocate=\"true\">
 		//<![CDATA[
 		$(function() {
 		$('.slideshowContainer').wcfSlideshow();
