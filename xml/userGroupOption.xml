@@ -98,7 +98,7 @@
         <categoryname>admin.cms.content</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
-        <enableoptions>admin.cms.content.attachmentMaxSize,admin.cms.content.allowedAttachmentExtensions, admin.cms.content.maxAttachmentCount</enableoptions>
+        <enableoptions>admin.cms.content.attachmentMaxSize,admin.cms.content.allowedAttachmentExtensions,admin.cms.content.maxAttachmentCount</enableoptions>
         <options>module_attachment</options>
       </option>
       <option name="admin.cms.content.attachmentMaxSize">
@@ -130,9 +130,6 @@ pdf]]>
         <categoryname>admin.cms.content</categoryname>
         <optiontype>integer</optiontype>
         <defaultvalue>5</defaultvalue>
-        <options>module_attachment</options>
-        <minvalue>1</minvalue>
-        <maxvalue>100</maxvalue>
       </option>
       
       <option name="admin.cms.style.canAddStylesheet">
@@ -277,7 +274,7 @@ pdf]]></admindefaultvalue>
         <categoryname>user.cms.news</categoryname>
         <optiontype>boolean</optiontype>
         <defaultvalue>1</defaultvalue>
-        <enableoptions>user.cms.news.attachmentMaxSize,user.cms.news.allowedAttachmentExtensions, user.cms.news.maxAttachmentCount</enableoptions>
+        <enableoptions>user.cms.news.attachmentMaxSize,user.cms.news.allowedAttachmentExtensions,user.cms.news.maxAttachmentCount</enableoptions>
         <options>module_attachment</options>
       </option>
       <option name="user.cms.news.attachmentMaxSize">
@@ -314,9 +311,6 @@ pdf]]>
         <categoryname>user.cms.news</categoryname>
         <optiontype>integer</optiontype>
         <defaultvalue>5</defaultvalue>
-        <options>module_attachment</options>
-        <minvalue>1</minvalue>
-        <maxvalue>100</maxvalue>
       </option>
       <!--mod-->
       <option name="mod.cms.page.canModeratePage">

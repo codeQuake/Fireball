@@ -5,8 +5,8 @@
     <!--codename: Fireball-->
     <packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
     <isapplication>1</isapplication>
-    <version>1.0.1 pl 1</version>
-    <date>2014-01-29</date>
+    <version>1.0.1 pl 3</version>
+    <date>2014-02-02</date>
   </packageinformation>
   <authorinformation>
     <author><![CDATA[Jens Krumsieck]]></author>
@@ -53,10 +53,32 @@
     <instruction type="file">files.tar</instruction>
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="template">templates.tar</instruction>
-       
+
+    <instruction type="script">acp/update.php</instruction>
+    
+    <!--xml-->
+    <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
   </instructions>
 
   <instructions type="update" fromversion="1.0.1">
+    <!--tar-->
     <instruction type="template">templates.tar</instruction>
+    <instruction type="file">files.tar</instruction>
+    <instruction type="script">acp/update.php</instruction>
+
+    <!--xml-->
+    <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+  </instructions>
+
+  <instructions type="update" fromversion="1.0.1 pl 1">    
+    <!--xml-->
+    <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+    <instruction type="file">files.tar</instruction>
+    <instruction type="script">acp/update.php</instruction>
+  </instructions>
+
+  <instructions type="update" fromversion="1.0.1 pl 2">
+    <instruction type="file">files.tar</instruction>
+    <instruction type="script">acp/update.php</instruction>
   </instructions>
 </package>

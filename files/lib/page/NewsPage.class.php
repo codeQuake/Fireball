@@ -59,11 +59,6 @@ class NewsPage extends AbstractPage{
         $this->commentManager = CommentHandler::getInstance()->getObjectType($this->commentObjectTypeID)->getProcessor();
         $this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->commentObjectTypeID, $this->newsID);
         
-        MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->news->subject . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
-		MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('News', array('application' => 'cms', 'object' => $this->news->getDecoratedObject())), true);
-		MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'article', true);
-		MetaTagHandler::getInstance()->addTag('og:description', 'og:description', StringUtil::decodeHTML(StringUtil::stripHTML($this->news->getExcerpt())), true);
-        
         $newsEditor = new NewsEditor($this->news->getDecoratedObject());
         $newsEditor->update(array('clicks' => $this->news->clicks+1));
         
@@ -71,6 +66,15 @@ class NewsPage extends AbstractPage{
         if (MODULE_TAGGING ) {
             $this->tags = $this->news->getTags();
         }
+        
+        MetaTagHandler::getInstance()->addTag('description',  'description', StringUtil::decodeHTML(StringUtil::stripHTML($this->news->getExcerpt())));
+        if(!empty($this->tags)) MetaTagHandler::getInstance()->addTag('keywords', 'keywords', implode(',', $this->tags));
+        MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->news->subject . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
+		MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('News', array('application' => 'cms', 'object' => $this->news->getDecoratedObject())), true);
+		MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'article', true);
+		MetaTagHandler::getInstance()->addTag('og:description', 'og:description', StringUtil::decodeHTML(StringUtil::stripHTML($this->news->getExcerpt())), true);
+        
+        
         
         if ($this->news->isNew()) {
 			$newsAction = new NewsAction(array($this->news->getDecoratedObject()), 'markAsRead', array(
