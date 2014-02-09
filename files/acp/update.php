@@ -1,7 +1,7 @@
 <?php
 use wcf\system\WCF;
 
-$sql = "CREATE TABLE cms1_counter(
+$sql = "CREATE TABLE cms1_counter(visitorID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                     time INT (10) NOT NULL,
                                     userID INT(10),
                                     referrer VARCHAR(255),

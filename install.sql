@@ -101,6 +101,7 @@ cumulativeLikes INT(10) NOT NULL DEFAULT 0
 --counter
 DROP TABLE IF EXISTS cms1_counter;
 CREATE TABLE cms1_counter(
+visitorID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 time INT (10) NOT NULL,
 userID INT(10),
 referrer VARCHAR(255),
