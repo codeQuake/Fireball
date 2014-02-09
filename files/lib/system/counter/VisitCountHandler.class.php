@@ -50,6 +50,28 @@ class VisitCountHandler extends SingletonFactory{
         return $statement->fetchColumn();
     }
     
+    public function getYearlyVisitorArray(){
+        $currentMonth = date("n", TIME_NOW);
+        $currentYear = date("Y", TIME_NOW);
+        
+        $visitors = array();
+        $year = $currentYear;
+        $month = $currentMonth;
+        
+        for($i = 1; $i<=12; $i++){
+
+            $months = array(WCF::getLanguage()->get('wcf.date.month.january'),WCF::getLanguage()->get('wcf.date.month.february'),WCF::getLanguage()->get('wcf.date.month.march'),WCF::getLanguage()->get('wcf.date.month.april'),WCF::getLanguage()->get('wcf.date.month.may'),WCF::getLanguage()->get('wcf.date.month.june'),WCF::getLanguage()->get('wcf.date.month.july'),WCF::getLanguage()->get('wcf.date.month.august'),WCF::getLanguage()->get('wcf.date.month.september'),WCF::getLanguage()->get('wcf.date.month.october'),WCF::getLanguage()->get('wcf.date.month.november'),WCF::getLanguage()->get('wcf.date.month.december'));
+            $visitors[$i] = array('string' => $months[$month-1].' '.$year,
+                                'visitors' => $this->getMonthlyVisitors($month, $year));
+            $month--;
+            if($month == 0) {
+                $month = 12; $year = $currentYear - 1;
+            }
+        }
+        return array_reverse($visitors);
+        
+    }
+    
     public function getBrowser($u_agent = '') { 
         if($u_agent == '') $u_agent = $_SERVER['HTTP_USER_AGENT'];
         $bname = 'Unknown';
