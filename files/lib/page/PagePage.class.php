@@ -1,6 +1,7 @@
 <?php
 namespace cms\page;
 use cms\data\page\Page;
+use cms\system\counter\VisitCountHandler;
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
 use wcf\system\comment\CommentHandler;
@@ -49,6 +50,8 @@ class PagePage extends AbstractPage{
     
     public function readData(){
         parent::readData();
+        
+        VisitCountHandler::getInstance()->count($this->page->pageID);
         if(!$this->page->isVisible() || !$this->page->isAccessible()) throw new PermissionDeniedException();
         if (PageMenu::getInstance()->getLandingPage()->menuItem == $this->page->title) {
 			WCF::getBreadcrumbs()->remove(0);

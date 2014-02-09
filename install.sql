@@ -101,15 +101,13 @@ cumulativeLikes INT(10) NOT NULL DEFAULT 0
 --counter
 DROP TABLE IF EXISTS cms1_counter;
 CREATE TABLE cms1_counter(
-visitorID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
 time INT (10) NOT NULL,
 userID INT(10),
-referrer VARCHAR(255),
 browser VARCHAR(255),
 browserVersion VARCHAR(255),
-resolution VARCHAR(255),
 ipAddress VARCHAR(255),
-pageID INT(10)
+spider TINYINT(1)
 );
 
 --news to category
