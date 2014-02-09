@@ -108,7 +108,8 @@ referrer VARCHAR(255),
 browser VARCHAR(255),
 browserVersion VARCHAR(255),
 resolution VARCHAR(255),
-ipAddress VARCHAR(255)
+ipAddress VARCHAR(255),
+pageID INT(10)
 );
 
 --news to category
