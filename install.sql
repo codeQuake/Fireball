@@ -98,6 +98,17 @@ ipAddress VARCHAR(39) NOT NULL DEFAULT '',
 cumulativeLikes INT(10) NOT NULL DEFAULT 0
 );
 
+--counter
+DROP TABLE IF EXISTS cms1_counter;
+CREATE TABLE cms1_counter(
+time INT (10) NOT NULL,
+userID INT(10),
+referrer VARCHAR(255),
+browser VARCHAR(255),
+browserVersion VARCHAR(255),
+resolution VARCHAR(255),
+ipAddress VARCHAR(255)
+);
 
 --news to category
 DROP TABLE IF EXISTS cms1_news_to_category;
