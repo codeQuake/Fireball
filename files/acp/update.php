@@ -12,4 +12,4 @@ $sql = "CREATE TABLE cms1_counter(
         );";
         
 $statement = WCF::getDB()->prepareStatement($sql);
-WCF::getDB()->execute($statement, array());
+$statement->execute(array());
