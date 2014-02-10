@@ -2,6 +2,7 @@
 namespace cms\system\counter;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
+use wcf\system\cache\builder\SpiderCacheBuilder;
 /**
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
@@ -26,7 +27,8 @@ class VisitCountHandler extends SingletonFactory{
             $userID = WCF::getUser()->userID;
             $time = TIME_NOW;
             $ipAddress = $this->session->ipAddress;
-            $spider = isset($this->session->spiderID) ? 1 : 0;
+            $spider = $this->getSpiderID($this->session->userAgent);
+            if($spider === null) $spider = 0;
             $browser = $this->getBrowser($this->session->userAgent);
             $browserName = $browser['name'];
             $browserVersion = $browser['version'];
@@ -37,30 +39,51 @@ class VisitCountHandler extends SingletonFactory{
         }
     }
     
-    public function getMonthlyVisitors($month = 1, $year=2014){
+    public function getMonthlyVisitors($month = 1, $year=2014,$option="all"){
         $start = mktime(0,0,0,$month,1,$year);
         if(in_array($month, array(1,3,5,7,8,10,12))) $end = mktime(0,0,0, $month,31,$year);
         if($month == 2) $end = mktime(0,0,0, $month,28,$year);
         else $end = mktime(0,0,0, $month,30,$year);
         
-        $sql = "SELECT  COUNT(*) AS amount
-            FROM    cms".WCF_N."_counter WHERE time BETWEEN ".$start." AND ".$end;
+        if($option=="all"){
+            $sql = "SELECT  COUNT(*) AS amount
+                FROM    cms".WCF_N."_counter WHERE time BETWEEN ".$start." AND ".$end."";
+        }
+        elseif($option=="spiders"){
+            $sql = "SELECT  COUNT(*) AS amount
+                FROM    cms".WCF_N."_counter WHERE spider <> 0 AND time BETWEEN ".$start." AND ".$end."";
+        }
+        elseif($option=="registered"){
+            $sql = "SELECT  COUNT(*) AS amount
+                FROM    cms".WCF_N."_counter WHERE userID <> 0 AND time BETWEEN ".$start." AND ".$end."";
+        }
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute();
         return $statement->fetchColumn();
     }
     
-    public function getDailyVisitors($day = 10, $month = 2, $year=2014){
+    public function getDailyVisitors($day = 10, $month = 2, $year=2014, $option="all"){
         $start = mktime(0,0,0,$month,$day,$year);
         $end = mktime(23,59,59, $month,$day,$year);
-         $sql = "SELECT  COUNT(*) AS amount
-            FROM    cms".WCF_N."_counter WHERE time BETWEEN ".$start." AND ".$end;
+        if($option=="all"){
+            $sql = "SELECT  COUNT(*) AS amount
+                FROM    cms".WCF_N."_counter WHERE time BETWEEN ".$start." AND ".$end."";
+        }
+        elseif($option=="spiders"){
+            $sql = "SELECT  COUNT(*) AS amount
+                FROM    cms".WCF_N."_counter WHERE spider <> 0 AND time BETWEEN ".$start." AND ".$end."";
+        }
+        elseif($option=="registered"){
+            $sql = "SELECT  COUNT(*) AS amount
+                FROM    cms".WCF_N."_counter WHERE userID <> 0 AND time BETWEEN ".$start." AND ".$end."";
+        }
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute();
+        
         return $statement->fetchColumn();
     }
     
-    public function getWeeklyVisitorArray(){
+    public function getWeeklyVisitorArray($option="all"){
         $currentMonth = date("n", TIME_NOW);
         $currentYear = date("Y", TIME_NOW);
         $currentDay = date("j", TIME_NOW);
@@ -74,7 +97,7 @@ class VisitCountHandler extends SingletonFactory{
 
             $months = array(WCF::getLanguage()->get('wcf.date.month.january'),WCF::getLanguage()->get('wcf.date.month.february'),WCF::getLanguage()->get('wcf.date.month.march'),WCF::getLanguage()->get('wcf.date.month.april'),WCF::getLanguage()->get('wcf.date.month.may'),WCF::getLanguage()->get('wcf.date.month.june'),WCF::getLanguage()->get('wcf.date.month.july'),WCF::getLanguage()->get('wcf.date.month.august'),WCF::getLanguage()->get('wcf.date.month.september'),WCF::getLanguage()->get('wcf.date.month.october'),WCF::getLanguage()->get('wcf.date.month.november'),WCF::getLanguage()->get('wcf.date.month.december'));
             $visitors[$i] = array('string' => $day.'. '.$months[$month-1].' '.$year,
-                                'visitors' => $this->getDailyVisitors($day, $month, $year));
+                                'visitors' => $this->getDailyVisitors($day, $month, $year,$option));
             $day--;
             if($day == 0){
                 $month--;
@@ -89,7 +112,7 @@ class VisitCountHandler extends SingletonFactory{
         return array_reverse($visitors);
     }
     
-    public function getYearlyVisitorArray(){
+    public function getYearlyVisitorArray($option="all"){
         $currentMonth = date("n", TIME_NOW);
         $currentYear = date("Y", TIME_NOW);
         
@@ -101,7 +124,7 @@ class VisitCountHandler extends SingletonFactory{
 
             $months = array(WCF::getLanguage()->get('wcf.date.month.january'),WCF::getLanguage()->get('wcf.date.month.february'),WCF::getLanguage()->get('wcf.date.month.march'),WCF::getLanguage()->get('wcf.date.month.april'),WCF::getLanguage()->get('wcf.date.month.may'),WCF::getLanguage()->get('wcf.date.month.june'),WCF::getLanguage()->get('wcf.date.month.july'),WCF::getLanguage()->get('wcf.date.month.august'),WCF::getLanguage()->get('wcf.date.month.september'),WCF::getLanguage()->get('wcf.date.month.october'),WCF::getLanguage()->get('wcf.date.month.november'),WCF::getLanguage()->get('wcf.date.month.december'));
             $visitors[$i] = array('string' => $months[$month-1].' '.$year,
-                                'visitors' => $this->getMonthlyVisitors($month, $year));
+                                'visitors' => $this->getMonthlyVisitors($month, $year,$option));
             $month--;
             if($month == 0) {
                 $month = 12; $year = $currentYear - 1;
@@ -158,7 +181,8 @@ class VisitCountHandler extends SingletonFactory{
         { 
             $bname = 'Netscape'; 
             $ub = "Netscape"; 
-        } 
+        }
+        else{$ub='';}
     
         // finally get the correct version number
         $known = array('Version', $ub, 'other');
@@ -194,5 +218,19 @@ class VisitCountHandler extends SingletonFactory{
             'platform'  => $platform,
             'pattern'    => $pattern
         );
-    } 
+    }
+    
+    
+    protected function getSpiderID($userAgent) {
+		$spiderList = SpiderCacheBuilder::getInstance()->getData();
+		$userAgent = strtolower($userAgent);
+		
+		foreach ($spiderList as $spider) {
+			if (strpos($userAgent, $spider->spiderIdentifier) !== false) {
+				return $spider->spiderID;
+			}
+		}
+		
+		return null;
+	}
 }

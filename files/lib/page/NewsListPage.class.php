@@ -7,6 +7,7 @@ use wcf\system\category\CategoryHandler;
 use wcf\page\SortablePage;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\request\LinkHandler;
+use cms\system\counter\VisitCountHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -55,6 +56,7 @@ class NewsListPage extends SortablePage{
     
     public function readData() {
 		parent::readData();
+        VisitCountHandler::getInstance()->count();
 		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), 
                                                             LinkHandler::getInstance()->getLink('NewsCategoryList', array('application' => 'cms'))));
         
