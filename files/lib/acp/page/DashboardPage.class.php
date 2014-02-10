@@ -10,6 +10,6 @@ class DashboardPage extends AbstractPage{
     
     public function assignVariables(){
         parent::assignVariables();
-        WCF::getTPL()->assign('yearlyVisitorArray', VisitCountHandler::getInstance()->getYearlyVisitorArray());
+        WCF::getTPL()->assign('visitors', VisitCountHandler::getInstance());
     }
 }

@@ -50,6 +50,45 @@ class VisitCountHandler extends SingletonFactory{
         return $statement->fetchColumn();
     }
     
+    public function getDailyVisitors($day = 10, $month = 2, $year=2014){
+        $start = mktime(0,0,0,$month,$day,$year);
+        $end = mktime(23,59,59, $month,$day,$year);
+         $sql = "SELECT  COUNT(*) AS amount
+            FROM    cms".WCF_N."_counter WHERE time BETWEEN ".$start." AND ".$end;
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute();
+        return $statement->fetchColumn();
+    }
+    
+    public function getWeeklyVisitorArray(){
+        $currentMonth = date("n", TIME_NOW);
+        $currentYear = date("Y", TIME_NOW);
+        $currentDay = date("j", TIME_NOW);
+        
+        $visitors = array();
+        $year = $currentYear;
+        $month = $currentMonth;
+        $day = $currentDay;
+        
+        for($i = 1; $i<=7; $i++){
+
+            $months = array(WCF::getLanguage()->get('wcf.date.month.january'),WCF::getLanguage()->get('wcf.date.month.february'),WCF::getLanguage()->get('wcf.date.month.march'),WCF::getLanguage()->get('wcf.date.month.april'),WCF::getLanguage()->get('wcf.date.month.may'),WCF::getLanguage()->get('wcf.date.month.june'),WCF::getLanguage()->get('wcf.date.month.july'),WCF::getLanguage()->get('wcf.date.month.august'),WCF::getLanguage()->get('wcf.date.month.september'),WCF::getLanguage()->get('wcf.date.month.october'),WCF::getLanguage()->get('wcf.date.month.november'),WCF::getLanguage()->get('wcf.date.month.december'));
+            $visitors[$i] = array('string' => $day.'. '.$months[$month-1].' '.$year,
+                                'visitors' => $this->getDailyVisitors($day, $month, $year));
+            $day--;
+            if($day == 0){
+                $month--;
+                if(in_array($month, array(1,3,5,7,8,10,12))) $day = 31;
+                if($month == 2) $day = 28;
+                else $day = 30;
+            }
+            if($month == 0) {
+                $month = 12; $year = $currentYear - 1;
+            }
+        }
+        return array_reverse($visitors);
+    }
+    
     public function getYearlyVisitorArray(){
         $currentMonth = date("n", TIME_NOW);
         $currentYear = date("Y", TIME_NOW);
