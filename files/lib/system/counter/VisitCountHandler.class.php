@@ -135,7 +135,12 @@ class VisitCountHandler extends SingletonFactory{
     }
     
     public function getBrowser($u_agent = '') { 
-        if($u_agent == '') $u_agent = $_SERVER['HTTP_USER_AGENT'];
+        if($u_agent == '') return array(
+                                        'userAgent' => '',
+                                        'name'      => 'unknown',
+                                        'version'   => '?',
+                                        'platform'  => '',
+                                        'pattern'    => '');
         $bname = 'Unknown';
         $platform = 'Unknown';
         $version= "";
@@ -201,7 +206,7 @@ class VisitCountHandler extends SingletonFactory{
                 $version= $matches['version'][0];
             }
             else {
-                $version= $matches['version'][1];
+                $version= isset($matches['version'][1])? $matches['version'][1] : "";
             }
         }
         else {
