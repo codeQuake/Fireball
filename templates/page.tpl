@@ -10,7 +10,7 @@
     <link rel="canonical" href="{link application='cms' controller='Page' object=$page}{/link}" />
 </head>
 
-<body id="{$templateName|ucfirst}">
+<body id="{$templateName|ucfirst}" data-page-id="{$page->pageID}">
 {if $sidebarList|count || $page->showSidebar}
 {capture assign='sidebar'}
 	{foreach from=$sidebarList item=content}
