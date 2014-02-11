@@ -16,7 +16,8 @@ sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
 layoutID INT(10),
 menuItem MEDIUMTEXT,
 isCommentable TINYINT(1) NOT NULL DEFAULT 0,
-comments INT(10) NOT NULL DEFAULT 0
+comments INT(10) NOT NULL DEFAULT 0,
+clicks INT (20) NOT NULL DEFAULT 0
 );
 
 --content
@@ -98,6 +99,17 @@ ipAddress VARCHAR(39) NOT NULL DEFAULT '',
 cumulativeLikes INT(10) NOT NULL DEFAULT 0
 );
 
+--counter
+DROP TABLE IF EXISTS cms1_counter;
+CREATE TABLE cms1_counter(
+
+time INT (20) NOT NULL,
+userID INT(10),
+browser VARCHAR(255),
+browserVersion VARCHAR(255),
+ipAddress VARCHAR(255),
+spider INT(20)
+);
 
 --news to category
 DROP TABLE IF EXISTS cms1_news_to_category;

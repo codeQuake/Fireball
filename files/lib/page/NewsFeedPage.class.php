@@ -35,7 +35,6 @@ class NewsFeedPage extends AbstractFeedPage{
     
     public function readData() {
 		parent::readData();
-
 		$this->title = WCF::getLanguage()->get('cms.page.news');
 
 		$this->items = new NewsFeedList($this->objectIDs);

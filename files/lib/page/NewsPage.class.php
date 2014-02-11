@@ -5,6 +5,7 @@ use cms\data\news\ViewableNews;
 use cms\data\news\NewsEditor;
 use cms\data\news\NewsAction;
 use wcf\page\AbstractPage;
+use cms\system\counter\VisitCountHandler;
 use wcf\system\comment\CommentHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
@@ -51,7 +52,7 @@ class NewsPage extends AbstractPage{
     
     public function readData(){
         parent::readData();
-        
+        VisitCountHandler::getInstance()->count();
         WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), 
                                                             LinkHandler::getInstance()->getLink('NewsCategoryList', array('application' => 'cms'))));
                                                             

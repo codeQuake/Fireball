@@ -4,6 +4,7 @@ use wcf\page\AbstractPage;
 use cms\data\file\File;
 use cms\data\file\FileEditor;
 use wcf\util\FileReader;
+use cms\system\counter\VisitCountHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 
@@ -33,6 +34,7 @@ class FileDownloadPage extends AbstractPage{
     
     public function readData(){
         parent::readData();
+        VisitCountHandler::getInstance()->count();
         $this->fileReader = new FileReader(CMS_DIR.'files/'.$this->file->filename, array('filename' => $this->file->title,
                                                                         'mimeType' => $this->file->type,
                                                                         'filesize' => $this->file->size,
