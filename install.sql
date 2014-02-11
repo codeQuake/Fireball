@@ -16,7 +16,8 @@ sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
 layoutID INT(10),
 menuItem MEDIUMTEXT,
 isCommentable TINYINT(1) NOT NULL DEFAULT 0,
-comments INT(10) NOT NULL DEFAULT 0
+comments INT(10) NOT NULL DEFAULT 0,
+clicks INT (20) NOT NULL DEFAULT 0
 );
 
 --content

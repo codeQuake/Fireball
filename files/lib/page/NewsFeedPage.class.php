@@ -5,7 +5,6 @@ use cms\data\news\NewsFeedList;
 use cms\data\category\NewsCategory;
 use wcf\system\category\CategoryHandler;
 use wcf\system\exception\IllegalLinkException;
-use cms\system\counter\VisitCountHandler;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\WCF;
 
@@ -36,7 +35,6 @@ class NewsFeedPage extends AbstractFeedPage{
     
     public function readData() {
 		parent::readData();
-        VisitCountHandler::getInstance()->count();
 		$this->title = WCF::getLanguage()->get('cms.page.news');
 
 		$this->items = new NewsFeedList($this->objectIDs);

@@ -1,6 +1,7 @@
 <?php
 namespace cms\page;
 use cms\data\page\Page;
+use cms\data\page\PageEditor;
 use cms\system\counter\VisitCountHandler;
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
@@ -50,8 +51,13 @@ class PagePage extends AbstractPage{
     
     public function readData(){
         parent::readData();
-        
+        //register visit
         VisitCountHandler::getInstance()->count();
+        
+        //count click
+        $pageEditor = new PageEditor($this->page);
+        $pageEditor->update(array('clicks' => $this->page->clicks+1));
+        
         if(!$this->page->isVisible() || !$this->page->isAccessible()) throw new PermissionDeniedException();
         if (PageMenu::getInstance()->getLandingPage()->menuItem == $this->page->title) {
 			WCF::getBreadcrumbs()->remove(0);

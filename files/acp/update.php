@@ -12,3 +12,7 @@ $sql = "CREATE TABLE cms".WCF_N."_counter(
         
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array());
+
+$sql = "ALTER TABLE cms".WCF."_page ADD clicks AFTER comments";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute(array());
