@@ -62,7 +62,9 @@
 						<dt>{lang}cms.acp.dashboard.visitsToday{/lang}</dt>
 						<dd>{$visitors->getWeeklyVisitorArray()[6][visitors]}</dd>
 						<dt>{lang}cms.acp.dashboard.visitsYesterday{/lang}</dt>
-						<dd>{$visitors->getWeeklyVisitorArray()[5][visitors]}</dd>						
+						<dd>{$visitors->getWeeklyVisitorArray()[5][visitors]}</dd>
+						<dt>{lang}cms.acp.dashboard.visitsAll{/lang}</dt>
+						<dd>{$visitors->getAllVisitors()}</dd>						
 					</dl>
 				</fieldset>
 			</div>

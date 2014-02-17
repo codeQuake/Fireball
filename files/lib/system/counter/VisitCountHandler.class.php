@@ -39,26 +39,47 @@ class VisitCountHandler extends SingletonFactory{
         }
     }
     
-    public function getMonthlyVisitors($month = 1, $year=2014,$option="all"){
-        $start = mktime(0,0,0,$month,1,$year);
-        if(in_array($month, array(1,3,5,7,8,10,12))) $end = mktime(0,0,0, $month,31,$year);
-        if($month == 2) $end = mktime(0,0,0, $month,28,$year);
-        else $end = mktime(0,0,0, $month,30,$year);
-        
-        if($option=="all"){
-            $sql = "SELECT  COUNT(*) AS amount
-                FROM    cms".WCF_N."_counter WHERE time BETWEEN ".$start." AND ".$end."";
+    public function getVisitors($start, $end){
+        $visitors = array();
+        $date = $start;
+        while($date <= $end){
+            $months = array(WCF::getLanguage()->get('wcf.date.month.january'),WCF::getLanguage()->get('wcf.date.month.february'),WCF::getLanguage()->get('wcf.date.month.march'),WCF::getLanguage()->get('wcf.date.month.april'),WCF::getLanguage()->get('wcf.date.month.may'),WCF::getLanguage()->get('wcf.date.month.june'),WCF::getLanguage()->get('wcf.date.month.july'),WCF::getLanguage()->get('wcf.date.month.august'),WCF::getLanguage()->get('wcf.date.month.september'),WCF::getLanguage()->get('wcf.date.month.october'),WCF::getLanguage()->get('wcf.date.month.november'),WCF::getLanguage()->get('wcf.date.month.december'));
+            
+            $visitors[] = array('visitors' => $this->getDailyVisitors(date('j', $date), date('n', $date), date('Y', $date)),
+                                'string' => date('j', $date).'. '.$months[date('n', $date)-1].' '. date('Y', $date));
+            $date = $date + 86400;
+           
         }
-        elseif($option=="spiders"){
-            $sql = "SELECT  COUNT(*) AS amount
-                FROM    cms".WCF_N."_counter WHERE spider <> 0 AND time BETWEEN ".$start." AND ".$end."";
-        }
-        elseif($option=="registered"){
-            $sql = "SELECT  COUNT(*) AS amount
-                FROM    cms".WCF_N."_counter WHERE userID <> 0 AND time BETWEEN ".$start." AND ".$end."";
-        }
+        return $visitors;
+    }
+    
+    public function getBrowsers($start, $end){
+        $browsers = array();
+        $sql = "SELECT COUNT( browser ) AS amount, browser 
+                FROM  cms".WCF_N."_counter 
+                WHERE browser <>  '' AND time BETWEEN ".$start." AND ".$end." 
+                GROUP BY browser";
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute();
+        $sum = 0;
+        while($row = $statement->fetchArray()){
+            $browsers[] = $row;
+            $sum = $sum + $row['amount'];
+        }
+        for($i = 0; $i<=count($browsers)-1; $i++){
+            $browsers[$i]['percentage'] = round(($browsers[$i]['amount']/$sum)*100, 2);
+        }
+        
+        return $browsers;
+     }
+    
+      
+    public function getAllVisitors(){
+        $sql = "SELECT  COUNT(*) AS amount
+                FROM    cms".WCF_N."_counter";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute();
+        
         return $statement->fetchColumn();
     }
     
@@ -112,36 +133,7 @@ class VisitCountHandler extends SingletonFactory{
         return array_reverse($visitors);
     }
     
-    public function getBrowserArray(){
-        $sql = "SELECT COUNT(*) AS amount, browser FROM cms".WCF_N."_counter GROUP BY browser"; 
-        $statement = WCF::getDB()->prepareStatement($sql);
-        $statement->execute();
-        
-        return $statement->fetchArray();
-        
-    }
-    public function getYearlyVisitorArray($option="all"){
-        $currentMonth = date("n", TIME_NOW);
-        $currentYear = date("Y", TIME_NOW);
-        
-        $visitors = array();
-        $year = $currentYear;
-        $month = $currentMonth;
-        
-        for($i = 1; $i<=12; $i++){
-
-            $months = array(WCF::getLanguage()->get('wcf.date.month.january'),WCF::getLanguage()->get('wcf.date.month.february'),WCF::getLanguage()->get('wcf.date.month.march'),WCF::getLanguage()->get('wcf.date.month.april'),WCF::getLanguage()->get('wcf.date.month.may'),WCF::getLanguage()->get('wcf.date.month.june'),WCF::getLanguage()->get('wcf.date.month.july'),WCF::getLanguage()->get('wcf.date.month.august'),WCF::getLanguage()->get('wcf.date.month.september'),WCF::getLanguage()->get('wcf.date.month.october'),WCF::getLanguage()->get('wcf.date.month.november'),WCF::getLanguage()->get('wcf.date.month.december'));
-            $visitors[$i] = array('string' => $months[$month-1].' '.$year,
-                                'visitors' => $this->getMonthlyVisitors($month, $year,$option));
-            $month--;
-            if($month == 0) {
-                $month = 12; $year = $currentYear - 1;
-            }
-        }
-        return array_reverse($visitors);
-        
-    }
-    
+  
     public function getBrowser($u_agent = '') { 
         if($u_agent == '') return array(
                                         'userAgent' => '',

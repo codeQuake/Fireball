@@ -172,6 +172,8 @@
     <item name="cms.acp.dashboard.lastNews"><![CDATA[Fireball CMS - Neuigkeiten]]></item>
     <item name="cms.acp.dashboard.visitsToday"><![CDATA[Besuche heute]]></item>
     <item name="cms.acp.dashboard.visitsYesterday"><![CDATA[Besuche gestern]]></item>
+    <item name="cms.acp.dashboard.visitsMonth"><![CDATA[Besuche diesen Monat]]></item>
+    <item name="cms.acp.dashboard.visitsAll"><![CDATA[Besuche gesamt]]></item>
   </category>
 
   <category name="cms.page">
