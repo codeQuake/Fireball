@@ -20,6 +20,9 @@
     <item name="cms.acp.menu.link.cms.news"><![CDATA[Nachrichten]]></item>
     <item name="cms.acp.menu.link.cms.module.add"><![CDATA[Modul hinzufügen]]></item>
     <item name="cms.acp.menu.link.cms.module.list"><![CDATA[Module auflisten]]></item>
+    <item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
+    <item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
+    <item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistik]]></item>
   </category>
 
   <category name="cms.acp">
@@ -162,6 +165,14 @@
     <item name="cms.acp.module.delete.sure"><![CDATA[Wollen Sie dieses Modul wirklich löschen?]]></item>
     <item name="cms.acp.stylesheet.delete.sure"><![CDATA[Wollen Sie dieses Stylesheet wirklich löschen?]]></item>
     <item name="cms.acp.layout.delete.sure"><![CDATA[Wollen Sie dieses Layout wirklich löschen?]]></item>
+    <item name="cms.acp.dashboard"><![CDATA[Dashboard]]></item>
+    <item name="cms.acp.dashboard.lastWeeksVisitors"><![CDATA[Besucher der letzten Woche]]></item>
+    <item name="cms.acp.dashboard.all"><![CDATA[Alle Besucher]]></item>
+    <item name="cms.acp.dashboard.registered"><![CDATA[Registrierte Benutzer]]></item>
+    <item name="cms.acp.dashboard.spiders"><![CDATA[Suchmaschinenroboter]]></item>
+    <item name="cms.acp.dashboard.lastNews"><![CDATA[Fireball CMS - Neuigkeiten]]></item>
+    <item name="cms.acp.dashboard.visitsToday"><![CDATA[Besuche heute]]></item>
+    <item name="cms.acp.dashboard.visitsYesterday"><![CDATA[Besuche gestern]]></item>
   </category>
 
   <category name="cms.page">
