@@ -5,7 +5,7 @@
     <!--codename: Fireball-->
     <packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
     <isapplication>1</isapplication>
-    <version>1.0.2 pl 1</version>
+    <version>1.0.2 pl 2</version>
     <date>2014-02-02</date>
   </packageinformation>
   <authorinformation>
@@ -76,7 +76,8 @@
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="template">templates.tar</instruction>
   </instructions>
-  <instructions type="update" fromversion="1.0.2">
+  <instructions type="update" fromversion="1.0.2 pl 1">
+    <instruction type="language">language/*.xml</instruction>
     <instruction type="file">files.tar</instruction>
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="template">templates.tar</instruction>

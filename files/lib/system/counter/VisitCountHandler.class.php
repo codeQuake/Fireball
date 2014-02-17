@@ -112,6 +112,14 @@ class VisitCountHandler extends SingletonFactory{
         return array_reverse($visitors);
     }
     
+    public function getBrowserArray(){
+        $sql = "SELECT COUNT(*) AS amount, browser FROM cms".WCF_N."_counter GROUP BY browser"; 
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute();
+        
+        return $statement->fetchArray();
+        
+    }
     public function getYearlyVisitorArray($option="all"){
         $currentMonth = date("n", TIME_NOW);
         $currentYear = date("Y", TIME_NOW);

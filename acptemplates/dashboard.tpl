@@ -13,7 +13,7 @@
 					<span class="icon icon16 icon-circle" style="color:rgba(21,41,148,1);"></span> {lang}cms.acp.dashboard.all{/lang}
 					<span class="icon icon16 icon-circle" style="color:rgba(148,1,1,1);" ></span> {lang}cms.acp.dashboard.registered{/lang}
 					<span class="icon icon16 icon-circle" style="color:rgba(151,187,205,1);" ></span> {lang}cms.acp.dashboard.spiders{/lang}
-				</div
+				</div>
 			</div>
 		
 		</fieldset>
@@ -110,6 +110,6 @@
 			});
 
 	</script>
-</div>
+
 
 {include file='footer'}
