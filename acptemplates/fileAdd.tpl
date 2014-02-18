@@ -34,6 +34,17 @@
                     {/if}
                 </dd>
             </dl>
+			<dl {if $errorField == 'folderID'}class="formError"{/if}>
+						<dt><label for="folderID">{lang}cms.acp.file.folderID{/lang}</label></dt>
+						<dd>
+							<select id="folderID" name="folderID">
+								<option value="0" {if folderID == 0} selected="selected"{/if}>{lang}cms.acp.file.folderID.root{/lang}</option>
+								{foreach from=$folderList item='item'}
+								<option value="{$item->folderID}" {if $item->folderID == $folderID}selected="selected"{/if}>{$folder->getTitle()|language}</option>
+								{/foreach}
+							</select>
+						</dd>
+			</dl>
         </fieldset>
     </div>
 

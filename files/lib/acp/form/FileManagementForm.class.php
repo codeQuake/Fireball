@@ -5,6 +5,7 @@ use wcf\system\WCF;
 use cms\data\file\FileAction;
 use wcf\util\ArrayUtil;
 use cms\data\file\FileList;
+use cms\data\folder\FolderList;
 use wcf\system\exception\UserInputException;
 
 /**
@@ -18,14 +19,16 @@ class FileManagementForm extends AbstractForm{
     
     public $templateName = 'fileAdd';
     public $neededPermissions = array('admin.cms.file.canAddFile');
-     public $activeMenuItem = 'cms.acp.menu.link.cms.file.management';
-    
+    public $activeMenuItem = 'cms.acp.menu.link.cms.file.management';
+    public $folderID = 0;
     public $file = null;
-    public $fileList = array();
+    public $fileList = null;
+    public $folderList = null;
     
     public function readFormParameters(){
         parent::readFormParameters();
         if (isset($_FILES['file'])) $this->file = $_FILES['file'];
+        if (isset($_POST['folderID'])) $this->folderID = intval($_POST['folderID']);
     }
     
     public function validate(){
@@ -49,6 +52,7 @@ class FileManagementForm extends AbstractForm{
         move_uploaded_file($this->file['tmp_name'], $path);
         
         $data = array('title' => $this->file['name'],
+                      'folderID' => $this->folderID,
                       'filename' => $filename,
                       'type' => $this->file['type'],
                       'size' => $this->file['size']);
@@ -67,10 +71,16 @@ class FileManagementForm extends AbstractForm{
         $list->readObjects();
         $this->fileList = $list->getObjects();
         
+        $folders = new FolderList();
+        $folders->readObjects();
+        $this->folders = $folders->getObjects();
+        
     }
     
     public function assignVariables(){
         parent::assignVariables();
-        WCF::getTPL()->assign(array('fileList' => $this->fileList));
+        WCF::getTPL()->assign(array('fileList' => $this->fileList,
+                                    'folderID' => $this->folderID,
+                                    'folderList' => $this->folders));
     }   
 }
