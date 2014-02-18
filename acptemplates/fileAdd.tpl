@@ -110,7 +110,7 @@
 {if $fileList|count || $folderList|count}
     <div class="tabularBox tabularBoxTitle marginTop">
 		<header>
-			<h2>{lang}cms.acp.file.list{/lang} <span class="badge badgeInverse">{#$fileList}</span></h2>
+			<h2>{lang}cms.acp.file.list{/lang} <span class="badge badgeInverse">{#$fileList|count}</span></h2>
 		</header>
         <table class="table">
             <thead>
