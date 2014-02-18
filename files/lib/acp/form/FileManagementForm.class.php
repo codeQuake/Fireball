@@ -10,6 +10,7 @@ use wcf\util\StringUtil;
 use cms\data\file\FileList;
 use cms\data\folder\FolderList;
 use wcf\system\exception\UserInputException;
+use wcf\system\exception\IllegalLinkException;
 
 /**
  * @author	Jens Krumsieck
@@ -23,11 +24,13 @@ class FileManagementForm extends AbstractForm{
     public $templateName = 'fileAdd';
     public $neededPermissions = array('admin.cms.file.canAddFile');
     public $activeMenuItem = 'cms.acp.menu.link.cms.file.management';
+    public $folderPageID = 0;
     public $folderID = 0;
     public $file = null;
     public $fileList = null;
     public $folderList = null;
     public $foldername = '';
+    public $isFolder = false;
     
     public function readFormParameters(){
         parent::readFormParameters();
@@ -39,6 +42,7 @@ class FileManagementForm extends AbstractForm{
         if($this->action =='folder'){
             if (isset($_POST['folder'])) $this->foldername = StringUtil::trim($_POST['folder']);
         }
+        
     }
     
     public function validate(){
@@ -99,11 +103,22 @@ class FileManagementForm extends AbstractForm{
     }
     
     public function readData(){
-        parent::readData();
-        $list = new FileList();
-        $list->readObjects();
-        $this->fileList = $list->getObjects();
-        
+        parent::readData();        
+        if(isset($_REQUEST['id'])) $this->folderPageID = intval($_REQUEST['id']);
+        if($this->folderPageID == 0){
+            $list = new FileList();
+            //get root files
+            $list->getConditionBuilder()->add('folderID = ?', array(0));
+            $list->readObjects();
+            $this->fileList = $list->getObjects();
+            $this->isFolder = false;
+        }
+        else{
+            $folder = new Folder($this->folderPageID); 
+            if($folder === null) throw new IllegalLinkException();
+            $this->fileList = $folder->getFiles();
+            $this->isFolder = true;
+        }
         $folders = new FolderList();
         $folders->readObjects();
         $this->folders = $folders->getObjects();
@@ -115,6 +130,7 @@ class FileManagementForm extends AbstractForm{
         WCF::getTPL()->assign(array('fileList' => $this->fileList,
                                     'folderID' => $this->folderID,
                                     'folderList' => $this->folders,
-                                    'foldername' => $this->foldername));
+                                    'foldername' => $this->foldername,
+                                    'isFolder' => $this->isFolder));
     }   
 }

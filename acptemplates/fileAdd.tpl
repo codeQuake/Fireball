@@ -106,44 +106,45 @@
 		 {@SECURITY_TOKEN_INPUT_TAG}
     </div>
 </form>
-{if $fileList|count}
+
+{if $fileList|count || $folderList|count}
     <div class="tabularBox tabularBoxTitle marginTop">
 		<header>
 			<h2>{lang}cms.acp.file.list{/lang} <span class="badge badgeInverse">{#$fileList}</span></h2>
 		</header>
         <table class="table">
             <thead>
-                <th class="columnID columnPageID" colspan="2">{lang}wcf.global.objectID{/lang}</th>
+                <th class="columnIcon">{lang}wcf.global.objectID{/lang}</th>
 			    <th class="columnTitle columnFile">{lang}cms.acp.file.title{/lang}</th>
                 <th class="columnType">{lang}cms.acp.file.type{/lang}</th>
                 <th class="downloads">{lang}cms.acp.file.downloads{/lang}</th>
 			    {event name='columnHeads'}
             </thead>
             <tbody>
+			{if !$isFolder}
+				{foreach from=$folderList item=folder}
+				<tr class="jsFolderRow">
+					<td class="columnIcon"><span class="icon icon-folder-close-alt icon16"></span></td>
+					<td class="columnTitle"><a href="{link controller='FileManagement' application='cms' object=$folder}{/link}">{$folder->getTitle()|language}</a></td>
+					<td>{lang}cms.acp.folder{/lang}</td>
+					<td>-</td>
+				</tr>
+				{/foreach}
+			{else}
+				<tr class="noFolders">
+					<td class="columnIcon"><a href="{link controller='FileManagement' application='cms'}{/link}"><span class="icon icon16 icon-angle-left"></span></a></td>
+					<td class="columnTitle"><a href="{link controller='FileManagement' application='cms'}{/link}">...</a></td>
+					<td>{lang}cms.acp.folder.toRoot{/lang}</td>
+					<td>-</td>
+				</tr>
+			{/if}
                 {foreach from=$fileList item=file}
                     <tr class="jsFileRow">
                         <td class="columnIcon">
+							{@$file->getIconTag()}
                             <span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
-                        </td>
-                        <td class="columnID">{@$file->fileID}</td> 
-                        <td class="columnTitle columnFile" id="file{$file->fileID}">{$file->title|language}
-							{if $file->type == "image/png" || $file->type == "image/jpg" || $file->type == "image/gif"}
-							<div id="preview{$file->fileID}" style="display:none;">
-									<img src="{$__wcf->getPath('cms')}files/{$file->filename}" style="max-width: 20%; max-height: 20%;"/>
-							</div>
-							{/if}
-						</td>
-						{if $file->type == "image/png" || $file->type == "image/jpg" || $file->type == "image/gif"}
-						<script data-relocate="true">
-						//<![CDATA[
-						$(function () {
-							$("#file{$file->fileID}").click(function () {
-								$("#preview{$file->fileID}").toggle("slow");
-							});
-						});
-							//]]>
-						</script>
-						{/if}
+                        </td> 
+                        <td class="columnTitle columnFile" id="file{$file->fileID}">{$file->title|language}</td>
                         <td class="columnType">{$file->type}</td>
                         <td class="columnDownloads">{#$file->downloads}</td>
                     </tr>

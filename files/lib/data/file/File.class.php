@@ -40,4 +40,11 @@ class File extends CMSDatabaseObject implements IRouteController{
         return WCF::getSession()->getPermission('user.cms.content.'.$permission);
     }
     
+    public function getIconTag(){
+        if(preg_match('/image/i', $this->type)) return '<span class="icon icon16 icon-picture"></span>';
+        if(preg_match('/audio/i', $this->type)) return '<span class="icon icon16 icon-music"></span>';
+        if(preg_match('/video/i', $this->type)) return '<span class="icon icon16 icon-film"></span>';
+        return '<span class="icon icon16 icon-file"></span>';
+    }
+    
 }
