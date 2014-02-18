@@ -23,6 +23,7 @@
     <item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
     <item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
     <item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistiken]]></item>
+    <item name="cms.acp.menu.link.cms.media"><![CDATA[Medien]]></item>
   </category>
 
   <category name="cms.acp">
@@ -158,6 +159,11 @@
     <item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
     <item name="cms.acp.file.error.empty"><![CDATA[Bitte laden Sie eine gültige Datei hoch.]]></item>
     <item name="cms.acp.file.management"><![CDATA[Dateiverwaltung]]></item>
+    <item name="cms.acp.folder"><![CDATA[Ordner]]></item>
+    <item name="cms.acp.folder.toRoot"><![CDATA[Zum Hauptverzeichnis wechseln]]></item>
+    <item name="cms.acp.folder.add"><![CDATA[Ordner erstellen]]></item>
+    <item name="cms.acp.file.add"><![CDATA[Datei hochladen]]></item>
+    <item name="cms.acp.file.folderID.root"><![CDATA[Hauptverzeichnis]]></item>
     <item name="cms.acp.page.delete.sure"><![CDATA[Wollen Sie diese Seite und all ihre Inhalte wirklich löschen?]]></item>
     <item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt und all seine Abschnitte wirklich löschen?]]></item>
     <item name="cms.acp.content.section.delete.sure"><![CDATA[Wollen Sie diesen Abschnitt wirklich löschen?]]></item>
