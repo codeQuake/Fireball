@@ -18,8 +18,37 @@
 {if $success|isset}
 <p class="success">{lang}wcf.global.success.add{/lang}</p>
 {/if}
-
-<form method="post" enctype="multipart/form-data" action="{link controller='FileManagement' application='cms'}{/link}">
+<script data-relocate="true">
+	//<![CDATA[
+	$(function() {
+		WCF.Language.addObject({
+				'cms.acp.file.add': '{lang}cms.acp.file.add{/lang}',
+				'cms.acp.folder.add': '{lang}cms.acp.folder.add{/lang}'
+				});
+		$('#fileAdd').hide();
+		$('#folderAdd').hide();
+		$('#fileAddButton').click(function() {
+			$('#fileAdd').wcfDialog({
+				title: WCF.Language.get('cms.acp.file.add')
+			});
+		});
+		$('#folderAddButton').click(function() {
+			$('#folderAdd').wcfDialog({
+				title: WCF.Language.get('cms.acp.folder.add')
+			});
+		});
+	});
+	//]]>
+</script>
+<div class="contentNavigation">
+	<nav>
+		<ul>
+			<li><a class="button small jsTooltip" id="folderAddButton" title="{lang}cms.acp.folder.add{/lang}"><span class="icon icon16 icon-folder-close"></span></a></li>
+			<li><a class="button small jsTooltip" id="fileAddButton" title="{lang}cms.acp.file.add{/lang}"><span class="icon icon16 icon-upload"></span></a></li>
+		</ul>
+	</nav>
+</div>
+<form id="fileAdd" class="hidden" method="post" enctype="multipart/form-data" action="{link controller='FileManagement' application='cms'}action=file{/link}">
     <div class="container containerPadding marginTop">
         <fieldset>
             <legend>{lang}cms.acp.file.file{/lang}</legend>
@@ -40,11 +69,35 @@
 							<select id="folderID" name="folderID">
 								<option value="0" {if folderID == 0} selected="selected"{/if}>{lang}cms.acp.file.folderID.root{/lang}</option>
 								{foreach from=$folderList item='item'}
-								<option value="{$item->folderID}" {if $item->folderID == $folderID}selected="selected"{/if}>{$folder->getTitle()|language}</option>
+								<option value="{$item->folderID}" {if $item->folderID == $folderID}selected="selected"{/if}>{$item->getTitle()|language}</option>
 								{/foreach}
 							</select>
 						</dd>
 			</dl>
+        </fieldset>
+    </div>
+
+    <div class="formSubmit">
+        <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+		 {@SECURITY_TOKEN_INPUT_TAG}
+    </div>
+</form>
+
+<form id="folderAdd" class="hidden" method="post" enctype="multipart/form-data" action="{link controller='FileManagement' application='cms'}action=folder{/link}">
+    <div class="container containerPadding marginTop">
+        <fieldset>
+            <legend>{lang}cms.acp.folder{/lang}</legend>
+            <dl{if $errorField == 'folder'} class="formError"{/if}>
+                <dt><label for="folder">{lang}cms.acp.folder{/lang}</label></dt>
+                <dd>
+                    <input type="text" name="folder" id="folder" value="{$foldername}" required="required"/>
+                    {if $errorField == 'folder'}
+                        <small class="innerError">
+                              {lang}cms.acp.folder.error.{$errorType}{/lang}
+                        </small>
+                    {/if}
+                </dd>
+            </dl>
         </fieldset>
     </div>
 
