@@ -2,6 +2,7 @@
 namespace cms\page;
 use wcf\page\AbstractPage;
 use cms\data\file\File;
+use cms\data\folder\Folder;
 use cms\data\file\FileEditor;
 use wcf\util\FileReader;
 use cms\system\counter\VisitCountHandler;
@@ -35,7 +36,13 @@ class FileDownloadPage extends AbstractPage{
     public function readData(){
         parent::readData();
         VisitCountHandler::getInstance()->count();
-        $this->fileReader = new FileReader(CMS_DIR.'files/'.$this->file->filename, array('filename' => $this->file->title,
+        $folderPath = '';
+        if($this->file->folderID != 0) {
+            $folder = new Folder($this->file->folderID);
+            $folderPath = $folder->folderPath.'/';
+        }
+        
+        $this->fileReader = new FileReader(CMS_DIR.'files/'.$folderPath.$this->file->filename, array('filename' => $this->file->title,
                                                                         'mimeType' => $this->file->type,
                                                                         'filesize' => $this->file->size,
                                                                         'showInline' => (in_array($this->file->type, self::$inlineMimeTypes)),

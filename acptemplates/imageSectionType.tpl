@@ -1,14 +1,38 @@
-            <dl {if $errorField == 'sectionData'}class="formError"{/if}>
-				<dt><label for="sectionData">{lang}cms.acp.content.section.data.imageID{/lang}</label></dt>
-				<dd>
-					<select id="sectionData" name="sectionData[]" multiple="multiple" size="10" >
-						{foreach from=$fileList item='item'}
-						<option value="{$item->fileID}" {if $item->fileID|in_array:$fileIDs}selected="selected"{/if}>{$item->title|language}</option>
-						{/foreach}
-					</select>
-                    <p class="description">{lang}cms.acp.content.section.data.imageID.description{/lang}</p>
-				</dd>
-			</dl>
+            
+			<ol class="nestedCategoryList doubleColumned {if $errorField == 'sectionData'}formError{/if}">
+				<li>
+					<div>
+						<div class="containerHeadline">
+							<h3><label><span class="icon icon24 icon-folder-close"></span> {lang}cms.acp.file.folderID.root{/lang}</label></h3>
+							
+							<ol>
+							{foreach from=$fileList item=file}
+								<li>
+									<label><input type="checkbox" name="sectionData[]" value="{$file->fileID}" {if $file->fileID|in_array:$fileIDs}checked="checked" {/if}/>{@$file->getIconTag()} {$file->getTitle()}</label>
+								</li>
+							{/foreach}
+							</ol>
+						</div>
+					</div>
+				</li>
+				{foreach from=$folderList item=folder}
+				<li>
+					<div>
+						<div class="containerHeadline">
+							<h3><label><span class="icon icon24 icon-folder-close"></span> {$folder->getTitle()}</label></h3>
+							
+							<ol>
+							{foreach from=$folder->getFiles('image') item=file}
+								<li>
+									<label><input type="checkbox" name="sectionData[]" value="{$file->fileID}" {if $file->fileID|in_array:$fileIDs}checked="checked" {/if}/>{@$file->getIconTag()} {$file->getTitle()}</label>
+								</li>
+							{/foreach}
+							</ol>
+						</div>
+					</div>
+				</li>
+				{/foreach}
+			</ol>
 
 			<dl>
 				<dt><label for="subtitle">{lang}cms.acp.content.section.data.subtitle{/lang}</label></dt>

@@ -6,7 +6,9 @@ use wcf\system\WCF;
 use wcf\util\StringUtil;
 use wcf\util\ArrayUtil;
 use cms\data\file\FileList;
+use cms\data\folder\FolderList;
 use cms\data\file\File;
+use cms\data\folder\Folder;
 
 /**
  * @author	Jens Krumsieck
@@ -20,13 +22,19 @@ class ImageContentSectionType extends AbstractContentSectionType{
     public $objectType = 'de.codequake.cms.section.type.image';
     public $isMultilingual = true;
     public $fileList = array();
+    public $folderList = array();
     public $additionalData = array();
     
     public function readParameters(){
         $list = new FileList();
         $list->getConditionBuilder()->add('file.type LIKE ?', array('image/%'));
+        $list->getConditionBuilder()->add('folderID = ?', array(0));
         $list->readObjects();
         $this->fileList = $list->getObjects();
+        
+        $list = new FolderList();
+        $list->readObjects();
+        $this->folderList = $list->getObjects();
     }
     
     public function readData($sectionID){
@@ -42,7 +50,7 @@ class ImageContentSectionType extends AbstractContentSectionType{
     }
     
     public function readFormData(){
-        if(isset($_POST['sectionData']) &&  is_array($_POST['sectionData'])) $this->formData['sectionData'] = ArrayUtil::trim($_POST['sectionData']);        
+        if(isset($_POST['sectionData']) && is_array($_POST['sectionData'])) $this->formData['sectionData'] = ArrayUtil::toIntegerArray($_POST['sectionData']);        
         if(isset($_POST['resizable']))   $this->additionalData['resizable'] = intval($_POST['resizable']);
         else $this->additionalData['resizable'] = 0;
         if(isset($_POST['subtitle'])) $this->additionalData['subtitle'] = StringUtil::trim($_POST['subtitle']);
@@ -53,6 +61,7 @@ class ImageContentSectionType extends AbstractContentSectionType{
     public function assignFormVariables(){
         
         WCF::getTPL()->assign(array('fileList' => $this->fileList,
+                                    'folderList' => $this->folderList,
                                     'fileIDs' => isset($this->formData['sectionData']) ? $this->formData['sectionData'] : array(),
                                     'link' => isset($this->additionalData['link']) ? $this->additionalData['link'] : '',
                                     'resizable' => isset($this->additionalData['resizable']) ? $this->additionalData['resizable'] : 0,
@@ -84,11 +93,15 @@ class ImageContentSectionType extends AbstractContentSectionType{
         
         //new version
         if(@unserialize($section->sectionData)) $imageIDs = @unserialize($section->sectionData);
-        
+        $i = 0;
         foreach($imageIDs as $id){
-            $fileList[] = new File(intval($id));
+            $file = new File(intval($id));
+            $fileList[$i]['file'] = $file;
+            $fileList[$i]['folder'] = new Folder($file->folderID);
+            $i++;
         }
         $additionalData = @unserialize($section->additionalData);
+        
         WCF::getTPL()->assign(array('images'=> $fileList,
                                     'resizable' => isset($additionalData['resizable']) ? $additionalData['resizable'] : 0,
                                     'link' => isset($additionalData['link']) ? $additionalData['link'] : '',
