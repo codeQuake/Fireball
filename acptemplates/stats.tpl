@@ -10,7 +10,7 @@
 			</div>
 		</fieldset>
 		</div>
-        <div class="container containerPadding shadow marginTop" style="width: 30%; float: left; box-sizing:border-box; margin-right: 2%;">
+        <div class="container containerPadding shadow marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
             <fieldset>
 			<legend>{lang}cms.acp.stats.browsers{/lang}</legend>
 			<div class="center">		
@@ -26,6 +26,159 @@
                     {/foreach}
                     </dl>
 		</fieldset>
+        </div>
+        <div class="container containerPadding shadow marginTop clearfix" style="float: left; width: 49%; box-sizing: border-box; margin-left: 1%;">
+            <fieldset>
+			<legend>{lang}cms.acp.stats.mostClicked{/lang}</legend>
+			<table class="table">
+                <thead>
+                    <tr>
+                        <th>{lang}cms.acp.stats.page{/lang}</th>
+                        <th>{lang}cms.acp.stats.clicks{/lang}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach from=$pages item=page}
+                        <tr>
+                            <td>{$page->getTitle()|language}</td>
+                            <td>{$page->clicks}</td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+			</table>
+		    </fieldset>
+        </div> 
+        <br style="clear: both;" />
+        <div  class="container containerPadding shadow marginTop">
+            <fieldset>
+			<legend>{lang}cms.acp.stats.vistors{/lang}</legend>
+                {assign var=usersOnlineList value=''}
+{assign var=usersOnline value=0}
+{assign var=robotsOnlineList value=''}
+{assign var=robotsOnline value=0}
+{assign var=guestsOnlineList value=''}
+{assign var=guestsOnline value=0}
+{foreach from=$objects item=user}
+	{capture assign=locationData}
+		<p>
+			{if $user->getLocation()}{@$user->getLocation()}{else}{lang}wcf.user.usersOnline.location.unknown{/lang}{/if} <small>- {@$user->lastActivityTime|time}</small>
+		</p>
+	{/capture}
+	
+	{capture assign=sessionData}
+		{if $__wcf->session->getPermission('admin.user.canViewIpAddress')}
+			<dl class="plain inlineDataList">
+				<dt>{lang}wcf.user.usersOnline.ipAddress{/lang}</dt>
+				<dd title="{$user->getFormattedIPAddress()}">{$user->getFormattedIPAddress()|truncate:30}</dd>
+				
+				{if !$user->spiderID}
+					<dt>{lang}wcf.user.usersOnline.userAgent{/lang}</dt>
+					<dd title="{$user->userAgent}">{$user->getBrowser()|truncate:30}</dd>
+				{/if}
+			</dl>
+		{/if}
+	{/capture}
+	
+	{if $user->userID}
+		{* member *}
+		{capture append=usersOnlineList}
+			<li>
+				<div class="box48">
+					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
+					
+					<div class="details userInformation">
+						<div class="containerHeadline">
+							<h3><a href="{link controller='User' object=$user}{/link}">{@$user->getFormattedUsername()}</a>{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h3>
+							{@$locationData} 
+						</div>
+						
+						{@$sessionData}
+						
+					</div>
+				</div>
+			</li>
+		{/capture}
+		
+		{assign var=usersOnline value=$usersOnline+1}
+	{elseif $user->spiderID}
+		{* search robot *}
+		{capture append=robotsOnlineList}
+			<li>
+				<div class="box48">
+					<p class="framed"><img src="{$__wcf->getPath()}images/avatars/avatar-spider-default.svg" alt="" class="icon48" /></p>
+					
+					<div class="details userInformation">
+						<div class="containerHeadline">
+							<h3>{if $user->getSpider()->spiderURL}<a href="{$user->getSpider()->spiderURL}" class="externalURL"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>{$user->getSpider()->spiderName}</a>{else}{$user->getSpider()->spiderName}{/if}</h3>
+							{@$locationData} 
+						</div>
+						
+						{@$sessionData}
+					</div>
+				</div>
+			</li>
+		{/capture}
+		
+		{assign var=robotsOnline value=$robotsOnline+1}
+	{else}
+		{* unregistered *}
+		{capture append=guestsOnlineList}
+			<li>
+				<div class="box48">
+					<p class="framed"><img src="{$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon48" /></p>
+					
+					<div class="details userInformation">
+						<div class="containerHeadline">
+							<h3>{lang}wcf.user.guest{/lang}</h3>
+							{@$locationData} 
+						</div>
+						
+						{@$sessionData}
+					</div>
+				</div>
+			</li>
+		{/capture}
+		
+		{assign var=guestsOnline value=$guestsOnline+1}
+	    {/if}
+    {/foreach}
+    {if $usersOnline}
+	    <header class="boxHeadline">
+		    <h1>{lang}wcf.user.usersOnline{/lang} <span class="badge">{#$usersOnline}</span></h1>
+	    </header>
+	
+	    <div class="container marginTop">
+		    <ol class="containerList doubleColumned userList">
+			    {@$usersOnlineList}
+		    </ol>
+	    </div>
+    {/if}
+
+    {if $guestsOnline && USERS_ONLINE_SHOW_GUESTS}
+	    <header class="boxHeadline">
+		    <h1>{lang}wcf.user.usersOnline.guests{/lang} <span class="badge">{#$guestsOnline}</span></h1>
+	    </header>
+	
+	    <div class="container marginTop">
+		    <ol class="containerList doubleColumned">
+			    {@$guestsOnlineList}
+		    </ol>
+	    </div>
+    {/if}
+
+    {if $robotsOnline && USERS_ONLINE_SHOW_ROBOTS}
+	    <header class="boxHeadline">
+		    <h1>{lang}wcf.user.usersOnline.robots{/lang} <span class="badge">{#$robotsOnline}</span></h1>
+	    </header>
+	
+	    <div class="container marginTop">
+		    <ol class="containerList doubleColumned">
+			    {@$robotsOnlineList}
+		    </ol>
+	    </div>
+    {/if}
+
+            </fieldset>
         </div>
 	{assign var=maximum value=0}
     <script data-relocate="true" src="{@$__wcf->getPath('cms')}js/3rdParty/Chart.js"></script>

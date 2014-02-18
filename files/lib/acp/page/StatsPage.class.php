@@ -1,5 +1,6 @@
 <?php
 namespace cms\acp\page;
+use cms\data\page\PageList;
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
 use cms\system\counter\VisitCountHandler;
@@ -12,7 +13,8 @@ class StatsPage extends AbstractPage{
     public $endDate = 0;
     public $visits = array();
     public $browsers = array();
-    public $colors = array('#015294', '#F7464A', '#E2EAE9', '#D4CCC5', '#949FB1', '#4D5360', '#F38630', '#f0f0f0', '#1f1f1');
+    public $colors = array('#015294', '#F7464A', '#E2EAE9', '#D4CCC5', '#949FB1', '#4D5360', '#F38630', '#f0f0f0', '#1f1f1'); 
+    public $pages = null;
     
     public function readParamters(){
         parent::readParameters();
@@ -29,10 +31,16 @@ class StatsPage extends AbstractPage{
         
         $this->browsers = VisitCountHandler::getInstance()->getBrowsers($this->startDate, $this->endDate);
                 
+        //read pages
+        $list = new PageList();
+        $list->sqlOrderBy = 'page.clicks DESC';
+        $list->sqlLimit = '8';
+        $list->readObjects();
+        $this->pages = $list->getObjects();
+        
         //user online list
         $this->usersOnlineList = new UsersOnlineList();
 		$this->usersOnlineList->readStats();
-		$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
 		$this->usersOnlineList->readObjects();
             
     }
@@ -43,7 +51,8 @@ class StatsPage extends AbstractPage{
         parent::assignVariables();
         WCF::getTPL()->assign(array('visits' => $this->visits,
                                     'browsers' => $this->browsers,
-                                    'usersOnlineList' => $this->usersOnlineList,
-                                    'colors' => $this->colors));
+                                    'objects' => $this->usersOnlineList,
+                                    'colors' => $this->colors,
+                                    'pages' => $this->pages));
     }
 }

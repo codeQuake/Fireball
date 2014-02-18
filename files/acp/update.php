@@ -13,6 +13,6 @@ $sql = "CREATE TABLE cms".WCF_N."_counter(
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array());
 
-$sql = "ALTER TABLE cms".WCF."_page clicks INT (20) NOT NULL DEFAULT 0 AFTER comments";
+$sql = "ALTER TABLE cms".WCF_N."_page clicks INT (20) NOT NULL DEFAULT 0 AFTER comments";
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array());
