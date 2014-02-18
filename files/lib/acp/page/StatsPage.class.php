@@ -16,13 +16,12 @@ class StatsPage extends AbstractPage{
     public $colors = array('#015294', '#F7464A', '#E2EAE9', '#D4CCC5', '#949FB1', '#4D5360', '#F38630', '#f0f0f0', '#1f1f1'); 
     public $pages = null;
     
-    public function readParamters(){
-        parent::readParameters();
-    }
     
     public function readData(){
         parent::readData();
-        //set default dates
+        //set dates
+        if(isset($_POST['startDate'])) $this->startDate = strtotime($_POST['startDate']);
+        if(isset($_POST['endDate'])) $this->endDate = strtotime($_POST['endDate']);
         if($this->startDate == 0) $this->startDate = TIME_NOW - 604800;
         if($this->endDate == 0)$this->endDate = TIME_NOW;
         
@@ -53,6 +52,8 @@ class StatsPage extends AbstractPage{
                                     'browsers' => $this->browsers,
                                     'objects' => $this->usersOnlineList,
                                     'colors' => $this->colors,
-                                    'pages' => $this->pages));
+                                    'pages' => $this->pages,
+                                    'startDate' => $this->startDate,
+                                    'endDate' => $this->endDate));
     }
 }

@@ -2,6 +2,14 @@
 <header class="boxHeadline">
     <h1>{lang}cms.acp.stats{/lang}</h1>
 </header>
+
+<div class="contentNavigation">
+    <form method="post" action="{link application='cms' controller='Stats'}{/link}">
+        <input type="date" name="startDate" value="{$startDate|date}"/>
+        <input type="date" name="endDate" value="{$endDate|date}"/>
+        <input type="submit" />
+    </form>
+</div>
 		<div  class="container containerPadding shadow marginTop">
 		<fieldset>
 			<legend>{lang}cms.acp.stats.vistors{/lang}</legend>

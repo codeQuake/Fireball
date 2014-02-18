@@ -26,6 +26,10 @@
       <parent>cms.acp.menu.link.cms.dashboard</parent>
       <controller><![CDATA[cms\acp\page\StatsPage]]></controller>
     </acpmenuitem>
+    <acpmenuitem name="cms.acp.menu.link.cms.page.settings">
+      <parent>cms.acp.menu.link.cms.dashboard</parent>
+      <controller><![CDATA[cms\acp\page\SettingsPage]]></controller>
+    </acpmenuitem>
     <acpmenuitem name="cms.acp.menu.link.cms.page.overview">
       <parent>cms.acp.menu.link.cms.content</parent>
       <controller><![CDATA[cms\acp\page\OverviewPage]]></controller>
