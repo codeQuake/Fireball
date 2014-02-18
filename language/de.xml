@@ -22,6 +22,7 @@
     <item name="cms.acp.menu.link.cms.module.list"><![CDATA[Module auflisten]]></item>
     <item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
     <item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
+    <item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistiken]]></item>
   </category>
 
   <category name="cms.acp">
