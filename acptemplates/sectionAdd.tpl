@@ -1,6 +1,7 @@
 {capture assign='pageTitle'}{lang}cms.acp.content.section.{@$action}{/lang}{/capture}
 {include file='header'}
 
+	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Like.js"></script>
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS.js"></script>
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 	

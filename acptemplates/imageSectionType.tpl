@@ -1,4 +1,3 @@
-            
 			<ol class="nestedCategoryList doubleColumned {if $errorField == 'sectionData'}formError{/if}">
 				<li>
 					<div>
