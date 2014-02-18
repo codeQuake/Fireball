@@ -4,6 +4,7 @@ use wcf\form\AbstractForm;
 use wcf\system\WCF;
 use cms\data\file\FileAction;
 use cms\data\folder\FolderAction;
+use cms\data\folder\Folder;
 use wcf\util\ArrayUtil;
 use wcf\util\StringUtil;
 use cms\data\file\FileList;
@@ -65,7 +66,8 @@ class FileManagementForm extends AbstractForm{
         if($this->action == 'file'){
             $tmp = explode('.',$this->file['name']);
             $filename = 'FB-File-'.md5($this->file['tmp_name'].time()).'.'.array_pop($tmp);
-            $path = CMS_DIR.'files/'.$filename;
+            $folder = new Folder($this->folderID);
+            $path = CMS_DIR.'files/'.$folder->folderPath.'/'.$filename;
             move_uploaded_file($this->file['tmp_name'], $path);
         
             $data = array('title' => $this->file['name'],
