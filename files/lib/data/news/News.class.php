@@ -204,6 +204,13 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
         return WCF::getSession()->getPermission('mod.cms.news.canModerateNews');
     }
     
+    public function canSeeDelayed(){
+        foreach($this->getCategories() as $category){
+            if(!$category->getPermission('canViewDelayedNews')) return false;
+        }
+        return true;
+    }
+    
     public static function getIpAddressByAuthor($userID, $username = '', $notIpAddress = '', $limit = 10) {
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("userID = ?", array($userID));

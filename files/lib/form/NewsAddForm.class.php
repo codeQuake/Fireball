@@ -104,7 +104,7 @@ class NewsAddForm extends MessageForm{
                        'message' => $this->text,
                        'userID' => WCF::getUser()->userID,
                        'username' => WCF::getUser()->username,
-                       'isDisabled' => ($this->time < TIME_NOW) ? 1 : 0,
+                       'isDisabled' => ($this->time > TIME_NOW)? 1 : 0,
                        'enableBBCodes' => $this->enableBBCodes,
 			           'enableHtml' => $this->enableHtml,
 			           'enableSmilies' => $this->enableSmilies,

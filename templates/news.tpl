@@ -72,9 +72,9 @@
 <header class="boxHeadline">
 		<h1>{$news->getTitle()|language}</h1>
 </header>
-
+{if $news->isDisabled}<p class="warning">{lang}cms.news.publication.delayed{/lang}</p>{/if}
 {include file='userNotice'}
-
+{if $news->isDisabled && !$news->canSeeDelayed()}
 <ul class="messageList">
     <li>
             <article class="message messageReduced marginTop jsNews jsMessage" data-user-id="{$news->userID}" data-object-id="{$news->newsID}" data-news-id="{$news->newsID}" data-is-deleted="{$news->isDeleted}" data-is-disabled="{$news->isDisabled}" data-object-type="de.codequake.cms.likeableNews" data-like-liked="{if $newsLikeData[$news->newsID]|isset}{@$newsLikeData[$news->newsID]->liked}{/if}" data-like-likes="{if $newsLikeData[$news->newsID]|isset}{@$newsLikeData[$news->newsID]->likes}{else}0{/if}" data-like-dislikes="{if $newsLikeData[$news->newsID]|isset}{@$newsLikeData[$news->newsID]->dislikes}{else}0{/if}" data-like-users='{if $newsLikeData[$news->newsID]|isset}{ {implode from=$newsLikeData[$news->newsID]->getUsers() item=likeUser}"{@$likeUser->userID}": { "username": "{$likeUser->username|encodeJSON}" }{/implode} }{else}{ }{/if}'>
@@ -140,6 +140,7 @@
 	    {/if}
     </div>
     {include file='newsCommentList' application='cms'}
+{/if}
 {include file='footer' sandbox=false}
 </body>
 </html>

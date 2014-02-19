@@ -8,6 +8,7 @@ use wcf\page\AbstractPage;
 use cms\system\counter\VisitCountHandler;
 use wcf\system\comment\CommentHandler;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\request\LinkHandler;
@@ -48,6 +49,9 @@ class NewsPage extends AbstractPage{
         if(!isset($this->newsID) || $this->newsID == 0) throw new IllegalLinkException();
         $this->news = ViewableNews::getNews($this->newsID);
         if($this->news === null) throw new IllegalLinkException();
+        foreach($this->news->getCategories() as $category){
+            if(!$category->getPermission('canViewNews')) throw new PermissionDeniedException();
+        }
     }
     
     public function readData(){
