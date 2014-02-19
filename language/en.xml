@@ -335,6 +335,8 @@
     <item name="wcf.acp.group.option.admin.cms.content.attachmentMaxSize"><![CDATA[Maximum filesize]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.maxAttachmentCount"><![CDATA[Maximum number of attachments per content section]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.allowedAttachmentExtensions"><![CDATA[Allowed file extensions]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.canViewDelayedNews"><![CDATA[Can see unpublished news]]></item>
+
   </category>
 
   <category name="wcf.acl.option">
@@ -345,7 +347,8 @@
     <item name="wcf.acl.option.de.codequake.cms.category.news.canViewCategory"><![CDATA[Can view category]]></item>
     <item name="wcf.acl.option.de.codequake.cms.category.news.canViewNews"><![CDATA[Can view news]]></item>
     <item name="wcf.acl.option.de.codequake.cms.category.news.canAddNews"><![CDATA[Can add news]]></item>
-    <item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[Can moderate news]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[Nachrichten Moderationsrecht]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[Can see unpublished news]]></item>
   </category>
 
   <category name="wcf.acp.option">

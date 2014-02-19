@@ -33,7 +33,7 @@ class NewsCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
         if (isset($this->permissions[$permission])) {
             return $this->permissions[$permission];
         }
-        return true;
+        return (WCF::getSession()->getPermission('user.cms.news.'.$permission) || WCF::getSession()->getPermission('mod.cms.news.'.$permission) || WCF::getSession()->getPermission('admin.cms.news.'.$permission));
     }
 
     public function getBreadcrumb() {

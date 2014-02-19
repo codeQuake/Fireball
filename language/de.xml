@@ -334,6 +334,7 @@
     <item name="wcf.acp.group.option.admin.cms.content.attachmentMaxSize"><![CDATA[Maximale Dateianhangsgröße]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.maxAttachmentCount"><![CDATA[Maximale Anzahl an Dateianhängen pro Inhaltsabschnitt]]></item>
     <item name="wcf.acp.group.option.admin.cms.content.allowedAttachmentExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
+    <item name="wcf.acp.group.option.user.cms.news.canViewDelayedNews"><![CDATA[Kann Nachrichten sehen, die noch nicht veröffentlicht wurden]]></item>
   </category>
 
   <category name="wcf.acl.option">
@@ -345,6 +346,7 @@
     <item name="wcf.acl.option.de.codequake.cms.category.news.canViewNews"><![CDATA[Kann Nachrichten sehen]]></item>
     <item name="wcf.acl.option.de.codequake.cms.category.news.canAddNews"><![CDATA[Kann Nachrichten hinzufügen]]></item>
     <item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[Nachrichten Moderationsrecht]]></item>
+    <item name="wcf.acl.option.de.codequake.cms.category.news.canViewDelayedNews"><![CDATA[Kann Nachrichten sehen, die noch nicht veröffentlicht wurden]]></item>
   </category>
 
   <category name="wcf.acp.option">
