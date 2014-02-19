@@ -40,7 +40,7 @@ class NewsAddForm extends MessageForm{
     public function readFormParameters(){
         parent::readFormParameters();
         if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tags = ArrayUtil::trim($_POST['tags']);
-        if (isset($_POST['time'])) $this->time = intval(strtotime($_POST['time']));
+        if (isset($_POST['time'])) $this->time = $_POST['time'];
     }
     
     
@@ -50,6 +50,7 @@ class NewsAddForm extends MessageForm{
     }
     public function readData(){
         parent::readData();
+        
          WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), 
                                                             LinkHandler::getInstance()->getLink('NewsCategoryList', array('application' => 'cms'))));
         
@@ -130,7 +131,7 @@ class NewsAddForm extends MessageForm{
         parent::assignVariables();
         WCF::getTPL()->assign(array('categoryList' => $this->categoryList,
                                     'categoryIDs' => $this->categoryIDs,
-                                    'time' => date("Y-m-d H:i", $this->time),
+                                    'time' => gmdate("Y-m-d H:i", $this->time),
                                     'action' => $this->action,
                                     'tags'      => $this->tags,
 			                        'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.cms.news.allowedAttachmentExtensions')))));
