@@ -149,7 +149,7 @@
                         <td class="columnDownloads">{#$file->downloads}</td>
                     </tr>
 					<div class="details" id="details{$file->fileID}" style="display: none;">
-						<div class="containerSubHeadline">
+						<div class="boxSubHeadline">
 							<h2>{@$file->getIconTag()} <a href="{$__wcf->getPath('cms')}files/{$file->filename}">{$file->title|language}</a></h2>
 						</div>
 						{if $file->type == 'image/png' || $file->type == 'image/jpeg' || $file->type == 'image/gif'}
