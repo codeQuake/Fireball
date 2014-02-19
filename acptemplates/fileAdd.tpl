@@ -8,7 +8,8 @@
 <script data-relocate="true">
     //<![CDATA[
     $(function () {
-        new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow');
+        new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow'); 
+		new WCF.Action.Delete('cms\\data\\folder\\FolderAction', '.jsFolderRow');
     });
     //]]>
 </script>
@@ -124,7 +125,7 @@
 			{if !$isFolder}
 				{foreach from=$folderList item=folder}
 				<tr class="jsFolderRow">
-					<td class="columnIcon"><span class="icon icon-folder-close-alt icon16"></span></td>
+					<td class="columnIcon"><span class="icon icon-folder-close-alt icon16"></span> <span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$folder->folderID}" data-confirm-message="{lang}cms.acp.folder.delete.sure{/lang}"></span></td>
 					<td class="columnTitle"><a href="{link controller='FileManagement' application='cms' object=$folder}{/link}">{$folder->getTitle()|language}</a></td>
 					<td>{lang}cms.acp.folder{/lang}</td>
 					<td>-</td>

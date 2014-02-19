@@ -4,6 +4,7 @@ use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\system\WCF;
 use cms\data\file\FileList;
+use cms\data\folder\FolderList;
 use cms\data\file\File;
 
 /**
@@ -18,12 +19,18 @@ class FileContentSectionType extends AbstractContentSectionType{
     public $objectType = 'de.codequake.cms.section.type.file';
     public $isMultilingual = true;
     public $fileList = array();
+    public $folderList = array();
     public $additionalData = array();
     
     public function readParameters(){
         $list = new FileList();
+        $list->getConditionBuilder()->add('folderID = ?', array(0));
         $list->readObjects();
         $this->fileList = $list->getObjects();
+        
+        $list = new FolderList();
+        $list->readObjects();
+        $this->folderList = $list->getObjects();
     }
     
     public function readData($sectionID){
@@ -39,6 +46,7 @@ class FileContentSectionType extends AbstractContentSectionType{
     public function assignFormVariables(){
         
         WCF::getTPL()->assign(array('fileList' => $this->fileList,
+                                    'folderList' => $this->folderList,
                                     'fileID' => isset($this->formData['sectionData']) ? $this->formData['sectionData']:0));
     }
     

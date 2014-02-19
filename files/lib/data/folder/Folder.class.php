@@ -37,8 +37,9 @@ class Folder extends CMSDatabaseObject implements IRouteController{
         return $this->folderName;
     }
     
-    public function getFiles(){
+    public function getFiles($type = ''){
         $list = new FileList();
+        if($type == 'image') $list->getConditionBuilder()->add('file.type LIKE ?', array('image/%'));
         $list->getConditionBuilder()->add('folderID = ?', array($this->folderID));
         $list->readObjects();
         return $list->getObjects();
