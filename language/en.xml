@@ -158,6 +158,7 @@
     <item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
     <item name="cms.acp.file.list"><![CDATA[Files]]></item>
     <item name="cms.acp.file.management"><![CDATA[Filemanagement]]></item>
+    <item name="cms.acp.file.details"><![CDATA[Information]]></item>
     <item name="cms.acp.folder"><![CDATA[Folder]]></item>
     <item name="cms.acp.folder.toRoot"><![CDATA[Got to root]]></item>
     <item name="cms.acp.folder.add"><![CDATA[Create folder]]></item>

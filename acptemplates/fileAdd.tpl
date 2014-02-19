@@ -4,7 +4,6 @@
 <header class="boxHeadline">
     <h1>{lang}cms.acp.file.management{/lang}</h1>
 </header>
-
 <script data-relocate="true">
     //<![CDATA[
     $(function () {
@@ -145,10 +144,34 @@
 							{@$file->getIconTag()}
                             <span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
                         </td> 
-                        <td class="columnTitle columnFile" id="file{$file->fileID}">{$file->title|language}</td>
+                        <td class="columnTitle columnFile"><a id="file{$file->fileID}">{$file->title|language}</a></td>
                         <td class="columnType">{$file->type}</td>
                         <td class="columnDownloads">{#$file->downloads}</td>
                     </tr>
+					<div class="details" id="details{$file->fileID}" style="display: none;">
+						<div class="containerSubHeadline">
+							<h2>{@$file->getIconTag()} <a href="{$__wcf->getPath('cms')}files/{$file->filename}">{$file->title|language}</a></h2>
+						</div>
+						{if $file->type == 'image/png' || $file->type == 'image/jpeg' || $file->type == 'image/gif'}
+							<div><img style="max-width: 300px" src="{$__wcf->getPath('cms')}files/{$file->filename}" alt="" /></div>
+						{/if}
+						<span>{$file->size|filesize} | {$file->type}</span>
+					</div>
+					<script data-relocate="true">
+						//<![CDATA[
+						$(function() {
+							WCF.Language.addObject({
+									'cms.acp.file.details': '{lang}cms.acp.file.details{/lang}'
+									});
+							$('#details{$file->fileID}').hide();
+							$('#file{$file->fileID}').click(function() {
+								$('#details{$file->fileID}').wcfDialog({
+									title: WCF.Language.get('cms.acp.file.details')
+								});
+							});
+						});
+						//]]>
+					</script>
                 {/foreach}
             </tbody>
         </table>

@@ -159,6 +159,7 @@
     <item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
     <item name="cms.acp.file.error.empty"><![CDATA[Bitte laden Sie eine gültige Datei hoch.]]></item>
     <item name="cms.acp.file.management"><![CDATA[Dateiverwaltung]]></item>
+    <item name="cms.acp.file.details"><![CDATA[Informationen]]></item>
     <item name="cms.acp.folder"><![CDATA[Ordner]]></item>
     <item name="cms.acp.folder.toRoot"><![CDATA[Zum Hauptverzeichnis wechseln]]></item>
     <item name="cms.acp.folder.add"><![CDATA[Ordner erstellen]]></item>
