@@ -161,6 +161,7 @@
     <item name="cms.acp.file.management"><![CDATA[Dateiverwaltung]]></item>
     <item name="cms.acp.file.details"><![CDATA[Informationen]]></item>
     <item name="cms.acp.folder"><![CDATA[Ordner]]></item>
+    <item name="cms.acp.file.folderID"><![CDATA[Ordner]]></item>
     <item name="cms.acp.folder.toRoot"><![CDATA[Zum Hauptverzeichnis wechseln]]></item>
     <item name="cms.acp.folder.add"><![CDATA[Ordner erstellen]]></item>
     <item name="cms.acp.folder.open"><![CDATA[Hier klicken um Dateien anzuzeigen]]></item>
