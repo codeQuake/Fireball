@@ -2,7 +2,8 @@
 namespace cms\data\news;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
-
+use wcf\system\category\CategoryHandler;
+use cms\data\category\NewsCategory;
 /**
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
@@ -14,6 +15,10 @@ class CategoryNewsList extends ViewableNewsList{
 
     public function __construct(array $categoryIDs) {
         parent::__construct();
+        foreach($categoryIDs as $categoryID){
+            $category = new NewsCategory(CategoryHandler::getInstance()->getCategory($categoryID));
+            if(!$category->getPermission('canViewDelayedNews')) $this->getConditionBuilder()->add('news.isDisabled = ?', array(0));
+        }
         $this->sqlSelects .=  ", news_to_category.*";
         $this->sqlJoins .= $this->sqlConditionJoins = ", cms".WCF_N."_news_to_category news_to_category".$this->sqlConditionJoins;
         $this->getConditionBuilder()->add('news_to_category.categoryID IN (?)', array($categoryIDs));
