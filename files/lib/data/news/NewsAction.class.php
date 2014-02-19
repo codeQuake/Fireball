@@ -83,10 +83,10 @@ class NewsAction extends AbstractDatabaseObjectAction{
     
     public function publish(){
             foreach($this->objects as $news){
+                $news->update(array('isDisabled' => 0));  
                 //recent
                 UserActivityEventHandler::getInstance()->fireEvent('de.codequake.cms.news.recentActivityEvent', $news->newsID, $news->languageID, $news->userID, $news->time);
                 UserActivityPointHandler::getInstance()->fireEvent('de.codequake.cms.activityPointEvent.news', $news->newsID, $news->userID);
-            
                 // update search index
 		        SearchIndexManager::getInstance()->add('de.codequake.cms.news', $news->newsID, $news->message, $news->subject, $news->time, $news->userID, $news->username, $news->languageID);
             }
