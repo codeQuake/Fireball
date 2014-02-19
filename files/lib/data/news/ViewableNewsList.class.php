@@ -24,6 +24,9 @@ class ViewableNewsList extends NewsList{
 			        $this->sqlSelects .= 'tracked_visit.visitTime';
 			        $this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_tracked_visit tracked_visit ON (tracked_visit.objectTypeID = ".VisitTracker::getInstance()->getObjectTypeID('de.codequake.cms.news')." AND tracked_visit.objectID = news.newsID AND tracked_visit.userID = ".WCF::getUser()->userID.")";
 		        }
+            if(!WCF::getSession()->getPermission('user.cms.news.canViewDelayedNews')){
+                $this->getConditionBuilder()->add('news.isDisabled = ?', array(0));
+            }
             // get like status
 		    if (!empty($this->sqlSelects)) $this->sqlSelects .= ',';
 		    $this->sqlSelects .= "like_object.likes, like_object.dislikes";

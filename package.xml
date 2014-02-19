@@ -34,6 +34,7 @@
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="option">xml/option.xml</instruction>
+    <instruction type="cronjob">xml/cronjob.xml</instruction>
     <instruction type="sitemap">xml/sitemap.xml</instruction>
     <instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
     <instruction type="pageMenu">xml/pagemenu.xml</instruction>
@@ -78,6 +79,7 @@
     <instruction type="template">templates.tar</instruction>
     <instruction type="script">acp/update.php</instruction>
     <!--xml-->
+    <instruction type="cronjob">xml/cronjob.xml</instruction>
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="option">xml/option.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>

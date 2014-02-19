@@ -66,18 +66,32 @@ class NewsAction extends AbstractDatabaseObjectAction{
         $languageID = (!isset($this->parameters['data']['languageID']) || ($this->parameters['data']['languageID'] === null)) ? LanguageFactory::getInstance()->getDefaultLanguageID() : $this->parameters['data']['languageID'];
         $newsEditor->update(array('languageID' => $languageID));
         
-        //recent
-        UserActivityEventHandler::getInstance()->fireEvent('de.codequake.cms.news.recentActivityEvent', $news->newsID, $news->languageID, $news->userID, $news->time);
-        UserActivityPointHandler::getInstance()->fireEvent('de.codequake.cms.activityPointEvent.news', $news->newsID, $news->userID);
+        if(!$news->isDisabled){
+            //recent
+            UserActivityEventHandler::getInstance()->fireEvent('de.codequake.cms.news.recentActivityEvent', $news->newsID, $news->languageID, $news->userID, $news->time);
+            UserActivityPointHandler::getInstance()->fireEvent('de.codequake.cms.activityPointEvent.news', $news->newsID, $news->userID);
             
-        // update search index
-		SearchIndexManager::getInstance()->add('de.codequake.cms.news', $news->newsID, $news->message, $news->subject, $news->time, $news->userID, $news->username, $news->languageID);
+            // update search index
+		    SearchIndexManager::getInstance()->add('de.codequake.cms.news', $news->newsID, $news->message, $news->subject, $news->time, $news->userID, $news->username, $news->languageID);
         
-        // reset storage
-		UserStorageHandler::getInstance()->resetAll('cmsUnreadNews');
-        
+            // reset storage
+		    UserStorageHandler::getInstance()->resetAll('cmsUnreadNews');
+        }
         return $news;
         
+    }
+    
+    public function publish(){
+            foreach($this->objects as $news){
+                //recent
+                UserActivityEventHandler::getInstance()->fireEvent('de.codequake.cms.news.recentActivityEvent', $news->newsID, $news->languageID, $news->userID, $news->time);
+                UserActivityPointHandler::getInstance()->fireEvent('de.codequake.cms.activityPointEvent.news', $news->newsID, $news->userID);
+            
+                // update search index
+		        SearchIndexManager::getInstance()->add('de.codequake.cms.news', $news->newsID, $news->message, $news->subject, $news->time, $news->userID, $news->username, $news->languageID);
+            }
+            // reset storage
+		    UserStorageHandler::getInstance()->resetAll('cmsUnreadNews');
     }
     
     public function update(){
