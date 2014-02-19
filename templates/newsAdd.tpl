@@ -122,6 +122,7 @@
        
         {event name='fieldsets'}
 		</div>
+		{if !($action == 'edit' && $news->time <= TIME_NOW)}
 		<div class="container containerPadding marginTop">
 		 <fieldset>
 				<legend>{lang}cms.news.time.toPublish{/lang}</legend>
@@ -133,6 +134,7 @@
 				</dl>
 		</fieldset>
 		</div>
+		{/if}
         <div class="formSubmit">
 		    <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 			{@SECURITY_TOKEN_INPUT_TAG}

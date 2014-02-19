@@ -28,6 +28,9 @@
       <option name="canViewNews">
         <objecttype>de.codequake.cms.category.news</objecttype>
       </option>
+      <option name="canViewDelayedNews">
+      <objecttype>de.codequake.cms.category.news</objecttype>
+      </option>
       <option name="canAddNews">
         <objecttype>de.codequake.cms.category.news</objecttype>
       </option>

@@ -34,7 +34,7 @@ class NewsAddForm extends MessageForm{
     public $enableMultilingualism = true;
     public $attachmentObjectType = 'de.codequake.cms.news';
 
-    public $time = 0;
+    public $time = TIME_NOW;
     public $tags = array();
     
     public function readFormParameters(){
@@ -104,6 +104,7 @@ class NewsAddForm extends MessageForm{
                        'message' => $this->text,
                        'userID' => WCF::getUser()->userID,
                        'username' => WCF::getUser()->username,
+                       'isDisabled' => ($this->time < TIME_NOW) ? 1 : 0,
                        'enableBBCodes' => $this->enableBBCodes,
 			           'enableHtml' => $this->enableHtml,
 			           'enableSmilies' => $this->enableSmilies,

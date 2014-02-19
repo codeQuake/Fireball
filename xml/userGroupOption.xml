@@ -246,6 +246,14 @@ pdf]]></admindefaultvalue>
         <defaultvalue>1</defaultvalue>
         <options>module_news</options>
       </option>
+      
+      <option name="user.cms.news.canViewDelayedNews">
+        <categoryname>user.cms.news</categoryname>
+        <optiontype>boolean</optiontype>
+        <defaultvalue>1</defaultvalue>
+        <options>module_news</options>
+      </option>
+      
       <option name="user.cms.news.canAddNews">
         <categoryname>user.cms.news</categoryname>
         <optiontype>boolean</optiontype>

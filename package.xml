@@ -80,5 +80,7 @@
     <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="option">xml/option.xml</instruction>
+    <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+    <instruction type="aclOption">xml/aclOption.xml</instruction>
   </instructions>
 </package>
