@@ -30,6 +30,7 @@
 
 {capture assign='sidebar'}
 	{hascontent}
+	{if CMS_NEWS_SIDEBAR_CATEGORIES}
 		<fieldset>
 			<legend>{lang}cms.news.category.categories{/lang}</legend>
 			
@@ -41,7 +42,7 @@
 							<a href="{link application='cms' controller='NewsList' object=$categoryItem->getDecoratedObject()}{/link}">{$categoryItem->getTitle()}</a>
 							{if $categoryItem->getUnreadNews() != 0}<span class="badge">{#$categoryItem->getUnreadNews()}</span>{/if}
 
-							{if $category && ($category->categoryID == $categoryItem->categoryID || $category->parentCategoryID == $categoryItem->categoryID) && $categoryItem->hasChildren()}
+							{if $category && ($category->categoryID == $categoryItem->categoryID || $category->parentCategoryID == $categoryItem->categoryID) && $categoryItem->hasChildren() && !CMS_NEWS_SIDEBAR_CATEGORIES_MAIN}
 								<ol>
 									{foreach from=$categoryItem item=subCategoryItem}
 										{if $subCategoryItem->isAccessible()}
@@ -59,6 +60,7 @@
 				{/content}
 			</ol>
 		</fieldset>
+		{/if}
 	{/hascontent}
 
     
