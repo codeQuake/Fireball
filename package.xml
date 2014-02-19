@@ -77,5 +77,6 @@
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="template">templates.tar</instruction>
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
+    <instruction type="option">xml/option.xml</instruction>
   </instructions>
 </package>

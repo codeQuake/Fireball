@@ -14,6 +14,18 @@
     </categories>
     
     <options>
+      <option name="cms_news_sidebar_categories">
+        <optiontype>boolean</optiontype>
+        <categoryname>cms.news</categoryname>
+        <defaultvalue>1</defaultvalue>
+        <options>module_news</options>
+      </option>
+      <option name="cms_news_sidebar_categories_main">
+        <optiontype>boolean</optiontype>
+        <categoryname>cms.news</categoryname>
+        <defaultvalue>1</defaultvalue>
+        <options>module_news</options>
+      </option>
       <option name="cms_news_preview_simplified">
         <optiontype>boolean</optiontype>
         <categoryname>cms.news</categoryname>
