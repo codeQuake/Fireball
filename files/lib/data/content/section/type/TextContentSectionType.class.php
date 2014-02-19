@@ -90,7 +90,7 @@ class TextContentSectionType extends AbstractContentSectionType{
         $this->enableSmilies = $data['enableSmilies'];
         $this->enableBBCodes = $data['enableBBCodes'];
         $this->enableHtml = $data['enableHtml'];
-        $this->attachments = $data['attachments'];
+        if(isset($data['attachments'])) $this->attachments = $data['attachments'];
         $this->formData['text'] = $section->sectionData;
         I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $section->sectionData, 'cms.content.section.sectionData\d+');
     }
