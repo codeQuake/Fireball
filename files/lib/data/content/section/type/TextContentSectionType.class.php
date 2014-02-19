@@ -99,9 +99,12 @@ class TextContentSectionType extends AbstractContentSectionType{
         I18nHandler::getInstance()->readValues();
         if (I18nHandler::getInstance()->isPlainValue('text')) $this->formData['text'] = MessageUtil::stripCrap(StringUtil::trim(I18nHandler::getInstance()->getValue('text')));
         if (isset($_POST['enableSmilies']) && WCF::getSession()->getPermission($this->permissionCanUseSmilies)) $this->enableSmilies = intval($_POST['enableSmilies']);
+        else $this->enableSmilies = 0;
         if (isset($_POST['enableHtml']) && WCF::getSession()->getPermission($this->permissionCanUseHtml)) $this->enableHtml = intval($_POST['enableHtml']);
+        else $this->enableHtml = 0;
         if (isset($_POST['enableBBCodes']) && WCF::getSession()->getPermission($this->permissionCanUseBBCodes)) $this->enableBBCodes = intval($_POST['enableBBCodes']);
-    }
+        else $this->enableBBCodes = 0;
+        }
     
     public function validateFormData(){
         if (!I18nHandler::getInstance()->validateValue('text')) {

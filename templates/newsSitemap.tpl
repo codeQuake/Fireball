@@ -1,4 +1,5 @@
-		<ul class="sitemapList" data-object-id="0">
+		{if MODULE_NEWS}
+    <ul class="sitemapList" data-object-id="0">
 				{assign var=oldDepth value=0}
 				{foreach from=$nodeList item='category'}
 					{section name=i loop=$oldDepth-$nodeList->getDepth()}</ul></li>{/section}
@@ -14,3 +15,4 @@
 				{/foreach}
 				{section name=i loop=$oldDepth}</ul></li>{/section}
 		</ul>
+{/if}
