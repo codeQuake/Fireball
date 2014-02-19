@@ -228,6 +228,7 @@
     <item name="cms.news.general"><![CDATA[Allgemeine Informationen]]></item>
     <item name="cms.news.clicks"><![CDATA[Aufrufe]]></item>
     <item name="cms.news.message"><![CDATA[Nachricht]]></item>
+    <item name="cms.news.time.toPublish"><![CDATA[Datum der Veröffentlichung]]></item>
     <item name="cms.news.add"><![CDATA[Nachricht hinzufügen]]></item>
     <item name="cms.news.edit"><![CDATA[Nachricht &raquo;{$news->getTitle()|language}&laquo; bearbeiten]]></item>
     <item name="cms.news.comments"><![CDATA[Kommentare]]></item>

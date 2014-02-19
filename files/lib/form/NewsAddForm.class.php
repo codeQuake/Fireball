@@ -34,12 +34,13 @@ class NewsAddForm extends MessageForm{
     public $enableMultilingualism = true;
     public $attachmentObjectType = 'de.codequake.cms.news';
 
-    
+    public $time = 0;
     public $tags = array();
     
     public function readFormParameters(){
         parent::readFormParameters();
         if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tags = ArrayUtil::trim($_POST['tags']);
+        if (isset($_POST['time'])) $this->time = intval(strtotime($_POST['time']));
     }
     
     
@@ -99,7 +100,7 @@ class NewsAddForm extends MessageForm{
         }
         $data = array('languageID' => $this->languageID,
                        'subject' => $this->subject,
-                       'time' => TIME_NOW,
+                       'time' => $this->time,
                        'message' => $this->text,
                        'userID' => WCF::getUser()->userID,
                        'username' => WCF::getUser()->username,
@@ -128,6 +129,7 @@ class NewsAddForm extends MessageForm{
         parent::assignVariables();
         WCF::getTPL()->assign(array('categoryList' => $this->categoryList,
                                     'categoryIDs' => $this->categoryIDs,
+                                    'time' => date("Y-m-d H:i", $this->time),
                                     'action' => $this->action,
                                     'tags'      => $this->tags,
 			                        'allowedFileExtensions' => explode("\n", StringUtil::unifyNewlines(WCF::getSession()->getPermission('user.cms.news.allowedAttachmentExtensions')))));

@@ -229,6 +229,7 @@
     <item name="cms.news.general"><![CDATA[General]]></item>
     <item name="cms.news.clicks"><![CDATA[Clicks]]></item>
     <item name="cms.news.message"><![CDATA[News]]></item>
+    <item name="cms.news.time.toPublish"><![CDATA[Date of publication]]></item>
     <item name="cms.news.add"><![CDATA[Add news]]></item>
     <item name="cms.news.edit"><![CDATA[Edit news &raquo;{$news->getTitle()|language}&laquo;]]></item>
     <item name="cms.news.comments"><![CDATA[Comments]]></item>

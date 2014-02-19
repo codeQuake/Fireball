@@ -114,15 +114,25 @@
 						    </small>
 					    {/if}
 				    </dd>
-			    </dl>
-			
+			    </dl>				
 			{event name='messageFields'}
 		</fieldset>
-        {event name='fieldsets'}
 		
 		{include file='messageFormTabs' wysiwygContainerID='text'}
-        </div>
-
+       
+        {event name='fieldsets'}
+		</div>
+		<div class="container containerPadding marginTop">
+		 <fieldset>
+				<legend>{lang}cms.news.time.toPublish{/lang}</legend>
+				<dl {if $errorField == 'time'} class="formError"{/if}>
+					<dt><label for="time">{lang}cms.news.time.toPublish{/lang}</label></dt>
+					<dd>
+						<input class="medium" id="time" type="datetime" name="time" value="{$time}"/>
+					</dd>
+				</dl>
+		</fieldset>
+		</div>
         <div class="formSubmit">
 		    <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 			{@SECURITY_TOKEN_INPUT_TAG}

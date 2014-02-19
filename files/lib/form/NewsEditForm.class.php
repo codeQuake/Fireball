@@ -37,7 +37,7 @@ class NewsEditForm extends NewsAddForm{
     public function readData(){
         parent::readData();
         $this->news = new News($this->newsID);
-        
+        $this->time = $this->news->time;
         $this->subject = $this->news->subject;
         $this->text = $this->news->message;
         $this->enableBBCodes = $this->news->enableBBCodes;
@@ -65,6 +65,7 @@ class NewsEditForm extends NewsAddForm{
         MessageForm::save();
          $data = array('subject' => $this->subject,
                        'message' => $this->text,
+                       'time' => $this->time,
                        'enableBBCodes' => $this->enableBBCodes,
 			           'enableHtml' => $this->enableHtml,
 			           'enableSmilies' => $this->enableSmilies,
