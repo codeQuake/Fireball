@@ -72,10 +72,12 @@
 
   <instructions type="update" fromversion="1.0.1 pl 2">
     <instruction type="language">language/*.xml</instruction>
+    <!--tar-->
     <instruction type="file">files.tar</instruction>
-    <instruction type="script">acp/update.php</instruction>
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="template">templates.tar</instruction>
+    <instruction type="script">acp/update.php</instruction>
+    <!--xml-->
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="option">xml/option.xml</instruction>
   </instructions>
