@@ -40,7 +40,7 @@ class NewsAddForm extends MessageForm{
     public function readFormParameters(){
         parent::readFormParameters();
         if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tags = ArrayUtil::trim($_POST['tags']);
-        if (isset($_POST['time'])) $this->time = $_POST['time'];
+        if (isset($_POST['time'])) $this->time = strtotime($_POST['time']);
     }
     
     
