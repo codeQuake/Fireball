@@ -162,6 +162,7 @@
     <item name="cms.acp.folder"><![CDATA[Ordner]]></item>
     <item name="cms.acp.folder.toRoot"><![CDATA[Zum Hauptverzeichnis wechseln]]></item>
     <item name="cms.acp.folder.add"><![CDATA[Ordner erstellen]]></item>
+    <item name="cms.acp.folder.open"><![CDATA[Hier klicken um Dateien anzuzeigen]]></item>
     <item name="cms.acp.file.add"><![CDATA[Datei hochladen]]></item>
     <item name="cms.acp.file.folderID.root"><![CDATA[Hauptverzeichnis]]></item>
     <item name="cms.acp.page.delete.sure"><![CDATA[Wollen Sie diese Seite und all ihre Inhalte wirklich löschen?]]></item>

@@ -161,6 +161,7 @@
     <item name="cms.acp.folder"><![CDATA[Folder]]></item>
     <item name="cms.acp.folder.toRoot"><![CDATA[Got to root]]></item>
     <item name="cms.acp.folder.add"><![CDATA[Create folder]]></item>
+    <item name="cms.acp.folder.open"><![CDATA[Click here to show files]]></item>
     <item name="cms.acp.file.add"><![CDATA[Upload file]]></item>
     <item name="cms.acp.file.folderID.root"><![CDATA[Root]]></item>
     <item name="cms.acp.file.error.empty"><![CDATA[Please upload a file.]]></item>
