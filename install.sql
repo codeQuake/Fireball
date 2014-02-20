@@ -113,8 +113,7 @@ DROP TABLE IF EXISTS cms1_news_image;
 CREATE TABLE cms1_news_image(
 imageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 title VARCHAR(255) NOT NULL,
-filename VARCHAR(255) NOT NULL,
-categories MEDIUMTEXT NOT NULL
+filename VARCHAR(255) NOT NULL
 );
 
 --counter

@@ -12,7 +12,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 
 class NewsImageAction extends AbstractDatabaseObjectAction{
 
-    protected $className = 'cms\data\file\FileEditor';
+    protected $className = 'cms\data\news\image\NewsImageEditor';
     protected $permissionsDelete = array('admin.cms.news.canManageCategory');
     protected $requireACP = array('delete');
    

@@ -194,6 +194,10 @@
     <item name="cms.acp.stats.page"><![CDATA[Seite]]></item>
     <item name="cms.acp.stats.clicks"><![CDATA[Clicks]]></item>
     <item name="cms.acp.stats.vistors"><![CDATA[Aktuelle Besucher]]></item>
+    <item name="cms.acp.news.image.data"><![CDATA[Daten]]></item>
+    <item name="cms.acp.news.image.title"><![CDATA[Titel]]></item>
+    <item name="cms.acp.news.image"><![CDATA[Nachrichtenbild]]></item>
+    <item name="cms.acp.news.image.add"><![CDATA[Nachrichtenbild hinzufügen]]></item>
   </category>
 
   <category name="cms.page">

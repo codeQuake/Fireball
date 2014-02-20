@@ -36,8 +36,7 @@ $statement->execute(array());
 $sql = "CREATE TABLE cms".WCF_N."_news_image(
                                     imageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                     title VARCHAR(255) NOT NULL,
-                                    filename VARCHAR(255) NOT NULL,
-                                    categories MEDIUMTEXT NOT NULL
+                                    filename VARCHAR(255) NOT NULL
                                     )";
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array());
