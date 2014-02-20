@@ -5,7 +5,7 @@
     <!--codename: Fireball-->
     <packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
     <isapplication>1</isapplication>
-    <version>1.0.2 pl 4</version>
+    <version>1.0.2 pl 5</version>
     <date>2014-02-02</date>
   </packageinformation>
   <authorinformation>
@@ -78,6 +78,19 @@
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="template">templates.tar</instruction>
     <instruction type="script">acp/update.php</instruction>
+    <!--xml-->
+    <instruction type="cronjob">xml/cronjob.xml</instruction>
+    <instruction type="acpMenu">xml/acpMenu.xml</instruction>
+    <instruction type="option">xml/option.xml</instruction>
+    <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+    <instruction type="aclOption">xml/aclOption.xml</instruction>
+  </instructions>
+  <instructions type="update" fromversion="1.0.2 pl 4">
+    <instruction type="language">language/*.xml</instruction>
+    <!--tar-->
+    <instruction type="file">files.tar</instruction>
+    <instruction type="acpTemplate">acptemplates.tar</instruction>
+    <instruction type="template">templates.tar</instruction>
     <!--xml-->
     <instruction type="cronjob">xml/cronjob.xml</instruction>
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
