@@ -36,6 +36,9 @@ class NewsImage extends CMSDatabaseObject implements IRouteController{
         return $this->title;
     }
     
-    
+    public function getImageTag($width){
+        $file = RELATIVE_CMS_DIR.'images/news/'.$this->filename;
+        return '<img src="'.$file.'" alt="'.$this->title.'" style="width: '.$width.'px" />';
+    }
     
 }

@@ -198,6 +198,9 @@
     <item name="cms.acp.news.image.title"><![CDATA[Title]]></item>
     <item name="cms.acp.news.image"><![CDATA[News image]]></item>
     <item name="cms.acp.news.image.add"><![CDATA[Add news image]]></item>
+    <item name="cms.acp.news.image.list"><![CDATA[Newsimages]]></item>
+    <item name="cms.acp.news.image.title"><![CDATA[Title]]></item>
+    <item name="cms.acp.news.image"><![CDATA[Preview]]></item>
   </category>
 
   <category name="cms.page">

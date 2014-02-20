@@ -198,6 +198,9 @@
     <item name="cms.acp.news.image.title"><![CDATA[Titel]]></item>
     <item name="cms.acp.news.image"><![CDATA[Nachrichtenbild]]></item>
     <item name="cms.acp.news.image.add"><![CDATA[Nachrichtenbild hinzufügen]]></item>
+    <item name="cms.acp.news.image.list"><![CDATA[Nachrichtenbilder]]></item>
+    <item name="cms.acp.news.image.title"><![CDATA[Titel]]></item>
+    <item name="cms.acp.news.image"><![CDATA[Vorschaubild]]></item>
   </category>
 
   <category name="cms.page">
