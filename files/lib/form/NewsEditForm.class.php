@@ -1,6 +1,7 @@
 <?php
 namespace cms\form;
 use cms\data\news\News;
+use cms\data\news\image\NewsImage;
 use cms\data\news\NewsAction;
 use wcf\form\MessageForm;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -43,6 +44,7 @@ class NewsEditForm extends NewsAddForm{
         $this->enableBBCodes = $this->news->enableBBCodes;
         $this->enableHtml = $this->news->enableHtml;
         $this->enableSmilies = $this->news->enableSmilies;
+        $this->image = new NewsImage($this->news->imageID);
         WCF::getBreadcrumbs()->add(new Breadcrumb($this->news->subject, 
                                                             LinkHandler::getInstance()->getLink('News', array('application' => 'cms', 'object' => $this->news))));
         
@@ -68,6 +70,7 @@ class NewsEditForm extends NewsAddForm{
                        'time' => $this->time,
                        'enableBBCodes' => $this->enableBBCodes,
 			           'enableHtml' => $this->enableHtml,
+                       'imageID' => $this->image->imageID,
 			           'enableSmilies' => $this->enableSmilies,
                        'lastChangeTime' => TIME_NOW,
                        'isDisabled' => ($this->time > TIME_NOW)? 1 : 0,

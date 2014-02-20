@@ -95,13 +95,13 @@
 					<dt><label for="text">{lang}cms.news.image{/lang}</label></dt>
 					<dd>
 						<div id="previewImage">
-						{if $image}
+						{if $image->imageID && $image->imageID != 0}
 								<div class="box96">
 									<div class="framed">
 										{@$image->getImageTag('96')}
 									</div>
 									<div>										<div>
-											<p>{$image->title}</p>>
+											<p>{$image->title}</p>
 										</div>
 									</div>
 								</div>
