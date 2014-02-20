@@ -17,4 +17,14 @@ class NewsImageAction extends AbstractDatabaseObjectAction{
     protected $requireACP = array('delete');
    
     
+    public function delete(){
+        //del files
+        foreach($this->objectIDs as $objectID){
+            $file = new NewsImage($objectID);
+            unlink(CMS_DIR.'images/news/'.$file->filename);
+            
+        }
+        parent::delete();
+    }
+    
 }
