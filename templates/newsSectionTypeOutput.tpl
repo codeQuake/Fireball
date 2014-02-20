@@ -3,9 +3,15 @@
     {foreach from=$newsList item=news}
     <li>
         <div class="box24">
-            <a class="framed" href="{link controller='User' object=$news->getUserProfile()}{/link}">
-                {@$news->getUserProfile()->getAvatar()->getImageTag(24)}
-             </a>
+             {if $news->getImage() != null}
+				<a class="framed" href="{link controller='News' object=$news application='cms'}{/link}">
+					{@$news->getImage()->getImageTag('24')}
+				</a>
+			{else}
+				<a class="framed" href="{link controller='User' object=$news->getUserProfile()}{/link}">
+					{@$news->getUserProfile()->getAvatar()->getImageTag(24)}
+			</a>
+				{/if}
             <div>
                 <div class="containerHeadline">
                     <h3><a class="newsLink" data-news-id="{$news->newsID}" href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a></h3>

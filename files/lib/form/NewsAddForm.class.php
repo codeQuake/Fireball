@@ -3,6 +3,8 @@ namespace cms\form;
 use cms\data\category\NewsCategoryNodeTree;
 use cms\data\category\NewsCategory;
 use cms\data\news\NewsAction;
+use cms\data\news\image\NewsImage;
+use cms\data\news\image\NewsImageList;
 use wcf\form\MessageForm;
 use wcf\system\language\LanguageFactory;
 use wcf\system\WCF;
@@ -33,7 +35,8 @@ class NewsAddForm extends MessageForm{
     public $neededPermissions = array('user.cms.news.canAddNews');
     public $enableMultilingualism = true;
     public $attachmentObjectType = 'de.codequake.cms.news';
-
+    public $image = null;
+    public $imageList;
     public $time = TIME_NOW;
     public $tags = array();
     
@@ -41,6 +44,7 @@ class NewsAddForm extends MessageForm{
         parent::readFormParameters();
         if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tags = ArrayUtil::trim($_POST['tags']);
         if (isset($_POST['time'])) $this->time = strtotime($_POST['time']);
+        if (isset($_POST['imageID'])) $this->image = new NewsImage(intval($_POST['imageID']));
     }
     
     
@@ -50,6 +54,11 @@ class NewsAddForm extends MessageForm{
     }
     public function readData(){
         parent::readData();
+        //news images
+        $list = new NewsImageList();
+        $list->readObjects();
+        $this->imageList = $list->getObjects();
+        
         
          WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), 
                                                             LinkHandler::getInstance()->getLink('NewsCategoryList', array('application' => 'cms'))));
@@ -109,6 +118,7 @@ class NewsAddForm extends MessageForm{
                        'enableBBCodes' => $this->enableBBCodes,
 			           'enableHtml' => $this->enableHtml,
 			           'enableSmilies' => $this->enableSmilies,
+                       'imageID' => $this->image->imageID,
                        'lastChangeTime' => TIME_NOW);
         $newsData = array('data' => $data,
                           'tags' => array(),
@@ -131,6 +141,9 @@ class NewsAddForm extends MessageForm{
         parent::assignVariables();
         WCF::getTPL()->assign(array('categoryList' => $this->categoryList,
                                     'categoryIDs' => $this->categoryIDs,
+                                    'imageList' => $this->imageList,
+                                    'image' => $this->image,
+                                    'imageID' => isset($this->image->imageID) ? $this->image->imageID : 0,
                                     'time' => gmdate("Y-m-d H:i", $this->time),
                                     'action' => $this->action,
                                     'tags'      => $this->tags,

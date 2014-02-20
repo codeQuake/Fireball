@@ -91,6 +91,60 @@
 				    </dd>
 			    </dl>
                 {if MODULE_TAGGING}{include file='tagInput'}{/if}
+				<dl>
+					<dt><label for="text">{lang}cms.news.image{/lang}</label></dt>
+					<dd>
+						<div id="previewImage">
+						{if $image}
+								<div class="box96">
+									<div class="framed">
+										{@$image->getImageTag('96')}
+									</div>
+									<div>										<div>
+											<p>{$image->title}</p>>
+										</div>
+									</div>
+								</div>
+						{/if}
+						</div>
+						<a class="button" id="imageSelectButton">{lang}cms.news.image.select{/lang}</a>
+						<script data-relocate="true">
+							//<![CDATA[
+							$(function() {
+								WCF.Language.addObject({
+										'cms.news.image.select': '{lang}cms.news.image.select{/lang}'
+										});
+								$('#imageSelect').hide();
+								$('#imageSelectButton').click(function() {
+									$('#imageSelect').wcfDialog({
+										title: WCF.Language.get('cms.news.image.select')
+									});
+								});
+							});
+							//]]>
+						</script>
+						
+						<input type="hidden" name="imageID" value="{$imageID}" id="imageID" />
+						<div id="imageSelect" style="display: none;">
+							{foreach from=$imageList item='imageItem'}
+								<a id="imageSelect{$imageItem->imageID}">
+									{@$imageItem->getImageTag('256')}
+								</a>
+								<script data-relocate="true">
+									//<![CDATA[
+									$(function() {
+										$('#imageSelect{$imageItem->imageID}').click(function() {
+											$("#imageID").val("{$imageItem->imageID}");
+											var html = '<div class="box96"><div class="framed">{@$imageItem->getImageTag('96')}</div><div><p>{$imageItem->title}</p></div></div>';
+											$("#previewImage").html(html);
+										});
+									});
+									//]]>
+								</script>
+							{/foreach}
+						</div>
+					</dd>
+				</dl>
 			{event name='informationFields'}
             </fieldset>
             <fieldset>

@@ -1,5 +1,13 @@
 {assign var="user" value=$news->getUserProfile()}
-    <div class="box48"> <a href="{link controller='News' application='cms' object=$news}{/link}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
+    <div class="box48">  
+	{if $news->getImage() != null}
+		<a class="framed" href="{link controller='News' object=$news application='cms'}{/link}">
+           {@$news->getImage()->getImageTag('48')}
+	{else}
+		<a class="framed" href="{link controller='User' object=$news->getUserProfile()}{/link}">
+			{@$news->getUserProfile()->getAvatar()->getImageTag(48)}
+		</a>
+	{/if}
 
         <div>
             <div class="containerHeadline">

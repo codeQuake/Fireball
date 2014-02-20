@@ -9,9 +9,15 @@
                         <div>
                             <header class="messageHeader">
                                 <div class="box32">
-                                    <a class="framed" href="{link controller='User' object=$news->getUserProfile()}{/link}">
-                                        {@$news->getUserProfile()->getAvatar()->getImageTag(32)}
-                                    </a>
+                                    {if $news->getImage() != null}
+										<a class="framed" href="{link controller='News' object=$news application='cms'}{/link}">
+                                        {@$news->getImage()->getImageTag('32')}
+										</a>
+									{else}
+										<a class="framed" href="{link controller='User' object=$news->getUserProfile()}{/link}">
+										{@$news->getUserProfile()->getAvatar()->getImageTag(32)}
+									</a>
+									{/if}
                                     <div class="messageHeadline">
                                         <h1>
                                             <a href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a>

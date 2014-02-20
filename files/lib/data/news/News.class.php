@@ -2,6 +2,7 @@
 namespace cms\data\news;
 use wcf\system\request\IRouteController;
 use cms\data\category\NewsCategory;
+use cms\data\news\image\NewsImage;
 use wcf\system\category\CategoryHandler;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -209,6 +210,11 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
             if(!$category->getPermission('canViewDelayedNews')) return false;
         }
         return true;
+    }
+    
+    public function getImage(){
+        if($this->imageID != 0) return new NewsImage($this->imageID);
+        return null;
     }
     
     public static function getIpAddressByAuthor($userID, $username = '', $notIpAddress = '', $limit = 10) {
