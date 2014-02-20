@@ -271,6 +271,8 @@
       <![CDATA[{@$author->username} hat eine Antwort zum Kommentar von "{@$commentAuthor->username}" zur Nachricht "{@$news->subject}" verfasst:
 {link application='cms' controller='News' object=$news encode=false forceFrontend=true}#comments{/link}]]>
     </item>
+    <item name="cms.news.image"><![CDATA[Nachrichtenbild]]></item>
+    <item name="cms.news.image.select"><![CDATA[Nachrichtenbild auswählen]]></item>
   </category>
 
   <category name="cms.content">

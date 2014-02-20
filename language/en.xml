@@ -272,6 +272,8 @@
 {link application='cms' controller='News' object=$news encode=false forceFrontend=true}#comments{/link}]]>
     </item>
     <item name="cms.news.comments.noEntries"><![CDATA[No Comments available]]></item>
+    <item name="cms.news.image"><![CDATA[News image]]></item>
+    <item name="cms.news.image.select"><![CDATA[Select an image]]></item>
   </category>
 
   <category name="cms.content">
