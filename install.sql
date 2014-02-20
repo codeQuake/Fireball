@@ -94,6 +94,7 @@ attachments INT(10) NOT NULL DEFAULT 0,
 languageID INT(10),
 clicks INT(10) NOT NULL DEFAULT 0,
 comments SMALLINT(5) NOT NULL DEFAULT 0,
+imageID INT(10) NOT NULL DEFALUT 0,
 enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
 enableHtml TINYINT(1) NOT NULL DEFAULT 0,
 enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
@@ -107,10 +108,18 @@ ipAddress VARCHAR(39) NOT NULL DEFAULT '',
 cumulativeLikes INT(10) NOT NULL DEFAULT 0
 );
 
+--news images
+DROP TABLE IF EXISTS cms1_news_image;
+CREATE TABLE cms1_news_image(
+imageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(255) NOT NULL,
+filename VARCHAR(255) NOT NULL,
+categories MEDIUMTEXT NOT NULL
+);
+
 --counter
 DROP TABLE IF EXISTS cms1_counter;
 CREATE TABLE cms1_counter(
-
 time INT (20) NOT NULL,
 userID INT(10),
 browser VARCHAR(255),

@@ -19,7 +19,7 @@ $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array());
 
 //create folder table
-$sql ="CREATE TABLE cms1_folder(
+$sql ="CREATE TABLE cms".WCF_N."_folder(
                                 folderID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                 folderName VARCHAR(255) NOT NULL,
                                 folderPath VARCHAR(255) NOT NULL
@@ -29,5 +29,20 @@ $statement->execute(array());
 
 //update file table for folder support
 $sql = "ALTER TABLE cms".WCF_N."_file ADD folderID INT (10) NOT NULL DEFAULT 0 AFTER fileID";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute(array());
+
+//news images
+$sql = "CREATE TABLE cms".WCF_N."_news_image(
+                                    imageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                    title VARCHAR(255) NOT NULL,
+                                    filename VARCHAR(255) NOT NULL,
+                                    categories MEDIUMTEXT NOT NULL
+                                    )";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute(array());
+
+//update news table fir news image support
+$sql = "ALTER TABLE cms".WCF_N."_news ADD imageID INT (10) NOT NULL DEFAULT 0 AFTER comments";
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array());
