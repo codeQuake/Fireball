@@ -97,7 +97,11 @@
     <item name="cms.acp.content.section.data.boxID.description"><![CDATA[Wählen Sie eine Dashboardbox. Die Auswahl passt sich der Ausrichtung des Inhaltsbereichs an.]]></item>
     <item name="cms.acp.content.section.data.moduleID"><![CDATA[Modul auswählen]]></item>
     <item name="cms.acp.content.section.data.moduleID.description"><![CDATA[Wählen Sie eines ihrer Module aus.]]></item>
-    <item name="cms.acp.content.section.news.small"><![CDATA[Kompakte Auflistung]]></item>
+    <item name="cms.acp.content.section.news.limit"><![CDATA[Anzahl der Nachrichten]]></item>
+    <item name="cms.acp.content.section.news.type"><![CDATA[Auflistungstyp]]></item>
+    <item name="cms.acp.content.section.news.type.0"><![CDATA[Standardauflistung]]></item>
+    <item name="cms.acp.content.section.news.type.1"><![CDATA[Kompakte Auflistung]]></item>
+    <item name="cms.acp.content.section.news.type.2"><![CDATA[Auflistung mit großem Bild]]></item>
     <item name="cms.acp.content.section.css"><![CDATA[CSS-Einstellungen]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.section.css.cssClasses"><![CDATA[CSS-Klassen]]></item>

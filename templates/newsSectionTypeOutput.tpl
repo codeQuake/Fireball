@@ -1,4 +1,4 @@
-{if $small == 1}
+{if $type == 1}
 <ul class="plainList">
     {foreach from=$newsList item=news}
     <li>

@@ -97,7 +97,11 @@
     <item name="cms.acp.content.section.data.boxID.description"><![CDATA[Choose a Dashboardbox. You can only choose boxes which match your contents position.]]></item>
     <item name="cms.acp.content.section.data.moduleID"><![CDATA[Choose module]]></item>
     <item name="cms.acp.content.section.data.moduleID.description"><![CDATA[]]></item>
-    <item name="cms.acp.content.section.news.small"><![CDATA[Small list]]></item>
+    <item name="cms.acp.content.section.news.limit"><![CDATA[Limit]]></item>
+    <item name="cms.acp.content.section.news.type"><![CDATA[List type]]></item>
+    <item name="cms.acp.content.section.news.type.0"><![CDATA[default]]></item>
+    <item name="cms.acp.content.section.news.type.1"><![CDATA[compact]]></item>
+    <item name="cms.acp.content.section.news.type.2"><![CDATA[big image]]></item>
     <item name="cms.acp.content.section.css"><![CDATA[CSS]]></item>
     <item name="cms.acp.content.section.css.cssID"><![CDATA[CSS-ID]]></item>
     <item name="cms.acp.content.section.css.cssClasses"><![CDATA[CSS-Classes]]></item>

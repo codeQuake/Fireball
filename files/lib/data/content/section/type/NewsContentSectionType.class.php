@@ -38,8 +38,10 @@ class NewsContentSectionType extends AbstractContentSectionType{
     
     public function readFormData(){
         if (isset($_REQUEST['categoryIDs']) && is_array($_REQUEST['categoryIDs'])) $this->formData['sectionData'] = ArrayUtil::toIntegerArray($_REQUEST['categoryIDs']);
-        if (isset($_REQUEST['small'])) $this->additionalData['small'] = intval($_REQUEST['small']);
-        else $this->additionalData['small'] = 0;
+        if (isset($_REQUEST['type'])) $this->additionalData['type'] = intval($_REQUEST['type']);
+        else $this->additionalData['type'] = 0;
+        if (isset($_REQUEST['limit'])) $this->additionalData['limit'] = intval($_REQUEST['limit']);
+        else $this->additionalData['limit'] = CMS_NEWS_LATEST_LIMIT;
     }
     
     
@@ -47,7 +49,8 @@ class NewsContentSectionType extends AbstractContentSectionType{
         
         WCF::getTPL()->assign(array('categoryList' => $this->categoryList,
                                     'categoryIDs' => isset($this->formData['sectionData']) ? $this->formData['sectionData']: array(),
-                                    'small' => isset($this->additionalData['small']) ? $this->additionalData['small'] : 0));
+                                    'type' => isset($this->additionalData['type']) ? $this->additionalData['type'] : 0,
+                                    'limit' => isset($this->additionalData['limit']) ? $this->additionalData['limit'] : CMS_NEWS_LATEST_LIMIT));
     }
     
     public function getFormTemplate(){
@@ -80,13 +83,14 @@ class NewsContentSectionType extends AbstractContentSectionType{
             }
         }
         if(!empty($categoryIDs)){
+            
+            $data = @unserialize($section->additionalData);
             $list = new CategoryNewsList($categoryIDs);
-            $list->sqlLimit = CMS_NEWS_LATEST_LIMIT;
+            $list->sqlLimit = isset($data['limit']) ? intval($data['limit']) : CMS_NEWS_LATEST_LIMIT;
             $list->readObjects();
             $list = $list->getObjects();
-            $data = @unserialize($section->additionalData);
-            $small = isset($data['small']) ? intval($data['small']) : 0;
-            WCF::getTPL()->assign(array('newsList' => $list, 'small' => $small));
+            $type = isset($data['type']) ? intval($data['type']) : 0;
+            WCF::getTPL()->assign(array('newsList' => $list, 'type' => $type));
             return WCF::getTPL()->fetch('newsSectionTypeOutput', 'cms');
         }
         return '';
@@ -102,8 +106,9 @@ class NewsContentSectionType extends AbstractContentSectionType{
             $category = new NewsCategory($category);
             $categories[] = $category->getTitle();
         }
-        $small = isset($data['small']) && intval($data['small']) == 1 ? 'small' : 'normal';
-        return StringUtil::truncate('### News: Type: '.$small.'; Categories: '.implode(', ', $categories).'###', 150, "\xE2\x80\xA6", true);;
+        $type = isset($data['type'])? $data['type'] : 0;
+        $limit = isset($data['limit'])? $data['limit'] : 0;
+        return StringUtil::truncate('### News: Type: '.$type.'; Limit: '.$limit.'; Categories: '.implode(', ', $categories).'###', 150, "\xE2\x80\xA6", true);;
     }
     
 }

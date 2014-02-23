@@ -1,5 +1,5 @@
 <dl>
- <dt><label for="categoryList">{lang}cms.news.category.categories{/lang}</label></dt>
+<dt><label for="categoryList">{lang}cms.news.category.categories{/lang}</label></dt>
 <dd><ol id="categoryList" class="nestedCategoryList doubleColumned jsCategoryList">
 				{foreach from=$categoryList item=categoryItem}
 					<li>
@@ -23,10 +23,20 @@
 			</ol>
     </dd>
 </dl>
-
 <dl>
-						<dt><label for="small">{lang}cms.acp.content.section.news.small{/lang}</label></dt>
-						<dd>
-							<input type="checkbox" name="small" id="small" value="1" {if $small == 1}checked="checked"{/if} />
-						</dd>
-					</dl>
+  <dt>
+    <label for="limit">{lang}cms.acp.content.section.news.limit{/lang}</label>
+  </dt>
+  <dd>
+    <input type="number" name="limit" id="limit" value="{$limit}" />
+  </dd>
+</dl>
+<dl>
+		<dt><label for="type">{lang}cms.acp.content.section.news.type{/lang}</label></dt>
+		<dd>
+      <select id="type" name="type">
+      <option value="0" {if $type == 0}selected="selected"{/if}>{lang}cms.acp.content.section.news.type.0{/lang}</option>
+      <option value="1" {if $type == 1}selected="selected"{/if}>{lang}cms.acp.content.section.news.type.1{/lang}</option>
+      </select>
+		</dd>
+</dl>
