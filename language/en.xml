@@ -436,4 +436,9 @@
     <item name="wcf.user.notification.de.codequake.cms.news.comment.response.notification.commentResponseOwner"><![CDATA[New response to a comment to one of your news]]></item>
     <item name="wcf.user.notification.de.codequake.cms.page.comment.response.notification.commentResponse"><![CDATA[New response to a comment on a page]]></item>
   </category>
+  <category name="wcf.acp.dataImport">
+    <item name="wcf.acp.dataImport.data.de.codequake.cms.news"><![CDATA[News]]></item>
+    <item name="wcf.acp.dataImport.data.de.codequake.cms.category.news"><![CDATA[Newscategories]]></item>
+    <item name="wcf.acp.dataImport.data.de.codequake.cms.news.comment"><![CDATA[Newscomments]]></item>
+  </category>
 </language>

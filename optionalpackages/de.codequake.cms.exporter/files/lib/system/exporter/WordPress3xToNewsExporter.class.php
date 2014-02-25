@@ -334,7 +334,7 @@ class WordPress3xToNewsExporter extends AbstractExporter {
 					$row2 = $parentCommentStatement->fetchArray();
 					
 					if (!$row2['comment_parent']) {
-						ImportHandler::getInstance()->getImporter('de.codequake.cms.news.response')->import($row['comment_ID'], array(
+						ImportHandler::getInstance()->getImporter('de.codequake.cms.news.comment.response')->import($row['comment_ID'], array(
 							'commentID' => $row2['comment_ID'],
 							'userID' => ($row['user_id'] ?: null),
 							'username' => $row['comment_author'],

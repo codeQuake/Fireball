@@ -6,6 +6,7 @@ use wcf\system\tagging\TagEngine;
 use wcf\system\importer\AbstractImporter;
 use wcf\system\importer\ImportHandler;
 use wcf\system\language\LanguageFactory;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -34,18 +35,12 @@ class NewsImporter extends AbstractImporter {
 		}
 
 		if (is_numeric($oldID)) {
-			$entry = new Entry($oldID);
-			if (!$entry->entryID) $data['entryID'] = $oldID;
+			$news = new News($oldID);
+			if (!$news->newsID) $data['newsID'] = $oldID;
 		}
 		
 
-		$action = new NewsAction(array(), 'create', array(
-			'data' => $data
-		));
-		$returnValues = $action->executeAction();
-		$newID = $returnValues['returnValues']->entryID;
-
-        $news = new News($newID);
+		
 
 		
 		// save categories
@@ -61,7 +56,14 @@ class NewsImporter extends AbstractImporter {
 			$categoryIDs[] = $this->getImportCategoryID();
 		}
 		
-		$editor->updateCategoryIDs($categoryIDs);
+		$action = new NewsAction(array(), 'create', array(
+			'data' => $data,
+            'categoryIDs' => $categoryIDs
+		));
+		$returnValues = $action->executeAction();
+		$newID = $returnValues['returnValues']->entryID;
+
+        $news = new News($newID);
 		
 		// save tags
 		if (!empty($additionalData['tags'])) {

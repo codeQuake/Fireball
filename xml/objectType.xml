@@ -240,5 +240,10 @@
       <definitionname>com.woltlab.wcf.importer</definitionname>
       <classname><![CDATA[cms\system\importer\NewsCommentImporter]]></classname>
     </type>
+    <type>
+      <name>de.codequake.cms.news.comment.response</name>
+      <definitionname>com.woltlab.wcf.importer</definitionname>
+      <classname><![CDATA[cms\system\importer\NewsCommentResponseImporter]]></classname>
+    </type>
   </import>
 </data>
