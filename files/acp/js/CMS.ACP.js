@@ -69,6 +69,17 @@ CMS.ACP.Content.Preview = Class.extend({
             case 'de.codequake.cms.section.type.headline':
                 $preview = '<div class="' + $('#cssClasses').val() + '"><' + $('#hlType').val() + '>' + $content + '</' + $('#hlType').val() + '></div>';
                 break;
+            case 'de.codequake.cms.section.type.link':
+                if ($('#type').val() == 1) {
+                    $preview = '<div class="' + $('#cssClasses').val() + '"><a href="' + $('#hyperlink').val() + '" class="button">' + $content + '</a></div>';
+                }
+                else if ($('#type').val() == 2) {
+                    $preview = '<div class="' + $('#cssClasses').val() + '"><a href="' + $('#hyperlink').val() + '" class="button small">' + $content + '</a></div>';
+                }
+                else {
+                    $preview = '<div class="' + $('#cssClasses').val() + '"><a href="' + $('#hyperlink').val() + '">' + $content + '</a></div>';
+                }
+                break;
             case 'de.codequake.cms.section.type.file':
                 $preview = '<div class="' + $('#cssClasses').val() + '"><div class="box32"><span class="icon icon32 icon-paper-clip"></span><div><p>' + $('#sectionData option:selected').text() + '</p><small>1.337 kB, <strong>42 Downloads</strong></small></div></div></div>';
                 break;

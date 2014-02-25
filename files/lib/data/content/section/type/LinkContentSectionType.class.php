@@ -63,7 +63,7 @@ class LinkContentSectionType extends AbstractContentSectionType {
     }
 
     public function getFormTemplate() {
-        return 'headlineSectionType';
+        return 'linkSectionType';
     }
 
     public function saved($section) {
@@ -103,7 +103,7 @@ class LinkContentSectionType extends AbstractContentSectionType {
         WCF::getTPL()->assign(array('sectionData' => $section->sectionData,
                                     'type' => $additionalData['type'],
                                     'hyperlink' => isset($additionalData['hyperlink']) ? $additionalData['hyperlink'] : ''));
-        return WCF::getTPL()->fetch('headlineSectionTypeOutput', 'cms');
+        return WCF::getTPL()->fetch('linkSectionTypeOutput', 'cms');
     }
 
     public function getPreview($sectionID) {
