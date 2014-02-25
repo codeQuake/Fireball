@@ -27,9 +27,9 @@ class WordPress3xToNewsExporter extends AbstractExporter {
 	 */
 	protected $methods = array(
 		'com.woltlab.wcf.user' => 'Users',
-		'de.codequake.cms.category.news' => 'BlogCategories',
-		'de.codequake.cms.news' => 'BlogEntries',
-		'de.codequake.cms.news.comment' => 'BlogComments'
+		'de.codequake.cms.category.news' => 'NewsCategories',
+		'de.codequake.cms.news' => 'NewsEntries',
+		'de.codequake.cms.news.comment' => 'NewsComments'
 	);
 	
 	/**

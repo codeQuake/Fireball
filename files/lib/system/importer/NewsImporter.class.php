@@ -1,9 +1,8 @@
 <?php
 namespace cms\system\importer;
 use cms\data\news\NewsAction;
-use cms\data\news\NewsList;
-use wcf\data\category\CategoryAction;
-use wcf\system\category\CategoryHandler;
+use cms\data\news\News;
+use wcf\system\tagging\TagEngine;
 use wcf\system\importer\AbstractImporter;
 use wcf\system\importer\ImportHandler;
 use wcf\system\language\LanguageFactory;
@@ -25,48 +24,58 @@ class NewsImporter extends AbstractImporter {
 	private $importCategoryID = 0;
 
 	public function import($oldID, array $data, array $additionalData = array()) {
-		// get category
-		$categoryID = ImportHandler::getInstance()->getNewID('de.codequake.cms.category.news', $additionalData['categoryID']);
+		$data['userID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['userID']);
+		
 
-
-		$tags = '';
-		if (isset($additionalData['tags']) && is_array($additionalData['tags'])) {
-			$tags = $additionalData['tags'];
-		}
-
-		if ($categoryID == null || !is_numeric($categoryID)) {
-			$categoryID = $this->getImportCategoryID();
-		}
-
-		// handle language
-		if (isset($additionalData['languageCode']) && !empty($additionalData['languageCode'])) {
+		if (!empty($additionalData['languageCode'])) {
 			if (($language = LanguageFactory::getInstance()->getLanguageByCode($additionalData['languageCode'])) !== null) {
 				$data['languageID'] = $language->languageID;
 			}
 		}
 
-		// userID
-		$data['userID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['userID']);
+		if (is_numeric($oldID)) {
+			$entry = new Entry($oldID);
+			if (!$entry->entryID) $data['entryID'] = $oldID;
+		}
+		
 
 		$action = new NewsAction(array(), 'create', array(
-			'data' => $data,
-			'categoryIDs' => array($categoryID),
-			'tags' => $tags
+			'data' => $data
 		));
 		$returnValues = $action->executeAction();
 		$newID = $returnValues['returnValues']->entryID;
 
-		ImportHandler::getInstance()->saveNewID('de.codequake.cms.news', $oldID, $newID);
+        $news = new News($newID);
 
-		return $newID;
+		
+		// save categories
+		$categoryIDs = array();
+		if (!empty($additionalData['categories'])) {
+			foreach ($additionalData['categories'] as $oldCategoryID) {
+				$newCategoryID = ImportHandler::getInstance()->getNewID('de.codequake.cms.category.news', $oldCategoryID);
+				if ($newCategoryID) $categoryIDs[] = $newCategoryID;
+			}
+		}
+		
+		if (empty($categoryIDs)) {
+			$categoryIDs[] = $this->getImportCategoryID();
+		}
+		
+		$editor->updateCategoryIDs($categoryIDs);
+		
+		// save tags
+		if (!empty($additionalData['tags'])) {
+			TagEngine::getInstance()->addObjectTags('de.codequake.cms.news', $news->newsID, $additionalData['tags'], ($news->languageID ?: LanguageFactory::getInstance()->getDefaultLanguageID()));
+		}
+		
+		ImportHandler::getInstance()->saveNewID('de.codequake.cms.news', $oldID, $news->newsID);
+		return $news->newsID;
 	}
-
 	
-
 	private function getImportCategoryID() {
 		if (!$this->importCategoryID) {
-			$objectTypeID = CategoryHandler::getInstance()->getObjectTypeByName('de.codequake.cms.category.news')->objectTypeID;
-
+			$objectTypeID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('com.woltlab.wcf.category', 'de.codequake.cms.category.news');
+			
 			$sql = "SELECT		categoryID
 				FROM		wcf".WCF_N."_category
 				WHERE		objectTypeID = ?
@@ -78,21 +87,17 @@ class NewsImporter extends AbstractImporter {
 			$row = $statement->fetchArray();
 			if ($row !== false) {
 				$this->importCategoryID = $row['categoryID'];
-			} else {
-				$action = new CategoryAction(array(), 'create', array(
-					'data' => array(
-						'objectTypeID' => $objectTypeID,
-						'parentCategoryID' => 0,
-						'title' => 'Import',
-						'showOrder' => 0,
-						'time' => TIME_NOW
-					)
-				));
-				$returnValues = $action->executeAction();
-				$this->importCategoryID = $returnValues['returnValues']->categoryID;
+			}
+			else {
+				$sql = "INSERT INTO	wcf".WCF_N."_category
+							(objectTypeID, parentCategoryID, title, showOrder, time)
+					VALUES		(?, ?, ?, ?, ?)";
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($objectTypeID, 0, 'Import', 0, TIME_NOW));
+				$this->importCategoryID = WCF::getDB()->getInsertID("wcf".WCF_N."_category", 'categoryID');
 			}
 		}
-
+		
 		return $this->importCategoryID;
 	}
 }
