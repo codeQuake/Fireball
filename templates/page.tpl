@@ -20,7 +20,6 @@
 					{@$section->getOutput()|language}
 				{else}
                 <fieldset {if $section->cssID != ''}id="{$section->cssID}"{/if} class="dashboardBox{if $section->cssClasses != ''} {$section->cssClasses}{/if}">
-					<legend></legend>
                     {@$section->getOutput()|language}
                 </fieldset>
 				{/if}
