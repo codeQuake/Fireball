@@ -133,6 +133,10 @@
     <item name="cms.acp.content.type.div"><![CDATA[Container (default)]]></item>
     <item name="cms.acp.content.type.ul"><![CDATA[Unordered list]]></item>
     <item name="cms.acp.content.type.ol"><![CDATA[Ordered list]]></item>
+    <item name="cms.acp.content.section.data.type"><![CDATA[Type]]></item>
+    <item name="cms.acp.content.section.data.button"><![CDATA[big button]]></item>
+    <item name="cms.acp.content.section.data.buttonsmall"><![CDATA[small button]]></item>
+    <item name="cms.acp.content.section.type.de.codequake.cms.section.type.link"><![CDATA[Hyperlink/Button]]></item>
     <item name="cms.acp.page.userPermissions"><![CDATA[Permissions]]></item>
     <item name="cms.acp.module.list"><![CDATA[List modules]]></item>
     <item name="cms.acp.module.add"><![CDATA[Add module]]></item>
