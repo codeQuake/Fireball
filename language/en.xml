@@ -438,7 +438,7 @@
   </category>
   <category name="wcf.acp.dataImport">
     <item name="wcf.acp.dataImport.data.de.codequake.cms.news"><![CDATA[News]]></item>
-    <item name="wcf.acp.dataImport.data.de.codequake.cms.category.news"><![CDATA[Newscategories]]></item>
-    <item name="wcf.acp.dataImport.data.de.codequake.cms.news.comment"><![CDATA[Newscomments]]></item>
+    <item name="wcf.acp.dataImport.data.de.codequake.cms.category.news"><![CDATA[News categories]]></item>
+    <item name="wcf.acp.dataImport.data.de.codequake.cms.news.comment"><![CDATA[News comments]]></item>
   </category>
 </language>
