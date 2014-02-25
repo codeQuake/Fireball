@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="de.codequake.cms.exporter" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
+	<packageinformation>
+		<packagename>CMS Importer</packagename>
+		<packagedescription>Ermöglicht den Datenimport aus anderen Systemen</packagedescription>
+		<version>1.0.0</version>
+		<date>2014-02-25</date>
+	</packageinformation>
+	
+	<authorinformation>
+		<author>Jens Krumsieck</author>
+		<authorurl>http://codequake.de</authorurl>
+	</authorinformation>
+	
+	<requiredpackages>
+		<requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
+	</requiredpackages>
+	
+	<instructions type="install">
+		<instruction type="file">files.tar</instruction>
+		<instruction type="objectType">objectType.xml</instruction>
+		<instruction type="language">language/*.xml</instruction>
+	</instructions>
+</package>

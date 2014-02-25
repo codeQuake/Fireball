@@ -224,6 +224,21 @@
         <definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
         <classname>cms\system\tagging\TaggableNews</classname>
     </type>
-
+    <!--Importer-->
+    <type>
+      <name>de.codequake.cms.category.news</name>
+      <definitionname>com.woltlab.wcf.importer</definitionname>
+      <classname><![CDATA[cms\system\importer\NewsCategoryImporter]]></classname>
+    </type>
+    <type>
+      <name>de.codequake.cms.news</name>
+      <definitionname>com.woltlab.wcf.importer</definitionname>
+      <classname><![CDATA[cms\system\importer\NewsImporter]]></classname>
+    </type>
+    <type>
+      <name>de.codequake.cms.news.comment</name>
+      <definitionname>com.woltlab.wcf.importer</definitionname>
+      <classname><![CDATA[cms\system\importer\NewsCommentImporter]]></classname>
+    </type>
   </import>
 </data>
