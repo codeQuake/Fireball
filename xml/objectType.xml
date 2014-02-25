@@ -13,6 +13,11 @@
       <classname>cms\data\content\section\type\HeadlineContentSectionType</classname>
     </type>
     <type>
+      <name>de.codequake.cms.section.type.link</name>
+      <definitionname>de.codequake.cms.section.type</definitionname>
+      <classname>cms\data\content\section\type\LinkContentSectionType</classname>
+    </type>
+    <type>
       <name>de.codequake.cms.section.type.file</name>
       <definitionname>de.codequake.cms.section.type</definitionname>
       <classname>cms\data\content\section\type\FileContentSectionType</classname>
