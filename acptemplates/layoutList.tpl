@@ -44,7 +44,7 @@
 				{foreach from=$objects item=layout}
 					<tr class="jsLayoutRow">
 						<td class="columnIcon">
-							<a href="{link controller='LayoutEdit' id=$layout->layoutID applicaton='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+							<a href="{link controller='LayoutEdit' id=$layout->layoutID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$layout->layoutID}" data-confirm-message="{lang}cms.acp.layout.delete.sure{/lang}"></span>
 							{event name='rowButtons'}
 						</td>
