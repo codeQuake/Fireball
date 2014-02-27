@@ -81,6 +81,7 @@ class PageEditForm extends AbstractForm{
         if(!isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
         
         $this->pageList = new PageList();
+        $this->pageList->getConditionBuilder()->add('pageID != ?', array($this->pageID));
         $this->pageList->readObjects();
         $this->pageList = $this->pageList->getObjects();
         
