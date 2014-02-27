@@ -42,7 +42,7 @@ class CMSExportAction extends AbstractAction{
         
         //images.tar
         $tar = new TarWriter(CMS_DIR.'tmp/images.tar');
-        $tar->add($this->getNewsImages(), '', CMS_DIR.'images/news');
+        $tar->add($this->getNewsImages(), '', CMS_DIR.'images/news/');
         $tar->create();
         
         //tar
@@ -63,7 +63,7 @@ class CMSExportAction extends AbstractAction{
     }
     
     protected function getNewsImages(){
-        $du = new DirectoryUtil(CMS_DIR.'images/news');
+        $du = new DirectoryUtil(CMS_DIR.'images/news/');
         return $du->getFiles();
     }
     protected function buildXML(){
