@@ -33,21 +33,37 @@ class CMSExportAction extends AbstractAction{
     
     protected function tar(){
         $this->filename = CMS_DIR.'tmp/CMS-Export.'.StringUtil::getRandomID().'.gz';
+        
+        //files.tar
         $tar = new TarWriter(CMS_DIR.'tmp/files.tar');
         $tar->add($this->getFiles(), '', CMS_DIR.'files/');
         $tar->create();
         
+        
+        //images.tar
+        $tar = new TarWriter(CMS_DIR.'tmp/images.tar');
+        $tar->add($this->getNewsImages(), '', CMS_DIR.'images/news');
+        $tar->create();
+        
+        //tar
         $tar = new TarWriter($this->filename, true);        
         $this->buildXML();
         $tar->add(CMS_DIR.'tmp/cmsData.xml','', CMS_DIR.'tmp/');
         $tar->add(CMS_DIR.'tmp/files.tar','', CMS_DIR.'tmp/');
+        $tar->add(CMS_DIR.'tmp/images.tar','', CMS_DIR.'tmp/');
         $tar->create();
         @unlink(CMS_DIR.'tmp/cmsData.xml');
         @unlink(CMS_DIR.'tmp/files.tar');
+        @unlink(CMS_DIR.'tmp/images.tar');
     }
     
     protected function getFiles(){
         $du = new DirectoryUtil(CMS_DIR.'files/');
+        return $du->getFiles();
+    }
+    
+    protected function getNewsImages(){
+        $du = new DirectoryUtil(CMS_DIR.'images/news');
         return $du->getFiles();
     }
     protected function buildXML(){
