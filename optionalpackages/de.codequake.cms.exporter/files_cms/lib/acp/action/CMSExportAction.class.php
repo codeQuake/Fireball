@@ -4,6 +4,7 @@ use wcf\action\AbstractAction;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\util\XMLWriter;
 use wcf\util\StringUtil;
+use wcf\util\DirectoryUtil;
 use wcf\system\io\TarWriter;
 use cms\data\page\PageList;
 use cms\data\content\ContentList;
@@ -32,13 +33,23 @@ class CMSExportAction extends AbstractAction{
     
     protected function tar(){
         $this->filename = CMS_DIR.'tmp/CMS-Export.'.StringUtil::getRandomID().'.gz';
+        $tar = new TarWriter(CMS_DIR.'tmp/files.tar');
+        $tar->add($this->getFiles(), '', CMS_DIR.'files/');
+        $tar->create();
+        
         $tar = new TarWriter($this->filename, true);        
         $this->buildXML();
         $tar->add(CMS_DIR.'tmp/cmsData.xml','', CMS_DIR.'tmp/');
+        $tar->add(CMS_DIR.'tmp/files.tar','', CMS_DIR.'tmp/');
         $tar->create();
         @unlink(CMS_DIR.'tmp/cmsData.xml');
+        @unlink(CMS_DIR.'tmp/files.tar');
     }
     
+    protected function getFiles(){
+        $du = new DirectoryUtil(CMS_DIR.'files/');
+        return $du->getFiles();
+    }
     protected function buildXML(){
        $xml = new XMLWriter();
        $xml->beginDocument('data', '', '');
