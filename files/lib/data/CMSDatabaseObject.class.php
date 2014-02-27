@@ -6,7 +6,7 @@ use wcf\data\DatabaseObject;
 * @author Jens Krumsieck
 * @copyright 2014 codeQuake
 * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
-* @package de.codequake.fireball
+* @package de.codequake.cms
 */
 
 abstract class CMSDatabaseObject extends DatabaseObject {
