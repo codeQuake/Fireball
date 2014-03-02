@@ -57,6 +57,10 @@ class CMSExportAction extends AbstractAction{
         @unlink(CMS_DIR.'tmp/images.tar');
     }
     
+    protected function getI18n(){
+        
+    }
+    
     protected function getFiles(){
         $du = new DirectoryUtil(CMS_DIR.'files/');
         return $du->getFiles();
