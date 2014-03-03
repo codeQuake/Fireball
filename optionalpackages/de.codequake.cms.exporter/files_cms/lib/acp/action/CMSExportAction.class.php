@@ -36,7 +36,7 @@ class CMSExportAction extends AbstractAction{
     protected function tar(){
         $this->filename = CMS_DIR.'tmp/CMS-Export.'.StringUtil::getRandomID().'.gz';
         
-        $this->buildLangFile();
+        $this->buildLangFiles();
         
         //files.tar
         $tar = new TarWriter(CMS_DIR.'tmp/files.tar');
@@ -74,7 +74,7 @@ class CMSExportAction extends AbstractAction{
        return $list->getObjects();
     }
     
-    protected function buildLangFile(){
+    protected function buildLangFiles(){
         
         //german file
         $xml = new XMLWriter();
