@@ -95,7 +95,7 @@
 					<dt><label for="text">{lang}cms.news.image{/lang}</label></dt>
 					<dd>
 						<div id="previewImage">
-						{if $image->imageID && $image->imageID != 0}
+						{if $image|isset &&  $image->imageID && $image->imageID != 0}
 								<div class="box96">
 									<div class="framed">
 										{@$image->getImageTag('96')}

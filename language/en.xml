@@ -384,6 +384,8 @@
     <item name="wcf.acp.option.cms_news_preview_simplified"><![CDATA[Show a simplified news preview]]></item>
     <item name="wcf.acp.option.cms_news_preview_truncate"><![CDATA[Truncate news preview]]></item>
     <item name="wcf.acp.option.cms_news_preview_truncate.description"><![CDATA[How much letters are allowed before truncating the preview?]]></item>
+    <item name="wcf.acp.option.cms_news_sidebar_categories"><![CDATA[Show categories in sidebar]]></item>
+    <item name="wcf.acp.option.cms_news_sidebar_categories_main"><![CDATA[Show only main categories]]></item>
   </category>
 
   <category name="wcf.dashboard">

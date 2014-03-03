@@ -53,6 +53,8 @@ class FileManagementForm extends AbstractForm{
                 throw new UserInputException('file', 'empty');
             }
             if (empty($this->file['tmp_name'])) throw new UserInputException('file', 'empty');
+            if($this->file['size'] >= $this->return_bytes(ini_get('upload_max_filesize'))) throw new UserInputException('file', 'tooBig');
+            if($this->file['size'] >= $this->return_bytes(ini_get('post_max_size'))) throw new UserInputException('file', 'tooBig');
             $allowedTypes = ArrayUtil::trim(explode("\n", WCF::getSession()->getPermission('admin.cms.file.allowedTypes')));
             $tmp = explode('.', $this->file['name']);
             $fileType = array_pop($tmp);
@@ -134,6 +136,25 @@ class FileManagementForm extends AbstractForm{
                                     'folderID' => $this->folderID,
                                     'folderList' => $this->folders,
                                     'foldername' => $this->foldername,
-                                    'isFolder' => $this->isFolder));
-    }   
+                                    'isFolder' => $this->isFolder,
+                                    'maxSize' => $this->return_bytes(ini_get('upload_max_filesize'))));
+    }
+    
+    
+    // see http://www.php.net/manual/de/function.ini-get.php
+    function return_bytes($val) {
+    $val = trim($val);
+    $last = strtolower($val[strlen($val)-1]);
+    switch($last) {
+        // The 'G' modifier is available since PHP 5.1.0
+        case 'g':
+            $val *= 1024;
+        case 'm':
+            $val *= 1024;
+        case 'k':
+            $val *= 1024;
+    }
+
+    return $val;
+}
 }
