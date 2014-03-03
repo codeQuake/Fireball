@@ -18,6 +18,16 @@
 {if $success|isset}
 <p class="success">{lang}wcf.global.success.add{/lang}</p>
 {/if}
+
+{if $errorField == 'file'}
+<p class="error">{lang}cms.acp.file.error.{$errorType}{/lang}</p>
+{/if}
+
+
+{if $errorField == 'folder'}
+<p class="error">{lang}cms.acp.folder.error.{$errorType}{/lang}</p>
+{/if}
+
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {

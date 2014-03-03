@@ -62,6 +62,9 @@ class FileManagementForm extends AbstractForm{
             if (empty($this->foldername)) {
                 throw new UserInputException('folder', 'empty');
             }
+            
+            $folderPath = StringUtil::firstCharToLowerCase($this->foldername);
+            if(file_exists(CMS_DIR.'files/'.$folderPath)) throw new UserInputException('folder', 'exists');
         }
     }
     

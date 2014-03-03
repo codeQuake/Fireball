@@ -169,6 +169,8 @@
     <item name="cms.acp.file.list"><![CDATA[Files]]></item>
     <item name="cms.acp.file.management"><![CDATA[Filemanagement]]></item>
     <item name="cms.acp.file.details"><![CDATA[Information]]></item>
+    <item name="cms.acp.files.noItems"><![CDATA[Currently there are no folders and files.]]></item>
+    <item name="cms.acp.folder.error.exists"><![CDATA[The folder name is invalid or given.]]></item>
     <item name="cms.acp.folder.delete.sure"><![CDATA[Are you sure you want to delete this folder and all of its files?]]></item>
     <item name="cms.acp.folder"><![CDATA[Folder]]></item>
     <item name="cms.acp.file.folderID"><![CDATA[Folder]]></item>

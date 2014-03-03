@@ -178,6 +178,8 @@
     <item name="cms.acp.folder.open"><![CDATA[Hier klicken um Dateien anzuzeigen]]></item>
     <item name="cms.acp.folder.delete.sure"><![CDATA[Wollen Sie diesen Ordner und alle sich darin befindenden Dateien wirklich löschen?]]></item>
     <item name="cms.acp.file.add"><![CDATA[Datei hochladen]]></item>
+    <item name="cms.acp.files.noItems"><![CDATA[Es sind keine Dateien und Ordner vorhanden.]]></item>
+    <item name="cms.acp.folder.error.exists"><![CDATA[Der Ordnername ist ungültig oder existiert bereits.]]></item>
     <item name="cms.acp.file.folderID.root"><![CDATA[Hauptverzeichnis]]></item>
     <item name="cms.acp.page.delete.sure"><![CDATA[Wollen Sie diese Seite und all ihre Inhalte wirklich löschen?]]></item>
     <item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt und all seine Abschnitte wirklich löschen?]]></item>
