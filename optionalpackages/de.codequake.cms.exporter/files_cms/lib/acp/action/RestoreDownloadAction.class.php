@@ -24,8 +24,6 @@ class RestoreDownloadAction extends AbstractAction{
 		header('Content-Type: application/x-gzip; charset=utf8');
 		header('Content-Disposition: attachment; filename="CMS-Export.tar.gz"');
 		readfile($filename);
-		// delete temp file
-		@unlink($filename);
     }
     
 }
