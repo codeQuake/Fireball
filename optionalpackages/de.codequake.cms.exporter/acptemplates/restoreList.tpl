@@ -39,7 +39,7 @@
 						<td class="columnIcon">
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$restore->restoreID}" data-confirm-message="{lang}cms.acp.restore.delete.sure{/lang}"></span>
 							<span class="icon icon16 icon-ambulance jsRestoreButton jsTooltip pointer" title="{lang}cms.acp.restore.restore{/lang}" data-object-id="{@$restore->restoreID}"></span>
-							<a title="{lang}cms.acp.restore.download{/lang}" class="jsTooltip pointer" href="{link controller="RestoreDownloadPage" id=$restore->restoreID application="cms"}{/link}"><span class="icon icon16 icon-download"></span></a>
+							<a title="{lang}cms.acp.restore.download{/lang}" class="jsTooltip pointer" href="{link controller="RestoreDownload" id=$restore->restoreID application="cms"}{/link}"><span class="icon icon16 icon-download"></span></a>
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$restore->restoreID}</td>
