@@ -14,7 +14,17 @@ class RestoreAction extends AbstractDatabaseObjectAction{
 
     protected $className = 'cms\data\restore\RestoreEditor';
     protected $requireACP = array('delete');
+    protected $permissionsDelete = array('admin.cms.restore.canRestore');
     
+    public function delete(){
+        //del files
+        foreach($this->objectIDs as $objectID){
+            $restore = new Restore($objectID);
+            unlink($restore->filename);
+            
+        }
+        parent::delete();
+    }
     
     
 }

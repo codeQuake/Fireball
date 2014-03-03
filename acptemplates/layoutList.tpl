@@ -33,7 +33,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th class="columnID columnLayoutID{if $sortField == 'layoutID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='LayoutList' application='cms'}pageNo={@$pageNo}&sortField=pageID&sortOrder={if $sortField == 'layoutID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+					<th class="columnID columnLayoutID{if $sortField == 'layoutID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='LayoutList' application='cms'}pageNo={@$pageNo}&sortField=layoutID&sortOrder={if $sortField == 'layoutID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
 					<th class="columnTitle columnLayout{if $sortField == 'title'} active {@$sortOrder}{/if}"><a href="{link controller='LayoutList' application='cms'}pageNo={@$pageNo}&sortField=title&sortOrder={if $sortField == 'title' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.layout.title{/lang}</a></th>
 					
 					{event name='columnHeads'}
@@ -64,7 +64,7 @@
 		
 		<nav>
 			<ul>
-				<li><a href="{link controller='LayoutStylesheetAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.layout.add{/lang}</span></a></li>
+				<li><a href="{link controller='LayoutAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.layout.add{/lang}</span></a></li>
 				
 				{event name='contentNavigationButtonsBottom'}
 			</ul>

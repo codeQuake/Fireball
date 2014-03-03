@@ -22,8 +22,10 @@
     <instruction type="sql">install.sql</instruction>
     <instruction type="file" application="wcf">files.tar</instruction>
     <instruction type="file" application="cms">files_cms.tar</instruction>
+    <instruction type="acpTemplate" application="cms">acptemplates.tar</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
     <instruction type="option">xml/option.xml</instruction>
+    <instruction type="cronjob">xml/cronjob.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="language">language/*.xml</instruction>
