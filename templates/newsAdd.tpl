@@ -134,9 +134,10 @@
 									//<![CDATA[
 									$(function() {
 										$('#imageSelect{$imageItem->imageID}').click(function() {
-											$("#imageID").val("{$imageItem->imageID}");
+											$('#imageID').val("{$imageItem->imageID}");
 											var html = '<div class="box96"><div class="framed">{@$imageItem->getImageTag('96')}</div><div><p>{$imageItem->title}</p></div></div>';
-											$("#previewImage").html(html);
+											$('#previewImage').html(html);
+											$('#imageSelect').wcfDialog('close');
 										});
 									});
 									//]]>
