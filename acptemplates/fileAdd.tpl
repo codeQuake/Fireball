@@ -176,6 +176,8 @@
             </tbody>
         </table>
     </div>
+{else}
+<p class="info">{lang}cms.acp.files.noItems{/lang}</p>
 {/if}
 
 {include file='footer'}
