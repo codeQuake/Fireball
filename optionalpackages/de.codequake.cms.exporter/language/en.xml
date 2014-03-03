@@ -16,7 +16,7 @@
 	</category>
   <category name="wcf.acp.option">
     <item name="wcf.acp.option.cms_automatic_export"><![CDATA[Automatic Backups]]></item>
-    <item name="cms_automatic_backup_delete"><![CDATA[Automatic delete]]></item>
-    <item name="cms_automatic_backup_delete.description"><![CDATA[Automatische delete of backups older than X days]]></item>
+    <item name="wcf.acp.option.cms_automatic_backup_delete"><![CDATA[Automatic delete]]></item>
+    <item name="wcf.acp.option.cms_automatic_backup_delete.description"><![CDATA[Automatische delete of backups older than X days]]></item>
   </category>
 </language>

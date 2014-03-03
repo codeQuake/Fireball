@@ -8,7 +8,7 @@
         <defaultvalue>1</defaultvalue>
       </option>
       <option name="cms_automatic_backup_delete">
-        <optiontype>number</optiontype>
+        <optiontype>integer</optiontype>
         <categoryname>cms.general</categoryname>
         <defaultvalue>30</defaultvalue>
       </option>
