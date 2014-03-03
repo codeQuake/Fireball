@@ -6,6 +6,8 @@ use wcf\util\XMLWriter;
 use wcf\util\StringUtil;
 use wcf\util\DirectoryUtil;
 use wcf\system\io\TarWriter;
+use wcf\data\language\item\LanguageItemList;
+use wcf\system\language\LanguageFactory;
 use cms\data\page\PageList;
 use cms\data\content\ContentList;
 use cms\data\folder\FolderList;
@@ -34,6 +36,8 @@ class CMSExportAction extends AbstractAction{
     protected function tar(){
         $this->filename = CMS_DIR.'tmp/CMS-Export.'.StringUtil::getRandomID().'.gz';
         
+        $this->buildLangFile();
+        
         //files.tar
         $tar = new TarWriter(CMS_DIR.'tmp/files.tar');
         $tar->add($this->getFiles(), '', CMS_DIR.'files/');
@@ -49,16 +53,60 @@ class CMSExportAction extends AbstractAction{
         $tar = new TarWriter($this->filename, true);        
         $this->buildXML();
         $tar->add(CMS_DIR.'tmp/cmsData.xml','', CMS_DIR.'tmp/');
+        $tar->add(CMS_DIR.'tmp/de.xml','', CMS_DIR.'tmp/');
+        $tar->add(CMS_DIR.'tmp/en.xml','', CMS_DIR.'tmp/');
         $tar->add(CMS_DIR.'tmp/files.tar','', CMS_DIR.'tmp/');
         $tar->add(CMS_DIR.'tmp/images.tar','', CMS_DIR.'tmp/');
         $tar->create();
+        @unlink(CMS_DIR.'tmp/de.xml');
+        @unlink(CMS_DIR.'tmp/en.xml');
         @unlink(CMS_DIR.'tmp/cmsData.xml');
         @unlink(CMS_DIR.'tmp/files.tar');
         @unlink(CMS_DIR.'tmp/images.tar');
     }
     
     protected function getI18n(){
+       $list = new LanguageItemList();
+       $list->getConditionBuilder()->add('languageItemOriginIsSystem  = ?', array(0));
+       $list->getConditionBuilder()->add('packageID = ?', array(PACKAGE_ID));
+       $list->sqlOrderBy = 'languageCategoryID ASC';
+       $list->readObjects();
+       return $list->getObjects();
+    }
+    
+    protected function buildLangFile(){
         
+        //german file
+        $xml = new XMLWriter();
+        $xml->beginDocument('language', 'http://www.woltlab.com', 'http://www.woltlab.com/XSD/maelstrom/language.xsd', array('languageCode' => 'de'));
+        $current = 0;
+        foreach($this->getI18n() as $item){
+            if($item->languageID == LanguageFactory::getInstance()->getLanguageByCode('de')->languageID){
+                if($current == 0 || $current != $item->languageCategoryID){
+                    if($current != 0) $xml->endElement();
+                    $xml->startElement('category', array('name' => LanguageFactory::getInstance()->getCategoryByID($item->languageCategoryID)->languageCategory));
+                    $current = $item->languageCategoryID;
+                }
+                $xml->writeElement('item', $item->languageItemValue, array('name' => $item->languageItem));
+            }
+        }
+        $xml->endDocument(CMS_DIR.'tmp/de.xml');
+        
+        //english file
+        $xml = new XMLWriter();
+        $xml->beginDocument('language', 'http://www.woltlab.com', 'http://www.woltlab.com/XSD/maelstrom/language.xsd', array('languageCode' => 'en'));
+        $current = 0;
+        foreach($this->getI18n() as $item){
+            if($item->languageID == LanguageFactory::getInstance()->getLanguageByCode('en')->languageID){
+                if($current == 0 || $current != $item->languageCategoryID){
+                    if($current != 0) $xml->endElement();
+                    $xml->startElement('category', array('name' => LanguageFactory::getInstance()->getCategoryByID($item->languageCategoryID)->languageCategory));
+                    $current = $item->languageCategoryID;
+                }
+                $xml->writeElement('item', $item->languageItemValue, array('name' => $item->languageItem));
+            }
+        }
+        $xml->endDocument(CMS_DIR.'tmp/en.xml');
     }
     
     protected function getFiles(){
