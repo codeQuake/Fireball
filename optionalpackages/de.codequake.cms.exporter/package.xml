@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="de.codequake.cms.exporter" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
 	<packageinformation>
-		<packagename>CMS Importer</packagename>
+		<packagename>Fireball CMS Im-/Exporter</packagename>
 		<packagedescription>Ermöglicht den Datenimport aus anderen Systemen</packagedescription>
     <plugin>de.codequake.cms</plugin>
 		<version>1.0.0</version>
@@ -23,6 +23,7 @@
     <instruction type="file" application="cms">files_cms.tar</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
     <instruction type="option">xml/option.xml</instruction>
+    <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="language">language/*.xml</instruction>
 	</instructions>
 </package>

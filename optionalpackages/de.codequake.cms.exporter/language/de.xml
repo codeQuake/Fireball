@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
+  <category name="cms.acp.menu">
+    <item name="cms.acp.menu.link.cms.page.restorelist"><![CDATA[Wiederherstellungspunkte auflisten]]></item>
+  </category>
+  
   <category name="wcf.acp.dataImport">
     <item name="wcf.acp.dataImport.exporter.com.woltlab.wcf.exporter.wordpress3xtoNews"><![CDATA[WordPress 3.7+ (als Nachrichten)]]></item>
   </category>
