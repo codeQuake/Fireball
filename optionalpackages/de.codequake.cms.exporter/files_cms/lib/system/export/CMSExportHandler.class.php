@@ -38,35 +38,35 @@ class CMSExportHandler extends SingletonFactory{
     }
     
     protected function tar(){
-        $this->filename = CMS_DIR.'tmp/CMS-Export.'.StringUtil::getRandomID().'.gz';
+        $this->filename = CMS_DIR.'export/CMS-Export.'.StringUtil::getRandomID().'.gz';
         
         $this->buildLangFiles();
         
         //files.tar
-        $tar = new TarWriter(CMS_DIR.'tmp/files.tar');
+        $tar = new TarWriter(CMS_DIR.'export/files.tar');
         $tar->add($this->getFiles(), '', CMS_DIR.'files/');
         $tar->create();
         
         
         //images.tar
-        $tar = new TarWriter(CMS_DIR.'tmp/images.tar');
+        $tar = new TarWriter(CMS_DIR.'export/images.tar');
         $tar->add($this->getNewsImages(), '', CMS_DIR.'images/news/');
         $tar->create();
         
         //tar
         $tar = new TarWriter($this->filename, true);        
         $this->buildXML();
-        $tar->add(CMS_DIR.'tmp/cmsData.xml','', CMS_DIR.'tmp/');
-        $tar->add(CMS_DIR.'tmp/de.xml','', CMS_DIR.'tmp/');
-        $tar->add(CMS_DIR.'tmp/en.xml','', CMS_DIR.'tmp/');
-        $tar->add(CMS_DIR.'tmp/files.tar','', CMS_DIR.'tmp/');
-        $tar->add(CMS_DIR.'tmp/images.tar','', CMS_DIR.'tmp/');
+        $tar->add(CMS_DIR.'export/cmsData.xml','', CMS_DIR.'export/');
+        $tar->add(CMS_DIR.'export/de.xml','', CMS_DIR.'export/');
+        $tar->add(CMS_DIR.'export/en.xml','', CMS_DIR.'export/');
+        $tar->add(CMS_DIR.'export/files.tar','', CMS_DIR.'export/');
+        $tar->add(CMS_DIR.'export/images.tar','', CMS_DIR.'export/');
         $tar->create();
-        @unlink(CMS_DIR.'tmp/de.xml');
-        @unlink(CMS_DIR.'tmp/en.xml');
-        @unlink(CMS_DIR.'tmp/cmsData.xml');
-        @unlink(CMS_DIR.'tmp/files.tar');
-        @unlink(CMS_DIR.'tmp/images.tar');
+        @unlink(CMS_DIR.'export/de.xml');
+        @unlink(CMS_DIR.'export/en.xml');
+        @unlink(CMS_DIR.'export/cmsData.xml');
+        @unlink(CMS_DIR.'export/files.tar');
+        @unlink(CMS_DIR.'export/images.tar');
     }
     
     protected function getI18n(){
@@ -94,7 +94,7 @@ class CMSExportHandler extends SingletonFactory{
                 $xml->writeElement('item', $item->languageItemValue, array('name' => $item->languageItem));
             }
         }
-        $xml->endDocument(CMS_DIR.'tmp/de.xml');
+        $xml->endDocument(CMS_DIR.'export/de.xml');
         
         //english file
         $xml = new XMLWriter();
@@ -110,7 +110,7 @@ class CMSExportHandler extends SingletonFactory{
                 $xml->writeElement('item', $item->languageItemValue, array('name' => $item->languageItem));
             }
         }
-        $xml->endDocument(CMS_DIR.'tmp/en.xml');
+        $xml->endDocument(CMS_DIR.'export/en.xml');
     }
     
     protected function getFiles(){
@@ -242,7 +242,7 @@ class CMSExportHandler extends SingletonFactory{
             }
         }
         
-         $xml->endDocument(CMS_DIR.'tmp/cmsData.xml');
+         $xml->endDocument(CMS_DIR.'export/cmsData.xml');
     }
     
     

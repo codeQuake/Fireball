@@ -3,4 +3,7 @@
   <category name="wcf.acp.dataImport">
     <item name="wcf.acp.dataImport.exporter.com.woltlab.wcf.exporter.wordpress3xtoNews"><![CDATA[WordPress 3.7+ (als Nachrichten)]]></item>
   </category>
+  <category name="wcf.acp.option">
+    <item name="wcf.acp.option.cms_automatic_export"><![CDATA[Automatische Sicherungen]]></item>
+  </category>
 </language>
