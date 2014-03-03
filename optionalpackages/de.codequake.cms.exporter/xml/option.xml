@@ -6,7 +6,11 @@
         <optiontype>boolean</optiontype>
         <categoryname>cms.general</categoryname>
         <defaultvalue>1</defaultvalue>
-        <options>module_news</options>
+      </option>
+      <option name="cms_automatic_backup_delete">
+        <optiontype>number</optiontype>
+        <categoryname>cms.general</categoryname>
+        <defaultvalue>30</defaultvalue>
       </option>
     </options>
   </import>
