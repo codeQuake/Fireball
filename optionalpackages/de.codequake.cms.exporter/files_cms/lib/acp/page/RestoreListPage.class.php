@@ -7,6 +7,7 @@ class RestoreListPage extends SortablePage{
     public $activeMenuItem = 'cms.acp.menu.link.cms.restore.list';
     public $neededPermissions = array('admin.cms.restore.canRestore');
     public $templateName = 'restoreList';
-    public $defaultSortfield = 'time';
+    public $defaultSortField = 'time';
+    public $defaultSortOrder = 'DESC';
     public $validSortFields = array('time');
 }
