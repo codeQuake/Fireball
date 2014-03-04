@@ -53,12 +53,18 @@ class CMSExportHandler extends SingletonFactory{
         $tar->add($this->getNewsImages(), '', CMS_DIR.'images/news/');
         $tar->create();
         
+         //templates.tar
+        $tar = new TarWriter(CMS_DIR.'export/templates.tar');
+        $tar->add($this->getTemplates(), '', CMS_DIR.'templates/');
+        $tar->create();
+        
         //tar
         $tar = new TarWriter($this->filename, true);        
         $this->buildXML();
         $tar->add(CMS_DIR.'export/cmsData.xml','', CMS_DIR.'export/');
         $tar->add(CMS_DIR.'export/de.xml','', CMS_DIR.'export/');
         $tar->add(CMS_DIR.'export/en.xml','', CMS_DIR.'export/');
+        $tar->add(CMS_DIR.'export/templates.tar','', CMS_DIR.'export/');
         $tar->add(CMS_DIR.'export/files.tar','', CMS_DIR.'export/');
         $tar->add(CMS_DIR.'export/images.tar','', CMS_DIR.'export/');
         $tar->create();
@@ -66,6 +72,7 @@ class CMSExportHandler extends SingletonFactory{
         @unlink(CMS_DIR.'export/en.xml');
         @unlink(CMS_DIR.'export/cmsData.xml');
         @unlink(CMS_DIR.'export/files.tar');
+        @unlink(CMS_DIR.'export/templates.tar');
         @unlink(CMS_DIR.'export/images.tar');
     }
     
@@ -116,6 +123,15 @@ class CMSExportHandler extends SingletonFactory{
     protected function getFiles(){
         $du = new DirectoryUtil(CMS_DIR.'files/');
         return $du->getFiles();
+    }
+    
+    protected function getTemplates(){
+        $du = new DirectoryUtil(CMS_DIR.'templates/');
+        $files = array();
+        foreach($du->getFiles() as $file){
+            if(preg_match('/cms_/', $file)) $files[] = $file;
+        }
+        return $files;
     }
     
     protected function getNewsImages(){
