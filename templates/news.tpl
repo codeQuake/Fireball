@@ -134,7 +134,7 @@
             </article>
         </li>
     </ul>
-    <div class="contentNavigation">
+    <div class="contentNavigation">			
         <nav>
             <ul>
                 <li><a href="{link application='cms' controller='News' object=$news appendSession=false}{/link}" class="button jsButtonShare jsOnly" data-link-title="{$news->subject}"><span class="icon icon16 icon-link"></span> <span>{lang}wcf.message.share{/lang}</span></a></li>
@@ -146,6 +146,41 @@
 	    {/if}
     </div>
     {include file='newsCommentList' application='cms'}
+	<!--news navigation-->
+	<div class="container marginTop">
+		<ol class="containerList doubleColumned">
+		{foreach from=$older item=old}
+			<li data-news-id="{$old->newsID}" class="newsNavigation">
+				<div class="box48">
+					<a data-news-id="{$old->newsID}" class="newsLink newsNavigationLink" href="{link controller='News' application='cms' object=$old}{/link}">
+						<span class="icon icon48 icon-double-angle-left"></span>{if $old->getImage() != null}{@$old->getImage()->getImageTag('48')}{else}{@$old->getUserProfile()->getAvatar()->getImageTag(48)}{/if}
+					</a>
+					<div>
+						<div class="containerHeadline">
+							<h3><a data-news-id="{$old->newsID}" class="newsLink" href="{link controller='News' application='cms' object=$old}{/link}">{$old->getTitle()}</a></h3>
+						</div>
+								<small><a class="userLink" data-user-id="{$news->userID}" href="{link controller='User' object=$old->getUserProfile()}{/link}">{$old->username}</a>, {@$old->time|time}</small>
+					</div>
+				</div>
+			</li>
+		{/foreach}
+		{foreach from=$later item=new}
+			<li data-news-id="{$new->newsID}" class="newsNavigation">
+				<div class="box48">
+					<a data-news-id="{$new->newsID}" class="newsLink newsNavigationLink" href="{link controller='News' application='cms' object=$new}{/link}">
+						<span class="icon icon48 icon-double-angle-right"></span>{if $new->getImage() != null}{@$new->getImage()->getImageTag('48')}{else}{@$new->getUserProfile()->getAvatar()->getImageTag(48)}{/if}
+					</a>
+					<div>
+						<div class="containerHeadline">
+							<h3><a data-news-id="{$new->newsID}" class="newsLink" href="{link controller='News' application='cms' object=$new}{/link}">{$new->getTitle()}</a></h3>
+						</div>
+								<small><a class="userLink" data-user-id="{$new->userID}" href="{link controller='User' object=$new->getUserProfile()}{/link}">{$new->username}</a>, {@$new->time|time}</small>
+					</div>
+				</div>
+			</li>
+		{/foreach}
+		</ol>
+	</div>
 {/if}
 {include file='footer' sandbox=false}
 </body>
