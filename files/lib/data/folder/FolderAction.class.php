@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\folder;
 use wcf\data\AbstractDatabaseObjectAction;
-use cms\data\file\File;
+use cms\data\file\FileAction;
 
 /**
  * @author	Jens Krumsieck
@@ -22,11 +22,11 @@ class FolderAction extends AbstractDatabaseObjectAction{
             $folder = new Folder($objectID);
             
             //fuck up all files
-            foreach($folder->getFiles() as $file){
-                if(file_exists(CMS_DIR.'files/'.$folder->folderPath.'/'.$file->filename)) unlink(CMS_DIR.'files/'.$folder->folderPath.'/'.$file->filename);
-            }
+            $action = new FileAction($folder->getFiles(), 'delete');
+            $action->executeAction();
+            
             //delete folder
-            rmdir(CMS_DIR.'files/'.$folder->folderPath);
+            if(file_exists(CMS_DIR.'files/'.$folder->folderPath))rmdir(CMS_DIR.'files/'.$folder->folderPath);
         }
         parent::delete();
     }

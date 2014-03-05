@@ -21,6 +21,8 @@ use cms\data\layout\LayoutList;
 use cms\data\layout\LayoutAction;
 use cms\data\stylesheet\StylesheetList;
 use cms\data\stylesheet\StylesheetAction;
+use cms\data\module\ModuleList;
+use cms\data\module\ModuleAction;
 
 class CMSImportHandler extends SingletonFactory{
     public $data = array();
