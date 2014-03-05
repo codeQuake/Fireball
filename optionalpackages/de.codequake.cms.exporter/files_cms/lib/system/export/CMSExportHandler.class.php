@@ -146,7 +146,7 @@ class CMSExportHandler extends SingletonFactory{
                 if(isset($page['metaKeywords'])) $xml->writeElement('metaKeywords', $page['metaKeywords']);
                 $xml->writeElement('invisible', $page['invisible']);
                 $xml->writeElement('robots', $page['robots']);
-                $xml->writeElement('showOder', $page['showOrder']);
+                $xml->writeElement('showOrder', $page['showOrder']);
                 $xml->writeElement('isHome', $page['isHome']);
                 $xml->writeElement('showSidebar', $page['showSidebar']);
                 $xml->writeElement('sidebarOrientation', $page['sidebarOrientation']);
@@ -159,7 +159,7 @@ class CMSExportHandler extends SingletonFactory{
         }
         
         //write content tags
-        if(isset($this->data['pages'])){
+        if(isset($this->data['contents'])){
             foreach ($this->data['contents'] as $content){
                 $xml->startElement('content');
                  $xml->writeElement('contentID', $content['contentID']);
@@ -168,7 +168,7 @@ class CMSExportHandler extends SingletonFactory{
                  $xml->writeElement('showOrder', $content['showOrder']);
                  if(isset($content['cssID'])) $xml->writeElement('cssID', $content['cssID']);
                  if(isset($content['cssClasses']))$xml->writeElement('cssClasses', $content['cssClasses']);
-                 $xml->writeElement('positon', $content['position']);
+                 $xml->writeElement('position', $content['position']);
                  $xml->writeElement('type', $content['type']);
                  $xml->startElement('sections');
                  if(isset($content['sections'])){
@@ -181,7 +181,7 @@ class CMSExportHandler extends SingletonFactory{
                         $xml->writeElement('showOrder', $section['showOrder']);
                         if(isset($section['cssID']))$xml->writeElement('cssID', $section['cssID']);
                         if(isset($section['cssClasses'])) $xml->writeElement('cssClasses', $section['cssClasses']);
-                        $xml->writeElement('additonalData', $section['additionalData']);
+                        $xml->writeElement('additionalData', $section['additionalData']);
                         $xml->endElement();
                     }
                 }
