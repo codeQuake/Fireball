@@ -26,7 +26,7 @@ class FolderAction extends AbstractDatabaseObjectAction{
             $action->executeAction();
             
             //delete folder
-            if(file_exists(CMS_DIR.'files/'.$folder->folderPath))rmdir(CMS_DIR.'files/'.$folder->folderPath);
+            if(file_exists(CMS_DIR.'files/'.$folder->folderPath)) rmdir(CMS_DIR.'files/'.$folder->folderPath);
         }
         parent::delete();
     }
