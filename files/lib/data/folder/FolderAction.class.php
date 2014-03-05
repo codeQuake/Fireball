@@ -23,7 +23,7 @@ class FolderAction extends AbstractDatabaseObjectAction{
             
             //fuck up all files
             foreach($folder->getFiles() as $file){
-                unlink(CMS_DIR.'files/'.$folder->folderPath.'/'.$file->filename);
+                if(file_exists(CMS_DIR.'files/'.$folder->folderPath.'/'.$file->filename)) unlink(CMS_DIR.'files/'.$folder->folderPath.'/'.$file->filename);
             }
             //delete folder
             rmdir(CMS_DIR.'files/'.$folder->folderPath);

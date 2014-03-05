@@ -20,10 +20,10 @@ class FileAction extends AbstractDatabaseObjectAction{
         //del files
         foreach($this->objectIDs as $objectID){
             $file = new File($objectID);
-            if($file->folderID == 0) unlink(CMS_DIR.'files/'.$file->filename);
+            if($file->folderID == 0 && file_exists(CMS_DIR.'files/'.$file->filename)) unlink(CMS_DIR.'files/'.$file->filename);
             else{
                 $folder = new Folder($file->folderID);
-                unlink(CMS_DIR.'files/'.$folder->folderPath.'/'.$file->filename);
+                if(file_exists(CMS_DIR.'files/'.$folder->folderPath.'/'.$file->filename)) unlink(CMS_DIR.'files/'.$folder->folderPath.'/'.$file->filename);
             }
         }
         parent::delete();
