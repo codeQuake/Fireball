@@ -26,7 +26,6 @@ use cms\data\news\NewsList;
 
 class CMSExportHandler extends SingletonFactory{
     public $data = array();
-    public $newsData = array();
     public $filename;
     
     
@@ -44,19 +43,12 @@ class CMSExportHandler extends SingletonFactory{
         
         $this->buildXML();
         $this->buildLangFiles();
-        $this->buildNewsXML();
         
         //files.tar
         $tar = new TarWriter(CMS_DIR.'export/files.tar');
         $tar->add($this->getFiles(), '', CMS_DIR.'files/');
         $tar->create();
-        
-        
-        //images.tar
-        $tar = new TarWriter(CMS_DIR.'export/images.tar');
-        $tar->add($this->getNewsImages(), '', CMS_DIR.'images/news/');
-        $tar->create();
-        
+                
          //templates.tar
         $tar = new TarWriter(CMS_DIR.'export/templates.tar');
         $tar->add($this->getTemplates(), '', CMS_DIR.'templates/');
@@ -66,17 +58,14 @@ class CMSExportHandler extends SingletonFactory{
         $tar = new TarWriter($this->filename, true);        
         
         $tar->add(CMS_DIR.'export/cmsData.xml','', CMS_DIR.'export/');
-        $tar->add(CMS_DIR.'export/newsData.xml','', CMS_DIR.'export/');
         $tar->add(CMS_DIR.'export/de.xml','', CMS_DIR.'export/');
         $tar->add(CMS_DIR.'export/en.xml','', CMS_DIR.'export/');
         $tar->add(CMS_DIR.'export/templates.tar','', CMS_DIR.'export/');
         $tar->add(CMS_DIR.'export/files.tar','', CMS_DIR.'export/');
-        $tar->add(CMS_DIR.'export/images.tar','', CMS_DIR.'export/');
         $tar->create();
         @unlink(CMS_DIR.'export/de.xml');
         @unlink(CMS_DIR.'export/en.xml');
         @unlink(CMS_DIR.'export/cmsData.xml');
-        @unlink(CMS_DIR.'export/newsData.xml');
         @unlink(CMS_DIR.'export/files.tar');
         @unlink(CMS_DIR.'export/templates.tar');
         @unlink(CMS_DIR.'export/images.tar');
@@ -91,68 +80,7 @@ class CMSExportHandler extends SingletonFactory{
        return $list->getObjects();
     }
     
-    protected function readNewsData(){
-        $list = new NewsList();
-        $list->readObjects();
-        foreach($list->getObjects() as $news){
-            $this->newsData[$news->newsID]['newsID'] = $news->newsID;
-            $this->newsData[$news->newsID]['username'] = $news->username;            
-            $this->newsData[$news->newsID]['subject'] = $news->subject;
-            $this->newsData[$news->newsID]['message'] = $news->message;
-            $this->newsData[$news->newsID]['time'] = $news->time;
-            $this->newsData[$news->newsID]['attachments'] = $news->attachments;
-            $this->newsData[$news->newsID]['languageID'] = $news->languageID;
-            $this->newsData[$news->newsID]['clicks'] = $news->clicks;
-            $this->newsData[$news->newsID]['comments'] = $news->comments;
-            $this->newsData[$news->newsID]['imageID'] = $news->imageID;
-            $this->newsData[$news->newsID]['enableSmilies'] = $news->enableSmilies;
-            $this->newsData[$news->newsID]['enableBBCodes'] = $news->enableBBCodes;
-            $this->newsData[$news->newsID]['enableHtml'] = $news->Html;
-            $this->newsData[$news->newsID]['isDisabled'] = $news->isDisabled;
-            $this->newsData[$news->newsID]['isDeleted'] = $news->isDeleted;
-            $this->newsData[$news->newsID]['deleteTime'] = $news->deleteTime;
-            $this->newsData[$news->newsID]['lastChangeTime'] = $news->lastChangeTime;
-            $this->newsData[$news->newsID]['lastEditor'] = $news->lastEditor;
-            $this->newsData[$news->newsID]['lastEditorID'] = $news->lastEditorID;
-            $this->newsData[$news->newsID]['ipAddress'] = $news->ipAddress;
-            $this->newsData[$news->newsID]['cumulativeLikes'] = $news->cumulativeLikes;
-        }
-    }
-    
-    protected function buildNewsXML(){
-       $this->readNewsData();
-       $xml = new XMLWriter();
-       $xml->beginDocument('data', '', '');
-        if(isset($this->newsData)){
-           foreach($this->newsData as $news){
-                $xml->startElement('news');
-                $xml->writeElement('newsID', $news['newsID']);
-                $xml->writeElement('username', $news['username']);
-                $xml->writeElement('subject', $news['subject']);
-                $xml->writeElement('message', $news['message']);
-                $xml->writeElement('time', $news['time']);
-                $xml->writeElement('attachments', $news['attachments']);
-                $xml->writeElement('languageID', $news['languageID']);
-                $xml->writeElement('clicks', $news['clicks']);
-                $xml->writeElement('comments', $news['comments']);
-                $xml->writeElement('imageID', $news['imageID']);
-                $xml->writeElement('enableSmilies', $news['enableSmilies']);
-                $xml->writeElement('enableBBCodes', $news['enableBBCodes']);
-                $xml->writeElement('enableHtml', $news['enableHtml']);
-                $xml->writeElement('isDisabled', $news['isDisabled']);
-                $xml->writeElement('isDeleted', $news['isDeleted']);
-                $xml->writeElement('deleteTime', $news['deleteTime']);
-                $xml->writeElement('lastChangeTime', $news['lastChangeTime']);
-                $xml->writeElement('lastEditor', $news['lastEditor']);
-                $xml->writeElement('lastEditorID', $news['lastEditorID']);
-                $xml->writeElement('ipAddress', $news['ipAddress']);
-                $xml->writeElement('cumulativeLikes', $news['cumulativeLikes']);
-                $xml->endElement();
-           }
-        }
-        $xml->endDocument(CMS_DIR.'export/newsData.xml');
-    }
-    
+      
     protected function buildLangFiles(){
         
         //german file
@@ -202,10 +130,6 @@ class CMSExportHandler extends SingletonFactory{
         return $files;
     }
     
-    protected function getNewsImages(){
-        $du = new DirectoryUtil(CMS_DIR.'images/news/');
-        return $du->getFiles();
-    }
     protected function buildXML(){
        $xml = new XMLWriter();
        $xml->beginDocument('data', '', '');
