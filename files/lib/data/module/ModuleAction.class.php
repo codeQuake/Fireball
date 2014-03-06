@@ -121,7 +121,7 @@ class ModuleAction extends AbstractDatabaseObjectAction{
             
             if($module->php !== null){
                 //delete PHP
-                unlink(CMS_DIR.'files/php/'.$module->php);
+                if(file_exists(CMS_DIR.'files/php/'.$module->php))unlink(CMS_DIR.'files/php/'.$module->php);
             }
         }
         parent::delete();

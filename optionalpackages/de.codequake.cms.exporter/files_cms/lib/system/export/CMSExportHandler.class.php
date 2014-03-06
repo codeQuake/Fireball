@@ -241,7 +241,7 @@ class CMSExportHandler extends SingletonFactory{
         //write module tags
         if(isset($this->data['modules'])){
             foreach($this->data['modules'] as $module){
-                $xml->startElement('stylemodule');
+                $xml->startElement('module');
                 $xml->writeElement('moduleID', $module['moduleID']);
                 $xml->writeElement('moduleTitle', $module['moduleTitle']);
                 if(isset($module['php'])) $xml->writeElement('php', $module['php']);
@@ -328,7 +328,7 @@ class CMSExportHandler extends SingletonFactory{
         foreach($list->getObjects() as $file){
             $this->data['files'][$file->fileID]['fileID'] = $file->fileID;
             $this->data['files'][$file->fileID]['folderID'] = $file->folderID;
-            $this->data['files'][$file->fileID]['title'] = $file->titleID;
+            $this->data['files'][$file->fileID]['title'] = $file->title;
             $this->data['files'][$file->fileID]['filename'] = $file->filename;
             $this->data['files'][$file->fileID]['size'] = $file->size;
             $this->data['files'][$file->fileID]['type'] = $file->type;
@@ -359,7 +359,7 @@ class CMSExportHandler extends SingletonFactory{
      
      protected function loadModules(){
         $list = new ModuleList();
-        $list->getObjects();
+        $list->readObjects();
         foreach($list->getObjects() as $module){
             $this->data['modules'][$module->moduleID]['moduleID'] = $module->moduleID;
             $this->data['modules'][$module->moduleID]['moduleTitle'] = $module->moduleTitle;

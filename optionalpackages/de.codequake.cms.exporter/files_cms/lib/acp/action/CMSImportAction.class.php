@@ -9,7 +9,7 @@ class CMSImportAction extends AbstractAction{
 
     public function execute(){
         parent::execute();
-        $filename = 'C:/xampp/htdocs/export/Downloads.tar';
+        $filename = 'C:/xampp/htdocs/export/Arschi.tar.gz';
         CMSImportHandler::getInstance()->handleImport($filename);
     }
     

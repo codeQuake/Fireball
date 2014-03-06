@@ -4,8 +4,11 @@ use wcf\system\SingletonFactory;
 use wcf\system\exception\UserInputException;
 use wcf\system\exception\SystemException;
 use wcf\util\XML;
+use wcf\util\DirectoryUtil;
+use wcf\util\FileUtil;
 use wcf\system\io\Tar;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\WCF;
 
 use cms\data\page\PageList;
 use cms\data\page\PageAction;
@@ -42,6 +45,7 @@ class CMSImportHandler extends SingletonFactory{
         $this->importStylesheets();
         $this->importLayouts();
         $this->importModules();
+        echo 'succeeded';
     }
     
     protected function importPages(){
@@ -131,18 +135,27 @@ class CMSImportHandler extends SingletonFactory{
     
     
     protected function importModules(){
-        //delete all modules
-        $list = new ModuleList();
-        $list->readObjects();
-        $action = new ModuleAction($list->getObjects(), 'delete');
-        $action->executeAction();
+        
+        $sql = "TRUNCATE TABLE cms".WCF_N."_module";
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute();
         
         //import
         if(isset($this->data['modules'])){
             foreach($this->data['modules'] as $mod){
                 $data = $mod;
-                $action = new ModuleAction(array(), 'create', array('data' => $data));
+                $source = array();
+                if(isset($mod['php']) && $mod['php'] != "") {
+                    $source['php'] = file_get_contents(CMS_DIR.'files/php/'.$mod['php']);
+                    if(file_exists(CMS_DIR.'files/php/'.$mod['php'])) @unlink(CMS_DIR.'files/php/'.$mod['php']);
+                }
+                if(isset($mod['tpl']) && $mod['tpl'] != ""){
+                    $source['tpl'] = file_get_contents(CMS_DIR.'templates/'.$mod['tpl'].'.tpl');
+                    if(file_exists(CMS_DIR.'templates/'.$mod['tpl'].'.tpl')) @unlink(CMS_DIR.'templates/'.$mod['tpl'].'.tpl');
+                }
+                $action = new ModuleAction(array(), 'create', array('data' => $data, 'source' => $source));
                 $action->executeAction();
+                
             }
         }
     }
@@ -189,10 +202,56 @@ class CMSImportHandler extends SingletonFactory{
     }
     
     protected function openTar($filename){
-        $tar = new Tar($filename);
+        $tar = new Tar($filename);        
+        $this->extractFiles($tar);  
+        $this->extractTemplates($tar);
         $this->data = $this->readData($tar);
         $tar->close();
     }
+    
+    
+    protected function extractFiles($tar){
+        //delete files folder
+        if(file_exists(CMS_DIR.'files/')){
+            DirectoryUtil::getInstance(CMS_DIR.'files/')->removeAll(); 
+        }
+        //extract
+        $files = 'files.tar';
+        if($tar->getIndexByFileName($files) === false){
+            throw new SystemException("Unable to find required file '".$files."' in the import archive");
+        }
+        $tar->extract($files, CMS_DIR.'files/files.tar');
+        
+		$ftar = new Tar(CMS_DIR.'files/files.tar');
+        $contentList = $ftar->getContentList();
+        foreach ($contentList as $key => $val) {
+     	    if($val['type'] == 'file' && $val['filename'] != '/files.tar' && $val['filename'] != 'files.tar') $ftar->extract($key, CMS_DIR.'files/'.$val['filename']);
+             elseif(!file_exists(CMS_DIR.'files/'.$val['filename'])) mkdir(CMS_DIR.'files/'.$val['filename']);
+        }
+        $ftar->close();
+        @unlink(CMS_DIR.'files/files.tar');
+        
+    }
+    
+    protected function extractTemplates($tar){
+        $templates = 'templates.tar';
+        if($tar->getIndexByFileName($templates) === false){
+            throw new SystemException("Unable to find required file '".$templates."' in the import archive");
+        }
+        $tar->extract($templates, CMS_DIR.'export/templates.tar');
+        
+        $ttar = new Tar(CMS_DIR.'export/templates.tar');
+        $contentList = $ttar->getContentList();
+        
+        foreach ($contentList as $key => $val) {
+            $ttar->extract($key, CMS_DIR.'files/'.$val['filename']);
+        }
+        
+        $ttar->close();
+        @unlink(CMS_DIR.'export/templates.tar');
+    }
+    
+
     
     protected function readData($tar){
         $xml = 'cmsData.xml';
