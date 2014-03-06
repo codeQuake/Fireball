@@ -234,6 +234,10 @@ class CMSImportHandler extends SingletonFactory{
     }
     
     protected function extractTemplates($tar){
+        $files = DirectoryUtil::getInstance(CMS_DIR.'templates/')->getFiles();
+        foreach($files as $file){
+            if(preg_match('$cms_$', $file)) @unlink($file);
+        }
         $templates = 'templates.tar';
         if($tar->getIndexByFileName($templates) === false){
             throw new SystemException("Unable to find required file '".$templates."' in the import archive");
@@ -244,7 +248,7 @@ class CMSImportHandler extends SingletonFactory{
         $contentList = $ttar->getContentList();
         
         foreach ($contentList as $key => $val) {
-            $ttar->extract($key, CMS_DIR.'files/'.$val['filename']);
+            $ttar->extract($key, CMS_DIR.'templates/'.$val['filename']);
         }
         
         $ttar->close();
