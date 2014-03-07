@@ -1,6 +1,12 @@
 <?php
 namespace cms\system\export;
 use wcf\system\SingletonFactory;
+use wcf\data\language\LanguageEditor;
+use wcf\data\language\category\LanguageCategoryEditor;
+use wcf\data\language\item\LanguageItemList;
+use wcf\data\language\item\LanguageItemAction;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\language\LanguageFactory;
 use wcf\system\exception\UserInputException;
 use wcf\system\exception\SystemException;
 use wcf\util\XML;
@@ -9,6 +15,7 @@ use wcf\util\FileUtil;
 use wcf\system\io\Tar;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\WCF;
+use wcf\system\Regex;
 
 use cms\data\page\PageList;
 use cms\data\page\PageAction;
@@ -45,6 +52,7 @@ class CMSImportHandler extends SingletonFactory{
         $this->importStylesheets();
         $this->importLayouts();
         $this->importModules();
+        
         echo 'succeeded';
     }
     
@@ -205,10 +213,10 @@ class CMSImportHandler extends SingletonFactory{
         $tar = new Tar($filename);        
         $this->extractFiles($tar);  
         $this->extractTemplates($tar);
+        $this->importLanguages($tar);
         $this->data = $this->readData($tar);
         $tar->close();
     }
-    
     
     protected function extractFiles($tar){
         //delete files folder
@@ -255,7 +263,32 @@ class CMSImportHandler extends SingletonFactory{
         @unlink(CMS_DIR.'export/templates.tar');
     }
     
-
+    protected function importLanguages($tar){
+        //delete I18n Values
+        $action = new LanguageItemAction($this->getI18n(), 'delete');
+        $action->executeAction();
+    
+        $tar->extract('de.xml', CMS_DIR.'export/de.xml');
+        $tar->extract('en.xml', CMS_DIR.'export/en.xml');
+        
+        //import de
+        $xmlDe = new XML();
+        $xmlDe->load(CMS_DIR.'export/de.xml');
+        $language = LanguageFactory::getInstance()->getLanguageByCode('de');
+        $de = $this->updateFromXML($xmlDe, PACKAGE_ID, $language->languageID);
+        
+        //import de
+        $xmlEn = new XML();
+        $xmlEn->load(CMS_DIR.'export/en.xml');        
+        $language = LanguageFactory::getInstance()->getLanguageByCode('en');
+        $en = $this->updateFromXML($xmlEn, PACKAGE_ID, $language->languageID);
+        
+        @unlink(CMS_DIR.'export/de.xml');
+        @unlink(CMS_DIR.'export/en.xml');
+        
+        LanguageFactory::getInstance()->clearCache();
+		LanguageFactory::getInstance()->deleteLanguageCache();
+    }
     
     protected function readData($tar){
         $xml = 'cmsData.xml';
@@ -328,4 +361,107 @@ class CMSImportHandler extends SingletonFactory{
         }
         return $data;
     }
+    
+    protected function getI18n(){
+       $list = new LanguageItemList();
+       $list->getConditionBuilder()->add('languageItemOriginIsSystem  = ?', array(0));
+       $list->getConditionBuilder()->add('packageID = ?', array(PACKAGE_ID));
+       $list->sqlOrderBy = 'languageCategoryID ASC';
+       $list->readObjects();
+       return $list->getObjects();
+    }
+    
+    //taken from wcf\data\language\LanguageEditor, modified to import I18n-Values
+    protected function updateFromXML(XML $xml, $packageID, $languageID, $updateFiles = true, $updateExistingItems = true) {
+		$xpath = $xml->xpath();
+		$usedCategories = array();
+		
+		// fetch categories
+		$categories = $xpath->query('/ns:language/ns:category');
+		foreach ($categories as $category) {
+			$usedCategories[$category->getAttribute('name')] = 0;
+		}
+		
+		if (empty($usedCategories)) return;
+		
+		// select existing categories
+		$conditions = new PreparedStatementConditionBuilder();
+		$conditions->add("languageCategory IN (?)", array(array_keys($usedCategories)));
+		
+		$sql = "SELECT	languageCategoryID, languageCategory
+			FROM	wcf".WCF_N."_language_category
+			".$conditions;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditions->getParameters());
+		while ($row = $statement->fetchArray()) {
+			$usedCategories[$row['languageCategory']] = $row['languageCategoryID'];
+		}
+		
+		// create new categories
+		foreach ($usedCategories as $categoryName => $categoryID) {
+			if ($categoryID) continue;
+			
+			$category = LanguageCategoryEditor::create(array(
+				'languageCategory' => $categoryName
+			));
+			$usedCategories[$categoryName] = $category->languageCategoryID;
+		}
+		
+		// loop through categories to import items
+		$itemData = array();
+		foreach ($categories as $category) {
+			$categoryName = $category->getAttribute('name');
+			$categoryID = $usedCategories[$categoryName];
+			
+			// loop through items
+			$elements = $xpath->query('child::*', $category);
+			foreach ($elements as $element) {
+				$itemName = $element->getAttribute('name');
+				$itemValue = $element->nodeValue;
+				
+				$itemData[] = $languageID;
+				$itemData[] = $itemName;
+				$itemData[] = $itemValue;
+				$itemData[] = $categoryID;
+                $itemData[] = 0;
+				if ($packageID) $itemData[] = $packageID;
+			}
+		}
+		
+		if (!empty($itemData)) {
+			// insert/update a maximum of 50 items per run (prevents issues with max_allowed_packet)
+			$step = ($packageID) ? 6 : 5;
+			WCF::getDB()->beginTransaction();
+			for ($i = 0, $length = count($itemData); $i < $length; $i += 50 * $step) {
+				$parameters = array_slice($itemData, $i, 50 * $step);
+				$repeat = count($parameters) / $step;
+				
+				$sql = "INSERT".(!$updateExistingItems ? " IGNORE" : "")." INTO		wcf".WCF_N."_language_item
+								(languageID, languageItem, languageItemValue, languageCategoryID, languageItemOriginIsSystem". ($packageID ? ", packageID" : "") . ")
+					VALUES			".substr(str_repeat('(?, ?, ?, ?, ?'. ($packageID ? ', ?' : '') .'), ', $repeat), 0, -2);
+				
+				if ($updateExistingItems) {
+					$sql .= " ON DUPLICATE KEY
+					UPDATE			languageItemValue = IF(languageItemOriginIsSystem = 0, languageItemValue, VALUES(languageItemValue)),
+								languageCategoryID = VALUES(languageCategoryID),
+								languageUseCustomValue = 0";
+				}
+				
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute($parameters);
+			}
+			WCF::getDB()->commitTransaction();
+		}
+		
+		// update the relevant language files
+		if ($updateFiles) {
+			DirectoryUtil::getInstance(WCF_DIR.'language/')->removePattern(new Regex($languageID.'_.*\.php$'));
+            
+		}
+		
+		// templates
+		DirectoryUtil::getInstance(WCF_DIR.'templates/compiled/')->removePattern(new Regex('.*_'.$languageID.'_.*\.php$'));
+		// acp templates
+		DirectoryUtil::getInstance(WCF_DIR.'acp/templates/compiled/')->removePattern(new Regex('.*_'.$languageID.'_.*\.php$'));
+	}
 }
