@@ -52,8 +52,6 @@ class CMSImportHandler extends SingletonFactory{
         $this->importStylesheets();
         $this->importLayouts();
         $this->importModules();
-        
-        echo 'succeeded';
     }
     
     protected function importPages(){

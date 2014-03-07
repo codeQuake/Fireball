@@ -2,26 +2,32 @@ CMS.ACP.Backup = { };
 CMS.ACP.Backup.Import = Class.extend({
     _notification: null,
     _proxy: null,
+    _target: null,
 
     init: function () {
+        this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'), 'success');
         this._proxy = new WCF.Action.Proxy({
-            success: function () { this._notification.show(); }
+            success: $.proxy(this._success, this)
         });
         $('.jsRestoreRow .jsRestoreButton').click($.proxy(this._click, this));
 
-        this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'), 'success');
+        
     },
-
+    _success: function () {
+        this._notification.show();
+        WCF.LoadingOverlayHandler.updateIcon(this._target, false);
+        this._target = null;
+    },
     _click: function (event) {
-        var $target = $(event.currentTarget);
+        this._target = $(event.currentTarget);
         event.preventDefault();
 
-        if ($target.data('confirmMessage')) {
-            WCF.System.Confirmation.show($target.data('confirmMessage'), $.proxy(this._execute, this), { target: $target });
+        if (this._target.data('confirmMessage')) {
+            WCF.System.Confirmation.show(this._target.data('confirmMessage'), $.proxy(this._execute, this), { target: this._target });
         }
         else {
-            WCF.LoadingOverlayHandler.updateIcon($target);
-            this._sendRequest($target);
+            WCF.LoadingOverlayHandler.updateIcon(this._target);
+            this._sendRequest(this._target);
         }
     },
 
@@ -42,6 +48,7 @@ CMS.ACP.Backup.Import = Class.extend({
         });
 
         this._proxy.sendRequest();
+
     }
 
    
