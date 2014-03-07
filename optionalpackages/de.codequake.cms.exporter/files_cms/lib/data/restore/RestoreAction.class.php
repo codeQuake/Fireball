@@ -13,8 +13,9 @@ use cms\system\export\CMSImportHandler;
 class RestoreAction extends AbstractDatabaseObjectAction{
 
     protected $className = 'cms\data\restore\RestoreEditor';
-    protected $requireACP = array('delete');
+    protected $requireACP = array('delete', 'importBackup');
     protected $permissionsDelete = array('admin.cms.restore.canRestore');
+    protected $permissionsImportBackup = array('admin.cms.restore.canRestore');
     
     public function delete(){
         //del files
@@ -26,7 +27,11 @@ class RestoreAction extends AbstractDatabaseObjectAction{
         parent::delete();
     }
     
-    public function import(){
+    public function validateImportBackup(){
+        //does nothing
+    }
+    
+    public function importBackup(){
         $objectID = reset($this->objectIDs);
         $restore = new Restore($objectID);
         

@@ -3,10 +3,15 @@
 
 <header class="boxHeadline">
     <h1>{lang}cms.acp.restore.list{/lang}</h1>
+	
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS.js"></script>
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.Backup.js"></script>
 	<script data-relocate="true">
 	    //<![CDATA[
 	    $(function () {
 	        new WCF.Action.Delete('cms\\data\\restore\\RestoreAction', '.jsRestoreRow');
+			new CMS.ACP.Backup.Import();
 	    });
 	    //]]>
 	</script>
@@ -42,7 +47,7 @@
 					<tr class="jsRestoreRow">
 						<td class="columnIcon">
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$restore->restoreID}" data-confirm-message="{lang}cms.acp.restore.delete.sure{/lang}"></span>
-							<span class="icon icon16 icon-ambulance jsRestoreButton jsTooltip pointer" title="{lang}cms.acp.restore.restore{/lang}" data-object-id="{@$restore->restoreID}"></span>
+							<span class="icon icon16 icon-ambulance jsRestoreButton jsTooltip pointer" title="{lang}cms.acp.restore.restore{/lang}" data-object-id="{@$restore->restoreID}" data-confirm-message="{lang}cms.acp.restore.import.sure{/lang}"></span>
 							<a title="{lang}cms.acp.restore.download{/lang}" class="jsTooltip pointer" href="{link controller="RestoreDownload" id=$restore->restoreID application="cms"}{/link}"><span class="icon icon16 icon-download"></span></a>
 							{event name='rowButtons'}
 						</td>
