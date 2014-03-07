@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\restore;
 use wcf\data\AbstractDatabaseObjectAction;
-use cms\data\folder\Folder;
+use cms\system\export\CMSImportHandler;
 
 /**
  * @author	Jens Krumsieck
@@ -24,6 +24,13 @@ class RestoreAction extends AbstractDatabaseObjectAction{
             
         }
         parent::delete();
+    }
+    
+    public function import(){
+        $objectID = reset($this->objectIDs);
+        $restore = new Restore($objectID);
+        
+        CMSImportHandler::getInstance()->handleImport($restore->filename);
     }
     
     
