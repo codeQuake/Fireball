@@ -13,7 +13,7 @@ use cms\data\feed\FeedAction;
  * @package	de.codequake.cms.news.rss
  */
 
-class FeedEditForm extends LayoutAddForm{
+class FeedEditForm extends FeedAddForm{
     
     public $feedID = 0;
     public $feed = null;
