@@ -20,7 +20,9 @@
 	
 	<instructions type="install">
     <instruction type="sql">install.sql</instruction>
-    <instruction type="file">files.tar</instruction>
+    <instruction type="file" application="cms">files.tar</instruction>
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
+    <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+    <instruction type="acpTemplate" application="cms">acptemplates.tar</instruction>
 	</instructions>
 </package>

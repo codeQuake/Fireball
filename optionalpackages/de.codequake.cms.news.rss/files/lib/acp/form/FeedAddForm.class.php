@@ -45,7 +45,7 @@ class FeedAddForm extends AbstractForm{
     
     public function validate(){
         parent::validate();
-        if(!simplexml_load_file($this->url)) throw new UserInputException('feedUrl', 'noFeed');
+        if(!simplexml_load_file($this->feedUrl)) throw new UserInputException('feedUrl', 'noFeed');
     }
     
     public function assignVariables(){
