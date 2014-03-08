@@ -23,6 +23,8 @@
     <instruction type="file" application="cms">files.tar</instruction>
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-    <instruction type="acpTemplate" application="cms">acptemplates.tar</instruction>
+    <instruction type="acpTemplate" application="cms">acptemplates.tar</instruction>>
+    <instruction type="language">language/*.xml</instruction>
+    <instruction type="cronjob">xml/cronjob.xml</instruction>
 	</instructions>
 </package>
