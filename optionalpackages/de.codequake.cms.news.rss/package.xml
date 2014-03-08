@@ -21,5 +21,6 @@
 	<instructions type="install">
     <instruction type="sql">install.sql</instruction>
     <instruction type="file">files.tar</instruction>
+    <instruction type="acpMenu">xml/acpMenu.xml</instruction>
 	</instructions>
 </package>

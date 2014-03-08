@@ -12,7 +12,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 class FeedAction extends AbstractDatabaseObjectAction{
 
     protected $className = 'cms\data\feed\FeedEditor';
-    protected $permissionsDelete = array('admin.cms.file.canAddFeed');
+    protected $permissionsDelete = array('admin.cms.news.canAddFeed');
     protected $requireACP = array('delete');
     
    
