@@ -4,6 +4,7 @@ use wcf\data\cronjob\Cronjob;
 use wcf\system\cronjob\AbstractCronjob;
 
 use cms\data\feed\FeedList;
+use cms\data\feed\FeedEditor;
 use cms\data\news\NewsAction;
 
 class RSSFeedNewsCronjob extends AbstractCronjob{
@@ -42,7 +43,10 @@ class RSSFeedNewsCronjob extends AbstractCronjob{
                     }
                     
                 }
+                $feedEditor = new FeedEditor($feed);
+                $feedEditor->update(array('lastCheck' => TIME_NOW));
             }
+            
             
         }
 }   
