@@ -23,7 +23,7 @@ class RSSFeedNewsCronjob extends AbstractCronjob{
 						    if(isset($ns_content) && (isset($ns_content->encoded)))
 							$content = (string)$ns_content->encoded;
                             
-                            $content .= '[url='.(string) $item->guid.']'.(string) $item->title.'[/url]';
+                            $content .= '<br/><span class="icon icon16 icon-rss"></span> [url='.(string) $item->guid.']'.(string) $item->title.'[/url] ('.$feed->title.')';
                             $news = array(
                                 'userID'       => null,
                                 'username'     => 'FeedPoster',
