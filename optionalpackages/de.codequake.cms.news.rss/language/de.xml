@@ -7,6 +7,7 @@
 
   <category name="cms.acp">
     <item name="cms.acp.feed.list"><![CDATA[RSS-Feeds auflisten]]></item>
+    <item name="cms.acp.feed.general"><![CDATA[Allgemeine Informationen]]></item>
     <item name="cms.acp.feed.title"><![CDATA[Titel]]></item>>
     <item name="cms.acp.feed.url"><![CDATA[RSS Feed]]></item>
     <item name="cms.acp.feed.add"><![CDATA[RSS-Feed hinzufügen]]></item>
