@@ -29,8 +29,6 @@ class FeedEditForm extends FeedAddForm{
     public function readFormParameters(){
         parent::readFormParameters();
         if(isset($_REQUEST['id'])) $this->feedID = intval($_REQUEST['id']);
-        if(isset($_POST['feedUrl'])) $this->feedUrl = $_POST['feedUrl'];
-        if(isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
     }
     
     public function assignVariables(){

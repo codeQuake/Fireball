@@ -24,7 +24,7 @@ class RSSFeedNewsCronjob extends AbstractCronjob{
                             
                             $content .= '[url='.(string) $item->guid.']'.(string) $item->title.'[/url]';
                             $news = array(
-                                'userID'       => 0,
+                                'userID'       => null,
                                 'username'     => 'FeedPoster',
                                 'subject'        => (string) $item->title,
                                 'message'   => $content,
@@ -36,8 +36,8 @@ class RSSFeedNewsCronjob extends AbstractCronjob{
                                 'imageID' => 0,
                                 'lastChangeTime' => TIME_NOW);
                             $categoryIDs = array($feed->categoryID);
-                            print_r($news);
-                            
+                            $action  = new NewsAction(array(), 'create', array('data' =>$news, 'categoryIDs' => $categoryIDs, 'attachmentHandler' => null, 'tags' => array()));
+                            $action->executeAction();
                         }
                     }
                     
