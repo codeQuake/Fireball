@@ -14,4 +14,8 @@
     <item name="cms.acp.feed.edit"><![CDATA[RSS-Feed bearbeiten]]></item>
     <item name="cms.acp.feed.categoryID"><![CDATA[Kategorie]]></item>
   </category>
+
+  <category name="wcf.acp.group">
+    <item name="wcf.acp.group.option.admin.cms.news.canAddFeed"><![CDATA[Kann RSS Feeds hinzufügen]]></item>
+  </category>
 </language>

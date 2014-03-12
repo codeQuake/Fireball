@@ -19,4 +19,9 @@
     <item name="wcf.acp.option.cms_automatic_backup_delete"><![CDATA[Automatische Löschung]]></item>
     <item name="wcf.acp.option.cms_automatic_backup_delete.description"><![CDATA[Automatische Löschung der Sicherungen, die Älter als die eingegebene Zeit in Tagen ist]]></item>
   </category>
+
+  <category name="wcf.acp.group">
+    <item name="wcf.acp.group.option.category.admin.cms.restore"><![CDATA[Wiederherstellungspunkte]]></item>
+    <item name="wcf.acp.group.option.admin.cms.restore.canRestore"><![CDATA[Kann Systemwiederherstellung nutzen]]></item>
+  </category>
 </language>

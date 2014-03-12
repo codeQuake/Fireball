@@ -19,4 +19,9 @@
     <item name="wcf.acp.option.cms_automatic_backup_delete"><![CDATA[Automatic delete]]></item>
     <item name="wcf.acp.option.cms_automatic_backup_delete.description"><![CDATA[Automatische delete of backups older than X days]]></item>
   </category>
+
+  <category name="wcf.acp.group">
+    <item name="wcf.acp.group.option.category.admin.cms.restore"><![CDATA[Restore]]></item>
+    <item name="wcf.acp.group.option.admin.cms.restore.canRestore"><![CDATA[Can restore page data]]></item>
+  </category>
 </language>

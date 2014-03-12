@@ -26,7 +26,7 @@ class RSSFeedNewsCronjob extends AbstractCronjob{
                             $content .= '<br/><span class="icon icon16 icon-rss"></span> [url='.(string) $item->guid.']'.(string) $item->title.'[/url] ('.$feed->title.')';
                             $news = array(
                                 'userID'       => null,
-                                'username'     => 'FeedPoster',
+                                'username'     =>  $feed->title,
                                 'subject'        => (string) $item->title,
                                 'message'   => $content,
                                 'time'         => strtotime((string) $item->pubDate),
