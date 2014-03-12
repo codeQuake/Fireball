@@ -45,7 +45,10 @@
                                 </div>
                             </header>
                             <div class="messageBody">
-                                <div>
+								<div class="center">
+									{if CMS_NEWS_NEWS_IMAGES_ATTACHED}{@$news->getImage()->getImageTag()}{/if}
+								</div>
+                                <div {if CMS_NEWS_NEWS_IMAGES_ATTACHED}class="marginTop"{/if}>
                                     {@$news->getExcerpt()}
                                 </div>
                                 <div class="messageFooter">
