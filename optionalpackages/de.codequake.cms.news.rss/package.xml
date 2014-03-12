@@ -4,8 +4,8 @@
 		<packagename>Fireball CMS RSS Feed Poster</packagename>
 		<packagedescription>Ermöglicht Nachrichten von RSS Feeds zu erstellen</packagedescription>
     <plugin>de.codequake.cms</plugin>
-		<version>1.0.0 Beta 1</version>
-		<date>2014-03-10</date>
+		<version>1.0.0</version>
+		<date>2014-03-12</date>
 	</packageinformation>
 	
 	<authorinformation>

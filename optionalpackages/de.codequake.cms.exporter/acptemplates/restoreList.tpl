@@ -24,8 +24,7 @@
 		</ul>
 	</nav>{pages print=true assign=pagesLinks application='cms' controller="RestoreList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 </div>
-
-
+	
 {if $objects|count}
 	<div class="tabularBox tabularBoxTitle marginTop">
 		<header>

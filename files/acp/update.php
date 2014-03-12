@@ -42,7 +42,7 @@ $sql = "CREATE TABLE cms".WCF_N."_news_image(
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array());
 
-//update news table fir news image support
+//update news table for news image support
 $sql = "ALTER TABLE cms".WCF_N."_news ADD imageID INT (10) NOT NULL DEFAULT 0 AFTER comments";
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array());
