@@ -5,4 +5,5 @@ title VARCHAR(255) NOT NULL,
 feedUrl VARCHAR(255) NOT NULL,
 lastCheck INT(20),
 languageID INT(10),
-categoryID INT(10) NOT NULL);
+categoryID INT(10) NOT NULL
+imageID INT (10) NOT NULL DEFAULT 0);

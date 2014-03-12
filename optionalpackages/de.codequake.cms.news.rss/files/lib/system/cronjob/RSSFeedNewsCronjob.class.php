@@ -34,7 +34,7 @@ class RSSFeedNewsCronjob extends AbstractCronjob{
                                 'enableBBCodes' => 1,
 			                    'enableHtml' => 1,
 			                    'enableSmilies' => 1,
-                                'imageID' => 0,
+                                'imageID' => $feed->imageID,
                                 'lastChangeTime' => TIME_NOW);
                             $categoryIDs = array($feed->categoryID);
                             $action  = new NewsAction(array(), 'create', array('data' =>$news, 'categoryIDs' => $categoryIDs, 'attachmentHandler' => null, 'tags' => array()));
