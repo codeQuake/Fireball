@@ -41,9 +41,9 @@ class NewsImage extends CMSDatabaseObject implements IRouteController{
         return $path;
     }
     
-    public function getImageTag($width){
+    public function getImageTag($width = 0){
         $file = $this->getImagePath();
-        return '<img src="'.$file.'" alt="'.$this->title.'" style="width: '.$width.'px" />';
+        return $width != 0 ? '<img src="'.$file.'" alt="'.$this->title.'" style="width: '.$width.'px" />' :  '<img src="'.$file.'" alt="'.$this->title.'" class="jsResizeImage" />';
     }
     
 }
