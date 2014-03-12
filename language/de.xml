@@ -386,6 +386,8 @@
     <item name="wcf.acp.option.cms_news_preview_truncate.description"><![CDATA[Nach wie vielen Zeichen sollen Nachrichten in der Vorschau gekürzt werden?]]></item>
     <item name="wcf.acp.option.cms_news_sidebar_categories"><![CDATA[Kategorien in der Sidebar anzeigen]]></item>
     <item name="wcf.acp.option.cms_news_sidebar_categories_main"><![CDATA[Nur Hauptkategorien anzeigen]]></item>
+    <item name="wcf.acp.option.cms_news_news_images_attached"><![CDATA[Nachrichtenbilder in Nachricht anzeigen]]></item>
+    <item name="wcf.acp.option.cms_news_news_images_attached.description"><![CDATA[Sollen die Nachrichtenbilder sofern vorhanden in voller Größe über der eigentlichen Nachricht angezeigt werden?]]></item>
   </category>
 
   <category name="wcf.dashboard">
