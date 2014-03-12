@@ -45,10 +45,12 @@
                                 </div>
                             </header>
                             <div class="messageBody">
+								{if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->getImage() != null}
 								<div class="center">
-									{if CMS_NEWS_NEWS_IMAGES_ATTACHED}{@$news->getImage()->getImageTag()}{/if}
+									{@$news->getImage()->getImageTag()}
 								</div>
-                                <div {if CMS_NEWS_NEWS_IMAGES_ATTACHED}class="marginTop"{/if}>
+								{/if}
+                                <div {if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->getImage() != null}class="marginTop"{/if}>
                                     {@$news->getExcerpt()}
                                 </div>
                                 <div class="messageFooter">

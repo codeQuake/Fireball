@@ -111,10 +111,12 @@
                                 </div>
                             </header>
                             <div class="messageBody">
-                                <div class="center">
-									{if CMS_NEWS_NEWS_IMAGES_ATTACHED}{@$news->getImage()->getImageTag()}{/if}
+                                {if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->getImage() != null}
+								<div class="center">
+									{@$news->getImage()->getImageTag()}
 								</div>
-                                <div {if CMS_NEWS_NEWS_IMAGES_ATTACHED}class="marginTop"{/if}>
+								{/if}
+                                <div {if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->getImage() != null}class="marginTop"{/if}>
                                     {@$news->getFormattedMessage()}
                                 </div>
 								{include file='attachments'}
