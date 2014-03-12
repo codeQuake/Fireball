@@ -27,8 +27,21 @@ class StatsPage extends AbstractPage{
         
         //get stats
         $this->visits = VisitCountHandler::getInstance()->getVisitors($this->startDate, $this->endDate);
-        
-        $this->browsers = VisitCountHandler::getInstance()->getBrowsers($this->startDate, $this->endDate);
+        $m = 0;
+        foreach($this->visits as $visit){
+            $tmp = @unserialize($visit['visitors']['browsers']);
+            if(empty($tmp)) $tmp = array();
+            foreach($tmp as $key => $value){
+                $this->browsers[$key] = array('visits' => isset($this->browsers[$key]) ? $this->browsers[$key] + $value : $value, 'percentage' => 0);
+                $m = $m + $value;
+            }
+        }
+        //calc percentages
+        foreach($this->browsers as $key => $browser){
+            $browser['percentage'] = ($browser['visits'] / $m) * 100;
+            $this->browsers[$key] = $browser;
+        }
+       
                 
         //read pages
         $list = new PageList();

@@ -18,7 +18,7 @@ class VisitCountHandler extends SingletonFactory{
     }
     
     protected function canCount(){
-        //if($this->session->getVar('counted')) return false;
+        if($this->session->getVar('counted')) return false;
         return true;
     }
 
@@ -77,7 +77,7 @@ class VisitCountHandler extends SingletonFactory{
     }
     
     public function getVisitors($start, $end){
-        $visitors = array();
+        $vistors = array();
         $date = $start;
         while($date <= $end){
             $months = array(WCF::getLanguage()->get('wcf.date.month.january'),WCF::getLanguage()->get('wcf.date.month.february'),WCF::getLanguage()->get('wcf.date.month.march'),WCF::getLanguage()->get('wcf.date.month.april'),WCF::getLanguage()->get('wcf.date.month.may'),WCF::getLanguage()->get('wcf.date.month.june'),WCF::getLanguage()->get('wcf.date.month.july'),WCF::getLanguage()->get('wcf.date.month.august'),WCF::getLanguage()->get('wcf.date.month.september'),WCF::getLanguage()->get('wcf.date.month.october'),WCF::getLanguage()->get('wcf.date.month.november'),WCF::getLanguage()->get('wcf.date.month.december'));
@@ -90,58 +90,26 @@ class VisitCountHandler extends SingletonFactory{
         return $visitors;
     }
     
-    public function getBrowsers($start, $end){
-        $browsers = array();
-        $sql = "SELECT COUNT( browser ) AS amount, browser 
-                FROM  cms".WCF_N."_counter 
-                WHERE browser <>  '' AND time BETWEEN ".$start." AND ".$end." 
-                GROUP BY browser";
-        $statement = WCF::getDB()->prepareStatement($sql);
-        $statement->execute();
-        $sum = 0;
-        while($row = $statement->fetchArray()){
-            $browsers[] = $row;
-            $sum = $sum + $row['amount'];
-        }
-        for($i = 0; $i<=count($browsers)-1; $i++){
-            $browsers[$i]['percentage'] = round(($browsers[$i]['amount']/$sum)*100, 2);
-        }
-        
-        return $browsers;
-     }
-    
       
     public function getAllVisitors(){
-        $sql = "SELECT  COUNT(*) AS amount
-                FROM    cms".WCF_N."_counter";
+        $sql = "SELECT * FROM cms".WCF_N."_counter";
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute();
-        
-        return $statement->fetchColumn();
+        $count = 0;
+        while($row = $statement->fetchArray()){
+            $count = $count + $row['visits'];
+        }
+        return $count;
     }
     
-    public function getDailyVisitors($day = 10, $month = 2, $year=2014, $option="all"){
-        $start = mktime(0,0,0,$month,$day,$year);
-        $end = mktime(23,59,59, $month,$day,$year);
-        if($option=="all"){
-            $sql = "SELECT  COUNT(*) AS amount
-                FROM    cms".WCF_N."_counter WHERE time BETWEEN ".$start." AND ".$end."";
-        }
-        elseif($option=="spiders"){
-            $sql = "SELECT  COUNT(*) AS amount
-                FROM    cms".WCF_N."_counter WHERE spider <> 0 AND time BETWEEN ".$start." AND ".$end."";
-        }
-        elseif($option=="registered"){
-            $sql = "SELECT  COUNT(*) AS amount
-                FROM    cms".WCF_N."_counter WHERE userID <> 0 AND time BETWEEN ".$start." AND ".$end."";
-        }
+    public function getDailyVisitors($day = 10, $month = 2, $year=2014){
+        $sql = "SELECT * FROM cms".WCF_N."_counter WHERE day = ? AND month = ? AND year = ?";
         $statement = WCF::getDB()->prepareStatement($sql);
-        $statement->execute();
-        
-        return $statement->fetchColumn();
+        $statement->execute(array($day, $month, $year));        
+        return $statement->fetchArray();
     }
     
-    public function getWeeklyVisitorArray($option="all"){
+    public function getWeeklyVisitorArray(){
         $currentMonth = date("n", TIME_NOW);
         $currentYear = date("Y", TIME_NOW);
         $currentDay = date("j", TIME_NOW);
@@ -155,7 +123,7 @@ class VisitCountHandler extends SingletonFactory{
 
             $months = array(WCF::getLanguage()->get('wcf.date.month.january'),WCF::getLanguage()->get('wcf.date.month.february'),WCF::getLanguage()->get('wcf.date.month.march'),WCF::getLanguage()->get('wcf.date.month.april'),WCF::getLanguage()->get('wcf.date.month.may'),WCF::getLanguage()->get('wcf.date.month.june'),WCF::getLanguage()->get('wcf.date.month.july'),WCF::getLanguage()->get('wcf.date.month.august'),WCF::getLanguage()->get('wcf.date.month.september'),WCF::getLanguage()->get('wcf.date.month.october'),WCF::getLanguage()->get('wcf.date.month.november'),WCF::getLanguage()->get('wcf.date.month.december'));
             $visitors[$i] = array('string' => $day.'. '.$months[$month-1].' '.$year,
-                                'visitors' => $this->getDailyVisitors($day, $month, $year,$option));
+                                'visitors' => $this->getDailyVisitors($day, $month, $year));
             $day--;
             if($day == 0){
                 $month--;

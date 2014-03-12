@@ -4,6 +4,7 @@
     <h1>{lang}cms.acp.dashboard{/lang}</h1>
 </header>
 		
+		{assign var=visitorArray value=$visitors->getWeeklyVisitorArray()}
 		<div  class="container containerPadding shadow marginTop">
 		<fieldset>
 			<legend>{lang}cms.acp.dashboard.lastWeeksVisitors{/lang}</legend>
@@ -60,9 +61,9 @@
 						<dt>{lang}wcf.user.usersOnline{/lang}</dt>
 						<dd>{#$usersOnlineList->stats[total]}</dd>
 						<dt>{lang}cms.acp.dashboard.visitsToday{/lang}</dt>
-						<dd>{$visitors->getWeeklyVisitorArray()[6][visitors]}</dd>
+						<dd>{$visitorArray[6][visitors]['visits']}</dd>
 						<dt>{lang}cms.acp.dashboard.visitsYesterday{/lang}</dt>
-						<dd>{$visitors->getWeeklyVisitorArray()[5][visitors]}</dd>
+						<dd>{$visitorArray[5][visitors]['visits']}</dd>
 						<dt>{lang}cms.acp.dashboard.visitsAll{/lang}</dt>
 						<dd>{$visitors->getAllVisitors()}</dd>						
 					</dl>
@@ -70,9 +71,6 @@
 			</div>
 		</div>
 		<br class="clearfix" />
-	{assign var=visitorArray value=$visitors->getWeeklyVisitorArray()}
-	{assign var=userArray value=$visitors->getWeeklyVisitorArray("registered")}
-	{assign var=spiderArray value=$visitors->getWeeklyVisitorArray("spiders")}
 	{assign var=maximum value=0}
     <script data-relocate="true" src="{@$__wcf->getPath('cms')}js/3rdParty/Chart.js"></script>
     <script data-relocate="true">
@@ -84,21 +82,21 @@
 				    strokeColor: "rgba(21,41,148,0.5)",
 				    pointColor: "rgba(21,41,148,1)",
 				    pointStrokeColor: "#fff",
-				    data: [{foreach from=$visitorArray item=count}{$count['visitors']}, {if $count['visitors'] > $maximum} {assign var=maximum value=$count['visitors']}{/if} {/foreach}]
+				    data: [{foreach from=$visitorArray item=count}{if $count['visitors']['visits']|isset}{$count['visitors']['visits']}, {if $count['visitors']['visits'] > $maximum} {assign var=maximum value=$count['visitors']['visits']}{/if}{else}0,{/if} {/foreach}]
 				},
 				{
 					fillColor : "rgba(151,187,205,0.1)",
 					strokeColor : "rgba(151,187,205,1)",
 					pointColor : "rgba(151,187,205,1)",
 					pointStrokeColor : "#fff",
-					data : [{foreach from=$spiderArray item=count}{$count['visitors']},{/foreach}]
+					data : [{foreach from=$visitorArray item=count}{if $count['visitors']['spiders']|isset} {$count['visitors']['spiders']}{else}0{/if},{/foreach}]
 				},
 				{
 					fillColor : "rgba(148,1,1,0.1)",
 					strokeColor : "rgba(148,1,1,0.5)",
 					pointColor : "rgba(148,1,1,1)",
 					pointStrokeColor : "#fff",
-					data : [{foreach from=$userArray item=count}{$count['visitors']},{/foreach}]
+					data : [{foreach from=$visitorArray item=count}{if $count['visitors']['users']|isset}{$count['visitors']['users']}{else}0{/if},{/foreach}]
 				}
             ]
 

@@ -27,9 +27,9 @@
                 
                     {assign var=i value=0}
                     <dl class="plain inlineDataList">
-                    {foreach from=$browsers item=browser}
-                        <dt style="float:left;"><span class="icon icon-circle" style="color: {$colors[$i]};"></span> <small>{$browser['browser']}</small></dt>
-                        <dd style="display: block; text-align: right;"><small>{$browser['percentage']} %</small></dd>
+                    {foreach from=$browsers item=values key=$key}
+                        <dt style="float:left;"><span class="icon icon-circle" style="color: {$colors[$i]};"></span> <small>{$key}</small></dt>
+                        <dd style="display: block; text-align: right;"><small>{$values['percentage']} %</small></dd>
                     {assign var=i value=$i+1}
                     {/foreach}
                     </dl>
@@ -194,14 +194,28 @@
      var lineChartData = {
          labels: [{foreach from=$visits item=month}"{$month['string']}",{/foreach}],
                  datasets: [
-                     {
-                         fillColor: "rgba(21,41,148,0.1)",
-                         strokeColor: "rgba(21,41,148,0.5)",
-                         pointColor: "rgba(21,41,148,1)",
-                         pointStrokeColor: "#fff",
-                         data: [{foreach from=$visits item=count}{$count['visitors']}, {if $count['visitors'] > $maximum} {assign var=maximum value=$count['visitors']}{/if} {/foreach}]
-                     }
-                            ]
+				{
+				    fillColor: "rgba(21,41,148,0.1)",
+				    strokeColor: "rgba(21,41,148,0.5)",
+				    pointColor: "rgba(21,41,148,1)",
+				    pointStrokeColor: "#fff",
+				    data: [{foreach from=$visits item=count}{if $count['visitors']['visits']|isset}{$count['visitors']['visits']}, {if $count['visitors']['visits'] > $maximum} {assign var=maximum value=$count['visitors']['visits']}{/if}{else}0,{/if} {/foreach}]
+				},
+				{
+					fillColor : "rgba(151,187,205,0.1)",
+					strokeColor : "rgba(151,187,205,1)",
+					pointColor : "rgba(151,187,205,1)",
+					pointStrokeColor : "#fff",
+					data : [{foreach from=$visits item=count}{if $count['visitors']['spiders']|isset} {$count['visitors']['spiders']}{else}0{/if},{/foreach}]
+				},
+				{
+					fillColor : "rgba(148,1,1,0.1)",
+					strokeColor : "rgba(148,1,1,0.5)",
+					pointColor : "rgba(148,1,1,1)",
+					pointStrokeColor : "#fff",
+					data : [{foreach from=$visits item=count}{if $count['visitors']['users']|isset}{$count['visitors']['users']}{else}0{/if},{/foreach}]
+				}
+            ]
                          }
 			
 			
@@ -217,7 +231,7 @@
                 var data = [
                     {foreach from=$browsers item=browser}
         {
-            value: {$browser['amount']},
+            value: {$browser['visits']},
             color: "{$colors[$i]}"
         },
         {assign var=i value=$i+1}
