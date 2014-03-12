@@ -18,25 +18,62 @@ class VisitCountHandler extends SingletonFactory{
     }
     
     protected function canCount(){
-        if($this->session->getVar('counted')) return false;
+        //if($this->session->getVar('counted')) return false;
         return true;
     }
 
     public function count(){
         if($this->canCount()){
             $userID = WCF::getUser()->userID;
-            $time = TIME_NOW;
-            $ipAddress = $this->session->ipAddress;
             $spider = $this->getSpiderID($this->session->userAgent);
             if($spider === null) $spider = 0;
             $browser = $this->getBrowser($this->session->userAgent);
             $browserName = $browser['name'];
-            $browserVersion = $browser['version'];
-            $sql = "INSERT INTO cms".WCF_N."_counter VALUES (".$time.",".$userID.",'".$browserName."','".$browserVersion."','".$ipAddress."',".$spider.")";
-            $statement = WCF::getDB()->prepareStatement($sql);
-            $statement->execute(array());
+            
+            //update
+            if($this->existingColumn()){
+                $sql = "SELECT * FROM cms".WCF_N."_counter WHERE day = ".date('j', TIME_NOW)." AND month = ".date('n', TIME_NOW)." AND year = ".date('Y', TIME_NOW);
+                $statement = WCF::getDB()->prepareStatement($sql);
+                $statement->execute();
+                $counter = $statement->fetchArray();
+                
+                $browsers = @unserialize($counter['browsers']);
+                if(isset($browsers[$browserName])) $browsers[$browserName] = $browsers[$browserName] + 1;
+                else $browsers[$browserName] = 1;
+                $users = $counter['users'];
+                if($userID != 0) $users++;
+                $spiders = $counter['spiders'];
+                if($spider != 0) $spiders++;
+                $visits = $counter['visits'] + 1;
+                
+                $sql = "UPDATE cms".WCF_N."_counter 
+                        SET visits = ?, users = ?, spiders = ?, browsers = ?
+                        WHERE day = ".date('j', TIME_NOW)." AND month = ".date('n', TIME_NOW)." AND year = ".date('Y', TIME_NOW);
+                $statement = WCF::getDB()->prepareStatement($sql);
+                $statement->execute(array($visits, $users, $spiders, serialize($browsers)));
+            }
+            //create new
+            else{
+                $users = 0; $spiders = 0;
+                if($userID != 0) $users++;
+                if($spider != 0) $spiders++;
+                $browsers = array();
+                $browsers[$browserName] = 1;
+                
+                $sql = "INSERT INTO cms".WCF_N."_counter VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $statement = WCF::getDB()->prepareStatement($sql);
+                $statement->execute(array(date('j', TIME_NOW), date('n', TIME_NOW), date('Y', TIME_NOW), 1, $users, $spiders, serialize($browsers)));
+            }
             $this->session->register('counted', true);
         }
+    }
+    
+    public function existingColumn(){
+        $sql = "SELECT COUNT(*) AS amount FROM cms".WCF_N."_counter WHERE day = ".date('j', TIME_NOW)." AND month = ".date('n', TIME_NOW)." AND year = ".date('Y', TIME_NOW);
+        $statement = WCF::getDB()->prepareStatement($sql);
+        $statement->execute();;
+        if($statement->fetchColumn() == 1) return true;
+        return false;
     }
     
     public function getVisitors($start, $end){

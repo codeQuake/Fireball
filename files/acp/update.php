@@ -1,14 +1,15 @@
 <?php
 use wcf\system\WCF;
 //create counter table
-$sql = "CREATE TABLE cms".WCF_N."_counter(
-                                    time INT (20) NOT NULL,
-                                    userID INT(10),
-                                    browser VARCHAR(255),
-                                    browserVersion VARCHAR(255),
-                                    ipAddress VARCHAR(255),
-                                    spider INT(20)
-        );";
+$sql = "CREATE TABLE cms1_counter(
+            day INT(2) NOT NULL DEFAULT '1',
+            month INT(2) NOT NULL DEFAULT '1',
+            year INT(4) NOT NULL DEFAULT '2014',
+            visits INT(20) NOT NULL DEFAULT 0,
+            users INT(20) NOT NULL DEFAULT 0,
+            spiders INT(20) NOT NULL DEFAULT 0,
+            browsers VARCHAR(255)
+            );";
         
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array());

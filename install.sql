@@ -116,17 +116,6 @@ title VARCHAR(255) NOT NULL,
 filename VARCHAR(255) NOT NULL
 );
 
---counter
-DROP TABLE IF EXISTS cms1_counter;
-CREATE TABLE cms1_counter(
-time INT (20) NOT NULL,
-userID INT(10),
-browser VARCHAR(255),
-browserVersion VARCHAR(255),
-ipAddress VARCHAR(255),
-spider INT(20)
-);
-
 --news to category
 DROP TABLE IF EXISTS cms1_news_to_category;
 CREATE TABLE cms1_news_to_category(
@@ -143,7 +132,20 @@ moduleID INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 moduleTitle VARCHAR(255) NOT NULL DEFAULT 'modul',
 php MEDIUMTEXT,
 tpl MEDIUMTEXT
-):
+);
+
+
+--counter
+DROP TABLE IF EXISTS cms1_counter;
+CREATE TABLE cms1_counter(
+day INT(2) NOT NULL DEFAULT '1',
+month INT(2) NOT NULL DEFAULT '1',
+year INT(4) NOT NULL DEFAULT '2014',
+visits INT(20) NOT NULL DEFAULT 0,
+users INT(20) NOT NULL DEFAULT 0,
+spiders INT(20) NOT NULL DEFAULT 0,
+browsers VARCHAR(255)
+);
 
 --foreign keys
 ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
