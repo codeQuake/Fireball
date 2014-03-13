@@ -20,7 +20,8 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a class="button jsTooltip" href="{link controller="CMSExport" application="cms"}{/link}" title="{lang}cms.acp.restore.create{/lang}"><span class="icon icon16 icon-asterisk"></span> <span>{lang}cms.acp.restore.create{/lang}<span></a></li>
+			<li><a class="button jsTooltip" href="{link controller="CMSExport" application="cms"}{/link}" title="{lang}cms.acp.restore.create{/lang}"><span class="icon icon16 icon-asterisk"></span> <span>{lang}cms.acp.restore.create{/lang}</span></a></li>
+			<li><a class="button jsTooltip" href="{link controller="Import" application="cms"}{/link}" title="{lang}cms.acp.restore.import{/lang}"><span class="icon icon16 icon-ambulance"></span> <span>{lang}cms.acp.restore.import{/lang}</span></a></li>
 		</ul>
 	</nav>{pages print=true assign=pagesLinks application='cms' controller="RestoreList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 </div>

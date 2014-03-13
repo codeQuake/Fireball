@@ -7,7 +7,12 @@
     <item name="cms.acp.restore.list"><![CDATA[Backups]]></item>
     <item name="cms.acp.restore.time"><![CDATA[Backup time]]></item>
     <item name="cms.acp.restore.restore"><![CDATA[Restore]]></item>
+    <item name="cms.acp.restore.import"><![CDATA[Restore with upload]]></item>
     <item name="cms.acp.restore.download"><![CDATA[Download]]></item>
+    <item name="cms.acp.restore.tar"><![CDATA[Upload package]]></item>
+    <item name="cms.acp.restore.info"><![CDATA[Importing huge datasets needs a lot of time, please do not close this window! All data will be erased before the import.]]></item>
+
+    <item name="cms.acp.restore.import.sure"><![CDATA[Are you sure you want to restore to this backup? All current data will be deleted!]]></item>
     <item name="cms.acp.restore.delete.sure"><![CDATA[Are you sure you want to delete this backup?]]></item>
     <item name="cms.acp.restore.create"><![CDATA[Create & download backup]]></item>
   </category>
