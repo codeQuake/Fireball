@@ -22,6 +22,7 @@
     <optionalpackage file="optionals/de.codequake.bbcode.icon.tar">de.codequake.bbcode.icon</optionalpackage>
     <optionalpackage file="optionals/de.codequake.cms.exporter.tar">de.codequake.cms.exporter</optionalpackage>
     <optionalpackage file="optionals/de.codequake.cms.news.rss.tar">de.codequake.cms.news.rss</optionalpackage>
+    <optionalpackage file="optionals/com.woltlab.wcf.legalNotice.tar">com.woltlab.wcf.legalNotice</optionalpackage>
   </optionalpackages>
 
   <instructions type="install">
