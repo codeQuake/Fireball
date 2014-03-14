@@ -37,7 +37,7 @@ class NewsAddForm extends MessageForm{
     public $attachmentObjectType = 'de.codequake.cms.news';
     public $image = null;
     public $imageList;
-    public $time = 0;
+    public $time = TIME_NOW;
     public $tags = array();
     
     public function readFormParameters(){
