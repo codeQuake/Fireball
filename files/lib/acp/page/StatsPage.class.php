@@ -38,7 +38,7 @@ class StatsPage extends AbstractPage{
         }
         //calc percentages
         foreach($this->browsers as $key => $browser){
-            $browser['percentage'] = ($browser['visits'] / $m) * 100;
+            $browser['percentage'] = round(($browser['visits'] / $m) * 100,2);
             $this->browsers[$key] = $browser;
         }
        
