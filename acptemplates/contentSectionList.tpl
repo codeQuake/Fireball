@@ -18,7 +18,7 @@
 			</span>
 		</li>
 		<li title="{$content->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-			<a href="{link controller='ContentList' application='cms' id=$content->contentID}{/link}" itemprop="url">
+			<a href="{link controller='ContentEdit' application='cms' id=$content->contentID}{/link}" itemprop="url">
 				<span itemprop="title">{$content->getTitle()|language}</span>
 			</a>
 			<span class="pointer">

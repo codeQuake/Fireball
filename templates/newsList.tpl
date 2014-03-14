@@ -81,7 +81,7 @@
 {include file='userNotice'}
 
 <div class="contentNavigation">
-  {pages print=true assign=pagesLinks controller="NewsCategory" application="cms" id=$categoryID link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+  {pages print=true assign=pagesLinks controller="NewsList" application="cms" id=$categoryID link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
   {if $category->getPermission('canAddNews')}
   <nav>
     <ul>
@@ -102,7 +102,7 @@
 
 {if $objects|count}
 <div class="contentNavigation">
-  {pages print=true assign=pagesLinks controller="NewsCategory" application="cms" id=$categoryID link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+  {pages print=true assign=pagesLinks controller="NewsList" application="cms" id=$categoryID link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
   {if $category->getPermission('canAddNews')}
   <nav>
     <ul>

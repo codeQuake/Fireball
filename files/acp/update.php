@@ -1,7 +1,7 @@
 <?php
 use wcf\system\WCF;
 //create counter table
-$sql = "CREATE TABLE cms1_counter(
+$sql = "CREATE TABLE cms".WCF_N."_counter(
             day INT(2) NOT NULL DEFAULT '1',
             month INT(2) NOT NULL DEFAULT '1',
             year INT(4) NOT NULL DEFAULT '2014',

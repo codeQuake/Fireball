@@ -37,13 +37,13 @@ class NewsAddForm extends MessageForm{
     public $attachmentObjectType = 'de.codequake.cms.news';
     public $image = null;
     public $imageList;
-    public $time = TIME_NOW;
+    public $time = 0;
     public $tags = array();
     
     public function readFormParameters(){
         parent::readFormParameters();
         if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tags = ArrayUtil::trim($_POST['tags']);
-        if (isset($_POST['time'])) $this->time = strtotime($_POST['time']);
+        if (isset($_POST['time']) && $_POST['time'] != 0) $this->time = strtotime($_POST['time']);
         if (isset($_POST['imageID'])) $this->image = new NewsImage(intval($_POST['imageID']));
     }
     

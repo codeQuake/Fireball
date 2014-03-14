@@ -28,7 +28,8 @@ class NewsListPage extends SortablePage{
     public $neededModules = array('MODULE_NEWS');
     public $itemsPerPage = CMS_NEWS_PER_PAGE;
     public $validSortFields = array('username', 'newsID', 'time', 'subject', 'clicks', 'comments');
-
+    public $defaultSortField = 'time';
+    public $defaultSortOrder = 'DESC';
     
     public $categoryID = 0;
     public $category = null;
