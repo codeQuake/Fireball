@@ -72,7 +72,7 @@ class VisitCountHandler extends SingletonFactory{
         $sql = "SELECT COUNT(*) AS amount FROM cms".WCF_N."_counter WHERE day = ".date('j', TIME_NOW)." AND month = ".date('n', TIME_NOW)." AND year = ".date('Y', TIME_NOW);
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute();;
-        if($statement->fetchColumn() == 1) return true;
+        if($statement->fetchColumn() != 0) return true;
         return false;
     }
     

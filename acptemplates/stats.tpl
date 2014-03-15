@@ -29,7 +29,7 @@
                     <dl class="plain inlineDataList">
                     {foreach from=$browsers item=values key=$key}
                         <dt style="float:left;"><span class="icon icon-circle" style="color: {$colors[$i]};"></span> <small>{$key}</small></dt>
-                        <dd style="display: block; text-align: right;"><small>{$values['percentage']} %</small></dd>
+                        <dd style="display: block; text-align: right;"><small>{$values['percentage']} %</small></dd><p style="clear:both;" ></p>
                     {assign var=i value=$i+1}
                     {/foreach}
                     </dl>

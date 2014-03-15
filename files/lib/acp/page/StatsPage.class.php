@@ -32,7 +32,7 @@ class StatsPage extends AbstractPage{
             $tmp = @unserialize($visit['visitors']['browsers']);
             if(empty($tmp)) $tmp = array();
             foreach($tmp as $key => $value){
-                $this->browsers[$key] = array('visits' => isset($this->browsers[$key]) ? $this->browsers[$key] + $value : $value, 'percentage' => 0);
+                $this->browsers[$key] = array('visits' => isset($this->browsers[$key]['visits']) ? $this->browsers[$key]['visits'] + $value : $value, 'percentage' => 0);
                 $m = $m + $value;
             }
         }
