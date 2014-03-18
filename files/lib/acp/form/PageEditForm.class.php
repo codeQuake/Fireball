@@ -41,6 +41,7 @@ class PageEditForm extends AbstractForm{
     public $showOrder = 0;
     public $menuItem = array();
     public $pageID = 0;
+    public $parentID = 0;
     public $page = null;
     public $pageList = null;
     public $layoutList = null;
