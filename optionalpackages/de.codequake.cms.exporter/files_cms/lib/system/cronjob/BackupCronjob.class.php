@@ -19,7 +19,7 @@ class BackupCronjob extends AbstractCronjob{
                 $action->executeAction();
             }
             if(CMS_AUTOMATIC_BACKUP_DELETE != 0){
-                $deleteTime = (time() - (CMS_AUTOMATIC_BACKUP_DELETE * 86400));
+                $deleteTime = (TIME_NOW - (CMS_AUTOMATIC_BACKUP_DELETE * 86400));
                 $list = new RestoreList();
                 $list->getConditionBuilder()->add('time <= ?', array($deleteTime));
                 $list->readObjects();
