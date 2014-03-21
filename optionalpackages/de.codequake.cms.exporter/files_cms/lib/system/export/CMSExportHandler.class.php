@@ -88,6 +88,7 @@ class CMSExportHandler extends SingletonFactory{
         $xml->beginDocument('language', 'http://www.woltlab.com', 'http://www.woltlab.com/XSD/maelstrom/language.xsd', array('languageCode' => 'de'));
         $current = 0;
         foreach($this->getI18n() as $item){
+            if(isset($item->languageID) && $item->languageID != 0 && LanguageFactory::getInstance()->getLanguageByCode('de') != null){
             if($item->languageID == LanguageFactory::getInstance()->getLanguageByCode('de')->languageID){
                 if($current == 0 || $current != $item->languageCategoryID){
                     if($current != 0) $xml->endElement();
@@ -96,6 +97,7 @@ class CMSExportHandler extends SingletonFactory{
                 }
                 $xml->writeElement('item', $item->languageItemValue, array('name' => $item->languageItem));
             }
+         }
         }
         $xml->endDocument(CMS_DIR.'export/de.xml');
         
@@ -104,6 +106,7 @@ class CMSExportHandler extends SingletonFactory{
         $xml->beginDocument('language', 'http://www.woltlab.com', 'http://www.woltlab.com/XSD/maelstrom/language.xsd', array('languageCode' => 'en'));
         $current = 0;
         foreach($this->getI18n() as $item){
+            if(isset($item->languageID) && $item->languageID != 0 && LanguageFactory::getInstance()->getLanguageByCode('en') != null){
             if($item->languageID == LanguageFactory::getInstance()->getLanguageByCode('en')->languageID){
                 if($current == 0 || $current != $item->languageCategoryID){
                     if($current != 0) $xml->endElement();
@@ -111,6 +114,7 @@ class CMSExportHandler extends SingletonFactory{
                     $current = $item->languageCategoryID;
                 }
                 $xml->writeElement('item', $item->languageItemValue, array('name' => $item->languageItem));
+            }
             }
         }
         $xml->endDocument(CMS_DIR.'export/en.xml');
