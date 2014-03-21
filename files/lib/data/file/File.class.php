@@ -3,6 +3,7 @@ namespace cms\data\file;
 use wcf\system\request\IRouteController;
 use cms\data\CMSDatabaseObject;
 use wcf\system\WCF;
+use cms\data\folder\Folder;
 
 /**
  * @author	Jens Krumsieck
@@ -45,6 +46,10 @@ class File extends CMSDatabaseObject implements IRouteController{
         if(preg_match('/audio/i', $this->type)) return '<span class="icon icon16 icon-music"></span>';
         if(preg_match('/video/i', $this->type)) return '<span class="icon icon16 icon-film"></span>';
         return '<span class="icon icon16 icon-file"></span>';
+    }
+    
+    public function getFolder(){
+        return new Folder($this->folderID);
     }
     
 }

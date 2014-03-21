@@ -163,7 +163,7 @@
 							<h2>{@$file->getIconTag()} <a href="{$__wcf->getPath('cms')}files/{$file->filename}">{$file->title|language}</a></h2>
 						</div>
 						{if $file->type == 'image/png' || $file->type == 'image/jpeg' || $file->type == 'image/gif'}
-							<div><img style="max-width: 300px" src="{$__wcf->getPath('cms')}files/{$file->filename}" alt="" /></div>
+							<div><img style="max-width: 300px" src="{$__wcf->getPath('cms')}files/{if $file->folderID != 0}{$file->getFolder()->folderPath}/{/if}{$file->filename}" alt="" /></div>
 						{/if}
 						<span>{$file->size|filesize} | {$file->type}</span>
 					</div>
