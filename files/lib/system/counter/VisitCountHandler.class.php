@@ -3,6 +3,7 @@ namespace cms\system\counter;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 use wcf\system\cache\builder\SpiderCacheBuilder;
+use wcf\util\DateUtil;
 /**
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
@@ -32,7 +33,7 @@ class VisitCountHandler extends SingletonFactory{
             
             //update
             if($this->existingColumn()){
-                $sql = "SELECT * FROM cms".WCF_N."_counter WHERE day = ".date('j', TIME_NOW)." AND month = ".date('n', TIME_NOW)." AND year = ".date('Y', TIME_NOW);
+                $sql = "SELECT * FROM cms".WCF_N."_counter WHERE day = ".DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j')." AND month = ".DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n')." AND year = ".DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
                 $statement = WCF::getDB()->prepareStatement($sql);
                 $statement->execute();
                 $counter = $statement->fetchArray();
@@ -48,7 +49,7 @@ class VisitCountHandler extends SingletonFactory{
                 
                 $sql = "UPDATE cms".WCF_N."_counter 
                         SET visits = ?, users = ?, spiders = ?, browsers = ?
-                        WHERE day = ".date('j', TIME_NOW)." AND month = ".date('n', TIME_NOW)." AND year = ".date('Y', TIME_NOW);
+                        WHERE day = ".DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j')." AND month = ".DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n')." AND year = ".DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
                 $statement = WCF::getDB()->prepareStatement($sql);
                 $statement->execute(array($visits, $users, $spiders, serialize($browsers)));
             }
@@ -62,14 +63,14 @@ class VisitCountHandler extends SingletonFactory{
                 
                 $sql = "INSERT INTO cms".WCF_N."_counter VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $statement = WCF::getDB()->prepareStatement($sql);
-                $statement->execute(array(date('j', TIME_NOW), date('n', TIME_NOW), date('Y', TIME_NOW), 1, $users, $spiders, serialize($browsers)));
+                $statement->execute(array(DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j'), DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n'),DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y'), 1, $users, $spiders, serialize($browsers)));
             }
             $this->session->register('counted', true);
         }
     }
     
     public function existingColumn(){
-        $sql = "SELECT COUNT(*) AS amount FROM cms".WCF_N."_counter WHERE day = ".date('j', TIME_NOW)." AND month = ".date('n', TIME_NOW)." AND year = ".date('Y', TIME_NOW);
+        $sql = "SELECT COUNT(*) AS amount FROM cms".WCF_N."_counter WHERE day = ".DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j')." AND month = ".DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n')." AND year = ".DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute();;
         if($statement->fetchColumn() != 0) return true;
@@ -82,8 +83,8 @@ class VisitCountHandler extends SingletonFactory{
         while($date <= $end){
             $months = array(WCF::getLanguage()->get('wcf.date.month.january'),WCF::getLanguage()->get('wcf.date.month.february'),WCF::getLanguage()->get('wcf.date.month.march'),WCF::getLanguage()->get('wcf.date.month.april'),WCF::getLanguage()->get('wcf.date.month.may'),WCF::getLanguage()->get('wcf.date.month.june'),WCF::getLanguage()->get('wcf.date.month.july'),WCF::getLanguage()->get('wcf.date.month.august'),WCF::getLanguage()->get('wcf.date.month.september'),WCF::getLanguage()->get('wcf.date.month.october'),WCF::getLanguage()->get('wcf.date.month.november'),WCF::getLanguage()->get('wcf.date.month.december'));
             
-            $visitors[] = array('visitors' => $this->getDailyVisitors(date('j', $date), date('n', $date), date('Y', $date)),
-                                'string' => date('j', $date).'. '.$months[date('n', $date)-1].' '. date('Y', $date));
+            $visitors[] = array('visitors' => $this->getDailyVisitors(DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'j'), DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'n'), DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'Y')),
+                                'string' => DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'j').'. '.$months[DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'n')-1].' '. DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'Y'));
             $date = $date + 86400;
            
         }
@@ -110,9 +111,9 @@ class VisitCountHandler extends SingletonFactory{
     }
     
     public function getWeeklyVisitorArray(){
-        $currentMonth = date("n", TIME_NOW);
-        $currentYear = date("Y", TIME_NOW);
-        $currentDay = date("j", TIME_NOW);
+        $currentMonth = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n');
+        $currentYear = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
+        $currentDay = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j');
         
         $visitors = array();
         $year = $currentYear;
