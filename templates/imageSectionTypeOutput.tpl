@@ -7,7 +7,7 @@
         <img src="{$__wcf->getPath('cms')}files/{if $image['folder']->folderPath != ''}{$image['folder']->folderPath}/{/if}{$image['file']->filename}"  alt="{$subtitle}"  title="{$subtitle}" class="jsTooltip" />
         </a>
         {else}
-        <a href="{$__wcf->getPath('cms')}files/{if $image['folder']->folderPath != ''}{$image['folder']->folderPath}/{/if}{$image['file']->filename}" class="jsImageViewer"><img src="{$__wcf->getPath('cms')}files/{$image['file']->filename}"  alt="{$subtitle}"  title="{$subtitle}"  style="max-width: {ATTACHMENT_THUMBNAIL_WIDTH}px; max-height: {ATTACHMENT_THUMBNAIL_HEIGHT}px;" /></a>
+        <a href="{$__wcf->getPath('cms')}files/{if $image['folder']->folderPath != ''}{$image['folder']->folderPath}/{/if}{$image['file']->filename}" class="jsImageViewer"><img src="{$__wcf->getPath('cms')}files/{if $image['folder']->folderPath != ''}{$image['folder']->folderPath}/{/if}{$image['file']->filename}"  alt="{$subtitle}"  title="{$subtitle}"  style="max-width: {ATTACHMENT_THUMBNAIL_WIDTH}px; max-height: {ATTACHMENT_THUMBNAIL_HEIGHT}px;" /></a>
         {/if}
         {if $subtitle != ''}
             <div title="{$subtitle}">
