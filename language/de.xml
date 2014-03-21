@@ -242,6 +242,7 @@
 
   <category name="cms.news">
     <item name="cms.news.categorizedNews"><![CDATA[Nachrichten aus der Kategorie „{$category->getTitle()|language}“]]></item>
+    <item name="cms.news.image.no"><![CDATA[Kein spezifisches Bild für diese Nachricht verwenden]]></item>
     <item name="cms.news.searchNews"><![CDATA[Nachrichten durchsuchen]]></item>
     <item name="cms.news.markAllAsRead"><![CDATA[Alle Nachrichten als gelesen markieren]]></item>
     <item name="cms.news.category.categories"><![CDATA[Kategorien]]></item>

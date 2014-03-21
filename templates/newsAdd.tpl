@@ -143,6 +143,21 @@
 									//]]>
 								</script>
 							{/foreach}
+							<a id="imageSelect0" title="{lang}cms.news.image.no{/lang}" class="jsTooltip">
+								<span class="icon icon96 icon-ban-circle"></span>
+							</a>
+							<script data-relocate="true">
+									//<![CDATA[
+									$(function() {
+										$('#imageSelect0').click(function() {
+											$('#imageID').val("0");
+											var html = '';
+											$('#previewImage').html(html);
+											$('#imageSelect').wcfDialog('close');
+										});
+									});
+									//]]>
+								</script>
 						</div>
 					</dd>
 				</dl>
