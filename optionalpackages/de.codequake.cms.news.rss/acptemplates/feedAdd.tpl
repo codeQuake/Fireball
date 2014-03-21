@@ -37,16 +37,7 @@
 				<input type="text"  id="feedUrl" name="feedUrl" value="{$feedUrl}"/>
 				</dd>
 			</dl>
-				<dl{if $errorField == 'languageID'} class="formError"{/if}>
-					<dt>{lang}wcf.user.language{/lang}</dt>
-					<dd id="languageIDContainer">
-							<select name="languageID" id="languageID">
-								{foreach from=$availableContentLanguages item=contentLanguage}
-									<option value="{@$contentLanguage->languageID}">{$contentLanguage}</option>
-								{/foreach}
-							</select>
-					</dd>
-				</dl>
+				{include file='messageFormMultilingualism'}
 			<dl>
 				<dt><label for="categoryID">{lang}cms.acp.feed.categoryID{/lang}</label></dt>
 				<dd>

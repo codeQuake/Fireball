@@ -12,6 +12,7 @@
     <item name="cms.acp.feed.url"><![CDATA[RSS Feed]]></item>
     <item name="cms.acp.feed.add"><![CDATA[RSS-Feed hinzufügen]]></item>
     <item name="cms.acp.feed.edit"><![CDATA[RSS-Feed bearbeiten]]></item>
+    <item name="cms.acp.feed.delete.sure"><![CDATA[Are you sure you want to delete this feed?]]></item>
     <item name="cms.acp.feed.categoryID"><![CDATA[Category]]></item>
   </category>
 

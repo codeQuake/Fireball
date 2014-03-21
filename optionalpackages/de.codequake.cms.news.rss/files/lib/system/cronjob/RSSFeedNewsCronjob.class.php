@@ -2,7 +2,7 @@
 namespace cms\system\cronjob;
 use wcf\data\cronjob\Cronjob;
 use wcf\system\cronjob\AbstractCronjob;
-
+use wcf\util\FileUtil;
 use cms\data\feed\FeedList;
 use cms\data\feed\FeedEditor;
 use cms\data\news\NewsAction;
@@ -15,7 +15,15 @@ class RSSFeedNewsCronjob extends AbstractCronjob{
             $list->readObjects();
             $news = array();
             foreach($list->getObjects() as $feed){
-                if($xml = simplexml_load_file($feed->feedUrl)){
+                try{
+                    $feedData = FileUtil::downloadFileFromHttp($feed->feedUrl, 'feed');
+                }
+                catch (\wcf\system\exception\SystemException $e){
+			        //invalid URL
+			        return ( array(	'errorMessage' => $e->getMessage()));
+		        }
+                if($xml = simplexml_load_file($feedData)){
+                @unlink($feedData);
                     foreach($xml->channel[0]->item as $item) {
                         if(strtotime((string) $item->pubDate) >= $feed->lastCheck){
                             $content = '';

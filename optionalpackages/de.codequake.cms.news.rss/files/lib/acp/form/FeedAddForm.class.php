@@ -25,8 +25,8 @@ class FeedAddForm extends AbstractForm{
     
     public $title = '';
     public $feedUrl = '';
-    public $categoryID = '';
-    public $languageID = '';
+    public $categoryID = 0;
+    public $languageID = null;
     public $image = null;
     public $imageList;
     public $availableContentLanguages = array();
@@ -66,6 +66,7 @@ class FeedAddForm extends AbstractForm{
     
     public function validate(){
         parent::validate();
+        if($this->feedUrl == "") throw new UserInputException('feedUrl', 'empty');
         if(!simplexml_load_file($this->feedUrl)) throw new UserInputException('feedUrl', 'noFeed');
     }
     
