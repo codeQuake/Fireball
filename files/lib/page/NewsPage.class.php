@@ -90,13 +90,14 @@ class NewsPage extends AbstractPage{
         if (MODULE_TAGGING ) {
             $this->tags = $this->news->getTags();
         }
-        
         MetaTagHandler::getInstance()->addTag('description',  'description', StringUtil::decodeHTML(StringUtil::stripHTML($this->news->getExcerpt())));
         if(!empty($this->tags)) MetaTagHandler::getInstance()->addTag('keywords', 'keywords', implode(',', $this->tags));
         MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->news->subject . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
 		MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('News', array('application' => 'cms', 'object' => $this->news->getDecoratedObject())), true);
 		MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'article', true);
-        if($this->news->getImage() != null) MetaTagHandler::getInstance()->addTag('og:image', 'og:image', $this->news->getImage()->getImagePath());
+        if($this->news->getImage() != null) MetaTagHandler::getInstance()->addTag('og:image', 'og:image', LinkHandler::getInstance()->getLink().$this->news->getImage()->getImagePath(), true);
+        if($this->news->getUserProfile()->facebook != '') MetaTagHandler::getInstance()->addTag('article:author', 'article:author', 'https://facebook.com/'.$this->news->getUserProfile()->facebook, true);
+        if(FACEBOOK_PUBLIC_KEY != '') MetaTagHandler::getInstance()->addTag('fb:app_id', 'fb:app_id', FACEBOOK_PUBLIC_KEY, true);
 		MetaTagHandler::getInstance()->addTag('og:description', 'og:description', StringUtil::decodeHTML(StringUtil::stripHTML($this->news->getExcerpt())), true);
         
         

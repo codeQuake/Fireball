@@ -90,7 +90,8 @@ class PagePage extends AbstractPage{
         MetaTagHandler::getInstance()->addTag('generator', 'generator', 'Fireball CMS');
         MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->page->getTitle() . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
         MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('Page', array('application' => 'cms', 'object' => $this->page)), true);
-        MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'article', true);
+        if(FACEBOOK_PUBLIC_KEY != '') MetaTagHandler::getInstance()->addTag('fb:app_id', 'fb:app_id', FACEBOOK_PUBLIC_KEY, true);
+        MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'website', true);
     }
     
     public function assignVariables(){
