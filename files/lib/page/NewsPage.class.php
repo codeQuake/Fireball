@@ -96,6 +96,7 @@ class NewsPage extends AbstractPage{
         MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->news->subject . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
 		MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('News', array('application' => 'cms', 'object' => $this->news->getDecoratedObject())), true);
 		MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'article', true);
+        if($this->news->getImage() != null) MetaTagHandler::getInstance()->addTag('og:image', 'og:image', $this->news->getImage()->getImagePath());
 		MetaTagHandler::getInstance()->addTag('og:description', 'og:description', StringUtil::decodeHTML(StringUtil::stripHTML($this->news->getExcerpt())), true);
         
         
