@@ -3,6 +3,7 @@ namespace cms\data\page;
 use cms\data\content\PageContentList;
 use wcf\system\request\IRouteController;
 use cms\data\CMSDatabaseObject;
+use wcf\system\request\LinkHandler;
 use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
 use wcf\system\WCF;
@@ -38,6 +39,10 @@ class Page extends CMSDatabaseObject implements IRouteController{
     public function getTitle(){
         if (preg_match('#cms.page.title#', $this->title)) return WCF::getLanguage()->get($this->title);
         return $this->title;
+    }
+    
+    public function getLink(){
+        return LinkHandler::getInstance()->getLink('Page', array('application' => 'cms', 'forceFrontend' => true, 'object' => $this));
     }
     
     public function getLayout(){
