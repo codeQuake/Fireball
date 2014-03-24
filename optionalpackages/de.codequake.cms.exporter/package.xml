@@ -4,8 +4,8 @@
 		<packagename>Fireball CMS Im-/Exporter und Backup System</packagename>
 		<packagedescription>Ermöglicht den Datenimport aus anderen Systemen, sowie automatische Backups</packagedescription>
     <plugin>de.codequake.cms</plugin>
-		<version>1.0.0</version>
-		<date>2014-03-12</date>
+		<version>1.0.1</version>
+		<date>2014-03-24</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -30,4 +30,8 @@
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
     <instruction type="language">language/*.xml</instruction>
 	</instructions>
+
+  <instructions type="update" fromversion="1.0.0">
+    <instruction type="file" application="cms">files_cms.tar</instruction>
+  </instructions>
 </package>
