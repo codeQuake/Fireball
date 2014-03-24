@@ -46,11 +46,12 @@ class PageAction extends AbstractDatabaseObjectAction{
             }
             
             //create
-            $url = LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','id' => $page->pageID, 'title' => empty($this->parameters['I18n'][1]) ? $page->title : $this->parameters['I18n'][1], 'isACP' => 0));
             $data = array('isDisabled' => 0,
                        'menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->getTitle(),
-                       'menuItemLink' => $url,
+                       'menuItemController' => 'cms\page\PagePage',
+                       'menuItemLink' => 'id='.$page->pageID,
                        'menuPosition' => 'header',
+                       'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
                        'parentMenuItem' => $parentItem,
                        'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header'));
             $action = new PageMenuItemAction(array(), 'create', array('data' => $data));
@@ -75,8 +76,7 @@ class PageAction extends AbstractDatabaseObjectAction{
              //update
             if(isset($menuItem['has']) && $menuItem['has'] == 1){
                 if($menuItem['id'] != 0){
-                    $action = new PageMenuItemAction(array($menuItem['id']), 'update', array('data' => array('menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title,
-                                                                                                             'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms', 'id' => $page->pageID, 'title' => empty($this->parameters['I18n'][1]) ? $page->title : $this->parameters['I18n'][1], 'isACP' => 0)))));
+                    $action = new PageMenuItemAction(array($menuItem['id']), 'update', array('data' => array('menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title)));
                     $action->executeAction();
                 }
                 //create new
@@ -94,11 +94,13 @@ class PageAction extends AbstractDatabaseObjectAction{
                         }
                     }
                     $data = array('isDisabled' => 0,
-                       'menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title,
-                       'menuItemLink' => LinkHandler::getInstance()->getLink('Page', array('application' => 'cms','id' => $page->pageID, 'title' => empty($this->parameters['I18n'][1]) ? $page->title : $this->parameters['I18n'][1], 'isACP' => 0)),
-                       'menuPosition' => 'header',
-                       'parentMenuItem' => $parentItem,
-                       'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header'));
+                                   'menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->getTitle(),
+                                   'menuItemController' => 'cms\page\PagePage',
+                                   'menuItemLink' => 'id='.$page->pageID,
+                                   'menuPosition' => 'header',
+                                   'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
+                                   'parentMenuItem' => $parentItem,
+                                   'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header'));
                     $action = new PageMenuItemAction(array(), 'create', array('data' => $data));
                     $action->executeAction();
                     $returnValues = $action->getReturnValues();
@@ -175,7 +177,7 @@ class PageAction extends AbstractDatabaseObjectAction{
         }
         
         //get Home Menu Item
-        $sql = "SELECT menuItemID FROM wcf".WCF_N."_page_menu_item WHERE menuItemController = ?";
+        $sql = "SELECT menuItemID FROM wcf".WCF_N."_page_menu_item WHERE menuItemController = ? AND menuItemLink = ''";
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array('cms\page\PagePage'));
         $row = $statement->fetchArray();

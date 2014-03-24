@@ -66,7 +66,7 @@
       <option name="cms_install_date">
         <optiontype>integer</optiontype>
         <hidden>1</hidden>
-        <categoryname>cms</categoryname>
+        <categoryname>cms.general</categoryname>
       </option>
       
       <option name="module_news">
