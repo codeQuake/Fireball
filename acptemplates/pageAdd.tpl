@@ -118,6 +118,18 @@
 							{/if}
 						</dd>
 					</dl>
+					<dl {if $errorField == 'alias'}class="formError"{/if}>
+						<dt><label for="alias">{lang}cms.acp.page.general.alias{/lang}</label></dt>
+						<dd>
+							<input type="text" id="alias" name="alias" value="{$alias}" class="long" required="required" />
+							<small>{lang}cms.acp.page.general.alias.description{/lang}</small>
+							{if $errorField == 'alias'}
+								<small class="innerError">
+									{lang}cms.acp.page.alias.error.{$errorType}{/lang}
+								</small>
+							{/if}
+						</dd>
+					</dl>
 					<dl  {if $errorField == 'description'}class="formError"{/if}>
 						<dt><label for="description">{lang}cms.acp.page.general.description{/lang}</label></dt>
 						<dd>

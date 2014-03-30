@@ -6,6 +6,7 @@ use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\NamedUserException;
 use cms\data\content\ContentAction;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
+use cms\system\cache\builder\PageCacheBuilder;
 use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\page\menu\item\PageMenuItemList;
@@ -29,6 +30,7 @@ class PageAction extends AbstractDatabaseObjectAction{
     public function create(){
         $page = parent::create();
         PagePermissionCacheBuilder::getInstance()->reset();
+        PageCacheBuilder::getInstance()->reset();
         $menuItem = @unserialize($page->menuItem);
         if(isset($menuItem['has']) && $menuItem['has'] == 1){
         
@@ -68,6 +70,7 @@ class PageAction extends AbstractDatabaseObjectAction{
     public function update(){
         parent::update();
         PagePermissionCacheBuilder::getInstance()->reset();
+        PageCacheBuilder::getInstance()->reset();
         
         //update menu item
         foreach($this->objectIDs as $objectID) {
@@ -124,7 +127,8 @@ class PageAction extends AbstractDatabaseObjectAction{
     }
     
     public function delete(){
-    
+        
+        PageCacheBuilder::getInstance()->reset();
         //delete all contents beloning to the pages
         foreach($this->objectIDs as $objectID){
             $page = new Page($objectID);
@@ -161,6 +165,8 @@ class PageAction extends AbstractDatabaseObjectAction{
 	}
     
 	public function setAsHome() {
+        
+        PageCacheBuilder::getInstance()->reset();
 		$this->pageEditor->setAsHome();
         
         

@@ -4,6 +4,7 @@ namespace cms\acp\form;
 use cms\data\page\PageAction;
 use cms\data\page\PageEditor;
 use cms\data\page\Page;
+use cms\data\page\PageCache;
 use cms\data\page\PageList;
 use cms\data\layout\LayoutList;
 use wcf\data\page\menu\item\PageMenuItemList;
@@ -41,6 +42,7 @@ class PageEditForm extends AbstractForm{
     public $showOrder = 0;
     public $menuItem = array();
     public $pageID = 0;
+    public $alias = "";
     public $parentID = 0;
     public $page = null;
     public $pageList = null;
@@ -79,6 +81,7 @@ class PageEditForm extends AbstractForm{
         $this->sidebarOrientation = $this->page->sidebarOrientation;
         $this->isCommentable = $this->page->isCommentable;
         $this->menuItem = @unserialize($this->page->menuItem);
+        $this->alias = $this->page->alias;
         if(!isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
         
         $this->pageList = new PageList();
@@ -97,6 +100,7 @@ class PageEditForm extends AbstractForm{
         if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
         if (I18nHandler::getInstance()->isPlainValue('metaDescription')) $this->metaDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('metaDescription'));
         if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
+        if(isset($_POST['alias'])) $this->alias = StringUtil::trim($_POST['alias']);
         if(isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
         if(isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
         if(isset($_POST['menuItem'])) $this->menuItem['has'] = intval($_POST['menuItem']);
@@ -112,6 +116,28 @@ class PageEditForm extends AbstractForm{
     
     public function validate(){
         parent::validate();
+       //validate alias
+        if(empty($this->alias)) throw new UserInputException('alias', 'empty');
+        if($this->parentID != 0){
+            $parent = PageCache::getInstance()->getPage($this->parentID);
+            if($parent->hasChildren()){
+                foreach($parent->getChildren() as $child){
+                    if($child->alias == $this->alias) throw new UserInputException('alias', 'given');
+                }
+            }
+        }
+        //1st floor ;)
+        else{
+            $list = new PageList();
+            $list->getConditionBuilder()->add('parentID = ?', array(0));
+            $list->readObjects();
+            foreach($list->getObjects() as $child){
+                if($child->alias == $this->alias && $child->pageID != $this->pageID) throw new UserInputException('alias', 'given');
+            }
+        }
+        
+        //check if valid
+        if(preg_match('~((\/{1}\.{1})?[a-z0-9-]+\/?)*~', $this->alias) !== 1) throw new UserInputException('alias', 'invalid');
         
         //validate menuitem
         $menu = @unserialize($this->page->menuItem);
@@ -140,7 +166,8 @@ class PageEditForm extends AbstractForm{
     
     public function save(){
         parent::save();
-        $objectAction = new PageAction(array($this->pageID), 'update', array('data' => array('title' => $this->title,
+        $objectAction = new PageAction(array($this->pageID), 'update', array('data' => array('alias' => $this->alias,
+                                                                                            'title' => $this->title,
                                                                                            'description' => $this->description,
                                                                                            'metaDescription' => $this->metaDescription,
                                                                                            'metaKeywords' => $this->metaKeywords,
@@ -153,7 +180,7 @@ class PageEditForm extends AbstractForm{
                                                                                            'sidebarOrientation' => $this->sidebarOrientation,
                                                                                            'robots' => $this->robots,
                                                                                            'isCommentable' => $this->isCommentable),
-                                                                               'I18n' => I18nHandler::getInstance()->getValues('title')));
+                                                                                           'I18n' => I18nHandler::getInstance()->getValues('title')));
         $objectAction->executeAction();
         
         $update = array();
@@ -194,6 +221,7 @@ class PageEditForm extends AbstractForm{
                                     'objectTypeID' => $this->objectTypeID,
                                     'invisible' => $this->invisible,
                                     'robots' => $this->robots,
+                                    'alias' => $this->alias,
                                     'parentID' => $this->parentID,
                                     'showOrder' => $this->showOrder,
                                     'pageList' => $this->pageList,

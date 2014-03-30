@@ -1,6 +1,5 @@
 <?php
 namespace cms\page;
-use cms\data\page\Page;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\counter\VisitCountHandler;
@@ -51,7 +50,7 @@ class PagePage extends AbstractPage{
             $statement->execute(array(1));
             $row = $statement->fetchArray();
             $this->pageID = $row['pageID'];
-            $this->page = new Page($this->pageID);
+            $this->page = PageCache::getInstance()->getPage($this->pageID);
             $this->activeMenuItem = $this->page->title;
             
             
@@ -131,7 +130,7 @@ class PagePage extends AbstractPage{
             $statement->execute(array(1));
             $row = $statement->fetchArray();
             $startPageID = $row['pageID'];
-            $startPage = new Page($startPageID);
+            $startPage = PageCache::getInstance()->getPage($startPageID);
             $this->activeMenuItem = $startPage->title;
         }
         parent::show();
@@ -142,6 +141,7 @@ class PagePage extends AbstractPage{
     }
     
     public function getObjectID() {
-        return $this->page->pageID;
+        if(isset($this->page->pageID))return $this->page->pageID;
+        return 0;
     }
 }

@@ -4,6 +4,7 @@ namespace cms\acp\form;
 use cms\data\page\PageAction;
 use cms\data\page\PageEditor;
 use cms\data\page\Page;
+use cms\data\page\PageCache;
 use cms\data\page\PageList;
 use cms\data\layout\LayoutList;
 use wcf\data\page\menu\item\PageMenuItemList;
@@ -31,6 +32,7 @@ class PageAddForm extends AbstractForm{
     public $enableMultilangualism = true;
     
     public $title = '';
+    public $alias = '';
     public $description = '';
     public $metaDescription = '';
     public $metaKeywords = '';
@@ -73,6 +75,7 @@ class PageAddForm extends AbstractForm{
         if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
         if (I18nHandler::getInstance()->isPlainValue('metaDescription')) $this->metaDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('metaDescription'));
         if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
+        if(isset($_POST['alias'])) $this->alias = StringUtil::trim($_POST['alias']);
         if(isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
         if(isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
         if(isset($_POST['menuItem'])) $this->menuItem['has'] = intval($_POST['menuItem']);
@@ -86,6 +89,29 @@ class PageAddForm extends AbstractForm{
     
     public function validate(){
         parent::validate();
+        //validate alias
+        if(empty($this->alias)) throw new UserInputException('alias', 'empty');
+        if($this->parentID != 0){
+            $parent = PageCache::getInstance()->getPage($this->parentID);
+            if($parent->hasChildren()){
+                foreach($parent->getChildren() as $child){
+                    if($child->alias == $this->alias) throw new UserInputException('alias', 'given');
+                }
+            }
+        }
+        //1st floor ;)
+        else{
+            $list = new PageList();
+            $list->getConditionBuilder()->add('parentID = ?', array(0));
+            $list->readObjects();
+            foreach($list->getObjects() as $child){
+                if($child->alias == $this->alias) throw new UserInputException('alias', 'given');
+            }
+        }
+        
+        //check if valid
+        if(preg_match('~((\/{1}\.{1})?[a-z0-9-]+\/?)*~', $this->alias) !== 1) throw new UserInputException('alias', 'invalid');
+        
         //validate menuitem
         $list = new PageMenuItemList();
         $list->readObjects();
@@ -108,7 +134,8 @@ class PageAddForm extends AbstractForm{
     
     public function save(){
         parent::save();
-        $data = array('title' => $this->title,
+        $data = array('alias' => $this->alias,
+                        'title' => $this->title,
                        'description' => $this->description,
                        'metaDescription' => $this->metaDescription,
                        'metaKeywords' => $this->metaKeywords,
@@ -156,7 +183,7 @@ class PageAddForm extends AbstractForm{
         
         $this->saved();
         WCF::getTPL()->assign('success', true);
-        $this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = '';
+        $this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
         $this->sidebarOrientation = 'right';
         $this->invisible = $this->parentID= $this->showOrder = $this->showSidebar = 0;
         $this->menuItem = array();
@@ -171,6 +198,7 @@ class PageAddForm extends AbstractForm{
                                     'objectTypeID' => $this->objectTypeID,
                                     'invisible' => $this->invisible,
                                     'robots' => $this->robots,
+                                    'alias' => $this->alias,
                                     'parentID' => $this->parentID,
                                     'showOrder' => $this->showOrder,
                                     'menu' => $this->menuItem['has'],
