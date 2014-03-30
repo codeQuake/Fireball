@@ -1,6 +1,7 @@
 <?php
 namespace cms\page;
 use cms\data\page\Page;
+use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\counter\VisitCountHandler;
 use wcf\page\AbstractPage;
@@ -14,6 +15,7 @@ use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck
@@ -35,10 +37,15 @@ class PagePage extends AbstractPage{
     
     public function readParameters(){
         parent::readParameters();
-        $pageID = 0;
-        if(isset($_REQUEST['id'])) $pageID = intval($_REQUEST['id']);
-        $this->page = new Page($pageID);
-        if($this->page->pageID == 0) {
+        $alias = '';
+        if(isset($_REQUEST['alias'])) $alias = StringUtil::trim($_REQUEST['alias']);
+        if($alias != '') {
+            $this->pageID = PageCache::getInstance()->getIDByAlias($alias);
+            if($this->pageID == 0) throw new IllegalLinkException();
+            $this->page = PageCache::getInstance()->getPage($this->pageID);
+            if($this->page === null) throw new IllegalLinkException();
+        }
+        else{
             $sql  = "SELECT pageID FROM cms".WCF_N."_page WHERE isHome = ?";
             $statement = WCF::getDB()->prepareStatement($sql);
             $statement->execute(array(1));

@@ -1,15 +1,21 @@
 <?php
 namespace cms\system\menu\page;
 use wcf\system\menu\page\DefaultPageMenuItemProvider;
-use cms\data\page\Page;
+use cms\data\page\PageCache;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
+ */
 class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider{
     
     protected $page = null;
     
     public function getPage(){
         $tmp = explode("=", $this->getDecoratedObject()->menuItemLink);
-        $this->page =  new Page(intval($tmp[1]));
+        $this->page =  PageCache::getInstance()->getPage(intval($tmp[1]));
     }
 
 	public function getLink(){

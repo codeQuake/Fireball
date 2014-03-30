@@ -41,9 +41,6 @@ class Page extends CMSDatabaseObject implements IRouteController{
         return $this->title;
     }
     
-    public function getLink(){
-        return LinkHandler::getInstance()->getLink('Page', array('application' => 'cms', 'forceFrontend' => true, 'object' => $this));
-    }
     
     public function getLayout(){
         if($this->layoutID != 0){
@@ -83,6 +80,21 @@ class Page extends CMSDatabaseObject implements IRouteController{
         $list = $list->getObjects();
         return $list;
     }
+    
+    //builds up a complete folder structure like link
+    public function getAlias(){
+        //returns page alias
+        if($this->getParentPage() != null){
+            return $this->getParentPage()->getAlias().'/'.$this->alias;
+        }
+        
+        return $this->alias;
+    }
+    
+    public function getLink(){
+        return LinkHandler::getInstance()->getLink('Page', array('application' => 'cms', 'forceFrontend' => true, 'alias' => $this->getAlias()));
+    }
+    
     
     public function hasMenuItem(){
         $menuItem = @unserialize($this->menuItem);
