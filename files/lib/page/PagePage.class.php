@@ -53,6 +53,8 @@ class PagePage extends AbstractPage{
             $this->pageID = $row['pageID'];
             $this->page = new Page($this->pageID);
             $this->activeMenuItem = $this->page->title;
+            
+            
         }
     }
     
