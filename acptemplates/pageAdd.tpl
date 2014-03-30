@@ -14,11 +14,20 @@
 	//]]>
 </script>
 
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
+<script data-relocate="true">
+	//<![CDATA[
+			$(function() {
+				WCF.Language.addObject({
+					'cms.acp.page.general.alias.preview': '{lang}cms.acp.page.general.alias.preview{/lang}',
+				});
+				new CMS.ACP.Page.AddForm();
+			});
+	//]]>
+</script>
 {if $action != 'add'}
 	{if !$page->isHome}
 	
-	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS.js"></script>
-	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 		<script data-relocate="true">
 			//<![CDATA[
 			$(function() {
@@ -28,6 +37,7 @@
 				});
 			
 				new CMS.ACP.Page.SetAsHome({@$pageID});
+				
 			});
 			//]]>
 		</script>
@@ -95,9 +105,9 @@
 						<dt><label for="parentID">{lang}cms.acp.page.general.parentID{/lang}</label></dt>
 						<dd>
 							<select id="parentID" name="parentID">
-								<option value="0" {if parentID == 0} selected="selected"{/if}>{lang}cms.acp.page.general.parentID.no{/lang}</option>
+								<option value="0" {if parentID == 0} selected="selected"{/if} data-alias="">{lang}cms.acp.page.general.parentID.no{/lang}</option>
 								{foreach from=$pageList item='item'}
-								<option value="{$item->pageID}" {if $item->pageID == $parentID}selected="selected"{/if}>{$item->title|language}</option>
+								<option value="{$item->pageID}" {if $item->pageID == $parentID}selected="selected"{/if} data-alias="{$item->alias}" >{$item->title|language}</option>
 								{/foreach}
 							</select>
 						</dd>
@@ -123,10 +133,12 @@
 						<dd>
 							<input type="text" id="alias" name="alias" value="{$alias}" class="long" required="required" />
 							<small>{lang}cms.acp.page.general.alias.description{/lang}</small>
+							<small id="aliasPreview"></small>
 							{if $errorField == 'alias'}
 								<small class="innerError">
 									{lang}cms.acp.page.alias.error.{$errorType}{/lang}
 								</small>
+								
 							{/if}
 						</dd>
 					</dl>

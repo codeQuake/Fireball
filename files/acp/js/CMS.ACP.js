@@ -1,7 +1,29 @@
-
+if (!CMS) var CMS = {};
 CMS.ACP = {};
 
-CMS.ACP.Page = { };
+CMS.ACP.Page = {};
+
+CMS.ACP.Page.AddForm = Class.extend({
+    init: function () {
+        $('#alias, #parentID').change($.proxy(this._buildAliasPreview, this));
+        this._buildAliasPreview();
+    },
+
+    _buildAliasPreview: function() {
+        var $aliasParent = $('#parentID option:selected').data('alias');
+        var $alias = $('#alias').val();
+        if ($alias != '') {
+            $aliasPreview = 'index.php/';
+            if ($aliasParent != '') {
+                $aliasPreview += $aliasParent + '/';
+            }
+            $aliasPreview += $alias + '/';
+            $('#aliasPreview').html(WCF.Language.get('cms.acp.page.general.alias.preview') +  $aliasPreview).show();
+        }
+        else { $('#aliasPreview').hide(); }
+    }
+});
+
 CMS.ACP.Page.SetAsHome = Class.extend({
 
     _pageID: 0,

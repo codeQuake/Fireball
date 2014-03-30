@@ -129,7 +129,9 @@
   </instructions>
 
   <instructions type="update" fromversion="1.1.1">    
+    <instruction type="language">language/*.xml</instruction>
     <instruction type="file">files.tar</instruction>
+    <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="eventListener">xml/eventlistener.xml</instruction>
     <instruction type="file" application="wcf">files_wcf.tar</instruction>
   </instructions>
