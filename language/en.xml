@@ -42,6 +42,8 @@
     <item name="cms.acp.page.general.parentID"><![CDATA[Parent page]]></item>
     <item name="cms.acp.page.general.parentID.no"><![CDATA[-------------]]></item>
     <item name="cms.acp.page.general.title"><![CDATA[Pagetitle]]></item>
+    <item name="cms.acp.page.general.alias"><![CDATA[Alias]]></item>
+    <item name="cms.acp.page.general.alias.description"><![CDATA[The so called alias will be this page's link. It must not contain any other items than lowercase-letters from a to z. numbers from 0 to 9 and a hyphen.]]></item>
     <item name="cms.acp.page.general.description"><![CDATA[Description]]></item>
     <item name="cms.acp.page.overview"><![CDATA[Overview]]></item>
     <item name="cms.acp.page.meta"><![CDATA[Metainfomation]]></item>
