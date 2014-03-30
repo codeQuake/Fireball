@@ -18,7 +18,7 @@ CMS.ACP.Page.AddForm = Class.extend({
                 $aliasPreview += $aliasParent + '/';
             }
             $aliasPreview += $alias + '/';
-            $('#aliasPreview').html(WCF.Language.get('cms.acp.page.general.alias.preview') +  $aliasPreview).show();
+            $('#aliasPreview').html(WCF.Language.get('cms.acp.page.general.alias.preview') + ' ' +  $aliasPreview).show();
         }
         else { $('#aliasPreview').hide(); }
     }

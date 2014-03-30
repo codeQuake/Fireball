@@ -44,6 +44,9 @@
     <item name="cms.acp.page.general.parentID.no"><![CDATA[-------------]]></item>
     <item name="cms.acp.page.general.title"><![CDATA[Seitentitel]]></item>
     <item name="cms.acp.page.general.alias"><![CDATA[Alias]]></item>
+    <item name="cms.acp.page.alias.error.given"><![CDATA[Ein gleichnamiger Alias existiert bereits.]]></item>
+    <item name="cms.acp.page.alias.error.invalid"><![CDATA[Kein gültiger Alias.]]></item>
+    <item name="cms.acp.page.alias.error.empty"><![CDATA[Alias angeben!]]></item>
     <item name="cms.acp.page.general.alias.preview"><![CDATA[Link-Vorschau:]]></item>
     <item name="cms.acp.page.general.alias.description"><![CDATA[Der sogenannte Alias ist eine Art Abkürzung, die später der Link zu dieser Seite sein wird. Ein Alias darf ausschließlich aus Kleinbuchstaben von a-z, Ziffern von 0-9 und Bindestrichen bestehen.]]></item>
     <item name="cms.acp.page.general.description"><![CDATA[Beschreibung]]></item>
