@@ -37,6 +37,7 @@ class PageAddForm extends AbstractForm{
     public $metaDescription = '';
     public $metaKeywords = '';
     public $invisible = 0;
+    public $availableDuringOfflineMode = 0;
     public $robots = 'index,follow';
     public $showSidebar = 0;
     public $sidebarOrientation = 'right';
@@ -77,6 +78,7 @@ class PageAddForm extends AbstractForm{
         if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
         if(isset($_POST['alias'])) $this->alias = StringUtil::trim($_POST['alias']);
         if(isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
+        if(isset($_POST['availableDuringOfflineMode'])) $this->availableDuringOfflineMode = intval($_POST['availableDuringOfflineMode']);
         if(isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
         if(isset($_POST['menuItem'])) $this->menuItem['has'] = intval($_POST['menuItem']);
         if(isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
@@ -140,6 +142,7 @@ class PageAddForm extends AbstractForm{
                        'metaDescription' => $this->metaDescription,
                        'metaKeywords' => $this->metaKeywords,
                        'invisible' => $this->invisible,
+                       'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
                        'menuItem' => serialize($this->menuItem),
                        'showOrder' => $this->showOrder,
                        'layoutID' => $this->layoutID,
@@ -197,6 +200,7 @@ class PageAddForm extends AbstractForm{
         WCF::getTPL()->assign(array('action' => 'add',
                                     'objectTypeID' => $this->objectTypeID,
                                     'invisible' => $this->invisible,
+                                    'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
                                     'robots' => $this->robots,
                                     'alias' => $this->alias,
                                     'parentID' => $this->parentID,

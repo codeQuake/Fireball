@@ -43,6 +43,7 @@
 					<li class="page sortableNode" data-object-id="{$page->pageID}">
 						<span class="sortableNodeLabel">
 							<span class="title">
+								<span class="pointer collapsibleButton icon icon16 icon-file-text-alt"></span>
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}">{@$page->getTitle()}</a> - <small>/{$page->getAlias()}/</small>
 							</span>
 							<span class="statusDisplay buttons">

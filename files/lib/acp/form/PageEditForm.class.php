@@ -22,41 +22,12 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 
-class PageEditForm extends AbstractForm{
+class PageEditForm extends PageAddForm{
     
-    public $templateName = 'pageAdd';
-    public $neededPermissions = array('admin.cms.page.canAddPage');
-    public $activeMenuItem = 'cms.acp.menu.link.cms.page.add';
-    public $objectTypeID = 0;
-    public $enableMultilangualism = true;
     
-    public $title = '';
-    public $description = '';
-    public $metaDescription = '';
-    public $showSidebar = 0;
-    public $sidebarOrientation = 'right';
-    public $metaKeywords = '';
-    public $invisible = 0;
-    public $layoutID = 0;
-    public $robots = 'index,follow';
-    public $showOrder = 0;
-    public $menuItem = array();
     public $pageID = 0;
-    public $alias = "";
-    public $parentID = 0;
     public $page = null;
-    public $pageList = null;
-    public $layoutList = null;
-    public $isCommentable = 0;
 
-   public function readParameters(){
-        parent::readParameters();
-        I18nHandler::getInstance()->register('title');
-        I18nHandler::getInstance()->register('description');
-        I18nHandler::getInstance()->register('metaDescription');
-        I18nHandler::getInstance()->register('metaKeywords');
-        $this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
-    }
     public function readData(){
         parent::readData();
         
@@ -72,6 +43,7 @@ class PageEditForm extends AbstractForm{
         I18nHandler::getInstance()->setOptions('metaKeywords', PACKAGE_ID, $this->page->metaKeywords, 'cms.page.metaKeywords\d+');
         $this->metaKeywords = $this->page->metaKeywords;
         
+        
         $this->parentID = $this->page->parentID;
         $this->showOrder = $this->page->showOrder;
         $this->invisible = $this->page->invisible;
@@ -80,98 +52,24 @@ class PageEditForm extends AbstractForm{
         $this->showSidebar = $this->page->showSidebar;
         $this->sidebarOrientation = $this->page->sidebarOrientation;
         $this->isCommentable = $this->page->isCommentable;
+        $this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
         $this->menuItem = @unserialize($this->page->menuItem);
+        
+        if(!isset($this->menuItem['has']))$this->menuItem['has'] = 0;
         $this->alias = $this->page->alias;
-        if(!isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
         
-        $this->pageList = new PageList();
-        $this->pageList->getConditionBuilder()->add('pageID != ?', array($this->pageID));
-        $this->pageList->readObjects();
-        $this->pageList = $this->pageList->getObjects();
-        
-        $this->layoutList = new LayoutList();
-        $this->layoutList->readObjects();
-        $this->layoutList = $this->layoutList->getObjects();
-    }
-    public function readFormParameters(){
-        parent::readFormParameters();
-        I18nHandler::getInstance()->readValues();
-        if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
-        if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
-        if (I18nHandler::getInstance()->isPlainValue('metaDescription')) $this->metaDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('metaDescription'));
-        if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
-        if(isset($_POST['alias'])) $this->alias = StringUtil::trim($_POST['alias']);
-        if(isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
-        if(isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
-        if(isset($_POST['menuItem'])) $this->menuItem['has'] = intval($_POST['menuItem']);
-        if(isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
-        if(isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
-        if(isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
-        if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
-        if(isset($_REQUEST['menuID'])) $this->menuItem['id'] = intval($_REQUEST['menuID']);
-        if(isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);        
-        if(isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);        
-        if(isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
     }
     
-    public function validate(){
-        parent::validate();
-       //validate alias
-        if(empty($this->alias)) throw new UserInputException('alias', 'empty');
-        if($this->parentID != 0){
-            $parent = PageCache::getInstance()->getPage($this->parentID);
-            if($parent->hasChildren()){
-                foreach($parent->getChildren() as $child){
-                    if($child->alias == $this->alias) throw new UserInputException('alias', 'given');
-                }
-            }
-        }
-        //1st floor ;)
-        else{
-            $list = new PageList();
-            $list->getConditionBuilder()->add('parentID = ?', array(0));
-            $list->readObjects();
-            foreach($list->getObjects() as $child){
-                if($child->alias == $this->alias && $child->pageID != $this->pageID) throw new UserInputException('alias', 'given');
-            }
-        }
-        
-        //check if valid
-        if(preg_match('~((\/{1}\.{1})?[a-z0-9-]+\/?)*~', $this->alias) !== 1) throw new UserInputException('alias', 'invalid');
-        
-        //validate menuitem
-        $menu = @unserialize($this->page->menuItem);
-        if (isset($this->menuItem['has']) && $this->menuItem['has'] == 1 && isset($menu['id']) == false && $menu['id'] != 0){
-            $list = new PageMenuItemList();
-            $list->readObjects();
-            $list = $list->getObjects();
-            foreach($list as $item){
-                if(isset($this->menuItem['id']) && $this->title == $item->menuItem)
-                    throw new UserInputException('menuItem', 'exists');
-                if(isset($this->menuItem['id']) && $item->menuItem == 'cms.page.title'.$this->pageID);
-                    throw new UserInputException('menuItem', 'exists');
-            }
-        }
-        if (!I18nHandler::getInstance()->validateValue('title')) {
-			if (I18nHandler::getInstance()->isPlainValue('title')) {
-				throw new UserInputException('title');
-			}
-			else {
-				throw new UserInputException('title', 'multilingual');
-			}
-		}
-        $parent = new Page($this->parentID);
-        if($parent === null) throw new UserInputException('parentID', 'invalid');
-    }
     
     public function save(){
-        parent::save();
+        AbstractForm::save();
         $objectAction = new PageAction(array($this->pageID), 'update', array('data' => array('alias' => $this->alias,
                                                                                             'title' => $this->title,
                                                                                            'description' => $this->description,
                                                                                            'metaDescription' => $this->metaDescription,
                                                                                            'metaKeywords' => $this->metaKeywords,
                                                                                            'invisible' => $this->invisible,
+                                                                                           'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
                                                                                            'showOrder' => $this->showOrder,
                                                                                            'menuItem' => serialize($this->menuItem),
                                                                                            'parentID' => $this->parentID,
@@ -214,12 +112,13 @@ class PageEditForm extends AbstractForm{
     }
     
     public function assignVariables(){
-        parent::assignVariables();
+        AbstractForm::assignVariables();
         I18nHandler::getInstance()->assignVariables(!empty($_POST));
         ACLHandler::getInstance()->assignVariables($this->objectTypeID);
         WCF::getTPL()->assign(array('action' => 'edit',
                                     'objectTypeID' => $this->objectTypeID,
                                     'invisible' => $this->invisible,
+                                    'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
                                     'robots' => $this->robots,
                                     'alias' => $this->alias,
                                     'parentID' => $this->parentID,

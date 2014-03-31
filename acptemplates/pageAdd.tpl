@@ -160,6 +160,7 @@
 						<dt><label for="metaDescription">{lang}cms.acp.page.meta.metaDescription{/lang}</label></dt>
 						<dd>
 							<textarea id="metaDescription" name="metaDescription" rows="5" cols="40" class="long">{$i18nPlainValues['metaDescription']}</textarea>
+							<small>{lang}cms.acp.page.metaDescription.description{/lang}</small>
 							{if $errorField == 'metaDescription'}
 								<small class="innerError">
 									{lang}cms.acp.page.metaDescription.error.{@$errorType}{/lang}
@@ -167,6 +168,7 @@
 							{/if}
 						</dd>
 					</dl>
+
 					<dl  {if $errorField == 'metaKeywords'}class="formError"{/if}>
 						<dt><label for="metaKeywords">{lang}cms.acp.page.meta.metaKeywords{/lang}</label></dt>
 						<dd>
@@ -191,8 +193,9 @@
 						</dd>
 					</dl>
 				</fieldset>
+
 				<fieldset>
-					<legend>{lang}cms.acp.page.optional{/lang}</legend>
+					<legend>{lang}cms.acp.page.visibility{/lang}</legend>
 					<dl  {if $errorField == 'invisible'}class="formError"{/if}>
 						<dt><label for="invisible">{lang}cms.acp.page.optional.invisible{/lang}</label></dt>
 						<dd>
@@ -210,7 +213,27 @@
 									</small>
 							{/if}
 						</dd>
-					</dl>					
+					</dl>	
+					<dl {if $errorField == 'availableDuringOfflineMode'}class="formError"{/if}>
+						<dt><label for="availableDuringOfflineMode">{lang}cms.acp.page.optional.availableDuringOfflineMode{/lang}</label></dt>
+						<dd>
+							<input type="checkbox" name="availableDuringOfflineMode" id="availableDuringOfflineMode" value="1" {if $availableDuringOfflineMode == 1}checked="checked"{/if} />
+						</dd>
+					</dl>
+					<dl  {if $errorField == 'showOrder'}class="formError"{/if}>
+						<dt><label for="showOrder">{lang}cms.acp.page.optional.showOrder{/lang}</label></dt>
+						<dd>
+							 <input type="number" id="showOrder" name="showOrder" value="{$showOrder}" />
+							{if $errorField == 'showOrder'}
+								<small class="innerError">
+									{lang}cms.acp.page.showOrder.error.{@$errorType}{/lang}
+								</small>
+							{/if}
+						</dd>
+					</dl>
+				</fieldset>
+				<fieldset>
+					<legend>{lang}cms.acp.page.optional{/lang}</legend>				
 					<dl  {if $errorField == 'showSidebar'}class="formError"{/if}>
 						<dt><label for="showSidebar">{lang}cms.acp.page.optional.showSidebar{/lang}</label></dt>
 						<dd>
@@ -248,17 +271,7 @@
 							{/if}
 						</dd>
 					</dl>
-					<dl  {if $errorField == 'showOrder'}class="formError"{/if}>
-						<dt><label for="showOrder">{lang}cms.acp.page.optional.showOrder{/lang}</label></dt>
-						<dd>
-							 <input type="text" id="showOrder" name="showOrder" value="{$showOrder}" class="long" />
-							{if $errorField == 'showOrder'}
-								<small class="innerError">
-									{lang}cms.acp.page.showOrder.error.{@$errorType}{/lang}
-								</small>
-							{/if}
-						</dd>
-					</dl>
+					
 				</fieldset>
 				{event name='fieldsets'}
 			</div>
