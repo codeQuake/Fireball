@@ -1,7 +1,8 @@
 <?php
 namespace cms\acp\page;
-use wcf\page\SortablePage;
-
+use wcf\page\AbstractPage;
+use cms\data\page\PageNodeTree;
+use wcf\system\WCF;
 /**
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
@@ -9,13 +10,22 @@ use wcf\page\SortablePage;
  * @package	de.codequake.cms
  */
 
-class PageListPage extends SortablePage{
+class PageListPage extends AbstractPage{
     
-    public $objectListClassName = 'cms\data\page\PageList';
     public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
     public $neededPermissions = array('admin.cms.page.canListPage');
     public $templateName = 'pageList';
-    public $defaultSortfield = 'pageID';
-    public $validSortFields = array('pageID', 'title');
+    
+    public $pageList = null;
+    
+    public function readData(){
+        parent::readData();
+        $this->pageList = new PageNodeTree(0);
+    }
+    
+    public function assignVariables(){
+        parent::assignVariables();
+        WCF::getTPL()->assign(array('pageList' => $this->pageList->getIterator()));
+    }
     
 }

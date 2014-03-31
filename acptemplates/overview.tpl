@@ -2,6 +2,7 @@
 
 <header class="boxHeadline">
     <h1>{lang}cms.acp.page.overview{/lang}</h1>
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 	<script data-relocate="true">
 	    //<![CDATA[
 	    $(function () {
@@ -38,11 +39,11 @@
                 });
                     //]]>
 	        </script>
-            <li class="jsCollapsibleCategory marginTop" data-object-id="{$page->pageID}">
+            <li class="jsCollapsibleCategory marginTop sortableNode page" data-object-id="{$page->pageID}">
                 <span class="sortableNodeLabel pointer jsPageRow">
                     <span id="pageLabel{$page->pageID}">
 						<span class="collapsibleButton pointer icon icon16 icon-file-text-alt"></span>
-						{@$page->getTitle()|language} {if $page->isHome}<span class="badge red">{lang}cms.acp.page.homePage{/lang}</span>{/if}
+						{@$page->getTitle()|language} - <small>/{$page->getAlias()}/</small> {if $page->isHome}<span class="badge red">{lang}cms.acp.page.homePage{/lang}</span>{/if}
 					</span>
                     <span class="statusDisplay sortableButtonContainer">
 						
@@ -53,7 +54,7 @@
 							<a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
                     </span>
                 </span>
-                <ol id="contentContainer{$page->pageID}" class="sortableList" data-object-id="{$page->pageID}" style="display:none;">
+				<ol id="contentContainer{$page->pageID}" class="sortableList" data-object-id="{$page->pageID}" style="display:none;">
                     {foreach from=$page->getContentList('body') item=content}
                         <script data-relocate="true">
                             //<![CDATA[

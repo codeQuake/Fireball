@@ -13,8 +13,11 @@ class PageCache extends SingletonFactory{
 
     protected $aliasToID = array();
     protected $pages = array();
+    protected $tree = array();
     
     protected function init(){
+        
+		$this->tree = PageCacheBuilder::getInstance()->getData(array(), 'tree');
         $this->aliasToID = PageCacheBuilder::getInstance()->getData(array(), 'aliasToID');
         $this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
     }
@@ -28,5 +31,13 @@ class PageCache extends SingletonFactory{
         if(isset($this->pages[$id])) return $this->pages[$id];
         return null;
     }
+    
+    public function getChildIDs($parentID = null) {
+		if ($parentID === null) $parentID = '';
+		
+		if (!isset($this->tree[$parentID])) return array();
+		
+		return $this->tree[$parentID];
+	}
 }
  
