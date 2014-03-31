@@ -30,7 +30,8 @@ class PageAddForm extends AbstractForm{
     public $objectTypeID = 0;
     
     public $enableMultilangualism = true;
-    
+    public $pageID = 0;
+    public $action = 'add';
     public $title = '';
     public $alias = '';
     public $description = '';
@@ -97,7 +98,10 @@ class PageAddForm extends AbstractForm{
             $parent = PageCache::getInstance()->getPage($this->parentID);
             if($parent->hasChildren()){
                 foreach($parent->getChildren() as $child){
-                    if($child->alias == $this->alias) throw new UserInputException('alias', 'given');
+                    if($child->alias == $this->alias && $this->action == 'add') throw new UserInputException('alias', 'given');
+                    else{
+                        if($child->alias == $this->alias && $child->pageID != $this->pageID) throw new UserInputException('alias', 'given');
+                    }
                 }
             }
         }
@@ -107,7 +111,11 @@ class PageAddForm extends AbstractForm{
             $list->getConditionBuilder()->add('parentID = ?', array(0));
             $list->readObjects();
             foreach($list->getObjects() as $child){
-                if($child->alias == $this->alias) throw new UserInputException('alias', 'given');
+                if($child->alias == $this->alias && $this->action == 'add') throw new UserInputException('alias', 'given');
+                    else{
+                        echo $this->pageID;
+                        if($child->alias == $this->alias && $child->pageID != $this->pageID) throw new UserInputException('alias', 'given');
+                    }
             }
         }
         

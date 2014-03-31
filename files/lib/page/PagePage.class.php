@@ -24,7 +24,8 @@ use wcf\util\StringUtil;
  */
 
 class PagePage extends AbstractPage{
-
+    const AVAILABLE_DURING_OFFLINE_MODE = true;
+    
     public $bodyList = array();
     public $sidebarList = array();
     public $page = null;
@@ -55,6 +56,18 @@ class PagePage extends AbstractPage{
             
             
         }
+        
+        //check if offline and view page or exit
+        // see: wcf\system\request\RequestHandler
+        if (OFFLINE) {
+             if (!WCF::getSession()->getPermission('admin.general.canViewPageDuringOfflineMode') && !$this->page->availableDuringOfflineMode) {
+                WCF::getTPL()->assign(array(
+                    'templateName' => 'offline'
+                ));
+                WCF::getTPL()->display('offline');
+                exit;
+			}
+		}
     }
     
     public function readData(){

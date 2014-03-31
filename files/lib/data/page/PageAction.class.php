@@ -114,7 +114,7 @@ class PageAction extends AbstractDatabaseObjectAction{
                 }
             }
             //delete if unchecked 
-            elseif($menuItem['id'] != 0){
+            elseif(isset($menuItem['id']) && $menuItem['id'] != 0){
                 $action = new PageMenuItemAction(array($menuItem['id']), 'delete', array());
                 $action->executeAction();
                 $menuItem['id'] = 0;

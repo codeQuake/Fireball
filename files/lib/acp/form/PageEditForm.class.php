@@ -27,7 +27,8 @@ class PageEditForm extends PageAddForm{
     
     public $pageID = 0;
     public $page = null;
-
+    public $action = 'edit';
+    
     public function readData(){
         parent::readData();
         
@@ -61,6 +62,61 @@ class PageEditForm extends PageAddForm{
     }
     
     
+    public function readFormParameters(){
+        parent::readFormParameters();
+          if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
+        }
+    
+        public function validate(){
+        AbstractForm::validate();
+       //validate alias
+        if(empty($this->alias)) throw new UserInputException('alias', 'empty');
+        if($this->parentID != 0){
+            $parent = PageCache::getInstance()->getPage($this->parentID);
+            if($parent->hasChildren()){
+                foreach($parent->getChildren() as $child){
+                    if($child->alias == $this->alias && $child->pageID != $this->pageID) throw new UserInputException('alias', 'given');
+                }
+            }
+        }
+        //1st floor ;)
+        else{
+            $list = new PageList();
+            $list->getConditionBuilder()->add('parentID = ?', array(0));
+            $list->readObjects();
+            foreach($list->getObjects() as $child){
+                if($child->alias == $this->alias && $child->pageID != $this->pageID) throw new UserInputException('alias', 'given');
+            }
+        }
+        
+        //check if valid
+        if(preg_match('~((\/{1}\.{1})?[a-z0-9-]+\/?)*~', $this->alias) !== 1) throw new UserInputException('alias', 'invalid');
+        
+        //validate menuitem
+        $menu = @unserialize($this->page->menuItem);
+        if (isset($this->menuItem['has']) && $this->menuItem['has'] == 1 && isset($menu['id']) == false && $menu['id'] != 0){
+            $list = new PageMenuItemList();
+            $list->readObjects();
+            $list = $list->getObjects();
+            foreach($list as $item){
+                if(isset($this->menuItem['id']) && $this->title == $item->menuItem)
+                    throw new UserInputException('menuItem', 'exists');
+                if(isset($this->menuItem['id']) && $item->menuItem == 'cms.page.title'.$this->pageID);
+                    throw new UserInputException('menuItem', 'exists');
+            }
+        }
+        if (!I18nHandler::getInstance()->validateValue('title')) {
+			if (I18nHandler::getInstance()->isPlainValue('title')) {
+				throw new UserInputException('title');
+			}
+			else {
+				throw new UserInputException('title', 'multilingual');
+			}
+		}
+        $parent = new Page($this->parentID);
+        if($parent === null) throw new UserInputException('parentID', 'invalid');
+    }
+
     public function save(){
         AbstractForm::save();
         $objectAction = new PageAction(array($this->pageID), 'update', array('data' => array('alias' => $this->alias,
