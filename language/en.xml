@@ -40,7 +40,7 @@
     <item name="cms.acp.page.homePage"><![CDATA[Startpage]]></item>
     <item name="cms.acp.page.general"><![CDATA[General]]></item>
     <item name="cms.acp.page.general.parentID"><![CDATA[Parent page]]></item>
-    <item name="cms.acp.page.general.parentID.no"><![CDATA[-------------]]></item>
+    <item name="cms.acp.page.general.parentID.no"><![CDATA[No choice]]></item>
     <item name="cms.acp.page.general.title"><![CDATA[Pagetitle]]></item>
     <item name="cms.acp.page.general.alias"><![CDATA[URL-Alias]]></item>
     <item name="cms.acp.page.alias.error.given"><![CDATA[Alias exists!]]></item>

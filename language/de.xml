@@ -41,7 +41,7 @@
     <item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
     <item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
     <item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
-    <item name="cms.acp.page.general.parentID.no"><![CDATA[-------------]]></item>
+    <item name="cms.acp.page.general.parentID.no"><![CDATA[Keine Auswahl]]></item>
     <item name="cms.acp.page.general.title"><![CDATA[Seitentitel]]></item>
     <item name="cms.acp.page.general.alias"><![CDATA[URL-Alias]]></item>
     <item name="cms.acp.page.alias.error.given"><![CDATA[Ein gleichnamiger Alias existiert bereits.]]></item>
