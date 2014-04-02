@@ -87,9 +87,7 @@ class PagePage extends AbstractPage{
         
         //breadcrumbs
         foreach($this->page->getParentPages() as $page){
-            WCF::getBreadcrumbs()->add(new Breadcrumb($page->getTitle(), 
-                                                            LinkHandler::getInstance()->getLink('Page', array('application' => 'cms',
-                                                                                                                'object' => $page))));
+            WCF::getBreadcrumbs()->add(new Breadcrumb($page->getTitle(), $page->getLink()));
         }
         
         //get Contents
