@@ -1,4 +1,4 @@
-﻿CREATE TABLE cms1_counter(
+CREATE TABLE cms1_counter(
             day INT(2) NOT NULL DEFAULT '1',
             month INT(2) NOT NULL DEFAULT '1',
             year INT(4) NOT NULL DEFAULT '2014',

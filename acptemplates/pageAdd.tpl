@@ -14,6 +14,7 @@
 	//]]>
 </script>
 
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}/js/CMS.js"></script>
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 <script data-relocate="true">
 	//<![CDATA[
