@@ -6,7 +6,7 @@ use cms\system\counter\VisitCountHandler;
 use cms\data\page\PageList;
 use cms\data\news\NewsList;
 use wcf\data\user\online\UsersOnlineList;
-use wcf\util\FileUtil;
+use wcf\util\HTTPRequest;
 
 class DashboardPage extends AbstractPage{
     public $templateName = 'dashboard';
@@ -18,16 +18,17 @@ class DashboardPage extends AbstractPage{
     protected function readFireballFeed(){
         $url = "http://codequake.de/index.php/NewsFeed/14/";
         try{
-            $feedData = FileUtil::downloadFileFromHttp($url, 'feed');
+            $request = new HTTPRequest("http://codequake.de/index.php/NewsFeed/14/");
+		    $request->execute();
+		    $feedData = $request->getReply()['body'];
             }
          catch (\wcf\system\exception\SystemException $e){
             return ( array(	'errorMessage' => $e->getMessage()));
         }
         
-        if(!$xml = simplexml_load_file($feedData)) {
+        if(!$xml = simplexml_load_string($feedData)) {
             die('Error reading feed!');
         }
-        @unlink($feedData);
         $feed = array();
         $i = 2;
         
