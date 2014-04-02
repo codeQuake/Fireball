@@ -16,3 +16,6 @@ CREATE TABLE cms1_folder(
 ALTER TABLE cms1_page ADD clicks INT (20) NOT NULL DEFAULT 0 AFTER comments;
 ALTER TABLE cms1_file ADD folderID INT (10) NOT NULL DEFAULT 0 AFTER fileID;
 ALTER TABLE cms1_news ADD imageID INT (10) NOT NULL DEFAULT 0 AFTER comments;
+
+ALTER TABLE cms1_page ADD alias VARCHAR(255) NOT NULL AFTER pageID;
+ALTER TABLE cms1_page ADD availableDuringOfflineMode TINYINT(1) NOT NULL DEFAULT 0 AFTER invisible;

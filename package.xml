@@ -116,6 +116,7 @@
     <instruction type="option">xml/option.xml</instruction>
     <instruction type="eventListener">xml/eventlistener.xml</instruction>
     <instruction type="template">templates.tar</instruction>
+    <instruction type="sql">update1_2.sql</instruction>
   </instructions>
 
   <instructions type="update" fromversion="1.1.0 pl 1">
@@ -126,6 +127,7 @@
     <instruction type="eventListener">xml/eventlistener.xml</instruction>
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="file">files.tar</instruction>
+    <instruction type="sql">update1_2.sql</instruction>
   </instructions>
 
   <instructions type="update" fromversion="1.1.1">    
@@ -134,5 +136,6 @@
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="eventListener">xml/eventlistener.xml</instruction>
     <instruction type="file" application="wcf">files_wcf.tar</instruction>
+    <instruction type="sql">update1_2.sql</instruction>
   </instructions>
 </package>
