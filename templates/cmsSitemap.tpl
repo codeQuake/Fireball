@@ -1,16 +1,17 @@
-<ul class="sitemapList" data-object-id="0">
+<ul class="sitemapList">
+    
+    {assign var=oldDepth value=0}
     {foreach from=$pageList item=page}
-    <li>
-        <a href="{$page->getLink()}">{$page->getTitle()|language}</a>
-        {if $page->hasChildren()}
-            <ul data-object-id="{$page->pageID}">
-                {foreach from=$page->getChildren() item=child}
-                    <li>
-                        <a href="{$child->getLink()}">{$child->getTitle()|language}</a>
-                    </li>
-                {/foreach}
-            </ul>
+      {section name=i loop=$oldDepth-$pageList->getDepth()}</ul></li>{/section}
+      <li>
+        <a href="{$page->getLink()}">{$page->getTitle()}</a>
+        <ul>
+          {if !$pageList->current()->hasChildren()}
+        </ul>
+        </li>
         {/if}
-    </li>
+        {assign var=oldDepth value=$pageList->getDepth()}
+      </li>
     {/foreach}
-    </ul>
+    {section name=i loop=$oldDepth}</ul></li>{/section}
+</ul>
