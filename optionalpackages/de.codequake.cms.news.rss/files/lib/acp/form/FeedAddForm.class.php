@@ -9,6 +9,7 @@ use wcf\system\language\LanguageFactory;
 use wcf\system\category\CategoryHandler;
 use cms\data\news\image\NewsImage;
 use cms\data\news\image\NewsImageList;
+use wcf\util\HTTPRequest;
 
 /**
  * @author	Jens Krumsieck
@@ -67,7 +68,16 @@ class FeedAddForm extends AbstractForm{
     public function validate(){
         parent::validate();
         if($this->feedUrl == "") throw new UserInputException('feedUrl', 'empty');
-        if(!simplexml_load_file($this->feedUrl)) throw new UserInputException('feedUrl', 'noFeed');
+        try{
+            $request = new HTTPRequest($this->feedUrl);
+            $request->execute();
+            $feedData = $request->getReply()['body'];
+        }
+        catch (\wcf\system\exception\SystemException $e){
+            //invalid URL
+            return ( array(	'errorMessage' => $e->getMessage()));
+        }
+        if(!simplexml_load_string($feedData)) throw new UserInputException('feedUrl', 'noFeed');
     }
     
     public function assignVariables(){
