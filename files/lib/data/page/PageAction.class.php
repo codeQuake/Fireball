@@ -5,6 +5,7 @@ use wcf\system\exception\UserInputException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\NamedUserException;
 use cms\data\content\ContentAction;
+use wcf\data\ISortableAction;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
 use cms\system\cache\builder\PageCacheBuilder;
 use wcf\data\page\menu\item\PageMenuItem;
@@ -21,7 +22,7 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 
-class PageAction extends AbstractDatabaseObjectAction{
+class PageAction extends AbstractDatabaseObjectAction implements ISortableAction{
 
     protected $className = 'cms\data\page\PageEditor';
     protected $permissionsDelete = array('admin.cms.page.canAddPage');
@@ -191,5 +192,53 @@ class PageAction extends AbstractDatabaseObjectAction{
         
         $action = new PageMenuItemAction(array($item->menuItemID), 'update', array('data' => array('menuItem' => $this->pageEditor->title)));
         $action->executeAction();
+	}
+    
+    public function validateUpdatePosition(){
+        WCF::getSession()->checkPermissions(array('admin.cms.page.canAddPage'));
+
+		if (!isset($this->parameters['data']['structure']) || !is_array($this->parameters['data']['structure'])) {
+			throw new UserInputException('structure');
+		}
+
+		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
+		foreach ($this->parameters['data']['structure'] as $parentID => $pageIDs) {
+			if ($parentID) {
+				if (!isset($pages[$parentID])) {
+					throw new UserInputException('structure');
+				}
+
+				$this->objects[$parentID] = new PageEditor($pages[$parentID]);
+			}
+
+			$aliases = array();
+			foreach ($pageIDs as $pageID) {
+				if (!isset($pages[$pageID])) {
+					throw new UserInputException('structure');
+				}
+				if (in_array($pages[$pageID]->alias, $aliases)) {
+					throw new UserInputException('structure');
+				}
+				$aliases[] = $pages[$pageID]->alias;
+
+				$this->objects[$pageID] = new PageEditor($pages[$pageID]);
+			}
+		}
+    }
+    
+    public function updatePosition() {
+		WCF::getDB()->beginTransaction();
+		foreach ($this->parameters['data']['structure'] as $parentID => $pageIDs) {
+			$position = 1;
+			foreach ($pageIDs as $pageID) {
+				$this->objects[$pageID]->update(array(
+					'parentID' => $parentID != 0 ? $this->objects[$parentID]->pageID : null,
+					'showOrder' => $position++
+				));
+			}
+		}
+		WCF::getDB()->commitTransaction();
+        
+        PageCacheBuilder::getInstance()->reset();
 	}
 }

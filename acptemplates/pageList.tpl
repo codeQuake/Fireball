@@ -17,7 +17,8 @@
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			new WCF.Action.Delete('cms\\data\\page\\PageAction', '.jsPageRow');			
+			new WCF.Action.Delete('cms\\data\\page\\PageAction', '.jsPageRow');
+			new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction');			
 		});
 		//]]>
 	</script>
@@ -35,7 +36,7 @@
 </div>
 {hascontent}
 	<section id="pageList" class="container containerPadding marginTop sortableListContainer">
-		<ol class="pageList sortableList" data-objectID="0">
+		<ol class="pageList sortableList" data-object-id="0">
 			{content}
 				{assign var=oldDepth value=0}
 				{foreach from=$pageList item=page}
@@ -66,6 +67,9 @@
 			{/content}
 		</ol>
 	</section>
+	<div class="formSubmit">
+			<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+	</div>
 {/hascontent}
 
 {include file='footer'}
