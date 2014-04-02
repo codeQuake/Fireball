@@ -105,6 +105,20 @@ class PageEditForm extends PageAddForm{
                     throw new UserInputException('menuItem', 'exists');
             }
         }
+        /validate menuitem
+        $menu = @unserialize($this->page->menuItem);
+        if (isset($this->menuItem['has']) && $this->menuItem['has'] == 1 && isset($menu['id']) == false && $menu['id'] != 0){
+            $list = new PageMenuItemList();
+            $list->readObjects();
+            $list = $list->getObjects();
+            foreach($list as $item){
+                if(isset($this->menuItem['id']) && $this->title == $item->menuItem)
+                    throw new UserInputException('menuItem', 'exists');
+                if(isset($this->menuItem['id']) && $item->menuItem == 'cms.page.title'.$this->pageID);
+                    throw new UserInputException('menuItem', 'exists');
+            }
+        }
+
         if (!I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');

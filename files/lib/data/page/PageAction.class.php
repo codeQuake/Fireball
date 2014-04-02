@@ -79,7 +79,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
              $menuItem = @unserialize($page->menuItem);
              //update
             if(isset($menuItem['has']) && $menuItem['has'] == 1){
-                if($menuItem['id'] != 0){
+                if(isset($menuItem['id']) && $menuItem['id'] != 0){
                     $action = new PageMenuItemAction(array($menuItem['id']), 'update', array('data' => array('menuItem' => empty($page->title) ? 'cms.page.title'.$page->pageID : $page->title)));
                     $action->executeAction();
                 }
@@ -103,7 +103,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
                                    'menuItemLink' => 'id='.$page->pageID,
                                    'menuPosition' => 'header',
                                    'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
-                                   'parentMenuItem' => $parentItem,
+                                   'parentMenuItem' => $parentItem != null ? $parentItem : '',
                                    'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header'));
                     $action = new PageMenuItemAction(array(), 'create', array('data' => $data));
                     $action->executeAction();
