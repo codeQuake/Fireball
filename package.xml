@@ -63,7 +63,7 @@
     <instruction type="file" application="wcf">files_wcf.tar</instruction>
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="template">templates.tar</instruction>
-    <instruction type="script">acp/update.php</instruction>
+    <instruction type="sql">update1_1.sql</instruction>
     <!--xml-->
     <instruction type="cronjob">xml/cronjob.xml</instruction>
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
@@ -80,7 +80,7 @@
     <instruction type="file" application="wcf">files_wcf.tar</instruction>
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="template">templates.tar</instruction>
-    <instruction type="script">acp/update.php</instruction>
+    <instruction type="sql">update1_1.sql</instruction>
     <!--xml-->
     <instruction type="cronjob">xml/cronjob.xml</instruction>
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
@@ -97,7 +97,7 @@
     <instruction type="file" application="wcf">files_wcf.tar</instruction>
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="template">templates.tar</instruction>
-    <instruction type="script">acp/update.php</instruction>
+    <instruction type="sql">update1_1.sql</instruction>
     <!--xml-->
     <instruction type="cronjob">xml/cronjob.xml</instruction>
     <instruction type="acpMenu">xml/acpMenu.xml</instruction>
