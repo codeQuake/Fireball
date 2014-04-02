@@ -143,12 +143,14 @@ class CMSExportHandler extends SingletonFactory{
            foreach($this->data['pages'] as $page){
                 $xml->startElement('page');
                 $xml->writeElement('pageID', $page['pageID']);
+                $xml->writeElement('alias', $page['alias']);
                 $xml->writeElement('parentID', $page['parentID']);
                 $xml->writeElement('title', $page['title']);
                 if(isset($page['description'])) $xml->writeElement('description', $page['description']);
                 if(isset($page['metaDescription'])) $xml->writeElement('metaDescription', $page['metaDescription']);
                 if(isset($page['metaKeywords'])) $xml->writeElement('metaKeywords', $page['metaKeywords']);
                 $xml->writeElement('invisible', $page['invisible']);
+                $xml->writeElement('availableDuringOfflineMode', $page['availabeDuringOfflineMode']);
                 $xml->writeElement('robots', $page['robots']);
                 $xml->writeElement('showOrder', $page['showOrder']);
                 $xml->writeElement('isHome', $page['isHome']);
@@ -274,12 +276,14 @@ class CMSExportHandler extends SingletonFactory{
         
         foreach($list->getObjects() as $page){
             $this->data['pages'][$page->pageID]['pageID'] = $page->pageID;
+            $this->data['pages'][$page->pageID]['alias'] = $page->alias;
             $this->data['pages'][$page->pageID]['parentID'] = $page->parentID;
             $this->data['pages'][$page->pageID]['title'] = $page->title;
             $this->data['pages'][$page->pageID]['description'] = $page->description;
             $this->data['pages'][$page->pageID]['metaDescription'] = $page->metaDescription;
             $this->data['pages'][$page->pageID]['metaKeywords'] = $page->metaKeywords;
             $this->data['pages'][$page->pageID]['invisible'] = $page->invisible;
+            $this->data['pages'][$page->pageID]['availableDuringOfflineMode'] = $page->availableDuringOfflineMode;
             $this->data['pages'][$page->pageID]['robots'] = $page->robots;
             $this->data['pages'][$page->pageID]['showOrder'] = $page->showOrder;
             $this->data['pages'][$page->pageID]['isHome'] = $page->isHome;
