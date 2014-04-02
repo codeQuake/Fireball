@@ -24,7 +24,9 @@
 				<fieldset>
 					<legend>{lang}cms.acp.dashboard.lastNews{/lang}</legend>
 					<ul>
+						
 						{foreach from=$feed item=item} 
+						{if $item['title']|isset}
 						<li style="border-bottom: 1px dashed #dfdfdf; padding: 5px; margin-bottom: 5px;">
 							<div class="containerHeadline">
 								<h3><a href="{$item['link']}">{$item['title']}</a></h3>
@@ -34,6 +36,9 @@
 								{@$item['description']}
 							</div>
 						</li>
+						{else}
+							<strong>Fatal Error:</strong> {$item}
+						{/if}
 						{/foreach}
 					</ul>
 				</fieldset>
