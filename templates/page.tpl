@@ -7,7 +7,7 @@
 	{@$page->getLayout()}
     <script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Moderation{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 	
-    <link rel="canonical" href="{link application='cms' controller='Page' object=$page}{/link}" />
+    <link rel="canonical" href="{$page->getLink()}" />
 </head>
 
 <body id="tpl{$templateName|ucfirst}" data-page-id="{$page->pageID}">
