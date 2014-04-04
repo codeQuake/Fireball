@@ -65,6 +65,7 @@ class PageEditForm extends PageAddForm{
     public function readFormParameters(){
         parent::readFormParameters();
           if(isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
+          if(isset($_REQUEST['menuID'])) $this->menuItem['id'] = intval($_REQUEST['menuID']);
         }
     
         public function validate(){
@@ -93,19 +94,6 @@ class PageEditForm extends PageAddForm{
         if(preg_match('~((\/{1}\.{1})?[a-z0-9-]+\/?)*~', $this->alias) !== 1) throw new UserInputException('alias', 'invalid');
         
         //validate menuitem
-        $menu = @unserialize($this->page->menuItem);
-        if (isset($this->menuItem['has']) && $this->menuItem['has'] == 1 && isset($menu['id']) == false && $menu['id'] != 0){
-            $list = new PageMenuItemList();
-            $list->readObjects();
-            $list = $list->getObjects();
-            foreach($list as $item){
-                if(isset($this->menuItem['id']) && $this->title == $item->menuItem)
-                    throw new UserInputException('menuItem', 'exists');
-                if(isset($this->menuItem['id']) && $item->menuItem == 'cms.page.title'.$this->pageID);
-                    throw new UserInputException('menuItem', 'exists');
-            }
-        }
-        /validate menuitem
         $menu = @unserialize($this->page->menuItem);
         if (isset($this->menuItem['has']) && $this->menuItem['has'] == 1 && isset($menu['id']) == false && $menu['id'] != 0){
             $list = new PageMenuItemList();
