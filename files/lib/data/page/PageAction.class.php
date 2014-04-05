@@ -166,8 +166,6 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 	}
     
 	public function setAsHome() {
-        
-        PageCacheBuilder::getInstance()->reset();
 		$this->pageEditor->setAsHome();
         
         
@@ -192,6 +190,8 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
         
         $action = new PageMenuItemAction(array($item->menuItemID), 'update', array('data' => array('menuItem' => $this->pageEditor->title)));
         $action->executeAction();
+        
+        PageCacheBuilder::getInstance()->reset();
 	}
     
     public function validateUpdatePosition(){

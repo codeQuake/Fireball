@@ -52,7 +52,9 @@ class PagePage extends AbstractPage{
             $row = $statement->fetchArray();
             $this->pageID = $row['pageID'];
             $this->page = PageCache::getInstance()->getPage($this->pageID);
-            $this->activeMenuItem = $this->page->title;
+            if($this->page->pageID != 0){
+                $this->activeMenuItem = $this->page->title;
+            }
             
             
         }
