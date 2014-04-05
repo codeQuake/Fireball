@@ -55,6 +55,7 @@ class PagePage extends AbstractPage{
             if($this->page->pageID != 0){
                 $this->activeMenuItem = $this->page->title;
             }
+            else throw new IllegalLinkException();
             
             
         }
