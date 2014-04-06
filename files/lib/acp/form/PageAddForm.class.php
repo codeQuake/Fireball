@@ -120,7 +120,7 @@ class PageAddForm extends AbstractForm{
         }
         
         //check if valid
-        if(preg_match('~((\/{1}\.{1})?[a-z0-9-]+\/?)*~', $this->alias) !== 1) throw new UserInputException('alias', 'invalid');
+        if(preg_match('~[a-z0-9/]+(?:\-{1}[a-z0-9/]+)*~', $this->alias) !== 1) throw new UserInputException('alias', 'invalid');
         
         //validate menuitem
         $list = new PageMenuItemList();

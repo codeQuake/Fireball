@@ -15,6 +15,7 @@ use wcf\system\dashboard\DashboardHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\util\StringUtil;
+use wcf\util\HeaderUtil;
 
 /**
  * @author	Jens Krumsieck
