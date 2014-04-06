@@ -154,9 +154,13 @@
     <instruction type="file">files.tar</instruction>
     <instruction type="acpTemplate">acptemplates.tar</instruction>
     <instruction type="file" application="wcf">files_wcf.tar</instruction>
+    <instruction type="acpTemplate">acptemplates.tar</instruction>
+    <instruction type="template">templates.tar</instruction>
   </instructions>
   <instructions type="update" fromversion="1.1.2 pl 1">
     <instruction type="file">files.tar</instruction>
     <instruction type="file" application="wcf">files_wcf.tar</instruction>
+    <instruction type="acpTemplate">acptemplates.tar</instruction>
+    <instruction type="template">templates.tar</instruction>
   </instructions>
 </package>
