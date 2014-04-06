@@ -14,7 +14,6 @@
 	//]]>
 </script>
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}/js/CMS.js"></script>
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 <script data-relocate="true">
 	//<![CDATA[
@@ -61,6 +60,7 @@
 				<span>»</span>
 			</span>
 		</li>
+	</ul>
 </nav>
 
 <header class="boxHeadline">
@@ -242,10 +242,10 @@
 						</dd>
 					</dl>
 					<dl  {if $errorField == 'sidebarOrientation'}class="formError"{/if}>
-						<dt><label for="position">{lang}cms.acp.page.optional.sidebarOrientation{/lang}</label></dt>
+						<dt><label for="sidebarOrientation">{lang}cms.acp.page.optional.sidebarOrientation{/lang}</label></dt>
 						<dd>
 							<select id="sidebarOrientation" name="sidebarOrientation">
-								<option value="right" {if $sidebarOrientation =="right"}selected="selected"{/if}">{lang}cms.acp.page.sidebarOrientation.right{/lang}</option>
+								<option value="right" {if $sidebarOrientation =="right"}selected="selected"{/if}>{lang}cms.acp.page.sidebarOrientation.right{/lang}</option>
 								<option value="left" {if $sidebarOrientation =="left"}selected="selected"{/if}>{lang}cms.acp.page.sidebarOrientation.left{/lang}</option>
 							</select>
 						</dd>

@@ -1,6 +1,5 @@
 <?php
 namespace cms\acp\form;
-
 use cms\data\page\PageAction;
 use cms\data\page\PageEditor;
 use cms\data\page\Page;
@@ -20,7 +19,7 @@ use wcf\system\WCF;
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
- */
+ **/
 
 class PageAddForm extends AbstractForm{
     
@@ -113,7 +112,6 @@ class PageAddForm extends AbstractForm{
             foreach($list->getObjects() as $child){
                 if($child->alias == $this->alias && $this->action == 'add') throw new UserInputException('alias', 'given');
                     else{
-                        echo $this->pageID;
                         if($child->alias == $this->alias && $child->pageID != $this->pageID) throw new UserInputException('alias', 'given');
                     }
             }
