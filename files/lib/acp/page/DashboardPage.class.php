@@ -20,7 +20,8 @@ class DashboardPage extends AbstractPage{
         try{
             $request = new HTTPRequest("http://codequake.de/index.php/NewsFeed/14/");
 		    $request->execute();
-		    $feedData = $request->getReply()['body'];
+		    $feedData = $request->getReply();
+            $feedData = $feedData['body'];
             }
          catch (\wcf\system\exception\SystemException $e){
             return ( array(	'errorMessage' => $e->getMessage()));
