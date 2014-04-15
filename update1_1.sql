@@ -12,6 +12,11 @@ CREATE TABLE cms1_folder(
 			folderName VARCHAR(255) NOT NULL,
 			folderPath VARCHAR(255) NOT NULL
             );
+CREATE TABLE cms1_news_image(
+			imageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			title VARCHAR(255) NOT NULL,
+			filename VARCHAR(255) NOT NULL
+);
 
 ALTER TABLE cms1_page ADD clicks INT (20) NOT NULL DEFAULT 0 AFTER comments;
 ALTER TABLE cms1_file ADD folderID INT (10) NOT NULL DEFAULT 0 AFTER fileID;
