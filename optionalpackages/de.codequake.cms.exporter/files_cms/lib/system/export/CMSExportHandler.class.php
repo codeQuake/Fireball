@@ -150,7 +150,7 @@ class CMSExportHandler extends SingletonFactory{
                 if(isset($page['metaDescription'])) $xml->writeElement('metaDescription', $page['metaDescription']);
                 if(isset($page['metaKeywords'])) $xml->writeElement('metaKeywords', $page['metaKeywords']);
                 $xml->writeElement('invisible', $page['invisible']);
-                $xml->writeElement('availableDuringOfflineMode', $page['availabeDuringOfflineMode']);
+                $xml->writeElement('availableDuringOfflineMode', $page['availableDuringOfflineMode']);
                 $xml->writeElement('robots', $page['robots']);
                 $xml->writeElement('showOrder', $page['showOrder']);
                 $xml->writeElement('isHome', $page['isHome']);

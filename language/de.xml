@@ -301,7 +301,7 @@
   </category>
 
   <category name="cms.user">
-    <item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{link controller='Page' application='cms' object=$page}{/link}">{@$page->getTitle()|language}</a>]]></item>
+    <item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{$page->getLink()}">{@$page->getTitle()|language}</a>]]></item>
     <item name="cms.user.usersOnline.location.newsPage"><![CDATA[<a href="{link controller='News' application='cms' object=$news}{/link}">Nachricht: {$news->getTitle()|language}</a>]]></item>
     <item name="cms.user.usersOnline.location.newsAddForm"><![CDATA[Neue Nachricht verfassen]]></item>
     <item name="cms.user.usersOnline.location.newsCategoryListPage"><![CDATA[Nachrichten]]></item>
