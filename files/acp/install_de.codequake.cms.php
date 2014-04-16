@@ -1,8 +1,8 @@
 <?php
+use cms\data\module\ModuleAction;
+use cms\data\stylesheet\StylesheetAction;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\WCF;
-use cms\data\stylesheet\StylesheetAction;
-use cms\data\module\ModuleAction;
 
 $package = $this->installation->getPackage();
 

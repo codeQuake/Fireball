@@ -1,7 +1,7 @@
 <?php
 namespace cms\acp\action;
-use wcf\action\AbstractAction;
 use cms\data\restore\Restore;
+use wcf\action\AbstractAction;
 use wcf\system\exception\IllegalLinkException;
 
 class RestoreDownloadAction extends AbstractAction{

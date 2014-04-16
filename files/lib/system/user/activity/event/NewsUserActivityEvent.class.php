@@ -1,9 +1,9 @@
 <?php
 namespace cms\system\user\activity\event;
+use cms\data\news\NewsList;
 use wcf\system\user\activity\event\IUserActivityEvent;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
-use cms\data\news\NewsList;
 
 /**
  * @author	Jens Krumsieck

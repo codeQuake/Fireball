@@ -1,11 +1,11 @@
 <?php
 namespace cms\acp\page;
+use cms\system\counter\VisitCountHandler;
+use cms\data\news\NewsList;
+use cms\data\page\PageList;
+use wcf\data\user\online\UsersOnlineList;
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
-use cms\system\counter\VisitCountHandler;
-use cms\data\page\PageList;
-use cms\data\news\NewsList;
-use wcf\data\user\online\UsersOnlineList;
 use wcf\util\HTTPRequest;
 
 class DashboardPage extends AbstractPage{

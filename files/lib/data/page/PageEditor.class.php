@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\page;
-use wcf\system\WCF;
 use wcf\data\DatabaseObjectEditor;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

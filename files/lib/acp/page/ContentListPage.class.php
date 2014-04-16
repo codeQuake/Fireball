@@ -1,8 +1,8 @@
 <?php
 namespace cms\acp\page;
 use cms\data\content\PageContentList;
-use wcf\page\SortablePage;
 use cms\data\page\Page;
+use wcf\page\SortablePage;
 use wcf\system\WCF;
 
 /**

@@ -1,7 +1,7 @@
 <?php
 namespace cms\system\importer;
-use wcf\system\importer\AbstractCategoryImporter;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\importer\AbstractCategoryImporter;
 
 /**
  * @author	Jens Krumsieck

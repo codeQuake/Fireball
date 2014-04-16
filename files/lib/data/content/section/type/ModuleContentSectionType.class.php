@@ -2,11 +2,11 @@
 namespace cms\data\content\section\type;
 use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionEditor;
-use wcf\system\WCF;
-use cms\data\module\ModuleList;
 use cms\data\module\Module;
+use cms\data\module\ModuleList;
 use wcf\system\template\TemplateCompiler;
 use wcf\system\template\TemplateEngine;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

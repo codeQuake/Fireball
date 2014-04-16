@@ -1,13 +1,13 @@
 <?php
 namespace cms\acp\form;
-use wcf\form\AbstractForm;
 use cms\data\content\section\ContentSectionAction;
-use wcf\system\event\EventHandler;
+use cms\data\content\Content;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\util\StringUtil;
+use wcf\form\AbstractForm;
+use wcf\system\event\EventHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
-use cms\data\content\Content;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

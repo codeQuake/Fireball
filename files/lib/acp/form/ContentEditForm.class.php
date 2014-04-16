@@ -1,12 +1,12 @@
 <?php
 namespace cms\acp\form;
-use wcf\form\AbstractForm;
 use cms\data\content\Content;
-use cms\data\content\ContentEditor;
 use cms\data\content\ContentAction;
+use cms\data\content\ContentEditor;
+use cms\data\page\Page;
+use wcf\form\AbstractForm;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
-use cms\data\page\Page;
 
 /**
  * @author	Jens Krumsieck

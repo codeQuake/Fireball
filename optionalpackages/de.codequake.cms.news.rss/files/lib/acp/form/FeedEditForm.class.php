@@ -1,11 +1,11 @@
 <?php
 namespace cms\acp\form;
-use wcf\form\AbstractForm;
-use wcf\util\StringUtil;
-use wcf\system\WCF;
-use cms\data\news\image\NewsImage;
 use cms\data\feed\Feed;
 use cms\data\feed\FeedAction;
+use cms\data\news\image\NewsImage;
+use wcf\form\AbstractForm;
+use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

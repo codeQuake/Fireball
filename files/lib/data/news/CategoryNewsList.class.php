@@ -1,9 +1,10 @@
 <?php
 namespace cms\data\news;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\WCF;
-use wcf\system\category\CategoryHandler;
 use cms\data\category\NewsCategory;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\category\CategoryHandler;
+use wcf\system\WCF;
+
 /**
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake

@@ -1,7 +1,7 @@
 <?php
 namespace cms\system\menu\page;
-use wcf\system\menu\page\DefaultPageMenuItemProvider;
 use cms\data\page\PageCache;
+use wcf\system\menu\page\DefaultPageMenuItemProvider;
 
 /**
  * @author	Jens Krumsieck

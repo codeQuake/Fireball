@@ -1,7 +1,6 @@
 <?php
 namespace cms\system\sitemap;
-use cms\data\page\PageNodeTree
-;
+use cms\data\page\PageNodeTree;
 use wcf\system\sitemap\ISitemapProvider;
 use wcf\system\WCF;
 

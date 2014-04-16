@@ -1,7 +1,7 @@
 <?php
 namespace cms\acp\page;
-use wcf\page\AbstractPage;
 use cms\data\page\PageNodeTree;
+use wcf\page\AbstractPage;
 use wcf\system\WCF;
 /**
  * @author	Jens Krumsieck

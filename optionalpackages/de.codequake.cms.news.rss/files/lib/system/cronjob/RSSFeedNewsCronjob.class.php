@@ -1,12 +1,12 @@
 <?php
 namespace cms\system\cronjob;
+use cms\data\feed\FeedEditor;
+use cms\data\feed\FeedList;
+use cms\data\news\NewsAction;
 use wcf\data\cronjob\Cronjob;
 use wcf\system\cronjob\AbstractCronjob;
 use wcf\util\HTTPRequest;
 use wcf\util\StringUtil;
-use cms\data\feed\FeedList;
-use cms\data\feed\FeedEditor;
-use cms\data\news\NewsAction;
 
 class RSSFeedNewsCronjob extends AbstractCronjob{
     

@@ -1,8 +1,8 @@
 <?php
 namespace cms\data\stylesheet;
-use wcf\data\AbstractDatabaseObjectAction;
-use cms\system\layout\LayoutHandler;
 use cms\data\layout\LayoutList;
+use cms\system\layout\LayoutHandler;
+use wcf\data\AbstractDatabaseObjectAction;
 
 /**
  * @author	Jens Krumsieck

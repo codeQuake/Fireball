@@ -1,11 +1,11 @@
 <?php
 namespace cms\data\content\section\type;
-use wcf\system\language\I18nHandler;
-use cms\data\content\section\ContentSectionEditor;
-use wcf\util\StringUtil;
 use cms\data\content\section\ContentSection;
-use wcf\system\WCF;
+use cms\data\content\section\ContentSectionEditor;
 use wcf\system\exception\UserInputException;
+use wcf\system\language\I18nHandler;
+use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

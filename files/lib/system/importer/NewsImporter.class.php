@@ -1,12 +1,12 @@
 <?php
 namespace cms\system\importer;
-use cms\data\news\NewsAction;
 use cms\data\news\News;
-use wcf\system\tagging\TagEngine;
+use cms\data\news\NewsAction;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\importer\AbstractImporter;
 use wcf\system\importer\ImportHandler;
 use wcf\system\language\LanguageFactory;
-use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\tagging\TagEngine;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 

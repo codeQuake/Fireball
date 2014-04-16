@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\content\section;
-use wcf\data\ISortableAction;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\ISortableAction;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 

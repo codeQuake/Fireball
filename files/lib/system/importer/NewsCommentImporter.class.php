@@ -1,7 +1,7 @@
 <?php
 namespace cms\system\importer;
-use cms\data\news\News;
 use cms\data\entry\EntryEditor;
+use cms\data\news\News;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\importer\AbstractCommentImporter;
 use wcf\system\importer\ImportHandler;

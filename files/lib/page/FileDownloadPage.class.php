@@ -1,13 +1,13 @@
 <?php
 namespace cms\page;
-use wcf\page\AbstractPage;
 use cms\data\file\File;
-use cms\data\folder\Folder;
 use cms\data\file\FileEditor;
-use wcf\util\FileReader;
+use cms\data\folder\Folder;
 use cms\system\counter\VisitCountHandler;
+use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\util\FileReader;
 
 /**
  * @author	Jens Krumsieck
