@@ -4,7 +4,6 @@ use cms\system\request\Route;
 use cms\util\PageUtil;
 use wcf\system\event\IEventListener;
 use wcf\system\request\RouteHandler;
-use wcf\system\application\ApplicationHandler;
 
 /**
  * @author	Jens Krumsieck

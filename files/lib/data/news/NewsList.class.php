@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\news;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\data\DatabaseObjectList;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
 
 /**

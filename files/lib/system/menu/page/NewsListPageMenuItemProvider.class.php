@@ -1,13 +1,13 @@
 <?php
 namespace cms\system\menu\page;
+use cms\data\category\NewsCategory;
+use wcf\system\category\CategoryHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\language\LanguageFactory;
 use wcf\system\menu\page\DefaultPageMenuItemProvider;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\visitTracker\VisitTracker;
-use wcf\system\category\CategoryHandler;
 use wcf\system\WCF;
-use cms\data\category\NewsCategory;
 
 /**
  * @author	Jens Krumsieck

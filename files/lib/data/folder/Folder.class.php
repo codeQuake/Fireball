@@ -1,9 +1,9 @@
 <?php
 namespace cms\data\folder;
-use wcf\system\request\IRouteController;
-use cms\data\CMSDatabaseObject;
-use wcf\system\WCF;
 use cms\data\file\FileList;
+use cms\data\CMSDatabaseObject;
+use wcf\system\request\IRouteController;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

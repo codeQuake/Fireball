@@ -1,10 +1,10 @@
 <?php
 namespace cms\data\content;
-use wcf\system\WCF;
-use wcf\data\ISortableAction;
-use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\exception\UserInputException;
 use cms\data\content\section\ContentSectionAction;
+use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\ISortableAction;
+use wcf\system\exception\UserInputException;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

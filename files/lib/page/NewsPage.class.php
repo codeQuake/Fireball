@@ -1,23 +1,23 @@
 <?php
 namespace cms\page;
+use cms\system\counter\VisitCountHandler;
 use cms\data\news\News;
+use cms\data\news\NewsAction;
+use cms\data\news\NewsEditor;
 use cms\data\news\NewsList;
 use cms\data\news\ViewableNews;
-use cms\data\news\NewsEditor;
-use cms\data\news\NewsAction;
 use wcf\page\AbstractPage;
-use cms\system\counter\VisitCountHandler;
+use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\comment\CommentHandler;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
-use wcf\system\dashboard\DashboardHandler;
-use wcf\system\request\LinkHandler;
 use wcf\system\like\LikeHandler;
-use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\request\LinkHandler;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\MetaTagHandler;
-use wcf\util\StringUtil;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

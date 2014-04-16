@@ -1,8 +1,8 @@
 <?php
 namespace cms\data\news;
 use wcf\data\search\ISearchResultObject;
-use wcf\system\search\SearchResultTextParser;
 use wcf\system\request\LinkHandler;
+use wcf\system\search\SearchResultTextParser;
 
 /**
  * @author	Jens Krumsieck

@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\restore;
-use wcf\data\AbstractDatabaseObjectAction;
 use cms\system\export\CMSImportHandler;
+use wcf\data\AbstractDatabaseObjectAction;
 
 /**
  * @author	Jens Krumsieck

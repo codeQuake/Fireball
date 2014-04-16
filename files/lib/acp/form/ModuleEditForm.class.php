@@ -2,9 +2,9 @@
 namespace cms\acp\form;
 use cms\data\module\Module;
 use cms\data\module\ModuleAction;
-use wcf\util\StringUtil;
 use wcf\form\AbstractForm;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

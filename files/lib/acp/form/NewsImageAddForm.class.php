@@ -1,11 +1,11 @@
 <?php
 namespace cms\acp\form;
 use cms\data\news\image\NewsImageAction;
-use wcf\system\exception\UserInputException;
-use wcf\util\StringUtil;
-use wcf\util\ArrayUtil;
 use wcf\form\AbstractForm;
+use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
+use wcf\util\ArrayUtil;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

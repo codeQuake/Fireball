@@ -1,14 +1,14 @@
 <?php
 namespace cms\data\content\section\type;
+use cms\data\category\NewsCategory;
+use cms\data\category\NewsCategoryNodeTree;
 use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionEditor;
+use cms\data\news\CategoryNewsList;
+use wcf\data\category\Category;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 use wcf\util\StringUtil;
-use cms\data\news\CategoryNewsList;
-use cms\data\category\NewsCategoryNodeTree;
-use wcf\data\category\Category;
-use cms\data\category\NewsCategory;
 
 /**
  * @author	Jens Krumsieck

@@ -1,8 +1,8 @@
 <?php
 namespace cms\system\layout;
 use cms\data\layout\Layout;
-use wcf\system\SingletonFactory;
 use cms\data\layout\LayoutList;
+use wcf\system\SingletonFactory;
 
 /**
  * @author	Jens Krumsieck

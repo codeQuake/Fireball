@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\layout;
-use wcf\system\request\IRouteController;
 use cms\data\CMSDatabaseObject;
+use wcf\system\request\IRouteController;
 use wcf\system\WCF;
 
 /**

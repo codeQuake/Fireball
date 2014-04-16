@@ -1,9 +1,9 @@
 <?php
 namespace cms\acp\form;
-use wcf\util\StringUtil;
-use wcf\form\AbstractForm;
 use cms\data\stylesheet\StylesheetAction;
+use wcf\form\AbstractForm;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

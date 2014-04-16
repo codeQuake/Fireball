@@ -1,9 +1,9 @@
 <?php
 namespace cms\system\cronjob;
+use cms\data\news\NewsAction;
+use cms\data\news\NewsList;
 use wcf\data\cronjob\Cronjob;
 use wcf\system\cronjob\AbstractCronjob;
-use cms\data\news\NewsList;
-use cms\data\news\NewsAction;
 
 class ActivateNewsCronjob extends AbstractCronjob{
     

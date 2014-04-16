@@ -2,13 +2,13 @@
 namespace cms\data\content\section\type;
 use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionEditor;
-use wcf\system\WCF;
-use wcf\util\StringUtil;
-use wcf\util\ArrayUtil;
-use cms\data\file\FileList;
-use cms\data\folder\FolderList;
 use cms\data\file\File;
+use cms\data\file\FileList;
 use cms\data\folder\Folder;
+use cms\data\folder\FolderList;
+use wcf\system\WCF;
+use wcf\util\ArrayUtil;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

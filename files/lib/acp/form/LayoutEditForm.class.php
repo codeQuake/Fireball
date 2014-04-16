@@ -3,8 +3,8 @@ namespace cms\acp\form;
 use cms\data\layout\Layout;
 use cms\data\layout\LayoutAction;
 use wcf\form\AbstractForm;
-use wcf\util\StringUtil;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

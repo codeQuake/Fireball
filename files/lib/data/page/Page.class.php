@@ -1,11 +1,11 @@
 <?php
 namespace cms\data\page;
 use cms\data\content\PageContentList;
-use wcf\system\request\IRouteController;
 use cms\data\CMSDatabaseObject;
-use wcf\system\request\LinkHandler;
 use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
+use wcf\system\request\IRouteController;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**

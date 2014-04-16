@@ -1,16 +1,16 @@
 <?php
 namespace cms\data\news;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\WCF;
-use wcf\util\UserUtil;
-use wcf\system\user\storage\UserStorageHandler;
-use wcf\system\visitTracker\VisitTracker;
+use wcf\system\attachment\AttachmentHandler;
 use wcf\system\language\LanguageFactory;
+use wcf\system\search\SearchIndexManager;
 use wcf\system\tagging\TagEngine;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\user\activity\point\UserActivityPointHandler;
-use wcf\system\attachment\AttachmentHandler;
-use wcf\system\search\SearchIndexManager;
+use wcf\system\user\storage\UserStorageHandler;
+use wcf\system\visitTracker\VisitTracker;
+use wcf\system\WCF;
+use wcf\util\UserUtil;
 
 /**
  * @author	Jens Krumsieck

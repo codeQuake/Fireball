@@ -2,10 +2,10 @@
 namespace cms\data\content\section\type;
 use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionEditor;
-use wcf\system\WCF;
+use cms\data\file\File;
 use cms\data\file\FileList;
 use cms\data\folder\FolderList;
-use cms\data\file\File;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

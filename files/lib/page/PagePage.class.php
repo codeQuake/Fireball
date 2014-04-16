@@ -4,18 +4,18 @@ use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\counter\VisitCountHandler;
 use wcf\page\AbstractPage;
-use wcf\system\WCF;
-use wcf\system\comment\CommentHandler;
-use wcf\system\MetaTagHandler;
-use wcf\system\exception\IllegalLinkException;
-use wcf\system\request\LinkHandler;
-use wcf\system\menu\page\PageMenu;
 use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\comment\CommentHandler;
 use wcf\system\dashboard\DashboardHandler;
-use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\util\StringUtil;
+use wcf\system\menu\page\PageMenu;
+use wcf\system\request\LinkHandler;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
+use wcf\system\MetaTagHandler;
+use wcf\system\WCF;
 use wcf\util\HeaderUtil;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

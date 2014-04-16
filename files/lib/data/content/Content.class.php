@@ -1,10 +1,10 @@
 <?php
 namespace cms\data\content;
-use cms\data\CMSDatabaseObject;
-use wcf\system\WCF;
 use cms\data\content\section\ContentContentSectionList;
-use wcf\system\request\IRouteController;
 use cms\data\page\Page;
+use cms\data\CMSDatabaseObject;
+use wcf\system\request\IRouteController;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

@@ -1,9 +1,10 @@
 <?php
 namespace cms\system\counter;
+use wcf\system\cache\builder\SpiderCacheBuilder;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
-use wcf\system\cache\builder\SpiderCacheBuilder;
 use wcf\util\DateUtil;
+
 /**
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
