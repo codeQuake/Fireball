@@ -1,7 +1,8 @@
 <?php
 namespace cms\data\page;
-use wcf\system\SingletonFactory;
 use cms\system\cache\builder\PageCacheBuilder;
+use wcf\system\SingletonFactory;
+
 /**
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake

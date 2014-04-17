@@ -1,10 +1,10 @@
 <?php
 namespace cms\data\news;
-use wcf\system\WCF;
-use wcf\system\visitTracker\VisitTracker;
 use cms\data\news\NewsList;
-use wcf\system\like\LikeHandler;
 use wcf\system\language\LanguageFactory;
+use wcf\system\like\LikeHandler;
+use wcf\system\visitTracker\VisitTracker;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

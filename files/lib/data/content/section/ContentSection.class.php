@@ -2,9 +2,9 @@
 namespace cms\data\content\section;
 use cms\data\content\Content;
 use cms\data\CMSDatabaseObject;
-use wcf\system\WCF;
-use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\object\type\ObjectType;
+use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

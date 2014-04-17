@@ -1,8 +1,8 @@
 <?php
 namespace cms\system\cache\builder;
+use cms\data\page\PageList;
 use wcf\system\cache\builder\AbstractCacheBuilder;
 use wcf\system\WCF;
-use cms\data\page\PageList;
 
 
 /**

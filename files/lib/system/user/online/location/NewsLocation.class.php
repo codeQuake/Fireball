@@ -1,9 +1,9 @@
 <?php
 namespace cms\system\user\online\location;
+use cms\data\news\News;
 use wcf\data\user\online\UserOnline;
 use wcf\system\user\online\location\IUserOnlineLocation;
 use wcf\system\WCF;
-use cms\data\news\News;
 
 /**
  * @author	Jens Krumsieck

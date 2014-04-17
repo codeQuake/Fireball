@@ -2,9 +2,9 @@
 namespace cms\system\layout;
 use cms\data\layout\Layout;
 use cms\data\stylesheet\LayoutStylesheetList;
+use wcf\system\exception\SystemException;
 use wcf\system\SingletonFactory;
 use wcf\util\FileUtil;
-use wcf\system\exception\SystemException;
 
 /**
  * @author	Jens Krumsieck

@@ -1,9 +1,9 @@
 <?php
 namespace cms\system\user\online\location;
+use cms\data\page\PageCache;
 use wcf\data\user\online\UserOnline;
 use wcf\system\user\online\location\IUserOnlineLocation;
 use wcf\system\WCF;
-use cms\data\page\PageCache;
 
 /**
  * @author	Jens Krumsieck

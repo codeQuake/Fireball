@@ -1,20 +1,20 @@
 <?php
 namespace cms\data\content\section\type;
-use wcf\system\language\I18nHandler;
-use wcf\system\attachment\AttachmentHandler;
+use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\data\attachment\GroupedAttachmentList;
-use wcf\util\MessageUtil;
-use wcf\system\bbcode\AttachmentBBCode;
-use wcf\system\exception\UserInputException;
-use wcf\system\bbcode\BBCodeHandler;
 use wcf\data\smiley\SmileyCache;
-use wcf\util\StringUtil;
-use wcf\util\ArrayUtil;
-use cms\data\content\section\ContentSection;
+use wcf\system\attachment\AttachmentHandler;
+use wcf\system\bbcode\AttachmentBBCode;
+use wcf\system\bbcode\BBCodeHandler;
 use wcf\system\bbcode\BBCodeParser;
 use wcf\system\bbcode\MessageParser;
+use wcf\system\language\I18nHandler;
+use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
+use wcf\util\ArrayUtil;
+use wcf\util\MessageUtil;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

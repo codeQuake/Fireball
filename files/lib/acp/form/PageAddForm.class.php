@@ -1,18 +1,18 @@
 <?php
 namespace cms\acp\form;
-use cms\data\page\PageAction;
-use cms\data\page\PageEditor;
-use cms\data\page\Page;
-use cms\data\page\PageCache;
-use cms\data\page\PageList;
 use cms\data\layout\LayoutList;
+use cms\data\page\Page;
+use cms\data\page\PageAction;
+use cms\data\page\PageCache;
+use cms\data\page\PageEditor;
+use cms\data\page\PageList;
 use wcf\data\page\menu\item\PageMenuItemList;
-use wcf\system\language\I18nHandler;
-use wcf\system\acl\ACLHandler;
 use wcf\form\AbstractForm;
-use wcf\util\StringUtil;
+use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
+use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

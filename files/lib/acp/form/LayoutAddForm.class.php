@@ -1,11 +1,11 @@
 <?php
 namespace cms\acp\form;
-use cms\data\stylesheet\StylesheetList;
 use cms\data\layout\LayoutAction;
+use cms\data\stylesheet\StylesheetList;
 use wcf\form\AbstractForm;
-use wcf\util\StringUtil;
-use wcf\system\WCF;
 use wcf\system\exception\UserInputException;
+use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

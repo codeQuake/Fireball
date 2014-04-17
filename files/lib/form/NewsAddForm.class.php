@@ -1,19 +1,19 @@
 <?php
 namespace cms\form;
-use cms\data\category\NewsCategoryNodeTree;
 use cms\data\category\NewsCategory;
-use cms\data\news\NewsAction;
+use cms\data\category\NewsCategoryNodeTree;
 use cms\data\news\image\NewsImage;
 use cms\data\news\image\NewsImageList;
+use cms\data\news\NewsAction;
 use wcf\form\MessageForm;
-use wcf\system\language\LanguageFactory;
-use wcf\system\WCF;
-use wcf\util\HeaderUtil;
 use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\request\LinkHandler;
-use wcf\system\exception\UserInputException;
 use wcf\system\category\CategoryHandler;
+use wcf\system\exception\UserInputException;
+use wcf\system\language\LanguageFactory;
+use wcf\system\request\LinkHandler;
+use wcf\system\WCF;
 use wcf\util\ArrayUtil;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**

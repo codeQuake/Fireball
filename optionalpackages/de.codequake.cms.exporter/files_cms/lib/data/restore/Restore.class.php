@@ -1,6 +1,5 @@
 <?php
 namespace cms\data\restore;
-
 use cms\data\CMSDatabaseObject;
 use wcf\system\WCF;
 

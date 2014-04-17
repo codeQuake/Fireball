@@ -1,16 +1,16 @@
 <?php
 namespace cms\page;
-use cms\data\news\CategoryNewsList;
 use cms\data\category\NewsCategory;
 use cms\data\category\NewsCategoryNodeTree;
-use wcf\system\category\CategoryHandler;
+use cms\data\news\CategoryNewsList;
 use wcf\page\SortablePage;
 use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\request\LinkHandler;
+use wcf\system\category\CategoryHandler;
 use cms\system\counter\VisitCountHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\request\LinkHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\WCF;
 

@@ -1,14 +1,14 @@
 <?php
 namespace cms\page;
 use cms\data\category\NewsCategoryNodeTree;
+use cms\data\news\ViewableNewsList;
+use wcf\page\SortablePage;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
-use wcf\system\MetaTagHandler;
-use cms\data\news\ViewableNewsList;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
-use wcf\system\dashboard\DashboardHandler;
+use wcf\system\MetaTagHandler;
 use wcf\system\WCF;
-use wcf\page\SortablePage;
 
 /**
  * @author	Jens Krumsieck

@@ -1,8 +1,8 @@
 <?php
 namespace cms\page;
-use wcf\page\AbstractFeedPage;
-use cms\data\news\NewsFeedList;
 use cms\data\category\NewsCategory;
+use cms\data\news\NewsFeedList;
+use wcf\page\AbstractFeedPage;
 use wcf\system\category\CategoryHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;

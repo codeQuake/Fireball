@@ -1,9 +1,9 @@
 <?php
 namespace cms\acp\form;
 use cms\data\stylesheet\Stylesheet;
+use cms\data\stylesheet\StylesheetAction;
 use wcf\form\AbstractForm;
 use wcf\system\WCF;
-use cms\data\stylesheet\StylesheetAction;
 
 /**
  * @author	Jens Krumsieck

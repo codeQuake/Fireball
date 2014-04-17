@@ -2,8 +2,8 @@
 namespace cms\acp\form;
 use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionAction;
-use wcf\form\AbstractForm;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\form\AbstractForm;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 

@@ -1,7 +1,7 @@
 <?php
 namespace cms\system\user\notification\object\type;
-use wcf\system\user\notification\object\type\ICommentUserNotificationObjectType;
 use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
+use wcf\system\user\notification\object\type\ICommentUserNotificationObjectType;
 use wcf\system\WCF;
 
 /**

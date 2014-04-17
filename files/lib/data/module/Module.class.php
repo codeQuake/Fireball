@@ -1,9 +1,9 @@
 <?php
 namespace cms\data\module;
-use wcf\system\request\IRouteController;
 use cms\data\CMSDatabaseObject;
-use wcf\system\WCF;
 use wcf\data\template\Template;
+use wcf\system\request\IRouteController;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

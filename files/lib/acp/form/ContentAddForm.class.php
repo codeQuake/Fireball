@@ -4,11 +4,11 @@ use cms\data\content\ContentAction;
 use cms\data\content\ContentEditor;
 use cms\data\page\Page;
 use cms\data\page\PageList;
-use wcf\system\language\I18nHandler;
 use wcf\form\AbstractForm;
-use wcf\util\StringUtil;
 use wcf\system\exception\UserInputException;
+use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

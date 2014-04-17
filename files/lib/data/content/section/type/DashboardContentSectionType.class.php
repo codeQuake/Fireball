@@ -1,12 +1,12 @@
 <?php
 namespace cms\data\content\section\type;
 use cms\data\content\section\ContentSection;
-use cms\data\content\Content;
 use cms\data\content\section\ContentSectionEditor;
-use wcf\system\cache\builder\DashboardBoxCacheBuilder;
-use wcf\data\dashboard\box\DashboardBox;
-use wcf\system\WCF;
+use cms\data\content\Content;
 use cms\page\PagePage;
+use wcf\data\dashboard\box\DashboardBox;
+use wcf\system\cache\builder\DashboardBoxCacheBuilder;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

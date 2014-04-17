@@ -1,15 +1,15 @@
 <?php
 namespace cms\acp\form;
-use wcf\form\AbstractForm;
-use wcf\util\StringUtil;
-use wcf\system\WCF;
-use wcf\system\exception\UserInputException;
 use cms\data\feed\FeedAction;
-use wcf\system\language\LanguageFactory;
-use wcf\system\category\CategoryHandler;
 use cms\data\news\image\NewsImage;
 use cms\data\news\image\NewsImageList;
+use wcf\form\AbstractForm;
+use wcf\system\category\CategoryHandler;
+use wcf\system\exception\UserInputException;
+use wcf\system\language\LanguageFactory;
+use wcf\system\WCF;
 use wcf\util\HTTPRequest;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck

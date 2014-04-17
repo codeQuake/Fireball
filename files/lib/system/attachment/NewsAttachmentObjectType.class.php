@@ -1,9 +1,9 @@
 <?php
 namespace cms\system\attachment;
-use wcf\system\WCF;
-use wcf\util\ArrayUtil;
 use cms\data\news\News;
 use wcf\system\attachment\AbstractAttachmentObjectType;
+use wcf\system\WCF;
+use wcf\util\ArrayUtil;
 
 /**
  * @author	Jens Krumsieck

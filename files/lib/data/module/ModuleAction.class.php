@@ -1,10 +1,10 @@
 <?php
 namespace cms\data\module;
-use wcf\data\AbstractDatabaseObjectAction;
-use wcf\data\template\TemplateAction;
-use wcf\util\FileUtil;
 use wcf\data\template\Template;
+use wcf\data\template\TemplateAction;
+use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\WCF;
+use wcf\util\FileUtil;
 
 /**
  * @author	Jens Krumsieck

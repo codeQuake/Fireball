@@ -1,12 +1,12 @@
 <?php
 namespace cms\system\user\activity\event;
+use cms\data\news\NewsList;
+use wcf\data\comment\response\CommentResponseList;
+use wcf\data\comment\CommentList;
+use wcf\data\user\User;
 use wcf\system\user\activity\event\IUserActivityEvent;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
-use wcf\data\comment\CommentList;
-use wcf\data\comment\response\CommentResponseList;
-use cms\data\news\NewsList;
-use wcf\data\user\User;
 
 /**
  * @author	Jens Krumsieck

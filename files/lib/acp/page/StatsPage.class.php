@@ -1,10 +1,10 @@
 <?php
 namespace cms\acp\page;
 use cms\data\page\PageList;
-use wcf\page\AbstractPage;
-use wcf\system\WCF;
 use cms\system\counter\VisitCountHandler;
 use wcf\data\user\online\UsersOnlineList;
+use wcf\page\AbstractPage;
+use wcf\system\WCF;
 
 class StatsPage extends AbstractPage{
     public $templateName = 'stats';

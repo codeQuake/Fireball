@@ -1,16 +1,16 @@
 <?php
 namespace cms\acp\form;
-use wcf\form\AbstractForm;
-use wcf\system\WCF;
 use cms\data\file\FileAction;
-use cms\data\folder\FolderAction;
+use cms\data\file\FileList;
 use cms\data\folder\Folder;
+use cms\data\folder\FolderAction;
+use cms\data\folder\FolderList;
+use wcf\form\AbstractForm;
+use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\UserInputException;
+use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 use wcf\util\StringUtil;
-use cms\data\file\FileList;
-use cms\data\folder\FolderList;
-use wcf\system\exception\UserInputException;
-use wcf\system\exception\IllegalLinkException;
 
 /**
  * @author	Jens Krumsieck

@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\layout;
-use wcf\data\AbstractDatabaseObjectAction;
 use cms\system\layout\LayoutHandler;
+use wcf\data\AbstractDatabaseObjectAction;
 
 /**
  * @author	Jens Krumsieck

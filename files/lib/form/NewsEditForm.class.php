@@ -1,15 +1,15 @@
 <?php
 namespace cms\form;
-use cms\data\news\News;
 use cms\data\news\image\NewsImage;
+use cms\data\news\News;
 use cms\data\news\NewsAction;
 use wcf\form\MessageForm;
 use wcf\system\breadcrumb\Breadcrumb;
-use wcf\util\ArrayUtil;
-use wcf\util\HeaderUtil;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
-use wcf\system\exception\IllegalLinkException;
+use wcf\util\ArrayUtil;
+use wcf\util\HeaderUtil;
 
 /**
  * @author	Jens Krumsieck

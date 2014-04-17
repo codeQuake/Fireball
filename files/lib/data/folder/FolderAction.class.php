@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\folder;
-use wcf\data\AbstractDatabaseObjectAction;
 use cms\data\file\FileAction;
+use wcf\data\AbstractDatabaseObjectAction;
 
 /**
  * @author	Jens Krumsieck

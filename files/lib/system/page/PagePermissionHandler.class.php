@@ -1,9 +1,9 @@
 <?php
 namespace cms\system\page;
+use cms\data\page\Page;
+use cms\system\cache\builder\PagePermissionCacheBuilder;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
-use cms\system\cache\builder\PagePermissionCacheBuilder;
-use cms\data\page\Page;
 
 /**
  * @author	Jens Krumsieck
