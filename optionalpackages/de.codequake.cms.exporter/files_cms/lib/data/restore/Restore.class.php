@@ -31,7 +31,4 @@ class Restore extends CMSDatabaseObject{
 
         parent::__construct(null, $row, $object);
     }
-    
-   
-    
 }

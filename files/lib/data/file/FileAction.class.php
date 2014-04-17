@@ -28,5 +28,4 @@ class FileAction extends AbstractDatabaseObjectAction{
         }
         parent::delete();
     }
-    
 }

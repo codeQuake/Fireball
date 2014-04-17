@@ -37,6 +37,4 @@ class RestoreAction extends AbstractDatabaseObjectAction{
         
         CMSImportHandler::getInstance()->handleImport($restore->filename);
     }
-    
-    
 }

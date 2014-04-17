@@ -196,6 +196,4 @@ class PageEditForm extends PageAddForm{
                                     'layoutList' => $this->layoutList,
                                     'isCommentable' => $this->isCommentable));
     }
-    
-    
 }

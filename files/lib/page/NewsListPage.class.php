@@ -95,5 +95,4 @@ class NewsListPage extends SortablePage{
     public function getObjectID() {
         return $this->categoryID;
     }
-
 }

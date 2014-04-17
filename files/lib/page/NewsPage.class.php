@@ -146,5 +146,4 @@ class NewsPage extends AbstractPage{
     public function getObjectID() {
         return $this->newsID;
     }
-
 }

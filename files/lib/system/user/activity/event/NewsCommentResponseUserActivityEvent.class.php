@@ -71,5 +71,4 @@ class NewsCommentResponseUserActivityEvent extends SingletonFactory implements I
             
         }
     }
-
 }

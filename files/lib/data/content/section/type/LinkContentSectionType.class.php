@@ -115,5 +115,4 @@ class LinkContentSectionType extends AbstractContentSectionType {
             return WCF::getLanguage()->get('cms.acp.content.section.type.de.codequake.cms.section.type.link') . ' ' . $additionalData['type'] . ' -> ' . WCF::getLanguage()->get($section->sectionData);
         return WCF::getLanguage()->get('cms.acp.content.section.type.de.codequake.cms.section.type.link') . ' ' . $additionalData['type'] . ' -> ' . $section->sectionData;
     }
-
 }

@@ -219,6 +219,4 @@ class PageAddForm extends AbstractForm{
                                     'layoutList' => $this->layoutList,
                                     'isCommentable' => $this->isCommentable));
     }
-    
-    
 }

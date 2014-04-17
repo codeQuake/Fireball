@@ -40,4 +40,3 @@ class PageCache extends SingletonFactory{
 		return $this->tree[$parentID];
 	}
 }
- 

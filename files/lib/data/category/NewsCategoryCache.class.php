@@ -54,5 +54,4 @@ class NewsCategoryCache extends SingletonFactory{
 		if (isset($this->unreadNews[$categoryID])) return $this->unreadNews[$categoryID];
 		return 0;
 	}
-
 }

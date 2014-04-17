@@ -51,5 +51,4 @@ class Content extends CMSDatabaseObject implements IRouteController{
         $this->sectionList->readObjects();
         return $this->sectionList->getObjects();
     }
-    
 }
