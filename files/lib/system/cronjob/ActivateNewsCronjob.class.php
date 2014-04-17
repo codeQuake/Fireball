@@ -18,6 +18,4 @@ class ActivateNewsCronjob extends AbstractCronjob{
             $action = new NewsAction($list, 'publish');
             $action->executeAction();
         }
-        
-        
 }

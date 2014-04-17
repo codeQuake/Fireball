@@ -26,5 +26,4 @@ class NewsImageAction extends AbstractDatabaseObjectAction{
         }
         parent::delete();
     }
-    
 }

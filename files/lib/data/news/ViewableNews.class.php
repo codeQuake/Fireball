@@ -49,5 +49,4 @@ class ViewableNews extends DatabaseObjectDecorator{
 		if (isset($objects[$newsID])) return $objects[$newsID];
 		return null;
 	}
-	
 }

@@ -115,5 +115,4 @@ class HeadlineContentSectionType extends AbstractContentSectionType {
             return WCF::getLanguage()->get('cms.acp.content.section.type.de.codequake.cms.section.type.headline') . ' ' . $additionalData['hlType'] . ' -> ' . WCF::getLanguage()->get($section->sectionData);
         return WCF::getLanguage()->get('cms.acp.content.section.type.de.codequake.cms.section.type.headline') . ' ' . $additionalData['hlType'] . ' -> ' . $section->sectionData;
     }
-
 }

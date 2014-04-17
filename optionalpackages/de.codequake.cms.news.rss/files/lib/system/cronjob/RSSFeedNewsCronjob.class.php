@@ -127,4 +127,4 @@ class RSSFeedNewsCronjob extends AbstractCronjob{
             elseif (isset($xml->entry))	return 'atom';
             else return null;
         }
-}   
+}

@@ -57,5 +57,4 @@ class NewsCommentUserActivityEvent extends SingletonFactory implements IUserActi
         }
         
     }
-
 }

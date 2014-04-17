@@ -68,5 +68,4 @@ class DashboardContentSectionType extends AbstractContentSectionType{
         $section = new ContentSection($sectionID);
         return '### DashboardBox-'.$section->sectionData.' ###';
     }
-
 }

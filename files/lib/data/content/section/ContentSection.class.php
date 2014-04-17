@@ -56,6 +56,4 @@ class ContentSection extends CMSDatabaseObject{
         $type =  new ObjectType($this->sectionTypeID);
         return $type->objectType;
     }
-    
-    
 }

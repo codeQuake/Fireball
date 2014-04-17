@@ -51,5 +51,4 @@ class File extends CMSDatabaseObject implements IRouteController{
     public function getFolder(){
         return new Folder($this->folderID);
     }
-    
 }

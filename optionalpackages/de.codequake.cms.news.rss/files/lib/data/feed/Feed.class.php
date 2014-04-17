@@ -30,6 +30,4 @@ class Feed extends CMSDatabaseObject{
 
         parent::__construct(null, $row, $object);
     }
-   
-    
 }

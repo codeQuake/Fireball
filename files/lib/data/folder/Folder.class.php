@@ -44,5 +44,4 @@ class Folder extends CMSDatabaseObject implements IRouteController{
         $list->readObjects();
         return $list->getObjects();
     }
-    
 }

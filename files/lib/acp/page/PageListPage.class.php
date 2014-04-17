@@ -27,5 +27,4 @@ class PageListPage extends AbstractPage{
         parent::assignVariables();
         WCF::getTPL()->assign(array('pageList' => $this->pageList->getIterator()));
     }
-    
 }

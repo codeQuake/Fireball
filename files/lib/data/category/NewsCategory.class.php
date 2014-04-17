@@ -59,5 +59,4 @@ class NewsCategory extends AbstractDecoratedCategory implements IBreadcrumbProvi
         }
         return $categoryIDs;
     }
-    
 }

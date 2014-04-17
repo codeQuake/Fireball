@@ -66,6 +66,4 @@ class PageNodeTree implements \IteratorAggregate {
         
         return new $this->nodeClassName($page);
     }
-    
-    
 }

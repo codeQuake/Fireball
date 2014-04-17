@@ -110,5 +110,4 @@ class NewsContentSectionType extends AbstractContentSectionType{
         $limit = isset($data['limit'])? $data['limit'] : 0;
         return StringUtil::truncate('### News: Type: '.$type.'; Limit: '.$limit.'; Categories: '.implode(', ', $categories).'###', 150, "\xE2\x80\xA6", true);;
     }
-    
 }

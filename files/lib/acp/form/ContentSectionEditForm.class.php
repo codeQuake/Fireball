@@ -75,5 +75,4 @@ class ContentSectionEditForm extends ContentSectionAddForm{
                                     'content' => $this->section->getContent()));
                                     
     }
-    
 }

@@ -11,5 +11,4 @@ use wcf\data\DatabaseObjectDecorator;
 
 class ViewableContentSection extends DatabaseObjectDecorator{
     protected static $baseClass = 'cms\data\content\section\ContentSection';
-
 }

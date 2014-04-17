@@ -41,5 +41,4 @@ class NewsUserActivityEvent extends SingletonFactory implements IUserActivityEve
         }
         
     }
-
 }

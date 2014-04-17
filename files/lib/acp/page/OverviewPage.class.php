@@ -17,5 +17,4 @@ class OverviewPage extends SortablePage{
     public $templateName = 'overview';
     public $defaultSortfield = 'pageID';
     public $validSortFields = array('pageID');
-    
 }

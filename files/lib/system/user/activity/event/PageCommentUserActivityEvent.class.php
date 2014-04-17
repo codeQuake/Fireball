@@ -57,5 +57,4 @@ class PageCommentUserActivityEvent extends SingletonFactory implements IUserActi
         }
         
     }
-
 }

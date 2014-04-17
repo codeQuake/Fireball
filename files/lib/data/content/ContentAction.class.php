@@ -80,5 +80,4 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
         WCF::getDB()->commitTransaction();
     
     }
-   
 }

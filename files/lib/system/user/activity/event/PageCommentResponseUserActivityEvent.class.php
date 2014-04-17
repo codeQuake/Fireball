@@ -71,5 +71,4 @@ class PageCommentResponseUserActivityEvent extends SingletonFactory implements I
             
         }
     }
-
 }

@@ -20,5 +20,4 @@ class CMSExportAction extends AbstractAction{
 		header('Content-Disposition: attachment; filename="CMS-Export.tar.gz"');
 		readfile($filename);
     }
-    
 }
