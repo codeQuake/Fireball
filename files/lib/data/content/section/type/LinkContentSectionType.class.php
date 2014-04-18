@@ -1,5 +1,6 @@
 <?php
 namespace cms\data\content\section\type;
+
 use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionEditor;
 use wcf\system\exception\UserInputException;
@@ -8,25 +9,26 @@ use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
- * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
- * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.codequake.cms
+ *
+ * @author Jens Krumsieck
+ * @copyright 2014 codeQuake
+ * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package de.codequake.cms
  */
-
 class LinkContentSectionType extends AbstractContentSectionType {
-
     public $objectType = 'de.codequake.cms.section.type.link';
     public $isMultilingual = true;
     public $type = '';
     public $hyperlink = '';
     public $additionalData = array();
 
-    public function readParameters() {
+    public function readParameters()
+    {
         I18nHandler::getInstance()->register('sectionData');
     }
 
-    public function readData($sectionID) {
+    public function readData($sectionID)
+    {
         $section = new ContentSection($sectionID);
         $data = @unserialize($section->additionalData);
         $this->type = isset($data['type']) ? $data['type'] : '';
@@ -35,38 +37,44 @@ class LinkContentSectionType extends AbstractContentSectionType {
         $this->formData['sectionData'] = $section->sectionData;
     }
 
-    public function readFormData() {        
+    public function readFormData()
+    {
         if (isset($_POST['type'])) $this->type = StringUtil::trim($_POST['type']);
         if (isset($_POST['hyperlink'])) $this->hyperlink = StringUtil::trim($_POST['hyperlink']);
         I18nHandler::getInstance()->readValues();
-        if (I18nHandler::getInstance()->isPlainValue('sectionData'))
-            $this->formData['sectionData'] = StringUtil::trim(I18nHandler::getInstance()->getValue('sectionData'));
+        if (I18nHandler::getInstance()->isPlainValue('sectionData')) $this->formData['sectionData'] = StringUtil::trim(I18nHandler::getInstance()->getValue('sectionData'));
     }
 
-    public function validateFormData() {
-        if (!I18nHandler::getInstance()->validateValue('sectionData')) {
+    public function validateFormData()
+    {
+        if (! I18nHandler::getInstance()->validateValue('sectionData')) {
             if (I18nHandler::getInstance()->isPlainValue('sectionData')) {
                 throw new UserInputException('sectionData');
-            } else {
+            }
+            else {
                 throw new UserInputException('sectionData', 'multilingual');
             }
         }
     }
 
-    public function assignFormVariables() {
+    public function assignFormVariables()
+    {
         I18nHandler::getInstance()->assignVariables();
-
-        I18nHandler::getInstance()->assignVariables(!empty($_POST));
-        WCF::getTPL()->assign(array('type' => $this->type,
-                                    'hyperlink' => $this->hyperlink));
         
+        I18nHandler::getInstance()->assignVariables(! empty($_POST));
+        WCF::getTPL()->assign(array(
+            'type' => $this->type,
+            'hyperlink' => $this->hyperlink
+        ));
     }
 
-    public function getFormTemplate() {
+    public function getFormTemplate()
+    {
         return 'linkSectionType';
     }
 
-    public function saved($section) {
+    public function saved($section)
+    {
         $additionalData = array();
         $additionalData['type'] = $this->type;
         $additionalData['hyperlink'] = $this->hyperlink;
@@ -74,18 +82,17 @@ class LinkContentSectionType extends AbstractContentSectionType {
         $data['additionalData'] = serialize($additionalData);
         if (I18nHandler::getInstance()->isPlainValue('sectionData')) {
             $data['sectionData'] = $this->formData['sectionData'];
-            
         }
         $editor = new ContentSectionEditor($section);
         $editor->update($data);
-
+        
         $sectionID = $section->sectionID;
         $update = array();
-        if (!I18nHandler::getInstance()->isPlainValue('sectionData')) {
+        if (! I18nHandler::getInstance()->isPlainValue('sectionData')) {
             I18nHandler::getInstance()->save('sectionData', 'cms.content.section.sectionData' . $sectionID, 'cms.content', PACKAGE_ID);
             $update['sectionData'] = 'cms.content.section.sectionData' . $sectionID;
         }
-        if (!empty($update)) {
+        if (! empty($update)) {
             $editor = new ContentSectionEditor($section);
             $editor->update($update);
         }
@@ -97,22 +104,24 @@ class LinkContentSectionType extends AbstractContentSectionType {
         }
     }
 
-    public function getOutput($sectionID) {
+    public function getOutput($sectionID)
+    {
         $section = new ContentSection($sectionID);
         $additionalData = @unserialize($section->additionalData);
-        WCF::getTPL()->assign(array('sectionData' => $section->sectionData,
-                                    'type' => $additionalData['type'],
-                                    'hyperlink' => isset($additionalData['hyperlink']) ? $additionalData['hyperlink'] : ''));
+        WCF::getTPL()->assign(array(
+            'sectionData' => $section->sectionData,
+            'type' => $additionalData['type'],
+            'hyperlink' => isset($additionalData['hyperlink']) ? $additionalData['hyperlink'] : ''
+        ));
         return WCF::getTPL()->fetch('linkSectionTypeOutput', 'cms');
     }
 
-    public function getPreview($sectionID) {
+    public function getPreview($sectionID)
+    {
         $section = new ContentSection($sectionID);
         $additionalData = @unserialize($section->additionalData);
-        if (!is_array($additionalData))
-            $additionalData = array();
-        if (preg_match('/cms.content./', $section->sectionData))
-            return WCF::getLanguage()->get('cms.acp.content.section.type.de.codequake.cms.section.type.link') . ' ' . $additionalData['type'] . ' -> ' . WCF::getLanguage()->get($section->sectionData);
+        if (! is_array($additionalData)) $additionalData = array();
+        if (preg_match('/cms.content./', $section->sectionData)) return WCF::getLanguage()->get('cms.acp.content.section.type.de.codequake.cms.section.type.link') . ' ' . $additionalData['type'] . ' -> ' . WCF::getLanguage()->get($section->sectionData);
         return WCF::getLanguage()->get('cms.acp.content.section.type.de.codequake.cms.section.type.link') . ' ' . $additionalData['type'] . ' -> ' . $section->sectionData;
     }
 }

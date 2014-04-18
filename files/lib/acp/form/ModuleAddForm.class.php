@@ -1,42 +1,50 @@
 <?php
 namespace cms\acp\form;
+
 use cms\data\module\ModuleAction;
 use wcf\form\AbstractForm;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
- * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
- * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.codequake.cms
+ *
+ * @author Jens Krumsieck
+ * @copyright 2014 codeQuake
+ * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package de.codequake.cms
  */
-
-class ModuleAddForm extends AbstractForm{
-    
-    public $neededPermissions = array('admin.cms.content.canManageModule');
+class ModuleAddForm extends AbstractForm {
+    public $neededPermissions = array(
+        'admin.cms.content.canManageModule'
+    );
     public $activeMenuItem = 'cms.acp.menu.link.cms.module.add';
     public $action = 'add';
-    
     public $title = '';
     public $phpCode = '';
     public $tplCode = '';
-    
-    public function readFormParameters(){
+
+    public function readFormParameters()
+    {
         parent::readFormParameters();
-        if(isset($_POST['php'])) $this->phpCode = StringUtil::trim($_POST['php']);
-        if(isset($_POST['tpl'])) $this->tplCode = StringUtil::trim($_POST['tpl']);
-        if(isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
+        if (isset($_POST['php'])) $this->phpCode = StringUtil::trim($_POST['php']);
+        if (isset($_POST['tpl'])) $this->tplCode = StringUtil::trim($_POST['tpl']);
+        if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
     }
-    
-    public function save(){
+
+    public function save()
+    {
         parent::save();
         
-        $data = array('data' => array('moduleTitle' => $this->title),
-                      'source' => array(
-                                      'php' => $this->phpCode,
-                                      'tpl' => $this->tplCode));
-        $action  = new ModuleAction(array(), 'create', $data);
+        $data = array(
+            'data' => array(
+                'moduleTitle' => $this->title
+            ),
+            'source' => array(
+                'php' => $this->phpCode,
+                'tpl' => $this->tplCode
+            )
+        );
+        $action = new ModuleAction(array(), 'create', $data);
         $action->executeAction();
         
         $this->saved();
@@ -45,11 +53,14 @@ class ModuleAddForm extends AbstractForm{
         
         $this->title = $this->phpCode = $this->tplCode = '';
     }
-    
-    public function assignVariables(){
+
+    public function assignVariables()
+    {
         parent::assignVariables();
-        WCF::getTPL()->assign(array('title' => $this->title,
-                                    'phpCode' => $this->phpCode,
-                                    'tplCode' => $this->tplCode));
+        WCF::getTPL()->assign(array(
+            'title' => $this->title,
+            'phpCode' => $this->phpCode,
+            'tplCode' => $this->tplCode
+        ));
     }
 }
