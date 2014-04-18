@@ -26,7 +26,6 @@ final class PageUtil {
 	 */
 	public static function isAvailableAlias($alias, $parentPageID, $excludedPageID = null) {
 		$childIDs = PageCache::getInstance()->getChildIDs($parentPageID);
-		die(var_dump($childIDs));
 
 		if (!empty($childIDs)) {
 			foreach ($childIDs as $childID) {

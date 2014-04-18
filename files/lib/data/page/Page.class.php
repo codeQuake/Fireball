@@ -62,8 +62,8 @@ class Page extends CMSDatabaseObject implements IRouteController{
     }
     
     public function isChild(){
-        if($this->parentID == 0) return false;
-        return true;
+        if ($this->parentID) return true;
+        return false;
     }
     
     public function hasChildren(){

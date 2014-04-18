@@ -112,7 +112,7 @@ class PageEditForm extends PageAddForm {
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'showOrder' => $this->showOrder,
 			'menuItem' => serialize($this->menuItem),
-			'parentID' => $this->parentID,
+			'parentID' => ($this->parentID) ?: null,
 			'layoutID' => $this->layoutID,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,

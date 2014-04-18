@@ -50,10 +50,12 @@ class PageAddForm extends AbstractForm {
 
 	public function readParameters() {
 		parent::readParameters();
+
 		I18nHandler::getInstance()->register('title');
 		I18nHandler::getInstance()->register('description');
 		I18nHandler::getInstance()->register('metaDescription');
 		I18nHandler::getInstance()->register('metaKeywords');
+
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
 	}
 
@@ -157,7 +159,7 @@ class PageAddForm extends AbstractForm {
 			'menuItem' => serialize($this->menuItem),
 			'showOrder' => $this->showOrder,
 			'layoutID' => $this->layoutID,
-			'parentID' => $this->parentID,
+			'parentID' => ($this->parentID) ?: null,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'robots' => $this->robots,
