@@ -137,7 +137,11 @@
 							<small id="aliasPreview"></small>
 							{if $errorField == 'alias'}
 								<small class="innerError">
-									{lang}cms.acp.page.alias.error.{$errorType}{/lang}
+									{if $errorType == 'empty'}
+										{lang}wcf.global.form.error.empty{/lang}
+									{else}
+										{lang}cms.acp.page.alias.error.{$errorType}{/lang}
+									{/if}
 								</small>
 								
 							{/if}
