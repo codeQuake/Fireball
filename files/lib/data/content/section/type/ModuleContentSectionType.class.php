@@ -1,5 +1,6 @@
 <?php
 namespace cms\data\content\section\type;
+
 use cms\data\content\section\ContentSection;
 use cms\data\content\section\ContentSectionEditor;
 use cms\data\module\Module;
@@ -9,64 +10,71 @@ use wcf\system\template\TemplateEngine;
 use wcf\system\WCF;
 
 /**
- * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
- * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.codequake.cms
+ *
+ * @author Jens Krumsieck
+ * @copyright 2014 codeQuake
+ * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package de.codequake.cms
  */
-
-class ModuleContentSectionType extends AbstractContentSectionType{
-
+class ModuleContentSectionType extends AbstractContentSectionType {
     public $objectType = 'de.codequake.cms.section.type.module';
     public $moduleList = array();
     public $additionalData = array();
-    
-    public function readParameters(){
+
+    public function readParameters()
+    {
         $list = new ModuleList();
         $list->readObjects();
         $this->moduleList = $list->getObjects();
     }
-    
-    public function readData($sectionID){
+
+    public function readData($sectionID)
+    {
         $section = new ContentSection($sectionID);
         $this->formData['sectionData'] = $section->sectionData;
     }
-    
-    public function readFormData(){
-        if(isset($_POST['sectionData'])) $this->formData['sectionData'] = intval($_POST['sectionData']);
+
+    public function readFormData()
+    {
+        if (isset($_POST['sectionData'])) $this->formData['sectionData'] = intval($_POST['sectionData']);
     }
-    
-    
-    public function assignFormVariables(){
-        
-        WCF::getTPL()->assign(array('moduleList' => $this->moduleList,
-                                    'moduleID' => isset($this->formData['sectionData']) ? $this->formData['sectionData']:0));
+
+    public function assignFormVariables()
+    {
+        WCF::getTPL()->assign(array(
+            'moduleList' => $this->moduleList,
+            'moduleID' => isset($this->formData['sectionData']) ? $this->formData['sectionData'] : 0
+        ));
     }
-    
-    public function getFormTemplate(){
+
+    public function getFormTemplate()
+    {
         return 'moduleSectionType';
     }
-    
-    public function saved($section){
+
+    public function saved($section)
+    {
         $data['sectionData'] = $this->formData['sectionData'];
         $editor = new ContentSectionEditor($section);
         $editor->update($data);
-        if ($this->action == 'add'){
+        if ($this->action == 'add') {
             $this->formData = array();
         }
     }
-    
-    public function getOutput($sectionID){
+
+    public function getOutput($sectionID)
+    {
         $section = new ContentSection($sectionID);
         $module = new Module(intval($section->sectionData));
-        if($module->php !== null) require(CMS_DIR.'files/php/'.$module->php);
-        if($module->tpl !== null) return WCF::getTPL()->fetch($module->tpl, 'cms');
+        if ($module->php !== null) require (CMS_DIR . 'files/php/' . $module->php);
+        if ($module->tpl !== null) return WCF::getTPL()->fetch($module->tpl, 'cms');
         return '';
     }
-    
-    public function getPreview($sectionID){
+
+    public function getPreview($sectionID)
+    {
         $section = new ContentSection($sectionID);
         $module = new Module(intval($section->sectionData));
-        return '### Module - '.$module->getTitle().'###';
+        return '### Module - ' . $module->getTitle() . '###';
     }
 }

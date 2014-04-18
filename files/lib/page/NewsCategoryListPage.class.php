@@ -1,5 +1,6 @@
 <?php
 namespace cms\page;
+
 use cms\data\category\NewsCategoryNodeTree;
 use cms\data\news\ViewableNewsList;
 use wcf\page\SortablePage;
@@ -11,24 +12,25 @@ use wcf\system\MetaTagHandler;
 use wcf\system\WCF;
 
 /**
- * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
- * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.codequake.cms
+ *
+ * @author Jens Krumsieck
+ * @copyright 2014 codeQuake
+ * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package de.codequake.cms
  */
-
-class NewsCategoryListPage extends SortablePage{
-
+class NewsCategoryListPage extends SortablePage {
     public $activeMenuItem = 'cms.page.news';
-    public $enableTracking = true;    
-    public $neededModules = array('MODULE_NEWS');
-    public $objectListClassName = 'cms\data\news\ViewableNewsList';    
+    public $enableTracking = true;
+    public $neededModules = array(
+        'MODULE_NEWS'
+    );
+    public $objectListClassName = 'cms\data\news\ViewableNewsList';
     public $itemsPerPage = CMS_NEWS_PER_PAGE;
     public $limit = 10;
     public $categoryList = null;
-    
-    
-    public function readData(){
+
+    public function readData()
+    {
         parent::readData();
         $categoryTree = new NewsCategoryNodeTree('de.codequake.cms.category.news');
         $this->categoryList = $categoryTree->getIterator();
@@ -36,16 +38,18 @@ class NewsCategoryListPage extends SortablePage{
         
         if (PageMenu::getInstance()->getLandingPage()->menuItem == 'cms.page.news') {
             WCF::getBreadcrumbs()->remove(0);
-
-            MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('NewsList', array('application' => 'cms')), true);
+            
+            MetaTagHandler::getInstance()->addTag('og:url', 'og:url', LinkHandler::getInstance()->getLink('NewsList', array(
+                'application' => 'cms'
+            )), true);
             MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'website', true);
             MetaTagHandler::getInstance()->addTag('og:title', 'og:title', WCF::getLanguage()->get(PAGE_TITLE), true);
             MetaTagHandler::getInstance()->addTag('og:description', 'og:description', WCF::getLanguage()->get(PAGE_DESCRIPTION), true);
         }
-        
     }
-    
-    public function assignVariables(){
+
+    public function assignVariables()
+    {
         parent::assignVariables();
         
         DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.news.newsList', $this);
@@ -54,7 +58,7 @@ class NewsCategoryListPage extends SortablePage{
             'categoryList' => $this->categoryList,
             'allowSpidersToIndexThisPage' => true,
             'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.news.newsList'),
-			'sidebarName' => 'de.codequake.cms.news.newsList'
-            ));
+            'sidebarName' => 'de.codequake.cms.news.newsList'
+        ));
     }
 }

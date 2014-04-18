@@ -2,47 +2,47 @@
 namespace cms\data\content\section\type;
 
 /**
- * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
- * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.codequake.cms
+ *
+ * @author Jens Krumsieck
+ * @copyright 2014 codeQuake
+ * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package de.codequake.cms
  */
-
-interface IContentSectionType{
+interface IContentSectionType {
     
-    //reads form parameters before saving
+    // reads form parameters before saving
     public function readParameters();
     
-    //reads data for edits
+    // reads data for edits
     public function readData($sectionID);
     
-    //reads form data 
+    // reads form data
     public function readFormData();
     
-    //validate form data
+    // validate form data
     public function validateFormData();
     
-    //saving form data
+    // saving form data
     public function saveFormData();
     
-    //assigns variables
+    // assigns variables
     public function assignFormVariables();
     
-    //provides an individual template for each type
+    // provides an individual template for each type
     public function getFormTemplate();
     
-    //gets formdata
+    // gets formdata
     public function getFormData();
     
-    //after saving, it works with the returnvalues
+    // after saving, it works with the returnvalues
     public function saved($section);
     
-    //gets the Output
+    // gets the Output
     public function getOutput($sectionID);
     
-    //preview
+    // preview
     public function getPreview($sectionID);
     
-    //add or edit?
+    // add or edit?
     public function setAction($action);
 }
