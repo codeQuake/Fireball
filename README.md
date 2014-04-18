@@ -1,6 +1,7 @@
 Fireball
 ========
 Fireball is an Open Source Content Management System for WoltLab Community Framework 2.0.
+[![Build Status](https://travis-ci.org/codeQuake/Fireball.svg?branch=master)](https://travis-ci.org/codeQuake/Fireball)
 
 Contributions
 ----------------
