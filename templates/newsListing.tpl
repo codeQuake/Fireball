@@ -1,4 +1,4 @@
-{if $objects|count}
+{if $objects|count && $__wcf->session->getPermission('user.cms.news.canViewNews')}
 <ul class="messageList">
     {foreach from=$objects item=news}
 	{assign var="attachments" value=$news->getAttachments()}
