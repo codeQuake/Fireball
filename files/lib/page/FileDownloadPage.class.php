@@ -28,6 +28,7 @@ class FileDownloadPage extends AbstractPage {
         'application/pdf',
         'image/pjpeg'
     );
+    
 
     public function readParameters()
     {
