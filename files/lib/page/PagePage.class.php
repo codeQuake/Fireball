@@ -31,6 +31,7 @@ class PagePage extends AbstractPage {
     public $bodyList = array();
     public $sidebarList = array();
     public $page = null;
+    public $pageID = 0;
     public $enableTracking = true;
     public $commentObjectTypeID = 0;
     public $commentManager = null;
@@ -56,11 +57,11 @@ class PagePage extends AbstractPage {
             $row = $statement->fetchArray();
             $this->pageID = $row['pageID'];
             $this->page = PageCache::getInstance()->getPage($this->pageID);
-            if ($this->page->pageID != 0) {
-                $this->activeMenuItem = $this->page->title;
-            }
-            else
+            if ($this->pageID == 0) {
                 throw new IllegalLinkException();
+            }
+
+               
         }
         
         // check if offline and view page or exit
@@ -156,8 +157,10 @@ class PagePage extends AbstractPage {
             ));
             $row = $statement->fetchArray();
             $startPageID = $row['pageID'];
-            $startPage = PageCache::getInstance()->getPage($startPageID);
-            $this->activeMenuItem = $startPage->title;
+            if ($startPageID != 0) {
+                $startPage = PageCache::getInstance()->getPage($startPageID);
+                $this->activeMenuItem = $startPage->title;
+            }
         }
         parent::show();
     }

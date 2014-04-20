@@ -21,6 +21,12 @@ class CMSCore extends AbstractApplication {
      * @see AbstractApplication::$abbreviation
      */
     protected $abbreviation = 'cms';
+    
+    /**
+     *
+     * @see \wcf\system\application\AbstractApplication::$primaryController
+     */
+    protected $primaryController = 'cms\page\PagePage';
 
     /**
      *
