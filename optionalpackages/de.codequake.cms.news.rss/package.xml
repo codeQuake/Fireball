@@ -6,7 +6,7 @@
 		<packagename>Fireball CMS RSS Feed Poster</packagename>
 		<packagedescription>Ermöglicht Nachrichten von RSS Feeds zu erstellen</packagedescription>
 		<plugin>de.codequake.cms</plugin>
-		<version>1.0.1 pl 4</version>
+		<version>1.0.1 pl 5</version>
 		<date>2014-03-21</date>
 	</packageinformation>
 
@@ -48,6 +48,9 @@
 		<instruction type="file" application="cms">files.tar</instruction>
 	</instructions>
 	<instructions type="update" fromversion="1.0.1 pl 3">
+		<instruction type="file" application="cms">files.tar</instruction>
+	</instructions>
+	<instructions type="update" fromversion="1.0.1 pl 4">		
 		<instruction type="file" application="cms">files.tar</instruction>
 	</instructions>
 </package>
