@@ -15,54 +15,42 @@ class AbstractContentSectionType implements IContentSectionType {
     public $objectType = "";
     
     // reads parameters at the beginning
-    public function readParameters()
-    {}
+    public function readParameters() {}
     
     // reads data for edits
-    public function readData($sectionID)
-    {}
+    public function readData($sectionID) {}
     
     // reads form data
-    public function readFormData()
-    {}
+    public function readFormData() {}
     
     // validate form data
-    public function validateFormData()
-    {}
+    public function validateFormData() {}
     
     // saving form data
-    public function saveFormData()
-    {}
+    public function saveFormData() {}
     
     // assigns variables
-    public function assignFormVariables()
-    {}
+    public function assignFormVariables() {}
     
     // provides an individual template for each type
-    public function getFormTemplate()
-    {}
+    public function getFormTemplate() {}
 
-    public function getFormData()
-    {
+    public function getFormData() {
         return $this->formData;
     }
     
     // after saving, it works with the returnvalues
-    public function saved($section)
-    {}
+    public function saved($section) {}
 
-    public function getOutput($sectionID)
-    {
+    public function getOutput($sectionID) {
         return '';
     }
 
-    public function getPreview($sectionID)
-    {
+    public function getPreview($sectionID) {
         return '###' . $this->objectType . '###';
     }
 
-    public function setAction($action)
-    {
+    public function setAction($action) {
         $this->action = $action;
     }
 }

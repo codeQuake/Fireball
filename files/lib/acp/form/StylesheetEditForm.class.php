@@ -17,8 +17,7 @@ class StylesheetEditForm extends StylesheetAddForm {
     public $sheetID = 0;
     public $sheet = null;
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         if (isset($_REQUEST['id'])) $this->sheetID = intval($_REQUEST['id']);
         $this->sheet = new Stylesheet($this->sheetID);
@@ -26,15 +25,13 @@ class StylesheetEditForm extends StylesheetAddForm {
         $this->less = $this->sheet->less;
     }
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_REQUEST['id'])) $this->sheetID = intval($_REQUEST['id']);
         $this->sheet = new Stylesheet($this->sheetID);
     }
 
-    public function save()
-    {
+    public function save() {
         AbstractForm::save();
         $data = array(
             'title' => $this->title,
@@ -51,8 +48,7 @@ class StylesheetEditForm extends StylesheetAddForm {
         WCF::getTPL()->assign('success', true);
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         AbstractForm::assignVariables();
         WCF::getTPL()->assign(array(
             'action' => 'edit',

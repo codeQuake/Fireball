@@ -25,24 +25,21 @@ class LayoutAddForm extends AbstractForm {
     public $data = array();
     public $stylesheetList = array();
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         $this->stylesheetList = new StylesheetList();
         $this->stylesheetList->readObjects();
         $this->stylesheetList = $this->stylesheetList->getObjects();
     }
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         
         if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
         if (isset($_POST['data'])) $this->data = $_POST['data'];
     }
 
-    public function save()
-    {
+    public function save() {
         parent::save();
         
         $objectAction = new LayoutAction(array(), 'create', array(
@@ -60,14 +57,12 @@ class LayoutAddForm extends AbstractForm {
         $this->data = array();
     }
 
-    public function validate()
-    {
+    public function validate() {
         parent::validate();
         if (empty($this->data)) throw new UserInputException('data', 'empty');
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         
         WCF::getTPL()->assign(array(

@@ -19,8 +19,7 @@ use wcf\system\WCF;
 class NewsFeedPage extends AbstractFeedPage {
     public $itemsPerPage = CMS_NEWS_PER_PAGE;
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         
         if (empty($this->objectIDs)) {
@@ -36,8 +35,7 @@ class NewsFeedPage extends AbstractFeedPage {
         }
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         $this->title = WCF::getLanguage()->get('cms.page.news');
         

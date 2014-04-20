@@ -15,8 +15,7 @@ use wcf\system\WCF;
 class NewsCategorySitemapProvider implements ISitemapProvider {
     public $objectTypeName = 'de.codequake.cms.category.news';
 
-    public function getTemplate()
-    {
+    public function getTemplate() {
         if (MODULE_NEWS) {
             $nodeTree = new NewsCategoryNodeTree($this->objectTypeName);
             $nodeList = $nodeTree->getIterator();

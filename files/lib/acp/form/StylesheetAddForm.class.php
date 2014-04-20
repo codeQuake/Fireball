@@ -22,15 +22,13 @@ class StylesheetAddForm extends AbstractForm {
     public $title = '';
     public $less = '';
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
         if (isset($_POST['less'])) $this->less = StringUtil::trim($_POST['less']);
     }
 
-    public function save()
-    {
+    public function save() {
         parent::save();
         
         $data = array(
@@ -48,8 +46,7 @@ class StylesheetAddForm extends AbstractForm {
         $this->title = $this->less = '';
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'action' => 'add',

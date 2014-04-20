@@ -35,23 +35,20 @@ class ContentAddForm extends AbstractForm {
     public $type = 'div';
     public $pageList = null;
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         I18nHandler::getInstance()->register('title');
         if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         $this->pageList = new PageList();
         $this->pageList->readObjects();
         $this->pageList = $this->pageList->getObjects();
     }
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         I18nHandler::getInstance()->readValues();
         if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
@@ -63,8 +60,7 @@ class ContentAddForm extends AbstractForm {
         if (isset($_POST['type'])) $this->type = StringUtil::trim($_POST['type']);
     }
 
-    public function validate()
-    {
+    public function validate() {
         parent::validate();
         ;
         if (! I18nHandler::getInstance()->validateValue('title')) {
@@ -79,8 +75,7 @@ class ContentAddForm extends AbstractForm {
         if ($this->page === null) throw new UserInputException('pageID', 'invalid');
     }
 
-    public function save()
-    {
+    public function save() {
         parent::save();
         $data = array(
             'title' => $this->title,
@@ -117,8 +112,7 @@ class ContentAddForm extends AbstractForm {
         I18nHandler::getInstance()->reset();
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         I18nHandler::getInstance()->assignVariables();
         WCF::getTPL()->assign(array(

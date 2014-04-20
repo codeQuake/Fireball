@@ -12,8 +12,7 @@ class PageContentList extends ViewableContentList {
     public $pageID = 0;
     public $sqlOrderBy = 'content.showOrder ASC';
 
-    public function __construct($pageID)
-    {
+    public function __construct($pageID) {
         $this->pageID = $pageID;
         parent::__construct();
         

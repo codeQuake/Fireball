@@ -22,8 +22,7 @@ class NewsImporter extends AbstractImporter {
     protected $className = 'cms\data\news\News';
     private $importCategoryID = 0;
 
-    public function import($oldID, array $data, array $additionalData = array())
-    {
+    public function import($oldID, array $data, array $additionalData = array()) {
         $data['userID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['userID']);
         
         if (! empty($additionalData['languageCode'])) {
@@ -68,8 +67,7 @@ class NewsImporter extends AbstractImporter {
         return $news->newsID;
     }
 
-    private function getImportCategoryID()
-    {
+    private function getImportCategoryID() {
         if (! $this->importCategoryID) {
             $objectTypeID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('com.woltlab.wcf.category', 'de.codequake.cms.category.news');
             

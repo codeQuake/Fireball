@@ -31,8 +31,7 @@ class NewsAction extends AbstractDatabaseObjectAction {
     );
     public $news = null;
 
-    public function create()
-    {
+    public function create() {
         $data = $this->parameters['data'];
         // count attachments
         if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
@@ -91,8 +90,7 @@ class NewsAction extends AbstractDatabaseObjectAction {
         return $news;
     }
 
-    public function publish()
-    {
+    public function publish() {
         foreach ($this->objects as $news) {
             $news->update(array(
                 'isDisabled' => 0
@@ -107,8 +105,7 @@ class NewsAction extends AbstractDatabaseObjectAction {
         UserStorageHandler::getInstance()->resetAll('cmsUnreadNews');
     }
 
-    public function update()
-    {
+    public function update() {
         // count attachments
         if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
             $this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
@@ -145,8 +142,7 @@ class NewsAction extends AbstractDatabaseObjectAction {
         }
     }
 
-    public function delete()
-    {
+    public function delete() {
         $newsIDs = array();
         $attachedNewsIDs = array();
         foreach ($this->objects as $news) {
@@ -166,8 +162,7 @@ class NewsAction extends AbstractDatabaseObjectAction {
         parent::delete();
     }
 
-    public function validateMarkAsRead()
-    {
+    public function validateMarkAsRead() {
         if (empty($this->objects)) {
             $this->readObjects();
             
@@ -177,8 +172,7 @@ class NewsAction extends AbstractDatabaseObjectAction {
         }
     }
 
-    public function markAsRead()
-    {
+    public function markAsRead() {
         if (empty($this->parameters['visitTime'])) {
             $this->parameters['visitTime'] = TIME_NOW;
         }
@@ -201,15 +195,13 @@ class NewsAction extends AbstractDatabaseObjectAction {
         }
     }
 
-    public function validateMarkAllAsRead()
-    {
+    public function validateMarkAllAsRead() {
     /**
      * Does nothing like a boss *
      */
     }
 
-    public function markAllAsRead()
-    {
+    public function markAllAsRead() {
         VisitTracker::getInstance()->trackTypeVisit('de.codequake.cms.news');
         // reset storage
         if (WCF::getUser()->userID) {
@@ -219,8 +211,7 @@ class NewsAction extends AbstractDatabaseObjectAction {
         }
     }
 
-    public function validateGetIpLog()
-    {
+    public function validateGetIpLog() {
         if (! LOG_IP_ADDRESS) {
             throw new PermissionDeniedException();
         }
@@ -237,8 +228,7 @@ class NewsAction extends AbstractDatabaseObjectAction {
         }
     }
 
-    public function getIpLog()
-    {
+    public function getIpLog() {
         // get ip addresses of the author
         $authorIpAddresses = News::getIpAddressByAuthor($this->news->userID, $this->news->username, $this->news->ipAddress);
         
@@ -299,8 +289,7 @@ class NewsAction extends AbstractDatabaseObjectAction {
         );
     }
 
-    public function getNewsPreview()
-    {
+    public function getNewsPreview() {
         $list = new ViewableNewsList();
         $list->getConditionBuilder()->add("news.newsID = ?", array(
             $this->news->newsID
@@ -315,8 +304,7 @@ class NewsAction extends AbstractDatabaseObjectAction {
         );
     }
 
-    public function validateGetNewsPreview()
-    {
+    public function validateGetNewsPreview() {
         $this->news = $this->getSingleObject();
         // check if board may be entered and thread can be read
         foreach ($this->news->getCategories() as $category) {

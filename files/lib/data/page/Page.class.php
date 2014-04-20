@@ -20,8 +20,7 @@ class Page extends CMSDatabaseObject implements IRouteController {
     protected static $databaseTableName = 'page';
     protected static $databaseTableIndexName = 'pageID';
 
-    public function __construct($id, $row = null, $object = null)
-    {
+    public function __construct($id, $row = null, $object = null) {
         if ($id !== null) {
             $sql = "SELECT *
                     FROM " . static::getDatabaseTableName() . "
@@ -38,14 +37,12 @@ class Page extends CMSDatabaseObject implements IRouteController {
         parent::__construct(null, $row, $object);
     }
 
-    public function getTitle()
-    {
+    public function getTitle() {
         if (preg_match('#cms.page.title#', $this->title)) return WCF::getLanguage()->get($this->title);
         return $this->title;
     }
 
-    public function getLayout()
-    {
+    public function getLayout() {
         if ($this->layoutID != 0) {
             return LayoutHandler::getInstance()->getStylesheet($this->layoutID);
         }
@@ -53,27 +50,23 @@ class Page extends CMSDatabaseObject implements IRouteController {
         return '';
     }
 
-    public function isVisible()
-    {
+    public function isVisible() {
         if ($this->invisible == 1 && $this->getPermission('canViewInvisiblePage')) return true;
         if ($this->invisible == 0 && $this->getPermission('canViewPage')) return true;
         return false;
     }
 
-    public function isAccessible()
-    {
+    public function isAccessible() {
         if ($this->getPermission('canEnterPage')) return true;
         return false;
     }
 
-    public function isChild()
-    {
+    public function isChild() {
         if ($this->parentID) return true;
         return false;
     }
 
-    public function hasChildren()
-    {
+    public function hasChildren() {
         $list = new PageList();
         $list->getConditionBuilder()->add('page.parentID = (?)', array(
             $this->pageID
@@ -82,8 +75,7 @@ class Page extends CMSDatabaseObject implements IRouteController {
         return false;
     }
 
-    public function getChildren()
-    {
+    public function getChildren() {
         $list = new PageList();
         $list->getConditionBuilder()->add('page.parentID = (?)', array(
             $this->pageID
@@ -94,8 +86,7 @@ class Page extends CMSDatabaseObject implements IRouteController {
     }
     
     // builds up a complete folder structure like link
-    public function getAlias()
-    {
+    public function getAlias() {
         // returns page alias
         if ($this->getParentPage() != null) {
             return $this->getParentPage()->getAlias() . '/' . $this->alias;
@@ -104,8 +95,7 @@ class Page extends CMSDatabaseObject implements IRouteController {
         return $this->alias;
     }
 
-    public function getLink()
-    {
+    public function getLink() {
         return LinkHandler::getInstance()->getLink('Page', array(
             'application' => 'cms',
             'forceFrontend' => true,
@@ -113,23 +103,20 @@ class Page extends CMSDatabaseObject implements IRouteController {
         ));
     }
 
-    public function hasMenuItem()
-    {
+    public function hasMenuItem() {
         $menuItem = @unserialize($this->menuItem);
         if (isset($menuItem['has']) && $menuItem['has'] != 0) return true;
         return false;
     }
 
-    public function getParentPage()
-    {
+    public function getParentPage() {
         if ($this->isChild()) {
             return new Page($this->parentID);
         }
         return null;
     }
 
-    public function getParentPages()
-    {
+    public function getParentPages() {
         if ($this->isChild()) {
             $parentPages = array();
             $parent = $this;
@@ -142,8 +129,7 @@ class Page extends CMSDatabaseObject implements IRouteController {
         return array();
     }
 
-    public function getContentList($position = 'body')
-    {
+    public function getContentList($position = 'body') {
         $list = new PageContentList($this->pageID);
         $list->getConditionBuilder()->add('content.position = ?', array(
             $position
@@ -152,8 +138,7 @@ class Page extends CMSDatabaseObject implements IRouteController {
         return $list->getObjects();
     }
 
-    public function getPermission($permission = 'canViewPage')
-    {
+    public function getPermission($permission = 'canViewPage') {
         $permissions = PagePermissionHandler::getInstance()->getPermission($this);
         if (isset($permissions[$permission])) {
             return $permissions[$permission];
@@ -161,8 +146,7 @@ class Page extends CMSDatabaseObject implements IRouteController {
         return WCF::getSession()->getPermission('user.cms.page.' . $permission);
     }
 
-    public function checkPermission(array $permissions = array('canViewPage'))
-    {
+    public function checkPermission(array $permissions = array('canViewPage')) {
         foreach ($permissions as $permission) {
             if (! $this->getPermission($permission)) {
                 throw new PermissionDeniedException();

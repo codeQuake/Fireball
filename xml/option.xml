@@ -1,79 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
-  <import>
-    <categories>
-      <category name="cms"></category>
-      <category name="cms.general">
-        <parent>cms</parent>
-      </category>
-      <category name="cms.news">
-        <parent>cms</parent>
-        <options>module_news</options>
-      </category>
-      
-    </categories>
-    
-    <options>
-      <option name="cms_news_news_images_attached">
-        <optiontype>boolean</optiontype>
-        <categoryname>cms.news</categoryname>
-        <defaultvalue>1</defaultvalue>
-        <options>module_news</options>
-      </option>
-      <option name="cms_news_sidebar_categories">
-        <optiontype>boolean</optiontype>
-        <categoryname>cms.news</categoryname>
-        <defaultvalue>1</defaultvalue>
-        <options>module_news</options>
-      </option>
-      <option name="cms_news_sidebar_categories_main">
-        <optiontype>boolean</optiontype>
-        <categoryname>cms.news</categoryname>
-        <defaultvalue>1</defaultvalue>
-        <options>module_news</options>
-      </option>
-      <option name="cms_news_preview_simplified">
-        <optiontype>boolean</optiontype>
-        <categoryname>cms.news</categoryname>
-        <defaultvalue>0</defaultvalue>
-        <options>module_news</options>
-      </option>
-      <option name="cms_news_preview_truncate">
-        <optiontype>integer</optiontype>
-        <categoryname>cms.news</categoryname>
-        <defaultvalue>255</defaultvalue>
-        <options>module_news</options>
-      </option>
-      <option name="cms_news_languageicon">
-        <optiontype>boolean</optiontype>
-        <categoryname>cms.news</categoryname>
-        <defaultvalue>1</defaultvalue>
-        <options>module_news</options>
-      </option>
-      <option name="cms_news_per_page">
-        <optiontype>integer</optiontype>
-        <categoryname>cms.news</categoryname>
-        <defaultvalue>10</defaultvalue>
-        <options>module_news</options>
-      </option>
-      <option name="cms_news_latest_limit">
-        <optiontype>integer</optiontype>
-        <categoryname>cms.news</categoryname>
-        <defaultvalue>10</defaultvalue>
-        <options>module_news</options>
-      </option>
-      
-      <option name="cms_install_date">
-        <optiontype>integer</optiontype>
-        <hidden>1</hidden>
-        <categoryname>cms.general</categoryname>
-      </option>
-      
-      <option name="module_news">
-        <optiontype>boolean</optiontype>
-        <categoryname>module.community</categoryname>
-        <defaultvalue>1</defaultvalue>
-      </option>
-    </options>
-  </import>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
+	<import>
+		<categories>
+			<category name="cms"></category>
+			<category name="cms.general">
+				<parent>cms</parent>
+			</category>
+			<category name="cms.news">
+				<parent>cms</parent>
+				<options>module_news</options>
+			</category>
+
+		</categories>
+
+		<options>
+			<option name="cms_news_news_images_attached">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.news</categoryname>
+				<defaultvalue>1</defaultvalue>
+				<options>module_news</options>
+			</option>
+			<option name="cms_news_sidebar_categories">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.news</categoryname>
+				<defaultvalue>1</defaultvalue>
+				<options>module_news</options>
+			</option>
+			<option name="cms_news_sidebar_categories_main">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.news</categoryname>
+				<defaultvalue>1</defaultvalue>
+				<options>module_news</options>
+			</option>
+			<option name="cms_news_preview_simplified">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.news</categoryname>
+				<defaultvalue>0</defaultvalue>
+				<options>module_news</options>
+			</option>
+			<option name="cms_news_preview_truncate">
+				<optiontype>integer</optiontype>
+				<categoryname>cms.news</categoryname>
+				<defaultvalue>255</defaultvalue>
+				<options>module_news</options>
+			</option>
+			<option name="cms_news_languageicon">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.news</categoryname>
+				<defaultvalue>1</defaultvalue>
+				<options>module_news</options>
+			</option>
+			<option name="cms_news_per_page">
+				<optiontype>integer</optiontype>
+				<categoryname>cms.news</categoryname>
+				<defaultvalue>10</defaultvalue>
+				<options>module_news</options>
+			</option>
+			<option name="cms_news_latest_limit">
+				<optiontype>integer</optiontype>
+				<categoryname>cms.news</categoryname>
+				<defaultvalue>10</defaultvalue>
+				<options>module_news</options>
+			</option>
+
+			<option name="cms_install_date">
+				<optiontype>integer</optiontype>
+				<hidden>1</hidden>
+				<categoryname>cms.general</categoryname>
+			</option>
+
+			<option name="module_news">
+				<optiontype>boolean</optiontype>
+				<categoryname>module.community</categoryname>
+				<defaultvalue>1</defaultvalue>
+			</option>
+		</options>
+	</import>
 </data>

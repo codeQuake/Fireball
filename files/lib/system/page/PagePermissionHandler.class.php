@@ -16,18 +16,15 @@ use wcf\system\WCF;
 class PagePermissionHandler extends SingletonFactory {
     protected $permissions = array();
 
-    protected function init()
-    {
+    protected function init() {
         $this->permissions = PagePermissionCacheBuilder::getInstance()->getData();
     }
 
-    public function resetCache()
-    {
+    public function resetCache() {
         PagePermissionCacheBuilder::getInstance()->reset();
     }
 
-    public function getPermission(Page $page)
-    {
+    public function getPermission(Page $page) {
         $user = WCF::getUser();
         $permissions = array();
         if (isset($this->permissions[$page->pageID])) {

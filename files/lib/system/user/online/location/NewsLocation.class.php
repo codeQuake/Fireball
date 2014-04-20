@@ -15,11 +15,9 @@ use wcf\system\WCF;
  */
 class NewsLocation implements IUserOnlineLocation {
 
-    public function cache(UserOnline $user)
-    {}
+    public function cache(UserOnline $user) {}
 
-    public function get(UserOnline $user, $languageVariable = '')
-    {
+    public function get(UserOnline $user, $languageVariable = '') {
         $news = new News($user->objectID);
         if ($news->newsID != 0) {
             if ($news->isVisible()) {

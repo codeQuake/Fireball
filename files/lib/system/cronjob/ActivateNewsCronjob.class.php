@@ -8,8 +8,7 @@ use wcf\system\cronjob\AbstractCronjob;
 
 class ActivateNewsCronjob extends AbstractCronjob {
 
-    public function execute(Cronjob $cronjob)
-    {
+    public function execute(Cronjob $cronjob) {
         parent::execute($cronjob);
         $list = new NewsList();
         $list->getConditionBuilder()->add('isDisabled = ?', array(

@@ -43,8 +43,7 @@ class NewsListPage extends SortablePage {
     public $category = null;
     public $categoryList = null;
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         if (isset($_REQUEST['id'])) $this->categoryID = intval($_REQUEST['id']);
         $this->category = CategoryHandler::getInstance()->getCategory($this->categoryID);
@@ -57,8 +56,7 @@ class NewsListPage extends SortablePage {
         }
     }
 
-    protected function initObjectList()
-    {
+    protected function initObjectList() {
         if ($this->category) {
             $this->objectList = new CategoryNewsList(array(
                 $this->category->categoryID
@@ -68,8 +66,7 @@ class NewsListPage extends SortablePage {
             throw new IllegalLinkException();
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         VisitCountHandler::getInstance()->count();
         WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), LinkHandler::getInstance()->getLink('NewsCategoryList', array(
@@ -82,13 +79,11 @@ class NewsListPage extends SortablePage {
         $this->categoryList->setMaxDepth(0);
     }
 
-    protected function readObjects()
-    {
+    protected function readObjects() {
         parent::readObjects();
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         
         DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.news.newsList', $this);
@@ -103,13 +98,11 @@ class NewsListPage extends SortablePage {
         ));
     }
 
-    public function getObjectType()
-    {
+    public function getObjectType() {
         return 'de.codequake.cms.category.news';
     }
 
-    public function getObjectID()
-    {
+    public function getObjectID() {
         return $this->categoryID;
     }
 }

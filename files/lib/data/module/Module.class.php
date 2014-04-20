@@ -17,8 +17,7 @@ class Module extends CMSDatabaseObject implements IRouteController {
     protected static $databaseTableName = 'module';
     protected static $databaseTableIndexName = 'moduleID';
 
-    public function __construct($id, $row = null, $object = null)
-    {
+    public function __construct($id, $row = null, $object = null) {
         if ($id !== null) {
             $sql = "SELECT *
                     FROM " . static::getDatabaseTableName() . "
@@ -35,19 +34,16 @@ class Module extends CMSDatabaseObject implements IRouteController {
         parent::__construct(null, $row, $object);
     }
 
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->moduleTitle;
     }
 
-    public function getPHPCode()
-    {
+    public function getPHPCode() {
         if ($this->php !== null) return implode("", file(CMS_DIR . '/files/php/' . $this->php));
         return '';
     }
 
-    public function getTPLCode()
-    {
+    public function getTPLCode() {
         $sql = "SELECT templateID FROM wcf" . WCF_N . "_template WHERE templateName = ?";
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array(

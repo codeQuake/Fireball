@@ -15,19 +15,16 @@ class PageNodeTree implements \IteratorAggregate {
     protected $parentID = 0;
     protected $parentNode = null;
 
-    public function __construct($parentID = 0)
-    {
+    public function __construct($parentID = 0) {
         $this->parentID = $parentID;
     }
 
-    public function buildTree()
-    {
+    public function buildTree() {
         $this->parentNode = $this->getNode($this->parentID);
         $this->buildTreeLevel($this->parentNode);
     }
 
-    public function buildTreeLevel(PageNode $pageNode)
-    {
+    public function buildTreeLevel(PageNode $pageNode) {
         foreach ($this->getChildren($pageNode) as $child) {
             $childNode = $this->getNode($child->pageID);
             
@@ -36,13 +33,11 @@ class PageNodeTree implements \IteratorAggregate {
         }
     }
 
-    protected function getPage($pageID)
-    {
+    protected function getPage($pageID) {
         return PageCache::getInstance()->getPage($pageID);
     }
 
-    protected function getChildren(PageNode $parentNode)
-    {
+    protected function getChildren(PageNode $parentNode) {
         $pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
         
         $children = array();
@@ -54,8 +49,7 @@ class PageNodeTree implements \IteratorAggregate {
         return $children;
     }
 
-    public function getIterator()
-    {
+    public function getIterator() {
         if ($this->parentNode === null) {
             $this->buildTree();
         }
@@ -63,8 +57,7 @@ class PageNodeTree implements \IteratorAggregate {
         return new \RecursiveIteratorIterator($this->parentNode, \RecursiveIteratorIterator::SELF_FIRST);
     }
 
-    protected function getNode($pageID)
-    {
+    protected function getNode($pageID) {
         if (! $pageID) {
             $page = new Page(0);
         }

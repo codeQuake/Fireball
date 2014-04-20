@@ -16,8 +16,7 @@ class NewsList extends DatabaseObjectList {
     public $className = 'cms\data\news\News';
     public $categoryList = true;
 
-    public function readObjects()
-    {
+    public function readObjects() {
         parent::readObjects();
         
         if ($this->categoryList) {
@@ -38,8 +37,7 @@ class NewsList extends DatabaseObjectList {
         }
     }
 
-    public function isCategoryList($enable = true)
-    {
+    public function isCategoryList($enable = true) {
         $this->categoryList = $enable;
     }
 }

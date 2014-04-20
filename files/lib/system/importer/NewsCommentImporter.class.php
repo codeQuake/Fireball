@@ -17,8 +17,7 @@ use wcf\system\importer\ImportHandler;
 class NewsCommentImporter extends AbstractCommentImporter {
     protected $objectTypeName = 'de.codequake.cms.news.comment';
 
-    public function __construct()
-    {
+    public function __construct() {
         $objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.comment.commentableContent', 'de.codequake.cms.news.comment');
         $this->objectTypeID = $objectType->objectTypeID;
     }
@@ -27,8 +26,7 @@ class NewsCommentImporter extends AbstractCommentImporter {
      *
      * @see wcf\system\importer\IImporter::import()
      */
-    public function import($oldID, array $data, array $additionalData = array())
-    {
+    public function import($oldID, array $data, array $additionalData = array()) {
         $data['objectID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.news', $data['objectID']);
         if (! $data['objectID']) return 0;
         

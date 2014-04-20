@@ -18,8 +18,7 @@ class NewsCategoryCache extends SingletonFactory {
     protected $unreadNews = array();
     public $sql;
 
-    protected function initUnreadNews()
-    {
+    protected function initUnreadNews() {
         $this->unreadNews = array();
         
         if (WCF::getUser()->userID) {
@@ -53,8 +52,7 @@ class NewsCategoryCache extends SingletonFactory {
         }
     }
 
-    public function getUnreadNews($categoryID)
-    {
+    public function getUnreadNews($categoryID) {
         $this->initUnreadNews();
         if (isset($this->unreadNews[$categoryID])) return $this->unreadNews[$categoryID];
         return 0;

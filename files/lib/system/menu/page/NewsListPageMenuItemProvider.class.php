@@ -20,8 +20,7 @@ use wcf\system\WCF;
 class NewsListPageMenuItemProvider extends DefaultPageMenuItemProvider {
     protected $notifications = null;
 
-    public function getNotifications()
-    {
+    public function getNotifications() {
         if ($this->notifications === null) {
             $this->notifications = 0;
             

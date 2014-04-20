@@ -21,8 +21,7 @@ class StylesheetAction extends AbstractDatabaseObjectAction {
         'delete'
     );
 
-    public function delete()
-    {
+    public function delete() {
         parent::delete();
         
         // kill all layouts
@@ -33,8 +32,7 @@ class StylesheetAction extends AbstractDatabaseObjectAction {
         }
     }
 
-    public function update()
-    {
+    public function update() {
         parent::update();
         
         // kill all layouts

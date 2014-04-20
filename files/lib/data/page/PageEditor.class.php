@@ -14,8 +14,7 @@ use wcf\system\WCF;
 class PageEditor extends DatabaseObjectEditor {
     protected static $baseClass = 'cms\data\page\Page';
 
-    public function setAsHome()
-    {
+    public function setAsHome() {
         $sql = "UPDATE	cms" . WCF_N . "_page
 			SET	isHome = ?";
         $statement = WCF::getDB()->prepareStatement($sql);

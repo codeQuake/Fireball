@@ -16,19 +16,16 @@ class PageNode extends DatabaseObjectDecorator implements \Countable, \Recursive
     public $parentNode = null;
     protected static $baseClass = 'cms\data\page\Page';
 
-    public function addChild(PageNode $pageNode)
-    {
+    public function addChild(PageNode $pageNode) {
         $pageNode->setParentNode($this);
         $this->children[] = $pageNode;
     }
 
-    public function setParentNode(PageNode $pageNode)
-    {
+    public function setParentNode(PageNode $pageNode) {
         $this->parentNode = $pageNode;
     }
 
-    public function isLastSibling()
-    {
+    public function isLastSibling() {
         foreach ($this->parentNode as $key => $value) {
             if ($value == $this) {
                 if ($key == count($this->parentNode) - 1) return true;
@@ -37,8 +34,7 @@ class PageNode extends DatabaseObjectDecorator implements \Countable, \Recursive
         }
     }
 
-    public function getOpenParentNodes()
-    {
+    public function getOpenParentNodes() {
         $element = $this;
         $i = 0;
         
@@ -50,43 +46,35 @@ class PageNode extends DatabaseObjectDecorator implements \Countable, \Recursive
         return $i;
     }
 
-    public function count()
-    {
+    public function count() {
         return count($this->children);
     }
 
-    public function current()
-    {
+    public function current() {
         return $this->children[$this->index];
     }
 
-    public function getChildren()
-    {
+    public function getChildren() {
         return $this->children[$this->index];
     }
 
-    public function hasChildren()
-    {
+    public function hasChildren() {
         return ! empty($this->children);
     }
 
-    public function key()
-    {
+    public function key() {
         return $this->index;
     }
 
-    public function next()
-    {
+    public function next() {
         $this->index ++;
     }
 
-    public function rewind()
-    {
+    public function rewind() {
         $this->index = 0;
     }
 
-    public function valid()
-    {
+    public function valid() {
         return isset($this->children[$this->index]);
     }
 }

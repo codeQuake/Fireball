@@ -9,6 +9,7 @@ use wcf\system\attachment\AttachmentHandler;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\BBCodeHandler;
 use wcf\system\bbcode\BBCodeParser;
+use wcf\system\bbcode\PreParser;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\language\I18nHandler;
 use wcf\system\exception\UserInputException;
@@ -47,8 +48,7 @@ class TextContentSectionType extends AbstractContentSectionType {
     public $showSignatureSetting = 0;
     public $preParse = 0;
 
-    public function readParameters()
-    {
+    public function readParameters() {
         if (isset($_REQUEST['tmpHash'])) {
             $this->tmpHash = $_REQUEST['tmpHash'];
         }
@@ -86,20 +86,19 @@ class TextContentSectionType extends AbstractContentSectionType {
         }
     }
 
-    public function readData($sectionID)
-    {
+    public function readData($sectionID) {
         $section = new ContentSection($sectionID);
         $data = @unserialize($section->additionalData);
         $this->enableSmilies = $data['enableSmilies'];
         $this->enableBBCodes = $data['enableBBCodes'];
+        $this->preParse = isset($data['preParse']) ? $data['preParse'] : 0;
         $this->enableHtml = $data['enableHtml'];
         if (isset($data['attachments'])) $this->attachments = $data['attachments'];
         $this->formData['text'] = $section->sectionData;
         I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $section->sectionData, 'cms.content.section.sectionData\d+');
     }
 
-    public function readFormData()
-    {
+    public function readFormData() {
         I18nHandler::getInstance()->readValues();
         if (I18nHandler::getInstance()->isPlainValue('text')) $this->formData['text'] = MessageUtil::stripCrap(StringUtil::trim(I18nHandler::getInstance()->getValue('text')));
         if (isset($_POST['enableSmilies']) && WCF::getSession()->getPermission($this->permissionCanUseSmilies)) $this->enableSmilies = intval($_POST['enableSmilies']);
@@ -111,10 +110,12 @@ class TextContentSectionType extends AbstractContentSectionType {
         if (isset($_POST['enableBBCodes']) && WCF::getSession()->getPermission($this->permissionCanUseBBCodes)) $this->enableBBCodes = intval($_POST['enableBBCodes']);
         else
             $this->enableBBCodes = 0;
+        if (isset($_POST['preParse'])) $this->preParse = intval($_POST['preParse']);
+        else
+            $this->preParse = 0;
     }
 
-    public function validateFormData()
-    {
+    public function validateFormData() {
         if (! I18nHandler::getInstance()->validateValue('text')) {
             if (I18nHandler::getInstance()->isPlainValue('text')) {
                 throw new UserInputException('text');
@@ -125,8 +126,7 @@ class TextContentSectionType extends AbstractContentSectionType {
         }
     }
 
-    public function assignFormVariables()
-    {
+    public function assignFormVariables() {
         I18nHandler::getInstance()->assignVariables();
         
         I18nHandler::getInstance()->assignVariables(! empty($_POST));
@@ -150,17 +150,33 @@ class TextContentSectionType extends AbstractContentSectionType {
         ));
     }
 
-    public function getFormTemplate()
-    {
+    public function getFormTemplate() {
         return 'textSectionType';
     }
 
-    public function saved($section)
-    {
+    public function saved($section) {
+        // parse URLs see: wcf\form\MessageForm
+        if ($this->preParse == 1) {
+            // BBCodes are enabled
+            if ($this->enableBBCodes) {
+                if ($this->allowedBBCodesPermission) {
+                    $this->formData['text'] = PreParser::getInstance()->parse($this->formData['text'], ArrayUtil::trim(explode(',', WCF::getSession()->getPermission($this->allowedBBCodesPermission))));
+                }
+                else {
+                    $this->formData['text'] = PreParser::getInstance()->parse($this->formData['text']);
+                }
+            }
+            // BBCodes are disabled, thus no allowed BBCodes
+            else {
+                $this->formData['text'] = PreParser::getInstance()->parse($this->formData['text'], array());
+            }
+        }
+        
         $additionalData = array();
         $additionalData['enableSmilies'] = $this->enableSmilies;
         $additionalData['enableBBCodes'] = $this->enableBBCodes;
         $additionalData['enableHtml'] = $this->enableHtml;
+        $additionalData['preParse'] = $this->preParse;
         if ($this->attachmentHandler !== null) $additionalData['attachments'] = count($this->attachmentHandler);
         $data = array();
         $data['additionalData'] = serialize($additionalData);
@@ -185,8 +201,7 @@ class TextContentSectionType extends AbstractContentSectionType {
         }
     }
 
-    public function getOutput($sectionID)
-    {
+    public function getOutput($sectionID) {
         $section = new ContentSection($sectionID);
         WCF::getTPL()->assign(array(
             'attachmentList' => $this->getAttachments($section),
@@ -196,8 +211,7 @@ class TextContentSectionType extends AbstractContentSectionType {
         return WCF::getTPL()->fetch('textSectionTypeOutput', 'cms');
     }
 
-    public function getFormattedMessage($section)
-    {
+    public function getFormattedMessage($section) {
         $additionalData = @unserialize($section->additionalData);
         if (! is_array($additionalData)) $additionalData = array();
         AttachmentBBCode::setObjectID($section->sectionID);
@@ -205,22 +219,16 @@ class TextContentSectionType extends AbstractContentSectionType {
         return MessageParser::getInstance()->parse(WCF::getLanguage()->get($section->sectionData), $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']);
     }
 
-    public function getPreview($sectionID)
-    {
+    public function getPreview($sectionID) {
         $section = new ContentSection($sectionID);
         return $this->getExcerpt($section);
     }
 
-    public function getExcerpt($section, $maxLength = 255)
-    {
-        $additionalData = @unserialize($section->additionalData);
-        if (! is_array($additionalData)) $additionalData = array();
-        MessageParser::getInstance()->setOutputType('text/simplified-html');
-        return WCF::getLanguage()->get(StringUtil::truncateHTML(MessageParser::getInstance()->parse(WCF::getLanguage()->get($section->sectionData), $additionalData['enableSmilies'], $additionalData['enableHtml'], $additionalData['enableBBCodes']), $maxLength));
+    public function getExcerpt($section, $maxLength = 255) {
+        return WCF::getLanguage()->get(StringUtil::truncateHTML($section->sectionData), $maxLength);
     }
 
-    public function getAttachments($section)
-    {
+    public function getAttachments($section) {
         $additionalData = @unserialize($section->additionalData);
         if (! is_array($additionalData)) $additionalData = array();
         if (MODULE_ATTACHMENT == 1 && $additionalData['attachments']) {

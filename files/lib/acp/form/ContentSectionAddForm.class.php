@@ -33,8 +33,7 @@ class ContentSectionAddForm extends AbstractForm {
     public $cssClasses = '';
     public $send = false;
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         // getObjectTypeByName($definitionName, $objectTypeName);
         if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.section.type', $_REQUEST['objectType']);
@@ -45,15 +44,13 @@ class ContentSectionAddForm extends AbstractForm {
         }
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         $this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.section.type');
         if (isset($_GET['id'])) $this->contentID = intval($_GET['id']);
     }
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         
         if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.section.type', $_REQUEST['objectType']);
@@ -65,16 +62,14 @@ class ContentSectionAddForm extends AbstractForm {
         if (isset($_POST['cssID'])) $this->cssID = StringUtil::trim($_POST['cssID']);
     }
 
-    public function validate()
-    {
+    public function validate() {
         parent::validate();
         if ($this->objectType != null) $this->objectTypeProcessor->validateFormData();
         else
             throw new UserInputException('objectType');
     }
 
-    public function submit()
-    {
+    public function submit() {
         // call submit event
         EventHandler::getInstance()->fireAction($this, 'submit');
         
@@ -94,8 +89,7 @@ class ContentSectionAddForm extends AbstractForm {
         }
     }
 
-    public function save()
-    {
+    public function save() {
         parent::save();
         $this->objectTypeProcessor->saveFormData();
         
@@ -122,8 +116,7 @@ class ContentSectionAddForm extends AbstractForm {
         $this->cssID = $this->cssClasses = '';
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         
         if ($this->objectType != null) $this->objectTypeProcessor->assignFormVariables();

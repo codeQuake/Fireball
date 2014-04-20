@@ -16,19 +16,16 @@ use wcf\util\DateUtil;
 class VisitCountHandler extends SingletonFactory {
     public $session = null;
 
-    public function init()
-    {
+    public function init() {
         $this->session = WCF::getSession();
     }
 
-    protected function canCount()
-    {
+    protected function canCount() {
         if ($this->session->getVar('counted')) return false;
         return true;
     }
 
-    public function count()
-    {
+    public function count() {
         if ($this->canCount()) {
             $userID = WCF::getUser()->userID;
             $spider = $this->getSpiderID($this->session->userAgent);
@@ -89,8 +86,7 @@ class VisitCountHandler extends SingletonFactory {
         }
     }
 
-    public function existingColumn()
-    {
+    public function existingColumn() {
         $sql = "SELECT COUNT(*) AS amount FROM cms" . WCF_N . "_counter WHERE day = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j') . " AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . " AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute();
@@ -99,8 +95,7 @@ class VisitCountHandler extends SingletonFactory {
         return false;
     }
 
-    public function getVisitors($start, $end)
-    {
+    public function getVisitors($start, $end) {
         $vistors = array();
         $date = $start;
         while ($date <= $end) {
@@ -128,8 +123,7 @@ class VisitCountHandler extends SingletonFactory {
         return $visitors;
     }
 
-    public function getAllVisitors()
-    {
+    public function getAllVisitors() {
         $sql = "SELECT * FROM cms" . WCF_N . "_counter";
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute();
@@ -140,8 +134,7 @@ class VisitCountHandler extends SingletonFactory {
         return $count;
     }
 
-    public function getDailyVisitors($day = 10, $month = 2, $year = 2014)
-    {
+    public function getDailyVisitors($day = 10, $month = 2, $year = 2014) {
         $sql = "SELECT * FROM cms" . WCF_N . "_counter WHERE day = ? AND month = ? AND year = ?";
         $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array(
@@ -152,8 +145,7 @@ class VisitCountHandler extends SingletonFactory {
         return $statement->fetchArray();
     }
 
-    public function getWeeklyVisitorArray()
-    {
+    public function getWeeklyVisitorArray() {
         $currentMonth = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n');
         $currentYear = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
         $currentDay = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j');
@@ -207,8 +199,7 @@ class VisitCountHandler extends SingletonFactory {
         return array_reverse($visitors);
     }
 
-    public function getBrowser($u_agent = '')
-    {
+    public function getBrowser($u_agent = '') {
         if ($u_agent == '') return array(
             'userAgent' => '',
             'name' => 'unknown',
@@ -301,8 +292,7 @@ class VisitCountHandler extends SingletonFactory {
         );
     }
 
-    protected function getSpiderID($userAgent)
-    {
+    protected function getSpiderID($userAgent) {
         $spiderList = SpiderCacheBuilder::getInstance()->getData();
         $userAgent = strtolower($userAgent);
         

@@ -27,8 +27,7 @@ class StatsPage extends AbstractPage {
     );
     public $pages = null;
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         // set dates
         if (isset($_POST['startDate'])) $this->startDate = strtotime($_POST['startDate']);
@@ -69,8 +68,7 @@ class StatsPage extends AbstractPage {
         $this->usersOnlineList->readObjects();
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'visits' => $this->visits,

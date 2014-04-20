@@ -18,8 +18,7 @@ class ViewableNewsList extends NewsList {
     public $decoratorClassName = 'cms\data\news\ViewableNews';
     public $sqlOrderBy = 'news.time DESC';
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         if (WCF::getUser()->userID != 0) {
             // last visit time

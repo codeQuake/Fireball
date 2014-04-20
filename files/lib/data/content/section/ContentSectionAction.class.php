@@ -24,8 +24,7 @@ class ContentSectionAction extends AbstractDatabaseObjectAction implements ISort
     );
     public $items = array();
 
-    public function validateUpdatePosition()
-    {
+    public function validateUpdatePosition() {
         WCF::getSession()->checkPermissions(array(
             'admin.cms.content.canAddContentSection'
         ));
@@ -57,8 +56,7 @@ class ContentSectionAction extends AbstractDatabaseObjectAction implements ISort
         }
     }
 
-    public function updatePosition()
-    {
+    public function updatePosition() {
         $sql = "UPDATE cms" . WCF_N . "_content_section
                 SET showOrder = ?
                 WHERE sectionID = ?";

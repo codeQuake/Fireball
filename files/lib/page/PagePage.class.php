@@ -37,8 +37,7 @@ class PagePage extends AbstractPage {
     public $commentManager = null;
     public $commentList = null;
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         $alias = '';
         if (isset($_REQUEST['alias'])) $alias = StringUtil::trim($_REQUEST['alias']);
@@ -60,8 +59,6 @@ class PagePage extends AbstractPage {
             if ($this->pageID == 0) {
                 throw new IllegalLinkException();
             }
-
-               
         }
         
         // check if offline and view page or exit
@@ -77,8 +74,7 @@ class PagePage extends AbstractPage {
         }
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         // register visit
         VisitCountHandler::getInstance()->count();
@@ -122,8 +118,7 @@ class PagePage extends AbstractPage {
         MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'website', true);
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'bodyList' => $this->bodyList,
@@ -145,8 +140,7 @@ class PagePage extends AbstractPage {
         ));
     }
 
-    public function show()
-    {
+    public function show() {
         if ($this->page->hasMenuItem()) $this->activeMenuItem = $this->page->title;
         else {
             // activate startpage-item
@@ -165,13 +159,11 @@ class PagePage extends AbstractPage {
         parent::show();
     }
 
-    public function getObjectType()
-    {
+    public function getObjectType() {
         return 'de.codequake.cms.page';
     }
 
-    public function getObjectID()
-    {
+    public function getObjectID() {
         if (isset($this->page->pageID)) return $this->page->pageID;
         return 0;
     }

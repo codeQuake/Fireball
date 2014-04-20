@@ -34,8 +34,7 @@ class FileManagementForm extends AbstractForm {
     public $foldername = '';
     public $isFolder = false;
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_GET['action'])) $this->action = StringUtil::trim($_GET['action']);
         if ($this->action == 'file') {
@@ -47,8 +46,7 @@ class FileManagementForm extends AbstractForm {
         }
     }
 
-    public function validate()
-    {
+    public function validate() {
         parent::validate();
         if ($this->action == 'file') {
             // check if file is given
@@ -73,8 +71,7 @@ class FileManagementForm extends AbstractForm {
         }
     }
 
-    public function save()
-    {
+    public function save() {
         parent::save();
         if ($this->action == 'file') {
             $tmp = explode('.', $this->file['name']);
@@ -119,8 +116,7 @@ class FileManagementForm extends AbstractForm {
         }
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         if (isset($_REQUEST['id'])) $this->folderPageID = intval($_REQUEST['id']);
         if ($this->folderPageID == 0) {
@@ -144,8 +140,7 @@ class FileManagementForm extends AbstractForm {
         $this->folders = $folders->getObjects();
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'fileList' => $this->fileList,
@@ -158,8 +153,7 @@ class FileManagementForm extends AbstractForm {
     }
     
     // see http://www.php.net/manual/de/function.ini-get.php
-    function return_bytes($val)
-    {
+    function return_bytes($val) {
         $val = trim($val);
         $last = strtolower($val[strlen($val) - 1]);
         switch ($last) {

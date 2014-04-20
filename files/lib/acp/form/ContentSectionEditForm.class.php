@@ -19,8 +19,7 @@ class ContentSectionEditForm extends ContentSectionAddForm {
     public $sectionID = 0;
     public $section = null;
 
-    public function readData()
-    {
+    public function readData() {
         AbstractForm::readData();
         $this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.section.type');
         if (isset($_REQUEST['id'])) $this->sectionID = intval($_REQUEST['id']);
@@ -31,8 +30,7 @@ class ContentSectionEditForm extends ContentSectionAddForm {
         $this->cssClasses = $this->section->cssClasses;
     }
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         if (isset($_REQUEST['id'])) $this->sectionID = intval($_REQUEST['id']);
         $this->section = new ContentSection($this->sectionID);
@@ -44,15 +42,13 @@ class ContentSectionEditForm extends ContentSectionAddForm {
         $this->submit();
     }
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_REQUEST['id'])) $this->sectionID = intval($_REQUEST['id']);
         $this->section = new ContentSection($this->sectionID);
     }
 
-    public function save()
-    {
+    public function save() {
         AbstractForm::save();
         $this->objectTypeProcessor->saveFormData();
         $data = array(
@@ -75,8 +71,7 @@ class ContentSectionEditForm extends ContentSectionAddForm {
         WCF::getTPL()->assign('success', true);
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         if ($this->objectType != null) $this->objectTypeProcessor->assignFormVariables();
         WCF::getTPL()->assign(array(

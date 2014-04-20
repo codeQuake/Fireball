@@ -17,8 +17,7 @@ class NewsCommentUserNotificationObjectType extends AbstractUserNotificationObje
     protected static $objectClassName = 'wcf\data\comment\Comment';
     protected static $objectListClassName = 'wcf\data\comment\CommentList';
 
-    public function getOwnerID($objectID)
-    {
+    public function getOwnerID($objectID) {
         $sql = "SELECT		news.userID
 			FROM		wcf" . WCF_N . "_comment comment
 			LEFT JOIN	cms" . WCF_N . "_news news

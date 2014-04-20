@@ -16,11 +16,9 @@ use wcf\system\WCF;
  */
 class NewsCategoryLocation implements IUserOnlineLocation {
 
-    public function cache(UserOnline $user)
-    {}
+    public function cache(UserOnline $user) {}
 
-    public function get(UserOnline $user, $languageVariable = '')
-    {
+    public function get(UserOnline $user, $languageVariable = '') {
         if ($category = CategoryHandler::getInstance()->getCategory($user->objectID)) {
             $category = new NewsCategory($category);
             if ($category->getPermission('canView')) {

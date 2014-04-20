@@ -13,13 +13,11 @@ use wcf\system\request\LinkHandler;
  */
 class NewsFeed extends ViewableNews implements IFeedEntry {
 
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->getDecoratedObject()->getTitle();
     }
 
-    public function getLink()
-    {
+    public function getLink() {
         return LinkHandler::getInstance()->getLink('News', array(
             'application' => 'cms',
             'object' => $this->getDecoratedObject(),
@@ -28,53 +26,43 @@ class NewsFeed extends ViewableNews implements IFeedEntry {
         ));
     }
 
-    public function getFormattedMessage()
-    {
+    public function getFormattedMessage() {
         return $this->getDecoratedObject()->getFormattedMessage();
     }
 
-    public function getMessage()
-    {
+    public function getMessage() {
         return $this->getDecoratedObject()->getMessage();
     }
 
-    public function getComments()
-    {
+    public function getComments() {
         return $this->comments;
     }
 
-    public function getExcerpt($maxLength = CMS_NEWS_PREVIEW_TRUNCATE)
-    {
+    public function getExcerpt($maxLength = CMS_NEWS_PREVIEW_TRUNCATE) {
         return $this->getDecoratedObject()->getExcerpt($maxLength);
     }
 
-    public function getTime()
-    {
+    public function getTime() {
         return $this->time;
     }
 
-    public function getUserID()
-    {
+    public function getUserID() {
         return $this->userID;
     }
 
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
-    public function __toString()
-    {
+    public function __toString() {
         return $this->getDecoratedObject()->__toString();
     }
 
-    public function isVisible()
-    {
+    public function isVisible() {
         return $this->canRead();
     }
 
-    public function getCategories()
-    {
+    public function getCategories() {
         $categoryNames = array();
         foreach ($this->getDecoratedObject()->getCategories() as $category) {
             $categoryNames[] = $category->getTitle();

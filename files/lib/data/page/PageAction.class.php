@@ -33,8 +33,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
         'setAsHome'
     );
 
-    public function create()
-    {
+    public function create() {
         $page = parent::create();
         PagePermissionCacheBuilder::getInstance()->reset();
         PageCacheBuilder::getInstance()->reset();
@@ -80,8 +79,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
         return $page;
     }
 
-    public function update()
-    {
+    public function update() {
         parent::update();
         PagePermissionCacheBuilder::getInstance()->reset();
         PageCacheBuilder::getInstance()->reset();
@@ -156,8 +154,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
         }
     }
 
-    public function delete()
-    {
+    public function delete() {
         PageCacheBuilder::getInstance()->reset();
         // delete all contents beloning to the pages
         foreach ($this->objectIDs as $objectID) {
@@ -182,8 +179,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
         parent::delete();
     }
 
-    public function validateSetAsHome()
-    {
+    public function validateSetAsHome() {
         WCF::getSession()->checkPermissions(array(
             'admin.cms.page.canAddPage'
         ));
@@ -198,8 +194,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
         }
     }
 
-    public function setAsHome()
-    {
+    public function setAsHome() {
         $this->pageEditor->setAsHome();
         
         // delete existing menu item
@@ -239,8 +234,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
         PageCacheBuilder::getInstance()->reset();
     }
 
-    public function validateUpdatePosition()
-    {
+    public function validateUpdatePosition() {
         WCF::getSession()->checkPermissions(array(
             'admin.cms.page.canAddPage'
         ));
@@ -274,8 +268,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
         }
     }
 
-    public function updatePosition()
-    {
+    public function updatePosition() {
         WCF::getDB()->beginTransaction();
         foreach ($this->parameters['data']['structure'] as $parentID => $pageIDs) {
             $position = 1;

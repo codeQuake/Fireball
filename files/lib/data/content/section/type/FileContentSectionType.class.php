@@ -22,8 +22,7 @@ class FileContentSectionType extends AbstractContentSectionType {
     public $folderList = array();
     public $additionalData = array();
 
-    public function readParameters()
-    {
+    public function readParameters() {
         $list = new FileList();
         $list->getConditionBuilder()->add('folderID = ?', array(
             0
@@ -36,19 +35,16 @@ class FileContentSectionType extends AbstractContentSectionType {
         $this->folderList = $list->getObjects();
     }
 
-    public function readData($sectionID)
-    {
+    public function readData($sectionID) {
         $section = new ContentSection($sectionID);
         $this->formData['sectionData'] = $section->sectionData;
     }
 
-    public function readFormData()
-    {
+    public function readFormData() {
         if (isset($_POST['sectionData'])) $this->formData['sectionData'] = intval($_POST['sectionData']);
     }
 
-    public function assignFormVariables()
-    {
+    public function assignFormVariables() {
         WCF::getTPL()->assign(array(
             'fileList' => $this->fileList,
             'folderList' => $this->folderList,
@@ -56,13 +52,11 @@ class FileContentSectionType extends AbstractContentSectionType {
         ));
     }
 
-    public function getFormTemplate()
-    {
+    public function getFormTemplate() {
         return 'fileSectionType';
     }
 
-    public function saved($section)
-    {
+    public function saved($section) {
         $data['sectionData'] = $this->formData['sectionData'];
         $editor = new ContentSectionEditor($section);
         $editor->update($data);
@@ -71,16 +65,14 @@ class FileContentSectionType extends AbstractContentSectionType {
         }
     }
 
-    public function getOutput($sectionID)
-    {
+    public function getOutput($sectionID) {
         $section = new ContentSection($sectionID);
         $file = new File(intval($section->sectionData));
         WCF::getTPL()->assign('file', $file);
         return WCF::getTPL()->fetch('fileSectionTypeOutput', 'cms');
     }
 
-    public function getPreview($sectionID)
-    {
+    public function getPreview($sectionID) {
         $section = new ContentSection($sectionID);
         $file = new File(intval($section->sectionData));
         return '###' . $file->title . '###';

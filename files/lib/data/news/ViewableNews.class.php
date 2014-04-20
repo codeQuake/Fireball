@@ -16,8 +16,7 @@ class ViewableNews extends DatabaseObjectDecorator {
     protected static $baseClass = 'cms\data\news\News';
     protected $effectiveVisitTime = null;
 
-    public function getVisitTime()
-    {
+    public function getVisitTime() {
         if ($this->effectiveVisitTime === null) {
             if (WCF::getUser()->userID) {
                 $this->effectiveVisitTime = max($this->visitTime, VisitTracker::getInstance()->getVisitTime('de.codequake.cms.news'));
@@ -33,8 +32,7 @@ class ViewableNews extends DatabaseObjectDecorator {
         return $this->effectiveVisitTime;
     }
 
-    public function isNew()
-    {
+    public function isNew() {
         if ($this->lastChangeTime > $this->getVisitTime()) {
             return true;
         }
@@ -42,8 +40,7 @@ class ViewableNews extends DatabaseObjectDecorator {
         return false;
     }
 
-    public static function getNews($newsID)
-    {
+    public static function getNews($newsID) {
         $list = new ViewableNewsList();
         $list->setObjectIDs(array(
             $newsID

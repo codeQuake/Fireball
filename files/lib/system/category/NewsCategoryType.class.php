@@ -19,23 +19,19 @@ class NewsCategoryType extends AbstractCategoryType {
         'com.woltlab.wcf.acl' => 'de.codequake.cms.category.news'
     );
 
-    public function getApplication()
-    {
+    public function getApplication() {
         return 'cms';
     }
 
-    public function canAddCategory()
-    {
+    public function canAddCategory() {
         return $this->canEditCategory();
     }
 
-    public function canDeleteCategory()
-    {
+    public function canDeleteCategory() {
         return $this->canEditCategory();
     }
 
-    public function canEditCategory()
-    {
+    public function canEditCategory() {
         return WCF::getSession()->getPermission('admin.cms.news.canManageCategory');
     }
 }

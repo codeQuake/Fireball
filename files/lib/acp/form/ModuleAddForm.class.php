@@ -23,16 +23,14 @@ class ModuleAddForm extends AbstractForm {
     public $phpCode = '';
     public $tplCode = '';
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_POST['php'])) $this->phpCode = StringUtil::trim($_POST['php']);
         if (isset($_POST['tpl'])) $this->tplCode = StringUtil::trim($_POST['tpl']);
         if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
     }
 
-    public function save()
-    {
+    public function save() {
         parent::save();
         
         $data = array(
@@ -54,8 +52,7 @@ class ModuleAddForm extends AbstractForm {
         $this->title = $this->phpCode = $this->tplCode = '';
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'title' => $this->title,

@@ -24,8 +24,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
         'updatePosition'
     );
 
-    public function delete()
-    {
+    public function delete() {
         
         // delete all sections beloning to the contents
         foreach ($this->objectIDs as $objectID) {
@@ -41,8 +40,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
         parent::delete();
     }
 
-    public function validateUpdatePosition()
-    {
+    public function validateUpdatePosition() {
         WCF::getSession()->checkPermissions(array(
             'admin.cms.content.canAddContentSection'
         ));
@@ -74,8 +72,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
         }
     }
 
-    public function updatePosition()
-    {
+    public function updatePosition() {
         $sql = "UPDATE cms" . WCF_N . "_content
                 SET showOrder = ?
                 WHERE contentID = ?";

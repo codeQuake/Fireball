@@ -16,8 +16,7 @@ class DashboardPage extends AbstractPage {
     public $news = null;
     public $usersOnlineList = null;
 
-    protected function readFireballFeed()
-    {
+    protected function readFireballFeed() {
         $url = "http://codequake.de/index.php/NewsFeed/14/";
         try {
             $request = new HTTPRequest("http://codequake.de/index.php/NewsFeed/14/");
@@ -52,8 +51,7 @@ class DashboardPage extends AbstractPage {
         return $feed;
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         // get pages
         $list = new PageList();
@@ -80,8 +78,7 @@ class DashboardPage extends AbstractPage {
         );
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'visitors' => VisitCountHandler::getInstance(),

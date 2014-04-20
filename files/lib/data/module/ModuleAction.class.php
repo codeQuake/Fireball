@@ -23,8 +23,7 @@ class ModuleAction extends AbstractDatabaseObjectAction {
         'delete'
     );
 
-    public function create()
-    {
+    public function create() {
         $data = $this->parameters['data'];
         $source = $this->parameters['source'];
         if (! empty($source['tpl'])) {
@@ -57,8 +56,7 @@ class ModuleAction extends AbstractDatabaseObjectAction {
         return $module;
     }
 
-    public function update()
-    {
+    public function update() {
         foreach ($this->objects as $module) {
             if (isset($this->parameters['source']['tpl'])) {
                 // create new
@@ -125,8 +123,7 @@ class ModuleAction extends AbstractDatabaseObjectAction {
         parent::update();
     }
 
-    public function delete()
-    {
+    public function delete() {
         foreach ($this->objects as $module) {
             if ($module->tpl !== null) {
                 // delete TPL

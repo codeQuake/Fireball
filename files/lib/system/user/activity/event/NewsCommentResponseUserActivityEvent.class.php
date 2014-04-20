@@ -18,8 +18,7 @@ use wcf\system\WCF;
  */
 class NewsCommentResponseUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
 
-    public function prepare(array $events)
-    {
+    public function prepare(array $events) {
         $objectIDs = array();
         foreach ($events as $event) {
             $objectIDs[] = $event->objectID;

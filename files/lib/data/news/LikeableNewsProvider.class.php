@@ -17,8 +17,7 @@ class LikeableNewsProvider extends AbstractObjectTypeProvider implements ILikeOb
     public $decoratorClassName = 'cms\data\news\LikeableNews';
     public $listClassName = 'cms\data\news\NewsList';
 
-    public function checkPermissions(ILikeObject $object)
-    {
+    public function checkPermissions(ILikeObject $object) {
         return $object->canRead();
     }
 }

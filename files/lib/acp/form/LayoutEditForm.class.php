@@ -18,8 +18,7 @@ class LayoutEditForm extends LayoutAddForm {
     public $layoutID = 0;
     public $layout = null;
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         if (isset($_REQUEST['id'])) $this->layoutID = intval($_REQUEST['id']);
         $this->layout = new Layout($this->layoutID);
@@ -27,16 +26,14 @@ class LayoutEditForm extends LayoutAddForm {
         $this->data = @unserialize($this->layout->data);
     }
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_REQUEST['id'])) $this->layoutID = intval($_REQUEST['id']);
         if (isset($_POST['data'])) $this->data = $_POST['data'];
         if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'action' => 'edit',
@@ -44,8 +41,7 @@ class LayoutEditForm extends LayoutAddForm {
         ));
     }
 
-    public function save()
-    {
+    public function save() {
         AbstractForm::save();
         $objectAction = new LayoutAction(array(
             $this->layoutID

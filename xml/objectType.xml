@@ -1,249 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
-  <import>
-    <!--section types-->
-    <type>
-      <name>de.codequake.cms.section.type.text</name>
-      <definitionname>de.codequake.cms.section.type</definitionname>
-      <classname>cms\data\content\section\type\TextContentSectionType</classname>
-    </type>
-    <type>
-      <name>de.codequake.cms.section.type.headline</name>
-      <definitionname>de.codequake.cms.section.type</definitionname>
-      <classname>cms\data\content\section\type\HeadlineContentSectionType</classname>
-    </type>
-    <type>
-      <name>de.codequake.cms.section.type.link</name>
-      <definitionname>de.codequake.cms.section.type</definitionname>
-      <classname>cms\data\content\section\type\LinkContentSectionType</classname>
-    </type>
-    <type>
-      <name>de.codequake.cms.section.type.file</name>
-      <definitionname>de.codequake.cms.section.type</definitionname>
-      <classname>cms\data\content\section\type\FileContentSectionType</classname>
-    </type>
-    <type>
-      <name>de.codequake.cms.section.type.image</name>
-      <definitionname>de.codequake.cms.section.type</definitionname>
-      <classname>cms\data\content\section\type\ImageContentSectionType</classname>
-    </type>
-    <type>
-      <name>de.codequake.cms.section.type.news</name>
-      <definitionname>de.codequake.cms.section.type</definitionname>
-      <classname>cms\data\content\section\type\NewsContentSectionType</classname>
-    </type>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
+	<import>
+		<!--section types -->
+		<type>
+			<name>de.codequake.cms.section.type.text</name>
+			<definitionname>de.codequake.cms.section.type</definitionname>
+			<classname>cms\data\content\section\type\TextContentSectionType</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.section.type.headline</name>
+			<definitionname>de.codequake.cms.section.type</definitionname>
+			<classname>cms\data\content\section\type\HeadlineContentSectionType</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.section.type.link</name>
+			<definitionname>de.codequake.cms.section.type</definitionname>
+			<classname>cms\data\content\section\type\LinkContentSectionType</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.section.type.file</name>
+			<definitionname>de.codequake.cms.section.type</definitionname>
+			<classname>cms\data\content\section\type\FileContentSectionType</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.section.type.image</name>
+			<definitionname>de.codequake.cms.section.type</definitionname>
+			<classname>cms\data\content\section\type\ImageContentSectionType</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.section.type.news</name>
+			<definitionname>de.codequake.cms.section.type</definitionname>
+			<classname>cms\data\content\section\type\NewsContentSectionType</classname>
+		</type>
 
-    <type>
-      <name>de.codequake.cms.section.type.module</name>
-      <definitionname>de.codequake.cms.section.type</definitionname>
-      <classname>cms\data\content\section\type\ModuleContentSectionType</classname>
-    </type>
+		<type>
+			<name>de.codequake.cms.section.type.module</name>
+			<definitionname>de.codequake.cms.section.type</definitionname>
+			<classname>cms\data\content\section\type\ModuleContentSectionType</classname>
+		</type>
 
-    <type>
-      <name>de.codequake.cms.section.type.dashboard</name>
-      <definitionname>de.codequake.cms.section.type</definitionname>
-      <classname>cms\data\content\section\type\DashboardContentSectionType</classname>
-    </type>
-    
-    <!--attachments-->
-    <type>
-      <name>de.codequake.cms.content.section</name>
-      <definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
-      <classname>cms\system\attachment\ContentSectionAttachmentObjectType</classname>
-    </type>
-    <type>
-      <name>de.codequake.cms.news</name>
-      <definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
-      <classname>cms\system\attachment\NewsAttachmentObjectType</classname>
-    </type>
-    
-    <!--user online location-->
-    <type>
-      <name>de.codequake.cms.page</name>
-      <definitionname>com.woltlab.wcf.user.online.location</definitionname>
-      <controller>cms\page\PagePage</controller>
-      <classname>cms\system\user\online\location\PageLocation</classname>
-      <languagevariable>cms.user.usersOnline.location.page</languagevariable>
-    </type>
-    <type>
-      <name>de.codequake.cms.news</name>
-      <definitionname>com.woltlab.wcf.user.online.location</definitionname>
-      <controller>cms\page\NewsPage</controller>
-      <classname>cms\system\user\online\location\NewsLocation</classname>
-      <languagevariable>cms.user.usersOnline.location.newsPage</languagevariable>
-    </type>
-    <type>
-      <name>de.codequake.cms.newsAdd</name>
-      <definitionname>com.woltlab.wcf.user.online.location</definitionname>
-      <controller>cms\form\NewsAddForm</controller>
-      <languagevariable>cms.user.usersOnline.location.newsAddForm</languagevariable>
-    </type>
-    <type>
-      <name>de.codequake.cms.newsCategoryList</name>
-      <definitionname>com.woltlab.wcf.user.online.location</definitionname>
-      <controller>cms\page\NewsCategoryListPage</controller>
-      <languagevariable>cms.user.usersOnline.location.newsCategoryListPage</languagevariable>
-    </type>
-    <type>
-      <name>de.codequake.cms.newsList</name>
-      <definitionname>com.woltlab.wcf.user.online.location</definitionname>
-      <controller>cms\page\NewsListPage</controller>
-      <classname>cms\system\user\online\location\NewsCategoryLocation</classname>
-      <languagevariable>cms.user.usersOnline.location.newsListPage</languagevariable>
-    </type>
+		<type>
+			<name>de.codequake.cms.section.type.dashboard</name>
+			<definitionname>de.codequake.cms.section.type</definitionname>
+			<classname>cms\data\content\section\type\DashboardContentSectionType</classname>
+		</type>
 
-    <!-- Category -->
-    <type>
-      <name>de.codequake.cms.category.news</name>
-      <definitionname>com.woltlab.wcf.category</definitionname>
-      <classname>cms\system\category\NewsCategoryType</classname>
-    </type>
-    
-    <!--ACL-->
-    <type>
-      <name>de.codequake.cms.page</name>
-      <definitionname>com.woltlab.wcf.acl</definitionname>
-    </type>
-    <type>
-      <name>de.codequake.cms.category.news</name>
-      <definitionname>com.woltlab.wcf.acl</definitionname>
-    </type>
+		<!--attachments -->
+		<type>
+			<name>de.codequake.cms.content.section</name>
+			<definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
+			<classname>cms\system\attachment\ContentSectionAttachmentObjectType</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.news</name>
+			<definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
+			<classname>cms\system\attachment\NewsAttachmentObjectType</classname>
+		</type>
 
-    <!--Dashboard-->
-    <type>
-      <name>de.codequake.cms.page</name>
-      <definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
-      <allowcontent>0</allowcontent>
-      <allowsidebar>1</allowsidebar>
-    </type>
-    <type>
-    <name>de.codequake.cms.news.newsList</name>
-    <definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
-    <allowcontent>0</allowcontent>
-    <allowsidebar>1</allowsidebar>
-    </type>
-    <type>
-      <name>de.codequake.cms.news.news</name>
-      <definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
-      <allowcontent>0</allowcontent>
-      <allowsidebar>1</allowsidebar>
-    </type>
-    
-    <!--Comments-->
-    <type>
-      <name>de.codequake.cms.news.comment</name>
-      <definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
-      <classname>cms\system\comment\manager\NewsCommentManager</classname>
-    </type>
-    
-    <type>
-      <name>de.codequake.cms.page.comment</name>
-      <definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
-      <classname>cms\system\comment\manager\PageCommentManager</classname>
-    </type>
-    
-      <!--Notifications-->
-    <type>
-      <name>de.codequake.cms.news.comment.notification</name>
-      <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
-      <classname>cms\system\user\notification\object\type\NewsCommentUserNotificationObjectType</classname>
-      <category>de.codequake.cms</category>
-    </type>
-    <type>
-      <name>de.codequake.cms.news.comment.response.notification</name>
-      <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
-      <classname>cms\system\user\notification\object\type\NewsCommentResponseUserNotificationObjectType</classname>
-      <category>de.codequake.cms</category>
-    </type>
-    <type>
-      <name>de.codequake.cms.page.comment.response.notification</name>
-      <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
-      <classname>cms\system\user\notification\object\type\PageCommentResponseUserNotificationObjectType</classname>
-      <category>de.codequake.cms</category>
-    </type>
-    
-    <!--Visit Tracker-->
-    <type>
-      <name>de.codequake.cms.news</name>
-      <definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
-    </type>
-    
-    <!--Recent Activity-->
-    <type>
-      <name>de.codequake.cms.news.recentActivityEvent</name>
-      <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
-      <classname>cms\system\user\activity\event\NewsUserActivityEvent</classname>
-    </type>
-    
-    <type>
-        <name>de.codequake.cms.news.comment.recentActivityEvent</name>
-        <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
-        <classname>cms\system\user\activity\event\NewsCommentUserActivityEvent</classname>
-      </type>
-      <type>
-        <name>de.codequake.cms.news.comment.response.recentActivityEvent</name>
-        <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
-        <classname>cms\system\user\activity\event\NewsCommentResponseUserActivityEvent</classname>
-      </type>
+		<!--user online location -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>cms\page\PagePage</controller>
+			<classname>cms\system\user\online\location\PageLocation</classname>
+			<languagevariable>cms.user.usersOnline.location.page</languagevariable>
+		</type>
+		<type>
+			<name>de.codequake.cms.news</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>cms\page\NewsPage</controller>
+			<classname>cms\system\user\online\location\NewsLocation</classname>
+			<languagevariable>cms.user.usersOnline.location.newsPage</languagevariable>
+		</type>
+		<type>
+			<name>de.codequake.cms.newsAdd</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>cms\form\NewsAddForm</controller>
+			<languagevariable>cms.user.usersOnline.location.newsAddForm</languagevariable>
+		</type>
+		<type>
+			<name>de.codequake.cms.newsCategoryList</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>cms\page\NewsCategoryListPage</controller>
+			<languagevariable>cms.user.usersOnline.location.newsCategoryListPage</languagevariable>
+		</type>
+		<type>
+			<name>de.codequake.cms.newsList</name>
+			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
+			<controller>cms\page\NewsListPage</controller>
+			<classname>cms\system\user\online\location\NewsCategoryLocation</classname>
+			<languagevariable>cms.user.usersOnline.location.newsListPage</languagevariable>
+		</type>
 
-    <type>
-      <name>de.codequake.cms.page.comment.recentActivityEvent</name>
-      <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
-      <classname>cms\system\user\activity\event\PageCommentUserActivityEvent</classname>
-    </type>
-    <type>
-      <name>de.codequake.cms.page.comment.response.recentActivityEvent</name>
-      <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
-      <classname>cms\system\user\activity\event\PageCommentResponseUserActivityEvent</classname>
-    </type>
-      <!--Activity Points-->
-      <type>
-        <name>de.codequake.cms.activityPointEvent.news</name>
-        <definitionname>com.woltlab.wcf.user.activityPointEvent</definitionname>
-        <points>5</points>
-        <classname>cms\system\user\activity\point\NewsUserActivityPointObjectProcessor</classname>
-      </type>
-  
-       <!--Like-->
-      <type>
-        <name>de.codequake.cms.likeableNews</name>
-        <definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
-        <classname>cms\data\news\LikeableNewsProvider</classname>
-      </type>
+		<!-- Category -->
+		<type>
+			<name>de.codequake.cms.category.news</name>
+			<definitionname>com.woltlab.wcf.category</definitionname>
+			<classname>cms\system\category\NewsCategoryType</classname>
+		</type>
 
-    <!--search-->
-    <type>
-      <name>de.codequake.cms.news</name>
-      <definitionname>com.woltlab.wcf.searchableObjectType</definitionname>
-      <classname>cms\system\search\NewsSearch</classname>
-    </type>
-    
-      <!--Tagging-->
-      <type>
-        <name>de.codequake.cms.news</name>
-        <definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
-        <classname>cms\system\tagging\TaggableNews</classname>
-    </type>
-    <!--Importer-->
-    <type>
-      <name>de.codequake.cms.category.news</name>
-      <definitionname>com.woltlab.wcf.importer</definitionname>
-      <classname><![CDATA[cms\system\importer\NewsCategoryImporter]]></classname>
-    </type>
-    <type>
-      <name>de.codequake.cms.news</name>
-      <definitionname>com.woltlab.wcf.importer</definitionname>
-      <classname><![CDATA[cms\system\importer\NewsImporter]]></classname>
-    </type>
-    <type>
-      <name>de.codequake.cms.news.comment</name>
-      <definitionname>com.woltlab.wcf.importer</definitionname>
-      <classname><![CDATA[cms\system\importer\NewsCommentImporter]]></classname>
-    </type>
-    <type>
-      <name>de.codequake.cms.news.comment.response</name>
-      <definitionname>com.woltlab.wcf.importer</definitionname>
-      <classname><![CDATA[cms\system\importer\NewsCommentResponseImporter]]></classname>
-    </type>
-  </import>
+		<!--ACL -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.acl</definitionname>
+		</type>
+		<type>
+			<name>de.codequake.cms.category.news</name>
+			<definitionname>com.woltlab.wcf.acl</definitionname>
+		</type>
+
+		<!--Dashboard -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+			<allowcontent>0</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
+			<name>de.codequake.cms.news.newsList</name>
+			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+			<allowcontent>0</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
+			<name>de.codequake.cms.news.news</name>
+			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+			<allowcontent>0</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+
+		<!--Comments -->
+		<type>
+			<name>de.codequake.cms.news.comment</name>
+			<definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
+			<classname>cms\system\comment\manager\NewsCommentManager</classname>
+		</type>
+
+		<type>
+			<name>de.codequake.cms.page.comment</name>
+			<definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
+			<classname>cms\system\comment\manager\PageCommentManager</classname>
+		</type>
+
+		<!--Notifications -->
+		<type>
+			<name>de.codequake.cms.news.comment.notification</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>cms\system\user\notification\object\type\NewsCommentUserNotificationObjectType</classname>
+			<category>de.codequake.cms</category>
+		</type>
+		<type>
+			<name>de.codequake.cms.news.comment.response.notification</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>cms\system\user\notification\object\type\NewsCommentResponseUserNotificationObjectType</classname>
+			<category>de.codequake.cms</category>
+		</type>
+		<type>
+			<name>de.codequake.cms.page.comment.response.notification</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>cms\system\user\notification\object\type\PageCommentResponseUserNotificationObjectType</classname>
+			<category>de.codequake.cms</category>
+		</type>
+
+		<!--Visit Tracker -->
+		<type>
+			<name>de.codequake.cms.news</name>
+			<definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
+		</type>
+
+		<!--Recent Activity -->
+		<type>
+			<name>de.codequake.cms.news.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>cms\system\user\activity\event\NewsUserActivityEvent</classname>
+		</type>
+
+		<type>
+			<name>de.codequake.cms.news.comment.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>cms\system\user\activity\event\NewsCommentUserActivityEvent</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.news.comment.response.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>cms\system\user\activity\event\NewsCommentResponseUserActivityEvent</classname>
+		</type>
+
+		<type>
+			<name>de.codequake.cms.page.comment.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>cms\system\user\activity\event\PageCommentUserActivityEvent</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.page.comment.response.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>cms\system\user\activity\event\PageCommentResponseUserActivityEvent</classname>
+		</type>
+		<!--Activity Points -->
+		<type>
+			<name>de.codequake.cms.activityPointEvent.news</name>
+			<definitionname>com.woltlab.wcf.user.activityPointEvent</definitionname>
+			<points>5</points>
+			<classname>cms\system\user\activity\point\NewsUserActivityPointObjectProcessor</classname>
+		</type>
+
+		<!--Like -->
+		<type>
+			<name>de.codequake.cms.likeableNews</name>
+			<definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
+			<classname>cms\data\news\LikeableNewsProvider</classname>
+		</type>
+
+		<!--search -->
+		<type>
+			<name>de.codequake.cms.news</name>
+			<definitionname>com.woltlab.wcf.searchableObjectType</definitionname>
+			<classname>cms\system\search\NewsSearch</classname>
+		</type>
+
+		<!--Tagging -->
+		<type>
+			<name>de.codequake.cms.news</name>
+			<definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
+			<classname>cms\system\tagging\TaggableNews</classname>
+		</type>
+		<!--Importer -->
+		<type>
+			<name>de.codequake.cms.category.news</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\NewsCategoryImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.news</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\NewsImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.news.comment</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\NewsCommentImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.news.comment.response</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\NewsCommentResponseImporter]]></classname>
+		</type>
+	</import>
 </data>

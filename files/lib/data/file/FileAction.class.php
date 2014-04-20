@@ -20,8 +20,7 @@ class FileAction extends AbstractDatabaseObjectAction {
         'delete'
     );
 
-    public function delete()
-    {
+    public function delete() {
         // del files
         foreach ($this->objectIDs as $objectID) {
             $file = new File($objectID);

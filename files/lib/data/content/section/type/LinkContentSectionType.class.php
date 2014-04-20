@@ -22,13 +22,11 @@ class LinkContentSectionType extends AbstractContentSectionType {
     public $hyperlink = '';
     public $additionalData = array();
 
-    public function readParameters()
-    {
+    public function readParameters() {
         I18nHandler::getInstance()->register('sectionData');
     }
 
-    public function readData($sectionID)
-    {
+    public function readData($sectionID) {
         $section = new ContentSection($sectionID);
         $data = @unserialize($section->additionalData);
         $this->type = isset($data['type']) ? $data['type'] : '';
@@ -37,16 +35,14 @@ class LinkContentSectionType extends AbstractContentSectionType {
         $this->formData['sectionData'] = $section->sectionData;
     }
 
-    public function readFormData()
-    {
+    public function readFormData() {
         if (isset($_POST['type'])) $this->type = StringUtil::trim($_POST['type']);
         if (isset($_POST['hyperlink'])) $this->hyperlink = StringUtil::trim($_POST['hyperlink']);
         I18nHandler::getInstance()->readValues();
         if (I18nHandler::getInstance()->isPlainValue('sectionData')) $this->formData['sectionData'] = StringUtil::trim(I18nHandler::getInstance()->getValue('sectionData'));
     }
 
-    public function validateFormData()
-    {
+    public function validateFormData() {
         if (! I18nHandler::getInstance()->validateValue('sectionData')) {
             if (I18nHandler::getInstance()->isPlainValue('sectionData')) {
                 throw new UserInputException('sectionData');
@@ -57,8 +53,7 @@ class LinkContentSectionType extends AbstractContentSectionType {
         }
     }
 
-    public function assignFormVariables()
-    {
+    public function assignFormVariables() {
         I18nHandler::getInstance()->assignVariables();
         
         I18nHandler::getInstance()->assignVariables(! empty($_POST));
@@ -68,13 +63,11 @@ class LinkContentSectionType extends AbstractContentSectionType {
         ));
     }
 
-    public function getFormTemplate()
-    {
+    public function getFormTemplate() {
         return 'linkSectionType';
     }
 
-    public function saved($section)
-    {
+    public function saved($section) {
         $additionalData = array();
         $additionalData['type'] = $this->type;
         $additionalData['hyperlink'] = $this->hyperlink;
@@ -104,8 +97,7 @@ class LinkContentSectionType extends AbstractContentSectionType {
         }
     }
 
-    public function getOutput($sectionID)
-    {
+    public function getOutput($sectionID) {
         $section = new ContentSection($sectionID);
         $additionalData = @unserialize($section->additionalData);
         WCF::getTPL()->assign(array(
@@ -116,8 +108,7 @@ class LinkContentSectionType extends AbstractContentSectionType {
         return WCF::getTPL()->fetch('linkSectionTypeOutput', 'cms');
     }
 
-    public function getPreview($sectionID)
-    {
+    public function getPreview($sectionID) {
         $section = new ContentSection($sectionID);
         $additionalData = @unserialize($section->additionalData);
         if (! is_array($additionalData)) $additionalData = array();

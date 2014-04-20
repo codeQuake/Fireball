@@ -32,8 +32,7 @@ class CMSCore extends AbstractApplication {
      *
      * @see wcf\system\application\AbstractApplication
      */
-    public function __run()
-    {
+    public function __run() {
         if (! $this->isActiveApplication()) {
             return;
         }

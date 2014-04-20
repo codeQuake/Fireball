@@ -14,8 +14,7 @@ use wcf\system\WCF;
  */
 class PageCacheBuilder extends AbstractCacheBuilder {
 
-    public function rebuild(array $parameters)
-    {
+    public function rebuild(array $parameters) {
         $data = array(
             'pages' => array(),
             'aliasToID' => array(),

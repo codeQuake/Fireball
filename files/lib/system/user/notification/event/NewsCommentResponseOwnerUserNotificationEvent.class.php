@@ -16,13 +16,11 @@ use wcf\system\user\notification\event\AbstractUserNotificationEvent;
  */
 class NewsCommentResponseOwnerUserNotificationEvent extends AbstractUserNotificationEvent {
 
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->getLanguage()->get('cms.news.commentResponseOwner.notification.title');
     }
 
-    public function getMessage()
-    {
+    public function getMessage() {
         $comment = new Comment($this->userNotificationObject->commentID);
         $news = new News($comment->objectID);
         $commentAuthor = new User($comment->userID);
@@ -34,8 +32,7 @@ class NewsCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
         ));
     }
 
-    public function getEmailMessage($notificationType = 'instant')
-    {
+    public function getEmailMessage($notificationType = 'instant') {
         $comment = new Comment($this->userNotificationObject->commentID);
         $news = new News($comment->objectID);
         $commentAuthor = new User($comment->userID);
@@ -47,8 +44,7 @@ class NewsCommentResponseOwnerUserNotificationEvent extends AbstractUserNotifica
         ));
     }
 
-    public function getLink()
-    {
+    public function getLink() {
         $comment = new Comment($this->userNotificationObject->commentID);
         $news = new News($comment->objectID);
         

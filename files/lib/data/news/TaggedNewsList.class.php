@@ -14,8 +14,7 @@ use wcf\system\WCF;
  */
 class TaggedNewsList extends ViewableNewsList {
 
-    public function __construct(Tag $tag)
-    {
+    public function __construct(Tag $tag) {
         parent::__construct();
         $this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', array(
             TagEngine::getInstance()->getObjectTypeID('de.codequake.cms.news'),
@@ -25,8 +24,7 @@ class TaggedNewsList extends ViewableNewsList {
         $this->getConditionBuilder()->add('news.newsID = tag_to_object.objectID');
     }
 
-    public function countObjects()
-    {
+    public function countObjects() {
         $sql = "SELECT	COUNT(*) AS count
             FROM	wcf" . WCF_N . "_tag_to_object tag_to_object,
                 cms" . WCF_N . "_news news
@@ -39,8 +37,7 @@ class TaggedNewsList extends ViewableNewsList {
         return $row['count'];
     }
 
-    public function readObjectIDs()
-    {
+    public function readObjectIDs() {
         $this->objectIDs = array();
         $sql = "SELECT	tag_to_object.objectID
             FROM	wcf" . WCF_N . "_tag_to_object tag_to_object,
@@ -56,8 +53,7 @@ class TaggedNewsList extends ViewableNewsList {
         }
     }
 
-    public function readObjects()
-    {
+    public function readObjects() {
         if ($this->objectIDs === null) $this->readObjectIDs();
         parent::readObjects();
     }

@@ -24,22 +24,19 @@ class NewsContentSectionType extends AbstractContentSectionType {
     public $additionalData = array();
     public $categoryList = null;
 
-    public function readParameters()
-    {
+    public function readParameters() {
         $categoryTree = new NewsCategoryNodeTree('de.codequake.cms.category.news');
         $this->categoryList = $categoryTree->getIterator();
         $this->categoryList->setMaxDepth(0);
     }
 
-    public function readData($sectionID)
-    {
+    public function readData($sectionID) {
         $section = new ContentSection($sectionID);
         $this->formData['sectionData'] = @unserialize($section->sectionData);
         $this->additionalData = @unserialize($section->additionalData);
     }
 
-    public function readFormData()
-    {
+    public function readFormData() {
         if (isset($_REQUEST['categoryIDs']) && is_array($_REQUEST['categoryIDs'])) $this->formData['sectionData'] = ArrayUtil::toIntegerArray($_REQUEST['categoryIDs']);
         if (isset($_REQUEST['type'])) $this->additionalData['type'] = intval($_REQUEST['type']);
         else
@@ -49,8 +46,7 @@ class NewsContentSectionType extends AbstractContentSectionType {
             $this->additionalData['limit'] = CMS_NEWS_LATEST_LIMIT;
     }
 
-    public function assignFormVariables()
-    {
+    public function assignFormVariables() {
         WCF::getTPL()->assign(array(
             'categoryList' => $this->categoryList,
             'categoryIDs' => isset($this->formData['sectionData']) ? $this->formData['sectionData'] : array(),
@@ -59,13 +55,11 @@ class NewsContentSectionType extends AbstractContentSectionType {
         ));
     }
 
-    public function getFormTemplate()
-    {
+    public function getFormTemplate() {
         return 'newsSectionType';
     }
 
-    public function saved($section)
-    {
+    public function saved($section) {
         $data['sectionData'] = serialize($this->formData['sectionData']);
         $data['additionalData'] = serialize($this->additionalData);
         $editor = new ContentSectionEditor($section);
@@ -76,8 +70,7 @@ class NewsContentSectionType extends AbstractContentSectionType {
         }
     }
 
-    public function getOutput($sectionID)
-    {
+    public function getOutput($sectionID) {
         $section = new ContentSection($sectionID);
         $categoryIDs = @unserialize($section->sectionData);
         foreach ($categoryIDs as $categoryID) {
@@ -108,8 +101,7 @@ class NewsContentSectionType extends AbstractContentSectionType {
         return '';
     }
 
-    public function getPreview($sectionID)
-    {
+    public function getPreview($sectionID) {
         $section = new ContentSection($sectionID);
         $data = @unserialize($section->additionalData);
         $categoryIDs = @unserialize($section->sectionData);

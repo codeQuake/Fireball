@@ -25,8 +25,7 @@ class ImageContentSectionType extends AbstractContentSectionType {
     public $folderList = array();
     public $additionalData = array();
 
-    public function readParameters()
-    {
+    public function readParameters() {
         $list = new FileList();
         $list->getConditionBuilder()->add('file.type LIKE ?', array(
             'image/%'
@@ -42,8 +41,7 @@ class ImageContentSectionType extends AbstractContentSectionType {
         $this->folderList = $list->getObjects();
     }
 
-    public function readData($sectionID)
-    {
+    public function readData($sectionID) {
         $section = new ContentSection($sectionID);
         
         // sections from old versions
@@ -57,8 +55,7 @@ class ImageContentSectionType extends AbstractContentSectionType {
         $this->additionalData = @unserialize($section->additionalData);
     }
 
-    public function readFormData()
-    {
+    public function readFormData() {
         if (isset($_POST['sectionData']) && is_array($_POST['sectionData'])) $this->formData['sectionData'] = ArrayUtil::toIntegerArray($_POST['sectionData']);
         if (isset($_POST['resizable'])) $this->additionalData['resizable'] = intval($_POST['resizable']);
         else
@@ -67,8 +64,7 @@ class ImageContentSectionType extends AbstractContentSectionType {
         if (isset($_POST['link'])) $this->additionalData['link'] = StringUtil::trim($_POST['link']);
     }
 
-    public function assignFormVariables()
-    {
+    public function assignFormVariables() {
         WCF::getTPL()->assign(array(
             'fileList' => $this->fileList,
             'folderList' => $this->folderList,
@@ -79,13 +75,11 @@ class ImageContentSectionType extends AbstractContentSectionType {
         ));
     }
 
-    public function getFormTemplate()
-    {
+    public function getFormTemplate() {
         return 'imageSectionType';
     }
 
-    public function saved($section)
-    {
+    public function saved($section) {
         $data['sectionData'] = serialize($this->formData['sectionData']);
         $data['additionalData'] = serialize($this->additionalData);
         $editor = new ContentSectionEditor($section);
@@ -96,8 +90,7 @@ class ImageContentSectionType extends AbstractContentSectionType {
         }
     }
 
-    public function getOutput($sectionID)
-    {
+    public function getOutput($sectionID) {
         $section = new ContentSection($sectionID);
         $fileList = array();
         
@@ -127,8 +120,7 @@ class ImageContentSectionType extends AbstractContentSectionType {
         return WCF::getTPL()->fetch('imageSectionTypeOutput', 'cms');
     }
 
-    public function getPreview($sectionID)
-    {
+    public function getPreview($sectionID) {
         $section = new ContentSection($sectionID);
         $imageIDs = @unserialize($section->sectionData);
         // old version fix

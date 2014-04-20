@@ -26,8 +26,7 @@ class NewsEditForm extends NewsAddForm {
     public $action = 'edit';
     public $tags = array();
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         if (isset($_REQUEST['id'])) $this->newsID = intval($_REQUEST['id']);
         if ($this->newsID == 0) throw new IllegalLinkException();
@@ -36,8 +35,7 @@ class NewsEditForm extends NewsAddForm {
         $this->attachmentObjectID = $this->newsID;
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         $this->news = new News($this->newsID);
         $this->time = $this->news->time;
@@ -65,8 +63,7 @@ class NewsEditForm extends NewsAddForm {
         }
     }
 
-    public function save()
-    {
+    public function save() {
         MessageForm::save();
         $data = array(
             'subject' => $this->subject,
@@ -104,8 +101,7 @@ class NewsEditForm extends NewsAddForm {
         exit();
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'news' => $this->news,

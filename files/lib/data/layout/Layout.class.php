@@ -16,8 +16,7 @@ class Layout extends CMSDatabaseObject implements IRouteController {
     protected static $databaseTableName = 'layout';
     protected static $databaseTableIndexName = 'layoutID';
 
-    public function __construct($id, $row = null, $object = null)
-    {
+    public function __construct($id, $row = null, $object = null) {
         if ($id !== null) {
             $sql = "SELECT *
                     FROM " . static::getDatabaseTableName() . "
@@ -34,8 +33,7 @@ class Layout extends CMSDatabaseObject implements IRouteController {
         parent::__construct(null, $row, $object);
     }
 
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 }

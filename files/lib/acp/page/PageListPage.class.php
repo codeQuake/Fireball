@@ -20,14 +20,12 @@ class PageListPage extends AbstractPage {
     public $templateName = 'pageList';
     public $pageList = null;
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         $this->pageList = new PageNodeTree(0);
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'pageList' => $this->pageList->getIterator()

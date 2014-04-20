@@ -15,8 +15,7 @@ use wcf\system\WCF;
  */
 class CategoryNewsList extends ViewableNewsList {
 
-    public function __construct(array $categoryIDs)
-    {
+    public function __construct(array $categoryIDs) {
         parent::__construct();
         foreach ($categoryIDs as $categoryID) {
             $category = new NewsCategory(CategoryHandler::getInstance()->getCategory($categoryID));
@@ -34,8 +33,7 @@ class CategoryNewsList extends ViewableNewsList {
         if (! WCF::getSession()->getPermission('mod.cms.news.canModerateNews')) $this->getConditionBuilder()->add('news.isDeleted = 0');
     }
 
-    public function readObjectIDs()
-    {
+    public function readObjectIDs() {
         $this->objectIDs = array();
         $sql = "SELECT	news_to_category.newsID AS objectID
 			FROM
@@ -51,8 +49,7 @@ class CategoryNewsList extends ViewableNewsList {
         }
     }
 
-    public function countObjects()
-    {
+    public function countObjects() {
         $sql = "SELECT	COUNT(*) AS count
 			FROM
 				cms" . WCF_N . "_news news

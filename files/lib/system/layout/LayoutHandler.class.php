@@ -15,8 +15,7 @@ use wcf\system\SingletonFactory;
 class LayoutHandler extends SingletonFactory {
     public $layoutIDs = array();
 
-    public function init()
-    {
+    public function init() {
         $list = new LayoutList();
         $list->readObjects();
         $list = $list->getObjects();
@@ -26,8 +25,7 @@ class LayoutHandler extends SingletonFactory {
         }
     }
 
-    public function getStylesheet($layoutID)
-    {
+    public function getStylesheet($layoutID) {
         $filename = RELATIVE_CMS_DIR . 'style/layout-' . $layoutID . '.css';
         if (! file_exists($filename)) {
             LayoutCompiler::getInstance()->compile(new Layout($layoutID));
@@ -35,8 +33,7 @@ class LayoutHandler extends SingletonFactory {
         return '<link rel="stylesheet" type="text/css" href="' . $filename . '" />';
     }
 
-    public function deleteStylesheet($layoutID)
-    {
+    public function deleteStylesheet($layoutID) {
         $filename = RELATIVE_CMS_DIR . 'style/layout-' . $layoutID . '.css';
         if (file_exists($filename)) {
             LayoutCompiler::getInstance()->kill(new Layout($layoutID));

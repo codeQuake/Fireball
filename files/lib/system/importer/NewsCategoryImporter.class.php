@@ -14,8 +14,7 @@ use wcf\system\importer\AbstractCategoryImporter;
 class NewsCategoryImporter extends AbstractCategoryImporter {
     protected $objectTypeName = 'de.codequake.cms.category.news';
 
-    public function __construct()
-    {
+    public function __construct() {
         $objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.codequake.cms.category.news');
         $this->objectTypeID = $objectType->objectTypeID;
     }

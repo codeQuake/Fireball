@@ -43,8 +43,7 @@ class NewsPage extends AbstractPage {
     public $likeData = array();
     public $tags = array();
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         
         if (isset($_REQUEST['id'])) $this->newsID = intval($_REQUEST['id']);
@@ -58,8 +57,7 @@ class NewsPage extends AbstractPage {
         }
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         
         $list = new NewsList();
@@ -131,8 +129,7 @@ class NewsPage extends AbstractPage {
         }
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         
         DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.news.news', $this);
@@ -156,13 +153,11 @@ class NewsPage extends AbstractPage {
         ));
     }
 
-    public function getObjectType()
-    {
+    public function getObjectType() {
         return 'de.codequake.cms.news';
     }
 
-    public function getObjectID()
-    {
+    public function getObjectID() {
         return $this->newsID;
     }
 }

@@ -20,8 +20,7 @@ use wcf\system\WCF;
 class NewsSearch extends AbstractSearchableObjectType {
     public $messageCache = array();
 
-    public function cacheObjects(array $objectIDs, array $additionalData = null)
-    {
+    public function cacheObjects(array $objectIDs, array $additionalData = null) {
         $list = new SearchResultNewsList();
         $list->getConditionBuilder()->add('news.newsID IN (?)', array(
             $objectIDs
@@ -32,29 +31,24 @@ class NewsSearch extends AbstractSearchableObjectType {
         }
     }
 
-    public function getApplication()
-    {
+    public function getApplication() {
         return 'cms';
     }
 
-    public function getObject($objectID)
-    {
+    public function getObject($objectID) {
         if (isset($this->messageCache[$objectID])) return $this->messageCache[$objectID];
         return null;
     }
 
-    public function getTableName()
-    {
+    public function getTableName() {
         return 'cms' . WCF_N . '_news';
     }
 
-    public function getIDFieldName()
-    {
+    public function getIDFieldName() {
         return $this->getTableName() . '.newsID';
     }
 
-    public function getConditions(IForm $form = null)
-    {
+    public function getConditions(IForm $form = null) {
         $conditionBuilder = new PreparedStatementConditionBuilder();
         
         // accessible category ids

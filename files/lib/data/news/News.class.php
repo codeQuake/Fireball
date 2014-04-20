@@ -35,8 +35,7 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
     protected $categories = null;
     protected $categoryIDs = array();
 
-    public function __construct($id, $row = null, $object = null)
-    {
+    public function __construct($id, $row = null, $object = null) {
         if ($id !== null) {
             $sql = "SELECT *
                     FROM " . static::getDatabaseTableName() . "
@@ -53,40 +52,34 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
         parent::__construct(null, $row, $object);
     }
 
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->subject;
     }
 
-    public function getMessage()
-    {
+    public function getMessage() {
         return $this->message;
     }
 
-    public function getTags()
-    {
+    public function getTags() {
         $tags = TagEngine::getInstance()->getObjectTags('de.codequake.cms.news', $this->newsID, array(
             ($this->languageID === null ? LanguageFactory::getInstance()->getDefaultLanguageID() : "")
         ));
         return $tags;
     }
 
-    public function getFormattedMessage()
-    {
+    public function getFormattedMessage() {
         AttachmentBBCode::setObjectID($this->newsID);
         
         MessageParser::getInstance()->setOutputType('text/html');
         return MessageParser::getInstance()->parse($this->getMessage(), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
     }
 
-    public function getSimplifiedFormattedMessage()
-    {
+    public function getSimplifiedFormattedMessage() {
         MessageParser::getInstance()->setOutputType('text/simplified-html');
         return MessageParser::getInstance()->parse($this->getMessage(), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
     }
 
-    public function getAttachments()
-    {
+    public function getAttachments() {
         if (MODULE_ATTACHMENT == 1 && $this->attachments) {
             $attachmentList = new GroupedAttachmentList('de.codequake.cms.news');
             $attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', array(
@@ -104,34 +97,28 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
         return null;
     }
 
-    public function getExcerpt($maxLength = CMS_NEWS_PREVIEW_TRUNCATE)
-    {
+    public function getExcerpt($maxLength = CMS_NEWS_PREVIEW_TRUNCATE) {
         if (CMS_NEWS_PREVIEW_SIMPLIFIED) return StringUtil::truncateHTML($this->getSimplifiedFormattedMessage(), $maxLength);
         return StringUtil::truncateHTML($this->getFormattedMessage(), $maxLength);
     }
 
-    public function getUserID()
-    {
+    public function getUserID() {
         return $this->userID;
     }
 
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
-    public function getUserProfile()
-    {
+    public function getUserProfile() {
         return new UserProfile(new User($this->userID));
     }
 
-    public function getTime()
-    {
+    public function getTime() {
         return $this->time;
     }
 
-    public function getLink()
-    {
+    public function getLink() {
         return LinkHandler::getInstance()->getLink('News', array(
             'application' => 'cms',
             'object' => $this,
@@ -139,45 +126,37 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
         ));
     }
 
-    public function getLanguage()
-    {
+    public function getLanguage() {
         if ($this->languageID) return LanguageFactory::getInstance()->getLanguage($this->languageID);
         
         return null;
     }
 
-    public function getLanguageIcon()
-    {
+    public function getLanguageIcon() {
         return '<img src="' . $this->getLanguage()->getIconPath() . '" alt="" title="' . $this->getLanguage() . '" class="jsTooltip iconFlag" />';
     }
 
-    public function __toString()
-    {
+    public function __toString() {
         return $this->getFormattedMessage();
     }
 
-    public function getBreadcrumb()
-    {
+    public function getBreadcrumb() {
         return new Breadcrumb($this->subject, $this->getLink());
     }
 
-    public function getCategoryIDs()
-    {
+    public function getCategoryIDs() {
         return $this->categoryIDs;
     }
 
-    public function setCategoryID($categoryID)
-    {
+    public function setCategoryID($categoryID) {
         $this->categoryIDs[] = $categoryID;
     }
 
-    public function setCategoryIDs(array $categoryIDs)
-    {
+    public function setCategoryIDs(array $categoryIDs) {
         $this->categoryIDs = $categoryIDs;
     }
 
-    public function getCategories()
-    {
+    public function getCategories() {
         if ($this->categories === null) {
             $this->categories = array();
             
@@ -203,8 +182,7 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
         return $this->categories;
     }
 
-    public function getIpAddress()
-    {
+    public function getIpAddress() {
         if ($this->ipAddress) {
             return UserUtil::convertIPv6To4($this->ipAddress);
         }
@@ -212,42 +190,35 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
         return '';
     }
 
-    public function isVisible()
-    {
+    public function isVisible() {
         return true;
     }
 
-    public function canRead()
-    {
+    public function canRead() {
         return WCF::getSession()->getPermission('user.cms.news.canViewCategory');
     }
 
-    public function canAdd()
-    {
+    public function canAdd() {
         return WCF::getSession()->getPermission('user.cms.news.canAddNews');
     }
 
-    public function canModerate()
-    {
+    public function canModerate() {
         return WCF::getSession()->getPermission('mod.cms.news.canModerateNews');
     }
 
-    public function canSeeDelayed()
-    {
+    public function canSeeDelayed() {
         foreach ($this->getCategories() as $category) {
             if (! $category->getPermission('canViewDelayedNews')) return false;
         }
         return true;
     }
 
-    public function getImage()
-    {
+    public function getImage() {
         if ($this->imageID != 0) return new NewsImage($this->imageID);
         return null;
     }
 
-    public static function getIpAddressByAuthor($userID, $username = '', $notIpAddress = '', $limit = 10)
-    {
+    public static function getIpAddressByAuthor($userID, $username = '', $notIpAddress = '', $limit = 10) {
         $conditions = new PreparedStatementConditionBuilder();
         $conditions->add("userID = ?", array(
             $userID
@@ -275,8 +246,7 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
         return $ipAddresses;
     }
 
-    public static function getAuthorByIpAddress($ipAddress, $notUserID = 0, $notUsername = '', $limit = 10)
-    {
+    public static function getAuthorByIpAddress($ipAddress, $notUserID = 0, $notUsername = '', $limit = 10) {
         $conditions = new PreparedStatementConditionBuilder();
         $conditions->add("ipAddress = ?", array(
             $ipAddress

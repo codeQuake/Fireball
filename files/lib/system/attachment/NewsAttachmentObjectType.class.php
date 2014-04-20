@@ -15,38 +15,31 @@ use wcf\util\ArrayUtil;
  */
 class NewsAttachmentObjectType extends AbstractAttachmentObjectType {
 
-    public function getMaxSize()
-    {
+    public function getMaxSize() {
         return WCF::getSession()->getPermission('user.cms.news.attachmentMaxSize');
     }
 
-    public function getAllowedExtensions()
-    {
+    public function getAllowedExtensions() {
         return ArrayUtil::trim(explode("\n", WCF::getSession()->getPermission('user.cms.news.allowedAttachmentExtensions')));
     }
 
-    public function getMaxCount()
-    {
+    public function getMaxCount() {
         return WCF::getSession()->getPermission('user.cms.news.maxAttachmentCount');
     }
 
-    public function canDownload($objectID)
-    {
+    public function canDownload($objectID) {
         return WCF::getSession()->getPermission('user.cms.news.canDownloadAttachments');
     }
 
-    public function canViewPreview($objectID)
-    {
+    public function canViewPreview($objectID) {
         return WCF::getSession()->getPermission('user.cms.news.canDownloadAttachments');
     }
 
-    public function canUpload($objectID, $parentObjectID = 0)
-    {
+    public function canUpload($objectID, $parentObjectID = 0) {
         return WCF::getSession()->getPermission('user.cms.news.canUploadAttachment');
     }
 
-    public function canDelete($objectID)
-    {
+    public function canDelete($objectID) {
         return WCF::getSession()->getPermission('user.cms.news.canUploadAttachment');
     }
 }

@@ -17,13 +17,11 @@ class NewsUserActivityPointObjectProcessor implements IUserActivityPointObjectPr
     public $objectType = null;
     public $limit = 5000;
 
-    public function __construct(ObjectType $objectType)
-    {
+    public function __construct(ObjectType $objectType) {
         $this->objectType = $objectType;
     }
 
-    public function countRequests()
-    {
+    public function countRequests() {
         $sql = "SELECT  COUNT(*) AS count
             FROM    cms" . WCF_N . "_news";
         $statement = WCF::getDB()->prepareStatement($sql);
@@ -32,8 +30,7 @@ class NewsUserActivityPointObjectProcessor implements IUserActivityPointObjectPr
         return ceil($row['count'] / $this->limit) + 1;
     }
 
-    public function updateActivityPointEvents($request)
-    {
+    public function updateActivityPointEvents($request) {
         if ($request == 0) {
             // first request
             $sql = "DELETE FROM	wcf" . WCF_N . "_user_activity_point_event 

@@ -1,42 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/aclOption.xsd">
-  <import>
-    <categories>
-      <category name="user.cms.page">
-        <objecttype>de.codequake.cms.page</objecttype>
-      </category>
-    </categories>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/aclOption.xsd">
+	<import>
+		<categories>
+			<category name="user.cms.page">
+				<objecttype>de.codequake.cms.page</objecttype>
+			</category>
+		</categories>
 
-    <options>
-      <!--page-->
-      <option name="canViewPage">
-        <categoryname>user.cms.page</categoryname>
-        <objecttype>de.codequake.cms.page</objecttype>
-      </option>
-        <option name="canViewInvisiblePage">
-        <categoryname>user.cms.page</categoryname>
-        <objecttype>de.codequake.cms.page</objecttype>
-      </option>
-      <option name="canEnterPage">
-        <categoryname>user.cms.page</categoryname>
-        <objecttype>de.codequake.cms.page</objecttype>
-      </option>
-      <!--news-->.
-      <option name="canViewCategory">
-        <objecttype>de.codequake.cms.category.news</objecttype>
-      </option>
-      <option name="canViewNews">
-        <objecttype>de.codequake.cms.category.news</objecttype>
-      </option>
-      <option name="canViewDelayedNews">
-      <objecttype>de.codequake.cms.category.news</objecttype>
-      </option>
-      <option name="canAddNews">
-        <objecttype>de.codequake.cms.category.news</objecttype>
-      </option>
-      <option name="canModerateNews">
-        <objecttype>de.codequake.cms.category.news</objecttype>
-      </option>
-    </options>
-  </import>
+		<options>
+			<!--page -->
+			<option name="canViewPage">
+				<categoryname>user.cms.page</categoryname>
+				<objecttype>de.codequake.cms.page</objecttype>
+			</option>
+			<option name="canViewInvisiblePage">
+				<categoryname>user.cms.page</categoryname>
+				<objecttype>de.codequake.cms.page</objecttype>
+			</option>
+			<option name="canEnterPage">
+				<categoryname>user.cms.page</categoryname>
+				<objecttype>de.codequake.cms.page</objecttype>
+			</option>
+			<!--news -->
+			.
+			<option name="canViewCategory">
+				<objecttype>de.codequake.cms.category.news</objecttype>
+			</option>
+			<option name="canViewNews">
+				<objecttype>de.codequake.cms.category.news</objecttype>
+			</option>
+			<option name="canViewDelayedNews">
+				<objecttype>de.codequake.cms.category.news</objecttype>
+			</option>
+			<option name="canAddNews">
+				<objecttype>de.codequake.cms.category.news</objecttype>
+			</option>
+			<option name="canModerateNews">
+				<objecttype>de.codequake.cms.category.news</objecttype>
+			</option>
+		</options>
+	</import>
 </data>

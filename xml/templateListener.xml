@@ -1,57 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/templatelistener.xsd">
-  <import>
-    <!--user-->
-    <templatelistener name="copyright">
-      <environment>user</environment>
-      <templatename>footer</templatename>
-      <eventname>copyright</eventname>
-      <templatecode><![CDATA[{if $__cms->isActiveApplication()}{lang}cms.page.copyright{/lang}{/if}]]></templatecode>
-    </templatelistener>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/templatelistener.xsd">
+	<import>
+		<!--user -->
+		<templatelistener name="copyright">
+			<environment>user</environment>
+			<templatename>footer</templatename>
+			<eventname>copyright</eventname>
+			<templatecode><![CDATA[{if $__cms->isActiveApplication()}{lang}cms.page.copyright{/lang}{/if}]]></templatecode>
+		</templatelistener>
 
-    <templatelistener name="logo">
-      <environment>user</environment>
-      <templatename>header</templatename>
-      <eventname>headerLogo</eventname>
-      <templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
-    </templatelistener>
+		<templatelistener name="logo">
+			<environment>user</environment>
+			<templatename>header</templatename>
+			<eventname>headerLogo</eventname>
+			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
+		</templatelistener>
 
-    <templatelistener name="javascriptInclude">
-      <environment>user</environment>
-      <templatename>headInclude</templatename>
-      <eventname>javascriptInclude</eventname>
-      <templatecode><![CDATA[{include file='__javascriptInclude' application='cms'}]]></templatecode>
-    </templatelistener>
-    
-    <templatelistener name="javascriptInit">
-      <environment>user</environment>
-      <templatename>headInclude</templatename>
-      <eventname>javascriptInit</eventname>
-      <templatecode><![CDATA[{include file='__javascriptInit' application='cms'}]]></templatecode>
-    </templatelistener>
+		<templatelistener name="javascriptInclude">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptInclude</eventname>
+			<templatecode><![CDATA[{include file='__javascriptInclude' application='cms'}]]></templatecode>
+		</templatelistener>
 
-    <templatelistener name="searchAreaSettings">
-      <environment>user</environment>
-      <templatename>searchArea</templatename>
-      <eventname>settings</eventname>
-      <templatecode><![CDATA[{include file='__searchAreaSettings' application='cms'}]]></templatecode>
-    </templatelistener>
+		<templatelistener name="javascriptInit">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptInit</eventname>
+			<templatecode><![CDATA[{include file='__javascriptInit' application='cms'}]]></templatecode>
+		</templatelistener>
 
-    <!--admin-->
-    <templatelistener name="cmsVersion">
-      <environment>admin</environment>
-      <templatename>index</templatename>
-      <eventname>softwareVersions</eventname>
-      <templatecode><![CDATA[{include file='__cmsVersion' application='cms'}]]></templatecode>
-    </templatelistener>
+		<templatelistener name="searchAreaSettings">
+			<environment>user</environment>
+			<templatename>searchArea</templatename>
+			<eventname>settings</eventname>
+			<templatecode><![CDATA[{include file='__searchAreaSettings' application='cms'}]]></templatecode>
+		</templatelistener>
 
-    <templatelistener name="headerLogo">
-      <environment>admin</environment>
-      <templatename>header</templatename>
-      <eventname>headerLogo</eventname>
-      <templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
-    </templatelistener>
-    
-    
-  </import>
+		<!--admin -->
+		<templatelistener name="cmsVersion">
+			<environment>admin</environment>
+			<templatename>index</templatename>
+			<eventname>softwareVersions</eventname>
+			<templatecode><![CDATA[{include file='__cmsVersion' application='cms'}]]></templatecode>
+		</templatelistener>
+
+		<templatelistener name="headerLogo">
+			<environment>admin</environment>
+			<templatename>header</templatename>
+			<eventname>headerLogo</eventname>
+			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
+		</templatelistener>
+
+
+	</import>
 </data>

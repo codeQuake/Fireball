@@ -11,8 +11,7 @@ namespace cms\system\request;
 class Route extends \wcf\system\request\Route {
     
     // page alias route ;)
-    protected function getParts($requestURL)
-    {
+    protected function getParts($requestURL) {
         $urlParts = explode('/', $requestURL);
         foreach ($urlParts as $index => $part) {
             if (empty($part)) {
@@ -26,8 +25,7 @@ class Route extends \wcf\system\request\Route {
         );
     }
 
-    public function buildLink(array $components)
-    {
+    public function buildLink(array $components) {
         if (isset($components['controller'])) {
             unset($components['controller']);
         }

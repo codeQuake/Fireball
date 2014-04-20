@@ -15,38 +15,31 @@ use wcf\util\ArrayUtil;
  */
 class ContentSectionAttachmentObjectType extends AbstractAttachmentObjectType {
 
-    public function getMaxSize()
-    {
+    public function getMaxSize() {
         return WCF::getSession()->getPermission('admin.cms.content.attachmentMaxSize');
     }
 
-    public function getAllowedExtensions()
-    {
+    public function getAllowedExtensions() {
         return ArrayUtil::trim(explode("\n", WCF::getSession()->getPermission('admin.cms.content.allowedAttachmentExtensions')));
     }
 
-    public function getMaxCount()
-    {
+    public function getMaxCount() {
         return WCF::getSession()->getPermission('admin.cms.content.maxAttachmentCount');
     }
 
-    public function canDownload($objectID)
-    {
+    public function canDownload($objectID) {
         return WCF::getSession()->getPermission('user.cms.content.canDownloadAttachments');
     }
 
-    public function canViewPreview($objectID)
-    {
+    public function canViewPreview($objectID) {
         return WCF::getSession()->getPermission('user.cms.content.canDownloadAttachments');
     }
 
-    public function canUpload($objectID, $parentObjectID = 0)
-    {
+    public function canUpload($objectID, $parentObjectID = 0) {
         return WCF::getSession()->getPermission('admin.cms.content.canUploadAttachment');
     }
 
-    public function canDelete($objectID)
-    {
+    public function canDelete($objectID) {
         return WCF::getSession()->getPermission('admin.cms.content.canUploadAttachment');
     }
 }

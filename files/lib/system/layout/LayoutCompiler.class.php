@@ -17,8 +17,7 @@ use wcf\util\FileUtil;
 class LayoutCompiler extends SingletonFactory {
     protected $compiler = null;
 
-    public function init()
-    {
+    public function init() {
         require_once (WCF_DIR . 'lib/system/style/lessc.inc.php');
         $this->compiler = new \lessc();
         $this->compiler->setImportDir(array(
@@ -26,8 +25,7 @@ class LayoutCompiler extends SingletonFactory {
         ));
     }
 
-    public function compile(Layout $layout)
-    {
+    public function compile(Layout $layout) {
         // create sheet list
         $list = new LayoutStylesheetList($layout->layoutID);
         $list->readObjects();
@@ -49,8 +47,7 @@ class LayoutCompiler extends SingletonFactory {
         FileUtil::makeWritable(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css');
     }
 
-    public function kill(Layout $layout)
-    {
+    public function kill(Layout $layout) {
         unlink(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css');
     }
 }

@@ -29,8 +29,7 @@ class NewsCategoryListPage extends SortablePage {
     public $limit = 10;
     public $categoryList = null;
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         $categoryTree = new NewsCategoryNodeTree('de.codequake.cms.category.news');
         $this->categoryList = $categoryTree->getIterator();
@@ -48,8 +47,7 @@ class NewsCategoryListPage extends SortablePage {
         }
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         
         DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.news.newsList', $this);

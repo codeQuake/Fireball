@@ -17,8 +17,7 @@ use wcf\system\WCF;
 class LatestNewsDashboardBox extends AbstractSidebarDashboardBox {
     public $latestNews = null;
 
-    public function init(DashboardBox $box, IPage $page)
-    {
+    public function init(DashboardBox $box, IPage $page) {
         parent::init($box, $page);
         
         $this->latestNews = new LatestNewsList();
@@ -26,8 +25,7 @@ class LatestNewsDashboardBox extends AbstractSidebarDashboardBox {
         $this->latestNews->readObjects();
     }
 
-    protected function render()
-    {
+    protected function render() {
         if (! count($this->latestNews)) return '';
         
         WCF::getTPL()->assign(array(

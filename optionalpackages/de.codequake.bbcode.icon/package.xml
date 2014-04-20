@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="de.codequake.bbcode.icon" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
+<package name="de.codequake.bbcode.icon" xmlns="http://www.woltlab.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
 	<packageinformation>
 		<packagename>Font Awesome Icon BBCode</packagename>
 		<packagedescription>BBCode for using font-awesome icons</packagedescription>
@@ -7,15 +9,15 @@
 		<date>2014-02-02</date>
 	</packageinformation>
 
-  <authorinformation>
-    <author><![CDATA[Jens Krumsieck]]></author>
-    <authorurl><![CDATA[http://codequake.de]]></authorurl>
-  </authorinformation>
-  
+	<authorinformation>
+		<author><![CDATA[Jens Krumsieck]]></author>
+		<authorurl><![CDATA[http://codequake.de]]></authorurl>
+	</authorinformation>
+
 	<requiredpackages>
 		<requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
 	</requiredpackages>
-  
+
 	<instructions type="install">
 		<instruction type="bbcode">bbcode.xml</instruction>
 	</instructions>

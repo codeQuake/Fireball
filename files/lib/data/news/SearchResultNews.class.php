@@ -14,19 +14,16 @@ use wcf\system\search\SearchResultTextParser;
  */
 class SearchResultNews extends ViewableNews implements ISearchResultObject {
 
-    public function getFormattedMessage()
-    {
+    public function getFormattedMessage() {
         return SearchResultTextParser::getInstance()->parse($this->getDecoratedObject()
             ->getSimplifiedFormattedMessage());
     }
 
-    public function getSubject()
-    {
+    public function getSubject() {
         return $this->subject;
     }
 
-    public function getLink($query = '')
-    {
+    public function getLink($query = '') {
         if ($query) {
             return LinkHandler::getInstance()->getLink('Link', array(
                 'application' => 'cms',
@@ -37,28 +34,23 @@ class SearchResultNews extends ViewableNews implements ISearchResultObject {
         return $this->getDecoratedObject()->getLink();
     }
 
-    public function getTime()
-    {
+    public function getTime() {
         return $this->time;
     }
 
-    public function getObjectTypeName()
-    {
+    public function getObjectTypeName() {
         return 'de.codequake.cms.news';
     }
 
-    public function getContainerTitle()
-    {
+    public function getContainerTitle() {
         return '';
     }
 
-    public function getContainerLink()
-    {
+    public function getContainerLink() {
         return '';
     }
 
-    public function getUserProfile()
-    {
+    public function getUserProfile() {
         return $this->getDecoratedObject()->getUserProfile();
     }
 }

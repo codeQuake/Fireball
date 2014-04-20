@@ -14,8 +14,7 @@ use wcf\system\WCF;
  */
 class CMSSitemapProvider implements ISitemapProvider {
 
-    public function getTemplate()
-    {
+    public function getTemplate() {
         $list = new PageNodeTree(0);
         
         WCF::getTPL()->assign(array(

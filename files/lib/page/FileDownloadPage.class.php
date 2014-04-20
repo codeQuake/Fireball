@@ -28,9 +28,8 @@ class FileDownloadPage extends AbstractPage {
         'application/pdf',
         'image/pjpeg'
     );
-    
-    public function readParameters()
-    {
+
+    public function readParameters() {
         parent::readParameters();
         $fileID = 0;
         if (isset($_REQUEST['id'])) $fileID = intval($_REQUEST['id']);
@@ -40,8 +39,7 @@ class FileDownloadPage extends AbstractPage {
         if (! $this->file->getPermission('canDownloadFile')) throw new PermissionDeniedException();
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         VisitCountHandler::getInstance()->count();
         $folderPath = '';
@@ -68,8 +66,7 @@ class FileDownloadPage extends AbstractPage {
         ));
     }
 
-    public function show()
-    {
+    public function show() {
         parent::show();
         $this->fileReader->send();
         exit();

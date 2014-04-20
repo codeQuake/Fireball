@@ -17,8 +17,7 @@ class Folder extends CMSDatabaseObject implements IRouteController {
     protected static $databaseTableName = 'folder';
     protected static $databaseTableIndexName = 'folderID';
 
-    public function __construct($id, $row = null, $object = null)
-    {
+    public function __construct($id, $row = null, $object = null) {
         if ($id !== null) {
             $sql = "SELECT *
                     FROM " . static::getDatabaseTableName() . "
@@ -35,13 +34,11 @@ class Folder extends CMSDatabaseObject implements IRouteController {
         parent::__construct(null, $row, $object);
     }
 
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->folderName;
     }
 
-    public function getFiles($type = '')
-    {
+    public function getFiles($type = '') {
         $list = new FileList();
         if ($type == 'image') $list->getConditionBuilder()->add('file.type LIKE ?', array(
             'image/%'

@@ -19,8 +19,7 @@ class ContentSection extends CMSDatabaseObject {
     protected static $databaseTableIndexName = 'sectionID';
     public $objectType = null;
 
-    public function __construct($id, $row = null, $object = null)
-    {
+    public function __construct($id, $row = null, $object = null) {
         if ($id !== null) {
             $sql = "SELECT *
                     FROM " . static::getDatabaseTableName() . "
@@ -37,30 +36,25 @@ class ContentSection extends CMSDatabaseObject {
         parent::__construct(null, $row, $object);
     }
 
-    public function getOutput()
-    {
+    public function getOutput() {
         $this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->sectionTypeID);
         return $this->objectType->getProcessor()->getOutput($this->sectionID);
     }
 
-    public function getPreview()
-    {
+    public function getPreview() {
         $this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->sectionTypeID);
         return $this->objectType->getProcessor()->getPreview($this->sectionID);
     }
 
-    public function getEditor()
-    {
+    public function getEditor() {
         return new ContentSectionEditor($this);
     }
 
-    public function getContent()
-    {
+    public function getContent() {
         return new Content($this->contentID);
     }
 
-    public function getObjectType()
-    {
+    public function getObjectType() {
         $type = new ObjectType($this->sectionTypeID);
         return $type->objectType;
     }

@@ -26,8 +26,7 @@ class ModuleEditForm extends ModuleAddForm {
     public $moduleID = 0;
     public $module = null;
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         if (isset($_REQUEST['id'])) $this->moduleID = intval($_REQUEST['id']);
         $this->module = new Module($this->moduleID);
@@ -36,15 +35,13 @@ class ModuleEditForm extends ModuleAddForm {
         $this->tplCode = $this->module->getTPLCode();
     }
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_REQUEST['id'])) $this->moduleID = intval($_REQUEST['id']);
         $this->module = new Module($this->moduleID);
     }
 
-    public function save()
-    {
+    public function save() {
         AbstractForm::save();
         
         $data = array(
@@ -66,8 +63,7 @@ class ModuleEditForm extends ModuleAddForm {
         WCF::getTPL()->assign('success', true);
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'title' => $this->title,

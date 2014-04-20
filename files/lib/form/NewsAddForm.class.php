@@ -43,22 +43,19 @@ class NewsAddForm extends MessageForm {
     public $time = TIME_NOW;
     public $tags = array();
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tags = ArrayUtil::trim($_POST['tags']);
         if (isset($_POST['time']) && $_POST['time'] != 0) $this->time = strtotime($_POST['time']);
         if (isset($_POST['imageID'])) $this->image = new NewsImage(intval($_POST['imageID']));
     }
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         if (isset($_REQUEST['categoryIDs']) && is_array($_REQUEST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray($_REQUEST['categoryIDs']);
     }
 
-    public function readData()
-    {
+    public function readData() {
         parent::readData();
         // news images
         $list = new NewsImageList();
@@ -95,8 +92,7 @@ class NewsAddForm extends MessageForm {
         }
     }
 
-    public function validate()
-    {
+    public function validate() {
         parent::validate();
         // categories
         if (empty($this->categoryIDs)) {
@@ -112,8 +108,7 @@ class NewsAddForm extends MessageForm {
         }
     }
 
-    public function save()
-    {
+    public function save() {
         parent::save();
         if ($this->languageID === null) {
             $this->languageID = LanguageFactory::getInstance()->getDefaultLanguageID();
@@ -151,8 +146,7 @@ class NewsAddForm extends MessageForm {
         exit();
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'categoryList' => $this->categoryList,

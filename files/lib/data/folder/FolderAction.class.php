@@ -20,8 +20,7 @@ class FolderAction extends AbstractDatabaseObjectAction {
         'delete'
     );
 
-    public function delete()
-    {
+    public function delete() {
         // del folder
         foreach ($this->objectIDs as $objectID) {
             $folder = new Folder($objectID);

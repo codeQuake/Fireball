@@ -27,15 +27,13 @@ class NewsImageAddForm extends AbstractForm {
     public $title = '';
     public $filename = '';
 
-    public function readFormParameters()
-    {
+    public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_FILES['image'])) $this->image = $_FILES['image'];
         if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
     }
 
-    public function validate()
-    {
+    public function validate() {
         parent::validate();
         // check if file is given
         if (empty($this->image)) {
@@ -49,8 +47,7 @@ class NewsImageAddForm extends AbstractForm {
         if (! in_array($fileType, $allowedTypes)) throw new UserInputException('news', 'invalid');
     }
 
-    public function save()
-    {
+    public function save() {
         parent::save();
         $tmp = explode('.', $this->image['name']);
         $this->filename = 'FB-File-' . md5($this->image['tmp_name'] . time()) . '.' . array_pop($tmp);
@@ -75,8 +72,7 @@ class NewsImageAddForm extends AbstractForm {
         $this->filename = '';
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'title' => $this->title,

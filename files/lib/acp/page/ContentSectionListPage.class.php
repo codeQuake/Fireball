@@ -30,8 +30,7 @@ class ContentSectionListPage extends SortablePage {
     public $contentID = 0;
     public $content = null;
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         $content = null;
         
@@ -41,13 +40,11 @@ class ContentSectionListPage extends SortablePage {
         if ($this->content === null) throw new IllegalLinkException();
     }
 
-    public function initObjectList()
-    {
+    public function initObjectList() {
         $this->objectList = new ContentContentSectionList($this->contentID);
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'contentID' => $this->contentID,

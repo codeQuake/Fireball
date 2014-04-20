@@ -30,23 +30,20 @@ class ContentListPage extends SortablePage {
     public $objectList = array();
     public $pageID = 0;
 
-    public function readParameters()
-    {
+    public function readParameters() {
         parent::readParameters();
         
         if (isset($_GET['id'])) $this->pageID = intval($_GET['id']);
     }
 
-    public function initObjectList()
-    {
+    public function initObjectList() {
         parent::initObjectList();
         if ($this->pageID != 0) {
             $this->objectList = new PageContentList($this->pageID);
         }
     }
 
-    public function assignVariables()
-    {
+    public function assignVariables() {
         parent::assignVariables();
         WCF::getTPL()->assign(array(
             'pageID' => $this->pageID,

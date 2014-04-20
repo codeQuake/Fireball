@@ -15,8 +15,7 @@ use wcf\system\WCF;
 class NewsEditor extends DatabaseObjectEditor {
     protected static $baseClass = 'cms\data\news\News';
 
-    public function updateCategoryIDs(array $categoryIDs = array())
-    {
+    public function updateCategoryIDs(array $categoryIDs = array()) {
         // remove old assigns
         $sql = "DELETE FROM	cms" . WCF_N . "_news_to_category
 			WHERE		newsID = ?";

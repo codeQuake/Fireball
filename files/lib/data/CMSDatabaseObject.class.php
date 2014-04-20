@@ -18,8 +18,7 @@ abstract class CMSDatabaseObject extends DatabaseObject {
      * @see wcf\data\IStorableObject::getDatabaseTableName()
      *
      */
-    public static function getDatabaseTableName()
-    {
+    public static function getDatabaseTableName() {
         return 'cms' . WCF_N . '_' . static::$databaseTableName;
     }
 }
