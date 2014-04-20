@@ -81,7 +81,8 @@ class FeedAddForm extends AbstractForm {
         try {
             $request = new HTTPRequest($this->feedUrl);
             $request->execute();
-            $feedData = $request->getReply()['body'];
+            $feedData = $request->getReply();
+            $feedData = $feedData['body'];
         }
         catch (\wcf\system\exception\SystemException $e) {
             // invalid URL
