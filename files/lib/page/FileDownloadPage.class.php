@@ -29,7 +29,6 @@ class FileDownloadPage extends AbstractPage {
         'image/pjpeg'
     );
     
-
     public function readParameters()
     {
         parent::readParameters();
