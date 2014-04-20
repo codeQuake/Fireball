@@ -34,6 +34,19 @@ class PageEditForm extends PageAddForm {
         // reading data
         if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
         $this->page = new Page($this->pageID);
+        
+        // overwrite pagelist
+        $this->pageList = new PageList();
+        $childIDs = array();
+        foreach ($this->page->getChildren() as $child) {
+            $childIDs[] = $child->pageID;
+        }
+        if (isset($this->pageID) && $this->pageID != 0) $this->pageList->getConditionBuilder()->add('pageID NOT IN (?)', array(
+            array_merge(array($this->pageID), $childIDs)
+        ));
+        $this->pageList->readObjects();
+        $this->pageList = $this->pageList->getObjects();
+        
         I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->page->title, 'cms.page.title\d+');
         $this->title = $this->page->title;
         I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->page->description, 'cms.page.description\d+');

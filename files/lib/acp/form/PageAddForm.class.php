@@ -68,6 +68,7 @@ class PageAddForm extends AbstractForm {
         
         if (! isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
         if (isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
+        
         $this->pageList = new PageList();
         $this->pageList->readObjects();
         $this->pageList = $this->pageList->getObjects();
