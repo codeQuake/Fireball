@@ -34,6 +34,7 @@
 		</ul>
 	</nav>
 </div>
+
 {hascontent}
 	<section id="pageList" class="container containerPadding marginTop sortableListContainer">
 		<ol class="pageList sortableList" data-object-id="0">
@@ -67,9 +68,12 @@
 			{/content}
 		</ol>
 	</section>
+
 	<div class="formSubmit">
 			<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 	</div>
+{hascontentelse}
+	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/hascontent}
 
 {include file='footer'}
