@@ -394,10 +394,12 @@
 		<item name="wcf.acl.option.de.codequake.cms.category.news.canAddNews"><![CDATA[Can add news]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[Nachrichten Moderationsrecht]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[Can see unpublished news]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.category.news.canViewDelayedNews"><![CDATA[Can view delayed news]]></item>
 	</category>
 
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.category.cms"><![CDATA[CMS]]></item>
+		<item name="wcf.acp.option.category.cms.general"><![CDATA[General]]></item>
 		<item name="wcf.acp.option.category.cms.news"><![CDATA[News]]></item>
 		<item name="wcf.acp.option.cms_news_per_page"><![CDATA[News per page]]></item>
 		<item name="wcf.acp.option.cms_news_languageicon"><![CDATA[Show language icon]]></item>
