@@ -21,6 +21,7 @@
     </nav>
 </div>
 
+{if $sheetList|count}
 <form method="post" action="{if $action == 'add'}{link application='cms' controller='LayoutAdd'}{/link}{else}{link application='cms' controller='LayoutEdit' id=$layoutID}{/link}{/if}">
     <div class="marginTop container shadow containerPadding">
         <fieldset>
@@ -62,5 +63,7 @@
 				<input type="hidden" name="action" value="{@$action}" />
 			</div>
 </form>
-
+{else}
+<p class="info">{lang}cms.acp.layout.add.noSheet{/lang}</p>
+{/if}
 {include file='footer'}

@@ -10,7 +10,7 @@
 				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
 			</a>
 			<span class="pointer">
-				<span>»</span>
+				<span>ï¿½</span>
 			</span>
 		</li>
 		
@@ -20,7 +20,7 @@
 				<span itemprop="title">{$page->getTitle()|language}</span>
 			</a>
 			<span class="pointer">
-				<span>»</span>
+				<span>ï¿½</span>
 			</span>
 		</li>
 	{/if}
@@ -48,7 +48,7 @@
         </ul>
     </nav>
 </div>
-
+{if $pageList|count}
 <form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd'}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}{/link}{/if}">
     <div class="container containerPadding marginTop shadow">
         <fieldset>
@@ -147,5 +147,7 @@
         {if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}
     </div>
 </form>
-
+{else}
+<p class="info">{lang}cms.acp.content.add.noPage{/lang}</p>
+{/if}
 {include file='footer'}

@@ -7,7 +7,7 @@
 				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
 			</a>
 			<span class="pointer">
-				<span>»</span>
+				<span>ï¿½</span>
 			</span>
 		</li>
 </nav>
@@ -41,7 +41,7 @@
 				{assign var=oldDepth value=0}
 				{foreach from=$pageList item=page}
 					{section name=i loop=$oldDepth-$pageList->getDepth()}</ol></li>{/section}
-					<li class="page sortableNode" data-object-id="{$page->pageID}">
+					<li class="page jsPageRow sortableNode" data-object-id="{$page->pageID}">
 						<span class="sortableNodeLabel">
 							<span class="title">
 								<span class="pointer collapsibleButton icon icon16 icon-file-text-alt"></span>

@@ -68,13 +68,13 @@
 		<item name="cms.acp.page.optional.sidebarOrientation"><![CDATA[Sidebarorientation]]></item>
 		<item name="cms.acp.page.sidebarOrientation.right"><![CDATA[Right]]></item>
 		<item name="cms.acp.page.sidebarOrientation.left"><![CDATA[Left]]></item>
-		"
 		<item name="cms.acp.page.content.add"><![CDATA[Add contents to'{$page->title|language}']]></item>
 		<item name="cms.acp.page.optional.isCommentable"><![CDATA[Allow comments]]></item>
 		<item name="cms.acp.page.optional.layoutID"><![CDATA[Choose layout]]></item>
 		<item name="cms.acp.page.optional.layoutID.noItems"><![CDATA[No Layout has been created]]></item>
 		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[A Menuitem with this values already exists. For technical reasons you cannnot create a new one.]]></item>
 		<item name="cms.acp.content.add"><![CDATA[Add content]]></item>
+		<item name="cms.acp.content.add.noPage"><![CDATA[No pages found! To create contents you must add at least one page.]]></item>
 		<item name="cms.acp.content.general"><![CDATA[General]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Page]]></item>
 		<item name="cms.acp.content.general.title"><![CDATA[Title]]></item>
@@ -91,24 +91,17 @@
 		<item name="cms.acp.content.page.list"><![CDATA[Choose a page...]]></item>
 		<item name="cms.acp.content.section.general"><![CDATA[General]]></item>
 		<item name="cms.acp.content.section.general.objectType"><![CDATA[Contenttype]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.headline"><![CDATA[Headline]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.headline"><![CDATA[Headline]]></item>
 		<item name="cms.acp.content.section.data"><![CDATA[Content]]></item>
 		<item name="cms.acp.content.section.data.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.section.data.headline"><![CDATA[Headline]]></item>
 		<item name="cms.acp.content.section.data.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[File]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Images]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Newslist]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Module]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[File]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Images]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Newslist]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Module]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.section.data.boxID"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.section.data.boxID.description"><![CDATA[Choose a Dashboardbox. You can only choose boxes which match your contents position.]]></item>
 		<item name="cms.acp.content.section.data.moduleID"><![CDATA[Choose module]]></item>
@@ -179,6 +172,7 @@
 		<item name="cms.acp.layout.edit"><![CDATA[Edit layout]]></item>
 		<item name="cms.acp.layout.title"><![CDATA[Title]]></item>
 		<item name="cms.acp.layout.add"><![CDATA[Add layout]]></item>
+		<item name="cms.acp.layout.add.noSheet"><![CDATA[To create a layout you have to create at least one stylesheet!]]></item>
 		<item name="cms.acp.layout.general"><![CDATA[General]]></item>
 		<item name="cms.acp.layout.options"><![CDATA[Options]]></item>
 		<item name="cms.acp.layout.stylesheets"><![CDATA[Choose stylesheets]]></item>

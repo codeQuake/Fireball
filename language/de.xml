@@ -76,6 +76,7 @@
 		<item name="cms.acp.page.optional.layoutID.noItems"><![CDATA[Keine Layouts vorhanden]]></item>
 		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
 		<item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
+		<item name="cms.acp.content.add.noPage"><![CDATA[Keine Seiten gefunden! Um einen Inhalt zu erstellen müssen Sie zuerst mindestens eine Seite erstellen.]]></item>
 		<item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
 		<item name="cms.acp.content.general.title"><![CDATA[Titel]]></item>
@@ -92,24 +93,17 @@
 		<item name="cms.acp.content.page.list"><![CDATA[Seite wählen...]]></item>
 		<item name="cms.acp.content.section.general"><![CDATA[Allgemeine Einstellungen]]></item>
 		<item name="cms.acp.content.section.general.objectType"><![CDATA[Inhaltstyp]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.headline"><![CDATA[Überschrift]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.headline"><![CDATA[Überschrift]]></item>
 		<item name="cms.acp.content.section.data"><![CDATA[Inhalt]]></item>
 		<item name="cms.acp.content.section.data.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.section.data.headline"><![CDATA[Überschrift]]></item>
 		<item name="cms.acp.content.section.data.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Bilder]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Modul]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Bilder]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Modul]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.section.data.boxID"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.section.data.boxID.description"><![CDATA[Wählen Sie eine Dashboardbox. Die Auswahl passt sich der Ausrichtung des Inhaltsbereichs an.]]></item>
 		<item name="cms.acp.content.section.data.moduleID"><![CDATA[Modul auswählen]]></item>
@@ -177,6 +171,7 @@
 		<item name="cms.acp.layout.edit"><![CDATA[Layout bearbeiten]]></item>
 		<item name="cms.acp.layout.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.layout.add"><![CDATA[Layout hinzufügen]]></item>
+		<item name="cms.acp.layout.add.noSheet"><![CDATA[Um ein Layout zu erstellen müssen Sie zuerst mindestens ein Stylesheet erstellen!]]></item>
 		<item name="cms.acp.layout.general"><![CDATA[Allgemeine Einstellungen]]></item>
 		<item name="cms.acp.layout.options"><![CDATA[Optionen]]></item>
 		<item name="cms.acp.layout.stylesheets"><![CDATA[Stylesheets auswählen]]></item>
