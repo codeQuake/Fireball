@@ -225,7 +225,7 @@ class TextContentSectionType extends AbstractContentSectionType {
     }
 
     public function getExcerpt($section, $maxLength = 255) {
-        return WCF::getLanguage()->get(StringUtil::truncateHTML($section->sectionData), $maxLength);
+        return StringUtil::truncateHTML(WCF::getLanguage()->get($section->sectionData), $maxLength);
     }
 
     public function getAttachments($section) {
