@@ -176,7 +176,7 @@ class VisitCountHandler extends SingletonFactory {
 	public function getBrowser($u_agent = '') {
 		if ($u_agent == '') return array(
 			'userAgent' => '',
-			'name' => 'unknown',
+			'name' => 'Unknown',
 			'version' => '?',
 			'platform' => '',
 			'pattern' => ''
@@ -279,7 +279,7 @@ class VisitCountHandler extends SingletonFactory {
 		return null;
 	}
 	
-	protected function getMonths(){
+	protected function getMonths() {
 		$months = array(
 			WCF::getLanguage()->get('wcf.date.month.january'),
 			WCF::getLanguage()->get('wcf.date.month.february'),
