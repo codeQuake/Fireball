@@ -67,7 +67,7 @@
 		<item name="cms.acp.page.optional.menuItem"><![CDATA[Menüitem erstellen]]></item>
 		<item name="cms.acp.page.optional.showSidebar"><![CDATA[Globale Seitenleiste anzeigen]]></item>
 		<item name="cms.acp.page.optional.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
-		<item name="cms.acp.page.sidebarOrientation.right"><![CDATA[Recht Seitenleiste]]></item>
+		<item name="cms.acp.page.sidebarOrientation.right"><![CDATA[Rechte Seitenleiste]]></item>
 		<item name="cms.acp.page.sidebarOrientation.left"><![CDATA[Linke Seitenleiste]]></item>
 		<item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
 		<item name="cms.acp.page.optional.isCommentable"><![CDATA[Kommentare erlauben]]></item>
