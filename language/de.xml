@@ -43,7 +43,6 @@
 		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
 		<item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
-		<item name="cms.acp.page.general.parentID.no"><![CDATA[Keine Auswahl]]></item>
 		<item name="cms.acp.page.general.title"><![CDATA[Seitentitel]]></item>
 		<item name="cms.acp.page.general.alias"><![CDATA[URL-Alias]]></item>
 		<item name="cms.acp.page.alias.error.given"><![CDATA[Ein gleichnamiger Alias existiert bereits.]]></item>
@@ -73,7 +72,6 @@
 		<item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
 		<item name="cms.acp.page.optional.isCommentable"><![CDATA[Kommentare erlauben]]></item>
 		<item name="cms.acp.page.optional.layoutID"><![CDATA[Layout auswählen]]></item>
-		<item name="cms.acp.page.optional.layoutID.noItems"><![CDATA[Keine Layouts vorhanden]]></item>
 		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
 		<item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
 		<item name="cms.acp.content.add.noPage"><![CDATA[Keine Seiten gefunden! Um einen Inhalt zu erstellen müssen Sie zuerst mindestens eine Seite erstellen.]]></item>
