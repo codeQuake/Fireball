@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd"
-	languagecode="de">
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms.restore.list"><![CDATA[Wiederherstellungspunkte]]></item>
 	</category>
-	<category name="cms.acp">
+
+	<category name="cms.acp.restore">
 		<item name="cms.acp.restore.list"><![CDATA[Wiederherstellungspunkte]]></item>
 		<item name="cms.acp.restore.time"><![CDATA[Wiederherstellungszeitpunkt]]></item>
 		<item name="cms.acp.restore.restore"><![CDATA[Wiederherstellen]]></item>
@@ -17,18 +16,19 @@
 		<item name="cms.acp.restore.delete.sure"><![CDATA[Sind sie sicher, dass sie diesen Wiederherstellungspunkt löschen möchten?]]></item>
 		<item name="cms.acp.restore.create"><![CDATA[Wiederherstellungspunkt erstellen und Backup herunterladen]]></item>
 	</category>
+
 	<category name="wcf.acp.dataImport">
-		<item
-			name="wcf.acp.dataImport.exporter.com.woltlab.wcf.exporter.wordpress3xtoNews"><![CDATA[WordPress 3.7+ (als Nachrichten)]]></item>
-	</category>
-	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.cms_automatic_export"><![CDATA[Automatische Sicherungen]]></item>
-		<item name="wcf.acp.option.cms_automatic_backup_delete"><![CDATA[Automatische Löschung]]></item>
-		<item name="wcf.acp.option.cms_automatic_backup_delete.description"><![CDATA[Automatische Löschung der Sicherungen, die Älter als die eingegebene Zeit in Tagen ist]]></item>
+		<item name="wcf.acp.dataImport.exporter.com.woltlab.wcf.exporter.wordpress3xtoNews"><![CDATA[WordPress 3.7+ (als Nachrichten)]]></item>
 	</category>
 
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.admin.cms.restore"><![CDATA[Wiederherstellungspunkte]]></item>
 		<item name="wcf.acp.group.option.admin.cms.restore.canRestore"><![CDATA[Kann Systemwiederherstellung nutzen]]></item>
+	</category>
+
+	<category name="wcf.acp.option">
+		<item name="wcf.acp.option.cms_automatic_export"><![CDATA[Automatische Sicherungen]]></item>
+		<item name="wcf.acp.option.cms_automatic_backup_delete"><![CDATA[Automatische Löschung]]></item>
+		<item name="wcf.acp.option.cms_automatic_backup_delete.description"><![CDATA[Automatische Löschung der Sicherungen, die Älter als die eingegebene Zeit in Tagen ist]]></item>
 	</category>
 </language>
