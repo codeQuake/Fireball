@@ -6,6 +6,7 @@ use cms\data\feed\FeedList;
 use cms\data\news\NewsAction;
 use wcf\data\cronjob\Cronjob;
 use wcf\system\cronjob\AbstractCronjob;
+use wcf\system\exception\SystemException;
 use wcf\util\HTTPRequest;
 use wcf\util\StringUtil;
 
@@ -22,7 +23,7 @@ class RSSFeedNewsCronjob extends AbstractCronjob {
 				$request->execute();
 				$feedData = $request->getReply()['body'];
 			}
-			catch (\wcf\system\exception\SystemException $e) {
+			catch (SystemException $e) {
 				// invalid URL
 				return (array(
 					'errorMessage' => $e->getMessage()
@@ -147,8 +148,8 @@ class RSSFeedNewsCronjob extends AbstractCronjob {
 	public function getFeedType($xml) {
 		// get feed type
 		if (isset($xml->channel->item)) return 'rss';
-		elseif (isset($xml->item)) return 'rdf';
-		elseif (isset($xml->entry)) return 'atom';
+		else if (isset($xml->item)) return 'rdf';
+		else if (isset($xml->entry)) return 'atom';
 		else
 			return null;
 	}

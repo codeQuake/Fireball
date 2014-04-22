@@ -79,10 +79,6 @@ class NewsListPage extends SortablePage {
 		$this->categoryList->setMaxDepth(0);
 	}
 
-	protected function readObjects() {
-		parent::readObjects();
-	}
-
 	public function assignVariables() {
 		parent::assignVariables();
 		

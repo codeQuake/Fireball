@@ -138,7 +138,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 				}
 			}
 			// delete if unchecked
-			elseif (isset($menuItem['id']) && $menuItem['id'] != 0) {
+			else if (isset($menuItem['id']) && $menuItem['id'] != 0) {
 				$action = new PageMenuItemAction(array(
 					$menuItem['id']
 				), 'delete', array());

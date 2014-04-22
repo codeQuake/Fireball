@@ -243,7 +243,7 @@ class CMSImportHandler extends SingletonFactory {
 		$contentList = $ftar->getContentList();
 		foreach ($contentList as $key => $val) {
 			if ($val['type'] == 'file' && $val['filename'] != '/files.tar' && $val['filename'] != 'files.tar') $ftar->extract($key, CMS_DIR . 'files/' . $val['filename']);
-			elseif (! file_exists(CMS_DIR . 'files/' . $val['filename'])) mkdir(CMS_DIR . 'files/' . $val['filename']);
+			else if (! file_exists(CMS_DIR . 'files/' . $val['filename'])) mkdir(CMS_DIR . 'files/' . $val['filename']);
 		}
 		$ftar->close();
 		@unlink(CMS_DIR . 'files/files.tar');

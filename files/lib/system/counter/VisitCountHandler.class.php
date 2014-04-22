@@ -156,7 +156,6 @@ class VisitCountHandler extends SingletonFactory {
 		$day = $currentDay;
 		
 		for ($i = 1; $i <= 7; $i ++) {
-			
 			$months = array(
 				WCF::getLanguage()->get('wcf.date.month.january'),
 				WCF::getLanguage()->get('wcf.date.month.february'),
@@ -215,10 +214,10 @@ class VisitCountHandler extends SingletonFactory {
 		if (preg_match('/linux/i', $u_agent)) {
 			$platform = 'linux';
 		}
-		elseif (preg_match('/macintosh|mac os x/i', $u_agent)) {
+		else if (preg_match('/macintosh|mac os x/i', $u_agent)) {
 			$platform = 'mac';
 		}
-		elseif (preg_match('/windows|win32/i', $u_agent)) {
+		else if (preg_match('/windows|win32/i', $u_agent)) {
 			$platform = 'windows';
 		}
 		
@@ -227,23 +226,23 @@ class VisitCountHandler extends SingletonFactory {
 			$bname = 'Internet Explorer';
 			$ub = "MSIE";
 		}
-		elseif (preg_match('/Firefox/i', $u_agent)) {
+		else if (preg_match('/Firefox/i', $u_agent)) {
 			$bname = 'Mozilla Firefox';
 			$ub = "Firefox";
 		}
-		elseif (preg_match('/Chrome/i', $u_agent)) {
+		else if (preg_match('/Chrome/i', $u_agent)) {
 			$bname = 'Google Chrome';
 			$ub = "Chrome";
 		}
-		elseif (preg_match('/Safari/i', $u_agent)) {
+		else if (preg_match('/Safari/i', $u_agent)) {
 			$bname = 'Apple Safari';
 			$ub = "Safari";
 		}
-		elseif (preg_match('/Opera/i', $u_agent)) {
+		else if (preg_match('/Opera/i', $u_agent)) {
 			$bname = 'Opera';
 			$ub = "Opera";
 		}
-		elseif (preg_match('/Netscape/i', $u_agent)) {
+		else if (preg_match('/Netscape/i', $u_agent)) {
 			$bname = 'Netscape';
 			$ub = "Netscape";
 		}
