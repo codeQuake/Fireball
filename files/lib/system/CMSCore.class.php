@@ -16,27 +16,27 @@ use wcf\system\WCF;
  * @package de.codequake.cms
  */
 class CMSCore extends AbstractApplication {
-    /**
-     *
-     * @see AbstractApplication::$abbreviation
-     */
-    protected $abbreviation = 'cms';
-    
-    /**
-     *
-     * @see \wcf\system\application\AbstractApplication::$primaryController
-     */
-    protected $primaryController = 'cms\page\PagePage';
+	/**
+	 *
+	 * @see AbstractApplication::$abbreviation
+	 */
+	protected $abbreviation = 'cms';
+	
+	/**
+	 *
+	 * @see \wcf\system\application\AbstractApplication::$primaryController
+	 */
+	protected $primaryController = 'cms\page\PagePage';
 
-    /**
-     *
-     * @see wcf\system\application\AbstractApplication
-     */
-    public function __run() {
-        if (! $this->isActiveApplication()) {
-            return;
-        }
-        
-        PageMenu::getInstance()->setActiveMenuItem('cms.pageMenu.index');
-    }
+	/**
+	 *
+	 * @see wcf\system\application\AbstractApplication
+	 */
+	public function __run() {
+		if (! $this->isActiveApplication()) {
+			return;
+		}
+		
+		PageMenu::getInstance()->setActiveMenuItem('cms.pageMenu.index');
+	}
 }

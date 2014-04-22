@@ -11,20 +11,20 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @package de.codequake.cms
  */
 class NewsImageAction extends AbstractDatabaseObjectAction {
-    protected $className = 'cms\data\news\image\NewsImageEditor';
-    protected $permissionsDelete = array(
-        'admin.cms.news.canManageCategory'
-    );
-    protected $requireACP = array(
-        'delete'
-    );
+	protected $className = 'cms\data\news\image\NewsImageEditor';
+	protected $permissionsDelete = array(
+		'admin.cms.news.canManageCategory'
+	);
+	protected $requireACP = array(
+		'delete'
+	);
 
-    public function delete() {
-        // del files
-        foreach ($this->objectIDs as $objectID) {
-            $file = new NewsImage($objectID);
-            unlink(CMS_DIR . 'images/news/' . $file->filename);
-        }
-        parent::delete();
-    }
+	public function delete() {
+		// del files
+		foreach ($this->objectIDs as $objectID) {
+			$file = new NewsImage($objectID);
+			unlink(CMS_DIR . 'images/news/' . $file->filename);
+		}
+		parent::delete();
+	}
 }

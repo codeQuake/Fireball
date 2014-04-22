@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectEditor;
  * @package de.codequake.cms
  */
 class LayoutEditor extends DatabaseObjectEditor {
-    protected static $baseClass = 'cms\data\layout\Layout';
+	protected static $baseClass = 'cms\data\layout\Layout';
 }

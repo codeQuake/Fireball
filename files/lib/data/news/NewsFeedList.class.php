@@ -9,5 +9,5 @@ namespace cms\data\news;
  * @package de.codequake.cms
  */
 class NewsFeedList extends CategoryNewsList {
-    public $decoratorClassName = 'cms\data\news\NewsFeed';
+	public $decoratorClassName = 'cms\data\news\NewsFeed';
 }

@@ -14,13 +14,13 @@ use wcf\system\WCF;
  */
 class CMSSitemapProvider implements ISitemapProvider {
 
-    public function getTemplate() {
-        $list = new PageNodeTree(0);
-        
-        WCF::getTPL()->assign(array(
-            'pageList' => $list->getIterator()
-        ));
-        
-        return WCF::getTPL()->fetch('cmsSitemap', 'cms');
-    }
+	public function getTemplate() {
+		$list = new PageNodeTree(0);
+		
+		WCF::getTPL()->assign(array(
+			'pageList' => $list->getIterator()
+		));
+		
+		return WCF::getTPL()->fetch('cmsSitemap', 'cms');
+	}
 }

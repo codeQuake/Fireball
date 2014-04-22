@@ -14,15 +14,15 @@ use wcf\system\tagging\ITaggable;
  */
 class TaggableNews implements ITaggable {
 
-    public function getObjectList(Tag $tag) {
-        return new TaggedNewsList($tag);
-    }
+	public function getObjectList(Tag $tag) {
+		return new TaggedNewsList($tag);
+	}
 
-    public function getTemplateName() {
-        return 'newsListing';
-    }
+	public function getTemplateName() {
+		return 'newsListing';
+	}
 
-    public function getApplication() {
-        return 'cms';
-    }
+	public function getApplication() {
+		return 'cms';
+	}
 }

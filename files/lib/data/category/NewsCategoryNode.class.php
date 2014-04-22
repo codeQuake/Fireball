@@ -11,11 +11,11 @@ use wcf\data\category\CategoryNode;
  * @package de.codequake.cms
  */
 class NewsCategoryNode extends CategoryNode {
-    protected static $baseClass = 'cms\data\category\NewsCategory';
-    protected $unreadNews = null;
+	protected static $baseClass = 'cms\data\category\NewsCategory';
+	protected $unreadNews = null;
 
-    public function getUnreadNews() {
-        if ($this->unreadNews === null) $this->unreadNews = NewsCategoryCache::getInstance()->getUnreadNews($this->categoryID);
-        return $this->unreadNews;
-    }
+	public function getUnreadNews() {
+		if ($this->unreadNews === null) $this->unreadNews = NewsCategoryCache::getInstance()->getUnreadNews($this->categoryID);
+		return $this->unreadNews;
+	}
 }

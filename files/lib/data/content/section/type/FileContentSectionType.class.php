@@ -16,65 +16,65 @@ use wcf\system\WCF;
  * @package de.codequake.cms
  */
 class FileContentSectionType extends AbstractContentSectionType {
-    public $objectType = 'de.codequake.cms.section.type.file';
-    public $isMultilingual = true;
-    public $fileList = array();
-    public $folderList = array();
-    public $additionalData = array();
+	public $objectType = 'de.codequake.cms.section.type.file';
+	public $isMultilingual = true;
+	public $fileList = array();
+	public $folderList = array();
+	public $additionalData = array();
 
-    public function readParameters() {
-        $list = new FileList();
-        $list->getConditionBuilder()->add('folderID = ?', array(
-            0
-        ));
-        $list->readObjects();
-        $this->fileList = $list->getObjects();
-        
-        $list = new FolderList();
-        $list->readObjects();
-        $this->folderList = $list->getObjects();
-    }
+	public function readParameters() {
+		$list = new FileList();
+		$list->getConditionBuilder()->add('folderID = ?', array(
+			0
+		));
+		$list->readObjects();
+		$this->fileList = $list->getObjects();
+		
+		$list = new FolderList();
+		$list->readObjects();
+		$this->folderList = $list->getObjects();
+	}
 
-    public function readData($sectionID) {
-        $section = new ContentSection($sectionID);
-        $this->formData['sectionData'] = $section->sectionData;
-    }
+	public function readData($sectionID) {
+		$section = new ContentSection($sectionID);
+		$this->formData['sectionData'] = $section->sectionData;
+	}
 
-    public function readFormData() {
-        if (isset($_POST['sectionData'])) $this->formData['sectionData'] = intval($_POST['sectionData']);
-    }
+	public function readFormData() {
+		if (isset($_POST['sectionData'])) $this->formData['sectionData'] = intval($_POST['sectionData']);
+	}
 
-    public function assignFormVariables() {
-        WCF::getTPL()->assign(array(
-            'fileList' => $this->fileList,
-            'folderList' => $this->folderList,
-            'fileID' => isset($this->formData['sectionData']) ? $this->formData['sectionData'] : 0
-        ));
-    }
+	public function assignFormVariables() {
+		WCF::getTPL()->assign(array(
+			'fileList' => $this->fileList,
+			'folderList' => $this->folderList,
+			'fileID' => isset($this->formData['sectionData']) ? $this->formData['sectionData'] : 0
+		));
+	}
 
-    public function getFormTemplate() {
-        return 'fileSectionType';
-    }
+	public function getFormTemplate() {
+		return 'fileSectionType';
+	}
 
-    public function saved($section) {
-        $data['sectionData'] = $this->formData['sectionData'];
-        $editor = new ContentSectionEditor($section);
-        $editor->update($data);
-        if ($this->action == 'add') {
-            $this->formData = array();
-        }
-    }
+	public function saved($section) {
+		$data['sectionData'] = $this->formData['sectionData'];
+		$editor = new ContentSectionEditor($section);
+		$editor->update($data);
+		if ($this->action == 'add') {
+			$this->formData = array();
+		}
+	}
 
-    public function getOutput($sectionID) {
-        $section = new ContentSection($sectionID);
-        $file = new File(intval($section->sectionData));
-        WCF::getTPL()->assign('file', $file);
-        return WCF::getTPL()->fetch('fileSectionTypeOutput', 'cms');
-    }
+	public function getOutput($sectionID) {
+		$section = new ContentSection($sectionID);
+		$file = new File(intval($section->sectionData));
+		WCF::getTPL()->assign('file', $file);
+		return WCF::getTPL()->fetch('fileSectionTypeOutput', 'cms');
+	}
 
-    public function getPreview($sectionID) {
-        $section = new ContentSection($sectionID);
-        $file = new File(intval($section->sectionData));
-        return '###' . $file->title . '###';
-    }
+	public function getPreview($sectionID) {
+		$section = new ContentSection($sectionID);
+		$file = new File(intval($section->sectionData));
+		return '###' . $file->title . '###';
+	}
 }

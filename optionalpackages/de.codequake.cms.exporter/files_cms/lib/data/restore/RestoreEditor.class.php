@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectEditor;
  * @package de.codequake.cms
  */
 class RestoreEditor extends DatabaseObjectEditor {
-    protected static $baseClass = 'cms\data\restore\Restore';
+	protected static $baseClass = 'cms\data\restore\Restore';
 }

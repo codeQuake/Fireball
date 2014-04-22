@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectEditor;
  * @package de.codequake.cms
  */
 class NewsImageEditor extends DatabaseObjectEditor {
-    protected static $baseClass = 'cms\data\news\image\NewsImage';
+	protected static $baseClass = 'cms\data\news\image\NewsImage';
 }

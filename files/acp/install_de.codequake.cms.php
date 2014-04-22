@@ -8,7 +8,7 @@ $package = $this->installation->getPackage();
 
 // default values
 DashboardHandler::setDefaultValues('de.codequake.cms.news.newsList', array(
-    'de.codequake.cms.latestNews' => 1
+	'de.codequake.cms.latestNews' => 1
 ));
 
 // install date
@@ -17,6 +17,6 @@ $sql = "UPDATE	wcf" . WCF_N . "_option
     WHERE	optionName = ?";
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array(
-    TIME_NOW,
-    'cms_install_date'
+	TIME_NOW,
+	'cms_install_date'
 ));

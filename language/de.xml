@@ -91,17 +91,24 @@
 		<item name="cms.acp.content.page.list"><![CDATA[Seite wählen...]]></item>
 		<item name="cms.acp.content.section.general"><![CDATA[Allgemeine Einstellungen]]></item>
 		<item name="cms.acp.content.section.general.objectType"><![CDATA[Inhaltstyp]]></item>
-		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>
-		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.headline"><![CDATA[Überschrift]]></item>
+		<item
+			name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>
+		<item
+			name="cms.acp.content.section.type.de.codequake.cms.section.type.headline"><![CDATA[Überschrift]]></item>
 		<item name="cms.acp.content.section.data"><![CDATA[Inhalt]]></item>
 		<item name="cms.acp.content.section.data.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.section.data.headline"><![CDATA[Überschrift]]></item>
 		<item name="cms.acp.content.section.data.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
-		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Bilder]]></item>
-		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>
-		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Modul]]></item>
-		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
+		<item
+			name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
+		<item
+			name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Bilder]]></item>
+		<item
+			name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>
+		<item
+			name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Modul]]></item>
+		<item
+			name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.section.data.boxID"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.section.data.boxID.description"><![CDATA[Wählen Sie eine Dashboardbox. Die Auswahl passt sich der Ausrichtung des Inhaltsbereichs an.]]></item>
 		<item name="cms.acp.content.section.data.moduleID"><![CDATA[Modul auswählen]]></item>
@@ -382,7 +389,8 @@
 		<item name="wcf.acl.option.de.codequake.cms.category.news.canViewNews"><![CDATA[Kann Nachrichten sehen]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.category.news.canAddNews"><![CDATA[Kann Nachrichten hinzufügen]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[Nachrichten Moderationsrecht]]></item>
-		<item name="wcf.acl.option.de.codequake.cms.category.news.canViewDelayedNews"><![CDATA[Kann Nachrichten sehen, die noch nicht veröffentlicht wurden]]></item>
+		<item
+			name="wcf.acl.option.de.codequake.cms.category.news.canViewDelayedNews"><![CDATA[Kann Nachrichten sehen, die noch nicht veröffentlicht wurden]]></item>
 	</category>
 
 	<category name="wcf.acp.option">

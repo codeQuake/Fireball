@@ -12,27 +12,27 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @package de.codequake.cms
  */
 class LayoutAction extends AbstractDatabaseObjectAction {
-    protected $className = 'cms\data\layout\LayoutEditor';
-    protected $permissionsDelete = array(
-        'admin.cms.style.canAddLayout'
-    );
-    protected $requireACP = array(
-        'delete'
-    );
+	protected $className = 'cms\data\layout\LayoutEditor';
+	protected $permissionsDelete = array(
+		'admin.cms.style.canAddLayout'
+	);
+	protected $requireACP = array(
+		'delete'
+	);
 
-    public function delete() {
-        // delete css files
-        foreach ($this->objectIDs as $objectID) {
-            LayoutHandler::getInstance()->deleteStylesheet($objectID);
-        }
-        parent::delete();
-    }
+	public function delete() {
+		// delete css files
+		foreach ($this->objectIDs as $objectID) {
+			LayoutHandler::getInstance()->deleteStylesheet($objectID);
+		}
+		parent::delete();
+	}
 
-    public function update() {
-        parent::update();
-        // delete css files
-        foreach ($this->objectIDs as $objectID) {
-            LayoutHandler::getInstance()->deleteStylesheet($objectID);
-        }
-    }
+	public function update() {
+		parent::update();
+		// delete css files
+		foreach ($this->objectIDs as $objectID) {
+			LayoutHandler::getInstance()->deleteStylesheet($objectID);
+		}
+	}
 }

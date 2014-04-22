@@ -11,15 +11,15 @@ use cms\data\layout\Layout;
  * @package de.codequake.cms
  */
 class LayoutStylesheetList extends ViewableStylesheetList {
-    public $layoutID = 0;
+	public $layoutID = 0;
 
-    public function __construct($layoutID) {
-        $this->layoutID = $layoutID;
-        $layout = new Layout($this->layoutID);
-        $data = @unserialize($layout->data);
-        parent::__construct();
-        $this->getConditionBuilder()->add('stylesheet.sheetID IN (?)', array(
-            $data
-        ));
-    }
+	public function __construct($layoutID) {
+		$this->layoutID = $layoutID;
+		$layout = new Layout($this->layoutID);
+		$data = @unserialize($layout->data);
+		parent::__construct();
+		$this->getConditionBuilder()->add('stylesheet.sheetID IN (?)', array(
+			$data
+		));
+	}
 }

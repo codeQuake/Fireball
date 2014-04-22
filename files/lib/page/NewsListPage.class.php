@@ -23,86 +23,86 @@ use wcf\system\WCF;
  * @package de.codequake.cms
  */
 class NewsListPage extends SortablePage {
-    public $activeMenuItem = 'cms.page.news';
-    public $enableTracking = true;
-    public $neededModules = array(
-        'MODULE_NEWS'
-    );
-    public $itemsPerPage = CMS_NEWS_PER_PAGE;
-    public $validSortFields = array(
-        'username',
-        'newsID',
-        'time',
-        'subject',
-        'clicks',
-        'comments'
-    );
-    public $defaultSortField = 'time';
-    public $defaultSortOrder = 'DESC';
-    public $categoryID = 0;
-    public $category = null;
-    public $categoryList = null;
+	public $activeMenuItem = 'cms.page.news';
+	public $enableTracking = true;
+	public $neededModules = array(
+		'MODULE_NEWS'
+	);
+	public $itemsPerPage = CMS_NEWS_PER_PAGE;
+	public $validSortFields = array(
+		'username',
+		'newsID',
+		'time',
+		'subject',
+		'clicks',
+		'comments'
+	);
+	public $defaultSortField = 'time';
+	public $defaultSortOrder = 'DESC';
+	public $categoryID = 0;
+	public $category = null;
+	public $categoryList = null;
 
-    public function readParameters() {
-        parent::readParameters();
-        if (isset($_REQUEST['id'])) $this->categoryID = intval($_REQUEST['id']);
-        $this->category = CategoryHandler::getInstance()->getCategory($this->categoryID);
-        if ($this->category === null) {
-            throw new IllegalLinkException();
-        }
-        $this->category = new NewsCategory($this->category);
-        if (! $this->category->isAccessible()) {
-            throw new PermissionDeniedException();
-        }
-    }
+	public function readParameters() {
+		parent::readParameters();
+		if (isset($_REQUEST['id'])) $this->categoryID = intval($_REQUEST['id']);
+		$this->category = CategoryHandler::getInstance()->getCategory($this->categoryID);
+		if ($this->category === null) {
+			throw new IllegalLinkException();
+		}
+		$this->category = new NewsCategory($this->category);
+		if (! $this->category->isAccessible()) {
+			throw new PermissionDeniedException();
+		}
+	}
 
-    protected function initObjectList() {
-        if ($this->category) {
-            $this->objectList = new CategoryNewsList(array(
-                $this->category->categoryID
-            ));
-        }
-        else
-            throw new IllegalLinkException();
-    }
+	protected function initObjectList() {
+		if ($this->category) {
+			$this->objectList = new CategoryNewsList(array(
+				$this->category->categoryID
+			));
+		}
+		else
+			throw new IllegalLinkException();
+	}
 
-    public function readData() {
-        parent::readData();
-        VisitCountHandler::getInstance()->count();
-        WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), LinkHandler::getInstance()->getLink('NewsCategoryList', array(
-            'application' => 'cms'
-        ))));
-        
-        // get categories
-        $categoryTree = new NewsCategoryNodeTree('de.codequake.cms.category.news');
-        $this->categoryList = $categoryTree->getIterator();
-        $this->categoryList->setMaxDepth(0);
-    }
+	public function readData() {
+		parent::readData();
+		VisitCountHandler::getInstance()->count();
+		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), LinkHandler::getInstance()->getLink('NewsCategoryList', array(
+			'application' => 'cms'
+		))));
+		
+		// get categories
+		$categoryTree = new NewsCategoryNodeTree('de.codequake.cms.category.news');
+		$this->categoryList = $categoryTree->getIterator();
+		$this->categoryList->setMaxDepth(0);
+	}
 
-    protected function readObjects() {
-        parent::readObjects();
-    }
+	protected function readObjects() {
+		parent::readObjects();
+	}
 
-    public function assignVariables() {
-        parent::assignVariables();
-        
-        DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.news.newsList', $this);
-        WCF::getTPL()->assign(array(
-            'category' => $this->category,
-            'categoryID' => $this->categoryID,
-            'controller' => 'NewsList',
-            'allowSpidersToIndexThisPage' => true,
-            'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.news.newsList'),
-            'sidebarName' => 'de.codequake.cms.news.newsList',
-            'categoryList' => $this->categoryList
-        ));
-    }
+	public function assignVariables() {
+		parent::assignVariables();
+		
+		DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.news.newsList', $this);
+		WCF::getTPL()->assign(array(
+			'category' => $this->category,
+			'categoryID' => $this->categoryID,
+			'controller' => 'NewsList',
+			'allowSpidersToIndexThisPage' => true,
+			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.news.newsList'),
+			'sidebarName' => 'de.codequake.cms.news.newsList',
+			'categoryList' => $this->categoryList
+		));
+	}
 
-    public function getObjectType() {
-        return 'de.codequake.cms.category.news';
-    }
+	public function getObjectType() {
+		return 'de.codequake.cms.category.news';
+	}
 
-    public function getObjectID() {
-        return $this->categoryID;
-    }
+	public function getObjectID() {
+		return $this->categoryID;
+	}
 }

@@ -15,39 +15,39 @@ use wcf\util\FileUtil;
  * @package de.codequake.cms
  */
 class LayoutCompiler extends SingletonFactory {
-    protected $compiler = null;
+	protected $compiler = null;
 
-    public function init() {
-        require_once (WCF_DIR . 'lib/system/style/lessc.inc.php');
-        $this->compiler = new \lessc();
-        $this->compiler->setImportDir(array(
-            WCF_DIR
-        ));
-    }
+	public function init() {
+		require_once (WCF_DIR . 'lib/system/style/lessc.inc.php');
+		$this->compiler = new \lessc();
+		$this->compiler->setImportDir(array(
+			WCF_DIR
+		));
+	}
 
-    public function compile(Layout $layout) {
-        // create sheet list
-        $list = new LayoutStylesheetList($layout->layoutID);
-        $list->readObjects();
-        $list = $list->getObjects();
-        // merge used sheets
-        $less = '';
-        foreach ($list as $sheet) {
-            $less .= ' ' . $sheet->less;
-        }
-        $content = '';
-        try {
-            $content = $this->compiler->compile($less);
-        }
-        catch (\Exception $e) {
-            throw new SystemException("Could not compile LESS: " . $e->getMessage(), 0, '', $e);
-        }
-        
-        file_put_contents(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css', $content);
-        FileUtil::makeWritable(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css');
-    }
+	public function compile(Layout $layout) {
+		// create sheet list
+		$list = new LayoutStylesheetList($layout->layoutID);
+		$list->readObjects();
+		$list = $list->getObjects();
+		// merge used sheets
+		$less = '';
+		foreach ($list as $sheet) {
+			$less .= ' ' . $sheet->less;
+		}
+		$content = '';
+		try {
+			$content = $this->compiler->compile($less);
+		}
+		catch (\Exception $e) {
+			throw new SystemException("Could not compile LESS: " . $e->getMessage(), 0, '', $e);
+		}
+		
+		file_put_contents(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css', $content);
+		FileUtil::makeWritable(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css');
+	}
 
-    public function kill(Layout $layout) {
-        unlink(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css');
-    }
+	public function kill(Layout $layout) {
+		unlink(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css');
+	}
 }

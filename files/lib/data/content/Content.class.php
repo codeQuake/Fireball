@@ -15,42 +15,42 @@ use wcf\system\WCF;
  * @package de.codequake.cms
  */
 class Content extends CMSDatabaseObject implements IRouteController {
-    protected static $databaseTableName = 'content';
-    protected static $databaseTableIndexName = 'contentID';
-    public $sectionList = array();
+	protected static $databaseTableName = 'content';
+	protected static $databaseTableIndexName = 'contentID';
+	public $sectionList = array();
 
-    public function __construct($id, $row = null, $object = null) {
-        if ($id !== null) {
-            $sql = "SELECT *
+	public function __construct($id, $row = null, $object = null) {
+		if ($id !== null) {
+			$sql = "SELECT *
                     FROM " . static::getDatabaseTableName() . "
                     WHERE (" . static::getDatabaseTableIndexName() . " = ?)";
-            $statement = WCF::getDB()->prepareStatement($sql);
-            $statement->execute(array(
-                $id
-            ));
-            $row = $statement->fetchArray();
-            
-            if ($row === false) $row = array();
-        }
-        
-        parent::__construct(null, $row, $object);
-    }
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				$id
+			));
+			$row = $statement->fetchArray();
+			
+			if ($row === false) $row = array();
+		}
+		
+		parent::__construct(null, $row, $object);
+	}
 
-    public function getPage() {
-        return new Page($this->pageID);
-    }
+	public function getPage() {
+		return new Page($this->pageID);
+	}
 
-    public function getEditor() {
-        return new ContentEditor($this);
-    }
+	public function getEditor() {
+		return new ContentEditor($this);
+	}
 
-    public function getTitle() {
-        return $this->title;
-    }
+	public function getTitle() {
+		return $this->title;
+	}
 
-    public function getSections() {
-        $this->sectionList = new ContentContentSectionList($this->contentID);
-        $this->sectionList->readObjects();
-        return $this->sectionList->getObjects();
-    }
+	public function getSections() {
+		$this->sectionList = new ContentContentSectionList($this->contentID);
+		$this->sectionList->readObjects();
+		return $this->sectionList->getObjects();
+	}
 }

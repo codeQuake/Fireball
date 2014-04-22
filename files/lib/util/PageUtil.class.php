@@ -13,45 +13,45 @@ use cms\data\page\PageCache;
  */
 final class PageUtil {
 
-    const ALIAS_PATTERN = '[a-z0-9]+(?:\-{1}[a-z0-9]+)*';
+	const ALIAS_PATTERN = '[a-z0-9]+(?:\-{1}[a-z0-9]+)*';
 
-    /**
-     * Returns true if the given alias is available at the given position.
-     * With the optional third parameter, you can specifiy a page that is
-     * excluded from checking agains. For example, you can use that to
-     * exclude the page the new alias will be assigned to.
-     *
-     * @param string $alias            
-     * @param integer $parentPageID            
-     * @param integer $excludedPageID            
-     * @return boolean
-     */
-    public static function isAvailableAlias($alias, $parentPageID, $excludedPageID = null) {
-        $childIDs = PageCache::getInstance()->getChildIDs($parentPageID);
-        
-        if (! empty($childIDs)) {
-            foreach ($childIDs as $childID) {
-                if ($childID == $excludedPageID) continue;
-                
-                $page = PageCache::getInstance()->getPage($childID);
-                if ($page->alias == $alias) {
-                    return false;
-                }
-            }
-        }
-        
-        return true;
-    }
+	/**
+	 * Returns true if the given alias is available at the given position.
+	 * With the optional third parameter, you can specifiy a page that is
+	 * excluded from checking agains. For example, you can use that to
+	 * exclude the page the new alias will be assigned to.
+	 *
+	 * @param string $alias        	
+	 * @param integer $parentPageID        	
+	 * @param integer $excludedPageID        	
+	 * @return boolean
+	 */
+	public static function isAvailableAlias($alias, $parentPageID, $excludedPageID = null) {
+		$childIDs = PageCache::getInstance()->getChildIDs($parentPageID);
+		
+		if (! empty($childIDs)) {
+			foreach ($childIDs as $childID) {
+				if ($childID == $excludedPageID) continue;
+				
+				$page = PageCache::getInstance()->getPage($childID);
+				if ($page->alias == $alias) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
 
-    /**
-     * Returns true if the given alias matches the general alias pattern.
-     *
-     * @param string $alias            
-     * @return boolean
-     */
-    public static function isValidAlias($alias) {
-        return preg_match('~^' . self::ALIAS_PATTERN . '$~', $alias);
-    }
+	/**
+	 * Returns true if the given alias matches the general alias pattern.
+	 *
+	 * @param string $alias        	
+	 * @return boolean
+	 */
+	public static function isValidAlias($alias) {
+		return preg_match('~^' . self::ALIAS_PATTERN . '$~', $alias);
+	}
 
-    private function __construct() { /* nothing */ }
+	private function __construct() { /* nothing */ }
 }

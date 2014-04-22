@@ -9,15 +9,15 @@ namespace cms\data\content;
  * @package de.codequake.cms
  */
 class PageContentList extends ViewableContentList {
-    public $pageID = 0;
-    public $sqlOrderBy = 'content.showOrder ASC';
+	public $pageID = 0;
+	public $sqlOrderBy = 'content.showOrder ASC';
 
-    public function __construct($pageID) {
-        $this->pageID = $pageID;
-        parent::__construct();
-        
-        $this->getConditionBuilder()->add('content.pageID = ?', array(
-            $pageID
-        ));
-    }
+	public function __construct($pageID) {
+		$this->pageID = $pageID;
+		parent::__construct();
+		
+		$this->getConditionBuilder()->add('content.pageID = ?', array(
+			$pageID
+		));
+	}
 }

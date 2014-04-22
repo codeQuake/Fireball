@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectEditor;
  * @package de.codequake.cms
  */
 class ContentSectionEditor extends DatabaseObjectEditor {
-    protected static $baseClass = 'cms\data\content\section\ContentSection';
+	protected static $baseClass = 'cms\data\content\section\ContentSection';
 }

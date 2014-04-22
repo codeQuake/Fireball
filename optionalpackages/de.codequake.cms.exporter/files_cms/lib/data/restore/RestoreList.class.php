@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectList;
  * @package de.codequake.cms
  */
 class RestoreList extends DatabaseObjectList {
-    public $className = 'cms\data\restore\Restore';
+	public $className = 'cms\data\restore\Restore';
 }

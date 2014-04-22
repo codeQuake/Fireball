@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectList;
  * @package de.codequake.cms
  */
 class LayoutList extends DatabaseObjectList {
-    public $className = 'cms\data\layout\Layout';
+	public $className = 'cms\data\layout\Layout';
 }

@@ -12,10 +12,10 @@ use wcf\system\importer\AbstractCategoryImporter;
  * @package de.codequake.cms
  */
 class NewsCategoryImporter extends AbstractCategoryImporter {
-    protected $objectTypeName = 'de.codequake.cms.category.news';
+	protected $objectTypeName = 'de.codequake.cms.category.news';
 
-    public function __construct() {
-        $objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.codequake.cms.category.news');
-        $this->objectTypeID = $objectType->objectTypeID;
-    }
+	public function __construct() {
+		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.codequake.cms.category.news');
+		$this->objectTypeID = $objectType->objectTypeID;
+	}
 }

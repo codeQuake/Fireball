@@ -11,7 +11,7 @@ use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
  * @package de.codequake.cms
  */
 class NewsCommentResponseUserNotificationObjectType extends AbstractUserNotificationObjectType {
-    protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentResponseUserNotificationObject';
-    protected static $objectClassName = 'wcf\data\comment\response\CommentResponse';
-    protected static $objectListClassName = 'wcf\data\comment\response\CommentResponseList';
+	protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentResponseUserNotificationObject';
+	protected static $objectClassName = 'wcf\data\comment\response\CommentResponse';
+	protected static $objectListClassName = 'wcf\data\comment\response\CommentResponseList';
 }

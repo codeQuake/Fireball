@@ -11,7 +11,7 @@ use wcf\acp\page\AbstractCategoryListPage;
  * @package de.codequake.cms
  */
 class NewsCategoryListPage extends AbstractCategoryListPage {
-    public $activeMenuItem = 'cms.acp.menu.link.cms.news.category.list';
-    public $objectTypeName = 'de.codequake.cms.category.news';
-    public $pageTitle = 'wcf.category.list';
+	public $activeMenuItem = 'cms.acp.menu.link.cms.news.category.list';
+	public $objectTypeName = 'de.codequake.cms.category.news';
+	public $pageTitle = 'wcf.category.list';
 }

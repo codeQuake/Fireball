@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectList;
  * @package de.codequake.cms
  */
 class FolderList extends DatabaseObjectList {
-    public $className = 'cms\data\folder\Folder';
+	public $className = 'cms\data\folder\Folder';
 }

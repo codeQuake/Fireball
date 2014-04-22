@@ -13,37 +13,37 @@ use wcf\system\WCF;
  * @package de.codequake.cms
  */
 class NewsImage extends CMSDatabaseObject implements IRouteController {
-    protected static $databaseTableName = 'news_image';
-    protected static $databaseTableIndexName = 'imageID';
+	protected static $databaseTableName = 'news_image';
+	protected static $databaseTableIndexName = 'imageID';
 
-    public function __construct($id, $row = null, $object = null) {
-        if ($id !== null) {
-            $sql = "SELECT *
+	public function __construct($id, $row = null, $object = null) {
+		if ($id !== null) {
+			$sql = "SELECT *
                     FROM " . static::getDatabaseTableName() . "
                     WHERE (" . static::getDatabaseTableIndexName() . " = ?)";
-            $statement = WCF::getDB()->prepareStatement($sql);
-            $statement->execute(array(
-                $id
-            ));
-            $row = $statement->fetchArray();
-            
-            if ($row === false) $row = array();
-        }
-        
-        parent::__construct(null, $row, $object);
-    }
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				$id
+			));
+			$row = $statement->fetchArray();
+			
+			if ($row === false) $row = array();
+		}
+		
+		parent::__construct(null, $row, $object);
+	}
 
-    public function getTitle() {
-        return $this->title;
-    }
+	public function getTitle() {
+		return $this->title;
+	}
 
-    public function getImagePath() {
-        $path = RELATIVE_CMS_DIR . 'images/news/' . $this->filename;
-        return $path;
-    }
+	public function getImagePath() {
+		$path = RELATIVE_CMS_DIR . 'images/news/' . $this->filename;
+		return $path;
+	}
 
-    public function getImageTag($width = 0) {
-        $file = $this->getImagePath();
-        return $width != 0 ? '<img src="' . $file . '" alt="' . $this->title . '" style="width: ' . $width . 'px" />' : '<img src="' . $file . '" alt="' . $this->title . '" class="jsResizeImage" />';
-    }
+	public function getImageTag($width = 0) {
+		$file = $this->getImagePath();
+		return $width != 0 ? '<img src="' . $file . '" alt="' . $this->title . '" style="width: ' . $width . 'px" />' : '<img src="' . $file . '" alt="' . $this->title . '" class="jsResizeImage" />';
+	}
 }

@@ -50,7 +50,7 @@
 	<instructions type="update" fromversion="1.0.1 pl 3">
 		<instruction type="file" application="cms">files.tar</instruction>
 	</instructions>
-	<instructions type="update" fromversion="1.0.1 pl 4">		
+	<instructions type="update" fromversion="1.0.1 pl 4">
 		<instruction type="file" application="cms">files.tar</instruction>
 	</instructions>
 </package>

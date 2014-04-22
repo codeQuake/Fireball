@@ -11,60 +11,60 @@ use cms\system\cache\builder\PageCacheBuilder;
  * @package de.codequake.cms
  */
 class PageNodeTree implements \IteratorAggregate {
-    protected $nodeClassName = 'cms\data\page\PageNode';
-    protected $parentID = 0;
-    protected $parentNode = null;
+	protected $nodeClassName = 'cms\data\page\PageNode';
+	protected $parentID = 0;
+	protected $parentNode = null;
 
-    public function __construct($parentID = 0) {
-        $this->parentID = $parentID;
-    }
+	public function __construct($parentID = 0) {
+		$this->parentID = $parentID;
+	}
 
-    public function buildTree() {
-        $this->parentNode = $this->getNode($this->parentID);
-        $this->buildTreeLevel($this->parentNode);
-    }
+	public function buildTree() {
+		$this->parentNode = $this->getNode($this->parentID);
+		$this->buildTreeLevel($this->parentNode);
+	}
 
-    public function buildTreeLevel(PageNode $pageNode) {
-        foreach ($this->getChildren($pageNode) as $child) {
-            $childNode = $this->getNode($child->pageID);
-            
-            $pageNode->addChild($childNode);
-            $this->buildTreeLevel($childNode);
-        }
-    }
+	public function buildTreeLevel(PageNode $pageNode) {
+		foreach ($this->getChildren($pageNode) as $child) {
+			$childNode = $this->getNode($child->pageID);
+			
+			$pageNode->addChild($childNode);
+			$this->buildTreeLevel($childNode);
+		}
+	}
 
-    protected function getPage($pageID) {
-        return PageCache::getInstance()->getPage($pageID);
-    }
+	protected function getPage($pageID) {
+		return PageCache::getInstance()->getPage($pageID);
+	}
 
-    protected function getChildren(PageNode $parentNode) {
-        $pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
-        
-        $children = array();
-        foreach ($pages as $page) {
-            if ($page->parentID == $parentNode->pageID) {
-                $children[$page->pageID] = $page;
-            }
-        }
-        return $children;
-    }
+	protected function getChildren(PageNode $parentNode) {
+		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
+		
+		$children = array();
+		foreach ($pages as $page) {
+			if ($page->parentID == $parentNode->pageID) {
+				$children[$page->pageID] = $page;
+			}
+		}
+		return $children;
+	}
 
-    public function getIterator() {
-        if ($this->parentNode === null) {
-            $this->buildTree();
-        }
-        
-        return new \RecursiveIteratorIterator($this->parentNode, \RecursiveIteratorIterator::SELF_FIRST);
-    }
+	public function getIterator() {
+		if ($this->parentNode === null) {
+			$this->buildTree();
+		}
+		
+		return new \RecursiveIteratorIterator($this->parentNode, \RecursiveIteratorIterator::SELF_FIRST);
+	}
 
-    protected function getNode($pageID) {
-        if (! $pageID) {
-            $page = new Page(0);
-        }
-        else {
-            $page = $this->getPage($pageID);
-        }
-        
-        return new $this->nodeClassName($page);
-    }
+	protected function getNode($pageID) {
+		if (! $pageID) {
+			$page = new Page(0);
+		}
+		else {
+			$page = $this->getPage($pageID);
+		}
+		
+		return new $this->nodeClassName($page);
+	}
 }

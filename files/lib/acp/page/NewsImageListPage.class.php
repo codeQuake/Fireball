@@ -11,11 +11,11 @@ use wcf\page\SortablePage;
  * @package de.codequake.cms
  */
 class NewsImageListPage extends SortablePage {
-    public $objectListClassName = 'cms\data\news\image\NewsImageList';
-    public $activeMenuItem = 'cms.acp.menu.link.cms.news.image.list';
-    public $neededPermissions = array(
-        'admin.cms.news.canManageCategory'
-    );
-    public $templateName = 'imageList';
-    public $defaultSortfield = 'title';
+	public $objectListClassName = 'cms\data\news\image\NewsImageList';
+	public $activeMenuItem = 'cms.acp.menu.link.cms.news.image.list';
+	public $neededPermissions = array(
+		'admin.cms.news.canManageCategory'
+	);
+	public $templateName = 'imageList';
+	public $defaultSortfield = 'title';
 }

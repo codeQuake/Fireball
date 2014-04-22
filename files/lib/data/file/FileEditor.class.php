@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectEditor;
  * @package de.codequake.cms
  */
 class FileEditor extends DatabaseObjectEditor {
-    protected static $baseClass = 'cms\data\file\File';
+	protected static $baseClass = 'cms\data\file\File';
 }

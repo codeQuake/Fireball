@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectDecorator;
  * @package de.codequake.cms
  */
 class ViewableContentSection extends DatabaseObjectDecorator {
-    protected static $baseClass = 'cms\data\content\section\ContentSection';
+	protected static $baseClass = 'cms\data\content\section\ContentSection';
 }

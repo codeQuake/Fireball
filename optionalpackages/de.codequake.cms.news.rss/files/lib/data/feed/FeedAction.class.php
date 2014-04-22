@@ -11,11 +11,11 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @package de.codequake.cms.news.rss
  */
 class FeedAction extends AbstractDatabaseObjectAction {
-    protected $className = 'cms\data\feed\FeedEditor';
-    protected $permissionsDelete = array(
-        'admin.cms.news.canAddFeed'
-    );
-    protected $requireACP = array(
-        'delete'
-    );
+	protected $className = 'cms\data\feed\FeedEditor';
+	protected $permissionsDelete = array(
+		'admin.cms.news.canAddFeed'
+	);
+	protected $requireACP = array(
+		'delete'
+	);
 }

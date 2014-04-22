@@ -15,23 +15,23 @@ use wcf\system\importer\ImportHandler;
  * @package de.codequake.cms
  */
 class NewsCommentImporter extends AbstractCommentImporter {
-    protected $objectTypeName = 'de.codequake.cms.news.comment';
+	protected $objectTypeName = 'de.codequake.cms.news.comment';
 
-    public function __construct() {
-        $objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.comment.commentableContent', 'de.codequake.cms.news.comment');
-        $this->objectTypeID = $objectType->objectTypeID;
-    }
+	public function __construct() {
+		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.comment.commentableContent', 'de.codequake.cms.news.comment');
+		$this->objectTypeID = $objectType->objectTypeID;
+	}
 
-    /**
-     *
-     * @see wcf\system\importer\IImporter::import()
-     */
-    public function import($oldID, array $data, array $additionalData = array()) {
-        $data['objectID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.news', $data['objectID']);
-        if (! $data['objectID']) return 0;
-        
-        $data['userID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['userID']);
-        
-        return parent::import($oldID, $data);
-    }
+	/**
+	 *
+	 * @see wcf\system\importer\IImporter::import()
+	 */
+	public function import($oldID, array $data, array $additionalData = array()) {
+		$data['objectID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.news', $data['objectID']);
+		if (! $data['objectID']) return 0;
+		
+		$data['userID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['userID']);
+		
+		return parent::import($oldID, $data);
+	}
 }

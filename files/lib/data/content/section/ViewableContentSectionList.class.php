@@ -9,5 +9,5 @@ namespace cms\data\content\section;
  * @package de.codequake.cms
  */
 class ViewableContentSectionList extends ContentSectionList {
-    public $decoratorClassName = 'cms\data\content\section\ViewableContentSection';
+	public $decoratorClassName = 'cms\data\content\section\ViewableContentSection';
 }

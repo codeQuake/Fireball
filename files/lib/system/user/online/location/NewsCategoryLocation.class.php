@@ -16,17 +16,17 @@ use wcf\system\WCF;
  */
 class NewsCategoryLocation implements IUserOnlineLocation {
 
-    public function cache(UserOnline $user) {}
+	public function cache(UserOnline $user) {}
 
-    public function get(UserOnline $user, $languageVariable = '') {
-        if ($category = CategoryHandler::getInstance()->getCategory($user->objectID)) {
-            $category = new NewsCategory($category);
-            if ($category->getPermission('canView')) {
-                return WCF::getLanguage()->getDynamicVariable($languageVariable, array(
-                    'category' => $category
-                ));
-            }
-        }
-        return '';
-    }
+	public function get(UserOnline $user, $languageVariable = '') {
+		if ($category = CategoryHandler::getInstance()->getCategory($user->objectID)) {
+			$category = new NewsCategory($category);
+			if ($category->getPermission('canView')) {
+				return WCF::getLanguage()->getDynamicVariable($languageVariable, array(
+					'category' => $category
+				));
+			}
+		}
+		return '';
+	}
 }

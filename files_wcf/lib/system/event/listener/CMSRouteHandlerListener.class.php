@@ -16,14 +16,14 @@ use wcf\system\request\RouteHandler;
  */
 class CMSRouteHandlerListener implements IEventListener {
 
-    public function execute($eventObj, $className, $eventName) {
-        // thx to SoftCreatR http://www.woltlab.com/forum/index.php/Thread/224017-Request-Handler/?postID=1332856#post1332856
-        $application = ApplicationHandler::getInstance()->getActiveApplication();
-        if (PACKAGE_ID != 1 && $application != null) {
-            $route = new Route('cmsPageRoute');
-            $route->setSchema('/{alias}/', 'Page');
-            $route->setParameterOption('alias', null, PageUtil::ALIAS_PATTERN);
-            $eventObj->addRoute($route);
-        }
-    }
+	public function execute($eventObj, $className, $eventName) {
+		// thx to SoftCreatR http://www.woltlab.com/forum/index.php/Thread/224017-Request-Handler/?postID=1332856#post1332856
+		$application = ApplicationHandler::getInstance()->getActiveApplication();
+		if (PACKAGE_ID != 1 && $application != null) {
+			$route = new Route('cmsPageRoute');
+			$route->setSchema('/{alias}/', 'Page');
+			$route->setParameterOption('alias', null, PageUtil::ALIAS_PATTERN);
+			$eventObj->addRoute($route);
+		}
+	}
 }

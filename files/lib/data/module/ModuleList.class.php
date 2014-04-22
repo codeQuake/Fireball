@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectList;
  * @package de.codequake.cms
  */
 class ModuleList extends DatabaseObjectList {
-    public $className = 'cms\data\module\Module';
+	public $className = 'cms\data\module\Module';
 }

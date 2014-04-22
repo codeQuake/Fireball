@@ -13,12 +13,12 @@ use wcf\data\DatabaseObject;
  */
 abstract class CMSDatabaseObject extends DatabaseObject {
 
-    /**
-     *
-     * @see wcf\data\IStorableObject::getDatabaseTableName()
-     *
-     */
-    public static function getDatabaseTableName() {
-        return 'cms' . WCF_N . '_' . static::$databaseTableName;
-    }
+	/**
+	 *
+	 * @see wcf\data\IStorableObject::getDatabaseTableName()
+	 *
+	 */
+	public static function getDatabaseTableName() {
+		return 'cms' . WCF_N . '_' . static::$databaseTableName;
+	}
 }

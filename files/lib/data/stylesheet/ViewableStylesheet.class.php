@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectDecorator;
  * @package de.codequake.cms
  */
 class ViewableStylesheet extends DatabaseObjectDecorator {
-    protected static $baseClass = 'cms\data\stylesheet\Stylesheet';
+	protected static $baseClass = 'cms\data\stylesheet\Stylesheet';
 }

@@ -13,11 +13,11 @@ use wcf\data\object\type\AbstractObjectTypeProvider;
  * @package de.codequake.cms
  */
 class LikeableNewsProvider extends AbstractObjectTypeProvider implements ILikeObjectTypeProvider {
-    public $className = 'cms\data\news\News';
-    public $decoratorClassName = 'cms\data\news\LikeableNews';
-    public $listClassName = 'cms\data\news\NewsList';
+	public $className = 'cms\data\news\News';
+	public $decoratorClassName = 'cms\data\news\LikeableNews';
+	public $listClassName = 'cms\data\news\NewsList';
 
-    public function checkPermissions(ILikeObject $object) {
-        return $object->canRead();
-    }
+	public function checkPermissions(ILikeObject $object) {
+		return $object->canRead();
+	}
 }

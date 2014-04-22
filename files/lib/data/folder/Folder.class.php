@@ -14,39 +14,39 @@ use wcf\system\WCF;
  * @package de.codequake.cms
  */
 class Folder extends CMSDatabaseObject implements IRouteController {
-    protected static $databaseTableName = 'folder';
-    protected static $databaseTableIndexName = 'folderID';
+	protected static $databaseTableName = 'folder';
+	protected static $databaseTableIndexName = 'folderID';
 
-    public function __construct($id, $row = null, $object = null) {
-        if ($id !== null) {
-            $sql = "SELECT *
+	public function __construct($id, $row = null, $object = null) {
+		if ($id !== null) {
+			$sql = "SELECT *
                     FROM " . static::getDatabaseTableName() . "
                     WHERE (" . static::getDatabaseTableIndexName() . " = ?)";
-            $statement = WCF::getDB()->prepareStatement($sql);
-            $statement->execute(array(
-                $id
-            ));
-            $row = $statement->fetchArray();
-            
-            if ($row === false) $row = array();
-        }
-        
-        parent::__construct(null, $row, $object);
-    }
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				$id
+			));
+			$row = $statement->fetchArray();
+			
+			if ($row === false) $row = array();
+		}
+		
+		parent::__construct(null, $row, $object);
+	}
 
-    public function getTitle() {
-        return $this->folderName;
-    }
+	public function getTitle() {
+		return $this->folderName;
+	}
 
-    public function getFiles($type = '') {
-        $list = new FileList();
-        if ($type == 'image') $list->getConditionBuilder()->add('file.type LIKE ?', array(
-            'image/%'
-        ));
-        $list->getConditionBuilder()->add('folderID = ?', array(
-            $this->folderID
-        ));
-        $list->readObjects();
-        return $list->getObjects();
-    }
+	public function getFiles($type = '') {
+		$list = new FileList();
+		if ($type == 'image') $list->getConditionBuilder()->add('file.type LIKE ?', array(
+			'image/%'
+		));
+		$list->getConditionBuilder()->add('folderID = ?', array(
+			$this->folderID
+		));
+		$list->readObjects();
+		return $list->getObjects();
+	}
 }

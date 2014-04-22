@@ -11,15 +11,15 @@ use wcf\page\SortablePage;
  * @package de.codequake.cms.news.rss
  */
 class FeedListPage extends SortablePage {
-    public $objectListClassName = 'cms\data\feed\FeedList';
-    public $activeMenuItem = 'cms.acp.menu.link.cms.feed.list';
-    public $neededPermissions = array(
-        'admin.cms.news.canAddFeed'
-    );
-    public $templateName = 'feedList';
-    public $defaultSortfield = 'title';
-    public $validSortFields = array(
-        'feedID',
-        'title'
-    );
+	public $objectListClassName = 'cms\data\feed\FeedList';
+	public $activeMenuItem = 'cms.acp.menu.link.cms.feed.list';
+	public $neededPermissions = array(
+		'admin.cms.news.canAddFeed'
+	);
+	public $templateName = 'feedList';
+	public $defaultSortfield = 'title';
+	public $validSortFields = array(
+		'feedID',
+		'title'
+	);
 }

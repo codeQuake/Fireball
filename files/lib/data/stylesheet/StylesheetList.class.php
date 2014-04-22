@@ -11,5 +11,5 @@ use wcf\data\DatabaseObjectList;
  * @package de.codequake.cms
  */
 class StylesheetList extends DatabaseObjectList {
-    public $className = 'cms\data\stylesheet\Stylesheet';
+	public $className = 'cms\data\stylesheet\Stylesheet';
 }

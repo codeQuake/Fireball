@@ -15,15 +15,15 @@ use wcf\system\WCF;
  */
 class PageLocation implements IUserOnlineLocation {
 
-    public function cache(UserOnline $user) {}
+	public function cache(UserOnline $user) {}
 
-    public function get(UserOnline $user, $languageVariable = '') {
-        $page = PageCache::getInstance()->getPage($user->objectID);
-        if ($page->pageID != 0) {
-            return WCF::getLanguage()->getDynamicVariable($languageVariable, array(
-                'page' => $page
-            ));
-        }
-        return '';
-    }
+	public function get(UserOnline $user, $languageVariable = '') {
+		$page = PageCache::getInstance()->getPage($user->objectID);
+		if ($page->pageID != 0) {
+			return WCF::getLanguage()->getDynamicVariable($languageVariable, array(
+				'page' => $page
+			));
+		}
+		return '';
+	}
 }

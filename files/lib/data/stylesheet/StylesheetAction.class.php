@@ -13,33 +13,33 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @package de.codequake.cms
  */
 class StylesheetAction extends AbstractDatabaseObjectAction {
-    protected $className = 'cms\data\stylesheet\StylesheetEditor';
-    protected $permissionsDelete = array(
-        'admin.cms.style.canAddStylesheet'
-    );
-    protected $requireACP = array(
-        'delete'
-    );
+	protected $className = 'cms\data\stylesheet\StylesheetEditor';
+	protected $permissionsDelete = array(
+		'admin.cms.style.canAddStylesheet'
+	);
+	protected $requireACP = array(
+		'delete'
+	);
 
-    public function delete() {
-        parent::delete();
-        
-        // kill all layouts
-        $layoutList = new LayoutList();
-        $layoutList->readObjects();
-        foreach ($layoutList->getObjects() as $layout) {
-            LayoutHandler::getInstance()->deleteStylesheet($layout->layoutiD);
-        }
-    }
+	public function delete() {
+		parent::delete();
+		
+		// kill all layouts
+		$layoutList = new LayoutList();
+		$layoutList->readObjects();
+		foreach ($layoutList->getObjects() as $layout) {
+			LayoutHandler::getInstance()->deleteStylesheet($layout->layoutiD);
+		}
+	}
 
-    public function update() {
-        parent::update();
-        
-        // kill all layouts
-        $layoutList = new LayoutList();
-        $layoutList->readObjects();
-        foreach ($layoutList->getObjects() as $layout) {
-            LayoutHandler::getInstance()->deleteStylesheet($layout->layoutID);
-        }
-    }
+	public function update() {
+		parent::update();
+		
+		// kill all layouts
+		$layoutList = new LayoutList();
+		$layoutList->readObjects();
+		foreach ($layoutList->getObjects() as $layout) {
+			LayoutHandler::getInstance()->deleteStylesheet($layout->layoutID);
+		}
+	}
 }

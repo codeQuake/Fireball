@@ -11,7 +11,7 @@ use wcf\acp\form\AbstractCategoryAddForm;
  * @package de.codequake.cms
  */
 class NewsCategoryAddForm extends AbstractCategoryAddForm {
-    public $activeMenuItem = 'cms.acp.menu.link.cms.news.category.add';
-    public $objectTypeName = 'de.codequake.cms.category.news';
-    public $pageTitle = 'wcf.category.add';
+	public $activeMenuItem = 'cms.acp.menu.link.cms.news.category.add';
+	public $objectTypeName = 'de.codequake.cms.category.news';
+	public $pageTitle = 'wcf.category.add';
 }
