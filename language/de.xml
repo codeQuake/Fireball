@@ -1,78 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd"
-	languagename="Deutsch" countrycode="de" languagecode="de">
-	<category name="cms.acp.menu">
-		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="cms.acp.menu.link.cms.page.overview"><![CDATA[Übersicht]]></item>
-		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[Seiten auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
-		<item name="cms.acp.menu.link.cms.content.list"><![CDATA[Inhalte auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.content.add"><![CDATA[Inhalt hinzufügen]]></item>
-		<item name="cms.acp.menu.link.cms.content.section.list"><![CDATA[Inhaltsabschnitte auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
-		<item name="cms.acp.menu.link.cms.layout.list"><![CDATA[Layouts auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.layout.add"><![CDATA[Layout hinzufügen]]></item>
-		<item name="cms.acp.menu.link.cms.file.management"><![CDATA[Dateiverwaltung]]></item>
-		<item name="cms.acp.menu.link.cms.news.category.add"><![CDATA[Kategorie hinzufügen]]></item>
-		<item name="cms.acp.menu.link.cms.news.category.list"><![CDATA[Kategorien auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.style"><![CDATA[Darstellungsoptionen]]></item>
-		<item name="cms.acp.menu.link.cms.content"><![CDATA[Seiten verwalten]]></item>
-		<item name="cms.acp.menu.link.cms.news"><![CDATA[Nachrichten]]></item>
-		<item name="cms.acp.menu.link.cms.module.add"><![CDATA[Modul hinzufügen]]></item>
-		<item name="cms.acp.menu.link.cms.module.list"><![CDATA[Module auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
-		<item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
-		<item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistiken]]></item>
-		<item name="cms.acp.menu.link.cms.media"><![CDATA[Medien]]></item>
-		<item name="cms.acp.menu.link.cms.news.image.list"><![CDATA[Nachrichtenbilder auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.news.image.add"><![CDATA[Nachrichtenbilder hinzufügen]]></item>
-	</category>
-
-	<category name="cms.acp">
-		<item name="cms.acp.page.overview"><![CDATA[Übersicht]]></item>
-		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
-		<item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
-		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
-		<item name="cms.acp.page.title"><![CDATA[Seitentitel]]></item>
-		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von '{$page->title|language}' auflisten]]></item>
-		<item name="cms.acp.page.description"><![CDATA[Beschreibung]]></item>
-		<item name="cms.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
-		<item name="cms.acp.page.setAsHome.confirmMessage"><![CDATA[Möchten sie diese Seite als Startseite des CMS festlegen? Sollte es bereits einen Menüpunkt für diese Seite geben, so wird dieser entfernt.]]></item>
-		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
-		<item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
-		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
-		<item name="cms.acp.page.general.title"><![CDATA[Seitentitel]]></item>
-		<item name="cms.acp.page.general.alias"><![CDATA[URL-Alias]]></item>
-		<item name="cms.acp.page.alias.error.given"><![CDATA[Ein gleichnamiger Alias existiert bereits.]]></item>
-		<item name="cms.acp.page.alias.error.invalid"><![CDATA[Kein gültiger Alias.]]></item>
-		<item name="cms.acp.page.general.alias.preview"><![CDATA[Link-Vorschau:]]></item>
-		<item name="cms.acp.page.general.alias.description"><![CDATA[Der sogenannte Alias ist eine Art Abkürzung, die später der Link zu dieser Seite sein wird. Ein Alias darf ausschließlich aus Kleinbuchstaben von a-z, Ziffern von 0-9 und Bindestrichen bestehen.]]></item>
-		<item name="cms.acp.page.general.description"><![CDATA[Beschreibung]]></item>
-		<item name="cms.acp.page.meta"><![CDATA[Meta-Informationen]]></item>
-		<item name="cms.acp.page.meta.metaDescription"><![CDATA[Meta-Beschreibung]]></item>
-		<item name="cms.acp.page.metaDescription.description"><![CDATA[Das meta-Element Attribut “description” wird laut Google nicht zur Berechnung des Rankings ausgewertet, ist aber maßgeblich für die CTR (Click-Through-Rate) von Usern ausschlaggebend und sollte demnach Beachtung finden.]]></item>
-		<item name="cms.acp.page.meta.metaKeywords"><![CDATA[Meta-Schlüsselwörter]]></item>
-		<item name="cms.acp.page.meta.robots"><![CDATA[Anweisung für Suchmaschinenroboter]]></item>
-		<item name="cms.acp.page.meta.robots.indexfollow"><![CDATA[Seite indizieren und Links folgen (Empfohlen)]]></item>
-		<item name="cms.acp.page.meta.robots.indexnofollow"><![CDATA[Seite indizieren und Links nicht folgen]]></item>
-		<item name="cms.acp.page.meta.robots.noindexfollow"><![CDATA[Seite nicht indizieren, aber Links folgen]]></item>
-		<item name="cms.acp.page.meta.robots.noindexnofollow"><![CDATA[Seite nicht indizieren und keinem Link folgen]]></item>
-		<item name="cms.acp.page.optional"><![CDATA[Einstellungen]]></item>
-		<item name="cms.acp.page.optional.availableDuringOfflineMode"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
-		<item name="cms.acp.page.visibility"><![CDATA[Sichtbarkeit]]></item>
-		<item name="cms.acp.page.optional.invisible"><![CDATA[Seite ist unsichtbar]]></item>
-		<item name="cms.acp.page.optional.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
-		<item name="cms.acp.page.optional.menuItem"><![CDATA[Menüitem erstellen]]></item>
-		<item name="cms.acp.page.optional.showSidebar"><![CDATA[Globale Seitenleiste anzeigen]]></item>
-		<item name="cms.acp.page.optional.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
-		<item name="cms.acp.page.sidebarOrientation.right"><![CDATA[Rechte Seitenleiste]]></item>
-		<item name="cms.acp.page.sidebarOrientation.left"><![CDATA[Linke Seitenleiste]]></item>
-		<item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
-		<item name="cms.acp.page.optional.isCommentable"><![CDATA[Kommentare erlauben]]></item>
-		<item name="cms.acp.page.optional.layoutID"><![CDATA[Layout auswählen]]></item>
-		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
+	<category name="cms.acp.content">
 		<item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
 		<item name="cms.acp.content.add.noPage"><![CDATA[Keine Seiten gefunden! Um einen Inhalt zu erstellen müssen Sie zuerst mindestens eine Seite erstellen.]]></item>
 		<item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
@@ -91,24 +19,17 @@
 		<item name="cms.acp.content.page.list"><![CDATA[Seite wählen...]]></item>
 		<item name="cms.acp.content.section.general"><![CDATA[Allgemeine Einstellungen]]></item>
 		<item name="cms.acp.content.section.general.objectType"><![CDATA[Inhaltstyp]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.headline"><![CDATA[Überschrift]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.headline"><![CDATA[Überschrift]]></item>
 		<item name="cms.acp.content.section.data"><![CDATA[Inhalt]]></item>
 		<item name="cms.acp.content.section.data.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.section.data.headline"><![CDATA[Überschrift]]></item>
 		<item name="cms.acp.content.section.data.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Bilder]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Modul]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.file"><![CDATA[Datei]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.image"><![CDATA[Bilder]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.news"><![CDATA[Nachrichtenauflistung]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.module"><![CDATA[Modul]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.dashboard"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.section.data.boxID"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.section.data.boxID.description"><![CDATA[Wählen Sie eine Dashboardbox. Die Auswahl passt sich der Ausrichtung des Inhaltsbereichs an.]]></item>
 		<item name="cms.acp.content.section.data.moduleID"><![CDATA[Modul auswählen]]></item>
@@ -152,60 +73,13 @@
 		<item name="cms.acp.content.section.data.type"><![CDATA[Typ]]></item>
 		<item name="cms.acp.content.section.data.button"><![CDATA[großer Button]]></item>
 		<item name="cms.acp.content.section.data.buttonsmall"><![CDATA[kleiner Button]]></item>
-		<item
-			name="cms.acp.content.section.type.de.codequake.cms.section.type.link"><![CDATA[Hyperlink/Button]]></item>
+		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.link"><![CDATA[Hyperlink/Button]]></item>
 		<item name="cms.acp.content.section.data.type"><![CDATA[Typ]]></item>
-		<item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
-		<item name="cms.acp.module.list"><![CDATA[Module auflisten]]></item>
-		<item name="cms.acp.module.add"><![CDATA[Modul hinzufügen]]></item>
-		<item name="cms.acp.module.edit"><![CDATA[Modul bearbeiten]]></item>
-		<item name="cms.acp.module.general"><![CDATA[Allgemeine Einstellungen]]></item>
-		<item name="cms.acp.module.php"><![CDATA[PHP-Quelltext]]></item>
-		<item name="cms.acp.module.php.description"><![CDATA[Hier können Sie PHP-Quelltext verwenden. <strong>Achtung</strong>: PHP-Fehler können dazu führen, dass Seiten nicht korrekt dargestellt werden.]]></item>
-		<item name="cms.acp.module.tpl"><![CDATA[Template-Quelltext]]></item>
-		<item name="cms.acp.module.tpl.description"><![CDATA[Hier können Sie Template-Quelltext verwenden (<a href="http://www.smarty.net/">Dokumentation</a>).]]></item>
-		<item name="cms.acp.module.title"><![CDATA[Titel]]></item>
-		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
-		<item name="cms.acp.stylesheet.title"><![CDATA[Titel]]></item>
-		<item name="cms.acp.stylesheet.general"><![CDATA[Allgemeine Einstellungen]]></item>
-		<item name="cms.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
-		<item name="cms.acp.stylesheet.edit"><![CDATA[Stylesheet bearbeiten]]></item>
-		<item name="cms.acp.stylesheet.less"><![CDATA[CSS & Less]]></item>
-		<item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Sie haben zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins.]]></item>
-		<item name="cms.acp.layout.list"><![CDATA[Layouts]]></item>
-		<item name="cms.acp.layout.edit"><![CDATA[Layout bearbeiten]]></item>
-		<item name="cms.acp.layout.title"><![CDATA[Titel]]></item>
-		<item name="cms.acp.layout.add"><![CDATA[Layout hinzufügen]]></item>
-		<item name="cms.acp.layout.add.noSheet"><![CDATA[Um ein Layout zu erstellen müssen Sie zuerst mindestens ein Stylesheet erstellen!]]></item>
-		<item name="cms.acp.layout.general"><![CDATA[Allgemeine Einstellungen]]></item>
-		<item name="cms.acp.layout.options"><![CDATA[Optionen]]></item>
-		<item name="cms.acp.layout.stylesheets"><![CDATA[Stylesheets auswählen]]></item>
-		<item name="cms.acp.file.error.invalid"><![CDATA[Ungültige Dateiendung]]></item>
-		<item name="cms.acp.file.file"><![CDATA[Datei]]></item>
-		<item name="cms.acp.file.title"><![CDATA[Titel]]></item>
-		<item name="cms.acp.file.type"><![CDATA[Typ]]></item>
-		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
-		<item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
-		<item name="cms.acp.file.error.empty"><![CDATA[Bitte laden Sie eine gültige Datei hoch.]]></item>
-		<item name="cms.acp.file.management"><![CDATA[Dateiverwaltung]]></item>
-		<item name="cms.acp.file.details"><![CDATA[Informationen]]></item>
-		<item name="cms.acp.folder"><![CDATA[Ordner]]></item>
-		<item name="cms.acp.file.folderID"><![CDATA[Ordner]]></item>
-		<item name="cms.acp.folder.toRoot"><![CDATA[Zum Hauptverzeichnis wechseln]]></item>
-		<item name="cms.acp.folder.add"><![CDATA[Ordner erstellen]]></item>
-		<item name="cms.acp.folder.open"><![CDATA[Hier klicken um Dateien anzuzeigen]]></item>
-		<item name="cms.acp.folder.delete.sure"><![CDATA[Wollen Sie diesen Ordner und alle sich darin befindenden Dateien wirklich löschen?]]></item>
-		<item name="cms.acp.file.add"><![CDATA[Datei hochladen]]></item>
-		<item name="cms.acp.files.noItems"><![CDATA[Es sind keine Dateien und Ordner vorhanden.]]></item>
-		<item name="cms.acp.folder.error.exists"><![CDATA[Der Ordnername ist ungültig oder existiert bereits.]]></item>
-		<item name="cms.acp.file.folderID.root"><![CDATA[Hauptverzeichnis]]></item>
-		<item name="cms.acp.page.delete.sure"><![CDATA[Wollen Sie diese Seite und all ihre Inhalte wirklich löschen?]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt und all seine Abschnitte wirklich löschen?]]></item>
 		<item name="cms.acp.content.section.delete.sure"><![CDATA[Wollen Sie diesen Abschnitt wirklich löschen?]]></item>
-		<item name="cms.acp.file.delete.sure"><![CDATA[Wollen Sie diese Datei wirklich löschen?]]></item>
-		<item name="cms.acp.module.delete.sure"><![CDATA[Wollen Sie dieses Modul wirklich löschen?]]></item>
-		<item name="cms.acp.stylesheet.delete.sure"><![CDATA[Wollen Sie dieses Stylesheet wirklich löschen?]]></item>
-		<item name="cms.acp.layout.delete.sure"><![CDATA[Wollen Sie dieses Layout wirklich löschen?]]></item>
+	</category>
+
+	<category name="cms.acp.dashboard">
 		<item name="cms.acp.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.dashboard.lastWeeksVisitors"><![CDATA[Besucher der letzten Woche]]></item>
 		<item name="cms.acp.dashboard.all"><![CDATA[Alle Besucher]]></item>
@@ -216,13 +90,87 @@
 		<item name="cms.acp.dashboard.visitsYesterday"><![CDATA[Besuche gestern]]></item>
 		<item name="cms.acp.dashboard.visitsMonth"><![CDATA[Besuche diesen Monat]]></item>
 		<item name="cms.acp.dashboard.visitsAll"><![CDATA[Besuche gesamt]]></item>
-		<item name="cms.acp.stats"><![CDATA[Statistiken]]></item>
-		<item name="cms.acp.stats.vistors"><![CDATA[Besucher]]></item>
-		<item name="cms.acp.stats.browsers"><![CDATA[Browserfamilien]]></item>
-		<item name="cms.acp.stats.mostClicked"><![CDATA[Meistgeklickte Seiten]]></item>
-		<item name="cms.acp.stats.page"><![CDATA[Seite]]></item>
-		<item name="cms.acp.stats.clicks"><![CDATA[Clicks]]></item>
-		<item name="cms.acp.stats.vistors"><![CDATA[Aktuelle Besucher]]></item>
+	</category>
+
+	<category name="cms.acp.file">
+		<item name="cms.acp.file.error.invalid"><![CDATA[Ungültige Dateiendung]]></item>
+		<item name="cms.acp.file.file"><![CDATA[Datei]]></item>
+		<item name="cms.acp.file.title"><![CDATA[Titel]]></item>
+		<item name="cms.acp.file.type"><![CDATA[Typ]]></item>
+		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
+		<item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
+		<item name="cms.acp.file.error.empty"><![CDATA[Bitte laden Sie eine gültige Datei hoch.]]></item>
+		<item name="cms.acp.file.management"><![CDATA[Dateiverwaltung]]></item>
+		<item name="cms.acp.file.details"><![CDATA[Informationen]]></item>
+		<item name="cms.acp.file.folderID"><![CDATA[Ordner]]></item>
+		<item name="cms.acp.file.add"><![CDATA[Datei hochladen]]></item>
+		<item name="cms.acp.file.folderID.root"><![CDATA[Hauptverzeichnis]]></item>
+		<item name="cms.acp.file.delete.sure"><![CDATA[Wollen Sie diese Datei wirklich löschen?]]></item>
+	</category>
+
+	<category name="cms.acp.folder">
+		<item name="cms.acp.folder"><![CDATA[Ordner]]></item>
+		<item name="cms.acp.folder.toRoot"><![CDATA[Zum Hauptverzeichnis wechseln]]></item>
+		<item name="cms.acp.folder.add"><![CDATA[Ordner erstellen]]></item>
+		<item name="cms.acp.folder.open"><![CDATA[Hier klicken um Dateien anzuzeigen]]></item>
+		<item name="cms.acp.folder.delete.sure"><![CDATA[Wollen Sie diesen Ordner und alle sich darin befindenden Dateien wirklich löschen?]]></item>
+		<item name="cms.acp.folder.error.exists"><![CDATA[Der Ordnername ist ungültig oder existiert bereits.]]></item>
+	</category>
+
+	<category name="cms.acp.layout">
+		<item name="cms.acp.layout.list"><![CDATA[Layouts]]></item>
+		<item name="cms.acp.layout.edit"><![CDATA[Layout bearbeiten]]></item>
+		<item name="cms.acp.layout.title"><![CDATA[Titel]]></item>
+		<item name="cms.acp.layout.add"><![CDATA[Layout hinzufügen]]></item>
+		<item name="cms.acp.layout.add.noSheet"><![CDATA[Um ein Layout zu erstellen müssen Sie zuerst mindestens ein Stylesheet erstellen!]]></item>
+		<item name="cms.acp.layout.general"><![CDATA[Allgemeine Einstellungen]]></item>
+		<item name="cms.acp.layout.options"><![CDATA[Optionen]]></item>
+		<item name="cms.acp.layout.stylesheets"><![CDATA[Stylesheets auswählen]]></item>
+		<item name="cms.acp.layout.delete.sure"><![CDATA[Wollen Sie dieses Layout wirklich löschen?]]></item>
+	</category>
+
+	<category name="cms.acp.menu">
+		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
+		<item name="cms.acp.menu.link.cms.page.overview"><![CDATA[Übersicht]]></item>
+		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[Seiten auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
+		<item name="cms.acp.menu.link.cms.content.list"><![CDATA[Inhalte auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.content.add"><![CDATA[Inhalt hinzufügen]]></item>
+		<item name="cms.acp.menu.link.cms.content.section.list"><![CDATA[Inhaltsabschnitte auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
+		<item name="cms.acp.menu.link.cms.layout.list"><![CDATA[Layouts auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.layout.add"><![CDATA[Layout hinzufügen]]></item>
+		<item name="cms.acp.menu.link.cms.file.management"><![CDATA[Dateiverwaltung]]></item>
+		<item name="cms.acp.menu.link.cms.news.category.add"><![CDATA[Kategorie hinzufügen]]></item>
+		<item name="cms.acp.menu.link.cms.news.category.list"><![CDATA[Kategorien auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.style"><![CDATA[Darstellungsoptionen]]></item>
+		<item name="cms.acp.menu.link.cms.content"><![CDATA[Seiten verwalten]]></item>
+		<item name="cms.acp.menu.link.cms.news"><![CDATA[Nachrichten]]></item>
+		<item name="cms.acp.menu.link.cms.module.add"><![CDATA[Modul hinzufügen]]></item>
+		<item name="cms.acp.menu.link.cms.module.list"><![CDATA[Module auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
+		<item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
+		<item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistiken]]></item>
+		<item name="cms.acp.menu.link.cms.media"><![CDATA[Medien]]></item>
+		<item name="cms.acp.menu.link.cms.news.image.list"><![CDATA[Nachrichtenbilder auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.news.image.add"><![CDATA[Nachrichtenbilder hinzufügen]]></item>
+	</category>
+
+	<category name="cms.acp.module">
+		<item name="cms.acp.module.list"><![CDATA[Module auflisten]]></item>
+		<item name="cms.acp.module.add"><![CDATA[Modul hinzufügen]]></item>
+		<item name="cms.acp.module.edit"><![CDATA[Modul bearbeiten]]></item>
+		<item name="cms.acp.module.general"><![CDATA[Allgemeine Einstellungen]]></item>
+		<item name="cms.acp.module.php"><![CDATA[PHP-Quelltext]]></item>
+		<item name="cms.acp.module.php.description"><![CDATA[Hier können Sie PHP-Quelltext verwenden. <strong>Achtung</strong>: PHP-Fehler können dazu führen, dass Seiten nicht korrekt dargestellt werden.]]></item>
+		<item name="cms.acp.module.tpl"><![CDATA[Template-Quelltext]]></item>
+		<item name="cms.acp.module.tpl.description"><![CDATA[Hier können Sie Template-Quelltext verwenden (<a href="http://www.smarty.net/">Dokumentation</a>).]]></item>
+		<item name="cms.acp.module.title"><![CDATA[Titel]]></item>
+		<item name="cms.acp.module.delete.sure"><![CDATA[Wollen Sie dieses Modul wirklich löschen?]]></item>
+	</category>
+
+	<category name="cms.acp.news">
 		<item name="cms.acp.news.image.data"><![CDATA[Daten]]></item>
 		<item name="cms.acp.news.image.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.news.image"><![CDATA[Nachrichtenbild]]></item>
@@ -230,6 +178,77 @@
 		<item name="cms.acp.news.image.list"><![CDATA[Nachrichtenbilder]]></item>
 		<item name="cms.acp.news.image.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.news.image"><![CDATA[Vorschaubild]]></item>
+	</category>
+
+	<category name="cms.acp.page">
+		<item name="cms.acp.page.overview"><![CDATA[Übersicht]]></item>
+		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
+		<item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
+		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
+		<item name="cms.acp.page.title"><![CDATA[Seitentitel]]></item>
+		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von '{$page->title|language}' auflisten]]></item>
+		<item name="cms.acp.page.description"><![CDATA[Beschreibung]]></item>
+		<item name="cms.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
+		<item name="cms.acp.page.setAsHome.confirmMessage"><![CDATA[Möchten sie diese Seite als Startseite des CMS festlegen? Sollte es bereits einen Menüpunkt für diese Seite geben, so wird dieser entfernt.]]></item>
+		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
+		<item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
+		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
+		<item name="cms.acp.page.general.alias"><![CDATA[URL-Alias]]></item>
+		<item name="cms.acp.page.alias.error.given"><![CDATA[Ein gleichnamiger Alias existiert bereits.]]></item>
+		<item name="cms.acp.page.alias.error.invalid"><![CDATA[Kein gültiger Alias.]]></item>
+		<item name="cms.acp.page.general.alias.preview"><![CDATA[Link-Vorschau:]]></item>
+		<item name="cms.acp.page.general.alias.description"><![CDATA[Der sogenannte Alias ist eine Art Abkürzung, die später der Link zu dieser Seite sein wird. Ein Alias darf ausschließlich aus Kleinbuchstaben, Ziffern und Bindestrichen bestehen.]]></item>
+		<item name="cms.acp.page.general.description"><![CDATA[Beschreibung]]></item>
+		<item name="cms.acp.page.meta"><![CDATA[Meta-Informationen]]></item>
+		<item name="cms.acp.page.meta.metaDescription"><![CDATA[Meta-Beschreibung]]></item>
+		<item name="cms.acp.page.metaDescription.description"><![CDATA[Das meta-Element Attribut “description” wird laut Google nicht zur Berechnung des Rankings ausgewertet, ist aber maßgeblich für die CTR (Click-Through-Rate) von Usern ausschlaggebend und sollte demnach Beachtung finden.]]></item>
+		<item name="cms.acp.page.meta.metaKeywords"><![CDATA[Meta-Schlüsselwörter]]></item>
+		<item name="cms.acp.page.meta.robots"><![CDATA[Anweisung für Suchmaschinenroboter]]></item>
+		<item name="cms.acp.page.meta.robots.indexfollow"><![CDATA[Seite indizieren und Links folgen (Empfohlen)]]></item>
+		<item name="cms.acp.page.meta.robots.indexnofollow"><![CDATA[Seite indizieren und Links nicht folgen]]></item>
+		<item name="cms.acp.page.meta.robots.noindexfollow"><![CDATA[Seite nicht indizieren, aber Links folgen]]></item>
+		<item name="cms.acp.page.meta.robots.noindexnofollow"><![CDATA[Seite nicht indizieren und keinem Link folgen]]></item>
+		<item name="cms.acp.page.settings"><![CDATA[Einstellungen]]></item>
+		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
+		<item name="cms.acp.page.visibility"><![CDATA[Sichtbarkeit]]></item>
+		<item name="cms.acp.page.general.menuItem"><![CDATA[Menüpunkt erstellen]]></item>
+		<item name="cms.acp.page.general.menuItem.description"><![CDATA[Sie können den erstellten Menüpunkt anschließend in der <a href="{link controller='PageMenuItemList'}{/link}">Hauptmenüverwaltung</a> verschieben oder bearbeiten.]]></item>
+		<item name="cms.acp.page.settings.showSidebar"><![CDATA[Globale Seitenleiste anzeigen]]></item>
+		<item name="cms.acp.page.settings.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
+		<item name="cms.acp.page.settings.sidebarOrientation.right"><![CDATA[Rechte Seitenleiste]]></item>
+		<item name="cms.acp.page.settings.sidebarOrientation.left"><![CDATA[Linke Seitenleiste]]></item>
+		<item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
+		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Kommentare aktivieren]]></item>
+		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[Erlaubt anderen Benutzern diese Seite zu kommentieren.]]></item>
+		<item name="cms.acp.page.settings.layoutID"><![CDATA[Layout auswählen]]></item>
+		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
+		<item name="cms.acp.page.position"><![CDATA[Position]]></item>
+		<item name="cms.acp.page.position.description"><![CDATA[Legt die Reihenfolge fest, in der die Seiten aufgelistet werden.]]></item>
+		<item name="cms.acp.page.position.invisible"><![CDATA[Seite verstecken]]></item>
+		<item name="cms.acp.page.position.invisible.description"><![CDATA[Diese Seite und ihre Unterseiten werden in allen Listen ausgeblendet, sind aber weiterhin mittels Direktlink aufrufbar.]]></item>
+		<item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
+		<item name="cms.acp.page.delete.sure"><![CDATA[Wollen Sie diese Seite und all ihre Inhalte wirklich löschen?]]></item>
+	</category>
+
+	<category name="cms.acp.stats">
+		<item name="cms.acp.stats"><![CDATA[Statistiken]]></item>
+		<item name="cms.acp.stats.vistors"><![CDATA[Besucher]]></item>
+		<item name="cms.acp.stats.browsers"><![CDATA[Browserfamilien]]></item>
+		<item name="cms.acp.stats.mostClicked"><![CDATA[Meistgeklickte Seiten]]></item>
+		<item name="cms.acp.stats.page"><![CDATA[Seite]]></item>
+		<item name="cms.acp.stats.clicks"><![CDATA[Clicks]]></item>
+		<item name="cms.acp.stats.vistors"><![CDATA[Aktuelle Besucher]]></item>
+	</category>
+
+	<category name="cms.acp.stylesheet">
+		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.stylesheet.title"><![CDATA[Titel]]></item>
+		<item name="cms.acp.stylesheet.general"><![CDATA[Allgemeine Einstellungen]]></item>
+		<item name="cms.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
+		<item name="cms.acp.stylesheet.edit"><![CDATA[Stylesheet bearbeiten]]></item>
+		<item name="cms.acp.stylesheet.less"><![CDATA[CSS & Less]]></item>
+		<item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Sie haben zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins.]]></item>
+		<item name="cms.acp.stylesheet.delete.sure"><![CDATA[Wollen Sie dieses Stylesheet wirklich löschen?]]></item>
 	</category>
 
 	<category name="cms.page">
@@ -375,8 +394,7 @@
 		<item name="wcf.acp.group.option.admin.cms.content.canUploadAttachment"><![CDATA[Kann Dateien anhängen]]></item>
 		<item name="wcf.acp.group.option.admin.cms.content.attachmentMaxSize"><![CDATA[Maximale Dateianhangsgröße]]></item>
 		<item name="wcf.acp.group.option.admin.cms.content.maxAttachmentCount"><![CDATA[Maximale Anzahl an Dateianhängen pro Inhaltsabschnitt]]></item>
-		<item
-			name="wcf.acp.group.option.admin.cms.content.allowedAttachmentExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
+		<item name="wcf.acp.group.option.admin.cms.content.allowedAttachmentExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
 		<item name="wcf.acp.group.option.user.cms.news.canViewDelayedNews"><![CDATA[Kann Nachrichten sehen, die noch nicht veröffentlicht wurden]]></item>
 	</category>
 
@@ -389,8 +407,7 @@
 		<item name="wcf.acl.option.de.codequake.cms.category.news.canViewNews"><![CDATA[Kann Nachrichten sehen]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.category.news.canAddNews"><![CDATA[Kann Nachrichten hinzufügen]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.category.news.canModerateNews"><![CDATA[Nachrichten Moderationsrecht]]></item>
-		<item
-			name="wcf.acl.option.de.codequake.cms.category.news.canViewDelayedNews"><![CDATA[Kann Nachrichten sehen, die noch nicht veröffentlicht wurden]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.category.news.canViewDelayedNews"><![CDATA[Kann Nachrichten sehen, die noch nicht veröffentlicht wurden]]></item>
 	</category>
 
 	<category name="wcf.acp.option">
@@ -431,21 +448,15 @@
 	</category>
 
 	<category name="wcf.user.recentActivity">
-		<item
-			name="wcf.user.recentActivity.de.codequake.cms.news.recentActivityEvent"><![CDATA[Nachricht]]></item>
-		<item
-			name="wcf.user.recentActivity.de.codequake.cms.page.comment.recentActivityEvent"><![CDATA[Kommentar (Seite)]]></item>
-		<item
-			name="wcf.user.recentActivity.de.codequake.cms.page.comment.response.recentActivityEvent"><![CDATA[Antwort (Seite)]]></item>
-		<item
-			name="wcf.user.recentActivity.de.codequake.cms.news.comment.recentActivityEvent"><![CDATA[Kommentar (Nachricht)]]></item>
-		<item
-			name="wcf.user.recentActivity.de.codequake.cms.news.comment.response.recentActivityEvent"><![CDATA[Antwort (Nachricht)]]></item>
+		<item name="wcf.user.recentActivity.de.codequake.cms.news.recentActivityEvent"><![CDATA[Nachricht]]></item>
+		<item name="wcf.user.recentActivity.de.codequake.cms.page.comment.recentActivityEvent"><![CDATA[Kommentar (Seite)]]></item>
+		<item name="wcf.user.recentActivity.de.codequake.cms.page.comment.response.recentActivityEvent"><![CDATA[Antwort (Seite)]]></item>
+		<item name="wcf.user.recentActivity.de.codequake.cms.news.comment.recentActivityEvent"><![CDATA[Kommentar (Nachricht)]]></item>
+		<item name="wcf.user.recentActivity.de.codequake.cms.news.comment.response.recentActivityEvent"><![CDATA[Antwort (Nachricht)]]></item>
 	</category>
 
 	<category name="wcf.user.activityPoint">
-		<item
-			name="wcf.user.activityPoint.objectType.de.codequake.cms.activityPointEvent.news"><![CDATA[Nachrichten]]></item>
+		<item name="wcf.user.activityPoint.objectType.de.codequake.cms.activityPointEvent.news"><![CDATA[Nachrichten]]></item>
 	</category>
 
 	<category name="wcf.tagging">
@@ -465,14 +476,10 @@
 
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.de.codequake.cms"><![CDATA[CMS]]></item>
-		<item
-			name="wcf.user.notification.de.codequake.cms.news.comment.notification.comment"><![CDATA[Neuer Kommentar zu einer Ihrer Nachrichten]]></item>
-		<item
-			name="wcf.user.notification.de.codequake.cms.news.comment.response.notification.commentResponse"><![CDATA[Neue Antwort auf einen Kommentar von Ihnen zu einer Nachricht]]></item>
-		<item
-			name="wcf.user.notification.de.codequake.cms.news.comment.response.notification.commentResponseOwner"><![CDATA[Neue Antwort auf einen Kommentar zu einer Ihrer Nachrichten]]></item>
-		<item
-			name="wcf.user.notification.de.codequake.cms.page.comment.response.notification.commentResponse"><![CDATA[Neue Antwort auf einen Kommentar auf einer Seite]]></item>
+		<item name="wcf.user.notification.de.codequake.cms.news.comment.notification.comment"><![CDATA[Neuer Kommentar zu einer Ihrer Nachrichten]]></item>
+		<item name="wcf.user.notification.de.codequake.cms.news.comment.response.notification.commentResponse"><![CDATA[Neue Antwort auf einen Kommentar von Ihnen zu einer Nachricht]]></item>
+		<item name="wcf.user.notification.de.codequake.cms.news.comment.response.notification.commentResponseOwner"><![CDATA[Neue Antwort auf einen Kommentar zu einer Ihrer Nachrichten]]></item>
+		<item name="wcf.user.notification.de.codequake.cms.page.comment.response.notification.commentResponse"><![CDATA[Neue Antwort auf einen Kommentar auf einer Seite]]></item>
 	</category>
 
 	<category name="wcf.acp.dataImport">
