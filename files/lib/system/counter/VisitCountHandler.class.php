@@ -94,26 +94,14 @@ class VisitCountHandler extends SingletonFactory {
 		if ($statement->fetchColumn() != 0) return true;
 		return false;
 	}
-
+	
+	
 	public function getVisitors($start, $end) {
 		$vistors = array();
 		$date = $start;
 		while ($date <= $end) {
-			$months = array(
-				WCF::getLanguage()->get('wcf.date.month.january'),
-				WCF::getLanguage()->get('wcf.date.month.february'),
-				WCF::getLanguage()->get('wcf.date.month.march'),
-				WCF::getLanguage()->get('wcf.date.month.april'),
-				WCF::getLanguage()->get('wcf.date.month.may'),
-				WCF::getLanguage()->get('wcf.date.month.june'),
-				WCF::getLanguage()->get('wcf.date.month.july'),
-				WCF::getLanguage()->get('wcf.date.month.august'),
-				WCF::getLanguage()->get('wcf.date.month.september'),
-				WCF::getLanguage()->get('wcf.date.month.october'),
-				WCF::getLanguage()->get('wcf.date.month.november'),
-				WCF::getLanguage()->get('wcf.date.month.december')
-			);
 			
+			$months = $this->getMonths();
 			$visitors[] = array(
 				'visitors' => $this->getDailyVisitors(DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'j'), DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'n'), DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'Y')),
 				'string' => DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'j') . '. ' . $months[DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'n') - 1] . ' ' . DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'Y')
@@ -156,20 +144,7 @@ class VisitCountHandler extends SingletonFactory {
 		$day = $currentDay;
 		
 		for ($i = 1; $i <= 7; $i ++) {
-			$months = array(
-				WCF::getLanguage()->get('wcf.date.month.january'),
-				WCF::getLanguage()->get('wcf.date.month.february'),
-				WCF::getLanguage()->get('wcf.date.month.march'),
-				WCF::getLanguage()->get('wcf.date.month.april'),
-				WCF::getLanguage()->get('wcf.date.month.may'),
-				WCF::getLanguage()->get('wcf.date.month.june'),
-				WCF::getLanguage()->get('wcf.date.month.july'),
-				WCF::getLanguage()->get('wcf.date.month.august'),
-				WCF::getLanguage()->get('wcf.date.month.september'),
-				WCF::getLanguage()->get('wcf.date.month.october'),
-				WCF::getLanguage()->get('wcf.date.month.november'),
-				WCF::getLanguage()->get('wcf.date.month.december')
-			);
+			$months = $this->getMonths();
 			$visitors[$i] = array(
 				'string' => $day . '. ' . $months[$month - 1] . ' ' . $year,
 				'visitors' => $this->getDailyVisitors($day, $month, $year)
@@ -303,4 +278,23 @@ class VisitCountHandler extends SingletonFactory {
 		
 		return null;
 	}
+	
+	protected function getMonths(){
+		$months = array(
+			WCF::getLanguage()->get('wcf.date.month.january'),
+			WCF::getLanguage()->get('wcf.date.month.february'),
+			WCF::getLanguage()->get('wcf.date.month.march'),
+			WCF::getLanguage()->get('wcf.date.month.april'),
+			WCF::getLanguage()->get('wcf.date.month.may'),
+			WCF::getLanguage()->get('wcf.date.month.june'),
+			WCF::getLanguage()->get('wcf.date.month.july'),
+			WCF::getLanguage()->get('wcf.date.month.august'),
+			WCF::getLanguage()->get('wcf.date.month.september'),
+			WCF::getLanguage()->get('wcf.date.month.october'),
+			WCF::getLanguage()->get('wcf.date.month.november'),
+			WCF::getLanguage()->get('wcf.date.month.december')
+		);
+		return $months;
+	}
+
 }
