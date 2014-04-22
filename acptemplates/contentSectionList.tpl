@@ -6,7 +6,7 @@
 				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
 			</a>
 			<span class="pointer">
-				<span>»</span>
+				<span>Â»</span>
 			</span>
 		</li>
 		<li title="{$content->getPage()->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -14,7 +14,7 @@
 				<span itemprop="title">{$content->getPage()->getTitle()|language}</span>
 			</a>
 			<span class="pointer">
-				<span>»</span>
+				<span>Â»</span>
 			</span>
 		</li>
 		<li title="{$content->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -22,7 +22,7 @@
 				<span itemprop="title">{$content->getTitle()|language}</span>
 			</a>
 			<span class="pointer">
-				<span>»</span>
+				<span>Â»</span>
 			</span>
 		</li>
 	</ul>

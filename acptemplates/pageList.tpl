@@ -7,7 +7,7 @@
 				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
 			</a>
 			<span class="pointer">
-				<span>�</span>
+				<span>»</span>
 			</span>
 		</li>
 </nav>
