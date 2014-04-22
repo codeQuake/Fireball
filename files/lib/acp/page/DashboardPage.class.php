@@ -6,6 +6,7 @@ use cms\data\news\NewsList;
 use cms\data\page\PageList;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\page\AbstractPage;
+use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 use wcf\util\HTTPRequest;
 
@@ -24,7 +25,7 @@ class DashboardPage extends AbstractPage {
 			$feedData = $request->getReply();
 			$feedData = $feedData['body'];
 		}
-		catch (\wcf\system\exception\SystemException $e) {
+		catch (SystemException $e) {
 			return (array(
 				'errorMessage' => $e->getMessage()
 			));

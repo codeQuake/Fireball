@@ -6,6 +6,7 @@ use cms\data\news\image\NewsImage;
 use cms\data\news\image\NewsImageList;
 use wcf\form\AbstractForm;
 use wcf\system\category\CategoryHandler;
+use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\WCF;
@@ -84,7 +85,7 @@ class FeedAddForm extends AbstractForm {
 			$feedData = $request->getReply();
 			$feedData = $feedData['body'];
 		}
-		catch (\wcf\system\exception\SystemException $e) {
+		catch (SystemException $e) {
 			// invalid URL
 			return (array(
 				'errorMessage' => $e->getMessage()

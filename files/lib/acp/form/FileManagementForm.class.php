@@ -153,7 +153,7 @@ class FileManagementForm extends AbstractForm {
 	}
 	
 	// see http://www.php.net/manual/de/function.ini-get.php
-	function return_bytes($val) {
+	protected function return_bytes($val) {
 		$val = trim($val);
 		$last = strtolower($val[strlen($val) - 1]);
 		switch ($last) {
