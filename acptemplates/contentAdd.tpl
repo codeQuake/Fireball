@@ -10,7 +10,7 @@
 				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
 			</a>
 			<span class="pointer">
-				<span>�</span>
+				<span>»</span>
 			</span>
 		</li>
 		
@@ -20,7 +20,7 @@
 				<span itemprop="title">{$page->getTitle()|language}</span>
 			</a>
 			<span class="pointer">
-				<span>�</span>
+				<span>»</span>
 			</span>
 		</li>
 	{/if}
