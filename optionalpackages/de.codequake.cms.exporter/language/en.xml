@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd"
-	languagecode="en">
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms.restore.list"><![CDATA[Backup list]]></item>
 	</category>
-	<category name="cms.acp">
+
+	<category name="cms.acp.restore">
 		<item name="cms.acp.restore.list"><![CDATA[Backups]]></item>
 		<item name="cms.acp.restore.time"><![CDATA[Backup time]]></item>
 		<item name="cms.acp.restore.restore"><![CDATA[Restore]]></item>
@@ -13,23 +12,23 @@
 		<item name="cms.acp.restore.download"><![CDATA[Download]]></item>
 		<item name="cms.acp.restore.tar"><![CDATA[Upload package]]></item>
 		<item name="cms.acp.restore.info"><![CDATA[Importing huge datasets needs a lot of time, please do not close this window! All data will be erased before the import.]]></item>
-
 		<item name="cms.acp.restore.import.sure"><![CDATA[Are you sure you want to restore to this backup? All current data will be deleted!]]></item>
 		<item name="cms.acp.restore.delete.sure"><![CDATA[Are you sure you want to delete this backup?]]></item>
 		<item name="cms.acp.restore.create"><![CDATA[Create & download backup]]></item>
 	</category>
+
 	<category name="wcf.acp.dataImport">
-		<item
-			name="wcf.acp.dataImport.exporter.com.woltlab.wcf.exporter.wordpress3xtoNews"><![CDATA[WordPress 3.7+ (as News)]]></item>
-	</category>
-	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.cms_automatic_export"><![CDATA[Automatic Backups]]></item>
-		<item name="wcf.acp.option.cms_automatic_backup_delete"><![CDATA[Automatic delete]]></item>
-		<item name="wcf.acp.option.cms_automatic_backup_delete.description"><![CDATA[Automatische delete of backups older than X days]]></item>
+		<item name="wcf.acp.dataImport.exporter.com.woltlab.wcf.exporter.wordpress3xtoNews"><![CDATA[WordPress 3.7+ (as News)]]></item>
 	</category>
 
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.category.admin.cms.restore"><![CDATA[Restore]]></item>
 		<item name="wcf.acp.group.option.admin.cms.restore.canRestore"><![CDATA[Can restore page data]]></item>
+	</category>
+
+	<category name="wcf.acp.option">
+		<item name="wcf.acp.option.cms_automatic_export"><![CDATA[Automatic Backups]]></item>
+		<item name="wcf.acp.option.cms_automatic_backup_delete"><![CDATA[Automatic delete]]></item>
+		<item name="wcf.acp.option.cms_automatic_backup_delete.description"><![CDATA[Automatische delete of backups older than X days]]></item>
 	</category>
 </language>

@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd"
-	languagecode="de">
-	<category name="cms.acp.menu">
-		<item name="cms.acp.menu.link.cms.feed.list"><![CDATA[RSS-Feeds auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.feed.add"><![CDATA[RSS-Feed hinzufügen]]></item>
-	</category>
-
-	<category name="cms.acp">
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
+	<category name="cms.acp.feed">
 		<item name="cms.acp.feed.list"><![CDATA[RSS-Feeds auflisten]]></item>
 		<item name="cms.acp.feed.general"><![CDATA[Allgemeine Informationen]]></item>
 		<item name="cms.acp.feed.title"><![CDATA[Titel]]></item>
@@ -17,6 +10,11 @@
 		<item name="cms.acp.feed.edit"><![CDATA[RSS-Feed bearbeiten]]></item>
 		<item name="cms.acp.feed.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Feed löschen möchten?]]></item>
 		<item name="cms.acp.feed.categoryID"><![CDATA[Kategorie]]></item>
+	</category>
+
+	<category name="cms.acp.menu">
+		<item name="cms.acp.menu.link.cms.feed.list"><![CDATA[RSS-Feeds auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.feed.add"><![CDATA[RSS-Feed hinzufügen]]></item>
 	</category>
 
 	<category name="wcf.acp.group">
