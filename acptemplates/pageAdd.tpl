@@ -45,7 +45,7 @@
 </nav>
 
 <header class="boxHeadline">
-    <h1>{lang}cms.acp.page.{@$action}{/lang}{if $action != 'add'}{if $page->isHome} <span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>{/if}{/if}</h1>
+	<h1>{lang}cms.acp.page.{@$action}{/lang}{if $action != 'add'}{if $page->isHome} <span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>{/if}{/if}</h1>
 </header>
 
 {include file='formError'}
@@ -86,22 +86,8 @@
 			<fieldset>
 				<legend>{lang}wcf.global.form.data{/lang}</legend>
 
-				{if $pageList != null}
-					<dl{if $errorField == 'parentID'} class="formError"{/if}>
-						<dt><label for="parentID">{lang}cms.acp.page.general.parentID{/lang}</label></dt>
-						<dd>
-							<select id="parentID" name="parentID">
-								<option value="0" {if parentID == 0} selected="selected"{/if} data-alias="">{lang}wcf.global.noSelection{/lang}</option>
-								{foreach from=$pageList item='item'}
-									<option value="{$item->pageID}" {if $item->pageID == $parentID}selected="selected"{/if} data-alias="{$item->alias}" >{$item->title|language}</option>
-								{/foreach}
-							</select>
-						</dd>
-					</dl>
-				{/if}
-
 				<dl{if $errorField == 'title'} class="formError"{/if}>
-					<dt><label for="title">{lang}cms.acp.page.general.title{/lang}</label></dt>
+					<dt><label for="title">{lang}cms.acp.page.title{/lang}</label></dt>
 					<dd>
 						<input type="text" id="title" name="title" value="{$i18nPlainValues['title']}" class="long" required="required" />
 						{if $errorField == 'title'}
@@ -149,6 +135,21 @@
 						{include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
 					</dd>
 				</dl>
+
+				<dl{if $errorField == 'menuItem'} class="formError"{/if}>
+					<dt class="reversed"><label for="menuItem">{lang}cms.acp.page.general.menuItem{/lang}</label></dt>
+					<dd>
+						<input type="checkbox" name="menuItem" id="menuItem" value="1"{if $menu == 1} checked="checked"{/if} />
+						{if $errorField == 'menuItem'}
+							<small class="innerError">
+								{lang}cms.acp.page.general.menuItem.error.{@$errorType}{/lang}
+							</small>
+						{/if}
+						<small>{lang}cms.acp.page.general.menuItem.description{/lang}</small>
+					</dd>
+				</dl>
+
+				{event name='dataFields'}
 			</fieldset>
 
 			<fieldset>
@@ -187,87 +188,96 @@
 					<dt><label for="robots">{lang}cms.acp.page.meta.robots{/lang}</label></dt>
 					<dd>
 						<select id="robots" name="robots">
-							<option value="index,follow" {if $robots =="index,follow"}selected="selected"{/if}>{lang}cms.acp.page.meta.robots.indexfollow{/lang}</option>
-							<option value="index,nofollow" {if $robots =="index,nofollow"}selected="selected"{/if}>{lang}cms.acp.page.meta.robots.indexnofollow{/lang}</option>
-							<option value="noindex,follow" {if $robots =="noindex,follow"}selected="selected"{/if}>{lang}cms.acp.page.meta.robots.noindexfollow{/lang}</option>
-							<option value="noindex,nofollow" {if $robots =="noindex,nofollow"}selected="selected"{/if}>{lang}cms.acp.page.meta.robots.noindexnofollow{/lang}</option>
+							<option value="index,follow"{if $robots =="index,follow"} selected="selected"{/if}>{lang}cms.acp.page.meta.robots.indexfollow{/lang}</option>
+							<option value="index,nofollow"{if $robots =="index,nofollow"} selected="selected"{/if}>{lang}cms.acp.page.meta.robots.indexnofollow{/lang}</option>
+							<option value="noindex,follow"{if $robots =="noindex,follow"} selected="selected"{/if}>{lang}cms.acp.page.meta.robots.noindexfollow{/lang}</option>
+							<option value="noindex,nofollow"{if $robots =="noindex,nofollow"} selected="selected"{/if}>{lang}cms.acp.page.meta.robots.noindexnofollow{/lang}</option>
 						</select>
 					</dd>
 				</dl>
+
+				{event name='metaFields'}
 			</fieldset>
 
 			<fieldset>
-				<legend>{lang}cms.acp.page.visibility{/lang}</legend>
+				<legend>{lang}cms.acp.page.position{/lang}</legend>
 
-				<dl{if $errorField == 'invisible'} class="formError"{/if}>
-					<dt class="reversed"><label for="invisible">{lang}cms.acp.page.optional.invisible{/lang}</label></dt>
-					<dd>
-						<input type="checkbox" name="invisible" id="invisible" value="1" {if $invisible == 1}checked="checked"{/if} />
-					</dd>
-				</dl>
-
-				<dl{if $errorField == 'menuItem'} class="formError"{/if}>
-					<dt class="reversed"><label for="menuItem">{lang}cms.acp.page.optional.menuItem{/lang}</label></dt>
-					<dd>
-						<input type="checkbox" name="menuItem" id="menuItem" value="1" {if $menu == 1}checked="checked"{/if} />
-						{if $errorField == 'menuItem'}
-							<small class="innerError">
-								{lang}cms.acp.page.menuItem.error.{@$errorType}{/lang}
-							</small>
-						{/if}
-					</dd>
-				</dl>
-
-				<dl{if $errorField == 'availableDuringOfflineMode'} class="formError"{/if}>
-					<dt class="reversed"><label for="availableDuringOfflineMode">{lang}cms.acp.page.optional.availableDuringOfflineMode{/lang}</label></dt>
-					<dd>
-						<input type="checkbox" name="availableDuringOfflineMode" id="availableDuringOfflineMode" value="1" {if $availableDuringOfflineMode == 1}checked="checked"{/if} />
-					</dd>
-				</dl>
+				{if $pageList != null}
+					<dl{if $errorField == 'parentID'} class="formError"{/if}>
+						<dt><label for="parentID">{lang}cms.acp.page.general.parentID{/lang}</label></dt>
+						<dd>
+							<select id="parentID" name="parentID">
+								<option value="0" {if parentID == 0} selected="selected"{/if} data-alias="">{lang}wcf.global.noSelection{/lang}</option>
+								{foreach from=$pageList item='item'}
+									<option value="{$item->pageID}" {if $item->pageID == $parentID}selected="selected"{/if} data-alias="{$item->alias}" >{$item->title|language}</option>
+								{/foreach}
+							</select>
+						</dd>
+					</dl>
+				{/if}
 
 				<dl{if $errorField == 'showOrder'} class="formError"{/if}>
-					<dt><label for="showOrder">{lang}cms.acp.page.optional.showOrder{/lang}</label></dt>
+					<dt><label for="showOrder">{lang}cms.acp.page.position{/lang}</label></dt>
 					<dd>
-						<input type="number" id="showOrder" name="showOrder" value="{$showOrder}" />
+						<input type="number" id="showOrder" name="showOrder" value="{$showOrder}" class="tiny" min="0" />
 						{if $errorField == 'showOrder'}
 							<small class="innerError">
-								{lang}cms.acp.page.showOrder.error.{@$errorType}{/lang}
+								{lang}cms.acp.page.position.error.{@$errorType}{/lang}
 							</small>
 						{/if}
+						<small>{lang}cms.acp.page.position.description{/lang}</small>
 					</dd>
 				</dl>
+
+				<dl{if $errorField == 'invisible'} class="formError"{/if}>
+					<dt class="reversed"><label for="invisible">{lang}cms.acp.page.position.invisible{/lang}</label></dt>
+					<dd>
+						<input type="checkbox" name="invisible" id="invisible" value="1"{if $invisible} checked="checked"{/if} />
+						<small>{lang}cms.acp.page.position.invisible.description{/lang}</small>
+					</dd>
+				</dl>
+
+				{event name='positionFields'}
 			</fieldset>
 
 			<fieldset>
-				<legend>{lang}cms.acp.page.optional{/lang}</legend>
+				<legend>{lang}cms.acp.page.settings{/lang}</legend>
 
 				<dl{if $errorField == 'showSidebar'} class="formError"{/if}>
-					<dt class="reversed"><label for="showSidebar">{lang}cms.acp.page.optional.showSidebar{/lang}</label></dt>
+					<dt class="reversed"><label for="showSidebar">{lang}cms.acp.page.settings.showSidebar{/lang}</label></dt>
 					<dd>
-						<input type="checkbox" name="showSidebar" id="showSidebar" value="1" {if $showSidebar == 1}checked="checked"{/if} />
+						<input type="checkbox" name="showSidebar" id="showSidebar" value="1"{if $showSidebar} checked="checked"{/if} />
 					</dd>
 				</dl>
 
 				<dl{if $errorField == 'sidebarOrientation'} class="formError"{/if}>
-					<dt><label for="sidebarOrientation">{lang}cms.acp.page.optional.sidebarOrientation{/lang}</label></dt>
+					<dt><label for="sidebarOrientation">{lang}cms.acp.page.settings.sidebarOrientation{/lang}</label></dt>
 					<dd>
 						<select id="sidebarOrientation" name="sidebarOrientation">
-							<option value="right" {if $sidebarOrientation =="right"}selected="selected"{/if}>{lang}cms.acp.page.sidebarOrientation.right{/lang}</option>
-							<option value="left" {if $sidebarOrientation =="left"}selected="selected"{/if}>{lang}cms.acp.page.sidebarOrientation.left{/lang}</option>
+							<option value="right"{if $sidebarOrientation =="right"} selected="selected"{/if}>{lang}cms.acp.page.settings.sidebarOrientation.right{/lang}</option>
+							<option value="left"{if $sidebarOrientation =="left"} selected="selected"{/if}>{lang}cms.acp.page.settings.sidebarOrientation.left{/lang}</option>
 						</select>
 					</dd>
 				</dl>
 
 				<dl{if $errorField == 'isCommentable'} class="formError"{/if}>
-					<dt class="reversed"><label for="isCommentable">{lang}cms.acp.page.optional.isCommentable{/lang}</label></dt>
+					<dt class="reversed"><label for="isCommentable">{lang}cms.acp.page.settings.isCommentable{/lang}</label></dt>
 					<dd>
-						<input type="checkbox" name="isCommentable" id="isCommentable" value="1" {if $isCommentable == 1}checked="checked"{/if} />
+						<input type="checkbox" name="isCommentable" id="isCommentable" value="1"{if $isCommentable == 1} checked="checked"{/if} />
+						<small>{lang}cms.acp.page.settings.isCommentable.description{/lang}</small>
+					</dd>
+				</dl>
+
+				<dl{if $errorField == 'availableDuringOfflineMode'} class="formError"{/if}>
+					<dt class="reversed"><label for="availableDuringOfflineMode">{lang}cms.acp.page.settings.availableDuringOfflineMode{/lang}</label></dt>
+					<dd>
+						<input type="checkbox" name="availableDuringOfflineMode" id="availableDuringOfflineMode" value="1"{if $availableDuringOfflineMode} checked="checked"{/if} />
 					</dd>
 				</dl>
 
 				{if $layoutList != null}
 					<dl{if $errorField == 'layoutID'} class="formError"{/if}>
-						<dt><label for="layoutID">{lang}cms.acp.page.optional.layoutID{/lang}</label></dt>
+						<dt><label for="layoutID">{lang}cms.acp.page.settings.layoutID{/lang}</label></dt>
 						<dd>
 							<select id="layoutID" name="layoutID">
 								<option value="0" {if layoutID == 0} selected="selected"{/if}></option>
