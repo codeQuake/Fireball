@@ -12,4 +12,3 @@ before_script:
 script:
   - find . -type f -name '*.php' |xargs -I file php -l file > /dev/null
   - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" .
-

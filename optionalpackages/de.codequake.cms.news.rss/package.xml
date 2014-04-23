@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="de.codequake.cms.news.rss" xmlns="http://www.woltlab.com"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
+<package name="de.codequake.cms.news.rss" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
 	<packageinformation>
 		<packagename>Fireball CMS RSS Feed Poster</packagename>
 		<packagedescription>Ermöglicht Nachrichten von RSS Feeds zu erstellen</packagedescription>
@@ -47,9 +45,11 @@
 	<instructions type="update" fromversion="1.0.1 pl 2">
 		<instruction type="file" application="cms">files.tar</instruction>
 	</instructions>
+
 	<instructions type="update" fromversion="1.0.1 pl 3">
 		<instruction type="file" application="cms">files.tar</instruction>
 	</instructions>
+
 	<instructions type="update" fromversion="1.0.1 pl 4">
 		<instruction type="file" application="cms">files.tar</instruction>
 	</instructions>

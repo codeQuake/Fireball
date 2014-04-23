@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
 	<import>
-		<!--section types -->
+		<!-- section types -->
 		<type>
 			<name>de.codequake.cms.section.type.text</name>
 			<definitionname>de.codequake.cms.section.type</definitionname>
@@ -45,8 +44,9 @@
 			<definitionname>de.codequake.cms.section.type</definitionname>
 			<classname>cms\data\content\section\type\DashboardContentSectionType</classname>
 		</type>
+		<!-- /section types -->
 
-		<!--attachments -->
+		<!-- attachments -->
 		<type>
 			<name>de.codequake.cms.content.section</name>
 			<definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
@@ -57,8 +57,9 @@
 			<definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
 			<classname>cms\system\attachment\NewsAttachmentObjectType</classname>
 		</type>
+		<!-- /attachments -->
 
-		<!--user online location -->
+		<!-- user online location -->
 		<type>
 			<name>de.codequake.cms.page</name>
 			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
@@ -92,15 +93,17 @@
 			<classname>cms\system\user\online\location\NewsCategoryLocation</classname>
 			<languagevariable>cms.user.usersOnline.location.newsListPage</languagevariable>
 		</type>
+		<!-- /user online location -->
 
-		<!-- Category -->
+		<!-- category -->
 		<type>
 			<name>de.codequake.cms.category.news</name>
 			<definitionname>com.woltlab.wcf.category</definitionname>
 			<classname>cms\system\category\NewsCategoryType</classname>
 		</type>
+		<!-- /category -->
 
-		<!--ACL -->
+		<!-- acl -->
 		<type>
 			<name>de.codequake.cms.page</name>
 			<definitionname>com.woltlab.wcf.acl</definitionname>
@@ -109,8 +112,9 @@
 			<name>de.codequake.cms.category.news</name>
 			<definitionname>com.woltlab.wcf.acl</definitionname>
 		</type>
+		<!-- /acl -->
 
-		<!--Dashboard -->
+		<!-- dashboard -->
 		<type>
 			<name>de.codequake.cms.page</name>
 			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
@@ -129,8 +133,9 @@
 			<allowcontent>0</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
+		<!-- /dashboard -->
 
-		<!--Comments -->
+		<!-- comments -->
 		<type>
 			<name>de.codequake.cms.news.comment</name>
 			<definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
@@ -142,8 +147,9 @@
 			<definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
 			<classname>cms\system\comment\manager\PageCommentManager</classname>
 		</type>
+		<!-- /comments -->
 
-		<!--Notifications -->
+		<!-- notifications -->
 		<type>
 			<name>de.codequake.cms.news.comment.notification</name>
 			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
@@ -162,20 +168,21 @@
 			<classname>cms\system\user\notification\object\type\PageCommentResponseUserNotificationObjectType</classname>
 			<category>de.codequake.cms</category>
 		</type>
+		<!-- /notifications -->
 
-		<!--Visit Tracker -->
+		<!-- visit tracker -->
 		<type>
 			<name>de.codequake.cms.news</name>
 			<definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
 		</type>
+		<!-- /visit tracker -->
 
-		<!--Recent Activity -->
+		<!-- recent activity -->
 		<type>
 			<name>de.codequake.cms.news.recentActivityEvent</name>
 			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
 			<classname>cms\system\user\activity\event\NewsUserActivityEvent</classname>
 		</type>
-
 		<type>
 			<name>de.codequake.cms.news.comment.recentActivityEvent</name>
 			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
@@ -186,7 +193,6 @@
 			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
 			<classname>cms\system\user\activity\event\NewsCommentResponseUserActivityEvent</classname>
 		</type>
-
 		<type>
 			<name>de.codequake.cms.page.comment.recentActivityEvent</name>
 			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
@@ -197,35 +203,42 @@
 			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
 			<classname>cms\system\user\activity\event\PageCommentResponseUserActivityEvent</classname>
 		</type>
-		<!--Activity Points -->
+		<!-- /recent activity -->
+
+		<!-- activity points -->
 		<type>
 			<name>de.codequake.cms.activityPointEvent.news</name>
 			<definitionname>com.woltlab.wcf.user.activityPointEvent</definitionname>
 			<points>5</points>
 			<classname>cms\system\user\activity\point\NewsUserActivityPointObjectProcessor</classname>
 		</type>
+		<!-- /activity points -->
 
-		<!--Like -->
+		<!-- like -->
 		<type>
 			<name>de.codequake.cms.likeableNews</name>
 			<definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
 			<classname>cms\data\news\LikeableNewsProvider</classname>
 		</type>
+		<!-- /like -->
 
-		<!--search -->
+		<!-- search -->
 		<type>
 			<name>de.codequake.cms.news</name>
 			<definitionname>com.woltlab.wcf.searchableObjectType</definitionname>
 			<classname>cms\system\search\NewsSearch</classname>
 		</type>
+		<!-- /seach -->
 
-		<!--Tagging -->
+		<!-- tagging -->
 		<type>
 			<name>de.codequake.cms.news</name>
 			<definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
 			<classname>cms\system\tagging\TaggableNews</classname>
 		</type>
-		<!--Importer -->
+		<!-- /tagging -->
+
+		<!-- importer -->
 		<type>
 			<name>de.codequake.cms.category.news</name>
 			<definitionname>com.woltlab.wcf.importer</definitionname>
@@ -246,5 +259,6 @@
 			<definitionname>com.woltlab.wcf.importer</definitionname>
 			<classname><![CDATA[cms\system\importer\NewsCommentResponseImporter]]></classname>
 		</type>
+		<!-- /importer -->
 	</import>
 </data>

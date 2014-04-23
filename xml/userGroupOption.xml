@@ -1,9 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/userGroupOption.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/userGroupOption.xsd">
 	<import>
 		<categories>
-			<!--admin -->
+			<!-- user -->
+			<category name="user.cms">
+				<parent>user</parent>
+			</category>
+			<category name="user.cms.page">
+				<parent>user.cms</parent>
+			</category>
+			<category name="user.cms.content">
+				<parent>user.cms</parent>
+			</category>
+			<category name="user.cms.news">
+				<parent>user.cms</parent>
+				<options>module_news</options>
+			</category>
+			<!-- /user -->
+
+			<!-- mod -->
+			<category name="mod.cms">
+				<parent>mod</parent>
+			</category>
+			<category name="mod.cms.page">
+				<parent>mod.cms</parent>
+			</category>
+			<category name="mod.cms.news">
+				<parent>mod.cms</parent>
+				<options>module_news</options>
+			</category>
+			<!-- /admin -->
+
+			<!-- admin -->
 			<category name="admin.cms">
 				<parent>admin</parent>
 			</category>
@@ -23,31 +51,7 @@
 				<parent>admin.cms</parent>
 				<options>module_news</options>
 			</category>
-			<!--mod -->
-			<category name="mod.cms">
-				<parent>mod</parent>
-			</category>
-			<category name="mod.cms.page">
-				<parent>mod.cms</parent>
-			</category>
-			<category name="mod.cms.news">
-				<parent>mod.cms</parent>
-				<options>module_news</options>
-			</category>
-			<!--user -->
-			<category name="user.cms">
-				<parent>user</parent>
-			</category>
-			<category name="user.cms.page">
-				<parent>user.cms</parent>
-			</category>
-			<category name="user.cms.content">
-				<parent>user.cms</parent>
-			</category>
-			<category name="user.cms.news">
-				<parent>user.cms</parent>
-				<options>module_news</options>
-			</category>
+			<!-- /admin -->
 		</categories>
 
 		<options>
