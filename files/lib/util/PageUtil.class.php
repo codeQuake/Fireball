@@ -6,13 +6,12 @@ use cms\data\page\PageCache;
 /**
  * Contains page-related functions.
  *
- * @author Florian Frantzen
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * @author	Florian Frantzen
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 final class PageUtil {
-
 	const ALIAS_PATTERN = '[a-z0-9]+(?:\-{1}[a-z0-9]+)*';
 
 	/**
@@ -21,10 +20,10 @@ final class PageUtil {
 	 * excluded from checking agains. For example, you can use that to
 	 * exclude the page the new alias will be assigned to.
 	 *
-	 * @param string $alias        	
-	 * @param integer $parentPageID        	
-	 * @param integer $excludedPageID        	
-	 * @return boolean
+	 * @param	string		$alias        	
+	 * @param	integer		$parentPageID        	
+	 * @param	integer		$excludedPageID        	
+	 * @return	boolean
 	 */
 	public static function isAvailableAlias($alias, $parentPageID, $excludedPageID = null) {
 		$childIDs = PageCache::getInstance()->getChildIDs($parentPageID);
@@ -46,8 +45,8 @@ final class PageUtil {
 	/**
 	 * Returns true if the given alias matches the general alias pattern.
 	 *
-	 * @param string $alias        	
-	 * @return boolean
+	 * @param	string		$alias        	
+	 * @return	boolean
 	 */
 	public static function isValidAlias($alias) {
 		return preg_match('~^' . self::ALIAS_PATTERN . '$~', $alias);

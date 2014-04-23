@@ -8,13 +8,13 @@ use wcf\util\StringUtil;
 
 /**
  * Exporter for WordPress 3.x
- *
- * @author Marcel Werk (changed by Jens Krumsieck)
- * @copyright 2001-2013 WoltLab GmbH
- * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package de.codequake.cms.exporter
- * @subpackage system.exporter
- * @category Community Framework
+ * 
+ * @author	Marcel Werk (changed by Jens Krumsieck)
+ * @copyright	2001-2013 WoltLab GmbH
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	de.codequake.cms.exporter
+ * @subpackage	system.exporter
+ * @category	Community Framework
  */
 class WordPress3xToNewsExporter extends AbstractExporter {
 	/**

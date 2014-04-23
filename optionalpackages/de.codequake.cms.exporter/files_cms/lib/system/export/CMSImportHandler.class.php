@@ -34,6 +34,12 @@ use wcf\util\DirectoryUtil;
 use wcf\util\FileUtil;
 use wcf\util\XML;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms.exporter
+ */
 class CMSImportHandler extends SingletonFactory {
 	public $data = array();
 

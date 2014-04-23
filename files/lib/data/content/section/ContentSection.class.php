@@ -8,11 +8,12 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\WCF;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * Represents a content section.
+ * 
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class ContentSection extends CMSDatabaseObject {
 	protected static $databaseTableName = 'content_section';

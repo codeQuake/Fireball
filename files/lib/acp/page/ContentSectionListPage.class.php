@@ -8,11 +8,12 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * Shows a list of content sections.
+ * 
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class ContentSectionListPage extends SortablePage {
 	public $objectListClassName = 'cms\data\content\section\ContentContentSectionList';

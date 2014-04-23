@@ -10,6 +10,14 @@ use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 use wcf\util\HTTPRequest;
 
+/**
+ * Shows the dashboard.
+ * 
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
+ */
 class DashboardPage extends AbstractPage {
 	public $templateName = 'dashboard';
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.dashboard';

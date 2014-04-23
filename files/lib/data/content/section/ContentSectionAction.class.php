@@ -7,11 +7,12 @@ use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * Executes content section-related actions.
+ * 
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class ContentSectionAction extends AbstractDatabaseObjectAction implements ISortableAction {
 	protected $className = 'cms\data\content\section\ContentSectionEditor';

@@ -5,8 +5,13 @@ use cms\data\restore\RestoreAction;
 use cms\system\export\CMSExportHandler;
 use wcf\action\AbstractAction;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms.exporter
+ */
 class CMSExportAction extends AbstractAction {
-
 	public function execute() {
 		parent::execute();
 		$filename = CMSExportHandler::getInstance()->getExportArchive();

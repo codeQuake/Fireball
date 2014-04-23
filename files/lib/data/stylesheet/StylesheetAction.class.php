@@ -6,11 +6,12 @@ use cms\system\layout\LayoutHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * Executes stylesheet-related actions.
+ * 
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class StylesheetAction extends AbstractDatabaseObjectAction {
 	protected $className = 'cms\data\stylesheet\StylesheetEditor';

@@ -7,11 +7,10 @@ use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class PageCommentResponseUserNotificationEvent extends AbstractUserNotificationEvent {
 

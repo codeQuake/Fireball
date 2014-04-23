@@ -19,11 +19,10 @@ use wcf\util\StringUtil;
 use wcf\util\XMLWriter;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms.exporter
  */
 class CMSExportHandler extends SingletonFactory {
 	public $data = array();
