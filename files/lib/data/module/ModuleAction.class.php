@@ -8,11 +8,12 @@ use wcf\system\WCF;
 use wcf\util\FileUtil;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * Executes module-related actions.
+ * 
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class ModuleAction extends AbstractDatabaseObjectAction {
 	protected $className = 'cms\data\module\ModuleEditor';

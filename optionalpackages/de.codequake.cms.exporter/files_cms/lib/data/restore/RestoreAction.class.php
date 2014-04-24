@@ -5,11 +5,10 @@ use cms\system\export\CMSImportHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms.exporter
  */
 class RestoreAction extends AbstractDatabaseObjectAction {
 	protected $className = 'cms\data\restore\RestoreEditor';

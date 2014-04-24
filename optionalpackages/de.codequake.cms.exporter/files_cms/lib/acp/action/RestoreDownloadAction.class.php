@@ -5,6 +5,12 @@ use cms\data\restore\Restore;
 use wcf\action\AbstractAction;
 use wcf\system\exception\IllegalLinkException;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms.exporter
+ */
 class RestoreDownloadAction extends AbstractAction {
 	public $restoreID = 0;
 

@@ -5,11 +5,12 @@ use cms\system\cache\builder\PageCacheBuilder;
 use wcf\system\SingletonFactory;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * Manages the page cache.
+ * 
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class PageCache extends SingletonFactory {
 	protected $aliasToID = array();

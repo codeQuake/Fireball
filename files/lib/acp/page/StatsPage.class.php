@@ -7,6 +7,12 @@ use wcf\data\user\online\UsersOnlineList;
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
 
+/**
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
+ */
 class StatsPage extends AbstractPage {
 	public $templateName = 'stats';
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.statistics';

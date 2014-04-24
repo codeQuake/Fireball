@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<package name="de.codequake.cms" xmlns="http://www.woltlab.com"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/package.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="de.codequake.cms" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
 	<packageinformation>
 		<packagename>Fireball CMS</packagename>
-		<!--codename: Fireball -->
 		<packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
 		<isapplication>1</isapplication>
 		<version>1.1.2 pl 2</version>
 		<date>2014-03-24</date>
 	</packageinformation>
+
 	<authorinformation>
 		<author><![CDATA[Jens Krumsieck]]></author>
 		<authorurl><![CDATA[http://codequake.de]]></authorurl>
@@ -17,8 +15,7 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="1.0.0 Beta 1"
-			file="requirements/de.codequake.wysiwygACP.tar">de.codequake.wysiwygACP</requiredpackage>
+		<requiredpackage minversion="1.0.0" file="requirements/de.codequake.wysiwygACP.tar">de.codequake.wysiwygACP</requiredpackage>
 	</requiredpackages>
 
 	<optionalpackages>
@@ -44,13 +41,13 @@
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="sitemap">xml/sitemap.xml</instruction>
 		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="pageMenu">xml/pagemenu.xml</instruction>
+		<instruction type="pageMenu">xml/pageMenu.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
 
@@ -58,54 +55,61 @@
 		<instruction type="sql">install.sql</instruction>
 	</instructions>
 
-
 	<instructions type="update" fromversion="1.0.0">
 		<instruction type="language">language/*.xml</instruction>
+
 		<!--tar -->
 		<instruction type="file">files.tar</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="sql">update1_1.sql</instruction>
+
 		<!--xml -->
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 	</instructions>
+
 	<instructions type="update" fromversion="1.0.1">
 		<instruction type="language">language/*.xml</instruction>
+
 		<!--tar -->
 		<instruction type="file">files.tar</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="sql">update1_1.sql</instruction>
+
 		<!--xml -->
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 	</instructions>
+
 	<instructions type="update" fromversion="1.0.1 pl *">
 		<instruction type="language">language/*.xml</instruction>
+
 		<!--tar -->
 		<instruction type="file">files.tar</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="sql">update1_1.sql</instruction>
+
 		<!--xml -->
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
@@ -117,7 +121,7 @@
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="sql">update1_2.sql</instruction>
 	</instructions>
@@ -127,7 +131,7 @@
 		<instruction type="option">xml/option.xml</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="sql">update1_2.sql</instruction>
@@ -137,7 +141,7 @@
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="sql">update1_2.sql</instruction>
@@ -147,7 +151,7 @@
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="eventListener">xml/eventListener.xml</instruction>
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="sql">update1_2.sql</instruction>
@@ -160,6 +164,7 @@
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 	</instructions>
+
 	<instructions type="update" fromversion="1.1.2 pl 1">
 		<instruction type="file">files.tar</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
