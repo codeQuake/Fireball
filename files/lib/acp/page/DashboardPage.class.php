@@ -12,7 +12,7 @@ use wcf\util\HTTPRequest;
 
 /**
  * Shows the dashboard.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -38,18 +38,18 @@ class DashboardPage extends AbstractPage {
 				'errorMessage' => $e->getMessage()
 			));
 		}
-		
+
 		if (! $xml = simplexml_load_string($feedData)) {
-			die('Error reading feed!');
+			return array();
 		}
 		$feed = array();
 		$i = 2;
-		
+
 		foreach ($xml->channel[0]->item as $item) {
 			if ($i -- == 0) {
 				break;
 			}
-			
+
 			$feed[] = array(
 				'title' => (string) $item->title,
 				'description' => (string) $item->description,
@@ -66,18 +66,18 @@ class DashboardPage extends AbstractPage {
 		$list = new PageList();
 		$list->readObjects();
 		$this->pages = $list->getObjects();
-		
+
 		// news
 		$list = new NewsList();
 		$list->readObjects();
 		$this->news = $list->getObjects();
-		
+
 		// onlinelist
 		$this->usersOnlineList = new UsersOnlineList();
 		$this->usersOnlineList->readStats();
 		$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
 		$this->usersOnlineList->readObjects();
-		
+
 		// system info
 		$this->server = array(
 			'os' => PHP_OS,
