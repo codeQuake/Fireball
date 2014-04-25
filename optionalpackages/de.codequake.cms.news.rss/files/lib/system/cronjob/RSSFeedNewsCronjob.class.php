@@ -36,9 +36,8 @@ class RSSFeedNewsCronjob extends AbstractCronjob {
 					'errorMessage' => $e->getMessage()
 				));
 			}
-			
+
 			if ($xml = simplexml_load_string($feedData)) {
-				@unlink($feedData);
 				$feedType = $this->getFeedType($xml);
 				switch ($feedType) {
 					case 'rss':
@@ -47,10 +46,10 @@ class RSSFeedNewsCronjob extends AbstractCronjob {
 								$content = '';
 								$ns_content = $item->children('http://purl.org/rss/1.0/modules/content/');
 								if (isset($ns_content) && (isset($ns_content->encoded))) $content = (string) $ns_content->encoded;
-								
+
 								if (empty($content)) $content = (string) $item->description;
 								$content .= "<br/><span class='icon icon16 icon-rss'></span> [url='" . (string) $item->guid . "']" . (string) $item->title . "[/url] (" . $feed->title . ")";
-								
+
 								$news = array(
 									'userID' => null,
 									'username' => $feed->title,
@@ -98,7 +97,7 @@ class RSSFeedNewsCronjob extends AbstractCronjob {
 									'imageID' => $feed->imageID,
 									'lastChangeTime' => TIME_NOW
 								);
-								
+
 								$categoryIDs = array(
 									$feed->categoryID
 								);
@@ -112,7 +111,7 @@ class RSSFeedNewsCronjob extends AbstractCronjob {
 							}
 						}
 						break;
-					
+
 					case 'rdf':
 						foreach ($xml->item as $item) {
 							if (strtotime($item->children()->date) >= $feed->lastCheck) {
@@ -129,7 +128,7 @@ class RSSFeedNewsCronjob extends AbstractCronjob {
 									'imageID' => $feed->imageID,
 									'lastChangeTime' => TIME_NOW
 								);
-								
+
 								$categoryIDs = array(
 									$feed->categoryID
 								);
