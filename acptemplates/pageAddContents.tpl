@@ -16,7 +16,7 @@
 				{if $page->getContentList('sidebar')|count}
 				<ol class="bodyList sortableList" data-object-id="0">
 					{foreach from=$page->getContentList() item=content}
-						<li class="sortableNode jsContentRow" data-object-id="{$content->contentID}">
+						<li class="sortableNode sortableNoNesting jsContentRow" data-object-id="{$content->contentID}">
 							<span class="sortableNodeLabel">
 								<span class="icon icon16 icon-file-alt"></span>
 								<span class="title"><a href="{link application='cms' controller='ContentEdit' id=$content->contentID}{/link}">{$content->getTitle()|language}</a></span>
@@ -41,7 +41,7 @@
 				{if $page->getContentList('sidebar')|count}
 				<ol class="sidebarList sortableList" data-object-id="0">
 					{foreach from=$page->getContentList('sidebar') item=content}
-						<li class="sortableNode jsContentRow" data-object-id="{$content->contentID}">
+						<li class="sortableNode sortableNoNesting jsContentRow" data-object-id="{$content->contentID}">
 							<span class="sortableNodeLabel"><span class="icon icon16 icon-file-alt"></span>
 								<span class="title"><a href="{link application='cms' controller='ContentEdit' id=$content->contentID}{/link}">{$content->getTitle()|language}</a></span>
 								<span class="statusDisplay sortableButtonContainer">
