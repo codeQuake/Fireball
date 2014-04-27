@@ -6,6 +6,7 @@ CMS.ACP.Page = {};
 CMS.ACP.Page.AddForm = Class.extend({
     init: function () {
         $('#alias, #parentID').change($.proxy(this._buildAliasPreview, this));
+        $('#title').change($.proxy(this._buildAlias, this));
         this._buildAliasPreview();
     },
 
@@ -21,6 +22,28 @@ CMS.ACP.Page.AddForm = Class.extend({
             $('#aliasPreview').html(WCF.Language.get('cms.acp.page.general.alias.preview') + ' ' +  $aliasPreview).show();
         }
         else { $('#aliasPreview').hide(); }
+    },
+
+    _buildAlias: function(){
+        var $alias = $('#alias').val();
+        //prevent alias from beeing overwritten
+        if($alias == ''){
+        	var $title = $('#title').val();
+        	var $minus = [" ", "\\", "/", ":", ";", ".", "_", ","];
+        	$minus.forEach(function(entry){
+        		$title = $title.replace(entry, "-");
+        	});
+
+        	var $empty = ["{", "}", "[", "]", "&", "%", "$", "§", "\"", "!", "*", "'", "+", "#", "@", "<", ">", "|", "µ", "?", ")", "("];
+        	$empty.forEach(function(entry){
+        		$title = $title.replace(entry, "");
+        	});
+
+        	$title = $title.toLowerCase();
+
+        	$('#alias').val($title);
+        	this._buildAliasPreview();
+        }
     }
 });
 
