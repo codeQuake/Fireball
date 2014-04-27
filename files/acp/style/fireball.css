@@ -1,0 +1,6 @@
+@CHARSET "ISO-8859-1";
+article.page{display: table; table-layout: fixed; width: 100%;}
+article.page > div {display: table-row;}
+article.page > div > section.content{display: table-cell;}
+article.page > div > aside.side{width: 300px; display: table-cell;}
+article.page > div > aside.side > fieldset#sidebarList{padding: 7px 14px 14px;}

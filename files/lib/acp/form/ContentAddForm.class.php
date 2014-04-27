@@ -8,12 +8,14 @@ use cms\data\page\PageList;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
  * Shows the content add form.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -102,15 +104,11 @@ class ContentAddForm extends AbstractForm {
 			$editor = new ContentEditor($returnValues['returnValues']);
 			$editor->update($update);
 		}
-		
+
 		$this->saved();
-		WCF::getTPL()->assign('success', true);
-		
-		$this->title = $this->cssID = $this->cssClasses = '';
-		$this->position = 'body';
-		$this->type = 'div';
-		$this->pageID = $this->showOrder = 0;
-		I18nHandler::getInstance()->reset();
+
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('PageEdit', array('id' => $this->pageID),'#contents'));
+		exit;
 	}
 
 	public function assignVariables() {

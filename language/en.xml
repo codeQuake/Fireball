@@ -2,6 +2,7 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
 	<category name="cms.acp.content">
 		<item name="cms.acp.content.add"><![CDATA[Add content]]></item>
+		<item name="cms.acp.content.contents"><![CDATA[Contents]]></item>
 		<item name="cms.acp.content.add.noPage"><![CDATA[No pages found! To create contents you must add at least one page.]]></item>
 		<item name="cms.acp.content.general"><![CDATA[General]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Page]]></item>

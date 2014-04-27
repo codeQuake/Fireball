@@ -1,5 +1,4 @@
 {include file='header' pageTitle='cms.acp.page.'|concat:$action}
-
 {include file='aclPermissions'}
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 <script data-relocate="true">
@@ -58,9 +57,6 @@
 	<nav>
 		<ul>
 			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
-			{if $pageID|isset}
-				<li><a href="{link application='cms' controller='ContentList' id=$pageID}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="button"><span class="icon icon24 icon-file"></span> <span>{lang}cms.acp.page.content.list{/lang}</span></a></li>
-			{/if}
 			{if $action != 'add' && !$page->isHome}
 				<li><a id="setAsHome" class="button"><span class="icon icon16 icon-home"></span> <span>{lang}cms.acp.page.setAsHome{/lang}</span></a></li>
 			{/if}
@@ -76,8 +72,10 @@
 		<nav class="tabMenu">
 			<ul>
 				<li><a href="{@$__wcf->getAnchor('general')}">{lang}cms.acp.page.general{/lang}</a></li>
+				{if $pageID|isset}
+				<li><a href="{@$__wcf->getAnchor('contents')}">{lang}cms.acp.content.contents{/lang}</a></li>
+				{/if}
 				<li><a href="{@$__wcf->getAnchor('userPermissions')}">{lang}cms.acp.page.userPermissions{/lang}</a></li>
-
 				{event name='tabMenuTabs'}
 			</ul>
 		</nav>
@@ -302,6 +300,11 @@
 				</dl>
 			</fieldset>
 		</div>
+		{if $pageID|isset}
+		<div id="contents" class="container containerPadding tabMenuContent">
+			{include file='pageAddContents' application='cms'}
+		</div>
+		{/if}
 
 		{event name='tabMenuContents'}
 	</div>

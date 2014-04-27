@@ -80,7 +80,7 @@ CMS.ACP.Content.Preview = Class.extend({
         this._objectType = objectType;
 
         $('#previewButton').click($.proxy(this._click, this));
-        
+
     },
     _click: function (event) {
         $('#previewContainer').hide();
@@ -112,4 +112,44 @@ CMS.ACP.Content.Preview = Class.extend({
         new WCF.Effect.Scroll().scrollTo($previewContainer);
     },
 
+});
+
+CMS.ACP.Sortable = {};
+CMS.ACP.Sortable.List = WCF.Sortable.List.extend({
+	init: function(containerID, className, offset, options, isSimpleSorting, additionalParameters) {
+		this._additionalParameters = additionalParameters || { };
+		this._containerID = $.wcfEscapeID(containerID);
+		this._container = $('#' + this._containerID);
+		this._className = className;
+		this._offset = (offset) ? offset : 0;
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		this._structure = { };
+
+		// init sortable
+		this._options = $.extend(true, {
+			axis: 'y',
+			connectWith: '#' + this._containerID + ' .sortableList',
+			disableNesting: 'sortableNoNesting',
+			doNotClear: true,
+			errorClass: 'sortableInvalidTarget',
+			forcePlaceholderSize: true,
+			helper: 'clone',
+			items: 'li:not(.sortableNoSorting)',
+			opacity: .6,
+			placeholder: 'sortablePlaceholder',
+			tolerance: 'pointer',
+			toleranceElement: '> span'
+		}, options || { });
+
+		if (isSimpleSorting) {
+			$('#' + this._containerID + ' .sortableList').sortable(this._options);
+		}
+		else {
+			$('#' + this._containerID + ' > .sortableList').nestedSortable(this._options);
+		}
+
+		$('#buttonSort').click($.proxy(this._submit, this));
+	}
 });
