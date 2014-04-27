@@ -14,7 +14,7 @@ use wcf\util\HeaderUtil;
 
 /**
  * Shows the news edit form.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -31,7 +31,7 @@ class NewsEditForm extends NewsAddForm {
 		parent::readParameters();
 		if (isset($_REQUEST['id'])) $this->newsID = intval($_REQUEST['id']);
 		if ($this->newsID == 0) throw new IllegalLinkException();
-		
+
 		// set attachment object id
 		$this->attachmentObjectID = $this->newsID;
 	}
@@ -50,11 +50,11 @@ class NewsEditForm extends NewsAddForm {
 			'application' => 'cms',
 			'object' => $this->news
 		))));
-		
+
 		foreach ($this->news->getCategories() as $category) {
 			$this->categoryIDs[] = $category->categoryID;
 		}
-		
+
 		// tagging
 		if (MODULE_TAGGING) {
 			$tags = $this->news->getTags();
@@ -71,6 +71,7 @@ class NewsEditForm extends NewsAddForm {
 			'message' => $this->text,
 			'time' => $this->time,
 			'enableBBCodes' => $this->enableBBCodes,
+			'showSignature'	=> $this->showSignature,
 			'enableHtml' => $this->enableHtml,
 			'imageID' => $this->image->imageID,
 			'enableSmilies' => $this->enableSmilies,
@@ -85,20 +86,20 @@ class NewsEditForm extends NewsAddForm {
 			'tags' => $this->tags,
 			'attachmentHandler' => $this->attachmentHandler
 		);
-		
+
 		$action = new NewsAction(array(
 			$this->newsID
 		), 'update', $newsData);
 		$resultValues = $action->executeAction();
 		$this->saved();
-		
+
 		// re-define after saving
 		$this->news = new News($this->newsID);
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('News', array(
 			'application' => 'cms',
 			'object' => $this->news
 		)));
-		
+
 		exit();
 	}
 

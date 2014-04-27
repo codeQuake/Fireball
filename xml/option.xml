@@ -30,6 +30,12 @@
 			<!-- /module.community -->
 
 			<!-- cms.news -->
+			<option name="cms_news_signatures">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.news</categoryname>
+				<defaultvalue>1</defaultvalue>
+				<options>module_news</options>
+			</option>
 			<option name="cms_news_news_images_attached">
 				<optiontype>boolean</optiontype>
 				<categoryname>cms.news</categoryname>

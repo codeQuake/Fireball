@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 <head>
 	<title>{$news->getTitle()|language} - {PAGE_TITLE|language}</title>
-	
+
 	<link rel="canonical" href="{link application='cms' controller='News' object=$news}{/link}" />
 	{include file='headInclude' application='wcf'}
     <script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Moderation{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
@@ -45,7 +45,7 @@
 	{if $news->getCategories()|count}
 		<fieldset>
 			<legend>{lang}cms.news.category.categories{/lang}</legend>
-			
+
 			<ul>
 				{foreach from=$news->getCategories() item=category}
 					<li><a href="{link application='cms' controller='NewsCategoryList' object=$category}{/link}" class="jsTooltip" title="{lang}cms.news.categorizedNews{/lang}">{$category->getTitle()}</a></li>
@@ -120,6 +120,11 @@
                                     {@$news->getFormattedMessage()}
                                 </div>
 								{include file='attachments'}
+								{if $news->showSignature && $news->getUserProfile()->showSignature() && CMS_NEWS_SIGNATURES}
+									<div class="messageSignature">
+										<div>{@$news->getUserProfile()->getSignature()}</div>
+									</div>
+								{/if}
                                <div class="messageFooter"></div>
                                 <footer class="messageOptions">
                                     <nav class="buttonGroupNavigation jsMobileNavigation">
@@ -128,7 +133,7 @@
 											{if LOG_IP_ADDRESS && $news->ipAddress && $__wcf->session->getPermission('admin.user.canViewIpAddress')}<li class="jsIpAddress jsOnly" data-news-id="{@$news->newsID}"><a title="{lang}cms.news.ipAddress{/lang}" class="button jsTooltip"><span class="icon icon16 icon-globe"></span> <span class="invisible">{lang}cms.news.ipAddress{/lang}</span></a></li>{/if}											{if $news->canModerate()}<li class="jsOnly"><div class="button"><span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$news->newsID}" data-confirm-message="{lang}cms.news.delete.sure{/lang}"></span></div></li>{/if}
 											{event name='messageOptions'}
 											<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 icon-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>
-                                            
+
                                         </ul>
                                     </nav>
                                 </footer>
@@ -139,7 +144,7 @@
             </article>
         </li>
     </ul>
-    <div class="contentNavigation">			
+    <div class="contentNavigation">
         <nav>
             <ul>
                 <li><a href="{link application='cms' controller='News' object=$news appendSession=false}{/link}" class="button jsButtonShare jsOnly" data-link-title="{$news->subject}"><span class="icon icon16 icon-link"></span> <span>{lang}wcf.message.share{/lang}</span></a></li>

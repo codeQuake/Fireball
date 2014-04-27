@@ -19,7 +19,7 @@ use wcf\util\StringUtil;
 
 /**
  * Shows the news add form.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -62,29 +62,29 @@ class NewsAddForm extends MessageForm {
 		$list = new NewsImageList();
 		$list->readObjects();
 		$this->imageList = $list->getObjects();
-		
+
 		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), LinkHandler::getInstance()->getLink('NewsCategoryList', array(
 			'application' => 'cms'
 		))));
-		
+
 		$excludedCategoryIDs = array_diff(NewsCategory::getAccessibleCategoryIDs(), NewsCategory::getAccessibleCategoryIDs(array(
 			'canAddNews'
 		)));
 		$categoryTree = new NewsCategoryNodeTree('de.codequake.cms.category.news', 0, false, $excludedCategoryIDs);
 		$this->categoryList = $categoryTree->getIterator();
 		$this->categoryList->setMaxDepth(0);
-		
+
 		// default values
 		if (! count($_POST)) {
 			$this->username = WCF::getSession()->getVar('username');
-			
+
 			// multilingualism
 			if (! empty($this->availableContentLanguages)) {
 				if (! $this->languageID) {
 					$language = LanguageFactory::getInstance()->getUserLanguage();
 					$this->languageID = $language->languageID;
 				}
-				
+
 				if (! isset($this->availableContentLanguages[$this->languageID])) {
 					$languageIDs = array_keys($this->availableContentLanguages);
 					$this->languageID = array_shift($languageIDs);
@@ -99,11 +99,11 @@ class NewsAddForm extends MessageForm {
 		if (empty($this->categoryIDs)) {
 			throw new UserInputException('categoryIDs');
 		}
-		
+
 		foreach ($this->categoryIDs as $categoryID) {
 			$category = CategoryHandler::getInstance()->getCategory($categoryID);
 			if ($category === null) throw new UserInputException('categoryIDs');
-			
+
 			$category = new NewsCategory($category);
 			if (! $category->isAccessible() || ! $category->getPermission('canAddNews')) throw new UserInputException('categoryIDs');
 		}
@@ -123,6 +123,7 @@ class NewsAddForm extends MessageForm {
 			'username' => WCF::getUser()->username,
 			'isDisabled' => ($this->time > TIME_NOW) ? 1 : 0,
 			'enableBBCodes' => $this->enableBBCodes,
+			'showSignature'	=> $this->showSignature,
 			'enableHtml' => $this->enableHtml,
 			'enableSmilies' => $this->enableSmilies,
 			'imageID' => $this->image->imageID,
@@ -135,11 +136,11 @@ class NewsAddForm extends MessageForm {
 			'categoryIDs' => $this->categoryIDs
 		);
 		$newsData['tags'] = $this->tags;
-		
+
 		$action = new NewsAction(array(), 'create', $newsData);
 		$resultValues = $action->executeAction();
 		$this->saved();
-		
+
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('News', array(
 			'application' => 'cms',
 			'object' => $resultValues['returnValues']

@@ -421,6 +421,8 @@
 		<item name="wcf.acp.option.cms_news_preview_truncate.description"><![CDATA[How much letters are allowed before truncating the preview?]]></item>
 		<item name="wcf.acp.option.cms_news_sidebar_categories"><![CDATA[Show categories in sidebar]]></item>
 		<item name="wcf.acp.option.cms_news_sidebar_categories_main"><![CDATA[Show only main categories]]></item>
+		<item name="wcf.acp.option.cms_news_signatures"><![CDATA[Show signatures]]></item>
+		<item name="wcf.acp.option.cms_news_signatures.description"><![CDATA[Authors are able to show they're signatures]]></item>
 		<item name="wcf.acp.option.cms_news_news_images_attached"><![CDATA[Show news images above message]]></item>
 		<item name="wcf.acp.option.cms_news_news_images_attached.description"><![CDATA[Shows news images if available above the text message]]></item>
 	</category>
