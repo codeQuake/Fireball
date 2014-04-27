@@ -12,10 +12,10 @@ use wcf\system\WCF;
 /**
  * Shows the content edit form.
  *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class ContentEditForm extends ContentAddForm {
 	public $contentID = 0;
@@ -73,10 +73,8 @@ class ContentEditForm extends ContentAddForm {
 			$editor->update($update);
 		}
 		$this->saved();
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('PageEdit', array(
-			'id' => $this->pageID
-		), '#contents'));
-		exit();
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('PageEdit', array('id' => $this->pageID),'#contents'));
+		exit;
 	}
 
 	public function assignVariables() {

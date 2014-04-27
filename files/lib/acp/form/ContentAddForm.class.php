@@ -16,10 +16,10 @@ use wcf\util\StringUtil;
 /**
  * Shows the content add form.
  *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class ContentAddForm extends AbstractForm {
 	public $templateName = 'contentAdd';
@@ -107,10 +107,8 @@ class ContentAddForm extends AbstractForm {
 
 		$this->saved();
 
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('PageEdit', array(
-			'id' => $this->pageID
-		), '#contents'));
-		exit();
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('PageEdit', array('id' => $this->pageID),'#contents'));
+		exit;
 	}
 
 	public function assignVariables() {
