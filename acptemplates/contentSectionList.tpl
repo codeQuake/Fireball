@@ -18,7 +18,7 @@
 			</span>
 		</li>
 		<li title="{$content->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-			<a href="{link controller='ContentEdit' application='cms' id=$content->contentID}{/link}" itemprop="url">
+			<a href="{link controller='PageEdit' application='cms' id=$content->getPage()->pageID}#contents{/link}" itemprop="url">
 				<span itemprop="title">{$content->getTitle()|language}</span>
 			</a>
 			<span class="pointer">
@@ -45,7 +45,7 @@
 		<ul>
 			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
 			<li><a href="{link controller='ContentSectionAdd' application='cms' id=$contentID}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.section.add{/lang}</span></a></li>
-			
+
 			{event name='contentNavigationButtonsTop'}
 		</ul>
 	</nav>
@@ -76,7 +76,7 @@
 		<ul>
 			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
 			<li><a href="{link controller='ContentSectionAdd' application='cms' id=$contentID}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.section.add{/lang}</span></a></li>
-			
+
 			{event name='contentNavigationButtonsTop'}
 		</ul>
 	</nav>

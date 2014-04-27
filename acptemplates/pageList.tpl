@@ -18,7 +18,7 @@
 		//<![CDATA[
 		$(function() {
 			new WCF.Action.Delete('cms\\data\\page\\PageAction', '.jsPageRow');
-			new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction');			
+			new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction');
 		});
 		//]]>
 	</script>
@@ -29,7 +29,7 @@
 		<ul>
 			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
 			<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
-			
+
 			{event name='contentNavigationButtonsTop'}
 		</ul>
 	</nav>
@@ -54,7 +54,7 @@
 							{/if}
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
-							<a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
+								<a href="{link controller='PageEdit' id=$page->pageID application='cms'}#contents{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
 							{event name='itemButtons'}
 							</span>
 						</span>

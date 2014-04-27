@@ -4,7 +4,7 @@
 	<script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Like.js"></script>
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS.js"></script>
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
-	
+
 
 <nav class="breadcrumbs marginTop">
 	<ul>
@@ -25,7 +25,7 @@
 			</span>
 		</li>
 		<li title="{$content->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-			<a href="{link controller='ContentList' application='cms' id=$content->contentID}{/link}" itemprop="url">
+			<a href="{link controller='PageEdit' application='cms' id=$content->getPage()->pageID}#contents{/link}" itemprop="url">
 				<span itemprop="title">{$content->getTitle()|language}</span>
 			</a>
 			<span class="pointer">
@@ -71,15 +71,15 @@
                 </dd>
             </dl>
         </fieldset>
-        
-        
+
+
         {if $objectType != null}
         <fieldset>
             <legend>{lang}cms.acp.content.section.data{/lang}</legend>
             {include file=$objectType->getProcessor()->getFormTemplate() application='cms'}
         </fieldset>
         {/if}
-        
+
 
 		<fieldset>
 			<legend>{lang}cms.acp.content.section.css{/lang}</legend>
@@ -122,7 +122,7 @@
 			//<![CDATA[
 			$(function() {
 				WCF.Language.addObject({
-					'wcf.global.preview': '{lang}wcf.global.preview{/lang}' 
+					'wcf.global.preview': '{lang}wcf.global.preview{/lang}'
 				});
 				new CMS.ACP.Content.Preview('{$objectTypeName}');
 			});
