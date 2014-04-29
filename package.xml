@@ -41,7 +41,7 @@
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="sitemap">xml/sitemap.xml</instruction>
 		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="pageMenu">xml/pageMenu.xml</instruction>
+		<instruction type="pageMenu">xml/pagemenu.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
