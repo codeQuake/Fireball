@@ -15,7 +15,7 @@
 <div class="contentNavigation">
     <nav>
         <ul>
-            <li><a href="{link application='cms' controller='LayoutList'}{/link}" title="{lang}cms.acp.menu.link.cms.layout.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.layout.list{/lang}</span></a></li>
+            <li><a href="{link application='cms' controller='LayoutList'}{/link}" title="{lang}cms.acp.menu.link.cms.layout.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.layout.list{/lang}</span></a></li>
             {event name='contentNavigationButtons'}
         </ul>
     </nav>

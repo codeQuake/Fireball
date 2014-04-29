@@ -14,14 +14,14 @@
 <div class="contentNavigation">
     <nav>
         <ul>
-            <li><a href="{link application='cms' controller='StylesheetList'}{/link}" title="{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}</span></a></li>
+            <li><a href="{link application='cms' controller='StylesheetList'}{/link}" title="{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}</span></a></li>
             {event name='contentNavigationButtons'}
         </ul>
     </nav>
 </div>
 
 <form method="post" action="{if $action == 'add'}{link controller='StylesheetAdd' application='cms'}{/link}{else}{link controller='StylesheetEdit' id=$sheetID application='cms'}{/link}{/if}">
-    <div class="container containerPadding marginTop">  
+    <div class="container containerPadding marginTop">
         <fieldset>
 			<legend>{lang}cms.acp.stylesheet.general{/lang}</legend>
 				<dl>
@@ -31,7 +31,7 @@
 		</fieldset>
 		<fieldset class="marginTop">
 				<legend>{lang}cms.acp.stylesheet.less{/lang}</legend>
-				
+
 				<dl class="wide">
 					<dd>
 						<textarea id="less" rows="20" cols="40" name="less">{$less}</textarea>
@@ -39,7 +39,7 @@
 					</dd>
 				</dl>
 		</fieldset>
-    </div>  
+    </div>
     {include file='codemirror' codemirrorMode='less' codemirrorSelector='#less'}
     <div class="formSubmit">
 		    <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />

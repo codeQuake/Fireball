@@ -14,7 +14,7 @@
 <div class="contentNavigation">
     <nav>
         <ul>
-            <li><a href="{link application='cms' controller='ModuleList'}{/link}" title="{lang}cms.acp.menu.link.cms.module.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.module.list{/lang}</span></a></li>
+            <li><a href="{link application='cms' controller='ModuleList'}{/link}" title="{lang}cms.acp.menu.link.cms.module.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.module.list{/lang}</span></a></li>
             {event name='contentNavigationButtons'}
         </ul>
     </nav>
@@ -31,7 +31,7 @@
 		</fieldset>
 		<fieldset class="marginTop">
 				<legend>{lang}cms.acp.module.php{/lang}</legend>
-				
+
 				<dl class="wide">
 					<dd>
 						<textarea id="php" rows="20" cols="40" name="php">{$phpCode}</textarea>
@@ -42,7 +42,7 @@
     {include file='codemirror' codemirrorMode='php' codemirrorSelector='#php'}
         <fieldset class="marginTop">
 				<legend>{lang}cms.acp.module.tpl{/lang}</legend>
-				
+
 				<dl class="wide">
 					<dd>
 						<textarea id="tpl" rows="20" cols="40" name="tpl">{$tplCode}</textarea>

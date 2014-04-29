@@ -17,7 +17,6 @@
 		<item name="cms.acp.content.content.section.add"><![CDATA[Add content section to '{$content->title|language}']]></item>
 		<item name="cms.acp.content.content.section.list"><![CDATA[List content sections of '{$content->title|language}']]></item>
 		<item name="cms.acp.content.list"><![CDATA[List contents]]></item>
-		<item name="cms.acp.content.page.list"><![CDATA[Choose a page...]]></item>
 		<item name="cms.acp.content.section.general"><![CDATA[General]]></item>
 		<item name="cms.acp.content.section.general.objectType"><![CDATA[Contenttype]]></item>
 		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>

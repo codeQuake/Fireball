@@ -13,7 +13,7 @@
 				<span>»</span>
 			</span>
 		</li>
-		
+
     {if $pageID != 0}
 		<li title="{$page->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
 			<a href="{link controller='PageEdit' application='cms' id=$page->pageID}{/link}" itemprop="url">
@@ -41,9 +41,9 @@
     <nav>
         <ul>
 			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
-			{if $contentID|isset}<li><a href="{link application='cms' controller='ContentSectionList' id=$contentID}{/link}" title="{lang}cms.acp.content.content.section.list{/lang}" class="button"><span class="icon icon24 icon-list-alt"></span> <span>{lang}cms.acp.content.content.section.list{/lang}</span></a></li>{/if}
-            <li><a href="{link application='cms' controller='ContentList'}{/link}" title="{lang}cms.acp.menu.link.cms.content.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.content.list{/lang}</span></a></li>
-			
+			{if $contentID|isset}<li><a href="{link application='cms' controller='ContentSectionList' id=$contentID}{/link}" title="{lang}cms.acp.content.content.section.list{/lang}" class="button"><span class="icon icon16 icon-list-alt"></span> <span>{lang}cms.acp.content.content.section.list{/lang}</span></a></li>{/if}
+            <li><a href="{link application='cms' controller='ContentList'}{/link}" title="{lang}cms.acp.menu.link.cms.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.content.list{/lang}</span></a></li>
+
             {event name='contentNavigationButtons'}
         </ul>
     </nav>
@@ -128,7 +128,7 @@
 							</select>
 							<small>{lang}cms.acp.content.optional.type.description{/lang}</small>
 						</dd>
-						
+
 			</dl>
 			<dl>
                 <dt><label for="showOrder">{lang}cms.acp.content.optional.showOrder{/lang}</label></dt>

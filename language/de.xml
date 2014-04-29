@@ -16,8 +16,6 @@
 		<item name="cms.acp.content.section.edit"><![CDATA[Inhaltsabschnitt bearbeiten]]></item>
 		<item name="cms.acp.content.content.section.add"><![CDATA[Inhaltsabschnitt zu '{$content->title|language}' hinzufügen]]></item>
 		<item name="cms.acp.content.content.section.list"><![CDATA[Inhaltsabschnitte von '{$content->title|language}' auflisten]]></item>
-		<item name="cms.acp.content.list"><![CDATA[Inhalte auflisten]]></item>
-		<item name="cms.acp.content.page.list"><![CDATA[Seite wählen...]]></item>
 		<item name="cms.acp.content.section.general"><![CDATA[Allgemeine Einstellungen]]></item>
 		<item name="cms.acp.content.section.general.objectType"><![CDATA[Inhaltstyp]]></item>
 		<item name="cms.acp.content.section.type.de.codequake.cms.section.type.text"><![CDATA[Text]]></item>
