@@ -72,9 +72,7 @@
 		<nav class="tabMenu">
 			<ul>
 				<li><a href="{@$__wcf->getAnchor('general')}">{lang}cms.acp.page.general{/lang}</a></li>
-				{if $pageID|isset}
 				<li><a href="{@$__wcf->getAnchor('contents')}">{lang}cms.acp.content.contents{/lang}</a></li>
-				{/if}
 				<li><a href="{@$__wcf->getAnchor('userPermissions')}">{lang}cms.acp.page.userPermissions{/lang}</a></li>
 				{event name='tabMenuTabs'}
 			</ul>
@@ -300,11 +298,9 @@
 				</dl>
 			</fieldset>
 		</div>
-		{if $pageID|isset}
 		<div id="contents" class="container containerPadding tabMenuContent">
 			{include file='pageAddContents' application='cms'}
 		</div>
-		{/if}
 
 		{event name='tabMenuContents'}
 	</div>

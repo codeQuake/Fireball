@@ -185,6 +185,7 @@
 		<item name="cms.acp.page.overview"><![CDATA[Übersicht]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
 		<item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
+		<item name="cms.acp.page.addContents.afterSaving"><![CDATA[Nach dem Speichern der Seite können Sie an dieser Stelle die Inhalte der Seite verwalten.]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
 		<item name="cms.acp.page.title"><![CDATA[Seitentitel]]></item>
 		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von '{$page->title|language}' auflisten]]></item>

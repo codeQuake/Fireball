@@ -184,6 +184,7 @@
 	<category name="cms.acp.page">
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
 		<item name="cms.acp.page.add"><![CDATA[Add page]]></item>
+		<item name="cms.acp.page.addContents.afterSaving"><![CDATA[You can add contents here after saving this page!]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Edit page]]></item>
 		<item name="cms.acp.page.title"><![CDATA[Pagetitle]]></item>
 		<item name="cms.acp.page.content.list"><![CDATA[List contents of '{$page->title|language}']]></item>

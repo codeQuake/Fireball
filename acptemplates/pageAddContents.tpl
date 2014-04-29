@@ -1,3 +1,4 @@
+{if $pageID|isset}
 <script data-relocate="true">
 		//<![CDATA[
 		$(function() {
@@ -67,3 +68,6 @@
 	<button type="button" class="button buttonPrimary" id="buttonSort" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 	{/if}
 </div>
+{else}
+	<p class="info">{lang}cms.acp.page.addContents.afterSaving{/lang}</p>
+{/if}
