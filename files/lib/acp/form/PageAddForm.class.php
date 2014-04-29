@@ -6,7 +6,7 @@ use cms\data\page\Page;
 use cms\data\page\PageAction;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
-use cms\data\page\PageList;
+use cms\data\page\PageNodeTree;
 use cms\util\PageUtil;
 use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\form\AbstractForm;
@@ -18,7 +18,7 @@ use wcf\util\StringUtil;
 
 /**
  * Shows the page add form.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -54,25 +54,24 @@ class PageAddForm extends AbstractForm {
 
 	public function readParameters() {
 		parent::readParameters();
-		
+
 		I18nHandler::getInstance()->register('title');
 		I18nHandler::getInstance()->register('description');
 		I18nHandler::getInstance()->register('metaDescription');
 		I18nHandler::getInstance()->register('metaKeywords');
-		
+
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
 	}
 
 	public function readData() {
 		parent::readData();
-		
+
 		if (! isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
 		if (isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
-		
-		$this->pageList = new PageList();
-		$this->pageList->readObjects();
-		$this->pageList = $this->pageList->getObjects();
-		
+
+		$this->pageList = new PageNodeTree();
+		$this->pageList = $this->pageList->getIterator();
+
 		$this->layoutList = new LayoutList();
 		$this->layoutList->readObjects();
 		$this->layoutList = $this->layoutList->getObjects();
@@ -80,7 +79,7 @@ class PageAddForm extends AbstractForm {
 
 	public function readFormParameters() {
 		parent::readFormParameters();
-		
+
 		I18nHandler::getInstance()->readValues();
 		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
 		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
@@ -101,13 +100,13 @@ class PageAddForm extends AbstractForm {
 
 	public function validate() {
 		parent::validate();
-		
+
 		// validate alias
 		$this->validateAlias();
-		
+
 		// validate menuitem
 		$this->validateMenuItem();
-		
+
 		if (! I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
@@ -116,7 +115,7 @@ class PageAddForm extends AbstractForm {
 				throw new UserInputException('title', 'multilingual');
 			}
 		}
-		
+
 		$page = new Page($this->parentID);
 		if ($page === null) throw new UserInputException('parentID', 'invalid');
 	}
@@ -142,7 +141,7 @@ class PageAddForm extends AbstractForm {
 	protected function validateMenuItem() {
 		$list = new PageMenuItemList();
 		$list->readObjects();
-		
+
 		foreach ($list as $item) {
 			if (isset($this->menuItem) && $this->title == $item->menuItem) {
 				throw new UserInputException('menuItem', 'exists');
@@ -152,7 +151,7 @@ class PageAddForm extends AbstractForm {
 
 	public function save() {
 		parent::save();
-		
+
 		$data = array(
 			'alias' => $this->alias,
 			'title' => $this->title,
@@ -170,22 +169,22 @@ class PageAddForm extends AbstractForm {
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable
 		);
-		
+
 		$objectAction = new PageAction(array(), 'create', array(
 			'data' => $data,
 			'I18n' => I18nHandler::getInstance()->getValues('title')
 		));
 		$objectAction->executeAction();
-		
+
 		$returnValues = $objectAction->getReturnValues();
 		$pageID = $returnValues['returnValues']->pageID;
-		
+
 		// save ACL
 		ACLHandler::getInstance()->save($pageID, $this->objectTypeID);
 		ACLHandler::getInstance()->disableAssignVariables();
 		// update I18n
 		$update = array();
-		
+
 		if (! I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.page.title' . $pageID, 'cms.page');
 			$update['title'] = 'cms.page.title' . $pageID;
@@ -206,7 +205,7 @@ class PageAddForm extends AbstractForm {
 			$editor = new PageEditor($returnValues['returnValues']);
 			$editor->update($update);
 		}
-		
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
 		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
@@ -218,10 +217,10 @@ class PageAddForm extends AbstractForm {
 
 	public function assignVariables() {
 		parent::assignVariables();
-		
+
 		I18nHandler::getInstance()->assignVariables();
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
-		
+
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'objectTypeID' => $this->objectTypeID,

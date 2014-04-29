@@ -11,10 +11,10 @@ use cms\system\cache\builder\PageCacheBuilder;
  */
 class PageNodeTree implements \IteratorAggregate {
 	protected $nodeClassName = 'cms\data\page\PageNode';
-	protected $parentID = 0;
+	protected $parentID = null;
 	protected $parentNode = null;
 
-	public function __construct($parentID = 0) {
+	public function __construct($parentID = null) {
 		$this->parentID = $parentID;
 	}
 
@@ -26,9 +26,10 @@ class PageNodeTree implements \IteratorAggregate {
 	public function buildTreeLevel(PageNode $pageNode) {
 		foreach ($this->getChildren($pageNode) as $child) {
 			$childNode = $this->getNode($child->pageID);
-			
-			$pageNode->addChild($childNode);
-			$this->buildTreeLevel($childNode);
+			if($this->isIncluded($childNode)){
+				$pageNode->addChild($childNode);
+				$this->buildTreeLevel($childNode);
+			}
 		}
 	}
 
@@ -38,7 +39,7 @@ class PageNodeTree implements \IteratorAggregate {
 
 	protected function getChildren(PageNode $parentNode) {
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
-		
+
 		$children = array();
 		foreach ($pages as $page) {
 			if ($page->parentID == $parentNode->pageID) {
@@ -52,7 +53,7 @@ class PageNodeTree implements \IteratorAggregate {
 		if ($this->parentNode === null) {
 			$this->buildTree();
 		}
-		
+
 		return new \RecursiveIteratorIterator($this->parentNode, \RecursiveIteratorIterator::SELF_FIRST);
 	}
 
@@ -63,7 +64,11 @@ class PageNodeTree implements \IteratorAggregate {
 		else {
 			$page = $this->getPage($pageID);
 		}
-		
+
 		return new $this->nodeClassName($page);
+	}
+
+	protected function isIncluded(PageNode $pageNode) {
+		return true;
 	}
 }

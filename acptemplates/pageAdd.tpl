@@ -205,10 +205,10 @@
 						<dt><label for="parentID">{lang}cms.acp.page.general.parentID{/lang}</label></dt>
 						<dd>
 							<select id="parentID" name="parentID">
-								<option value="0" {if parentID == 0} selected="selected"{/if} data-alias="">{lang}wcf.global.noSelection{/lang}</option>
-								{foreach from=$pageList item='item'}
-									<option value="{$item->pageID}" {if $item->pageID == $parentID}selected="selected"{/if} data-alias="{$item->alias}" >{$item->title|language}</option>
-								{/foreach}
+								<option value="0" {if $parentID == 0} selected="selected"{/if} data-alias="">{lang}wcf.global.noSelection{/lang}</option>
+								{foreach from=$pageList item=$node}
+					                <option data-alias="{$node->getAlias()}" {if $node->pageID == $parentID} selected="selected" {/if} value="{@$node->pageID}">{section name=i loop=$pageList->getDepth()}&nbsp;&raquo;&raquo;&nbsp;{/section}{$node->getTitle()|language}</option>
+					            {/foreach}
 							</select>
 						</dd>
 					</dl>
