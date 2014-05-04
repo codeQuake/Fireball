@@ -5,6 +5,9 @@
 			<name>com.woltlab.wcf.exporter.wordpress3xtoNews</name>
 			<definitionname>com.woltlab.wcf.exporter</definitionname>
 			<classname>wcf\system\exporter\WordPress3xToNewsExporter</classname>
+			<name>com.woltlab.wcf.exporter.cnewstoNews</name>
+			<definitionname>com.woltlab.wcf.exporter</definitionname>
+			<classname>wcf\system\exporter\Cnews1xToNewsExporter</classname>
 		</type>
 	</import>
 </data>
