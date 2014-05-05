@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
 	<import>
-		<!-- section types -->
+		<!-- content types -->
 		<type>
-			<name>de.codequake.cms.section.type.text</name>
-			<definitionname>de.codequake.cms.section.type</definitionname>
-			<classname>cms\data\content\section\type\TextContentSectionType</classname>
+			<name>de.codequake.cms.content.type.text</name>
+			<definitionname>de.codequake.cms.type</definitionname>
+			<classname>cms\system\content\type\TextContentType</classname>
 		</type>
 		<type>
-			<name>de.codequake.cms.section.type.headline</name>
-			<definitionname>de.codequake.cms.section.type</definitionname>
-			<classname>cms\data\content\section\type\HeadlineContentSectionType</classname>
+			<name>de.codequake.cms.content.type.headline</name>
+			<definitionname>de.codequake.cms.type</definitionname>
+			<classname>cms\system\content\type\HeadlineContentSectionType</classname>
 		</type>
-		<type>
+		<!--<type>
 			<name>de.codequake.cms.section.type.link</name>
 			<definitionname>de.codequake.cms.section.type</definitionname>
 			<classname>cms\data\content\section\type\LinkContentSectionType</classname>
@@ -43,7 +43,7 @@
 			<name>de.codequake.cms.section.type.dashboard</name>
 			<definitionname>de.codequake.cms.section.type</definitionname>
 			<classname>cms\data\content\section\type\DashboardContentSectionType</classname>
-		</type>
+		</type>  -->
 		<!-- /section types -->
 
 		<!-- attachments -->
