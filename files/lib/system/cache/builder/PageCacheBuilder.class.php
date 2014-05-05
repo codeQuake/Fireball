@@ -3,7 +3,6 @@ namespace cms\system\cache\builder;
 
 use cms\data\page\PageList;
 use wcf\system\cache\builder\AbstractCacheBuilder;
-use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
@@ -19,7 +18,7 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 			'aliasToID' => array(),
 			'tree' => array()
 		);
-		
+
 		$list = new PageList();
 		$list->sqlOrderBy = 'parentID ASC, showOrder ASC';
 		$list->readObjects();
@@ -27,11 +26,11 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 		foreach ($data['pages'] as $page) {
 			$data['aliasToID'][$page->getAlias()] = $page->pageID;
 		}
-		
+
 		foreach ($data['pages'] as $page) {
 			$data['tree'][$page->parentID][] = $page->pageID;
 		}
-		
+
 		return $data;
 	}
 }

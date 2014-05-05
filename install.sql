@@ -25,10 +25,12 @@ CREATE TABLE cms1_page (
 --content
 DROP TABLE IF EXISTS cms1_content;
 CREATE TABLE cms1_content (
-	sectionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	contentID INT(10),
-	sectionTypeID INT(10),
-	sectionData MEDIUMTEXT,
+	contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	parentID INT(10),
+	pageID INT(10),
+	title VARCHAR(255) NOT NULL DEFAULT '',
+	contentTypeID INT(10),
+	contentData MEDIUMTEXT,
 	showOrder INT(10) DEFAULT 0,
 	cssID VARCHAR (255),
 	cssClasses VARCHAR(255),
@@ -140,8 +142,8 @@ CREATE TABLE cms1_counter (
 --foreign keys
 ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 
-ALTER TABLE cms1_content_section ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
-ALTER TABLE cms1_content_section ADD FOREIGN KEY (sectionTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+ALTER TABLE cms1_content ADD FOREIGN KEY (parentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
+ALTER TABLE cms1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
 

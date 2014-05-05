@@ -9,7 +9,7 @@ use wcf\system\WCF;
 
 /**
  * Represents a content item.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -18,7 +18,6 @@ use wcf\system\WCF;
 class Content extends CMSDatabaseObject implements IRouteController {
 	protected static $databaseTableName = 'content';
 	protected static $databaseTableIndexName = 'contentID';
-	public $sectionList = array();
 
 	public function __construct($id, $row = null, $object = null) {
 		if ($id !== null) {
@@ -30,10 +29,10 @@ class Content extends CMSDatabaseObject implements IRouteController {
 				$id
 			));
 			$row = $statement->fetchArray();
-			
+
 			if ($row === false) $row = array();
 		}
-		
+
 		parent::__construct(null, $row, $object);
 	}
 
@@ -41,17 +40,7 @@ class Content extends CMSDatabaseObject implements IRouteController {
 		return new Page($this->pageID);
 	}
 
-	public function getEditor() {
-		return new ContentEditor($this);
-	}
-
 	public function getTitle() {
 		return $this->title;
-	}
-
-	public function getSections() {
-		$this->sectionList = new ContentContentSectionList($this->contentID);
-		$this->sectionList->readObjects();
-		return $this->sectionList->getObjects();
 	}
 }
