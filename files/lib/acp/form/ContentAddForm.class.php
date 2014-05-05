@@ -30,12 +30,11 @@ class ContentAddForm extends AbstractForm {
 	public $enableMultilangualism = true;
 	public $title = '';
 	public $page = null;
+	public $parentID = null;
 	public $pageID = 0;
 	public $showOrder = 0;
 	public $cssID = '';
 	public $cssClasses = '';
-	public $position = 'body';
-	public $type = 'div';
 	public $pageList = null;
 
 	public function readParameters() {
@@ -46,9 +45,7 @@ class ContentAddForm extends AbstractForm {
 
 	public function readData() {
 		parent::readData();
-		$this->pageList = new PageList();
-		$this->pageList->readObjects();
-		$this->pageList = $this->pageList->getObjects();
+		//load page & content node trees
 	}
 
 	public function readFormParameters() {
@@ -56,11 +53,10 @@ class ContentAddForm extends AbstractForm {
 		I18nHandler::getInstance()->readValues();
 		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
 		if (isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
+		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
 		if (isset($_POST['cssID'])) $this->cssID = StringUtil::trim($_POST['cssID']);
 		if (isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
-		if (isset($_POST['position'])) $this->position = StringUtil::trim($_POST['position']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
-		if (isset($_POST['type'])) $this->type = StringUtil::trim($_POST['type']);
 	}
 
 	public function validate() {
@@ -83,6 +79,7 @@ class ContentAddForm extends AbstractForm {
 		$data = array(
 			'title' => $this->title,
 			'pageID' => $this->pageID,
+			'parentID' => $this->parentID,
 			'cssID' => $this->cssID,
 			'cssClasses' => $this->cssClasses,
 			'showOrder' => $this->showOrder,
@@ -120,6 +117,7 @@ class ContentAddForm extends AbstractForm {
 			'cssID' => $this->cssID,
 			'showOrder' => $this->showOrder,
 			'pageID' => $this->pageID,
+			'parentID' => $this->parentID,
 			'pageList' => $this->pageList,
 			'page' => new Page($this->pageID),
 			'position' => $this->position,
