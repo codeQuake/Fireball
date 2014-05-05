@@ -18,12 +18,12 @@
 		<requiredpackage minversion="1.0.0" file="requirements/de.codequake.wysiwygACP.tar">de.codequake.wysiwygACP</requiredpackage>
 	</requiredpackages>
 
-	<optionalpackages>
-		<optionalpackage file="optionals/de.codequake.bbcode.icon.tar">de.codequake.bbcode.icon</optionalpackage>
+	<!--<optionalpackages>
+		 <optionalpackage file="optionals/de.codequake.bbcode.icon.tar">de.codequake.bbcode.icon</optionalpackage>
 		<optionalpackage file="optionals/de.codequake.cms.exporter.tar">de.codequake.cms.exporter</optionalpackage>
 		<optionalpackage file="optionals/de.codequake.cms.news.rss.tar">de.codequake.cms.news.rss</optionalpackage>
 		<optionalpackage file="optionals/com.woltlab.wcf.legalNotice.tar">com.woltlab.wcf.legalNotice</optionalpackage>
-	</optionalpackages>
+	</optionalpackages> -->
 
 	<instructions type="install">
 		<!--lang -->
@@ -53,158 +53,5 @@
 
 		<!--others -->
 		<instruction type="sql">install.sql</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.0.0">
-		<instruction type="language">language/*.xml</instruction>
-
-		<!--tar -->
-		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update1_1.sql</instruction>
-
-		<!--xml -->
-		<instruction type="cronjob">xml/cronjob.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.0.1">
-		<instruction type="language">language/*.xml</instruction>
-
-		<!--tar -->
-		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update1_1.sql</instruction>
-
-		<!--xml -->
-		<instruction type="cronjob">xml/cronjob.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.0.1 pl *">
-		<instruction type="language">language/*.xml</instruction>
-
-		<!--tar -->
-		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update1_1.sql</instruction>
-
-		<!--xml -->
-		<instruction type="cronjob">xml/cronjob.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.1.0">
-		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update1_2.sql</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.1.0 pl 1">
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="sql">update1_2.sql</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.1.1">
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update1_2.sql</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.1.1 pl 1">
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="sql">update1_2.sql</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.1.2">
-		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update1_3.sql</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.1.2 pl 1">
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update1_3.sql</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.1.2 pl 2">
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="sql">update1_3.sql</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="1.1.2 pl 3">
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
 	</instructions>
 </package>
