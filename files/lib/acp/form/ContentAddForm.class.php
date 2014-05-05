@@ -82,9 +82,7 @@ class ContentAddForm extends AbstractForm {
 			'parentID' => $this->parentID,
 			'cssID' => $this->cssID,
 			'cssClasses' => $this->cssClasses,
-			'showOrder' => $this->showOrder,
-			'position' => $this->position,
-			'type' => $this->type
+			'showOrder' => $this->showOrder
 		);
 		$objectAction = new ContentAction(array(), 'create', array(
 			'data' => $data
@@ -119,9 +117,7 @@ class ContentAddForm extends AbstractForm {
 			'pageID' => $this->pageID,
 			'parentID' => $this->parentID,
 			'pageList' => $this->pageList,
-			'page' => new Page($this->pageID),
-			'position' => $this->position,
-			'type' => $this->type
+			'page' => new Page($this->pageID)
 		));
 	}
 }
