@@ -47,7 +47,7 @@
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="eventListener">xml/eventListener.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
 
