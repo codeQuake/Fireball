@@ -10,7 +10,7 @@
 				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
 			</a>
 			<span class="pointer">
-				<span>Â»</span>
+				<span>»</span>
 			</span>
 		</li>
 
@@ -20,7 +20,7 @@
 				<span itemprop="title">{$page->getTitle()|language}</span>
 			</a>
 			<span class="pointer">
-				<span>Â»</span>
+				<span>»</span>
 			</span>
 		</li>
 	{/if}
@@ -49,7 +49,7 @@
     </nav>
 </div>
 {if $pageList|count}
-<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd'}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}{/link}{/if}">
+<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}{/link}{/if}">
     <div class="container containerPadding marginTop shadow">
         <fieldset>
             <legend>{lang}cms.acp.content.general{/lang}</legend>
@@ -129,6 +129,7 @@
         <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
          {@SECURITY_TOKEN_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
+        <input type="hidden" name="objectType" value="{@$objectType->objectType}" />
         {if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}
     </div>
 </form>

@@ -35,6 +35,8 @@ class ContentAddForm extends AbstractForm {
 	public $showOrder = 0;
 	public $cssID = '';
 	public $cssClasses = '';
+	public $contentData = array();
+
 	public $pageList = null;
 
 	public $objectType;
@@ -65,13 +67,14 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_POST['cssID'])) $this->cssID = StringUtil::trim($_POST['cssID']);
 		if (isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
+		if (isset($_POST['contentData']) && is_array($_POST['contentData'])) $this->contentData = $_POST['contentData'];
 
-		print_r($_POST);
 	}
 
 	public function validate() {
 		parent::validate();
-		;
+		$this->objectTypeProcessor->validate();
+
 		if (! I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
@@ -92,7 +95,9 @@ class ContentAddForm extends AbstractForm {
 			'parentID' => $this->parentID,
 			'cssID' => $this->cssID,
 			'cssClasses' => $this->cssClasses,
-			'showOrder' => $this->showOrder
+			'showOrder' => $this->showOrder,
+			'contentData' => serialize($this->contentData),
+			'contentTypeID' => $this->objectType->objectTypeID
 		);
 		$objectAction = new ContentAction(array(), 'create', array(
 			'data' => $data
@@ -127,7 +132,8 @@ class ContentAddForm extends AbstractForm {
 			'pageList' => $this->pageList,
 			'page' => new Page($this->pageID),
 			'objectType' => $this->objectType,
-			'objectTypeProcessor' => $this->objectTypeProcessor
+			'objectTypeProcessor' => $this->objectTypeProcessor,
+			'contentData' => $this->contentData
 		));
 	}
 }
