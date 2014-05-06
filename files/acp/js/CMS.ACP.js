@@ -68,12 +68,12 @@ CMS.ACP.Page.AddContent = Class.extend({
 		event.preventDefault();
 		if(!this._dialogContent){
 			this._dialogContent = $('<div id="contentAddDialog"></div>');
-			$fieldset = $('<fieldset><legend>' + WCF.Language.get('cms.acp.content.contenttypes') + '</legend></fieldset>').appendTo(this._dialogContent);
+			$fieldset = $('<fieldset><legend>' + WCF.Language.get('cms.acp.content.type.content') + '</legend></fieldset>').appendTo(this._dialogContent);
 			$list = $('<ul class="tripleColumned"></ul>').appendTo($fieldset);
 
 			for(var identifier in this._contentTypes){
 				var current = this._contentTypes[identifier];
-				var $listItem = $('<li><span class="icon icon16 ' + current.icon + '"></span> ' + WCF.Language.get('cms.content.type.' + identifier) + '</li>').appendTo($list);
+				var $listItem = $('<li><span class="icon icon16 ' + current.icon + '"></span> ' + WCF.Language.get('cms.acp.content.type.' + identifier) + '</li>').appendTo($list);
 			}
 		}
 

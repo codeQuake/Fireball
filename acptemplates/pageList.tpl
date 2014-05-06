@@ -23,8 +23,14 @@
 			new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction');
 			var $addContent = new CMS.ACP.Page.AddContent();
 			{foreach from=$objectTypeList item=type}
-			$addContent._register('{$type->objectType}', { icon: '{$type->getProcessor()->getIcon()}' });
+				$addContent._register('{$type->objectType}', { icon: '{$type->getProcessor()->getIcon()}' });
 			{/foreach}
+			WCF.Language.addObject({
+			{foreach from=$objectTypeList item=type}
+				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
+			{/foreach}
+			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}'
+		});
 		});
 		//]]>
 	</script>
