@@ -4,13 +4,13 @@ namespace cms\acp\form;
 use cms\data\content\ContentAction;
 use cms\data\content\ContentEditor;
 use cms\data\page\Page;
-use cms\data\page\PageList;
+use cms\data\page\PageNodeTree;
 use wcf\form\AbstractForm;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
-use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -37,15 +37,23 @@ class ContentAddForm extends AbstractForm {
 	public $cssClasses = '';
 	public $pageList = null;
 
+	public $objectType;
+	public $objectTypeProcessor;
+
 	public function readParameters() {
 		parent::readParameters();
 		I18nHandler::getInstance()->register('title');
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
+		if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $_REQUEST['objectType']);
+			if ($this->objectType != null) {
+					$this->objectTypeProcessor = $this->objectType->getProcessor();
+			}
 	}
 
 	public function readData() {
 		parent::readData();
-		//load page & content node trees
+		$nodeTree = new PageNodeTree();
+		$this->pageList = $nodeTree->getIterator();
 	}
 
 	public function readFormParameters() {
@@ -57,6 +65,8 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_POST['cssID'])) $this->cssID = StringUtil::trim($_POST['cssID']);
 		if (isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
+
+		print_r($_POST);
 	}
 
 	public function validate() {
@@ -102,8 +112,6 @@ class ContentAddForm extends AbstractForm {
 
 		$this->saved();
 
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('PageEdit', array('id' => $this->pageID), '#contents'));
-		exit;
 	}
 
 	public function assignVariables() {
@@ -117,7 +125,9 @@ class ContentAddForm extends AbstractForm {
 			'pageID' => $this->pageID,
 			'parentID' => $this->parentID,
 			'pageList' => $this->pageList,
-			'page' => new Page($this->pageID)
+			'page' => new Page($this->pageID),
+			'objectType' => $this->objectType,
+			'objectTypeProcessor' => $this->objectTypeProcessor
 		));
 	}
 }

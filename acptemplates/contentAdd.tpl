@@ -58,7 +58,7 @@
 				<dd>
 					<select id="pageID" name="pageID">
 						{foreach from=$pageList item='item'}
-						<option value="{$item->pageID}" {if $item->pageID == $pageID}selected="selected"{/if}>{$item->title|language}</option>
+						<option value="{$item->pageID}" {if $item->pageID == $pageID}selected="selected"{/if}>{section name=i loop=$pageList->getDepth()}&nbsp;&raquo;&raquo;&nbsp;{/section}{$item->title|language}</option>
 						{/foreach}
 					</select>
 				</dd>
@@ -79,6 +79,12 @@
                 </dd>
             </dl>
         </fieldset>
+
+        <fieldset>
+        	<legend></legend>
+        	{include file=$objectTypeProcessor->getFormTemplate() application='cms'}
+        </fieldset>
+
         <fieldset>
             <legend>{lang}cms.acp.content.css{/lang}</legend>
             <dl>
@@ -108,32 +114,11 @@
             </dl>
         </fieldset>
         <fieldset>
-            <legend>{lang}cms.acp.content.optional{/lang}</legend>
-            <dl  {if $errorField == 'position'}class="formError"{/if}>
-						<dt><label for="position">{lang}cms.acp.content.optional.position{/lang}</label></dt>
-						<dd>
-							<select id="position" name="position">
-								<option value="body" {if $position =="body"}selected="selected"{/if}>{lang}cms.acp.content.position.body{/lang}</option>
-								<option value="sidebar" {if $position =="sidebar"}selected="selected"{/if}">{lang}cms.acp.content.position.sidebar{/lang}</option>
-							</select>
-						</dd>
-			</dl>
-			<dl  {if $errorField == 'type'}class="formError"{/if}>
-						<dt><label for="type">{lang}cms.acp.content.optional.type{/lang}</label></dt>
-						<dd>
-							<select id="type" name="type">
-								<option value="div" {if $type =="div"}selected="selected"{/if}>{lang}cms.acp.content.type.div{/lang}</option>
-								<option value="ul" {if $type =="ul"}selected="selected"{/if}">{lang}cms.acp.content.type.ul{/lang}</option>
-								<option value="ol" {if $type =="ol"}selected="selected"{/if}">{lang}cms.acp.content.type.ol{/lang}</option>
-							</select>
-							<small>{lang}cms.acp.content.optional.type.description{/lang}</small>
-						</dd>
-
-			</dl>
+            <legend>{lang}cms.acp.content.position{/lang}</legend>
 			<dl>
-                <dt><label for="showOrder">{lang}cms.acp.content.optional.showOrder{/lang}</label></dt>
+                <dt><label for="showOrder">{lang}cms.acp.content.position.showOrder{/lang}</label></dt>
                 <dd>
-                    <input type="text" name="showOrder" id="showorder" value="{$showOrder}" />
+                    <input type="number" name="showOrder" id="showorder" value="{$showOrder}" />
                 </dd>
             </dl>
         </fieldset>

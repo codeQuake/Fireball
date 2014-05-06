@@ -15,7 +15,7 @@
 		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding". For a margin on top use "marginTop".]]></item>
 		<item name="cms.acp.content.list"><![CDATA[List contents]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Edit content]]></item>
-		<item name="cms.acp.content.optional"><![CDATA[Optional]]></item>
+		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content?]]></item>
 	</category>
 

@@ -10,12 +10,6 @@ namespace cms\system\content\type;
  *
  */
 interface IContentType{
-	//type's icon
-	protected static $icon;
-
-	//object type name
-	public $objectType;
-
 	//validates form data
 	public function validate();
 

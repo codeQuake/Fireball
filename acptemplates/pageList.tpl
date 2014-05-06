@@ -36,7 +36,7 @@
 </div>
 
 {hascontent}
-	<section id="pageList" class="container containerPadding marginTop sortableListContainer">
+	<section id="pageList" class="sortableListContainer container containerPadding marginTop">
 		<ol class="pageList sortableList" data-object-id="0">
 			{content}
 				{assign var=oldDepth value=0}
@@ -45,16 +45,16 @@
 					<li class="page jsPageRow sortableNode" data-object-id="{$page->pageID}">
 						<span class="sortableNodeLabel">
 							<span class="title">
-								<span class="pointer collapsibleButton icon icon16 icon-file-text-alt"></span>
+								{if $page->isHome}
+								<span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>
+								{else}<span class="pointer collapsibleButton icon icon16 icon-file-text-alt"></span>
+								{/if}
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}">{@$page->getTitle()}</a> - <small>/{$page->getAlias()}/</small>
 							</span>
 							<span class="statusDisplay buttons">
-							{if $page->isHome}
-							<span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>
-							{/if}
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
-								<a href="{link controller='PageEdit' id=$page->pageID application='cms'}#contents{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
+								<a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
 							{event name='itemButtons'}
 							</span>
 						</span>

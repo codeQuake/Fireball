@@ -2,7 +2,7 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/objectTypeDefinition.xsd">
 	<import>
 		<definition>
-			<name>de.codequake.cms.type</name>
+			<name>de.codequake.cms.content.type</name>
 			<interfacename><![CDATA[cms\system\content\type\IContentType]]></interfacename>
 		</definition>
 	</import>
