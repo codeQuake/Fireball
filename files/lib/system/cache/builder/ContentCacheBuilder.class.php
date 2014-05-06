@@ -23,7 +23,6 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 		$list->readObjects();
 		$data['contents'] = $list->getObjects();
 
-
 		foreach ($data['contents'] as $content) {
 			$data['tree'][$content->parentID][] = $content->contentID;
 		}

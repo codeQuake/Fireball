@@ -26,7 +26,7 @@ class PageNodeTree implements \IteratorAggregate {
 	public function buildTreeLevel(PageNode $pageNode) {
 		foreach ($this->getChildren($pageNode) as $child) {
 			$childNode = $this->getNode($child->pageID);
-			if($this->isIncluded($childNode)){
+			if($this->isIncluded($childNode)) {
 				$pageNode->addChild($childNode);
 				$this->buildTreeLevel($childNode);
 			}
