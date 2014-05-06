@@ -47,6 +47,45 @@ CMS.ACP.Page.AddForm = Class.extend({
     }
 });
 
+CMS.ACP.Page.AddContent = Class.extend({
+
+	_buttonSelector: '.jsContentAddButton',
+	_dialogContent: '',
+	_contentTypes: [],
+
+	init: function(){
+		this._addButtons = $('.jsContentAddButton');
+		this._addButtons.click($.proxy(this._click, this));
+	},
+
+	_register: function(identifier, options){
+		this._contentTypes[identifier] = options;
+		console.log(identifier);
+	},
+
+	_click: function(event){
+		var $target = $(event.currentTarget);
+		event.preventDefault();
+		if(!this._dialogContent){
+			this._dialogContent = $('<div id="contentAddDialog"></div>');
+			$fieldset = $('<fieldset><legend>' + WCF.Language.get('cms.acp.content.contenttypes') + '</legend></fieldset>').appendTo(this._dialogContent);
+			$list = $('<ul class="tripleColumned"></ul>').appendTo($fieldset);
+
+			for(var identifier in this._contentTypes){
+				var current = this._contentTypes[identifier];
+				var $listItem = $('<li><span class="icon icon16 ' + current.icon + '"></span> ' + WCF.Language.get('cms.content.type.' + identifier) + '</li>').appendTo($list);
+			}
+		}
+
+		$dialog = this._dialogContent.clone().appendTo(document.body);
+		$dialog.wcfDialog();
+
+
+	}
+
+
+});
+
 CMS.ACP.Page.SetAsHome = Class.extend({
 
     _pageID: 0,
@@ -135,44 +174,4 @@ CMS.ACP.Content.Preview = Class.extend({
         new WCF.Effect.Scroll().scrollTo($previewContainer);
     },
 
-});
-
-CMS.ACP.Sortable = {};
-CMS.ACP.Sortable.List = WCF.Sortable.List.extend({
-	init: function(containerID, className, offset, options, isSimpleSorting, additionalParameters) {
-		this._additionalParameters = additionalParameters || { };
-		this._containerID = $.wcfEscapeID(containerID);
-		this._container = $('#' + this._containerID);
-		this._className = className;
-		this._offset = (offset) ? offset : 0;
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
-		});
-		this._structure = { };
-
-		// init sortable
-		this._options = $.extend(true, {
-			axis: 'y',
-			connectWith: '#' + this._containerID + ' .sortableList',
-			disableNesting: 'sortableNoNesting',
-			doNotClear: true,
-			errorClass: 'sortableInvalidTarget',
-			forcePlaceholderSize: true,
-			helper: 'clone',
-			items: 'li:not(.sortableNoSorting)',
-			opacity: .6,
-			placeholder: 'sortablePlaceholder',
-			tolerance: 'pointer',
-			toleranceElement: '> span'
-		}, options || { });
-
-		if (isSimpleSorting) {
-			$('#' + this._containerID + ' .sortableList').sortable(this._options);
-		}
-		else {
-			$('#' + this._containerID + ' > .sortableList').nestedSortable(this._options);
-		}
-
-		$('#buttonSort').click($.proxy(this._submit, this));
-	}
 });

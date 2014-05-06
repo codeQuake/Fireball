@@ -13,7 +13,7 @@ class AbstractContentType implements IContentType{
 	/**
 	 * @see cms\system\content\type\IContentType::$icon
 	 */
-	protected static $icon = 'icon-unchecked';
+	protected $icon = 'icon-unchecked';
 
 	/**
 	 * @see cms\system\content\type\IContentType::$objectType
@@ -36,7 +36,7 @@ class AbstractContentType implements IContentType{
 	 * @see \cms\system\content\type\IContentType::getIcon()
 	 */
 	public function getIcon(){
-		return self::$icon;
+		return $this->icon;
 	}
 
 	/**

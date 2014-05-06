@@ -14,11 +14,17 @@
 
 <header class="boxHeadline">
     <h1>{lang}cms.acp.page.list{/lang}</h1>
+
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
 			new WCF.Action.Delete('cms\\data\\page\\PageAction', '.jsPageRow');
 			new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction');
+			var $addContent = new CMS.ACP.Page.AddContent();
+			{foreach from=$objectTypeList item=type}
+			$addContent._register('{$type->objectType}', { icon: '{$type->getProcessor()->getIcon()}' });
+			{/foreach}
 		});
 		//]]>
 	</script>
@@ -54,6 +60,7 @@
 							<span class="statusDisplay buttons">
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
+								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{$page->pageID}"></span>
 								<a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
 							{event name='itemButtons'}
 							</span>

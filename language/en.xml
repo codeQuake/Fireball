@@ -17,6 +17,8 @@
 		<item name="cms.acp.content.edit"><![CDATA[Edit content]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content?]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.headline"><![CDATA[Headline]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">

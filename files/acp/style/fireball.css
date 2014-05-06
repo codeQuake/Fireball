@@ -6,4 +6,4 @@
 .containerSidebarContainer > div > .containerSidebar > span	{position: relative;}
 .containerSidebarContainer > div > .containerSidebar > div {.containerSidebarContainer > div > .containerSidebar > span}
 
-#pageList .sortableList {list-style-type: none; margin-left: 16px;}
+#contentAddDialog .tripleColumned > li{float:left; width: 33%;}
