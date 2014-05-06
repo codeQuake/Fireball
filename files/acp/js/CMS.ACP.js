@@ -50,40 +50,58 @@ CMS.ACP.Page.AddForm = Class.extend({
 CMS.ACP.Page.AddContent = Class.extend({
 
 	_buttonSelector: '.jsContentAddButton',
-	_dialogContent: '',
-	_contentTypes: [],
+	_proxy: null,
+	_cache: {},
+	_dialog: null,
+	_didInit: false,
 
 	init: function(){
+		if (this._didInit) {
+			return;
+		}
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+
 		this._addButtons = $('.jsContentAddButton');
 		this._addButtons.click($.proxy(this._click, this));
+
+		this._didInit = true;
 	},
 
-	_register: function(identifier, options){
-		this._contentTypes[identifier] = options;
-		console.log(identifier);
-	},
 
 	_click: function(event){
-		var $target = $(event.currentTarget);
 		event.preventDefault();
-		if(!this._dialogContent){
-			this._dialogContent = $('<div id="contentAddDialog"></div>');
-			$fieldset = $('<fieldset><legend>' + WCF.Language.get('cms.acp.content.type.content') + '</legend></fieldset>').appendTo(this._dialogContent);
-			$list = $('<ul class="tripleColumned"></ul>').appendTo($fieldset);
+		var $pageID = $(event.currentTarget).data('objectID');
 
-			for(var identifier in this._contentTypes){
-				var current = this._contentTypes[identifier];
-				var $listItem = $('<li><span class="icon icon16 ' + current.icon + '"></span> ' + WCF.Language.get('cms.acp.content.type.' + identifier) + '</li>').appendTo($list);
-			}
+		if(this._cache[$pageID] === undefined){
+			this._proxy.setOption('data', {
+				actionName: 'getContentTypes',
+				className: 'cms\\data\\page\\PageAction',
+				objectIDs: [ $pageID ]
+			});
+			this._proxy.sendRequest();
 		}
+		else {
+			this._show($pageID);
+		}
+	},
 
-		$dialog = this._dialogContent.clone().appendTo(document.body);
-		$dialog.wcfDialog();
+	_show: function(pageID){
+		if(this._dialog === null){
+			this._dialog = $('<div id="contentAddDialog">' + this._cache[pageID] + '</div>').appendTo(document.body);
+			this._dialog.wcfDialog();
+		}
+		else{
+			this._dialog.html(this._cache[pageID]);
+			this._dialog.wcfDialog('open');
+		}
+	},
 
-
+	_success: function(data, textStatus, jqXHR) {
+		this._cache[data.returnValues.pageID] = data.returnValues.template;
+		this._show(data.returnValues.pageID);
 	}
-
-
 });
 
 CMS.ACP.Page.SetAsHome = Class.extend({
@@ -132,46 +150,3 @@ CMS.ACP.Page.SetAsHome = Class.extend({
 });
 
 
-CMS.ACP.Content = {};
-
-CMS.ACP.Content.Preview = Class.extend({
-    _objectType: '',
-    _proxy: null,
-
-    init: function (objectType) {
-        this._objectType = objectType;
-
-        $('#previewButton').click($.proxy(this._click, this));
-
-    },
-    _click: function (event) {
-        $('#previewContainer').hide();
-        var $preview = '';
-        var $find = $('#sectionData');
-        var $content = $find.val();
-        switch (this._objectType) {
-            case 'de.codequake.cms.section.type.headline':
-                $preview = '<div class="' + $('#cssClasses').val() + '"><' + $('#hlType').val() + '>' + $content + '</' + $('#hlType').val() + '></div>';
-                break;
-            case 'de.codequake.cms.section.type.link':
-                if ($('#type').val() == 1) {
-                    $preview = '<div class="' + $('#cssClasses').val() + '"><a href="' + $('#hyperlink').val() + '" class="button">' + $content + '</a></div>';
-                }
-                else if ($('#type').val() == 2) {
-                    $preview = '<div class="' + $('#cssClasses').val() + '"><a href="' + $('#hyperlink').val() + '" class="button small">' + $content + '</a></div>';
-                }
-                else {
-                    $preview = '<div class="' + $('#cssClasses').val() + '"><a href="' + $('#hyperlink').val() + '">' + $content + '</a></div>';
-                }
-                break;
-            case 'de.codequake.cms.section.type.file':
-                $preview = '<div class="' + $('#cssClasses').val() + '"><div class="box32"><span class="icon icon32 icon-paper-clip"></span><div><p>' + $('#sectionData option:selected').text() + '</p><small>1.337 kB, <strong>42 Downloads</strong></small></div></div></div>';
-                break;
-        }
-        $previewContainer = $('<div class="container containerPadding marginTop" id="previewContainer"><fieldset><legend>' + WCF.Language.get('wcf.global.preview') + '</legend><div></div></fieldset>').prependTo($('#formContainer')).wcfFadeIn();
-        $previewContainer.find('div:eq(0)').html($preview);
-
-        new WCF.Effect.Scroll().scrollTo($previewContainer);
-    },
-
-});

@@ -4,6 +4,7 @@ namespace cms\data\page;
 use cms\data\content\ContentAction;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\page\menu\item\PageMenuItemEditor;
@@ -18,7 +19,7 @@ use wcf\system\WCF;
 
 /**
  * Executes page-related actions.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -40,7 +41,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		PageCacheBuilder::getInstance()->reset();
 		$menuItem = @unserialize($page->menuItem);
 		if (isset($menuItem['has']) && $menuItem['has'] == 1) {
-			
+
 			// check if has parents
 			$parentItem = '';
 			if ($page->isChild()) {
@@ -53,7 +54,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 					}
 				}
 			}
-			
+
 			// create
 			$data = array(
 				'isDisabled' => 0,
@@ -84,7 +85,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		parent::update();
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
-		
+
 		// update menu item
 		foreach ($this->objectIDs as $objectID) {
 			$page = new Page($objectID);
@@ -168,7 +169,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			$action = new ContentAction($contentIDs, 'delete', array());
 			$action->executeAction();
 		}
-		
+
 		// delete menuItem
 		$menuItem = @unserialize($page->menuItem);
 		if (isset($menuItem['has']) && $menuItem['has'] == 1 && isset($menuItem['id'])) {
@@ -184,12 +185,12 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		WCF::getSession()->checkPermissions(array(
 			'admin.cms.page.canAddPage'
 		));
-		
+
 		$this->pageEditor = $this->getSingleObject();
 		if (! $this->pageEditor->pageID) {
 			throw new UserInputException('objectIDs');
 		}
-		
+
 		else if ($this->pageEditor->isHome) {
 			throw new PermissionDeniedException();
 		}
@@ -197,7 +198,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
-		
+
 		// delete existing menu item
 		$menuItem = @unserialize($this->pageEditor->menuItem);
 		if ($this->pageEditor->hasMenuItem() && $menuItem['id'] != 0) {
@@ -213,7 +214,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 				'menuItem' => $menuItem
 			));
 		}
-		
+
 		// get Home Menu Item
 		$sql = "SELECT menuItemID FROM wcf" . WCF_N . "_page_menu_item WHERE menuItemController = ? AND menuItemLink = ''";
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -222,7 +223,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		));
 		$row = $statement->fetchArray();
 		$item = new PageMenuItem($row['menuItemID']);
-		
+
 		$action = new PageMenuItemAction(array(
 			$item->menuItemID
 		), 'update', array(
@@ -231,7 +232,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			)
 		));
 		$action->executeAction();
-		
+
 		PageCacheBuilder::getInstance()->reset();
 	}
 
@@ -239,21 +240,21 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		WCF::getSession()->checkPermissions(array(
 			'admin.cms.page.canAddPage'
 		));
-		
+
 		if (! isset($this->parameters['data']['structure']) || ! is_array($this->parameters['data']['structure'])) {
 			throw new UserInputException('structure');
 		}
-		
+
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		foreach ($this->parameters['data']['structure'] as $parentID => $pageIDs) {
 			if ($parentID) {
 				if (! isset($pages[$parentID])) {
 					throw new UserInputException('structure');
 				}
-				
+
 				$this->objects[$parentID] = new PageEditor($pages[$parentID]);
 			}
-			
+
 			$aliases = array();
 			foreach ($pageIDs as $pageID) {
 				if (! isset($pages[$pageID])) {
@@ -263,7 +264,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 					throw new UserInputException('structure');
 				}
 				$aliases[] = $pages[$pageID]->alias;
-				
+
 				$this->objects[$pageID] = new PageEditor($pages[$pageID]);
 			}
 		}
@@ -281,7 +282,23 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			}
 		}
 		WCF::getDB()->commitTransaction();
-		
+
 		PageCacheBuilder::getInstance()->reset();
+	}
+
+	public function validateGetContentTypes(){
+		if (count($this->objectIDs) != 1) {
+			throw new UserInputException('objectIDs');
+		}
+	}
+
+	public function getContentTypes(){
+		$types = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
+
+		WCF::getTPL()->assign(array('pageID' => reset($this->objectIDs), 'contentTypes' => $types));
+		return array(
+			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms'),
+			'pageID' => reset($this->objectIDs)
+		);
 	}
 }
