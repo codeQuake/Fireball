@@ -13,7 +13,7 @@ class TextContentType extends AbstractContentType{
 
 	public $objectType = 'de.codequake.cms.content.type.text';
 
-	public function getFormTemplate(){
+	public function getFormTemplate() {
 		return 'textContentType';
 	}
 

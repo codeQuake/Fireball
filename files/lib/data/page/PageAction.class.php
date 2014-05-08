@@ -286,13 +286,13 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		PageCacheBuilder::getInstance()->reset();
 	}
 
-	public function validateGetContentTypes(){
+	public function validateGetContentTypes() {
 		if (count($this->objectIDs) != 1) {
 			throw new UserInputException('objectIDs');
 		}
 	}
 
-	public function getContentTypes(){
+	public function getContentTypes() {
 		$types = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
 
 		WCF::getTPL()->assign(array('pageID' => reset($this->objectIDs), 'contentTypes' => $types));

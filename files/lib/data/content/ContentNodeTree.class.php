@@ -27,7 +27,7 @@ class ContentNodeTree implements \IteratorAggregate {
 	public function buildTreeLevel(ContentNode $contentNode) {
 		foreach ($this->getChildren($contentNode) as $child) {
 			$childNode = $this->getNode($child->pageID);
-			if($this->isIncluded($childNode)) {
+			if ($this->isIncluded($childNode)) {
 				$contentNode->addChild($childNode);
 				$this->buildTreeLevel($childNode);
 			}
