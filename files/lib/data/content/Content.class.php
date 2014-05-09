@@ -4,6 +4,7 @@ namespace cms\data\content;
 use cms\data\content\section\ContentContentSectionList;
 use cms\data\page\Page;
 use cms\data\CMSDatabaseObject;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\request\IRouteController;
 use wcf\system\WCF;
 
@@ -42,5 +43,10 @@ class Content extends CMSDatabaseObject implements IRouteController {
 
 	public function getTitle() {
 		return $this->title;
+	}
+
+	public function getIcon(){
+		$this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->contentTypeID);
+		return $this->objectType->getProcessor()->getIcon();
 	}
 }
