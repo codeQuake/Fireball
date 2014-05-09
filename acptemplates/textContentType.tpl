@@ -13,6 +13,7 @@
 	//<![CDATA[
 	$(function() {
 		$('#text').ckeditor();
+		
 	});
 	//]]>
 </script>
