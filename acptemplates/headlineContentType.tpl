@@ -14,7 +14,7 @@
 <dl>
 	<dt><label for="text">{lang}cms.content.type.de.codequake.cms.content.type.headline.text{/lang}</label></dt>
 	<dd>
-		<input name="contentData[text]" id="text" type="text" value="{if $i18nPlainValues['contentData[text]']|isset}{$i18nPlainValues['contentData[text]']}{/if}"  class="long" required="required" />
+		<input name="text" id="text" type="text" value="{$i18nPlainValues['text']}"  class="long" required="required" />
 	</dd>
 </dl>
 
