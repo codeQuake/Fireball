@@ -12,8 +12,10 @@
 </dl>
 
 <dl>
-	<dt><label for="contentData[text]">{lang}cms.content.type.de.codequake.cms.content.type.headline.text{/lang}</label></dt>
+	<dt><label for="text">{lang}cms.content.type.de.codequake.cms.content.type.headline.text{/lang}</label></dt>
 	<dd>
-		<input name="contentData[text]" id="contentData[text]" type="text" value="{if $contentData['text']|isset}{$contentData['text']}{/if}"  class="long" required="required" />
+		<input name="contentData[text]" id="text" type="text" value="{if $i18nPlainValues['contentData[text]']|isset}{$i18nPlainValues['contentData[text]']}{/if}"  class="long" required="required" />
 	</dd>
 </dl>
+
+{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}

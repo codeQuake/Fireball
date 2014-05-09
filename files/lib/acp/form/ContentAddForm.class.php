@@ -50,6 +50,11 @@ class ContentAddForm extends AbstractForm {
 			if ($this->objectType != null) {
 					$this->objectTypeProcessor = $this->objectType->getProcessor();
 			}
+		if ($this->objectTypeProcessor->isMultilingual) {
+			foreach($this->objectTypeProcessor->multilingualFields as $field) {
+				I18nHandler::getInstance()->register($field);
+			}
+		}
 	}
 
 	public function readData() {
@@ -68,19 +73,36 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['contentData']) && is_array($_POST['contentData'])) $this->contentData = $_POST['contentData'];
-
+		if ($this->objectTypeProcessor->isMultilingual) {
+			foreach($this->objectTypeProcessor->multilingualFields as $field) {
+				if(I18nHandler::getInstance()->isPlainValue($field)) $this->contentData[$field] = StringUtil::trim(I18nHandler::getInstance()->getValue($field));
+			}
+		}
 	}
 
 	public function validate() {
 		parent::validate();
 		$this->objectTypeProcessor->validate();
 
-		if (! I18nHandler::getInstance()->validateValue('title')) {
+		if (!I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
 			}
 			else {
 				throw new UserInputException('title', 'multilingual');
+			}
+		}
+
+		if ($this->objectTypeProcessor->isMultilingual) {
+			foreach($this->objectTypeProcessor->multilingualFields as $field) {
+				if (!I18nHandler::getInstance()->validateValue($field)) {
+					if (I18nHandler::getInstance()->isPlainValue($field)) {
+						throw new UserInputException($field);
+					}
+					else {
+						throw new UserInputException($field, 'multilingual');
+					}
+				}
 			}
 		}
 		$this->page = new Page($this->pageID);
@@ -105,10 +127,21 @@ class ContentAddForm extends AbstractForm {
 		$objectAction->executeAction();
 		$returnValues = $objectAction->getReturnValues();
 		$contentID = $returnValues['returnValues']->contentID;
+		$contentData = @unserialize($returnValues['returnValues']->contentData);
 		$update = array();
 		if (! I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.content.' . $contentID . '.title', 'cms.content', PACKAGE_ID);
 			$update['title'] = 'cms.content.' . $contentID . '.title';
+		}
+
+		if ($this->objectTypeProcessor->isMultilingual) {
+			foreach($this->objectTypeProcessor->multilingualFields as $field) {
+				if (! I18nHandler::getInstance()->isPlainValue($field)) {
+					I18nHandler::getInstance()->save($field, 'cms.content.' . $contentID . '.'.$field, 'cms.content', PACKAGE_ID);
+					$contentData[$field] = 'cms.content.' . $contentID . '.'.$field;
+				}
+			}
+			$update['contentData'] = serialize($contentData);
 		}
 		if (! empty($update)) {
 			$editor = new ContentEditor($returnValues['returnValues']);

@@ -12,17 +12,11 @@ namespace cms\system\content\type;
  */
 class AbstractContentType implements IContentType {
 
-	/**
-	 *
-	 * @see cms\system\content\type\IContentType::$icon
-	 */
-	protected $icon = 'icon-unchecked';
 
-	/**
-	 *
-	 * @see cms\system\content\type\IContentType::$objectType
-	 */
+	protected $icon = 'icon-unchecked';
 	public $objectType = '';
+	public $isMultilingual = false;
+	public $multilingualFields = array();
 
 	/**
 	 *

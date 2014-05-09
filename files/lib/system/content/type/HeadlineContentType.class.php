@@ -13,6 +13,9 @@ namespace cms\system\content\type;
 class HeadlineContentType extends AbstractContentType {
 	protected $icon = 'icon-underline';
 	public $objectType = 'de.codequake.cms.content.type.headline';
+	public $isMultilingual = true;
+	public $multilingualFields = array('text');
+
 	public function getFormTemplate() {
 		return 'headlineContentType';
 	}
