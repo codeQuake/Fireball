@@ -51,7 +51,7 @@ class ContentAddForm extends AbstractForm {
 					$this->objectTypeProcessor = $this->objectType->getProcessor();
 			}
 		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach($this->objectTypeProcessor->multilingualFields as $field) {
+			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
 				I18nHandler::getInstance()->register($field);
 			}
 		}
@@ -74,7 +74,7 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['contentData']) && is_array($_POST['contentData'])) $this->contentData = $_POST['contentData'];
 		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach($this->objectTypeProcessor->multilingualFields as $field) {
+			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
 				if(I18nHandler::getInstance()->isPlainValue($field)) $this->contentData[$field] = StringUtil::trim(I18nHandler::getInstance()->getValue($field));
 			}
 		}
@@ -94,7 +94,7 @@ class ContentAddForm extends AbstractForm {
 		}
 
 		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach($this->objectTypeProcessor->multilingualFields as $field) {
+			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
 				if (!I18nHandler::getInstance()->validateValue($field)) {
 					if (I18nHandler::getInstance()->isPlainValue($field)) {
 						throw new UserInputException($field);
@@ -135,7 +135,7 @@ class ContentAddForm extends AbstractForm {
 		}
 
 		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach($this->objectTypeProcessor->multilingualFields as $field) {
+			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
 				if (! I18nHandler::getInstance()->isPlainValue($field)) {
 					I18nHandler::getInstance()->save($field, 'cms.content.' . $contentID . '.'.$field, 'cms.content', PACKAGE_ID);
 					$contentData[$field] = 'cms.content.' . $contentID . '.'.$field;

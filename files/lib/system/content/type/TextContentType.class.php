@@ -10,8 +10,10 @@ namespace cms\system\content\type;
  */
 class TextContentType extends AbstractContentType{
 	protected $icon = 'icon-file-text-alt';
-
 	public $objectType = 'de.codequake.cms.content.type.text';
+
+	public $isMultilingual = true;
+	public $multilingualFields = array('text');
 
 	public function getFormTemplate() {
 		return 'textContentType';
