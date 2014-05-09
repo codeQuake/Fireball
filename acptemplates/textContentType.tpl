@@ -1,4 +1,4 @@
-<dl>
+<dl class="wide">
 	<dt><label for="text">{lang}cms.content.type.de.codequake.cms.content.type.text.text{/lang}</label></dt>
 	<dd>
 		<textarea name="contentData[text]" id="text">{if $i18nPlainValues['contentData[text]']|isset}{$i18nPlainValues['contentData[text]']}{/if}</textarea>
@@ -13,7 +13,6 @@
 	//<![CDATA[
 	$(function() {
 		$('#text').ckeditor();
-		
 	});
 	//]]>
 </script>
