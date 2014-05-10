@@ -20,9 +20,9 @@ class TextContentType extends AbstractContentType{
 		return 'textContentType';
 	}
 
-	public function getOutput(Content $content){
+	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
-		if(isset($data['text'])) return $data['text'];
+		if (isset($data['text'])) return $data['text'];
 		return '';
 	}
 

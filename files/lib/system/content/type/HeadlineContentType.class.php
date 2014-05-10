@@ -22,7 +22,7 @@ class HeadlineContentType extends AbstractContentType {
 		return 'headlineContentType';
 	}
 
-	public function getOutput(Content $content){
+	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
 		WCF::getTPL()->assign(array('data' => $data));
 		return WCF::getTPL()->fetch('headlineContentTypeOutput', 'cms');
