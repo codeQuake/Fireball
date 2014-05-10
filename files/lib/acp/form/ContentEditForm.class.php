@@ -12,7 +12,7 @@ use wcf\system\WCF;
 
 /**
  * Shows the content edit form.
- * 
+ *
  * @author Jens Krumsieck
  * @copyright 2014 codeQuake
  * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -72,7 +72,7 @@ class ContentEditForm extends ContentAddForm {
 			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
-		
+
 		if ($this->objectTypeProcessor->isMultilingual) {
 			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
 				if (! I18nHandler::getInstance()->isPlainValue($field)) {
@@ -86,7 +86,7 @@ class ContentEditForm extends ContentAddForm {
 			$editor = new ContentEditor(new Content($contentID));
 			$editor->update($update);
 		}
-		
+
 		$this->saved();
 	}
 
