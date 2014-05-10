@@ -89,7 +89,6 @@ class ContentEditForm extends ContentAddForm{
 	  public function assignVariables() {
 	  	AbstractForm::assignVariables();
 	  	I18nHandler::getInstance()->assignVariables(! empty($_POST));
-	  	print_r(I18nHandler::getInstance());
 	  	WCF::getTPL()->assign(array(
 		  	'action' => 'edit',
 		  	'cssClasses' => $this->cssClasses,
