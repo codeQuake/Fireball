@@ -49,7 +49,7 @@
     </nav>
 </div>
 {if $pageList|count}
-<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}{/link}{/if}">
+<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}objectType={$objectType->objectType}{/link}{/if}">
     <div class="container containerPadding marginTop shadow">
         <fieldset>
             <legend>{lang}cms.acp.content.general{/lang}</legend>

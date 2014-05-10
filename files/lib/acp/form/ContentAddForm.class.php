@@ -130,15 +130,15 @@ class ContentAddForm extends AbstractForm {
 		$contentData = @unserialize($returnValues['returnValues']->contentData);
 		$update = array();
 		if (! I18nHandler::getInstance()->isPlainValue('title')) {
-			I18nHandler::getInstance()->save('title', 'cms.content.' . $contentID . '.title', 'cms.content', PACKAGE_ID);
-			$update['title'] = 'cms.content.' . $contentID . '.title';
+			I18nHandler::getInstance()->save('title', 'cms.content.title'.$contentID, 'cms.content', PACKAGE_ID);
+			$update['title'] = 'cms.content.title'.$contentID;
 		}
 
 		if ($this->objectTypeProcessor->isMultilingual) {
 			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
 				if (! I18nHandler::getInstance()->isPlainValue($field)) {
-					I18nHandler::getInstance()->save($field, 'cms.content.' . $contentID . '.'.$field, 'cms.content', PACKAGE_ID);
-					$contentData[$field] = 'cms.content.' . $contentID . '.'.$field;
+					I18nHandler::getInstance()->save($field, 'cms.content.'.$field.$contentID, 'cms.content', PACKAGE_ID);
+					$contentData[$field] = 'cms.content.'.$field.$contentID;
 				}
 			}
 			$update['contentData'] = serialize($contentData);
@@ -149,6 +149,8 @@ class ContentAddForm extends AbstractForm {
 		}
 
 		$this->saved();
+		WCF::getTPL()->assign('success', true);
+		//redirect
 
 	}
 
