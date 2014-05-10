@@ -72,8 +72,8 @@ class ContentNodeTree implements \IteratorAggregate {
 	}
 
 	protected function isIncluded(ContentNode $contentNode) {
-		if($this->pageID != 0){
-			if($contentNode->pageID != $this->pageID) return false;
+		if ($this->pageID != 0) {
+			if ($contentNode->pageID != $this->pageID) return false;
 		}
 		return true;
 	}

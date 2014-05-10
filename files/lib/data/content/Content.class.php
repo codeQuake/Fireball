@@ -45,17 +45,17 @@ class Content extends CMSDatabaseObject implements IRouteController {
 		return $this->title;
 	}
 
-	public function getIcon(){
+	public function getIcon() {
 		$this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->contentTypeID);
 		return $this->objectType->getProcessor()->getIcon();
 	}
 
-	public function getOutput(){
+	public function getOutput() {
 		$this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->contentTypeID);
 		return $this->objectType->getProcessor()->getOutput($this);
 	}
 
-	public function handleContentData(){
+	public function handleContentData() {
 		return @unserialize($this->contentData);
 	}
 }

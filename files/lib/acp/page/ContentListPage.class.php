@@ -28,7 +28,7 @@ class ContentListPage extends AbstractPage {
 	public $pageID = 0;
 	public $page = null;
 
-	public function readParameters(){
+	public function readParameters() {
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
 		else throw new IllegalLinkException();
 	}
