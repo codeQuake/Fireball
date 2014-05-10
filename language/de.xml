@@ -3,7 +3,7 @@
 	<category name="cms.acp.content">
 		<item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
 		<item name="cms.acp.content.contents"><![CDATA[Inhalte]]></item>
-		<item name="cms.acp.content.add.noPage"><![CDATA[Keine Seiten gefunden! Um einen Inhalt zu erstellen müssen Sie zuerst mindestens eine Seite erstellen.]]></item>
+		<item name="cms.acp.content.list"><![CDATA[Inhalte von '{$page->title|language}']]></item>
 		<item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
 		<item name="cms.acp.content.general.title"><![CDATA[Titel]]></item>
@@ -11,14 +11,22 @@
 		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
 		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie "container containerPadding". Für einen Abstand zum oberen Element nutzen sie zusätzlich "marginTop".]]></item>
-		<item name="cms.acp.content.optional.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
 		<item name="cms.acp.content.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
+		<item name="cms.acp.content.position.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt wirklich löschen?]]></item>
 		<item name="cms.acp.content.type.content"><![CDATA[Allgemein]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Überschrift]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.headline"><![CDATA[Überschrift]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Formatvorlage]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Überschrift 1]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Überschrift 2]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Überschrift 3]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Überschrift 4]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Überschrift 5]]></item>
+		<item name="cms.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Überschrift]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">
