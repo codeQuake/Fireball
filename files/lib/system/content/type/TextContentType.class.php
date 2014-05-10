@@ -1,5 +1,6 @@
 <?php
 namespace cms\system\content\type;
+use cms\data\content\Content;
 
 /**
  * @author	Jens Krumsieck
@@ -17,6 +18,12 @@ class TextContentType extends AbstractContentType{
 
 	public function getFormTemplate() {
 		return 'textContentType';
+	}
+
+	public function getOutput(Content $content){
+		$data = $content->handleContentData();
+		if(isset($data['text'])) return $data['text'];
+		return '';
 	}
 
 }

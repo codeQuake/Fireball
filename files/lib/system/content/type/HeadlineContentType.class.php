@@ -1,6 +1,8 @@
 <?php
 
 namespace cms\system\content\type;
+use cms\data\content\Content;
+use wcf\system\WCF;
 
 /**
  *
@@ -18,5 +20,11 @@ class HeadlineContentType extends AbstractContentType {
 
 	public function getFormTemplate() {
 		return 'headlineContentType';
+	}
+
+	public function getOutput(Content $content){
+		$data = $content->handleContentData();
+		WCF::getTPL()->assign(array('data' => $data));
+		return WCF::getTPL()->fetch('headlineContentTypeOutput', 'cms');
 	}
 }

@@ -1,3 +1,0 @@
-{@$message}
-
-{include file='attachments'}

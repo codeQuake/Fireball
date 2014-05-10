@@ -1,6 +1,7 @@
 <?php
 
 namespace cms\system\content\type;
+use cms\data\content\Content;
 
 /**
  * Interface for Basic Contenttypes
@@ -16,7 +17,7 @@ interface IContentType {
 	public function validate();
 
 	// get Output
-	public function getOutput();
+	public function getOutput(Content $content);
 
 	// returns type's icon
 	public function getIcon();

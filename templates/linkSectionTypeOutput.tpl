@@ -1,1 +1,0 @@
-<a href="{$hyperlink}" {if $type == 1}class="button"{elseif $type == 2}class="button small"{/if}>{$sectionData|language}</a>

@@ -1,6 +1,7 @@
 <?php
 
 namespace cms\system\content\type;
+use cms\data\content\Content;
 
 /**
  *
@@ -28,7 +29,7 @@ class AbstractContentType implements IContentType {
 	 *
 	 * @see \cms\system\content\type\IContentType::getOutput()
 	 */
-	public function getOutput() {
+	public function getOutput(Content $content) {
 		return '';
 	}
 

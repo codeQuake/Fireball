@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\page;
 
-use cms\data\content\PageContentList;
+use cms\data\content\ContentNodeTree;
 use cms\data\CMSDatabaseObject;
 use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
@@ -11,7 +11,7 @@ use wcf\system\WCF;
 
 /**
  * Represents a page.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -31,10 +31,10 @@ class Page extends CMSDatabaseObject implements IRouteController {
 				$id
 			));
 			$row = $statement->fetchArray();
-			
+
 			if ($row === false) $row = array();
 		}
-		
+
 		parent::__construct(null, $row, $object);
 	}
 
@@ -47,7 +47,7 @@ class Page extends CMSDatabaseObject implements IRouteController {
 		if ($this->layoutID != 0) {
 			return LayoutHandler::getInstance()->getStylesheet($this->layoutID);
 		}
-		
+
 		return '';
 	}
 
@@ -85,14 +85,14 @@ class Page extends CMSDatabaseObject implements IRouteController {
 		$list = $list->getObjects();
 		return $list;
 	}
-	
+
 	// builds up a complete folder structure like link
 	public function getAlias() {
 		// returns page alias
 		if ($this->getParentPage() != null) {
 			return $this->getParentPage()->getAlias() . '/' . $this->alias;
 		}
-		
+
 		return $this->alias;
 	}
 
@@ -130,13 +130,9 @@ class Page extends CMSDatabaseObject implements IRouteController {
 		return array();
 	}
 
-	public function getContentList($position = 'body') {
-		$list = new PageContentList($this->pageID);
-		$list->getConditionBuilder()->add('content.position = ?', array(
-			$position
-		));
-		$list->readObjects();
-		return $list->getObjects();
+	public function getContents() {
+		$nodeTree = new ContentNodeTree(null,$this->pageID);
+		return $nodeTree->getIterator();
 	}
 
 	public function getPermission($permission = 'canViewPage') {
