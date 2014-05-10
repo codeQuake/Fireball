@@ -131,7 +131,7 @@ class Page extends CMSDatabaseObject implements IRouteController {
 	}
 
 	public function getContents() {
-		$nodeTree = new ContentNodeTree(null,$this->pageID);
+		$nodeTree = new ContentNodeTree(null, $this->pageID);
 		return $nodeTree->getIterator();
 	}
 
