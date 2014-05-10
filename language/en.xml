@@ -17,17 +17,20 @@
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.showOrder"><![CDATA[Sortorder]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content?]]></item>
-		<item name="cms.acp.content.type.content"><![CDATA[General]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline"><![CDATA[Headline]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Type]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Headline 1]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Headline 2]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Headline 3]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Headline 4]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Headline 5]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Headline]]></item>
+		<item name="cms.acp.content.type.general"><![CDATA[General]]></item>
+		<item name="cms.acp.content.type.structure"><![CDATA[Structure]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Headline]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Formatvorlage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Headline 1]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Headline 2]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Headline 3]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Headline 4]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Headline 5]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Headline]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Two Columns]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns.description"><![CDATA[<strong>This is a "Two Columns" content</strong>, all child contents will be show in two columns.]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">

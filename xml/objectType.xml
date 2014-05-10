@@ -6,11 +6,19 @@
 			<name>de.codequake.cms.content.type.text</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TextContentType</classname>
+			<category>general</category>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.headline</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\HeadlineContentType</classname>
+			<category>general</category>
+		</type>
+		<type>
+			<name>de.codequake.cms.content.type.twocolumns</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\TwoColumnsContentType</classname>
+			<category>structure</category>
 		</type>
 		<!--<type>
 			<name>de.codequake.cms.section.type.link</name>
@@ -47,11 +55,6 @@
 		<!-- /section types -->
 
 		<!-- attachments -->
-		<type>
-			<name>de.codequake.cms.content.section</name>
-			<definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
-			<classname>cms\system\attachment\ContentSectionAttachmentObjectType</classname>
-		</type>
 		<type>
 			<name>de.codequake.cms.news</name>
 			<definitionname>com.woltlab.wcf.attachment.objectType</definitionname>

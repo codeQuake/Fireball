@@ -16,17 +16,20 @@
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt wirklich löschen?]]></item>
-		<item name="cms.acp.content.type.content"><![CDATA[Allgemein]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline"><![CDATA[Überschrift]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Formatvorlage]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Überschrift 1]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Überschrift 2]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Überschrift 3]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Überschrift 4]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Überschrift 5]]></item>
-		<item name="cms.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Überschrift]]></item>
+		<item name="cms.acp.content.type.general"><![CDATA[Allgemein]]></item>
+		<item name="cms.acp.content.type.structure"><![CDATA[Struktur]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Überschrift]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Formatvorlage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Überschrift 1]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Überschrift 2]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Überschrift 3]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Überschrift 4]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Überschrift 5]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Überschrift]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Zweispaltig]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns.description"><![CDATA[<strong>Dies ist ein zweispaltiger Inhalt</strong>, alle enthaltenen Inhalte werden zweispaltig angeordnet.]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">

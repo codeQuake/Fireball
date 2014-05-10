@@ -294,8 +294,15 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 	public function getContentTypes() {
 		$types = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
+		$categories = array();
+		foreach($types as $type){
+			$categories[$type->category] = array();
+		}
+		foreach($types as $type){
+			array_push($categories[$type->category], $type);
+		}
 
-		WCF::getTPL()->assign(array('pageID' => reset($this->objectIDs), 'contentTypes' => $types));
+		WCF::getTPL()->assign(array('pageID' => reset($this->objectIDs), 'contentTypes' => $categories));
 		return array(
 			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms'),
 			'pageID' => reset($this->objectIDs)
