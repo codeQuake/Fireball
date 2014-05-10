@@ -43,46 +43,41 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 
 	public function validateUpdatePosition() {
 		WCF::getSession()->checkPermissions(array(
-			'admin.cms.content.canAddContentSection'
+			'admin.cms.content.canAddContent'
 		));
 
-		// check parameters
-		if (! isset($this->parameters['data']['structure'])) {
-			throw new SystemException("Missing 'structure' parameter.");
-		}
-		if (! is_array($this->parameters['data']['structure'])) {
-			throw new SystemException("'structure' parameter is no array.");
-		}
-
-		$itemIDs = array();
-		foreach ($this->parameters['data']['structure'] as $items) {
-			$itemIDs = array_merge($itemIDs, $items);
-		}
-
-		// createList
-		$list = new ContentList();
-		$list->getConditionBuilder()->add('content.contentID IN (?)', array(
-			$itemIDs
-		));
-		$list->readObjects();
-		$this->items = $list->getObjects();
-
-		// check number of items
-		if (count($items) != count($itemIDs)) {
+		if (! isset($this->parameters['data']['structure']) || ! is_array($this->parameters['data']['structure'])) {
 			throw new UserInputException('structure');
+		}
+		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		foreach ($this->parameters['data']['structure'] as $parentID => $contentIDs) {
+			if ($parentID) {
+				if (! isset($contents[$parentID])) {
+					throw new UserInputException('structure');
+				}
+
+				$this->objects[$parentID] = new ContentEditor($contents[$parentID]);
+			}
+
+
+			foreach ($contentIDs as $contentID) {
+				if (! isset($contents[$contentID])) {
+					throw new UserInputException('structure');
+				}
+
+				$this->objects[$contentID] = new ContentEditor($contents[$contentID]);
+			}
 		}
 	}
 
 	public function updatePosition() {
-		$sql = "UPDATE cms" . WCF_N . "_content
-                SET showOrder = ?
-                WHERE contentID = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
-		foreach ($this->parameters['data']['structure'] as $parentContentID => $contentIDs) {
-			foreach ($contentIDs as $showOrder => $contentID) {
-				$this->items[$contentID]->getEditor()->update(array(
-					'showOrder' => $showOrder + 1
+		foreach ($this->parameters['data']['structure'] as $parentID => $contentIDs) {
+			$position = 1;
+			foreach ($contentIDs as $contentID) {
+				$this->objects[$contentID]->update(array(
+					'parentID' => $parentID != 0 ? $this->objects[$parentID]->contentID : null,
+					'showOrder' => $position ++
 				));
 			}
 		}

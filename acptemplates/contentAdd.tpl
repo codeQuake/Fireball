@@ -53,16 +53,6 @@
     <div class="container containerPadding marginTop shadow">
         <fieldset>
             <legend>{lang}cms.acp.content.general{/lang}</legend>
-			<dl {if $errorField == 'pageID'}class="formError"{/if}>
-				<dt><label for="pageID">{lang}cms.acp.content.general.pageID{/lang}</label></dt>
-				<dd>
-					<select id="pageID" name="pageID">
-						{foreach from=$pageList item='item'}
-						<option value="{$item->pageID}" {if $item->pageID == $pageID}selected="selected"{/if}>{section name=i loop=$pageList->getDepth()}&nbsp;&raquo;&raquo;&nbsp;{/section}{$item->title|language}</option>
-						{/foreach}
-					</select>
-				</dd>
-			</dl>
             <dl {if $errorField == 'title'}class="formError"{/if}>
                 <dt><label for="title">{lang}cms.acp.content.general.title{/lang}</label></dt>
                 <dd>
@@ -130,7 +120,8 @@
          {@SECURITY_TOKEN_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
         <input type="hidden" name="objectType" value="{@$objectType->objectType}" />
-        {if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}
+        {if $contentID|isset}<input type="hidden" name="contentID" value="{@$contentID}" />{/if}
+        {if $pageID|isset}<input type="hidden" name="pageID" value="{@$pageID}" />{/if}
     </div>
 </form>
 {else}

@@ -64,30 +64,34 @@ class ContentEditForm extends ContentAddForm {
 		), 'update', array(
 			'data' => $data
 		));
+
 		$objectAction->executeAction();
 		$contentID = $this->contentID;
-		$contentData = @unserialize($returnValues['returnValues']->contentData);
+		$content = new Content($contentID);
+		$contentData = @unserialize($content->contentData);
+
 		$update = array();
-		if (! I18nHandler::getInstance()->isPlainValue('title')) {
+		if (!I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
 
 		if ($this->objectTypeProcessor->isMultilingual) {
 			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-				if (! I18nHandler::getInstance()->isPlainValue($field)) {
+				if (!I18nHandler::getInstance()->isPlainValue($field)) {
 					I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
 					$contentData[$field] = 'cms.content.' . $field . $contentID;
 				}
 			}
 			$update['contentData'] = serialize($contentData);
 		}
-		if (! empty($update)) {
-			$editor = new ContentEditor(new Content($contentID));
+		if (!empty($update)) {
+			$editor = new ContentEditor($content);
 			$editor->update($update);
 		}
 
 		$this->saved();
+		WCF::getTPL()->assign('success', true);
 	}
 
 	public function assignVariables() {
