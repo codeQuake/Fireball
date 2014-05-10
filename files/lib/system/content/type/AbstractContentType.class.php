@@ -23,7 +23,7 @@ class AbstractContentType implements IContentType {
 	 *
 	 * @see cms\system\content\type\IContentType::validate()
 	 */
-	public function validate() { }
+	public function validate($data) { }
 
 	/**
 	 *

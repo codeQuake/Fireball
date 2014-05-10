@@ -26,4 +26,5 @@ class TextContentType extends AbstractContentType{
 		return '';
 	}
 
+
 }

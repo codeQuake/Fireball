@@ -59,7 +59,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 				$this->objects[$parentID] = new ContentEditor($contents[$parentID]);
 			}
 
-
 			foreach ($contentIDs as $contentID) {
 				if (! isset($contents[$contentID])) {
 					throw new UserInputException('structure');

@@ -14,7 +14,7 @@ use cms\data\content\Content;
  */
 interface IContentType {
 	// validates form data
-	public function validate();
+	public function validate($data);
 
 	// get Output
 	public function getOutput(Content $content);

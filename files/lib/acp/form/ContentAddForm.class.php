@@ -82,7 +82,7 @@ class ContentAddForm extends AbstractForm {
 
 	public function validate() {
 		parent::validate();
-		$this->objectTypeProcessor->validate();
+		$this->objectTypeProcessor->validate($this->contentData);
 
 		if (!I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
