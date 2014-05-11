@@ -295,10 +295,10 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 	public function getContentTypes() {
 		$types = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
 		$categories = array();
-		foreach($types as $type){
+		foreach ($types as $type) {
 			$categories[$type->category] = array();
 		}
-		foreach($types as $type){
+		foreach ($types as $type) {
 			array_push($categories[$type->category], $type);
 		}
 

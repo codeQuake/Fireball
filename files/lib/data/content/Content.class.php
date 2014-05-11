@@ -46,21 +46,42 @@ class Content extends CMSDatabaseObject implements IRouteController {
 	}
 
 	public function getIcon() {
-		$this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->contentTypeID);
+		$this->objectType = $this->getObjectType();
 		return $this->objectType->getProcessor()->getIcon();
 	}
 
 	public function getOutput() {
-		$this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->contentTypeID);
+		$this->objectType = $this->getObjectType();
 		return $this->objectType->getProcessor()->getOutput($this);
+	}
+
+	public function getCategory() {
+		$this->objectType = $this->getObjectType();
+		return $this->objectType->category;
+	}
+
+	public function getParentContent(){
+		if ($this->parentID !== null) return ContentCache::getInstance()->getContent($this->parentID);
+		return null;
+	}
+
+	//build css structure
+	public function getCSSClasses(){
+		if ($this->getCategory() == 'structure') return $this->getObjectType()->getProcessor()->getCSSClasses().' '.$this->cssClasses;
+		if ($this->getParentContent()->getCategory() == 'structure') return $this->getParentContent()->getObjectType()->getProcessor()->getChildCSSClasses($this).' '.$this->cssClasses;
+		return $this->cssClasses;
 	}
 
 	public function handleContentData() {
 		return @unserialize($this->contentData);
 	}
 
+	public function getObjectType(){
+		return ObjectTypeCache::getInstance()->getObjectType($this->contentTypeID);
+	}
+
 	public function getTypeName() {
-		$this->objectType = ObjectTypeCache::getInstance()->getObjectType($this->contentTypeID);
+		$this->objectType = $this->getObjectType();
 		return $this->objectType->objectType;
 	}
 }

@@ -10,7 +10,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  *
  */
-class TwoColumnsContentType extends AbstractContentType{
+class TwoColumnsContentType extends AbstractStructureContentType{
 	protected $icon = 'icon-columns';
 	public $objectType = 'de.codequake.cms.content.type.twocolumns';
 
@@ -18,7 +18,11 @@ class TwoColumnsContentType extends AbstractContentType{
 		return 'columnContentType';
 	}
 
-	public function getOutput(Content $content){
-		return '';
+	public function getCSSClasses() {
+		return 'gridContainer';
+	}
+
+	public function getChildCSSClasses(Content $content) {
+		return 'grid grid50';
 	}
 }

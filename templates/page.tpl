@@ -38,7 +38,7 @@
 	{assign var=oldDepth value=0}
     {foreach from=$contentNodeTree item=content}
     	{section name=i loop=$oldDepth-$contentNodeTree->getDepth()}</div>{/section}
-		<div {if $content->cssClasses != ""}class="{$content->cssClasses}"{/if} {if $content->cssID != ""}id="{$content->cssID}"{/if}>
+		<div {if $content->getCSSClasses() != ""}class="{$content->getCSSClasses()}"{/if} {if $content->cssID != ""}id="{$content->cssID}"{/if}>
 		{@$content->getOutput()|language}
 		{if !$contentNodeTree->current()->hasChildren()}
 			</div>
