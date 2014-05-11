@@ -12,6 +12,7 @@ use wcf\system\language\I18nHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
+use cms\data\content\ContentCache;
 
 /**
  * Shows the content add form.
@@ -85,8 +86,24 @@ class ContentAddForm extends AbstractForm {
 		$this->objectTypeProcessor->validate($this->contentData);
 
 		//validate showOrder
-		if ($this->showOrder == 0){
-
+		if ($this->showOrder == 0) {
+			$childIDs = ContentCache::getInstance()->getChildIDs($this->parentID ?: null);
+			if (! empty($childIDs)) {
+				$showOrders = array();
+				foreach ($childIDs as $childID) {
+					$content = ContentCache::getInstance()->getContent($childID);
+					$showOrders[] = $content->showOrder;
+				}
+				array_unique($showOrders);
+				if (isset($this->contentID)) {
+					$content = ContentCache::getInstance()->getContent($this->contentID);
+					print_r(max($showOrders));
+					if($content->showOrder == max($showOrders) && max($showOrders) != 0) $this->showOrder = max($showOrders);
+					else $this->showOrder = intval(max($showOrders) + 1);
+				}
+				else $this->showOrder = intval(max($showOrders) + 1);
+			}
+			else $this->showOrder = 1;
 		}
 
 		if (!I18nHandler::getInstance()->validateValue('title')) {
@@ -119,7 +136,7 @@ class ContentAddForm extends AbstractForm {
 		$data = array(
 			'title' => $this->title,
 			'pageID' => $this->pageID,
-			'parentID' => $this->parentID,
+			'parentID' => ($this->parentID) ?  : null,
 			'cssID' => $this->cssID,
 			'cssClasses' => $this->cssClasses,
 			'showOrder' => $this->showOrder,

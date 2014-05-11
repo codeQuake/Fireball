@@ -68,7 +68,7 @@ class Content extends CMSDatabaseObject implements IRouteController {
 	//build css structure
 	public function getCSSClasses() {
 		if ($this->getCategory() == 'structure') return $this->getObjectType()->getProcessor()->getCSSClasses().' '.$this->cssClasses;
-		if ($this->getParentContent()->getCategory() == 'structure') return $this->getParentContent()->getObjectType()->getProcessor()->getChildCSSClasses($this).' '.$this->cssClasses;
+		if ($this->parentID != null && $this->getParentContent()->getCategory() == 'structure') return $this->getParentContent()->getObjectType()->getProcessor()->getChildCSSClasses($this).' '.$this->cssClasses;
 		return $this->cssClasses;
 	}
 
