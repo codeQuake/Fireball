@@ -3,8 +3,8 @@ namespace cms\acp\form;
 
 use cms\data\content\ContentAction;
 use cms\data\content\ContentEditor;
+use cms\data\content\ContentNodeTree;
 use cms\data\page\Page;
-use cms\data\page\PageNodeTree;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
@@ -37,7 +37,7 @@ class ContentAddForm extends AbstractForm {
 	public $cssClasses = '';
 	public $contentData = array();
 
-	public $pageList = null;
+	public $contentList = null;
 
 	public $objectType;
 	public $objectTypeProcessor;
@@ -59,8 +59,8 @@ class ContentAddForm extends AbstractForm {
 
 	public function readData() {
 		parent::readData();
-		$nodeTree = new PageNodeTree();
-		$this->pageList = $nodeTree->getIterator();
+		$this->contentList = new ContentNodeTree(null, $this->pageID);
+		$this->contentList = $this->contentList->getIterator();
 	}
 
 	public function readFormParameters() {
@@ -83,6 +83,11 @@ class ContentAddForm extends AbstractForm {
 	public function validate() {
 		parent::validate();
 		$this->objectTypeProcessor->validate($this->contentData);
+
+		//validate showOrder
+		if ($this->showOrder == 0){
+
+		}
 
 		if (!I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
@@ -164,7 +169,7 @@ class ContentAddForm extends AbstractForm {
 			'showOrder' => $this->showOrder,
 			'pageID' => $this->pageID,
 			'parentID' => $this->parentID,
-			'pageList' => $this->pageList,
+			'contentList' => $this->contentList,
 			'page' => new Page($this->pageID),
 			'objectType' => $this->objectType,
 			'objectTypeProcessor' => $this->objectTypeProcessor,

@@ -5,6 +5,7 @@ use cms\data\content\Content;
 use cms\data\content\ContentAction;
 use cms\data\content\ContentCache;
 use cms\data\content\ContentEditor;
+use cms\data\content\DrainedContentNodeTree;
 use cms\data\page\Page;
 use wcf\form\AbstractForm;
 use wcf\system\language\I18nHandler;
@@ -45,6 +46,9 @@ class ContentEditForm extends ContentAddForm {
 				I18nHandler::getInstance()->setOptions($field, PACKAGE_ID, $this->contentData[$field], 'cms.content.' . $field . '\d+');
 			}
 		}
+		//overwrite contentlist
+		$this->contentList = new DrainedContentNodeTree(null, $this->pageID, $this->contentID);
+		$this->contentList = $this->contentList->getIterator();
 	}
 
 	public function save() {
@@ -104,7 +108,7 @@ class ContentEditForm extends ContentAddForm {
 			'showOrder' => $this->showOrder,
 			'pageID' => $this->pageID,
 			'parentID' => $this->parentID,
-			'pageList' => $this->pageList,
+			'contentList' => $this->contentList,
 			'page' => new Page($this->pageID),
 			'objectType' => $this->objectType,
 			'objectTypeProcessor' => $this->objectTypeProcessor,

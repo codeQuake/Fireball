@@ -48,7 +48,6 @@
         </ul>
     </nav>
 </div>
-{if $pageList|count}
 <form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}objectType={$objectType->objectType}{/link}{/if}">
     <div class="container containerPadding marginTop shadow">
         <fieldset>
@@ -105,6 +104,17 @@
         </fieldset>
         <fieldset>
             <legend>{lang}cms.acp.content.position{/lang}</legend>
+            <dl>
+            	<dt><label for="parentID">{lang}cms.acp.content.position.parentID{/lang}</label></dt>
+            	<dd>
+            		<select id="parentID" name="parentID">
+						<option value="0" {if $parentID == 0} selected="selected"{/if}>{lang}wcf.global.noSelection{/lang}</option>
+						{foreach from=$contentList item=$node}
+			                <option {if $node->contentID == $parentID} selected="selected" {/if} value="{@$node->contentID}">{section name=i loop=$contentList->getDepth()}&nbsp;&raquo;&raquo;&nbsp;{/section}{$node->getTitle()|language}</option>
+			            {/foreach}
+					</select>
+            	</dd>
+            </dl>
 			<dl>
                 <dt><label for="showOrder">{lang}cms.acp.content.position.showOrder{/lang}</label></dt>
                 <dd>
@@ -124,7 +134,4 @@
         {if $pageID|isset}<input type="hidden" name="pageID" value="{@$pageID}" />{/if}
     </div>
 </form>
-{else}
-<p class="info">{lang}cms.acp.content.add.noPage{/lang}</p>
-{/if}
 {include file='footer'}
