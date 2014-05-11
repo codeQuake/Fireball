@@ -2,6 +2,7 @@
 namespace cms\acp\form;
 
 use cms\data\content\ContentAction;
+use cms\data\content\ContentCache;
 use cms\data\content\ContentEditor;
 use cms\data\content\ContentNodeTree;
 use cms\data\page\Page;
@@ -12,7 +13,6 @@ use wcf\system\language\I18nHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
-use cms\data\content\ContentCache;
 
 /**
  * Shows the content add form.
