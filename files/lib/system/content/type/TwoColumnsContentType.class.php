@@ -23,6 +23,7 @@ class TwoColumnsContentType extends AbstractStructureContentType{
 	}
 
 	public function getChildCSSClasses(Content $content) {
-		return 'grid grid50';
+		$width = ($content->showOrder%2 == 1)? '70' : '30';
+		return 'grid grid'.$width;
 	}
 }
