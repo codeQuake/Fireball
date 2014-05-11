@@ -14,6 +14,7 @@
 		<item name="cms.acp.content.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
+		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
 		<item name="cms.acp.content.position.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt wirklich löschen?]]></item>
 		<item name="cms.acp.content.type.general"><![CDATA[Allgemein]]></item>
