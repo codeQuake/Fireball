@@ -25,7 +25,7 @@ class TwoColumnsContentType extends AbstractStructureContentType{
 	public function getChildCSSClasses(Content $content) {
 		$parent = $content->getParentContent();
 		$data = $parent->handleContentData();
-		if (isset($data['width'])) $width = array(substr($data['width'], 0,2), substr($data['width'],2,3));
+		if (isset($data['width'])) $width = array(substr($data['width'], 0, 2), substr($data['width'], 2, 3));
 		else $width = array(50,50);
 		$width = ($content->showOrder%2 == 1)? $width[0] : $width[1];
 		return 'grid grid'.$width;

@@ -29,6 +29,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Überschrift 4]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Überschrift 5]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Überschrift]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Gruppierung]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Zweispaltig]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumn.width"><![CDATA[Breite der Spalten]]></item>
 	</category>

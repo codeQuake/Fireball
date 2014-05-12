@@ -15,6 +15,12 @@
 			<category>general</category>
 		</type>
 		<type>
+			<name>de.codequake.cms.content.type.group</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\GroupContentType</classname>
+			<category>structure</category>
+		</type>
+		<type>
 			<name>de.codequake.cms.content.type.twocolumns</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TwoColumnsContentType</classname>
