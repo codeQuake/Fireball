@@ -56,7 +56,7 @@ class ContentEditForm extends ContentAddForm {
 		$data = array(
 			'title' => $this->title,
 			'pageID' => $this->pageID,
-			'parentID' => $this->parentID,
+			'parentID' => ($this->parentID) ?  : null,
 			'cssID' => $this->cssID,
 			'cssClasses' => $this->cssClasses,
 			'showOrder' => $this->showOrder,

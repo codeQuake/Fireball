@@ -31,7 +31,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Headline 5]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Headline]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Two Columns]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns.description"><![CDATA[<strong>This is a "Two Columns" content</strong>, all child contents will be show in two columns.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumn.width"><![CDATA[Column width]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">

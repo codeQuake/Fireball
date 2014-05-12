@@ -70,7 +70,7 @@
         </fieldset>
 
         <fieldset>
-        	<legend></legend>
+        	<legend>{lang}cms.acp.content.type.{$objectType->objectType}{/lang}</legend>
         	{include file=$objectTypeProcessor->getFormTemplate() application='cms'}
         </fieldset>
 
