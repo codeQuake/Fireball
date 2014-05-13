@@ -14,5 +14,18 @@
 			<listenerclassname>wcf\system\event\listener\CMSRouteHandlerListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
+
+		<eventlistener>
+			<eventclassname>wcf\acp\form\PageMenuItemAddForm</eventclassname>
+			<eventname>save</eventname>
+			<listenerclassname>cms\system\event\listener\PageMenuListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\acp\form\PageMenuItemEditForm</eventclassname>
+			<eventname>save</eventname>
+			<listenerclassname>cms\system\event\listener\PageMenuListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
 	</import>
 </data>
