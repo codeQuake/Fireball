@@ -33,6 +33,8 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[Dieser Inhaltstyp gruppiert automatisch alle untergeordneten Inhalte.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Zweispaltig]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumn.width"><![CDATA[Breite der Spalten]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns"><![CDATA[Dreispaltig]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumn.width"><![CDATA[Breite der Spalten]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">

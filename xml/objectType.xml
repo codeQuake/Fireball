@@ -26,6 +26,12 @@
 			<classname>cms\system\content\type\TwoColumnsContentType</classname>
 			<category>structure</category>
 		</type>
+		<type>
+			<name>de.codequake.cms.content.type.threecolumns</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\ThreeColumnsContentType</classname>
+			<category>structure</category>
+		</type>
 		<!--<type>
 			<name>de.codequake.cms.section.type.link</name>
 			<definitionname>de.codequake.cms.section.type</definitionname>

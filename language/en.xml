@@ -34,6 +34,8 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Content collection]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Two Columns]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumn.width"><![CDATA[Column width]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns"><![CDATA[Three Columns]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumn.width"><![CDATA[Column width]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">
