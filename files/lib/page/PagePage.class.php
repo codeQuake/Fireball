@@ -65,7 +65,7 @@ class PagePage extends AbstractPage {
 				throw new IllegalLinkException();
 			}
 		}
-		
+
 		// check if offline and view page or exit
 		// see: wcf\system\request\RequestHandler
 		if (OFFLINE) {
@@ -81,35 +81,27 @@ class PagePage extends AbstractPage {
 
 	public function readData() {
 		parent::readData();
-		// register visit
-		VisitCountHandler::getInstance()->count();
-		
-		// count click
-		$pageEditor = new PageEditor($this->page);
-		$pageEditor->updateCounters(array(
-			'clicks' => 1
-		));
-		
+
 		if (! $this->page->isVisible() || ! $this->page->isAccessible()) throw new PermissionDeniedException();
 		if (PageMenu::getInstance()->getLandingPage()->menuItem == $this->page->title) {
 			WCF::getBreadcrumbs()->remove(0);
 		}
-		
+
 		// breadcrumbs
 		foreach ($this->page->getParentPages() as $page) {
 			WCF::getBreadcrumbs()->add(new Breadcrumb($page->getTitle(), $page->getLink()));
 		}
-		
+
 		// get Contents
 		$this->contentNodeTree = $this->page->getContents();
-		
+
 		// comments
 		if ($this->page->isCommentable) {
 			$this->commentObjectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.codequake.cms.page.comment');
 			$this->commentManager = CommentHandler::getInstance()->getObjectType($this->commentObjectTypeID)->getProcessor();
 			$this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->commentObjectTypeID, $this->page->pageID);
 		}
-		
+
 		// meta tags
 		if ($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', WCF::getLanguage()->get($this->page->metaKeywords));
 		if ($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('description', 'description', WCF::getLanguage()->get($this->page->metaDescription));
@@ -134,7 +126,7 @@ class PagePage extends AbstractPage {
 			'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),
 			'allowSpidersToIndexThisPage' => true
 		));
-		
+
 		// sidebar
 		if ($this->page->showSidebar == 1) DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.page', $this);
 		WCF::getTPL()->assign(array(
@@ -160,6 +152,14 @@ class PagePage extends AbstractPage {
 			}
 		}
 		parent::show();
+		// register visit
+		VisitCountHandler::getInstance()->count();
+
+		// count click
+		$pageEditor = new PageEditor($this->page);
+		$pageEditor->updateCounters(array(
+			'clicks' => 1
+		));
 	}
 
 	public function getObjectType() {
