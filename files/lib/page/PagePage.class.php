@@ -19,6 +19,7 @@ use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -27,12 +28,19 @@ use wcf\util\StringUtil;
 class PagePage extends AbstractPage {
 
 	const AVAILABLE_DURING_OFFLINE_MODE = true;
+
 	public $contentNodeTree;
+
 	public $page = null;
+
 	public $pageID = 0;
+
 	public $enableTracking = true;
+
 	public $commentObjectTypeID = 0;
+
 	public $commentManager = null;
+
 	public $commentList = null;
 
 	public function readParameters() {
@@ -44,8 +52,7 @@ class PagePage extends AbstractPage {
 			if ($this->pageID == 0) throw new IllegalLinkException();
 			$this->page = PageCache::getInstance()->getPage($this->pageID);
 			if ($this->page === null) throw new IllegalLinkException();
-		}
-		else {
+		} else {
 			$sql = "SELECT pageID FROM cms" . WCF_N . "_page WHERE isHome = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
@@ -58,7 +65,7 @@ class PagePage extends AbstractPage {
 				throw new IllegalLinkException();
 			}
 		}
-
+		
 		// check if offline and view page or exit
 		// see: wcf\system\request\RequestHandler
 		if (OFFLINE) {
@@ -76,33 +83,33 @@ class PagePage extends AbstractPage {
 		parent::readData();
 		// register visit
 		VisitCountHandler::getInstance()->count();
-
+		
 		// count click
 		$pageEditor = new PageEditor($this->page);
-		$pageEditor->update(array(
-			'clicks' => $this->page->clicks + 1
+		$pageEditor->updateCounters(array(
+			'clicks' => 1
 		));
-
+		
 		if (! $this->page->isVisible() || ! $this->page->isAccessible()) throw new PermissionDeniedException();
 		if (PageMenu::getInstance()->getLandingPage()->menuItem == $this->page->title) {
 			WCF::getBreadcrumbs()->remove(0);
 		}
-
+		
 		// breadcrumbs
 		foreach ($this->page->getParentPages() as $page) {
 			WCF::getBreadcrumbs()->add(new Breadcrumb($page->getTitle(), $page->getLink()));
 		}
-
+		
 		// get Contents
 		$this->contentNodeTree = $this->page->getContents();
-
+		
 		// comments
 		if ($this->page->isCommentable) {
 			$this->commentObjectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.codequake.cms.page.comment');
 			$this->commentManager = CommentHandler::getInstance()->getObjectType($this->commentObjectTypeID)->getProcessor();
 			$this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->commentObjectTypeID, $this->page->pageID);
 		}
-
+		
 		// meta tags
 		if ($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', WCF::getLanguage()->get($this->page->metaKeywords));
 		if ($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('description', 'description', WCF::getLanguage()->get($this->page->metaDescription));
@@ -127,7 +134,7 @@ class PagePage extends AbstractPage {
 			'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),
 			'allowSpidersToIndexThisPage' => true
 		));
-
+		
 		// sidebar
 		if ($this->page->showSidebar == 1) DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.page', $this);
 		WCF::getTPL()->assign(array(
