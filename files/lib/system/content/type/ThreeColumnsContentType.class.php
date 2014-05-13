@@ -30,8 +30,8 @@ class ThreeColumnsContentType extends AbstractStructureContentType {
 		$data = $parent->handleContentData();
 		if (isset($data['width'])) $width = array(
 			substr($data['width'], 0, 2),
-			substr($data['width'], 2, 3),
-			substr($data['width'], 4, 5)
+			substr($data['width'], 2, 2),
+			substr($data['width'], 4, 2)
 		);
 		else $width = array(
 			33,
@@ -39,17 +39,17 @@ class ThreeColumnsContentType extends AbstractStructureContentType {
 			33
 		);
 
-		switch ($content->showOrder % 3) {
+		switch ($content->showOrder%3) {
 			case 0:
-				$width = $width[0];
+				$gridWidth = $width[2];
 				break;
 			case 1:
-				$width = $width[1];
+				$gridWidth = $width[0];
 				break;
 			case 2:
-				$width = $width[2];
+				$gridWidth = $width[1];
 				break;
 		}
-		return 'grid grid' . $width;
+		return 'grid grid' . $gridWidth;
 	}
 }
