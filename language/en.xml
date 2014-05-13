@@ -30,6 +30,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Headline 4]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Headline 5]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Headline]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.hyperlink"><![CDATA[Hyperlink]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[A collection of contents.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Content collection]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Two Columns]]></item>
