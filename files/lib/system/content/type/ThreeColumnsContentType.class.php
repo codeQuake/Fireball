@@ -38,8 +38,8 @@ class ThreeColumnsContentType extends AbstractStructureContentType {
 			33,
 			33
 		);
-
-		switch ($content->showOrder%3) {
+		
+		switch ($content->showOrder % 3) {
 			case 0:
 				$gridWidth = $width[2];
 				break;

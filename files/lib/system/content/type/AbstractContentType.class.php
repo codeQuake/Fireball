@@ -1,6 +1,6 @@
 <?php
-
 namespace cms\system\content\type;
+
 use cms\data\content\Content;
 
 /**
@@ -9,21 +9,22 @@ use cms\data\content\Content;
  * @copyright codeQuake 2014
  * @package de.codequake.cms
  * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- *
  */
 class AbstractContentType implements IContentType {
 
-
 	protected $icon = 'icon-unchecked';
+
 	public $objectType = '';
+
 	public $isMultilingual = false;
+
 	public $multilingualFields = array();
 
 	/**
 	 *
 	 * @see cms\system\content\type\IContentType::validate()
 	 */
-	public function validate($data) { }
+	public function validate($data) {}
 
 	/**
 	 *
