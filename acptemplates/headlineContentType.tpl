@@ -21,7 +21,7 @@
 <dl>
 	<dt><label for="contentData[link]">{lang}cms.acp.content.type.de.codequake.cms.content.type.headline.hyperlink{/lang}</label></dt>
 	<dd>
-		<input name="contentData[link]" id="contentData[link]" type="text" value="{$contentData['link']}"  class="long" />
+		<input name="contentData[link]" id="contentData[link]" type="text" value="{if $contentData['link']|isset}{$contentData['link']}{/if}"  class="long" />
 	</dd>
 </dl>
 
