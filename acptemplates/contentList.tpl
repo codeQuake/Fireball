@@ -66,7 +66,7 @@
 						<span class="sortableNodeLabel">
 							<span class="title">
 								<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
-								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}">{@$content->getTitle()|language}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
+								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=body{/link}">{@$content->getTitle()|language}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
 							</span>
 							<span class="statusDisplay buttons">
 								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
@@ -107,7 +107,7 @@
 						<span class="sortableNodeLabel">
 							<span class="title">
 								<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
-								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}">{@$content->getTitle()|language}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
+								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=sidebar{/link}">{@$content->getTitle()|language}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
 							</span>
 							<span class="statusDisplay buttons">
 								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
