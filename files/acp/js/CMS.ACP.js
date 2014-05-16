@@ -73,12 +73,16 @@ CMS.ACP.Page.AddContent = Class.extend({
 	_click: function(event){
 		event.preventDefault();
 		var $pageID = $(event.currentTarget).data('objectID');
+		var $position = $(event.currentTarget).data('position');
 
 		if(this._cache[$pageID] === undefined){
 			this._proxy.setOption('data', {
 				actionName: 'getContentTypes',
 				className: 'cms\\data\\page\\PageAction',
-				objectIDs: [ $pageID ]
+				objectIDs: [ $pageID ],
+				parameters: {
+					position: $position
+				}
 			});
 			this._proxy.sendRequest();
 		}

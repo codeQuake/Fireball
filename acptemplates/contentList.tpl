@@ -20,8 +20,10 @@
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
+			WCF.TabMenu.init();
 			new WCF.Action.Delete('cms\\data\\content\\ContentAction', '.jsContentRow');
-			new WCF.Sortable.List('contentList', 'cms\\data\\content\\ContentAction');
+			new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
+			new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
 			new CMS.ACP.Page.AddContent();
 			WCF.Language.addObject({
 				{foreach from=$objectTypeList item=type}
@@ -44,14 +46,22 @@
 		</ul>
 	</nav>
 </div>
-
+<div class="tabMenuContainer">
+<nav class="tabMenu">
+	<ul>
+		<li><a href="{@$__wcf->getAnchor('body')}">{lang}cms.acp.content.position.positon.body{/lang}</a></li>
+		<li><a href="{@$__wcf->getAnchor('sidebar')}">{lang}cms.acp.content.position.positon.sidebar{/lang}</a></li>
+		{event name='tabMenuTabs'}
+	</ul>
+</nav>
+<div id="body" class="tabMenuContent container containerPadding">
 {hascontent}
-	<section id="contentList" class="sortableListContainer container containerPadding marginTop">
-		<ol class="contentList sortableList" data-object-id="0">
+	<section id="contentListBody" class="sortableListContainer">
+		<ol class="contentListBody sortableList" data-object-id="0">
 			{content}
 				{assign var=oldDepth value=0}
-				{foreach from=$contentList item=content}
-					{section name=i loop=$oldDepth-$contentList->getDepth()}</ol></li>{/section}
+				{foreach from=$contentListBody item=content}
+					{section name=i loop=$oldDepth-$contentListBody->getDepth()}</ol></li>{/section}
 					<li class="content jsContentRow sortableNode" data-object-id="{$content->contentID}">
 						<span class="sortableNodeLabel">
 							<span class="title">
@@ -61,16 +71,16 @@
 							<span class="statusDisplay buttons">
 								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
-								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$content->pageID}"></span>
+								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="body"></span>
 
 								{event name='itemButtons'}
 							</span>
 						</span>
-						<ol class="contentList sortableList" data-object-id="{@$content->contentID}">
-						{if !$contentList->current()->hasChildren()}
+						<ol class="contentListBody sortableList" data-object-id="{@$content->contentID}">
+						{if !$contentListBody->current()->hasChildren()}
 							</ol></li>
 						{/if}
-						{assign var=oldDepth value=$contentList->getDepth()}
+						{assign var=oldDepth value=$contentListBody->getDepth()}
 				{/foreach}
 				{section name=i loop=$oldDepth}</ol></li>{/section}
 			{/content}
@@ -83,5 +93,46 @@
 {hascontentelse}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/hascontent}
+</div>
 
+<div id="sidebar" class="tabMenuContent container containerPadding">
+{hascontent}
+	<section id="contentListSidebar" class="sortableListContainer">
+		<ol class="contentListSidebar sortableList" data-object-id="0">
+			{content}
+				{assign var=oldDepth value=0}
+				{foreach from=$contentListSidebar item=content}
+					{section name=i loop=$oldDepth-$contentListSidebar->getDepth()}</ol></li>{/section}
+					<li class="content jsContentRow sortableNode" data-object-id="{$content->contentID}">
+						<span class="sortableNodeLabel">
+							<span class="title">
+								<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
+								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}">{@$content->getTitle()|language}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
+							</span>
+							<span class="statusDisplay buttons">
+								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
+								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="sidebar"></span>
+
+								{event name='itemButtons'}
+							</span>
+						</span>
+						<ol class="contentListSidebar sortableList" data-object-id="{@$content->contentID}">
+						{if !$contentListSidebar->current()->hasChildren()}
+							</ol></li>
+						{/if}
+						{assign var=oldDepth value=$contentListSidebar->getDepth()}
+				{/foreach}
+				{section name=i loop=$oldDepth}</ol></li>{/section}
+			{/content}
+		</ol>
+	</section>
+
+	<div class="formSubmit">
+			<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+	</div>
+{hascontentelse}
+	<p class="info">{lang}wcf.global.noItems{/lang}</p>
+{/hascontent}
+</div>
 {include file='footer'}

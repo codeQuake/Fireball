@@ -11,7 +11,7 @@ class DrainedContentNodeTree extends ContentNodeTree {
 	}
 
 	public function isIncluded(ContentNode $contentNode) {
-		if ($contentNode->contentID == $this->drainedID) return false;
+		if ($this->drainedID != null && $contentNode->contentID == $this->drainedID) return false;
 		return parent::isIncluded($contentNode);
 	}
 }

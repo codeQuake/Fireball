@@ -7,36 +7,48 @@
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TextContentType</classname>
 			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.headline</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\HeadlineContentType</classname>
 			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.group</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\GroupContentType</classname>
 			<category>structure</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.twocolumns</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TwoColumnsContentType</classname>
 			<category>structure</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.threecolumns</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\ThreeColumnsContentType</classname>
 			<category>structure</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.fourcolumns</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\FourColumnsContentType</classname>
 			<category>structure</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>0</allowsidebar>
 		</type>
 		<!--<type>
 			<name>de.codequake.cms.section.type.link</name>

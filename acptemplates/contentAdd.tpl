@@ -48,7 +48,7 @@
         </ul>
     </nav>
 </div>
-<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}objectType={$objectType->objectType}{/link}{/if}">
+<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{if $position|isset}&position={$position}{/if}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}objectType={$objectType->objectType}{if $position|isset}&position={$position}{/if}{/link}{/if}">
     <div class="container containerPadding marginTop shadow">
         <fieldset>
             <legend>{lang}cms.acp.content.general{/lang}</legend>
@@ -115,7 +115,7 @@
 					</select>
             	</dd>
             </dl>
-			<dl>
+            <dl>
                 <dt><label for="showOrder">{lang}cms.acp.content.position.showOrder{/lang}</label></dt>
                 <dd>
                     <input type="number" name="showOrder" id="showorder" value="{$showOrder}" />
@@ -132,6 +132,7 @@
         <input type="hidden" name="objectType" value="{@$objectType->objectType}" />
         {if $contentID|isset}<input type="hidden" name="contentID" value="{@$contentID}" />{/if}
         {if $pageID|isset}<input type="hidden" name="pageID" value="{@$pageID}" />{/if}
+        {if $position|isset}<input type="hidden" name="position" value="{@$position}" />{/if}
     </div>
 </form>
 {include file='footer'}

@@ -32,6 +32,7 @@ CREATE TABLE cms1_content (
 	contentTypeID INT(10),
 	contentData MEDIUMTEXT,
 	showOrder INT(10) DEFAULT 0,
+	position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body',
 	cssID VARCHAR (255),
 	cssClasses VARCHAR(255),
 	additionalData MEDIUMTEXT DEFAULT NULL

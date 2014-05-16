@@ -44,7 +44,8 @@ class ContentListPage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
-		'contentList' => $this->contentList->getIterator(),
+		'contentListBody' => $this->contentList->getIterator(),
+		'contentListSidebar' => $this->contentList->getIterator(),
 		'objectTypeList' => $this->objectTypeList,
 		'page' => $this->page
 		));

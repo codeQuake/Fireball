@@ -5,7 +5,7 @@ use cms\data\content\Content;
 use cms\data\content\ContentAction;
 use cms\data\content\ContentCache;
 use cms\data\content\ContentEditor;
-use cms\data\content\DrainedContentNodeTree;
+use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\Page;
 use wcf\form\AbstractForm;
 use wcf\system\language\I18nHandler;
@@ -38,6 +38,7 @@ class ContentEditForm extends ContentAddForm {
 		$this->cssID = $this->content->cssID;
 		$this->parentID = $this->content->parentID;
 		$this->showOrder = $this->content->showOrder;
+		$this->position = $this->content->position;
 		$this->contentData = $this->content->handleContentData();
 		$this->title = $this->content->getTitle();
 		I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
@@ -47,7 +48,7 @@ class ContentEditForm extends ContentAddForm {
 			}
 		}
 		//overwrite contentlist
-		$this->contentList = new DrainedContentNodeTree(null, $this->pageID, $this->contentID);
+		$this->contentList = new DrainedPositionContentNodeTree(null, $this->pageID, $this->contentID, $this->position);
 		$this->contentList = $this->contentList->getIterator();
 	}
 
@@ -60,6 +61,7 @@ class ContentEditForm extends ContentAddForm {
 			'cssID' => $this->cssID,
 			'cssClasses' => $this->cssClasses,
 			'showOrder' => $this->showOrder,
+			'position' => $this->position,
 			'contentData' => serialize($this->contentData),
 			'contentTypeID' => $this->objectType->objectTypeID
 		);
@@ -106,6 +108,7 @@ class ContentEditForm extends ContentAddForm {
 			'cssClasses' => $this->cssClasses,
 			'cssID' => $this->cssID,
 			'showOrder' => $this->showOrder,
+			'position' => $this->position,
 			'pageID' => $this->pageID,
 			'parentID' => $this->parentID,
 			'contentList' => $this->contentList,

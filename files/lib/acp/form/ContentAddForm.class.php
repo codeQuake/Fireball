@@ -4,7 +4,7 @@ namespace cms\acp\form;
 use cms\data\content\ContentAction;
 use cms\data\content\ContentCache;
 use cms\data\content\ContentEditor;
-use cms\data\content\ContentNodeTree;
+use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\Page;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
@@ -32,6 +32,7 @@ class ContentAddForm extends AbstractForm {
 	public $title = '';
 	public $page = null;
 	public $parentID = null;
+	public $position = 'body';
 	public $pageID = 0;
 	public $showOrder = 0;
 	public $cssID = '';
@@ -47,6 +48,9 @@ class ContentAddForm extends AbstractForm {
 		parent::readParameters();
 		I18nHandler::getInstance()->register('title');
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
+		if (isset($_REQUEST['position'])) $this->position = StringUtil::trim($_REQUEST['position']);
+		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
+		if ($this->parentID == 0) $this->parentID = null;
 		if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $_REQUEST['objectType']);
 			if ($this->objectType != null) {
 					$this->objectTypeProcessor = $this->objectType->getProcessor();
@@ -60,7 +64,7 @@ class ContentAddForm extends AbstractForm {
 
 	public function readData() {
 		parent::readData();
-		$this->contentList = new ContentNodeTree(null, $this->pageID);
+		$this->contentList = new DrainedPositionContentNodeTree(null, $this->pageID, null, $this->position);
 		$this->contentList = $this->contentList->getIterator();
 	}
 
@@ -72,6 +76,7 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
 		if (isset($_POST['cssID'])) $this->cssID = StringUtil::trim($_POST['cssID']);
 		if (isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
+		if (isset($_POST['position'])) $this->position = StringUtil::trim($_POST['position']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['contentData']) && is_array($_POST['contentData'])) $this->contentData = $_POST['contentData'];
 		if ($this->objectTypeProcessor->isMultilingual) {
@@ -97,7 +102,6 @@ class ContentAddForm extends AbstractForm {
 				array_unique($showOrders);
 				if (isset($this->contentID)) {
 					$content = ContentCache::getInstance()->getContent($this->contentID);
-					print_r(max($showOrders));
 					if($content->showOrder == max($showOrders) && max($showOrders) != 0) $this->showOrder = max($showOrders);
 					else $this->showOrder = intval(max($showOrders) + 1);
 				}
@@ -140,6 +144,7 @@ class ContentAddForm extends AbstractForm {
 			'cssID' => $this->cssID,
 			'cssClasses' => $this->cssClasses,
 			'showOrder' => $this->showOrder,
+			'position' => $this->position,
 			'contentData' => serialize($this->contentData),
 			'contentTypeID' => $this->objectType->objectTypeID
 		);
@@ -186,6 +191,7 @@ class ContentAddForm extends AbstractForm {
 			'showOrder' => $this->showOrder,
 			'pageID' => $this->pageID,
 			'parentID' => $this->parentID,
+			'position' => $this->position,
 			'contentList' => $this->contentList,
 			'page' => new Page($this->pageID),
 			'objectType' => $this->objectType,

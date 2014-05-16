@@ -290,6 +290,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		if (count($this->objectIDs) != 1) {
 			throw new UserInputException('objectIDs');
 		}
+		if (!isset($this->parameters['position'])) $this->parameters['position'] = 'body';
 	}
 
 	public function getContentTypes() {
@@ -299,13 +300,15 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			$categories[$type->category] = array();
 		}
 		foreach ($types as $type) {
-			array_push($categories[$type->category], $type);
+			if ($this->parameters['position'] == 'body' && $type->allowcontent)	array_push($categories[$type->category], $type);
+			if ($this->parameters['position'] == 'sidebar' && $type->allowsidebar)	array_push($categories[$type->category], $type);
 		}
 
-		WCF::getTPL()->assign(array('pageID' => reset($this->objectIDs), 'contentTypes' => $categories));
+		WCF::getTPL()->assign(array('pageID' => reset($this->objectIDs), 'contentTypes' => $categories, 'position' => $this->parameters['position']));
 		return array(
 			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms'),
-			'pageID' => reset($this->objectIDs)
+			'pageID' => reset($this->objectIDs),
+			'position' => $this->parameters['position']
 		);
 	}
 }
