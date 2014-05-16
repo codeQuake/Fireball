@@ -90,6 +90,12 @@ class ContentAddForm extends AbstractForm {
 		parent::validate();
 		$this->objectTypeProcessor->validate($this->contentData);
 
+		//if this happens, user is a retard
+		$position = array('body', 'sidebar');
+		if(!in_array($this->position, $position)) throw new UserInputException('position');
+		if($this->position == 'sidebar' && !$this->objectType->allowsidebar) throw new UserInputException('position');
+		if($this->position == 'body' && !$this->objectType->allowcontent) throw new UserInputException('position');
+
 		//validate showOrder
 		if ($this->showOrder == 0) {
 			$childIDs = ContentCache::getInstance()->getChildIDs($this->parentID ?: null);
