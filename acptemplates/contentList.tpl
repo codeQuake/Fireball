@@ -10,6 +10,14 @@
 				<span>»</span>
 			</span>
 		</li>
+		<li title="{$page->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+			<a href="{link controller='PageEdit' object=$page application='cms'}{/link}" itemprop="url">
+				<span itemprop="title">{$page->getTitle()|language}</span>
+			</a>
+			<span class="pointer">
+				<span>»</span>
+			</span>
+		</li>
 	</ul>
 </nav>
 
@@ -49,8 +57,8 @@
 <div class="tabMenuContainer">
 <nav class="tabMenu">
 	<ul>
-		<li><a href="{@$__wcf->getAnchor('body')}">{lang}cms.acp.content.position.positon.body{/lang}</a></li>
-		<li><a href="{@$__wcf->getAnchor('sidebar')}">{lang}cms.acp.content.position.positon.sidebar{/lang}</a></li>
+		<li><a href="{@$__wcf->getAnchor('body')}">{lang}cms.acp.content.position.position.body{/lang}</a></li>
+		<li><a href="{@$__wcf->getAnchor('sidebar')}">{lang}cms.acp.content.position.position.sidebar{/lang}</a></li>
 		{event name='tabMenuTabs'}
 	</ul>
 </nav>
