@@ -1,7 +1,7 @@
 <?php
 namespace cms\acp\page;
 
-use cms\data\content\ContentNodeTree;
+use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\PageCache;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\AbstractPage;
@@ -36,7 +36,8 @@ class ContentListPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		$this->page = PageCache::getInstance()->getPage($this->pageID);
-		$this->contentList = new ContentNodeTree(null, $this->pageID);
+		$this->contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body');
+		$this->contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar');
 		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
 
 	}
@@ -44,8 +45,8 @@ class ContentListPage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
-		'contentListBody' => $this->contentList->getIterator(),
-		'contentListSidebar' => $this->contentList->getIterator(),
+		'contentListBody' => $this->contentListBody->getIterator(),
+		'contentListSidebar' => $this->contentListSidebar->getIterator(),
 		'objectTypeList' => $this->objectTypeList,
 		'page' => $this->page
 		));
