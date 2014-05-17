@@ -5,6 +5,7 @@
 		<item name="cms.acp.content.contents"><![CDATA[Inhalte]]></item>
 		<item name="cms.acp.content.listing"><![CDATA[Inhalte auflisten]]></item>
 		<item name="cms.acp.content.list"><![CDATA[Inhalte von '{$page->title|language}']]></item>
+		<item name="cms.acp.content.remove"><![CDATA[Inhalt entfernen]]></item>
 		<item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
 		<item name="cms.acp.content.general.title"><![CDATA[Titel]]></item>
