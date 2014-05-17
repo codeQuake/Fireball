@@ -101,47 +101,45 @@ CMS.ACP.Page.AddContent = Class.extend({
 
 CMS.ACP.Page.SetAsHome = Class.extend({
 
-    _pageID: 0,
+	_buttonSelector: '.jsSetAsHome',
+	_proxy: null,
+	_didInit: false,
 
-    init: function (pageID) {
-        this._pageID = pageID;
+    init: function () {
+    	if (this._didInit) {
+			return;
+		}
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
 
-        $('#setAsHome').click($.proxy(this._click, this));
+		this._buttons = $('.jsSetAsHome');
+		this._buttons.click($.proxy(this._click, this));
+
+		this._didInit = true;
     },
 
-    _click: function () {
-        WCF.System.Confirmation.show(WCF.Language.get('cms.acp.page.setAsHome.confirmMessage'), $.proxy(function (action) {
-            if (action === 'confirm') {
-                this._setAsHome();
-            }
-        }, this));
-    },
+    _click: function (event) {
+    	event.preventDefault();
+		var $pageID = $(event.currentTarget).data('objectID');
 
-    _setAsHome: function () {
-        new WCF.Action.Proxy({
-            autoSend: true,
-            data: {
-                actionName: 'setAsHome',
+			this._proxy.setOption('data', {
+				actionName: 'setAsHome',
                 className: 'cms\\data\\page\\PageAction',
-                objectIDs: [ this._pageID ]
-            },
-            success: $.proxy(function (data, textStatus, jqXHR) {
-                var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-                $notification.show();
+                objectIDs: [ $pageID ]
+			});
+			WCF.LoadingOverlayHandler.updateIcon($(event.currentTarget));
+			this._proxy.sendRequest();
+    },
 
-                // remove button
-                $('#setAsHome').parent().remove();
-
-                // insert icon
-                $headline = $('.boxHeadline > h1');
-                $headline.html($headline.html() + ' ');
-                $('<span class="icon icon16 icon-home jsTooltip" title="' + WCF.Language.get('cms.acp.page.homePage') + '" />').appendTo($headline);
-
-
-                WCF.DOMNodeInsertedHandler.execute();
-            }, this)
-        });
+    _success: function (data, textStatus, jqXHR) {
+    	var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+		var self = this;
+		$notification.show(function() {
+			window.location = location;
+		});
     }
+
 });
 
 

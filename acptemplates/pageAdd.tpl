@@ -12,14 +12,6 @@
 
 		new CMS.ACP.Page.AddForm();
 
-		{if $action != 'add' && !$page->isHome}
-			WCF.Language.addObject({
-				'cms.acp.page.homePage': '{lang}cms.acp.page.homePage{/lang}',
-				'cms.acp.page.setAsHome.confirmMessage': '{lang}cms.acp.page.setAsHome.confirmMessage{/lang}'
-			});
-
-			new CMS.ACP.Page.SetAsHome({@$pageID});
-		{/if}
 	});
 	//]]>
 </script>
@@ -44,7 +36,7 @@
 </nav>
 
 <header class="boxHeadline">
-	<h1>{lang}cms.acp.page.{@$action}{/lang}{if $action != 'add'}{if $page->isHome} <span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>{/if}{/if}</h1>
+	<h1>{lang}cms.acp.page.{@$action}{/lang}</h1>
 </header>
 
 {include file='formError'}
@@ -57,9 +49,6 @@
 	<nav>
 		<ul>
 			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
-			{if $action != 'add' && !$page->isHome}
-				<li><a id="setAsHome" class="button"><span class="icon icon16 icon-home"></span> <span>{lang}cms.acp.page.setAsHome{/lang}</span></a></li>
-			{/if}
 			<li><a href="{link application='cms' controller='PageList'}{/link}" title="{lang}cms.acp.menu.link.cms.page.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.page.list{/lang}</span></a></li>
 
 			{event name='contentNavigationButtons'}

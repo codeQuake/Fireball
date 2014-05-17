@@ -282,7 +282,6 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			}
 		}
 		WCF::getDB()->commitTransaction();
-
 		PageCacheBuilder::getInstance()->reset();
 	}
 

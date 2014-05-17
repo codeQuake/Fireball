@@ -164,7 +164,6 @@
 		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von '{$page->title|language}' auflisten]]></item>
 		<item name="cms.acp.page.description"><![CDATA[Beschreibung]]></item>
 		<item name="cms.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
-		<item name="cms.acp.page.setAsHome.confirmMessage"><![CDATA[Möchten sie diese Seite als Startseite des CMS festlegen? Sollte es bereits einen Menüpunkt für diese Seite geben, so wird dieser entfernt.]]></item>
 		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
 		<item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
