@@ -1,9 +1,3 @@
 @CHARSET "ISO-8859-1";
-.containerSidebarContainer{display: table; 	table-layout: fixed; 	width: 100%;}
-.containerSidebarContainer > div {display: table-row;}
-.containerSidebarContainer > div > * {display: table-cell !important; vertical-align: top; }
-.containerSidebarContainer > div > .containerSidebar{background-color: #b8d3ed; width: 300px;}
-.containerSidebarContainer > div > .containerSidebar > span	{position: relative;}
-.containerSidebarContainer > div > .containerSidebar > div {.containerSidebarContainer > div > .containerSidebar > span}
-
 #contentAddDialog .tripleColumned > li{float:left; width: 33%;}
+#contentAddDialog .tripleColumned > li:nth-child(n+3){margin-top: 5px;}
