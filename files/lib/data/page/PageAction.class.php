@@ -304,11 +304,17 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			if ($this->parameters['position'] == 'sidebar' && $type->allowsidebar)	array_push($categories[$type->category], $type);
 		}
 
-		WCF::getTPL()->assign(array('pageID' => reset($this->objectIDs), 'contentTypes' => $categories, 'position' => $this->parameters['position']));
+		WCF::getTPL()->assign(array(
+			'pageID' => reset($this->objectIDs),
+			'contentTypes' => $categories,
+			'position' => $this->parameters['position'],
+			'parentID' => intval($this->parameters['parentID'])));
+
 		return array(
 			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms'),
 			'pageID' => reset($this->objectIDs),
-			'position' => $this->parameters['position']
+			'position' => $this->parameters['position'],
+			'parentID' => intval($this->parameters['parentID'])
 		);
 	}
 }

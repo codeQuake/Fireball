@@ -73,6 +73,7 @@ CMS.ACP.Page.AddContent = Class.extend({
 	_click: function(event){
 		event.preventDefault();
 		var $pageID = $(event.currentTarget).data('objectID');
+		var $parentID = $(event.currentTarget).data('parentID');
 		var $position = $(event.currentTarget).data('position');
 
 			this._proxy.setOption('data', {
@@ -80,7 +81,8 @@ CMS.ACP.Page.AddContent = Class.extend({
 				className: 'cms\\data\\page\\PageAction',
 				objectIDs: [ $pageID ],
 				parameters: {
-					position: $position
+					position: $position,
+					parentID: $parentID
 				}
 			});
 			this._proxy.sendRequest();
