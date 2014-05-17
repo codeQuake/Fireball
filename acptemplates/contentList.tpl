@@ -94,12 +94,15 @@
 			{/content}
 		</ol>
 	</section>
-
 	<div class="formSubmit">
 			<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+			<button class="button jsContentAddButton jsTooltip pointer" data-object-id="{$page->pageID}" data-position="body" title="{lang}cms.acp.content.add{/lang}"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
 	</div>
 {hascontentelse}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
+	<div class="formSubmit">
+			<button class="button jsContentAddButton jsTooltip pointer" data-object-id="{$page->pageID}" data-position="body" title="{lang}cms.acp.content.add{/lang}"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
+	</div>
 {/hascontent}
 </div>
 
@@ -135,12 +138,16 @@
 			{/content}
 		</ol>
 	</section>
-
 	<div class="formSubmit">
 			<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+			<button class="button jsContentAddButton jsTooltip pointer" data-object-id="{$page->pageID}" data-position="sidebar" title="{lang}cms.acp.content.add{/lang}"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
 	</div>
 {hascontentelse}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
+	<div class="formSubmit">
+			<button class="button jsContentAddButton jsTooltip pointer" data-object-id="{$page->pageID}" data-position="sidebar" title="{lang}cms.acp.content.add{/lang}"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
+	</div>
 {/hascontent}
 </div>
+
 {include file='footer'}

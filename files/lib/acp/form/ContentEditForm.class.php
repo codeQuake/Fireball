@@ -9,7 +9,9 @@ use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\Page;
 use wcf\form\AbstractForm;
 use wcf\system\language\I18nHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 
 /**
  * Shows the content edit form.
@@ -97,7 +99,7 @@ class ContentEditForm extends ContentAddForm {
 		}
 
 		$this->saved();
-		WCF::getTPL()->assign('success', true);
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array('application' => 'cms', 'object' => new Page($this->pageID))));
 	}
 
 	public function assignVariables() {

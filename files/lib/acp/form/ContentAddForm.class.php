@@ -12,6 +12,7 @@ use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -182,8 +183,7 @@ class ContentAddForm extends AbstractForm {
 		}
 
 		$this->saved();
-		WCF::getTPL()->assign('success', true);
-		//redirect
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array('application' => 'cms', 'object' => new Page($this->pageID))));
 
 	}
 

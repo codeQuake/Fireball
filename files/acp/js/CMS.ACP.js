@@ -75,7 +75,6 @@ CMS.ACP.Page.AddContent = Class.extend({
 		var $pageID = $(event.currentTarget).data('objectID');
 		var $position = $(event.currentTarget).data('position');
 
-		if(this._cache[$pageID] === undefined){
 			this._proxy.setOption('data', {
 				actionName: 'getContentTypes',
 				className: 'cms\\data\\page\\PageAction',
@@ -85,21 +84,11 @@ CMS.ACP.Page.AddContent = Class.extend({
 				}
 			});
 			this._proxy.sendRequest();
-		}
-		else {
-			this._show($pageID);
-		}
 	},
 
 	_show: function(pageID){
-		if(this._dialog === null){
 			this._dialog = $('<div id="contentAddDialog">' + this._cache[pageID] + '</div>').appendTo(document.body);
 			this._dialog.wcfDialog();
-		}
-		else{
-			this._dialog.html(this._cache[pageID]);
-			this._dialog.wcfDialog('open');
-		}
 	},
 
 	_success: function(data, textStatus, jqXHR) {
