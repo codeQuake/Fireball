@@ -1,0 +1,1 @@
+<a class="{if $data['type'] == 'button' || $data['type'] == 'smallbutton'}button{/if} {if $data['type'] == 'smallbutton'}small{/if} jsTooltip" href="{$data['link']}" title="{$data['text']|language}">{$data['text']|language}</a>

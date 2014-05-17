@@ -19,6 +19,14 @@
 			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
+			<name>de.codequake.cms.content.type.link</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\LinkContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
 			<name>de.codequake.cms.content.type.group</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\GroupContentType</classname>

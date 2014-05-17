@@ -26,8 +26,15 @@
 		<item name="cms.acp.content.type.structure"><![CDATA[Structure]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.link"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.button"><![CDATA[Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.smallbutton"><![CDATA[Small Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type"><![CDATA[Pattern]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.hyperlink"><![CDATA[Hyperlink]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Headline]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Formatvorlage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Pattern]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Headline 1]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Headline 2]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Headline 3]]></item>
