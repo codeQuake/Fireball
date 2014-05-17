@@ -82,6 +82,22 @@
 	<div class="formSubmit">
 			<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 	</div>
+
+	<div class="container containerPadding marginTop">
+		<ol class="containerList infoBoxList">
+			<div>
+				<div class="containerHeadline">
+					<h3>{lang}cms.acp.page.legend{/lang}</h3>
+				</div>
+				<ul class="dataList">
+					<li><span class="icon icon16 icon-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></li>
+					<li><span class="icon icon16 icon-remove"></span> <span>{lang}cms.acp.page.remove{/lang}</span></li>
+					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
+					<li><span class="icon icon16 icon-file-alt"></span> <span>{lang}cms.acp.content.listing{/lang}</span></li>
+				</ul>
+			</div>
+		</ul>
+	</div>
 {hascontentelse}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/hascontent}
