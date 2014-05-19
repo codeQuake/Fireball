@@ -202,8 +202,8 @@ class PageAddForm extends AbstractForm {
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $pageID;
 		}
 
-		if($this->menuItem){
-			if($returnValues['returnValues']->getParentPage() !== null){
+		if($this->menuItem) {
+			if($returnValues['returnValues']->getParentPage() !== null) {
 				$parentPage = $returnValues['returnValues']->getParentPage();
 				$parentItem = new PageMenuItem($parentPage->menuItemID);
 			}

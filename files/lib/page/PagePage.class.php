@@ -3,10 +3,9 @@ namespace cms\page;
 
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
-use cms\system\CMSCore;
 use cms\system\counter\VisitCountHandler;
+use cms\system\CMSCore;
 use wcf\page\AbstractPage;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\comment\CommentHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
@@ -83,15 +82,14 @@ class PagePage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 
-		if (! $this->page->isVisible() || ! $this->page->isAccessible()) throw new PermissionDeniedException();
-		if (PageMenu::getInstance()->getLandingPage()->menuItem == $this->page->title) {
-			WCF::getBreadcrumbs()->remove(0);
-		}
+		//set menuitem
+		CMSCore::setActiveMenuItem($this->page);
 
-		// breadcrumbs
-		foreach ($this->page->getParentPages() as $page) {
-			WCF::getBreadcrumbs()->add(new Breadcrumb($page->getTitle(), $page->getLink()));
-		}
+		//set breadcrumbs
+		CMSCore::setBreadcrumbs($this->page);
+
+		//check permission
+		if (! $this->page->isVisible() || ! $this->page->isAccessible()) throw new PermissionDeniedException();
 
 		// get Contents
 		$this->contentNodeTree = $this->page->getContents();
@@ -138,8 +136,6 @@ class PagePage extends AbstractPage {
 
 	public function show() {
 		parent::show();
-
-		CMSCore::setActiveMenuItem($this->page);
 		// register visit
 		VisitCountHandler::getInstance()->count();
 

@@ -62,7 +62,6 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			$action->executeAction();
 		}
 
-
 		$action = new PageMenuItemAction(array(
 			$page->menuItemID
 		), 'delete', array());

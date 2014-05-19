@@ -15,12 +15,12 @@ class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider {
 
 	public function getPage() {
 		$tmp = explode("=", $this->getDecoratedObject()->menuItemLink);
-		$this->page = PageCache::getInstance()->getPage(intval($tmp[1]));
+		$page = PageCache::getInstance()->getPage(intval($tmp[1]));
+		return $page;
 	}
 
-	public function getLink() {
-		$this->getPage();
-		if ($this->page === null || $this->page->pageID == 0) return parent::getLink();
-		return $this->page->getLink();
+	public function getLink() {;
+		if ($this->getPage() === null) return parent::getLink();
+		return $this->getPage()->getLink();
 	}
 }
