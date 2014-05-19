@@ -53,7 +53,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		// delete all contents beloning to the pages
 		foreach ($this->objectIDs as $objectID) {
 			$page = new Page($objectID);
-			$list = $page->getContentList();
+			$list = $page->getContents();
 			$contentIDs = array();
 			foreach ($list as $content) {
 				$contentIDs[] = $content->contentID;

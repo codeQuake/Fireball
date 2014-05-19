@@ -9,6 +9,8 @@ use cms\data\page\PageEditor;
 use cms\data\page\PageNodeTree;
 use cms\util\PageUtil;
 use wcf\data\page\menu\item\PageMenuItem;
+use wcf\data\page\menu\item\PageMenuItemAction;
+use wcf\data\page\menu\item\PageMenuItemEditor;
 use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
@@ -46,8 +48,8 @@ class PageAddForm extends AbstractForm {
 	public $showSidebar = 0;
 	public $sidebarOrientation = 'right';
 	public $showOrder = 0;
-	public $parentID = 0;
-	public $menuItem = 0;
+	public $parentID = null;
+	public $menuItem = 1;
 	public $menuItemID = null;
 	public $pageList = null;
 	public $layoutList = null;
@@ -160,7 +162,6 @@ class PageAddForm extends AbstractForm {
 			'metaKeywords' => $this->metaKeywords,
 			'invisible' => $this->invisible,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
-			'menuItem' => serialize($this->menuItem),
 			'showOrder' => $this->showOrder,
 			'layoutID' => $this->layoutID,
 			'parentID' => ($this->parentID) ?  : null,
@@ -208,12 +209,12 @@ class PageAddForm extends AbstractForm {
 			}
 
 			$data = array(
-				'className' => 'cms\system\menu\page\CMSPageMenuItemProvier',
+				'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
 				'menuItemController' => 'cms\page\PagePage',
 				'menuItemLink' => 'id='.$pageID,
 				'menuPosition' => 'header',
 				'packageID' => PACKAGE_ID,
-				'parentMenuItem' => $parentItem !== null ? $parentItem->menuItem : '',
+				'parentMenuItem' => isset($parentItem) ? $parentItem->menuItem : '',
 				'showOrder' => 0
 			);
 
@@ -223,7 +224,6 @@ class PageAddForm extends AbstractForm {
 
 			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.'.$menuItem->menuItemID, 'wcf.page');
 			$data['menuItem'] = 'wcf.page.menuItem.'.$menuItem->menuItemID;
-
 			$editor = new PageMenuItemEditor($menuItem);
 			$editor->update($data);
 
@@ -259,7 +259,7 @@ class PageAddForm extends AbstractForm {
 			'alias' => $this->alias,
 			'parentID' => $this->parentID,
 			'showOrder' => $this->showOrder,
-			'menu' => $this->menuItem['has'],
+			'menu' => $this->menuItem,
 			'layoutID' => $this->layoutID,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,

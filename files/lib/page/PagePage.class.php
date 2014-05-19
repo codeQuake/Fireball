@@ -3,6 +3,7 @@ namespace cms\page;
 
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
+use cms\system\CMSCore;
 use cms\system\counter\VisitCountHandler;
 use wcf\page\AbstractPage;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -136,22 +137,9 @@ class PagePage extends AbstractPage {
 	}
 
 	public function show() {
-		if ($this->page->hasMenuItem()) $this->activeMenuItem = $this->page->title;
-		else {
-			// activate startpage-item
-			$sql = "SELECT pageID FROM cms" . WCF_N . "_page WHERE isHome = ?";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(
-				1
-			));
-			$row = $statement->fetchArray();
-			$startPageID = $row['pageID'];
-			if ($startPageID != 0) {
-				$startPage = PageCache::getInstance()->getPage($startPageID);
-				$this->activeMenuItem = $startPage->title;
-			}
-		}
 		parent::show();
+
+		CMSCore::setActiveMenuItem($this->page);
 		// register visit
 		VisitCountHandler::getInstance()->count();
 
