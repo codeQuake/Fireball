@@ -39,45 +39,6 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		$page = parent::create();
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
-		$menuItem = @unserialize($page->menuItem);
-		if (isset($menuItem['has']) && $menuItem['has'] == 1) {
-
-			// check if has parents
-			$parentItem = '';
-			if ($page->isChild()) {
-				$parent = $page->getParentPage();
-				$temp = @unserialize($parent->menuItem);
-				if (isset($temp['has']) && $temp['has'] == 1) {
-					if ($temp['id'] != 0) {
-						$parentItem = new PageMenuItem($temp['id']);
-						$parentItem = $parentItem->menuItem;
-					}
-				}
-			}
-
-			// create
-			$data = array(
-				'isDisabled' => 0,
-				'menuItem' => empty($page->title) ? 'cms.page.title' . $page->pageID : $page->getTitle(),
-				'menuItemController' => 'cms\page\PagePage',
-				'menuItemLink' => 'id=' . $page->pageID,
-				'menuPosition' => 'header',
-				'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
-				'parentMenuItem' => $parentItem,
-				'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header')
-			);
-			$action = new PageMenuItemAction(array(), 'create', array(
-				'data' => $data
-			));
-			$action->executeAction();
-			$returnValues = $action->getReturnValues();
-			$menuItem['id'] = $returnValues['returnValues']->menuItemID;
-			$menuItem = serialize($menuItem);
-			$pageEditor = new PageEditor($page);
-			$pageEditor->update(array(
-				'menuItem' => $menuItem
-			));
-		}
 		return $page;
 	}
 
@@ -86,78 +47,9 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
 
-		// update menu item
-		foreach ($this->objectIDs as $objectID) {
-			$page = new Page($objectID);
-			$menuItem = @unserialize($page->menuItem);
-			// update
-			if (isset($menuItem['has']) && $menuItem['has'] == 1) {
-				if (isset($menuItem['id']) && $menuItem['id'] != 0) {
-					$action = new PageMenuItemAction(array(
-						$menuItem['id']
-					), 'update', array(
-						'data' => array(
-							'menuItem' => empty($page->title) ? 'cms.page.title' . $page->pageID : $page->title
-						)
-					));
-					$action->executeAction();
-				}
-				// create new
-				else {
-					// check if has parents
-					$parentItem = '';
-					if ($page->isChild()) {
-						$parent = $page->getParentPage();
-						$temp = @unserialize($parent->menuItem);
-						if (isset($temp['has']) && $temp['has'] == 1) {
-							if ($temp['id'] != 0) {
-								$parentItem = new PageMenuItem($temp['id']);
-								$parentItem = $parentItem->menuItem;
-							}
-						}
-					}
-					$data = array(
-						'isDisabled' => 0,
-						'menuItem' => empty($page->title) ? 'cms.page.title' . $page->pageID : $page->getTitle(),
-						'menuItemController' => 'cms\page\PagePage',
-						'menuItemLink' => 'id=' . $page->pageID,
-						'menuPosition' => 'header',
-						'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
-						'parentMenuItem' => $parentItem != null ? $parentItem : '',
-						'showOrder' => PageMenuItemEditor::getShowOrder(0, 'header')
-					);
-					$action = new PageMenuItemAction(array(), 'create', array(
-						'data' => $data
-					));
-					$action->executeAction();
-					$returnValues = $action->getReturnValues();
-					$menuItem['id'] = $returnValues['returnValues']->menuItemID;
-					$menuItem = serialize($menuItem);
-					$pageEditor = new PageEditor($page);
-					$pageEditor->update(array(
-						'menuItem' => $menuItem
-					));
-				}
-			}
-			// delete if unchecked
-			else if (isset($menuItem['id']) && $menuItem['id'] != 0) {
-				$action = new PageMenuItemAction(array(
-					$menuItem['id']
-				), 'delete', array());
-				$action->executeAction();
-				$menuItem['id'] = 0;
-				$menuItem['has'] = 0;
-				$menuItem = serialize($menuItem);
-				$pageEditor = new PageEditor($page);
-				$pageEditor->update(array(
-					'menuItem' => $menuItem
-				));
-			}
-		}
 	}
 
 	public function delete() {
-		PageCacheBuilder::getInstance()->reset();
 		// delete all contents beloning to the pages
 		foreach ($this->objectIDs as $objectID) {
 			$page = new Page($objectID);
@@ -170,15 +62,14 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			$action->executeAction();
 		}
 
-		// delete menuItem
-		$menuItem = @unserialize($page->menuItem);
-		if (isset($menuItem['has']) && $menuItem['has'] == 1 && isset($menuItem['id'])) {
-			$action = new PageMenuItemAction(array(
-				$menuItem['id']
-			), 'delete', array());
-			$action->executeAction();
-		}
+
+		$action = new PageMenuItemAction(array(
+			$page->menuItemID
+		), 'delete', array());
+		$action->executeAction();
+
 		parent::delete();
+		PageCacheBuilder::getInstance()->reset();
 	}
 
 	public function validateSetAsHome() {
@@ -198,41 +89,6 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
-
-		// delete existing menu item
-		$menuItem = @unserialize($this->pageEditor->menuItem);
-		if ($this->pageEditor->hasMenuItem() && $menuItem['id'] != 0) {
-			$action = new PageMenuItemAction(array(
-				$menuItem['id']
-			), 'delete', array());
-			$action->executeAction();
-			$menuItem['id'] = 0;
-			$menuItem['has'] = 0;
-			$menuItem = serialize($menuItem);
-			$pageEditor = new PageEditor($this->pageEditor->getDecoratedObject());
-			$pageEditor->update(array(
-				'menuItem' => $menuItem
-			));
-		}
-
-		// get Home Menu Item
-		$sql = "SELECT menuItemID FROM wcf" . WCF_N . "_page_menu_item WHERE menuItemController = ? AND menuItemLink = ''";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			'cms\page\PagePage'
-		));
-		$row = $statement->fetchArray();
-		$item = new PageMenuItem($row['menuItemID']);
-
-		$action = new PageMenuItemAction(array(
-			$item->menuItemID
-		), 'update', array(
-			'data' => array(
-				'menuItem' => $this->pageEditor->title
-			)
-		));
-		$action->executeAction();
-
 		PageCacheBuilder::getInstance()->reset();
 	}
 

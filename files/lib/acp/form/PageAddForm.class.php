@@ -8,6 +8,7 @@ use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\data\page\PageNodeTree;
 use cms\util\PageUtil;
+use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
@@ -46,7 +47,8 @@ class PageAddForm extends AbstractForm {
 	public $sidebarOrientation = 'right';
 	public $showOrder = 0;
 	public $parentID = 0;
-	public $menuItem = array();
+	public $menuItem = 0;
+	public $menuItemID = null;
 	public $pageList = null;
 	public $layoutList = null;
 	public $layoutID = 0;
@@ -65,8 +67,6 @@ class PageAddForm extends AbstractForm {
 
 	public function readData() {
 		parent::readData();
-
-		if (! isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
 		if (isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
 
 		$this->pageList = new PageNodeTree();
@@ -89,7 +89,7 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['availableDuringOfflineMode'])) $this->availableDuringOfflineMode = intval($_POST['availableDuringOfflineMode']);
 		if (isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
-		if (isset($_POST['menuItem'])) $this->menuItem['has'] = intval($_POST['menuItem']);
+		if (isset($_POST['menuItem'])) $this->menuItem = intval($_POST['menuItem']);
 		if (isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
 		if (isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
 		if (isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
@@ -171,8 +171,7 @@ class PageAddForm extends AbstractForm {
 		);
 
 		$objectAction = new PageAction(array(), 'create', array(
-			'data' => $data,
-			'I18n' => I18nHandler::getInstance()->getValues('title')
+			'data' => $data
 		));
 		$objectAction->executeAction();
 
@@ -201,6 +200,36 @@ class PageAddForm extends AbstractForm {
 			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $pageID, 'cms.page');
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $pageID;
 		}
+
+		if($this->menuItem){
+			if($returnValues['returnValues']->getParentPage() !== null){
+				$parentPage = $returnValues['returnValues']->getParentPage();
+				$parentItem = new PageMenuItem($parentPage->menuItemID);
+			}
+
+			$data = array(
+				'className' => 'cms\system\menu\page\CMSPageMenuItemProvier',
+				'menuItemController' => 'cms\page\PagePage',
+				'menuItemLink' => 'id='.$pageID,
+				'menuPosition' => 'header',
+				'packageID' => PACKAGE_ID,
+				'parentMenuItem' => $parentItem !== null ? $parentItem->menuItem : '',
+				'showOrder' => 0
+			);
+
+			$menuItemAction = new PageMenuItemAction(array(), 'create', array('data' => $data));
+			$itemReturnValues = $menuItemAction->executeAction();
+			$menuItem = $itemReturnValues['returnValues'];
+
+			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.'.$menuItem->menuItemID, 'wcf.page');
+			$data['menuItem'] = 'wcf.page.menuItem.'.$menuItem->menuItemID;
+
+			$editor = new PageMenuItemEditor($menuItem);
+			$editor->update($data);
+
+			$update['menuItemID'] = $menuItem->menuItemID ?: null;
+		}
+
 		if (! empty($update)) {
 			$editor = new PageEditor($returnValues['returnValues']);
 			$editor->update($update);

@@ -16,7 +16,7 @@ CREATE TABLE cms1_page (
 	showSidebar INT(1) DEFAULT 0,
 	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
 	layoutID INT(10),
-	menuItem MEDIUMTEXT,
+	menuItemID INT(10),
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
 	comments INT(10) NOT NULL DEFAULT 0,
 	clicks INT (20) NOT NULL DEFAULT 0
@@ -147,6 +147,7 @@ ALTER TABLE cms1_content ADD FOREIGN KEY (parentID) REFERENCES cms1_content (con
 ALTER TABLE cms1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
+ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;
 
 ALTER TABLE cms1_news ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE cms1_news ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE SET NULL;
