@@ -45,7 +45,9 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		parent::update();
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
-		PageModificationLogHandler::getInstance()->edit($page);
+		foreach ($this->objects as $page) {
+			PageModificationLogHandler::getInstance()->edit($page->getDecoratedObject());
+		}
 
 	}
 

@@ -66,7 +66,7 @@
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
 								{if !$page->isHome && !$page->isChild()}<span class="icon icon16 icon-home jsTooltip jsSetAsHome pointer" data-object-id="{$page->pageID}" title="{lang}cms.acp.page.setAsHome{/lang}"></span>{/if}
 								<a href="{link controller='PageLog' application='cms' object=$page}{/link}" title="{lang}cms.acp.page.log{/lang}" class="jsTooltip"><span class="icon icon16 icon-tasks"></span></a>
-
+								<!-- content controls -->
 								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$page->pageID}"></span>
 								<a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
 							{event name='itemButtons'}
