@@ -91,14 +91,6 @@ class ContentAddForm extends AbstractForm {
 		parent::validate();
 		$this->objectTypeProcessor->validate($this->contentData);
 
-		//validate if parent is tabmenu, fallback to a cssID
-		if ($this->parentID) {
-			$parent = ContentCache::getInstance()->getContent($this->parentID);
-			if ($parent->contentTypeID == ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.tabmenu')) {
-				if ($this->cssID == '') $this->cssID = 'tab-'.$this->pageID.$this->parentID.$this->showOrder.$this->objectType->objectTypeID.rand(0,20);
-			}
-		}
-
 		//if this happens, user is a retard
 		$position = array('body', 'sidebar');
 		if(!in_array($this->position, $position)) throw new UserInputException('position');
@@ -148,6 +140,14 @@ class ContentAddForm extends AbstractForm {
 		}
 		$this->page = new Page($this->pageID);
 		if ($this->page === null) throw new UserInputException('pageID', 'invalid');
+
+		//validate if parent is tabmenu, fallback to a cssID
+		if ($this->parentID) {
+			$parent = ContentCache::getInstance()->getContent($this->parentID);
+			if ($parent->contentTypeID == ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.tabmenu')) {
+				if ($this->cssID == '') $this->cssID = 'tab-'.$this->pageID.$this->parentID.$this->showOrder.$this->objectType->objectTypeID.rand(0,20);
+			}
+		}
 	}
 
 	public function save() {
