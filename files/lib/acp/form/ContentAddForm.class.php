@@ -145,7 +145,7 @@ class ContentAddForm extends AbstractForm {
 		if ($this->parentID) {
 			$parent = ContentCache::getInstance()->getContent($this->parentID);
 			if ($parent->contentTypeID == ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.tabmenu')) {
-				if ($this->cssID == '') $this->cssID = 'tab-'.$this->pageID.$this->parentID.$this->showOrder.$this->objectType->objectTypeID.rand(0,20);
+				if ($this->cssID == '') $this->cssID = 'tab-'.$this->pageID.$this->parentID.$this->showOrder.$this->objectType->objectTypeID.rand(0, 20);
 			}
 		}
 	}
