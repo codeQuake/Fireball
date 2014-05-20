@@ -34,7 +34,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.hyperlink"><![CDATA[Hyperlink]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu.description"><![CDATA[All children will be arranged in a tabmenu.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu.description"><![CDATA[All children will be arranged in a tabmenu. The children's titles will be the titles of your tab buttons. Tab buttons need CSS-IDs for the anchors, if you don't enter a CSS-ID for each child, it will be generated automatically.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Choose box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Headline]]></item>
@@ -169,7 +169,6 @@
 		<item name="cms.acp.page.log.editContent"><![CDATA[{$additionalData['username']} edited „{$additionalData['content']->title|language}“ on this page.]]></item>
 		<item name="cms.acp.page.log.deleteContent"><![CDATA[{$additionalData['username']} deleted a content.]]></item>
 		<item name="cms.acp.page.add"><![CDATA[Add page]]></item>
-		<item name="cms.acp.page.addContents.afterSaving"><![CDATA[You can add contents here after saving this page!]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Edit page]]></item>
 		<item name="cms.acp.page.remove"><![CDATA[Remove page]]></item>
 		<item name="cms.acp.page.title"><![CDATA[Pagetitle]]></item>
@@ -199,6 +198,7 @@
 		<item name="cms.acp.page.meta.robots.noindexnofollow"><![CDATA[no index, no follow]]></item>
 		<item name="cms.acp.page.settings"><![CDATA[Settings]]></item>
 		<item name="cms.acp.page.settings.showSidebar"><![CDATA[Show sidebar]]></item>
+		<item name="cms.acp.page.settings.showSidebar.description"><![CDATA[Shows the global sidebar, which you can set up <a href="{link controller='DashboardList'}{/link}">here</a>.]]></item>
 		<item name="cms.acp.page.settings.sidebarOrientation"><![CDATA[Sidebarorientation]]></item>
 		<item name="cms.acp.page.settings.sidebarOrientation.right"><![CDATA[Right]]></item>
 		<item name="cms.acp.page.settings.sidebarOrientation.left"><![CDATA[Left]]></item>

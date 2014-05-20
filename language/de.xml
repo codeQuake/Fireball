@@ -169,7 +169,6 @@
 		<item name="cms.acp.page.log.editContent"><![CDATA[{$additionalData['username']} hat den Inhalt „{$additionalData['content']->title|language}“ bearbeitet.]]></item>
 		<item name="cms.acp.page.log.deleteContent"><![CDATA[{$additionalData['username']} hat einen Inhalt entfernt.]]></item>
 		<item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
-		<item name="cms.acp.page.addContents.afterSaving"><![CDATA[Nach dem Speichern der Seite können Sie an dieser Stelle die Inhalte der Seite verwalten.]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
 		<item name="cms.acp.page.remove"><![CDATA[Seite entfernen]]></item>
 		<item name="cms.acp.page.title"><![CDATA[Seitentitel]]></item>
@@ -200,6 +199,7 @@
 		<item name="cms.acp.page.general.menuItem"><![CDATA[Menüpunkt erstellen]]></item>
 		<item name="cms.acp.page.general.menuItem.description"><![CDATA[Sie können den erstellten Menüpunkt anschließend in der <a href="{link controller='PageMenuItemList'}{/link}">Hauptmenüverwaltung</a> verschieben oder bearbeiten.]]></item>
 		<item name="cms.acp.page.settings.showSidebar"><![CDATA[Globale Seitenleiste anzeigen]]></item>
+		<item name="cms.acp.page.settings.showSidebar.description"><![CDATA[Sie können die globale Seitenleiste in der <a href="{link controller='DashboardList'}{/link}">Dashboard-Konfiguration</a> konfigurieren.]]></item>
 		<item name="cms.acp.page.settings.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
 		<item name="cms.acp.page.settings.sidebarOrientation.right"><![CDATA[Rechte Seitenleiste]]></item>
 		<item name="cms.acp.page.settings.sidebarOrientation.left"><![CDATA[Linke Seitenleiste]]></item>
