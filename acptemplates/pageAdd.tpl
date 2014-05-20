@@ -84,7 +84,7 @@
 							</small>
 						{/if}
 
-						{include file='multipleLanguageInputJavascript' elementIdentifier='title' forceSelection=false}
+						{include file='multipleLanguageInputJavascript' elementIdentifier='title' forceSelection=true}
 					</dd>
 				</dl>
 
