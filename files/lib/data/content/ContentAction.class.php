@@ -35,14 +35,14 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 
 	public function update() {
 		parent::update();
-		foreach($this->objects as $content) {
+		foreach ($this->objects as $content) {
 			PageModificationLogHandler::getInstance()->deleteContent($content->getPage());
 		}
 		ContentCacheBuilder::getInstance()->reset();
 	}
 
 	public function delete() {
-		foreach($this->objects as $content) {
+		foreach ($this->objects as $content) {
 			PageModificationLogHandler::getInstance()->deleteContent($content->getPage());
 		}
 		parent::delete();

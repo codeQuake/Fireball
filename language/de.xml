@@ -159,6 +159,11 @@
 		<item name="cms.acp.page.log"><![CDATA[Änderungsprotokoll]]></item>
 		<item name="cms.acp.page.log.action"><![CDATA[Änderung]]></item>
 		<item name="cms.acp.page.log.time"><![CDATA[Zeit]]></item>
+		<item name="cms.acp.page.log.create"><![CDATA[Die Seite wurde von {$additionalData['username']} erstellt.]]></item>
+		<item name="cms.acp.page.log.edit"><![CDATA[Die Seite wurde von {$additionalData['username']} bearbeitet.]]></item>
+		<item name="cms.acp.page.log.addContent"><![CDATA[{$additionalData['username']} hat der Seite den Inhalt {$addtionalData['content']->getTitle()|language} hinzugefügt.]]></item>
+		<item name="cms.acp.page.log.editContent"><![CDATA[{$additionalData['username']} hat den Inhalt {$addtionalData['content']->getTitle()|language} bearbeitet.]]></item>
+		<item name="cms.acp.page.log.deleteContent"><![CDATA[{$additionalData['username']} hat einen Inhalt entfernt.]]></item>
 		<item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="cms.acp.page.addContents.afterSaving"><![CDATA[Nach dem Speichern der Seite können Sie an dieser Stelle die Inhalte der Seite verwalten.]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
