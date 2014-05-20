@@ -11,7 +11,6 @@ use cms\util\PageUtil;
 use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\page\menu\item\PageMenuItemEditor;
-use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
@@ -106,9 +105,6 @@ class PageAddForm extends AbstractForm {
 		// validate alias
 		$this->validateAlias();
 
-		// validate menuitem
-		$this->validateMenuItem();
-
 		if (! I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
@@ -134,20 +130,6 @@ class PageAddForm extends AbstractForm {
 		}
 		if (! PageUtil::isAvailableAlias($this->alias, ($this->parentID) ?  : null)) {
 			throw new UserInputException('alias', 'given');
-		}
-	}
-
-	/**
-	 * Validates the menu item
-	 */
-	protected function validateMenuItem() {
-		$list = new PageMenuItemList();
-		$list->readObjects();
-
-		foreach ($list as $item) {
-			if (isset($this->menuItem) && $this->title == $item->menuItem) {
-				throw new UserInputException('menuItem', 'exists');
-			}
 		}
 	}
 

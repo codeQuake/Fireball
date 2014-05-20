@@ -8,7 +8,9 @@ use cms\data\page\PageAction;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\util\PageUtil;
-use wcf\data\page\menu\item\PageMenuItemList;
+use wcf\data\page\menu\item\PageMenuItem;
+use wcf\data\page\menu\item\PageMenuItemAction;
+use wcf\data\page\menu\item\PageMenuItemEditor;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
@@ -58,9 +60,9 @@ class PageEditForm extends PageAddForm {
 		$this->sidebarOrientation = $this->page->sidebarOrientation;
 		$this->isCommentable = $this->page->isCommentable;
 		$this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
-		$this->menuItem = @unserialize($this->page->menuItem);
+		$this->menuItem = isset($this->page->menuItemID) ? 1 : 0;
+		$this->menuItemID = $this->page->menuItemID;
 
-		if (! isset($this->menuItem['has'])) $this->menuItem['has'] = 0;
 		$this->alias = $this->page->alias;
 	}
 
@@ -68,7 +70,6 @@ class PageEditForm extends PageAddForm {
 		parent::readFormParameters();
 
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
-		if (isset($_REQUEST['menuID'])) $this->menuItem['id'] = intval($_REQUEST['menuID']);
 	}
 
 	/**
@@ -87,27 +88,6 @@ class PageEditForm extends PageAddForm {
 		}
 	}
 
-	/**
-	 *
-	 * @see \cms\acp\form\PageAddForm::validateMenuItem()
-	 */
-	public function validateMenuItem() {
-		$menu = @unserialize($this->page->menuItem);
-		if (isset($this->menuItem['has']) && $this->menuItem['has'] == 1 && isset($menu['id']) == false && $menu['id'] != 0) {
-			$list = new PageMenuItemList();
-			$list->readObjects();
-
-			foreach ($list as $item) {
-				if (isset($this->menuItem['id']) && $this->title == $item->menuItem) {
-					throw new UserInputException('menuItem', 'exists');
-				}
-				if (isset($this->menuItem['id']) && $item->menuItem == 'cms.page.title' . $this->pageID) {
-					throw new UserInputException('menuItem', 'exists');
-				}
-			}
-		}
-	}
-
 	public function save() {
 		AbstractForm::save();
 
@@ -120,7 +100,6 @@ class PageEditForm extends PageAddForm {
 			'invisible' => $this->invisible,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'showOrder' => $this->showOrder,
-			'menuItem' => serialize($this->menuItem),
 			'parentID' => ($this->parentID) ?  : null,
 			'layoutID' => $this->layoutID,
 			'showSidebar' => $this->showSidebar,
@@ -161,7 +140,51 @@ class PageEditForm extends PageAddForm {
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $this->pageID;
 		}
 
-		//Menu!!! TODO!!!
+		if (!$this->menuItem && $this->menuItemID) {
+			//delete old item
+			$action = new PageMenuItemAction(array(
+				$this->menuItemID
+			), 'delete', array());
+			$action->executeAction();
+
+			$update['menuItemID'] = null;
+		} else if ($this->menuItem && !$this->menuItemID) {
+			//create menuitem
+			$page = new Page($this->pageID);
+			if ($page->getParentPage() !== null) {
+				$parentPage = $page->getParentPage();
+				$parentItem = new PageMenuItem($parentPage->menuItemID);
+			}
+
+			$data = array(
+				'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
+				'menuItemController' => 'cms\page\PagePage',
+				'menuItemLink' => 'id='.$this->pageID,
+				'menuPosition' => 'header',
+				'packageID' => PACKAGE_ID,
+				'parentMenuItem' => isset($parentItem) ? $parentItem->menuItem : '',
+				'showOrder' => 0
+			);
+
+			$menuItemAction = new PageMenuItemAction(array(), 'create', array('data' => $data));
+			$itemReturnValues = $menuItemAction->executeAction();
+			$menuItem = $itemReturnValues['returnValues'];
+
+			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.'.$menuItem->menuItemID, 'wcf.page');
+			$data['menuItem'] = 'wcf.page.menuItem.'.$menuItem->menuItemID;
+			$editor = new PageMenuItemEditor($menuItem);
+			$editor->update($data);
+
+			$update['menuItemID'] = $menuItem->menuItemID ?: null;
+		} else if ($this->menuItem && $this->menuItemID) {
+			//update old item
+			$item = new PageMenuItem($this->menuItemID);
+			$editor = new PageMenuItemEditor($item);
+			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.'.$menuItem->menuItemID, 'wcf.page');
+			$data['menuItem'] = 'wcf.page.menuItem.'.$menuItem->menuItemID;
+			$editor->update($data);
+		}
+
 		if (! empty($update)) {
 			$editor = new PageEditor(new Page($this->pageID));
 			$editor->update($update);
