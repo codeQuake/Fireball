@@ -2,6 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use cms\page\PagePage;
 use wcf\system\cache\builder\DashboardBoxCacheBuilder;
 use wcf\system\WCF;
 
@@ -25,6 +26,12 @@ class DashboardContentType extends AbstractContentType {
 	}
 
 	public function getOutput(Content $content) {
-		return '';
+		$data = $content->handleContentData();
+		$boxID = $data['box'];
+		$boxList = DashboardBoxCacheBuilder::getInstance()->getData(array(), 'boxes');
+        $className = $boxList[$boxID]->className;
+        $box = new $className();
+        $box->init($boxList[$boxID], new PagePage());
+        return $box->getTemplate();
 	}
 }

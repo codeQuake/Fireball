@@ -30,6 +30,7 @@ class PagePage extends AbstractPage {
 	const AVAILABLE_DURING_OFFLINE_MODE = true;
 
 	public $contentNodeTree;
+	public $sidebarNodeTree;
 
 	public $page = null;
 
@@ -92,7 +93,9 @@ class PagePage extends AbstractPage {
 		if (! $this->page->isVisible() || ! $this->page->isAccessible()) throw new PermissionDeniedException();
 
 		// get Contents
-		$this->contentNodeTree = $this->page->getContents();
+		$contents = $this->page->getContents();
+		$this->contentNodeTree = $contents['body'];
+		$this->sidebarNodeTree = $contents['sidebar'];
 
 		// comments
 		if ($this->page->isCommentable) {
@@ -117,6 +120,7 @@ class PagePage extends AbstractPage {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
 			'contentNodeTree' => $this->contentNodeTree,
+			'sidebarNodeTree' => $this->sidebarNodeTree,
 			'page' => $this->page,
 			'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : array()),
 			'commentCanAdd' => (WCF::getUser()->userID && WCF::getSession()->getPermission('user.cms.page.canAddComment')),

@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\page;
 
-use cms\data\content\ContentNodeTree;
+use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\CMSDatabaseObject;
 use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
@@ -125,8 +125,13 @@ class Page extends CMSDatabaseObject implements IRouteController {
 	}
 
 	public function getContents() {
-		$nodeTree = new ContentNodeTree(null, $this->pageID);
-		return $nodeTree->getIterator();
+		$contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body');
+		$contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar');
+		$contentList = array(
+			'body' => $contentListBody->getIterator(),
+			'sidebar' => $contentListSidebar->getIterator()
+		);
+		return $contentList;
 	}
 
 	public function getPermission($permission = 'canViewPage') {
