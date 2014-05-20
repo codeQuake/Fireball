@@ -11,8 +11,9 @@
 </head>
 
 <body id="tpl{$templateName|ucfirst}" data-page-id="{$page->pageID}">
-{if $page->showSidebar || $sidebarNodeTree !== null}
+{hascontent}
 {capture assign='sidebar'}
+	{content}
 	{if $page->showSidebar == 1}
 		{@$__boxSidebar}
 	{/if}
@@ -29,8 +30,9 @@
 		    {/foreach}
 			{section name=i loop=$oldDepth}</fieldset>{/section}
 	{/if}
+	{/content}
 {/capture}
-{/if}
+{/hascontent}
 
 {include file='header' sidebarOrientation=$page->sidebarOrientation}
 
