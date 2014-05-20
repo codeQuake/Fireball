@@ -7,10 +7,11 @@ use wcf\system\cache\builder\DashboardBoxCacheBuilder;
 use wcf\system\WCF;
 
 /**
- * @author	Jens Krumsieck
- * @copyright	codeQuake 2014
- * @package	de.codequake.cms
- * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ *
+ * @author Jens Krumsieck
+ * @copyright codeQuake 2014
+ * @package de.codequake.cms
+ * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  */
 class DashboardContentType extends AbstractContentType {
 
@@ -29,9 +30,9 @@ class DashboardContentType extends AbstractContentType {
 		$data = $content->handleContentData();
 		$boxID = $data['box'];
 		$boxList = DashboardBoxCacheBuilder::getInstance()->getData(array(), 'boxes');
-        $className = $boxList[$boxID]->className;
-        $box = new $className();
-        $box->init($boxList[$boxID], new PagePage());
-        return $box->getTemplate();
+		$className = $boxList[$boxID]->className;
+		$box = new $className();
+		$box->init($boxList[$boxID], new PagePage());
+		return $box->getTemplate();
 	}
 }
