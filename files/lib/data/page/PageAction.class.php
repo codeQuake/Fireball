@@ -4,6 +4,7 @@ namespace cms\data\page;
 use cms\data\content\ContentAction;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
+use cms\system\log\modification\PageModificationLogHandler;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\AbstractDatabaseObjectAction;
@@ -36,6 +37,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		$page = parent::create();
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
+		PageModificationLogHandler::getInstance()->create($page);
 		return $page;
 	}
 
@@ -43,6 +45,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		parent::update();
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
+		PageModificationLogHandler::getInstance()->edit($page);
 
 	}
 

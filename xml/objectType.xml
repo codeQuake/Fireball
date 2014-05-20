@@ -58,39 +58,7 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>
 		</type>
-		<!--<type>
-			<name>de.codequake.cms.section.type.link</name>
-			<definitionname>de.codequake.cms.section.type</definitionname>
-			<classname>cms\data\content\section\type\LinkContentSectionType</classname>
-		</type>
-		<type>
-			<name>de.codequake.cms.section.type.file</name>
-			<definitionname>de.codequake.cms.section.type</definitionname>
-			<classname>cms\data\content\section\type\FileContentSectionType</classname>
-		</type>
-		<type>
-			<name>de.codequake.cms.section.type.image</name>
-			<definitionname>de.codequake.cms.section.type</definitionname>
-			<classname>cms\data\content\section\type\ImageContentSectionType</classname>
-		</type>
-		<type>
-			<name>de.codequake.cms.section.type.news</name>
-			<definitionname>de.codequake.cms.section.type</definitionname>
-			<classname>cms\data\content\section\type\NewsContentSectionType</classname>
-		</type>
-
-		<type>
-			<name>de.codequake.cms.section.type.module</name>
-			<definitionname>de.codequake.cms.section.type</definitionname>
-			<classname>cms\data\content\section\type\ModuleContentSectionType</classname>
-		</type>
-
-		<type>
-			<name>de.codequake.cms.section.type.dashboard</name>
-			<definitionname>de.codequake.cms.section.type</definitionname>
-			<classname>cms\data\content\section\type\DashboardContentSectionType</classname>
-		</type>  -->
-		<!-- /section types -->
+		<!-- /content types -->
 
 		<!-- attachments -->
 		<type>
@@ -210,6 +178,13 @@
 			<category>de.codequake.cms</category>
 		</type>
 		<!-- /notifications -->
+
+		<!-- modification -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.modifiableContent</definitionname>
+		</type>
+		<!-- /modification -->
 
 		<!-- visit tracker -->
 		<type>

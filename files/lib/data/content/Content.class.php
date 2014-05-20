@@ -2,7 +2,7 @@
 namespace cms\data\content;
 
 use cms\data\content\section\ContentContentSectionList;
-use cms\data\page\Page;
+use cms\data\page\PageCache;
 use cms\data\CMSDatabaseObject;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\request\IRouteController;
@@ -38,7 +38,7 @@ class Content extends CMSDatabaseObject implements IRouteController {
 	}
 
 	public function getPage() {
-		return new Page($this->pageID);
+		return PageCache::getInstance()->getPage($this->pageID);
 	}
 
 	public function getTitle() {
