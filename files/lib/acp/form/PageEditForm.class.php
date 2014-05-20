@@ -160,6 +160,8 @@ class PageEditForm extends PageAddForm {
 			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $this->pageID, 'cms.page');
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $this->pageID;
 		}
+
+		//Menu!!! TODO!!!
 		if (! empty($update)) {
 			$editor = new PageEditor(new Page($this->pageID));
 			$editor->update($update);
