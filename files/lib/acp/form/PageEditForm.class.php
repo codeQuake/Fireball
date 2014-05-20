@@ -60,7 +60,7 @@ class PageEditForm extends PageAddForm {
 		$this->sidebarOrientation = $this->page->sidebarOrientation;
 		$this->isCommentable = $this->page->isCommentable;
 		$this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
-		$this->menuItem = isset($this->page->menuItemID) ? 1 : 0;
+		$this->menuItem = $this->page->menuItemID !== null ? 1 : 0;
 		$this->menuItemID = $this->page->menuItemID;
 
 		$this->alias = $this->page->alias;
@@ -68,7 +68,6 @@ class PageEditForm extends PageAddForm {
 
 	public function readFormParameters() {
 		parent::readFormParameters();
-
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
 	}
 
@@ -90,7 +89,6 @@ class PageEditForm extends PageAddForm {
 
 	public function save() {
 		AbstractForm::save();
-
 		$data = array(
 			'alias' => $this->alias,
 			'title' => $this->title,
@@ -111,8 +109,7 @@ class PageEditForm extends PageAddForm {
 		$objectAction = new PageAction(array(
 			$this->pageID
 		), 'update', array(
-			'data' => $data,
-			'I18n' => I18nHandler::getInstance()->getValues('title')
+			'data' => $data
 		));
 		$objectAction->executeAction();
 
@@ -139,6 +136,9 @@ class PageEditForm extends PageAddForm {
 			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $this->pageID, 'cms.page');
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $this->pageID;
 		}
+
+		$page = new Page($this->pageID);
+		$this->menuItemID = $page->menuItemID;
 
 		if (!$this->menuItem && $this->menuItemID) {
 			//delete old item
@@ -180,9 +180,9 @@ class PageEditForm extends PageAddForm {
 			//update old item
 			$item = new PageMenuItem($this->menuItemID);
 			$editor = new PageMenuItemEditor($item);
-			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.'.$menuItem->menuItemID, 'wcf.page');
-			$data['menuItem'] = 'wcf.page.menuItem.'.$menuItem->menuItemID;
-			$editor->update($data);
+			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.'.$item->menuItemID, 'wcf.page');
+			$menuData['menuItem'] = 'wcf.page.menuItem.'.$item->menuItemID;
+			$editor->update($menuData);
 		}
 
 		if (! empty($update)) {
@@ -216,10 +216,9 @@ class PageEditForm extends PageAddForm {
 			'description' => $this->description,
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords,
-			'menu' => $this->menuItem['has'],
+			'menu' => $this->menuItem,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
-			'menuID' => isset($this->menuItem['id']) ? $this->menuItem['id'] : 0,
 			'page' => $this->page,
 			'layoutList' => $this->layoutList,
 			'isCommentable' => $this->isCommentable

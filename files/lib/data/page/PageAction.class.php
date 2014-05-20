@@ -5,6 +5,7 @@ use cms\data\content\ContentAction;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\system\exception\NamedUserException;

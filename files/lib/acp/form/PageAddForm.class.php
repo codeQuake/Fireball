@@ -80,7 +80,6 @@ class PageAddForm extends AbstractForm {
 
 	public function readFormParameters() {
 		parent::readFormParameters();
-
 		I18nHandler::getInstance()->readValues();
 		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
 		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
@@ -91,6 +90,7 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['availableDuringOfflineMode'])) $this->availableDuringOfflineMode = intval($_POST['availableDuringOfflineMode']);
 		if (isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
 		if (isset($_POST['menuItem'])) $this->menuItem = intval($_POST['menuItem']);
+		else $this->menuItem = 0;
 		if (isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
 		if (isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
 		if (isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
@@ -222,7 +222,7 @@ class PageAddForm extends AbstractForm {
 		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
 		$this->sidebarOrientation = 'right';
 		$this->invisible = $this->parentID = $this->showOrder = $this->showSidebar = 0;
-		$this->menuItem = array();
+		$this->menuItem = 1;
 		I18nHandler::getInstance()->reset();
 	}
 
