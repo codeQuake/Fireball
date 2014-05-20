@@ -162,13 +162,13 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			'pageID' => reset($this->objectIDs),
 			'contentTypes' => $categories,
 			'position' => $this->parameters['position'],
-			'parentID' => intval($this->parameters['parentID'])));
+			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null ));
 
 		return array(
 			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms'),
 			'pageID' => reset($this->objectIDs),
 			'position' => $this->parameters['position'],
-			'parentID' => intval($this->parameters['parentID'])
+			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null
 		);
 	}
 }

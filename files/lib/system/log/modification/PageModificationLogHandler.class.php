@@ -4,17 +4,18 @@ namespace cms\system\log\modification;
 use cms\data\content\Content;
 use cms\data\page\Page;
 use wcf\system\log\modification\ModificationLogHandler;
+use wcf\system\WCF;
 
 class PageModificationLogHandler extends ModificationLogHandler {
 
-	public function create(Page $page){
+	public function create(Page $page) {
 		$this->add($page, 'create', array(
 			'time' => TIME_NOW,
 			'username' => WCF::getUser()->username
 		));
 	}
 
-	public function edit(Page $page){
+	public function edit(Page $page) {
 		$this->add($page, 'edit', array(
 			'time' => TIME_NOW,
 			'username' => WCF::getUser()->username

@@ -156,6 +156,9 @@
 	<category name="cms.acp.page">
 		<item name="cms.acp.page.legend"><![CDATA[Legend]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
+		<item name="cms.acp.page.log"><![CDATA[Changelog]]></item>
+		<item name="cms.acp.page.log.action"><![CDATA[Changes]]></item>
+		<item name="cms.acp.page.log.time"><![CDATA[Time]]></item>
 		<item name="cms.acp.page.add"><![CDATA[Add page]]></item>
 		<item name="cms.acp.page.addContents.afterSaving"><![CDATA[You can add contents here after saving this page!]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Edit page]]></item>
