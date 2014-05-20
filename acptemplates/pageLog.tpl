@@ -11,7 +11,7 @@
 			</span>
 		</li>
 		<li title="{$page->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-			<a href="{link controller='Page' object=$page application='cms'}{/link}" itemprop="url">
+			<a href="{link controller='PageEdit' object=$page application='cms'}{/link}" itemprop="url">
 				<span itemprop="title">{$page->getTitle()|language}</span>
 			</a>
 			<span class="pointer">

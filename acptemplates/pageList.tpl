@@ -65,7 +65,7 @@
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
 								{if !$page->isHome && !$page->isChild()}<span class="icon icon16 icon-home jsTooltip jsSetAsHome pointer" data-object-id="{$page->pageID}" title="{lang}cms.acp.page.setAsHome{/lang}"></span>{/if}
-								<a href="{link controller='PageLog' application='cms' object=$page}{/link} title="{lang}cms.acp.page.modification.log{/lang}" class="jsTooltip"><span class="icon icon16 icon-tasks"></span></a>
+								<a href="{link controller='PageLog' application='cms' object=$page}{/link}" title="{lang}cms.acp.page.log{/lang}" class="jsTooltip"><span class="icon icon16 icon-tasks"></span></a>
 
 								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$page->pageID}"></span>
 								<a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
@@ -97,7 +97,7 @@
 					<li><span class="icon icon16 icon-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></li>
 					<li><span class="icon icon16 icon-remove"></span> <span>{lang}cms.acp.page.remove{/lang}</span></li>
 					<li><span class="icon icon16 icon-home"></span> <span>{lang}cms.acp.page.setAsHome{/lang}</span></li>
-					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.page.modification.log{/lang}</span>
+					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.page.log{/lang}</span>
 					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
 					<li><span class="icon icon16 icon-file"></span> <span>{lang}cms.acp.content.listing{/lang}</span></li>
 				</ul>
