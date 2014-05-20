@@ -28,7 +28,7 @@ class TabmenuContentType extends AbstractStructureContentType {
 		return 'tabMenuContent container containerPadding';
 	}
 
-	public function getOutput(Content $content){
+	public function getOutput(Content $content) {
 		$childIDs = ContentCache::getInstance()->getChildIDs($content->contentID);
 		$children = array();
 
