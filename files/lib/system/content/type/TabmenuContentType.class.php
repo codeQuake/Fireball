@@ -31,9 +31,11 @@ class TabmenuContentType extends AbstractStructureContentType {
 	public function getOutput(Content $content){
 		$childIDs = ContentCache::getInstance()->getChildIDs($content->contentID);
 		$children = array();
+
 		foreach ($childIDs as $childID) {
 			$children[] = ContentCache::getInstance()->getContent($childID);
 		}
+
 		WCF::getTPL()->assign(array('children' => $children));
 		return WCF::getTPL()->fetch('tabMenuContentTypeOutput', 'cms');
 	}
