@@ -20,13 +20,17 @@
 	{if $sidebarNodeTree !== null}
 		{assign var=oldDepth value=0}
 		    {foreach from=$sidebarNodeTree item=content}
-		    	{section name=i loop=$oldDepth-$sidebarNodeTree->getDepth()}</div>{/section}
-				<fieldset class="dashboardBox {if $content->getCSSClasses() != ""}{$content->getCSSClasses()}{/if}" {if $content->cssID != ""}id="{$content->cssID}"{/if}>
-				{@$content->getOutput()|language}
-				{if !$sidebarNodeTree->current()->hasChildren()}
-					</div>
+		    	{if $content->getTypeName() != 'de.codequake.cms.content.type.dashboard'}
+			    	{section name=i loop=$oldDepth-$sidebarNodeTree->getDepth()}</fieldset>{/section}<fieldset class="dashboardBox {if $content->getCSSClasses() != ""}{$content->getCSSClasses()}{/if}" {if $content->cssID != ""}id="{$content->cssID}"{/if}>
+						<legend>{$content->getTitle()|language}</legend>
+					{@$content->getOutput()|language}
+					{if !$sidebarNodeTree->current()->hasChildren()}
+						</div>
+					{/if}
+					{assign var=oldDepth value=$sidebarNodeTree->getDepth()}
+				{else}
+					{@$content->getOutput()|language}
 				{/if}
-				{assign var=oldDepth value=$sidebarNodeTree->getDepth()}
 		    {/foreach}
 			{section name=i loop=$oldDepth}</fieldset>{/section}
 	{/if}
