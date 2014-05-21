@@ -5,6 +5,9 @@
 		<dashboardbox name="de.codequake.cms.latestNews">
 			<classname><![CDATA[cms\system\dashboard\box\LatestNewsDashboardBox]]></classname>
 			<boxtype>sidebar</boxtype>
+		</dashboardbox><dashboardbox name="de.codequake.cms.mostReadNews">
+			<classname><![CDATA[cms\system\dashboard\box\MostReadNewsDashboardBox]]></classname>
+			<boxtype>sidebar</boxtype>
 		</dashboardbox>
 	</import>
 </data>

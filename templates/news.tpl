@@ -36,10 +36,25 @@
 
 {capture assign='sidebar'}
 	<fieldset>
+		<legend>{lang}cms.news.author{/lang}</legend>
+		<div class="box32">
+			<div class="userAvatar">
+				<a class="framed userLink" data-user-id="{$news->getUserProfile()->userID}" href="{link controller='User' object=$news->getUserProfile()}{/link}">{@$news->getUserProfile()->getAvatar()->getImageTag(24)}</a>
+			</div>
+			<div class="userDetails">
+				<div class="containerHeadline">
+					<h3><a class="userLink" data-user-id="{$news->getUserProfile()->userID}" href="{link controller='User' object=$news->getUserProfile()}{/link}">{$news->getUserProfile()->username}</a></h3>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+	<fieldset>
 		<legend>{lang}cms.news.general{/lang}</legend>
 		<dl class="plain inlineDataList">
 			<dt>{lang}cms.news.clicks{/lang}</dt>
 			<dd>{$news->clicks}</dd>
+			<dt>{lang}cms.news.comments{/lang}</dt>
+			<dd>{@$commentList->countObjects()}</dd>
 		</dl>
 	</fieldset>
 	{if $news->getCategories()|count}
@@ -71,6 +86,7 @@
 
 <header class="boxHeadline">
 		<h1>{$news->getTitle()|language}</h1>
+		<p>{if $news->teaser != ''}{$news->teaser}{else}{$news->getExcerpt()}{/if}</p>
 </header>
 {if $news->isDisabled}<p class="warning">{lang}cms.news.publication.delayed{/lang}</p>{/if}
 {include file='userNotice'}
@@ -83,17 +99,7 @@
                     <section class="messageContent">
                         <div>
                             <header class="messageHeader">
-                                <div class="box32">
-                                     {if $news->getImage() != null}
-										<a class="framed" href="{link controller='News' object=$news application='cms'}{/link}">
-                                        {@$news->getImage()->getImageTag('32')}
-										</a>
-									{else}
-										<a class="framed" href="{link controller='User' object=$news->getUserProfile()}{/link}">
-										{@$news->getUserProfile()->getAvatar()->getImageTag(32)}
-									</a>
-									{/if}
-                                    <div class="messageHeadline">
+                                <div class="messageHeadline">
                                         <h1>
                                             <a href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a>
                                         </h1>
@@ -107,7 +113,6 @@
                                                 {@$news->time|time}
                                             </a>
                                         </p>
-                                    </div>
                                 </div>
                             </header>
                             <div class="messageBody">

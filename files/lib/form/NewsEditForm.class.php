@@ -41,6 +41,7 @@ class NewsEditForm extends NewsAddForm {
 		$this->news = new News($this->newsID);
 		$this->time = $this->news->time;
 		$this->subject = $this->news->subject;
+		$this->teaser = $this->news->teaser;
 		$this->text = $this->news->message;
 		$this->enableBBCodes = $this->news->enableBBCodes;
 		$this->enableHtml = $this->news->enableHtml;
@@ -69,6 +70,7 @@ class NewsEditForm extends NewsAddForm {
 		$data = array(
 			'subject' => $this->subject,
 			'message' => $this->text,
+			'teaser' => $this->teaser,
 			'time' => $this->time,
 			'enableBBCodes' => $this->enableBBCodes,
 			'showSignature'	=> $this->showSignature,

@@ -269,8 +269,10 @@
 		<item name="cms.news.category.categories"><![CDATA[Categories]]></item>
 		<item name="cms.news.category.categories.description"><![CDATA[Choose one or more categories]]></item>
 		<item name="cms.news.general"><![CDATA[General]]></item>
+		<item name="cms.news.teaser"><![CDATA[Teaser]]></item>
 		<item name="cms.news.clicks"><![CDATA[Clicks]]></item>
 		<item name="cms.news.message"><![CDATA[News]]></item>
+		<item name="cms.news.author"><![CDATA[Author]]></item>
 		<item name="cms.news.time.toPublish"><![CDATA[Date of publication]]></item>
 		<item name="cms.news.publication.delayed"><![CDATA[This news has not been published, yet!]]></item>
 		<item name="cms.news.add"><![CDATA[Add news]]></item>
@@ -418,6 +420,7 @@
 		<item name="wcf.dashboard.objectType.de.codequake.cms.news.newsList"><![CDATA[CMS: Newslist]]></item>
 		<item name="wcf.dashboard.objectType.de.codequake.cms.news.news"><![CDATA[CMS: News]]></item>
 		<item name="wcf.dashboard.box.de.codequake.cms.latestNews"><![CDATA[Latest news]]></item>
+		<item name="wcf.dashboard.box.de.codequake.cms.mostReadNews"><![CDATA[Most read news]]></item>
 	</category>
 
 	<category name="wcf.acp.index">

@@ -80,6 +80,7 @@ CREATE TABLE cms1_news (
 	userID INT(10),
 	username VARCHAR(255),
 	subject VARCHAR(255),
+	teaser MEDIUMTEXT,
 	message MEDIUMTEXT,
 	time INT(10) NOT NULL DEFAULT 0,
 	attachments INT(10) NOT NULL DEFAULT 0,

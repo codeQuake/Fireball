@@ -8,17 +8,7 @@
                     <section class="messageContent">
                         <div>
                             <header class="messageHeader">
-                                <div class="box32">
-                                    {if $news->getImage() != null}
-										<a class="framed" href="{link controller='News' object=$news application='cms'}{/link}">
-                                        {@$news->getImage()->getImageTag('32')}
-										</a>
-									{else}
-										<a class="framed" href="{link controller='User' object=$news->getUserProfile()}{/link}">
-										{@$news->getUserProfile()->getAvatar()->getImageTag(32)}
-									</a>
-									{/if}
-                                    <div class="messageHeadline">
+                                <div class="messageHeadline">
                                         <h1>
                                             <a href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a>
                                         </h1>
@@ -42,7 +32,6 @@
 											{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike') && $news->likes || $news->dislikes}<span class="likesBadge badge jsTooltip {if $news->cumulativeLikes > 0}green{elseif $news->cumulativeLikes < 0}red{/if}" title="{lang likes=$news->likes dislikes=$news->dislikes}wcf.like.tooltip{/lang}">{if $news->cumulativeLikes > 0}+{elseif $news->cumulativeLikes == 0}&plusmn;{/if}{#$news->cumulativeLikes}</span>{/if}
                                         </p>
                                     </div>
-                                </div>
                             </header>
                             <div class="messageBody">
 								{if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->getImage() != null}

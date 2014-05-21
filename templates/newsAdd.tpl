@@ -40,7 +40,7 @@
 							<div class="containerHeadline">
 								<h3><label{if $categoryItem->getDescription()} class="jsTooltip" title="{$categoryItem->getDescription()}"{/if}><input type="checkbox" name="categoryIDs[]" value="{@$categoryItem->categoryID}" class="jsCategory"{if $categoryItem->categoryID|in_array:$categoryIDs}checked="checked" {/if}/> {$categoryItem->getTitle()}</label></h3>
 							</div>
-							
+
 							{if $categoryItem->hasChildren()}
 								<ol>
 									{foreach from=$categoryItem item=subCategoryItem}
@@ -123,7 +123,7 @@
 							});
 							//]]>
 						</script>
-						
+
 						<input type="hidden" name="imageID" value="{$imageID}" id="imageID" />
 						<div id="imageSelect" style="display: none;">
 							{foreach from=$imageList item='imageItem'}
@@ -161,11 +161,27 @@
 						</div>
 					</dd>
 				</dl>
+
+				<dl {if $errorField == 'teaser'}class="formError{/if}">
+				    <dt><label for="teaser">{lang}cms.news.teaser{/lang}</label></dt>
+				    <dd>
+					    <textarea id="teaser" name="teaser" rows="5" cols="40">{$teaser}</textarea>
+					    {if $errorField == 'teaser'}
+						    <small class="innerError">
+							    {if $errorType == 'empty'}
+								    {lang}wcf.global.form.error.empty{/lang}
+							    {else}
+								    {lang}cms.news.teaser.error.{@$errorType}{/lang}
+							    {/if}
+						    </small>
+					    {/if}
+				    </dd>
+			    </dl>
 			{event name='informationFields'}
             </fieldset>
             <fieldset>
 			    <legend>{lang}cms.news.message{/lang}</legend>
-			
+
 			    <dl class="wide{if $errorField == 'text'} formError{/if}">
 				    <dt><label for="text">{lang}cms.news.message{/lang}</label></dt>
 				    <dd>
@@ -184,12 +200,12 @@
 						    </small>
 					    {/if}
 				    </dd>
-			    </dl>				
+			    </dl>
 			{event name='messageFields'}
 		</fieldset>
-		
+
 		{include file='messageFormTabs' wysiwygContainerID='text'}
-       
+
         {event name='fieldsets'}
 		</div>
 		<div class="container containerPadding marginTop">

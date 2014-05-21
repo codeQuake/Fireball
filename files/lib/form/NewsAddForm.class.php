@@ -42,6 +42,7 @@ class NewsAddForm extends MessageForm {
 	public $image = null;
 	public $imageList;
 	public $time = TIME_NOW;
+	public $teaser = '';
 	public $tags = array();
 
 	public function readFormParameters() {
@@ -49,6 +50,7 @@ class NewsAddForm extends MessageForm {
 		if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tags = ArrayUtil::trim($_POST['tags']);
 		if (isset($_POST['time']) && $_POST['time'] != 0) $this->time = strtotime($_POST['time']);
 		if (isset($_POST['imageID'])) $this->image = new NewsImage(intval($_POST['imageID']));
+		if (isset($_POST['teaser'])) $this->teaser = StringUtil::trim($_POST['teaser']);
 	}
 
 	public function readParameters() {
@@ -118,6 +120,7 @@ class NewsAddForm extends MessageForm {
 			'languageID' => $this->languageID,
 			'subject' => $this->subject,
 			'time' => $this->time,
+			'teaser' => $this->teaser,
 			'message' => $this->text,
 			'userID' => WCF::getUser()->userID,
 			'username' => WCF::getUser()->username,
@@ -155,6 +158,7 @@ class NewsAddForm extends MessageForm {
 			'categoryIDs' => $this->categoryIDs,
 			'imageList' => $this->imageList,
 			'image' => $this->image,
+			'teaser' => $this->teaser,
 			'imageID' => isset($this->image->imageID) ? $this->image->imageID : 0,
 			'time' => gmdate("Y-m-d H:i", $this->time),
 			'action' => $this->action,
