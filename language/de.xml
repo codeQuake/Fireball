@@ -272,6 +272,7 @@
 		<item name="cms.news.category.categories.description"><![CDATA[Wählen Sie die passenden Kategorien für die Nachricht!]]></item>
 		<item name="cms.news.general"><![CDATA[Allgemeine Informationen]]></item>
 		<item name="cms.news.teaser"><![CDATA[Teaser]]></item>
+		<item name="cms.news.teaser.description"><![CDATA[Ein Teaser ist eine kleine Einleitung der Nachricht. Bleibt dieses Feld leer, wird kein Teaser angezeigt.]]></item>
 		<item name="cms.news.clicks"><![CDATA[Aufrufe]]></item>
 		<item name="cms.news.message"><![CDATA[Nachricht]]></item>
 		<item name="cms.news.author"><![CDATA[Verfasser]]></item>

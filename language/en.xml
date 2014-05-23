@@ -270,6 +270,7 @@
 		<item name="cms.news.category.categories.description"><![CDATA[Choose one or more categories]]></item>
 		<item name="cms.news.general"><![CDATA[General]]></item>
 		<item name="cms.news.teaser"><![CDATA[Teaser]]></item>
+		<item name="cms.news.teaser.description"><![CDATA[]]></item>
 		<item name="cms.news.clicks"><![CDATA[Clicks]]></item>
 		<item name="cms.news.message"><![CDATA[News]]></item>
 		<item name="cms.news.author"><![CDATA[Author]]></item>

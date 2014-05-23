@@ -166,6 +166,7 @@
 				    <dt><label for="teaser">{lang}cms.news.teaser{/lang}</label></dt>
 				    <dd>
 					    <textarea id="teaser" name="teaser" rows="5" cols="40">{$teaser}</textarea>
+					    <small>{lang}cms.news.teaser.description{/lang}</small>
 					    {if $errorField == 'teaser'}
 						    <small class="innerError">
 							    {if $errorType == 'empty'}
