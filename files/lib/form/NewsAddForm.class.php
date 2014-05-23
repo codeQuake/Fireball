@@ -4,7 +4,6 @@ namespace cms\form;
 use cms\data\category\NewsCategory;
 use cms\data\category\NewsCategoryNodeTree;
 use cms\data\news\image\NewsImage;
-use cms\data\news\image\NewsImageList;
 use cms\data\news\NewsAction;
 use wcf\form\MessageForm;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -40,7 +39,6 @@ class NewsAddForm extends MessageForm {
 	public $enableMultilingualism = true;
 	public $attachmentObjectType = 'de.codequake.cms.news';
 	public $image = null;
-	public $imageList;
 	public $time = TIME_NOW;
 	public $teaser = '';
 	public $tags = array();
@@ -60,10 +58,6 @@ class NewsAddForm extends MessageForm {
 
 	public function readData() {
 		parent::readData();
-		// news images
-		$list = new NewsImageList();
-		$list->readObjects();
-		$this->imageList = $list->getObjects();
 
 		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), LinkHandler::getInstance()->getLink('NewsCategoryList', array(
 			'application' => 'cms'
@@ -156,7 +150,6 @@ class NewsAddForm extends MessageForm {
 		WCF::getTPL()->assign(array(
 			'categoryList' => $this->categoryList,
 			'categoryIDs' => $this->categoryIDs,
-			'imageList' => $this->imageList,
 			'image' => $this->image,
 			'teaser' => $this->teaser,
 			'imageID' => isset($this->image->imageID) ? $this->image->imageID : 0,

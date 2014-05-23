@@ -7,7 +7,7 @@ use wcf\system\WCF;
 
 /**
  * Represents a news image.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -27,10 +27,10 @@ class NewsImage extends CMSDatabaseObject implements IRouteController {
 				$id
 			));
 			$row = $statement->fetchArray();
-			
+
 			if ($row === false) $row = array();
 		}
-		
+
 		parent::__construct(null, $row, $object);
 	}
 
@@ -38,13 +38,13 @@ class NewsImage extends CMSDatabaseObject implements IRouteController {
 		return $this->title;
 	}
 
-	public function getImagePath() {
+	public function getURL() {
 		$path = RELATIVE_CMS_DIR . 'images/news/' . $this->filename;
 		return $path;
 	}
 
 	public function getImageTag($width = 0) {
-		$file = $this->getImagePath();
+		$file = $this->getURL();
 		return $width != 0 ? '<img src="' . $file . '" alt="' . $this->title . '" style="width: ' . $width . 'px" />' : '<img src="' . $file . '" alt="' . $this->title . '" class="jsResizeImage" />';
 	}
 }

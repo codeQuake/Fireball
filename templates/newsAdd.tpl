@@ -2,9 +2,16 @@
 <head>
     <title>{lang}cms.news.{$action}{/lang} - {lang}cms.page.news{/lang} - {PAGE_TITLE|language}</title>
     {include file='headInclude' application='wcf'}
+    <script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS.js?v={@$__wcfVersion}"></script>
     <script data-relocate="true">
         //<![CDATA[
         $(function () {
+
+			WCF.Language.addObject({
+				'cms.news.image.select': '{lang}cms.news.image.select{/lang}'
+			});
+
+       		new CMS.News.Image.Form($('#imageSelect'), $('#imageID'));
             new WCF.Category.NestedList();
             new WCF.Message.FormGuard();
 			WCF.Message.Submit.registerButton('text', $('#messageContainer > .formSubmit > input[type=submit]'));
@@ -91,74 +98,39 @@
 				    </dd>
 			    </dl>
                 {if MODULE_TAGGING}{include file='tagInput'}{/if}
-				<dl>
-					<dt><label for="text">{lang}cms.news.image{/lang}</label></dt>
+				<dl class="newsImage">
+					<dt><label for="image">{lang}cms.news.image{/lang}</label></dt>
 					<dd>
-						<div id="previewImage">
-						{if $image|isset &&  $image->imageID && $image->imageID != 0}
-								<div class="box96">
+						<ul>
+							{if $image}
+								<li class="box32">
 									<div class="framed">
-										{@$image->getImageTag('96')}
+										<img src="{$image->getURL()}" alt="{$image->title}" class="newsImage" style="max-width: 32px; max-height: 32px;" />
 									</div>
-									<div>										<div>
-											<p>{$image->title}</p>
-										</div>
+									<div>
+										<p>{$image->title}</p>
 									</div>
-								</div>
-						{/if}
+								</li>
+							{else}
+								<li class="box32">
+									<div class="framed">
+										<img src="{@$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="newsImage" style="width: 32px; height: 32px;" />
+									</div>
+								</li>
+							{/if}
+						</ul>
+
+						<div id="imageSelect" class="marginTop">
+							<span class="button small">{lang}cms.news.image.select{/lang}</span>
 						</div>
-						<a class="button" id="imageSelectButton">{lang}cms.news.image.select{/lang}</a>
-						<script data-relocate="true">
-							//<![CDATA[
-							$(function() {
-								WCF.Language.addObject({
-										'cms.news.image.select': '{lang}cms.news.image.select{/lang}'
-										});
-								$('#imageSelect').hide();
-								$('#imageSelectButton').click(function() {
-									$('#imageSelect').wcfDialog({
-										title: WCF.Language.get('cms.news.image.select')
-									});
-								});
-							});
-							//]]>
-						</script>
+
+						{if $errorField == 'imageID'}
+							<small class="innerError">
+								{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{/if}
+							</small>
+						{/if}
 
 						<input type="hidden" name="imageID" value="{$imageID}" id="imageID" />
-						<div id="imageSelect" style="display: none;">
-							{foreach from=$imageList item='imageItem'}
-								<a id="imageSelect{$imageItem->imageID}">
-									{@$imageItem->getImageTag('256')}
-								</a>
-								<script data-relocate="true">
-									//<![CDATA[
-									$(function() {
-										$('#imageSelect{$imageItem->imageID}').click(function() {
-											$('#imageID').val("{$imageItem->imageID}");
-											var html = '<div class="box96"><div class="framed">{@$imageItem->getImageTag('96')}</div><div><p>{$imageItem->title}</p></div></div>';
-											$('#previewImage').html(html);
-											$('#imageSelect').wcfDialog('close');
-										});
-									});
-									//]]>
-								</script>
-							{/foreach}
-							<a id="imageSelect0" title="{lang}cms.news.image.no{/lang}" class="jsTooltip">
-								<span class="icon icon96 icon-ban-circle"></span>
-							</a>
-							<script data-relocate="true">
-									//<![CDATA[
-									$(function() {
-										$('#imageSelect0').click(function() {
-											$('#imageID').val("0");
-											var html = '';
-											$('#previewImage').html(html);
-											$('#imageSelect').wcfDialog('close');
-										});
-									});
-									//]]>
-								</script>
-						</div>
 					</dd>
 				</dl>
 

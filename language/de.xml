@@ -376,6 +376,7 @@
 		<item name="wcf.acp.group.option.user.cms.news.canUploadAttachment"><![CDATA[Kann Dateien anhängen]]></item>
 		<item name="wcf.acp.group.option.user.cms.news.attachmentMaxSize"><![CDATA[Maximale Dateianhangsgröße]]></item>
 		<item name="wcf.acp.group.option.user.cms.news.allowedAttachmentExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
+		<item name="wcf.acp.group.option.user.cms.news.image.allowedExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
 		<item name="wcf.acp.group.option.user.cms.news.canDownloadAttachments"><![CDATA[Kann Dateianhänge herunterladen]]></item>
 		<item name="wcf.acp.group.option.user.cms.news.maxAttachmentCount"><![CDATA[Maximale Anzahl an Dateianhängen pro Nachricht]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canDownloadAttachments"><![CDATA[Kann Dateianhänge herunterladen]]></item>
