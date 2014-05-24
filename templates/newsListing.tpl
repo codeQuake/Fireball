@@ -34,7 +34,7 @@
                                     </div>
                             </header>
                             <div class="messageBody">
-								{if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->getImage() != null}
+								{if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->imageID != 0}
 								<div class="newsBox128">
 									<div class="framed">
 										<img src="{@$news->getImage()->getURL()}" alt="{$news->getImage()->title}" style="width: 128px;" />

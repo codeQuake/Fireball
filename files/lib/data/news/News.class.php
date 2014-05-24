@@ -6,8 +6,6 @@ use cms\data\news\image\NewsImage;
 use cms\data\CMSDatabaseObject;
 use wcf\data\attachment\Attachment;
 use wcf\data\attachment\GroupedAttachmentList;
-use wcf\data\user\User;
-use wcf\data\user\UserProfile;
 use wcf\data\IMessage;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
@@ -103,10 +101,6 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 
 	public function getUsername() {
 		return $this->username;
-	}
-
-	public function getUserProfile() {
-		return new UserProfile(new User($this->userID));
 	}
 
 	public function getTime() {

@@ -2,6 +2,8 @@
 namespace cms\data\news;
 
 use wcf\data\DatabaseObjectDecorator;
+use wcf\data\user\User;
+use wcf\data\user\UserProfile;
 use wcf\system\visitTracker\VisitTracker;
 use wcf\system\WCF;
 
@@ -15,6 +17,8 @@ class ViewableNews extends DatabaseObjectDecorator {
 	protected static $baseClass = 'cms\data\news\News';
 	protected $effectiveVisitTime = null;
 
+	public $userProfile = null;
+
 	public function getVisitTime() {
 		if ($this->effectiveVisitTime === null) {
 			if (WCF::getUser()->userID) {
@@ -27,7 +31,7 @@ class ViewableNews extends DatabaseObjectDecorator {
 				$this->effectiveVisitTime = 0;
 			}
 		}
-		
+
 		return $this->effectiveVisitTime;
 	}
 
@@ -35,7 +39,7 @@ class ViewableNews extends DatabaseObjectDecorator {
 		if ($this->lastChangeTime > $this->getVisitTime()) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -45,8 +49,15 @@ class ViewableNews extends DatabaseObjectDecorator {
 			$newsID
 		));
 		$list->readObjects();
-		$objects = $list->getObjects();
-		if (isset($objects[$newsID])) return $objects[$newsID];
-		return null;
+
+		return $list->search($newsID);
+	}
+
+	public function getUserProfile() {
+		if ($this->userProfile === null) {
+			$this->userProfile = new UserProfile(new User($this->getDecoratedObject()->userID));
+		}
+
+		return $this->userProfile;
 	}
 }

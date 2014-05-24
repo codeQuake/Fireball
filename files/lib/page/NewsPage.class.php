@@ -59,24 +59,6 @@ class NewsPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 
-		$list = new NewsList();
-		$list->getConditionBuilder()->add('time < ?', array(
-			$this->news->time
-		));
-		$list->sqlOrderBy = 'time DESC';
-		$list->sqlLimit = 1;
-		$list->readObjects();
-		$this->older = $list->getObjects();
-
-		$list = new NewsList();
-		$list->getConditionBuilder()->add('time > ?', array(
-			$this->news->time
-		));
-		$list->sqlLimit = 1;
-		$list->sqlOrderBy = 'time ASC';
-		$list->readObjects();
-		$this->later = $list->getObjects();
-
 		VisitCountHandler::getInstance()->count();
 		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('cms.page.news'), LinkHandler::getInstance()->getLink('NewsCategoryList', array(
 			'application' => 'cms'
@@ -148,9 +130,7 @@ class NewsPage extends AbstractPage {
 			'attachmentList' => $this->news->getAttachments(),
 			'allowSpidersToIndexThisPage' => true,
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.news.news'),
-			'sidebarName' => 'de.codequake.cms.news.news',
-			'older' => $this->older,
-			'later' => $this->later
+			'sidebarName' => 'de.codequake.cms.news.news'
 		));
 	}
 
