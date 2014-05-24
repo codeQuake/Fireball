@@ -24,7 +24,7 @@ use wcf\util\UserUtil;
 
 /**
  * Represents a news.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -46,10 +46,10 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 				$id
 			));
 			$row = $statement->fetchArray();
-			
+
 			if ($row === false) $row = array();
 		}
-		
+
 		parent::__construct(null, $row, $object);
 	}
 
@@ -70,13 +70,8 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 
 	public function getFormattedMessage() {
 		AttachmentBBCode::setObjectID($this->newsID);
-		
-		MessageParser::getInstance()->setOutputType('text/html');
-		return MessageParser::getInstance()->parse($this->getMessage(), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
-	}
 
-	public function getSimplifiedFormattedMessage() {
-		MessageParser::getInstance()->setOutputType('text/simplified-html');
+		MessageParser::getInstance()->setOutputType('text/html');
 		return MessageParser::getInstance()->parse($this->getMessage(), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
 	}
 
@@ -91,15 +86,14 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 				'canDownload' => WCF::getSession()->getPermission('user.cms.news.canDownloadAttachments'),
 				'canViewPreview' => WCF::getSession()->getPermission('user.cms.news.canDownloadAttachments')
 			));
-			
+
 			AttachmentBBCode::setAttachmentList($attachmentList);
 			return $attachmentList;
 		}
 		return null;
 	}
 
-	public function getExcerpt($maxLength = CMS_NEWS_PREVIEW_TRUNCATE) {
-		if (CMS_NEWS_PREVIEW_SIMPLIFIED) return StringUtil::truncateHTML($this->getSimplifiedFormattedMessage(), $maxLength);
+	public function getExcerpt($maxLength = 500) {
 		return StringUtil::truncateHTML($this->getFormattedMessage(), $maxLength);
 	}
 
@@ -129,7 +123,7 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 
 	public function getLanguage() {
 		if ($this->languageID) return LanguageFactory::getInstance()->getLanguage($this->languageID);
-		
+
 		return null;
 	}
 
@@ -160,7 +154,7 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 	public function getCategories() {
 		if ($this->categories === null) {
 			$this->categories = array();
-			
+
 			if (! empty($this->categoryIDs)) {
 				foreach ($this->categoryIDs as $categoryID) {
 					$this->categories[$categoryID] = new NewsCategory(CategoryHandler::getInstance()->getCategory($categoryID));
@@ -179,7 +173,7 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 				}
 			}
 		}
-		
+
 		return $this->categories;
 	}
 
@@ -187,7 +181,7 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 		if ($this->ipAddress) {
 			return UserUtil::convertIPv6To4($this->ipAddress);
 		}
-		
+
 		return '';
 	}
 
@@ -231,19 +225,19 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 			$notIpAddress
 		));
 		$conditions->add("ipAddress <> ''");
-		
+
 		$sql = "SELECT		DISTINCT ipAddress
 			FROM		cms" . WCF_N . "_news
 			" . $conditions . "
 			ORDER BY	time DESC";
 		$statement = WCF::getDB()->prepareStatement($sql, $limit);
 		$statement->execute($conditions->getParameters());
-		
+
 		$ipAddresses = array();
 		while ($row = $statement->fetchArray()) {
 			$ipAddresses[] = $row['ipAddress'];
 		}
-		
+
 		return $ipAddresses;
 	}
 
@@ -258,19 +252,19 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 		if (! empty($notUsername)) $conditions->add("username <> ?", array(
 			$notUsername
 		));
-		
+
 		$sql = "SELECT		DISTINCT username, userID
 			FROM		cms" . WCF_N . "_news
 			" . $conditions . "
 			ORDER BY	time DESC";
 		$statement = WCF::getDB()->prepareStatement($sql, $limit);
 		$statement->execute($conditions->getParameters());
-		
+
 		$users = array();
 		while ($row = $statement->fetchArray()) {
 			$users[] = $row;
 		}
-		
+
 		return $users;
 	}
 }

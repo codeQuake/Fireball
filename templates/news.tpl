@@ -86,7 +86,7 @@
 
 <header class="boxHeadline">
 		<h1>{$news->getTitle()|language}</h1>
-		<p>{if $news->teaser != ''}{$news->teaser}{else}{$news->getExcerpt()}{/if}</p>
+		<p>{if $news->teaser != ''}{$news->teaser}{else}{@$news->getExcerpt()}{/if}</p>
 </header>
 {if $news->isDisabled}<p class="warning">{lang}cms.news.publication.delayed{/lang}</p>{/if}
 {include file='userNotice'}
