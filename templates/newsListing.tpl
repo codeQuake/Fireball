@@ -35,14 +35,20 @@
                             </header>
                             <div class="messageBody">
 								{if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->getImage() != null}
-								<div class="center">
-									{@$news->getImage()->getImageTag()}
+								<div class="newsBox128">
+									<div class="framed">
+										<img src="{@$news->getImage()->getURL()}" alt="{$news->getImage()->title}" style="width: 128px;" />
+									</div>
+									<div class="newsTeaser">
+										<strong>{if $news->teaser != ""}{$news->teaser}{else}{@$news->getExcerpt()}{/if}</strong>
+									</div>
 								</div>
+								{else}
+									<div class="newsTeaser">
+										<strong>{if $news->teaser != ""}{$news->teaser}{else}{@$news->getExcerpt()}{/if}</strong>
+									</div>
 								{/if}
-                                <div {if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->getImage() != null}class="marginTop"{/if}>
-                                    {@$news->getExcerpt()}
-                                </div>
-                                <div class="messageFooter">
+								<div class="messageFooter">
                                     <p class="messageFooterNote">
                                         <a href="{link controller='News' object=$news application='cms'}{/link}">
                                             {lang}cms.news.comments.count{/lang}

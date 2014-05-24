@@ -63,7 +63,7 @@
 			<option name="cms_news_preview_truncate">
 				<optiontype>integer</optiontype>
 				<categoryname>cms.news</categoryname>
-				<defaultvalue>255</defaultvalue>
+				<defaultvalue>500</defaultvalue>
 				<options>module_news</options>
 			</option>
 			<option name="cms_news_languageicon">

@@ -117,13 +117,19 @@
                             </header>
                             <div class="messageBody">
                                 {if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->getImage() != null}
-								<div class="center">
-									{@$news->getImage()->getImageTag()}
+								<div class="newsBox256">
+									<div class="framed">
+										<img src="{@$news->getImage()->getURL()}" alt="{$news->getImage()->title}" style="width: 250px;" />
+									</div>
+									<div class="newsText">
+										{@$news->getFormattedMessage()}
+									</div>
 								</div>
+								{else}
+									<div class="newsText">
+										{@$news->getFormattedMessage()}
+									</div>
 								{/if}
-                                <div {if CMS_NEWS_NEWS_IMAGES_ATTACHED && $news->getImage() != null}class="marginTop"{/if}>
-                                    {@$news->getFormattedMessage()}
-                                </div>
 								{include file='attachments'}
 								{if $news->showSignature && $news->getUserProfile()->showSignature() && CMS_NEWS_SIGNATURES}
 									<div class="messageSignature">

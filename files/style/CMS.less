@@ -8,6 +8,12 @@
     color: @wcfContainerBackgroundColor;
 }
 
+.newsBox256, .newsBox128{
+	> :first-child { float: left; margin-right: @wcfGapMedium; margin-bottom: @wcfGapMedium;}
+	> .newsText {text-align: justify;}
+	> .newsTeaser {text-align: justify;}
+}
+
 #tplPage{
 	blockquote{
 		font-style: italic;

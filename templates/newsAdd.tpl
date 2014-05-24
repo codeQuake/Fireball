@@ -98,6 +98,24 @@
 				    </dd>
 			    </dl>
                 {if MODULE_TAGGING}{include file='tagInput'}{/if}
+
+				<dl {if $errorField == 'teaser'}class="formError{/if}">
+				    <dt><label for="teaser">{lang}cms.news.teaser{/lang}</label></dt>
+				    <dd>
+					    <textarea id="teaser" name="teaser" rows="5" cols="40">{$teaser}</textarea>
+					    <small>{lang}cms.news.teaser.description{/lang}</small>
+					    {if $errorField == 'teaser'}
+						    <small class="innerError">
+							    {if $errorType == 'empty'}
+								    {lang}wcf.global.form.error.empty{/lang}
+							    {else}
+								    {lang}cms.news.teaser.error.{@$errorType}{/lang}
+							    {/if}
+						    </small>
+					    {/if}
+				    </dd>
+			    </dl>
+
 				<dl class="newsImage">
 					<dt><label for="image">{lang}cms.news.image{/lang}</label></dt>
 					<dd>
@@ -133,23 +151,6 @@
 						<input type="hidden" name="imageID" value="{$imageID}" id="imageID" />
 					</dd>
 				</dl>
-
-				<dl {if $errorField == 'teaser'}class="formError{/if}">
-				    <dt><label for="teaser">{lang}cms.news.teaser{/lang}</label></dt>
-				    <dd>
-					    <textarea id="teaser" name="teaser" rows="5" cols="40">{$teaser}</textarea>
-					    <small>{lang}cms.news.teaser.description{/lang}</small>
-					    {if $errorField == 'teaser'}
-						    <small class="innerError">
-							    {if $errorType == 'empty'}
-								    {lang}wcf.global.form.error.empty{/lang}
-							    {else}
-								    {lang}cms.news.teaser.error.{@$errorType}{/lang}
-							    {/if}
-						    </small>
-					    {/if}
-				    </dd>
-			    </dl>
 			{event name='informationFields'}
             </fieldset>
             <fieldset>
