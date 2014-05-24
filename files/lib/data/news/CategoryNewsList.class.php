@@ -34,7 +34,7 @@ class CategoryNewsList extends ViewableNewsList {
 
 	public function readObjectIDs() {
 		$this->objectIDs = array();
-		$sql = "SELECT	news_to_category.newsID AS objectID
+		$sql = "SELECT news_to_category.newsID AS objectID
 			FROM
 				cms" . WCF_N . "_news news
 				" . $this->sqlConditionJoins . "

@@ -34,7 +34,7 @@ class ViewableNewsList extends NewsList {
 		if (! empty($this->sqlSelects)) $this->sqlSelects .= ',';
 		$this->sqlSelects .= "like_object.likes, like_object.dislikes";
 		$this->sqlJoins .= " LEFT JOIN wcf" . WCF_N . "_like_object like_object ON (like_object.objectTypeID = " . LikeHandler::getInstance()->getObjectType('de.codequake.cms.likeableNews')->objectTypeID . " AND like_object.objectID = news.newsID)";
-		
+
 		// language Filter
 		if (LanguageFactory::getInstance()->multilingualismEnabled() && count(WCF::getUser()->getLanguageIDs())) {
 			$this->getConditionBuilder()->add('(news.languageID IN (?) OR news.languageID IS NULL)', array(

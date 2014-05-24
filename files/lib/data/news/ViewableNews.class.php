@@ -1,9 +1,9 @@
 <?php
 namespace cms\data\news;
 
-use wcf\data\DatabaseObjectDecorator;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
+use wcf\data\DatabaseObjectDecorator;
 use wcf\system\visitTracker\VisitTracker;
 use wcf\system\WCF;
 

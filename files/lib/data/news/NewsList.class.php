@@ -7,7 +7,7 @@ use wcf\system\WCF;
 
 /**
  * Represents a list of news.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -19,7 +19,7 @@ class NewsList extends DatabaseObjectList {
 
 	public function readObjects() {
 		parent::readObjects();
-		
+
 		if ($this->categoryList) {
 			if (! empty($this->objectIDs)) {
 				$conditionBuilder = new PreparedStatementConditionBuilder();
