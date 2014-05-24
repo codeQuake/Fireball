@@ -7,6 +7,13 @@
 		//<![CDATA[
 		$(function() {
 			new CMS.News.MarkAllAsRead();
+			var deleteAction = new WCF.Action.Delete('cms\\data\\news\\NewsAction', '.jsNewsRow');
+			var actionObjects = { };
+			actionObjects['de.codequake.cms.news'] = { };
+			actionObjects['de.codequake.cms.news']['delete'] = deleteAction;
+			WCF.Clipboard.init('cms\\page\\NewsArchivePage', {@$hasMarkedItems}, actionObjects);
+
+
 			});
 		//]]>
 	</script>
@@ -38,10 +45,17 @@
   {pages print=true assign=pagesLinks controller="NewsArchive" application="cms" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 </div>
 
-{include file='newsTable' application='cms'}
+	{if $objects|count}
+		{include file='newsTable' application='cms'}
+	{else}
+		<p class="info">{lang}wcf.global.noItems{/lang}</p>
+	{/if}
+
 
 {if $objects|count}
 <div class="contentNavigation">
+  {if $__wcf->user->userID && $__wcf->session->getPermission('mod.cms.news.canModerateNews')}<nav class="jsClipboardEditor" data-types="[ 'de.codequake.cms.news' ]"></nav>{/if}
+
   {pages print=true assign=pagesLinks controller="NewsArchive" application="cms" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 </div>
 {/if}

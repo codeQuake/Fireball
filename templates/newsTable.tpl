@@ -1,22 +1,25 @@
-<div class="marginTop tabularBox tabularBoxTitle messageGroupList cmsNewsList jsClipboardContainer" data-type="de.codequake.cms.news">
+<div id="newsTableContainer" class="marginTop tabularBox tabularBoxTitle messageGroupList cmsNewsList jsClipboardContainer" data-type="de.codequake.cms.news">
 <header>
 	<h2>{lang}cms.news.news{/lang}</h2>
 </header>
 <table class="table">
 	<thead>
 		<tr>
-			{if $__wcf->user->userID && $__wcf->session->getPermission('user.cms.news.canAddNews')}<th class="columnMark jsOnly"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>{/if}
-			<th colspan="2" class="columnTitle columnSubject{if $sortField == 'title'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='NewsArchive'}pageNo={@$pageNo}&sortField=title&sortOrder={if $sortField == 'title' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.news.title{/lang}</a></th>
+			{if $__wcf->user->userID && $__wcf->session->getPermission('mod.cms.news.canModerateNews')}<th colspan="2" class="columnMark jsOnly"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>{/if}
+			<th colspan="2" class="columnTitle columnSubject{if $sortField == 'subject'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='NewsArchive'}pageNo={@$pageNo}&sortField=subject&sortOrder={if $sortField == 'subject' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.title{/lang}</a></th>
 			<th class="columnDigits columnClicks{if $sortField == 'clicks'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='NewsArchive'}pageNo={@$pageNo}&sortField=clicks&sortOrder={if $sortField == 'clicks' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.news.clicks{/lang}</a></th>
 			<th class="columnCategories">{lang}cms.news.category.categories{/lang}</th>
 		</tr>
 	</thead>
 	<tbody>
 		{foreach from=$objects item=news}
-		<tr id="news{@$news->newsID}" class="cmsNews jsClipboardObject {if $news->isNew()}new{/if}" data-news-id="{@$news->newsID}" data-element-id="{@$news->newsID}">
-			{if $__wcf->user->userID && $__wcf->session->getPermission('user.cms.news.canAddNews')}
+		<tr id="news{@$news->newsID}" class="cmsNews jsNewsRow jsClipboardObject {if $news->isNew()}new{/if}" data-news-id="{@$news->newsID}" data-element-id="{@$news->newsID}">
+			{if $__wcf->user->userID && $__wcf->session->getPermission('mod.cms.news.canModerateNews')}
 			<td class="columnMark jsOnly">
 				<label><input type="checkbox" class="jsClipboardItem" data-object-id="{@$news->newsID}" /></label>
+			</td>
+			<td class="columnMark jsOnly">
+				<span class="icon icon16 icon-remove jsTooltip jsDeleteButton pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$news->newsID}" data-confirm-message="{lang}cms.news.delete.sure{/lang}"></span>
 			</td>
 			{/if}
 			<td class="columnIcon columnAvatar">
@@ -28,7 +31,7 @@
 			</td>
 			<td class="columnText columnSubject">
 				<h3>
-				 <a href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a>
+				 <a class="messageGroupLink cmsNewsLink newsLink" data-news-id="{$news->newsID}" href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a>
 				 </h3>
 				<aside class="statusDisplay">
 					<ul class="statusIcons">
@@ -50,7 +53,6 @@
 			<td class="columnDigits columnClicks">
 				{#$news->clicks}
 			</td>
-
 			<td class="columnCategories">
 				{if $news->getCategories()|count}
 					<ul class="dataList">

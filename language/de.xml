@@ -241,6 +241,7 @@
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
 		<item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
 		<item name="cms.page.news"><![CDATA[Nachrichten]]></item>
+		<item name="cms.page.news.archive"><![CDATA[Archiv]]]></item>
 		<item name="cms.page.comments"><![CDATA[Kommentare]]></item>
 		<item name="cms.page.comments.noEntries"><![CDATA[Keine Kommentare vorhanden]]></item>
 		<item name="cms.page.comment.notification.title"><![CDATA[Neuer Kommentar (Seite)]]></item>
@@ -264,6 +265,7 @@
 	</category>
 
 	<category name="cms.news">
+		<item name="cms.news.news"><![CDATA[Nachrichten]]></item>
 		<item name="cms.news.categorizedNews"><![CDATA[Nachrichten aus der Kategorie „{$category->getTitle()|language}“]]></item>
 		<item name="cms.news.image.no"><![CDATA[Kein spezifisches Bild für diese Nachricht verwenden]]></item>
 		<item name="cms.news.searchNews"><![CDATA[Nachrichten durchsuchen]]></item>
@@ -477,4 +479,10 @@
 		<item name="wcf.acp.dataImport.data.de.codequake.cms.category.news"><![CDATA[Nachrichtenkategorien]]></item>
 		<item name="wcf.acp.dataImport.data.de.codequake.cms.news.comment"><![CDATA[Nachrichtenkommentare]]></item>
 	</category>
+	<category name="wcf.clipboard">
+		<item name="wcf.clipboard.item.de.codequake.cms.news.delete"><![CDATA[Nachrichten löschen ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.news.delete.confirmMessage"><![CDATA[Wollen sie {if $count == 1}diese Nachricht{else} diese {#$count} Nachrichten{/if} wirklich entgültig löschen?]]></item>
+		<item name="wcf.clipboard.label.de.codequake.cms.news.marked"><![CDATA[{if $count == 1}Eine Nachricht{else}{#$count} Nachrichten{/if} markiert]]></item>
+	</category>
+
 </language>

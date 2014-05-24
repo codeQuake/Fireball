@@ -138,6 +138,13 @@
 			<definitionname>com.woltlab.wcf.acl</definitionname>
 		</type>
 		<!-- /acl -->
+		<!-- clipboard -->
+		<type>
+			<name>de.codequake.cms.news</name>
+			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+			<listclassname><![CDATA[cms\data\news\NewsList]]></listclassname>
+		</type>
+		<!-- /clipboard -->
 
 		<!-- dashboard -->
 		<type>

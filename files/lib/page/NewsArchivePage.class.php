@@ -2,15 +2,10 @@
 namespace cms\page;
 
 use cms\data\category\NewsCategory;
-use cms\data\category\NewsCategoryNodeTree;
 use cms\data\news\CategoryNewsList;
 use wcf\page\SortablePage;
-use wcf\system\dashboard\DashboardHandler;
+use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\system\menu\page\PageMenu;
-use wcf\system\request\LinkHandler;
-use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
-use wcf\system\MetaTagHandler;
 use wcf\system\WCF;
 
 /**
@@ -30,6 +25,11 @@ class NewsArchivePage extends SortablePage {
 	public $categoryList = null;
 	public $defaultSortField = 'time';
 	public $defaultSortOrder = 'DESC';
+	public $validSortFields = array(
+		'subject',
+		'time',
+		'clicks'
+	);
 
 
 	protected function initObjectList() {
@@ -39,5 +39,17 @@ class NewsArchivePage extends SortablePage {
 		}
 		else
 			throw new PermissionDeniedException();
+	}
+
+	public function assignVariables() {
+		parent::assignVariables();
+		WCF::getTPL()->assign(array(
+			'allowSpidersToIndexThisPage' => true,
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.news'))
+		));
+	}
+
+	public function getObjectType() {
+		return 'de.codequake.cms.news';
 	}
 }
