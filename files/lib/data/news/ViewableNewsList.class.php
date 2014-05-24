@@ -42,4 +42,10 @@ class ViewableNewsList extends NewsList {
 			));
 		}
 	}
+
+	public function readObjects() {
+		if ($this->objectIDs === null) $this->readObjectIDs();
+
+		parent::readObjects();
+	}
 }
