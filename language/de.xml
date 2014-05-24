@@ -241,7 +241,7 @@
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
 		<item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
 		<item name="cms.page.news"><![CDATA[Nachrichten]]></item>
-		<item name="cms.page.news.archive"><![CDATA[Archiv]]]></item>
+		<item name="cms.page.news.archive"><![CDATA[Archiv]]></item>
 		<item name="cms.page.comments"><![CDATA[Kommentare]]></item>
 		<item name="cms.page.comments.noEntries"><![CDATA[Keine Kommentare vorhanden]]></item>
 		<item name="cms.page.comment.notification.title"><![CDATA[Neuer Kommentar (Seite)]]></item>
