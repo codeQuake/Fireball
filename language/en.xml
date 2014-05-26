@@ -54,6 +54,12 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns.width"><![CDATA[Column width]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns"><![CDATA[Four] Columns]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns.width"><![CDATA[Column width]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.news"><![CDATA[News]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.news.type"><![CDATA[Pattern]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.news.type.standard"><![CDATA[Standart]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.news.type.boxed"><![CDATA[Without borders]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.news.type.simple1"><![CDATA[Simple without image]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.news.type.simple2"><![CDATA[Simple without teaser]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">
