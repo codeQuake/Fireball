@@ -4,7 +4,7 @@
 {foreach from=$objects item=news}
 <div class="box128">
 	<div class="newsImage">
-		<a href="{link controller='News' object=$news application='cms'}{/link}"><img src="{$news->getImage()->getURL()}" alt="{$news->getTitle()}" style="max-width: 120px;" /></a>
+		<a href="{link controller='News' object=$news application='cms'}{/link}"><img src="{if $news->imageID != 0}{$news->getImage()->getURL()}{else}{$news->getUserProfile()->getAvatar()->getURL()}{/if}" alt="{$news->getTitle()}" style="max-width: 120px;" /></a>
 	</div>
 
 	<div class="containerHeadline">
@@ -40,7 +40,7 @@
 {foreach from=$objects item=news}
 <div class="box48 simpleNews">
 	<div class="newsImage">
-		<a href="{link controller='News' object=$news application='cms'}{/link}"><img src="{$news->getImage()->getURL()}" alt="{$news->getTitle()}" style="max-width: 40px;" /></a>
+		<a href="{link controller='News' object=$news application='cms'}{/link}"><img src="{if $news->imageID != 0}{$news->getImage()->getURL()}{else}{$news->getUserProfile()->getAvatar()->getURL()}{/if}" alt="{$news->getTitle()}" style="max-width: 40px;" /></a>
 	</div>
 	<div class="containerHeadline">
 		<h3><a class="newsLink" data-news-id="{$news->newsID}" href="{link controller='News' object=$news application='cms'}{/link}">{$news->getTitle()}</a></h3>
