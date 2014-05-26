@@ -4,6 +4,7 @@ namespace cms\form;
 use cms\data\news\image\NewsImage;
 use cms\data\news\News;
 use cms\data\news\NewsAction;
+use cms\data\news\NewsEditor;
 use wcf\form\MessageForm;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;

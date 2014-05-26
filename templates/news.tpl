@@ -125,10 +125,22 @@
 										{@$news->getFormattedMessage()}
 									</div>
 								</div>
-								{else}
-									<div class="newsText">
-										{@$news->getFormattedMessage()}
+								{if $news->getPoll()}
+									<div>
+										{include file='poll' poll=$news->getPoll()}
 									</div>
+								{/if}
+								{else}
+								<div>
+									{if $news->getPoll()}
+									<div>
+										{include file='poll' poll=$news->getPoll()}
+									</div>
+									{/if}
+										<div class="newsText">
+											{@$news->getFormattedMessage()}
+										</div>
+								</div>
 								{/if}
 								{include file='attachments'}
 								{if $news->showSignature && $news->getUserProfile()->showSignature() && CMS_NEWS_SIGNATURES}

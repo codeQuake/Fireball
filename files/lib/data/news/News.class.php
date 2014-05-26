@@ -6,7 +6,9 @@ use cms\data\news\image\NewsImage;
 use cms\data\CMSDatabaseObject;
 use wcf\data\attachment\Attachment;
 use wcf\data\attachment\GroupedAttachmentList;
+use wcf\data\poll\Poll;
 use wcf\data\IMessage;
+use wcf\data\IPollObject;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -28,10 +30,11 @@ use wcf\util\UserUtil;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class News extends CMSDatabaseObject implements IMessage, IRouteController, IBreadcrumbProvider {
+class News extends CMSDatabaseObject implements IMessage, IRouteController, IBreadcrumbProvider, IPollObject {
 	protected static $databaseTableName = 'news';
 	protected static $databaseTableIndexName = 'newsID';
 	protected $categories = null;
+	protected $poll = null;
 	protected $categoryIDs = array();
 
 	public function __construct($id, $row = null, $object = null) {
@@ -260,5 +263,23 @@ class News extends CMSDatabaseObject implements IMessage, IRouteController, IBre
 		}
 
 		return $users;
+	}
+
+	public function getPoll() {
+		if ($this->pollID && $this->poll === null) {
+			$this->poll = new Poll($this->pollID);
+			$this->poll->setRelatedObject($this);
+		}
+
+		return $this->poll;
+	}
+
+	public function setPoll(Poll $poll) {
+		$this->poll = $poll;
+		$this->poll->setRelatedObject($this);
+	}
+
+	public function canVote() {
+		return (WCF::getSession()->getPermission('user.cms.news.canVotePoll') ? true : false);
 	}
 }
