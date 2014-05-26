@@ -7,6 +7,7 @@ use cms\data\news\NewsAction;
 use wcf\form\MessageForm;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\poll\PollManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
@@ -34,11 +35,14 @@ class NewsEditForm extends NewsAddForm {
 
 		// set attachment object id
 		$this->attachmentObjectID = $this->newsID;
+
 	}
 
 	public function readData() {
 		parent::readData();
 		$this->news = new News($this->newsID);
+
+		if (WCF::getSession()->getPermission('user.cms.news.canStartPoll') && MODULE_POLL) PollManager::getInstance()->setObject('de.codequake.cms.news', $this->news->newsID, $this->news->pollID);
 		$this->time = $this->news->time;
 		$this->subject = $this->news->subject;
 		$this->teaser = $this->news->teaser;
@@ -94,9 +98,27 @@ class NewsEditForm extends NewsAddForm {
 		), 'update', $newsData);
 		$resultValues = $action->executeAction();
 		$this->saved();
-
 		// re-define after saving
 		$this->news = new News($this->newsID);
+
+		if (WCF::getSession()->getPermission('user.cms.news.canStartPoll') && MODULE_POLL) {
+			$pollID = PollManager::getInstance()->save($this->news->newsID);
+			if ($pollID && $pollID != $this->news->pollID) {
+				$editor = new NewsEditor($this->news);
+				$editor->update(array(
+					'pollID' => $pollID
+				));
+
+			}
+			else if (!$pollID && $this->news->pollID) {
+				$editor = new NewsEditor($this->news);
+				$editor->update(array(
+					'pollID' => null
+				));
+
+			}
+		}
+
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('News', array(
 			'application' => 'cms',
 			'object' => $this->news

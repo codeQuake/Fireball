@@ -84,6 +84,7 @@ CREATE TABLE cms1_news (
 	message MEDIUMTEXT,
 	time INT(10) NOT NULL DEFAULT 0,
 	attachments INT(10) NOT NULL DEFAULT 0,
+	pollID INT(10),
 	languageID INT(10),
 	clicks INT(10) NOT NULL DEFAULT 0,
 	comments SMALLINT(5) NOT NULL DEFAULT 0,
@@ -152,6 +153,7 @@ ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_ite
 
 ALTER TABLE cms1_news ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE cms1_news ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE SET NULL;
+ALTER TABLE cms1_news ADD FOREIGN KEY (pollID) REFERENCES wcf1_poll (pollID) ON DELETE SET NULL;
 
 ALTER TABLE cms1_news_to_category ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
 ALTER TABLE cms1_news_to_category ADD FOREIGN KEY (newsID) REFERENCES cms1_news (newsID) ON DELETE CASCADE;

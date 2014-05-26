@@ -259,6 +259,24 @@ pdf]]></admindefaultvalue>
 				<defaultvalue>1</defaultvalue>
 				<options>module_news</options>
 			</option>
+			<option name="user.cms.news.canStartPoll">
+				<categoryname>user.cms.news</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<options>module_news</options>
+			</option>
+			<option name="user.cms.news.canStartPublicPoll">
+				<categoryname>user.cms.news</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<options>module_news</options>
+			</option>
+			<option name="user.cms.news.canVotePoll">
+				<categoryname>user.cms.news</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<options>module_news</options>
+			</option>
 			<option name="user.cms.news.canAddComment">
 				<categoryname>user.cms.news</categoryname>
 				<optiontype>boolean</optiontype>

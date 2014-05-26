@@ -108,6 +108,14 @@
 		</type>
 		<!-- /attachments -->
 
+		<!-- Poll -->
+		<type>
+			<name>de.codequake.cms.news</name>
+			<definitionname>com.woltlab.wcf.poll</definitionname>
+			<classname>cms\system\poll\NewsPollHandler</classname>
+		</type>
+		<!-- /Poll -->
+
 		<!-- user online location -->
 		<type>
 			<name>de.codequake.cms.page</name>

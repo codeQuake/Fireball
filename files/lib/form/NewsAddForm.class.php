@@ -5,11 +5,13 @@ use cms\data\category\NewsCategory;
 use cms\data\category\NewsCategoryNodeTree;
 use cms\data\news\image\NewsImage;
 use cms\data\news\NewsAction;
+use cms\data\news\NewsEditor;
 use wcf\form\MessageForm;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\category\CategoryHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\LanguageFactory;
+use wcf\system\poll\PollManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
@@ -49,10 +51,14 @@ class NewsAddForm extends MessageForm {
 		if (isset($_POST['time']) && $_POST['time'] != 0) $this->time = strtotime($_POST['time']);
 		if (isset($_POST['imageID'])) $this->image = new NewsImage(intval($_POST['imageID']));
 		if (isset($_POST['teaser'])) $this->teaser = StringUtil::trim($_POST['teaser']);
+
+		if (MODULE_POLL && WCF::getSession()->getPermission('user.cms.news.canStartPoll')) PollManager::getInstance()->readFormParameters();
 	}
 
 	public function readParameters() {
 		parent::readParameters();
+		// polls
+		if (MODULE_POLL & WCF::getSession()->getPermission('user.cms.news.canStartPoll')) PollManager::getInstance()->setObject('de.codequake.cms.news', 0);
 		if (isset($_REQUEST['categoryIDs']) && is_array($_REQUEST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray($_REQUEST['categoryIDs']);
 	}
 
@@ -103,6 +109,8 @@ class NewsAddForm extends MessageForm {
 			$category = new NewsCategory($category);
 			if (! $category->isAccessible() || ! $category->getPermission('canAddNews')) throw new UserInputException('categoryIDs');
 		}
+
+		if (MODULE_POLL && WCF::getSession()->getPermission('user.cms.news.canStartPoll')) PollManager::getInstance()->validate();
 	}
 
 	public function save() {
@@ -136,6 +144,19 @@ class NewsAddForm extends MessageForm {
 
 		$action = new NewsAction(array(), 'create', $newsData);
 		$resultValues = $action->executeAction();
+
+		// save polls
+		if (WCF::getSession()->getPermission('user.cms.news.canStartPoll') && MODULE_POLL) {
+			$pollID = PollManager::getInstance()->save($resultValues['returnValues']->newsID);
+			if ($pollID) {
+				$editor = new NewsEditor($resultValues['returnValues']);
+				$editor->update(array(
+					'pollID' => $pollID
+				));
+
+			}
+		}
+
 		$this->saved();
 
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('News', array(
@@ -147,6 +168,9 @@ class NewsAddForm extends MessageForm {
 
 	public function assignVariables() {
 		parent::assignVariables();
+
+		if (WCF::getSession()->getPermission('user.cms.news.canStartPoll') && MODULE_POLL) PollManager::getInstance()->assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'categoryList' => $this->categoryList,
 			'categoryIDs' => $this->categoryIDs,
