@@ -23,7 +23,6 @@
 		<item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt wirklich löschen?]]></item>
 		<item name="cms.acp.content.type.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.content.type.structure"><![CDATA[Struktur]]></item>
-		<item name="cms.acp.content.type.source"><![CDATA[Quelltext]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
