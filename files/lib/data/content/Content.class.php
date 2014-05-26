@@ -5,6 +5,8 @@ use cms\data\content\section\ContentContentSectionList;
 use cms\data\page\PageCache;
 use cms\data\CMSDatabaseObject;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\poll\Poll;
+use wcf\data\IPollObject;
 use wcf\system\request\IRouteController;
 use wcf\system\WCF;
 
@@ -16,9 +18,10 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Content extends CMSDatabaseObject implements IRouteController {
+class Content extends CMSDatabaseObject implements IRouteController, IPollObject {
 	protected static $databaseTableName = 'content';
 	protected static $databaseTableIndexName = 'contentID';
+	public $poll = null;
 
 	public function __construct($id, $row = null, $object = null) {
 		if ($id !== null) {
@@ -93,5 +96,24 @@ class Content extends CMSDatabaseObject implements IRouteController {
 	public function getTypeName() {
 		$this->objectType = $this->getObjectType();
 		return $this->objectType->objectType;
+	}
+
+	public function getPoll() {
+		$data = $this->handleContentData();
+		if ($data['pollID'] && $this->poll === null) {
+			$this->poll = new Poll($data['pollID']);
+			$this->poll->setRelatedObject($this);
+		}
+
+		return $this->poll;
+	}
+
+	public function setPoll(Poll $poll) {
+		$this->poll = $poll;
+		$this->poll->setRelatedObject($this);
+	}
+
+	public function canVote() {
+		(WCF::getSession()->getPermission('user.cms.content.canVotePoll') ? true : false);
 	}
 }

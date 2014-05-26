@@ -216,6 +216,13 @@ pdf]]></admindefaultvalue>
 				<defaultvalue>1</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
+			<option name="user.cms.content.canVotePoll">
+				<categoryname>user.cms.content</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<options>module_news</options>
+			</option>
+
 			<option name="user.cms.page.canAddComment">
 				<categoryname>user.cms.page</categoryname>
 				<optiontype>boolean</optiontype>

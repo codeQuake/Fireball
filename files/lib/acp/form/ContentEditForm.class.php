@@ -9,6 +9,7 @@ use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\Page;
 use wcf\form\AbstractForm;
 use wcf\system\language\I18nHandler;
+use wcf\system\poll\PollManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -42,6 +43,7 @@ class ContentEditForm extends ContentAddForm {
 		$this->showOrder = $this->content->showOrder;
 		$this->position = $this->content->position;
 		$this->contentData = $this->content->handleContentData();
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.ncontent', $this->content->contentID, $this->contentData['pollID']);
 		$this->title = $this->content->getTitle();
 		I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
 		if ($this->objectTypeProcessor->isMultilingual) {
@@ -79,6 +81,18 @@ class ContentEditForm extends ContentAddForm {
 		$contentData = @unserialize($content->contentData);
 
 		$update = array();
+
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
+			$pollID = PollManager::getInstance()->save($this->content->contentID);
+			if ($pollID && $pollID != $contentData['pollID']) {
+				$contentData['pollID'] = $pollID;
+
+			}
+			//happens for idiots :P
+			else if (!$pollID && $contentData['pollID']) {
+				$contentData['pollID'] = null;
+			}
+		}
 		if (!I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
 			$update['title'] = 'cms.content.title' . $contentID;
@@ -91,8 +105,9 @@ class ContentEditForm extends ContentAddForm {
 					$contentData[$field] = 'cms.content.' . $field . $contentID;
 				}
 			}
-			$update['contentData'] = serialize($contentData);
 		}
+
+		$update['contentData'] = serialize($contentData);
 		if (!empty($update)) {
 			$editor = new ContentEditor($content);
 			$editor->update($update);
@@ -105,6 +120,7 @@ class ContentEditForm extends ContentAddForm {
 	public function assignVariables() {
 		AbstractForm::assignVariables();
 		I18nHandler::getInstance()->assignVariables(! empty($_POST));
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
 			'cssClasses' => $this->cssClasses,

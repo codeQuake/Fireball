@@ -10,6 +10,7 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
+use wcf\system\poll\PollManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -61,6 +62,7 @@ class ContentAddForm extends AbstractForm {
 				I18nHandler::getInstance()->register($field);
 			}
 		}
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.content', 0);
 	}
 
 	public function readData() {
@@ -85,11 +87,13 @@ class ContentAddForm extends AbstractForm {
 				if(I18nHandler::getInstance()->isPlainValue($field)) $this->contentData[$field] = StringUtil::trim(I18nHandler::getInstance()->getValue($field));
 			}
 		}
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->readFormParameters();
 	}
 
 	public function validate() {
 		parent::validate();
 		$this->objectTypeProcessor->validate($this->contentData);
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->validate();
 
 		//if this happens, user is a retard
 		$position = array('body', 'sidebar');
@@ -171,6 +175,15 @@ class ContentAddForm extends AbstractForm {
 		$contentID = $returnValues['returnValues']->contentID;
 		$contentData = @unserialize($returnValues['returnValues']->contentData);
 		$update = array();
+
+		// save polls
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
+			$pollID = PollManager::getInstance()->save($returnValues['returnValues']->contentID);
+			if ($pollID) {
+				$contentData['pollID'] = $pollID;
+			}
+		}
+
 		if (! I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.content.title'.$contentID, 'cms.content', PACKAGE_ID);
 			$update['title'] = 'cms.content.title'.$contentID;
@@ -183,8 +196,10 @@ class ContentAddForm extends AbstractForm {
 					$contentData[$field] = 'cms.content.'.$field.$contentID;
 				}
 			}
-			$update['contentData'] = serialize($contentData);
 		}
+
+		$update['contentData'] = serialize($contentData);
+
 		if (! empty($update)) {
 			$editor = new ContentEditor($returnValues['returnValues']);
 			$editor->update($update);
@@ -198,6 +213,7 @@ class ContentAddForm extends AbstractForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		I18nHandler::getInstance()->assignVariables();
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'cssClasses' => $this->cssClasses,

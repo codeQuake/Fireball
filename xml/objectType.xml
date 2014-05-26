@@ -27,6 +27,14 @@
 			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
+			<name>de.codequake.cms.content.type.poll</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\PollContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
 			<name>de.codequake.cms.content.type.dashboard</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\DashboardContentType</classname>
@@ -113,6 +121,11 @@
 			<name>de.codequake.cms.news</name>
 			<definitionname>com.woltlab.wcf.poll</definitionname>
 			<classname>cms\system\poll\NewsPollHandler</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.content</name>
+			<definitionname>com.woltlab.wcf.poll</definitionname>
+			<classname>cms\system\poll\ContentPollHandler</classname>
 		</type>
 		<!-- /Poll -->
 
