@@ -8,7 +8,7 @@ use wcf\system\WCF;
 
 /**
  * Represents a module.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -28,34 +28,14 @@ class Module extends CMSDatabaseObject implements IRouteController {
 				$id
 			));
 			$row = $statement->fetchArray();
-			
+
 			if ($row === false) $row = array();
 		}
-		
+
 		parent::__construct(null, $row, $object);
 	}
 
 	public function getTitle() {
 		return $this->moduleTitle;
-	}
-
-	public function getPHPCode() {
-		if ($this->php !== null) return implode("", file(CMS_DIR . '/files/php/' . $this->php));
-		return '';
-	}
-
-	public function getTPLCode() {
-		$sql = "SELECT templateID FROM wcf" . WCF_N . "_template WHERE templateName = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			$this->tpl
-		));
-		$row = $statement->fetchArray();
-		
-		$tpl = new Template($row['templateID']);
-		if ($tpl !== null) {
-			return $tpl->getSource();
-		}
-		return '';
 	}
 }

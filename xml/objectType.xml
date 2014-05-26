@@ -82,6 +82,14 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>
 		</type>
+		<type>
+			<name>de.codequake.cms.content.type.template</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\TemplateContentType</classname>
+			<category>code</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
 		<!-- /content types -->
 
 		<!-- attachments -->
