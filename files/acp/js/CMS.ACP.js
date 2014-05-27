@@ -170,23 +170,25 @@ CMS.ACP.File.Upload = WCF.Upload.extend({
 		var $li = this._fileListSelector.find('li');
 		//remove progressbar
 		$li.find('progress').remove();
-		if (data.returnValues.fileID) {
-			//remove spinner icon
-			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
+		$.each(data.returnValues, function (key, value){
+			if (value.fileID) {
+				//remove spinner icon
+				$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
 
-			// show noti
-			var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-			$notification.show();
-		} else {
-			//add fail icon
-			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
+				// show noti
+				var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+				$notification.show();
+			} else {
+				//add fail icon
+				$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
 
-			//err msg
-			$li.find('div > div').append($('<small class="innerError">'+WCF.Language.get('cms.acp.file.error.' + data.returnValues.errorType)+'</small>'));
-			$li.addClass('uploadFailed');
-		}
-		//webkit suxxx
-		$li.css('display', 'block');
+				//err msg
+				$li.find('div > div').append($('<small class="innerError">'+WCF.Language.get('cms.acp.file.error.' + data.returnValues.errorType)+'</small>'));
+				$li.addClass('uploadFailed');
+			}
+			//webkit suxxx
+			$li.css('display', 'block');
+		});
 
 		WCF.DOMNodeInsertedHandler.execute();
 	},

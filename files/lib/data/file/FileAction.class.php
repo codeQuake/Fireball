@@ -45,6 +45,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 	public function upload() {
 		//get file
 		$files = $this->parameters['__files']->getFiles();
+		$return = array();
 		foreach($files as $file){
 			try {
 
@@ -66,7 +67,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 					if (@move_uploaded_file($file->getLocation(), $path)) {
 						@unlink($file->getLocation());
 
-						return array(
+						$return[] =  array(
 							'fileID' => $uploadedFile->fileID,
 							'folderID' => $uploadedFile->folderID,
 							'title' => $uploadedFile->title,
@@ -87,10 +88,8 @@ class FileAction extends AbstractDatabaseObjectAction {
 			catch (UserInputException $e) {
 				$file->setValidationErrorType($e->getType());
 			}
-
-			return array(
-				'errorType' => $file->getValidationErrorType()
-			);
 		}
+
+		return $return;
 	}
 }
