@@ -66,6 +66,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[HTML]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[HTML-Source]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[You can use HTML Code here.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">

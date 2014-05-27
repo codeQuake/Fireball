@@ -43,7 +43,7 @@ class ContentEditForm extends ContentAddForm {
 		$this->showOrder = $this->content->showOrder;
 		$this->position = $this->content->position;
 		$this->contentData = $this->content->handleContentData();
-		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.ncontent', $this->content->contentID, $this->contentData['pollID']);
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.content', $this->content->contentID, $this->contentData['pollID']);
 		$this->title = $this->content->getTitle();
 		I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
 		if ($this->objectTypeProcessor->isMultilingual) {
