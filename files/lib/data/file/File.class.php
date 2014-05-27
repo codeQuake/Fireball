@@ -63,4 +63,8 @@ class File extends CMSDatabaseObject implements IRouteController {
 	public function getByID($id) {
 		return new File($id);
 	}
+
+	public function getImageSize(){
+		return getimagesize($this->getURL());
+	}
 }

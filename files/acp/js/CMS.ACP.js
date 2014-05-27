@@ -267,9 +267,38 @@ CMS.ACP.Content.Image = Class.extend({
 		var $image = $(event.currentTarget);
 
 		this._field.val($image.data('objectID'));
+		$('#width').val($image.data('width'));
+		$('#height').val($image.data('height'));
+		ratio = new CMS.ACP.Image.Ratio($image.data('width'), $image.data('height'));
 
 		$image.clone().appendTo($('.image ul').html(''));
 
 		this._dialog.wcfDialog('close');
 	}
+});
+
+
+CMS.ACP.Image = {};
+
+CMS.ACP.Image.Ratio = Class.extend({
+
+	_ratio: 1,
+
+	init: function(width, height) {
+		this._ratio = width/height;
+		 $('#width').change($.proxy(this._calculateHeight, this));
+		 $('#height').change($.proxy(this._calculateWidth, this));
+	},
+
+	_calculateHeight: function() {
+		var $width = $('#width');
+		var height = $width.val() / this._ratio;
+		$('#height').val(Math.round(height));
+    },
+
+    _calculateWidth: function() {
+		var $height = $('#height');
+		var width = $height.val() * this._ratio;
+		$('#width').val(Math.round(width));
+    }
 });

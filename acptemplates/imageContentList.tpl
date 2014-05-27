@@ -14,7 +14,8 @@
 		<div class="container">
 			<ol class="containerList doubleColumned">
 			{foreach from=$images item=image}
-				<li class="jsFileImage" data-object-id="{$image->fileID}">
+				{assign var='size' value=$image->getImageSize()}
+				<li class="jsFileImage" data-object-id="{$image->fileID}" data-width="{$size[0]}" data-height="{$size[1]}">
 					<div class="box32 pointer">
 						<div class="framed">
 							<img src="{$image->getURL()}" alt="" style="max-width: 32px; max-height: 32px;" />
@@ -34,7 +35,8 @@
 		<div class="container">
 			<ol class="containerList doubleColumned">
 			{foreach from=$folder->getFiles('image') item=image}
-				<li class="jsFileImage" data-object-id="{$image->fileID}">
+				{assign var='size' value=$image->getImageSize()}
+				<li class="jsFileImage" data-object-id="{$image->fileID}" data-width="{$size[0]}" data-height="{$size[1]}">
 					<div class="box32 pointer">
 						<div class="framed">
 							<img src="{$image->getURL()}" alt="" style="max-width: 32px; max-height: 32px;" />
