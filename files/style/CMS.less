@@ -27,9 +27,13 @@
 		max-width: 100%;
 	}
 
-	figure > figcaption {
-		font-style: italic;
-		font-size: @wcfSmallFontSize;
+	figure {
+		margin-top: @wcfGapMedium;
+		margin-bottom: @wcfGapMedium;
+		> figcaption {
+			font-style: italic;
+			font-size: @wcfSmallFontSize;
+		}
 	}
 
 	h1{
@@ -55,71 +59,5 @@
 		font-weight: bold;
 		color: @wcfHeadlineColor;
 		font-family: @wcfHeadlineFontFamily;
-	}
-	table{
-		border: 1px solid @wcfContainerBorderColor;
-		>	caption{
-			font-size: @wcfTitleFontSize;
-			font-weight: bold;
-			color: @wcfHeadlineColor;
-			font-family: @wcfHeadlineFontFamily;
-		}
-		th,
-		td {
-			padding: @wcfGapSmall;
-			text-align: left;
-			vertical-align: middle;
-
-			> label {
-				cursor: pointer;
-				display: block;
-				margin: -@wcfGapSmall;
-				padding: @wcfGapSmall;
-
-				> input[type="checkbox"] {
-					margin: -1px 3px 0;
-				}
-			}
-		}
-		td {
-			background-color: @wcfContainerBackgroundColor;
-			.transition(background, .1s);
-		}
-		> tbody {
-			> tr:nth-child(even) > td {
-				background-color: @wcfContainerAccentBackgroundColor;
-			}
-		}
-		> tbody {
-			> tr {
-				&:not(:last-child) {
-					> td {
-						border-bottom: 1px solid rgba(255, 255, 255, .3);
-					}
-				}
-
-				&:hover {
-					> td {
-						background-color: @wcfContainerHoverBackgroundColor;
-					}
-				}
-
-				> td:not(:last-child) {
-					border-right: 1px solid rgba(255, 255, 255, .3);
-				}
-
-				> td.focus {
-					background-color: @wcfContainerHoverBackgroundColor;
-				}
-
-				> td.left {
-					text-align: left;
-				}
-
-				> td.right {
-					text-align: right;
-				}
-			}
-		}
 	}
 }

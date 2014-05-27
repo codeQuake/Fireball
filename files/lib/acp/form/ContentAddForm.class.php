@@ -130,7 +130,6 @@ class ContentAddForm extends AbstractForm {
 			}
 		}
 
-
 		$this->page = new Page($this->pageID);
 		if ($this->page === null) throw new UserInputException('pageID', 'invalid');
 

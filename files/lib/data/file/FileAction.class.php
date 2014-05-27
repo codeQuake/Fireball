@@ -17,10 +17,13 @@ use wcf\util\FileUtil;
  * @package	de.codequake.cms
  */
 class FileAction extends AbstractDatabaseObjectAction {
+
 	protected $className = 'cms\data\file\FileEditor';
+
 	protected $permissionsDelete = array(
 		'admin.cms.file.canAddFile'
 	);
+
 	protected $requireACP = array(
 		'delete'
 	);
@@ -39,7 +42,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 	}
 
 	public function validateGetImages() {
-		//does nothing like a boss
+		// does nothing like a boss
 	}
 
 	public function getImages() {
@@ -50,13 +53,17 @@ class FileAction extends AbstractDatabaseObjectAction {
 			}
 		}
 
-		// file	images
+		// file images
 		$list = new FileList();
-		//get images only
-        $list->getConditionBuilder()->add('file.type LIKE ?', array('image/%'));
+		// get images only
+		$list->getConditionBuilder()->add('file.type LIKE ?', array(
+			'image/%'
+		));
 
-        //main folder
-        $list->getConditionBuilder()->add('file.folderID =  ?', array('0'));
+		// main folder
+		$list->getConditionBuilder()->add('file.folderID =  ?', array(
+			'0'
+		));
 		$list->readObjects();
 		$imageList = $list->getObjects();
 
@@ -64,11 +71,9 @@ class FileAction extends AbstractDatabaseObjectAction {
 		$list->readObjects();
 		$folderList = $list->getObjects();
 
-
-
 		WCF::getTPL()->assign(array(
-		'images' => $imageList,
-		'folders' => $folderList
+			'images' => $imageList,
+			'folders' => $folderList
 		));
 
 		return array(
@@ -81,16 +86,16 @@ class FileAction extends AbstractDatabaseObjectAction {
 		if (count($this->parameters['__files']->getFiles()) <= 0) {
 			throw new UserInputException('files');
 		}
-
 	}
+
 	public function upload() {
-		//get file
+		// get file
 		$files = $this->parameters['__files']->getFiles();
 		$return = array();
 		foreach ($files as $file) {
 			try {
 
-				if (!$file->getValidationErrorType()) {
+				if (! $file->getValidationErrorType()) {
 					$filename = 'FB-File-' . md5($file->getFilename() . time()) . '.' . $file->getFileExtension();
 					$folderID = $this->parameters['folderID'];
 					if ($folderID != 0) $folder = new Folder($folderID);
@@ -104,11 +109,11 @@ class FileAction extends AbstractDatabaseObjectAction {
 
 					$uploadedFile = FileEditor::create($data);
 					if ($folderID == 0) $path = CMS_DIR . 'files/' . $filename;
-					else $path = CMS_DIR. 'files/'.$folder->folderPath.'/'.$filename;
+					else $path = CMS_DIR . 'files/' . $folder->folderPath . '/' . $filename;
 					if (@move_uploaded_file($file->getLocation(), $path)) {
 						@unlink($file->getLocation());
 
-						$return[] =  array(
+						$return[] = array(
 							'fileID' => $uploadedFile->fileID,
 							'folderID' => $uploadedFile->folderID,
 							'title' => $uploadedFile->title,
@@ -117,16 +122,13 @@ class FileAction extends AbstractDatabaseObjectAction {
 							'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->filesize)
 						);
 					} else {
-						//failure
+						// failure
 						$editor = new FileEditor($uploadedFile);
 						$editor->delete();
 						throw new UserInputException('file', 'uploadFailed');
 					}
-
 				}
-
-			}
-			catch (UserInputException $e) {
+			} catch (UserInputException $e) {
 				$file->setValidationErrorType($e->getType());
 			}
 		}
