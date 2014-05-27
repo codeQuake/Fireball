@@ -56,7 +56,7 @@ class File extends CMSDatabaseObject implements IRouteController {
 	}
 
 	public function getURL() {
-		if ($this->getFolder()) return RELATIVE_CMS_DIR.'files/'.$this->getFolder()->folderPath.'/'.$this->filename;
+		if ($this->getFolder() && $this->getFolder()->folderPath != '') return RELATIVE_CMS_DIR.'files/'.$this->getFolder()->folderPath.'/'.$this->filename;
 		return RELATIVE_CMS_DIR.'files/'.$this->filename;
 	}
 

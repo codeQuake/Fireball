@@ -29,6 +29,13 @@
 	</dd>
 </dl>
 
+<dl>
+	<dt><label for="contentData[link]">{lang}cms.acp.content.type.de.codequake.cms.content.type.headline.hyperlink{/lang}</label></dt>
+	<dd>
+		<input name="contentData[link]" id="contentData[link]" type="text" value="{if $contentData['link']|isset}{$contentData['link']}{/if}"  class="long" />
+	</dd>
+</dl>
+
 {include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
 
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@$__wcfVersion}"></script>
