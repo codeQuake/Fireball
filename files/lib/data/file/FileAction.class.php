@@ -46,7 +46,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 		//get file
 		$files = $this->parameters['__files']->getFiles();
 		$return = array();
-		foreach($files as $file){
+		foreach ($files as $file) {
 			try {
 
 				if (!$file->getValidationErrorType()) {
