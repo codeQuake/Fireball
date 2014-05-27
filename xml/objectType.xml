@@ -27,6 +27,14 @@
 			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
+			<name>de.codequake.cms.content.type.image</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\ImageContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
 			<name>de.codequake.cms.content.type.poll</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\PollContentType</classname>

@@ -13,7 +13,7 @@
 		WCF.Language.addObject({
 				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
-		new CMS.ACP.File.Upload({$folderID});
+		new CMS.ACP.File.Upload({$folderID}, true);
     });
     //]]>
 </script>

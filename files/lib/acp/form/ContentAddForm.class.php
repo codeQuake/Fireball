@@ -130,18 +130,7 @@ class ContentAddForm extends AbstractForm {
 			}
 		}
 
-		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-				if (!I18nHandler::getInstance()->validateValue($field)) {
-					if (I18nHandler::getInstance()->isPlainValue($field)) {
-						throw new UserInputException($field);
-					}
-					else {
-						throw new UserInputException($field, 'multilingual');
-					}
-				}
-			}
-		}
+
 		$this->page = new Page($this->pageID);
 		if ($this->page === null) throw new UserInputException('pageID', 'invalid');
 

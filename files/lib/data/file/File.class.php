@@ -8,7 +8,7 @@ use wcf\system\WCF;
 
 /**
  * Represents a file.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -28,10 +28,10 @@ class File extends CMSDatabaseObject implements IRouteController {
 				$id
 			));
 			$row = $statement->fetchArray();
-			
+
 			if ($row === false) $row = array();
 		}
-		
+
 		parent::__construct(null, $row, $object);
 	}
 
@@ -52,5 +52,15 @@ class File extends CMSDatabaseObject implements IRouteController {
 
 	public function getFolder() {
 		return new Folder($this->folderID);
+		return null;
+	}
+
+	public function getURL() {
+		if ($this->getFolder()) return RELATIVE_CMS_DIR.'files/'.$this->getFolder()->folderPath.'/'.$this->filename;
+		return RELATIVE_CMS_DIR.'files/'.$this->filename;
+	}
+
+	public function getByID($id) {
+		return new File($id);
 	}
 }

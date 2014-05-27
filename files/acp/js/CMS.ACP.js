@@ -149,10 +149,10 @@ CMS.ACP.File.Upload = WCF.Upload.extend({
 	_folderID: 0,
 
 	//calls parent init with params
-	init: function(folderID) {
+	init: function(folderID, multiple) {
 		var options = {
 			action: 'upload',
-			multiple: true,
+			multiple: multiple,
 			url: 'index.php/AJAXUpload/?t=' + SECURITY_TOKEN + SID_ARG_2ND
 		};
 		this._folderID = folderID;
@@ -200,4 +200,76 @@ CMS.ACP.File.Upload = WCF.Upload.extend({
 		$listItem.find('div > div').append($('<small class="innerError">'+WCF.Language.get('cms.acp.file.error.uploadFailed')+'</small>'));
 	}
 
+});
+
+CMS.ACP.Content = {};
+
+CMS.ACP.Content.Image = Class.extend({
+	_cache: [],
+	_dialog: null,
+	_didInit: false,
+
+	_button: null,
+	_proxy: null,
+	_field: null,
+
+	init: function(button, field){
+		this._button = button;
+		this._field = field;
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success,this)
+		});
+
+		//add click event
+		this._button.click($.proxy(this._click, this));
+	},
+
+	_click: function(event) {
+		event.preventDefault();
+		var $target = $(event.currentTarget);
+		this.button = $target;
+
+		if (this._dialog == null) {
+			this._dialog = $('<div id="images" />').appendTo(document.body);
+
+			this._proxy.setOption('data',{
+				actionName: 'getImages',
+				className: 'cms\\data\\file\\FileAction',
+				parameters: {
+					imageID: this._field.val()
+				}
+			});
+			this._proxy.sendRequest();
+		} else this._dialog.wcfDialog('open');
+	},
+
+	_success: function(data, textStatus, jqXHR) {
+
+		if (this.didInit) {
+			this.dialog.find('#images').html(data.returnValues.template);
+			this._dialog.wcfDialog('render');
+		}
+		else {
+			this._dialog.html(data.returnValues.template);
+			this._dialog.wcfDialog({
+				title: WCF.Language.get('cms.acp.content.type.de.codequake.cms.content.type.image.select')
+			});
+			this._didInit = true;
+		}
+
+		//find image & add click handler
+		this._dialog.find('.jsFileImage').click($.proxy(this._imageSelect, this));
+		//mark as active
+		this._dialog.find('.jsFileImage[data-object-id="'+ this._field.val() +'"]').addClass('active');
+	},
+
+	_imageSelect: function(event) {
+		var $image = $(event.currentTarget);
+
+		this._field.val($image.data('objectID'));
+
+		$image.clone().appendTo($('.image ul').html(''));
+
+		this._dialog.wcfDialog('close');
+	}
 });

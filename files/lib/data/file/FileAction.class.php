@@ -2,8 +2,10 @@
 namespace cms\data\file;
 
 use cms\data\folder\Folder;
+use cms\data\folder\FolderList;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
+use wcf\system\WCF;
 use wcf\util\FileUtil;
 
 /**
@@ -34,6 +36,45 @@ class FileAction extends AbstractDatabaseObjectAction {
 			}
 		}
 		parent::delete();
+	}
+
+	public function validateGetImages() {
+		//does nothing like a boss
+	}
+
+	public function getImages() {
+		if ($this->parameters['imageID']) {
+			$image = new File($this->parameters['imageID']);
+			if ($image->imageID) {
+				WCF::getTPL()->assign('image', $image);
+			}
+		}
+
+		// file	images
+		$list = new FileList();
+		//get images only
+        $list->getConditionBuilder()->add('file.type LIKE ?', array('image/%'));
+
+        //main folder
+        $list->getConditionBuilder()->add('file.folderID =  ?', array('0'));
+		$list->readObjects();
+		$imageList = $list->getObjects();
+
+		$list = new FolderList();
+		$list->readObjects();
+		$folderList = $list->getObjects();
+
+
+
+		WCF::getTPL()->assign(array(
+		'images' => $imageList,
+		'folders' => $folderList
+		));
+
+		return array(
+			'images' => $imageList,
+			'template' => WCF::getTPL()->fetch('imageContentList', 'cms')
+		);
 	}
 
 	public function validateUpload() {

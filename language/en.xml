@@ -66,7 +66,8 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[HTML]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[HTML-Source]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[You can use HTML Code here.]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Poll]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Picture]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">
