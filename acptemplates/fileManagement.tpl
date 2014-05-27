@@ -4,11 +4,16 @@
 <header class="boxHeadline">
     <h1>{lang}cms.acp.file.management{/lang}</h1>
 </header>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true">
     //<![CDATA[
     $(function () {
-        new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow'); 
+        new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow');
 		new WCF.Action.Delete('cms\\data\\folder\\FolderAction', '.jsFolderRow');
+		WCF.Language.addObject({
+				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
+		});
+		new CMS.ACP.File.Upload({$folderID});
     });
     //]]>
 </script>
@@ -58,40 +63,21 @@
 		</ul>
 	</nav>
 </div>
-<form id="fileAdd" class="hidden" method="post" enctype="multipart/form-data" action="{link controller='FileManagement' application='cms'}action=file{/link}">
-    <div class="container containerPadding marginTop">
+<div id="fileAdd">
+	<div class="container containerPadding marginTop fileUpload" id="fileUpload" >
+		<ul>
+		</ul>
         <fieldset>
             <legend>{lang}cms.acp.file.file{/lang}</legend>
             <dl{if $errorField == 'file'} class="formError"{/if}>
                 <dt><label for="file">{lang}cms.acp.file.file{/lang}</label></dt>
                 <dd>
-                    <input type="file" name="file" id="file"  required="required"/>
-                    {if $errorField == 'file'}
-                        <small class="innerError">
-                              {lang}cms.acp.file.error.{$errorType}{/lang}
-                        </small>
-                    {/if}
+					<div id="fileUploadButton"></div>
                 </dd>
             </dl>
-			<dl {if $errorField == 'folderID'}class="formError"{/if}>
-						<dt><label for="folderID">{lang}cms.acp.file.folderID{/lang}</label></dt>
-						<dd>
-							<select id="folderID" name="folderID">
-								<option value="0" {if folderID == 0} selected="selected"{/if}>{lang}cms.acp.file.folderID.root{/lang}</option>
-								{foreach from=$folderList item='item'}
-								<option value="{$item->folderID}" {if $item->folderID == $folderID}selected="selected"{/if}>{$item->getTitle()|language}</option>
-								{/foreach}
-							</select>
-						</dd>
-			</dl>
         </fieldset>
     </div>
-
-    <div class="formSubmit">
-        <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		 {@SECURITY_TOKEN_INPUT_TAG}
-    </div>
-</form>
+</div>
 
 <form id="folderAdd" class="hidden" method="post" enctype="multipart/form-data" action="{link controller='FileManagement' application='cms'}action=folder{/link}">
     <div class="container containerPadding marginTop">
@@ -153,7 +139,7 @@
                         <td class="columnIcon">
 							{@$file->getIconTag()}
                             <span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
-                        </td> 
+                        </td>
                         <td class="columnTitle columnFile"><a id="file{$file->fileID}">{$file->title|language}</a></td>
                         <td class="columnType">{$file->type}</td>
                         <td class="columnDownloads">{#$file->downloads}</td>

@@ -3,10 +3,12 @@ namespace cms\data\file;
 
 use cms\data\folder\Folder;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\exception\UserInputException;
+use wcf\util\FileUtil;
 
 /**
  * Executes file-related actions.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -32,5 +34,63 @@ class FileAction extends AbstractDatabaseObjectAction {
 			}
 		}
 		parent::delete();
+	}
+
+	public function validateUpload() {
+		if (count($this->parameters['__files']->getFiles()) <= 0) {
+			throw new UserInputException('files');
+		}
+
+	}
+	public function upload() {
+		//get file
+		$files = $this->parameters['__files']->getFiles();
+		foreach($files as $file){
+			try {
+
+				if (!$file->getValidationErrorType()) {
+					$filename = 'FB-File-' . md5($file->getFilename() . time()) . '.' . $file->getFileExtension();
+					$folderID = $this->parameters['folderID'];
+					if ($folderID != 0) $folder = new Folder($folderID);
+					$data = array(
+						'title' => $file->getFilename(),
+						'folderID' => $folderID,
+						'filename' => $filename,
+						'size' => $file->getFilesize(),
+						'type' => $file->getMimeType()
+					);
+
+					$uploadedFile = FileEditor::create($data);
+					if ($folderID == 0) $path = CMS_DIR . 'files/' . $filename;
+					else $path = CMS_DIR. 'files/'.$folder->folderPath.'/'.$filename;
+					if (@move_uploaded_file($file->getLocation(), $path)) {
+						@unlink($file->getLocation());
+
+						return array(
+							'fileID' => $uploadedFile->fileID,
+							'folderID' => $uploadedFile->folderID,
+							'title' => $uploadedFile->title,
+							'filename' => $uploadedFile->filename,
+							'filesize' => $uploadedFile->filesize,
+							'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->filesize)
+						);
+					} else {
+						//failure
+						$editor = new FileEditor($uploadedFile);
+						$editor->delete();
+						throw new UserInputException('file', 'uploadFailed');
+					}
+
+				}
+
+			}
+			catch (UserInputException $e) {
+				$file->setValidationErrorType($e->getType());
+			}
+
+			return array(
+				'errorType' => $file->getValidationErrorType()
+			);
+		}
 	}
 }
