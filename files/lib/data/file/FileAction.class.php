@@ -128,7 +128,8 @@ class FileAction extends AbstractDatabaseObjectAction {
 						throw new UserInputException('file', 'uploadFailed');
 					}
 				}
-			} catch (UserInputException $e) {
+			}
+			catch (UserInputException $e) {
 				$file->setValidationErrorType($e->getType());
 			}
 		}
