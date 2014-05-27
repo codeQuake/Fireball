@@ -68,6 +68,8 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Bild]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.select"><![CDATA[Bild auswählen]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.width"><![CDATA[Breite (in px)]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Höhe (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Untertitel]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
 	</category>
