@@ -379,6 +379,10 @@
 		<item name="wcf.acp.group.option.user.cms.news.canDeleteComment"><![CDATA[Kann eigene Kommentare löschen]]></item>
 		<item name="wcf.acp.group.option.user.cms.news.canEditComment"><![CDATA[Kann eigene Kommentare bearbeiten]]></item>
 		<item name="wcf.acp.group.option.user.cms.news.canViewCategory"><![CDATA[Kann Kategorie sehen]]></item>
+		<item name="wcf.acp.group.option.user.cms.news.canStartPoll"><![CDATA[Kann Umfragen starten]]></item>
+		<item name="wcf.acp.group.option.user.cms.news.canStartPublicPoll"><![CDATA[Kann öffentliche Umfragen starten]]></item>
+		<item name="wcf.acp.group.option.user.cms.news.canVotePoll"><![CDATA[Kann an Umfragen teilnehmen]]></item>
+		<item name="wcf.acp.group.option.user.cms.content.canVotePoll"><![CDATA[Kann an Umfragen teilnehmen]]></item>
 		<item name="wcf.acp.group.option.admin.cms.page.canListPage"><![CDATA[Kann Seiten auflisten]]></item>
 		<item name="wcf.acp.group.option.admin.cms.page.canAddPage"><![CDATA[Kann Seiten verwalten]]></item>
 		<item name="wcf.acp.group.option.category.admin.cms.style"><![CDATA[Stile]]></item>
