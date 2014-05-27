@@ -57,7 +57,7 @@
     //<![CDATA[
     $(function () {
 		WCF.Language.addObject({
-				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
+				'cms.acp.content.type.de.codequake.cms.content.type.image.select': '{lang}cms.acp.content.type.de.codequake.cms.content.type.image.select{/lang}'
 		});
 		new CMS.ACP.Content.Image($('#imageSelect'), $('#imageID'));
 		{if $contentData['width']|isset && $contentData['height']|isset}new CMS.ACP.Image.Ratio({$contentData['width']},{$contentData['height']}){/if}
