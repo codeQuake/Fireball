@@ -70,15 +70,8 @@
 	<div class="container containerPadding marginTop fileUpload" id="fileUpload" >
 		<ul>
 		</ul>
-        <fieldset>
-            <legend>{lang}cms.acp.file.file{/lang}</legend>
-            <dl{if $errorField == 'file'} class="formError"{/if}>
-                <dt><label for="file">{lang}cms.acp.file.file{/lang}</label></dt>
-                <dd>
-					<div id="fileUploadButton"></div>
-                </dd>
-            </dl>
-        </fieldset>
+      	<div id="fileUploadButton"></div>
+      	<small>{lang}cms.acp.file.add.description{/lang}</small>
     </div>
 </div>
 

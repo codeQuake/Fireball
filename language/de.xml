@@ -84,6 +84,7 @@
 	<category name="cms.acp.file">
 		<item name="cms.acp.file.error.invalid"><![CDATA[Ungültige Dateiendung]]></item>
 		<item name="cms.acp.file.file"><![CDATA[Datei]]></item>
+		<item name="cms.acp.file.add.description"><![CDATA[Die Dateien werden im aktuell ausgewählten Ordner hochgeladen. Sie können mehrere Dateien auswählen, in dem Sie die STRG-Taste gedrückt halten.]]></item>
 		<item name="cms.acp.file.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.file.type"><![CDATA[Typ]]></item>
 		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
@@ -92,7 +93,7 @@
 		<item name="cms.acp.file.management"><![CDATA[Dateiverwaltung]]></item>
 		<item name="cms.acp.file.details"><![CDATA[Informationen]]></item>
 		<item name="cms.acp.file.folderID"><![CDATA[Ordner]]></item>
-		<item name="cms.acp.file.add"><![CDATA[Datei hochladen]]></item>
+		<item name="cms.acp.file.add"><![CDATA[Dateien hochladen]]></item>
 		<item name="cms.acp.file.folderID.root"><![CDATA[Hauptverzeichnis]]></item>
 		<item name="cms.acp.file.delete.sure"><![CDATA[Wollen Sie diese Datei wirklich löschen?]]></item>
 	</category>
