@@ -3,6 +3,8 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use cms\data\file\File;
+use cms\data\file\FileList;
+use cms\data\folder\FolderList;
 use wcf\system\WCF;
 
 /**
@@ -18,6 +20,20 @@ class FileContentType extends AbstractContentType {
 	public $objectType = 'de.codequake.cms.content.type.file';
 
 	public function getFormTemplate() {
+		$list = new FileList();
+		$list->getConditionBuilder()->add('file.folderID =  ?', array(
+			'0'
+		));
+		$list->readObjects();
+		$rootList = $list->getObjects();
+
+		$list = new FolderList();
+		$list->readObjects();
+		$folderList = $list->getObjects();
+		WCF::getTPL()->assign(array(
+			'rootList' => $rootList,
+			'folderList' => $folderList
+		));
 		return 'fileContentType';
 	}
 
