@@ -42,7 +42,7 @@ class FileContentType extends AbstractContentType {
 		$file = new File($data['fileID']);
 		WCF::getTPL()->assign(array(
 			'data' => $data,
-			'file' => $image
+			'file' => $file
 		));
 
 		return WCF::getTPL()->fetch('fileContentTypeOutput', 'cms');
