@@ -73,6 +73,9 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Height (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Caption]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[File]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Choose file]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Root]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">
