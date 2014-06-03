@@ -7,8 +7,8 @@
 
 {include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/3rdParty/ckeditor/ckeditor.js"></script>
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/3rdParty/ckeditor/adapters/jquery.js"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('wcf')}js/3rdParty/ckeditor/ckeditor.js"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('wcf')}js/3rdParty/ckeditor/adapters/jquery.js"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
