@@ -2,6 +2,9 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use wcf\system\bbcode\BBCodeHandler;
+use wcf\system\bbcode\MessageParser;
+use wcf\system\WCF;
 
 /**
  *
@@ -23,12 +26,15 @@ class TextContentType extends AbstractContentType {
 	);
 
 	public function getFormTemplate() {
+		//init bbcodes
+		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
+
 		return 'textContentType';
 	}
 
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
-		if (isset($data['text'])) return $data['text'];
+		if (isset($data['text'])) return MessageParser::getInstance()->parse(WCF::getLanguage()->get($data['text']), 1, 0, 1);
 		return '';
 	}
 }

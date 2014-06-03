@@ -6,5 +6,4 @@
 </dl>
 
 {include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
-
-{* WYSWIYG *}
+{include file='wysiwyg'}
