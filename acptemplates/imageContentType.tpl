@@ -1,4 +1,3 @@
-{$errorField}
 <dl class="image">
 	<dt><label for="image">{lang}cms.acp.content.type.de.codequake.cms.content.type.image{/lang}</label></dt>
 	<dd>

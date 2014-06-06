@@ -16,7 +16,7 @@ class GalleryContentType extends AbstractContentType {
 	public $objectType = 'de.codequake.cms.content.type.gallery';
 
 	public function getFormTemplate() {
-		return;
+		return 'galleryContentType';
 	}
 
 	public function getOutput(Content $content) {

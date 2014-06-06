@@ -10,7 +10,8 @@
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
 		<item name="cms.acp.content.general.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.css"><![CDATA[CSS-Einstellungen]]></item>
-		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item><item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
+		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
+		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
 		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie "container containerPadding". Für einen Abstand zum oberen Element nutzen sie zusätzlich "marginTop".]]></item>
 		<item name="cms.acp.content.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
@@ -85,6 +86,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.size4"><![CDATA[1280 x 720 (HD)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.size5"><![CDATA[1920 x 1080 (HD)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Galerie]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.select"><![CDATA[Bilder auswählen]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">

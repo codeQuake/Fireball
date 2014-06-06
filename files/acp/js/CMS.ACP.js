@@ -277,6 +277,95 @@ CMS.ACP.Content.Image = Class.extend({
 	}
 });
 
+CMS.ACP.Content.Image.Gallery = Class.extend({
+	_cache: [],
+	_dialog: null,
+	_didInit: false,
+
+	_button: null,
+	_proxy: null,
+	_field: null,
+
+	init: function(button, field){
+		this._button = button;
+		this._field = field;
+		if (field.val() != 0 && field.val() != '') var length = field.val().split(',').length;
+		else length = 0;
+		$('#imageSelect').append('<span id="imagesBadge" class="badge green">'+length+'</span>');
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success,this)
+		});
+
+		//add click event
+		this._button.click($.proxy(this._click, this));
+	},
+
+	_click: function(event) {
+		event.preventDefault();
+		var $target = $(event.currentTarget);
+		this.button = $target;
+
+		if (this._dialog == null) {
+			this._dialog = $('<div id="images" />').appendTo(document.body);
+
+			this._proxy.setOption('data',{
+				actionName: 'getImages',
+				className: 'cms\\data\\file\\FileAction',
+				parameters: {
+					imageID: this._field.val()
+				}
+			});
+			this._proxy.sendRequest();
+		} else this._dialog.wcfDialog('open');
+	},
+
+	_success: function(data, textStatus, jqXHR) {
+
+		if (this.didInit) {
+			this.dialog.find('#images').html(data.returnValues.template);
+			this._dialog.wcfDialog('render');
+		}
+		else {
+			this._dialog.html(data.returnValues.template);
+			this._dialog.wcfDialog({
+				title: WCF.Language.get('cms.acp.content.type.de.codequake.cms.content.type.gallery.select')
+			});
+			this._didInit = true;
+		}
+
+		//find image & add click handler
+		this._dialog.find('.jsFileImage').click($.proxy(this._imageSelect, this));
+		var dialog = this._dialog;
+		var value = this._field.val();
+		value = value.split(",");
+		$.each(value, function(item, element){
+			dialog.find('.jsFileImage[data-object-id="'+ element +'"]').addClass('active');
+		});
+	},
+
+	_imageSelect: function(event) {
+		var $image = $(event.currentTarget);
+		if (!$image.hasClass('active')) {
+			$image.addClass('active');
+			var temp = this._field.val();
+			if (temp != '' && temp != 0) this._field.val(temp + ',' + $image.data('objectID'));
+			else this._field.val($image.data('objectID'));
+		}
+		else {
+			$image.removeClass('active');
+			var temp = this._field.val();
+			temp = temp.split(",");
+			$.each(temp, function(index, element){
+				if (element == $image.data('objectID')) temp.splice(index,1);
+			});
+			temp = temp.join();
+			this._field.val(temp);
+		}
+
+
+		$('#imagesBadge').html(this._field.val().split(',').length);
+	}
+});
 
 CMS.ACP.Image = {};
 
