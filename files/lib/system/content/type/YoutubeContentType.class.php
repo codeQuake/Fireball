@@ -22,7 +22,7 @@ class YoutubeContentType extends AbstractContentType {
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
 		$url = $data['video'];
-		parse_str( parse_url( $url, PHP_URL_QUERY ), $var );
+		parse_str(parse_url($url, PHP_URL_QUERY), $var);
 		$videoID = $var['v'];
 
 		switch ($data['size']) {
