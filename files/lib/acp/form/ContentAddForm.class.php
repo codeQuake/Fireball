@@ -29,7 +29,7 @@ class ContentAddForm extends AbstractForm {
 	public $neededPermissions = array(
 		'admin.cms.content.canAddContent'
 	);
-	public $activeMenuItem = 'cms.acp.menu.link.cms.content.add';
+	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
 	public $enableMultilangualism = true;
 	public $title = '';
 	public $page = null;

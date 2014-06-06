@@ -10,8 +10,7 @@
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
 		<item name="cms.acp.content.general.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.css"><![CDATA[CSS-Einstellungen]]></item>
-		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
-		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
+		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item><item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
 		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie "container containerPadding". Für einen Abstand zum oberen Element nutzen sie zusätzlich "marginTop".]]></item>
 		<item name="cms.acp.content.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
@@ -138,7 +137,6 @@
 
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="cms.acp.menu.link.cms.page.overview"><![CDATA[Übersicht]]></item>
 		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[Seiten auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="cms.acp.menu.link.cms.content.list"><![CDATA[Inhalte auflisten]]></item>
@@ -153,28 +151,12 @@
 		<item name="cms.acp.menu.link.cms.news.category.list"><![CDATA[Kategorien auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.style"><![CDATA[Darstellungsoptionen]]></item>
 		<item name="cms.acp.menu.link.cms.content"><![CDATA[Seiten verwalten]]></item>
-		<item name="cms.acp.menu.link.cms.news"><![CDATA[Nachrichten]]></item>
-		<item name="cms.acp.menu.link.cms.module.add"><![CDATA[Modul hinzufügen]]></item>
-		<item name="cms.acp.menu.link.cms.module.list"><![CDATA[Module auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistiken]]></item>
 		<item name="cms.acp.menu.link.cms.media"><![CDATA[Medien]]></item>
 		<item name="cms.acp.menu.link.cms.news.image.list"><![CDATA[Nachrichtenbilder auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.news.image.add"><![CDATA[Nachrichtenbilder hinzufügen]]></item>
-	</category>
-
-	<category name="cms.acp.module">
-		<item name="cms.acp.module.list"><![CDATA[Module auflisten]]></item>
-		<item name="cms.acp.module.add"><![CDATA[Modul hinzufügen]]></item>
-		<item name="cms.acp.module.edit"><![CDATA[Modul bearbeiten]]></item>
-		<item name="cms.acp.module.general"><![CDATA[Allgemeine Einstellungen]]></item>
-		<item name="cms.acp.module.php"><![CDATA[PHP-Quelltext]]></item>
-		<item name="cms.acp.module.php.description"><![CDATA[Hier können Sie PHP-Quelltext verwenden. <strong>Achtung</strong>: PHP-Fehler können dazu führen, dass Seiten nicht korrekt dargestellt werden.]]></item>
-		<item name="cms.acp.module.tpl"><![CDATA[Template-Quelltext]]></item>
-		<item name="cms.acp.module.tpl.description"><![CDATA[Hier können Sie Template-Quelltext verwenden (<a href="http://www.smarty.net/">Dokumentation</a>).]]></item>
-		<item name="cms.acp.module.title"><![CDATA[Titel]]></item>
-		<item name="cms.acp.module.delete.sure"><![CDATA[Wollen Sie dieses Modul wirklich löschen?]]></item>
 	</category>
 
 	<category name="cms.acp.news">
@@ -417,7 +399,6 @@
 		<item name="wcf.acp.group.option.user.cms.news.canDownloadAttachments"><![CDATA[Kann Dateianhänge herunterladen]]></item>
 		<item name="wcf.acp.group.option.user.cms.news.maxAttachmentCount"><![CDATA[Maximale Anzahl an Dateianhängen pro Nachricht]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canDownloadAttachments"><![CDATA[Kann Dateianhänge herunterladen]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.canManageModule"><![CDATA[Kann Module verwalten]]></item>
 		<item name="wcf.acp.group.option.admin.cms.content.canUploadAttachment"><![CDATA[Kann Dateien anhängen]]></item>
 		<item name="wcf.acp.group.option.admin.cms.content.attachmentMaxSize"><![CDATA[Maximale Dateianhangsgröße]]></item>
 		<item name="wcf.acp.group.option.admin.cms.content.maxAttachmentCount"><![CDATA[Maximale Anzahl an Dateianhängen pro Inhaltsabschnitt]]></item>

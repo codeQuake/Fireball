@@ -120,16 +120,6 @@ CREATE TABLE cms1_news_to_category (
 	PRIMARY KEY (categoryID, newsID)
 );
 
---module
-DROP TABLE IF EXISTS cms1_module;
-CREATE TABLE cms1_module (
-	moduleID INT (10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	moduleTitle VARCHAR(255) NOT NULL DEFAULT 'modul',
-	php MEDIUMTEXT,
-	tpl MEDIUMTEXT
-);
-
-
 --counter
 DROP TABLE IF EXISTS cms1_counter;
 CREATE TABLE cms1_counter (

@@ -139,7 +139,6 @@
 
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="cms.acp.menu.link.cms.page.overview"><![CDATA[Overview]]></item>
 		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[List pages]]></item>
 		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Add page]]></item>
 		<item name="cms.acp.menu.link.cms.content.list"><![CDATA[List contents]]></item>
@@ -155,27 +154,12 @@
 		<item name="cms.acp.menu.link.cms.style"><![CDATA[Displaymanagement]]></item>
 		<item name="cms.acp.menu.link.cms.content"><![CDATA[Pagemanagement]]></item>
 		<item name="cms.acp.menu.link.cms.news"><![CDATA[News]]></item>
-		<item name="cms.acp.menu.link.cms.module.add"><![CDATA[Add module]]></item>
-		<item name="cms.acp.menu.link.cms.module.list"><![CDATA[List modules]]></item>
 		<item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistics]]></item>
 		<item name="cms.acp.menu.link.cms.media"><![CDATA[Media]]></item>
 		<item name="cms.acp.menu.link.cms.news.image.list"><![CDATA[List news images]]></item>
 		<item name="cms.acp.menu.link.cms.news.image.add"><![CDATA[Add news image]]></item>
-	</category>
-
-	<category name="cms.acp.module">
-		<item name="cms.acp.module.list"><![CDATA[List modules]]></item>
-		<item name="cms.acp.module.add"><![CDATA[Add module]]></item>
-		<item name="cms.acp.module.edit"><![CDATA[Edit module]]></item>
-		<item name="cms.acp.module.general"><![CDATA[General]]></item>
-		<item name="cms.acp.module.php"><![CDATA[PHP-Source]]></item>
-		<item name="cms.acp.module.php.description"><![CDATA[You can use PHP-Syntax here. <strong>Danger</strong>: PHP-Errors might cause a non functionally site.]]></item>
-		<item name="cms.acp.module.tpl"><![CDATA[Template-Source]]></item>
-		<item name="cms.acp.module.tpl.description"><![CDATA[You can use Smarty-Syntax here (<a href="http://www.smarty.net/">Documentation</a>).]]></item>
-		<item name="cms.acp.module.title"><![CDATA[Title]]></item>
-		<item name="cms.acp.module.delete.sure"><![CDATA[Are you sure you want to delete this module?]]></item>
 	</category>
 
 	<category name="cms.acp.news">
@@ -412,7 +396,6 @@
 		<item name="wcf.acp.group.option.user.cms.news.canDownloadAttachments"><![CDATA[Can download attachments]]></item>
 		<item name="wcf.acp.group.option.user.cms.news.maxAttachmentCount"><![CDATA[Maximum number of attachments per news]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canDownloadAttachments"><![CDATA[Can download attachments]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.canManageModule"><![CDATA[Can manage modules]]></item>
 		<item name="wcf.acp.group.option.admin.cms.content.canUploadAttachment"><![CDATA[Can attach files]]></item>
 		<item name="wcf.acp.group.option.admin.cms.content.attachmentMaxSize"><![CDATA[Maximum filesize]]></item>
 		<item name="wcf.acp.group.option.admin.cms.content.maxAttachmentCount"><![CDATA[Maximum number of attachments per content section]]></item>
