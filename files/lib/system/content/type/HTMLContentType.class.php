@@ -2,7 +2,6 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

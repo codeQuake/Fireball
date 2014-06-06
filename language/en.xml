@@ -76,6 +76,14 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[File]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Choose file]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Root]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video"><![CDATA[Video-URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.size"><![CDATA[Videosize]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.size1"><![CDATA[560 x 315]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.size2"><![CDATA[640 x 360]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.size3"><![CDATA[853 x 480]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.size4"><![CDATA[1280 x 720 (HD)]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.size5"><![CDATA[1920 x 1080 (HD)]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">

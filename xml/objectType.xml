@@ -66,6 +66,15 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>
 		</type>
+
+		<type>
+			<name>de.codequake.cms.content.type.youtube</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\YoutubeContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>0</allowsidebar>
+		</type>
 		<type>
 			<name>de.codequake.cms.content.type.html</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
