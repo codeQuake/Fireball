@@ -19,49 +19,17 @@
 			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
-			<name>de.codequake.cms.content.type.link</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\LinkContentType</classname>
-			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
-		</type>
-		<type>
-			<name>de.codequake.cms.content.type.image</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\ImageContentType</classname>
-			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
-		</type>
-		<type>
-			<name>de.codequake.cms.content.type.gallery</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\GalleryContentType</classname>
-			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
-		</type>
-		<type>
-			<name>de.codequake.cms.content.type.file</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\FileContentType</classname>
-			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
-		</type>
-		<type>
-			<name>de.codequake.cms.content.type.poll</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\PollContentType</classname>
-			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
-		</type>
-		<type>
 			<name>de.codequake.cms.content.type.dashboard</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\DashboardContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
+			<name>de.codequake.cms.content.type.link</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\LinkContentType</classname>
 			<category>general</category>
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
@@ -74,12 +42,44 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>
 		</type>
+		<type>
+			<name>de.codequake.cms.content.type.poll</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\PollContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
 
+		<type>
+			<name>de.codequake.cms.content.type.gallery</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\GalleryContentType</classname>
+			<category>media</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>0</allowsidebar>
+		</type>
+		<type>
+			<name>de.codequake.cms.content.type.image</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\ImageContentType</classname>
+			<category>media</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
+			<name>de.codequake.cms.content.type.file</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\FileContentType</classname>
+			<category>media</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
 		<type>
 			<name>de.codequake.cms.content.type.youtube</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\YoutubeContentType</classname>
-			<category>general</category>
+			<category>media</category>
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>
 		</type>
@@ -87,7 +87,7 @@
 			<name>de.codequake.cms.content.type.html</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\HTMLContentType</classname>
-			<category>general</category>
+			<category>code</category>
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
@@ -95,7 +95,7 @@
 			<name>de.codequake.cms.content.type.template</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TemplateContentType</classname>
-			<category>general</category>
+			<category>code</category>
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
