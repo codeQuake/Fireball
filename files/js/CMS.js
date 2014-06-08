@@ -323,3 +323,4 @@ CMS.News.IPAddressHandler = Class.extend({
         this._dialog.wcfDialog('render');
     }
 });
+

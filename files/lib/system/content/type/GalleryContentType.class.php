@@ -2,6 +2,8 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use cms\data\file\FileList;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
@@ -20,6 +22,13 @@ class GalleryContentType extends AbstractContentType {
 	}
 
 	public function getOutput(Content $content) {
-		return;
+		$data = $content->handleContentData();
+		$imageIDs = explode(',', $data['imageIDs']);
+		$list = new FileList();
+		$list->getConditionBuilder()->add('fileID in (?)', array($imageIDs));
+		$list->readObjects();
+		$list->getObjects();
+		WCF::getTPL()->assign(array('images' => $list));
+		return WCF::getTPL()->fetch('galleryContentTypeOutput', 'cms');
 	}
 }
