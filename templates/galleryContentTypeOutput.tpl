@@ -5,3 +5,11 @@
 		{/foreach}
 	</ul>
 </div>
+
+<script data-relocate="true">
+        //<![CDATA[
+        $(function() {
+        $('.slideshowContainer').wcfSlideshow();
+        });
+        //]]>
+ </script>
