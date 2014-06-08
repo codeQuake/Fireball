@@ -89,6 +89,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Gallery]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Images]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.select"><![CDATA[Pick images]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">
