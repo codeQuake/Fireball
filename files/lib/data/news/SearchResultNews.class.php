@@ -24,7 +24,7 @@ class SearchResultNews extends ViewableNews implements ISearchResultObject {
 
 	public function getLink($query = '') {
 		if ($query) {
-			return LinkHandler::getInstance()->getLink('Link', array(
+			return LinkHandler::getInstance()->getLink('News', array(
 				'application' => 'cms',
 				'object' => $this->getDecoratedObject(),
 				'highlight' => urlencode($query)
