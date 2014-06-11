@@ -67,6 +67,10 @@ class PagePage extends AbstractPage {
 			}
 		}
 
+		//check permission
+		if (! $this->page->isVisible() || ! $this->page->isAccessible()) throw new PermissionDeniedException();
+
+
 		// check if offline and view page or exit
 		// see: wcf\system\request\RequestHandler
 		if (OFFLINE) {
@@ -88,10 +92,6 @@ class PagePage extends AbstractPage {
 
 		//set breadcrumbs
 		CMSCore::setBreadcrumbs($this->page);
-
-		//check permission
-		if (! $this->page->isVisible() || ! $this->page->isAccessible()) throw new PermissionDeniedException();
-
 		// get Contents
 		$contents = $this->page->getContents();
 		$this->contentNodeTree = $contents['body'];

@@ -17,10 +17,11 @@
 </dl>
 
 <dl>
-	<dt><label for="contentData[link]">{lang}cms.acp.content.type.de.codequake.cms.content.type.link.hyperlink{/lang}</label></dt>
+	<dt><label for="link">{lang}cms.acp.content.type.de.codequake.cms.content.type.link.hyperlink{/lang}</label></dt>
 	<dd>
-		<input name="contentData[link]" id="contentData[link]" type="text" value="{if $contentData['link']|isset}{$contentData['link']}{/if}"  class="long" required="required" />
+		<input name="link" id="link" type="text" value="{$i18nPlainValues['link']}"  class="long" required="required" />
 	</dd>
 </dl>
 
 {include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
+{include file='multipleLanguageInputJavascript' elementIdentifier='link' forceSelection=false}
