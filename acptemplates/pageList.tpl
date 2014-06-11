@@ -1,17 +1,5 @@
 {include file='header' pageTitle='cms.acp.page.list'}
 
-<nav class="breadcrumbs marginTop">
-	<ul>
-		<li title="{lang}cms.acp.page.overview{/lang}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-			<a href="{link controller='Overview' application='cms'}{/link}" itemprop="url">
-				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
-			</a>
-			<span class="pointer">
-				<span>»</span>
-			</span>
-		</li>
-</nav>
-
 <header class="boxHeadline">
     <h1>{lang}cms.acp.page.list{/lang}</h1>
 
@@ -37,7 +25,6 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
 			<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}

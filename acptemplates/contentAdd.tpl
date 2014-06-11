@@ -5,15 +5,6 @@
 
 <nav class="breadcrumbs marginTop">
 	<ul>
-		<li title="{lang}cms.acp.page.overview{/lang}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-			<a href="{link controller='Overview' application='cms'}{/link}" itemprop="url">
-				<span itemprop="title">{lang}cms.acp.page.overview{/lang}</span>
-			</a>
-			<span class="pointer">
-				<span>»</span>
-			</span>
-		</li>
-
     {if $pageID != 0}
 		<li title="{$page->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
 			<a href="{link controller='PageEdit' application='cms' id=$page->pageID}{/link}" itemprop="url">
@@ -40,7 +31,6 @@
 <div class="contentNavigation">
     <nav>
         <ul>
-			<li><a href="{link controller='Overview' application='cms'}{/link}" class="button"><span class="icon icon16 icon-gears"></span> <span>{lang}cms.acp.page.overview{/lang}</span></a></li>
 			<li><a href="{link application='cms' controller='ContentList' object=$page}{/link}" title="{lang}cms.acp.menu.link.cms.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.content.list{/lang}</span></a></li>
 
             {event name='contentNavigationButtons'}
