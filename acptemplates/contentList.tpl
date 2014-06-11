@@ -21,7 +21,7 @@
 		//<![CDATA[
 		$(function() {
 			WCF.TabMenu.init();
-			new WCF.Action.Delete('cms\\data\\content\\ContentAction', '.jsContentRow');
+			new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '.jsContentRow');
 			new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
 			new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
 			new CMS.ACP.Page.AddContent();
