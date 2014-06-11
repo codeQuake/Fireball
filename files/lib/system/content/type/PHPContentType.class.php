@@ -2,6 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+
 /**
  * @author	Jens Krumsieck
  * @copyright	codeQuake 2014
