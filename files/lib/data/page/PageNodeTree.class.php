@@ -71,6 +71,7 @@ class PageNodeTree implements \IteratorAggregate {
 	}
 
 	protected function isIncluded(PageNode $pageNode) {
-		return true;
+		if ($pageNode->isVisible() && $pageNode->isAccessible()) return true;
+		return false;
 	}
 }
