@@ -20,7 +20,7 @@ class PHPContentType extends AbstractContentType {
 
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
-		$php = substr($data['text'], 4);
+		$php = substr($data['text'], 5);
 		return eval($php);
 	}
 }
