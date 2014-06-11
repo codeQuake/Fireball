@@ -38,7 +38,7 @@ class PageModificationLogHandler extends ModificationLogHandler {
 		));
 	}
 
-	public function sortContents(Page $page){
+	public function sortContents(Page $page) {
 		$this->add($page, 'sortContents', array(
 			'time' => TIME_NOW,
 			'username' => WCF::getUser()->username
