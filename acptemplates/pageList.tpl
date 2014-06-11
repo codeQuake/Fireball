@@ -7,7 +7,7 @@
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			new WCF.Action.Delete('cms\\data\\page\\PageAction', '.jsPageRow');
+			new WCF.Action.NestedDelete('cms\\data\\page\\PageAction', '.jsPageRow');
 			new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction');
 			new CMS.ACP.Page.AddContent();
 			new CMS.ACP.Page.SetAsHome();

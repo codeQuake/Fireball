@@ -2,6 +2,8 @@
 namespace cms\data\page;
 
 use cms\data\content\ContentAction;
+use cms\data\page\PageCache;
+use cms\data\page\PageEditor;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
 use cms\system\log\modification\PageModificationLogHandler;
@@ -35,6 +37,13 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 	public function create() {
 		$page = parent::create();
+
+		//check if first page
+		if (PageCache::getInstance()->getHomePage() === null) {
+			$editor = new PageEditor($page);
+			$editor->setAsHome();
+		}
+
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
 		PageModificationLogHandler::getInstance()->create($page);
@@ -52,12 +61,15 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 	}
 
 	public function delete() {
-		// delete all contents beloning to the pages
+		// delete all contents belonging to the pages
 		foreach ($this->objectIDs as $objectID) {
 			$page = new Page($objectID);
 			$list = $page->getContents();
 			$contentIDs = array();
-			foreach ($list as $content) {
+			foreach ($list['body'] as $content) {
+				$contentIDs[] = $content->contentID;
+			}
+			foreach ($list['sidebar'] as $content) {
 				$contentIDs[] = $content->contentID;
 			}
 			$action = new ContentAction($contentIDs, 'delete', array());
@@ -70,6 +82,17 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		$action->executeAction();
 
 		parent::delete();
+
+		//check if first page
+		PageCacheBuilder::getInstance()->reset();
+		if (PageCache::getInstance()->getHomePage() === null) {
+			$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
+			$page = reset($pages);
+			if ($page != null) {
+				$editor = new PageEditor($page);
+				$editor->setAsHome();
+			}
+		}
 		PageCacheBuilder::getInstance()->reset();
 	}
 
