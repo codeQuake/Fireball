@@ -90,5 +90,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		}
 		WCF::getDB()->commitTransaction();
 		ContentCacheBuilder::getInstance()->reset();
+
+		PageModificationLogHandler::getInstance()->sortContents(reset($this->objects)->getPage());
 	}
 }

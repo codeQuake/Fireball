@@ -189,6 +189,7 @@
 		<item name="cms.acp.page.log.addContent"><![CDATA[{$additionalData['username']} added „{$additionalData['content']->title|language}“ to this page.]]></item>
 		<item name="cms.acp.page.log.editContent"><![CDATA[{$additionalData['username']} edited „{$additionalData['content']->title|language}“ on this page.]]></item>
 		<item name="cms.acp.page.log.deleteContent"><![CDATA[{$additionalData['username']} deleted a content.]]></item>
+		<item name="cms.acp.page.log.addContent"><![CDATA[{$additionalData['username']} sorted this page's contents.]]></item>
 		<item name="cms.acp.page.add"><![CDATA[Add page]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Edit page]]></item>
 		<item name="cms.acp.page.remove"><![CDATA[Remove page]]></item>

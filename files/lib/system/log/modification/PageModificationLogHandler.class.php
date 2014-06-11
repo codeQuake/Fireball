@@ -38,6 +38,13 @@ class PageModificationLogHandler extends ModificationLogHandler {
 		));
 	}
 
+	public function sortContents(Page $page){
+		$this->add($page, 'sortContents', array(
+			'time' => TIME_NOW,
+			'username' => WCF::getUser()->username
+		));
+	}
+
 	public function deleteContent(Page $page) {
 		$this->add($page, 'deleteContent', array(
 			'time' => TIME_NOW,
