@@ -9,7 +9,7 @@ use cms\system\cache\builder\PagePermissionCacheBuilder;
 use cms\system\log\modification\PageModificationLogHandler;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
-use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\VersionableDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
@@ -25,7 +25,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class PageAction extends AbstractDatabaseObjectAction implements ISortableAction {
+class PageAction extends VersionableDatabaseObjectAction implements ISortableAction {
 	protected $className = 'cms\data\page\PageEditor';
 	protected $permissionsDelete = array(
 		'admin.cms.page.canAddPage'

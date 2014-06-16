@@ -5,9 +5,11 @@ use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\CMSDatabaseObject;
 use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
+use wcf\data\ILinkableObject;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use cms\data\CMSVersionableDatabaseObject;
 
 /**
  * Represents a page.
@@ -17,9 +19,10 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Page extends CMSDatabaseObject implements IRouteController {
+class Page extends CMSVersionableDatabaseObject implements IRouteController, ILinkableObject {
 	protected static $databaseTableName = 'page';
 	protected static $databaseTableIndexName = 'pageID';
+	public $versionableObjectTypeName = 'de.codequake.cms.page';
 
 	public function __construct($id, $row = null, $object = null) {
 		if ($id !== null) {

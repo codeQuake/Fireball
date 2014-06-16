@@ -1,18 +1,18 @@
 <?php
 namespace cms\data\page;
 
-use wcf\data\DatabaseObjectEditor;
+use wcf\data\VersionableDatabaseObjectEditor;
 use wcf\system\WCF;
 
 /**
  * Functions to edit a page.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class PageEditor extends DatabaseObjectEditor {
+class PageEditor extends VersionableDatabaseObjectEditor {
 	protected static $baseClass = 'cms\data\page\Page';
 
 	public function setAsHome() {
@@ -22,7 +22,7 @@ class PageEditor extends DatabaseObjectEditor {
 		$statement->execute(array(
 			0
 		));
-		
+
 		$sql = "UPDATE	cms" . WCF_N . "_page
 			SET	isHome = ?
 			WHERE	pageID = ?";

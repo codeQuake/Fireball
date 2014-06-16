@@ -149,6 +149,13 @@
 		</type>
 		<!-- /content types -->
 
+		<!-- versionable -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.versionableObject</definitionname>
+		</type>
+
+		<!-- /versionable -->
 		<!-- attachments -->
 		<type>
 			<name>de.codequake.cms.news</name>

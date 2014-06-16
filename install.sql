@@ -22,6 +22,30 @@ CREATE TABLE cms1_page (
 	clicks INT (20) NOT NULL DEFAULT 0
 );
 
+DROP TABLE IF EXISTS cms1_page_version;
+CREATE TABLE cms1_page_version(
+	versionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	pageID INT(10),
+	alias VARCHAR(255) NOT NULL,
+	parentID INT(10) DEFAULT NULL,
+	title VARCHAR(255) NOT NULL,
+	description MEDIUMTEXT,
+	metaDescription MEDIUMTEXT,
+	metaKeywords VARCHAR(255),
+	invisible TINYINT(1) DEFAULT 0,
+	availableDuringOfflineMode TINYINT(1) DEFAULT 0,
+	robots ENUM('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow') NOT NULL DEFAULT 'index,follow',
+	showOrder INT(10) DEFAULT 0,
+	isHome INT(1) DEFAULT 0,
+	showSidebar INT(1) DEFAULT 0,
+	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
+	layoutID INT(10),
+	menuItemID INT(10),
+	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
+	comments INT(10) NOT NULL DEFAULT 0,
+	clicks INT (20) NOT NULL DEFAULT 0
+);
+
 --content
 DROP TABLE IF EXISTS cms1_content;
 CREATE TABLE cms1_content (
@@ -140,6 +164,8 @@ ALTER TABLE cms1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_
 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;
+
+ALTER TABLE cms1_page_version ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 
 ALTER TABLE cms1_news ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE cms1_news ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE SET NULL;
