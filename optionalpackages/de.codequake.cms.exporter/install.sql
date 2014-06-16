@@ -1,6 +1,0 @@
-﻿DROP TABLE IF EXISTS cms1_restore;
-CREATE TABLE cms1_restore (
-restoreID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-filename VARCHAR(255),
-time INT(255) NOT NULL
-);
