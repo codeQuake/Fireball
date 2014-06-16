@@ -295,13 +295,6 @@
 		</type>
 		<!-- /notifications -->
 
-		<!-- modification -->
-		<type>
-			<name>de.codequake.cms.page</name>
-			<definitionname>com.woltlab.wcf.modifiableContent</definitionname>
-		</type>
-		<!-- /modification -->
-
 		<!-- visit tracker -->
 		<type>
 			<name>de.codequake.cms.news</name>

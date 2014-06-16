@@ -2,7 +2,6 @@
 namespace cms\data\content;
 
 use cms\system\cache\builder\ContentCacheBuilder;
-use cms\system\log\modification\PageModificationLogHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\system\exception\UserInputException;
@@ -29,22 +28,15 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 	public function create() {
 		$content = parent::create();
 		ContentCacheBuilder::getInstance()->reset();
-		PageModificationLogHandler::getInstance()->addContent($content->getPage(), $content);
 		return $content;
 	}
 
 	public function update() {
 		parent::update();
-		foreach ($this->objects as $content) {
-			PageModificationLogHandler::getInstance()->editContent($content->getPage(), $content->getDecoratedObject());
-		}
 		ContentCacheBuilder::getInstance()->reset();
 	}
 
 	public function delete() {
-		foreach ($this->objects as $content) {
-			PageModificationLogHandler::getInstance()->deleteContent($content->getPage());
-		}
 		parent::delete();
 		ContentCacheBuilder::getInstance()->reset();
 	}
@@ -90,7 +82,5 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		}
 		WCF::getDB()->commitTransaction();
 		ContentCacheBuilder::getInstance()->reset();
-
-		PageModificationLogHandler::getInstance()->sortContents(reset($this->objects)->getPage());
 	}
 }

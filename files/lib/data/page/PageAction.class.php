@@ -6,7 +6,6 @@ use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
-use cms\system\log\modification\PageModificationLogHandler;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\VersionableDatabaseObjectAction;
@@ -46,7 +45,6 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
-		PageModificationLogHandler::getInstance()->create($page);
 		return $page;
 	}
 
@@ -54,9 +52,6 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 		parent::update();
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
-		foreach ($this->objects as $page) {
-			PageModificationLogHandler::getInstance()->edit($page->getDecoratedObject());
-		}
 
 	}
 
