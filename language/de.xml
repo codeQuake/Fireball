@@ -181,15 +181,7 @@
 		<item name="cms.acp.page.legend"><![CDATA[Legende]]></item>
 		<item name="cms.acp.page.overview"><![CDATA[Übersicht]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
-		<item name="cms.acp.page.log"><![CDATA[Änderungsprotokoll]]></item>
-		<item name="cms.acp.page.log.action"><![CDATA[Änderung]]></item>
-		<item name="cms.acp.page.log.time"><![CDATA[Zeit]]></item>
-		<item name="cms.acp.page.log.create"><![CDATA[Die Seite wurde von {$additionalData['username']} erstellt.]]></item>
-		<item name="cms.acp.page.log.edit"><![CDATA[Die Seite wurde von {$additionalData['username']} bearbeitet.]]></item>
-		<item name="cms.acp.page.log.addContent"><![CDATA[{$additionalData['username']} hat der Seite den Inhalt „{$additionalData['content']->title|language}“ hinzugefügt.]]></item>
-		<item name="cms.acp.page.log.editContent"><![CDATA[{$additionalData['username']} hat den Inhalt „{$additionalData['content']->title|language}“ bearbeitet.]]></item>
-		<item name="cms.acp.page.log.deleteContent"><![CDATA[{$additionalData['username']} hat einen Inhalt entfernt.]]></item>
-		<item name="cms.acp.page.log.addContent"><![CDATA[{$additionalData['username']} hat Sortierung der Inhalte verändert.]]></item>
+		<item name="cms.acp.page.versions"><![CDATA[Versionen]]></item>
 		<item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
 		<item name="cms.acp.page.remove"><![CDATA[Seite entfernen]]></item>
