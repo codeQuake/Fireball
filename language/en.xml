@@ -499,4 +499,8 @@
 		<item name="wcf.clipboard.item.de.codequake.cms.news.delete.confirmMessage"><![CDATA[Are you sure you want to delete {if $count == 1}this news{else} this {#$count} news{/if}?]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.news.marked"><![CDATA[{if $count == 1}1 News{else}{#$count} News{/if} marked]]></item>
 	</category>
+	<category name="wcf.acp.dataImport">
+		<item name="wcf.acp.dataImport.exporter.com.woltlab.wcf.exporter.wordpress3xtoNews"><![CDATA[Wordpress 3.x to News]]></item>
+		<item name="wcf.acp.dataImport.exporter.com.woltlab.wcf.exporter.cnewstoNews"><![CDATA[CNews]]></item>
+	</category>
 </language>

@@ -502,4 +502,8 @@
 		<item name="wcf.clipboard.label.de.codequake.cms.news.marked"><![CDATA[{if $count == 1}Eine Nachricht{else}{#$count} Nachrichten{/if} markiert]]></item>
 	</category>
 
+	<category name="wcf.acp.dataImport">
+		<item name="wcf.acp.dataImport.exporter.com.woltlab.wcf.exporter.wordpress3xtoNews"><![CDATA[Wordpress 3.x zu Nachrichten]]></item>
+		<item name="wcf.acp.dataImport.exporter.com.woltlab.wcf.exporter.cnewstoNews"><![CDATA[CNews]]></item>
+	</category>
 </language>
