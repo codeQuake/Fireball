@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\page;
 
-use cms\data\content\DrainedPositionContentNodeTree;;
+use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\CMSVersionableDatabaseObject;
 use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
