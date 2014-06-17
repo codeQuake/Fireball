@@ -157,6 +157,7 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 			}
 		}
 		WCF::getDB()->commitTransaction();
+		$this->createRevision();
 		PageCacheBuilder::getInstance()->reset();
 	}
 
