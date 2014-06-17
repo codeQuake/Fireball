@@ -18,7 +18,7 @@
 			{/foreach}
 			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
 			'cms.acp.page.versions': '{lang}cms.acp.page.versions{/lang}'
-		});
+			});
 		});
 		//]]>
 	</script>

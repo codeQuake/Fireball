@@ -31,9 +31,16 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 	protected $permissionsDelete = array(
 		'admin.cms.page.canAddPage'
 	);
+
+	protected $permissionsUpdate = array(
+		'admin.cms.page.canAddPage'
+	);
+
 	protected $requireACP = array(
 		'delete',
-		'setAsHome'
+		'setAsHome',
+		'restoreRevision',
+		'createRevision'
 	);
 
 	public function create() {

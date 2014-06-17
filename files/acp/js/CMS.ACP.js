@@ -92,6 +92,49 @@ CMS.ACP.Page.Revisions = Class.extend({
 	}
 });
 
+
+CMS.ACP.Page.Revisions.Restore = Class.extend({
+	_proxy: null,
+	_didInit:false,
+
+	 init: function () {
+	    	if (this._didInit) {
+				return;
+			}
+			this._proxy = new WCF.Action.Proxy({
+				success: $.proxy(this._success, this)
+			});
+
+			this._buttons = $('.jsRestoreRevisionButton');
+			this._buttons.click($.proxy(this._click, this));
+
+			this._didInit = true;
+	    },
+
+	    _click: function (event) {
+	    	event.preventDefault();
+			var $versionID = $(event.currentTarget).data('objectID');
+			var $pageID = $(event.currentTarget).data('pageID');
+				this._proxy.setOption('data', {
+					actionName: 'restoreRevision',
+	                className: 'cms\\data\\page\\PageAction',
+	                objectIDs: [ $pageID ],
+	                parameters: {
+	                	'restoreObjectID': $versionID
+	                }
+				});
+				WCF.LoadingOverlayHandler.updateIcon($(event.currentTarget));
+				this._proxy.sendRequest();
+	    },
+
+	    _success: function (data, textStatus, jqXHR) {
+	    	var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+			$notification.show(function() {
+				window.location = location;
+			});
+	    }
+});
+
 CMS.ACP.Page.AddContent = Class.extend({
 
 	_buttonSelector: '.jsContentAddButton',
@@ -143,6 +186,7 @@ CMS.ACP.Page.AddContent = Class.extend({
 		this._show(data.returnValues.pageID);
 	}
 });
+
 
 CMS.ACP.Page.SetAsHome = Class.extend({
 

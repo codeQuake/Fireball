@@ -1,3 +1,10 @@
+<script data-relocate="true">
+//<![CDATA[
+		$(function() {
+			new CMS.ACP.Page.Revisions.Restore();
+		});
+		//]]>
+</script>
 <div class="tabularBox tabularBoxTitle">
 	<table class="table">
 		<thead>
@@ -10,7 +17,7 @@
 			{foreach from=$versions item=version}
 			<tr class="jsVersionRow">
 				<td class="columnIcon">
-					<span class="icon icon16 icon-cogs jsRestoreRevisionButton jsTooltip pointer" title="{lang}cms.acp.page.revision.restore{/lang}" data-object-id="{@$version->versionID}" data-confirm-message="{lang}cms.acp.page.revision.restore.sure{/lang}"></span>
+					<span class="icon icon16 icon-cogs jsRestoreRevisionButton jsTooltip pointer" title="{lang}cms.acp.page.revision.restore{/lang}" data-object-id="{@$version->versionID}" data-page-id="{@$version->pageID}" data-confirm-message="{lang}cms.acp.page.revision.restore.sure{/lang}"></span>
 					{event name='rowButtons'}
 				</td>
 				<td class="columnID">{@$version->versionID}</td>
