@@ -66,7 +66,30 @@ CREATE TABLE cms1_content (
 	position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body',
 	cssID VARCHAR (255),
 	cssClasses VARCHAR(255),
-	additionalData MEDIUMTEXT DEFAULT NULL
+	additionalData MEDIUMTEXT DEFAULT NULL,
+	lastEditor VARCHAR(255) NOT NULL,
+	lastEditorID INT(10),
+	lastEditTime INT(10) NOT NULL DEFAULT 0
+);
+
+--content_version
+DROP TABLE IF EXISTS cms1_content_version;
+CREATE TABLE cms1_content_version(
+	versionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	contentID INT(10) NOT NULL,
+	parentID INT(10),
+	pageID INT(10),
+	title VARCHAR(255) NOT NULL DEFAULT '',
+	contentTypeID INT(10),
+	contentData MEDIUMTEXT,
+	showOrder INT(10) DEFAULT 0,
+	position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body',
+	cssID VARCHAR (255),
+	cssClasses VARCHAR(255),
+	additionalData MEDIUMTEXT DEFAULT NULL,
+	lastEditor VARCHAR(255) NOT NULL,
+	lastEditorID INT(10),
+	lastEditTime INT(10) NOT NULL DEFAULT 0
 );
 
 --stylesheet
@@ -168,6 +191,11 @@ ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) 
 
 ALTER TABLE cms1_content ADD FOREIGN KEY (parentID) REFERENCES cms1_content (contentID) ON DELETE SET NULL;
 ALTER TABLE cms1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+
+ALTER TABLE cms1_content_version ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
+
+ALTER TABLE cms1_content ADD FOREIGN KEY (lastEditorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE cms1_content_version ADD FOREIGN KEY (lastEditorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;

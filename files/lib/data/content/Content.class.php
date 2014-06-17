@@ -3,7 +3,7 @@ namespace cms\data\content;
 
 use cms\data\content\section\ContentContentSectionList;
 use cms\data\page\PageCache;
-use cms\data\CMSDatabaseObject;
+use cms\data\CMSVersionableDatabaseObject;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\poll\Poll;
 use wcf\data\IPollObject;
@@ -18,7 +18,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Content extends CMSDatabaseObject implements IRouteController, IPollObject {
+class Content extends CMSVersionableDatabaseObject implements IRouteController, IPollObject {
 	protected static $databaseTableName = 'content';
 	protected static $databaseTableIndexName = 'contentID';
 	public $poll = null;

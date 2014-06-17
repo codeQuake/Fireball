@@ -2,8 +2,8 @@
 namespace cms\data\content;
 
 use cms\system\cache\builder\ContentCacheBuilder;
-use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
+use wcf\data\VersionableDatabaseObjectAction;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 
@@ -15,7 +15,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class ContentAction extends AbstractDatabaseObjectAction implements ISortableAction {
+class ContentAction extends VersionableDatabaseObjectAction implements ISortableAction {
 	protected $className = 'cms\data\content\ContentEditor';
 	protected $permissionsDelete = array(
 		'admin.cms.content.canAddContent'
