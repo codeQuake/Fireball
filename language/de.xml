@@ -188,6 +188,7 @@
 		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
 		<item name="cms.acp.page.remove"><![CDATA[Seite entfernen]]></item>
 		<item name="cms.acp.page.title"><![CDATA[Seitentitel]]></item>
+		<item name="cms.acp.page.title.error.multilingual"><![CDATA[Der Seitentitel muss in allen Sprachen vorhanden sein!]]></item>
 		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von „{$page->title|language}' auflisten]]></item>
 		<item name="cms.acp.page.description"><![CDATA[Beschreibung]]></item>
 		<item name="cms.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
