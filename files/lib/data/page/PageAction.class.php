@@ -45,7 +45,6 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
-		$this->createRevision();
 		return $page;
 	}
 
