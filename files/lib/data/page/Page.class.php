@@ -1,15 +1,14 @@
 <?php
 namespace cms\data\page;
 
-use cms\data\content\DrainedPositionContentNodeTree;
-use cms\data\CMSDatabaseObject;
+use cms\data\content\DrainedPositionContentNodeTree;;
+use cms\data\CMSVersionableDatabaseObject;
 use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
 use wcf\data\ILinkableObject;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
-use cms\data\CMSVersionableDatabaseObject;
 
 /**
  * Represents a page.

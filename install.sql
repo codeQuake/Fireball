@@ -19,9 +19,13 @@ CREATE TABLE cms1_page (
 	menuItemID INT(10),
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
 	comments INT(10) NOT NULL DEFAULT 0,
-	clicks INT (20) NOT NULL DEFAULT 0
+	clicks INT (20) NOT NULL DEFAULT 0,
+	lastEditor VARCHAR(255) NOT NULL,
+	lastEditorID INT(10) NOT NULL,
+	lastEditTime INT(10) NOT NULL DEFAULT 0
 );
 
+--page_version
 DROP TABLE IF EXISTS cms1_page_version;
 CREATE TABLE cms1_page_version(
 	versionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -43,7 +47,10 @@ CREATE TABLE cms1_page_version(
 	menuItemID INT(10),
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
 	comments INT(10) NOT NULL DEFAULT 0,
-	clicks INT (20) NOT NULL DEFAULT 0
+	clicks INT (20) NOT NULL DEFAULT 0,
+	lastEditor VARCHAR(255) NOT NULL,
+	lastEditorID INT(10) NOT NULL,
+	lastEditTime INT(10) NOT NULL DEFAULT 0
 );
 
 --content
@@ -164,7 +171,8 @@ ALTER TABLE cms1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_
 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;
-
+ALTER TABLE cms1_page ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE cms1_page_version ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE cms1_page_version ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 
 ALTER TABLE cms1_news ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;

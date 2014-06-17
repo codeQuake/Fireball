@@ -8,8 +8,8 @@ use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
-use wcf\data\VersionableDatabaseObjectAction;
 use wcf\data\ISortableAction;
+use wcf\data\VersionableDatabaseObjectAction;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
@@ -45,6 +45,7 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 
 		PagePermissionCacheBuilder::getInstance()->reset();
 		PageCacheBuilder::getInstance()->reset();
+		$this->createRevision();
 		return $page;
 	}
 

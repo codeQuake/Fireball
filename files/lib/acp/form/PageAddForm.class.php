@@ -150,7 +150,10 @@ class PageAddForm extends AbstractForm {
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'robots' => $this->robots,
-			'isCommentable' => $this->isCommentable
+			'isCommentable' => $this->isCommentable,
+			'lastEditor' => WCF::getUser()->username,
+			'lastEditorID' => WCF::getUser()->userID,
+			'lastEditTime' => TIME_NOW
 		);
 
 		$objectAction = new PageAction(array(), 'create', array(
