@@ -10,7 +10,7 @@
 			{foreach from=$versions item=version}
 			<tr class="jsVersionRow">
 				<td class="columnIcon">
-					<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$version->versionID}" data-confirm-message="{lang}cms.acp.page.version.delete.sure{/lang}"></span>
+					<span class="icon icon16 icon-cogs jsRestoreRevisionButton jsTooltip pointer" title="{lang}cms.acp.page.revision.restore{/lang}" data-object-id="{@$version->versionID}" data-confirm-message="{lang}cms.acp.page.revision.restore.sure{/lang}"></span>
 					{event name='rowButtons'}
 				</td>
 				<td class="columnID">{@$version->versionID}</td>
