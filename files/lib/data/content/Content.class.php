@@ -21,6 +21,7 @@ use wcf\system\WCF;
 class Content extends CMSVersionableDatabaseObject implements IRouteController, IPollObject {
 	protected static $databaseTableName = 'content';
 	protected static $databaseTableIndexName = 'contentID';
+	public $versionableObjectTypeName = 'de.codequake.cms.content';
 	public $poll = null;
 
 	public function __construct($id, $row = null, $object = null) {

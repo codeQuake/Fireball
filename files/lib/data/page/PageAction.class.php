@@ -26,6 +26,8 @@ use wcf\system\WCF;
  */
 class PageAction extends VersionableDatabaseObjectAction implements ISortableAction {
 	protected $className = 'cms\data\page\PageEditor';
+	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'setAsHome', 'createRevision', 'deleteRevision', 'restoreRevision');
+
 	protected $permissionsDelete = array(
 		'admin.cms.page.canAddPage'
 	);
@@ -44,15 +46,7 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 		}
 
 		PagePermissionCacheBuilder::getInstance()->reset();
-		PageCacheBuilder::getInstance()->reset();
 		return $page;
-	}
-
-	public function update() {
-		parent::update();
-		PagePermissionCacheBuilder::getInstance()->reset();
-		PageCacheBuilder::getInstance()->reset();
-
 	}
 
 	public function delete() {
@@ -88,7 +82,6 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 				$editor->setAsHome();
 			}
 		}
-		PageCacheBuilder::getInstance()->reset();
 	}
 
 	public function validateSetAsHome() {
@@ -108,7 +101,6 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
-		PageCacheBuilder::getInstance()->reset();
 	}
 
 	public function validateUpdatePosition() {
@@ -158,7 +150,6 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 		}
 		WCF::getDB()->commitTransaction();
 		$this->createRevision();
-		PageCacheBuilder::getInstance()->reset();
 	}
 
 	public function validateGetContentTypes() {
@@ -190,6 +181,29 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 			'pageID' => reset($this->objectIDs),
 			'position' => $this->parameters['position'],
 			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null
+		);
+	}
+
+	public function validateGetRevisions() {
+		if (count($this->objectIDs) != 1) {
+			throw new UserInputException('objectIDs');
+		}
+	}
+
+	public function getRevisions() {
+		$objectID = reset($this->objectIDs);
+		$page = PageCache::getInstance()->getPage($objectID);
+		$versions = $page->getVersions();
+
+		WCF::getTPL()->assign(array(
+			'versions' => $versions,
+			'pageID' => $page->pageID
+		));
+
+		return array(
+			'template' => WCF::getTPL()->fetch('versionList', 'cms'),
+			'versions' => $versions,
+			'pageID' => $page->pageID
 		);
 	}
 }

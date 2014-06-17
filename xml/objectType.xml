@@ -153,9 +153,16 @@
 		<type>
 			<name>de.codequake.cms.page</name>
 			<definitionname>com.woltlab.wcf.versionableObject</definitionname>
+			<classname>cms\data\page\Page</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.content</name>
+			<definitionname>com.woltlab.wcf.versionableObject</definitionname>
+			<classname>cms\data\content\Content</classname>
 		</type>
 
 		<!-- /versionable -->
+
 		<!-- attachments -->
 		<type>
 			<name>de.codequake.cms.news</name>
