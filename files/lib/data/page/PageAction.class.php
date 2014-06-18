@@ -24,9 +24,9 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class PageAction extends VersionableDatabaseObjectAction implements ISortableAction {
+class PageAction extends AbstractDatabaseObjectAction implements ISortableAction {
 	protected $className = 'cms\data\page\PageEditor';
-	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'setAsHome', 'createRevision', 'deleteRevision', 'restoreRevision');
+	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'setAsHome');
 
 	protected $permissionsDelete = array(
 		'admin.cms.page.canAddPage'
@@ -38,9 +38,7 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 
 	protected $requireACP = array(
 		'delete',
-		'setAsHome',
-		'restoreRevision',
-		'createRevision'
+		'setAsHome'
 	);
 
 	public function create() {
@@ -188,29 +186,6 @@ class PageAction extends VersionableDatabaseObjectAction implements ISortableAct
 			'pageID' => reset($this->objectIDs),
 			'position' => $this->parameters['position'],
 			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null
-		);
-	}
-
-	public function validateGetRevisions() {
-		if (count($this->objectIDs) != 1) {
-			throw new UserInputException('objectIDs');
-		}
-	}
-
-	public function getRevisions() {
-		$objectID = reset($this->objectIDs);
-		$page = PageCache::getInstance()->getPage($objectID);
-		$versions = $page->getVersions();
-
-		WCF::getTPL()->assign(array(
-			'versions' => $versions,
-			'pageID' => $page->pageID
-		));
-
-		return array(
-			'template' => WCF::getTPL()->fetch('versionList', 'cms'),
-			'versions' => $versions,
-			'pageID' => $page->pageID
 		);
 	}
 }

@@ -67,10 +67,7 @@ class ContentEditForm extends ContentAddForm {
 			'showOrder' => $this->showOrder,
 			'position' => $this->position,
 			'contentData' => serialize($this->contentData),
-			'contentTypeID' => $this->objectType->objectTypeID,
-			'lastEditor' => WCF::getUser()->username,
-			'lastEditorID' => WCF::getUser()->userID,
-			'lastEditTime' => TIME_NOW
+			'contentTypeID' => $this->objectType->objectTypeID
 		);
 		$objectAction = new ContentAction(array(
 			$this->contentID

@@ -19,38 +19,7 @@ CREATE TABLE cms1_page (
 	menuItemID INT(10),
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
 	comments INT(10) NOT NULL DEFAULT 0,
-	clicks INT (20) NOT NULL DEFAULT 0,
-	lastEditor VARCHAR(255) NOT NULL,
-	lastEditorID INT(10),
-	lastEditTime INT(10) NOT NULL DEFAULT 0
-);
-
---page_version
-DROP TABLE IF EXISTS cms1_page_version;
-CREATE TABLE cms1_page_version(
-	versionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	pageID INT(10),
-	alias VARCHAR(255) NOT NULL,
-	parentID INT(10) DEFAULT NULL,
-	title VARCHAR(255) NOT NULL,
-	description MEDIUMTEXT,
-	metaDescription MEDIUMTEXT,
-	metaKeywords VARCHAR(255),
-	invisible TINYINT(1) DEFAULT 0,
-	availableDuringOfflineMode TINYINT(1) DEFAULT 0,
-	robots ENUM('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow') NOT NULL DEFAULT 'index,follow',
-	showOrder INT(10) DEFAULT 0,
-	isHome INT(1) DEFAULT 0,
-	showSidebar INT(1) DEFAULT 0,
-	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
-	layoutID INT(10),
-	menuItemID INT(10),
-	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
-	comments INT(10) NOT NULL DEFAULT 0,
-	clicks INT (20) NOT NULL DEFAULT 0,
-	lastEditor VARCHAR(255) NOT NULL,
-	lastEditorID INT(10),
-	lastEditTime INT(10) NOT NULL DEFAULT 0
+	clicks INT (20) NOT NULL DEFAULT 0
 );
 
 --content
@@ -66,30 +35,7 @@ CREATE TABLE cms1_content (
 	position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body',
 	cssID VARCHAR (255),
 	cssClasses VARCHAR(255),
-	additionalData MEDIUMTEXT DEFAULT NULL,
-	lastEditor VARCHAR(255) NOT NULL,
-	lastEditorID INT(10),
-	lastEditTime INT(10) NOT NULL DEFAULT 0
-);
-
---content_version
-DROP TABLE IF EXISTS cms1_content_version;
-CREATE TABLE cms1_content_version(
-	versionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	contentID INT(10) NOT NULL,
-	parentID INT(10),
-	pageID INT(10),
-	title VARCHAR(255) NOT NULL DEFAULT '',
-	contentTypeID INT(10),
-	contentData MEDIUMTEXT,
-	showOrder INT(10) DEFAULT 0,
-	position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body',
-	cssID VARCHAR (255),
-	cssClasses VARCHAR(255),
-	additionalData MEDIUMTEXT DEFAULT NULL,
-	lastEditor VARCHAR(255) NOT NULL,
-	lastEditorID INT(10),
-	lastEditTime INT(10) NOT NULL DEFAULT 0
+	additionalData MEDIUMTEXT DEFAULT NULL
 );
 
 --stylesheet

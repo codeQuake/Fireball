@@ -1,7 +1,7 @@
 {include file='header' pageTitle='cms.acp.page.list'}
 
 <header class="boxHeadline">
-    <h1>{lang}cms.acp.page.list{/lang}</h1>
+	<h1>{lang}cms.acp.page.list{/lang}</h1>
 
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 	<script data-relocate="true">
@@ -11,7 +11,6 @@
 			new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction');
 			new CMS.ACP.Page.AddContent();
 			new CMS.ACP.Page.SetAsHome();
-			new CMS.ACP.Page.Revisions();
 			WCF.Language.addObject({
 			{foreach from=$objectTypeList item=type}
 				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
@@ -55,7 +54,7 @@
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
 								{if !$page->isHome && !$page->isChild()}<span class="icon icon16 icon-home jsTooltip jsSetAsHome pointer" data-object-id="{$page->pageID}" title="{lang}cms.acp.page.setAsHome{/lang}"></span>{/if}
 
-								<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.versions{/lang}" data-object-id="{@$page->pageID}"></span>
+								{*<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.versions{/lang}" data-object-id="{@$page->pageID}"></span>*}
 								<!-- content controls -->
 								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$page->pageID}"></span>
 								<a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>

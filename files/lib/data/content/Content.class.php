@@ -3,7 +3,7 @@ namespace cms\data\content;
 
 use cms\data\content\section\ContentContentSectionList;
 use cms\data\page\PageCache;
-use cms\data\CMSVersionableDatabaseObject;
+use cms\data\CMSDatabaseObject;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\poll\Poll;
 use wcf\data\IPollObject;
@@ -18,17 +18,16 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Content extends CMSVersionableDatabaseObject implements IRouteController, IPollObject {
+class Content extends CMSDatabaseObject implements IRouteController, IPollObject {
 	protected static $databaseTableName = 'content';
 	protected static $databaseTableIndexName = 'contentID';
-	public $versionableObjectTypeName = 'de.codequake.cms.content';
 	public $poll = null;
 
 	public function __construct($id, $row = null, $object = null) {
 		if ($id !== null) {
 			$sql = "SELECT *
-                    FROM " . static::getDatabaseTableName() . "
-                    WHERE (" . static::getDatabaseTableIndexName() . " = ?)";
+					FROM " . static::getDatabaseTableName() . "
+					WHERE (" . static::getDatabaseTableIndexName() . " = ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
 				$id

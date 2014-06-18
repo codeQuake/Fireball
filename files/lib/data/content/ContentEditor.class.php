@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\content;
 
-use wcf\data\VersionableDatabaseObjectEditor;
+use wcf\data\DatabaseObjectEditor;
 
 /**
  * Functions to edit a content item.
@@ -11,6 +11,6 @@ use wcf\data\VersionableDatabaseObjectEditor;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class ContentEditor extends VersionableDatabaseObjectEditor {
+class ContentEditor extends DatabaseObjectEditor {
 	protected static $baseClass = 'cms\data\content\Content';
 }

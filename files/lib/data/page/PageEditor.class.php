@@ -2,9 +2,8 @@
 namespace cms\data\page;
 
 use cms\system\cache\builder\PageCacheBuilder;
+use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\data\VersionableDatabaseObjectEditor;
-use wcf\system\cache\builder\VersionCacheBuilder;
 use wcf\system\WCF;
 
 /**
@@ -15,7 +14,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class PageEditor extends VersionableDatabaseObjectEditor implements IEditableCachedObject {
+class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	protected static $baseClass = 'cms\data\page\Page';
 
 	public function setAsHome() {
@@ -38,6 +37,5 @@ class PageEditor extends VersionableDatabaseObjectEditor implements IEditableCac
 
 	public static function resetCache() {
 		PageCacheBuilder::getInstance()->reset();
-		VersionCacheBuilder::getInstance()->reset();
 	}
 }

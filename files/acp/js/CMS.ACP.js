@@ -4,135 +4,47 @@ CMS.ACP = {};
 CMS.ACP.Page = {};
 
 CMS.ACP.Page.AddForm = Class.extend({
-    init: function () {
-        $('#alias, #parentID').change($.proxy(this._buildAliasPreview, this));
-        $('#title').change($.proxy(this._buildAlias, this));
-        this._buildAliasPreview();
-    },
-
-    _buildAliasPreview: function() {
-        var $aliasParent = $('#parentID option:selected').data('alias');
-        var $alias = $('#alias').val();
-        if ($alias != '') {
-            $aliasPreview = window.location.origin + '/index.php/';
-            if ($aliasParent != '') {
-                $aliasPreview += $aliasParent + '/';
-            }
-            $aliasPreview += $alias + '/';
-            $('#aliasPreview').html(WCF.Language.get('cms.acp.page.general.alias.preview') + ' ' +  $aliasPreview).show();
-        }
-        else { $('#aliasPreview').hide(); }
-    },
-
-    _buildAlias: function(){
-        var $alias = $('#alias').val();
-        //prevent alias from beeing overwritten
-        if($alias == ''){
-        	var $title = $('#title').val();
-        	var $minus = [" ", "\\", "/", ":", ";", ".", "_", ","];
-        	$minus.forEach(function(entry){
-        		$title = $title.replace(entry, "-");
-        	});
-
-        	var $empty = ["{", "}", "[", "]", "&", "%", "$", "§", "\"", "!", "*", "'", "+", "#", "@", "<", ">", "|", "µ", "?", ")", "("];
-        	$empty.forEach(function(entry){
-        		$title = $title.replace(entry, "");
-        	});
-
-        	$title = $title.toLowerCase();
-
-        	$('#alias').val($title);
-        	this._buildAliasPreview();
-        }
-    }
-});
-
-CMS.ACP.Page.Revisions = Class.extend({
-	_proxy: null,
-	_cache: {},
-	_dialog: null,
-	_didInit: false,
-
-	init:function(){
-		if (this._didInit)  {
-			return;
-		}
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
-		});
-
-		this._buttons = $('.jsRevisionsButton');
-		this._buttons.click($.proxy(this._click, this));
-
-		this._didInit = true;
+	init: function () {
+		$('#alias, #parentID').change($.proxy(this._buildAliasPreview, this));
+		$('#title').change($.proxy(this._buildAlias, this));
+		this._buildAliasPreview();
 	},
 
-	_click: function(event){
-		event.preventDefault();
-		var $pageID = $(event.currentTarget).data('objectID');
-
-			this._proxy.setOption('data', {
-				actionName: 'getRevisions',
-				className: 'cms\\data\\page\\PageAction',
-				objectIDs: [ $pageID ]
-			});
-			this._proxy.sendRequest();
-	},
-
-	_show: function(pageID){
-			this._dialog = $('<div id="revisionDialog">' + this._cache[pageID] + '</div>').appendTo(document.body);
-			this._dialog.wcfDialog({
-				title: WCF.Language.get('cms.acp.page.versions')
-			});
-	},
-
-	_success: function(data, textStatus, jqXHR) {
-		this._cache[data.returnValues.pageID] = data.returnValues.template;
-		this._show(data.returnValues.pageID);
-	}
-});
-
-
-CMS.ACP.Page.Revisions.Restore = Class.extend({
-	_proxy: null,
-	_didInit:false,
-
-	 init: function () {
-	    	if (this._didInit) {
-				return;
+	_buildAliasPreview: function() {
+		var $aliasParent = $('#parentID option:selected').data('alias');
+		var $alias = $('#alias').val();
+		if ($alias != '') {
+			$aliasPreview = window.location.origin + '/index.php/';
+			if ($aliasParent != '') {
+				$aliasPreview += $aliasParent + '/';
 			}
-			this._proxy = new WCF.Action.Proxy({
-				success: $.proxy(this._success, this)
+			$aliasPreview += $alias + '/';
+			$('#aliasPreview').html(WCF.Language.get('cms.acp.page.general.alias.preview') + ' ' +  $aliasPreview).show();
+		}
+		else { $('#aliasPreview').hide(); }
+	},
+
+	_buildAlias: function(){
+		var $alias = $('#alias').val();
+		//prevent alias from beeing overwritten
+		if($alias == ''){
+			var $title = $('#title').val();
+			var $minus = [" ", "\\", "/", ":", ";", ".", "_", ","];
+			$minus.forEach(function(entry){
+				$title = $title.replace(entry, "-");
 			});
 
-			this._buttons = $('.jsRestoreRevisionButton');
-			this._buttons.click($.proxy(this._click, this));
-
-			this._didInit = true;
-	    },
-
-	    _click: function (event) {
-	    	event.preventDefault();
-			var $versionID = $(event.currentTarget).data('objectID');
-			var $pageID = $(event.currentTarget).data('pageID');
-				this._proxy.setOption('data', {
-					actionName: 'restoreRevision',
-	                className: 'cms\\data\\page\\PageAction',
-	                objectIDs: [ $pageID ],
-	                parameters: {
-	                	'restoreObjectID': $versionID
-	                }
-				});
-				WCF.LoadingOverlayHandler.updateIcon($(event.currentTarget));
-				this._proxy.sendRequest();
-	    },
-
-	    _success: function (data, textStatus, jqXHR) {
-	    	var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-			$notification.show(function() {
-				window.location = location;
+			var $empty = ["{", "}", "[", "]", "&", "%", "$", "§", "\"", "!", "*", "'", "+", "#", "@", "<", ">", "|", "µ", "?", ")", "("];
+			$empty.forEach(function(entry){
+				$title = $title.replace(entry, "");
 			});
-	    }
+
+			$title = $title.toLowerCase();
+
+			$('#alias').val($title);
+			this._buildAliasPreview();
+		}
+	}
 });
 
 CMS.ACP.Page.AddContent = Class.extend({
@@ -194,8 +106,8 @@ CMS.ACP.Page.SetAsHome = Class.extend({
 	_proxy: null,
 	_didInit: false,
 
-    init: function () {
-    	if (this._didInit) {
+	init: function () {
+		if (this._didInit) {
 			return;
 		}
 		this._proxy = new WCF.Action.Proxy({
@@ -206,28 +118,28 @@ CMS.ACP.Page.SetAsHome = Class.extend({
 		this._buttons.click($.proxy(this._click, this));
 
 		this._didInit = true;
-    },
+	},
 
-    _click: function (event) {
-    	event.preventDefault();
+	_click: function (event) {
+		event.preventDefault();
 		var $pageID = $(event.currentTarget).data('objectID');
 
 			this._proxy.setOption('data', {
 				actionName: 'setAsHome',
-                className: 'cms\\data\\page\\PageAction',
-                objectIDs: [ $pageID ]
+				className: 'cms\\data\\page\\PageAction',
+				objectIDs: [ $pageID ]
 			});
 			WCF.LoadingOverlayHandler.updateIcon($(event.currentTarget));
 			this._proxy.sendRequest();
-    },
+	},
 
-    _success: function (data, textStatus, jqXHR) {
-    	var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+	_success: function (data, textStatus, jqXHR) {
+		var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
 		var self = this;
 		$notification.show(function() {
 			window.location = location;
 		});
-    }
+	}
 
 });
 
@@ -464,19 +376,19 @@ CMS.ACP.Image.Ratio = Class.extend({
 
 	init: function(width, height) {
 		this._ratio = width/height;
-		 $('#width').change($.proxy(this._calculateHeight, this));
-		 $('#height').change($.proxy(this._calculateWidth, this));
+		$('#width').change($.proxy(this._calculateHeight, this));
+		$('#height').change($.proxy(this._calculateWidth, this));
 	},
 
 	_calculateHeight: function() {
 		var $width = $('#width');
 		var height = $width.val() / this._ratio;
 		$('#height').val(Math.round(height));
-    },
+	},
 
-    _calculateWidth: function() {
+	_calculateWidth: function() {
 		var $height = $('#height');
 		var width = $height.val() * this._ratio;
 		$('#width').val(Math.round(width));
-    }
+	}
 });
