@@ -18,7 +18,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Page extends CMSeDatabaseObject implements IRouteController, ILinkableObject {
+class Page extends CMSDatabaseObject implements IRouteController, ILinkableObject {
 	protected static $databaseTableName = 'page';
 	protected static $databaseTableIndexName = 'pageID';
 
