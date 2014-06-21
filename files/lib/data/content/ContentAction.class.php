@@ -2,6 +2,7 @@
 namespace cms\data\content;
 
 use cms\system\cache\builder\ContentCacheBuilder;
+use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
