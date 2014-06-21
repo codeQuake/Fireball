@@ -87,6 +87,11 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 		return $list;
 	}
 
+	public function getChildrenTree() {
+		$tree = new PageNodeTree($this->pageID);
+		return $tree->getIterator();
+	}
+
 	// builds up a complete folder structure like link
 	public function getAlias() {
 		// returns page alias
@@ -107,7 +112,7 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 
 	public function getParentPage() {
 		if ($this->isChild()) {
-			return new Page($this->parentID);
+			return PageCache::getInstance()->getPage($this->parentID);
 		}
 		return null;
 	}

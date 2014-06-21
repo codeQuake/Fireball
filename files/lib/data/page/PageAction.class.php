@@ -154,7 +154,6 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			}
 		}
 		WCF::getDB()->commitTransaction();
-		$this->createRevision();
 	}
 
 	public function validateGetContentTypes() {

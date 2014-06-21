@@ -1,6 +1,7 @@
 <?php
 namespace cms\system\cache\builder;
 
+use cms\data\page\Page;
 use cms\data\page\PageList;
 use wcf\system\cache\builder\AbstractCacheBuilder;
 
@@ -24,10 +25,15 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 		$list->readObjects();
 		$data['pages'] = $list->getObjects();
 		foreach ($data['pages'] as $page) {
-			$data['aliasToID'][$page->getAlias()] = $page->pageID;
-		}
 
-		foreach ($data['pages'] as $page) {
+			$alias = $page->alias;
+
+			while ($page->parentID && $page = $data['pages'][$page->parentID]) {
+				$alias = $page->alias .'/'. $alias;
+			}
+
+			$data['aliasToID'][$alias] = $page->pageID;
+
 			$data['tree'][$page->parentID][] = $page->pageID;
 		}
 
