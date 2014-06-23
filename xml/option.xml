@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+	<?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
 	<import>
 		<categories>
@@ -30,7 +30,7 @@
 			<!-- /module.community -->
 
 			<!-- cms.news -->
-			<option name="cms_news_signatures">
+			<option name="cms_news_comments">
 				<optiontype>boolean</optiontype>
 				<categoryname>cms.news</categoryname>
 				<defaultvalue>1</defaultvalue>
@@ -51,7 +51,7 @@
 			<option name="cms_news_sidebar_categories_main">
 				<optiontype>boolean</optiontype>
 				<categoryname>cms.news</categoryname>
-				<defaultvalue>1</defaultvalue>
+				<defaultvalue>0</defaultvalue>
 				<options>module_news</options>
 			</option>
 			<option name="cms_news_languageicon">
@@ -70,6 +70,12 @@
 				<optiontype>integer</optiontype>
 				<categoryname>cms.news</categoryname>
 				<defaultvalue>10</defaultvalue>
+				<options>module_news</options>
+			</option>
+			<option name="cms_news_signatures">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.news</categoryname>
+				<defaultvalue>1</defaultvalue>
 				<options>module_news</options>
 			</option>
 			<!-- /cms.news -->
