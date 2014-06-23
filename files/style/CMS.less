@@ -1,11 +1,11 @@
 .newsNavigationLink > span {
-    position: absolute;
-    display: none;
-    transition: 3s ease all;
+	position: absolute;
+	display: none;
+	transition: 3s ease all;
 }
 .newsNavigation:hover  .newsNavigationLink > span {
-    display:inline-block;
-    color: @wcfContainerBackgroundColor;
+	display:inline-block;
+	color: @wcfContainerBackgroundColor;
 }
 
 .newsBox256, .newsBox128{
@@ -14,6 +14,15 @@
 	> .newsTeaser {text-align: justify;}
 }
 
+.menuContainer{
+	.cmsMenu{
+		> li > ul > li > a {padding-left: 35px;}
+		> li > ul > li > ul > li a {padding-left: 56px;}
+		> li > ul > li > ul > ul > li a {padding-left: 77px;}
+		> li > ul > li > ul > ul > li > ul > li a {padding-left: 98px;}
+		> li > ul > li > ul > ul > li > ul > li > ul > li a {padding-left: 119px;}
+	}
+}
 #tplPage{
 	aside.sidebar .pollContainer{
 		float: none;
