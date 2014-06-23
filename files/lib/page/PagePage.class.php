@@ -54,15 +54,8 @@ class PagePage extends AbstractPage {
 			$this->page = PageCache::getInstance()->getPage($this->pageID);
 			if ($this->page === null) throw new IllegalLinkException();
 		} else {
-			$sql = "SELECT pageID FROM cms" . WCF_N . "_page WHERE isHome = ?";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(
-				1
-			));
-			$row = $statement->fetchArray();
-			$this->pageID = $row['pageID'];
-			$this->page = PageCache::getInstance()->getPage($this->pageID);
-			if ($this->pageID == 0) {
+			$this->page = PageCache::getInstance()->getHomePage($this->pageID);
+			if ($this->page->pageID == 0) {
 				throw new IllegalLinkException();
 			}
 		}
