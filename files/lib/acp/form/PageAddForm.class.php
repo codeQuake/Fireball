@@ -42,10 +42,10 @@ class PageAddForm extends AbstractForm {
 	public $metaDescription = '';
 	public $metaKeywords = '';
 	public $invisible = 0;
-	public $availableDuringOfflineMode = 0;
-	public $robots = 'index,follow';
-	public $showSidebar = 0;
-	public $sidebarOrientation = 'right';
+	public $availableDuringOfflineMode = CMS_PAGES_DEFAULT_OFFLINE;
+	public $robots = CMS_PAGES_DEFAULT_ROBOTS;
+	public $showSidebar = CMS_PAGES_DEFAULT_GLOBAL_SIDEBAR;
+	public $sidebarOrientation = CMS_PAGES_DEFAULT_SIDEBAR;
 	public $showOrder = 0;
 	public $parentID = null;
 	public $menuItem = 1;
@@ -53,7 +53,7 @@ class PageAddForm extends AbstractForm {
 	public $pageList = null;
 	public $layoutList = null;
 	public $layoutID = 0;
-	public $isCommentable = 0;
+	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
 
 	public function readParameters() {
 		parent::readParameters();

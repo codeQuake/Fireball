@@ -1,4 +1,4 @@
-	<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
 	<import>
 		<categories>
@@ -6,8 +6,23 @@
 			<category name="cms.general">
 				<parent>cms</parent>
 			</category>
+			<category name="cms.pages">
+				<parent>cms</parent>
+			</category>
+			<category name="cms.pages.default">
+				<parent>cms.pages</parent>
+			</category>
 			<category name="cms.news">
 				<parent>cms</parent>
+				<options>module_news</options>
+			</category>
+			<category name="cms.news.images">
+				<parent>cms.news</parent>
+				<options>module_news</options>
+			</category>
+
+			<category name="cms.news.categories">
+				<parent>cms.news</parent>
 				<options>module_news</options>
 			</category>
 		</categories>
@@ -29,6 +44,44 @@
 			</option>
 			<!-- /module.community -->
 
+			<!-- cms.pages.default -->
+			<option name="cms_pages_default_robots">
+				<optiontype>select</optiontype>
+				<categoryname>cms.pages.default</categoryname>
+				<selectoptions><![CDATA[index,follow:wcf.acp.option.cms_pages_default_robots.indexfollow
+index,nofollow:wcf.acp.option.cms_pages_default_robots.indexnofollow
+noindex,follow:wcf.acp.option.cms_pages_default_robots.noindexfollow
+noindex,nofollow:wcf.acp.option.cms_pages_default_robots.noindexnofollow]]></selectoptions>
+				<defaultvalue><![CDATA[index,follow]]></defaultvalue>
+			</option>
+
+			<option name="cms_pages_default_global_sidebar">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.pages.default</categoryname>
+				<defaultvalue>0</defaultvalue>
+			</option>
+
+			<option name="cms_pages_default_sidebar">
+				<optiontype>select</optiontype>
+				<categoryname>cms.pages.default</categoryname>
+				<selectoptions><![CDATA[left:wcf.acp.option.cms_pages_default_sidebar.left
+right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
+				<defaultvalue><![CDATA[right]]></defaultvalue>
+			</option>
+
+			<option name="cms_pages_default_comments">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.pages.default</categoryname>
+				<defaultvalue>0</defaultvalue>
+			</option>
+
+			<option name="cms_pages_default_offline">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.pages.default</categoryname>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			<!--  /cms.pages.default -->
+
 			<!-- cms.news -->
 			<option name="cms_news_comments">
 				<optiontype>boolean</optiontype>
@@ -38,19 +91,19 @@
 			</option>
 			<option name="cms_news_news_images_attached">
 				<optiontype>boolean</optiontype>
-				<categoryname>cms.news</categoryname>
+				<categoryname>cms.news.images</categoryname>
 				<defaultvalue>1</defaultvalue>
 				<options>module_news</options>
 			</option>
 			<option name="cms_news_sidebar_categories">
 				<optiontype>boolean</optiontype>
-				<categoryname>cms.news</categoryname>
+				<categoryname>cms.news.categories</categoryname>
 				<defaultvalue>1</defaultvalue>
 				<options>module_news</options>
 			</option>
 			<option name="cms_news_sidebar_categories_main">
 				<optiontype>boolean</optiontype>
-				<categoryname>cms.news</categoryname>
+				<categoryname>cms.news.categories</categoryname>
 				<defaultvalue>0</defaultvalue>
 				<options>module_news</options>
 			</option>

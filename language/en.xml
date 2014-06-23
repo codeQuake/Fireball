@@ -217,7 +217,7 @@
 		<item name="cms.acp.page.meta.robots.noindexfollow"><![CDATA[no index, follow]]></item>
 		<item name="cms.acp.page.meta.robots.noindexnofollow"><![CDATA[no index, no follow]]></item>
 		<item name="cms.acp.page.settings"><![CDATA[Settings]]></item>
-		<item name="cms.acp.page.settings.showSidebar"><![CDATA[Show sidebar]]></item>
+		<item name="cms.acp.page.settings.showSidebar"><![CDATA[Show global sidebar]]></item>
 		<item name="cms.acp.page.settings.showSidebar.description"><![CDATA[Shows the global sidebar, which you can set up <a href="{link controller='DashboardList'}{/link}">here</a>.]]></item>
 		<item name="cms.acp.page.settings.sidebarOrientation"><![CDATA[Sidebarorientation]]></item>
 		<item name="cms.acp.page.settings.sidebarOrientation.right"><![CDATA[Right]]></item>
@@ -425,9 +425,24 @@
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.category.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.acp.option.category.cms.general"><![CDATA[General]]></item>
+		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Pages]]></item>
+		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Defaultvalues]]></item>
+		<item name="wcf.acp.option.category.cms.news.images"><![CDATA[Images]]></item>
+		<item name="wcf.acp.option.category.cms.news.categories"><![CDATA[Categories]]></item>
 		<item name="wcf.acp.option.category.cms.news"><![CDATA[News]]></item>
 		<item name="wcf.acp.option.cms_news_per_page"><![CDATA[News per page]]></item>
 		<item name="wcf.acp.option.cms_news_comments"><![CDATA[Use Comment-System]]></item>
+		<item name="wcf.acp.option.cms_pages_default_robots"><![CDATA[Meta-Robots]]></item>
+		<item name="wcf.acp.option.cms_pages_default_robots.indexfollow"><![CDATA[index & follow (default)]]></item>
+		<item name="wcf.acp.option.cms_pages_default_robots.indexnofollow"><![CDATA[index & no follow]]></item>
+		<item name="wcf.acp.option.cms_pages_default_robots.noindexfollow"><![CDATA[no index & no follow]]></item>
+		<item name="wcf.acp.option.cms_pages_default_robots.noindexnofollow"><![CDATA[no index & no follow]]></item>
+		<item name="wcf.acp.option.cms_pages_default_global_sidebar"><![CDATA[Show global sidebar]]></item>
+		<item name="wcf.acp.option.cms_pages_default_sidebar"><![CDATA[Sidebarorientation]]></item>
+		<item name="wcf.acp.option.cms_pages_default_sidebar.left"><![CDATA[Left]]></item>
+		<item name="wcf.acp.option.cms_pages_default_sidebar.right"><![CDATA[Right]]></item>
+		<item name="wcf.acp.option.cms_pages_default_comments"><![CDATA[Enable Comments]]></item>
+		<item name="wcf.acp.option.cms_pages_default_offline"><![CDATA[Available during offline mode]]></item>
 		<item name="wcf.acp.option.cms_news_languageicon"><![CDATA[Show language icon]]></item>
 		<item name="wcf.acp.option.cms_news_latest_limit"><![CDATA[Latest news limit]]></item>
 		<item name="wcf.acp.option.cms_news_latest_limit.description"><![CDATA[Amount of latest news in dashboard box]]></item>
