@@ -1,38 +1,41 @@
 /*
-    Fireball Grid System for WCF
+	Fireball Grid System for WCF
 */
 .gridContainer {
-    &::before, &::after {
-        display: table;
-        content: '';
-    }
+	&::before, &::after {
+		display: table;
+		content: '';
+	}
 
-    &::after {
-        clear: both;
-    }
+	&::after {
+		clear: both;
+	}
 }
 
-.grid {
-    float: left;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
 
-    &:not(:last-child) {
-        padding-right: @wcfGapMedium;
-    }
+@media all and (min-width: 801px) {
+	.grid {
+		float: left;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+
+		&:not(:last-child) {
+			padding-right: @wcfGapMedium;
+		}
+	}
+
+	.grid10 { width: 10%; }
+	.grid15 { width: 15%; }
+	.grid20 { width: 20%; }
+	.grid25 { width: 25%; }
+	.grid30 { width: 30%; }
+	.grid33 { width: 33%; }
+	.grid40 { width: 40%; }
+	.grid50 { width: 50%; }
+	.grid60 { width: 60%; }
+	.grid70 { width: 70%; }
+	.grid75 { width: 75%; }
+	.grid80 { width: 80%; }
+	.grid90 { width: 90%; }
+	.grid100 { width: 100%; }
 }
-
-.grid10 { width: 10%; }
-.grid15 { width: 15%; }
-.grid20 { width: 20%; }
-.grid25 { width: 25%; }
-.grid30 { width: 30%; }
-.grid33 { width: 33%; }
-.grid40 { width: 40%; }
-.grid50 { width: 50%; }
-.grid60 { width: 60%; }
-.grid70 { width: 70%; }
-.grid75 { width: 75%; }
-.grid80 { width: 80%; }
-.grid90 { width: 90%; }
-.grid100 { width: 100%; }
