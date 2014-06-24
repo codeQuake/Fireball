@@ -51,7 +51,14 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		}
 
 		PagePermissionCacheBuilder::getInstance()->reset();
+		$this->objects = array(new PageEditor($page));
+		$this->createRevision();
 		return $page;
+	}
+
+	public function update() {
+		parent::update();
+		$this->createRevision('update');
 	}
 
 	public function delete() {
@@ -89,6 +96,12 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		}
 	}
 
+	protected function createRevision($action = 'create') {
+		foreach ($this->objects as $object) {
+			call_user_func(array($this->className, 'createRevision'), array('pageID' => $object->getObjectID(), 'action' => $action, 'data' => serialize($object->getDecoratedObject()->getData())));
+		}
+	}
+
 	public function validateSetAsHome() {
 		WCF::getSession()->checkPermissions(array(
 			'admin.cms.page.canAddPage'
@@ -106,6 +119,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
+		$this->createRevision('setAsHome');
 	}
 
 	public function validateUpdatePosition() {
@@ -154,6 +168,8 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			}
 		}
 		WCF::getDB()->commitTransaction();
+
+		$this->createRevision('updatePosition');
 	}
 
 	public function validateGetContentTypes() {
