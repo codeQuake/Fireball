@@ -1,5 +1,5 @@
 <dl>
-	<dt><label for="contentData[width]">{lang}cms.acp.content.type.de.codequake.cms.content.type.twocolumn.width{/lang}</label></dt>
+	<dt><label for="contentData[width]">{lang}cms.acp.content.type.de.codequake.cms.content.type.twocolumns.width{/lang}</label></dt>
 	<dd>
 		<select id="contentData[width]" name="contentData[width]" >
 			<option value="5050" {if $contentData['width']|isset && $contentData['width'] == 5050}selected="selected" {/if}>50%:50%</option>
