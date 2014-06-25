@@ -26,7 +26,7 @@ use wcf\system\WCF;
  */
 class PageAction extends AbstractDatabaseObjectAction implements ISortableAction {
 	protected $className = 'cms\data\page\PageEditor';
-	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'setAsHome', 'createRevision');
+	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'setAsHome', 'restoreRevision');
 
 	protected $permissionsDelete = array(
 		'admin.cms.page.canAddPage'
