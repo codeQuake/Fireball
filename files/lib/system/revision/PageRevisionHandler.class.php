@@ -26,4 +26,11 @@ class PageRevisionHandler extends SingletonFactory {
 		}
 		return array();
 	}
+
+	public function getRevisionByID($pageID, $revisionID) {
+		if (isset($this->revisions[$pageID][$revisionID])) {
+			return $this->revisions[$pageID][$revisionID];
+		}
+		return null;
+	}
 }

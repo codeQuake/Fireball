@@ -217,6 +217,12 @@ class PageAddForm extends AbstractForm {
 			$editor->update($update);
 		}
 
+		//create revision
+		$objectAction = new PageAction(array(
+			$this->pageID
+		), 'createRevision');
+		$objectAction->executeAction();
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
 		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';

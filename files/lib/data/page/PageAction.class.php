@@ -6,6 +6,7 @@ use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
+use cms\system\revision\PageRevisionHandler;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\AbstractDatabaseObjectAction;
@@ -15,7 +16,6 @@ use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
-
 /**
  * Executes page-related actions.
  *
@@ -26,7 +26,7 @@ use wcf\system\WCF;
  */
 class PageAction extends AbstractDatabaseObjectAction implements ISortableAction {
 	protected $className = 'cms\data\page\PageEditor';
-	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'setAsHome');
+	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'setAsHome', 'createRevision');
 
 	protected $permissionsDelete = array(
 		'admin.cms.page.canAddPage'
@@ -52,13 +52,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 		PagePermissionCacheBuilder::getInstance()->reset();
 		$this->objects = array(new PageEditor($page));
-		$this->createRevision();
 		return $page;
-	}
-
-	public function update() {
-		parent::update();
-		$this->createRevision('update');
 	}
 
 	public function delete() {
@@ -97,16 +91,45 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		}
 	}
 
-	protected function createRevision($action = 'create') {
+	protected function createRevision() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		$action = 'create';
+		if (isset($this->parameters['action'])) {
+			$action = $this->parameters['action'];
+		}
+
 		foreach ($this->objects as $object) {
 			call_user_func(array($this->className, 'createRevision'), array('pageID' => $object->getObjectID(), 'action' => $action, 'userID' => WCF::getUser()->userID, 'username' => WCF::getUser()->username, 'time' => TIME_NOW, 'data' => serialize($object->getDecoratedObject()->getData())));
 		}
 	}
 
 	protected function deleteAllRevisions() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+
 		foreach ($this->objects as $object) {
 			call_user_func(array($this->className, 'deleteAllRevisions'), $object->getObjectID());
 		}
+	}
+
+	public function validateRestoreRevision() {
+		parent::validateUpdate();
+	}
+
+	public function restoreRevision() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+
+		foreach ($this->objects as $object) {
+			$restoreObject = PageRevisionHandler::getInstance()->getRevisionByID($object->pageID, $this->parameters['restoreObjectID']);
+			$this->parameters['data'] = @unserialize($restoreObject->data);
+		}
+
+		$this->update();
 	}
 
 	public function validateGetRevisions() {
@@ -199,7 +222,9 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		}
 		WCF::getDB()->commitTransaction();
 
-		$this->createRevision('updatePosition');
+		//create revision
+		$this->parameters['action'] = 'updatePosition';
+		$this->createRevision();
 	}
 
 	public function validateGetContentTypes() {

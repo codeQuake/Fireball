@@ -190,6 +190,12 @@ class PageEditForm extends PageAddForm {
 			$editor->update($update);
 		}
 
+		//create revision
+		$objectAction = new PageAction(array(
+			$this->pageID
+		), 'createRevision', array('action' => 'update'));
+		$objectAction->executeAction();
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
 	}
