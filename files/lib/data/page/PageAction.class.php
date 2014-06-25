@@ -75,6 +75,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			}
 			$action = new ContentAction($contentIDs, 'delete', array());
 			$action->executeAction();
+			$this->deleteAllRevisions();
 		}
 
 		$action = new PageMenuItemAction(array(
@@ -99,6 +100,12 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 	protected function createRevision($action = 'create') {
 		foreach ($this->objects as $object) {
 			call_user_func(array($this->className, 'createRevision'), array('pageID' => $object->getObjectID(), 'action' => $action, 'data' => serialize($object->getDecoratedObject()->getData())));
+		}
+	}
+
+	protected function deleteAllRevisions() {
+		foreach ($this->objects as $object) {
+			call_user_func(array($this->className, 'deleteAllRevisions'), $object->getObjectID());
 		}
 	}
 
