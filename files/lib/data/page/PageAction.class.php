@@ -99,7 +99,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 	protected function createRevision($action = 'create') {
 		foreach ($this->objects as $object) {
-			call_user_func(array($this->className, 'createRevision'), array('pageID' => $object->getObjectID(), 'action' => $action, 'data' => serialize($object->getDecoratedObject()->getData())));
+			call_user_func(array($this->className, 'createRevision'), array('pageID' => $object->getObjectID(), 'action' => $action, 'userID' => WCF::getUser()->userID, 'username' => WCF::getUser()->username, 'time' => TIME_NOW, 'data' => serialize($object->getDecoratedObject()->getData())));
 		}
 	}
 
@@ -107,6 +107,29 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		foreach ($this->objects as $object) {
 			call_user_func(array($this->className, 'deleteAllRevisions'), $object->getObjectID());
 		}
+	}
+
+	public function validateGetRevisions() {
+		if (count($this->objectIDs) != 1) {
+			throw new UserInputException('objectIDs');
+		}
+	}
+
+	public function getRevisions() {
+		$objectID = reset($this->objectIDs);
+		$page = PageCache::getInstance()->getPage($objectID);
+		$revisions = $page->getRevisions();
+
+		WCF::getTPL()->assign(array(
+		'revisions' => $revisions,
+		'pageID' => $page->pageID
+		));
+
+		return array(
+			'template' => WCF::getTPL()->fetch('revisionList', 'cms'),
+			'revisions' => $revisions,
+			'pageID' => $page->pageID
+		);
 	}
 
 	public function validateSetAsHome() {

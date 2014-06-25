@@ -184,9 +184,8 @@
 	<category name="cms.acp.page">
 		<item name="cms.acp.page.legend"><![CDATA[Legend]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
-		<item name="cms.acp.page.versions"><![CDATA[Versions]]></item>
+		<item name="cms.acp.page.revisions"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>
-		<item name="cms.acp.page.revision.title"><![CDATA[Page edited by {$version->lastEditor} - {@$version->lastEditTime|time}]]></item>
 		<item name="cms.acp.page.add"><![CDATA[Add page]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Edit page]]></item>
 		<item name="cms.acp.page.remove"><![CDATA[Remove page]]></item>

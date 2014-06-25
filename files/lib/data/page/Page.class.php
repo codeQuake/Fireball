@@ -5,6 +5,7 @@ use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\CMSDatabaseObject;
 use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
+use cms\system\revision\PageRevisionHandler;
 use wcf\data\ILinkableObject;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
@@ -138,6 +139,11 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 			'sidebar' => $contentListSidebar->getIterator()
 		);
 		return $contentList;
+	}
+
+	public function getRevisions() {
+		//gets page revisions
+		return PageRevisionHandler::getInstance()->getRevisions($this->pageID);
 	}
 
 	public function getPermission($permission = 'canViewPage') {
