@@ -219,8 +219,8 @@ class PageAddForm extends AbstractForm {
 
 		//create revision
 		$objectAction = new PageAction(array(
-			$this->pageID
-		), 'createRevision');
+			$returnValues['returnValues']->pageID,
+		), 'createRevision', array('action' => 'create'));
 		$objectAction->executeAction();
 
 		$this->saved();

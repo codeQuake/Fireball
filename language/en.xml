@@ -186,6 +186,10 @@
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
 		<item name="cms.acp.page.revisions"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>
+		<item name="cms.acp.page.revision.create"><![CDATA[Created page]]></item>
+		<item name="cms.acp.page.revision.update"><![CDATA[Updated page]]></item>
+		<item name="cms.acp.page.revision.updatePosition"><![CDATA[Changed sorting]]></item>
+		<item name="cms.acp.page.revision.setAsHome"><![CDATA[Set as homepage]]></item>
 		<item name="cms.acp.page.revision.action"><![CDATA[Action]]></item>
 		<item name="cms.acp.page.revision.user"><![CDATA[User]]></item>
 		<item name="cms.acp.page.revision.time"><![CDATA[Time]]></item>
