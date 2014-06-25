@@ -187,6 +187,7 @@
 		<item name="cms.acp.page.revisions"><![CDATA[Revisionen]]></item>
 		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>
 		<item name="cms.acp.page.revision.restore"><![CDATA[Wiederherstellen]]></item>
+		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Revision wiederherstellen wollen?]]></item>
 		<item name="cms.acp.page.revision.create"><![CDATA[Seite erstellt]]></item>
 		<item name="cms.acp.page.revision.update"><![CDATA[Seite bearbeitet]]></item>
 		<item name="cms.acp.page.revision.updatePosition"><![CDATA[Sortierung geändert]]></item>

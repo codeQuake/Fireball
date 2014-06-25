@@ -459,18 +459,38 @@ CMS.ACP.Page.Revisions.Restore = Class.extend({
 
 		_click: function (event) {
 			event.preventDefault();
-			var $versionID = $(event.currentTarget).data('objectID');
-			var $pageID = $(event.currentTarget).data('pageID');
-				this._proxy.setOption('data', {
-					actionName: 'restoreRevision',
-					className: 'cms\\data\\page\\PageAction',
-					objectIDs: [ $pageID ],
-					parameters: {
-						'restoreObjectID': $versionID
-					}
-				});
-				WCF.LoadingOverlayHandler.updateIcon($(event.currentTarget));
-				this._proxy.sendRequest();
+			var $target = $(event.currentTarget);
+
+			if ($target.data('confirmMessage')) {
+				WCF.System.Confirmation.show($target.data('confirmMessage'), $.proxy(this._execute, this), { target: $target });
+			}
+			else {
+				WCF.LoadingOverlayHandler.updateIcon($target);
+				this._sendRequest($target);
+			}
+		},
+
+		_sendRequest: function (object) {
+			$pageID = $(object).data('pageID');
+			$versionID = $(object).data('objectID');
+			this._proxy.setOption('data', {
+				actionName: 'restoreRevision',
+				className: 'cms\\data\\page\\PageAction',
+				objectIDs: [ $pageID ],
+				parameters: {
+					'restoreObjectID': $versionID
+				}
+			});
+			this._proxy.sendRequest();
+		},
+
+		_execute: function (action, parameters) {
+			if (action === 'cancel') {
+				return;
+			}
+
+			WCF.LoadingOverlayHandler.updateIcon(parameters.target);
+			this._sendRequest(parameters.target);
 		},
 
 		_success: function (data, textStatus, jqXHR) {
