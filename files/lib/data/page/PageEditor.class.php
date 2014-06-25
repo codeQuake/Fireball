@@ -41,12 +41,6 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		PageRevisionCacheBuilder::getInstance()->reset();
 	}
 
-	public static function deleteAllRevisions($objectID) {
-		$sql = "DELETE FROM cms".WCF_N."_page_revision WHERE pageID = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($objectID));
-	}
-
 	public static function createRevision(array $parameters = array()) {
 		$keys = $values = '';
 		$statementParameters = array();

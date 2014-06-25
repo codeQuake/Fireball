@@ -69,7 +69,6 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			}
 			$action = new ContentAction($contentIDs, 'delete', array());
 			$action->executeAction();
-			$this->deleteAllRevisions();
 		}
 
 		$action = new PageMenuItemAction(array(
@@ -102,16 +101,6 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 		foreach ($this->objects as $object) {
 			call_user_func(array($this->className, 'createRevision'), array('pageID' => $object->getObjectID(), 'action' => $action, 'userID' => WCF::getUser()->userID, 'username' => WCF::getUser()->username, 'time' => TIME_NOW, 'data' => serialize($object->getDecoratedObject()->getData())));
-		}
-	}
-
-	protected function deleteAllRevisions() {
-		if (empty($this->objects)) {
-			$this->readObjects();
-		}
-
-		foreach ($this->objects as $object) {
-			call_user_func(array($this->className, 'deleteAllRevisions'), $object->getObjectID());
 		}
 	}
 
