@@ -87,7 +87,7 @@
 					<li><span class="icon icon16 icon-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></li>
 					<li><span class="icon icon16 icon-remove"></span> <span>{lang}cms.acp.page.remove{/lang}</span></li>
 					<li><span class="icon icon16 icon-home"></span> <span>{lang}cms.acp.page.setAsHome{/lang}</span></li>
-					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.page.revisions{/lang}</span>
+					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.page.revisions{/lang}</span></li>
 					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
 					<li><span class="icon icon16 icon-file"></span> <span>{lang}cms.acp.content.listing{/lang}</span></li>
 				</ul>
