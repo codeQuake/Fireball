@@ -138,7 +138,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		));
 
 		return array(
-			'template' => WCF::getTPL()->fetch('revisionList', 'cms'),
+			'template' => WCF::getTPL()->fetch('pageRevisionList', 'cms'),
 			'revisions' => $revisions,
 			'pageID' => $page->pageID
 		);

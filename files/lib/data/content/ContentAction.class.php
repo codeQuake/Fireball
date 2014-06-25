@@ -123,7 +123,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		));
 
 		return array(
-			'template' => WCF::getTPL()->fetch('revisionList', 'cms'),
+			'template' => WCF::getTPL()->fetch('contentRevisionList', 'cms'),
 			'revisions' => $revisions,
 			'contentID' => $content->contentID
 		);
