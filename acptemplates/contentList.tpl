@@ -14,7 +14,7 @@
 </nav>
 
 <header class="boxHeadline">
-    <h1>{lang}cms.acp.content.list{/lang}</h1>
+	<h1>{lang}cms.acp.content.list{/lang}</h1>
 
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 	<script data-relocate="true">
@@ -25,12 +25,19 @@
 			new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
 			new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
 			new CMS.ACP.Page.AddContent();
+			new CMS.ACP.Content.Revisions();
 			WCF.Language.addObject({
 				{foreach from=$objectTypeList item=type}
 					'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
 				{/foreach}
-				'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}'
-			});
+				'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
+				'cms.acp.content.revisions': '{lang}cms.acp.content.revisions{/lang}',
+				'cms.acp.content.revision.action.create': '{lang}cms.acp.content.revision.action.create{/lang}',
+				'cms.acp.content.revision.action.update': '{lang}cms.acp.content.revision.action.update{/lang}',
+				'cms.acp.content.revision.action.updatePosition': '{lang}cms.acp.content.revision.action.updatePosition{/lang}',
+				'cms.acp.content.revision.action.setAsHome': '{lang}cms.acp.content.revision.action.setAsHome{/lang}',
+				'cms.acp.content.revision.action.restore': '{lang}cms.acp.content.revision.action.restore{/lang}'
+				});
 		});
 		//]]>
 	</script>
@@ -69,6 +76,7 @@
 								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
 								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="body" data-parent-id="{$content->contentID}"></span>
+								<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revisions{/lang}" data-object-id="{@$content->contentID}"></span>
 
 								{event name='itemButtons'}
 							</span>
@@ -149,6 +157,7 @@
 					<li><span class="icon icon16 icon-pencil"></span> <span>{lang}cms.acp.content.edit{/lang}</span></li>
 					<li><span class="icon icon16 icon-remove"></span> <span>{lang}cms.acp.content.remove{/lang}</span></li>
 					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
+					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.content.revisions{/lang}</span></li>
 				</ul>
 			</div>
 		</ol>

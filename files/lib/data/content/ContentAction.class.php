@@ -2,6 +2,7 @@
 namespace cms\data\content;
 
 use cms\system\cache\builder\ContentCacheBuilder;
+use cms\system\revision\ContentRevisionHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\system\exception\UserInputException;
@@ -99,7 +100,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		}
 
 		foreach ($this->objects as $object) {
-			$restoreObject = PageRevisionHandler::getInstance()->getRevisionByID($object->contentID, $this->parameters['restoreObjectID']);
+			$restoreObject = ContentRevisionHandler::getInstance()->getRevisionByID($object->contentID, $this->parameters['restoreObjectID']);
 			$this->parameters['data'] = @unserialize($restoreObject->data);
 		}
 
@@ -116,7 +117,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		$objectID = reset($this->objectIDs);
 		$content = ContentCache::getInstance()->getContent($objectID);
 		$revisions = $content->getRevisions();
-
 		WCF::getTPL()->assign(array(
 		'revisions' => $revisions,
 		'contentID' => $content->contentID

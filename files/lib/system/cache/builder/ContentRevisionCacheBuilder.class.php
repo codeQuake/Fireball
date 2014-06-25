@@ -25,8 +25,8 @@ class ContentRevisionCacheBuilder extends AbstractCacheBuilder {
 
 		while ($row = $statement->fetchArray()) {
 			$object = new Content(null, $row);
-			$data['revisions'][$object->pageID][$object->revisionID] = $object;
-			$data['revisionIDs'][$object->pageID][$object->revisionID] = $object->revisionID;
+			$data['revisions'][$object->contentID][$object->revisionID] = $object;
+			$data['revisionIDs'][$object->contentID][$object->revisionID] = $object->revisionID;
 		}
 
 		return $data;

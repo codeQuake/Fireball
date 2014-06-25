@@ -119,7 +119,7 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 	}
 
 	public function getRevisions() {
-		//gets page revisions
+		//gets content revisions
 		return ContentRevisionHandler::getInstance()->getRevisions($this->contentID);
 	}
 }

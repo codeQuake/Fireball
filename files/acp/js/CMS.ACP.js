@@ -523,7 +523,7 @@ CMS.ACP.Content.Revisions = Class.extend({
 
 	_click: function(event){
 		event.preventDefault();
-		var $pageID = $(event.currentTarget).data('objectID');
+		var $contentID = $(event.currentTarget).data('objectID');
 
 			this._proxy.setOption('data', {
 				actionName: 'getRevisions',
@@ -584,7 +584,7 @@ CMS.ACP.Content.Revisions.Restore = Class.extend({
 			this._proxy.setOption('data', {
 				actionName: 'restoreRevision',
 				className: 'cms\\data\\content\\ContentAction',
-				objectIDs: [ $pageID ],
+				objectIDs: [ $contentID ],
 				parameters: {
 					'restoreObjectID': $versionID
 				}

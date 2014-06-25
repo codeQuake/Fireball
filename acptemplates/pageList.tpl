@@ -17,7 +17,12 @@
 				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
 			{/foreach}
 			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
-			'cms.acp.page.revisions': '{lang}cms.acp.page.revisions{/lang}'
+			'cms.acp.page.revisions': '{lang}cms.acp.page.revisions{/lang}',
+			'cms.acp.page.revision.action.create': '{lang}cms.acp.page.revision.action.create{/lang}',
+			'cms.acp.page.revision.action.update': '{lang}cms.acp.page.revision.action.update{/lang}',
+			'cms.acp.page.revision.action.updatePosition': '{lang}cms.acp.page.revision.action.updatePosition{/lang}',
+			'cms.acp.page.revision.action.setAsHome': '{lang}cms.acp.page.revision.action.setAsHome{/lang}',
+			'cms.acp.page.revision.action.restore': '{lang}cms.acp.page.revision.action.restore{/lang}'
 			});
 		});
 		//]]>

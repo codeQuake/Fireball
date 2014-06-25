@@ -7,9 +7,9 @@
 		<item name="cms.acp.content.revision"><![CDATA[Revision]]></item>
 		<item name="cms.acp.content.revision.restore"><![CDATA[Wiederherstellen]]></item>
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Revision wiederherstellen wollen?]]></item>
-		<item name="cms.acp.content.revision.create"><![CDATA[Inhalt erstellt]]></item>
-		<item name="cms.acp.content.revision.update"><![CDATA[Inhalt bearbeitet]]></item>
-		<item name="cms.acp.content.revision.updatePosition"><![CDATA[Sortierung geändert]]></item>
+		<item name="cms.acp.content.revision.action.create"><![CDATA[Inhalt erstellt]]></item>
+		<item name="cms.acp.content.revision.action.update"><![CDATA[Inhalt bearbeitet]]></item>
+		<item name="cms.acp.content.revision.action.updatePosition"><![CDATA[Sortierung geändert]]></item>
 		<item name="cms.acp.content.revision.action"><![CDATA[Aktion]]></item>
 		<item name="cms.acp.content.revision.user"><![CDATA[Benutzer]]></item>
 		<item name="cms.acp.content.revision.time"><![CDATA[Zeitpunkt]]></item>
@@ -198,10 +198,10 @@
 		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>
 		<item name="cms.acp.page.revision.restore"><![CDATA[Wiederherstellen]]></item>
 		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Revision wiederherstellen wollen?]]></item>
-		<item name="cms.acp.page.revision.create"><![CDATA[Seite erstellt]]></item>
-		<item name="cms.acp.page.revision.update"><![CDATA[Seite bearbeitet]]></item>
-		<item name="cms.acp.page.revision.updatePosition"><![CDATA[Sortierung geändert]]></item>
-		<item name="cms.acp.page.revision.setAsHome"><![CDATA[Als Startseite gesetzt]]></item>
+		<item name="cms.acp.page.revision.action.create"><![CDATA[Seite erstellt]]></item>
+		<item name="cms.acp.page.revision.action.update"><![CDATA[Seite bearbeitet]]></item>
+		<item name="cms.acp.page.revision.action.updatePosition"><![CDATA[Sortierung geändert]]></item>
+		<item name="cms.acp.page.revision.action.setAsHome"><![CDATA[Als Startseite gesetzt]]></item>
 		<item name="cms.acp.page.revision.action"><![CDATA[Aktion]]></item>
 		<item name="cms.acp.page.revision.user"><![CDATA[Benutzer]]></item>
 		<item name="cms.acp.page.revision.time"><![CDATA[Zeitpunkt]]></item>

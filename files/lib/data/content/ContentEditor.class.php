@@ -4,6 +4,8 @@ namespace cms\data\content;
 use cms\system\cache\builder\ContentCacheBuilder;
 use cms\system\cache\builder\ContentRevisionCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
+use wcf\data\IEditableCachedObject;
+use wcf\system\WCF;
 
 /**
  * Functions to edit a content item.
@@ -13,7 +15,7 @@ use wcf\data\DatabaseObjectEditor;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class ContentEditor extends DatabaseObjectEditor {
+class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	protected static $baseClass = 'cms\data\content\Content';
 
 	public static function createRevision(array $parameters = array()) {
