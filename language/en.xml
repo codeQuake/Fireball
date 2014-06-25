@@ -186,6 +186,9 @@
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
 		<item name="cms.acp.page.revisions"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>
+		<item name="cms.acp.page.revision.action"><![CDATA[Action]]></item>
+		<item name="cms.acp.page.revision.user"><![CDATA[User]]></item>
+		<item name="cms.acp.page.revision.time"><![CDATA[Time]]></item>
 		<item name="cms.acp.page.add"><![CDATA[Add page]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Edit page]]></item>
 		<item name="cms.acp.page.remove"><![CDATA[Remove page]]></item>
