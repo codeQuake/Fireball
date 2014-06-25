@@ -172,7 +172,10 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
-		$this->createRevision('setAsHome');
+
+		//create revision
+		$this->parameters['action'] = 'setAsHome';
+		$this->createRevision();
 	}
 
 	public function validateUpdatePosition() {
