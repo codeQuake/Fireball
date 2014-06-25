@@ -17,29 +17,18 @@ use wcf\system\WCF;
  */
 class ContentAction extends AbstractDatabaseObjectAction implements ISortableAction {
 	protected $className = 'cms\data\content\ContentEditor';
+	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'restoreRevision');
 	protected $permissionsDelete = array(
+		'admin.cms.content.canAddContent'
+	);
+
+	protected $permissionsUpdate = array(
 		'admin.cms.content.canAddContent'
 	);
 	protected $requireACP = array(
 		'delete',
 		'updatePosition'
 	);
-
-	public function create() {
-		$content = parent::create();
-		ContentCacheBuilder::getInstance()->reset();
-		return $content;
-	}
-
-	public function update() {
-		parent::update();
-		ContentCacheBuilder::getInstance()->reset();
-	}
-
-	public function delete() {
-		parent::delete();
-		ContentCacheBuilder::getInstance()->reset();
-	}
 
 	public function validateUpdatePosition() {
 		WCF::getSession()->checkPermissions(array(
@@ -81,6 +70,62 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 			}
 		}
 		WCF::getDB()->commitTransaction();
-		ContentCacheBuilder::getInstance()->reset();
+		//create revision
+		$this->parameters['action'] = 'updatePosition';
+		$this->createRevision();
+	}
+
+	protected function createRevision() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		$action = 'create';
+		if (isset($this->parameters['action'])) {
+			$action = $this->parameters['action'];
+		}
+
+		foreach ($this->objects as $object) {
+			call_user_func(array($this->className, 'createRevision'), array('contentID' => $object->getObjectID(), 'action' => $action, 'userID' => WCF::getUser()->userID, 'username' => WCF::getUser()->username, 'time' => TIME_NOW, 'data' => serialize($object->getDecoratedObject()->getData())));
+		}
+	}
+
+	public function validateRestoreRevision() {
+		parent::validateUpdate();
+	}
+
+	public function restoreRevision() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+
+		foreach ($this->objects as $object) {
+			$restoreObject = PageRevisionHandler::getInstance()->getRevisionByID($object->contentID, $this->parameters['restoreObjectID']);
+			$this->parameters['data'] = @unserialize($restoreObject->data);
+		}
+
+		$this->update();
+	}
+
+	public function validateGetRevisions() {
+		if (count($this->objectIDs) != 1) {
+			throw new UserInputException('objectIDs');
+		}
+	}
+
+	public function getRevisions() {
+		$objectID = reset($this->objectIDs);
+		$content = ContentCache::getInstance()->getContent($objectID);
+		$revisions = $content->getRevisions();
+
+		WCF::getTPL()->assign(array(
+		'revisions' => $revisions,
+		'contentID' => $content->contentID
+		));
+
+		return array(
+			'template' => WCF::getTPL()->fetch('revisionList', 'cms'),
+			'revisions' => $revisions,
+			'contentID' => $content->contentID
+		);
 	}
 }

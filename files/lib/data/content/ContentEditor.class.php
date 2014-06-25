@@ -1,6 +1,8 @@
 <?php
 namespace cms\data\content;
 
+use cms\system\cache\builder\ContentCacheBuilder;
+use cms\system\cache\builder\ContentRevisionCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 
 /**
@@ -13,4 +15,34 @@ use wcf\data\DatabaseObjectEditor;
  */
 class ContentEditor extends DatabaseObjectEditor {
 	protected static $baseClass = 'cms\data\content\Content';
+
+	public static function createRevision(array $parameters = array()) {
+		$keys = $values = '';
+		$statementParameters = array();
+		foreach ($parameters as $key => $value) {
+			if (!empty($keys)) {
+				$keys .= ',';
+				$values .= ',';
+			}
+
+			$keys .= $key;
+			$values .= '?';
+			$statementParameters[] = $value;
+		}
+
+		// save object
+		$sql = "INSERT INTO	cms".WCF_N."_content_revision (".$keys.")
+				VALUES (".$values.")";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($statementParameters);
+
+		$id = WCF::getDB()->getInsertID("cms".WCF_N."_content_revision", "revisionID");
+
+		return new static::$baseClass($id);
+	}
+
+	public static function resetCache() {
+		ContentCacheBuilder::getInstance()->reset();
+		ContentRevisionCacheBuilder::getInstance()->reset();
+	}
 }

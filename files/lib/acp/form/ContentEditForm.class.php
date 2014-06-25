@@ -113,7 +113,13 @@ class ContentEditForm extends ContentAddForm {
 			$editor->update($update);
 		}
 
+		//create revision
+		$objectAction = new ContentAction(array(
+			$this->contentID
+		), 'createRevision', array('action' => 'update'));
+		$objectAction->executeAction();
 		$this->saved();
+
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array('application' => 'cms', 'object' => new Page($this->pageID))));
 	}
 

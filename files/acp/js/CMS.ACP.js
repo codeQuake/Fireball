@@ -500,3 +500,112 @@ CMS.ACP.Page.Revisions.Restore = Class.extend({
 			});
 		}
 });
+
+CMS.ACP.Content.Revisions = Class.extend({
+	_proxy: null,
+	_cache: {},
+	_dialog: null,
+	_didInit: false,
+
+	init:function(){
+		if (this._didInit)  {
+			return;
+		}
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+
+		this._buttons = $('.jsRevisionsButton');
+		this._buttons.click($.proxy(this._click, this));
+
+		this._didInit = true;
+	},
+
+	_click: function(event){
+		event.preventDefault();
+		var $pageID = $(event.currentTarget).data('objectID');
+
+			this._proxy.setOption('data', {
+				actionName: 'getRevisions',
+				className: 'cms\\data\\content\\ContentAction',
+				objectIDs: [ $contentID ]
+			});
+			this._proxy.sendRequest();
+	},
+
+	_show: function(contentID){
+			this._dialog = $('<div id="revisionDialog">' + this._cache[contentID] + '</div>').appendTo(document.body);
+			this._dialog.wcfDialog({
+				title: WCF.Language.get('cms.acp.content.revisions')
+			});
+	},
+
+	_success: function(data, textStatus, jqXHR) {
+		this._cache[data.returnValues.contentID] = data.returnValues.template;
+		this._show(data.returnValues.contentID);
+	}
+});
+
+
+CMS.ACP.Content.Revisions.Restore = Class.extend({
+	_proxy: null,
+	_didInit:false,
+
+	init: function () {
+			if (this._didInit) {
+				return;
+			}
+			this._proxy = new WCF.Action.Proxy({
+				success: $.proxy(this._success, this)
+			});
+
+			this._buttons = $('.jsRestoreRevisionButton');
+			this._buttons.click($.proxy(this._click, this));
+
+			this._didInit = true;
+		},
+
+		_click: function (event) {
+			event.preventDefault();
+			var $target = $(event.currentTarget);
+
+			if ($target.data('confirmMessage')) {
+				WCF.System.Confirmation.show($target.data('confirmMessage'), $.proxy(this._execute, this), { target: $target });
+			}
+			else {
+				WCF.LoadingOverlayHandler.updateIcon($target);
+				this._sendRequest($target);
+			}
+		},
+
+		_sendRequest: function (object) {
+			$contentID = $(object).data('contentID');
+			$versionID = $(object).data('objectID');
+			this._proxy.setOption('data', {
+				actionName: 'restoreRevision',
+				className: 'cms\\data\\content\\ContentAction',
+				objectIDs: [ $pageID ],
+				parameters: {
+					'restoreObjectID': $versionID
+				}
+			});
+			this._proxy.sendRequest();
+		},
+
+		_execute: function (action, parameters) {
+			if (action === 'cancel') {
+				return;
+			}
+
+			WCF.LoadingOverlayHandler.updateIcon(parameters.target);
+			this._sendRequest(parameters.target);
+		},
+
+		_success: function (data, textStatus, jqXHR) {
+			var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+			$notification.show(function() {
+				window.location = location;
+			});
+		}
+});
+

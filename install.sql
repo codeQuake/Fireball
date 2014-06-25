@@ -50,6 +50,18 @@ CREATE TABLE cms1_content (
 	additionalData MEDIUMTEXT DEFAULT NULL
 );
 
+--content revisions
+DROP TABLE IF EXISTS cms1_content_revision;
+CREATE TABLE cms1_content_revision(
+	revisionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	contentID INT(10) NOT NULL,
+	action VARCHAR(255),
+	userID INT(10),
+	username VARCHAR(255) NOT NULL DEFAULT '',
+	time INT(10) NOT NULL DEFAULT 0,
+	data MEDIUMTEXT
+);
+
 --stylesheet
 DROP TABLE IF EXISTS cms1_stylesheet;
 CREATE TABLE cms1_stylesheet (
@@ -149,6 +161,9 @@ ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) 
 
 ALTER TABLE cms1_content ADD FOREIGN KEY (parentID) REFERENCES cms1_content (contentID) ON DELETE SET NULL;
 ALTER TABLE cms1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+
+ALTER TABLE cms1_content_revision ADD FOREIGN KEY (contentID) REFERENCES cms1_content contentID) ON DELETE CASCADE;
+ALTER TABLE cms1_content_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;

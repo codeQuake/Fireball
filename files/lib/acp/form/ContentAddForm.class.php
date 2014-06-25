@@ -193,6 +193,12 @@ class ContentAddForm extends AbstractForm {
 			$editor->update($update);
 		}
 
+		//create revision
+		$objectAction = new ContentAction(array(
+			$returnValues['returnValues']->contentID,
+		), 'createRevision', array('action' => 'create'));
+		$objectAction->executeAction();
+
 		$this->saved();
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array('application' => 'cms', 'object' => new Page($this->pageID))));
 

@@ -3,6 +3,16 @@
 	<category name="cms.acp.content">
 		<item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
 		<item name="cms.acp.content.contents"><![CDATA[Inhalte]]></item>
+		<item name="cms.acp.content.revisions"><![CDATA[Revisionen]]></item>
+		<item name="cms.acp.content.revision"><![CDATA[Revision]]></item>
+		<item name="cms.acp.content.revision.restore"><![CDATA[Wiederherstellen]]></item>
+		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Revision wiederherstellen wollen?]]></item>
+		<item name="cms.acp.content.revision.create"><![CDATA[Inhalt erstellt]]></item>
+		<item name="cms.acp.content.revision.update"><![CDATA[Inhalt bearbeitet]]></item>
+		<item name="cms.acp.content.revision.updatePosition"><![CDATA[Sortierung geändert]]></item>
+		<item name="cms.acp.content.revision.action"><![CDATA[Aktion]]></item>
+		<item name="cms.acp.content.revision.user"><![CDATA[Benutzer]]></item>
+		<item name="cms.acp.content.revision.time"><![CDATA[Zeitpunkt]]></item>
 		<item name="cms.acp.content.listing"><![CDATA[Inhalte auflisten]]></item>
 		<item name="cms.acp.content.list"><![CDATA[Inhalte von '{$page->title|language}']]></item>
 		<item name="cms.acp.content.remove"><![CDATA[Inhalt entfernen]]></item>
