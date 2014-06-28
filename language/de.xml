@@ -447,7 +447,7 @@
 		<item name="wcf.acp.option.category.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.acp.option.category.cms.news"><![CDATA[Nachrichten]]></item>
 		<item name="wcf.acp.option.category.cms.general"><![CDATA[Allgemeine Einstellungen]]></item>
-		<item name="wcf.acp.option.category.cms.general.revision"><![CDATA[Revisions]]></item>
+		<item name="wcf.acp.option.category.cms.general.revision"><![CDATA[Revisionen]]></item>
 		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Standardwerte]]></item>
 		<item name="wcf.acp.option.category.cms.news.images"><![CDATA[Nachrichtenbilder]]></item>
@@ -455,7 +455,7 @@
 		<item name="wcf.acp.option.cms_news_per_page"><![CDATA[Nachrichten pro Seite]]></item>
 		<item name="wcf.acp.option.cms_news_comments"><![CDATA[Kommentarsystem aktivieren]]></item>
 		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Automatische Löschung von Revisionen]]></item>
-		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Geben Sie die Anzahl an Tagen ein, nach der alte Revisionen automatisch gelöscht werden. (0 zur Deaktivierung)]]></item>
+		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Geben Sie die Anzahl an Tagen ein, nach der alte Revisionen automatisch gelöscht werden. (0 zur Deaktivierung)]]></item>
 		<item name="wcf.acp.option.cms_pages_default_robots"><![CDATA[Anweisung für Suchmaschinenroboter]]></item>
 		<item name="wcf.acp.option.cms_pages_default_robots.indexfollow"><![CDATA[Seite indizieren und Links folgen (Empfohlen)]]></item>
 		<item name="wcf.acp.option.cms_pages_default_robots.indexnofollow"><![CDATA[Seite indizieren und Links nicht folgen]]></item>
