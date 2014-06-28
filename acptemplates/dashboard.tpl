@@ -1,22 +1,17 @@
 ﻿{include file='header' pageTitle='cms.acp.dashboard'}
 
 <header class="boxHeadline">
-    <h1>{lang}cms.acp.dashboard{/lang}</h1>
+	<h1>{lang}cms.acp.dashboard{/lang}</h1>
 </header>
-		
+
 		{assign var=visitorArray value=$visitors->getWeeklyVisitorArray()}
 		<div  class="container containerPadding shadow marginTop">
 		<fieldset>
 			<legend>{lang}cms.acp.dashboard.lastWeeksVisitors{/lang}</legend>
-			<div class="center">		
-				<canvas id="canvas" height="200" width="800"></canvas>
-				<div class="legend">
-					<span class="icon icon16 icon-circle" style="color:rgba(21,41,148,1);"></span> {lang}cms.acp.dashboard.all{/lang}
-					<span class="icon icon16 icon-circle" style="color:rgba(148,1,1,1);" ></span> {lang}cms.acp.dashboard.registered{/lang}
-					<span class="icon icon16 icon-circle" style="color:rgba(151,187,205,1);" ></span> {lang}cms.acp.dashboard.spiders{/lang}
-				</div>
+			<div class="center">
+				<div id="canvas" height="250"></div>
 			</div>
-		
+
 		</fieldset>
 		</div>
 		<div style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
@@ -24,8 +19,8 @@
 				<fieldset>
 					<legend>{lang}cms.acp.dashboard.lastNews{/lang}</legend>
 					<ul>
-						
-						{foreach from=$feed item=item} 
+
+						{foreach from=$feed item=item}
 						{if $item['title']|isset}
 						<li style="border-bottom: 1px dashed #dfdfdf; padding: 5px; margin-bottom: 5px;">
 							<div class="containerHeadline">
@@ -70,50 +65,38 @@
 						<dt>{lang}cms.acp.dashboard.visitsYesterday{/lang}</dt>
 						<dd>{$visitorArray[5][visitors]['visits']}</dd>
 						<dt>{lang}cms.acp.dashboard.visitsAll{/lang}</dt>
-						<dd>{$visitors->getAllVisitors()}</dd>						
+						<dd>{$visitors->getAllVisitors()}</dd>
 					</dl>
 				</fieldset>
 			</div>
 		</div>
 		<br class="clearfix" />
 	{assign var=maximum value=0}
-    <script data-relocate="true" src="{@$__wcf->getPath('cms')}js/3rdParty/Chart.js"></script>
-    <script data-relocate="true">
-        var lineChartData = {
-            labels: [{foreach from=$visitorArray item=month}"{$month['string']}",{/foreach}],
-            datasets: [
-				{
-				    fillColor: "rgba(21,41,148,0.1)",
-				    strokeColor: "rgba(21,41,148,0.5)",
-				    pointColor: "rgba(21,41,148,1)",
-				    pointStrokeColor: "#fff",
-				    data: [{foreach from=$visitorArray item=count}{if $count['visitors']['visits']|isset}{$count['visitors']['visits']}, {if $count['visitors']['visits'] > $maximum} {assign var=maximum value=$count['visitors']['visits']}{/if}{else}0,{/if} {/foreach}]
-				},
-				{
-					fillColor : "rgba(151,187,205,0.1)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
-					data : [{foreach from=$visitorArray item=count}{if $count['visitors']['spiders']|isset} {$count['visitors']['spiders']}{else}0{/if},{/foreach}]
-				},
-				{
-					fillColor : "rgba(148,1,1,0.1)",
-					strokeColor : "rgba(148,1,1,0.5)",
-					pointColor : "rgba(148,1,1,1)",
-					pointStrokeColor : "#fff",
-					data : [{foreach from=$visitorArray item=count}{if $count['visitors']['users']|isset}{$count['visitors']['users']}{else}0{/if},{/foreach}]
-				}
-            ]
+	<script data-relocate="true" src="https://www.google.com/jsapi"></script>
+	<script data-relocate="true">
+		{literal}google.load("visualization", "1", {packages:["corechart"]});{/literal}
+		google.setOnLoadCallback(drawArea);
+		function drawArea() {
+				var data = google.visualization.arrayToDataTable([
+				['Visits', '{lang}cms.acp.dashboard.all{/lang}', '{lang}cms.acp.dashboard.registered{/lang}', '{lang}cms.acp.dashboard.spiders{/lang}'],
+				{foreach from=$visitorArray item=visit}
+				['{$visit['string']}', {if $visit['visitors']['visits']|isset}{$visit['visitors']['visits']}{else}0{/if}, {if $visit['visitors']['users']|isset}{$visit['visitors']['users']}{else}0{/if}, {if $visit['visitors']['spiders']|isset}{$visit['visitors']['spiders']}{else}0{/if}],
+				{/foreach}
+			]);
 
-            }
-			
-			
-        var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, {
-				scaleOverride : true,
-				scaleSteps : {if $maximum <= 50}{($maximum+5)/5}{elseif $maximum <=100}{($maximum+10)/10}{elseif $maximum <= 300}{($maximum+20)/20}{elseif $maximum <= 500}{($maximum+50)/50}{elseif $maximum <= 700}{($maximum+100)/100}{else}{($maximum+200)/200}{/if},
-				scaleStepWidth: {if $maximum <= 50}5{elseif $maximum <=100}10{elseif $maximum <= 300}20{elseif $maximum <= 500}50{elseif $maximum <= 700}100{else}200{/if}
-			});
+			var options = {
+				title: '',
+				backgroundColor: 'transparent',
+				fontName: 'Trebuchet MS',
+				{literal}
+				legend: {position: 'bottom'},
+				vAxis: {minValue: 0}
+				{/literal}
+			};
 
+			var chart = new google.visualization.AreaChart(document.getElementById('canvas'));
+			chart.draw(data, options);
+		}
 	</script>
 
 

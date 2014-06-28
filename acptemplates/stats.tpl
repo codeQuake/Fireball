@@ -179,7 +179,6 @@
 
 			</fieldset>
 		</div>
-	{assign var=maximum value=0}
 	<script data-relocate="true" src="https://www.google.com/jsapi"></script>
 	{assign var=i value=0}
 	<script data-relocate="true">
