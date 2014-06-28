@@ -103,6 +103,8 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu"><![CDATA[Menu]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Pattern]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Child pages]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[User]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.user.name"><![CDATA[Username]]></item>
 	</category>
 
 	<category name="cms.acp.dashboard">

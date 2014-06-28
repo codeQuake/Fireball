@@ -54,7 +54,7 @@
 					<dl class="plain statsDataList">
 						<dt>{lang}cms.acp.page.list{/lang}</dt>
 						<dd>{#$pages|count}</dd>
-						<dt>{lang}cms.acp.menu.link.cms.news{/lang}
+						<dt>{lang}cms.page.news{/lang}
 						<dd>{#$news|count}</dd>
 						</dl>
 					<dl class="plain statsDataList">

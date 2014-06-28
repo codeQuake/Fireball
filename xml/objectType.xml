@@ -50,6 +50,14 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
+		<type>
+			<name>de.codequake.cms.content.type.user</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\UserContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
 
 		<type>
 			<name>de.codequake.cms.content.type.gallery</name>
