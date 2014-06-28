@@ -6,6 +6,9 @@
 			<category name="cms.general">
 				<parent>cms</parent>
 			</category>
+			<category name="cms.general.revision">
+				<parent>cms.general</parent>
+			</category>
 			<category name="cms.pages">
 				<parent>cms</parent>
 			</category>
@@ -132,6 +135,15 @@ right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
 				<options>module_news</options>
 			</option>
 			<!-- /cms.news -->
+
+			<!-- cms.general.revision -->
+			<option name="cms_revision_delete">
+				<categoryname>cms.general.revision</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<min>0</min>
+			</option>
+			<!-- /cms.general.revision -->
 		</options>
 	</import>
 </data>

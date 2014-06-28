@@ -27,5 +27,19 @@
 			<listenerclassname>cms\system\event\listener\PageMenuListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
+
+		<!-- delete revisions/old data -->
+		<eventlistener>
+			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
+			<eventname>execute</eventname>
+			<listenerclassname>cms\system\event\listener\DailyCleanUpListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
+			<eventname>execute</eventname>
+			<listenerclassname>cms\system\event\listener\DailyCleanUpListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
 	</import>
 </data>
