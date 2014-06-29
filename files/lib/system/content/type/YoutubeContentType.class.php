@@ -25,33 +25,6 @@ class YoutubeContentType extends AbstractContentType {
 		parse_str(parse_url($url, PHP_URL_QUERY), $var);
 		$videoID = $var['v'];
 
-		switch ($data['size']) {
-			case 1:
-				$width = 560;
-				$height = 315;
-				break;
-			case 2:
-				$width = 640;
-				$height = 360;
-				break;
-			case 3:
-				$width = 853;
-				$height = 480;
-				break;
-			case 4:
-				$width = 1280;
-				$height = 720;
-				break;
-			case 5:
-				$width = 1920;
-				$height = 1080;
-				break;
-			default:
-				$width = 640;
-				$height = 360;
-				break;
-		}
-
-		return '<iframe width="'.$width.'" height="'.$height.'" src="http://youtube.com/embed/'.$videoID.'" frameborder="0" allowfullscreen></iframe>';
+		return '<div class="elastic_video"><iframe width="640" height="360" src="http://youtube.com/embed/'.$videoID.'" frameborder="0" allowfullscreen></iframe></div>';
 	}
 }
