@@ -39,10 +39,14 @@
 	figure {
 		margin-top: @wcfGapMedium;
 		margin-bottom: @wcfGapMedium;
+		overflow: hidden;
 		> figcaption {
 			font-style: italic;
 			font-size: @wcfSmallFontSize;
 		}
+
+		> a.framed > img {max-width: 100%; height: auto; }
+		> img {max-width: 100%; height: auto;}
 	}
 
 	h1{
@@ -71,6 +75,7 @@
 	}
 
 	.userCard > div > .buttonGroupNavigation {float: right;}
+
 	.elastic_video{
 		position: relative;
 		padding-bottom: 55%;
