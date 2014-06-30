@@ -4,8 +4,8 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>2.0.0 alpha 2</version>
-		<date>2014-06-25</date>
+		<version>2.0.0 alpha 3</version>
+		<date>2014-06-30</date>
 	</packageinformation>
 
 	<authorinformation>
