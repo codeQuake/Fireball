@@ -16,13 +16,6 @@
 			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
 		</templatelistener>
 
-		<templatelistener name="javascriptInclude">
-			<environment>user</environment>
-			<templatename>headInclude</templatename>
-			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[{include file='__javascriptInclude' application='cms'}]]></templatecode>
-		</templatelistener>
-
 		<!--admin -->
 		<templatelistener name="cmsVersion">
 			<environment>admin</environment>
