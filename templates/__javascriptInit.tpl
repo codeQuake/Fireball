@@ -1,2 +1,0 @@
-new CMS.News.Preview();
-

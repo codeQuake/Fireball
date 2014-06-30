@@ -38,14 +38,10 @@
 		<!--xml -->
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="sitemap">xml/sitemap.xml</instruction>
-		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="pageMenu">xml/pagemenu.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 		<instruction type="templateListener">xml/templateListener.xml</instruction>
 		<instruction type="eventListener">xml/eventlistener.xml</instruction>

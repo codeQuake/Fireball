@@ -17,10 +17,6 @@
 		<acpmenuitem name="cms.acp.menu.link.cms.style">
 			<parent>cms.acp.menu.link.cms</parent>
 		</acpmenuitem>
-
-		<acpmenuitem name="cms.acp.menu.link.cms.news">
-			<parent>cms.acp.menu.link.cms</parent>
-		</acpmenuitem>
 		<acpmenuitem name="cms.acp.menu.link.cms.page.dashboard">
 			<parent>cms.acp.menu.link.cms.dashboard</parent>
 			<controller><![CDATA[cms\acp\page\DashboardPage]]></controller>
@@ -69,33 +65,5 @@
 			<controller><![CDATA[cms\acp\form\LayoutAddForm]]></controller>
 			<permissions>admin.cms.style.canAddLayout</permissions>
 		</acpmenuitem>
-
-		<acpmenuitem name="cms.acp.menu.link.cms.news.category.list">
-			<parent>cms.acp.menu.link.cms.news</parent>
-			<controller><![CDATA[cms\acp\page\NewsCategoryListPage]]></controller>
-			<permissions>admin.cms.news.canManageCategory</permissions>
-			<options>module_news</options>
-		</acpmenuitem>
-
-		<acpmenuitem name="cms.acp.menu.link.cms.news.category.add">
-			<parent>cms.acp.menu.link.cms.news</parent>
-			<controller><![CDATA[cms\acp\form\NewsCategoryAddForm]]></controller>
-			<permissions>admin.cms.news.canManageCategory</permissions>
-			<options>module_news</options>
-		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.news.image.list">
-			<parent>cms.acp.menu.link.cms.news</parent>
-			<controller><![CDATA[cms\acp\page\NewsImageListPage]]></controller>
-			<permissions>admin.cms.news.canManageCategory</permissions>
-			<options>module_news</options>
-		</acpmenuitem>
-
-		<acpmenuitem name="cms.acp.menu.link.cms.news.image.add">
-			<parent>cms.acp.menu.link.cms.news</parent>
-			<controller><![CDATA[cms\acp\form\NewsImageAddForm]]></controller>
-			<permissions>admin.cms.news.canManageCategory</permissions>
-			<options>module_news</options>
-		</acpmenuitem>
-
 	</import>
 </data>

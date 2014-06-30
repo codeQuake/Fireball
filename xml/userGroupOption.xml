@@ -12,10 +12,6 @@
 			<category name="user.cms.content">
 				<parent>user.cms</parent>
 			</category>
-			<category name="user.cms.news">
-				<parent>user.cms</parent>
-				<options>module_news</options>
-			</category>
 			<!-- /user -->
 
 			<!-- mod -->
@@ -24,10 +20,6 @@
 			</category>
 			<category name="mod.cms.page">
 				<parent>mod.cms</parent>
-			</category>
-			<category name="mod.cms.news">
-				<parent>mod.cms</parent>
-				<options>module_news</options>
 			</category>
 			<!-- /admin -->
 
@@ -46,10 +38,6 @@
 			</category>
 			<category name="admin.cms.file">
 				<parent>admin.cms</parent>
-			</category>
-			<category name="admin.cms.news">
-				<parent>admin.cms</parent>
-				<options>module_news</options>
 			</category>
 			<!-- /admin -->
 		</categories>
@@ -99,7 +87,7 @@
 				<categoryname>admin.cms.content</categoryname>
 				<optiontype>textarea</optiontype>
 				<defaultvalue>
-          <![CDATA[gif
+		  <![CDATA[gif
 JPG
 JPEG
 jpg
@@ -151,14 +139,6 @@ pdf]]>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-
-			<option name="admin.cms.news.canManageCategory">
-				<categoryname>admin.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-				<options>module_news</options>
 			</option>
 
 			<!--user -->
@@ -216,124 +196,6 @@ pdf]]>
 				<defaultvalue>1</defaultvalue>
 			</option>
 
-			<option name="user.cms.news.canViewCategory">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="user.cms.news.canViewNews">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-
-			<option name="user.cms.news.canViewDelayedNews">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-				<options>module_news</options>
-			</option>
-
-			<option name="user.cms.news.canAddNews">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="user.cms.news.canStartPoll">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="user.cms.news.canStartPublicPoll">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="user.cms.news.canVotePoll">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="user.cms.news.canAddComment">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="user.cms.news.canDeleteComment">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="user.cms.news.canEditComment">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="user.cms.news.canUploadAttachment">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<enableoptions>user.cms.news.image.allowedExtensions,user.cms.news.attachmentMaxSize,user.cms.news.allowedAttachmentExtensions,user.cms.news.maxAttachmentCount</enableoptions>
-				<options>module_attachment</options>
-			</option>
-			<option name="user.cms.news.attachmentMaxSize">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>fileSize</optiontype>
-				<defaultvalue>1000000</defaultvalue>
-				<options>module_attachment</options>
-				<minvalue>10000</minvalue>
-			</option>
-			<option name="user.cms.news.image.allowedExtensions">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>textarea</optiontype>
-				<defaultvalue>
-          <![CDATA[gif
-jpg
-jpeg
-JPG
-JPEG
-png
-bmp]]>
-				</defaultvalue>
-				<wildcard><![CDATA[*]]></wildcard>
-			</option>
-			<option name="user.cms.news.allowedAttachmentExtensions">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>textarea</optiontype>
-				<defaultvalue>
-          <![CDATA[gif
-jpg
-jpeg
-png
-bmp
-zip
-txt
-pdf]]>
-				</defaultvalue>
-				<options>module_attachment</options>
-				<wildcard><![CDATA[*]]></wildcard>
-			</option>
-			<option name="user.cms.news.canDownloadAttachments">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="user.cms.news.maxAttachmentCount">
-				<categoryname>user.cms.news</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue>5</defaultvalue>
-			</option>
 			<!--mod -->
 			<option name="mod.cms.page.canModeratePage">
 				<categoryname>mod.cms.page</categoryname>
@@ -358,34 +220,6 @@ pdf]]>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="mod.cms.news.canModerateNews">
-				<categoryname>mod.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="mod.cms.news.canModerateComment">
-				<categoryname>mod.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="mod.cms.news.canEditComment">
-				<categoryname>mod.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="mod.cms.news.canDeleteComment">
-				<categoryname>mod.cms.news</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-				<options>module_news</options>
 			</option>
 		</options>
 	</import>

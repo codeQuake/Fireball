@@ -22,24 +22,6 @@
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
 			<!-- /page -->
-
-			<!-- news -->
-			<option name="canViewCategory">
-				<objecttype>de.codequake.cms.category.news</objecttype>
-			</option>
-			<option name="canViewNews">
-				<objecttype>de.codequake.cms.category.news</objecttype>
-			</option>
-			<option name="canViewDelayedNews">
-				<objecttype>de.codequake.cms.category.news</objecttype>
-			</option>
-			<option name="canAddNews">
-				<objecttype>de.codequake.cms.category.news</objecttype>
-			</option>
-			<option name="canModerateNews">
-				<objecttype>de.codequake.cms.category.news</objecttype>
-			</option>
-			<!-- /news -->
 		</options>
 	</import>
 </data>

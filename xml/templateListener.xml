@@ -23,21 +23,6 @@
 			<templatecode><![CDATA[{include file='__javascriptInclude' application='cms'}]]></templatecode>
 		</templatelistener>
 
-		<templatelistener name="javascriptInit">
-			<environment>user</environment>
-			<templatename>headInclude</templatename>
-			<eventname>javascriptInit</eventname>
-			<templatecode><![CDATA[{include file='__javascriptInit' application='cms'}]]></templatecode>
-		</templatelistener>
-
-		<templatelistener name="searchAreaSettings">
-			<environment>user</environment>
-			<templatename>searchArea</templatename>
-			<eventname>settings</eventname>
-			<templatecode><![CDATA[{include file='__searchAreaSettings' application='cms'}]]></templatecode>
-		</templatelistener>
-		<!-- /user -->
-
 		<!--admin -->
 		<templatelistener name="cmsVersion">
 			<environment>admin</environment>

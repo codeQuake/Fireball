@@ -15,19 +15,6 @@
 			<category name="cms.pages.default">
 				<parent>cms.pages</parent>
 			</category>
-			<category name="cms.news">
-				<parent>cms</parent>
-				<options>module_news</options>
-			</category>
-			<category name="cms.news.images">
-				<parent>cms.news</parent>
-				<options>module_news</options>
-			</category>
-
-			<category name="cms.news.categories">
-				<parent>cms.news</parent>
-				<options>module_news</options>
-			</category>
 		</categories>
 
 		<options>
@@ -38,15 +25,6 @@
 				<categoryname>general</categoryname>
 			</option>
 			<!-- /general -->
-
-			<!-- module.community -->
-			<option name="module_news">
-				<optiontype>boolean</optiontype>
-				<categoryname>module.community</categoryname>
-				<defaultvalue>1</defaultvalue>
-			</option>
-			<!-- /module.community -->
-
 			<!-- cms.pages.default -->
 			<option name="cms_pages_default_robots">
 				<optiontype>select</optiontype>
@@ -84,57 +62,6 @@ right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
 				<defaultvalue>0</defaultvalue>
 			</option>
 			<!--  /cms.pages.default -->
-
-			<!-- cms.news -->
-			<option name="cms_news_comments">
-				<optiontype>boolean</optiontype>
-				<categoryname>cms.news</categoryname>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="cms_news_news_images_attached">
-				<optiontype>boolean</optiontype>
-				<categoryname>cms.news.images</categoryname>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="cms_news_sidebar_categories">
-				<optiontype>boolean</optiontype>
-				<categoryname>cms.news.categories</categoryname>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="cms_news_sidebar_categories_main">
-				<optiontype>boolean</optiontype>
-				<categoryname>cms.news.categories</categoryname>
-				<defaultvalue>0</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="cms_news_languageicon">
-				<optiontype>boolean</optiontype>
-				<categoryname>cms.news</categoryname>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="cms_news_per_page">
-				<optiontype>integer</optiontype>
-				<categoryname>cms.news</categoryname>
-				<defaultvalue>10</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="cms_news_latest_limit">
-				<optiontype>integer</optiontype>
-				<categoryname>cms.news</categoryname>
-				<defaultvalue>10</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<option name="cms_news_signatures">
-				<optiontype>boolean</optiontype>
-				<categoryname>cms.news</categoryname>
-				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
-			</option>
-			<!-- /cms.news -->
 
 			<!-- cms.general.revision -->
 			<option name="cms_revision_delete">
