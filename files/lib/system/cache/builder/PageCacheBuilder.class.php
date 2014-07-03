@@ -27,16 +27,15 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 		foreach ($data['pages'] as $page) {
 
 			$alias = $page->alias;
-
-			while ($page->parentID && $page = $data['pages'][$page->parentID]) {
-				$alias = $page->alias .'/'. $alias;
+			$tmp = $page;
+			while ($tmp->parentID && $tmp = $data['pages'][$tmp->parentID]) {
+				$alias = $tmp->alias .'/'. $alias;
 			}
 
 			$data['aliasToID'][$alias] = $page->pageID;
 
 			$data['tree'][$page->parentID][] = $page->pageID;
 		}
-
 		return $data;
 	}
 }
