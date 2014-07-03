@@ -87,7 +87,7 @@
 				<categoryname>admin.cms.content</categoryname>
 				<optiontype>textarea</optiontype>
 				<defaultvalue>
-		  <![CDATA[gif
+		<![CDATA[gif
 JPG
 JPEG
 jpg
@@ -177,7 +177,6 @@ pdf]]>
 				<categoryname>user.cms.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
-				<options>module_news</options>
 			</option>
 
 			<option name="user.cms.page.canAddComment">
