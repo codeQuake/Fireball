@@ -88,9 +88,11 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 		return $list;
 	}
 
-	public function getChildrenTree() {
+	public function getChildrenTree($maxDepth = -1) {
 		$tree = new PageNodeTree($this->pageID);
-		return $tree->getIterator();
+		$tree =  $tree->getIterator();
+		if ($maxDepth >= 0) $tree->setMaxDepth($maxDepth);
+		return $tree;
 	}
 
 	// builds up a complete folder structure like link

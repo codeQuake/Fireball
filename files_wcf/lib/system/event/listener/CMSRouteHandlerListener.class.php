@@ -21,7 +21,7 @@ class CMSRouteHandlerListener implements IEventListener {
 		if (PACKAGE_ID != 1 && $application != null) {
 			$route = new Route('cmsPageRoute');
 			$route->setSchema('/{alias}/', 'Page');
-			$route->setParameterOption('alias', null, '[a-z]+(?:\-{1}[a-z]+)*(?:\/[a-z]+(?:\-{1}[a-z]+)*)*');
+			$route->setParameterOption('alias', null, '[a-z]+(?:\-{1}[a-z0-9]+)*(?:\/[a-z0-9]+(?:\-{1}[a-z0-9]+)*)*');
 			$eventObj->addRoute($route);
 		}
 	}

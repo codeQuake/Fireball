@@ -24,7 +24,7 @@ class MenuContentType extends AbstractStructureContentType {
 		$data = $content->handleContentData();
 		switch ($data['type']) {
 			case "children":
-				$menuItems = $content->getPage()->getChildrenTree();
+				$menuItems = $content->getPage()->getChildrenTree(isset($data['depth']) && $data['depth'] != 0? intval($data['depth']) - 1 : null);
 				break;
 		}
 		WCF::getTPL()->assign(array(

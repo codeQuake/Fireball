@@ -88,6 +88,8 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.select"><![CDATA[Bilder auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu"><![CDATA[Menü]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth"><![CDATA[Tiefe der Menüstruktur]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth.description"><![CDATA[Geben Sie hier die Tiefe der Menüstrukur an. Das heißt die Anzahl der aufzulistenden Ebenen des Menüs. Soll keine Beschränkung eingerichtet werden, so geben Sie 0 an.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Vorlage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[Benutzer]]></item>
