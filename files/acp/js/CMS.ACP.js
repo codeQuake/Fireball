@@ -609,3 +609,48 @@ CMS.ACP.Content.Revisions.Restore = Class.extend({
 		}
 });
 
+CMS.ACP.Copy = Class.extend({
+
+	_buttonSelector: '.jsCopyButton',
+	_objectAction: 'cms\\data\\page\\PageAction',
+	_proxy: null,
+	_didInit: false,
+
+	init: function (buttonSelector, objectAction) {
+		if (this._didInit) {
+			return;
+		}
+		this._buttonSelector = buttonSelector;
+		this._objectAction = objectAction;
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+
+		this._buttons = $(this._buttonSelector);
+		this._buttons.click($.proxy(this._click, this));
+
+		this._didInit = true;
+	},
+
+	_click: function (event) {
+		event.preventDefault();
+		var $objectID = $(event.currentTarget).data('objectID');
+
+			this._proxy.setOption('data', {
+				actionName: 'copy',
+				className: this._objectAction,
+				objectIDs: [ $objectID ]
+			});
+			WCF.LoadingOverlayHandler.updateIcon($(event.currentTarget));
+			this._proxy.sendRequest();
+	},
+
+	_success: function (data, textStatus, jqXHR) {
+		var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+		var self = this;
+		$notification.show(function() {
+			window.location = location;
+		});
+	}
+
+});

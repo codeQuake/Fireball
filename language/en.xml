@@ -4,6 +4,7 @@
 		<item name="cms.acp.content.add"><![CDATA[Add content]]></item>
 		<item name="cms.acp.content.contents"><![CDATA[Contents]]></item>
 		<item name="cms.acp.content.revisions"><![CDATA[Revisions]]></item>
+		<item name="cms.acp.content.copy"><![CDATA[Copy contnet]]></item>
 		<item name="cms.acp.content.revision"><![CDATA[Revision]]></item>
 		<item name="cms.acp.content.revision.restore"><![CDATA[Restore]]></item>
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
@@ -170,6 +171,7 @@
 
 	<category name="cms.acp.page">
 		<item name="cms.acp.page.legend"><![CDATA[Legend]]></item>
+		<item name="cms.acp.page.copy"><![CDATA[Copy page]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
 		<item name="cms.acp.page.revisions"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>

@@ -24,6 +24,7 @@
 			new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '.jsContentRow');
 			new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
 			new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
+			new CMS.ACP.Copy('.jsCopyButton', 'cms\\data\\content\\ContentAction');
 			new CMS.ACP.Page.AddContent();
 			new CMS.ACP.Content.Revisions();
 			WCF.Language.addObject({
@@ -76,6 +77,7 @@
 								<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
 								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="body" data-parent-id="{$content->contentID}"></span>
+								<span class="icon icon16 icon-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
 								<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revisions{/lang}" data-object-id="{@$content->contentID}"></span>
 
 								{event name='itemButtons'}
@@ -157,6 +159,7 @@
 					<li><span class="icon icon16 icon-pencil"></span> <span>{lang}cms.acp.content.edit{/lang}</span></li>
 					<li><span class="icon icon16 icon-remove"></span> <span>{lang}cms.acp.content.remove{/lang}</span></li>
 					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
+					<li><span class="icon icon16 icon-copy"></span> <span>{lang}cms.acp.content.copy{/lang}</span></li>
 					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.content.revisions{/lang}</span></li>
 				</ul>
 			</div>

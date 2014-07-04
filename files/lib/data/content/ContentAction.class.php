@@ -18,7 +18,7 @@ use wcf\system\WCF;
  */
 class ContentAction extends AbstractDatabaseObjectAction implements ISortableAction {
 	protected $className = 'cms\data\content\ContentEditor';
-	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'restoreRevision');
+	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'restoreRevision', 'copy');
 	protected $permissionsDelete = array(
 		'admin.cms.content.canAddContent'
 	);
@@ -127,5 +127,22 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 			'revisions' => $revisions,
 			'contentID' => $content->contentID
 		);
+	}
+
+	public function validateCopy() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		if (count($this->objects) != 1) {
+			throw new UserInputException('objectIDs');
+		}
+	}
+
+	public function copy() {
+		$object = reset($this->objects);
+		$data = $object->getDecoratedObject()->getData();
+		unset($data['contentID']);
+		$this->parameters['data'] = $data;
+		$this->create();
 	}
 }

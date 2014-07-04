@@ -27,7 +27,7 @@ use wcf\system\WCF;
  */
 class PageAction extends AbstractDatabaseObjectAction implements ISortableAction {
 	protected $className = 'cms\data\page\PageEditor';
-	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'setAsHome', 'restoreRevision');
+	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'setAsHome', 'restoreRevision', 'copy');
 
 	protected $permissionsDelete = array(
 		'admin.cms.page.canAddPage'
@@ -250,5 +250,23 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			'position' => $this->parameters['position'],
 			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null
 		);
+	}
+
+	public function validateCopy() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		if (count($this->objects) != 1) {
+			throw new UserInputException('objectIDs');
+		}
+	}
+
+	public function copy() {
+		$object = reset($this->objects);
+		$data = $object->getDecoratedObject()->getData();
+		$data['alias'] .= '-copy';
+		unset($data['pageID']);
+		$this->parameters['data'] = $data;
+		$this->create();
 	}
 }

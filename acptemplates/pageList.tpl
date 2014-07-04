@@ -9,6 +9,7 @@
 		$(function() {
 			new WCF.Action.NestedDelete('cms\\data\\page\\PageAction', '.jsPageRow');
 			new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction');
+			new CMS.ACP.Copy('.jsCopyButton', 'cms\\data\\page\\PageAction');
 			new CMS.ACP.Page.AddContent();
 			new CMS.ACP.Page.SetAsHome();
 			new CMS.ACP.Page.Revisions();
@@ -59,7 +60,7 @@
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
 								{if !$page->isHome && !$page->isChild()}<span class="icon icon16 icon-home jsTooltip jsSetAsHome pointer" data-object-id="{$page->pageID}" title="{lang}cms.acp.page.setAsHome{/lang}"></span>{/if}
-
+								<span class="icon icon16 icon-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.page.copy{/lang}" data-object-id="{@$page->pageID}"></span>
 								<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revisions{/lang}" data-object-id="{@$page->pageID}"></span>
 								<!-- content controls -->
 								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$page->pageID}"></span>
@@ -92,6 +93,7 @@
 					<li><span class="icon icon16 icon-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></li>
 					<li><span class="icon icon16 icon-remove"></span> <span>{lang}cms.acp.page.remove{/lang}</span></li>
 					<li><span class="icon icon16 icon-home"></span> <span>{lang}cms.acp.page.setAsHome{/lang}</span></li>
+					<li><span class="icon icon16 icon-copy"></span> <span>{lang}cms.acp.page.copy{/lang}</span></li>
 					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.page.revisions{/lang}</span></li>
 					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
 					<li><span class="icon icon16 icon-file"></span> <span>{lang}cms.acp.content.listing{/lang}</span></li>
