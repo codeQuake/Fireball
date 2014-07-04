@@ -4,7 +4,7 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>2.0.0 alpha 3</version>
+		<version>2.0.0 Beta 1</version>
 		<date>2014-06-30</date>
 	</packageinformation>
 
@@ -20,6 +20,7 @@
 
 	<optionalpackages>
 		<optionalpackage file="optionals/de.codequake.bbcode.icon.tar">de.codequake.bbcode.icon</optionalpackage>
+		<optionalpackage file="optionals/de.codequake.cms.news.tar">de.codequake.cms.news</optionalpackage>
 		<optionalpackage file="optionals/com.woltlab.wcf.legalNotice.tar">com.woltlab.wcf.legalNotice</optionalpackage>
 	</optionalpackages>
 
