@@ -3,6 +3,7 @@ namespace cms\data\page;
 
 use cms\data\content\ContentAction;
 use cms\data\content\ContentEditor;
+use cms\data\content\ContentList;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\cache\builder\PageCacheBuilder;
@@ -271,25 +272,45 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		$page = $this->create();
 		$pageID = $page->pageID;
 		$contents = $object->getContents();
-
+		$tmp = array();
 		//body
 		foreach ($contents['body'] as $content) {
 			//recreate
 			$data = $content->getDecoratedObject()->getData();
+			$oldID = $data['contentID'];
 			unset($data['contentID']);
 			$data['pageID'] = $pageID;
 			$action = new ContentAction(array(), 'create', array('data' => $data));
-			$action->executeAction();
+			$return = $action->executeAction();
+			$tmp[$oldID] = $return['returnValues']->contentID;
 		}
 
 		//sidebar
 		foreach ($contents['sidebar'] as $content) {
 			//recreate
 			$data = $content->getData();
+			$oldID = $data['contentID'];
 			unset($data['contentID']);
 			$data['pageID'] = $pageID;
 			$action = new ContentAction(array(), 'create', array('data' => $data));
-			$action->executeAction();
+			$return = $action->executeAction();
+			$tmp[$oldID] = $return['returnValues']->contentID;
+		}
+
+		//clear cache
+
+		//setting new IDs
+		$contents = new ContentList();
+		$contents->getConditionBuilder()->add('pageID = ?', array($pageID));
+		$contents->readObjects();
+		$contents = $contents->getObjects();
+		foreach ($contents as $content) {
+			$update = array();
+			if (isset($tmp[$content->parentID])) {
+				$editor = new ContentEditor($content);
+				$update['parentID'] = $tmp[$content->parentID];
+				$editor->update($update);
+			}
 		}
 	}
 }
