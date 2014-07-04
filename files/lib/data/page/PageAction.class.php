@@ -2,6 +2,7 @@
 namespace cms\data\page;
 
 use cms\data\content\ContentAction;
+use cms\data\content\ContentEditor;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\cache\builder\PageCacheBuilder;
@@ -267,6 +268,28 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		$data['alias'] .= '-copy';
 		unset($data['pageID']);
 		$this->parameters['data'] = $data;
-		$this->create();
+		$page = $this->create();
+		$pageID = $page->pageID;
+		$contents = $object->getContents();
+
+		//body
+		foreach ($contents['body'] as $content) {
+			//recreate
+			$data = $content->getDecoratedObject()->getData();
+			unset($data['contentID']);
+			$data['pageID'] = $pageID;
+			$action = new ContentAction(array(), 'create', array('data' => $data));
+			$action->executeAction();
+		}
+
+		//sidebar
+		foreach ($contents['sidebar'] as $content) {
+			//recreate
+			$data = $content->getData();
+			unset($data['contentID']);
+			$data['pageID'] = $pageID;
+			$action = new ContentAction(array(), 'create', array('data' => $data));
+			$action->executeAction();
+		}
 	}
 }
