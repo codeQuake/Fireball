@@ -18,17 +18,17 @@ class PageRevisionCacheBuilder extends AbstractCacheBuilder {
 			'revisions' => array(),
 			'revisionIDs' => array()
 		);
-
-		$sql = "SELECT * FROM  cms".WCF_N."_page_revision";
+		
+		$sql = "SELECT * FROM  cms" . WCF_N . "_page_revision";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
-
+		
 		while ($row = $statement->fetchArray()) {
 			$object = new Page(null, $row);
 			$data['revisions'][$object->pageID][$object->revisionID] = $object;
 			$data['revisionIDs'][$object->pageID][$object->revisionID] = $object->revisionID;
 		}
-
+		
 		return $data;
 	}
 }

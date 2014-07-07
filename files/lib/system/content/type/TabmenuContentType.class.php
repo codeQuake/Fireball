@@ -14,6 +14,7 @@ use wcf\system\WCF;
 class TabmenuContentType extends AbstractStructureContentType {
 
 	public $objectType = 'de.codequake.cms.content.type.tabmenu';
+
 	protected $icon = 'icon-list-alt';
 
 	public function getFormTemplate() {
@@ -31,12 +32,14 @@ class TabmenuContentType extends AbstractStructureContentType {
 	public function getOutput(Content $content) {
 		$childIDs = ContentCache::getInstance()->getChildIDs($content->contentID);
 		$children = array();
-
+		
 		foreach ($childIDs as $childID) {
 			$children[] = ContentCache::getInstance()->getContent($childID);
 		}
-
-		WCF::getTPL()->assign(array('children' => $children));
+		
+		WCF::getTPL()->assign(array(
+			'children' => $children
+		));
 		return WCF::getTPL()->fetch('tabMenuContentTypeOutput', 'cms');
 	}
 }

@@ -16,10 +16,13 @@ use wcf\util\FileUtil;
  * @package	de.codequake.cms
  */
 class ModuleAction extends AbstractDatabaseObjectAction {
+
 	protected $className = 'cms\data\module\ModuleEditor';
+
 	protected $permissionsDelete = array(
 		'admin.cms.content.canManageModule'
 	);
+
 	protected $requireACP = array(
 		'delete'
 	);

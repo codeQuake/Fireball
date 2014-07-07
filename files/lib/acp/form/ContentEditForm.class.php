@@ -74,53 +74,57 @@ class ContentEditForm extends ContentAddForm {
 		), 'update', array(
 			'data' => $data
 		));
-
+		
 		$objectAction->executeAction();
 		$contentID = $this->contentID;
 		$content = new Content($contentID);
 		$contentData = @unserialize($content->contentData);
-
+		
 		$update = array();
-
+		
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
 			$pollID = PollManager::getInstance()->save($this->content->contentID);
 			if ($pollID && $pollID != $contentData['pollID']) {
 				$contentData['pollID'] = $pollID;
-
-			}
-			//happens for idiots :P
-			else if (!$pollID && $contentData['pollID']) {
+			
+			} 			//happens for idiots :P
+			else if (! $pollID && $contentData['pollID']) {
 				$contentData['pollID'] = null;
 			}
 		}
-		if (!I18nHandler::getInstance()->isPlainValue('title')) {
+		if (! I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
-
+		
 		if ($this->objectTypeProcessor->isMultilingual) {
 			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-				if (!I18nHandler::getInstance()->isPlainValue($field)) {
+				if (! I18nHandler::getInstance()->isPlainValue($field)) {
 					I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
 					$contentData[$field] = 'cms.content.' . $field . $contentID;
 				}
 			}
 		}
-
+		
 		$update['contentData'] = serialize($contentData);
-		if (!empty($update)) {
+		if (! empty($update)) {
 			$editor = new ContentEditor($content);
 			$editor->update($update);
 		}
-
+		
 		//create revision
 		$objectAction = new ContentAction(array(
 			$this->contentID
-		), 'createRevision', array('action' => 'update'));
+		), 'createRevision', array(
+			'action' => 'update'
+		));
 		$objectAction->executeAction();
 		$this->saved();
-
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array('application' => 'cms', 'object' => new Page($this->pageID))));
+		
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(
+			'application' => 'cms',
+			'object' => new Page($this->pageID)
+		)));
 	}
 
 	public function assignVariables() {

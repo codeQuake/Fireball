@@ -12,10 +12,14 @@ use wcf\data\DatabaseObjectDecorator;
  * @package	de.codequake.cms
  */
 
-class ContentNode extends DatabaseObjectDecorator implements \Countable, \RecursiveIterator{
+class ContentNode extends DatabaseObjectDecorator implements \Countable, \RecursiveIterator {
+
 	public $children = array();
+
 	public $index = 0;
+
 	public $parentNode = null;
+
 	protected static $baseClass = 'cms\data\content\Content';
 
 	/**
@@ -42,12 +46,12 @@ class ContentNode extends DatabaseObjectDecorator implements \Countable, \Recurs
 	public function getOpenParentNodes() {
 		$element = $this;
 		$i = 0;
-
+		
 		while ($element->parentNode->parentNode != null && $element->isLastSibling()) {
 			$i ++;
 			$element = $element->parentNode;
 		}
-
+		
 		return $i;
 	}
 

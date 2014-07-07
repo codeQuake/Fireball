@@ -19,7 +19,8 @@ class LinkContentType extends AbstractContentType {
 	public $isMultilingual = true;
 
 	public $multilingualFields = array(
-		'text', 'link'
+		'text',
+		'link'
 	);
 
 	public function getFormTemplate() {

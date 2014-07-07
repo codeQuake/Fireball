@@ -8,6 +8,7 @@ namespace cms\data\page;
  * @package	de.codequake.cms
  */
 class DrainedPageNodeTree extends PageNodeTree {
+
 	public $drainedID = null;
 
 	public function __construct($parentID = null, $drainedID = null) {

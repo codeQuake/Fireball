@@ -12,5 +12,6 @@ use wcf\data\DatabaseObjectDecorator;
  * @package	de.codequake.cms
  */
 class ViewableContent extends DatabaseObjectDecorator {
+
 	protected static $baseClass = 'cms\data\content\Content';
 }

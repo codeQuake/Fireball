@@ -14,7 +14,9 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class Layout extends CMSDatabaseObject implements IRouteController {
+
 	protected static $databaseTableName = 'layout';
+
 	protected static $databaseTableIndexName = 'layoutID';
 
 	public function __construct($id, $row = null, $object = null) {

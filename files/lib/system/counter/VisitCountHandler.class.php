@@ -13,6 +13,7 @@ use wcf\util\DateUtil;
  * @package	de.codequake.cms
  */
 class VisitCountHandler extends SingletonFactory {
+
 	public $session = null;
 
 	public function init() {
@@ -41,8 +42,7 @@ class VisitCountHandler extends SingletonFactory {
 				
 				$browsers = @unserialize($counter['browsers']);
 				if (isset($browsers[$browserName])) $browsers[$browserName] = $browsers[$browserName] + 1;
-				else
-					$browsers[$browserName] = 1;
+				else $browsers[$browserName] = 1;
 				$users = $counter['users'];
 				if ($userID != 0) $users ++;
 				$spiders = $counter['spiders'];
@@ -59,8 +59,7 @@ class VisitCountHandler extends SingletonFactory {
 					$spiders,
 					serialize($browsers)
 				));
-			}
-			// create new
+			} 			// create new
 			else {
 				$users = 0;
 				$spiders = 0;
@@ -93,8 +92,7 @@ class VisitCountHandler extends SingletonFactory {
 		if ($statement->fetchColumn() != 0) return true;
 		return false;
 	}
-	
-	
+
 	public function getVisitors($start, $end) {
 		$vistors = array();
 		$date = $start;
@@ -161,8 +159,7 @@ class VisitCountHandler extends SingletonFactory {
 					12
 				))) $day = 31;
 				if ($month == 2) $day = 28;
-				else
-					$day = 30;
+				else $day = 30;
 			}
 			if ($month == 0) {
 				$month = 12;
@@ -187,11 +184,9 @@ class VisitCountHandler extends SingletonFactory {
 		// First get the platform?
 		if (preg_match('/linux/i', $u_agent)) {
 			$platform = 'linux';
-		}
-		else if (preg_match('/macintosh|mac os x/i', $u_agent)) {
+		} else if (preg_match('/macintosh|mac os x/i', $u_agent)) {
 			$platform = 'mac';
-		}
-		else if (preg_match('/windows|win32/i', $u_agent)) {
+		} else if (preg_match('/windows|win32/i', $u_agent)) {
 			$platform = 'windows';
 		}
 		
@@ -199,28 +194,22 @@ class VisitCountHandler extends SingletonFactory {
 		if (preg_match('/MSIE/i', $u_agent) && ! preg_match('/Opera/i', $u_agent)) {
 			$bname = 'Internet Explorer';
 			$ub = "MSIE";
-		}
-		else if (preg_match('/Firefox/i', $u_agent)) {
+		} else if (preg_match('/Firefox/i', $u_agent)) {
 			$bname = 'Mozilla Firefox';
 			$ub = "Firefox";
-		}
-		else if (preg_match('/Chrome/i', $u_agent)) {
+		} else if (preg_match('/Chrome/i', $u_agent)) {
 			$bname = 'Google Chrome';
 			$ub = "Chrome";
-		}
-		else if (preg_match('/Safari/i', $u_agent)) {
+		} else if (preg_match('/Safari/i', $u_agent)) {
 			$bname = 'Apple Safari';
 			$ub = "Safari";
-		}
-		else if (preg_match('/Opera/i', $u_agent)) {
+		} else if (preg_match('/Opera/i', $u_agent)) {
 			$bname = 'Opera';
 			$ub = "Opera";
-		}
-		else if (preg_match('/Netscape/i', $u_agent)) {
+		} else if (preg_match('/Netscape/i', $u_agent)) {
 			$bname = 'Netscape';
 			$ub = "Netscape";
-		}
-		else {
+		} else {
 			$ub = '';
 		}
 		
@@ -242,12 +231,10 @@ class VisitCountHandler extends SingletonFactory {
 			// see if version is before or after the name
 			if (strripos($u_agent, "Version") < strripos($u_agent, $ub)) {
 				$version = $matches['version'][0];
-			}
-			else {
+			} else {
 				$version = isset($matches['version'][1]) ? $matches['version'][1] : "";
 			}
-		}
-		else {
+		} else {
 			$version = $matches['version'][0];
 		}
 		
@@ -277,7 +264,7 @@ class VisitCountHandler extends SingletonFactory {
 		
 		return null;
 	}
-	
+
 	protected function getMonths() {
 		$months = array(
 			WCF::getLanguage()->get('wcf.date.month.january'),

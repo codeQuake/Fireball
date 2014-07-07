@@ -12,9 +12,13 @@ use wcf\data\DatabaseObjectDecorator;
  * @package	de.codequake.cms
  */
 class PageNode extends DatabaseObjectDecorator implements \Countable, \RecursiveIterator {
+
 	public $children = array();
+
 	public $index = 0;
+
 	public $parentNode = null;
+
 	protected static $baseClass = 'cms\data\page\Page';
 
 	public function addChild(PageNode $pageNode) {

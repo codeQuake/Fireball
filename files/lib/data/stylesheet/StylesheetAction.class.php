@@ -14,10 +14,13 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @package	de.codequake.cms
  */
 class StylesheetAction extends AbstractDatabaseObjectAction {
+
 	protected $className = 'cms\data\stylesheet\StylesheetEditor';
+
 	protected $permissionsDelete = array(
 		'admin.cms.style.canAddStylesheet'
 	);
+
 	protected $requireACP = array(
 		'delete'
 	);

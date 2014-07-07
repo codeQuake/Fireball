@@ -21,16 +21,25 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class FileManagementForm extends AbstractForm {
+
 	public $templateName = 'fileManagement';
+
 	public $neededPermissions = array(
 		'admin.cms.file.canAddFile'
 	);
+
 	public $activeMenuItem = 'cms.acp.menu.link.cms.file.management';
+
 	public $folderPageID = 0;
+
 	public $folderID = 0;
+
 	public $fileList = null;
+
 	public $folderList = null;
+
 	public $foldername = '';
+
 	public $isFolder = false;
 
 	public function readFormParameters() {
@@ -41,12 +50,12 @@ class FileManagementForm extends AbstractForm {
 	public function validate() {
 		parent::validate();
 		if (empty($this->foldername)) {
-				throw new UserInputException('folder', 'empty');
-			}
-
+			throw new UserInputException('folder', 'empty');
+		}
+		
 		$folderPath = StringUtil::firstCharToLowerCase($this->foldername);
 		if (file_exists(CMS_DIR . 'files/' . $folderPath)) throw new UserInputException('folder', 'exists');
-
+	
 	}
 
 	public function save() {
@@ -61,12 +70,12 @@ class FileManagementForm extends AbstractForm {
 			'data' => $data
 		));
 		$action->executeAction();
-
+		
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
-
+		
 		$this->foldername = null;
-
+	
 	}
 
 	public function readData() {
@@ -81,8 +90,7 @@ class FileManagementForm extends AbstractForm {
 			$list->readObjects();
 			$this->fileList = $list->getObjects();
 			$this->isFolder = false;
-		}
-		else {
+		} else {
 			$folder = new Folder($this->folderPageID);
 			if ($folder === null) throw new IllegalLinkException();
 			$this->fileList = $folder->getFiles();

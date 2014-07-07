@@ -1,5 +1,6 @@
 <?php
 namespace cms\system\poll;
+
 use cms\data\content\Content;
 use wcf\data\poll\Poll;
 use wcf\system\poll\AbstractPollHandler;
@@ -28,7 +29,7 @@ class ContentPollHandler extends AbstractPollHandler {
 		if ($content->contentID && $data['pollID'] == $poll->pollID) {
 			return $content;
 		}
-
+		
 		return null;
 	}
 }

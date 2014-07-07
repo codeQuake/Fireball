@@ -28,7 +28,7 @@ class TextContentType extends AbstractContentType {
 	public function getFormTemplate() {
 		//init bbcodes
 		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
-
+		
 		return 'textContentType';
 	}
 

@@ -19,21 +19,21 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 			'aliasToID' => array(),
 			'tree' => array()
 		);
-
+		
 		$list = new PageList();
 		$list->sqlOrderBy = 'parentID ASC, showOrder ASC';
 		$list->readObjects();
 		$data['pages'] = $list->getObjects();
 		foreach ($data['pages'] as $page) {
-
+			
 			$alias = $page->alias;
 			$tmp = $page;
 			while ($tmp->parentID && $tmp = $data['pages'][$tmp->parentID]) {
-				$alias = $tmp->alias .'/'. $alias;
+				$alias = $tmp->alias . '/' . $alias;
 			}
-
+			
 			$data['aliasToID'][$alias] = $page->pageID;
-
+			
 			$data['tree'][$page->parentID][] = $page->pageID;
 		}
 		return $data;

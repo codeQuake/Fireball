@@ -15,6 +15,7 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class PagePermissionCacheBuilder extends AbstractCacheBuilder {
+
 	public function rebuild(array $parameters) {
 		$data = array();
 		$objectTypeName = 'de.codequake.cms.page';

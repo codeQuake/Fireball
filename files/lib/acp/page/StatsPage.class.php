@@ -14,12 +14,19 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class StatsPage extends AbstractPage {
+
 	public $templateName = 'stats';
+
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.statistics';
+
 	public $startDate = 0;
+
 	public $endDate = 0;
+
 	public $visits = array();
+
 	public $browsers = array();
+
 	public $colors = array(
 		'#015294',
 		'#F7464A',
@@ -31,6 +38,7 @@ class StatsPage extends AbstractPage {
 		'#f0f0f0',
 		'#1f1f1'
 	);
+
 	public $pages = null;
 
 	public function readData() {

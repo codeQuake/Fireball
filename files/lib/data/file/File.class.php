@@ -15,7 +15,9 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class File extends CMSDatabaseObject implements IRouteController {
+
 	protected static $databaseTableName = 'file';
+
 	protected static $databaseTableIndexName = 'fileID';
 
 	public function __construct($id, $row = null, $object = null) {
@@ -28,10 +30,10 @@ class File extends CMSDatabaseObject implements IRouteController {
 				$id
 			));
 			$row = $statement->fetchArray();
-
+			
 			if ($row === false) $row = array();
 		}
-
+		
 		parent::__construct(null, $row, $object);
 	}
 
@@ -44,12 +46,12 @@ class File extends CMSDatabaseObject implements IRouteController {
 	}
 
 	public function getIconTag($width = 16) {
-		if (preg_match('/image/i', $this->type)) return '<span class="icon icon'.$width.' icon-picture"></span>';
-		if (preg_match('/audio/i', $this->type)) return '<span class="icon icon'.$width.' icon-music"></span>';
-		if (preg_match('/video/i', $this->type)) return '<span class="icon icon'.$width.' icon-film"></span>';
-		if (preg_match('/pdf/i', $this->type)) return '<span class="icon icon'.$width.' icon-file-text"></span>';
-		if (preg_match('/html/i', $this->type)|| preg_match('/java/i', $this->type) || preg_match('/x-c/i', $this->type) || preg_match('/css/i', $this->type) || preg_match('/javascript/i', $this->type)) return '<span class="icon icon'.$width.' icon-code"></span>';
-		return '<span class="icon icon'.$width.' icon-file"></span>';
+		if (preg_match('/image/i', $this->type)) return '<span class="icon icon' . $width . ' icon-picture"></span>';
+		if (preg_match('/audio/i', $this->type)) return '<span class="icon icon' . $width . ' icon-music"></span>';
+		if (preg_match('/video/i', $this->type)) return '<span class="icon icon' . $width . ' icon-film"></span>';
+		if (preg_match('/pdf/i', $this->type)) return '<span class="icon icon' . $width . ' icon-file-text"></span>';
+		if (preg_match('/html/i', $this->type) || preg_match('/java/i', $this->type) || preg_match('/x-c/i', $this->type) || preg_match('/css/i', $this->type) || preg_match('/javascript/i', $this->type)) return '<span class="icon icon' . $width . ' icon-code"></span>';
+		return '<span class="icon icon' . $width . ' icon-file"></span>';
 	}
 
 	public function getFolder() {
@@ -58,8 +60,8 @@ class File extends CMSDatabaseObject implements IRouteController {
 	}
 
 	public function getURL() {
-		if ($this->getFolder() && $this->getFolder()->folderPath != '') return RELATIVE_CMS_DIR.'files/'.$this->getFolder()->folderPath.'/'.$this->filename;
-		return RELATIVE_CMS_DIR.'files/'.$this->filename;
+		if ($this->getFolder() && $this->getFolder()->folderPath != '') return RELATIVE_CMS_DIR . 'files/' . $this->getFolder()->folderPath . '/' . $this->filename;
+		return RELATIVE_CMS_DIR . 'files/' . $this->filename;
 	}
 
 	public function getByID($id) {

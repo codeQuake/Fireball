@@ -27,52 +27,77 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class PageAddForm extends AbstractForm {
+
 	public $templateName = 'pageAdd';
+
 	public $neededPermissions = array(
 		'admin.cms.page.canAddPage'
 	);
+
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.add';
+
 	public $objectTypeID = 0;
+
 	public $enableMultilangualism = true;
+
 	public $pageID = 0;
+
 	public $action = 'add';
+
 	public $title = '';
+
 	public $alias = '';
+
 	public $description = '';
+
 	public $metaDescription = '';
+
 	public $metaKeywords = '';
+
 	public $invisible = 0;
+
 	public $availableDuringOfflineMode = CMS_PAGES_DEFAULT_OFFLINE;
+
 	public $robots = CMS_PAGES_DEFAULT_ROBOTS;
+
 	public $showSidebar = CMS_PAGES_DEFAULT_GLOBAL_SIDEBAR;
+
 	public $sidebarOrientation = CMS_PAGES_DEFAULT_SIDEBAR;
+
 	public $showOrder = 0;
+
 	public $parentID = null;
+
 	public $menuItem = 1;
+
 	public $menuItemID = null;
+
 	public $pageList = null;
+
 	public $layoutList = null;
+
 	public $layoutID = 0;
+
 	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
 
 	public function readParameters() {
 		parent::readParameters();
-
+		
 		I18nHandler::getInstance()->register('title');
 		I18nHandler::getInstance()->register('description');
 		I18nHandler::getInstance()->register('metaDescription');
 		I18nHandler::getInstance()->register('metaKeywords');
-
+		
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
 	}
 
 	public function readData() {
 		parent::readData();
 		if (isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
-
+		
 		$this->pageList = new PageNodeTree();
 		$this->pageList = $this->pageList->getIterator();
-
+		
 		$this->layoutList = new LayoutList();
 		$this->layoutList->readObjects();
 		$this->layoutList = $this->layoutList->getObjects();
@@ -101,19 +126,18 @@ class PageAddForm extends AbstractForm {
 
 	public function validate() {
 		parent::validate();
-
+		
 		// validate alias
 		$this->validateAlias();
-
+		
 		if (! I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
-			}
-			else {
+			} else {
 				throw new UserInputException('title', 'multilingual');
 			}
 		}
-
+		
 		$page = new Page($this->parentID);
 		if ($page === null) throw new UserInputException('parentID', 'invalid');
 	}
@@ -135,7 +159,7 @@ class PageAddForm extends AbstractForm {
 
 	public function save() {
 		parent::save();
-
+		
 		$data = array(
 			'alias' => $this->alias,
 			'title' => $this->title,
@@ -152,21 +176,21 @@ class PageAddForm extends AbstractForm {
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable
 		);
-
+		
 		$objectAction = new PageAction(array(), 'create', array(
 			'data' => $data
 		));
 		$objectAction->executeAction();
-
+		
 		$returnValues = $objectAction->getReturnValues();
 		$pageID = $returnValues['returnValues']->pageID;
-
+		
 		// save ACL
 		ACLHandler::getInstance()->save($pageID, $this->objectTypeID);
 		ACLHandler::getInstance()->disableAssignVariables();
 		// update I18n
 		$update = array();
-
+		
 		if (! I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.page.title' . $pageID, 'cms.page');
 			$update['title'] = 'cms.page.title' . $pageID;
@@ -183,17 +207,17 @@ class PageAddForm extends AbstractForm {
 			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $pageID, 'cms.page');
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $pageID;
 		}
-
+		
 		if ($this->menuItem) {
 			if ($returnValues['returnValues']->getParentPage() !== null) {
 				$parentPage = $returnValues['returnValues']->getParentPage();
 				$parentItem = new PageMenuItem($parentPage->menuItemID);
 			}
-
+			
 			$data = array(
 				'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
 				'menuItemController' => 'cms\page\PagePage',
-				'menuItemLink' => 'id='.$pageID,
+				'menuItemLink' => 'id=' . $pageID,
 				'menuPosition' => 'header',
 				'packageID' => PACKAGE_ID,
 				'options' => '',
@@ -201,30 +225,34 @@ class PageAddForm extends AbstractForm {
 				'parentMenuItem' => isset($parentItem) ? $parentItem->menuItem : '',
 				'showOrder' => 0
 			);
-
-			$menuItemAction = new PageMenuItemAction(array(), 'create', array('data' => $data));
+			
+			$menuItemAction = new PageMenuItemAction(array(), 'create', array(
+				'data' => $data
+			));
 			$itemReturnValues = $menuItemAction->executeAction();
 			$menuItem = $itemReturnValues['returnValues'];
-
-			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.'.$menuItem->menuItemID, 'wcf.page');
-			$data['menuItem'] = 'wcf.page.menuItem.'.$menuItem->menuItemID;
+			
+			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.' . $menuItem->menuItemID, 'wcf.page');
+			$data['menuItem'] = 'wcf.page.menuItem.' . $menuItem->menuItemID;
 			$editor = new PageMenuItemEditor($menuItem);
 			$editor->update($data);
-
-			$update['menuItemID'] = $menuItem->menuItemID ?: null;
+			
+			$update['menuItemID'] = $menuItem->menuItemID ?  : null;
 		}
-
+		
 		if (! empty($update)) {
 			$editor = new PageEditor($returnValues['returnValues']);
 			$editor->update($update);
 		}
-
+		
 		//create revision
 		$objectAction = new PageAction(array(
-			$returnValues['returnValues']->pageID,
-		), 'createRevision', array('action' => 'create'));
+			$returnValues['returnValues']->pageID
+		), 'createRevision', array(
+			'action' => 'create'
+		));
 		$objectAction->executeAction();
-
+		
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
 		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
@@ -236,10 +264,10 @@ class PageAddForm extends AbstractForm {
 
 	public function assignVariables() {
 		parent::assignVariables();
-
+		
 		I18nHandler::getInstance()->assignVariables();
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
-
+		
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'objectTypeID' => $this->objectTypeID,

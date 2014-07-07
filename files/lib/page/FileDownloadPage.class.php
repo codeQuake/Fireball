@@ -17,9 +17,13 @@ use wcf\util\FileReader;
  * @package	de.codequake.cms
  */
 class FileDownloadPage extends AbstractPage {
+
 	public $file = null;
+
 	public $fileReader = null;
+
 	public $useTemplate = false;
+
 	public static $inlineMimeTypes = array(
 		'image/gif',
 		'image/jpeg',

@@ -14,7 +14,9 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class Stylesheet extends CMSDatabaseObject implements IRouteController {
+
 	protected static $databaseTableName = 'stylesheet';
+
 	protected static $databaseTableIndexName = 'sheetID';
 
 	public function __construct($id, $row = null, $object = null) {

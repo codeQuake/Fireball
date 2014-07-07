@@ -23,7 +23,9 @@ class UserContentType extends AbstractContentType {
 
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
-		WCF::getTPL()->assign(array('user' => UserProfile::getUserProfileByUsername($data['name'])));
+		WCF::getTPL()->assign(array(
+			'user' => UserProfile::getUserProfileByUsername($data['name'])
+		));
 		return WCF::getTPL()->fetch('userContentTypeOutput', 'cms');
 	}
 }

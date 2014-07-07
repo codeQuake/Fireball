@@ -13,10 +13,13 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @package	de.codequake.cms
  */
 class FolderAction extends AbstractDatabaseObjectAction {
+
 	protected $className = 'cms\data\folder\FolderEditor';
+
 	protected $permissionsDelete = array(
 		'admin.cms.file.canAddFile'
 	);
+
 	protected $requireACP = array(
 		'delete'
 	);

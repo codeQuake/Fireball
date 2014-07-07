@@ -10,6 +10,7 @@ use cms\data\layout\Layout;
  * @package	de.codequake.cms
  */
 class LayoutStylesheetList extends ViewableStylesheetList {
+
 	public $layoutID = 0;
 
 	public function __construct($layoutID) {

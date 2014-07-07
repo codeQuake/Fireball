@@ -15,12 +15,17 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class StylesheetAddForm extends AbstractForm {
+
 	public $templateName = 'stylesheetAdd';
+
 	public $neededPermissions = array(
 		'admin.cms.style.canAddStylesheet'
 	);
+
 	public $activeMenuItem = 'cms.acp.menu.link.cms.stylesheet.add';
+
 	public $title = '';
+
 	public $less = '';
 
 	public function readFormParameters() {

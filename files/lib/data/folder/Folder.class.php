@@ -15,7 +15,9 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class Folder extends CMSDatabaseObject implements IRouteController {
+
 	protected static $databaseTableName = 'folder';
+
 	protected static $databaseTableIndexName = 'folderID';
 
 	public function __construct($id, $row = null, $object = null) {

@@ -13,6 +13,7 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class PagePermissionHandler extends SingletonFactory {
+
 	protected $permissions = array();
 
 	protected function init() {
@@ -33,8 +34,7 @@ class PagePermissionHandler extends SingletonFactory {
 						foreach ($this->permissions[$page->pageID]['group'][$groupID] as $optionName => $optionValue) {
 							if (isset($permissions[$optionName])) {
 								$permissions[$optionName] = $permissions[$optionName] || $optionValue;
-							}
-							else {
+							} else {
 								$permissions[$optionName] = $optionValue;
 							}
 						}

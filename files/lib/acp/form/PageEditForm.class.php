@@ -27,21 +27,24 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class PageEditForm extends PageAddForm {
+
 	public $pageID = 0;
+
 	public $page = null;
+
 	public $action = 'edit';
 
 	public function readData() {
 		parent::readData();
-
+		
 		// reading data
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
 		$this->page = new Page($this->pageID);
-
+		
 		// overwrite pagelist
 		$this->pageList = new DrainedPageNodeTree(null, $this->pageID);
 		$this->pageList = $this->pageList->getIterator();
-
+		
 		I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->page->title, 'cms.page.title\d+');
 		$this->title = $this->page->title;
 		I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->page->description, 'cms.page.description\d+');
@@ -50,7 +53,7 @@ class PageEditForm extends PageAddForm {
 		$this->metaDescription = $this->page->metaDescription;
 		I18nHandler::getInstance()->setOptions('metaKeywords', PACKAGE_ID, $this->page->metaKeywords, 'cms.page.metaKeywords\d+');
 		$this->metaKeywords = $this->page->metaKeywords;
-
+		
 		$this->parentID = $this->page->parentID;
 		$this->showOrder = $this->page->showOrder;
 		$this->invisible = $this->page->invisible;
@@ -62,7 +65,7 @@ class PageEditForm extends PageAddForm {
 		$this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
 		$this->menuItem = $this->page->menuItemID !== null ? 1 : 0;
 		$this->menuItemID = $this->page->menuItemID;
-
+		
 		$this->alias = $this->page->alias;
 	}
 
@@ -105,20 +108,20 @@ class PageEditForm extends PageAddForm {
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable
 		);
-
+		
 		$objectAction = new PageAction(array(
 			$this->pageID
 		), 'update', array(
 			'data' => $data
 		));
 		$objectAction->executeAction();
-
+		
 		$update = array();
-
+		
 		// save ACL
 		ACLHandler::getInstance()->save($this->pageID, $this->objectTypeID);
 		ACLHandler::getInstance()->disableAssignVariables();
-
+		
 		// update I18n
 		if (! I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.page.title' . $this->pageID, 'cms.page');
@@ -136,30 +139,30 @@ class PageEditForm extends PageAddForm {
 			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $this->pageID, 'cms.page');
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $this->pageID;
 		}
-
+		
 		$page = new Page($this->pageID);
 		$this->menuItemID = $page->menuItemID;
-
-		if (!$this->menuItem && $this->menuItemID) {
+		
+		if (! $this->menuItem && $this->menuItemID) {
 			//delete old item
 			$action = new PageMenuItemAction(array(
 				$this->menuItemID
 			), 'delete', array());
 			$action->executeAction();
-
+			
 			$update['menuItemID'] = null;
-		} else if ($this->menuItem && !$this->menuItemID) {
+		} else if ($this->menuItem && ! $this->menuItemID) {
 			//create menuitem
 			$page = new Page($this->pageID);
 			if ($page->getParentPage() !== null) {
 				$parentPage = $page->getParentPage();
 				$parentItem = new PageMenuItem($parentPage->menuItemID);
 			}
-
+			
 			$data = array(
 				'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
 				'menuItemController' => 'cms\page\PagePage',
-				'menuItemLink' => 'id='.$this->pageID,
+				'menuItemLink' => 'id=' . $this->pageID,
 				'menuPosition' => 'header',
 				'options' => '',
 				'permissions' => '',
@@ -167,47 +170,51 @@ class PageEditForm extends PageAddForm {
 				'parentMenuItem' => isset($parentItem) ? $parentItem->menuItem : '',
 				'showOrder' => 0
 			);
-
-			$menuItemAction = new PageMenuItemAction(array(), 'create', array('data' => $data));
+			
+			$menuItemAction = new PageMenuItemAction(array(), 'create', array(
+				'data' => $data
+			));
 			$itemReturnValues = $menuItemAction->executeAction();
 			$menuItem = $itemReturnValues['returnValues'];
-
-			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.'.$menuItem->menuItemID, 'wcf.page');
-			$data['menuItem'] = 'wcf.page.menuItem.'.$menuItem->menuItemID;
+			
+			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.' . $menuItem->menuItemID, 'wcf.page');
+			$data['menuItem'] = 'wcf.page.menuItem.' . $menuItem->menuItemID;
 			$editor = new PageMenuItemEditor($menuItem);
 			$editor->update($data);
-
-			$update['menuItemID'] = $menuItem->menuItemID ?: null;
+			
+			$update['menuItemID'] = $menuItem->menuItemID ?  : null;
 		} else if ($this->menuItem && $this->menuItemID) {
 			//update old item
 			$item = new PageMenuItem($this->menuItemID);
 			$editor = new PageMenuItemEditor($item);
-			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.'.$item->menuItemID, 'wcf.page');
-			$menuData['menuItem'] = 'wcf.page.menuItem.'.$item->menuItemID;
+			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.' . $item->menuItemID, 'wcf.page');
+			$menuData['menuItem'] = 'wcf.page.menuItem.' . $item->menuItemID;
 			$editor->update($menuData);
 		}
-
+		
 		if (! empty($update)) {
 			$editor = new PageEditor(new Page($this->pageID));
 			$editor->update($update);
 		}
-
+		
 		//create revision
 		$objectAction = new PageAction(array(
 			$this->pageID
-		), 'createRevision', array('action' => 'update'));
+		), 'createRevision', array(
+			'action' => 'update'
+		));
 		$objectAction->executeAction();
-
+		
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
 	}
 
 	public function assignVariables() {
 		AbstractForm::assignVariables();
-
+		
 		I18nHandler::getInstance()->assignVariables(! empty($_POST));
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
-
+		
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
 			'objectTypeID' => $this->objectTypeID,

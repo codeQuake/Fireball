@@ -12,5 +12,6 @@ use wcf\data\DatabaseObjectEditor;
  * @package	de.codequake.cms
  */
 class FolderEditor extends DatabaseObjectEditor {
+
 	protected static $baseClass = 'cms\data\folder\Folder';
 }

@@ -20,8 +20,11 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class Content extends CMSDatabaseObject implements IRouteController, IPollObject {
+
 	protected static $databaseTableName = 'content';
+
 	protected static $databaseTableIndexName = 'contentID';
+
 	public $poll = null;
 
 	public function __construct($id, $row = null, $object = null) {
@@ -34,10 +37,10 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 				$id
 			));
 			$row = $statement->fetchArray();
-
+			
 			if ($row === false) $row = array();
 		}
-
+		
 		parent::__construct(null, $row, $object);
 	}
 
@@ -68,19 +71,29 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 		if ($this->parentID !== null) return ContentCache::getInstance()->getContent($this->parentID);
 		return null;
 	}
-
+	
 	//build css structure
 	public function getCSSClasses() {
 		if ($this->getCategory() == 'structure') {
 			if ($this->parentID != null && $this->getParentContent()->getCategory() == 'structure') {
-				$childCSS = $this->getParentContent()->getObjectType()->getProcessor()->getChildCSSClasses($this);
-				if ($childCSS != '') return $this->getObjectType()->getProcessor()->getCSSClasses().' '.$childCSS.' '.$this->cssClasses;
+				$childCSS = $this->getParentContent()
+					->getObjectType()
+					->getProcessor()
+					->getChildCSSClasses($this);
+				if ($childCSS != '') return $this->getObjectType()
+					->getProcessor()
+					->getCSSClasses() . ' ' . $childCSS . ' ' . $this->cssClasses;
 			}
-			return $this->getObjectType()->getProcessor()->getCSSClasses().' '.$this->cssClasses;
+			return $this->getObjectType()
+				->getProcessor()
+				->getCSSClasses() . ' ' . $this->cssClasses;
 		}
 		if ($this->parentID != null && $this->getParentContent()->getCategory() == 'structure') {
-			$childCSS = $this->getParentContent()->getObjectType()->getProcessor()->getChildCSSClasses($this);
-			if ($childCSS != '') return $childCSS.' '.$this->cssClasses;
+			$childCSS = $this->getParentContent()
+				->getObjectType()
+				->getProcessor()
+				->getChildCSSClasses($this);
+			if ($childCSS != '') return $childCSS . ' ' . $this->cssClasses;
 			return $this->cssClasses;
 		}
 		return $this->cssClasses;
@@ -105,7 +118,7 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 			$this->poll = new Poll($data['pollID']);
 			$this->poll->setRelatedObject($this);
 		}
-
+		
 		return $this->poll;
 	}
 

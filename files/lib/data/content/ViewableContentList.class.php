@@ -12,5 +12,6 @@ use cms\data\content\ContentList;
  * @package	de.codequake.cms
  */
 class ViewableContentList extends ContentList {
+
 	public $decoratorClassName = 'cms\data\content\ViewableContent';
 }

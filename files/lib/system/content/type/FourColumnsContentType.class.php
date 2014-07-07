@@ -40,7 +40,7 @@ class FourColumnsContentType extends AbstractStructureContentType {
 			25,
 			25
 		);
-
+		
 		switch ($content->showOrder % 3) {
 			case 0:
 				$gridWidth = $width[3];

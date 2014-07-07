@@ -13,8 +13,11 @@ use wcf\system\SingletonFactory;
  * @package	de.codequake.cms
  */
 class PageCache extends SingletonFactory {
+
 	protected $aliasToID = array();
+
 	protected $pages = array();
+
 	protected $tree = array();
 
 	protected function init() {
@@ -35,16 +38,16 @@ class PageCache extends SingletonFactory {
 
 	public function getHomePage() {
 		foreach ($this->pages as $page) {
-			if($page->isHome) return $page;
+			if ($page->isHome) return $page;
 		}
 		return null;
 	}
 
 	public function getChildIDs($parentID = null) {
 		if ($parentID === null) $parentID = '';
-
+		
 		if (! isset($this->tree[$parentID])) return array();
-
+		
 		return $this->tree[$parentID];
 	}
 }

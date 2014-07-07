@@ -12,7 +12,9 @@ use wcf\system\SingletonFactory;
  */
 
 class ContentRevisionHandler extends SingletonFactory {
+
 	protected $revisions = array();
+
 	protected $revisionIDs = array();
 
 	public function init() {

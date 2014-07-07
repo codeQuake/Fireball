@@ -12,5 +12,6 @@ use wcf\data\DatabaseObjectList;
  * @package	de.codequake.cms
  */
 class FileList extends DatabaseObjectList {
+
 	public $className = 'cms\data\file\File';
 }

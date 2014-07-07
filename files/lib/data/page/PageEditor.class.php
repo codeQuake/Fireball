@@ -16,6 +16,7 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
+
 	protected static $baseClass = 'cms\data\page\Page';
 
 	public function setAsHome() {
@@ -25,7 +26,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		$statement->execute(array(
 			0
 		));
-
+		
 		$sql = "UPDATE	cms" . WCF_N . "_page
 			SET	isHome = ?
 			WHERE	pageID = ?";
@@ -45,24 +46,24 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		$keys = $values = '';
 		$statementParameters = array();
 		foreach ($parameters as $key => $value) {
-			if (!empty($keys)) {
+			if (! empty($keys)) {
 				$keys .= ',';
 				$values .= ',';
 			}
-
+			
 			$keys .= $key;
 			$values .= '?';
 			$statementParameters[] = $value;
 		}
-
+		
 		// save object
-		$sql = "INSERT INTO	cms".WCF_N."_page_revision (".$keys.")
-				VALUES (".$values.")";
+		$sql = "INSERT INTO	cms" . WCF_N . "_page_revision (" . $keys . ")
+				VALUES (" . $values . ")";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($statementParameters);
-
-		$id = WCF::getDB()->getInsertID("cms".WCF_N."_page_revision", "revisionID");
-
+		
+		$id = WCF::getDB()->getInsertID("cms" . WCF_N . "_page_revision", "revisionID");
+		
 		return new static::$baseClass($id);
 	}
 }

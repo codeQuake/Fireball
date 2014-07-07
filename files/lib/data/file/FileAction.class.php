@@ -52,30 +52,30 @@ class FileAction extends AbstractDatabaseObjectAction {
 				WCF::getTPL()->assign('image', $image);
 			}
 		}
-
+		
 		// file images
 		$list = new FileList();
 		// get images only
 		$list->getConditionBuilder()->add('file.type LIKE ?', array(
 			'image/%'
 		));
-
+		
 		// main folder
 		$list->getConditionBuilder()->add('file.folderID =  ?', array(
 			'0'
 		));
 		$list->readObjects();
 		$imageList = $list->getObjects();
-
+		
 		$list = new FolderList();
 		$list->readObjects();
 		$folderList = $list->getObjects();
-
+		
 		WCF::getTPL()->assign(array(
 			'images' => $imageList,
 			'folders' => $folderList
 		));
-
+		
 		return array(
 			'images' => $imageList,
 			'template' => WCF::getTPL()->fetch('imageContentList', 'cms')
@@ -94,7 +94,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 		$return = array();
 		foreach ($files as $file) {
 			try {
-
+				
 				if (! $file->getValidationErrorType()) {
 					$filename = 'FB-File-' . md5($file->getFilename() . time()) . '.' . $file->getFileExtension();
 					$folderID = $this->parameters['folderID'];
@@ -106,13 +106,13 @@ class FileAction extends AbstractDatabaseObjectAction {
 						'size' => $file->getFilesize(),
 						'type' => $file->getMimeType()
 					);
-
+					
 					$uploadedFile = FileEditor::create($data);
 					if ($folderID == 0) $path = CMS_DIR . 'files/' . $filename;
 					else $path = CMS_DIR . 'files/' . $folder->folderPath . '/' . $filename;
 					if (@move_uploaded_file($file->getLocation(), $path)) {
 						@unlink($file->getLocation());
-
+						
 						$return[] = array(
 							'fileID' => $uploadedFile->fileID,
 							'folderID' => $uploadedFile->folderID,
@@ -128,12 +128,11 @@ class FileAction extends AbstractDatabaseObjectAction {
 						throw new UserInputException('file', 'uploadFailed');
 					}
 				}
-			}
-			catch (UserInputException $e) {
+			} catch (UserInputException $e) {
 				$file->setValidationErrorType($e->getType());
 			}
 		}
-
+		
 		return $return;
 	}
 }

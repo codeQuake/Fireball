@@ -12,6 +12,7 @@ use wcf\system\SingletonFactory;
  * @package	de.codequake.cms
  */
 class LayoutHandler extends SingletonFactory {
+
 	public $layoutIDs = array();
 
 	public function init() {

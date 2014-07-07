@@ -24,7 +24,7 @@ class YoutubeContentType extends AbstractContentType {
 		$url = $data['video'];
 		parse_str(parse_url($url, PHP_URL_QUERY), $var);
 		$videoID = $var['v'];
-
-		return '<div class="elastic_video"><iframe width="640" height="360" src="http://youtube.com/embed/'.$videoID.'" frameborder="0" allowfullscreen></iframe></div>';
+		
+		return '<div class="elastic_video"><iframe width="640" height="360" src="http://youtube.com/embed/' . $videoID . '" frameborder="0" allowfullscreen></iframe></div>';
 	}
 }

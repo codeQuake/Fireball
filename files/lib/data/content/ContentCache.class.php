@@ -13,7 +13,9 @@ use wcf\system\SingletonFactory;
  * @package	de.codequake.cms
  */
 class ContentCache extends SingletonFactory {
+
 	protected $contents = array();
+
 	protected $tree = array();
 
 	protected function init() {
@@ -28,9 +30,9 @@ class ContentCache extends SingletonFactory {
 
 	public function getChildIDs($parentID = null) {
 		if ($parentID === null) $parentID = '';
-
+		
 		if (! isset($this->tree[$parentID])) return array();
-
+		
 		return $this->tree[$parentID];
 	}
 }

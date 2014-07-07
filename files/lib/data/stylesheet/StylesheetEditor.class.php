@@ -12,5 +12,6 @@ use wcf\data\DatabaseObjectEditor;
  * @package	de.codequake.cms
  */
 class StylesheetEditor extends DatabaseObjectEditor {
+
 	protected static $baseClass = 'cms\data\stylesheet\Stylesheet';
 }

@@ -15,19 +15,24 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class PageListPage extends AbstractPage {
+
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
+
 	public $neededPermissions = array(
 		'admin.cms.page.canListPage'
 	);
+
 	public $templateName = 'pageList';
+
 	public $pageList = null;
+
 	public $objectTypeList = null;
 
 	public function readData() {
 		parent::readData();
 		$this->pageList = new PageNodeTree(0);
 		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
-
+	
 	}
 
 	public function assignVariables() {

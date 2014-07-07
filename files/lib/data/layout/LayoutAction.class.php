@@ -13,10 +13,13 @@ use wcf\data\AbstractDatabaseObjectAction;
  * @package	de.codequake.cms
  */
 class LayoutAction extends AbstractDatabaseObjectAction {
+
 	protected $className = 'cms\data\layout\LayoutEditor';
+
 	protected $permissionsDelete = array(
 		'admin.cms.style.canAddLayout'
 	);
+
 	protected $requireACP = array(
 		'delete'
 	);

@@ -26,7 +26,7 @@ class FileContentType extends AbstractContentType {
 		));
 		$list->readObjects();
 		$rootList = $list->getObjects();
-
+		
 		$list = new FolderList();
 		$list->readObjects();
 		$folderList = $list->getObjects();
@@ -44,7 +44,7 @@ class FileContentType extends AbstractContentType {
 			'data' => $data,
 			'file' => $file
 		));
-
+		
 		return WCF::getTPL()->fetch('fileContentTypeOutput', 'cms');
 	}
 }

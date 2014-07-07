@@ -17,15 +17,21 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class ContentListPage extends AbstractPage {
+
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
+
 	public $neededPermissions = array(
 		'admin.cms.page.canListPage'
 	);
+
 	public $templateName = 'contentList';
+
 	public $pageList = null;
+
 	public $objectTypeList = null;
 
 	public $pageID = 0;
+
 	public $page = null;
 
 	public function readParameters() {
@@ -39,16 +45,16 @@ class ContentListPage extends AbstractPage {
 		$this->contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body');
 		$this->contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar');
 		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
-
+	
 	}
 
 	public function assignVariables() {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
-		'contentListBody' => $this->contentListBody->getIterator(),
-		'contentListSidebar' => $this->contentListSidebar->getIterator(),
-		'objectTypeList' => $this->objectTypeList,
-		'page' => $this->page
+			'contentListBody' => $this->contentListBody->getIterator(),
+			'contentListSidebar' => $this->contentListSidebar->getIterator(),
+			'objectTypeList' => $this->objectTypeList,
+			'page' => $this->page
 		));
 	}
 }

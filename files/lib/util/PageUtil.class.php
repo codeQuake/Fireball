@@ -12,6 +12,7 @@ use cms\data\page\PageCache;
  * @package	de.codequake.cms
  */
 final class PageUtil {
+
 	const ALIAS_PATTERN = '[a-z0-9]+(?:\-{1}[a-z0-9]+)*';
 
 	/**

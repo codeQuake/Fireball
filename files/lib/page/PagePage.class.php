@@ -30,6 +30,7 @@ class PagePage extends AbstractPage {
 	const AVAILABLE_DURING_OFFLINE_MODE = true;
 
 	public $contentNodeTree;
+
 	public $sidebarNodeTree;
 
 	public $page = null;
@@ -59,10 +60,10 @@ class PagePage extends AbstractPage {
 				throw new IllegalLinkException();
 			}
 		}
-
+		
 		//check permission
 		if (! $this->page->isVisible() || ! $this->page->isAccessible()) throw new PermissionDeniedException();
-
+		
 		// check if offline and view page or exit
 		// see: wcf\system\request\RequestHandler
 		if (OFFLINE) {
@@ -78,24 +79,24 @@ class PagePage extends AbstractPage {
 
 	public function readData() {
 		parent::readData();
-
+		
 		//set menuitem
 		CMSCore::setActiveMenuItem($this->page);
-
+		
 		//set breadcrumbs
 		CMSCore::setBreadcrumbs($this->page);
 		// get Contents
 		$contents = $this->page->getContents();
 		$this->contentNodeTree = $contents['body'];
 		$this->sidebarNodeTree = $contents['sidebar'];
-
+		
 		// comments
 		if ($this->page->isCommentable) {
 			$this->commentObjectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.codequake.cms.page.comment');
 			$this->commentManager = CommentHandler::getInstance()->getObjectType($this->commentObjectTypeID)->getProcessor();
 			$this->commentList = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->commentObjectTypeID, $this->page->pageID);
 		}
-
+		
 		// meta tags
 		if ($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', WCF::getLanguage()->get($this->page->metaKeywords));
 		if ($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('description', 'description', WCF::getLanguage()->get($this->page->metaDescription));
@@ -121,7 +122,7 @@ class PagePage extends AbstractPage {
 			'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),
 			'allowSpidersToIndexThisPage' => true
 		));
-
+		
 		// sidebar
 		if ($this->page->showSidebar == 1) DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.page', $this);
 		WCF::getTPL()->assign(array(
@@ -134,7 +135,7 @@ class PagePage extends AbstractPage {
 		parent::show();
 		// register visit
 		VisitCountHandler::getInstance()->count();
-
+		
 		// count click
 		$pageEditor = new PageEditor($this->page);
 		$pageEditor->updateCounters(array(

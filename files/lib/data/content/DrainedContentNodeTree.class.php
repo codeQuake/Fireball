@@ -2,6 +2,7 @@
 namespace cms\data\content;
 
 class DrainedContentNodeTree extends ContentNodeTree {
+
 	public $drainedID = null;
 
 	public function __construct($parentID = null, $pageID = 0, $drainedID = null) {

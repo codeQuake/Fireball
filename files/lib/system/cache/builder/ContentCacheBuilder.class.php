@@ -17,16 +17,16 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 			'contens' => array(),
 			'tree' => array()
 		);
-
+		
 		$list = new ContentList();
 		$list->sqlOrderBy = 'parentID ASC, showOrder ASC';
 		$list->readObjects();
 		$data['contents'] = $list->getObjects();
-
+		
 		foreach ($data['contents'] as $content) {
 			$data['tree'][$content->parentID][] = $content->contentID;
 		}
-
+		
 		return $data;
 	}
 }

@@ -11,6 +11,7 @@ use wcf\system\menu\page\DefaultPageMenuItemProvider;
  * @package	de.codequake.cms
  */
 class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider {
+
 	protected $page = null;
 
 	public function getPage() {
@@ -19,7 +20,8 @@ class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider {
 		return $page;
 	}
 
-	public function getLink() {;
+	public function getLink() {
+		;
 		if ($this->getPage() === null) return parent::getLink();
 		return $this->getPage()->getLink();
 	}

@@ -15,7 +15,9 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class Module extends CMSDatabaseObject implements IRouteController {
+
 	protected static $databaseTableName = 'module';
+
 	protected static $databaseTableIndexName = 'moduleID';
 
 	public function __construct($id, $row = null, $object = null) {
@@ -28,10 +30,10 @@ class Module extends CMSDatabaseObject implements IRouteController {
 				$id
 			));
 			$row = $statement->fetchArray();
-
+			
 			if ($row === false) $row = array();
 		}
-
+		
 		parent::__construct(null, $row, $object);
 	}
 

@@ -10,5 +10,6 @@ namespace cms\data\stylesheet;
  * @package	de.codequake.cms
  */
 class ViewableStylesheetList extends StylesheetList {
+
 	public $decoratorClassName = 'cms\data\stylesheet\ViewableStylesheet';
 }

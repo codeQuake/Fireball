@@ -23,10 +23,13 @@ $statement->execute(array(
 ));
 
 // set default page title
-if (!defined('PAGE_TITLE') || !PAGE_TITLE) {
-	$sql = "UPDATE	wcf".WCF_N."_option
+if (! defined('PAGE_TITLE') || ! PAGE_TITLE) {
+	$sql = "UPDATE	wcf" . WCF_N . "_option
 		SET	optionValue = ?
 		WHERE	optionName = ?";
 	$statement = WCF::getDB()->prepareStatement($sql);
-	$statement->execute(array('Fireball CMS 2.0', 'page_title'));
+	$statement->execute(array(
+		'Fireball CMS 2.0',
+		'page_title'
+	));
 }

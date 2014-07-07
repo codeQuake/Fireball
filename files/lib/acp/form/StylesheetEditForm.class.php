@@ -15,7 +15,9 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class StylesheetEditForm extends StylesheetAddForm {
+
 	public $sheetID = 0;
+
 	public $sheet = null;
 
 	public function readData() {

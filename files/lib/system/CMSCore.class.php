@@ -18,6 +18,7 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class CMSCore extends AbstractApplication {
+
 	/**
 	 *
 	 * @see AbstractApplication::$abbreviation
@@ -30,14 +31,12 @@ class CMSCore extends AbstractApplication {
 	 */
 	protected $primaryController = 'cms\page\PagePage';
 
-
 	public static function setActiveMenuItem(Page $page) {
 		if ($page->menuItemID) {
 			$menuItemID = $page->menuItemID;
-		}
-		else if (PageCache::getInstance()->getHomePage() !== null) $menuItemID = PageCache::getInstance()->getHomePage()->menuItemID;
+		} else if (PageCache::getInstance()->getHomePage() !== null) $menuItemID = PageCache::getInstance()->getHomePage()->menuItemID;
 		else $menuItemID = PageMenu::getInstance()->getLandingPage()->menuItemID;
-
+		
 		foreach (PageMenu::getInstance()->getMenuItems('header') as $item) {
 			if ($item->menuItemID == $menuItemID) PageMenu::getInstance()->setActiveMenuItem($item->menuItem);
 		}
@@ -45,12 +44,14 @@ class CMSCore extends AbstractApplication {
 
 	public static function setBreadcrumbs(Page $page) {
 		if (PageMenu::getInstance()->getLandingPage()->getProcessor() instanceof CMSPageMenuItemProvider) {
-			$pageID = PageMenu::getInstance()->getLandingPage()->getProcessor()->getPage()->pageID;
+			$pageID = PageMenu::getInstance()->getLandingPage()
+				->getProcessor()
+				->getPage()->pageID;
 		}
 		if (isset($pageID) && $pageID == $page->pageID) {
 			WCF::getBreadcrumbs()->remove(0);
 		}
-
+		
 		// add breadcrumbs
 		foreach ($page->getParentPages() as $child) {
 			WCF::getBreadcrumbs()->add(new Breadcrumb($child->getTitle(), $child->getLink()));

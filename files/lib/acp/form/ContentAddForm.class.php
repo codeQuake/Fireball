@@ -25,25 +25,39 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class ContentAddForm extends AbstractForm {
+
 	public $templateName = 'contentAdd';
+
 	public $neededPermissions = array(
 		'admin.cms.content.canAddContent'
 	);
+
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
+
 	public $enableMultilangualism = true;
+
 	public $title = '';
+
 	public $page = null;
+
 	public $parentID = null;
+
 	public $position = 'body';
+
 	public $pageID = 0;
+
 	public $showOrder = 0;
+
 	public $cssID = '';
+
 	public $cssClasses = '';
+
 	public $contentData = array();
 
 	public $contentList = null;
 
 	public $objectType;
+
 	public $objectTypeProcessor;
 
 	public function readParameters() {
@@ -54,9 +68,9 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
 		if ($this->parentID == 0) $this->parentID = null;
 		if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $_REQUEST['objectType']);
-			if ($this->objectType != null) {
-					$this->objectTypeProcessor = $this->objectType->getProcessor();
-			}
+		if ($this->objectType != null) {
+			$this->objectTypeProcessor = $this->objectType->getProcessor();
+		}
 		if ($this->objectTypeProcessor->isMultilingual) {
 			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
 				I18nHandler::getInstance()->register($field);
@@ -84,7 +98,7 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_POST['contentData']) && is_array($_POST['contentData'])) $this->contentData = $_POST['contentData'];
 		if ($this->objectTypeProcessor->isMultilingual) {
 			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-				if(I18nHandler::getInstance()->isPlainValue($field)) $this->contentData[$field] = StringUtil::trim(I18nHandler::getInstance()->getValue($field));
+				if (I18nHandler::getInstance()->isPlainValue($field)) $this->contentData[$field] = StringUtil::trim(I18nHandler::getInstance()->getValue($field));
 			}
 		}
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->readFormParameters();
@@ -94,16 +108,19 @@ class ContentAddForm extends AbstractForm {
 		parent::validate();
 		$this->objectTypeProcessor->validate($this->contentData);
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->validate();
-
+		
 		//if this happens, user is a retard
-		$position = array('body', 'sidebar');
-		if(!in_array($this->position, $position)) throw new UserInputException('position');
-		if($this->position == 'sidebar' && !$this->objectType->allowsidebar) throw new UserInputException('position');
-		if($this->position == 'body' && !$this->objectType->allowcontent) throw new UserInputException('position');
-
+		$position = array(
+			'body',
+			'sidebar'
+		);
+		if (! in_array($this->position, $position)) throw new UserInputException('position');
+		if ($this->position == 'sidebar' && ! $this->objectType->allowsidebar) throw new UserInputException('position');
+		if ($this->position == 'body' && ! $this->objectType->allowcontent) throw new UserInputException('position');
+		
 		//validate showOrder
 		if ($this->showOrder == 0) {
-			$childIDs = ContentCache::getInstance()->getChildIDs($this->parentID ?: null);
+			$childIDs = ContentCache::getInstance()->getChildIDs($this->parentID ?  : null);
 			if (! empty($childIDs)) {
 				$showOrders = array();
 				foreach ($childIDs as $childID) {
@@ -113,31 +130,30 @@ class ContentAddForm extends AbstractForm {
 				array_unique($showOrders);
 				if (isset($this->contentID)) {
 					$content = ContentCache::getInstance()->getContent($this->contentID);
-					if($content->showOrder == max($showOrders) && max($showOrders) != 0) $this->showOrder = max($showOrders);
+					if ($content->showOrder == max($showOrders) && max($showOrders) != 0) $this->showOrder = max($showOrders);
 					else $this->showOrder = intval(max($showOrders) + 1);
-				}
-				else $this->showOrder = intval(max($showOrders) + 1);
-			}
-			else $this->showOrder = 1;
+				} else
+					$this->showOrder = intval(max($showOrders) + 1);
+			} else
+				$this->showOrder = 1;
 		}
-
-		if (!I18nHandler::getInstance()->validateValue('title')) {
+		
+		if (! I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
-			}
-			else {
+			} else {
 				throw new UserInputException('title', 'multilingual');
 			}
 		}
-
+		
 		$this->page = new Page($this->pageID);
 		if ($this->page === null) throw new UserInputException('pageID', 'invalid');
-
+		
 		//validate if parent is tabmenu, fallback to a cssID
 		if ($this->parentID) {
 			$parent = ContentCache::getInstance()->getContent($this->parentID);
 			if ($parent->contentTypeID == ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.tabmenu')) {
-				if ($this->cssID == '') $this->cssID = 'tab-'.$this->pageID.$this->parentID.$this->showOrder.$this->objectType->objectTypeID.rand(0, 20);
+				if ($this->cssID == '') $this->cssID = 'tab-' . $this->pageID . $this->parentID . $this->showOrder . $this->objectType->objectTypeID . rand(0, 20);
 			}
 		}
 	}
@@ -163,7 +179,7 @@ class ContentAddForm extends AbstractForm {
 		$contentID = $returnValues['returnValues']->contentID;
 		$contentData = @unserialize($returnValues['returnValues']->contentData);
 		$update = array();
-
+		
 		// save polls
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
 			$pollID = PollManager::getInstance()->save($returnValues['returnValues']->contentID);
@@ -171,37 +187,42 @@ class ContentAddForm extends AbstractForm {
 				$contentData['pollID'] = $pollID;
 			}
 		}
-
+		
 		if (! I18nHandler::getInstance()->isPlainValue('title')) {
-			I18nHandler::getInstance()->save('title', 'cms.content.title'.$contentID, 'cms.content', PACKAGE_ID);
-			$update['title'] = 'cms.content.title'.$contentID;
+			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
+			$update['title'] = 'cms.content.title' . $contentID;
 		}
-
+		
 		if ($this->objectTypeProcessor->isMultilingual) {
 			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
 				if (! I18nHandler::getInstance()->isPlainValue($field)) {
-					I18nHandler::getInstance()->save($field, 'cms.content.'.$field.$contentID, 'cms.content', PACKAGE_ID);
-					$contentData[$field] = 'cms.content.'.$field.$contentID;
+					I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
+					$contentData[$field] = 'cms.content.' . $field . $contentID;
 				}
 			}
 		}
-
+		
 		$update['contentData'] = serialize($contentData);
-
+		
 		if (! empty($update)) {
 			$editor = new ContentEditor($returnValues['returnValues']);
 			$editor->update($update);
 		}
-
+		
 		//create revision
 		$objectAction = new ContentAction(array(
-			$returnValues['returnValues']->contentID,
-		), 'createRevision', array('action' => 'create'));
+			$returnValues['returnValues']->contentID
+		), 'createRevision', array(
+			'action' => 'create'
+		));
 		$objectAction->executeAction();
-
+		
 		$this->saved();
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array('application' => 'cms', 'object' => new Page($this->pageID))));
-
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(
+			'application' => 'cms',
+			'object' => new Page($this->pageID)
+		)));
+	
 	}
 
 	public function assignVariables() {

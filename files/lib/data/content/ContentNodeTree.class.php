@@ -11,9 +11,13 @@ use cms\system\cache\builder\ContentCacheBuilder;
  * @package	de.codequake.cms
  */
 class ContentNodeTree implements \IteratorAggregate {
+
 	protected $nodeClassName = 'cms\data\content\ContentNode';
+
 	protected $parentID = null;
+
 	protected $parentNode = null;
+
 	protected $pageID = 0;
 
 	public function __construct($parentID = null, $pageID = 0) {
@@ -42,7 +46,7 @@ class ContentNodeTree implements \IteratorAggregate {
 
 	protected function getChildren(ContentNode $parentNode) {
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
-
+		
 		$children = array();
 		foreach ($contents as $content) {
 			if ($content->parentID == $parentNode->contentID) {
@@ -56,18 +60,17 @@ class ContentNodeTree implements \IteratorAggregate {
 		if ($this->parentNode === null) {
 			$this->buildTree();
 		}
-
+		
 		return new \RecursiveIteratorIterator($this->parentNode, \RecursiveIteratorIterator::SELF_FIRST);
 	}
 
 	protected function getNode($contentID) {
-		if (!$contentID) {
+		if (! $contentID) {
 			$content = new Content(null);
-		}
-		else {
+		} else {
 			$content = $this->getContent($contentID);
 		}
-
+		
 		return new $this->nodeClassName($content);
 	}
 

@@ -42,7 +42,7 @@ class PageNodeTree implements \IteratorAggregate {
 
 	protected function getChildren(PageNode $parentNode) {
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
-
+		
 		$children = array();
 		foreach ($pages as $page) {
 			if ($page->parentID == $parentNode->pageID) {
@@ -56,7 +56,7 @@ class PageNodeTree implements \IteratorAggregate {
 		if ($this->parentNode === null) {
 			$this->buildTree();
 		}
-
+		
 		return new \RecursiveIteratorIterator($this->parentNode, \RecursiveIteratorIterator::SELF_FIRST);
 	}
 
@@ -66,7 +66,7 @@ class PageNodeTree implements \IteratorAggregate {
 		} else {
 			$page = $this->getPage($pageID);
 		}
-
+		
 		return new $this->nodeClassName($page);
 	}
 

@@ -1,5 +1,6 @@
 <?php
 namespace cms\system\event\listener;
+
 use wcf\data\package\PackageCache;
 use wcf\system\event\IEventListener;
 
@@ -11,6 +12,7 @@ use wcf\system\event\IEventListener;
  */
 
 class PageMenuListener implements IEventListener {
+
 	public function execute($eventObj, $className, $eventName) {
 		if ($eventObj->menuItemController == 'cms\page\PagePage') {
 			$eventObj->additionalFields['className'] = 'cms\system\menu\page\CMSPageMenuItemProvider';

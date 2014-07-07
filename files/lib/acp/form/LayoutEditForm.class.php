@@ -16,7 +16,9 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class LayoutEditForm extends LayoutAddForm {
+
 	public $layoutID = 0;
+
 	public $layout = null;
 
 	public function readData() {

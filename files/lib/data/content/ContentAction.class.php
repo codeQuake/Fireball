@@ -17,8 +17,19 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class ContentAction extends AbstractDatabaseObjectAction implements ISortableAction {
+
 	protected $className = 'cms\data\content\ContentEditor';
-	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'restoreRevision', 'copy');
+
+	protected $resetCache = array(
+		'create',
+		'delete',
+		'toggle',
+		'update',
+		'updatePosition',
+		'restoreRevision',
+		'copy'
+	);
+
 	protected $permissionsDelete = array(
 		'admin.cms.content.canAddContent'
 	);
@@ -26,6 +37,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 	protected $permissionsUpdate = array(
 		'admin.cms.content.canAddContent'
 	);
+
 	protected $requireACP = array(
 		'delete',
 		'updatePosition'
@@ -35,7 +47,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		WCF::getSession()->checkPermissions(array(
 			'admin.cms.content.canAddContent'
 		));
-
+		
 		if (! isset($this->parameters['data']['structure']) || ! is_array($this->parameters['data']['structure'])) {
 			throw new UserInputException('structure');
 		}
@@ -45,15 +57,15 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 				if (! isset($contents[$parentID])) {
 					throw new UserInputException('structure');
 				}
-
+				
 				$this->objects[$parentID] = new ContentEditor($contents[$parentID]);
 			}
-
+			
 			foreach ($contentIDs as $contentID) {
 				if (! isset($contents[$contentID])) {
 					throw new UserInputException('structure');
 				}
-
+				
 				$this->objects[$contentID] = new ContentEditor($contents[$contentID]);
 			}
 		}
@@ -84,9 +96,19 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		if (isset($this->parameters['action'])) {
 			$action = $this->parameters['action'];
 		}
-
+		
 		foreach ($this->objects as $object) {
-			call_user_func(array($this->className, 'createRevision'), array('contentID' => $object->getObjectID(), 'action' => $action, 'userID' => WCF::getUser()->userID, 'username' => WCF::getUser()->username, 'time' => TIME_NOW, 'data' => serialize($object->getDecoratedObject()->getData())));
+			call_user_func(array(
+				$this->className,
+				'createRevision'
+			), array(
+				'contentID' => $object->getObjectID(),
+				'action' => $action,
+				'userID' => WCF::getUser()->userID,
+				'username' => WCF::getUser()->username,
+				'time' => TIME_NOW,
+				'data' => serialize($object->getDecoratedObject()->getData())
+			));
 		}
 	}
 
@@ -98,12 +120,12 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		if (empty($this->objects)) {
 			$this->readObjects();
 		}
-
+		
 		foreach ($this->objects as $object) {
 			$restoreObject = ContentRevisionHandler::getInstance()->getRevisionByID($object->contentID, $this->parameters['restoreObjectID']);
 			$this->parameters['data'] = @unserialize($restoreObject->data);
 		}
-
+		
 		$this->update();
 	}
 
@@ -118,10 +140,10 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		$content = ContentCache::getInstance()->getContent($objectID);
 		$revisions = $content->getRevisions();
 		WCF::getTPL()->assign(array(
-		'revisions' => $revisions,
-		'contentID' => $content->contentID
+			'revisions' => $revisions,
+			'contentID' => $content->contentID
 		));
-
+		
 		return array(
 			'template' => WCF::getTPL()->fetch('contentRevisionList', 'cms'),
 			'revisions' => $revisions,

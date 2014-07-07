@@ -25,10 +25,14 @@ class GalleryContentType extends AbstractContentType {
 		$data = $content->handleContentData();
 		$imageIDs = explode(',', $data['imageIDs']);
 		$list = new FileList();
-		$list->getConditionBuilder()->add('fileID in (?)', array($imageIDs));
+		$list->getConditionBuilder()->add('fileID in (?)', array(
+			$imageIDs
+		));
 		$list->readObjects();
 		$list->getObjects();
-		WCF::getTPL()->assign(array('images' => $list));
+		WCF::getTPL()->assign(array(
+			'images' => $list
+		));
 		return WCF::getTPL()->fetch('galleryContentTypeOutput', 'cms');
 	}
 }

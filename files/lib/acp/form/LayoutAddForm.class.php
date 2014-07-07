@@ -17,13 +17,19 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class LayoutAddForm extends AbstractForm {
+
 	public $templateName = 'layoutAdd';
+
 	public $neededPermissions = array(
 		'admin.cms.style.canAddLayout'
 	);
+
 	public $activeMenuItem = 'cms.acp.menu.link.cms.layout.add';
+
 	public $title = '';
+
 	public $data = array();
+
 	public $stylesheetList = array();
 
 	public function readData() {
