@@ -196,6 +196,8 @@ class PageAddForm extends AbstractForm {
 				'menuItemLink' => 'id='.$pageID,
 				'menuPosition' => 'header',
 				'packageID' => PACKAGE_ID,
+				'options' => '',
+				'permissions' => '',
 				'parentMenuItem' => isset($parentItem) ? $parentItem->menuItem : '',
 				'showOrder' => 0
 			);

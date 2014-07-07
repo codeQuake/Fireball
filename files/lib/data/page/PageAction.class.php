@@ -268,6 +268,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		$data = $object->getDecoratedObject()->getData();
 		$data['alias'] .= '-copy';
 		unset($data['pageID']);
+		unset($data['isHome']);
 		$this->parameters['data'] = $data;
 		$page = $this->create();
 		$pageID = $page->pageID;

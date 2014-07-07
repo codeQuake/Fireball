@@ -161,6 +161,8 @@ class PageEditForm extends PageAddForm {
 				'menuItemController' => 'cms\page\PagePage',
 				'menuItemLink' => 'id='.$this->pageID,
 				'menuPosition' => 'header',
+				'options' => '',
+				'permissions' => '',
 				'packageID' => PACKAGE_ID,
 				'parentMenuItem' => isset($parentItem) ? $parentItem->menuItem : '',
 				'showOrder' => 0
