@@ -49,29 +49,31 @@
 		> img {max-width: 100%; height: auto;}
 	}
 	#main{
-		h1{
-			font-size: @wcfHeadlineFontSize;
-			font-weight: bold;
-			color: @wcfHeadlineColor;
-			font-family: @wcfHeadlineFontFamily;
-		}
-		h2{
-			font-size: @wcfSubHeadlineFontSize;
-			font-weight: bold;
-			color: @wcfHeadlineColor;
-			font-family: @wcfHeadlineFontFamily;
-		}
+		div[data-content-type="de.codequake.cms.content.type.headline"], div[data-content-type="de.codequake.cms.content.type.html"], div[data-content-type="de.codequake.cms.content.type.tpl"], div[data-content-type="de.codequake.cms.content.type.php"], div[data-content-type="de.codequake.cms.content.type.text"]{
+			h1{
+				font-size: @wcfHeadlineFontSize;
+				font-weight: bold;
+				color: @wcfHeadlineColor;
+				font-family: @wcfHeadlineFontFamily;
+			}
+			h2{
+				font-size: @wcfSubHeadlineFontSize;
+				font-weight: bold;
+				color: @wcfHeadlineColor;
+				font-family: @wcfHeadlineFontFamily;
+			}
 
-		h3{
-			font-size: @wcfTitleFontSize;
-			font-weight: bold;
-			color: @wcfHeadlineColor;
-			font-family: @wcfHeadlineFontFamily;
-		}
-		h4{
-			font-weight: bold;
-			color: @wcfHeadlineColor;
-			font-family: @wcfHeadlineFontFamily;
+			h3{
+				font-size: @wcfTitleFontSize;
+				font-weight: bold;
+				color: @wcfHeadlineColor;
+				font-family: @wcfHeadlineFontFamily;
+			}
+			h4{
+				font-weight: bold;
+				color: @wcfHeadlineColor;
+				font-family: @wcfHeadlineFontFamily;
+			}
 		}
 	}
 
