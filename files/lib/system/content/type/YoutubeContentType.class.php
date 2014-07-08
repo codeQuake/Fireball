@@ -3,6 +3,7 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use wcf\system\exception\UserInputException;
+use wcf\util\FileUtil;
 
 /**
  * @author	Jens Krumsieck
