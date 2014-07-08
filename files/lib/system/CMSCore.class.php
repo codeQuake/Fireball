@@ -34,7 +34,8 @@ class CMSCore extends AbstractApplication {
 	public static function setActiveMenuItem(Page $page) {
 		if ($page->menuItemID) {
 			$menuItemID = $page->menuItemID;
-		} else if (PageCache::getInstance()->getHomePage() !== null) $menuItemID = PageCache::getInstance()->getHomePage()->menuItemID;
+		}
+		else if (PageCache::getInstance()->getHomePage() !== null) $menuItemID = PageCache::getInstance()->getHomePage()->menuItemID;
 		else $menuItemID = PageMenu::getInstance()->getLandingPage()->menuItemID;
 		
 		foreach (PageMenu::getInstance()->getMenuItems('header') as $item) {

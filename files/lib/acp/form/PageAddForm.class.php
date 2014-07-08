@@ -133,7 +133,8 @@ class PageAddForm extends AbstractForm {
 		if (! I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
-			} else {
+			}
+			else {
 				throw new UserInputException('title', 'multilingual');
 			}
 		}

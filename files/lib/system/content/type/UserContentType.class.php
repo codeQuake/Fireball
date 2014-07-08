@@ -23,8 +23,8 @@ class UserContentType extends AbstractContentType {
 	}
 
 	public function validate($data) {
-		if (!isset($data['name']) || $data['name'] == '') throw new UserInputException('data[name]', 'empty');
-		if (!UserProfile::getUserProfileByUsername($data['name'])) throw new UserInputException('data[name]', 'notValid');
+		if (! isset($data['name']) || $data['name'] == '') throw new UserInputException('data[name]', 'empty');
+		if (! UserProfile::getUserProfileByUsername($data['name'])) throw new UserInputException('data[name]', 'notValid');
 	}
 
 	public function getOutput(Content $content) {

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="de.codequake.cms" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
+<package name="de.codequake.cms" xmlns="http://www.woltlab.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
 	<packageinformation>
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
@@ -14,14 +16,19 @@
 	</authorinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="1.0.0" file="requirements/de.codequake.wysiwyg.acp.tar">de.codequake.wysiwyg.acp</requiredpackage>
+		<requiredpackage minversion="2.0.0">com.woltlab.wcf
+		</requiredpackage>
+		<requiredpackage minversion="1.0.0"
+			file="requirements/de.codequake.wysiwyg.acp.tar">de.codequake.wysiwyg.acp</requiredpackage>
 	</requiredpackages>
 
 	<optionalpackages>
-		<optionalpackage file="optionals/de.codequake.bbcode.icon.tar">de.codequake.bbcode.icon</optionalpackage>
-		<optionalpackage file="optionals/de.codequake.cms.news.tar">de.codequake.cms.news</optionalpackage>
-		<optionalpackage file="optionals/com.woltlab.wcf.legalNotice.tar">com.woltlab.wcf.legalNotice</optionalpackage>
+		<optionalpackage file="optionals/de.codequake.bbcode.icon.tar">de.codequake.bbcode.icon
+		</optionalpackage>
+		<optionalpackage file="optionals/de.codequake.cms.news.tar">de.codequake.cms.news
+		</optionalpackage>
+		<optionalpackage file="optionals/com.woltlab.wcf.legalNotice.tar">com.woltlab.wcf.legalNotice
+		</optionalpackage>
 	</optionalpackages>
 
 	<instructions type="install">
@@ -30,7 +37,8 @@
 
 		<!--tar -->
 		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
+		<instruction type="file" application="wcf">files_wcf.tar
+		</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 
@@ -39,13 +47,16 @@
 		<instruction type="option">xml/option.xml</instruction>
 		<instruction type="sitemap">xml/sitemap.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
+		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml
+		</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
+		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml
+		</instruction>
 		<instruction type="templateListener">xml/templateListener.xml</instruction>
 		<instruction type="eventListener">xml/eventlistener.xml</instruction>
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
-		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
+		<instruction type="script">acp/install_de.codequake.cms.php
+		</instruction>
 
 		<!--others -->
 		<instruction type="sql">install.sql</instruction>
@@ -57,7 +68,8 @@
 
 		<!--tar -->
 		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
+		<instruction type="file" application="wcf">files_wcf.tar
+		</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 

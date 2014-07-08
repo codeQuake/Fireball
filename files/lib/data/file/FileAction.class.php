@@ -121,14 +121,16 @@ class FileAction extends AbstractDatabaseObjectAction {
 							'filesize' => $uploadedFile->filesize,
 							'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->filesize)
 						);
-					} else {
+					}
+					else {
 						// failure
 						$editor = new FileEditor($uploadedFile);
 						$editor->delete();
 						throw new UserInputException('file', 'uploadFailed');
 					}
 				}
-			} catch (UserInputException $e) {
+			}
+			catch (UserInputException $e) {
 				$file->setValidationErrorType($e->getType());
 			}
 		}

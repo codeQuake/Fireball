@@ -63,7 +63,8 @@ class PageNodeTree implements \IteratorAggregate {
 	protected function getNode($pageID) {
 		if (! $pageID) {
 			$page = new Page(0);
-		} else {
+		}
+		else {
 			$page = $this->getPage($pageID);
 		}
 		

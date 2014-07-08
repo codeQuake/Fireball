@@ -35,23 +35,24 @@ class DashboardPage extends AbstractPage {
 			$request->execute();
 			$feedData = $request->getReply();
 			$feedData = $feedData['body'];
-		} catch (SystemException $e) {
+		}
+		catch (SystemException $e) {
 			return (array(
 				'errorMessage' => $e->getMessage()
 			));
 		}
-
+		
 		if (! $xml = simplexml_load_string($feedData)) {
 			return array();
 		}
 		$feed = array();
 		$i = 2;
-
+		
 		foreach ($xml->channel[0]->item as $item) {
 			if ($i -- == 0) {
 				break;
 			}
-
+			
 			$feed[] = array(
 				'title' => (string) $item->title,
 				'description' => (string) $item->description,
@@ -68,13 +69,13 @@ class DashboardPage extends AbstractPage {
 		$list = new PageList();
 		$list->readObjects();
 		$this->pages = $list->getObjects();
-
+		
 		// onlinelist
 		$this->usersOnlineList = new UsersOnlineList();
 		$this->usersOnlineList->readStats();
 		$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
 		$this->usersOnlineList->readObjects();
-
+		
 		// system info
 		$this->server = array(
 			'os' => PHP_OS,

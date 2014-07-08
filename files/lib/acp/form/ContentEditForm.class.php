@@ -87,7 +87,7 @@ class ContentEditForm extends ContentAddForm {
 			if ($pollID && $pollID != $contentData['pollID']) {
 				$contentData['pollID'] = $pollID;
 			
-			} 			//happens for idiots :P
+			} //happens for idiots :P
 			else if (! $pollID && $contentData['pollID']) {
 				$contentData['pollID'] = null;
 			}

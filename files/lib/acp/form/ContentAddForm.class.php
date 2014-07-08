@@ -132,16 +132,19 @@ class ContentAddForm extends AbstractForm {
 					$content = ContentCache::getInstance()->getContent($this->contentID);
 					if ($content->showOrder == max($showOrders) && max($showOrders) != 0) $this->showOrder = max($showOrders);
 					else $this->showOrder = intval(max($showOrders) + 1);
-				} else
+				}
+				else
 					$this->showOrder = intval(max($showOrders) + 1);
-			} else
+			}
+			else
 				$this->showOrder = 1;
 		}
 		
 		if (! I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
-			} else {
+			}
+			else {
 				throw new UserInputException('title', 'multilingual');
 			}
 		}

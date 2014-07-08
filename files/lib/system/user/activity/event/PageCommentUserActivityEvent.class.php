@@ -54,7 +54,8 @@ class PageCommentUserActivityEvent extends SingletonFactory implements IUserActi
 					$event->setDescription($comment->getFormattedMessage());
 					$event->setIsAccessible();
 				}
-			} else {
+			}
+			else {
 				$event->setIsOrphaned();
 			}
 		}

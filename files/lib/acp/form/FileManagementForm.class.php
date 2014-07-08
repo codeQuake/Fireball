@@ -90,7 +90,8 @@ class FileManagementForm extends AbstractForm {
 			$list->readObjects();
 			$this->fileList = $list->getObjects();
 			$this->isFolder = false;
-		} else {
+		}
+		else {
 			$folder = new Folder($this->folderPageID);
 			if ($folder === null) throw new IllegalLinkException();
 			$this->fileList = $folder->getFiles();

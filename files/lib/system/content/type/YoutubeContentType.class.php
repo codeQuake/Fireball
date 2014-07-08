@@ -22,8 +22,8 @@ class YoutubeContentType extends AbstractContentType {
 	}
 
 	public function validate($data) {
-		if (!isset($data['video'])) throw new UserInputException('data[video]', 'empty');
-		if (!FileUtil::isURL($data['video'])) throw new UserInputException('data[video]', 'notValid');
+		if (! isset($data['video'])) throw new UserInputException('data[video]', 'empty');
+		if (! FileUtil::isURL($data['video'])) throw new UserInputException('data[video]', 'notValid');
 	}
 
 	public function getOutput(Content $content) {

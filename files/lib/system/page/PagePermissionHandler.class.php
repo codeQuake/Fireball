@@ -34,7 +34,8 @@ class PagePermissionHandler extends SingletonFactory {
 						foreach ($this->permissions[$page->pageID]['group'][$groupID] as $optionName => $optionValue) {
 							if (isset($permissions[$optionName])) {
 								$permissions[$optionName] = $permissions[$optionName] || $optionValue;
-							} else {
+							}
+							else {
 								$permissions[$optionName] = $optionValue;
 							}
 						}

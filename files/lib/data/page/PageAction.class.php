@@ -178,8 +178,8 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		$this->pageEditor = $this->getSingleObject();
 		if (! $this->pageEditor->pageID) {
 			throw new UserInputException('objectIDs');
-		} 
-
+		}
+		
 		else if ($this->pageEditor->isHome) {
 			throw new PermissionDeniedException();
 		}

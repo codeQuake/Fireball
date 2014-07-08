@@ -151,7 +151,8 @@ class PageEditForm extends PageAddForm {
 			$action->executeAction();
 			
 			$update['menuItemID'] = null;
-		} else if ($this->menuItem && ! $this->menuItemID) {
+		}
+		else if ($this->menuItem && ! $this->menuItemID) {
 			//create menuitem
 			$page = new Page($this->pageID);
 			if ($page->getParentPage() !== null) {
@@ -183,7 +184,8 @@ class PageEditForm extends PageAddForm {
 			$editor->update($data);
 			
 			$update['menuItemID'] = $menuItem->menuItemID ?  : null;
-		} else if ($this->menuItem && $this->menuItemID) {
+		}
+		else if ($this->menuItem && $this->menuItemID) {
 			//update old item
 			$item = new PageMenuItem($this->menuItemID);
 			$editor = new PageMenuItemEditor($item);

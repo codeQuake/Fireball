@@ -38,7 +38,8 @@ class LayoutCompiler extends SingletonFactory {
 		$content = '';
 		try {
 			$content = $this->compiler->compile($less);
-		} catch (\Exception $e) {
+		}
+		catch (\Exception $e) {
 			throw new SystemException("Could not compile LESS: " . $e->getMessage(), 0, '', $e);
 		}
 		
