@@ -84,6 +84,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Hauptverzeichnis]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video"><![CDATA[Video-URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video.error.notValid"><![CDATA[Keine gültige URL]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Galerie]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Bilder]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.select"><![CDATA[Bilder auswählen]]></item>

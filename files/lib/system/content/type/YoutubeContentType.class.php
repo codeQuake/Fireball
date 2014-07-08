@@ -2,6 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use wcf\system\exception\UserInputException;
 
 /**
  * @author	Jens Krumsieck
@@ -19,12 +20,19 @@ class YoutubeContentType extends AbstractContentType {
 		return 'youtubeContentType';
 	}
 
+	public function validate($data) {
+		if (!isset($data['video'])) throw new UserInputException('data[video]', 'empty');
+		if (!FileUtil::isURL($data['video'])) throw new UserInputException('data[video]', 'notValid');
+	}
+
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
 		$url = $data['video'];
 		parse_str(parse_url($url, PHP_URL_QUERY), $var);
-		$videoID = $var['v'];
-		
-		return '<div class="elastic_video"><iframe width="640" height="360" src="http://youtube.com/embed/' . $videoID . '" frameborder="0" allowfullscreen></iframe></div>';
+		if (isset($var['v'])) {
+			$videoID = $var['v'];
+			return '<div class="elastic_video"><iframe width="640" height="360" src="http://youtube.com/embed/' . $videoID . '" frameborder="0" allowfullscreen></iframe></div>';
+		}
+		return '';
 	}
 }

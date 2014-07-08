@@ -5,7 +5,6 @@ use cms\data\content\Content;
 use wcf\data\user\UserProfile;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
-use wcf\util\UserUtil;
 
 /**
  * @author	Jens Krumsieck
