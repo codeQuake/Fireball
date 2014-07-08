@@ -3,7 +3,9 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use wcf\data\user\UserProfile;
+use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
+use wcf\util\UserUtil;
 
 /**
  * @author	Jens Krumsieck
@@ -19,6 +21,11 @@ class UserContentType extends AbstractContentType {
 
 	public function getFormTemplate() {
 		return 'userContentType';
+	}
+
+	public function validate($data) {
+		if (!isset($data['name']) || $data['name'] = '') throw new UserInputException('data[name]', 'empty');
+		if (!UserProfile::getUserProfileByUsername($data['name'])) throw new UserInputException('data[name]', 'notValid');
 	}
 
 	public function getOutput(Content $content) {

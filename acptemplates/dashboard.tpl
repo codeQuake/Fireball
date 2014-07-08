@@ -54,8 +54,6 @@
 					<dl class="plain statsDataList">
 						<dt>{lang}cms.acp.page.list{/lang}</dt>
 						<dd>{#$pages|count}</dd>
-						<dt>{lang}cms.page.news{/lang}
-						<dd>{#$news|count}</dd>
 						</dl>
 					<dl class="plain statsDataList">
 						<dt>{lang}wcf.user.usersOnline{/lang}</dt>

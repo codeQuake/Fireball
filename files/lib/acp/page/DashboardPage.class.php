@@ -26,8 +26,6 @@ class DashboardPage extends AbstractPage {
 
 	public $pages = null;
 
-	public $news = null;
-
 	public $usersOnlineList = null;
 
 	protected function readFireballFeed() {
@@ -42,18 +40,18 @@ class DashboardPage extends AbstractPage {
 				'errorMessage' => $e->getMessage()
 			));
 		}
-		
+
 		if (! $xml = simplexml_load_string($feedData)) {
 			return array();
 		}
 		$feed = array();
 		$i = 2;
-		
+
 		foreach ($xml->channel[0]->item as $item) {
 			if ($i -- == 0) {
 				break;
 			}
-			
+
 			$feed[] = array(
 				'title' => (string) $item->title,
 				'description' => (string) $item->description,
@@ -70,18 +68,13 @@ class DashboardPage extends AbstractPage {
 		$list = new PageList();
 		$list->readObjects();
 		$this->pages = $list->getObjects();
-		
-		// news
-		$list = new NewsList();
-		$list->readObjects();
-		$this->news = $list->getObjects();
-		
+
 		// onlinelist
 		$this->usersOnlineList = new UsersOnlineList();
 		$this->usersOnlineList->readStats();
 		$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
 		$this->usersOnlineList->readObjects();
-		
+
 		// system info
 		$this->server = array(
 			'os' => PHP_OS,
@@ -97,7 +90,6 @@ class DashboardPage extends AbstractPage {
 			'visitors' => VisitCountHandler::getInstance(),
 			'feed' => $this->readFireballFeed(),
 			'pages' => $this->pages,
-			'news' => $this->news,
 			'usersOnlineList' => $this->usersOnlineList,
 			'server' => $this->server
 		));
