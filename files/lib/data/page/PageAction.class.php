@@ -57,13 +57,13 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 	public function create() {
 		$page = parent::create();
-		
+
 		//check if first page
 		if (PageCache::getInstance()->getHomePage() === null) {
 			$editor = new PageEditor($page);
 			$editor->setAsHome();
 		}
-		
+
 		PagePermissionCacheBuilder::getInstance()->reset();
 		$this->objects = array(
 			new PageEditor($page)
@@ -86,14 +86,14 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			$action = new ContentAction($contentIDs, 'delete', array());
 			$action->executeAction();
 		}
-		
+
 		$action = new PageMenuItemAction(array(
 			$page->menuItemID
 		), 'delete', array());
 		$action->executeAction();
-		
+
 		parent::delete();
-		
+
 		//check if first page
 		PageCacheBuilder::getInstance()->reset();
 		if (PageCache::getInstance()->getHomePage() === null) {
@@ -114,7 +114,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		if (isset($this->parameters['action'])) {
 			$action = $this->parameters['action'];
 		}
-		
+
 		foreach ($this->objects as $object) {
 			call_user_func(array(
 				$this->className,
@@ -138,12 +138,12 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		if (empty($this->objects)) {
 			$this->readObjects();
 		}
-		
+
 		foreach ($this->objects as $object) {
 			$restoreObject = PageRevisionHandler::getInstance()->getRevisionByID($object->pageID, $this->parameters['restoreObjectID']);
 			$this->parameters['data'] = @unserialize($restoreObject->data);
 		}
-		
+
 		$this->update();
 	}
 
@@ -157,12 +157,12 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		$objectID = reset($this->objectIDs);
 		$page = PageCache::getInstance()->getPage($objectID);
 		$revisions = $page->getRevisions();
-		
+
 		WCF::getTPL()->assign(array(
 			'revisions' => $revisions,
 			'pageID' => $page->pageID
 		));
-		
+
 		return array(
 			'template' => WCF::getTPL()->fetch('pageRevisionList', 'cms'),
 			'revisions' => $revisions,
@@ -174,12 +174,12 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		WCF::getSession()->checkPermissions(array(
 			'admin.cms.page.canAddPage'
 		));
-		
+
 		$this->pageEditor = $this->getSingleObject();
 		if (! $this->pageEditor->pageID) {
 			throw new UserInputException('objectIDs');
 		}
-		
+
 		else if ($this->pageEditor->isHome) {
 			throw new PermissionDeniedException();
 		}
@@ -187,7 +187,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 
 	public function setAsHome() {
 		$this->pageEditor->setAsHome();
-		
+
 		//create revision
 		$this->parameters['action'] = 'setAsHome';
 		$this->createRevision();
@@ -197,21 +197,21 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 		WCF::getSession()->checkPermissions(array(
 			'admin.cms.page.canAddPage'
 		));
-		
+
 		if (! isset($this->parameters['data']['structure']) || ! is_array($this->parameters['data']['structure'])) {
 			throw new UserInputException('structure');
 		}
-		
+
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		foreach ($this->parameters['data']['structure'] as $parentID => $pageIDs) {
 			if ($parentID) {
 				if (! isset($pages[$parentID])) {
 					throw new UserInputException('structure');
 				}
-				
+
 				$this->objects[$parentID] = new PageEditor($pages[$parentID]);
 			}
-			
+
 			$aliases = array();
 			foreach ($pageIDs as $pageID) {
 				if (! isset($pages[$pageID])) {
@@ -221,7 +221,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 					throw new UserInputException('structure');
 				}
 				$aliases[] = $pages[$pageID]->alias;
-				
+
 				$this->objects[$pageID] = new PageEditor($pages[$pageID]);
 			}
 		}
@@ -239,7 +239,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			}
 		}
 		WCF::getDB()->commitTransaction();
-		
+
 		//create revision
 		$this->parameters['action'] = 'updatePosition';
 		$this->createRevision();
@@ -262,14 +262,14 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			if ($this->parameters['position'] == 'body' && $type->allowcontent) array_push($categories[$type->category], $type);
 			if ($this->parameters['position'] == 'sidebar' && $type->allowsidebar) array_push($categories[$type->category], $type);
 		}
-		
+
 		WCF::getTPL()->assign(array(
 			'pageID' => reset($this->objectIDs),
 			'contentTypes' => $categories,
 			'position' => $this->parameters['position'],
 			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null
 		));
-		
+
 		return array(
 			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms'),
 			'pageID' => reset($this->objectIDs),
@@ -312,7 +312,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			$return = $action->executeAction();
 			$tmp[$oldID] = $return['returnValues']->contentID;
 		}
-		
+
 		//sidebar
 		foreach ($contents['sidebar'] as $content) {
 			//recreate
@@ -326,9 +326,8 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			$return = $action->executeAction();
 			$tmp[$oldID] = $return['returnValues']->contentID;
 		}
-		
+
 		//clear cache
-		
 
 		//setting new IDs
 		$contents = new ContentList();
