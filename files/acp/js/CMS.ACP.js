@@ -647,7 +647,6 @@ CMS.ACP.Copy = Class.extend({
 
 	_success: function (data, textStatus, jqXHR) {
 		var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-		var self = this;
 		$notification.show(function() {
 			window.location = location;
 		});
