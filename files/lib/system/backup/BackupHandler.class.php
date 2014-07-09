@@ -3,9 +3,13 @@ namespace cms\system\backup;
 
 use cms\system\cache\builder\ContentCacheBuilder;
 use cms\system\cache\builder\PageCacheBuilder;
-use cms\data\stylesheet\StylesheetList;
+use cms\data\file\FileList;
+use cms\data\folder\FolderList;
 use cms\data\layout\LayoutList;
+use cms\data\stylesheet\StylesheetList;
+use wcf\system\io\TarWriter;
 use wcf\system\SingletonFactory;
+use wcf\util\StringUtil;
 use wcf\util\XMLWriter;
 
 /**
@@ -21,16 +25,28 @@ class BackupHandler extends SingletonFactory{
 	protected $contents = null;
 	protected $layouts = null;
 	protected $stylesheets = null;
+	protected $files = null;
+	protected $folders = null;
 
 	protected function init() {
 		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+
 		$list = new StylesheetList();
 		$list->readObjects();
 		$this->stylesheets = $list->getObjects();
+
 		$list = new LayoutList();
 		$list->readObjects();
 		$this->layouts = $list->getObjects();
+
+		$list = new FolderList();
+		$list->readObjects();
+		$this->folders = $list->getObjects();
+
+		$list = new FileList();
+		$list->readObjects();
+		$this->files = $list->getObjects();
 	}
 
 	public function buildXML() {
@@ -38,7 +54,7 @@ class BackupHandler extends SingletonFactory{
 		//start doc
 		$xml = new XMLWriter();
 		$xml->beginDocument('data', '', '');
-		$objects = array('page', 'content', 'stylesheet', 'layout');
+		$objects = array('page', 'content', 'stylesheet', 'layout','file', 'folder');
 
 		foreach ($objects as $object) {
 			if ($this->{$object.'s'} !== null && !empty($this->{$object.'s'})) {
@@ -56,5 +72,18 @@ class BackupHandler extends SingletonFactory{
 
 		//end doc
 		$xml->endDocument(CMS_DIR . 'export/cmsData.xml');
+	}
+
+	public function tar() {
+		$this->filename = CMS_DIR . 'export/CMS-Export.' . StringUtil::getRandomID() . '.tgz';
+		$this->buildXML();
+		$files = array('cmsData.xml');
+
+		$tar = new TarWriter($this->filename, true);
+		foreach ($files as $file) {
+			$tar->add(CMS_DIR . 'export/'.$file, '', CMS_DIR . 'export/');
+			@unlink(CMS_DIR . 'export/'.$file);
+		}
+		$tar->create();
 	}
 }
