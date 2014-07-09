@@ -9,6 +9,7 @@ use cms\data\layout\LayoutList;
 use cms\data\stylesheet\StylesheetList;
 use wcf\system\io\TarWriter;
 use wcf\system\SingletonFactory;
+use wcf\util\DirectoryUtil;
 use wcf\util\StringUtil;
 use wcf\util\XMLWriter;
 
@@ -27,6 +28,8 @@ class BackupHandler extends SingletonFactory{
 	protected $stylesheets = null;
 	protected $files = null;
 	protected $folders = null;
+
+	protected  $filename = '';
 
 	protected function init() {
 		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
@@ -49,7 +52,12 @@ class BackupHandler extends SingletonFactory{
 		$this->files = $list->getObjects();
 	}
 
-	public function buildXML() {
+	public function getExportArchive() {
+		$this->tar();
+		return $this->filename;
+	}
+
+	protected function buildXML() {
 
 		//start doc
 		$xml = new XMLWriter();
@@ -74,16 +82,24 @@ class BackupHandler extends SingletonFactory{
 		$xml->endDocument(CMS_DIR . 'export/cmsData.xml');
 	}
 
-	public function tar() {
+	protected function tar() {
 		$this->filename = CMS_DIR . 'export/CMS-Export.' . StringUtil::getRandomID() . '.tgz';
 		$this->buildXML();
-		$files = array('cmsData.xml');
+		$this->tarFiles();
+		$files = array('cmsData.xml', 'files.tar');
 
 		$tar = new TarWriter($this->filename, true);
 		foreach ($files as $file) {
 			$tar->add(CMS_DIR . 'export/'.$file, '', CMS_DIR . 'export/');
 			@unlink(CMS_DIR . 'export/'.$file);
 		}
+		$tar->create();
+	}
+
+	protected function tarFiles() {
+		$files = new DirectoryUtil(CMS_DIR . 'files/');
+		$tar = new TarWriter(CMS_DIR . 'export/files.tar');
+		$tar->add($files->getFiles(), '', CMS_DIR . 'files/');
 		$tar->create();
 	}
 }
