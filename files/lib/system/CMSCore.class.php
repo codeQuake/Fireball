@@ -35,9 +35,10 @@ class CMSCore extends AbstractApplication {
 		if ($page->menuItemID) {
 			$menuItemID = $page->menuItemID;
 		}
+		else if ($page->parentID != null && PageCache::getInstance()->getPage($page->parentID)->menuItemID != 0) $menuItemID = PageCache::getInstance()->getPage($page->parentID)->menuItemID;
 		else if (PageCache::getInstance()->getHomePage() !== null) $menuItemID = PageCache::getInstance()->getHomePage()->menuItemID;
 		else $menuItemID = PageMenu::getInstance()->getLandingPage()->menuItemID;
-		
+
 		foreach (PageMenu::getInstance()->getMenuItems('header') as $item) {
 			if ($item->menuItemID == $menuItemID) PageMenu::getInstance()->setActiveMenuItem($item->menuItem);
 		}
@@ -52,7 +53,7 @@ class CMSCore extends AbstractApplication {
 		if (isset($pageID) && $pageID == $page->pageID) {
 			WCF::getBreadcrumbs()->remove(0);
 		}
-		
+
 		// add breadcrumbs
 		foreach ($page->getParentPages() as $child) {
 			WCF::getBreadcrumbs()->add(new Breadcrumb($child->getTitle(), $child->getLink()));
