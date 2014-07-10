@@ -3,16 +3,23 @@ namespace cms\system\backup;
 
 use cms\system\cache\builder\ContentCacheBuilder;
 use cms\system\cache\builder\PageCacheBuilder;
+use cms\data\content\ContentAction;
+use cms\data\file\FileAction;
 use cms\data\file\FileList;
+use cms\data\folder\FolderAction;
 use cms\data\folder\FolderList;
+use cms\data\layout\LayoutAction;
 use cms\data\layout\LayoutList;
+use cms\data\page\PageAction;
 use cms\data\stylesheet\StylesheetList;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\io\Tar;
 use wcf\system\io\TarWriter;
 use wcf\system\SingletonFactory;
 use wcf\util\DirectoryUtil;
 use wcf\util\FileUtil;
 use wcf\util\StringUtil;
+use wcf\util\XML;
 use wcf\util\XMLWriter;
 
 /**
@@ -110,7 +117,7 @@ class BackupHandler extends SingletonFactory{
 	public function handleImport($filename) {
 		//clean all
 		foreach ($this->objects as $object) {
-			$actionName = ucfirst($object).'Action';
+			$actionName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Action';
 			$action = new $actionName($this->{$object.'s'}, 'delete');
 			$action->executeAction();
 		}
@@ -125,7 +132,7 @@ class BackupHandler extends SingletonFactory{
 		foreach ($this->objects as $object) {
 			if (isset($this->data[$object.'s'])) {
 				foreach ($this->data[$object.'s'] as $$object) {
-					$actionName = ucfirst($object).'Action';
+					$actionName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Action';
 					$action = new $actionName(array(), 'create', array('data' => $$object));
 					$action->executeAction();
 				}
@@ -136,11 +143,11 @@ class BackupHandler extends SingletonFactory{
 	protected function openTar($filename) {
 		$tar = new Tar($filename);
 		$this->data = $this->readXML($tar);
-		$this->importFiles();
+		$this->importFiles($tar);
 		$tar->close();
 	}
 
-	protected function importFiles() {
+	protected function importFiles($tar) {
 		$files = 'files.tar';
 		if ($tar->getIndexByFileName($files) === false) {
 			throw new SystemException("Unable to find required file '" . $files . "' in the import archive");
@@ -168,15 +175,17 @@ class BackupHandler extends SingletonFactory{
 		$root = $xpath->query('/ns:data')->item(0);
 		$items = $xpath->query('child::*', $root);
 		$data = array();
+		$i = 0;
 		foreach ($items as $item) {
 			foreach ($xpath->query('child::*', $item) as $child) {
-				foreach ($xpath->query('child::*', $item) as $property) {
-					if ($property->tagName == 'contentTypeID') $data[$item->tagName][][$property->tagName] = ObjectTypeCache::getInstance()->getObjectTypeByName($property->nodeValue)->objectType;
-					else $data[$item->tagName][][$property->tagName] = $property->nodeValue;
+				foreach ($xpath->query('child::*', $child) as $property) {
+					if ($property->tagName == 'contentTypeID') $data[$item->tagName][$i][$property->tagName] = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', $property->nodeValue);
+					else if ($property->tagName == 'parentID' && $property->nodeValue == '' || $property->tagName == 'menuItemID') $data[$item->tagName][$i][$property->tagName] = null;
+					else $data[$item->tagName][$i][$property->tagName] = $property->nodeValue;
 				}
+				$i++;
 			}
 		}
-
 		return $data;
 	}
 }

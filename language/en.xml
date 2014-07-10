@@ -186,6 +186,7 @@
 
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
+		<item name="cms.acp.menu.link.cms.page.import"><![CDATA[Import pages]]></item>
 		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[List pages]]></item>
 		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Add page]]></item>
 		<item name="cms.acp.menu.link.cms.content.list"><![CDATA[List contents]]></item>
@@ -205,6 +206,9 @@
 	</category>
 
 	<category name="cms.acp.page">
+		<item name="cms.acp.page.import"><![CDATA[Import]]></item>
+		<item name="cms.acp.page.import.tar"><![CDATA[Archive]]></item>
+		<item name="cms.acp.page.import.info"><![CDATA[Importing huge datasets needs a lot of time, please do not close this window! All data will be erased before the import.]]></item>
 		<item name="cms.acp.page.backup"><![CDATA[Backup]]></item>
 		<item name="cms.acp.page.backup.description"><![CDATA[You can download a backup of your configuration here: <a href="{link application='cms' controller='CMSExport'}{/link}"><span class="icon icon16 icon-cloud-download"></span> Download</a>]]></item>
 		<item name="cms.acp.page.legend"><![CDATA[Legend]]></item>

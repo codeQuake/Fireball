@@ -63,6 +63,7 @@
 		<instruction type="template">templates.tar</instruction>
 
 		<!-- xml -->
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="templateListener">xml/templateListener.xml</instruction>
 	</instructions>
