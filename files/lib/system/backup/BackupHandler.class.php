@@ -11,6 +11,7 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\io\TarWriter;
 use wcf\system\SingletonFactory;
 use wcf\util\DirectoryUtil;
+use wcf\util\FileUtil;
 use wcf\util\StringUtil;
 use wcf\util\XMLWriter;
 
@@ -82,26 +83,26 @@ class BackupHandler extends SingletonFactory{
 		}
 
 		//end doc
-		$xml->endDocument(CMS_DIR . 'export/cmsData.xml');
+		$xml->endDocument(FileUtil::getTempFolder().'cmsData.xml');
 	}
 
 	protected function tar() {
-		$this->filename = CMS_DIR . 'export/CMS-Export.' . StringUtil::getRandomID() . '.tgz';
+		$this->filename = FileUtil::getTempFolder().'CMS-Export.' . StringUtil::getRandomID() . '.tgz';
 		$this->buildXML();
 		$this->tarFiles();
 		$files = array('cmsData.xml', 'files.tar');
 
 		$tar = new TarWriter($this->filename, true);
 		foreach ($files as $file) {
-			$tar->add(CMS_DIR . 'export/'.$file, '', CMS_DIR . 'export/');
-			@unlink(CMS_DIR . 'export/'.$file);
+			$tar->add(FileUtil::getTempFolder().$file, '', FileUtil::getTempFolder());
+			@unlink(FileUtil::getTempFolder().$file);
 		}
 		$tar->create();
 	}
 
 	protected function tarFiles() {
 		$files = new DirectoryUtil(CMS_DIR . 'files/');
-		$tar = new TarWriter(CMS_DIR . 'export/files.tar');
+		$tar = new TarWriter(FileUtil::getTempFolder().'files.tar');
 		$tar->add($files->getFiles(), '', CMS_DIR . 'files/');
 		$tar->create();
 	}

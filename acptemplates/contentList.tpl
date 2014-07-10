@@ -151,9 +151,10 @@
 {/hascontent}
 </div>
 
-<div class="container containerPadding marginTop">
+<div class="container marginTop">
 		<ol class="containerList infoBoxList">
-			<div>
+			<li class="box32">
+				<span class="icon icon32 icon-question-sign"></span>
 				<div class="containerHeadline">
 					<h3>{lang}cms.acp.page.legend{/lang}</h3>
 				</div>
@@ -164,7 +165,7 @@
 					<li><span class="icon icon16 icon-copy"></span> <span>{lang}cms.acp.content.copy{/lang}</span></li>
 					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.content.revisions{/lang}</span></li>
 				</ul>
-			</div>
+			</li>
 		</ol>
 </div>
 
