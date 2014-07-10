@@ -38,6 +38,13 @@
 			<eventname>stylesheets</eventname>
 			<templatecode><![CDATA[<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('cms')}acp/style/fireball.css">]]></templatecode>
 		</templatelistener>
+
+		<templatelistener name="pagemenuInfo">
+			<environment>admin</environment>
+			<templatename>pageMenuItemAdd</templatename>
+			<eventname>linkFields</eventname>
+			<templatecode><![CDATA[{include file='__pageMenuInfo' application='cms'}]]></templatecode>
+		</templatelistener>
 		<!-- /admin -->
 	</import>
 </data>

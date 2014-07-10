@@ -47,6 +47,23 @@ CMS.ACP.Page.AddForm = Class.extend({
 	}
 });
 
+CMS.ACP.Page.Menu = Class.extend({
+
+	init: function () {
+		$('#menuItemParameters').change($.proxy(this._showNotice, this));
+		$('#menuItemController').change($.proxy(this._showNotice, this));
+		$('#menuItemParametersContainer > dd').append('<p id="cmsNoticeContainer" />');
+		this._showNotice();
+	},
+
+	_showNotice: function () {
+		if ($('#menuItemController').val() == 'cms\\page\\PagePage') {
+			$('#cmsNoticeContainer').html('<small>' + WCF.Language.get('wcf.acp.pageMenu.parameters.notice') + '</small>');
+		}
+		else $('#cmsNoticeContainer').html("");
+	}
+}),
+
 CMS.ACP.Page.AddContent = Class.extend({
 
 	_buttonSelector: '.jsContentAddButton',

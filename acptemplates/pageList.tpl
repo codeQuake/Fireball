@@ -83,9 +83,10 @@
 			<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 	</div>
 
-	<div class="container containerPadding marginTop">
+	<div class="container marginTop">
 		<ol class="containerList infoBoxList">
-			<div>
+			<li class="box32">
+				<span class="icon icon-question-sign icon32"></span>
 				<div class="containerHeadline">
 					<h3>{lang}cms.acp.page.legend{/lang}</h3>
 				</div>
@@ -98,7 +99,14 @@
 					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
 					<li><span class="icon icon16 icon-file"></span> <span>{lang}cms.acp.content.listing{/lang}</span></li>
 				</ul>
-			</div>
+			</li>
+			<li class="box32">
+				<span class="icon icon32 icon-cloud-download"></span>
+				<div class="containerHeadline">
+					<h3>{lang}cms.acp.page.backup{/lang}</h3>
+				</div>
+				<p>{lang}cms.acp.page.backup.description{/lang}</p>
+			</li>
 		</ol>
 	</div>
 {hascontentelse}

@@ -15,9 +15,15 @@ class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider {
 	protected $page = null;
 
 	public function getPage() {
-		$tmp = explode("=", $this->getDecoratedObject()->menuItemLink);
-		$page = PageCache::getInstance()->getPage(intval($tmp[1]));
-		return $page;
+		if ($this->page === null) {
+			$matches = array();
+			preg_match('/id=(\d+)/', $this->menuItemLink, $matches);
+
+			if (isset($matches[1])) $this->page = PageCache::getInstance()->getPage($matches[1]);
+			else $this->page = PageCache::getInstance()->getHomePage();
+		}
+
+		return $this->page;
 	}
 
 	public function getLink() {

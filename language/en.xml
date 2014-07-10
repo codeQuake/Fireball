@@ -205,6 +205,8 @@
 	</category>
 
 	<category name="cms.acp.page">
+		<item name="cms.acp.page.backup"><![CDATA[Backup]]></item>
+		<item name="cms.acp.page.backup.description"><![CDATA[You can download a backup of your configuration here: <a href="{link application='cms' controller='CMSExport'}{/link}"><span class="icon icon16 icon-cloud-download"></span> Download</a>]]></item>
 		<item name="cms.acp.page.legend"><![CDATA[Legend]]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Copy page]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
@@ -234,6 +236,7 @@
 		<item name="cms.acp.page.general.menuItem"><![CDATA[Add menu item]]></item>
 		<item name="cms.acp.page.general.menuItem.description"><![CDATA[]]>
 		</item>
+		<item name="cms.acp.page.alias.error.sort"><![CDATA[Sorting failed - Existing Alias!]]></item>
 		<item name="cms.acp.page.alias.error.given"><![CDATA[Alias exists!]]></item>
 		<item name="cms.acp.page.alias.error.invalid"><![CDATA[Invalid Alias!]]></item>
 		<item name="cms.acp.page.general.alias.preview"><![CDATA[Link-Preview:]]></item>
@@ -323,6 +326,10 @@
 
 	<category name="cms.user">
 		<item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{$page->getLink()}">{@$page->getTitle()|language}</a>]]></item>
+	</category>
+
+	<category name="wcf.acp.pageMenu">
+		<item name="wcf.acp.pageMenu.parameters.notice"><![CDATA[If you want to link a CMS-Page please input the page's ID. e.g.: id=1]]></item>
 	</category>
 
 	<category name="wcf.acp.group">

@@ -203,6 +203,8 @@
 	</category>
 
 	<category name="cms.acp.page">
+		<item name="cms.acp.page.backup"><![CDATA[Datensicherung]]></item>
+		<item name="cms.acp.page.backup.description"><![CDATA[Laden Sie sich hier Ihre aktuelle Datensicherung herunter: <a href="{link application='cms' controller='CMSExport'}{/link}"><span class="icon icon16 icon-cloud-download"></span> Herunterladen</a>]]></item>
 		<item name="cms.acp.page.legend"><![CDATA[Legende]]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Seite kopieren]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
@@ -229,6 +231,7 @@
 		<item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
 		<item name="cms.acp.page.general.alias"><![CDATA[URL-Alias]]></item>
+		<item name="cms.acp.page.alias.error.sort"><![CDATA[Sortierung fehlgeschlagen - Alias-Dopplung]]></item>
 		<item name="cms.acp.page.alias.error.given"><![CDATA[Ein gleichnamiger Alias existiert bereits.]]></item>
 		<item name="cms.acp.page.alias.error.invalid"><![CDATA[Kein gültiger Alias.]]></item>
 		<item name="cms.acp.page.general.alias.preview"><![CDATA[Link-Vorschau:]]></item>
@@ -320,6 +323,10 @@
 
 	<category name="cms.user">
 		<item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{$page->getLink()}">{@$page->getTitle()|language}</a>]]></item>
+	</category>
+
+	<category name="wcf.acp.pageMenu">
+		<item name="wcf.acp.pageMenu.parameters.notice"><![CDATA[Wenn Sie eine Seite des CMS verlinken wollen, so geben Sie hier die ID der Seite, die Sie verlinken wollen, an. Beispiel: id=1]]></item>
 	</category>
 
 	<category name="wcf.acp.group">

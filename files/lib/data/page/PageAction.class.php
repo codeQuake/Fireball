@@ -13,6 +13,7 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
+use wcf\system\exception\AJAXException;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
@@ -218,7 +219,7 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 					throw new UserInputException('structure');
 				}
 				if (in_array($pages[$pageID]->alias, $aliases)) {
-					throw new UserInputException('structure');
+					throw new AJAXException(WCF::getLanguage()->get('cms.acp.page.alias.error.sort', 412));
 				}
 				$aliases[] = $pages[$pageID]->alias;
 
