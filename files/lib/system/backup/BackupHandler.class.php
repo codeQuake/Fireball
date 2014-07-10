@@ -123,7 +123,7 @@ class BackupHandler extends SingletonFactory{
 		//import all
 		foreach ($this->objects as $object) {
 			if (isset($this->data[$object.'s'])) {
-				foreach($this->data[$object.'s'] as $$object) {
+				foreach ($this->data[$object.'s'] as $$object) {
 					$actionName = ucfirst($object).'Action';
 					$action = new $actionName(array(), 'create', array('data' => $$object));
 					$action->executeAction();
@@ -168,8 +168,8 @@ class BackupHandler extends SingletonFactory{
 		$items = $xpath->query('child::*', $root);
 		$data = array();
 		foreach ($items as $item) {
-			foreach ($xpath->query('child::*', $item) as $child){
-				foreach ($xpath->query('child::*', $item) as $property){
+			foreach ($xpath->query('child::*', $item) as $child) {
+				foreach ($xpath->query('child::*', $item) as $property) {
 					if ($property->tagName == 'contentTypeID') $data[$item->tagName][][$property->tagName] = ObjectTypeCache::getInstance()->getObjectTypeByName($property->nodeValue)->objectType;
 					else $data[$item->tagName][][$property->tagName] = $property->nodeValue;
 				}
