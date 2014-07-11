@@ -127,14 +127,29 @@ class BackupHandler extends SingletonFactory{
 		}
 
 		$this->openTar($filename);
-
 		//import all
 		foreach ($this->objects as $object) {
+			if ($object == 'page' || $object == 'content') $parentIDs = array();
 			if (isset($this->data[$object.'s'])) {
-				foreach ($this->data[$object.'s'] as $$object) {
+				foreach ($this->data[$object.'s'] as $import) {
+					if ($object == 'page' || $object == 'content') {
+						if (isset($import['parentID']) && $import['parentID'] != '') $parentIDs[$import[$object.'ID']] = $import['parentID'];
+					}
+					unset($import['parentID']);
 					$actionName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Action';
-					$action = new $actionName(array(), 'create', array('data' => $$object));
+					$action = new $actionName(array(), 'create', array('data' => $import));
 					$action->executeAction();
+				}
+				if ($object == 'page' || $object == 'content') {
+					foreach ($this->data[$object.'s'] as $import) {
+						if (isset($parentIDs[$import[$object.'ID']])) {
+							$editorName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
+							$cacheName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Cache';
+							$editor = new $editorName($cacheName::getInstance()->{'get'.ucfirst($object)}($import[$object.'ID']));
+							$update['parentID'] = $parentIDs[$import[$object.'ID']];
+							$editor->update($update);
+						}
+					}
 				}
 			}
 		}
