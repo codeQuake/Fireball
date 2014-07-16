@@ -82,22 +82,22 @@ class PageAddForm extends AbstractForm {
 
 	public function readParameters() {
 		parent::readParameters();
-		
+
 		I18nHandler::getInstance()->register('title');
 		I18nHandler::getInstance()->register('description');
 		I18nHandler::getInstance()->register('metaDescription');
 		I18nHandler::getInstance()->register('metaKeywords');
-		
+
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
 	}
 
 	public function readData() {
 		parent::readData();
 		if (isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
-		
+
 		$this->pageList = new PageNodeTree();
 		$this->pageList = $this->pageList->getIterator();
-		
+
 		$this->layoutList = new LayoutList();
 		$this->layoutList->readObjects();
 		$this->layoutList = $this->layoutList->getObjects();
@@ -113,6 +113,7 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['alias'])) $this->alias = StringUtil::trim($_POST['alias']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['availableDuringOfflineMode'])) $this->availableDuringOfflineMode = intval($_POST['availableDuringOfflineMode']);
+		else $this->availableDuringOfflineMode = 0;
 		if (isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
 		if (isset($_POST['menuItem'])) $this->menuItem = intval($_POST['menuItem']);
 		else $this->menuItem = 0;
@@ -120,16 +121,18 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
 		if (isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
 		if (isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
+		else $this->showSidebar = 0;
 		if (isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);
 		if (isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
+		else $this->isCommentable = 0;
 	}
 
 	public function validate() {
 		parent::validate();
-		
+
 		// validate alias
 		$this->validateAlias();
-		
+
 		if (! I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
@@ -138,7 +141,7 @@ class PageAddForm extends AbstractForm {
 				throw new UserInputException('title', 'multilingual');
 			}
 		}
-		
+
 		$page = new Page($this->parentID);
 		if ($page === null) throw new UserInputException('parentID', 'invalid');
 	}
@@ -160,7 +163,7 @@ class PageAddForm extends AbstractForm {
 
 	public function save() {
 		parent::save();
-		
+
 		$data = array(
 			'alias' => $this->alias,
 			'title' => $this->title,
@@ -177,21 +180,21 @@ class PageAddForm extends AbstractForm {
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable
 		);
-		
+
 		$objectAction = new PageAction(array(), 'create', array(
 			'data' => $data
 		));
 		$objectAction->executeAction();
-		
+
 		$returnValues = $objectAction->getReturnValues();
 		$pageID = $returnValues['returnValues']->pageID;
-		
+
 		// save ACL
 		ACLHandler::getInstance()->save($pageID, $this->objectTypeID);
 		ACLHandler::getInstance()->disableAssignVariables();
 		// update I18n
 		$update = array();
-		
+
 		if (! I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.page.title' . $pageID, 'cms.page');
 			$update['title'] = 'cms.page.title' . $pageID;
@@ -208,13 +211,13 @@ class PageAddForm extends AbstractForm {
 			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $pageID, 'cms.page');
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $pageID;
 		}
-		
+
 		if ($this->menuItem) {
 			if ($returnValues['returnValues']->getParentPage() !== null) {
 				$parentPage = $returnValues['returnValues']->getParentPage();
 				$parentItem = new PageMenuItem($parentPage->menuItemID);
 			}
-			
+
 			$data = array(
 				'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
 				'menuItemController' => 'cms\page\PagePage',
@@ -226,26 +229,26 @@ class PageAddForm extends AbstractForm {
 				'parentMenuItem' => isset($parentItem) ? $parentItem->menuItem : '',
 				'showOrder' => 0
 			);
-			
+
 			$menuItemAction = new PageMenuItemAction(array(), 'create', array(
 				'data' => $data
 			));
 			$itemReturnValues = $menuItemAction->executeAction();
 			$menuItem = $itemReturnValues['returnValues'];
-			
+
 			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.' . $menuItem->menuItemID, 'wcf.page');
 			$data['menuItem'] = 'wcf.page.menuItem.' . $menuItem->menuItemID;
 			$editor = new PageMenuItemEditor($menuItem);
 			$editor->update($data);
-			
+
 			$update['menuItemID'] = $menuItem->menuItemID ?  : null;
 		}
-		
+
 		if (! empty($update)) {
 			$editor = new PageEditor($returnValues['returnValues']);
 			$editor->update($update);
 		}
-		
+
 		//create revision
 		$objectAction = new PageAction(array(
 			$returnValues['returnValues']->pageID
@@ -253,7 +256,7 @@ class PageAddForm extends AbstractForm {
 			'action' => 'create'
 		));
 		$objectAction->executeAction();
-		
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
 		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
@@ -265,10 +268,10 @@ class PageAddForm extends AbstractForm {
 
 	public function assignVariables() {
 		parent::assignVariables();
-		
+
 		I18nHandler::getInstance()->assignVariables();
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
-		
+
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'objectTypeID' => $this->objectTypeID,
