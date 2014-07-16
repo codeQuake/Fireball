@@ -57,9 +57,7 @@ class PagePage extends AbstractPage {
 		}
 		else {
 			$this->page = PageCache::getInstance()->getHomePage($this->pageID);
-			if ($this->page->pageID == 0) {
-				throw new IllegalLinkException();
-			}
+			if ($this->page === null ||$this->page->pageID == 0) HeaderUtil::redirect(Linkhandler::getInstance()->getLink());
 		}
 
 		//check permission
