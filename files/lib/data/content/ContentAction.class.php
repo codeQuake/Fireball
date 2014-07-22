@@ -47,7 +47,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		WCF::getSession()->checkPermissions(array(
 			'admin.cms.content.canAddContent'
 		));
-		
+
 		if (! isset($this->parameters['data']['structure']) || ! is_array($this->parameters['data']['structure'])) {
 			throw new UserInputException('structure');
 		}
@@ -57,15 +57,15 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 				if (! isset($contents[$parentID])) {
 					throw new UserInputException('structure');
 				}
-				
+
 				$this->objects[$parentID] = new ContentEditor($contents[$parentID]);
 			}
-			
+
 			foreach ($contentIDs as $contentID) {
 				if (! isset($contents[$contentID])) {
 					throw new UserInputException('structure');
 				}
-				
+
 				$this->objects[$contentID] = new ContentEditor($contents[$contentID]);
 			}
 		}
@@ -96,7 +96,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		if (isset($this->parameters['action'])) {
 			$action = $this->parameters['action'];
 		}
-		
+
 		foreach ($this->objects as $object) {
 			call_user_func(array(
 				$this->className,
@@ -120,12 +120,12 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		if (empty($this->objects)) {
 			$this->readObjects();
 		}
-		
+
 		foreach ($this->objects as $object) {
 			$restoreObject = ContentRevisionHandler::getInstance()->getRevisionByID($object->contentID, $this->parameters['restoreObjectID']);
 			$this->parameters['data'] = @unserialize($restoreObject->data);
 		}
-		
+
 		$this->update();
 	}
 
@@ -143,7 +143,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 			'revisions' => $revisions,
 			'contentID' => $content->contentID
 		));
-		
+
 		return array(
 			'template' => WCF::getTPL()->fetch('contentRevisionList', 'cms'),
 			'revisions' => $revisions,
@@ -163,8 +163,36 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 	public function copy() {
 		$object = reset($this->objects);
 		$data = $object->getDecoratedObject()->getData();
+		$oldID = $data['contentID'];
 		unset($data['contentID']);
 		$this->parameters['data'] = $data;
-		$this->create();
+		$content = $this->create();
+		$contentID = $content->contentID;
+		$childIDs = ContentCache::getInstance()->getChildIDs($oldID);
+		$tmp = array();
+		$tmp[$oldID] = $contentID;
+		$affectedIDs = array();
+
+		foreach ($childIDs as $childID) {
+			$old = ContentCache::getInstance()->getContent($childID);
+			$oldID = $old->contentID;
+
+			$data = $old->getData();
+			unset($data['contentID']);
+			$this->parameters['data'] = $data;
+			$new = $this->create();
+			$tmp[$oldID] = $new->contentID;
+			$affectedIDs[] = $new->contentID;
+		}
+
+		foreach ($affectedIDs as $affectedID) {
+			$update = array();
+			$affectedObject = new Content($affectedID);
+			if (isset ($tmp[$affectedObject->parentID])) {
+				$editor = new ContentEditor($affectedObject);
+				$update['parentID'] = $tmp[$affectedObject->parentID];
+				$editor->update($update);
+			}
+		}
 	}
 }

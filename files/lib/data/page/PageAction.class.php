@@ -305,7 +305,6 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 			$data = $content->getDecoratedObject()->getData();
 			$oldID = $data['contentID'];
 			unset($data['contentID']);
-			unset($data['isHome']);
 			$data['pageID'] = $pageID;
 			$action = new ContentAction(array(), 'create', array(
 				'data' => $data
