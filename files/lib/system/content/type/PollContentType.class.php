@@ -22,6 +22,6 @@ class PollContentType extends AbstractContentType {
 
 	public function getOutput(Content $content) {
 		WCF::getTPL()->assign('poll', $content->getPoll());
-		return '<div>' . WCF::getTPL()->fetch('poll', 'wcf') . '</div>';
+		return WCF::getTPL()->fetch('poll', 'wcf');
 	}
 }

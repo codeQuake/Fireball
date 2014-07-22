@@ -37,10 +37,10 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 				$id
 			));
 			$row = $statement->fetchArray();
-			
+
 			if ($row === false) $row = array();
 		}
-		
+
 		parent::__construct(null, $row, $object);
 	}
 
@@ -71,7 +71,7 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 		if ($this->parentID !== null) return ContentCache::getInstance()->getContent($this->parentID);
 		return null;
 	}
-	
+
 	//build css structure
 	public function getCSSClasses() {
 		if ($this->getCategory() == 'structure') {
@@ -118,7 +118,7 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 			$this->poll = new Poll($data['pollID']);
 			$this->poll->setRelatedObject($this);
 		}
-		
+
 		return $this->poll;
 	}
 
@@ -128,7 +128,7 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 	}
 
 	public function canVote() {
-		(WCF::getSession()->getPermission('user.cms.content.canVotePoll') ? true : false);
+		return (WCF::getSession()->getPermission('user.cms.content.canVotePoll') ? true : false);
 	}
 
 	public function getRevisions() {
