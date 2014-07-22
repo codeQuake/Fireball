@@ -74,19 +74,19 @@ class ContentEditForm extends ContentAddForm {
 		), 'update', array(
 			'data' => $data
 		));
-		
+
 		$objectAction->executeAction();
 		$contentID = $this->contentID;
 		$content = new Content($contentID);
 		$contentData = @unserialize($content->contentData);
-		
+
 		$update = array();
-		
+
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
-			$pollID = PollManager::getInstance()->save($this->content->contentID);
+			$pollID = PollManager::getInstance()->save($contentID);
 			if ($pollID && $pollID != $contentData['pollID']) {
 				$contentData['pollID'] = $pollID;
-			
+
 			} //happens for idiots :P
 			else if (! $pollID && $contentData['pollID']) {
 				$contentData['pollID'] = null;
@@ -96,7 +96,7 @@ class ContentEditForm extends ContentAddForm {
 			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
-		
+
 		if ($this->objectTypeProcessor->isMultilingual) {
 			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
 				if (! I18nHandler::getInstance()->isPlainValue($field)) {
@@ -105,13 +105,13 @@ class ContentEditForm extends ContentAddForm {
 				}
 			}
 		}
-		
+
 		$update['contentData'] = serialize($contentData);
 		if (! empty($update)) {
 			$editor = new ContentEditor($content);
 			$editor->update($update);
 		}
-		
+
 		//create revision
 		$objectAction = new ContentAction(array(
 			$this->contentID
@@ -120,7 +120,7 @@ class ContentEditForm extends ContentAddForm {
 		));
 		$objectAction->executeAction();
 		$this->saved();
-		
+
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(
 			'application' => 'cms',
 			'object' => new Page($this->pageID)

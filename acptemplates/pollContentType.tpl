@@ -63,7 +63,7 @@
 				<dd>
 					<label><input type="checkbox" name="pollIsChangeable" value="1"{if $pollIsChangeable} checked="checked"{/if} /> {lang}wcf.poll.isChangeable{/lang}</label>
 				</dd>
-				{if !$pollID}
+				{if !$contentData['pollID']}
 					<dd>
 						<label><input type="checkbox" name="pollIsPublic" value="1"{if $pollIsPublic} checked="checked"{/if} /> {lang}wcf.poll.isPublic{/lang}</label>
 					</dd>
@@ -76,3 +76,4 @@
 					<label><input type="checkbox" name="pollSortByVotes" value="1"{if $pollSortByVotes} checked="checked"{/if} /> {lang}wcf.poll.sortByVotes{/lang}</label>
 				</dd>
 			</dl>
+<input type="hidden" name="contentData[pollID]" value="{if $contentData['pollID']|isset}{$contentData['pollID']}{/if}" />
