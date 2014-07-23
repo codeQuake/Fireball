@@ -52,6 +52,12 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 		return $this->title;
 	}
 
+	public function getChildren() {
+		$tree = new ContentNodeTree($this->contentID);
+		$tree = $tree->getIterator();
+		return $tree;
+	}
+
 	public function getIcon() {
 		$this->objectType = $this->getObjectType();
 		return $this->objectType->getProcessor()->getIcon();

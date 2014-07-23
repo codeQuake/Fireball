@@ -163,25 +163,24 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 	public function copy() {
 		$object = reset($this->objects);
 		$data = $object->getDecoratedObject()->getData();
+		$childs = $object->getDecoratedObject()->getChildren();
 		$oldID = $data['contentID'];
 		unset($data['contentID']);
 		$this->parameters['data'] = $data;
 		$content = $this->create();
 		$contentID = $content->contentID;
-		$childIDs = ContentCache::getInstance()->getChildIDs($oldID);
 		$tmp = array();
 		$tmp[$oldID] = $contentID;
 		$affectedIDs = array();
 
-		foreach ($childIDs as $childID) {
-			$old = ContentCache::getInstance()->getContent($childID);
-			$oldID = $old->contentID;
+		foreach ($childs as $child) {
+			$childID = $child->getDecoratedObject()->contentID;
 
-			$data = $old->getData();
+			$data = $child->getDecoratedObject()->getData();
 			unset($data['contentID']);
 			$this->parameters['data'] = $data;
 			$new = $this->create();
-			$tmp[$oldID] = $new->contentID;
+			$tmp[$childID] = $new->contentID;
 			$affectedIDs[] = $new->contentID;
 		}
 
