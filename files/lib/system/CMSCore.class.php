@@ -32,16 +32,21 @@ class CMSCore extends AbstractApplication {
 	protected $primaryController = 'cms\page\PagePage';
 
 	public static function setActiveMenuItem(Page $page) {
-		if ($page->menuItemID) {
+		if ($page->menuItemID && $page->parentID === null) {
 			$menuItemID = $page->menuItemID;
 		}
-		else if ($page->parentID != null && PageCache::getInstance()->getPage($page->parentID)->menuItemID != 0) $menuItemID = PageCache::getInstance()->getPage($page->parentID)->menuItemID;
+		else if ($page->parentID != null) {
+			foreach ($page->getParentPages() as $parentPage) {
+				if ($parentPage->parentID === null && $parentPage->menuItemID != 0) $menuItemID = $parentPage->menuItemID;
+			}
+		}
 		else if (PageCache::getInstance()->getHomePage() !== null) $menuItemID = PageCache::getInstance()->getHomePage()->menuItemID;
 		else $menuItemID = PageMenu::getInstance()->getLandingPage()->menuItemID;
 
 		foreach (PageMenu::getInstance()->getMenuItems('header') as $item) {
 			if ($item->menuItemID == $menuItemID) PageMenu::getInstance()->setActiveMenuItem($item->menuItem);
 		}
+
 	}
 
 	public static function setBreadcrumbs(Page $page) {
