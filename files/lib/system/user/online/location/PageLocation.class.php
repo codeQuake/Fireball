@@ -18,7 +18,7 @@ class PageLocation implements IUserOnlineLocation {
 
 	public function get(UserOnline $user, $languageVariable = '') {
 		$page = PageCache::getInstance()->getPage($user->objectID);
-		if ($page->pageID != 0) {
+		if ($page !== null && $page->pageID != 0) {
 			return WCF::getLanguage()->getDynamicVariable($languageVariable, array(
 				'page' => $page
 			));
