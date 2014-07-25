@@ -1,15 +1,9 @@
-<div class="slideshowContainer">
-	<ul>
+<div class="gridContainer galleryContainer center">
 		{foreach from=$images item=image}
-			<li><img src="{$image->getURL()}" alt="" class="jsResizeImage" /></li>
+			<div class="grid grid25 galleryImage shadow marginTop">
+				<figure>
+					<a class="imgThumb jsImageViewer" href="{$image->getURL()}"><img src="{$image->getURL()}" alt="" /></a>
+				</figure>
+			</div>
 		{/foreach}
-	</ul>
 </div>
-
-<script data-relocate="true">
-        //<![CDATA[
-        $(function() {
-        $('.slideshowContainer').wcfSlideshow();
-        });
-        //]]>
- </script>

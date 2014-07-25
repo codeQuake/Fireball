@@ -35,7 +35,6 @@
 		float: none;
 		max-width: 100%;
 	}
-
 	figure {
 		margin-top: @wcfGapMedium;
 		margin-bottom: @wcfGapMedium;
@@ -46,8 +45,26 @@
 		}
 
 		> a.framed > img {max-width: 100%; height: auto; }
+		> a.imgThumb > img {max-width: 100%; height: auto; max-height: 150px;}
 		> img {max-width: 100%; height: auto;}
 	}
+
+	.galleryImage{
+		max-width: 100%; height: auto;
+		> figure {
+			background: @wcfContainerBackgroundColor;
+			border: 1px solid @wcfContainerBorderColor;
+			width: 100%;
+			border-radius: @wcfContainerBorderRadius;
+			-webkit-border-radius: @wcfContainerBorderRadius;
+			-moz-border-radius: @wcfContainerBorderRadius;
+			line-height: 170px;
+			height: 190px;
+			transition: .2s all ease-in-out;
+			&:hover{background: @wcfContainerHoverBackgroundColor;}
+		}
+	}
+
 	#main{
 		div[data-content-type="de.codequake.cms.content.type.headline"], div[data-content-type="de.codequake.cms.content.type.html"], div[data-content-type="de.codequake.cms.content.type.tpl"], div[data-content-type="de.codequake.cms.content.type.php"], div[data-content-type="de.codequake.cms.content.type.text"]{
 			h1{
