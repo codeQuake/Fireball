@@ -172,6 +172,7 @@
 
 	<category name="cms.acp.layout">
 		<item name="cms.acp.layout.list"><![CDATA[Layouts]]></item>
+		<item name="cms.acp.layout.list.description"><![CDATA[Layouts sind Gruppierungen von <a href="{link controller='StylesheetList' application='cms'}{/link}">Stylesheets</a>, die einer Seite zugeordnet werden können. Dadurch gibt es die Möglichkeit verschiedene Stylesheets auf Ihren Seiten verschieden miteinander zu kombinieren.]]></item>
 		<item name="cms.acp.layout.edit"><![CDATA[Layout bearbeiten]]></item>
 		<item name="cms.acp.layout.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.layout.add"><![CDATA[Layout hinzufügen]]></item>
@@ -212,6 +213,7 @@
 		<item name="cms.acp.page.legend"><![CDATA[Legende]]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Seite kopieren]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
+		<item name="cms.acp.page.list.description"><![CDATA[Seiten bilden die Grundlage des Fireball CMS. Erstellen Sie eine Seite um dieser später Inhalte verschiedener Typen zuordnen zu können.]]></item>
 		<item name="cms.acp.page.revisions"><![CDATA[Revisionen]]></item>
 		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>
 		<item name="cms.acp.page.revision.restore"><![CDATA[Wiederherstellen]]></item>
@@ -285,6 +287,7 @@
 
 	<category name="cms.acp.stylesheet">
 		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie in Layouts gruppiert und einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
 		<item name="cms.acp.stylesheet.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.stylesheet.general"><![CDATA[Allgemeine Einstellungen]]></item>
 		<item name="cms.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>

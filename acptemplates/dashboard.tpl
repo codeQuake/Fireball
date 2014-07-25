@@ -59,9 +59,9 @@
 						<dt>{lang}wcf.user.usersOnline{/lang}</dt>
 						<dd>{#$usersOnlineList->stats[total]}</dd>
 						<dt>{lang}cms.acp.dashboard.visitsToday{/lang}</dt>
-						<dd>{$visitorArray[6][visitors]['visits']}</dd>
+						<dd>{if $visitorArray[6][visitors]['visits']|isset}{$visitorArray[6][visitors]['visits']}{else}0{/if}</dd>
 						<dt>{lang}cms.acp.dashboard.visitsYesterday{/lang}</dt>
-						<dd>{$visitorArray[5][visitors]['visits']}</dd>
+						<dd>{if $visitorArray[5][visitors]['visits']|isset}{$visitorArray[5][visitors]['visits']}{else}0{/if}</dd>
 						<dt>{lang}cms.acp.dashboard.visitsAll{/lang}</dt>
 						<dd>{$visitors->getAllVisitors()}</dd>
 					</dl>

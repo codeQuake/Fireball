@@ -6,7 +6,7 @@
 		<item name="cms.acp.content.add"><![CDATA[Add content]]></item>
 		<item name="cms.acp.content.contents"><![CDATA[Contents]]></item>
 		<item name="cms.acp.content.revisions"><![CDATA[Revisions]]></item>
-		<item name="cms.acp.content.copy"><![CDATA[Copy contnet]]></item>
+		<item name="cms.acp.content.copy"><![CDATA[Copy content]]></item>
 		<item name="cms.acp.content.revision"><![CDATA[Revision]]></item>
 		<item name="cms.acp.content.revision.restore"><![CDATA[Restore]]></item>
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
@@ -174,6 +174,7 @@
 
 	<category name="cms.acp.layout">
 		<item name="cms.acp.layout.list"><![CDATA[Layouts]]></item>
+		<item name="cms.acp.layout.list.description"><![CDATA[Layouts are collections of <a href="{link controller='StylesheetList' application='cms'}{/link}">Stylesheets</a>. You can easily add a layout to a CMS page to use some page-specific CSS.]]></item>
 		<item name="cms.acp.layout.edit"><![CDATA[Edit layout]]></item>
 		<item name="cms.acp.layout.title"><![CDATA[Title]]></item>
 		<item name="cms.acp.layout.add"><![CDATA[Add layout]]></item>
@@ -214,6 +215,7 @@
 		<item name="cms.acp.page.legend"><![CDATA[Legend]]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Copy page]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
+		<item name="cms.acp.page.list.description"><![CDATA[Pages are the base of this CMS. Create a page to add multiple types of content later.]]></item>
 		<item name="cms.acp.page.revisions"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>
 		<item name="cms.acp.page.revision.restore"><![CDATA[Restore]]></item>
@@ -292,6 +294,7 @@
 
 	<category name="cms.acp.stylesheet">
 		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets or Cascading Stylesheets are neccessary to individualize your pages - stylesheets are grouped in layouts. Recommended for beginners: <a href="http://www.w3schools.com/css/default.asp">CSS Tutorial by W3Schools</a>.]]></item>
 		<item name="cms.acp.stylesheet.title"><![CDATA[Title]]></item>
 		<item name="cms.acp.stylesheet.general"><![CDATA[General]]></item>
 		<item name="cms.acp.stylesheet.add"><![CDATA[Add stylesheet]]></item>

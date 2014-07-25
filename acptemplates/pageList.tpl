@@ -2,7 +2,7 @@
 
 <header class="boxHeadline">
 	<h1>{lang}cms.acp.page.list{/lang}</h1>
-
+	<p>{lang}cms.acp.page.list.description{/lang}</p>
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 	<script data-relocate="true">
 		//<![CDATA[
