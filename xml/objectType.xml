@@ -116,6 +116,16 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
+
+		<type>
+			<name>de.codequake.cms.content.type.slideshow</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\SlideshowContentType</classname>
+			<category>structure</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+
 		<type>
 			<name>de.codequake.cms.content.type.menu</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>

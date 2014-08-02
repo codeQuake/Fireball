@@ -35,6 +35,34 @@
 		float: none;
 		max-width: 100%;
 	}
+
+	.fireballSlideContainer{
+		position: relative;
+		margin-bottom: @wcfGapLarge;
+		> div {
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: none;
+		}
+		> ul.slideshowButtonList {
+			width: 100%;
+			text-align: center;
+			bottom: -15px;
+			top: auto;
+			position: absolute;
+			right: 0;
+			> li {
+				display: inline-block;
+				&.active > a > span{
+					transition: 0.5s all ease-in-out;
+					color: @wcfContainerHoverBackgroundColor;
+				}
+			}
+		}
+	}
+
+
 	figure {
 		margin-top: @wcfGapMedium;
 		margin-bottom: @wcfGapMedium;
