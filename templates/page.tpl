@@ -9,7 +9,7 @@
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			new CMS.Content.Type.Slideshow(3000);
+			new CMS.Content.Type.Slideshow({CMS_PAGES_CONTENT_SLIDESHOW_INTERVAL});
 		});
 		//]]>
 	</script>

@@ -394,6 +394,9 @@
 		<item name="wcf.acp.option.category.cms.general.revision"><![CDATA[Revisions]]></item>
 		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Pages]]></item>
 		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Defaultvalues]]></item>
+		<item name="wcf.acp.option.category.cms.pages.content"><![CDATA[Content]]></item>
+		<item name="wcf.acp.option.cms_pages_content_slideshow_interval"><![CDATA[Slideshow-Interval]]></item>
+		<item name="wcf.acp.option.cms_pages_content_slideshow_interval.description"><![CDATA[Enter the delay after a slide in a slideshow is automatically sliding. 1 sec = 1000]]></item>
 		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Auto-Delete]]></item>
 		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[After X Days old revisions will be deleted. (0 = deactivate auto-delete)]]></item>
 		<item name="wcf.acp.option.cms_pages_default_robots"><![CDATA[Meta-Robots]]></item>

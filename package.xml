@@ -65,6 +65,7 @@
 
 		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
 	</instructions>
 
 	<instructions type="update" fromversion="2.0.0 Beta 3">
@@ -79,5 +80,6 @@
 
 		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
 	</instructions>
 </package>

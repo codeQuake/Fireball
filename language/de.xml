@@ -394,6 +394,9 @@
 		<item name="wcf.acp.option.category.cms.general.revision"><![CDATA[Revisionen]]></item>
 		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Standardwerte]]></item>
+		<item name="wcf.acp.option.category.cms.pages.content"><![CDATA[Inhalte]]></item>
+		<item name="wcf.acp.option.cms_pages_content_slideshow_interval"><![CDATA[Slideshow-Intervall]]></item>
+		<item name="wcf.acp.option.cms_pages_content_slideshow_interval.description"><![CDATA[Geben Sie die Zeit an, nach der automatisch zum nächsten Slide gewechselt werden soll. 1000 = 1 sec (Standard: 5000)]]></item>
 		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Automatische Löschung von Revisionen]]></item>
 		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Geben Sie die Anzahl an Tagen ein, nach der alte Revisionen automatisch gelöscht werden. (0 zur Deaktivierung)]]></item>
 		<item name="wcf.acp.option.cms_pages_default_robots"><![CDATA[Anweisung für Suchmaschinenroboter]]></item>
