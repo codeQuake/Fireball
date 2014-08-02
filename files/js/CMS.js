@@ -29,6 +29,7 @@ CMS.Content.Type.Slideshow = Class.extend({
 		$('.fireballSlideContainer').css('height', max_height);
 
 		$('.fireballSlideContainer > .slideshowButtonList > li > a').click($.proxy(this._click, this));
+		$(window).resize($.proxy(this._resize, this));
 	},
 
 	slide: function() {
@@ -61,5 +62,14 @@ CMS.Content.Type.Slideshow = Class.extend({
 
 		clearInterval(this._interval);
 
+	},
+
+	_resize: function() {
+		//calc max-height
+		var max_height = 0;
+		$('.fireballSlideContainer').children('div').each(function() {
+			if ($(this).outerHeight() >= max_height) max_height = $(this).outerHeight();
+		});
+		$('.fireballSlideContainer').css('height', max_height);
 	}
 });
