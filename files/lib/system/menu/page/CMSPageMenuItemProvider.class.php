@@ -14,6 +14,12 @@ class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider {
 
 	protected $page = null;
 
+	public function isVisible() {
+		if ($this->page === null) $this->getPage();
+		if ($this->page->isVisible()) return true;
+		return false;
+	}
+
 	public function getPage() {
 		if ($this->page === null) {
 			$matches = array();
@@ -27,7 +33,6 @@ class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider {
 	}
 
 	public function getLink() {
-		;
 		if ($this->getPage() === null) return parent::getLink();
 		return $this->getPage()->getLink();
 	}

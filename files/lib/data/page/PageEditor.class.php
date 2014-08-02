@@ -2,6 +2,7 @@
 namespace cms\data\page;
 
 use cms\system\cache\builder\PageCacheBuilder;
+use cms\system\cache\builder\PagePermissionCacheBuilder;
 use cms\system\cache\builder\PageRevisionCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
@@ -26,7 +27,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		$statement->execute(array(
 			0
 		));
-		
+
 		$sql = "UPDATE	cms" . WCF_N . "_page
 			SET	isHome = ?
 			WHERE	pageID = ?";
@@ -39,6 +40,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 
 	public static function resetCache() {
 		PageCacheBuilder::getInstance()->reset();
+		PagePermissionCacheBuilder::getInstance()->reset();
 		PageRevisionCacheBuilder::getInstance()->reset();
 	}
 
@@ -50,20 +52,20 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 				$keys .= ',';
 				$values .= ',';
 			}
-			
+
 			$keys .= $key;
 			$values .= '?';
 			$statementParameters[] = $value;
 		}
-		
+
 		// save object
 		$sql = "INSERT INTO	cms" . WCF_N . "_page_revision (" . $keys . ")
 				VALUES (" . $values . ")";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($statementParameters);
-		
+
 		$id = WCF::getDB()->getInsertID("cms" . WCF_N . "_page_revision", "revisionID");
-		
+
 		return new static::$baseClass($id);
 	}
 }

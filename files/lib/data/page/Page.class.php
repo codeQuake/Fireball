@@ -35,10 +35,10 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 				$id
 			));
 			$row = $statement->fetchArray();
-			
+
 			if ($row === false) $row = array();
 		}
-		
+
 		parent::__construct(null, $row, $object);
 	}
 
@@ -51,7 +51,7 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 		if ($this->layoutID != 0) {
 			return LayoutHandler::getInstance()->getStylesheet($this->layoutID);
 		}
-		
+
 		return '';
 	}
 
@@ -96,14 +96,14 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 		if ($maxDepth >= 0) $tree->setMaxDepth($maxDepth);
 		return $tree;
 	}
-	
+
 	// builds up a complete folder structure like link
 	public function getAlias() {
 		// returns page alias
 		if ($this->getParentPage() != null) {
 			return $this->getParentPage()->getAlias() . '/' . $this->alias;
 		}
-		
+
 		return $this->alias;
 	}
 

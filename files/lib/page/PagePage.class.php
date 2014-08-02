@@ -61,7 +61,7 @@ class PagePage extends AbstractPage {
 		}
 
 		//check permission
-		if (! $this->page->isVisible() || ! $this->page->isAccessible()) throw new PermissionDeniedException();
+		if (!$this->page->isVisible() || !$this->page->isAccessible()) throw new PermissionDeniedException();
 
 		// check if offline and view page or exit
 		// see: wcf\system\request\RequestHandler
