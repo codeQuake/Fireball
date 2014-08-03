@@ -56,7 +56,7 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 	}
 
 	public function isVisible() {
-		if ($this->invisible == 1 && $this->isDisabled == 0){
+		if ($this->invisible == 1 && $this->isDisabled == 0) {
 			if ($this->getPermission('canViewInvisiblePage')) return true;
 			return false;
 		}
