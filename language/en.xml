@@ -7,6 +7,7 @@
 		<item name="cms.acp.content.contents"><![CDATA[Contents]]></item>
 		<item name="cms.acp.content.revisions"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.content.copy"><![CDATA[Copy content]]></item>
+		<item name="cms.acp.content.disable"><![CDATA[Toggle content]]></item>
 		<item name="cms.acp.content.revision"><![CDATA[Revision]]></item>
 		<item name="cms.acp.content.revision.restore"><![CDATA[Restore]]></item>
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
@@ -216,6 +217,7 @@
 		<item name="cms.acp.page.backup.description"><![CDATA[You can download a backup of your configuration here: <a href="{link application='cms' controller='CMSExport'}{/link}"><span class="icon icon16 icon-cloud-download"></span> Download</a>]]></item>
 		<item name="cms.acp.page.legend"><![CDATA[Legend]]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Copy page]]></item>
+		<item name="cms.acp.page.disable"><![CDATA[Toggle page]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
 		<item name="cms.acp.page.list.description"><![CDATA[Pages are the base of this CMS. Create a page to add multiple types of content later.]]></item>
 		<item name="cms.acp.page.revisions"><![CDATA[Revisions]]></item>

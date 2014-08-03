@@ -95,6 +95,7 @@
 				<ul class="dataList">
 					<li><span class="icon icon16 icon-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></li>
 					<li><span class="icon icon16 icon-remove"></span> <span>{lang}cms.acp.page.remove{/lang}</span></li>
+					<li><span class="icon icon16 icon-check"></span> <span>{lang}cms.acp.page.disable{/lang}</span></li>
 					<li><span class="icon icon16 icon-home"></span> <span>{lang}cms.acp.page.setAsHome{/lang}</span></li>
 					<li><span class="icon icon16 icon-copy"></span> <span>{lang}cms.acp.page.copy{/lang}</span></li>
 					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.page.revisions{/lang}</span></li>
