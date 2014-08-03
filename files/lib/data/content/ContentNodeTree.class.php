@@ -2,6 +2,7 @@
 namespace cms\data\content;
 
 use cms\system\cache\builder\ContentCacheBuilder;
+use wcf\system\WCF;
 
 /**
  * Builds the content tree
@@ -83,7 +84,7 @@ class ContentNodeTree implements \IteratorAggregate {
 			if ($contentNode->pageID != $this->pageID) return false;
 		}
 		if ($this->isACP) return true;
-		if ($contentNode->isDisabled && !WCF::getSession()->getPermission('wcf.acp.group.option.user.cms.page.canViewDisabledContent')) return false;
+		if ($contentNode->isDisabled && !WCF::getSession()->getPermission('user.cms.page.canViewDisabledContent')) return false;
 		return true;
 	}
 }

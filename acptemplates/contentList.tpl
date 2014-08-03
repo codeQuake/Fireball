@@ -21,8 +21,8 @@
 		//<![CDATA[
 		$(function() {
 			WCF.TabMenu.init();
-			new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '.jsContentRow')
-			new WCF.Action.Toggle('cms\\data\\page\\PageAction', '.jsContentRow', '> .sortableNodeLabel > .buttons > .jsToggleButton');;
+			new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '.jsContentRow');
+			new WCF.Action.Toggle('cms\\data\\content\\ContentAction', '.jsContentRow', '> .sortableNodeLabel > .buttons > .jsToggleButton');
 			new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
 			new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
 			new CMS.ACP.Copy('.jsCopyButton', 'cms\\data\\content\\ContentAction');
