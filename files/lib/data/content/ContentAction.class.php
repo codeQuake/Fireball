@@ -5,6 +5,7 @@ use cms\system\cache\builder\ContentCacheBuilder;
 use cms\system\revision\ContentRevisionHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
+use wcf\data\IToggleAction;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 
@@ -16,7 +17,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class ContentAction extends AbstractDatabaseObjectAction implements ISortableAction {
+class ContentAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction {
 
 	protected $className = 'cms\data\content\ContentEditor';
 
@@ -42,6 +43,20 @@ class ContentAction extends AbstractDatabaseObjectAction implements ISortableAct
 		'delete',
 		'updatePosition'
 	);
+
+	public function validateToggle() {
+		$this->validateUpdate();
+	}
+
+	public function toggle() {
+		if (empty($this->objects)) $this->readObjects();
+
+		foreach ($this->objects as $content) {
+			$content->update(array(
+				'isDisabled' => 1 - $content->isDisabled
+			));
+		}
+	}
 
 	public function validateUpdatePosition() {
 		WCF::getSession()->checkPermissions(array(

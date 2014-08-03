@@ -66,6 +66,9 @@
 		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
+
+		<!--others -->
+		<instruction type="sql">update_beta5.sql</instruction>
 	</instructions>
 
 	<instructions type="update" fromversion="2.0.0 Beta 3">
@@ -81,6 +84,9 @@
 		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
+
+		<!--others -->
+		<instruction type="sql">update_beta5.sql</instruction>
 	</instructions>
 	<instructions type="update" fromversion="2.0.0 Beta 4">
 		<!--lang -->
@@ -89,8 +95,12 @@
 		<!--tar -->
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
 
 		<!-- xml -->
 		<instruction type="option">xml/option.xml</instruction>
+
+		<!--others -->
+		<instruction type="sql">update_beta5.sql</instruction>
 	</instructions>
 </package>

@@ -13,6 +13,7 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
+use wcf\data\IToggleAction;
 use wcf\system\exception\AJAXException;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
@@ -28,7 +29,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class PageAction extends AbstractDatabaseObjectAction implements ISortableAction {
+class PageAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction {
 
 	protected $className = 'cms\data\page\PageEditor';
 
@@ -104,6 +105,20 @@ class PageAction extends AbstractDatabaseObjectAction implements ISortableAction
 				$editor = new PageEditor($page);
 				$editor->setAsHome();
 			}
+		}
+	}
+
+	public function validateToggle() {
+		$this->validateUpdate();
+	}
+
+	public function toggle() {
+		if (empty($this->objects)) $this->readObjects();
+
+		foreach ($this->objects as $page) {
+			$page->update(array(
+				'isDisabled' => 1 - $page->isDisabled
+			));
 		}
 	}
 
