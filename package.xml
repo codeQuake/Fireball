@@ -41,12 +41,12 @@
 		<instruction type="option">xml/option.xml</instruction>
 		<instruction type="sitemap">xml/sitemap.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="aclOption">xml/aclOption.xml</instruction>
 		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 		<instruction type="templateListener">xml/templateListener.xml</instruction>
 		<instruction type="eventListener">xml/eventlistener.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
 
 		<!--others -->
@@ -66,6 +66,8 @@
 		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="aclOption">xml/aclOption.xml</instruction>
 
 		<!--others -->
 		<instruction type="sql">update_beta5.sql</instruction>
@@ -84,6 +86,8 @@
 		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="aclOption">xml/aclOption.xml</instruction>
 
 		<!--others -->
 		<instruction type="sql">update_beta5.sql</instruction>
@@ -99,6 +103,8 @@
 
 		<!-- xml -->
 		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="aclOption">xml/aclOption.xml</instruction>
 
 		<!--others -->
 		<instruction type="sql">update_beta5.sql</instruction>

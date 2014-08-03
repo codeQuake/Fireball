@@ -20,9 +20,12 @@ class ContentNodeTree implements \IteratorAggregate {
 
 	protected $pageID = 0;
 
-	public function __construct($parentID = null, $pageID = 0) {
+	protected $isACP = 0;
+
+	public function __construct($parentID = null, $pageID = 0, $isACP = 0) {
 		$this->parentID = $parentID;
 		$this->pageID = $pageID;
+		$this->isACP = $isACP;
 	}
 
 	public function buildTree() {
@@ -79,6 +82,8 @@ class ContentNodeTree implements \IteratorAggregate {
 		if ($this->pageID != 0) {
 			if ($contentNode->pageID != $this->pageID) return false;
 		}
+		if ($this->isACP) return true;
+		if ($contentNode->isDisabled && !WCF::getSession()->getPermission('wcf.acp.group.option.user.cms.page.canViewDisabledContent')) return false;
 		return true;
 	}
 }

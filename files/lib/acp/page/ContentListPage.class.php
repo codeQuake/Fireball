@@ -42,10 +42,10 @@ class ContentListPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		$this->page = PageCache::getInstance()->getPage($this->pageID);
-		$this->contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body');
-		$this->contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar');
+		$this->contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body', 1);
+		$this->contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar', 1);
 		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
-	
+
 	}
 
 	public function assignVariables() {

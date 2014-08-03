@@ -17,8 +17,11 @@ class PageNodeTree implements \IteratorAggregate {
 
 	protected $parentNode = null;
 
-	public function __construct($parentID = null) {
+	protected $isACP = 0;
+
+	public function __construct($parentID = null, $isACP = 0) {
 		$this->parentID = $parentID;
+		$this->isACP = $isACP;
 	}
 
 	public function buildTree() {
@@ -42,7 +45,7 @@ class PageNodeTree implements \IteratorAggregate {
 
 	protected function getChildren(PageNode $parentNode) {
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
-		
+
 		$children = array();
 		foreach ($pages as $page) {
 			if ($page->parentID == $parentNode->pageID) {
@@ -56,7 +59,7 @@ class PageNodeTree implements \IteratorAggregate {
 		if ($this->parentNode === null) {
 			$this->buildTree();
 		}
-		
+
 		return new \RecursiveIteratorIterator($this->parentNode, \RecursiveIteratorIterator::SELF_FIRST);
 	}
 
@@ -67,11 +70,12 @@ class PageNodeTree implements \IteratorAggregate {
 		else {
 			$page = $this->getPage($pageID);
 		}
-		
+
 		return new $this->nodeClassName($page);
 	}
 
 	protected function isIncluded(PageNode $pageNode) {
+		if ($this->isACP) return true;
 		if ($pageNode->isVisible() && $pageNode->isAccessible()) return true;
 		return false;
 	}

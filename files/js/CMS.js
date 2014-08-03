@@ -16,10 +16,6 @@ CMS.Content.Type.Slideshow = Class.extend({
 		this._fx = fx;
 		this._interval = '';
 
-		//set first as active
-		$('.fireballSlideContainer > div:first').css('display', 'block').addClass('active');
-		this._interval = setInterval($.proxy(this.slide, this), this._speed);
-
 		//calc max-height
 		var max_height = 0;
 		$('.fireballSlideContainer').append('<ul class="slideshowButtonList" />');
@@ -28,6 +24,10 @@ CMS.Content.Type.Slideshow = Class.extend({
 			if ($(this).outerHeight() >= max_height) max_height = $(this).outerHeight();
 			$('.fireballSlideContainer > .slideshowButtonList').append('<li><a><span class="icon icon16 icon-circle"></span></a></li>');
 		});
+
+		//set first as active
+		$('.fireballSlideContainer > div:first').css('display', 'block').addClass('active');
+		this._interval = setInterval($.proxy(this.slide, this), this._speed);
 
 		$('.fireballSlideContainer > .slideshowButtonList > li:first').addClass('active');
 		$('.fireballSlideContainer').css('height', max_height);

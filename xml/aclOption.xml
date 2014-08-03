@@ -14,6 +14,10 @@
 				<categoryname>user.cms.page</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
+			<option name="canViewDisabledPage">
+				<categoryname>user.cms.page</categoryname>
+				<objecttype>de.codequake.cms.page</objecttype>
+			</option>
 			<option name="canViewInvisiblePage">
 				<categoryname>user.cms.page</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>

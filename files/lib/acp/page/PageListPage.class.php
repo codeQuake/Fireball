@@ -30,9 +30,9 @@ class PageListPage extends AbstractPage {
 
 	public function readData() {
 		parent::readData();
-		$this->pageList = new PageNodeTree(0);
+		$this->pageList = new PageNodeTree(0, 1);
 		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
-	
+
 	}
 
 	public function assignVariables() {
