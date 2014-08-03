@@ -73,6 +73,18 @@ right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
 				<categoryname>cms.pages.content</categoryname>
 				<defaultvalue>5000</defaultvalue>
 			</option>
+			<option name="cms_pages_content_slideshow_effect_delay">
+				<optiontype>integer</optiontype>
+				<categoryname>cms.pages.content</categoryname>
+				<defaultvalue>1000</defaultvalue>
+			</option>
+			<option name="cms_pages_content_slideshow_fx">
+				<optiontype>select</optiontype>
+				<categoryname>cms.pages.content</categoryname>
+				<selectoptions><![CDATA[fade:wcf.acp.option.cms_pages_content_slideshow_fx.fade
+slide:wcf.acp.option.cms_pages_content_slideshow_fx.slide]]></selectoptions>
+				<defaultvalue><![CDATA[fade]]></defaultvalue>
+			</option>
 			<!-- /cms.pages.content -->
 
 			<!-- cms.general.revision -->

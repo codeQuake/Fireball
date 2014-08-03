@@ -4,8 +4,8 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>2.0.0 Beta 4</version>
-		<date>2014-08-02</date>
+		<version>2.0.0 Beta 5</version>
+		<date>2014-08-03</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -80,6 +80,17 @@
 
 		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+	</instructions>
+	<instructions type="update" fromversion="2.0.0 Beta 4">
+		<!--lang -->
+		<instruction type="language">language/*.xml</instruction>
+
+		<!--tar -->
+		<instruction type="file">files.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+
+		<!-- xml -->
 		<instruction type="option">xml/option.xml</instruction>
 	</instructions>
 </package>

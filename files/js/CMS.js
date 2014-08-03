@@ -7,9 +7,13 @@ CMS.Content.Type = {};
 CMS.Content.Type.Slideshow = Class.extend({
 
 	_speed: 5000,
+	_effectDelay: 1000,
+	_fx: 'fade',
 
-	init: function(speed) {
+	init: function(speed, effectDelay, fx) {
 		this._speed = speed;
+		this._effectDelay = effectDelay;
+		this._fx = fx;
 		this._interval = '';
 
 		//set first as active
@@ -38,8 +42,14 @@ CMS.Content.Type.Slideshow = Class.extend({
 
 		$next = $active.next('div').length ? $active.next('div') : $('.fireballSlideContainer > div:first');
 
-		$active.addClass('last-active').fadeOut(1500);
-		$next.addClass('active').fadeIn(1500);
+		if (this._fx == 'slide') {
+			$active.addClass('last-active').slideUp(this._effectDelay);
+			$next.addClass('active').slideDown(this._effectDelay);
+		}
+		else{
+			$active.addClass('last-active').fadeOut(this._effectDelay);
+			$next.addClass('active').fadeIn(this._effectDelay);
+		}
 		$('.fireballSlideContainer > .slideshowButtonList > li').eq($active.index()).removeClass('active');
 		$('.fireballSlideContainer > .slideshowButtonList > li').eq($next.index()).addClass('active');
 		$active.removeClass('active last-active');
@@ -57,8 +67,14 @@ CMS.Content.Type.Slideshow = Class.extend({
 		$newActive = $('.fireballSlideContainer > .slideshowButtonList > li.active');
 		newIndex = $newActive.index();
 
-		$('.fireballSlideContainer > div').eq(oldIndex).fadeOut(1500).removeClass('active');
-		$('.fireballSlideContainer > div').eq(newIndex).fadeIn(1500).addClass('active');
+		if (this._fx == 'slide') {
+			$('.fireballSlideContainer > div').eq(oldIndex).slideUp(this._effectDelay).removeClass('active');
+			$('.fireballSlideContainer > div').eq(newIndex).slideDown(this._effectDelay).addClass('active');
+		}
+		else{
+			$('.fireballSlideContainer > div').eq(oldIndex).fadeOut(this._effectDelay).removeClass('active');
+			$('.fireballSlideContainer > div').eq(newIndex).fadeIn(this._effectDelay).addClass('active');
+		}
 
 		clearInterval(this._interval);
 
