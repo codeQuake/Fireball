@@ -16,7 +16,7 @@ class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider {
 
 	public function isVisible() {
 		if ($this->page === null) $this->getPage();
-		if ($this->page->isVisible()) return true;
+		if ($this->page !== null && $this->page->isVisible()) return true;
 		return false;
 	}
 
