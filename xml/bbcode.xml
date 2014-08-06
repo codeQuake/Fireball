@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/bbcode.xsd">
+	<import>
+		<bbcode name="cmsfile">
+			<classname><![CDATA[cms\system\bbcode\CMSFileBBCode]]></classname>
+			<allowedchildren>none^b,i,u,s,sub,sup,color,font,url</allowedchildren>
+			<attributes>
+				<attribute name="0">
+					<validationpattern>^\d+$</validationpattern>
+					<required>1</required>
+					<usetext>1</usetext>
+				</attribute>
+				<attribute name="1">
+					<validationpattern>^(left|right)$</validationpattern>
+					<required>0</required>
+				</attribute>
+				<attribute name="2">
+					<validationpattern>^\d+$</validationpattern>
+					<required>0</required>
+				</attribute>
+
+				<attribute name="3">
+					<usetext>1</usetext>
+				</attribute>
+			</attributes>
+		</bbcode>
+	</import>
+</data>

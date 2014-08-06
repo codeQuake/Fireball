@@ -23,17 +23,17 @@ class File extends CMSDatabaseObject implements IRouteController {
 	public function __construct($id, $row = null, $object = null) {
 		if ($id !== null) {
 			$sql = "SELECT *
-                    FROM " . static::getDatabaseTableName() . "
-                    WHERE (" . static::getDatabaseTableIndexName() . " = ?)";
+					FROM " . static::getDatabaseTableName() . "
+					WHERE (" . static::getDatabaseTableIndexName() . " = ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
 				$id
 			));
 			$row = $statement->fetchArray();
-			
+
 			if ($row === false) $row = array();
 		}
-		
+
 		parent::__construct(null, $row, $object);
 	}
 
@@ -60,8 +60,8 @@ class File extends CMSDatabaseObject implements IRouteController {
 	}
 
 	public function getURL() {
-		if ($this->getFolder() && $this->getFolder()->folderPath != '') return RELATIVE_CMS_DIR . 'files/' . $this->getFolder()->folderPath . '/' . $this->filename;
-		return RELATIVE_CMS_DIR . 'files/' . $this->filename;
+		if ($this->getFolder() && $this->getFolder()->folderPath != '') return WCF::getPath('cms') . 'files/' . $this->getFolder()->folderPath . '/' . $this->filename;
+		return WCF::getPath('cms') . 'files/' . $this->filename;
 	}
 
 	public function getByID($id) {
