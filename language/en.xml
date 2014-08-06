@@ -27,7 +27,14 @@
 		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Classes]]></item>
 		<item name="cms.acp.content.title"><![CDATA[Title]]></item>
-		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding". For a margin on top use "marginTop".]]></item>
+		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding". For a margin on top use "marginTop". <br />
+																		<strong>Examples:</strong>
+																		<ul>
+																		<li><pre>container</pre> - Adds a border to your content</li>
+																		<li><pre>containerPadding</pre> - Use it with container to add some padding</li>
+																		<li><pre>marginTop</pre> - Adds a margin on top</li>
+																		<li><pre>center</pre> - Centers the content</li>
+																		</ul>]]></item>
 		<item name="cms.acp.content.list"><![CDATA[List contents]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Edit content]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>

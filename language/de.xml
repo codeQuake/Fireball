@@ -26,7 +26,14 @@
 		<item name="cms.acp.content.css"><![CDATA[CSS-Einstellungen]]></item>
 		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
-		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie "container containerPadding". Für einen Abstand zum oberen Element nutzen sie zusätzlich "marginTop".]]></item>
+		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie "container containerPadding". Für einen Abstand zum oberen Element nutzen sie zusätzlich "marginTop". <br/>
+																		<strong>Beispiele:</strong>
+																		<ul>
+																		<li><pre>container</pre> - Legt einen Rahmen um das Element</li>
+																		<li><pre>containerPadding</pre> - Zusammen mit container wird der Inhalt mit einem Abstand zum Rahmen versehen</li>
+																		<li><pre>marginTop</pre> - Weist dem Element einen Abstand nach oben zu</li>
+																		<li><pre>center</pre> - Zentriert den Inhalt des Elements</li>
+																		</ul>]]></item>
 		<item name="cms.acp.content.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
