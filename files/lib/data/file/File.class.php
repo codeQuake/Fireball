@@ -64,11 +64,16 @@ class File extends CMSDatabaseObject implements IRouteController {
 		return WCF::getPath('cms') . 'files/' . $this->filename;
 	}
 
+	public function getRelativeURL() {
+		if ($this->getFolder() && $this->getFolder()->folderPath != '') return RELATIVE_CMS_DIR . 'files/' . $this->getFolder()->folderPath . '/' . $this->filename;
+		return RELATIVE_CMS_DIR . 'files/' . $this->filename;
+	}
+
 	public function getByID($id) {
 		return new File($id);
 	}
 
 	public function getImageSize() {
-		return getimagesize($this->getURL());
+		return getimagesize($this->getRelativeURL());
 	}
 }
