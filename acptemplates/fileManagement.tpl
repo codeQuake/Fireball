@@ -146,7 +146,7 @@
 						<fieldset>
 							<legend>{@$file->getIconTag()} <a href="{$file->getURL()}">{$file->title|language}</a></fieldset>
 						{if $file->type == 'image/png' || $file->type == 'image/jpeg' || $file->type == 'image/gif'}
-							<figure>
+							<figure class="framed">
 								<img style="max-width: 300px" src="{$file->getURL()}" alt="" />
 								<figcaption><small>{$file->size|filesize} | {$file->type}</small></figcaption>
 							</figure>

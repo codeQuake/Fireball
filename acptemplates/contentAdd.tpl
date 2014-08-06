@@ -79,7 +79,7 @@
 			<dl>
 				<dt><label for="cssClasses">{lang}cms.acp.content.css.cssClasses{/lang}</label></dt>
 				<dd>
-					 <input type="text" id="cssClasses" name="cssClasses" value="{$cssClasses}" class="long" />
+					<input type="text" id="cssClasses" name="cssClasses" value="{$cssClasses}" class="long" />
 						<small class="description">
 							{lang}cms.acp.content.css.cssClasses.description{/lang}
 						</small>
@@ -116,7 +116,7 @@
 	<div class="formSubmit">
 		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		 {@SECURITY_TOKEN_INPUT_TAG}
+		{@SECURITY_TOKEN_INPUT_TAG}
 		<input type="hidden" name="action" value="{@$action}" />
 		<input type="hidden" name="objectType" value="{@$objectType->objectType}" />
 		{if $contentID|isset}<input type="hidden" name="contentID" value="{@$contentID}" />{/if}
