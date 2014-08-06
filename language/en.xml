@@ -165,6 +165,7 @@
 		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
 		<item name="cms.acp.file.list"><![CDATA[Files]]></item>
 		<item name="cms.acp.file.management"><![CDATA[Filemanagement]]></item>
+		<item name="cms.acp.file.management.description"><![CDATA[This is a list of all of your files & folders. You can easily share them via BBCode or content type.]]></item>
 		<item name="cms.acp.file.details"><![CDATA[Information]]></item>
 		<item name="cms.acp.file.folderID"><![CDATA[Folder]]></item>
 		<item name="cms.acp.file.add"><![CDATA[Upload files]]></item>

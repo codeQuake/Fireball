@@ -2,20 +2,21 @@
 {include file='header'}
 
 <header class="boxHeadline">
-    <h1>{lang}cms.acp.file.management{/lang}</h1>
+	<h1>{lang}cms.acp.file.management{/lang}</h1>
+	<p>{lang}cms.acp.file.management.description{/lang}</p>
 </header>
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true">
-    //<![CDATA[
-    $(function () {
-        new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow');
+	//<![CDATA[
+	$(function () {
+		new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow');
 		new WCF.Action.Delete('cms\\data\\folder\\FolderAction', '.jsFolderRow');
 		WCF.Language.addObject({
 				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 		new CMS.ACP.File.Upload({$folderID}, true);
-    });
-    //]]>
+	});
+	//]]>
 </script>
 
 {include file='formError'}
@@ -70,49 +71,49 @@
 	<div class="container containerPadding marginTop fileUpload" id="fileUpload" >
 		<ul>
 		</ul>
-      	<div id="fileUploadButton"></div>
-      	<small>{lang}cms.acp.file.add.description{/lang}</small>
-    </div>
+		<div id="fileUploadButton"></div>
+		<small>{lang}cms.acp.file.add.description{/lang}</small>
+	</div>
 </div>
 
 <form id="folderAdd" class="hidden" method="post" enctype="multipart/form-data" action="{link controller='FileManagement' application='cms'}action=folder{/link}">
-    <div class="container containerPadding marginTop">
-        <fieldset>
-            <legend>{lang}cms.acp.folder{/lang}</legend>
-            <dl{if $errorField == 'folder'} class="formError"{/if}>
-                <dt><label for="folder">{lang}cms.acp.folder{/lang}</label></dt>
-                <dd>
-                    <input type="text" name="folder" id="folder" value="{$foldername}" required="required"/>
-                    {if $errorField == 'folder'}
-                        <small class="innerError">
-                              {lang}cms.acp.folder.error.{$errorType}{/lang}
-                        </small>
-                    {/if}
-                </dd>
-            </dl>
-        </fieldset>
-    </div>
+	<div class="container containerPadding marginTop">
+		<fieldset>
+			<legend>{lang}cms.acp.folder{/lang}</legend>
+			<dl{if $errorField == 'folder'} class="formError"{/if}>
+				<dt><label for="folder">{lang}cms.acp.folder{/lang}</label></dt>
+				<dd>
+					<input type="text" name="folder" id="folder" value="{$foldername}" required="required"/>
+					{if $errorField == 'folder'}
+						<small class="innerError">
+							{lang}cms.acp.folder.error.{$errorType}{/lang}
+						</small>
+					{/if}
+				</dd>
+			</dl>
+		</fieldset>
+	</div>
 
-    <div class="formSubmit">
-        <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		 {@SECURITY_TOKEN_INPUT_TAG}
-    </div>
+	<div class="formSubmit">
+		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+		{@SECURITY_TOKEN_INPUT_TAG}
+	</div>
 </form>
 
 {if $fileList|count || $folderList|count}
-    <div class="tabularBox tabularBoxTitle marginTop">
+	<div class="tabularBox tabularBoxTitle marginTop">
 		<header>
 			<h2>{lang}cms.acp.file.list{/lang} <span class="badge badgeInverse">{#$fileList|count}</span></h2>
 		</header>
-        <table class="table">
-            <thead>
-                <th class="columnIcon">{lang}wcf.global.objectID{/lang}</th>
-			    <th class="columnTitle columnFile">{lang}cms.acp.file.title{/lang}</th>
-                <th class="columnType">{lang}cms.acp.file.type{/lang}</th>
-                <th class="downloads">{lang}cms.acp.file.downloads{/lang}</th>
-			    {event name='columnHeads'}
-            </thead>
-            <tbody>
+		<table class="table">
+			<thead>
+				<th class="columnIcon">{lang}wcf.global.objectID{/lang}</th>
+				<th class="columnTitle columnFile">{lang}cms.acp.file.title{/lang}</th>
+				<th class="columnType">{lang}cms.acp.file.type{/lang}</th>
+				<th class="downloads">{lang}cms.acp.file.downloads{/lang}</th>
+				{event name='columnHeads'}
+			</thead>
+			<tbody>
 			{if !$isFolder}
 				{foreach from=$folderList item=folder}
 				<tr class="jsFolderRow">
@@ -130,24 +131,37 @@
 					<td>-</td>
 				</tr>
 			{/if}
-                {foreach from=$fileList item=file}
-                    <tr class="jsFileRow">
-                        <td class="columnIcon">
+				{foreach from=$fileList item=file}
+					<tr class="jsFileRow">
+						<td class="columnIcon">
 							{@$file->getIconTag()}
-                            <span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
-                        </td>
-                        <td class="columnTitle columnFile"><a id="file{$file->fileID}">{$file->title|language}</a></td>
-                        <td class="columnType">{$file->type}</td>
-                        <td class="columnDownloads">{#$file->downloads}</td>
-                    </tr>
+							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
+							<span>{$file->fileID}</span>
+						</td>
+						<td class="columnTitle columnFile"><a id="file{$file->fileID}" class="jsTooltip" title="{lang}cms.acp.file.details{/lang}">{$file->title|language}</a></td>
+						<td class="columnType">{$file->type}</td>
+						<td class="columnDownloads">{#$file->downloads}</td>
+					</tr>
 					<div class="details" id="details{$file->fileID}" style="display: none;">
-						<div class="boxSubHeadline">
-							<h2>{@$file->getIconTag()} <a href="{$__wcf->getPath('cms')}files/{$file->filename}">{$file->title|language}</a></h2>
-						</div>
+						<fieldset>
+							<legend>{@$file->getIconTag()} <a href="{$file->getURL()}">{$file->title|language}</a></fieldset>
 						{if $file->type == 'image/png' || $file->type == 'image/jpeg' || $file->type == 'image/gif'}
-							<div><img style="max-width: 300px" src="{$__wcf->getPath('cms')}files/{if $file->folderID != 0}{$file->getFolder()->folderPath}/{/if}{$file->filename}" alt="" /></div>
+							<figure>
+								<img style="max-width: 300px" src="{$file->getURL()}" alt="" />
+								<figcaption><small>{$file->size|filesize} | {$file->type}</small></figcaption>
+							</figure>
+						{else}
+						<small>{$file->size|filesize} | {$file->type}</small>
 						{/if}
-						<span>{$file->size|filesize} | {$file->type}</span>
+
+						</fieldset>
+
+						<fieldset>
+							<legend>{lang}wcf.message.share{/lang}</legend>
+							<input type="text" readonly="readonly" class="long" value="[cmsfile={$file->fileID}][/cmsfile]" />
+							<br/><br/>
+							<input type="text" readonly="readonly" class="long" value="{$file->getURL()}" />
+						</fieldset>
 					</div>
 					<script data-relocate="true">
 						//<![CDATA[
@@ -164,10 +178,10 @@
 						});
 						//]]>
 					</script>
-                {/foreach}
-            </tbody>
-        </table>
-    </div>
+				{/foreach}
+			</tbody>
+		</table>
+	</div>
 {else}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/if}
