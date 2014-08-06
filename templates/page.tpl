@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->getMenuItem()->menuItem}{$page->getTitle()|language} - {/if}{PAGE_TITLE|language}</title>
+	<title>{if !$page->getMenuItem() || $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->getMenuItem()->menuItem}{$page->getTitle()|language} - {/if}{PAGE_TITLE|language}</title>
 
 	{include file='headInclude' application='wcf' sandbox=false}
 	{@$page->getLayout()}
