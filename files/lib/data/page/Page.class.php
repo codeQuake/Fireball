@@ -7,6 +7,7 @@ use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
 use cms\system\revision\PageRevisionHandler;
 use wcf\data\ILinkableObject;
+use wcf\system\menu\page\PageMenu;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -176,5 +177,15 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 				throw new PermissionDeniedException();
 			}
 		}
+	}
+
+	public function getMenuItem() {
+		foreach (PageMenu::getInstance()->getMenuItems('header') as $item) {
+			if ($item->menuItemID == $this->menuItemID) return $item;
+		}
+		foreach (PageMenu::getInstance()->getMenuItems('footer') as $item) {
+			if ($item->menuItemID == $this->menuItemID) return $item;
+		}
+		return null;
 	}
 }
