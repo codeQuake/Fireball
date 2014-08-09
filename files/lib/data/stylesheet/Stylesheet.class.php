@@ -14,28 +14,19 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class Stylesheet extends CMSDatabaseObject implements IRouteController {
-
+	/**
+	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 */
 	protected static $databaseTableName = 'stylesheet';
 
+	/**
+	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 */
 	protected static $databaseTableIndexName = 'sheetID';
 
-	public function __construct($id, $row = null, $object = null) {
-		if ($id !== null) {
-			$sql = "SELECT *
-                    FROM " . static::getDatabaseTableName() . "
-                    WHERE (" . static::getDatabaseTableIndexName() . " = ?)";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(
-				$id
-			));
-			$row = $statement->fetchArray();
-			
-			if ($row === false) $row = array();
-		}
-		
-		parent::__construct(null, $row, $object);
-	}
-
+	/**
+	 * @see	\wcf\data\ITitledObject::getTitle()
+	 */
 	public function getTitle() {
 		return $this->title;
 	}

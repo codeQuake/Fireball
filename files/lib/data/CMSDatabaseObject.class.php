@@ -12,7 +12,6 @@ use wcf\data\DatabaseObject;
  * @package	de.codequake.cms
  */
 abstract class CMSDatabaseObject extends DatabaseObject {
-
 	/**
 	 * @see	\wcf\data\IStorableObject::getDatabaseTableName()
 	 */

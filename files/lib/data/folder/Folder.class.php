@@ -15,41 +15,40 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class Folder extends CMSDatabaseObject implements IRouteController {
-
+	/**
+	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 */
 	protected static $databaseTableName = 'folder';
 
+	/**
+	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 */
 	protected static $databaseTableIndexName = 'folderID';
 
-	public function __construct($id, $row = null, $object = null) {
-		if ($id !== null) {
-			$sql = "SELECT *
-                    FROM " . static::getDatabaseTableName() . "
-                    WHERE (" . static::getDatabaseTableIndexName() . " = ?)";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(
-				$id
-			));
-			$row = $statement->fetchArray();
-			
-			if ($row === false) $row = array();
+	/**
+	 * Returns all files within this folder. Set the first parameter $type
+	 * to 'image' to only fetch images.
+	 * 
+	 * @param	string		$type
+	 * @return	array<\cms\data\file\File>
+	 */
+	public function getFiles($type = '') {
+		$fileList = new FileList();
+
+		if ($type == 'image') {
+			$fileList->getConditionBuilder()->add('file.type LIKE ?', array('image/%'));
 		}
-		
-		parent::__construct(null, $row, $object);
+
+		$fileList->getConditionBuilder()->add('folderID = ?', array($this->folderID));
+		$fileList->readObjects();
+
+		return $fileList->getObjects();
 	}
 
+	/**
+	 * @see	\wcf\data\ITitledObject::getTitle()
+	 */
 	public function getTitle() {
 		return $this->folderName;
-	}
-
-	public function getFiles($type = '') {
-		$list = new FileList();
-		if ($type == 'image') $list->getConditionBuilder()->add('file.type LIKE ?', array(
-			'image/%'
-		));
-		$list->getConditionBuilder()->add('folderID = ?', array(
-			$this->folderID
-		));
-		$list->readObjects();
-		return $list->getObjects();
 	}
 }
