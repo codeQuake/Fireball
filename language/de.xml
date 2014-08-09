@@ -277,6 +277,7 @@
 	</category>
 
 	<category name="cms.page">
+		<item name="cms.page.clickCounter"><![CDATA[{#$clicks} mal aufgerufen]]></item>
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
 		<item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
 		<item name="cms.page.news"><![CDATA[Nachrichten]]></item>
@@ -376,6 +377,8 @@
 		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Standardwerte]]></item>
 		<item name="wcf.acp.option.category.cms.pages.content"><![CDATA[Inhalte]]></item>
+		<item name="wcf.acp.option.category.dashboard.sidebar.cms"><![CDATA[CMS]]></item>
+		<item name="wcf.acp.option.cms_dashboard_sidebar_entries"><![CDATA[Anzahl Seiten]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_interval"><![CDATA[Slideshow-Intervall]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_interval.description"><![CDATA[Geben Sie die Zeit an, nach der automatisch zum nächsten Slide gewechselt werden soll. 1000 = 1 sec (Standard: 5000)]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_effect_delay"><![CDATA[Slideshow-Effektzeit]]></item>
@@ -400,6 +403,7 @@
 	</category>
 
 	<category name="wcf.dashboard">
+		<item name="wcf.dashboard.box.de.codequake.cms.mostViewedPages"><![CDATA[Meistbesuchte Seiten]]></item>
 		<item name="wcf.dashboard.objectType.de.codequake.cms.page"><![CDATA[CMS: Seiten]]></item>
 	</category>
 
