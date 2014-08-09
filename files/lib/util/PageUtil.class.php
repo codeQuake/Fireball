@@ -12,8 +12,47 @@ use cms\data\page\PageCache;
  * @package	de.codequake.cms
  */
 final class PageUtil {
+	/**
+	 * maximum length of an alias
+	 * @var	integer
+	 */
+	const ALIAS_MAXLENGTH = 25;
 
+	/**
+	 * minimum length of an alias
+	 * @var	integer
+	 */
+	const ALIAS_MINLENGTH = 3;
+
+	/**
+	 * general pattern for an alias
+	 * @var	string
+	 */
 	const ALIAS_PATTERN = '[a-z0-9]+(?:\-{1}[a-z0-9]+)*';
+
+	/**
+	 * pattern of a stack of aliases, devided by slashes
+	 * @var	string
+	 */
+	const ALIAS_PATTERN_STACK = '[a-z0-9]+(?:\-{1}[a-z0-9]+)*(?:\/[a-z0-9]+(?:\-{1}[a-z0-9]+)*)*';
+
+	/**
+	 * Builds an alias based upon the given page title automatically.
+	 * Caution: Though the generated alias is valid, you have to check
+	 * whether the alias is available at the used position.
+	 * 
+	 * @param	string		$title
+	 * @return	string
+	 */
+	public static function buildAlias($title) {
+		// remove illegal characters
+		$title = trim(preg_replace('~[^a-z0-9\-]+~', '', mb_strtolower($title)), '-');
+
+		// trim to maxlength
+		$title = mb_substr($title, 0, self::ALIAS_MAXLENGTH);
+
+		return $title;
+	}
 
 	/**
 	 * Returns true if the given alias is available at the given position.
@@ -29,7 +68,7 @@ final class PageUtil {
 	public static function isAvailableAlias($alias, $parentPageID, $excludedPageID = null) {
 		$childIDs = PageCache::getInstance()->getChildIDs($parentPageID);
 		
-		if (! empty($childIDs)) {
+		if (!empty($childIDs)) {
 			foreach ($childIDs as $childID) {
 				if ($childID == $excludedPageID) continue;
 				
@@ -50,7 +89,12 @@ final class PageUtil {
 	 * @return	boolean
 	 */
 	public static function isValidAlias($alias) {
-		return preg_match('~^' . self::ALIAS_PATTERN . '$~', $alias);
+		// check for min and maxlength
+		if (mb_strlen($alias) < self::ALIAS_MINLENGTH || mb_strlen($alias) > self::ALIAS_MAXLENGTH) {
+			return false;
+		}
+
+		return (preg_match('~^' . self::ALIAS_PATTERN . '$~', $alias) == 1);
 	}
 
 	private function __construct() { /* nothing */ }

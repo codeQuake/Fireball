@@ -6,7 +6,6 @@ CMS.ACP.Page = {};
 CMS.ACP.Page.AddForm = Class.extend({
 	init: function () {
 		$('#alias, #parentID').change($.proxy(this._buildAliasPreview, this));
-		$('#title').change($.proxy(this._buildAlias, this));
 		this._buildAliasPreview();
 	},
 
@@ -19,36 +18,13 @@ CMS.ACP.Page.AddForm = Class.extend({
 				$aliasPreview += $aliasParent + '/';
 			}
 			$aliasPreview += $alias + '/';
-			$('#aliasPreview').html(WCF.Language.get('cms.acp.page.general.alias.preview') + ' ' +  $aliasPreview).show();
+			$('#aliasPreview').html(WCF.Language.get('cms.acp.page.alias.preview') + ' ' +  $aliasPreview).show();
 		}
 		else { $('#aliasPreview').hide(); }
-	},
-
-	_buildAlias: function(){
-		var $alias = $('#alias').val();
-		//prevent alias from beeing overwritten
-		if($alias == ''){
-			var $title = $('#title').val();
-			var $minus = [" ", "\\", "/", ":", ";", ".", "_", ","];
-			$minus.forEach(function(entry){
-				$title = $title.replace(entry, "-");
-			});
-
-			var $empty = ["{", "}", "[", "]", "&", "%", "$", "§", "\"", "!", "*", "'", "+", "#", "@", "<", ">", "|", "µ", "?", ")", "("];
-			$empty.forEach(function(entry){
-				$title = $title.replace(entry, "");
-			});
-
-			$title = $title.toLowerCase();
-
-			$('#alias').val($title);
-			this._buildAliasPreview();
-		}
 	}
 });
 
 CMS.ACP.Page.Menu = Class.extend({
-
 	init: function () {
 		$('#menuItemParameters').change($.proxy(this._showNotice, this));
 		$('#menuItemController').change($.proxy(this._showNotice, this));
@@ -65,7 +41,6 @@ CMS.ACP.Page.Menu = Class.extend({
 }),
 
 CMS.ACP.Page.AddContent = Class.extend({
-
 	_buttonSelector: '.jsContentAddButton',
 	_proxy: null,
 	_cache: {},
@@ -116,9 +91,7 @@ CMS.ACP.Page.AddContent = Class.extend({
 	}
 });
 
-
 CMS.ACP.Page.SetAsHome = Class.extend({
-
 	_buttonSelector: '.jsSetAsHome',
 	_proxy: null,
 	_didInit: false,
@@ -157,13 +130,11 @@ CMS.ACP.Page.SetAsHome = Class.extend({
 			window.location = location;
 		});
 	}
-
 });
 
 CMS.ACP.File = {};
 
 CMS.ACP.File.Upload = WCF.Upload.extend({
-
 	_folderID: 0,
 
 	//calls parent init with params
@@ -184,6 +155,7 @@ CMS.ACP.File.Upload = WCF.Upload.extend({
 	_getParameters: function() {
 		return {'folderID': this._folderID};
 	},
+
 	_success: function(uploadID, data) {
 		var $li = this._fileListSelector.find('li');
 		//remove progressbar
@@ -388,7 +360,6 @@ CMS.ACP.Content.Image.Gallery = Class.extend({
 CMS.ACP.Image = {};
 
 CMS.ACP.Image.Ratio = Class.extend({
-
 	_ratio: 1,
 
 	init: function(width, height) {
@@ -455,67 +426,66 @@ CMS.ACP.Page.Revisions = Class.extend({
 	}
 });
 
-
 CMS.ACP.Page.Revisions.Restore = Class.extend({
 	_proxy: null,
 	_didInit:false,
 
 	init: function () {
-			if (this._didInit) {
-				return;
-			}
-			this._proxy = new WCF.Action.Proxy({
-				success: $.proxy(this._success, this)
-			});
-
-			this._buttons = $('.jsRestoreRevisionButton');
-			this._buttons.click($.proxy(this._click, this));
-
-			this._didInit = true;
-		},
-
-		_click: function (event) {
-			event.preventDefault();
-			var $target = $(event.currentTarget);
-
-			if ($target.data('confirmMessage')) {
-				WCF.System.Confirmation.show($target.data('confirmMessage'), $.proxy(this._execute, this), { target: $target });
-			}
-			else {
-				WCF.LoadingOverlayHandler.updateIcon($target);
-				this._sendRequest($target);
-			}
-		},
-
-		_sendRequest: function (object) {
-			$pageID = $(object).data('pageID');
-			$versionID = $(object).data('objectID');
-			this._proxy.setOption('data', {
-				actionName: 'restoreRevision',
-				className: 'cms\\data\\page\\PageAction',
-				objectIDs: [ $pageID ],
-				parameters: {
-					'restoreObjectID': $versionID
-				}
-			});
-			this._proxy.sendRequest();
-		},
-
-		_execute: function (action, parameters) {
-			if (action === 'cancel') {
-				return;
-			}
-
-			WCF.LoadingOverlayHandler.updateIcon(parameters.target);
-			this._sendRequest(parameters.target);
-		},
-
-		_success: function (data, textStatus, jqXHR) {
-			var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-			$notification.show(function() {
-				window.location = location;
-			});
+		if (this._didInit) {
+			return;
 		}
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+
+		this._buttons = $('.jsRestoreRevisionButton');
+		this._buttons.click($.proxy(this._click, this));
+
+		this._didInit = true;
+	},
+
+	_click: function (event) {
+		event.preventDefault();
+		var $target = $(event.currentTarget);
+
+		if ($target.data('confirmMessage')) {
+			WCF.System.Confirmation.show($target.data('confirmMessage'), $.proxy(this._execute, this), { target: $target });
+		}
+		else {
+			WCF.LoadingOverlayHandler.updateIcon($target);
+			this._sendRequest($target);
+		}
+	},
+
+	_sendRequest: function (object) {
+		$pageID = $(object).data('pageID');
+		$versionID = $(object).data('objectID');
+		this._proxy.setOption('data', {
+			actionName: 'restoreRevision',
+			className: 'cms\\data\\page\\PageAction',
+			objectIDs: [ $pageID ],
+			parameters: {
+				'restoreObjectID': $versionID
+			}
+		});
+		this._proxy.sendRequest();
+	},
+
+	_execute: function (action, parameters) {
+		if (action === 'cancel') {
+			return;
+		}
+
+		WCF.LoadingOverlayHandler.updateIcon(parameters.target);
+		this._sendRequest(parameters.target);
+	},
+
+	_success: function (data, textStatus, jqXHR) {
+		var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+		$notification.show(function() {
+			window.location = location;
+		});
+	}
 });
 
 CMS.ACP.Content.Revisions = Class.extend({
@@ -563,71 +533,69 @@ CMS.ACP.Content.Revisions = Class.extend({
 	}
 });
 
-
 CMS.ACP.Content.Revisions.Restore = Class.extend({
 	_proxy: null,
 	_didInit:false,
 
 	init: function () {
-			if (this._didInit) {
-				return;
-			}
-			this._proxy = new WCF.Action.Proxy({
-				success: $.proxy(this._success, this)
-			});
-
-			this._buttons = $('.jsRestoreRevisionButton');
-			this._buttons.click($.proxy(this._click, this));
-
-			this._didInit = true;
-		},
-
-		_click: function (event) {
-			event.preventDefault();
-			var $target = $(event.currentTarget);
-
-			if ($target.data('confirmMessage')) {
-				WCF.System.Confirmation.show($target.data('confirmMessage'), $.proxy(this._execute, this), { target: $target });
-			}
-			else {
-				WCF.LoadingOverlayHandler.updateIcon($target);
-				this._sendRequest($target);
-			}
-		},
-
-		_sendRequest: function (object) {
-			$contentID = $(object).data('contentID');
-			$versionID = $(object).data('objectID');
-			this._proxy.setOption('data', {
-				actionName: 'restoreRevision',
-				className: 'cms\\data\\content\\ContentAction',
-				objectIDs: [ $contentID ],
-				parameters: {
-					'restoreObjectID': $versionID
-				}
-			});
-			this._proxy.sendRequest();
-		},
-
-		_execute: function (action, parameters) {
-			if (action === 'cancel') {
-				return;
-			}
-
-			WCF.LoadingOverlayHandler.updateIcon(parameters.target);
-			this._sendRequest(parameters.target);
-		},
-
-		_success: function (data, textStatus, jqXHR) {
-			var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-			$notification.show(function() {
-				window.location = location;
-			});
+		if (this._didInit) {
+			return;
 		}
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+
+		this._buttons = $('.jsRestoreRevisionButton');
+		this._buttons.click($.proxy(this._click, this));
+
+		this._didInit = true;
+	},
+
+	_click: function (event) {
+		event.preventDefault();
+		var $target = $(event.currentTarget);
+
+		if ($target.data('confirmMessage')) {
+			WCF.System.Confirmation.show($target.data('confirmMessage'), $.proxy(this._execute, this), { target: $target });
+		}
+		else {
+			WCF.LoadingOverlayHandler.updateIcon($target);
+			this._sendRequest($target);
+		}
+	},
+
+	_sendRequest: function (object) {
+		$contentID = $(object).data('contentID');
+		$versionID = $(object).data('objectID');
+		this._proxy.setOption('data', {
+			actionName: 'restoreRevision',
+			className: 'cms\\data\\content\\ContentAction',
+			objectIDs: [ $contentID ],
+			parameters: {
+				'restoreObjectID': $versionID
+			}
+		});
+		this._proxy.sendRequest();
+	},
+
+	_execute: function (action, parameters) {
+		if (action === 'cancel') {
+			return;
+		}
+
+		WCF.LoadingOverlayHandler.updateIcon(parameters.target);
+		this._sendRequest(parameters.target);
+	},
+
+	_success: function (data, textStatus, jqXHR) {
+		var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+		$notification.show(function() {
+			window.location = location;
+		});
+	}
 });
 
 CMS.ACP.Copy = Class.extend({
-
 	_buttonSelector: '.jsCopyButton',
 	_objectAction: 'cms\\data\\page\\PageAction',
 	_proxy: null,
@@ -668,5 +636,4 @@ CMS.ACP.Copy = Class.extend({
 			location.reload();
 		});
 	}
-
 });

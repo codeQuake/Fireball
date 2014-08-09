@@ -27,13 +27,13 @@
 		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
 		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie "container containerPadding". Für einen Abstand zum oberen Element nutzen sie zusätzlich "marginTop". <br/>
-																		<strong>Beispiele:</strong>
-																		<ul>
-																		<li><pre>container</pre> - Legt einen Rahmen um das Element</li>
-																		<li><pre>containerPadding</pre> - Zusammen mit container wird der Inhalt mit einem Abstand zum Rahmen versehen</li>
-																		<li><pre>marginTop</pre> - Weist dem Element einen Abstand nach oben zu</li>
-																		<li><pre>center</pre> - Zentriert den Inhalt des Elements</li>
-																		</ul>]]></item>
+<strong>Beispiele:</strong>
+<ul>
+	<li><pre>container</pre> - Legt einen Rahmen um das Element</li>
+	<li><pre>containerPadding</pre> - Zusammen mit container wird der Inhalt mit einem Abstand zum Rahmen versehen</li>
+	<li><pre>marginTop</pre> - Weist dem Element einen Abstand nach oben zu</li>
+	<li><pre>center</pre> - Zentriert den Inhalt des Elements</li>
+</ul>]]></item>
 		<item name="cms.acp.content.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
@@ -50,91 +50,60 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type"><![CDATA[Vorlage]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.link.type.link"><![CDATA[Hyperlink]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.link.type.button"><![CDATA[Button]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.link.type.smallbutton"><![CDATA[Kleiner Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.link"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.button"><![CDATA[Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.smallbutton"><![CDATA[Kleiner Button]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.text"><![CDATA[Text]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.link.hyperlink"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.hyperlink"><![CDATA[Hyperlink]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu.description"><![CDATA[Alle untergeordneten Inhalte werden als Tabs des Tabmenüs behandelt. Der Titel eines untergeordneten Inhaltes wird als Titel des Tab-Buttons verwendet. Sollte für einen untergeordneten Inhalt keine CSS-ID für den Anker angegeben werden, so wird eine CSS-ID generiert.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu.description"><![CDATA[Alle untergeordneten Inhalte werden als Tabs des Tabmenüs behandelt. Der Titel eines untergeordneten Inhaltes wird als Titel des Tab-Buttons verwendet. Sollte für einen untergeordneten Inhalt keine CSS-ID für den Anker angegeben werden, so wird eine CSS-ID generiert.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboardbox]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Box auswählen]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Box auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Überschrift]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Formatvorlage]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Überschrift 1]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Überschrift 2]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Überschrift 3]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Überschrift 4]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Überschrift 5]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Überschrift]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.headline.hyperlink"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Formatvorlage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Überschrift 1]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Überschrift 2]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Überschrift 3]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Überschrift 4]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Überschrift 5]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Überschrift]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.hyperlink"><![CDATA[Hyperlink]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Gruppierung]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[Dieser Inhaltstyp gruppiert automatisch alle untergeordneten Inhalte.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[Dieser Inhaltstyp gruppiert automatisch alle untergeordneten Inhalte.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Zweispaltig]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns.width"><![CDATA[Breite der Spalten]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns"><![CDATA[Dreispaltig]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns.width"><![CDATA[Breite der Spalten]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns.width"><![CDATA[Breite der Spalten]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns"><![CDATA[Dreispaltig]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns.width"><![CDATA[Breite der Spalten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns"><![CDATA[Vierspaltig]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns.width"><![CDATA[Breite der Spalten]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns.width"><![CDATA[Breite der Spalten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[Template (Smarty)]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Template-Quelltext]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[Hier können Sie Template-Quelltext verwenden (<a href="http://www.smarty.net/">Dokumentation</a>).]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Template-Quelltext]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[Hier können Sie Template-Quelltext verwenden (<a href="http://www.smarty.net/">Dokumentation</a>).]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.html"><![CDATA[HTML]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.html.text"><![CDATA[HTML-Quelltext]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.html.text.description"><![CDATA[Hier können Sie HTML-Quelltext verwenden (<a href="http://de.selfhtml.org/">Dokumentation</a>).]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.html.text.description"><![CDATA[Hier können Sie HTML-Quelltext verwenden (<a href="http://de.selfhtml.org/">Dokumentation</a>).]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Bild]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.image.select"><![CDATA[Bild auswählen]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.select"><![CDATA[Bild auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.width"><![CDATA[Breite (in px)]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Höhe (in px)]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Höhe (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Untertitel]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[Datei]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Datei auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Hauptverzeichnis]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video"><![CDATA[Video-URL]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video.error.notValid"><![CDATA[Keine gültige URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video"><![CDATA[Video-URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video.error.notValid"><![CDATA[Keine gültige URL]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Galerie]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Bilder]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.gallery.select"><![CDATA[Bilder auswählen]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Bilder]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.select"><![CDATA[Bilder auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu"><![CDATA[Menü]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth"><![CDATA[Tiefe der Menüstruktur]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth.description"><![CDATA[Geben Sie hier die Tiefe der Menüstrukur an. Das heißt die Anzahl der aufzulistenden Ebenen des Menüs. Soll keine Beschränkung eingerichtet werden, so geben Sie 0 an.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth.description"><![CDATA[Geben Sie hier die Tiefe der Menüstrukur an. Das heißt die Anzahl der aufzulistenden Ebenen des Menüs. Soll keine Beschränkung eingerichtet werden, so geben Sie 0 an.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Vorlage]]></item>
-		<item
-			name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[Benutzer]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user.name"><![CDATA[Benutzername]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
@@ -248,12 +217,12 @@
 		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
 		<item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
-		<item name="cms.acp.page.general.alias"><![CDATA[URL-Alias]]></item>
+		<item name="cms.acp.page.alias"><![CDATA[Abkürzung]]></item>
 		<item name="cms.acp.page.alias.error.sort"><![CDATA[Sortierung fehlgeschlagen - Alias-Dopplung]]></item>
-		<item name="cms.acp.page.alias.error.given"><![CDATA[Ein gleichnamiger Alias existiert bereits.]]></item>
-		<item name="cms.acp.page.alias.error.invalid"><![CDATA[Kein gültiger Alias.]]></item>
-		<item name="cms.acp.page.general.alias.preview"><![CDATA[Link-Vorschau:]]></item>
-		<item name="cms.acp.page.general.alias.description"><![CDATA[Der sogenannte Alias ist eine Art Abkürzung, die später der Link zu dieser Seite sein wird. Ein Alias darf ausschließlich aus Kleinbuchstaben, Ziffern und Bindestrichen bestehen.]]></item>
+		<item name="cms.acp.page.alias.error.notUnique"><![CDATA[Auf dieser Ebene existiert bereits eine Seite, die die gleiche Abkürzung besitzt.]]></item>
+		<item name="cms.acp.page.alias.error.notValid"><![CDATA[Die eingegebene Abkürzung ist ungültig.]]></item>
+		<item name="cms.acp.page.alias.preview"><![CDATA[Link-Vorschau:]]></item>
+		<item name="cms.acp.page.alias.description"><![CDATA[Die Abkürzung darf ausschließlich aus Kleinbuchstaben, Ziffern und Bindestrichen bestehen. Bindestriche sind am Anfang und Ende der Abkürzung nicht erlaubt. Abkürzungen müssen auf ihrer jeweiligen Ebene einzigartig sein. Sollten Sie keine Abkürzung vorgeben, wird diese automatisch auf Basis des Seitentitels erstellt.]]></item>
 		<item name="cms.acp.page.general.description"><![CDATA[Beschreibung]]></item>
 		<item name="cms.acp.page.meta"><![CDATA[Meta-Informationen]]></item>
 		<item name="cms.acp.page.meta.metaDescription"><![CDATA[Meta-Beschreibung]]></item>
@@ -387,8 +356,7 @@
 		<item name="wcf.acp.group.option.admin.cms.content.canUploadAttachment"><![CDATA[Kann Dateien anhängen]]></item>
 		<item name="wcf.acp.group.option.admin.cms.content.attachmentMaxSize"><![CDATA[Maximale Dateianhangsgröße]]></item>
 		<item name="wcf.acp.group.option.admin.cms.content.maxAttachmentCount"><![CDATA[Maximale Anzahl an Dateianhängen pro Inhaltsabschnitt]]></item>
-		<item
-			name="wcf.acp.group.option.admin.cms.content.allowedAttachmentExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
+		<item name="wcf.acp.group.option.admin.cms.content.allowedAttachmentExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
 	</category>
 
 	<category name="wcf.acl.option">
@@ -443,17 +411,14 @@
 	</category>
 
 	<category name="wcf.user.recentActivity">
-		<item
-			name="wcf.user.recentActivity.de.codequake.cms.page.comment.recentActivityEvent"><![CDATA[Kommentar (Seite)]]></item>
-		<item
-			name="wcf.user.recentActivity.de.codequake.cms.page.comment.response.recentActivityEvent"><![CDATA[Antwort (Seite)]]></item>
+		<item name="wcf.user.recentActivity.de.codequake.cms.page.comment.recentActivityEvent"><![CDATA[Kommentar (Seite)]]></item>
+		<item name="wcf.user.recentActivity.de.codequake.cms.page.comment.response.recentActivityEvent"><![CDATA[Antwort (Seite)]]></item>
 	</category>
 	<category name="wcf.page">
 		<item name="wcf.page.sitemap.cms"><![CDATA[Seiten]]></item>
 	</category>
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.de.codequake.cms"><![CDATA[CMS]]></item>
-		<item
-			name="wcf.user.notification.de.codequake.cms.page.comment.response.notification.commentResponse"><![CDATA[Neue Antwort auf einen Kommentar auf einer Seite]]></item>
+		<item name="wcf.user.notification.de.codequake.cms.page.comment.response.notification.commentResponse"><![CDATA[Neue Antwort auf einen Kommentar auf einer Seite]]></item>
 	</category>
 </language>
