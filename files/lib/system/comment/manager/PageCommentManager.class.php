@@ -1,7 +1,7 @@
 <?php
 namespace cms\system\comment\manager;
 
-use cms\data\page\Page;
+use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use wcf\system\comment\manager\AbstractCommentManager;
 use wcf\system\request\LinkHandler;
@@ -14,29 +14,51 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class PageCommentManager extends AbstractCommentManager {
-
+	/**
+	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionAdd
+	 */
 	protected $permissionAdd = 'user.cms.page.canAddComment';
 
+	/**
+	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionCanModerate
+	 */
 	protected $permissionCanModerate = 'mod.cms.page.canModerateComment';
 
+	/**
+	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionDelete
+	 */
 	protected $permissionDelete = 'user.cms.page.canDeleteComment';
 
+	/**
+	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionEdit
+	 */
 	protected $permissionEdit = 'user.cms.page.canEditComment';
 
+	/**
+	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionModDelete
+	 */
 	protected $permissionModDelete = 'mod.cms.page.canDeleteComment';
 
+	/**
+	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionModEdit
+	 */
 	protected $permissionModEdit = 'mod.cms.page.canEditComment';
 
-	public function isAccessible($objectID, $validateWritePermission = false) {
-		// check object id
-		$page = new Page($objectID);
-		if (! $page->pageID || ! $page->isVisible()) {
-			return false;
+	/**
+	 * @see	\wcf\system\comment\manager\ICommentManager::canAdd()
+	 */
+	public function canAdd($objectID) {
+		if (parent::canAdd($objectID)) {
+			$page = PageCache::getInstance()->getPage($objectID);
+			return $page->getPermission('canAddComment');
 		}
-		
-		return true;
+
+		return false;
 	}
 
+	/**
+	 * @see	\wcf\system\comment\manager\ICommentManager::getLink()
+	 */
 	public function getLink($objectTypeID, $objectID) {
 		return LinkHandler::getInstance()->getLink('Page', array(
 			'application' => 'cms',
@@ -44,17 +66,32 @@ class PageCommentManager extends AbstractCommentManager {
 		));
 	}
 
+	/**
+	 * @see	\wcf\system\comment\manager\ICommentManager::getTitle()
+	 */
 	public function getTitle($objectTypeID, $objectID, $isResponse = false) {
 		if ($isResponse) return WCF::getLanguage()->get('cms.page.commentResponse');
 		
 		return WCF::getLanguage()->getDynamicVariable('cms.page.comment');
 	}
 
+	/**
+	 * @see	\wcf\system\comment\manager\ICommentManager::isAccessible()
+	 */
+	public function isAccessible($objectID, $validateWritePermission = false) {
+		$page = PageCache::getInstance()->getPage($objectID);
+
+		return ($page !== null && $page->isVisible());
+	}
+
+	/**
+	 * @see	\wcf\system\comment\manager\ICommentManager::updateCounter()
+	 */
 	public function updateCounter($objectID, $value) {
-		$page = new Page($objectID);
+		$page = PageCache::getInstance()->getPage($objectID)
 		$editor = new PageEditor($page);
-		$editor->update(array(
-			'comments' => ($page->comments + $value)
+		$editor->updateCounters(array(
+			'comments' => $value
 		));
 	}
 }

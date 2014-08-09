@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd"
-	languagecode="en">
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
 	<category name="cms.acp.content">
 		<item name="cms.acp.content.add"><![CDATA[Add content]]></item>
 		<item name="cms.acp.content.contents"><![CDATA[Contents]]></item>
@@ -295,7 +293,7 @@
 		<item name="cms.page.comment.notification.message"><![CDATA[commented on „{$page->getTitle()|language}“.]]></item>
 		<item name="cms.page.comment.notification.mail"><![CDATA[{@$author->username} commented on "{@$page->getTitle()}":
 {link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}]]></item>
-		<item name="cms.page.comments.noEntries"><![CDATA[No Entries.]]></item>
+		<item name="cms.page.comments.noComments"><![CDATA[No Entries.]]></item>
 		<item name="cms.page.commentResponse.notification.title"><![CDATA[New response (Page)]]></item>
 		<item name="cms.page.commentResponse.notification.message"><![CDATA[left a response to your comment on „{$page->getTitle()|language}“.]]></item>
 		<item name="cms.page.commentResponse.notification.mail"><![CDATA[{@$author->username} left a response to your comment on "{@$page->getTitle|language}":
@@ -340,6 +338,7 @@
 		<item name="wcf.acp.group.option.user.cms.page.canViewDisabledPage"><![CDATA[Can see disabled pages]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canViewDisabledContent"><![CDATA[Can see disabled contents]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canViewInvisiblePage"><![CDATA[Can see invisible pages]]></item>
+		<item name="wcf.acp.group.option.user.cms.page.canViewComment"><![CDATA[Can view comments]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canAddComment"><![CDATA[Can add comments]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canDeleteComment"><![CDATA[Can delete own comments]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canEditComment"><![CDATA[Can edit own comments]]></item>
@@ -361,11 +360,14 @@
 	</category>
 
 	<category name="wcf.acl.option">
-		<item name="wcf.acl.option.de.codequake.cms.page.canViewPage"><![CDATA[Can view page]]></item>
+		<item name="wcf.acl.option.category.de.codequake.cms.page.user.cms.page"><![CDATA[General Permissions]]></item>
+		<item name="wcf.acl.option.category.de.codequake.cms.page.user.cms.page.comment"><![CDATA[Comments]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.page.canAddComment"><![CDATA[Can add comments]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.page.canEnterPage"><![CDATA[Can enter page]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.page.canViewComment"><![CDATA[Can view comments]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewDisabledPage"><![CDATA[Can view deactivated page]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewInvisiblePage"><![CDATA[Can view invisble page]]></item>
-		<item name="wcf.acl.option.de.codequake.cms.page.canEnterPage"><![CDATA[Can enter page]]></item>
-		<item name="wcf.acl.option.category.de.codequake.cms.page.user.cms.page"><![CDATA[Permissions]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.page.canViewPage"><![CDATA[Can view page]]></item>
 	</category>
 
 	<category name="wcf.acp.option">
