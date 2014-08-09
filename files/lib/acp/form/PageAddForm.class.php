@@ -15,6 +15,7 @@ use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
+use wcf\system\language\LanguageFactory;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -130,9 +131,6 @@ class PageAddForm extends AbstractForm {
 	public function validate() {
 		parent::validate();
 
-		// validate alias
-		$this->validateAlias();
-
 		if (! I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
@@ -142,6 +140,9 @@ class PageAddForm extends AbstractForm {
 			}
 		}
 
+		// validate alias
+		$this->validateAlias();
+
 		$page = new Page($this->parentID);
 		if ($page === null) throw new UserInputException('parentID', 'invalid');
 	}
@@ -150,14 +151,24 @@ class PageAddForm extends AbstractForm {
 	 * Validates the alias.
 	 */
 	protected function validateAlias() {
+		// build alias automatically
 		if (empty($this->alias)) {
-			throw new UserInputException('alias');
+			$titles = I18nHandler::getInstance()->getValues('title');
+
+			// prefer english aliases, otherwise use default language
+			$language = LanguageFactory::getInstance()->getLanguageByCode('en');
+			if ($language === null) {
+				$language = LanguageFactory::getInstance()->getLanguage(LanguageFactory::getInstance()->getDefaultLanguageID());
+			}
+
+			$this->alias = PageUtil::buildAlias($titles[$language->languageID]);
 		}
-		if (! PageUtil::isValidAlias($this->alias)) {
-			throw new UserInputException('alias', 'invalid');
+
+		if (!PageUtil::isValidAlias($this->alias)) {
+			throw new UserInputException('alias', 'notValid');
 		}
-		if (! PageUtil::isAvailableAlias($this->alias, ($this->parentID) ?  : null)) {
-			throw new UserInputException('alias', 'given');
+		if (!PageUtil::isAvailableAlias($this->alias, ($this->parentID) ?: null)) {
+			throw new UserInputException('alias', 'notUnique');
 		}
 	}
 

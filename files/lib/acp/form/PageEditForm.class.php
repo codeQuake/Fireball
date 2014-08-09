@@ -82,11 +82,11 @@ class PageEditForm extends PageAddForm {
 		if (empty($this->alias)) {
 			throw new UserInputException('alias');
 		}
-		if (! PageUtil::isValidAlias($this->alias)) {
-			throw new UserInputException('alias', 'invalid');
+		if (!PageUtil::isValidAlias($this->alias)) {
+			throw new UserInputException('alias', 'notValid');
 		}
-		if (! PageUtil::isAvailableAlias($this->alias, ($this->parentID) ?  : null, $this->pageID)) {
-			throw new UserInputException('alias', 'given');
+		if (!PageUtil::isAvailableAlias($this->alias, ($this->parentID) ?: null, $this->pageID)) {
+			throw new UserInputException('alias', 'notUnique');
 		}
 	}
 

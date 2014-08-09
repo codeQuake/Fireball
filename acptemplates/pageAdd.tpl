@@ -5,7 +5,7 @@
 	//<![CDATA[
 	$(function() {
 		WCF.Language.addObject({
-			'cms.acp.page.general.alias.preview': '{lang}cms.acp.page.general.alias.preview{/lang}',
+			'cms.acp.page.alias.preview': '{lang}cms.acp.page.alias.preview{/lang}',
 		});
 
 		WCF.TabMenu.init();
@@ -77,11 +77,9 @@
 				</dl>
 
 				<dl{if $errorField == 'alias'} class="formError"{/if}>
-					<dt><label for="alias">{lang}cms.acp.page.general.alias{/lang}</label></dt>
+					<dt><label for="alias">{lang}cms.acp.page.alias{/lang}</label></dt>
 					<dd>
 						<input type="text" id="alias" name="alias" value="{$alias}" class="long" required="required" />
-						<small>{lang}cms.acp.page.general.alias.description{/lang}</small>
-						<small id="aliasPreview"></small>
 						{if $errorField == 'alias'}
 							<small class="innerError">
 								{if $errorType == 'empty'}
@@ -91,6 +89,8 @@
 								{/if}
 							</small>
 						{/if}
+						<small>{lang}cms.acp.page.alias.description{/lang}</small>
+						<small id="aliasPreview"></small>
 					</dd>
 				</dl>
 
