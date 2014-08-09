@@ -174,19 +174,21 @@
 			<fieldset>
 				<legend>{lang}cms.acp.page.position{/lang}</legend>
 
-				{if $pageList != null}
+				{hascontent}
 					<dl{if $errorField == 'parentID'} class="formError"{/if}>
 						<dt><label for="parentID">{lang}cms.acp.page.general.parentID{/lang}</label></dt>
 						<dd>
 							<select id="parentID" name="parentID">
 								<option value="0" {if $parentID == 0} selected="selected"{/if} data-alias="">{lang}wcf.global.noSelection{/lang}</option>
-								{foreach from=$pageList item=$node}
-									<option data-alias="{$node->getAlias()}" {if $node->pageID == $parentID} selected="selected" {/if} value="{@$node->pageID}">{section name=i loop=$pageList->getDepth()}&nbsp;&raquo;&raquo;&nbsp;{/section}{$node->getTitle()|language}</option>
-								{/foreach}
+								{content}
+									{foreach from=$pageList item=$node}
+										<option data-alias="{$node->getAlias()}" {if $node->pageID == $parentID} selected="selected" {/if} value="{@$node->pageID}">{section name=i loop=$pageList->getDepth()}&nbsp;&raquo;&raquo;&nbsp;{/section}{$node->getTitle()|language}</option>
+									{/foreach}
+								{/content}
 							</select>
 						</dd>
 					</dl>
-				{/if}
+				{/hascontent}
 
 				<dl{if $errorField == 'showOrder'} class="formError"{/if}>
 					<dt><label for="showOrder">{lang}cms.acp.page.position{/lang}</label></dt>
