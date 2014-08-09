@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/aclOption.xsd">
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/aclOption.xsd">
 	<import>
 		<categories>
 			<category name="user.cms.page">
 				<objecttype>de.codequake.cms.page</objecttype>
 			</category>
+			<category name="user.cms.page.comment">
+				<objecttype>de.codequake.cms.page</objecttype>
+			</category>
 		</categories>
 
 		<options>
-			<!-- page -->
+			<!-- user.cms.page -->
 			<option name="canViewPage">
 				<categoryname>user.cms.page</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
@@ -26,7 +28,18 @@
 				<categoryname>user.cms.page</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
-			<!-- /page -->
+			<!-- /user.cms.page -->
+
+			<!-- user.cms.page.comment -->
+			<option name="canViewComment">
+				<categoryname>user.cms.page.comment</categoryname>
+				<objecttype>de.codequake.cms.page</objecttype>
+			</option>
+			<option name="canAddComment">
+				<categoryname>user.cms.page.comment</categoryname>
+				<objecttype>de.codequake.cms.page</objecttype>
+			</option>
+			<!-- /user.cms.page.comment -->
 		</options>
 	</import>
 </data>

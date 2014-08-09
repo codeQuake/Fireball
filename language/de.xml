@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd"
-	languagecode="de">
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="cms.acp.content">
 		<item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
 		<item name="cms.acp.content.contents"><![CDATA[Inhalte]]></item>
@@ -284,7 +282,7 @@
 		<item name="cms.page.news"><![CDATA[Nachrichten]]></item>
 		<item name="cms.page.news.archive"><![CDATA[Archiv]]></item>
 		<item name="cms.page.comments"><![CDATA[Kommentare]]></item>
-		<item name="cms.page.comments.noEntries"><![CDATA[Keine Kommentare vorhanden]]></item>
+		<item name="cms.page.comments.noComments"><![CDATA[Keine Kommentare vorhanden]]></item>
 		<item name="cms.page.comment.notification.title"><![CDATA[Neuer Kommentar (Seite)]]></item>
 		<item name="cms.page.comment.notification.message"><![CDATA[Hat einen Kommentar auf der Seite „{$page->getTitle()|language}“ hinterlassen.]]></item>
 		<item name="cms.page.comment.notification.mail">
@@ -338,6 +336,7 @@
 		<item name="wcf.acp.group.option.user.cms.page.canViewDisabledPage"><![CDATA[Kann deaktivierte Seiten sehen]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canViewDisabledContent"><![CDATA[Kann deaktivierte Inhalte sehen]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canViewInvisiblePage"><![CDATA[Kann unsichtbare Seiten sehen]]></item>
+		<item name="wcf.acp.group.option.user.cms.page.canViewComment"><![CDATA[Kann Kommentare sehen]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canAddComment"><![CDATA[Kann Kommentare hinzufügen]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canDeleteComment"><![CDATA[Kann eigene Kommentare löschen]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canEditComment"><![CDATA[Kann eigene Kommentare bearbeiten]]></item>
@@ -360,11 +359,14 @@
 	</category>
 
 	<category name="wcf.acl.option">
-		<item name="wcf.acl.option.de.codequake.cms.page.canViewPage"><![CDATA[Kann Seite sehen]]></item>
+		<item name="wcf.acl.option.category.de.codequake.cms.page.user.cms.page"><![CDATA[Allgemeine Berechtigungen]]></item>
+		<item name="wcf.acl.option.category.de.codequake.cms.page.user.cms.page.comment"><![CDATA[Kommentare]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.page.canAddComment"><![CDATA[Kann Kommentare erstellen]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.page.canEnterPage"><![CDATA[Kann Seite betreten]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.page.canViewComment"><![CDATA[Kann Kommentare sehen]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewDisabledPage"><![CDATA[Kann deaktivierte Seite sehen]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewInvisiblePage"><![CDATA[Kann unsichtbare Seite sehen]]></item>
-		<item name="wcf.acl.option.de.codequake.cms.page.canEnterPage"><![CDATA[Kann Seite betreten]]></item>
-		<item name="wcf.acl.option.category.de.codequake.cms.page.user.cms.page"><![CDATA[Benutzerrechte]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.page.canViewPage"><![CDATA[Kann Seite sehen]]></item>
 	</category>
 
 	<category name="wcf.acp.option">
