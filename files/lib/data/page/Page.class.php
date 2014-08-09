@@ -21,28 +21,19 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class Page extends CMSDatabaseObject implements IRouteController, ILinkableObject {
-
+	/**
+	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 */
 	protected static $databaseTableName = 'page';
 
+	/**
+	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 */
 	protected static $databaseTableIndexName = 'pageID';
 
-	public function __construct($id, $row = null, $object = null) {
-		if ($id !== null) {
-			$sql = "SELECT *
-					FROM " . static::getDatabaseTableName() . "
-					WHERE (" . static::getDatabaseTableIndexName() . " = ?)";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(
-				$id
-			));
-			$row = $statement->fetchArray();
-
-			if ($row === false) $row = array();
-		}
-
-		parent::__construct(null, $row, $object);
-	}
-
+	/**
+	 * @see	\wcf\data\ITitledObject::getTitle()
+	 */
 	public function getTitle() {
 		if (preg_match('#cms.page.title#', $this->title)) return WCF::getLanguage()->get($this->title);
 		return $this->title;
