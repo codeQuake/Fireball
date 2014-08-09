@@ -88,7 +88,7 @@ class PageCommentManager extends AbstractCommentManager {
 	 * @see	\wcf\system\comment\manager\ICommentManager::updateCounter()
 	 */
 	public function updateCounter($objectID, $value) {
-		$page = PageCache::getInstance()->getPage($objectID)
+		$page = PageCache::getInstance()->getPage($objectID);
 		$editor = new PageEditor($page);
 		$editor->updateCounters(array(
 			'comments' => $value
