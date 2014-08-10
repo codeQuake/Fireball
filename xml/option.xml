@@ -19,6 +19,10 @@
 			<category name="cms.pages.content">
 				<parent>cms.pages</parent>
 			</category>
+
+			<category name="dashboard.sidebar.cms">
+				<parent>dashboard.sidebar</parent>
+			</category>
 		</categories>
 
 		<options>
@@ -29,6 +33,7 @@
 				<categoryname>general</categoryname>
 			</option>
 			<!-- /general -->
+
 			<!-- cms.pages.default -->
 			<option name="cms_pages_default_robots">
 				<optiontype>select</optiontype>
@@ -95,6 +100,14 @@ slide:wcf.acp.option.cms_pages_content_slideshow_fx.slide]]></selectoptions>
 				<min>0</min>
 			</option>
 			<!-- /cms.general.revision -->
+
+			<!-- dashboard.sidebar.cms -->
+			<option name="cms_dashboard_sidebar_entries">
+				<categoryname>dashboard.sidebar.cms</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>5</defaultvalue>
+			</option>
+			<!-- /dashboard.sidebar.cms -->
 		</options>
 	</import>
 </data>
