@@ -16,6 +16,7 @@ use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
+use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -81,6 +82,18 @@ class PageAddForm extends AbstractForm {
 
 	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
 
+	/**
+	 * list of available styles
+	 * @var	array<\wcf\data\style\Style>
+	 */
+	public $availableStyles = array();
+
+	/**
+	 * style id
+	 * @var	integer
+	 */
+	public $styleID = 0;
+
 	public function readParameters() {
 		parent::readParameters();
 
@@ -90,6 +103,9 @@ class PageAddForm extends AbstractForm {
 		I18nHandler::getInstance()->register('metaKeywords');
 
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
+
+		// get available styles
+		$this->availableStyles = StyleHandler::getInstance()->getStyles();
 	}
 
 	public function readData() {
@@ -126,6 +142,7 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);
 		if (isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
 		else $this->isCommentable = 0;
+		if (isset($_POST['styleID'])) $this->styleID = intval($_POST['styleID']);
 	}
 
 	public function validate() {
@@ -142,6 +159,11 @@ class PageAddForm extends AbstractForm {
 
 		// validate alias
 		$this->validateAlias();
+
+		// validate style
+		if ($this->styleID && !isset($this->availableStyles[$this->styleID])) {
+			throw new UserInputException('styleID', 'notValid');
+		}
 
 		$page = new Page($this->parentID);
 		if ($page === null) throw new UserInputException('parentID', 'invalid');
@@ -189,7 +211,8 @@ class PageAddForm extends AbstractForm {
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'robots' => $this->robots,
-			'isCommentable' => $this->isCommentable
+			'isCommentable' => $this->isCommentable,
+			'styleID' => ($this->styleID) ?: null
 		);
 
 		$objectAction = new PageAction(array(), 'create', array(
@@ -272,7 +295,7 @@ class PageAddForm extends AbstractForm {
 		WCF::getTPL()->assign('success', true);
 		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
 		$this->sidebarOrientation = 'right';
-		$this->invisible = $this->parentID = $this->showOrder = $this->showSidebar = 0;
+		$this->invisible = $this->parentID = $this->showOrder = $this->showSidebar = $this->styleID = 0;
 		$this->menuItem = 1;
 		I18nHandler::getInstance()->reset();
 	}
@@ -298,7 +321,9 @@ class PageAddForm extends AbstractForm {
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'pageList' => $this->pageList,
 			'layoutList' => $this->layoutList,
-			'isCommentable' => $this->isCommentable
+			'isCommentable' => $this->isCommentable,
+			'availableStyles' => $this->availableStyles,
+			'styleID' => $this->styleID
 		));
 	}
 }
