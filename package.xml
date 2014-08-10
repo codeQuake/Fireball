@@ -132,6 +132,7 @@
 
 		<!-- xml -->
 		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
