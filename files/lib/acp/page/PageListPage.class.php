@@ -4,6 +4,7 @@ namespace cms\acp\page;
 use cms\data\page\PageNodeTree;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\AbstractPage;
+use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\WCF;
 
 /**
@@ -15,7 +16,9 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class PageListPage extends AbstractPage {
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
 
 	public $neededPermissions = array(
@@ -30,6 +33,7 @@ class PageListPage extends AbstractPage {
 
 	public function readData() {
 		parent::readData();
+
 		$this->pageList = new PageNodeTree(0, 1);
 		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
 
@@ -37,9 +41,11 @@ class PageListPage extends AbstractPage {
 
 	public function assignVariables() {
 		parent::assignVariables();
+
 		WCF::getTPL()->assign(array(
-			'pageList' => $this->pageList->getIterator(),
-			'objectTypeList' => $this->objectTypeList
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.page')),
+			'objectTypeList' => $this->objectTypeList,
+			'pageList' => $this->pageList->getIterator()
 		));
 	}
 }
