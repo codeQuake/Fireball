@@ -2,6 +2,14 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
 	<import>
+		<!-- clipboard -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+			<listclassname>cms\data\page\PageList</listclassname>
+		</type>
+		<!-- /clipbaord -->
+
 		<!-- content types -->
 		<type>
 			<name>de.codequake.cms.content.type.text</name>

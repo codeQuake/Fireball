@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/clipboardAction.xsd">
+	<import>
+		<!-- page -->
+		<action name="delete">
+			<actionclassname>cms\system\clipboard\action\PageClipboardAction</actionclassname>
+			<showorder>1</showorder>
+			<pages>
+				<page>cms\acp\page\PageListPage</page>
+			</pages>
+		</action>
+		<action name="enable">
+			<actionclassname>cms\system\clipboard\action\PageClipboardAction</actionclassname>
+			<showorder>2</showorder>
+			<pages>
+				<page>cms\acp\page\PageListPage</page>
+			</pages>
+		</action>
+		<action name="disable">
+			<actionclassname>cms\system\clipboard\action\PageClipboardAction</actionclassname>
+			<showorder>3</showorder>
+			<pages>
+				<page>cms\acp\page\PageListPage</page>
+			</pages>
+		</action>
+		<!-- /page -->
+	</import>
+</data>
