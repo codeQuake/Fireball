@@ -78,9 +78,9 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[Template (Smarty)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Template-Source]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[You can use Smarty-Syntax here (<a href="http://www.smarty.net/">Documentation</a>).]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[HTML]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[HTML-Source]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[You can use HTML Code here.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.html"><![CDATA[HTML]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.html.text"><![CDATA[HTML-Source]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.html.text.description"><![CDATA[You can use HTML Code here.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Poll]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Picture]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.select"><![CDATA[Select a picture]]></item>
@@ -226,7 +226,6 @@
 		<item name="cms.acp.page.alias.preview"><![CDATA[Link-Preview:]]></item>
 		<item name="cms.acp.page.alias.description"><![CDATA[The so called alias will be this page's link. It must not contain any other items than lowercase-letters, numbers and hyphens.]]></item>
 		<item name="cms.acp.page.general.description"><![CDATA[Description]]></item>
-		<item name="cms.acp.page.overview"><![CDATA[Overview]]></item>
 		<item name="cms.acp.page.meta"><![CDATA[Metainfomation]]></item>
 		<item name="cms.acp.page.meta.metaDescription"><![CDATA[Meta-Description]]></item>
 		<item name="cms.acp.page.metaDescription.description"><![CDATA[The meta element "description" is neccessary for a good CTR (Click-Through-Rate).]]></item>
@@ -346,6 +345,7 @@
 		<item name="wcf.acp.group.option.admin.cms.page.canListPage"><![CDATA[Can list pages]]></item>
 		<item name="wcf.acp.group.option.admin.cms.page.canAddPage"><![CDATA[Can manage pages]]></item>
 		<item name="wcf.acp.group.option.category.admin.cms.style"><![CDATA[Style]]></item>
+		<item name="wcf.acp.group.option.user.cms.content.canVotePoll"><![CDATA[Can vote poll]]></item>
 		<item name="wcf.acp.group.option.admin.cms.style.canAddStylesheet"><![CDATA[Can add stylesheets]]></item>
 		<item name="wcf.acp.group.option.admin.cms.style.canListStylesheet"><![CDATA[Can list stylesheets]]></item>
 		<item name="wcf.acp.group.option.admin.cms.style.canAddLayout"><![CDATA[Can manage layouts]]></item>
@@ -353,11 +353,6 @@
 		<item name="wcf.acp.group.option.admin.cms.file.canAddFile"><![CDATA[Can manage files]]></item>
 		<item name="wcf.acp.group.option.admin.cms.file.allowedTypes"><![CDATA[Allowed file extensions]]></item>
 		<item name="wcf.acp.group.option.category.admin.cms.file"><![CDATA[Files]]></item>
-		<item name="wcf.acp.group.option.user.cms.content.canDownloadAttachments"><![CDATA[Can download attachments]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.canUploadAttachment"><![CDATA[Can attach files]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.attachmentMaxSize"><![CDATA[Maximum filesize]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.maxAttachmentCount"><![CDATA[Maximum number of attachments per content section]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.allowedAttachmentExtensions"><![CDATA[Allowed file extensions]]></item>
 	</category>
 
 	<category name="wcf.acl.option">

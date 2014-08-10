@@ -352,11 +352,6 @@
 		<item name="wcf.acp.group.option.admin.cms.file.canAddFile"><![CDATA[Kann Dateien verwalten]]></item>
 		<item name="wcf.acp.group.option.admin.cms.file.allowedTypes"><![CDATA[Erlaubte Dateitypen]]></item>
 		<item name="wcf.acp.group.option.category.admin.cms.file"><![CDATA[Dateien]]></item>
-		<item name="wcf.acp.group.option.user.cms.content.canDownloadAttachments"><![CDATA[Kann Dateianhänge herunterladen]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.canUploadAttachment"><![CDATA[Kann Dateien anhängen]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.attachmentMaxSize"><![CDATA[Maximale Dateianhangsgröße]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.maxAttachmentCount"><![CDATA[Maximale Anzahl an Dateianhängen pro Inhaltsabschnitt]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.allowedAttachmentExtensions"><![CDATA[Erlaubte Dateiendungen]]></item>
 	</category>
 
 	<category name="wcf.acl.option">
