@@ -7,25 +7,34 @@
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			new WCF.Action.NestedDelete('cms\\data\\page\\PageAction', '.jsPageRow');
-			new WCF.Action.Toggle('cms\\data\\page\\PageAction', '.jsPageRow', '> .sortableNodeLabel > .buttons > .jsToggleButton');
+			WCF.Language.addObject({
+				{foreach from=$objectTypeList item=type}
+					'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
+				{/foreach}
+				'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
+				'cms.acp.page.revisions': '{lang}cms.acp.page.revisions{/lang}',
+				'cms.acp.page.revision.action.create': '{lang}cms.acp.page.revision.action.create{/lang}',
+				'cms.acp.page.revision.action.update': '{lang}cms.acp.page.revision.action.update{/lang}',
+				'cms.acp.page.revision.action.updatePosition': '{lang}cms.acp.page.revision.action.updatePosition{/lang}',
+				'cms.acp.page.revision.action.setAsHome': '{lang}cms.acp.page.revision.action.setAsHome{/lang}',
+				'cms.acp.page.revision.action.restore': '{lang}cms.acp.page.revision.action.restore{/lang}'
+			});
+
+			var deleteAction = new WCF.Action.NestedDelete('cms\\data\\page\\PageAction', '.jsPageRow');
+			var toggleAction = new WCF.Action.Toggle('cms\\data\\page\\PageAction', '.jsPageRow', '> .sortableNodeLabel > .buttons > .jsToggleButton');
+
+			var actionObjects = { };
+			actionObjects['de.codequake.cms.page'] = { };
+			actionObjects['de.codequake.cms.page']['disable'] = actionObjects['de.codequake.cms.page']['enable'] = toggleAction;
+			actionObjects['de.codequake.cms.page']['delete'] = deleteAction;
+
+			WCF.Clipboard.init('cms\\acp\\page\\PageListPage', {@$hasMarkedItems}, actionObjects);
+
 			new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction');
 			new CMS.ACP.Copy('.jsCopyButton', 'cms\\data\\page\\PageAction');
 			new CMS.ACP.Page.AddContent();
 			new CMS.ACP.Page.SetAsHome();
 			new CMS.ACP.Page.Revisions();
-			WCF.Language.addObject({
-			{foreach from=$objectTypeList item=type}
-				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
-			{/foreach}
-			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
-			'cms.acp.page.revisions': '{lang}cms.acp.page.revisions{/lang}',
-			'cms.acp.page.revision.action.create': '{lang}cms.acp.page.revision.action.create{/lang}',
-			'cms.acp.page.revision.action.update': '{lang}cms.acp.page.revision.action.update{/lang}',
-			'cms.acp.page.revision.action.updatePosition': '{lang}cms.acp.page.revision.action.updatePosition{/lang}',
-			'cms.acp.page.revision.action.setAsHome': '{lang}cms.acp.page.revision.action.setAsHome{/lang}',
-			'cms.acp.page.revision.action.restore': '{lang}cms.acp.page.revision.action.restore{/lang}'
-			});
 		});
 		//]]>
 	</script>
@@ -39,10 +48,12 @@
 			{event name='contentNavigationButtonsTop'}
 		</ul>
 	</nav>
+
+	<nav class="jsClipboardEditor" data-types="[ 'de.codequake.cms.page' ]"></nav>
 </div>
 
 {hascontent}
-	<section id="pageList" class="sortableListContainer container containerPadding marginTop">
+	<section id="pageList" class="sortableListContainer container containerPadding marginTop jsClipboardContainer" data-type="de.codequake.cms.page">
 		<ol class="pageList sortableList" data-object-id="0">
 			{content}
 				{assign var=oldDepth value=0}
@@ -51,9 +62,11 @@
 					<li class="page jsPageRow sortableNode" data-object-id="{$page->pageID}">
 						<span class="sortableNodeLabel">
 							<span class="title">
+								<input type="checkbox" class="jsClipboardItem" data-object-id="{@$page->pageID}" />
 								{if $page->isHome}
-								<span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>
-								{else}<span class="pointer collapsibleButton icon icon16 icon-file-text-alt"></span>
+									<span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>
+								{else}
+									<span class="pointer collapsibleButton icon icon16 icon-file-text-alt"></span>
 								{/if}
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}">{@$page->getTitle()}</a> - <small>/{$page->getAlias()}/</small>
 							</span>
@@ -82,7 +95,7 @@
 	</section>
 
 	<div class="formSubmit">
-			<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+		<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 	</div>
 
 	<div class="container marginTop">
