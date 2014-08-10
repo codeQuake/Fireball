@@ -12,6 +12,7 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
+use wcf\system\style\StyleHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\MetaTagHandler;
 use wcf\system\WCF;
@@ -84,6 +85,12 @@ class PagePage extends AbstractPage {
 
 		//set breadcrumbs
 		CMSCore::setBreadcrumbs($this->page);
+
+		// change style
+		if ($this->page->styleID && StyleHandler::getInstance()->getStyle()->styleID != $this->page->styleID) {
+			StyleHandler::getInstance()->changeStyle($this->page->styleID, true);
+		}
+
 		// get Contents
 		$contents = $this->page->getContents();
 		$this->contentNodeTree = $contents['body'];
