@@ -59,7 +59,7 @@
 				{assign var=oldDepth value=0}
 				{foreach from=$pageList item=page}
 					{section name=i loop=$oldDepth-$pageList->getDepth()}</ol></li>{/section}
-					<li class="page jsPageRow sortableNode" data-object-id="{$page->pageID}">
+					<li class="page jsPageRow sortableNode jsClipboardObject" data-object-id="{$page->pageID}">
 						<span class="sortableNodeLabel">
 							<span class="title">
 								<input type="checkbox" class="jsClipboardItem" data-object-id="{@$page->pageID}" />
@@ -128,5 +128,4 @@
 {hascontentelse}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/hascontent}
-
 {include file='footer'}
