@@ -19,7 +19,7 @@
 			{foreach from=$revisions item=revision}
 			<tr class="jsRevisionRow">
 				<td class="columnIcon">
-					<span class="icon icon16 icon-cogs jsRestoreRevisionButton jsTooltip pointer" title="{lang}cms.acp.content.revision.restore{/lang}" data-object-id="{@$revision->revisionID}" data-content-id="{@$revision->contentID}" data-confirm-message="{lang}cms.acp.content.revision.restore.sure{/lang}"></span>
+					<span class="icon icon16 icon-undo jsRestoreRevisionButton jsTooltip pointer" title="{lang}cms.acp.content.revision.restore{/lang}" data-object-id="{@$revision->revisionID}" data-content-id="{@$revision->contentID}" data-confirm-message="{lang}cms.acp.content.revision.restore.sure{/lang}"></span>
 					{event name='rowButtons'}
 				</td>
 				<td class="columnID">{@$revision->revisionID}</td>
