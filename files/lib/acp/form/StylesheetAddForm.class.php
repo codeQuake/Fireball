@@ -15,25 +15,33 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class StylesheetAddForm extends AbstractForm {
-
-	public $templateName = 'stylesheetAdd';
-
-	public $neededPermissions = array(
-		'admin.cms.style.canAddStylesheet'
-	);
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.stylesheet.add';
+
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('admin.cms.style.canAddStylesheet');
 
 	public $title = '';
 
 	public $less = '';
 
+	/**
+	 * @see	\wcf\form\IForm::readFormParameters()
+	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
+
 		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if (isset($_POST['less'])) $this->less = StringUtil::trim($_POST['less']);
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::save()
+	 */
 	public function save() {
 		parent::save();
 		
@@ -52,8 +60,12 @@ class StylesheetAddForm extends AbstractForm {
 		$this->title = $this->less = '';
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'title' => $this->title,

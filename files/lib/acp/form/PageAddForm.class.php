@@ -29,18 +29,17 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class PageAddForm extends AbstractForm {
-
-	public $templateName = 'pageAdd';
-
-	public $neededPermissions = array(
-		'admin.cms.page.canAddPage'
-	);
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.add';
 
-	public $objectTypeID = 0;
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('admin.cms.page.canAddPage');
 
-	public $enableMultilangualism = true;
+	public $objectTypeID = 0;
 
 	public $pageID = 0;
 
@@ -94,6 +93,9 @@ class PageAddForm extends AbstractForm {
 	 */
 	public $styleID = 0;
 
+	/**
+	 * @see	\wcf\page\IPage::readParameters()
+	 */
 	public function readParameters() {
 		parent::readParameters();
 
@@ -106,18 +108,6 @@ class PageAddForm extends AbstractForm {
 
 		// get available styles
 		$this->availableStyles = StyleHandler::getInstance()->getStyles();
-	}
-
-	public function readData() {
-		parent::readData();
-		if (isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
-
-		$this->pageList = new PageNodeTree();
-		$this->pageList = $this->pageList->getIterator();
-
-		$this->layoutList = new LayoutList();
-		$this->layoutList->readObjects();
-		$this->layoutList = $this->layoutList->getObjects();
 	}
 
 	public function readFormParameters() {
@@ -298,6 +288,22 @@ class PageAddForm extends AbstractForm {
 		$this->invisible = $this->parentID = $this->showOrder = $this->showSidebar = $this->styleID = 0;
 		$this->menuItem = 1;
 		I18nHandler::getInstance()->reset();
+	}
+
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+
+		if (isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
+
+		$this->pageList = new PageNodeTree();
+		$this->pageList = $this->pageList->getIterator();
+
+		$this->layoutList = new LayoutList();
+		$this->layoutList->readObjects();
+		$this->layoutList = $this->layoutList->getObjects();
 	}
 
 	public function assignVariables() {

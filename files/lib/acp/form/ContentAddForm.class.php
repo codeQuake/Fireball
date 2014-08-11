@@ -25,43 +25,94 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class ContentAddForm extends AbstractForm {
-
-	public $templateName = 'contentAdd';
-
-	public $neededPermissions = array(
-		'admin.cms.content.canAddContent'
-	);
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
 
-	public $enableMultilangualism = true;
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('admin.cms.content.canAddContent');
 
+	/**
+	 * content title
+	 * @var	string
+	 */
 	public $title = '';
 
-	public $page = null;
-
-	public $parentID = null;
-
-	public $position = 'body';
-
+	/**
+	 * id of the page the cotent will be assigned to
+	 * @var	integer
+	 */
 	public $pageID = 0;
 
+	/**
+	 * object of the page the content will be assigned to
+	 * @var	\cms\data\page\Page
+	 */
+	public $page = null;
+
+	/**
+	 * id of the parent content
+	 * @var	integer
+	 */
+	public $parentID = null;
+
+	/**
+	 * position of the new content ('body' or 'sidebar')
+	 * @var	string
+	 */
+	public $position = 'body';
+
+	/**
+	 * show order
+	 * @var	integer
+	 */
 	public $showOrder = 0;
 
+	/**
+	 * css id of the content
+	 * @var	string
+	 */
 	public $cssID = '';
 
+	/**
+	 * css classes of the content
+	 * @var	string
+	 */
 	public $cssClasses = '';
 
+	/**
+	 * content data
+	 * @var	array<mixed>
+	 */
 	public $contentData = array();
 
+	/**
+	 * list of contents
+	 * @var	\RecursiveIteratorIterator
+	 */
 	public $contentList = null;
 
-	public $objectType;
+	/**
+	 * content object type
+	 * @var	\wcf\data\object\type\ObjectType
+	 */
+	public $objectType = null;
 
-	public $objectTypeProcessor;
+	/**
+	 * content object type processor
+	 * @var	\cms\system\content\type\IContentType
+	 */
+	public $objectTypeProcessor = null;
 
+	/**
+	 * @see	\wcf\page\IPage::readParameters()
+	 */
 	public function readParameters() {
 		parent::readParameters();
+
 		I18nHandler::getInstance()->register('title');
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
 		if (isset($_REQUEST['position'])) $this->position = StringUtil::trim($_REQUEST['position']);
@@ -79,14 +130,12 @@ class ContentAddForm extends AbstractForm {
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.content', 0);
 	}
 
-	public function readData() {
-		parent::readData();
-		$this->contentList = new DrainedPositionContentNodeTree(null, $this->pageID, null, $this->position);
-		$this->contentList = $this->contentList->getIterator();
-	}
-
+	/**
+	 * @see	\wcf\page\IPage::readFormParameters()
+	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
+
 		I18nHandler::getInstance()->readValues();
 		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
 		if (isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
@@ -104,8 +153,12 @@ class ContentAddForm extends AbstractForm {
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->readFormParameters();
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::validate()
+	 */
 	public function validate() {
 		parent::validate();
+
 		$this->objectTypeProcessor->validate($this->contentData);
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->validate();
 		
@@ -161,6 +214,9 @@ class ContentAddForm extends AbstractForm {
 		}
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::save()
+	 */
 	public function save() {
 		parent::save();
 		$data = array(
@@ -228,6 +284,18 @@ class ContentAddForm extends AbstractForm {
 	
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+		$this->contentList = new DrainedPositionContentNodeTree(null, $this->pageID, null, $this->position);
+		$this->contentList = $this->contentList->getIterator();
+	}
+
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
 		I18nHandler::getInstance()->assignVariables();

@@ -17,14 +17,15 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class ContentListPage extends AbstractPage {
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
 
-	public $neededPermissions = array(
-		'admin.cms.page.canListPage'
-	);
-
-	public $templateName = 'contentList';
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('admin.cms.page.canListPage');
 
 	public $pageList = null;
 
@@ -34,13 +35,22 @@ class ContentListPage extends AbstractPage {
 
 	public $page = null;
 
+	/**
+	 * @see	\wcf\page\IPage::readParameters()
+	 */
 	public function readParameters() {
+		parent::readParameters();
+
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
 		else throw new IllegalLinkException();
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
 	public function readData() {
 		parent::readData();
+
 		$this->page = PageCache::getInstance()->getPage($this->pageID);
 		$this->contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body', 1);
 		$this->contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar', 1);
@@ -48,8 +58,12 @@ class ContentListPage extends AbstractPage {
 
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'contentListBody' => $this->contentListBody->getIterator(),
 			'contentListSidebar' => $this->contentListSidebar->getIterator(),

@@ -20,22 +20,34 @@ class StylesheetEditForm extends StylesheetAddForm {
 
 	public $sheet = null;
 
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
 	public function readData() {
 		parent::readData();
+
 		if (isset($_REQUEST['id'])) $this->sheetID = intval($_REQUEST['id']);
 		$this->sheet = new Stylesheet($this->sheetID);
 		$this->title = $this->sheet->title;
 		$this->less = $this->sheet->less;
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::readFormParameters()
+	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
+
 		if (isset($_REQUEST['id'])) $this->sheetID = intval($_REQUEST['id']);
 		$this->sheet = new Stylesheet($this->sheetID);
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::save()
+	 */
 	public function save() {
 		AbstractForm::save();
+
 		$data = array(
 			'title' => $this->title,
 			'less' => $this->less
@@ -51,8 +63,12 @@ class StylesheetEditForm extends StylesheetAddForm {
 		WCF::getTPL()->assign('success', true);
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		AbstractForm::assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
 			'title' => $this->title,

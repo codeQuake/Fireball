@@ -17,16 +17,11 @@ class StylesheetListPage extends SortablePage {
 
 	public $activeMenuItem = 'cms.acp.menu.link.cms.stylesheet.list';
 
-	public $neededPermissions = array(
-		'admin.cms.style.canListStylesheet'
-	);
+	public $neededPermissions = array('admin.cms.style.canListStylesheet');
 
 	public $templateName = 'stylesheetList';
 
 	public $defaultSortfield = 'sheetID';
 
-	public $validSortFields = array(
-		'sheetID',
-		'title'
-	);
+	public $validSortFields = array('sheetID', 'title');
 }

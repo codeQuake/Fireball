@@ -1,7 +1,6 @@
 <?php
 namespace cms\acp\action;
 
-
 use cms\system\backup\BackupHandler;
 use wcf\action\AbstractAction;
 
@@ -11,11 +10,13 @@ use wcf\action\AbstractAction;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-
 class CMSExportAction extends AbstractAction {
-
+	/**
+	 * @see	\wcf\action\IAction::execute()
+	 */
 	public function execute() {
 		parent::execute();
+
 		$filename = BackupHandler::getInstance()->getExportArchive();
 		$this->executed();
 

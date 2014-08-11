@@ -19,52 +19,21 @@ use wcf\util\HTTPRequest;
  * @package	de.codequake.cms
  */
 class DashboardPage extends AbstractPage {
-
-	public $templateName = 'dashboard';
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.dashboard';
 
 	public $pages = null;
 
 	public $usersOnlineList = null;
 
-	protected function readFireballFeed() {
-		$url = "http://codequake.de/index.php/NewsFeed/14/";
-		try {
-			$request = new HTTPRequest("http://codequake.de/index.php/NewsFeed/14/");
-			$request->execute();
-			$feedData = $request->getReply();
-			$feedData = $feedData['body'];
-		}
-		catch (SystemException $e) {
-			return (array(
-				'errorMessage' => $e->getMessage()
-			));
-		}
-		
-		if (! $xml = simplexml_load_string($feedData)) {
-			return array();
-		}
-		$feed = array();
-		$i = 2;
-		
-		foreach ($xml->channel[0]->item as $item) {
-			if ($i -- == 0) {
-				break;
-			}
-			
-			$feed[] = array(
-				'title' => (string) $item->title,
-				'description' => (string) $item->description,
-				'link' => (string) $item->guid,
-				'date' => date('d.m.Y H:i', strtotime((string) $item->pubDate))
-			);
-		}
-		return $feed;
-	}
-
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
 	public function readData() {
 		parent::readData();
+
 		// get pages
 		$list = new PageList();
 		$list->readObjects();
@@ -85,8 +54,47 @@ class DashboardPage extends AbstractPage {
 		);
 	}
 
+	protected function readFireballFeed() {
+		$url = "http://codequake.de/index.php/NewsFeed/14/";
+		try {
+			$request = new HTTPRequest("http://codequake.de/index.php/NewsFeed/14/");
+			$request->execute();
+			$feedData = $request->getReply();
+			$feedData = $feedData['body'];
+		}
+		catch (SystemException $e) {
+			return (array(
+				'errorMessage' => $e->getMessage()
+			));
+		}
+
+		if (! $xml = simplexml_load_string($feedData)) {
+			return array();
+		}
+		$feed = array();
+		$i = 2;
+
+		foreach ($xml->channel[0]->item as $item) {
+			if ($i -- == 0) {
+				break;
+			}
+
+			$feed[] = array(
+				'title' => (string) $item->title,
+				'description' => (string) $item->description,
+				'link' => (string) $item->guid,
+				'date' => date('d.m.Y H:i', strtotime((string) $item->pubDate))
+			);
+		}
+		return $feed;
+	}
+
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'visitors' => VisitCountHandler::getInstance(),
 			'feed' => $this->readFireballFeed(),
