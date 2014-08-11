@@ -19,6 +19,7 @@ CREATE TABLE cms1_page (
 	showSidebar INT(1) DEFAULT 0,
 	invisible TINYINT(1) DEFAULT 0,
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
+	styleID INT(10) DEFAULT NULL.
 	comments INT(10) NOT NULL DEFAULT 0,
 	clicks INT (20) NOT NULL DEFAULT 0
 );
@@ -122,6 +123,7 @@ ALTER TABLE cms1_content_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user 
 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;
+ALTER TABLE cms1_page ADD FOREIGN KEY (styleID) REFERENCES wcf1_style (styleID) ON DELETE SET NULL;
 
 ALTER TABLE cms1_page_revision ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE cms1_page_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;

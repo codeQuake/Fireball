@@ -67,6 +67,7 @@ class PageEditForm extends PageAddForm {
 		$this->menuItemID = $this->page->menuItemID;
 		
 		$this->alias = $this->page->alias;
+		$this->styleID = $this->page->styleID;
 	}
 
 	public function readFormParameters() {
@@ -106,7 +107,8 @@ class PageEditForm extends PageAddForm {
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'robots' => $this->robots,
-			'isCommentable' => $this->isCommentable
+			'isCommentable' => $this->isCommentable,
+			'styleID' => ($this->styleID) ?: null
 		);
 		
 		$objectAction = new PageAction(array(
@@ -238,7 +240,9 @@ class PageEditForm extends PageAddForm {
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'page' => $this->page,
 			'layoutList' => $this->layoutList,
-			'isCommentable' => $this->isCommentable
+			'isCommentable' => $this->isCommentable,
+			'availableStyles' => $this->availableStyles,
+			'styleID' => $this->styleID
 		));
 	}
 }

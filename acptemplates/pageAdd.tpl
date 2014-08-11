@@ -250,6 +250,19 @@
 					</dd>
 				</dl>
 
+				<dl>
+					<dt><label for="styleID">{lang}cms.acp.page.styleID{/lang}</label></dt>
+					<dd>
+						<select id="styleID" name="styleID">
+							<option value="0">{lang}wcf.global.noSelection{/lang}</option>
+							{foreach from=$availableStyles item=style}
+								<option value="{@$style->styleID}"{if $style->styleID == $styleID} selected="selected"{/if}>{$style->styleName}</option>
+							{/foreach}
+						</select>
+						<small>{lang}cms.acp.page.styleID.description{/lang}</small>
+					</dd>
+				</dl>
+
 				{if $layoutList != null}
 					<dl{if $errorField == 'layoutID'} class="formError"{/if}>
 						<dt><label for="layoutID">{lang}cms.acp.page.settings.layoutID{/lang}</label></dt>

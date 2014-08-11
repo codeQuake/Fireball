@@ -255,8 +255,9 @@
 		<item name="cms.acp.page.position.description"><![CDATA[]]>
 		</item>
 		<item name="cms.acp.page.position.invisible"><![CDATA[Invisible]]></item>
-		<item name="cms.acp.page.position.invisible.description"><![CDATA[]]>
-		</item>
+		<item name="cms.acp.page.position.invisible.description"><![CDATA[]]></item>
+		<item name="cms.acp.page.styleID"><![CDATA[Style]]></item>
+		<item name="cms.acp.page.styleID.description"><![CDATA[Forces selected style upon page visit]]></item>
 	</category>
 
 	<category name="cms.acp.stats">

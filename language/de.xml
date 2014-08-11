@@ -252,6 +252,8 @@
 		<item name="cms.acp.page.position.invisible.description"><![CDATA[Diese Seite und ihre Unterseiten werden in allen Listen ausgeblendet, sind aber weiterhin mittels Direktlink aufrufbar.]]></item>
 		<item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
 		<item name="cms.acp.page.delete.sure"><![CDATA[Wollen Sie diese Seite und all ihre Inhalte wirklich löschen?]]></item>
+		<item name="cms.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
+		<item name="cms.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
 	</category>
 
 	<category name="cms.acp.stats">
