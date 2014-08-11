@@ -38,13 +38,13 @@ class DashboardPage extends AbstractPage {
 		$list = new PageList();
 		$list->readObjects();
 		$this->pages = $list->getObjects();
-		
+
 		// onlinelist
 		$this->usersOnlineList = new UsersOnlineList();
 		$this->usersOnlineList->readStats();
 		$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
 		$this->usersOnlineList->readObjects();
-		
+
 		// system info
 		$this->server = array(
 			'os' => PHP_OS,
@@ -55,7 +55,7 @@ class DashboardPage extends AbstractPage {
 	}
 
 	protected function readFireballFeed() {
-		$url = "http://codequake.de/index.php/NewsFeed/14/";
+		$url = "http://codequake.de/index.php/NewsFeed/26/";
 		try {
 			$request = new HTTPRequest("http://codequake.de/index.php/NewsFeed/14/");
 			$request->execute();
