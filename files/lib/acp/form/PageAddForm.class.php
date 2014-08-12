@@ -18,6 +18,7 @@ use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
 use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
+use wcf\util\ArrayUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -132,7 +133,7 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
 		else $this->isCommentable = 0;
 		if (isset($_POST['styleID'])) $this->styleID = intval($_POST['styleID']);
-		if (isset($_POST['stylesheets']) && is_array($_POST['stylesheets'])) $this->stylesheets = $_POST['stylesheets'];
+		if (isset($_POST['stylesheets']) && is_array($_POST['stylesheets'])) $this->stylesheets = ArrayUtil::toIntegerArray($_POST['stylesheets']);
 	}
 
 	public function validate() {
