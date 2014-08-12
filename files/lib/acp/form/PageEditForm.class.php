@@ -77,11 +77,7 @@ class PageEditForm extends PageAddForm {
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable,
 			'styleID' => ($this->styleID) ?: null,
-			'stylesheets' => serialize($this->stylesheets),
-
-			'lastEditTime' => TIME_NOW,
-			'lastEditorID' => WCF::getUser()->userID,
-			'lastEditorName' => WCF::getUser()->username
+			'stylesheets' => serialize($this->stylesheets)
 		);
 
 		$objectAction = new PageAction(array(
