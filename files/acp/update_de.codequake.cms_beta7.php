@@ -4,12 +4,6 @@ use cms\data\page\PageList;
 use cms\system\cache\builder\PageCacheBuilder;
 use wcf\system\WCF;
 
-// add stylesheets column to page table
-// added here, because this column must exist for converting
-$sql = "ALTER TABLE cms1_page ADD COLUMN stylesheets MEDIUMTEXT AFTER clicks";
-$statement = WCF::getDB()->prepareStatement($sql);
-$statement->execute();
-
 //get Pages
 $list = new PageList();
 $list->readObjects();
@@ -35,3 +29,8 @@ foreach ($list->getObjects() as $page) {
 
 //clear cache
 PageCacheBuilder::getInstance()->reset();
+
+//drop layout column
+$sql = "DROP TABLE IF EXISTS cms1_layout";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute();

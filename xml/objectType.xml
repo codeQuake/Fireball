@@ -176,6 +176,14 @@
 		</type>
 		<!-- /content types -->
 
+		<!-- search -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.searchableObjectType</definitionname>
+			<classname>cms\system\search\PageSearch</classname>
+		</type>
+		<!-- /search -->
+
 		<!-- Poll -->
 		<type>
 			<name>de.codequake.cms.content</name>

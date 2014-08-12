@@ -77,8 +77,8 @@
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 
 		<!--others -->
-		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
 		<instruction type="sql">update_beta5.sql</instruction>
+		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
 	</instructions>
 	<instructions type="update" fromversion="2.0.0 Beta 4">
 		<!--lang -->
@@ -99,8 +99,8 @@
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 
 		<!--others -->
-		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
 		<instruction type="sql">update_beta5.sql</instruction>
+		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
 	</instructions>
 	<instructions type="update" fromversion="2.0.0 Beta 5">
 		<!--lang -->
@@ -120,8 +120,8 @@
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 
 		<!-- others -->
-		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
 		<instruction type="sql">update_beta7.sql</instruction>
+		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
 	</instructions>
 
 	<instructions type="update" fromversion="2.0.0 Beta 6">
@@ -133,8 +133,11 @@
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 
+		<!-- xml -->
+		<instruction type="objectType">xml/objectType.xml</instruction>
+
 		<!-- others -->
-		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
 		<instruction type="sql">update_beta7.sql</instruction>
+		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
 	</instructions>
 </package>

@@ -203,7 +203,10 @@ class PageAddForm extends AbstractForm {
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable,
 			'styleID' => ($this->styleID) ?: null,
-			'stylesheets' => serialize($this->stylesheets)
+			'stylesheets' => serialize($this->stylesheets),
+			'creationTime' => TIME_NOW,
+			'authorID' => WCF::getUser()->userID,
+			'authorName' => WCF::getUser()->username
 		);
 
 		$objectAction = new PageAction(array(), 'create', array(

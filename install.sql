@@ -11,18 +11,29 @@ CREATE TABLE cms1_page (
 	availableDuringOfflineMode TINYINT(1) DEFAULT 0,
 	robots ENUM('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow') NOT NULL DEFAULT 'index,follow',
 	showOrder INT(10) DEFAULT 0,
-	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
-	layoutID INT(10),
 	menuItemID INT(10),
+
+	--settings
 	isDisabled TINYINT(1) DEFAULT 0,
 	isHome INT(1) DEFAULT 0,
 	showSidebar INT(1) DEFAULT 0,
 	invisible TINYINT(1) DEFAULT 0,
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
-	styleID INT(10) DEFAULT NULL,
+
+	--properties
+	authorID INT(10) DEFAULT NULL,
+	authorName VARCHAR(255) NOT NULL DEFAULT '',
+	lastEditorID INT(10) DEFAULT NULL,
+	lastEditorName VARCHAR(255) NOT NULL DEFAULT '',
+	creationTime INT(10) NOT NULL DEFAULT 0,
+	lastEditTime INT(10) NOT NULL DEFAULT 0,
 	comments INT(10) NOT NULL DEFAULT 0,
-	clicks INT (20) NOT NULL DEFAULT 0,
-	stylesheets MEDIUMTEXT
+	clicks INT (20) NOT NULL DEFAULT 0
+
+	--display
+	styleID INT(10) DEFAULT NULL,
+	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
+	stylesheets MEDIUMTEXT,
 );
 
 --page revisions
@@ -117,6 +128,8 @@ ALTER TABLE cms1_content_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (styleID) REFERENCES wcf1_style (styleID) ON DELETE SET NULL;
+ALTER TABLE cms1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE cms1_page ADD FOREIGN KEY (lastEditorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 
 ALTER TABLE cms1_page_revision ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE cms1_page_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
