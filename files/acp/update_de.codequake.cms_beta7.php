@@ -1,6 +1,6 @@
 <?php
-use cms\data\page\PageList;
 use cms\data\page\PageEditor;
+use cms\data\page\PageList;
 use cms\system\cache\builder\PageCacheBuilder;
 use wcf\system\WCF;
 

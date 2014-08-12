@@ -40,7 +40,8 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 	}
 
 	public function getLayout() {
-		if ($this->stylesheets != '') {
+		$stylesheets = @unserialize($this->stylesheets);
+		if (is_array($stylesheets) && !empty($stylesheets)) {
 			return LayoutHandler::getInstance()->getStylesheet($this->pageID);
 		}
 

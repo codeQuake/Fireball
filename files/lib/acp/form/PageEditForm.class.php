@@ -77,7 +77,7 @@ class PageEditForm extends PageAddForm {
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable,
 			'styleID' => ($this->styleID) ?: null,
-			'stylesheets' => @serialize($this->stylesheets)
+			'stylesheets' => serialize($this->stylesheets)
 		);
 
 		$objectAction = new PageAction(array(

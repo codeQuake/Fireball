@@ -41,7 +41,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 
 	public static function resetCache() {
 		//delete layout file
-		LayoutHandler::getInstance()->deleteStylesheet($this->pageID);
+		LayoutHandler::getInstance()->deleteStylesheets();
 
 		//clear caches
 		PageCacheBuilder::getInstance()->reset();

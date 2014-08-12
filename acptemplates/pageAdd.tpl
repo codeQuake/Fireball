@@ -277,7 +277,7 @@
 					<dt>{lang}cms.acp.page.stylesheets.select{/lang}</dt>
 
 					<dd>
-						<select name="stylesheets[]" multiple="multiple" id="stylesheets" size="10" required="required">
+						<select name="stylesheets[]" multiple="multiple" id="stylesheets" size="10">
 							{foreach from=$stylesheetList item=$sheet}
 								<option value="{$sheet->sheetID}" {if $sheet->sheetID|in_array:$stylesheets}selected="selected"{/if}>{$sheet->title}</option>
 							{/foreach}

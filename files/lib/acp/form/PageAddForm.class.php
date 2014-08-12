@@ -132,7 +132,7 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
 		else $this->isCommentable = 0;
 		if (isset($_POST['styleID'])) $this->styleID = intval($_POST['styleID']);
-		if (isset($_POST['stylesheets'])) $this->stylsheets = $_POST['stylesheets'];
+		if (isset($_POST['stylesheets']) && is_array($_POST['stylesheets'])) $this->stylesheets = $_POST['stylesheets'];
 	}
 
 	public function validate() {
@@ -202,7 +202,7 @@ class PageAddForm extends AbstractForm {
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable,
 			'styleID' => ($this->styleID) ?: null,
-			'stylesheets' => @serialize($this->stylesheets)
+			'stylesheets' => serialize($this->stylesheets)
 		);
 
 		$objectAction = new PageAction(array(), 'create', array(

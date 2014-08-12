@@ -2,6 +2,7 @@
 namespace cms\system\layout;
 
 use cms\data\page\PageCache;
+use cms\data\page\PageList;
 use wcf\system\SingletonFactory;
 
 /**
@@ -11,8 +12,6 @@ use wcf\system\SingletonFactory;
  * @package	de.codequake.cms
  */
 class LayoutHandler extends SingletonFactory {
-
-	public $layoutIDs = array();
 
 	public function init() {
 		// does nothing
@@ -30,6 +29,14 @@ class LayoutHandler extends SingletonFactory {
 		$filename = RELATIVE_CMS_DIR . 'style/layout-' . $pageID . '.css';
 		if (file_exists($filename)) {
 			LayoutCompiler::getInstance()->kill(PageCache::getInstance()->getPage($pageID));
+		}
+	}
+
+	public function deleteStylesheets() {
+		$list = new PageList();
+		$list->readObjects();
+		foreach ($list->getObjects() as $page) {
+			$this->deleteStylesheet($page->pageID);
 		}
 	}
 }
