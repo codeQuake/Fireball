@@ -17,7 +17,6 @@ use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\MetaTagHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
-use wcf\util\StringUtil;
 
 /**
  * Shows a created page.
@@ -30,21 +29,52 @@ use wcf\util\StringUtil;
 class PagePage extends AbstractPage {
 	const AVAILABLE_DURING_OFFLINE_MODE = true;
 
-	public $contentNodeTree;
+	/**
+	 * structured list of page comments
+	 * @var	\wcf\data\comment\StructuredCommentList
+	 */
+	public $commentList = null;
 
-	public $sidebarNodeTree;
-
-	public $page = null;
-
-	public $pageID = 0;
-
-	public $enableTracking = true;
-
-	public $commentObjectTypeID = 0;
-
+	/**
+	 * comment manager object
+	 * @var	\wcf\system\comment\manager\ICommentManager
+	 */
 	public $commentManager = null;
 
-	public $commentList = null;
+	/**
+	 * object type id for comments
+	 * @var	integer
+	 */
+	public $commentObjectTypeID = 0;
+
+	/**
+	 * list of content nodes
+	 * @var	\RecursiveIteratorIterator
+	 */
+	public $contentNodeTree = null;
+
+	/**
+	 * @see	\wcf\page\AbstractPage::$enableTracking
+	 */
+	public $enableTracking = true;
+
+	/**
+	 * page id
+	 * @var	integer
+	 */
+	public $pageID = 0;
+
+	/**
+	 * page object
+	 * @var	\cms\data\page\Page
+	 */
+	public $page = null;
+
+	/**
+	 * list of sidebar nodes
+	 * @var	\RecursiveIteratorIterator
+	 */
+	public $sidebarNodeTree = null;
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -52,32 +82,53 @@ class PagePage extends AbstractPage {
 	public function readParameters() {
 		parent::readParameters();
 
-		$alias = '';
-		if (isset($_REQUEST['alias'])) $alias = StringUtil::trim($_REQUEST['alias']);
-		if ($alias != '') {
+		// alias for indicating the requested page
+		if (isset($_REQUEST['alias'])) {
+			$alias = $_REQUEST['alias'];
 			$this->pageID = PageCache::getInstance()->getIDByAlias($alias);
-			if ($this->pageID == 0) throw new IllegalLinkException();
-			$this->page = PageCache::getInstance()->getPage($this->pageID);
-			if ($this->page === null) throw new IllegalLinkException();
-		}
-		else {
-			$this->page = PageCache::getInstance()->getHomePage();
-			if ($this->page === null ||$this->page->pageID == 0) HeaderUtil::redirect(Linkhandler::getInstance()->getLink());
 		}
 
-		// check permission
-		if (!$this->page->isVisible() || !$this->page->isAccessible()) throw new PermissionDeniedException();
+		// fallback to id as page indicator. Needed for backward
+		// compatibility and due to rare situations where WCF (or 3rd
+		// parties) doesn't respect link manipulation for menu items
+		else if (isset($_REQUEST['id'])) {
+			$this->pageID = intval($_REQUEST['id']);
+		}
+
+		// no indicator provided
+		else {
+			// landing page of the cms
+			$page = PageCache::getInstance()->getHomePage();
+			if ($page !== null) {
+				$this->pageID = $page->pageID;
+			} else {
+				// redirect to system's landing page
+				HeaderUtil::redirect(Linkhandler::getInstance()->getLink(), true);
+				exit;
+			}
+		}
+
+		$this->page = PageCache::getInstance()->getPage($this->pageID);
+		if ($this->page === null) {
+			throw new IllegalLinkException();
+		}
 
 		// check if offline and view page or exit
-		// see: wcf\system\request\RequestHandler
+		// @see	\wcf\system\request\RequestHandler
 		if (OFFLINE) {
-			if (! WCF::getSession()->getPermission('admin.general.canViewPageDuringOfflineMode') && ! $this->page->availableDuringOfflineMode) {
+			if (!WCF::getSession()->getPermission('admin.general.canViewPageDuringOfflineMode') && !$this->page->availableDuringOfflineMode) {
 				WCF::getTPL()->assign(array(
 					'templateName' => 'offline'
 				));
 				WCF::getTPL()->display('offline');
-				exit();
+
+				exit;
 			}
+		}
+
+		// check permissions
+		if (!$this->page->isVisible() || !$this->page->isAccessible()) {
+			throw new PermissionDeniedException();
 		}
 	}
 
@@ -87,10 +138,10 @@ class PagePage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 
-		//set menuitem
+		// set menuitem
 		CMSCore::setActiveMenuItem($this->page);
 
-		//set breadcrumbs
+		// set breadcrumbs
 		CMSCore::setBreadcrumbs($this->page);
 
 		// change style
@@ -175,7 +226,6 @@ class PagePage extends AbstractPage {
 	 * @see	\wcf\page\ITrackablePage::getObjectID()
 	 */
 	public function getObjectID() {
-		if (isset($this->page->pageID)) return $this->page->pageID;
-		return 0;
+		return $this->pageID;
 	}
 }
