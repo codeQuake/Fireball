@@ -49,7 +49,7 @@
 		<nav class="tabMenu">
 			<ul>
 				<li><a href="{@$__wcf->getAnchor('general')}">{lang}cms.acp.page.general{/lang}</a></li>
-				<li><a href="{@$__wcf->getAnchor('pageStylesheets')}">{lang}cms.acp.page.stylesheets{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('display')}">{lang}cms.acp.page.display{/lang}</a></li>
 				<li><a href="{@$__wcf->getAnchor('userPermissions')}">{lang}cms.acp.page.userPermissions{/lang}</a></li>
 				{event name='tabMenuTabs'}
 			</ul>
@@ -250,6 +250,14 @@
 						<input type="checkbox" name="availableDuringOfflineMode" id="availableDuringOfflineMode" value="1"{if $availableDuringOfflineMode} checked="checked"{/if} />
 					</dd>
 				</dl>
+			</fieldset>
+
+			{event name='fieldsets'}
+		</div>
+
+		<div id="display" class="container containerPadding tabMenuContent">
+			<fieldset>
+				<legend>{lang}cms.acp.page.display{/lang}</legend>
 
 				<dl>
 					<dt><label for="styleID">{lang}cms.acp.page.styleID{/lang}</label></dt>
@@ -264,32 +272,26 @@
 					</dd>
 				</dl>
 
-			</fieldset>
-
-			{event name='fieldsets'}
-		</div>
-
-		<div id="pageStylesheets" class="container containerPadding tabMenuContent">
-			<fieldset>
-				<legend>{lang}cms.acp.page.stylesheets{/lang}</legend>
-
-				<dl>
-					<dt>{lang}cms.acp.page.stylesheets.select{/lang}</dt>
-
-					<dd>
-						<select name="stylesheets[]" multiple="multiple" id="stylesheets" size="10">
-							{foreach from=$stylesheetList item=$sheet}
-								<option value="{$sheet->sheetID}" {if $sheet->sheetID|in_array:$stylesheets}selected="selected"{/if}>{$sheet->title}</option>
-							{/foreach}
-						</select>
-						<small>{lang}wcf.global.multiSelect{/lang}</small>
-						{if $errorField == 'stylesheets'}
+				{hascontent}
+					<dl>
+						<dt>{lang}cms.acp.page.stylesheets{/lang}</dt>
+						<dd>
+							<select name="stylesheets[]" multiple="multiple" id="stylesheets" size="10">
+								{content}
+									{foreach from=$stylesheetList item=$sheet}
+										<option value="{$sheet->sheetID}" {if $sheet->sheetID|in_array:$stylesheets}selected="selected"{/if}>{$sheet->title}</option>
+									{/foreach}
+								{/content}
+							</select>
+							{if $errorField == 'stylesheets'}
 								<small class="innerError">
 									{lang}cms.acp.page.stylesheets.error.{@$errorType}{/lang}
 								</small>
-						{/if}
-					</dd>
-				</dl>
+							{/if}
+							<small>{lang}wcf.global.multiSelect{/lang}</small>
+						</dd>
+					</dl>
+				{/hascontent}
 			</fieldset>
 		</div>
 
