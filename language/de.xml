@@ -239,7 +239,7 @@
 		<item name="cms.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
-		<item name="cms.acp.page.stylesheets.select"><![CDATA[Stylesheets auswählen]]></item>
+		<item name="cms.acp.page.display"><![CDATA[Darstellung]]></item>
 	</category>
 
 	<category name="cms.acp.stats">

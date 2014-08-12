@@ -242,7 +242,7 @@
 		<item name="cms.acp.page.styleID"><![CDATA[Style]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Forces selected style upon page visit]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
-		<item name="cms.acp.page.stylesheets.select"><![CDATA[Choose Stylesheets]]></item>
+		<item name="cms.acp.page.display"><![CDATA[Display]]></item>
 	</category>
 
 	<category name="cms.acp.stats">
