@@ -17,7 +17,6 @@ use wcf\util\FileReader;
  * @package	de.codequake.cms
  */
 class FileDownloadPage extends AbstractPage {
-
 	public $file = null;
 
 	public $fileReader = null;
@@ -32,8 +31,12 @@ class FileDownloadPage extends AbstractPage {
 		'image/pjpeg'
 	);
 
+	/**
+	 * @see	\wcf\page\IPage::readParameters()
+	 */
 	public function readParameters() {
 		parent::readParameters();
+
 		$fileID = 0;
 		if (isset($_REQUEST['id'])) $fileID = intval($_REQUEST['id']);
 		$this->file = new File($fileID);
@@ -42,8 +45,12 @@ class FileDownloadPage extends AbstractPage {
 		if (! $this->file->getPermission('canDownloadFile')) throw new PermissionDeniedException();
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
 	public function readData() {
 		parent::readData();
+
 		VisitCountHandler::getInstance()->count();
 		$folderPath = '';
 		if ($this->file->folderID != 0) {
@@ -69,8 +76,12 @@ class FileDownloadPage extends AbstractPage {
 		));
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::show()
+	 */
 	public function show() {
 		parent::show();
+
 		$this->fileReader->send();
 		exit();
 	}

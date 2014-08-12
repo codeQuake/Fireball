@@ -23,41 +23,33 @@ use wcf\util\HeaderUtil;
  * @package de.codequake.cms
  */
 class ContentEditForm extends ContentAddForm {
-
+	/**
+	 * content id
+	 * @var	integer
+	 */
 	public $contentID = 0;
 
+	/**
+	 * content object
+	 * @var	\cms\data\content\Content
+	 */
 	public $content = null;
 
+	/**
+	 * @see	\wcf\page\IPage::readParameters()
+	 */
 	public function readParameters() {
 		parent::readParameters();
+
 		if (isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
 	}
 
-	public function readData() {
-		parent::readData();
-		$this->content = ContentCache::getInstance()->getContent($this->contentID);
-		$this->pageID = $this->content->pageID;
-		$this->cssClasses = $this->content->cssClasses;
-		$this->cssID = $this->content->cssID;
-		$this->parentID = $this->content->parentID;
-		$this->showOrder = $this->content->showOrder;
-		$this->position = $this->content->position;
-		$this->contentData = $this->content->handleContentData();
-		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.content', $this->content->contentID, $this->contentData['pollID']);
-		$this->title = $this->content->getTitle();
-		I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
-		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-				I18nHandler::getInstance()->setOptions($field, PACKAGE_ID, $this->contentData[$field], 'cms.content.' . $field . '\d+');
-			}
-		}
-		//overwrite contentlist
-		$this->contentList = new DrainedPositionContentNodeTree(null, $this->pageID, $this->contentID, $this->position);
-		$this->contentList = $this->contentList->getIterator();
-	}
-
+	/**
+	 * @see	\wcf\form\IForm::save()
+	 */
 	public function save() {
 		AbstractForm::save();
+
 		$data = array(
 			'title' => $this->title,
 			'pageID' => $this->pageID,
@@ -127,10 +119,42 @@ class ContentEditForm extends ContentAddForm {
 		)));
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+
+		$this->content = ContentCache::getInstance()->getContent($this->contentID);
+		$this->pageID = $this->content->pageID;
+		$this->cssClasses = $this->content->cssClasses;
+		$this->cssID = $this->content->cssID;
+		$this->parentID = $this->content->parentID;
+		$this->showOrder = $this->content->showOrder;
+		$this->position = $this->content->position;
+		$this->contentData = $this->content->handleContentData();
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.content', $this->content->contentID, $this->contentData['pollID']);
+		$this->title = $this->content->getTitle();
+		I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
+		if ($this->objectTypeProcessor->isMultilingual) {
+			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+				I18nHandler::getInstance()->setOptions($field, PACKAGE_ID, $this->contentData[$field], 'cms.content.' . $field . '\d+');
+			}
+		}
+		//overwrite contentlist
+		$this->contentList = new DrainedPositionContentNodeTree(null, $this->pageID, $this->contentID, $this->position);
+		$this->contentList = $this->contentList->getIterator();
+	}
+
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		AbstractForm::assignVariables();
+
 		I18nHandler::getInstance()->assignVariables(! empty($_POST));
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
 			'cssClasses' => $this->cssClasses,

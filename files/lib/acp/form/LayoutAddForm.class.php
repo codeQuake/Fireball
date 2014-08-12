@@ -17,35 +17,54 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class LayoutAddForm extends AbstractForm {
-
-	public $templateName = 'layoutAdd';
-
-	public $neededPermissions = array(
-		'admin.cms.style.canAddLayout'
-	);
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.layout.add';
 
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('admin.cms.style.canAddLayout');
+
+	/**
+	 * layout title
+	 * @var	string
+	 */
 	public $title = '';
 
 	public $data = array();
 
-	public $stylesheetList = array();
+	/**
+	 * list of stylesheets
+	 * @var	\cms\data\stylesheet\StylesheetList
+	 */
+	public $stylesheetList = null;
 
-	public function readData() {
-		parent::readData();
-		$this->stylesheetList = new StylesheetList();
-		$this->stylesheetList->readObjects();
-		$this->stylesheetList = $this->stylesheetList->getObjects();
-	}
-
+	/**
+	 * @see	\wcf\form\IForm::readFormParameters()
+	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
-		
+
 		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if (isset($_POST['data'])) $this->data = $_POST['data'];
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::validate()
+	 */
+	public function validate() {
+		parent::validate();
+
+		if (empty($this->data)) {
+			throw new UserInputException('data');
+		}
+	}
+
+	/**
+	 * @see	\wcf\form\IForm::save()
+	 */
 	public function save() {
 		parent::save();
 		
@@ -56,22 +75,31 @@ class LayoutAddForm extends AbstractForm {
 			)
 		));
 		$objectAction->executeAction();
-		
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
-		
+
+		// reset values
 		$this->title = '';
 		$this->data = array();
 	}
 
-	public function validate() {
-		parent::validate();
-		if (empty($this->data)) throw new UserInputException('data', 'empty');
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+
+		$this->stylesheetList = new StylesheetList();
+		$this->stylesheetList->readObjects();
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
+
 		WCF::getTPL()->assign(array(
 			'title' => $this->title,
 			'data' => $this->data,

@@ -14,9 +14,9 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class StatsPage extends AbstractPage {
-
-	public $templateName = 'stats';
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.statistics';
 
 	public $startDate = 0;
@@ -41,8 +41,12 @@ class StatsPage extends AbstractPage {
 
 	public $pages = null;
 
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
 	public function readData() {
 		parent::readData();
+
 		// set dates
 		if (isset($_POST['startDate'])) $this->startDate = strtotime($_POST['startDate']);
 		if (isset($_POST['endDate'])) $this->endDate = strtotime($_POST['endDate']);
@@ -82,8 +86,12 @@ class StatsPage extends AbstractPage {
 		$this->usersOnlineList->readObjects();
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'visits' => $this->visits,
 			'browsers' => $this->browsers,

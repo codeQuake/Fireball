@@ -21,14 +21,15 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class FileManagementForm extends AbstractForm {
-
-	public $templateName = 'fileManagement';
-
-	public $neededPermissions = array(
-		'admin.cms.file.canAddFile'
-	);
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.file.management';
+
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('admin.cms.file.canAddFile');
 
 	public $folderPageID = 0;
 
@@ -44,22 +45,31 @@ class FileManagementForm extends AbstractForm {
 
 	public function readFormParameters() {
 		parent::readFormParameters();
+
 		if (isset($_POST['folder'])) $this->foldername = StringUtil::trim($_POST['folder']);
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::validate()
+	 */
 	public function validate() {
 		parent::validate();
+
 		if (empty($this->foldername)) {
 			throw new UserInputException('folder', 'empty');
 		}
-		
+
 		$folderPath = StringUtil::firstCharToLowerCase($this->foldername);
 		if (file_exists(CMS_DIR . 'files/' . $folderPath)) throw new UserInputException('folder', 'exists');
 	
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::save()
+	 */
 	public function save() {
 		parent::save();
+
 		$folderPath = StringUtil::firstCharToLowerCase($this->foldername);
 		mkdir(CMS_DIR . 'files/' . $folderPath, 0777);
 		$data = array(
@@ -78,8 +88,12 @@ class FileManagementForm extends AbstractForm {
 	
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
 	public function readData() {
 		parent::readData();
+
 		if (isset($_REQUEST['id'])) $this->folderPageID = intval($_REQUEST['id']);
 		if ($this->folderPageID == 0) {
 			$list = new FileList();
@@ -102,8 +116,12 @@ class FileManagementForm extends AbstractForm {
 		$this->folders = $folders->getObjects();
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'fileList' => $this->fileList,
 			'folderID' => $this->folderPageID,

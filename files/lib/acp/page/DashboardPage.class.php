@@ -19,14 +19,40 @@ use wcf\util\HTTPRequest;
  * @package	de.codequake.cms
  */
 class DashboardPage extends AbstractPage {
-
-	public $templateName = 'dashboard';
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.dashboard';
 
 	public $pages = null;
 
 	public $usersOnlineList = null;
+
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+
+		// get pages
+		$list = new PageList();
+		$list->readObjects();
+		$this->pages = $list->getObjects();
+
+		// onlinelist
+		$this->usersOnlineList = new UsersOnlineList();
+		$this->usersOnlineList->readStats();
+		$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
+		$this->usersOnlineList->readObjects();
+
+		// system info
+		$this->server = array(
+			'os' => PHP_OS,
+			'webserver' => (isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : ''),
+			'mySQLVersion' => WCF::getDB()->getVersion(),
+			'load' => ''
+		);
+	}
 
 	protected function readFireballFeed() {
 		$url = "http://codequake.de/index.php/NewsFeed/26/";
@@ -63,30 +89,12 @@ class DashboardPage extends AbstractPage {
 		return $feed;
 	}
 
-	public function readData() {
-		parent::readData();
-		// get pages
-		$list = new PageList();
-		$list->readObjects();
-		$this->pages = $list->getObjects();
-
-		// onlinelist
-		$this->usersOnlineList = new UsersOnlineList();
-		$this->usersOnlineList->readStats();
-		$this->usersOnlineList->getConditionBuilder()->add('session.userID IS NOT NULL');
-		$this->usersOnlineList->readObjects();
-
-		// system info
-		$this->server = array(
-			'os' => PHP_OS,
-			'webserver' => (isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : ''),
-			'mySQLVersion' => WCF::getDB()->getVersion(),
-			'load' => ''
-		);
-	}
-
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'visitors' => VisitCountHandler::getInstance(),
 			'feed' => $this->readFireballFeed(),

@@ -20,14 +20,14 @@ use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
- *
+ * Shows a created page.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
 class PagePage extends AbstractPage {
-
 	const AVAILABLE_DURING_OFFLINE_MODE = true;
 
 	public $contentNodeTree;
@@ -46,8 +46,12 @@ class PagePage extends AbstractPage {
 
 	public $commentList = null;
 
+	/**
+	 * @see	\wcf\page\IPage::readParameters()
+	 */
 	public function readParameters() {
 		parent::readParameters();
+
 		$alias = '';
 		if (isset($_REQUEST['alias'])) $alias = StringUtil::trim($_REQUEST['alias']);
 		if ($alias != '') {
@@ -61,7 +65,7 @@ class PagePage extends AbstractPage {
 			if ($this->page === null ||$this->page->pageID == 0) HeaderUtil::redirect(Linkhandler::getInstance()->getLink());
 		}
 
-		//check permission
+		// check permission
 		if (!$this->page->isVisible() || !$this->page->isAccessible()) throw new PermissionDeniedException();
 
 		// check if offline and view page or exit
@@ -77,6 +81,9 @@ class PagePage extends AbstractPage {
 		}
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
 	public function readData() {
 		parent::readData();
 
@@ -115,8 +122,12 @@ class PagePage extends AbstractPage {
 		MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'website', true);
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'contentNodeTree' => $this->contentNodeTree,
 			'sidebarNodeTree' => $this->sidebarNodeTree,
@@ -137,8 +148,12 @@ class PagePage extends AbstractPage {
 		));
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::show()
+	 */
 	public function show() {
 		parent::show();
+
 		// register visit
 		VisitCountHandler::getInstance()->count();
 
@@ -149,10 +164,16 @@ class PagePage extends AbstractPage {
 		));
 	}
 
+	/**
+	 * @see	\wcf\page\ITrackablePage::getObjectType()
+	 */
 	public function getObjectType() {
 		return 'de.codequake.cms.page';
 	}
 
+	/**
+	 * @see	\wcf\page\ITrackablePage::getObjectID()
+	 */
 	public function getObjectID() {
 		if (isset($this->page->pageID)) return $this->page->pageID;
 		return 0;

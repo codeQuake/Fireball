@@ -21,16 +21,18 @@ class PageListPage extends AbstractPage {
 	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
 
-	public $neededPermissions = array(
-		'admin.cms.page.canListPage'
-	);
-
-	public $templateName = 'pageList';
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('admin.cms.page.canListPage');
 
 	public $pageList = null;
 
 	public $objectTypeList = null;
 
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
 	public function readData() {
 		parent::readData();
 
@@ -39,6 +41,9 @@ class PageListPage extends AbstractPage {
 
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
 
