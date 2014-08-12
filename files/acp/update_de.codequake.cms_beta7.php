@@ -31,6 +31,13 @@ foreach ($list->getObjects() as $page) {
 PageCacheBuilder::getInstance()->reset();
 
 //drop layout column
-$sql = "DROP TABLE IF EXISTS cms1_layout";
+$sql = "DROP TABLE IF EXISTS cms".WCF_N."_layout";
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute();
+
+//remove from log
+$sql = "DELETE FROM wcf".WCF_N."_package_installation_sql_log WHERE sqlTable = ?";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute(array(
+	'cms'.WCF_N.'_layout'
+));
