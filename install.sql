@@ -21,7 +21,8 @@ CREATE TABLE cms1_page (
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
 	styleID INT(10) DEFAULT NULL.
 	comments INT(10) NOT NULL DEFAULT 0,
-	clicks INT (20) NOT NULL DEFAULT 0
+	clicks INT (20) NOT NULL DEFAULT 0,
+	stylesheets MEDIUMTEXT
 );
 
 --page revisions
@@ -71,14 +72,6 @@ CREATE TABLE cms1_stylesheet (
 	sheetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	title VARCHAR(255) NOT NULL,
 	less MEDIUMTEXT
-);
-
---layout
-DROP TABLE IF EXISTS cms1_layout;
-CREATE TABLE cms1_layout (
-	layoutID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	title VARCHAR(255) NOT NULL,
-	data MEDIUMTEXT
 );
 
 --file

@@ -49,6 +49,7 @@
 		<nav class="tabMenu">
 			<ul>
 				<li><a href="{@$__wcf->getAnchor('general')}">{lang}cms.acp.page.general{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('pageStylesheets')}">{lang}cms.acp.page.stylesheets{/lang}</a></li>
 				<li><a href="{@$__wcf->getAnchor('userPermissions')}">{lang}cms.acp.page.userPermissions{/lang}</a></li>
 				{event name='tabMenuTabs'}
 			</ul>
@@ -263,22 +264,33 @@
 					</dd>
 				</dl>
 
-				{if $layoutList != null}
-					<dl{if $errorField == 'layoutID'} class="formError"{/if}>
-						<dt><label for="layoutID">{lang}cms.acp.page.settings.layoutID{/lang}</label></dt>
-						<dd>
-							<select id="layoutID" name="layoutID">
-								<option value="0" {if layoutID == 0} selected="selected"{/if}></option>
-								{foreach from=$layoutList item='item'}
-									<option value="{$item->layoutID}"{if $item->layoutID == $layoutID} selected="selected"{/if}>{$item->title|language}</option>
-								{/foreach}
-							</select>
-						</dd>
-					</dl>
-				{/if}
 			</fieldset>
 
 			{event name='fieldsets'}
+		</div>
+
+		<div id="pageStylesheets" class="container containerPadding tabMenuContent">
+			<fieldset>
+				<legend>{lang}cms.acp.page.stylesheets{/lang}</legend>
+
+				<dl>
+					<dt>{lang}cms.acp.page.stylesheets.select{/lang}</dt>
+
+					<dd>
+						<select name="stylesheets[]" multiple="multiple" id="stylesheets" size="10" required="required">
+							{foreach from=$stylesheetList item=$sheet}
+								<option value="{$sheet->sheetID}" {if $sheet->sheetID|in_array:$stylesheets}selected="selected"{/if}>{$sheet->title}</option>
+							{/foreach}
+						</select>
+						<small>{lang}wcf.global.multiSelect{/lang}</small>
+						{if $errorField == 'stylesheets'}
+								<small class="innerError">
+									{lang}cms.acp.page.stylesheets.error.{@$errorType}{/lang}
+								</small>
+						{/if}
+					</dd>
+				</dl>
+			</fieldset>
 		</div>
 
 		<div id="userPermissions" class="container containerPadding tabMenuContent">

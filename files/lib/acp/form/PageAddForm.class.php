@@ -1,12 +1,12 @@
 <?php
 namespace cms\acp\form;
 
-use cms\data\layout\LayoutList;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\data\page\PageNodeTree;
+use cms\data\stylesheet\StylesheetList;
 use cms\util\PageUtil;
 use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemAction;
@@ -75,9 +75,9 @@ class PageAddForm extends AbstractForm {
 
 	public $pageList = null;
 
-	public $layoutList = null;
+	public $stylesheets = array();
 
-	public $layoutID = 0;
+	public $stylesheetList = null;
 
 	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
 
@@ -126,13 +126,13 @@ class PageAddForm extends AbstractForm {
 		else $this->menuItem = 0;
 		if (isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
 		if (isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
-		if (isset($_POST['layoutID'])) $this->layoutID = intval($_POST['layoutID']);
 		if (isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
 		else $this->showSidebar = 0;
 		if (isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);
 		if (isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
 		else $this->isCommentable = 0;
 		if (isset($_POST['styleID'])) $this->styleID = intval($_POST['styleID']);
+		if (isset($_POST['stylesheets'])) $this->stylsheets = $_POST['stylesheets'];
 	}
 
 	public function validate() {
@@ -196,13 +196,13 @@ class PageAddForm extends AbstractForm {
 			'invisible' => $this->invisible,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'showOrder' => $this->showOrder,
-			'layoutID' => $this->layoutID,
 			'parentID' => ($this->parentID) ?  : null,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable,
-			'styleID' => ($this->styleID) ?: null
+			'styleID' => ($this->styleID) ?: null,
+			'stylesheets' => @serialize($this->stylesheets)
 		);
 
 		$objectAction = new PageAction(array(), 'create', array(
@@ -301,9 +301,8 @@ class PageAddForm extends AbstractForm {
 		$this->pageList = new PageNodeTree();
 		$this->pageList = $this->pageList->getIterator();
 
-		$this->layoutList = new LayoutList();
-		$this->layoutList->readObjects();
-		$this->layoutList = $this->layoutList->getObjects();
+		$this->stylesheetList = new StylesheetList();
+		$this->stylesheetList->readObjects();
 	}
 
 	public function assignVariables() {
@@ -322,14 +321,14 @@ class PageAddForm extends AbstractForm {
 			'parentID' => $this->parentID,
 			'showOrder' => $this->showOrder,
 			'menu' => $this->menuItem,
-			'layoutID' => $this->layoutID,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'pageList' => $this->pageList,
-			'layoutList' => $this->layoutList,
 			'isCommentable' => $this->isCommentable,
 			'availableStyles' => $this->availableStyles,
-			'styleID' => $this->styleID
+			'styleID' => $this->styleID,
+			'stylesheets' => $this->stylesheets,
+			'stylesheetList' => $this->stylesheetList->getObjects()
 		));
 	}
 }

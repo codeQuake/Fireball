@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\stylesheet;
 
-use cms\data\layout\Layout;
+use cms\data\page\PageCache;
 
 /**
  * @author	Jens Krumsieck
@@ -9,14 +9,14 @@ use cms\data\layout\Layout;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class LayoutStylesheetList extends ViewableStylesheetList {
+class PageStylesheetList extends ViewableStylesheetList {
 
-	public $layoutID = 0;
+	public $pageID = 0;
 
-	public function __construct($layoutID) {
-		$this->layoutID = $layoutID;
-		$layout = new Layout($this->layoutID);
-		$data = @unserialize($layout->data);
+	public function __construct($pageID) {
+		$this->pageID = $pageID;
+		$page = PageCache::getInstance()->getPage($pageID);
+		$data = @unserialize($page->stylesheets);
 		parent::__construct();
 		$this->getConditionBuilder()->add('stylesheet.sheetID IN (?)', array(
 			$data

@@ -4,7 +4,7 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>2.0.0 Beta 6</version>
+		<version>2.0.0 Beta 7</version>
 		<date>2014-08-10</date>
 	</packageinformation>
 
@@ -56,34 +56,12 @@
 		<instruction type="sql">install.sql</instruction>
 	</instructions>
 
-	<instructions type="update" fromversion="2.0.0 Beta 2">
-		<!--lang -->
-		<instruction type="language">language/*.xml</instruction>
-
-		<!--tar -->
-		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-
-		<!-- xml -->
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="bbcode">xml/bbcode.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-
-		<!--others -->
-		<instruction type="sql">update_beta5.sql</instruction>
-	</instructions>
-
 	<instructions type="update" fromversion="2.0.0 Beta 3">
 		<!--lang -->
 		<instruction type="language">language/*.xml</instruction>
 
 		<!--tar -->
+
 		<instruction type="file">files.tar</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
@@ -99,6 +77,7 @@
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 
 		<!--others -->
+		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
 		<instruction type="sql">update_beta5.sql</instruction>
 	</instructions>
 	<instructions type="update" fromversion="2.0.0 Beta 4">
@@ -120,6 +99,7 @@
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 
 		<!--others -->
+		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
 		<instruction type="sql">update_beta5.sql</instruction>
 	</instructions>
 	<instructions type="update" fromversion="2.0.0 Beta 5">
@@ -138,5 +118,23 @@
 		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
+
+		<!-- others -->
+		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
+		<instruction type="sql">update_beta7.sql</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="2.0.0 Beta 6">
+		<!--lang -->
+		<instruction type="language">language/*.xml</instruction>
+
+		<!--tar -->
+		<instruction type="file">files.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+
+		<!-- others -->
+		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
+		<instruction type="sql">update_beta7.sql</instruction>
 	</instructions>
 </package>

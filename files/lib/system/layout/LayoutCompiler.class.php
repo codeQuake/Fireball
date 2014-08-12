@@ -1,8 +1,8 @@
 <?php
 namespace cms\system\layout;
 
-use cms\data\layout\Layout;
-use cms\data\stylesheet\LayoutStylesheetList;
+use cms\data\page\Page;
+use cms\data\stylesheet\PageStylesheetList;
 use wcf\system\exception\SystemException;
 use wcf\system\SingletonFactory;
 use wcf\util\FileUtil;
@@ -25,9 +25,9 @@ class LayoutCompiler extends SingletonFactory {
 		));
 	}
 
-	public function compile(Layout $layout) {
+	public function compile(Page $page) {
 		// create sheet list
-		$list = new LayoutStylesheetList($layout->layoutID);
+		$list = new PageStylesheetList($page->pageID);
 		$list->readObjects();
 		$list = $list->getObjects();
 		// merge used sheets
@@ -42,12 +42,12 @@ class LayoutCompiler extends SingletonFactory {
 		catch (\Exception $e) {
 			throw new SystemException("Could not compile LESS: " . $e->getMessage(), 0, '', $e);
 		}
-		
-		file_put_contents(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css', $content);
-		FileUtil::makeWritable(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css');
+
+		file_put_contents(CMS_DIR . 'style/layout-' . $page->pageID . '.css', $content);
+		FileUtil::makeWritable(CMS_DIR . 'style/layout-' . $page->pageID . '.css');
 	}
 
-	public function kill(Layout $layout) {
-		unlink(CMS_DIR . 'style/layout-' . $layout->layoutID . '.css');
+	public function kill(Page $page) {
+		unlink(CMS_DIR . 'style/layout-' . $page->pageID . '.css');
 	}
 }

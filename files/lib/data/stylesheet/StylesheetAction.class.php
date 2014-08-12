@@ -1,13 +1,13 @@
 <?php
 namespace cms\data\stylesheet;
 
-use cms\data\layout\LayoutList;
+use cms\data\page\PageList;
 use cms\system\layout\LayoutHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 
 /**
  * Executes stylesheet-related actions.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -27,23 +27,23 @@ class StylesheetAction extends AbstractDatabaseObjectAction {
 
 	public function delete() {
 		parent::delete();
-		
-		// kill all layouts
-		$layoutList = new LayoutList();
-		$layoutList->readObjects();
-		foreach ($layoutList->getObjects() as $layout) {
-			LayoutHandler::getInstance()->deleteStylesheet($layout->layoutiD);
+
+		// kill all layout files to recreate them
+		$pageList = new PageList();
+		$pageList->readObjects();
+		foreach ($pageList->getObjects() as $page) {
+			LayoutHandler::getInstance()->deleteStylesheet($page->pageID);
 		}
 	}
 
 	public function update() {
 		parent::update();
-		
-		// kill all layouts
-		$layoutList = new LayoutList();
-		$layoutList->readObjects();
-		foreach ($layoutList->getObjects() as $layout) {
-			LayoutHandler::getInstance()->deleteStylesheet($layout->layoutID);
+
+		// kill all layout files to recreate them
+		$pageList = new PageList();
+		$pageList->readObjects();
+		foreach ($pageList->getObjects() as $page) {
+			LayoutHandler::getInstance()->deleteStylesheet($page->pageID);
 		}
 	}
 }

@@ -1,7 +1,6 @@
 <?php
 namespace cms\acp\form;
 
-use cms\data\layout\LayoutList;
 use cms\data\page\DrainedPageNodeTree;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
@@ -73,27 +72,27 @@ class PageEditForm extends PageAddForm {
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'showOrder' => $this->showOrder,
 			'parentID' => ($this->parentID) ?  : null,
-			'layoutID' => $this->layoutID,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable,
-			'styleID' => ($this->styleID) ?: null
+			'styleID' => ($this->styleID) ?: null,
+			'stylesheets' => @serialize($this->stylesheets)
 		);
-		
+
 		$objectAction = new PageAction(array(
 			$this->pageID
 		), 'update', array(
 			'data' => $data
 		));
 		$objectAction->executeAction();
-		
+
 		$update = array();
-		
+
 		// save ACL
 		ACLHandler::getInstance()->save($this->pageID, $this->objectTypeID);
 		ACLHandler::getInstance()->disableAssignVariables();
-		
+
 		// update I18n
 		if (! I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.page.title' . $this->pageID, 'cms.page');
@@ -111,17 +110,17 @@ class PageEditForm extends PageAddForm {
 			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $this->pageID, 'cms.page');
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $this->pageID;
 		}
-		
+
 		$page = new Page($this->pageID);
 		$this->menuItemID = $page->menuItemID;
-		
+
 		if (! $this->menuItem && $this->menuItemID) {
 			//delete old item
 			$action = new PageMenuItemAction(array(
 				$this->menuItemID
 			), 'delete', array());
 			$action->executeAction();
-			
+
 			$update['menuItemID'] = null;
 		}
 		else if ($this->menuItem && ! $this->menuItemID) {
@@ -131,7 +130,7 @@ class PageEditForm extends PageAddForm {
 				$parentPage = $page->getParentPage();
 				$parentItem = new PageMenuItem($parentPage->menuItemID);
 			}
-			
+
 			$data = array(
 				'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
 				'menuItemController' => 'cms\page\PagePage',
@@ -143,18 +142,18 @@ class PageEditForm extends PageAddForm {
 				'parentMenuItem' => isset($parentItem) ? $parentItem->menuItem : '',
 				'showOrder' => 0
 			);
-			
+
 			$menuItemAction = new PageMenuItemAction(array(), 'create', array(
 				'data' => $data
 			));
 			$itemReturnValues = $menuItemAction->executeAction();
 			$menuItem = $itemReturnValues['returnValues'];
-			
+
 			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.' . $menuItem->menuItemID, 'wcf.page');
 			$data['menuItem'] = 'wcf.page.menuItem.' . $menuItem->menuItemID;
 			$editor = new PageMenuItemEditor($menuItem);
 			$editor->update($data);
-			
+
 			$update['menuItemID'] = $menuItem->menuItemID ?  : null;
 		}
 		else if ($this->menuItem && $this->menuItemID) {
@@ -165,12 +164,12 @@ class PageEditForm extends PageAddForm {
 			$menuData['menuItem'] = 'wcf.page.menuItem.' . $item->menuItemID;
 			$editor->update($menuData);
 		}
-		
+
 		if (! empty($update)) {
 			$editor = new PageEditor(new Page($this->pageID));
 			$editor->update($update);
 		}
-		
+
 		//create revision
 		$objectAction = new PageAction(array(
 			$this->pageID
@@ -178,7 +177,7 @@ class PageEditForm extends PageAddForm {
 			'action' => 'update'
 		));
 		$objectAction->executeAction();
-		
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
 	}
@@ -188,15 +187,15 @@ class PageEditForm extends PageAddForm {
 	 */
 	public function readData() {
 		parent::readData();
-		
+
 		// reading data
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
 		$this->page = new Page($this->pageID);
-		
+
 		// overwrite pagelist
 		$this->pageList = new DrainedPageNodeTree(null, $this->pageID);
 		$this->pageList = $this->pageList->getIterator();
-		
+
 		I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->page->title, 'cms.page.title\d+');
 		$this->title = $this->page->title;
 		I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->page->description, 'cms.page.description\d+');
@@ -205,21 +204,21 @@ class PageEditForm extends PageAddForm {
 		$this->metaDescription = $this->page->metaDescription;
 		I18nHandler::getInstance()->setOptions('metaKeywords', PACKAGE_ID, $this->page->metaKeywords, 'cms.page.metaKeywords\d+');
 		$this->metaKeywords = $this->page->metaKeywords;
-		
+
 		$this->parentID = $this->page->parentID;
 		$this->showOrder = $this->page->showOrder;
 		$this->invisible = $this->page->invisible;
 		$this->robots = $this->page->robots;
-		$this->layoutID = $this->page->layoutID;
 		$this->showSidebar = $this->page->showSidebar;
 		$this->sidebarOrientation = $this->page->sidebarOrientation;
 		$this->isCommentable = $this->page->isCommentable;
 		$this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
 		$this->menuItem = $this->page->menuItemID !== null ? 1 : 0;
 		$this->menuItemID = $this->page->menuItemID;
-		
+
 		$this->alias = $this->page->alias;
 		$this->styleID = $this->page->styleID;
+		$this->stylesheets = @unserialize($this->page->stylesheets);
 	}
 
 	/**
@@ -227,10 +226,10 @@ class PageEditForm extends PageAddForm {
 	 */
 	public function assignVariables() {
 		AbstractForm::assignVariables();
-		
+
 		I18nHandler::getInstance()->assignVariables(! empty($_POST));
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
-		
+
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
 			'objectTypeID' => $this->objectTypeID,
@@ -242,7 +241,6 @@ class PageEditForm extends PageAddForm {
 			'showOrder' => $this->showOrder,
 			'pageList' => $this->pageList,
 			'pageID' => $this->pageID,
-			'layoutID' => $this->layoutID,
 			'title' => $this->title,
 			'description' => $this->description,
 			'metaDescription' => $this->metaDescription,
@@ -251,10 +249,11 @@ class PageEditForm extends PageAddForm {
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'page' => $this->page,
-			'layoutList' => $this->layoutList,
 			'isCommentable' => $this->isCommentable,
 			'availableStyles' => $this->availableStyles,
-			'styleID' => $this->styleID
+			'styleID' => $this->styleID,
+			'stylesheets' => $this->stylesheets,
+			'stylesheetList' => $this->stylesheetList->getObjects()
 		));
 	}
 }

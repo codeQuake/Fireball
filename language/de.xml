@@ -148,19 +148,6 @@
 		<item name="cms.acp.folder.error.exists"><![CDATA[Der Ordnername ist ungültig oder existiert bereits.]]></item>
 	</category>
 
-	<category name="cms.acp.layout">
-		<item name="cms.acp.layout.list"><![CDATA[Layouts]]></item>
-		<item name="cms.acp.layout.list.description"><![CDATA[Layouts sind Gruppierungen von <a href="{link controller='StylesheetList' application='cms'}{/link}">Stylesheets</a>, die einer Seite zugeordnet werden können. Dadurch gibt es die Möglichkeit verschiedene Stylesheets auf Ihren Seiten verschieden miteinander zu kombinieren.]]></item>
-		<item name="cms.acp.layout.edit"><![CDATA[Layout bearbeiten]]></item>
-		<item name="cms.acp.layout.title"><![CDATA[Titel]]></item>
-		<item name="cms.acp.layout.add"><![CDATA[Layout hinzufügen]]></item>
-		<item name="cms.acp.layout.add.noSheet"><![CDATA[Um ein Layout zu erstellen müssen Sie zuerst mindestens ein Stylesheet erstellen!]]></item>
-		<item name="cms.acp.layout.general"><![CDATA[Allgemeine Einstellungen]]></item>
-		<item name="cms.acp.layout.options"><![CDATA[Optionen]]></item>
-		<item name="cms.acp.layout.stylesheets"><![CDATA[Stylesheets auswählen]]></item>
-		<item name="cms.acp.layout.delete.sure"><![CDATA[Wollen Sie dieses Layout wirklich löschen?]]></item>
-	</category>
-
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
 		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[Seiten auflisten]]></item>
@@ -171,8 +158,6 @@
 		<item name="cms.acp.menu.link.cms.content.section.list"><![CDATA[Inhaltsabschnitte auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
-		<item name="cms.acp.menu.link.cms.layout.list"><![CDATA[Layouts auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.layout.add"><![CDATA[Layout hinzufügen]]></item>
 		<item name="cms.acp.menu.link.cms.file.management"><![CDATA[Dateiverwaltung]]></item>
 		<item name="cms.acp.menu.link.cms.style"><![CDATA[Darstellungsoptionen]]></item>
 		<item name="cms.acp.menu.link.cms.content"><![CDATA[Seiten verwalten]]></item>
@@ -244,7 +229,6 @@
 		<item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
 		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Kommentare aktivieren]]></item>
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[Erlaubt anderen Benutzern diese Seite zu kommentieren.]]></item>
-		<item name="cms.acp.page.settings.layoutID"><![CDATA[Layout auswählen]]></item>
 		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
 		<item name="cms.acp.page.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.page.position.description"><![CDATA[Legt die Reihenfolge fest, in der die Seiten aufgelistet werden.]]></item>
@@ -254,6 +238,8 @@
 		<item name="cms.acp.page.delete.sure"><![CDATA[Wollen Sie diese Seite und all ihre Inhalte wirklich löschen?]]></item>
 		<item name="cms.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
+		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.page.stylesheets.select"><![CDATA[Stylesheets auswählen]]></item>
 	</category>
 
 	<category name="cms.acp.stats">
@@ -268,7 +254,7 @@
 
 	<category name="cms.acp.stylesheet">
 		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
-		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie in Layouts gruppiert und einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
+		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
 		<item name="cms.acp.stylesheet.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.stylesheet.general"><![CDATA[Allgemeine Einstellungen]]></item>
 		<item name="cms.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
@@ -349,8 +335,6 @@
 		<item name="wcf.acp.group.option.category.admin.cms.style"><![CDATA[Stile]]></item>
 		<item name="wcf.acp.group.option.admin.cms.style.canAddStylesheet"><![CDATA[Kann Stylesheets verwalten]]></item>
 		<item name="wcf.acp.group.option.admin.cms.style.canListStylesheet"><![CDATA[Kann Stylesheets auflisten]]></item>
-		<item name="wcf.acp.group.option.admin.cms.style.canAddLayout"><![CDATA[Kann Layouts verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.cms.style.canListLayout"><![CDATA[Kann Layouts auflisten]]></item>
 		<item name="wcf.acp.group.option.admin.cms.file.canAddFile"><![CDATA[Kann Dateien verwalten]]></item>
 		<item name="wcf.acp.group.option.admin.cms.file.allowedTypes"><![CDATA[Erlaubte Dateitypen]]></item>
 		<item name="wcf.acp.group.option.category.admin.cms.file"><![CDATA[Dateien]]></item>

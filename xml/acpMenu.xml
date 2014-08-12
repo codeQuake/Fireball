@@ -60,17 +60,5 @@
 			<controller><![CDATA[cms\acp\form\StylesheetAddForm]]></controller>
 			<permissions>admin.cms.style.canAddStylesheet</permissions>
 		</acpmenuitem>
-
-		<acpmenuitem name="cms.acp.menu.link.cms.layout.list">
-			<parent>cms.acp.menu.link.cms.style</parent>
-			<controller><![CDATA[cms\acp\page\LayoutListPage]]></controller>
-			<permissions>admin.cms.style.canListLayout</permissions>
-		</acpmenuitem>
-
-		<acpmenuitem name="cms.acp.menu.link.cms.layout.add">
-			<parent>cms.acp.menu.link.cms.style</parent>
-			<controller><![CDATA[cms\acp\form\LayoutAddForm]]></controller>
-			<permissions>admin.cms.style.canAddLayout</permissions>
-		</acpmenuitem>
 	</import>
 </data>
