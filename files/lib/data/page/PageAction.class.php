@@ -133,18 +133,35 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::create()
 	 */
 	public function create() {
-		$page = parent::create();
+		// set default values for author and last editor
+		if (!isset($this->parameters['data']['authorID'])) {
+			$this->parameters['data']['authorID'] = WCF::getUser()->userID;
+			$this->parameters['data']['authorName'] = WCF::getUser()->username;
+		}
+		if (!isset($this->parameters['data']['lastEditorID'])) {
+			$this->parameters['data']['lastEditorID'] = $this->parameters['data']['authorID'];
+			$this->parameters['data']['lastEditorName'] = $this->parameters['data']['authorName'];
+		}
 
-		//check if first page
+		// set default values for creation- and last edit time
+		if (!isset($this->parameters['data']['creationTime'])) {
+			$this->parameters['data']['creationTime'] = TIME_NOW;
+		}
+		if (!isset($this->parameters['data']['lastEditTime'])) {
+			$this->parameters['data']['lastEditTime'] = $this->parameters['data']['creationTime'];
+		}
+
+		// create page itself
+		$page = parent::create();
+		$pageEditor = new PageEditor($page);
+
+		// check if first page
 		if (PageCache::getInstance()->getHomePage() === null) {
-			$editor = new PageEditor($page);
-			$editor->setAsHome();
+			$pageEditor->setAsHome();
 		}
 
 		PagePermissionCacheBuilder::getInstance()->reset();
-		$this->objects = array(
-			new PageEditor($page)
-		);
+		$this->objects = array($pageEditor);
 
 		return $page;
 	}
@@ -404,6 +421,25 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function unmarkAll() {
 		ClipboardHandler::getInstance()->removeItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.page'));
+	}
+
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::update()
+	 */
+	public function update() {
+		// set default values for last editor
+		if (!isset($this->parameters['data']['lastEditorID'])) {
+			$this->parameters['data']['lastEditorID'] = WCF::getUser()->userID;
+			$this->parameters['data']['lastEditorName'] = WCF::getUser()->username;
+		}
+
+		// set default value for last edit time
+		if (!isset($this->parameters['data']['lastEditTime'])) {
+			$this->parameters['data']['lastEditTime'] = TIME_NOW;
+		}
+
+		// perform update
+		parent::update();
 	}
 
 	/**
