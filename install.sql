@@ -19,7 +19,7 @@ CREATE TABLE cms1_page (
 	showSidebar INT(1) DEFAULT 0,
 	invisible TINYINT(1) DEFAULT 0,
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
-	styleID INT(10) DEFAULT NULL.
+	styleID INT(10) DEFAULT NULL,
 	comments INT(10) NOT NULL DEFAULT 0,
 	clicks INT (20) NOT NULL DEFAULT 0,
 	stylesheets MEDIUMTEXT
