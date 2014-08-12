@@ -13,7 +13,7 @@ use wcf\system\WCF;
  * @package de.codequake.cms
  * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  */
-class TextContentType extends AbstractContentType {
+class TextContentType extends AbstractSearchableContentType {
 
 	protected $icon = 'icon-file-text-alt';
 
@@ -25,10 +25,14 @@ class TextContentType extends AbstractContentType {
 		'text'
 	);
 
+	protected $searchableFields = array(
+		'text'
+	);
+
 	public function getFormTemplate() {
 		//init bbcodes
 		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
-		
+
 		return 'textContentType';
 	}
 
