@@ -205,7 +205,6 @@
 		<item name="cms.acp.page.general.menuItem"><![CDATA[Add menu item]]></item>
 		<item name="cms.acp.page.general.menuItem.description"><![CDATA[]]>
 		</item>
-		<item name="cms.acp.page.alias.error.sort"><![CDATA[Sorting failed - Existing Alias!]]></item>
 		<item name="cms.acp.page.alias.error.notUnique"><![CDATA[Alias exists!]]></item>
 		<item name="cms.acp.page.alias.error.notValid"><![CDATA[Invalid Alias!]]></item>
 		<item name="cms.acp.page.alias.preview"><![CDATA[Link-Preview:]]></item>
