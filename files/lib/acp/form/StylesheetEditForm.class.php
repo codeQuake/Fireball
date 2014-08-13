@@ -67,12 +67,10 @@ class StylesheetEditForm extends StylesheetAddForm {
 	 * @see	\wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
-		AbstractForm::assignVariables();
+		parent::assignVariables();
 
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
-			'title' => $this->title,
-			'less' => $this->less,
 			'sheetID' => $this->sheetID
 		));
 	}
