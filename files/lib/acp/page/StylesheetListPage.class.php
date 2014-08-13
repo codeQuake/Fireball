@@ -2,6 +2,8 @@
 namespace cms\acp\page;
 
 use wcf\page\SortablePage;
+use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\WCF;
 
 /**
  * Shows a list of stylesheets.
@@ -12,16 +14,39 @@ use wcf\page\SortablePage;
  * @package	de.codequake.cms
  */
 class StylesheetListPage extends SortablePage {
-
-	public $objectListClassName = 'cms\data\stylesheet\StylesheetList';
-
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.stylesheet.list';
 
+	/**
+	 * @see	\wcf\page\SortablePage::$defaultSortField
+	 */
+	public $defaultSortField = 'title';
+
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
 	public $neededPermissions = array('admin.cms.style.canListStylesheet');
 
-	public $templateName = 'stylesheetList';
+	/**
+	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
+	 */
+	public $objectListClassName = 'cms\data\stylesheet\StylesheetList';
 
-	public $defaultSortfield = 'sheetID';
-
+	/**
+	 * @see	\wcf\page\SortablePage::$validSortFields
+	 */
 	public $validSortFields = array('sheetID', 'title');
+
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
+
+		WCF::getTPL()->assign(array(
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.stylesheet'))
+		));
+	}
 }

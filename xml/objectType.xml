@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/objectType.xsd">
 	<import>
 		<!-- clipboard -->
 		<type>
 			<name>de.codequake.cms.page</name>
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
 			<listclassname>cms\data\page\PageList</listclassname>
+		</type>
+		<type>
+			<name>de.codequake.cms.stylesheet</name>
+			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+			<listclassname>cms\data\stylesheet\StylesheetList</listclassname>
 		</type>
 		<!-- /clipbaord -->
 
