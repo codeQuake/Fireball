@@ -225,35 +225,14 @@ class PageEditForm extends PageAddForm {
 	 * @see	\wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
-		AbstractForm::assignVariables();
+		parent::assignVariables();
 
-		I18nHandler::getInstance()->assignVariables(! empty($_POST));
-		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
+		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
-			'objectTypeID' => $this->objectTypeID,
-			'invisible' => $this->invisible,
-			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
-			'robots' => $this->robots,
-			'alias' => $this->alias,
-			'parentID' => $this->parentID,
-			'showOrder' => $this->showOrder,
-			'pageList' => $this->pageList,
 			'pageID' => $this->pageID,
-			'title' => $this->title,
-			'description' => $this->description,
-			'metaDescription' => $this->metaDescription,
-			'metaKeywords' => $this->metaKeywords,
-			'menu' => $this->menuItem,
-			'showSidebar' => $this->showSidebar,
-			'sidebarOrientation' => $this->sidebarOrientation,
-			'page' => $this->page,
-			'isCommentable' => $this->isCommentable,
-			'availableStyles' => $this->availableStyles,
-			'styleID' => $this->styleID,
-			'stylesheets' => $this->stylesheets,
-			'stylesheetList' => $this->stylesheetList->getObjects()
+			'page' => $this->page
 		));
 	}
 }

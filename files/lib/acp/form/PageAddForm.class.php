@@ -111,11 +111,15 @@ class PageAddForm extends AbstractForm {
 		$this->availableStyles = StyleHandler::getInstance()->getStyles();
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::readFormParameters()
+	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
+
 		I18nHandler::getInstance()->readValues();
+
 		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
-		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
 		if (I18nHandler::getInstance()->isPlainValue('metaDescription')) $this->metaDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('metaDescription'));
 		if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
 		if (isset($_POST['alias'])) $this->alias = StringUtil::trim($_POST['alias']);
@@ -136,16 +140,14 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['stylesheets']) && is_array($_POST['stylesheets'])) $this->stylesheets = ArrayUtil::toIntegerArray($_POST['stylesheets']);
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::validate()
+	 */
 	public function validate() {
 		parent::validate();
 
-		if (! I18nHandler::getInstance()->validateValue('title')) {
-			if (I18nHandler::getInstance()->isPlainValue('title')) {
-				throw new UserInputException('title');
-			}
-			else {
-				throw new UserInputException('title', 'multilingual');
-			}
+		if (!I18nHandler::getInstance()->validateValue('title')) {
+			throw new UserInputException('title', 'multilingual');
 		}
 
 		// validate alias
@@ -318,9 +320,12 @@ class PageAddForm extends AbstractForm {
 			'invisible' => $this->invisible,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'robots' => $this->robots,
+			'description' => $this->description,
 			'alias' => $this->alias,
 			'parentID' => $this->parentID,
 			'showOrder' => $this->showOrder,
+			'metaDescription' => $this->metaDescription,
+			'metaKeywords' => $this->metaKeywords,
 			'menu' => $this->menuItem,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
