@@ -387,7 +387,10 @@
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete.confirmMessage"><![CDATA[{if $count == 1}Eine Seite{else}{#$count} Seiten{/if} löschen?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.disable"><![CDATA[Deaktivieren ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.enable"><![CDATA[Aktivieren ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.stylesheet.delete"><![CDATA[Löschen ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.stylesheet.delete.confirmMessage"><![CDATA[{if $count == 1}Ein Stylesheet{else}{#$count} Stylesheets{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.page.marked"><![CDATA[{if $count == 1}Eine Seite{else}{#$count} Seiten{/if} markiert]]></item>
+		<item name="wcf.clipboard.label.de.codequake.cms.stylesheet.marked"><![CDATA[{if $count == 1}Ein Stylesheet{else}{#$count} Stylesheets{/if} markiert]]></item>
 	</category>
 
 	<category name="wcf.dashboard">

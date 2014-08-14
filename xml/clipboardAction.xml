@@ -24,5 +24,15 @@
 			</pages>
 		</action>
 		<!-- /page -->
+
+		<!-- stylesheet -->
+		<action name="delete">
+			<actionclassname>cms\system\clipboard\action\StylesheetClipboardAction</actionclassname>
+			<showorder>1</showorder>
+			<pages>
+				<page>cms\acp\page\StylesheetListPage</page>
+			</pages>
+		</action>
+		<!-- /stylesheet -->
 	</import>
 </data>
