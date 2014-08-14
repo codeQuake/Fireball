@@ -201,7 +201,6 @@
 		<item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
 		<item name="cms.acp.page.alias"><![CDATA[Abkürzung]]></item>
-		<item name="cms.acp.page.alias.error.sort"><![CDATA[Sortierung fehlgeschlagen - Alias-Dopplung]]></item>
 		<item name="cms.acp.page.alias.error.notUnique"><![CDATA[Auf dieser Ebene existiert bereits eine Seite, die die gleiche Abkürzung besitzt.]]></item>
 		<item name="cms.acp.page.alias.error.notValid"><![CDATA[Die eingegebene Abkürzung ist ungültig.]]></item>
 		<item name="cms.acp.page.alias.preview"><![CDATA[Link-Vorschau:]]></item>
