@@ -145,9 +145,11 @@ class BackupHandler extends SingletonFactory{
 						if (isset($parentIDs[$import[$object.'ID']])) {
 							$editorName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
 							$cacheName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Cache';
-							$editor = new $editorName($cacheName::getInstance()->{'get'.ucfirst($object)}($import[$object.'ID']));
-							$update['parentID'] = $parentIDs[$import[$object.'ID']];
-							$editor->update($update);
+							if ($cacheName::getInstance()->{'get'.ucfirst($object)}($import[$object.'ID']) !== null) {
+								$editor = new $editorName($cacheName::getInstance()->{'get'.ucfirst($object)}($import[$object.'ID']));
+								$update['parentID'] = $parentIDs[$import[$object.'ID']];
+								$editor->update($update);
+							}
 						}
 					}
 				}
