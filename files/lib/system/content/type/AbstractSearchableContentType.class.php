@@ -20,9 +20,10 @@ abstract class AbstractSearchableContentType extends AbstractContentType impleme
 
 	public function getSearchableData(Content $content) {
 		foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
+			$this->searchIndexData[$language->languageID] = array();
 			foreach ($this->searchableFields as $field) {
 				$data = @unserialize($content->contentData);
-				$this->searchIndexData[$language->languageID][] = $language->get($data[$field]);
+				if (is_array($data) && !empty($data)) $this->searchIndexData[$language->languageID][] = $language->get($data[$field]);
 			}
 			$this->searchIndexData[$language->languageID] = implode("\n", $this->searchIndexData[$language->languageID]);
 		}

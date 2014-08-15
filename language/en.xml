@@ -384,6 +384,11 @@
 		<item name="wcf.acp.pageMenu.parameters.notice"><![CDATA[If you want to link a CMS-Page please input the page's ID. e.g.: id=1]]></item>
 	</category>
 
+	<category name="wcf.acp.rebuildData">
+		<item name="wcf.acp.rebuildData.de.codequake.cms.page"><![CDATA[Seiten aktualisieren]]></item>
+		<item name="wcf.acp.rebuildData.de.codequake.cms.page.description"><![CDATA[Aktualisiert den Suchindex aller Fireball CMS Seiten]]></item>
+	</category>
+
 	<category name="wcf.clipboard">
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete"><![CDATA[Delete ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete.confirmMessage"><![CDATA[Do you really want to delete {#$count} page{if $count != 1}s{/if}?]]></item>
@@ -402,6 +407,11 @@
 
 	<category name="wcf.page">
 		<item name="wcf.page.sitemap.cms"><![CDATA[Pages]]></item>
+	</category>
+
+	<category name="wcf.search">
+		<item name="wcf.search.type.de.codequake.cms.page"><![CDATA[Pages]]></item>
+		<item name="wcf.search.object.de.codequake.cms.page"><![CDATA[Page]]></item>
 	</category>
 
 	<category name="wcf.user.notification">

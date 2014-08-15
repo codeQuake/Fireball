@@ -251,5 +251,13 @@
 			<classname>cms\system\user\activity\event\PageCommentResponseUserActivityEvent</classname>
 		</type>
 		<!-- /recent activity -->
+
+		<!-- rebuild data worker -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
+			<classname>cms\system\worker\PageRebuildDataWorker</classname>
+		</type>
+		<!-- /rebuild data worker -->
 	</import>
 </data>

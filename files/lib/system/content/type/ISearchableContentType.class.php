@@ -1,8 +1,8 @@
 <?php
 namespace cms\system\content\type;
 
-
 use cms\data\content\Content;
+
 /**
  * Interface for searchable Contenttypes
  *

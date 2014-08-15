@@ -8,6 +8,7 @@ use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
+use cms\system\content\type\ISearchableContentType;
 use cms\system\revision\PageRevisionHandler;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
@@ -19,11 +20,10 @@ use wcf\system\exception\AJAXException;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
-use wcf\system\request\LinkHandler;
 use wcf\system\language\LanguageFactory;
+use wcf\system\request\LinkHandler;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
-use cms\system\content\type\ISearchableContentType;
 
 /**
  * Executes page-related actions.
@@ -360,7 +360,8 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
 		}
-		SearchIndexManager::getInstance()->delete('de.codequake.cms.page', $pageIDs);
+
+		if (!isset($this->parameters['isBulkProcessing']) || !$this->parameters['isBulkProcessing']) SearchIndexManager::getInstance()->delete('de.codequake.cms.page', $pageIDs);
 
 		foreach ($this->objects as $pageEditor) {
 			$contents = $pageEditor->getDecoratedObject()->getContents();
@@ -404,7 +405,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				);
 			}
 		}
-
 
 	}
 
