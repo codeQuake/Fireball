@@ -21,8 +21,7 @@
 		<item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
 		<item name="cms.acp.content.general.title"><![CDATA[Titel]]></item>
-		<item name="cms.acp.content.list"><![CDATA[Inhalte von '{$page->title|language}']]></item>
-		<item name="cms.acp.content.listing"><![CDATA[Inhalte auflisten]]></item>
+		<item name="cms.acp.content.list"><![CDATA[Inhalte auflisten]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
 		<item name="cms.acp.content.position.position.body"><![CDATA[Inhaltsbereich]]></item>
@@ -194,7 +193,7 @@
 		<item name="cms.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts oder mit Konvertierungsplugin auch von CMS Version 1.1.2 pl 2 möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließen Sie auf keinen Fall das Fenster und achten Sie darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
 		<item name="cms.acp.page.import.tar"><![CDATA[Archiv]]></item>
 		<item name="cms.acp.page.legend"><![CDATA[Legende]]></item>
-		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
+		<item name="cms.acp.page.list"><![CDATA[Seiten auflisten]]></item>
 		<item name="cms.acp.page.list.description"><![CDATA[Seiten bilden die Grundlage des Fireball CMS. Erstellen Sie eine Seite um dieser später Inhalte verschiedener Typen zuordnen zu können.]]></item>
 		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
 		<item name="cms.acp.page.meta"><![CDATA[Meta-Informationen]]></item>
@@ -206,6 +205,7 @@
 		<item name="cms.acp.page.meta.robots.noindexfollow"><![CDATA[Seite nicht indizieren, aber Links folgen]]></item>
 		<item name="cms.acp.page.meta.robots.noindexnofollow"><![CDATA[Seite nicht indizieren und keinem Link folgen]]></item>
 		<item name="cms.acp.page.metaDescription.description"><![CDATA[Das meta-Element Attribut “description” wird laut Google nicht zur Berechnung des Rankings ausgewertet, ist aber maßgeblich für die CTR (Click-Through-Rate) von Usern ausschlaggebend und sollte demnach Beachtung finden.]]></item>
+		<item name="cms.acp.page.page"><![CDATA[Seite]]></item>
 		<item name="cms.acp.page.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.page.position.description"><![CDATA[Legt die Reihenfolge fest, in der die Seiten aufgelistet werden.]]></item>
 		<item name="cms.acp.page.position.invisible"><![CDATA[Seite verstecken]]></item>
@@ -257,7 +257,7 @@
 		<item name="cms.acp.stylesheet.general"><![CDATA[Allgemeine Einstellungen]]></item>
 		<item name="cms.acp.stylesheet.less"><![CDATA[CSS & Less]]></item>
 		<item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Sie haben zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins.]]></item>
-		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
 		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
 		<item name="cms.acp.stylesheet.title"><![CDATA[Titel]]></item>
 	</category>
