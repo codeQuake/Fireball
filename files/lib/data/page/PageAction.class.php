@@ -372,7 +372,8 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			//body
 			foreach ($contents['body'] as $content) {
 				if ($content->getObjectType()->getProcessor() instanceof ISearchableContentType) {
-					$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData();
+					$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData($content->getDecoratedObject());
+
 					foreach ($searchIndexData as $languageID => $data) {
 						if (!empty($metaData[$languageID])) $metaData[$languageID] .= "\n";
 						$metaData[$languageID] .= $data;
@@ -382,14 +383,13 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			//sidebar
 			foreach ($contents['sidebar'] as $content) {
 				if ($content->getObjectType()->getProcessor() instanceof ISearchableContentType) {
-					$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData();
+					$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData($content->getDecoratedObject());
 					foreach ($searchIndexData as $languageID => $data) {
 						if (!empty($metaData[$languageID])) $metaData[$languageID] .= "\n";
 						$metaData[$languageID] .= $data;
 					}
 				}
 			}
-
 			foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
 				SearchIndexManager::getInstance()->add(
 							'de.codequake.cms.page',
@@ -400,7 +400,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 							$pageEditor->authorID,
 							$pageEditor->authorName,
 							$language->languageID,
-							$metaData[$language->language]
+							isset($metaData[$language->languageID])? $metaData[$language->languageID]: ''
 				);
 			}
 		}

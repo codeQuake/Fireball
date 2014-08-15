@@ -1,6 +1,8 @@
 <?php
 namespace cms\system\content\type;
 
+
+use cms\data\content\Content;
 /**
  * Interface for searchable Contenttypes
  *
@@ -17,6 +19,6 @@ interface ISearchableContentType {
 	 *
 	 * @return	array
 	 */
-	public function getSearchableData();
+	public function getSearchableData(Content $content);
 
 }

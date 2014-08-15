@@ -35,12 +35,12 @@ class SearchResultPage extends ViewablePage implements ISearchResultObject {
 	}
 
 	public function getSubject() {
-		$this->getDecoratedObject()->getTitle();
+		return $this->title;
 	}
 
 	public function getUserProfile() {
 		if ($this->userProfile === null) {
-			$this->userProfile = new UserProfile(new User(null, $this->getDecoratedObject()->data));
+			$this->userProfile = new UserProfile(new User($this->authorID));
 		}
 
 		return $this->userProfile;

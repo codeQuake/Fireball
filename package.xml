@@ -135,6 +135,8 @@
 
 		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 
 		<!-- others -->
 		<instruction type="sql">update_beta7.sql</instruction>

@@ -1,6 +1,7 @@
 <?php
 namespace cms\system\content\type;
 
+use cms\data\content\Content;
 use wcf\system\language\LanguageFactory;
 use wcf\system\WCF;
 
@@ -17,14 +18,14 @@ abstract class AbstractSearchableContentType extends AbstractContentType impleme
 	protected $searchableFields = array();
 	public $searchIndexData = array();
 
-	public function getSearchableData() {
+	public function getSearchableData(Content $content) {
 		foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
 			foreach ($this->searchableFields as $field) {
-				$this->searchIndexData[$language->languageID][] = $language->get($this->{$field});
+				$data = @unserialize($content->contentData);
+				$this->searchIndexData[$language->languageID][] = $language->get($data[$field]);
 			}
 			$this->searchIndexData[$language->languageID] = implode("\n", $this->searchIndexData[$language->languageID]);
 		}
-
 		return $this->searchIndexData;
 	}
 }

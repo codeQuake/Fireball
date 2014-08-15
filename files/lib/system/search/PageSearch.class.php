@@ -1,5 +1,7 @@
 <?php
-namespace cms\page\search;
+namespace cms\system\search;
+
+use cms\data\page\SearchResultPageList;
 use wcf\system\search\AbstractSearchableObjectType;
 
 /**
@@ -41,14 +43,14 @@ class PageSearch extends AbstractSearchableObjectType {
 	}
 
 	public function getSubjectFieldName() {
-		return $this->getTableName() . 'title';
+		return $this->getTableName() . '.title';
 	}
 
 	public function getTimeFieldName() {
-		return $this->getTableName() . 'creationTime';
+		return $this->getTableName() . '.creationTime';
 	}
 
 	public function getUsernameFieldName() {
-		return $this->getTableName() . 'authorName';
+		return $this->getTableName() . '.authorName';
 	}
 }
