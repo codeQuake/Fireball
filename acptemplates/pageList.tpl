@@ -90,7 +90,7 @@
 								<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revisions{/lang}" data-object-id="{@$page->pageID}"></span>
 								<!-- content controls -->
 								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$page->pageID}"></span>
-								<a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
+								<a href="{link controller='ContentList' pageID=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
 							{event name='itemButtons'}
 							</span>
 						</span>
@@ -124,7 +124,7 @@
 					<li><span class="icon icon16 icon-copy"></span> <span>{lang}cms.acp.page.copy{/lang}</span></li>
 					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.page.revisions{/lang}</span></li>
 					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
-					<li><span class="icon icon16 icon-file"></span> <span>{lang}cms.acp.content.listing{/lang}</span></li>
+					<li><span class="icon icon16 icon-file"></span> <span>{lang}cms.acp.content.list{/lang}</span></li>
 				</ul>
 			</li>
 			<li class="box32">

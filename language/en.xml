@@ -22,7 +22,6 @@
 		<item name="cms.acp.content.general.pageID"><![CDATA[Page]]></item>
 		<item name="cms.acp.content.general.title"><![CDATA[Title]]></item>
 		<item name="cms.acp.content.list"><![CDATA[List contents]]></item>
-		<item name="cms.acp.content.listing"><![CDATA[List contents]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Parent content]]></item>
 		<item name="cms.acp.content.position.position.body"><![CDATA[Body]]></item>

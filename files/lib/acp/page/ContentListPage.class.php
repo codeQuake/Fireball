@@ -3,6 +3,7 @@ namespace cms\acp\page;
 
 use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\PageCache;
+use cms\data\page\PageNodeTree;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
@@ -27,6 +28,10 @@ class ContentListPage extends AbstractPage {
 	 */
 	public $neededPermissions = array('admin.cms.page.canListPage');
 
+	/**
+	 * list of pages
+	 * @var	\RecursiveIteratorIterator
+	 */
 	public $pageList = null;
 
 	public $objectTypeList = null;
@@ -41,8 +46,13 @@ class ContentListPage extends AbstractPage {
 	public function readParameters() {
 		parent::readParameters();
 
-		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
-		else throw new IllegalLinkException();
+		if (isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
+		if ($this->pageID) {
+			$this->page = PageCache::getInstance()->getPage($this->pageID);
+			if ($this->page === null) {
+				throw new IllegalLinkException();
+			}
+		}
 	}
 
 	/**
@@ -51,7 +61,9 @@ class ContentListPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 
-		$this->page = PageCache::getInstance()->getPage($this->pageID);
+		$pageNodeTree = new PageNodeTree(0, 1);
+		$this->pageList = $pageNodeTree->getIterator();
+
 		$this->contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body', 1);
 		$this->contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar', 1);
 		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
@@ -68,7 +80,9 @@ class ContentListPage extends AbstractPage {
 			'contentListBody' => $this->contentListBody->getIterator(),
 			'contentListSidebar' => $this->contentListSidebar->getIterator(),
 			'objectTypeList' => $this->objectTypeList,
-			'page' => $this->page
+			'pageID' => $this->pageID,
+			'page' => $this->page,
+			'pageList' => $this->pageList
 		));
 	}
 }
