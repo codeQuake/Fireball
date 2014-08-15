@@ -178,6 +178,10 @@ class PageEditForm extends PageAddForm {
 		));
 		$objectAction->executeAction();
 
+		//update search index
+		$objectAction = new PageAction(array($this->pageID), 'refreshSearchIndex');
+		$objectAction->executeAction();
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
 	}

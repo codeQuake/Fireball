@@ -6,6 +6,7 @@ use cms\data\content\ContentCache;
 use cms\data\content\ContentEditor;
 use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\Page;
+use cms\data\page\PageAction;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
@@ -161,7 +162,7 @@ class ContentAddForm extends AbstractForm {
 
 		$this->objectTypeProcessor->validate($this->contentData);
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->validate();
-		
+
 		//if this happens, user is a retard
 		$position = array(
 			'body',
@@ -170,7 +171,7 @@ class ContentAddForm extends AbstractForm {
 		if (! in_array($this->position, $position)) throw new UserInputException('position');
 		if ($this->position == 'sidebar' && ! $this->objectType->allowsidebar) throw new UserInputException('position');
 		if ($this->position == 'body' && ! $this->objectType->allowcontent) throw new UserInputException('position');
-		
+
 		//validate showOrder
 		if ($this->showOrder == 0) {
 			$childIDs = ContentCache::getInstance()->getChildIDs($this->parentID ?  : null);
@@ -192,7 +193,7 @@ class ContentAddForm extends AbstractForm {
 			else
 				$this->showOrder = 1;
 		}
-		
+
 		if (! I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
@@ -201,10 +202,10 @@ class ContentAddForm extends AbstractForm {
 				throw new UserInputException('title', 'multilingual');
 			}
 		}
-		
+
 		$this->page = new Page($this->pageID);
 		if ($this->page === null) throw new UserInputException('pageID', 'invalid');
-		
+
 		//validate if parent is tabmenu, fallback to a cssID
 		if ($this->parentID) {
 			$parent = ContentCache::getInstance()->getContent($this->parentID);
@@ -238,7 +239,7 @@ class ContentAddForm extends AbstractForm {
 		$contentID = $returnValues['returnValues']->contentID;
 		$contentData = @unserialize($returnValues['returnValues']->contentData);
 		$update = array();
-		
+
 		// save polls
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
 			$pollID = PollManager::getInstance()->save($returnValues['returnValues']->contentID);
@@ -246,12 +247,12 @@ class ContentAddForm extends AbstractForm {
 				$contentData['pollID'] = $pollID;
 			}
 		}
-		
+
 		if (! I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
-		
+
 		if ($this->objectTypeProcessor->isMultilingual) {
 			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
 				if (! I18nHandler::getInstance()->isPlainValue($field)) {
@@ -260,14 +261,14 @@ class ContentAddForm extends AbstractForm {
 				}
 			}
 		}
-		
+
 		$update['contentData'] = serialize($contentData);
-		
+
 		if (! empty($update)) {
 			$editor = new ContentEditor($returnValues['returnValues']);
 			$editor->update($update);
 		}
-		
+
 		//create revision
 		$objectAction = new ContentAction(array(
 			$returnValues['returnValues']->contentID
@@ -275,13 +276,17 @@ class ContentAddForm extends AbstractForm {
 			'action' => 'create'
 		));
 		$objectAction->executeAction();
-		
+
+		//update search index
+		$objectAction = new PageAction(array($returnValues['returnValues']->pageID), 'refreshSearchIndex');
+		$objectAction->executeAction();
+
 		$this->saved();
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(
 			'application' => 'cms',
 			'object' => new Page($this->pageID)
 		)));
-	
+
 	}
 
 	/**

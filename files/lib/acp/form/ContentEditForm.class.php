@@ -7,6 +7,7 @@ use cms\data\content\ContentCache;
 use cms\data\content\ContentEditor;
 use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\Page;
+use cms\data\page\PageAction;
 use wcf\form\AbstractForm;
 use wcf\system\language\I18nHandler;
 use wcf\system\poll\PollManager;
@@ -111,6 +112,11 @@ class ContentEditForm extends ContentAddForm {
 			'action' => 'update'
 		));
 		$objectAction->executeAction();
+
+		//update search index
+		$objectAction = new PageAction(array($this->pageID), 'refreshSearchIndex');
+		$objectAction->executeAction();
+
 		$this->saved();
 
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(

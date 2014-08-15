@@ -282,6 +282,10 @@ class PageAddForm extends AbstractForm {
 		));
 		$objectAction->executeAction();
 
+		//update search index
+		$objectAction = new PageAction(array($returnValues['returnValues']->pageID), 'refreshSearchIndex');
+		$objectAction->executeAction();
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
 		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';

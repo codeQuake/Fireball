@@ -20,7 +20,10 @@ use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
+use wcf\system\language\LanguageFactory;
+use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
+use cms\system\content\type\ISearchableContentType;
 
 /**
  * Executes page-related actions.
@@ -197,6 +200,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @see	\wcf\data\IDeleteAction::delete()
 	 */
 	public function delete() {
+
+		// update search index
+		if (!empty($this->objectIDs)) {
+			SearchIndexManager::getInstance()->delete('de.codequake.cms.page', $this->objectIDs);
+		}
+
 		// delete all contents belonging to the pages
 		foreach ($this->objectIDs as $objectID) {
 			$page = new Page($objectID);
@@ -337,6 +346,66 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			'revisions' => $revisions,
 			'pageID' => $page->pageID
 		);
+	}
+
+	/**
+	 * Refreshes the search index
+	 */
+	public function refreshSearchIndex() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+
+		$pageIDs = array();
+		foreach ($this->objects as $pageEditor) {
+			$pageIDs[] = $pageEditor->pageID;
+		}
+		SearchIndexManager::getInstance()->delete('de.codequake.cms.page', $pageIDs);
+
+		foreach ($this->objects as $pageEditor) {
+			$contents = $pageEditor->getDecoratedObject()->getContents();
+
+			$metaData = array();
+			foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
+				$metaData[$language->languageID] = '';
+			}
+			//body
+			foreach ($contents['body'] as $content) {
+				if ($content->getObjectType()->getProcessor() instanceof ISearchableContentType) {
+					$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData();
+					foreach ($searchIndexData as $languageID => $data) {
+						if (!empty($metaData[$languageID])) $metaData[$languageID] .= "\n";
+						$metaData[$languageID] .= $data;
+					}
+				}
+			}
+			//sidebar
+			foreach ($contents['sidebar'] as $content) {
+				if ($content->getObjectType()->getProcessor() instanceof ISearchableContentType) {
+					$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData();
+					foreach ($searchIndexData as $languageID => $data) {
+						if (!empty($metaData[$languageID])) $metaData[$languageID] .= "\n";
+						$metaData[$languageID] .= $data;
+					}
+				}
+			}
+
+			foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
+				SearchIndexManager::getInstance()->add(
+							'de.codequake.cms.page',
+							$pageEditor->pageID,
+							$language->get($pageEditor->description),
+							$language->get($pageEditor->title),
+							$pageEditor->creationTime,
+							$pageEditor->authorID,
+							$pageEditor->authorName,
+							$language->languageID,
+							$metaData[$language->language]
+				);
+			}
+		}
+
+
 	}
 
 	/**
