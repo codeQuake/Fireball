@@ -1,43 +1,54 @@
 {include file='header' pageTitle='cms.acp.page.list'}
 
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
+<script data-relocate="true">
+	//<![CDATA[
+	$(function() {
+		WCF.Language.addObject({
+			{foreach from=$objectTypeList item=type}
+				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
+			{/foreach}
+			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
+			'cms.acp.page.revisions': '{lang}cms.acp.page.revisions{/lang}',
+			'cms.acp.page.revision.action.create': '{lang}cms.acp.page.revision.action.create{/lang}',
+			'cms.acp.page.revision.action.update': '{lang}cms.acp.page.revision.action.update{/lang}',
+			'cms.acp.page.revision.action.updatePosition': '{lang}cms.acp.page.revision.action.updatePosition{/lang}',
+			'cms.acp.page.revision.action.setAsHome': '{lang}cms.acp.page.revision.action.setAsHome{/lang}',
+			'cms.acp.page.revision.action.restore': '{lang}cms.acp.page.revision.action.restore{/lang}'
+		});
+
+		var deleteAction = new WCF.Action.NestedDelete('cms\\data\\page\\PageAction', '.jsPageRow');
+		var toggleAction = new WCF.Action.Toggle('cms\\data\\page\\PageAction', '.jsPageRow', '> .sortableNodeLabel > .buttons > .jsToggleButton');
+
+		var actionObjects = { };
+		actionObjects['de.codequake.cms.page'] = { };
+		actionObjects['de.codequake.cms.page']['disable'] = actionObjects['de.codequake.cms.page']['enable'] = toggleAction;
+		actionObjects['de.codequake.cms.page']['delete'] = deleteAction;
+
+		WCF.Clipboard.init('cms\\acp\\page\\PageListPage', {@$hasMarkedItems}, actionObjects);
+
+		new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction', 0, {
+			isAllowed: function (item, parent) {
+				if (parent === null) {
+					parent = $('#pageList');
+				}
+
+				// check whether there is an other page with the same alias next to this one.
+				return (parent.children('ol').children('li.sortableNode[data-alias="'+ item.data('alias') +'"]:not(#'+ item.wcfIdentify() +')').length == 0);
+			}
+		});
+
+		new CMS.ACP.Copy('.jsCopyButton', 'cms\\data\\page\\PageAction');
+		new CMS.ACP.Page.AddContent();
+		new CMS.ACP.Page.SetAsHome();
+		new CMS.ACP.Page.Revisions();
+	});
+	//]]>
+</script>
+
 <header class="boxHeadline">
 	<h1>{lang}cms.acp.page.list{/lang}</h1>
 	<p>{lang}cms.acp.page.list.description{/lang}</p>
-	<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
-	<script data-relocate="true">
-		//<![CDATA[
-		$(function() {
-			WCF.Language.addObject({
-				{foreach from=$objectTypeList item=type}
-					'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
-				{/foreach}
-				'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
-				'cms.acp.page.revisions': '{lang}cms.acp.page.revisions{/lang}',
-				'cms.acp.page.revision.action.create': '{lang}cms.acp.page.revision.action.create{/lang}',
-				'cms.acp.page.revision.action.update': '{lang}cms.acp.page.revision.action.update{/lang}',
-				'cms.acp.page.revision.action.updatePosition': '{lang}cms.acp.page.revision.action.updatePosition{/lang}',
-				'cms.acp.page.revision.action.setAsHome': '{lang}cms.acp.page.revision.action.setAsHome{/lang}',
-				'cms.acp.page.revision.action.restore': '{lang}cms.acp.page.revision.action.restore{/lang}'
-			});
-
-			var deleteAction = new WCF.Action.NestedDelete('cms\\data\\page\\PageAction', '.jsPageRow');
-			var toggleAction = new WCF.Action.Toggle('cms\\data\\page\\PageAction', '.jsPageRow', '> .sortableNodeLabel > .buttons > .jsToggleButton');
-
-			var actionObjects = { };
-			actionObjects['de.codequake.cms.page'] = { };
-			actionObjects['de.codequake.cms.page']['disable'] = actionObjects['de.codequake.cms.page']['enable'] = toggleAction;
-			actionObjects['de.codequake.cms.page']['delete'] = deleteAction;
-
-			WCF.Clipboard.init('cms\\acp\\page\\PageListPage', {@$hasMarkedItems}, actionObjects);
-
-			new WCF.Sortable.List('pageList', 'cms\\data\\page\\PageAction');
-			new CMS.ACP.Copy('.jsCopyButton', 'cms\\data\\page\\PageAction');
-			new CMS.ACP.Page.AddContent();
-			new CMS.ACP.Page.SetAsHome();
-			new CMS.ACP.Page.Revisions();
-		});
-		//]]>
-	</script>
 </header>
 
 <div class="contentNavigation">
@@ -59,7 +70,7 @@
 				{assign var=oldDepth value=0}
 				{foreach from=$pageList item=page}
 					{section name=i loop=$oldDepth-$pageList->getDepth()}</ol></li>{/section}
-					<li class="page jsPageRow sortableNode jsClipboardObject" data-object-id="{$page->pageID}">
+					<li class="page jsPageRow sortableNode jsClipboardObject" data-alias="{$page->alias}" data-object-id="{$page->pageID}">
 						<span class="sortableNodeLabel">
 							<span class="title">
 								<input type="checkbox" class="jsClipboardItem" data-object-id="{@$page->pageID}" />

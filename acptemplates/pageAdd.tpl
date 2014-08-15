@@ -65,8 +65,8 @@
 						<input type="text" id="title" name="title" value="{$i18nPlainValues['title']}" class="long" required="required" />
 						{if $errorField == 'title'}
 							<small class="innerError">
-								{if $errorType == 'empty'}
-									{lang}wcf.global.form.error.empty{/lang}
+								{if $errorType == 'multilingual'}
+									{lang}wcf.global.form.error.multilingual{/lang}
 								{else}
 									{lang}cms.acp.page.title.error.{@$errorType}{/lang}
 								{/if}

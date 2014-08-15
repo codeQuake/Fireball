@@ -156,24 +156,12 @@ class ContentEditForm extends ContentAddForm {
 	 * @see	\wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
-		AbstractForm::assignVariables();
+		parent::assignVariables();
 
-		I18nHandler::getInstance()->assignVariables(! empty($_POST));
-		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->assignVariables();
+		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
-			'cssClasses' => $this->cssClasses,
-			'cssID' => $this->cssID,
-			'showOrder' => $this->showOrder,
-			'position' => $this->position,
-			'pageID' => $this->pageID,
-			'parentID' => $this->parentID,
-			'contentList' => $this->contentList,
-			'page' => new Page($this->pageID),
-			'objectType' => $this->objectType,
-			'objectTypeProcessor' => $this->objectTypeProcessor,
-			'contentData' => $this->contentData,
 			'contentID' => $this->contentID
 		));
 	}

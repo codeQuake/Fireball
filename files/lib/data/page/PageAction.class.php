@@ -515,18 +515,17 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @see	\wcf\data\ISortableAction::validateUpdatePosition()
 	 */
 	public function validateUpdatePosition() {
-		WCF::getSession()->checkPermissions(array(
-			'admin.cms.page.canAddPage'
-		));
+		WCF::getSession()->checkPermissions($this->permissionsUpdate);
 
-		if (! isset($this->parameters['data']['structure']) || ! is_array($this->parameters['data']['structure'])) {
+		if (!isset($this->parameters['data']['structure']) || !is_array($this->parameters['data']['structure'])) {
 			throw new UserInputException('structure');
 		}
 
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		foreach ($this->parameters['data']['structure'] as $parentID => $pageIDs) {
 			if ($parentID) {
-				if (! isset($pages[$parentID])) {
+				// validate parent page
+				if (!isset($pages[$parentID])) {
 					throw new UserInputException('structure');
 				}
 
@@ -535,11 +534,14 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 			$aliases = array();
 			foreach ($pageIDs as $pageID) {
-				if (! isset($pages[$pageID])) {
+				// validate page
+				if (!isset($pages[$pageID])) {
 					throw new UserInputException('structure');
 				}
+
+				// validate alias
 				if (in_array($pages[$pageID]->alias, $aliases)) {
-					throw new AJAXException(WCF::getLanguage()->get('cms.acp.page.alias.error.sort', 412));
+					throw new UserInputException('structure');
 				}
 				$aliases[] = $pages[$pageID]->alias;
 
@@ -559,8 +561,8 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 			foreach ($pageIDs as $pageID) {
 				$this->objects[$pageID]->update(array(
-					'parentID' => $parentID != 0 ? $this->objects[$parentID]->pageID : null,
-					'showOrder' => $position ++
+					'parentID' => ($parentID != 0) ? $this->objects[$parentID]->pageID : null,
+					'showOrder' => $position++
 				));
 			}
 		}

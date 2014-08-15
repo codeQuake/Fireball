@@ -220,6 +220,7 @@ class ContentAddForm extends AbstractForm {
 	 */
 	public function save() {
 		parent::save();
+
 		$data = array(
 			'title' => $this->title,
 			'pageID' => $this->pageID,
@@ -294,6 +295,7 @@ class ContentAddForm extends AbstractForm {
 	 */
 	public function readData() {
 		parent::readData();
+
 		$this->contentList = new DrainedPositionContentNodeTree(null, $this->pageID, null, $this->position);
 		$this->contentList = $this->contentList->getIterator();
 	}
@@ -303,8 +305,10 @@ class ContentAddForm extends AbstractForm {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
+
 		I18nHandler::getInstance()->assignVariables();
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->assignVariables();
+
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'cssClasses' => $this->cssClasses,
