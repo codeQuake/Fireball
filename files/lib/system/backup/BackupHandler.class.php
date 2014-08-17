@@ -8,8 +8,6 @@ use cms\data\file\FileAction;
 use cms\data\file\FileList;
 use cms\data\folder\FolderAction;
 use cms\data\folder\FolderList;
-use cms\data\layout\LayoutAction;
-use cms\data\layout\LayoutList;
 use cms\data\page\PageAction;
 use cms\data\stylesheet\StylesheetList;
 use wcf\data\object\type\ObjectTypeCache;
@@ -31,10 +29,9 @@ use wcf\util\XMLWriter;
 
 class BackupHandler extends SingletonFactory{
 
-	public $objects = array('page', 'content', 'stylesheet', 'layout','file', 'folder');
+	public $objects = array('page', 'content', 'stylesheet', 'file', 'folder');
 	protected $pages = null;
 	protected $contents = null;
-	protected $layouts = null;
 	protected $stylesheets = null;
 	protected $files = null;
 	protected $folders = null;
@@ -49,10 +46,6 @@ class BackupHandler extends SingletonFactory{
 		$list = new StylesheetList();
 		$list->readObjects();
 		$this->stylesheets = $list->getObjects();
-
-		$list = new LayoutList();
-		$list->readObjects();
-		$this->layouts = $list->getObjects();
 
 		$list = new FolderList();
 		$list->readObjects();
