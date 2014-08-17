@@ -205,7 +205,6 @@
 		<item name="cms.acp.page.meta.robots.noindexfollow"><![CDATA[Seite nicht indizieren, aber Links folgen]]></item>
 		<item name="cms.acp.page.meta.robots.noindexnofollow"><![CDATA[Seite nicht indizieren und keinem Link folgen]]></item>
 		<item name="cms.acp.page.metaDescription.description"><![CDATA[Das meta-Element Attribut “description” wird laut Google nicht zur Berechnung des Rankings ausgewertet, ist aber maßgeblich für die CTR (Click-Through-Rate) von Usern ausschlaggebend und sollte demnach Beachtung finden.]]></item>
-		<item name="cms.acp.page.page"><![CDATA[Seite]]></item>
 		<item name="cms.acp.page.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.page.position.description"><![CDATA[Legt die Reihenfolge fest, in der die Seiten aufgelistet werden.]]></item>
 		<item name="cms.acp.page.position.invisible"><![CDATA[Seite verstecken]]></item>
@@ -264,6 +263,10 @@
 
 	<category name="cms.content">
 		<item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
+	</category>
+
+	<category name="cms.global">
+		<item name="cms.global.page"><![CDATA[Seite]]></item>
 	</category>
 
 	<category name="cms.page">

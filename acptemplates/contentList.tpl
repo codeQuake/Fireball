@@ -38,7 +38,7 @@
 			<legend>{lang}wcf.global.filter{/lang}</legend>
 
 			<dl>
-				<dt><label for="pageID">{lang}cms.acp.page.page{/lang}</label></dt>
+				<dt><label for="pageID">{lang}cms.global.page{/lang}</label></dt>
 				<dd>
 					<select name="pageID" id="pageID">
 						{foreach from=$pageList item=node}
