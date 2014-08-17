@@ -191,7 +191,7 @@
 		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
 		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
 		<item name="cms.acp.page.import"><![CDATA[Datenimport]]></item>
-		<item name="cms.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts oder mit Konvertierungsplugin auch von CMS Version 1.1.2 pl 2 möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließen Sie auf keinen Fall das Fenster und achten Sie darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
+		<item name="cms.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließen Sie auf keinen Fall das Fenster und achten Sie darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
 		<item name="cms.acp.page.import.tar"><![CDATA[Archiv]]></item>
 		<item name="cms.acp.page.legend"><![CDATA[Legende]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Seiten auflisten]]></item>
