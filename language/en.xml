@@ -168,8 +168,8 @@
 
 	<category name="cms.acp.page">
 		<item name="cms.acp.page.add"><![CDATA[Add page]]></item>
-		<item name="cms.acp.page.alias"><![CDATA[URL-Alias]]></item>
-		<item name="cms.acp.page.alias.description"><![CDATA[The so called alias will be this page's link. It must not contain any other items than lowercase-letters, numbers and hyphens.]]></item>
+		<item name="cms.acp.page.alias"><![CDATA[URL-Shortcut]]></item>
+		<item name="cms.acp.page.alias.description"><![CDATA[The URL-Shortcut will be part of this page's hyperlink. It must not contain any other items than lowercase-letters, numbers and hyphens.]]></item>
 		<item name="cms.acp.page.alias.error.notUnique"><![CDATA[Alias exists!]]></item>
 		<item name="cms.acp.page.alias.error.notValid"><![CDATA[Invalid Alias!]]></item>
 		<item name="cms.acp.page.alias.preview"><![CDATA[Link-Preview:]]></item>
