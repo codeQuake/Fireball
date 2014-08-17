@@ -12,14 +12,20 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class CMSSitemapProvider implements ISitemapProvider {
-
+	/**
+	 * @see	\wcf\system\sitemap\ISitemapProvider::getTemplate()
+	 */
 	public function getTemplate() {
-		$list = new PageNodeTree(0);
-		
+		$nodeTree = new PageNodeTree(0);
+		$nodeList = $nodeTree->getIterator();
+
+		// sitemap only supports up to child-child-pages
+		$nodeList->setMaxDepth(2);
+
 		WCF::getTPL()->assign(array(
 			'pageList' => $list->getIterator()
 		));
-		
+
 		return WCF::getTPL()->fetch('cmsSitemap', 'cms');
 	}
 }
