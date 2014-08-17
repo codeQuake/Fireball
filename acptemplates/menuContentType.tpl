@@ -3,6 +3,7 @@
 	<dd>
 		<select name="contentData[type]" id="contentData[type]">
 			<option value="children">{lang}cms.acp.content.type.de.codequake.cms.content.type.menu.type.children{/lang}</option>
+			<option value="all">{lang}cms.acp.content.type.de.codequake.cms.content.type.menu.type.all{/lang}</option>
 		<select>
 	</dd>
 </dl>

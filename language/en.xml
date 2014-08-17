@@ -82,6 +82,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth.description"><![CDATA[Number of listed menu levels. Type 0 for unlimited.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Pattern]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Child pages]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[All pages]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Poll]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>

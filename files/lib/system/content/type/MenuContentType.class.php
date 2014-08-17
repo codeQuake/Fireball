@@ -3,6 +3,7 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use wcf\system\WCF;
+use cms\data\page\PageNodeTree;
 
 /**
  * @author	Jens Krumsieck
@@ -25,6 +26,11 @@ class MenuContentType extends AbstractStructureContentType {
 		switch ($data['type']) {
 			case "children":
 				$menuItems = $content->getPage()->getChildrenTree(isset($data['depth']) && $data['depth'] != 0 ? intval($data['depth']) - 1 : null);
+				break;
+			case "all":
+				$nodeTree = new PageNodeTree();
+				$menuItems = $nodeTree->getIterator();
+				if (isset($data['depth']) && $data['depth'] != 0) $menuItems->setMaxDepth(intval($data['depth']) - 1);
 				break;
 		}
 		WCF::getTPL()->assign(array(
