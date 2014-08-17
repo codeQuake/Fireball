@@ -200,35 +200,26 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @see	\wcf\data\IDeleteAction::delete()
 	 */
 	public function delete() {
+		$returnValues = parent::delete();
+
+		$menuItemIDs = $pageIDs = array();
+		foreach ($this->objects as $pageEditor) {
+			$pageIDs[] = $pageEditor->pageID;
+			if ($pageEditor->menuItemID) $menuItemIDs[] = $pageEditor->menuItemID;
+		}
 
 		// update search index
-		if (!empty($this->objectIDs)) {
-			SearchIndexManager::getInstance()->delete('de.codequake.cms.page', $this->objectIDs);
+		if (!empty($pageIDs)) {
+			SearchIndexManager::getInstance()->delete('de.codequake.cms.page', $pageIDs);
 		}
 
-		// delete all contents belonging to the pages
-		foreach ($this->objectIDs as $objectID) {
-			$page = new Page($objectID);
-			$list = $page->getContents();
-			$contentIDs = array();
-			foreach ($list['body'] as $content) {
-				$contentIDs[] = $content->contentID;
-			}
-			foreach ($list['sidebar'] as $content) {
-				$contentIDs[] = $content->contentID;
-			}
-			$action = new ContentAction($contentIDs, 'delete', array());
-			$action->executeAction();
-
-			$action = new PageMenuItemAction(array(
-				$page->menuItemID
-			), 'delete', array());
-			$action->executeAction();
+		// delete related menu items
+		if (!empty($menuItemIDs)) {
+			$objectAction = new PageMenuItemAction($menuItemIDs, 'delete');
+			$objectAction->executeAction();
 		}
 
-		parent::delete();
-
-		//check if first page
+		// check if first page
 		PageCacheBuilder::getInstance()->reset();
 		if (PageCache::getInstance()->getHomePage() === null) {
 			$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
@@ -238,6 +229,8 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				$editor->setAsHome();
 			}
 		}
+
+		return $returnValues;
 	}
 
 	/**
