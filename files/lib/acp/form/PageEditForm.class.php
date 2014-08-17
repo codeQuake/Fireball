@@ -200,29 +200,31 @@ class PageEditForm extends PageAddForm {
 		$this->pageList = new DrainedPageNodeTree(null, $this->pageID);
 		$this->pageList = $this->pageList->getIterator();
 
-		I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->page->title, 'cms.page.title\d+');
-		$this->title = $this->page->title;
-		I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->page->description, 'cms.page.description\d+');
-		$this->description = $this->page->description;
-		I18nHandler::getInstance()->setOptions('metaDescription', PACKAGE_ID, $this->page->metaDescription, 'cms.page.metaDescription\d+');
-		$this->metaDescription = $this->page->metaDescription;
-		I18nHandler::getInstance()->setOptions('metaKeywords', PACKAGE_ID, $this->page->metaKeywords, 'cms.page.metaKeywords\d+');
-		$this->metaKeywords = $this->page->metaKeywords;
+		if (empty($_POST)) {
+			I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->page->title, 'cms.page.title\d+');
+			$this->title = $this->page->title;
+			I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->page->description, 'cms.page.description\d+');
+			$this->description = $this->page->description;
+			I18nHandler::getInstance()->setOptions('metaDescription', PACKAGE_ID, $this->page->metaDescription, 'cms.page.metaDescription\d+');
+			$this->metaDescription = $this->page->metaDescription;
+			I18nHandler::getInstance()->setOptions('metaKeywords', PACKAGE_ID, $this->page->metaKeywords, 'cms.page.metaKeywords\d+');
+			$this->metaKeywords = $this->page->metaKeywords;
 
-		$this->parentID = $this->page->parentID;
-		$this->showOrder = $this->page->showOrder;
-		$this->invisible = $this->page->invisible;
-		$this->robots = $this->page->robots;
-		$this->showSidebar = $this->page->showSidebar;
-		$this->sidebarOrientation = $this->page->sidebarOrientation;
-		$this->isCommentable = $this->page->isCommentable;
-		$this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
-		$this->menuItem = $this->page->menuItemID !== null ? 1 : 0;
-		$this->menuItemID = $this->page->menuItemID;
+			$this->parentID = $this->page->parentID;
+			$this->showOrder = $this->page->showOrder;
+			$this->invisible = $this->page->invisible;
+			$this->robots = $this->page->robots;
+			$this->showSidebar = $this->page->showSidebar;
+			$this->sidebarOrientation = $this->page->sidebarOrientation;
+			$this->isCommentable = $this->page->isCommentable;
+			$this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
+			$this->menuItem = $this->page->menuItemID !== null ? 1 : 0;
+			$this->menuItemID = $this->page->menuItemID;
 
-		$this->alias = $this->page->alias;
-		$this->styleID = $this->page->styleID;
-		$this->stylesheets = @unserialize($this->page->stylesheets);
+			$this->alias = $this->page->alias;
+			$this->styleID = $this->page->styleID;
+			$this->stylesheets = @unserialize($this->page->stylesheets);
+		}
 	}
 
 	/**

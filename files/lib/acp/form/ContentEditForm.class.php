@@ -131,22 +131,25 @@ class ContentEditForm extends ContentAddForm {
 	public function readData() {
 		parent::readData();
 
-		$this->content = ContentCache::getInstance()->getContent($this->contentID);
-		$this->pageID = $this->content->pageID;
-		$this->cssClasses = $this->content->cssClasses;
-		$this->cssID = $this->content->cssID;
-		$this->parentID = $this->content->parentID;
-		$this->showOrder = $this->content->showOrder;
-		$this->position = $this->content->position;
-		$this->contentData = $this->content->handleContentData();
-		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.content', $this->content->contentID, $this->contentData['pollID']);
-		$this->title = $this->content->getTitle();
-		I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
-		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-				I18nHandler::getInstance()->setOptions($field, PACKAGE_ID, $this->contentData[$field], 'cms.content.' . $field . '\d+');
+		if (empty($_POST)) {
+			$this->content = ContentCache::getInstance()->getContent($this->contentID);
+			$this->pageID = $this->content->pageID;
+			$this->cssClasses = $this->content->cssClasses;
+			$this->cssID = $this->content->cssID;
+			$this->parentID = $this->content->parentID;
+			$this->showOrder = $this->content->showOrder;
+			$this->position = $this->content->position;
+			$this->contentData = $this->content->handleContentData();
+			if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.content', $this->content->contentID, $this->contentData['pollID']);
+			$this->title = $this->content->getTitle();
+			I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
+			if ($this->objectTypeProcessor->isMultilingual) {
+				foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+					I18nHandler::getInstance()->setOptions($field, PACKAGE_ID, $this->contentData[$field], 'cms.content.' . $field . '\d+');
+				}
 			}
 		}
+
 		//overwrite contentlist
 		$this->contentList = new DrainedPositionContentNodeTree(null, $this->pageID, $this->contentID, $this->position);
 		$this->contentList = $this->contentList->getIterator();

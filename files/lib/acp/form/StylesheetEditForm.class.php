@@ -15,31 +15,26 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class StylesheetEditForm extends StylesheetAddForm {
-
-	public $sheetID = 0;
-
-	public $sheet = null;
+	/**
+	 * stylesheet id
+	 * @var	integer
+	 */
+	public $stylesheetID = 0;
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * stylesheet object
+	 * @var	\cms\data\stylesheet\Stylesheet
 	 */
-	public function readData() {
-		parent::readData();
-
-		if (isset($_REQUEST['id'])) $this->sheetID = intval($_REQUEST['id']);
-		$this->sheet = new Stylesheet($this->sheetID);
-		$this->title = $this->sheet->title;
-		$this->less = $this->sheet->less;
-	}
+	public $stylesheet = null;
 
 	/**
-	 * @see	\wcf\form\IForm::readFormParameters()
+	 * @see	\wcf\page\IPage::readParameters()
 	 */
-	public function readFormParameters() {
-		parent::readFormParameters();
+	public function readParameters() {
+		parent::readParameters();
 
-		if (isset($_REQUEST['id'])) $this->sheetID = intval($_REQUEST['id']);
-		$this->sheet = new Stylesheet($this->sheetID);
+		if (isset($_REQUEST['id'])) $this->stylesheetID = intval($_REQUEST['id']);
+		$this->stylesheet = new Stylesheet($this->stylesheetID);
 	}
 
 	/**
@@ -52,15 +47,26 @@ class StylesheetEditForm extends StylesheetAddForm {
 			'title' => $this->title,
 			'less' => $this->less
 		);
-		$objectAction = new StylesheetAction(array(
-			$this->sheet
-		), 'update', array(
+
+		$objectAction = new StylesheetAction(array($this->stylesheet), 'update', array(
 			'data' => $data
 		));
 		$objectAction->executeAction();
-		
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
+	}
+
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+
+		if (empty($_POST)) {
+			$this->title = $this->stylesheet->title;
+			$this->less = $this->stylesheet->less;
+		}
 	}
 
 	/**
@@ -71,7 +77,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
-			'sheetID' => $this->sheetID
+			'stylesheetID' => $this->stylesheetID
 		));
 	}
 }
