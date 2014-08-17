@@ -121,7 +121,7 @@ class ContentEditForm extends ContentAddForm {
 
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(
 			'application' => 'cms',
-			'object' => new Page($this->pageID)
+			'pageID' => $this->pageID
 		)));
 	}
 
