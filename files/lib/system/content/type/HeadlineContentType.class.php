@@ -10,7 +10,7 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  */
-class HeadlineContentType extends AbstractContentType {
+class HeadlineContentType extends AbstractSearchableContentType {
 
 	protected $icon = 'icon-underline';
 
@@ -19,6 +19,10 @@ class HeadlineContentType extends AbstractContentType {
 	public $isMultilingual = true;
 
 	public $multilingualFields = array(
+		'text'
+	);
+
+	protected $searchableFields = array(
 		'text'
 	);
 
