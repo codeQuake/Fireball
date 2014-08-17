@@ -35,6 +35,13 @@
 			<!-- /general -->
 
 			<!-- cms.pages.default -->
+
+			<option name="cms_pages_default_menu_item">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.pages.default</categoryname>
+				<defaultvalue>1</defaultvalue>
+			</option>
+
 			<option name="cms_pages_default_robots">
 				<optiontype>select</optiontype>
 				<categoryname>cms.pages.default</categoryname>

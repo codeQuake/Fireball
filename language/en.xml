@@ -375,6 +375,7 @@
 		<item name="wcf.acp.option.cms_pages_default_sidebar"><![CDATA[Sidebarorientation]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.left"><![CDATA[Left]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.right"><![CDATA[Right]]></item>
+		<item name="wcf.acp.option.cms_pages_default_menu_item"><![CDATA[Menüpunkt erstellen]]></item>
 		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Auto-Delete]]></item>
 		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[After X Days old revisions will be deleted. (0 = deactivate auto-delete)]]></item>
 	</category>

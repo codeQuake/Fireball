@@ -70,7 +70,7 @@ class PageAddForm extends AbstractForm {
 
 	public $parentID = null;
 
-	public $menuItem = 1;
+	public $menuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
 
 	public $menuItemID = null;
 
