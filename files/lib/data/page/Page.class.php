@@ -35,8 +35,7 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
 	public function getTitle() {
-		if (preg_match('#cms.page.title#', $this->title)) return WCF::getLanguage()->get($this->title);
-		return $this->title;
+		return WCF::getLanguage()->get($this->title);
 	}
 
 	public function getLayout() {

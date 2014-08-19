@@ -276,19 +276,19 @@
 	{@$author->username} hat einen Kommentar auf der Seite „{@$page->getTitle()}“ hinterlassen:
 {link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}
 		]]></item>
-		<item name="cms.page.comment.notification.message"><![CDATA[Hat einen Kommentar auf der Seite „{$page->getTitle()|language}“ hinterlassen.]]></item>
+		<item name="cms.page.comment.notification.message"><![CDATA[Hat einen Kommentar auf der Seite „{$page->getTitle()}“ hinterlassen.]]></item>
 		<item name="cms.page.comment.notification.title"><![CDATA[Neuer Kommentar (Seite)]]></item>
 		<item name="cms.page.commentResponse.notification.mail"><![CDATA[
-	{@$author->username} hat eine Antwort zu Ihrem Kommentar auf der Seite „{@$page->getTitle|language}“ verfasst:
+	{@$author->username} hat eine Antwort zu Ihrem Kommentar auf der Seite „{@$page->getTitle()}“ verfasst:
 {link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}
 		]]></item>
-		<item name="cms.page.commentResponse.notification.message"><![CDATA[Hat eine Antwort zu Ihrem Kommentar auf der Seite „{$page->getTitle()|language}“ verfasst.]]></item>
+		<item name="cms.page.commentResponse.notification.message"><![CDATA[Hat eine Antwort zu Ihrem Kommentar auf der Seite „{$page->getTitle()}“ verfasst.]]></item>
 		<item name="cms.page.commentResponse.notification.title"><![CDATA[Neue Antwort (Seite)]]></item>
 		<item name="cms.page.commentResponseOwner.notification.mail"><![CDATA[
-	{@$author->username} hat eine Antwort zum Kommentar von "{@$commentAuthor->username}" auf der Seite "{@$page->getTitle()|language}" verfasst:
+	{@$author->username} hat eine Antwort zum Kommentar von "{@$commentAuthor->username}" auf der Seite "{@$page->getTitle()}" verfasst:
 {link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}
 		]]></item>
-		<item name="cms.page.commentResponseOwner.notification.message"><![CDATA[Hat eine Antwort zum Kommentar von „{$commentAuthor->username}“ auf der Seite „{$page->getTitle()|language}“ verfasst.]]></item>
+		<item name="cms.page.commentResponseOwner.notification.message"><![CDATA[Hat eine Antwort zum Kommentar von „{$commentAuthor->username}“ auf der Seite „{$page->getTitle()}“ verfasst.]]></item>
 		<item name="cms.page.commentResponseOwner.notification.title"><![CDATA[Neue Antwort (Seite)]]></item>
 		<item name="cms.page.comments"><![CDATA[Kommentare]]></item>
 		<item name="cms.page.comments.noComments"><![CDATA[Keine Kommentare vorhanden]]></item>
