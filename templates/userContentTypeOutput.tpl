@@ -4,28 +4,28 @@
 		<nav class="jsMobileNavigation buttonGroupNavigation">
 			<ul class="buttonList iconList">
 				{if $user->homepage != ""}
-				<li>
-					<a href="{$user->homepage}" title="{lang}wcf.user.option.homepage{/lang}" class="jsTooltip">
-						<span class="icon icon16 icon-home"></span>
-						<span class="invisible">{lang}wcf.user.option.homepage{/lang}</span>
-					</a>
-				</li>
+					<li>
+						<a href="{$user->homepage}" title="{lang}wcf.user.option.homepage{/lang}" class="jsTooltip">
+							<span class="icon icon16 icon-home"></span>
+							<span class="invisible">{lang}wcf.user.option.homepage{/lang}</span>
+						</a>
+					</li>
 				{/if}
 				{if $user->facebook != ""}
-				<li>
-					<a href="http://facebook.com/{$user->facebook}" title="{lang}wcf.user.option.facebook{/lang}" class="jsTooltip">
-						<span class="icon icon16 icon-facebook"></span>
-						<span class="invisible">{lang}wcf.user.option.facebook{/lang}</span>
-					</a>
-				</li>
+					<li>
+						<a href="http://facebook.com/{$user->facebook}" title="{lang}wcf.user.option.facebook{/lang}" class="jsTooltip">
+							<span class="icon icon16 icon-facebook"></span>
+							<span class="invisible">{lang}wcf.user.option.facebook{/lang}</span>
+						</a>
+					</li>
 				{/if}
 				{if $user->twitter != ""}
-				<li>
-					<a href="http://twitter.com/{$user->twitter}" title="{lang}wcf.user.option.twitter{/lang}" class="jsTooltip">
-						<span class="icon icon16 icon-twitter"></span>
-						<span class="invisible">{lang}wcf.user.option.twitter{/lang}</span>
-					</a>
-				</li>
+					<li>
+						<a href="http://twitter.com/{$user->twitter}" title="{lang}wcf.user.option.twitter{/lang}" class="jsTooltip">
+							<span class="icon icon16 icon-twitter"></span>
+							<span class="invisible">{lang}wcf.user.option.twitter{/lang}</span>
+						</a>
+					</li>
 				{/if}
 			</ul>
 		</nav>
@@ -37,4 +37,3 @@
 		{@$user->getFormattedUserOption('aboutMe')}
 	</div>
 </div>
-

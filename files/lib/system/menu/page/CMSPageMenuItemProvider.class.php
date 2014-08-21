@@ -11,15 +11,26 @@ use wcf\system\menu\page\DefaultPageMenuItemProvider;
  * @package	de.codequake.cms
  */
 class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider {
-
+	/**
+	 * page object
+	 * @var	\cms\data\page\Page
+	 */
 	protected $page = null;
 
+	/**
+	 * @see	\wcf\system\menu\page\IPageMenuItemProvider::isVisible()
+	 */
 	public function isVisible() {
 		if ($this->page === null) $this->getPage();
-		if ($this->page !== null && $this->page->isVisible()) return true;
-		return false;
+
+		return ($this->page !== null && $this->page->isVisible());
 	}
 
+	/**
+	 * Returns the page this menu item links to.
+	 * 
+	 * @var	\cms\data\page\Page
+	 */
 	public function getPage() {
 		if ($this->page === null) {
 			$matches = array();
@@ -32,6 +43,9 @@ class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider {
 		return $this->page;
 	}
 
+	/**
+	 * @see	\wcf\system\menu\page\IPageMenuItemProvider::getLink()
+	 */
 	public function getLink() {
 		if ($this->getPage() === null) return parent::getLink();
 		return $this->getPage()->getLink();

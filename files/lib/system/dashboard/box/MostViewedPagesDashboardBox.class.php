@@ -1,5 +1,6 @@
 <?php
 namespace cms\system\dashboard\box;
+
 use cms\data\page\PageList;
 use wcf\data\dashboard\box\DashboardBox;
 use wcf\page\IPage;

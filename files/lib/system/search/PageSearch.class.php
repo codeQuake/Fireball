@@ -12,9 +12,15 @@ use wcf\system\search\AbstractSearchableObjectType;
  */
 
 class PageSearch extends AbstractSearchableObjectType {
-
+	/**
+	 * page cache
+	 * @var	array<\cms\data\page\SearchResultPage>
+	 */
 	public $cache = array();
 
+	/**
+	 * @see	\wcf\system\search\ISearchableObjectType::cacheObjects()
+	 */
 	public function cacheObjects(array $objectIDs, array $additionalData = null) {
 		$pageList = new SearchResultPageList();
 		$pageList->getConditionBuilder()->add('page.pageID IN (?)', array($objectIDs));
@@ -25,31 +31,55 @@ class PageSearch extends AbstractSearchableObjectType {
 		}
 	}
 
+	/**
+	 * @see	\wcf\system\search\ISearchableObjectType::getApplication()
+	 */
 	public function getApplication() {
 		return 'cms';
 	}
 
-	public function getObject($objectID) {
-		if (isset($this->cache[$objectID])) return $this->cache[$objectID];
-		return null;
-	}
-
-	public function getTableName() {
-		return 'cms' . WCF_N . '_page';
-	}
-
+	/**
+	 * @see	\wcf\system\search\ISearchableObjectType::getIDFieldName()
+	 */
 	public function getIDFieldName() {
 		return $this->getTableName() . '.pageID';
 	}
 
+	/**
+	 * @see	\wcf\system\search\ISearchableObjectType::getObject()
+	 */
+	public function getObject($objectID) {
+		if (isset($this->cache[$objectID])) {
+			return $this->cache[$objectID];
+		}
+
+		return null;
+	}
+
+	/**
+	 * @see	\wcf\system\search\ISearchableObjectType::getSubjectFieldName()
+	 */
 	public function getSubjectFieldName() {
 		return $this->getTableName() . '.title';
 	}
 
+	/**
+	 * @see	\wcf\system\search\ISearchableObjectType::getTableName()
+	 */
+	public function getTableName() {
+		return 'cms' . WCF_N . '_page';
+	}
+
+	/**
+	 * @see	\wcf\system\search\ISearchableObjectType::getTimeFieldName()
+	 */
 	public function getTimeFieldName() {
 		return $this->getTableName() . '.creationTime';
 	}
 
+	/**
+	 * @see	\wcf\system\search\ISearchableObjectType::getUsernameFieldName()
+	 */
 	public function getUsernameFieldName() {
 		return $this->getTableName() . '.authorName';
 	}

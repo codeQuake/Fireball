@@ -10,13 +10,15 @@ use wcf\system\SingletonFactory;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-
 class PageRevisionHandler extends SingletonFactory {
 
 	protected $revisions = array();
 
 	protected $revisionIDs = array();
 
+	/**
+	 * @see	\wcf\system\SingletonFactory::init()
+	 */
 	public function init() {
 		$this->revisions = PageRevisionCacheBuilder::getInstance()->getData(array(), 'revisions');
 		$this->revisionIDs = PageRevisionCacheBuilder::getInstance()->getData(array(), 'revisionIDs');
@@ -26,6 +28,7 @@ class PageRevisionHandler extends SingletonFactory {
 		if (isset($this->revisions[$pageID])) {
 			return $this->revisions[$pageID];
 		}
+
 		return array();
 	}
 
@@ -33,6 +36,7 @@ class PageRevisionHandler extends SingletonFactory {
 		if (isset($this->revisions[$pageID][$revisionID])) {
 			return $this->revisions[$pageID][$revisionID];
 		}
+
 		return null;
 	}
 }

@@ -7,19 +7,16 @@ use wcf\system\bbcode\MessageParser;
 use wcf\system\WCF;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright codeQuake 2014
- * @package de.codequake.cms
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class TextContentType extends AbstractSearchableContentType {
-
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 */
 	protected $icon = 'icon-file-text-alt';
-
-	public $objectType = 'de.codequake.cms.content.type.text';
-
-	public $isMultilingual = true;
 
 	public $multilingualFields = array(
 		'text'

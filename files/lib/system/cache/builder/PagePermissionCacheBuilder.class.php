@@ -15,14 +15,16 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class PagePermissionCacheBuilder extends AbstractCacheBuilder {
-
+	/**
+	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
+	 */
 	public function rebuild(array $parameters) {
 		$data = array();
 		$objectTypeName = 'de.codequake.cms.page';
 		$pageList = new PageList();
 		$pageList->readObjects();
 		$pageList = $pageList->getObjects();
-		
+
 		$aclOptions = ACLHandler::getInstance()->getPermissions(ACLHandler::getInstance()->getObjectTypeID($objectTypeName), array_keys($pageList));
 		$options = $aclOptions['options']->getObjects();
 		foreach (array(

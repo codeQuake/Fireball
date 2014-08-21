@@ -13,33 +13,30 @@ use wcf\util\DateUtil;
  * @package	de.codequake.cms
  */
 class VisitCountHandler extends SingletonFactory {
-
-	public $session = null;
-
-	public function init() {
-		$this->session = WCF::getSession();
-	}
-
 	protected function canCount() {
-		if ($this->session->getVar('counted')) return false;
+		if (WCF::getSession()->getVar('counted')) return false;
 		return true;
 	}
 
 	public function count() {
 		if ($this->canCount()) {
 			$userID = WCF::getUser()->userID;
-			$spider = $this->getSpiderID($this->session->userAgent);
+			$spider = $this->getSpiderID(WCF::getSession()->userAgent);
 			if ($spider === null) $spider = 0;
-			$browser = $this->getBrowser($this->session->userAgent);
+			$browser = $this->getBrowser(WCF::getSession()->userAgent);
 			$browserName = $browser['name'];
-			
+
 			// update
 			if ($this->existingColumn()) {
-				$sql = "SELECT * FROM cms" . WCF_N . "_counter WHERE day = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j') . " AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . " AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
+				$sql = "SELECT	*
+					FROM	cms" . WCF_N . "_counter
+					WHERE	day = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j') . "
+						AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . "
+						AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$statement->execute();
 				$counter = $statement->fetchArray();
-				
+
 				$browsers = @unserialize($counter['browsers']);
 				if (isset($browsers[$browserName])) $browsers[$browserName] = $browsers[$browserName] + 1;
 				else $browsers[$browserName] = 1;
@@ -48,10 +45,15 @@ class VisitCountHandler extends SingletonFactory {
 				$spiders = $counter['spiders'];
 				if ($spider != 0) $spiders ++;
 				$visits = $counter['visits'] + 1;
-				
-				$sql = "UPDATE cms" . WCF_N . "_counter 
-                        SET visits = ?, users = ?, spiders = ?, browsers = ?
-                        WHERE day = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j') . " AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . " AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
+
+				$sql = "UPDATE	cms" . WCF_N . "_counter 
+					SET	visits = ?,
+						users = ?,
+						spiders = ?,
+						browsers = ?
+					WHERE	day = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j') . "
+						AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . "
+						AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$statement->execute(array(
 					$visits,
@@ -59,7 +61,9 @@ class VisitCountHandler extends SingletonFactory {
 					$spiders,
 					serialize($browsers)
 				));
-			} // create new
+			}
+
+			// create new
 			else {
 				$users = 0;
 				$spiders = 0;
@@ -67,8 +71,10 @@ class VisitCountHandler extends SingletonFactory {
 				if ($spider != 0) $spiders ++;
 				$browsers = array();
 				$browsers[$browserName] = 1;
-				
-				$sql = "INSERT INTO cms" . WCF_N . "_counter VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+				$sql = "INSERT INTO	cms" . WCF_N . "_counter
+							(day, month, year, visits, users, spiders, browsers)
+					VALUES		(?, ?, ?, ?, ?, ?, ?)";
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$statement->execute(array(
 					DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j'),
@@ -80,15 +86,19 @@ class VisitCountHandler extends SingletonFactory {
 					serialize($browsers)
 				));
 			}
-			$this->session->register('counted', true);
+			WCF::getSession()->register('counted', true);
 		}
 	}
 
 	public function existingColumn() {
-		$sql = "SELECT COUNT(*) AS amount FROM cms" . WCF_N . "_counter WHERE day = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j') . " AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . " AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
+		$sql = "SELECT	COUNT(*) AS amount
+			FROM	cms" . WCF_N . "_counter
+			WHERE	day = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j') . "
+				AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . "
+				AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
-		;
+
 		if ($statement->fetchColumn() != 0) return true;
 		return false;
 	}
@@ -97,7 +107,6 @@ class VisitCountHandler extends SingletonFactory {
 		$vistors = array();
 		$date = $start;
 		while ($date <= $end) {
-			
 			$months = $this->getMonths();
 			$visitors[] = array(
 				'visitors' => $this->getDailyVisitors(DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'j'), DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'n'), DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'Y')),
@@ -109,7 +118,8 @@ class VisitCountHandler extends SingletonFactory {
 	}
 
 	public function getAllVisitors() {
-		$sql = "SELECT * FROM cms" . WCF_N . "_counter";
+		$sql = "SELECT	*
+			FROM	cms" . WCF_N . "_counter";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		$count = 0;
@@ -120,7 +130,11 @@ class VisitCountHandler extends SingletonFactory {
 	}
 
 	public function getDailyVisitors($day = 10, $month = 2, $year = 2014) {
-		$sql = "SELECT * FROM cms" . WCF_N . "_counter WHERE day = ? AND month = ? AND year = ?";
+		$sql = "SELECT	*
+			FROM	cms" . WCF_N . "_counter
+			WHERE	day = ?
+				AND month = ?
+				AND year = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(
 			$day,
@@ -134,12 +148,12 @@ class VisitCountHandler extends SingletonFactory {
 		$currentMonth = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n');
 		$currentYear = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
 		$currentDay = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j');
-		
+
 		$visitors = array();
 		$year = $currentYear;
 		$month = $currentMonth;
 		$day = $currentDay;
-		
+
 		for ($i = 1; $i <= 7; $i ++) {
 			$months = $this->getMonths();
 			$visitors[$i] = array(
@@ -180,7 +194,7 @@ class VisitCountHandler extends SingletonFactory {
 		$bname = 'Unknown';
 		$platform = 'Unknown';
 		$version = "";
-		
+
 		// First get the platform?
 		if (preg_match('/linux/i', $u_agent)) {
 			$platform = 'linux';
@@ -191,7 +205,7 @@ class VisitCountHandler extends SingletonFactory {
 		else if (preg_match('/windows|win32/i', $u_agent)) {
 			$platform = 'windows';
 		}
-		
+
 		// Next get the name of the useragent yes seperately and for good reason
 		if (preg_match('/MSIE/i', $u_agent) && ! preg_match('/Opera/i', $u_agent)) {
 			$bname = 'Internet Explorer';
@@ -220,7 +234,7 @@ class VisitCountHandler extends SingletonFactory {
 		else {
 			$ub = '';
 		}
-		
+
 		// finally get the correct version number
 		$known = array(
 			'Version',
@@ -231,7 +245,7 @@ class VisitCountHandler extends SingletonFactory {
 		if (! preg_match_all($pattern, $u_agent, $matches)) {
 			// we have no matching number just continue
 		}
-		
+
 		// see how many we have
 		$i = count($matches['browser']);
 		if ($i != 1) {
@@ -247,12 +261,12 @@ class VisitCountHandler extends SingletonFactory {
 		else {
 			$version = $matches['version'][0];
 		}
-		
+
 		// check if we have a number
 		if ($version == null || $version == "") {
 			$version = "?";
 		}
-		
+
 		return array(
 			'userAgent' => $u_agent,
 			'name' => $bname,
@@ -292,5 +306,4 @@ class VisitCountHandler extends SingletonFactory {
 		);
 		return $months;
 	}
-
 }

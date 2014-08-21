@@ -7,23 +7,28 @@ use wcf\util\FileUtil;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	codeQuake 2014
- * @package	de.codequake.cms
+ * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class YoutubeContentType extends AbstractContentType {
-
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 */
 	protected $icon = 'icon-youtube';
-
-	public $objectType = 'de.codequake.cms.content.type.youtube';
 
 	public function getFormTemplate() {
 		return 'youtubeContentType';
 	}
 
 	public function validate($data) {
-		if (! isset($data['video'])) throw new UserInputException('data[video]', 'empty');
-		if (! FileUtil::isURL($data['video'])) throw new UserInputException('data[video]', 'notValid');
+		if (!isset($data['video'])) {
+			throw new UserInputException('data[video]');
+		}
+
+		if (!FileUtil::isURL($data['video'])) {
+			throw new UserInputException('data[video]', 'notValid');
+		}
 	}
 
 	public function getOutput(Content $content) {

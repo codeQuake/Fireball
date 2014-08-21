@@ -8,15 +8,15 @@ use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	codeQuake 2014
- * @package	de.codequake.cms
+ * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class UserContentType extends AbstractContentType {
-
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 */
 	protected $icon = 'icon-user';
-
-	public $objectType = 'de.codequake.cms.content.type.user';
 
 	public function getFormTemplate() {
 		return 'userContentType';
