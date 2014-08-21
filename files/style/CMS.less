@@ -23,27 +23,38 @@
 		> li > ul > li > ul > li > ul > li > ul > li > ul > li a {padding-left: 119px;}
 	}
 }
-#tplPage{
-	aside.sidebar .pollContainer{
+
+#tplPage {
+	aside.sidebar .pollContainer {
 		float: none;
 		min-width: 230px;
 		max-width: 230px;
-		> fieldset {min-width: 230px !important; width: 230px !important;}
-		> .formSubmit { width: 272px; }
+
+		> fieldset {
+			min-width: 230px !important;
+			width: 230px !important;
+		}
+
+		> .formSubmit {
+			width: 272px;
+		}
 	}
-	section.content .pollContainer{
+
+	section.content .pollContainer {
 		float: none;
 		max-width: 100%;
 	}
 
-	.fireballSlideContainer{
+	.fireballSlideContainer {
 		position: relative;
 		margin-bottom: @wcfGapLarge;
+
 		> div {
 			display: none;
 			position: absolute;
 			width: 100%;
 		}
+
 		> ul.slideshowButtonList {
 			width: 100%;
 			text-align: center;
@@ -51,9 +62,11 @@
 			top: auto;
 			position: absolute;
 			right: 0;
+
 			> li {
 				display: inline-block;
-				&.active > a > span{
+
+				&.active > a > span {
 					transition: 0.5s all ease-in-out;
 					color: @wcfContainerHoverBackgroundColor;
 				}
@@ -66,18 +79,33 @@
 		margin-top: @wcfGapMedium;
 		margin-bottom: @wcfGapMedium;
 		overflow: hidden;
+
 		> figcaption {
 			font-style: italic;
 			font-size: @wcfSmallFontSize;
 		}
 
-		> a.framed > img {max-width: 100%; height: auto; }
-		> a.imgThumb > img {max-width: 100%; height: auto; max-height: 150px;}
-		> img {max-width: 100%; height: auto;}
+		> a.framed > img {
+			max-width: 100%;
+			height: auto;
+		}
+
+		> a.imgThumb > img {
+			max-width: 100%;
+			height: auto;
+			max-height: 150px;
+		}
+
+		> img {
+			max-width: 100%;
+			height: auto;
+		}
 	}
 
-	.galleryImage{
-		max-width: 100%; height: auto;
+	.galleryImage {
+		max-width: 100%;
+		height: auto;
+
 		> figure {
 			background: @wcfContainerBackgroundColor;
 			border: 1px solid @wcfContainerBorderColor;
@@ -88,32 +116,41 @@
 			line-height: 170px;
 			height: 190px;
 			transition: .2s all ease-in-out;
-			&:hover{background: @wcfContainerHoverBackgroundColor;}
+
+			&:hover {
+				background: @wcfContainerHoverBackgroundColor;
+			}
 		}
 	}
 
-	#main{
-		div[data-content-type="de.codequake.cms.content.type.headline"], div[data-content-type="de.codequake.cms.content.type.html"], div[data-content-type="de.codequake.cms.content.type.tpl"], div[data-content-type="de.codequake.cms.content.type.php"], div[data-content-type="de.codequake.cms.content.type.text"]{
-			h1{
+	#main {
+		div[data-content-type="de.codequake.cms.content.type.headline"],
+		div[data-content-type="de.codequake.cms.content.type.html"],
+		div[data-content-type="de.codequake.cms.content.type.tpl"],
+		div[data-content-type="de.codequake.cms.content.type.php"],
+		div[data-content-type="de.codequake.cms.content.type.text"] {
+			h1 {
 				font-size: @wcfHeadlineFontSize;
 				font-weight: bold;
 				color: @wcfHeadlineColor;
 				font-family: @wcfHeadlineFontFamily;
 			}
-			h2{
+
+			h2 {
 				font-size: @wcfSubHeadlineFontSize;
 				font-weight: bold;
 				color: @wcfHeadlineColor;
 				font-family: @wcfHeadlineFontFamily;
 			}
 
-			h3{
+			h3 {
 				font-size: @wcfTitleFontSize;
 				font-weight: bold;
 				color: @wcfHeadlineColor;
 				font-family: @wcfHeadlineFontFamily;
 			}
-			h4{
+
+			h4 {
 				font-weight: bold;
 				color: @wcfHeadlineColor;
 				font-family: @wcfHeadlineFontFamily;
@@ -121,9 +158,11 @@
 		}
 	}
 
-	.userCard > div > .buttonGroupNavigation {float: right;}
+	.userCard > div > .buttonGroupNavigation {
+		float: right;
+	}
 
-	.elastic_video{
+	.elastic_video {
 		position: relative;
 		padding-bottom: 55%;
 		padding-top: 15px;
@@ -138,5 +177,4 @@
 		width: 100%;
 		height: 100%;
 	}
-
 }

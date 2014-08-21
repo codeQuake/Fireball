@@ -11,26 +11,28 @@ use wcf\system\WCF;
 
 /**
  * Fireball core.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
 class CMSCore extends AbstractApplication {
-
 	/**
-	 *
 	 * @see AbstractApplication::$abbreviation
 	 */
 	protected $abbreviation = 'cms';
 
 	/**
-	 *
 	 * @see \wcf\system\application\AbstractApplication::$primaryController
 	 */
 	protected $primaryController = 'cms\page\PagePage';
 
+	/**
+	 * Finds and activates the related menu item for the given page.
+	 * 
+	 * @param	\cms\data\page\Page	$page
+	 */
 	public static function setActiveMenuItem(Page $page) {
 		if ($page->menuItemID && $page->parentID === null) {
 			$menuItemID = $page->menuItemID;
@@ -49,6 +51,11 @@ class CMSCore extends AbstractApplication {
 
 	}
 
+	/**
+	 * Sets breadcrumbs for the given page.
+	 * 
+	 * @param	\cms\data\page\Page	$page
+	 */
 	public static function setBreadcrumbs(Page $page) {
 		if (PageMenu::getInstance()->getLandingPage()->getProcessor() instanceof CMSPageMenuItemProvider) {
 			$pageID = PageMenu::getInstance()->getLandingPage()->getProcessor()->getPage()->pageID;

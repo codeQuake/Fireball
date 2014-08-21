@@ -5,18 +5,12 @@ use cms\data\content\Content;
 use wcf\system\WCF;
 
 /**
- *
- * @author Jens Krumsieck
- * @copyright codeQuake 2014
- * @package de.codequake.cms
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class ThreeColumnsContentType extends AbstractStructureContentType {
-
-	protected $icon = 'icon-columns';
-
-	public $objectType = 'de.codequake.cms.content.type.threecolumns';
-
 	public function getFormTemplate() {
 		return 'threeColumnContentType';
 	}

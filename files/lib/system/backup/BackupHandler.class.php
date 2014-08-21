@@ -26,7 +26,6 @@ use wcf\util\XMLWriter;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-
 class BackupHandler extends SingletonFactory{
 
 	public $objects = array('page', 'content', 'stylesheet', 'file', 'folder');
@@ -199,4 +198,3 @@ class BackupHandler extends SingletonFactory{
 		return $data;
 	}
 }
-

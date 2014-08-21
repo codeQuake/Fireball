@@ -4,30 +4,28 @@ namespace cms\system\content\type;
 use cms\data\content\Content;
 
 /**
+ * Abstract content type implementation.
  *
- * @author Jens Krumsieck
- * @copyright codeQuake 2014
- * @package de.codequake.cms
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 abstract class AbstractContentType implements IContentType {
-
+	/**
+	 * name of the icon to display
+	 * @var	string
+	 */
 	protected $icon = 'icon-unchecked';
-
-	public $objectType = '';
-
-	public $isMultilingual = false;
 
 	public $multilingualFields = array();
 
 	/**
-	 *
 	 * @see cms\system\content\type\IContentType::validate()
 	 */
 	public function validate($data) {}
 
 	/**
-	 *
 	 * @see \cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
@@ -35,7 +33,6 @@ abstract class AbstractContentType implements IContentType {
 	}
 
 	/**
-	 *
 	 * @see \cms\system\content\type\IContentType::getIcon()
 	 */
 	public function getIcon() {
@@ -43,7 +40,6 @@ abstract class AbstractContentType implements IContentType {
 	}
 
 	/**
-	 *
 	 * @see \cms\system\content\type\IContentType::getFormTemplate()
 	 */
 	public function getFormTemplate() {

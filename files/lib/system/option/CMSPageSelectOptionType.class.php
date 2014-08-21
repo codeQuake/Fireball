@@ -1,5 +1,6 @@
 <?php
 namespace cms\system\option;
+
 use cms\data\page\PageCache;
 use cms\data\page\PageNodeTree;
 use wcf\data\option\Option;

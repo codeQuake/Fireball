@@ -8,7 +8,7 @@ use wcf\system\worker\AbstractRebuildDataWorker;
 
 /**
  * worker for refreshing search index
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -36,7 +36,7 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 			SearchIndexManager::getInstance()->reset('de.codequake.cms.page');
 		}
 
-		//refresh time
+		// refresh time
 		foreach ($this->objectList->getObjects() as $page) {
 			if ($page->creationTime == 0) {
 				$pageEditor = new PageEditor($page);
@@ -50,6 +50,5 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 		// refresh search index
 		$pageAction = new PageAction($this->objectList->getObjects(), 'refreshSearchIndex', array('isBulkProcessing' => true));
 		$pageAction->executeAction();
-
 	}
 }

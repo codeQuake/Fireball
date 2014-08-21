@@ -14,9 +14,11 @@ use wcf\util\FileUtil;
  * @package	de.codequake.cms
  */
 class LayoutCompiler extends SingletonFactory {
-
 	protected $compiler = null;
 
+	/**
+	 * @see	\wcf\system\SingletonFactory::init()
+	 */
 	public function init() {
 		require_once (WCF_DIR . 'lib/system/style/lessc.inc.php');
 		$this->compiler = new \lessc();

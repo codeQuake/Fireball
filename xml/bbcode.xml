@@ -18,7 +18,6 @@
 					<validationpattern>^\d+$</validationpattern>
 					<required>0</required>
 				</attribute>
-
 				<attribute name="3">
 					<usetext>1</usetext>
 				</attribute>

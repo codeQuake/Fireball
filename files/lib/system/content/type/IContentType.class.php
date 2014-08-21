@@ -6,21 +6,37 @@ use cms\data\content\Content;
 /**
  * Interface for Basic Contenttypes
  * 
- * @author Jens Krumsieck
- * @copyright codeQuake 2014
- * @package de.codequake.cms
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 interface IContentType {
-	// validates form data
+	/**
+	 * Validates the submitted form data. In case of invalid inputs, throw
+	 * an instance of '\wcf\system\exception\UserInputException'
+	 */
 	public function validate($data);
-	
-	// get Output
+
+	/**
+	 * Returns the formatted output for the given content.
+	 * 
+	 * @param	\cms\data\content\Content	$content
+	 * @return	string
+	 */
 	public function getOutput(Content $content);
-	
-	// returns type's icon
+
+	/**
+	 * Returns the icon name (with icon prefix) for this content type.
+	 * 
+	 * @return	string
+	 */
 	public function getIcon();
-	
-	// returns template name
+
+	/**
+	 * Returns the template name for the acp forms
+	 * 
+	 * @return	string
+	 */
 	public function getFormTemplate();
 }

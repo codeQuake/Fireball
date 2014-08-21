@@ -16,7 +16,7 @@ CMS.Content.Type.Slideshow = Class.extend({
 		this._fx = fx;
 		this._interval = '';
 
-		//calc max-height
+		// calc max-height
 		var max_height = 0;
 		$('.fireballSlideContainer').append('<ul class="slideshowButtonList" />');
 
@@ -81,7 +81,7 @@ CMS.Content.Type.Slideshow = Class.extend({
 	},
 
 	_resize: function() {
-		//calc max-height
+		// calc max-height
 		var max_height = 0;
 		$('.fireballSlideContainer').children('div').each(function() {
 			if ($(this).outerHeight() >= max_height) max_height = $(this).outerHeight();
