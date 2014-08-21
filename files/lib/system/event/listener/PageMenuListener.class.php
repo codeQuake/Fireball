@@ -6,13 +6,14 @@ use wcf\system\event\IEventListener;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	codeQuake 2014
- * @package	de.codequake.cms
+ * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
-
 class PageMenuListener implements IEventListener {
-
+	/**
+	 * @see	\wcf\system\event\IEventListener::execute()
+	 */
 	public function execute($eventObj, $className, $eventName) {
 		if ($eventObj->menuItemController == 'cms\page\PagePage') {
 			$eventObj->additionalFields['className'] = 'cms\system\menu\page\CMSPageMenuItemProvider';

@@ -10,13 +10,15 @@ use wcf\system\SingletonFactory;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-
 class ContentRevisionHandler extends SingletonFactory {
 
 	protected $revisions = array();
 
 	protected $revisionIDs = array();
 
+	/**
+	 * @see	\wcf\system\SingletonFactory::init()
+	 */
 	public function init() {
 		$this->revisions = ContentRevisionCacheBuilder::getInstance()->getData(array(), 'revisions');
 		$this->revisionIDs = ContentRevisionCacheBuilder::getInstance()->getData(array(), 'revisionIDs');

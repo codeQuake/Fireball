@@ -17,7 +17,7 @@ class Route extends \wcf\system\request\Route {
 				unset($urlParts[$index]);
 			}
 		}
-		
+
 		$urlParts = array_values($urlParts);
 		return array(
 			implode('/', $urlParts)
@@ -28,7 +28,7 @@ class Route extends \wcf\system\request\Route {
 		if (isset($components['controller'])) {
 			unset($components['controller']);
 		}
-		
+
 		return parent::buildLink($components);
 	}
 }

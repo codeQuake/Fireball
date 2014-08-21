@@ -138,7 +138,7 @@ class PagePage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 
-		// set menuitem
+		// set active menu item
 		CMSCore::setActiveMenuItem($this->page);
 
 		// set breadcrumbs
@@ -149,7 +149,7 @@ class PagePage extends AbstractPage {
 			StyleHandler::getInstance()->changeStyle($this->page->styleID, true);
 		}
 
-		// get Contents
+		// get contents
 		$contents = $this->page->getContents();
 		$this->contentNodeTree = $contents['body'];
 		$this->sidebarNodeTree = $contents['sidebar'];

@@ -123,11 +123,11 @@ class ContentAddForm extends AbstractForm {
 		if ($this->objectType != null) {
 			$this->objectTypeProcessor = $this->objectType->getProcessor();
 		}
-		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-				I18nHandler::getInstance()->register($field);
-			}
+
+		foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+			I18nHandler::getInstance()->register($field);
 		}
+
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.content', 0);
 	}
 
@@ -146,11 +146,11 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_POST['position'])) $this->position = StringUtil::trim($_POST['position']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['contentData']) && is_array($_POST['contentData'])) $this->contentData = $_POST['contentData'];
-		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-				if (I18nHandler::getInstance()->isPlainValue($field)) $this->contentData[$field] = StringUtil::trim(I18nHandler::getInstance()->getValue($field));
-			}
+
+		foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+			if (I18nHandler::getInstance()->isPlainValue($field)) $this->contentData[$field] = StringUtil::trim(I18nHandler::getInstance()->getValue($field));
 		}
+
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->readFormParameters();
 	}
 
@@ -254,12 +254,10 @@ class ContentAddForm extends AbstractForm {
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
 
-		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-				if (! I18nHandler::getInstance()->isPlainValue($field)) {
-					I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
-					$contentData[$field] = 'cms.content.' . $field . $contentID;
-				}
+		foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+			if (!I18nHandler::getInstance()->isPlainValue($field)) {
+				I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
+				$contentData[$field] = 'cms.content.' . $field . $contentID;
 			}
 		}
 

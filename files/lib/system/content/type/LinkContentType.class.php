@@ -6,17 +6,15 @@ use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	codeQuake 2014
- * @package	de.codequake.cms
+ * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class LinkContentType extends AbstractContentType {
-
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 */
 	protected $icon = 'icon-link';
-
-	public $objectType = 'de.codequake.cms.content.type.link';
-
-	public $isMultilingual = true;
 
 	public $multilingualFields = array(
 		'text',

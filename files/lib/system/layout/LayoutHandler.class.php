@@ -12,11 +12,6 @@ use wcf\system\SingletonFactory;
  * @package	de.codequake.cms
  */
 class LayoutHandler extends SingletonFactory {
-
-	public function init() {
-		// does nothing
-	}
-
 	public function getStylesheet($pageID) {
 		$filename = RELATIVE_CMS_DIR . 'style/layout-' . $pageID . '.css';
 		if (! file_exists($filename)) {

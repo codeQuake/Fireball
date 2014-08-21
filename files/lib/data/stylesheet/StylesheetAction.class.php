@@ -29,6 +29,9 @@ class StylesheetAction extends AbstractDatabaseObjectAction {
 	 */
 	protected $requireACP = array('delete', 'update');
 
+	/**
+	 * @see	\wcf\data\IDeleteAction::delete()
+	 */
 	public function delete() {
 		parent::delete();
 
@@ -40,6 +43,9 @@ class StylesheetAction extends AbstractDatabaseObjectAction {
 		}
 	}
 
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::update()
+	 */
 	public function update() {
 		parent::update();
 

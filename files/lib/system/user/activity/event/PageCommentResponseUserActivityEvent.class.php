@@ -16,13 +16,15 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class PageCommentResponseUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
-
+	/**
+	 * @see	\wcf\system\user\activity\event\IUserActivityEvent::prepare()
+	 */
 	public function prepare(array $events) {
 		$objectIDs = array();
 		foreach ($events as $event) {
 			$objectIDs[] = $event->objectID;
 		}
-		
+
 		// comments responses
 		$responseList = new CommentResponseList();
 		$responseList->getConditionBuilder()->add("comment_response.responseID IN (?)", array(
@@ -30,7 +32,7 @@ class PageCommentResponseUserActivityEvent extends SingletonFactory implements I
 		));
 		$responseList->readObjects();
 		$responses = $responseList->getObjects();
-		
+
 		// comments
 		$commentIDs = array();
 		foreach ($responses as $response) {
@@ -42,20 +44,20 @@ class PageCommentResponseUserActivityEvent extends SingletonFactory implements I
 		));
 		$commentList->readObjects();
 		$comments = $commentList->getObjects();
-		
+
 		// get pages
 		$pageIDs = array();
 		foreach ($comments as $comment) {
 			$pageIDs[] = $comment->objectID;
 		}
-		
+
 		$list = new PageList();
 		$list->getConditionBuilder()->add("page.pageID IN (?)", array(
 			$pageIDs
 		));
 		$list->readObjects();
 		$pages = $list->getObjects();
-		
+
 		foreach ($events as $event) {
 			if (isset($responses[$event->objectID])) {
 				$response = $responses[$event->objectID];

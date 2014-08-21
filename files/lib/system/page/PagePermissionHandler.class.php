@@ -42,14 +42,14 @@ class PagePermissionHandler extends SingletonFactory {
 					}
 				}
 			}
-			
+
 			if (isset($this->permissions[$page->pageID]['user']) && isset($this->permissions[$page->pageID]['user'][$user->userID])) {
 				foreach ($this->permissions[$page->pageID]['user'][$user->userID] as $optionName => $optionValue) {
 					$permissions[$optionName] = $optionValue;
 				}
 			}
 		}
-		
+
 		return $permissions;
 	}
 }

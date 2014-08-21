@@ -18,10 +18,10 @@ use wcf\util\HeaderUtil;
 /**
  * Shows the content edit form.
  *
- * @author Jens Krumsieck
- * @copyright 2014 codeQuake
- * @license GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package de.codequake.cms
+ * @author	Jens Krumsieck
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
  */
 class ContentEditForm extends ContentAddForm {
 	/**
@@ -90,12 +90,10 @@ class ContentEditForm extends ContentAddForm {
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
 
-		if ($this->objectTypeProcessor->isMultilingual) {
-			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-				if (! I18nHandler::getInstance()->isPlainValue($field)) {
-					I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
-					$contentData[$field] = 'cms.content.' . $field . $contentID;
-				}
+		foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+			if (!I18nHandler::getInstance()->isPlainValue($field)) {
+				I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
+				$contentData[$field] = 'cms.content.' . $field . $contentID;
 			}
 		}
 
@@ -143,10 +141,9 @@ class ContentEditForm extends ContentAddForm {
 			if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.content', $this->content->contentID, $this->contentData['pollID']);
 			$this->title = $this->content->getTitle();
 			I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
-			if ($this->objectTypeProcessor->isMultilingual) {
-				foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-					I18nHandler::getInstance()->setOptions($field, PACKAGE_ID, $this->contentData[$field], 'cms.content.' . $field . '\d+');
-				}
+
+			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+				I18nHandler::getInstance()->setOptions($field, PACKAGE_ID, $this->contentData[$field], 'cms.content.' . $field . '\d+');
 			}
 		}
 

@@ -5,7 +5,7 @@ use cms\data\page\PageCache;
 
 /**
  * Contains page-related functions.
- *
+ * 
  * @author	Florian Frantzen
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -59,7 +59,7 @@ final class PageUtil {
 	 * With the optional third parameter, you can specifiy a page that is
 	 * excluded from checking agains. For example, you can use that to
 	 * exclude the page the new alias will be assigned to.
-	 *
+	 * 
 	 * @param	string		$alias        	
 	 * @param	integer		$parentPageID        	
 	 * @param	integer		$excludedPageID        	
@@ -84,7 +84,7 @@ final class PageUtil {
 
 	/**
 	 * Returns true if the given alias matches the general alias pattern.
-	 *
+	 * 
 	 * @param	string		$alias        	
 	 * @return	boolean
 	 */

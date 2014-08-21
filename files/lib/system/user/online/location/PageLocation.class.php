@@ -13,9 +13,14 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class PageLocation implements IUserOnlineLocation {
-
+	/**
+	 * @see	\wcf\system\user\online\location\IUserOnlineLocation::cache()
+	 */
 	public function cache(UserOnline $user) {}
 
+	/**
+	 * @see	\wcf\system\user\online\location\IUserOnlineLocation::get()
+	 */
 	public function get(UserOnline $user, $languageVariable = '') {
 		$page = PageCache::getInstance()->getPage($user->objectID);
 
@@ -24,7 +29,7 @@ class PageLocation implements IUserOnlineLocation {
 		}
 
 		return WCF::getLanguage()->getDynamicVariable($languageVariable, array(
-				'page' => $page
-			));
+			'page' => $page
+		));
 	}
 }

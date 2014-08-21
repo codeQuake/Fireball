@@ -18,7 +18,9 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
-
+	/**
+	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
+	 */
 	protected static $baseClass = 'cms\data\page\Page';
 
 	public function setAsHome() {
