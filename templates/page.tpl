@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{if !$page->getMenuItem() || $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->getMenuItem()->menuItem}{$page->getTitle()|language} - {/if}{PAGE_TITLE|language}</title>
+	<title>{if !$page->getMenuItem() || $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->getMenuItem()->menuItem}{$page->getTitle()} - {/if}{PAGE_TITLE|language}</title>
 
 	{include file='headInclude' application='wcf' sandbox=false}
 	{@$page->getLayout()}
@@ -29,7 +29,7 @@
 			{foreach from=$sidebarNodeTree item=content}
 				{if $content->getTypeName() != 'de.codequake.cms.content.type.dashboard'}
 					{section name=i loop=$oldDepth-$sidebarNodeTree->getDepth()}</fieldset>{/section}<fieldset class="dashboardBox {if $content->getCSSClasses() != ""}{$content->getCSSClasses()}{/if}" {if $content->cssID != ""}id="{$content->cssID}"{/if} data-content-type="{$content->getTypeName()}">
-						<legend>{$content->getTitle()|language}</legend>
+						<legend>{$content->getTitle()}</legend>
 					{@$content->getOutput()|language}
 					{if !$sidebarNodeTree->current()->hasChildren()}
 						</fieldset>
@@ -52,7 +52,7 @@
 		<h1>{PAGE_TITLE|language}</h1>
 		{hascontent}<p>{content}{PAGE_DESCRIPTION|language}{/content}</p>{/hascontent}
 	{else}
-		<h1>{$page->getTitle()|language}</h1>
+		<h1>{$page->getTitle()}</h1>
 		<p>{$page->description|language}</p>
 	{/if}
 </header>

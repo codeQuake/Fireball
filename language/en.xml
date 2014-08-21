@@ -277,17 +277,17 @@
 		<item name="cms.page.clickCounter"><![CDATA[{#$clicks} time{if $clicks != 1}s{/if} read]]></item>
 		<item name="cms.page.comment.notification.mail"><![CDATA[{@$author->username} commented on "{@$page->getTitle()}":
 {link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}]]></item>
-		<item name="cms.page.comment.notification.message"><![CDATA[commented on „{$page->getTitle()|language}“.]]></item>
+		<item name="cms.page.comment.notification.message"><![CDATA[commented on „{$page->getTitle()}“.]]></item>
 		<item name="cms.page.comment.notification.title"><![CDATA[New comment (Page)]]></item>
-		<item name="cms.page.commentResponse.notification.mail"><![CDATA[{@$author->username} left a response to your comment on "{@$page->getTitle|language}":
+		<item name="cms.page.commentResponse.notification.mail"><![CDATA[{@$author->username} left a response to your comment on "{@$page->getTitle()}":
 {link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}
 		]]></item>
-		<item name="cms.page.commentResponse.notification.message"><![CDATA[left a response to your comment on „{$page->getTitle()|language}“.]]></item>
+		<item name="cms.page.commentResponse.notification.message"><![CDATA[left a response to your comment on „{$page->getTitle()}“.]]></item>
 		<item name="cms.page.commentResponse.notification.title"><![CDATA[New response (Page)]]></item>
-		<item name="cms.page.commentResponseOwner.notification.mail"><![CDATA[{@$author->username} left a response to „{$commentAuthor->username}“'s comment on „{$page->getTitle()|language}“:
+		<item name="cms.page.commentResponseOwner.notification.mail"><![CDATA[{@$author->username} left a response to „{$commentAuthor->username}“'s comment on „{$page->getTitle()}“:
 {link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}
 		]]></item>
-		<item name="cms.page.commentResponseOwner.notification.message"><![CDATA[left a response to „{$commentAuthor->username}“'s comment on „{$page->getTitle()|language}“.]]></item>
+		<item name="cms.page.commentResponseOwner.notification.message"><![CDATA[left a response to „{$commentAuthor->username}“'s comment on „{$page->getTitle()}“.]]></item>
 		<item name="cms.page.commentResponseOwner.notification.title"><![CDATA[New Response (Page)]]></item>
 		<item name="cms.page.comments"><![CDATA[Comments]]></item>
 		<item name="cms.page.comments.noComments"><![CDATA[No Entries.]]></item>

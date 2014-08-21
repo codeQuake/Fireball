@@ -114,8 +114,8 @@
 		{event name='fieldsets'}
 	</div>
 	<div class="formSubmit">
-		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 		{@SECURITY_TOKEN_INPUT_TAG}
 		<input type="hidden" name="action" value="{@$action}" />
 		<input type="hidden" name="objectType" value="{@$objectType->objectType}" />
