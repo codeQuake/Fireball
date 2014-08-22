@@ -17,7 +17,7 @@ class CMSImportForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.page.import';
+	public $activeMenuItem = 'cms.acp.menu.link.cms.page.importAndExport';
 
 	/**
 	 * uploaded file

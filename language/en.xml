@@ -159,7 +159,7 @@
 		<item name="cms.acp.menu.link.cms.media"><![CDATA[Media]]></item>
 		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Add page]]></item>
 		<item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
-		<item name="cms.acp.menu.link.cms.page.import"><![CDATA[Import pages]]></item>
+		<item name="cms.acp.menu.link.cms.page.importAndExport"><![CDATA[Import &amp; Export]]></item>
 		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[List pages]]></item>
 		<item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistics]]></item>
 		<item name="cms.acp.menu.link.cms.style"><![CDATA[Display management]]></item>
@@ -184,6 +184,9 @@
 		<item name="cms.acp.page.disable"><![CDATA[Toggle page]]></item>
 		<item name="cms.acp.page.display"><![CDATA[Display]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Edit page]]></item>
+		<item name="cms.acp.page.export"><![CDATA[Download pages]]></item>
+		<item name="cms.acp.page.export.download"><![CDATA[Download pages]]></item>
+		<item name="cms.acp.page.export.download.description"><![CDATA[Downloads a backup of all cms pages, stylesheets and uploaded files to your local machine.]]></item>
 		<item name="cms.acp.page.general"><![CDATA[General]]></item>
 		<item name="cms.acp.page.general.description"><![CDATA[Description]]></item>
 		<item name="cms.acp.page.general.menuItem"><![CDATA[Add menu item]]></item>
@@ -191,9 +194,10 @@
 		]]></item>
 		<item name="cms.acp.page.general.parentID"><![CDATA[Parent page]]></item>
 		<item name="cms.acp.page.homePage"><![CDATA[Startpage]]></item>
-		<item name="cms.acp.page.import"><![CDATA[Import]]></item>
+		<item name="cms.acp.page.import"><![CDATA[Import pages]]></item>
 		<item name="cms.acp.page.import.info"><![CDATA[Importing huge datasets needs a lot of time, please do not close this window! All data will be erased before the import.]]></item>
-		<item name="cms.acp.page.import.tar"><![CDATA[Archive]]></item>
+		<item name="cms.acp.page.import.upload"><![CDATA[Upload pages]]></item>
+		<item name="cms.acp.page.import.upload.description"><![CDATA[Upload previously downloaded backup file.]]></item>
 		<item name="cms.acp.page.legend"><![CDATA[Legend]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
 		<item name="cms.acp.page.list.description"><![CDATA[Pages are the base of this CMS. Create a page to add multiple types of content later.]]></item>

@@ -159,7 +159,7 @@
 		<item name="cms.acp.menu.link.cms.media"><![CDATA[Medien]]></item>
 		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
-		<item name="cms.acp.menu.link.cms.page.import"><![CDATA[Daten importieren]]></item>
+		<item name="cms.acp.menu.link.cms.page.importAndExport"><![CDATA[Sichern &amp; Wiederherstellen]]></item>
 		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[Seiten auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistiken]]></item>
 		<item name="cms.acp.menu.link.cms.style"><![CDATA[Darstellungsoptionen]]></item>
@@ -184,15 +184,19 @@
 		<item name="cms.acp.page.disable"><![CDATA[Seite (de)-aktivieren]]></item>
 		<item name="cms.acp.page.display"><![CDATA[Darstellung]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
+		<item name="cms.acp.page.export"><![CDATA[Seiten sichern]]></item>
+		<item name="cms.acp.page.export.download"><![CDATA[Sicherung der CMS-Seiten herunterladen]]></item>
+		<item name="cms.acp.page.export.download.description"><![CDATA[Laden Sie eine Sicherung aller CMS-Seiten, Stylesheets und hochgeladenen Dateien auf Ihren lokalen Rechner herunter.]]></item>
 		<item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.page.general.description"><![CDATA[Beschreibung]]></item>
 		<item name="cms.acp.page.general.menuItem"><![CDATA[Menüpunkt erstellen]]></item>
 		<item name="cms.acp.page.general.menuItem.description"><![CDATA[Sie können den erstellten Menüpunkt anschließend in der <a href="{link controller='PageMenuItemList'}{/link}">Hauptmenüverwaltung</a> verschieben oder bearbeiten.]]></item>
 		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
 		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
-		<item name="cms.acp.page.import"><![CDATA[Datenimport]]></item>
+		<item name="cms.acp.page.import"><![CDATA[Seiten importieren]]></item>
 		<item name="cms.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließen Sie auf keinen Fall das Fenster und achten Sie darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
-		<item name="cms.acp.page.import.tar"><![CDATA[Archiv]]></item>
+		<item name="cms.acp.page.import.upload"><![CDATA[Sicherung der Seiten vom lokalen Computer hochladen]]></item>
+		<item name="cms.acp.page.import.upload.description"><![CDATA[Wählen Sie eine Sicherung der CMS-Seiten von Ihrem lokalen Rechner aus.]]></item>
 		<item name="cms.acp.page.legend"><![CDATA[Legende]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Seiten auflisten]]></item>
 		<item name="cms.acp.page.list.description"><![CDATA[Seiten bilden die Grundlage des Fireball CMS. Erstellen Sie eine Seite um dieser später Inhalte verschiedener Typen zuordnen zu können.]]></item>
