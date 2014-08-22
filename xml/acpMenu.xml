@@ -37,7 +37,7 @@
 			<permissions>admin.cms.page.canAddPage</permissions>
 		</acpmenuitem>
 
-		<acpmenuitem name="cms.acp.menu.link.cms.page.import">
+		<acpmenuitem name="cms.acp.menu.link.cms.page.importAndExport">
 			<parent>cms.acp.menu.link.cms.content</parent>
 			<controller><![CDATA[cms\acp\form\CMSImportForm]]></controller>
 			<permissions>admin.cms.page.canAddPage</permissions>
