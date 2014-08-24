@@ -61,9 +61,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Headline 3]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Headline 4]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Headline 5]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.html"><![CDATA[HTML]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.html.text"><![CDATA[HTML-Source]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.html.text.description"><![CDATA[You can use HTML Code here.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Picture]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Height (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
