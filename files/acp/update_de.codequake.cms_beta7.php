@@ -2,6 +2,7 @@
 use cms\data\page\PageEditor;
 use cms\data\page\PageList;
 use cms\system\cache\builder\PageCacheBuilder;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\WCF;
 
 //get Pages
@@ -41,3 +42,13 @@ $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute(array(
 	'cms'.WCF_N.'_layout'
 ));
+
+// change contents of type 'html' to 'template'
+$htmlContentType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.html');
+$templateContentType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.template');
+
+$sql = "UPDATE	cms".WCF_N."_content
+	SET	contentTypeID = ?
+	WHERE	contentTypeID = ?";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute(array($templateContentType->objectTypeID, $htmlContentType->objectTypeID));
