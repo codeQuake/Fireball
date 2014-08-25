@@ -33,11 +33,11 @@
 		<item name="cms.acp.content.revision.action.create"><![CDATA[Created content]]></item>
 		<item name="cms.acp.content.revision.action.update"><![CDATA[Updated content]]></item>
 		<item name="cms.acp.content.revision.action.updatePosition"><![CDATA[Changed sorting]]></item>
+		<item name="cms.acp.content.revision.list"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.content.revision.restore"><![CDATA[Restore]]></item>
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
 		<item name="cms.acp.content.revision.time"><![CDATA[Time]]></item>
 		<item name="cms.acp.content.revision.user"><![CDATA[User]]></item>
-		<item name="cms.acp.content.revisions"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.content.title"><![CDATA[Title]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard box]]></item>
@@ -220,11 +220,11 @@
 		<item name="cms.acp.page.revision.action.setAsHome"><![CDATA[Set as homepage]]></item>
 		<item name="cms.acp.page.revision.action.update"><![CDATA[Updated page]]></item>
 		<item name="cms.acp.page.revision.action.updatePosition"><![CDATA[Changed sorting]]></item>
+		<item name="cms.acp.page.revision.list"><![CDATA[Änderungsprotokoll]]></item>
 		<item name="cms.acp.page.revision.restore"><![CDATA[Restore]]></item>
 		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
 		<item name="cms.acp.page.revision.time"><![CDATA[Time]]></item>
 		<item name="cms.acp.page.revision.user"><![CDATA[User]]></item>
-		<item name="cms.acp.page.revisions"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.page.setAsHome"><![CDATA[Set as startpage]]></item>
 		<item name="cms.acp.page.settings"><![CDATA[Settings]]></item>
 		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Page is visible during offline mode]]></item>

@@ -46,10 +46,13 @@ final class PageUtil {
 	 */
 	public static function buildAlias($title) {
 		// remove illegal characters
-		$title = trim(preg_replace('~[^a-z0-9\-]+~', '', mb_strtolower($title)), '-');
+		$title = preg_replace('~[^a-z0-9\-]+~', '', mb_strtolower($title));
 
 		// trim to maxlength
 		$title = mb_substr($title, 0, self::ALIAS_MAXLENGTH);
+
+		// remove hyphens from start and end of alias
+		$title = trim($title, '-');
 
 		return $title;
 	}

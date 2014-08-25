@@ -17,12 +17,12 @@
 				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
 			{/foreach}
 			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
-			'cms.acp.content.revisions': '{lang}cms.acp.content.revisions{/lang}',
 			'cms.acp.content.revision.action.create': '{lang}cms.acp.content.revision.action.create{/lang}',
 			'cms.acp.content.revision.action.update': '{lang}cms.acp.content.revision.action.update{/lang}',
 			'cms.acp.content.revision.action.updatePosition': '{lang}cms.acp.content.revision.action.updatePosition{/lang}',
 			'cms.acp.content.revision.action.setAsHome': '{lang}cms.acp.content.revision.action.setAsHome{/lang}',
-			'cms.acp.content.revision.action.restore': '{lang}cms.acp.content.revision.action.restore{/lang}'
+			'cms.acp.content.revision.action.restore': '{lang}cms.acp.content.revision.action.restore{/lang}',
+			'cms.acp.content.revision.list': '{lang}cms.acp.content.revision.list{/lang}'
 		});
 	});
 	//]]>
@@ -95,7 +95,7 @@
 											<span class="icon icon16 icon-check{if $content->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$content->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$content->contentID}"></span>
 											<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="body" data-parent-id="{$content->contentID}"></span>
 											<span class="icon icon16 icon-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
-											<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revisions{/lang}" data-object-id="{@$content->contentID}"></span>
+											<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.content.revision.list{/lang}" data-object-id="{@$content->contentID}"></span>
 
 											{event name='itemButtons'}
 										</span>
@@ -142,7 +142,7 @@
 											<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
 											<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="sidebar" data-parent-id="{$content->contentID}"></span>
 											<span class="icon icon16 icon-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
-											<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revisions{/lang}" data-object-id="{@$content->contentID}"></span>
+											<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.content.revision.list{/lang}" data-object-id="{@$content->contentID}"></span>
 
 											{event name='itemButtons'}
 										</span>

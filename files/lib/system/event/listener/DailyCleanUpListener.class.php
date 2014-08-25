@@ -15,9 +15,9 @@ class DailyCleanUpListener implements IEventListener {
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		//delete outdated revisions
+		// delete outdated revisions
 		if (CMS_REVISION_DELETE) {
-			//page revisions
+			// page revisions
 			$sql = "DELETE FROM	cms" . WCF_N . "_page_revision
 				WHERE		time < ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -25,7 +25,7 @@ class DailyCleanUpListener implements IEventListener {
 				TIME_NOW - (CMS_REVISION_DELETE * 86400)
 			));
 			
-			//content revisions
+			// content revisions
 			$sql = "DELETE FROM	cms" . WCF_N . "_content_revision
 				WHERE		time < ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
