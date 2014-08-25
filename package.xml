@@ -18,6 +18,10 @@
 		<requiredpackage minversion="1.0.0" file="requirements/de.codequake.wysiwyg.acp.tar">de.codequake.wysiwyg.acp</requiredpackage>
 	</requiredpackages>
 
+	<excludedpackages>
+		<requiredpackage minversion="2.1.0 Alpha">com.woltlab.wcf</requiredpackage>
+	</excludedpackages>
+
 	<optionalpackages>
 		<optionalpackage file="optionals/de.codequake.cms.news.tar">de.codequake.cms.news</optionalpackage>
 		<optionalpackage file="optionals/de.codequake.cms.news.voolia.tar">de.codequake.cms.news.voolia</optionalpackage>
