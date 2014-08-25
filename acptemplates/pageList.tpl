@@ -9,12 +9,12 @@
 				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
 			{/foreach}
 			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
-			'cms.acp.page.revisions': '{lang}cms.acp.page.revisions{/lang}',
 			'cms.acp.page.revision.action.create': '{lang}cms.acp.page.revision.action.create{/lang}',
 			'cms.acp.page.revision.action.update': '{lang}cms.acp.page.revision.action.update{/lang}',
 			'cms.acp.page.revision.action.updatePosition': '{lang}cms.acp.page.revision.action.updatePosition{/lang}',
 			'cms.acp.page.revision.action.setAsHome': '{lang}cms.acp.page.revision.action.setAsHome{/lang}',
-			'cms.acp.page.revision.action.restore': '{lang}cms.acp.page.revision.action.restore{/lang}'
+			'cms.acp.page.revision.action.restore': '{lang}cms.acp.page.revision.action.restore{/lang}',
+			'cms.acp.page.revision.list': '{lang}cms.acp.page.revision.list{/lang}',
 		});
 
 		var deleteAction = new WCF.Action.NestedDelete('cms\\data\\page\\PageAction', '.jsPageRow');
@@ -87,7 +87,7 @@
 								{if !$page->isHome && !$page->isChild()}<span class="icon icon16 icon-home jsTooltip jsSetAsHome pointer" data-object-id="{$page->pageID}" title="{lang}cms.acp.page.setAsHome{/lang}"></span>{/if}
 								<span class="icon icon16 icon-check{if $page->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$page->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$page->pageID}"></span>
 								<span class="icon icon16 icon-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.page.copy{/lang}" data-object-id="{@$page->pageID}"></span>
-								<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revisions{/lang}" data-object-id="{@$page->pageID}"></span>
+								<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revision.list{/lang}" data-object-id="{@$page->pageID}"></span>
 								<!-- content controls -->
 								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$page->pageID}"></span>
 								<a href="{link controller='ContentList' pageID=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
