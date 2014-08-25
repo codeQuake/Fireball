@@ -80,6 +80,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$data['alias'] .= '-copy';
 		unset($data['pageID']);
 		unset($data['isHome']);
+		unset($data['clicks']);
 		$this->parameters['data'] = $data;
 		$page = $this->create();
 		$pageID = $page->pageID;
