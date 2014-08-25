@@ -28,16 +28,16 @@
 		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Seitenleiste]]></item>
 		<item name="cms.acp.content.position.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
 		<item name="cms.acp.content.remove"><![CDATA[Inhalt entfernen]]></item>
-		<item name="cms.acp.content.revision"><![CDATA[Revision]]></item>
+		<item name="cms.acp.content.revision"><![CDATA[Version]]></item>
 		<item name="cms.acp.content.revision.action"><![CDATA[Aktion]]></item>
 		<item name="cms.acp.content.revision.action.create"><![CDATA[Inhalt erstellt]]></item>
 		<item name="cms.acp.content.revision.action.update"><![CDATA[Inhalt bearbeitet]]></item>
 		<item name="cms.acp.content.revision.action.updatePosition"><![CDATA[Sortierung geändert]]></item>
+		<item name="cms.acp.content.revision.list"><![CDATA[Änderungsprotokoll]]></item>
 		<item name="cms.acp.content.revision.restore"><![CDATA[Wiederherstellen]]></item>
-		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Revision wiederherstellen wollen?]]></item>
+		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Version wiederherstellen wollen?]]></item>
 		<item name="cms.acp.content.revision.time"><![CDATA[Zeitpunkt]]></item>
 		<item name="cms.acp.content.revision.user"><![CDATA[Benutzer]]></item>
-		<item name="cms.acp.content.revisions"><![CDATA[Revisionen]]></item>
 		<item name="cms.acp.content.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboardbox]]></item>
@@ -212,17 +212,17 @@
 		<item name="cms.acp.page.position.invisible"><![CDATA[Seite verstecken]]></item>
 		<item name="cms.acp.page.position.invisible.description"><![CDATA[Diese Seite und ihre Unterseiten werden in allen Listen ausgeblendet, sind aber weiterhin mittels Direktlink aufrufbar.]]></item>
 		<item name="cms.acp.page.remove"><![CDATA[Seite entfernen]]></item>
-		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>
+		<item name="cms.acp.page.revision"><![CDATA[Version]]></item>
 		<item name="cms.acp.page.revision.action"><![CDATA[Aktion]]></item>
 		<item name="cms.acp.page.revision.action.create"><![CDATA[Seite erstellt]]></item>
 		<item name="cms.acp.page.revision.action.setAsHome"><![CDATA[Als Startseite gesetzt]]></item>
 		<item name="cms.acp.page.revision.action.update"><![CDATA[Seite bearbeitet]]></item>
 		<item name="cms.acp.page.revision.action.updatePosition"><![CDATA[Sortierung geändert]]></item>
+		<item name="cms.acp.page.revision.list"><![CDATA[Änderungsprotokoll]]></item>
 		<item name="cms.acp.page.revision.restore"><![CDATA[Wiederherstellen]]></item>
-		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Revision wiederherstellen wollen?]]></item>
+		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Version wiederherstellen wollen?]]></item>
 		<item name="cms.acp.page.revision.time"><![CDATA[Zeitpunkt]]></item>
 		<item name="cms.acp.page.revision.user"><![CDATA[Benutzer]]></item>
-		<item name="cms.acp.page.revisions"><![CDATA[Revisionen]]></item>
 		<item name="cms.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
 		<item name="cms.acp.page.settings"><![CDATA[Einstellungen]]></item>
 		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
@@ -362,8 +362,8 @@
 
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.category.cms"><![CDATA[CMS]]></item>
-		<item name="wcf.acp.option.category.cms.general"><![CDATA[Allgemeine Einstellungen]]></item>
-		<item name="wcf.acp.option.category.cms.general.revision"><![CDATA[Revisionen]]></item>
+		<item name="wcf.acp.option.category.cms.general"><![CDATA[Allgemein]]></item>
+		<item name="wcf.acp.option.category.cms.general.revision"><![CDATA[Versionen]]></item>
 		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.option.category.cms.pages.content"><![CDATA[Inhalte]]></item>
 		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Standardwerte]]></item>
@@ -389,8 +389,8 @@
 		<item name="wcf.acp.option.cms_pages_default_sidebar.left"><![CDATA[Linke Seitenleiste]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.right"><![CDATA[Rechte Seitenleiste]]></item>
 		<item name="wcf.acp.option.cms_pages_default_menu_item"><![CDATA[Menüpunkt erstellen]]></item>
-		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Automatische Löschung von Revisionen]]></item>
-		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Geben Sie die Anzahl an Tagen ein, nach der alte Revisionen automatisch gelöscht werden. (0 zur Deaktivierung)]]></item>
+		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Versionen automatisch löschen]]></item>
+		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Zeitraum nach dem alte Versionen automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]></item>
 	</category>
 
 	<category name="wcf.acp.pageMenu">

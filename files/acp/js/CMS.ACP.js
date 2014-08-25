@@ -416,7 +416,7 @@ CMS.ACP.Page.Revisions = Class.extend({
 	_show: function(pageID){
 			this._dialog = $('<div id="revisionDialog">' + this._cache[pageID] + '</div>').appendTo(document.body);
 			this._dialog.wcfDialog({
-				title: WCF.Language.get('cms.acp.page.revisions')
+				title: WCF.Language.get('cms.acp.page.revision.list')
 			});
 	},
 
@@ -523,7 +523,7 @@ CMS.ACP.Content.Revisions = Class.extend({
 	_show: function(contentID){
 			this._dialog = $('<div id="revisionDialog">' + this._cache[contentID] + '</div>').appendTo(document.body);
 			this._dialog.wcfDialog({
-				title: WCF.Language.get('cms.acp.content.revisions')
+				title: WCF.Language.get('cms.acp.content.revision.list')
 			});
 	},
 
