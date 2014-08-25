@@ -246,15 +246,15 @@
 		<item name="cms.acp.stats"><![CDATA[Statistiken]]></item>
 		<item name="cms.acp.stats.browsers"><![CDATA[Browserfamilien]]></item>
 		<item name="cms.acp.stats.clicks"><![CDATA[Clicks]]></item>
-		<item name="cms.acp.stats.mostClicked"><![CDATA[Meistgeklickte Seiten]]></item>
-		<item name="cms.acp.stats.page"><![CDATA[Seite]]></item>
-		<item name="cms.acp.stats.vistors"><![CDATA[Aktuelle Besucher]]></item>
-		<item name="cms.acp.stats.userOnline"><![CDATA[Zurzeit auf der Seite aktiv <span class="badge">{#objects|count}</span>)]]></item>
-		<item name="cms.acp.stats.platforms"><![CDATA[Betriebssysteme]]></item>
 		<item name="cms.acp.stats.devices"><![CDATA[Geräte]]></item>
 		<item name="cms.acp.stats.devices.desktop"><![CDATA[Desktop-PC]]></item>
-		<item name="cms.acp.stats.devices.tablet"><![CDATA[Tablet]]></item>
 		<item name="cms.acp.stats.devices.mobile"><![CDATA[Smartphone]]></item>
+		<item name="cms.acp.stats.devices.tablet"><![CDATA[Tablet]]></item>
+		<item name="cms.acp.stats.mostClicked"><![CDATA[Meistgeklickte Seiten]]></item>
+		<item name="cms.acp.stats.page"><![CDATA[Seite]]></item>
+		<item name="cms.acp.stats.platforms"><![CDATA[Betriebssysteme]]></item>
+		<item name="cms.acp.stats.userOnline"><![CDATA[Zurzeit auf der Seite aktiv <span class="badge">{#objects|count}</span>)]]></item>
+		<item name="cms.acp.stats.vistors"><![CDATA[Aktuelle Besucher]]></item>
 	</category>
 
 	<category name="cms.acp.stylesheet">
