@@ -178,7 +178,7 @@
 								<small>{@$user->lastActivityTime|time}</small>
 								-
 								<small>{$user->getBrowser()}</small>
-							<li>
+							</li>
 						{else}
 							<li>
 								<span class="icon icon16 icon-question-sign"></span>
@@ -187,7 +187,7 @@
 								<small>{@$user->lastActivityTime|time}</small>
 								-
 								<small>{$user->getBrowser()}</small>
-							<li>
+							</li>
 						{/if}
 					{/foreach}
 				</ul>
