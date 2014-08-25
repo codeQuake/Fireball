@@ -26,6 +26,24 @@
 			</div>
 		</fieldset>
 		</div>
+		<div class="container containerPadding shadow marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
+			<fieldset>
+			<legend>{lang}cms.acp.stats.platforms{/lang}</legend>
+			<div class="center">
+				<div id="platforms"></div>
+			</div>
+		</fieldset>
+		</div>
+
+		<br style="clear: both;" />
+		<div class="container containerPadding shadow marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
+			<fieldset>
+			<legend>{lang}cms.acp.stats.devices{/lang}</legend>
+			<div class="center">
+				<div id="devices"></div>
+			</div>
+		</fieldset>
+		</div>
 		<div class="container containerPadding shadow marginTop clearfix" style="float: left; width: 49%; box-sizing: border-box; margin-left: 1%;">
 			<fieldset>
 			<legend>{lang}cms.acp.stats.mostClicked{/lang}</legend>
@@ -48,139 +66,7 @@
 			</fieldset>
 		</div>
 		<br style="clear: both;" />
-		<div  class="container containerPadding shadow marginTop">
-			<fieldset>
-			<legend>{lang}cms.acp.stats.vistors{/lang}</legend>
-				{assign var=usersOnlineList value=''}
-{assign var=usersOnline value=0}
-{assign var=robotsOnlineList value=''}
-{assign var=robotsOnline value=0}
-{assign var=guestsOnlineList value=''}
-{assign var=guestsOnline value=0}
-{foreach from=$objects item=user}
-	{capture assign=locationData}
-		<p>
-			{if $user->getLocation()}{@$user->getLocation()}{else}{lang}wcf.user.usersOnline.location.unknown{/lang}{/if} <small>- {@$user->lastActivityTime|time}</small>
-		</p>
-	{/capture}
-
-	{capture assign=sessionData}
-		{if $__wcf->session->getPermission('admin.user.canViewIpAddress')}
-			<dl class="plain inlineDataList">
-				<dt>{lang}wcf.user.usersOnline.ipAddress{/lang}</dt>
-				<dd title="{$user->getFormattedIPAddress()}">{$user->getFormattedIPAddress()|truncate:30}</dd>
-
-				{if !$user->spiderID}
-					<dt>{lang}wcf.user.usersOnline.userAgent{/lang}</dt>
-					<dd title="{$user->userAgent}">{$user->getBrowser()|truncate:30}</dd>
-				{/if}
-			</dl>
-		{/if}
-	{/capture}
-
-	{if $user->userID}
-		{* member *}
-		{capture append=usersOnlineList}
-			<li>
-				<div class="box48">
-					<a href="{link controller='User' object=$user}{/link}" title="{$user->username}" class="framed">{@$user->getAvatar()->getImageTag(48)}</a>
-
-					<div class="details userInformation">
-						<div class="containerHeadline">
-							<h3><a href="{link controller='User' object=$user}{/link}">{@$user->getFormattedUsername()}</a>{if MODULE_USER_RANK && $user->getUserTitle()} <span class="badge userTitleBadge{if $user->getRank() && $user->getRank()->cssClassName} {@$user->getRank()->cssClassName}{/if}">{$user->getUserTitle()}</span>{/if}</h3>
-							{@$locationData}
-						</div>
-
-						{@$sessionData}
-
-					</div>
-				</div>
-			</li>
-		{/capture}
-
-		{assign var=usersOnline value=$usersOnline+1}
-	{elseif $user->spiderID}
-		{* search robot *}
-		{capture append=robotsOnlineList}
-			<li>
-				<div class="box48">
-					<p class="framed"><img src="{$__wcf->getPath()}images/avatars/avatar-spider-default.svg" alt="" class="icon48" /></p>
-
-					<div class="details userInformation">
-						<div class="containerHeadline">
-							<h3>{if $user->getSpider()->spiderURL}<a href="{$user->getSpider()->spiderURL}" class="externalURL"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>{$user->getSpider()->spiderName}</a>{else}{$user->getSpider()->spiderName}{/if}</h3>
-							{@$locationData}
-						</div>
-
-						{@$sessionData}
-					</div>
-				</div>
-			</li>
-		{/capture}
-
-		{assign var=robotsOnline value=$robotsOnline+1}
-	{else}
-		{* unregistered *}
-		{capture append=guestsOnlineList}
-			<li>
-				<div class="box48">
-					<p class="framed"><img src="{$__wcf->getPath()}images/avatars/avatar-default.svg" alt="" class="icon48" /></p>
-
-					<div class="details userInformation">
-						<div class="containerHeadline">
-							<h3>{lang}wcf.user.guest{/lang}</h3>
-							{@$locationData}
-						</div>
-
-						{@$sessionData}
-					</div>
-				</div>
-			</li>
-		{/capture}
-
-		{assign var=guestsOnline value=$guestsOnline+1}
-		{/if}
-	{/foreach}
-	{if $usersOnline}
-		<header class="boxHeadline">
-			<h1>{lang}wcf.user.usersOnline{/lang} <span class="badge">{#$usersOnline}</span></h1>
-		</header>
-
-		<div class="container marginTop">
-			<ol class="containerList doubleColumned userList">
-				{@$usersOnlineList}
-			</ol>
-		</div>
-	{/if}
-
-	{if $guestsOnline && USERS_ONLINE_SHOW_GUESTS}
-		<header class="boxHeadline">
-			<h1>{lang}wcf.user.usersOnline.guests{/lang} <span class="badge">{#$guestsOnline}</span></h1>
-		</header>
-
-		<div class="container marginTop">
-			<ol class="containerList doubleColumned">
-				{@$guestsOnlineList}
-			</ol>
-		</div>
-	{/if}
-
-	{if $robotsOnline && USERS_ONLINE_SHOW_ROBOTS}
-		<header class="boxHeadline">
-			<h1>{lang}wcf.user.usersOnline.robots{/lang} <span class="badge">{#$robotsOnline}</span></h1>
-		</header>
-
-		<div class="container marginTop">
-			<ol class="containerList doubleColumned">
-				{@$robotsOnlineList}
-			</ol>
-		</div>
-	{/if}
-
-			</fieldset>
-		</div>
 	<script data-relocate="true" src="https://www.google.com/jsapi"></script>
-	{assign var=i value=0}
 	<script data-relocate="true">
 	{literal}google.load("visualization", "1", {packages:["corechart"]});{/literal}
 	google.setOnLoadCallback(drawArea);
@@ -205,8 +91,6 @@
 		var chart = new google.visualization.AreaChart(document.getElementById('canvas'));
 		chart.draw(data, options);
 	}
-
-	{assign var=i value=0}
 		google.setOnLoadCallback(drawChart);
 		function drawChart() {
 			var data = google.visualization.arrayToDataTable([
@@ -226,5 +110,88 @@
 			var chart = new google.visualization.PieChart(document.getElementById('browsers'));
 			chart.draw(data, options);
 		}
+
+		google.setOnLoadCallback(drawPlatformChart);
+		function drawPlatformChart() {
+			var data = google.visualization.arrayToDataTable([
+				['Platform', 'Visits'],
+				{foreach from=$platforms item=platform key=name}
+				['{$name}', {$platform['visits']}],
+				{/foreach}
+			]);
+
+			var options = {
+			title: '',
+			backgroundColor: 'transparent',
+			fontName: 'Trebuchet MS',
+			is3D: true
+			};
+
+			var chart = new google.visualization.PieChart(document.getElementById('platforms'));
+			chart.draw(data, options);
+		}
+
+		google.setOnLoadCallback(drawDeviceChart);
+		function drawDeviceChart() {
+			var data = google.visualization.arrayToDataTable([
+				['Device', 'Visits'],
+				{foreach from=$devices item=device key=name}
+				['cms.acp.stats.devices.{$name}', {$device['visits']}],
+				{/foreach}
+			]);
+
+			var options = {
+			title: '',
+			backgroundColor: 'transparent',
+			fontName: 'Trebuchet MS',
+			pieHole: 0.4
+			};
+
+			var chart = new google.visualization.PieChart(document.getElementById('devices'));
+			chart.draw(data, options);
+		}
 	</script>
+
+	<div class="container marginTop">
+		<ol class="containerList infoBoxList">
+			<li class="box32">
+				<span class="icon icon32 icon-user"></span>
+				<div class="containerHeadline">
+					<h3>{lang}cms.acp.stats.userOnline{/lang}</h3>
+				</div>
+				<ul class="containerBoxList doubleColumned">
+					{foreach from=$objects item=user}
+						{if $user->userID}
+							<li>
+								<span class="icon icon16 icon-user"></span>
+								<a href="{link controller='User' object=$user forceFrontend=true}{/link}">{@$user->getFormattedUsername()}</a>
+								-
+								<small>{@$user->lastActivityTime|time}</small>
+								-
+								<small>{$user->getBrowser()}</small>
+							</li>
+						{elseif $user->spiderID}
+							<li>
+								<span class="icon icon16 icon-bullseye"></span>
+								{$user->getSpider()->spiderName}
+								-
+								<small>{@$user->lastActivityTime|time}</small>
+								-
+								<small>{$user->getBrowser()}</small>
+							<li>
+						{else}
+							<li>
+								<span class="icon icon16 icon-question-sign"></span>
+								{lang}wcf.user.guest{/lang}
+								-
+								<small>{@$user->lastActivityTime|time}</small>
+								-
+								<small>{$user->getBrowser()}</small>
+							<li>
+						{/if}
+					{/foreach}
+				</ul>
+			</li>
+		</ol>
+	</div>
 {include file='footer'}

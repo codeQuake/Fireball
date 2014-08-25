@@ -27,6 +27,10 @@ class StatsPage extends AbstractPage {
 
 	public $browsers = array();
 
+	public $platforms = array();
+
+	public $devices = array();
+
 	public $colors = array(
 		'#015294',
 		'#F7464A',
@@ -52,34 +56,43 @@ class StatsPage extends AbstractPage {
 		if (isset($_POST['endDate'])) $this->endDate = strtotime($_POST['endDate']);
 		if ($this->startDate == 0) $this->startDate = TIME_NOW - 604800;
 		if ($this->endDate == 0) $this->endDate = TIME_NOW;
-		
+
 		// get stats
 		$this->visits = VisitCountHandler::getInstance()->getVisitors($this->startDate, $this->endDate);
-		$m = 0;
+
 		foreach ($this->visits as $visit) {
-			$tmp = @unserialize($visit['visitors']['browsers']);
-			if (empty($tmp)) $tmp = array();
-			foreach ($tmp as $key => $value) {
+			$browsers = @unserialize($visit['visitors']['browsers']);
+			if (empty($browsers)) $browsers = array();
+			foreach ($browsers as $key => $value) {
 				$this->browsers[$key] = array(
-					'visits' => isset($this->browsers[$key]['visits']) ? $this->browsers[$key]['visits'] + $value : $value,
-					'percentage' => 0
+					'visits' => isset($this->browsers[$key]['visits']) ? $this->browsers[$key]['visits'] + $value : $value
 				);
-				$m = $m + $value;
+			}
+
+			$platforms = @unserialize($visit['visitors']['platforms']);
+			if (empty($platforms)) $platforms = array();
+			foreach ($platforms as $key => $value) {
+				$this->platforms[$key] = array(
+					'visits' => isset($this->platforms[$key]['visits']) ? $this->platforms[$key]['visits'] + $value : $value
+				);
+			}
+
+			$devices = @unserialize($visit['visitors']['devices']);
+			if (empty($devices)) $devices = array();
+			foreach ($devices as $key => $value) {
+				$this->devices[$key] = array(
+					'visits' => isset($this->devices[$key]['visits']) ? $this->devices[$key]['visits'] + $value : $value
+				);
 			}
 		}
-		// calc percentages
-		foreach ($this->browsers as $key => $browser) {
-			$browser['percentage'] = round(($browser['visits'] / $m) * 100, 2);
-			$this->browsers[$key] = $browser;
-		}
-		
+
 		// read pages
 		$list = new PageList();
 		$list->sqlOrderBy = 'page.clicks DESC';
 		$list->sqlLimit = '8';
 		$list->readObjects();
 		$this->pages = $list->getObjects();
-		
+
 		// user online list
 		$this->usersOnlineList = new UsersOnlineList();
 		$this->usersOnlineList->readStats();
@@ -95,6 +108,8 @@ class StatsPage extends AbstractPage {
 		WCF::getTPL()->assign(array(
 			'visits' => $this->visits,
 			'browsers' => $this->browsers,
+			'platforms' => $this->platforms,
+			'devices' => $this->devices,
 			'objects' => $this->usersOnlineList,
 			'colors' => $this->colors,
 			'pages' => $this->pages,

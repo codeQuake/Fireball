@@ -1,6 +1,7 @@
 <?php
 namespace cms\system\counter;
 
+use cms\util\BrowserUtil;
 use wcf\system\cache\builder\SpiderCacheBuilder;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -23,8 +24,10 @@ class VisitCountHandler extends SingletonFactory {
 			$userID = WCF::getUser()->userID;
 			$spider = $this->getSpiderID(WCF::getSession()->userAgent);
 			if ($spider === null) $spider = 0;
-			$browser = $this->getBrowser(WCF::getSession()->userAgent);
-			$browserName = $browser['name'];
+			$browser = BrowserUtil::getBrowser(WCF::getSession()->userAgent);
+			$platform = BrowserUtil::getPlatform(WCF::getSession()->userAgent);
+			$isTablet = BrowserUtil::isTablet(WCF::getSession()->userAgent);
+			$isMobile = BrowserUtil::isMobile(WCF::getSession()->userAgent);
 
 			// update
 			if ($this->existingColumn()) {
@@ -38,19 +41,34 @@ class VisitCountHandler extends SingletonFactory {
 				$counter = $statement->fetchArray();
 
 				$browsers = @unserialize($counter['browsers']);
-				if (isset($browsers[$browserName])) $browsers[$browserName] = $browsers[$browserName] + 1;
-				else $browsers[$browserName] = 1;
+				$platforms = @unserialize($counter['platforms']);
+				$devices = @unserialize($counter['devices']);
+				// save browser
+				if (isset($browsers[$browser])) $browsers[$browser] = $browsers[$browser] + 1;
+				else $browsers[$browser] = 1;
+				// save platform
+				if (isset($platforms[$platform])) $platforms[$platform] = $platforms[$platform] + 1;
+				else $platforms[$platform] = 1;
+				// save device
+				if ($isMobile) $device = 'mobile';
+				else if ($isTablet) $device = 'tablet';
+				else $device = 'desktop';
+				if (isset($devices[$device])) $devices[$device] = $devices[$device] + 1;
+				else $devices[$device] = 1;
+				// save visits
 				$users = $counter['users'];
 				if ($userID != 0) $users ++;
 				$spiders = $counter['spiders'];
 				if ($spider != 0) $spiders ++;
 				$visits = $counter['visits'] + 1;
 
-				$sql = "UPDATE	cms" . WCF_N . "_counter 
+				$sql = "UPDATE	cms" . WCF_N . "_counter
 					SET	visits = ?,
 						users = ?,
 						spiders = ?,
-						browsers = ?
+						browsers = ?,
+						platforms = ?,
+						devices = ?
 					WHERE	day = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j') . "
 						AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . "
 						AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
@@ -59,7 +77,9 @@ class VisitCountHandler extends SingletonFactory {
 					$visits,
 					$users,
 					$spiders,
-					serialize($browsers)
+					serialize($browsers),
+					serialize($platforms),
+					serialize($devices)
 				));
 			}
 
@@ -70,10 +90,19 @@ class VisitCountHandler extends SingletonFactory {
 				if ($userID != 0) $users ++;
 				if ($spider != 0) $spiders ++;
 				$browsers = array();
-				$browsers[$browserName] = 1;
+				$browsers[$browser] = 1;
+				$platforms = array();
+				$platforms[$platform] = 1;
+
+				if ($isMobile) $device = 'mobile';
+				else if ($isTablet) $device = 'tablet';
+				else $device = 'desktop';
+
+				$devices = array();
+				$devices[$device] = 1;
 
 				$sql = "INSERT INTO	cms" . WCF_N . "_counter
-							(day, month, year, visits, users, spiders, browsers)
+							(day, month, year, visits, users, spiders, browsers, platforms, devices)
 					VALUES		(?, ?, ?, ?, ?, ?, ?)";
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$statement->execute(array(
@@ -83,7 +112,9 @@ class VisitCountHandler extends SingletonFactory {
 					1,
 					$users,
 					$spiders,
-					serialize($browsers)
+					serialize($browsers),
+					serialize($platforms),
+					serialize($devices)
 				));
 			}
 			WCF::getSession()->register('counted', true);
@@ -183,109 +214,16 @@ class VisitCountHandler extends SingletonFactory {
 		return array_reverse($visitors);
 	}
 
-	public function getBrowser($u_agent = '') {
-		if ($u_agent == '') return array(
-			'userAgent' => '',
-			'name' => 'Unknown',
-			'version' => '?',
-			'platform' => '',
-			'pattern' => ''
-		);
-		$bname = 'Unknown';
-		$platform = 'Unknown';
-		$version = "";
-
-		// First get the platform?
-		if (preg_match('/linux/i', $u_agent)) {
-			$platform = 'linux';
-		}
-		else if (preg_match('/macintosh|mac os x/i', $u_agent)) {
-			$platform = 'mac';
-		}
-		else if (preg_match('/windows|win32/i', $u_agent)) {
-			$platform = 'windows';
-		}
-
-		// Next get the name of the useragent yes seperately and for good reason
-		if (preg_match('/MSIE/i', $u_agent) && ! preg_match('/Opera/i', $u_agent)) {
-			$bname = 'Internet Explorer';
-			$ub = "MSIE";
-		}
-		else if (preg_match('/Firefox/i', $u_agent)) {
-			$bname = 'Mozilla Firefox';
-			$ub = "Firefox";
-		}
-		else if (preg_match('/Chrome/i', $u_agent)) {
-			$bname = 'Google Chrome';
-			$ub = "Chrome";
-		}
-		else if (preg_match('/Safari/i', $u_agent)) {
-			$bname = 'Apple Safari';
-			$ub = "Safari";
-		}
-		else if (preg_match('/Opera/i', $u_agent)) {
-			$bname = 'Opera';
-			$ub = "Opera";
-		}
-		else if (preg_match('/Netscape/i', $u_agent)) {
-			$bname = 'Netscape';
-			$ub = "Netscape";
-		}
-		else {
-			$ub = '';
-		}
-
-		// finally get the correct version number
-		$known = array(
-			'Version',
-			$ub,
-			'other'
-		);
-		$pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
-		if (! preg_match_all($pattern, $u_agent, $matches)) {
-			// we have no matching number just continue
-		}
-
-		// see how many we have
-		$i = count($matches['browser']);
-		if ($i != 1) {
-			// we will have two since we are not using 'other' argument yet
-			// see if version is before or after the name
-			if (strripos($u_agent, "Version") < strripos($u_agent, $ub)) {
-				$version = $matches['version'][0];
-			}
-			else {
-				$version = isset($matches['version'][1]) ? $matches['version'][1] : "";
-			}
-		}
-		else {
-			$version = $matches['version'][0];
-		}
-
-		// check if we have a number
-		if ($version == null || $version == "") {
-			$version = "?";
-		}
-
-		return array(
-			'userAgent' => $u_agent,
-			'name' => $bname,
-			'version' => $version,
-			'platform' => $platform,
-			'pattern' => $pattern
-		);
-	}
-
 	protected function getSpiderID($userAgent) {
 		$spiderList = SpiderCacheBuilder::getInstance()->getData();
 		$userAgent = strtolower($userAgent);
-		
+
 		foreach ($spiderList as $spider) {
 			if (strpos($userAgent, $spider->spiderIdentifier) !== false) {
 				return $spider->spiderID;
 			}
 		}
-		
+
 		return null;
 	}
 

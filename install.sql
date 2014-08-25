@@ -113,7 +113,9 @@ CREATE TABLE cms1_counter (
 	visits INT(20) NOT NULL DEFAULT 0,
 	users INT(20) NOT NULL DEFAULT 0,
 	spiders INT(20) NOT NULL DEFAULT 0,
-	browsers VARCHAR(255)
+	browsers MEDIUMTEXT,
+	platforms MEDIUMTEXT,
+	devices MEDIUMTEXT
 );
 
 --foreign keys
