@@ -1,14 +1,5 @@
 @CHARSET "ISO-8859-1";
 
-#contentAddDialog .tripleColumned>li {
-	float: left;
-	width: 33%;
-}
-
-#contentAddDialog .tripleColumned>li:nth-child(n+4) {
-	margin-top: 5px;
-}
-
 .jsFileImage.active {
 	background: rgba(116, 164, 70, 0.4) !important;
 }
