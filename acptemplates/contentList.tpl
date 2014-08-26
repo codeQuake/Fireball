@@ -5,13 +5,24 @@
 	//<![CDATA[
 	$(function() {
 		WCF.TabMenu.init();
-		new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '.jsContentRow');
-		new WCF.Action.Toggle('cms\\data\\content\\ContentAction', '.jsContentRow', '> .sortableNodeLabel > .buttons > .jsToggleButton');
+
+		var deleteAction = new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '.jsContentRow');
+		var toggleAction = new WCF.Action.Toggle('cms\\data\\content\\ContentAction', '.jsContentRow', '> .sortableNodeLabel > .buttons > .jsToggleButton');
+
+		var actionObjects = { };
+		actionObjects['de.codequake.cms.content'] = { };
+		actionObjects['de.codequake.cms.content']['disable'] = actionObjects['de.codequake.cms.content']['enable'] = toggleAction;
+		actionObjects['de.codequake.cms.content']['delete'] = deleteAction;
+
+		WCF.Clipboard.init('cms\\acp\\page\\ContentListPage', {@$hasMarkedItems}, actionObjects);
+
 		new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
 		new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
+
 		new CMS.ACP.Copy('.jsCopyButton', 'cms\\data\\content\\ContentAction');
 		new CMS.ACP.Page.AddContent();
 		new CMS.ACP.Content.Revisions();
+
 		WCF.Language.addObject({
 			{foreach from=$objectTypeList item=type}
 				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
@@ -65,7 +76,7 @@
 </div>
 
 {if $pageID}
-	<div class="tabMenuContainer">
+	<div class="jsClipboardContainer tabMenuContainer" data-type="de.codequake.cms.content">
 		<nav class="tabMenu">
 			<ul>
 				<li><a href="{@$__wcf->getAnchor('body')}">{lang}cms.acp.content.position.position.body{/lang}</a></li>
@@ -83,9 +94,10 @@
 							{assign var=oldDepth value=0}
 							{foreach from=$contentListBody item=content}
 								{section name=i loop=$oldDepth-$contentListBody->getDepth()}</ol></li>{/section}
-								<li class="content jsContentRow sortableNode" data-object-id="{$content->contentID}">
+								<li class="content jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
 									<span class="sortableNodeLabel">
 										<span class="title">
+											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
 											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
 											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=body{/link}">{@$content->getTitle()|language}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
 										</span>
@@ -131,9 +143,10 @@
 							{assign var=oldDepth value=0}
 							{foreach from=$contentListSidebar item=content}
 								{section name=i loop=$oldDepth-$contentListSidebar->getDepth()}</ol></li>{/section}
-								<li class="content jsContentRow sortableNode" data-object-id="{$content->contentID}">
+								<li class="content jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
 									<span class="sortableNodeLabel">
 										<span class="title">
+											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
 											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
 											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=sidebar{/link}">{@$content->getTitle()|language}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
 										</span>
@@ -168,6 +181,10 @@
 				</div>
 			{/hascontent}
 		</div>
+	</div>
+
+	<div class="contentNavigation">
+		<nav class="jsClipboardEditor" data-types="[ 'de.codequake.cms.content' ]"></nav>
 	</div>
 
 	<div class="container marginTop">
