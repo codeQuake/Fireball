@@ -28,7 +28,7 @@ CREATE TABLE cms1_page (
 	creationTime INT(10) NOT NULL DEFAULT 0,
 	lastEditTime INT(10) NOT NULL DEFAULT 0,
 	comments INT(10) NOT NULL DEFAULT 0,
-	clicks INT (20) NOT NULL DEFAULT 0
+	clicks INT (20) NOT NULL DEFAULT 0,
 
 	--display
 	styleID INT(10) DEFAULT NULL,
