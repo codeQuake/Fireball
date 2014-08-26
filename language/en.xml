@@ -89,6 +89,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[Template (Smarty)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Template-Source]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[You can use Smarty-Syntax here (<a href="http://www.smarty.net/">Documentation</a>).]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.error.compileError"><![CDATA[The given text contains the following template errors:<br />{$compileError}]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns"><![CDATA[Three Columns]]></item>
