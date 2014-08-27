@@ -13,12 +13,6 @@ use cms\data\content\Content;
  */
 interface IContentType {
 	/**
-	 * Validates the submitted form data. In case of invalid inputs, throw
-	 * an instance of '\wcf\system\exception\UserInputException'
-	 */
-	public function validate($data);
-
-	/**
 	 * Returns the formatted output for the given content.
 	 * 
 	 * @param	\cms\data\content\Content	$content
@@ -32,6 +26,22 @@ interface IContentType {
 	 * @return	string
 	 */
 	public function getIcon();
+
+	/**
+	 * Reads content type specific parameters.
+	 */
+	public function readParameters();
+
+	/**
+	 * Reads content type specific form parameters.
+	 */
+	public function readFormParameters();
+
+	/**
+	 * Validates the submitted form data. In case of invalid inputs, throw
+	 * an instance of '\wcf\system\exception\UserInputException'
+	 */
+	public function validate($data);
 
 	/**
 	 * Returns the template name for the acp forms

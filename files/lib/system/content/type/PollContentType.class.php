@@ -2,6 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use wcf\system\poll\PollManager;
 use wcf\system\WCF;
 
 /**
@@ -16,12 +17,41 @@ class PollContentType extends AbstractContentType {
 	 */
 	protected $icon = 'icon-bar-chart';
 
-	public function getFormTemplate() {
-		return 'pollContentType';
-	}
-
+	/**
+	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 */
 	public function getOutput(Content $content) {
 		WCF::getTPL()->assign('poll', $content->getPoll());
 		return WCF::getTPL()->fetch('poll', 'wcf');
+	}
+
+	/**
+	 * @see	\cms\system\content\type\IContentType::readParameters()
+	 */
+	public function readParameters() {
+		parent::readParameters();
+
+		PollManager::getInstance()->setObject('de.codequake.cms.content', 0);
+	}
+
+	/**
+	 * @see	\cms\system\content\type\IContentType::readFormParameters()
+	 */
+	public function readFormParameters() {
+		PollManager::getInstance()->readFormParameters();
+	}
+
+	/**
+	 * @see	\cms\system\content\type\IContentType::validate()
+	 */
+	public function validate($data) {
+		PollManager::getInstance()->validate();
+	}
+
+	/**
+	 * @see	\cms\system\content\type\IcontentType::getFormTemplate()
+	 */
+	public function getFormTemplate() {
+		return 'pollContentType';
 	}
 }

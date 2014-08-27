@@ -103,12 +103,6 @@ class ContentAddForm extends AbstractForm {
 	public $objectType = null;
 
 	/**
-	 * content object type processor
-	 * @var	\cms\system\content\type\IContentType
-	 */
-	public $objectTypeProcessor = null;
-
-	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -120,15 +114,9 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
 		if ($this->parentID == 0) $this->parentID = null;
 		if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $_REQUEST['objectType']);
-		if ($this->objectType != null) {
-			$this->objectTypeProcessor = $this->objectType->getProcessor();
-		}
 
-		foreach ($this->objectTypeProcessor->multilingualFields as $field) {
-			I18nHandler::getInstance()->register($field);
-		}
-
-		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->setObject('de.codequake.cms.content', 0);
+		// read object type specific parameters
+		$this->objectType->getProcessor()->readParameters();
 	}
 
 	/**
@@ -147,11 +135,12 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['contentData']) && is_array($_POST['contentData'])) $this->contentData = $_POST['contentData'];
 
-		foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+		foreach ($this->objectType->getProcessor()->multilingualFields as $field) {
 			if (I18nHandler::getInstance()->isPlainValue($field)) $this->contentData[$field] = StringUtil::trim(I18nHandler::getInstance()->getValue($field));
 		}
 
-		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->readFormParameters();
+		// read object type specific form parameters
+		$this->objectType->getProcessor()->readFormParameters();
 	}
 
 	/**
@@ -160,8 +149,7 @@ class ContentAddForm extends AbstractForm {
 	public function validate() {
 		parent::validate();
 
-		$this->objectTypeProcessor->validate($this->contentData);
-		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->validate();
+		$this->objectType->getProcessor()->validate($this->contentData);
 
 		//if this happens, user is a retard
 		$position = array(
@@ -254,7 +242,7 @@ class ContentAddForm extends AbstractForm {
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
 
-		foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+		foreach ($this->objectType->getProcessor()->multilingualFields as $field) {
 			if (!I18nHandler::getInstance()->isPlainValue($field)) {
 				I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
 				$contentData[$field] = 'cms.content.' . $field . $contentID;
@@ -318,7 +306,7 @@ class ContentAddForm extends AbstractForm {
 			'contentList' => $this->contentList,
 			'page' => new Page($this->pageID),
 			'objectType' => $this->objectType,
-			'objectTypeProcessor' => $this->objectTypeProcessor,
+			'objectTypeProcessor' => $this->objectType->getProcessor(),
 			'contentData' => $this->contentData
 		));
 	}
