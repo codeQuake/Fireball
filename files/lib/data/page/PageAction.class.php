@@ -16,6 +16,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
+use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\AJAXException;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;

@@ -51,7 +51,7 @@ class TemplateContentType extends AbstractContentType {
 	 */
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
-		$compiled = WCF::getTPL()->getCompiler()->compileString($this->objectType . $content->contentID, $data['text']);
+		$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $data['text']);
 		return WCF::getTPL()->fetchString($compiled['template']);
 	}
 }
