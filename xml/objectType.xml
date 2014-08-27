@@ -3,6 +3,11 @@
 	<import>
 		<!-- clipboard -->
 		<type>
+			<name>de.codequake.cms.content</name>
+			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+			<listclassname>cms\data\content\ContentList</listclassname>
+		</type>
+		<type>
 			<name>de.codequake.cms.page</name>
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
 			<listclassname>cms\data\page\PageList</listclassname>

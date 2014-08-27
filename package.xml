@@ -72,6 +72,7 @@
 		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu_update.xml</instruction>
+		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 
 		<!-- others -->

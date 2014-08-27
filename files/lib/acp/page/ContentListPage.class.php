@@ -6,6 +6,7 @@ use cms\data\page\PageCache;
 use cms\data\page\PageNodeTree;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\AbstractPage;
+use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
@@ -79,6 +80,7 @@ class ContentListPage extends AbstractPage {
 		WCF::getTPL()->assign(array(
 			'contentListBody' => $this->contentListBody->getIterator(),
 			'contentListSidebar' => $this->contentListSidebar->getIterator(),
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.content')),
 			'objectTypeList' => $this->objectTypeList,
 			'pageID' => $this->pageID,
 			'page' => $this->page,
