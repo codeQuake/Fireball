@@ -73,8 +73,10 @@
 		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu_update.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption_update.xml</instruction>
 		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
 
 		<!-- others -->
 		<instruction type="sql">update_beta7.sql</instruction>

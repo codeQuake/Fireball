@@ -3,5 +3,13 @@
 	<delete>
 		<acpmenuitem name="cms.acp.menu.link.cms.layout.list"></acpmenuitem>
 		<acpmenuitem name="cms.acp.menu.link.cms.layout.add"></acpmenuitem>
+		<acpmenuitem name="cms.acp.menu.link.cms.page.import"></acpmenuitem>
 	</delete>
+	<import>
+		<acpmenuitem name="cms.acp.menu.link.cms.page.importAndExport">
+			<parent>cms.acp.menu.link.cms.content</parent>
+			<controller><![CDATA[cms\acp\form\CMSImportForm]]></controller>
+			<permissions>admin.cms.page.canAddPage</permissions>
+		</acpmenuitem>
+	</import>
 </data>
