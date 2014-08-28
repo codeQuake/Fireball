@@ -2,6 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use wcf\system\language\I18nHandler;
 
 /**
  * Abstract content type implementation.
@@ -21,11 +22,6 @@ abstract class AbstractContentType implements IContentType {
 	public $multilingualFields = array();
 
 	/**
-	 * @see cms\system\content\type\IContentType::validate()
-	 */
-	public function validate($data) {}
-
-	/**
 	 * @see \cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
@@ -38,6 +34,26 @@ abstract class AbstractContentType implements IContentType {
 	public function getIcon() {
 		return $this->icon;
 	}
+
+	/**
+	 * @see	\cms\system\content\type\IContentType::readParameters()
+	 */
+	public function readParameters() {
+		// register multilingual fields
+		foreach ($this->multilingualFields as $field) {
+			I18nHandler::getInstance()->register($field);
+		}
+	}
+
+	/**
+	 * @see	\cms\system\content\type\IContentType::readFormParameters()
+	 */
+	public function readFormParameters() { }
+
+	/**
+	 * @see cms\system\content\type\IContentType::validate()
+	 */
+	public function validate($data) { }
 
 	/**
 	 * @see \cms\system\content\type\IContentType::getFormTemplate()
