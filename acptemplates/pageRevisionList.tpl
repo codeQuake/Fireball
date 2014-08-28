@@ -7,7 +7,7 @@
 		//]]>
 	</script>
 
-	<div class="tabularBox tabularBoxTitle">
+	<div class="marginTop tabularBox">
 		<table class="table">
 			<thead>
 				<tr>
