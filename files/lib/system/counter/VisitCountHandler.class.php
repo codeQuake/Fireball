@@ -103,7 +103,7 @@ class VisitCountHandler extends SingletonFactory {
 
 				$sql = "INSERT INTO	cms" . WCF_N . "_counter
 							(day, month, year, visits, users, spiders, browsers, platforms, devices)
-					VALUES		(?, ?, ?, ?, ?, ?, ?)";
+					VALUES		(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$statement->execute(array(
 					DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j'),
