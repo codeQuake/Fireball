@@ -23,7 +23,7 @@ class CMSSitemapProvider implements ISitemapProvider {
 		$nodeList->setMaxDepth(2);
 
 		WCF::getTPL()->assign(array(
-			'pageList' => $list->getIterator()
+			'pageList' => $nodeList->getIterator()
 		));
 
 		return WCF::getTPL()->fetch('cmsSitemap', 'cms');
