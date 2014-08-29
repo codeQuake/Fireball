@@ -127,7 +127,7 @@
 					<li><span class="icon icon16 icon-check"></span> <span>{lang}cms.acp.page.disable{/lang}</span></li>
 					<li><span class="icon icon16 icon-home"></span> <span>{lang}cms.acp.page.setAsHome{/lang}</span></li>
 					<li><span class="icon icon16 icon-copy"></span> <span>{lang}cms.acp.page.copy{/lang}</span></li>
-					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.page.revisionList{/lang}</span></li>
+					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.page.revision.list{/lang}</span></li>
 					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
 					<li><span class="icon icon16 icon-file"></span> <span>{lang}cms.acp.content.list{/lang}</span></li>
 				</ul>
