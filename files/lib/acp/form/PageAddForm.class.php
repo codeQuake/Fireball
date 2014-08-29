@@ -19,12 +19,13 @@ use wcf\system\language\LanguageFactory;
 use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
+use wcf\util\DateUtil;
 use wcf\util\StringUtil;
 
 /**
  * Shows the page add form.
  *
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -83,6 +84,30 @@ class PageAddForm extends AbstractForm {
 	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
 
 	/**
+	 * enables a delayed deactivation of this page
+	 * @var	integer
+	 */
+	public $enableDelayedDeactivation = 0;
+
+	/**
+	 * enables a delayed publication of this page
+	 * @var	integer
+	 */
+	public $enableDelayedPublication = 0;
+
+	/**
+	 * deactivation date (ISO 8601)
+	 * @var	string
+	 */
+	public $deactivationDate = '';
+
+	/**
+	 * publication date (ISO 8601)
+	 * @var	string
+	 */
+	public $publicationDate = '';
+
+	/**
 	 * list of available styles
 	 * @var	array<\wcf\data\style\Style>
 	 */
@@ -138,6 +163,11 @@ class PageAddForm extends AbstractForm {
 		else $this->isCommentable = 0;
 		if (isset($_POST['styleID'])) $this->styleID = intval($_POST['styleID']);
 		if (isset($_POST['stylesheets']) && is_array($_POST['stylesheets'])) $this->stylesheets = ArrayUtil::toIntegerArray($_POST['stylesheets']);
+
+		if (isset($_POST['enableDelayedPublication'])) $this->enableDelayedPublication = intval($_POST['enableDelayedPublication']);
+		if (isset($_POST['publicationDate'])) $this->publicationDate = $_POST['publicationDate'];
+		if (isset($_POST['enableDelayedDeactivation'])) $this->enableDelayedDeactivation = intval($_POST['enableDelayedDeactivation']);
+		if (isset($_POST['deactivationDate'])) $this->deactivationDate = $_POST['deactivationDate'];
 	}
 
 	/**
@@ -152,6 +182,37 @@ class PageAddForm extends AbstractForm {
 
 		// validate alias
 		$this->validateAlias();
+
+		// validate publication date
+		if ($this->enableDelayedPublication) {
+			$publicationDateTimestamp = @strtotime($this->publicationDate);
+			if ($publicationDateTimestamp === false || $publicationDateTimestamp <= TIME_NOW) {
+				throw new UserInputException('publicationDate', 'notValid');
+			}
+
+			// integer overflow
+			if ($publicationDateTimestamp > 2147483647) {
+				throw new UserInputException('publicationDate', 'notValid');
+			}
+		}
+
+		// validate deactivation date
+		if ($this->enableDelayedDeactivation) {
+			$deactivationDateTimestamp = @strtotime($this->deactivationDate);
+			if ($deactivationDateTimestamp === false || $deactivationDateTimestamp <= TIME_NOW) {
+				throw new UserInputException('deactivationDate', 'notValid');
+			}
+
+			// integer overflow
+			if ($deactivationDateTimestamp > 2147483647) {
+				throw new UserInputException('deactivationDate', 'notValid');
+			}
+
+			// deactivation date needs to be after publication date
+			if ($this->enableDelayedPublication && $deactivationDateTimestamp < $publicationDateTimestamp) {
+				throw new UserInputException('deactivationDate', 'beforePublication');
+			}
+		}
 
 		// validate style
 		if ($this->styleID && !isset($this->availableStyles[$this->styleID])) {
@@ -207,6 +268,17 @@ class PageAddForm extends AbstractForm {
 			'styleID' => ($this->styleID) ?: null,
 			'stylesheets' => serialize($this->stylesheets)
 		);
+
+		// publication
+		if ($this->enableDelayedPublication) {
+			$data['isPublished'] = 0;
+			$dateTime = \DateTime::createFromFormat('Y-m-d H:i', $this->publicationDate, WCF::getUser()->getTimeZone());
+			$data['publicationDate'] = $dateTime->getTimestamp();
+		}
+		if ($this->enableDelayedDeactivation) {
+			$dateTime = \DateTime::createFromFormat('Y-m-d H:i', $this->deactivationDate, WCF::getUser()->getTimeZone());
+			$data['deactivationDate'] = $dateTime->getTimestamp();
+		}
 
 		$objectAction = new PageAction(array(), 'create', array(
 			'data' => $data
@@ -292,7 +364,7 @@ class PageAddForm extends AbstractForm {
 		WCF::getTPL()->assign('success', true);
 		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
 		$this->sidebarOrientation = 'right';
-		$this->invisible = $this->parentID = $this->showOrder = $this->showSidebar = $this->styleID = 0;
+		$this->deactivationDate = $this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->parentID = $this->publicationDate = $this->showOrder = $this->showSidebar = $this->styleID = 0;
 		$this->menuItem = 1;
 		I18nHandler::getInstance()->reset();
 	}
@@ -304,6 +376,13 @@ class PageAddForm extends AbstractForm {
 		parent::readData();
 
 		if (isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
+
+		// set default values
+		if (empty($_POST)) {
+			$dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
+			$dateTime->setTimezone(WCF::getUser()->getTimeZone());
+			$this->deactivationDate = $this->publicationDate = $dateTime->format('c');
+		}
 
 		$this->pageList = new PageNodeTree();
 		$this->pageList = $this->pageList->getIterator();
@@ -338,7 +417,11 @@ class PageAddForm extends AbstractForm {
 			'availableStyles' => $this->availableStyles,
 			'styleID' => $this->styleID,
 			'stylesheets' => $this->stylesheets,
-			'stylesheetList' => $this->stylesheetList->getObjects()
+			'stylesheetList' => $this->stylesheetList->getObjects(),
+			'enableDelayedDeactivation' => $this->enableDelayedDeactivation,
+			'enableDelayedPublication' => $this->enableDelayedPublication,
+			'deactivationDate' => $this->deactivationDate,
+			'publicationDate' => $this->publicationDate
 		));
 	}
 }

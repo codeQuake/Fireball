@@ -154,6 +154,12 @@
 			</option>
 
 			<!--mod -->
+			<option name="mod.cms.canReadUnpublishedPage">
+				<categoryname>mod.cms</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
 			<option name="mod.cms.page.canModeratePage">
 				<categoryname>mod.cms.page</categoryname>
 				<optiontype>boolean</optiontype>

@@ -46,6 +46,7 @@
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
 		<instruction type="bbcode">xml/bbcode.xml</instruction>
 		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
+		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
 		<instruction type="sitemap">xml/sitemap.xml</instruction>
@@ -75,6 +76,7 @@
 		<instruction type="acpMenu">xml/acpMenu_update.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption_update.xml</instruction>
 		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
+		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
 

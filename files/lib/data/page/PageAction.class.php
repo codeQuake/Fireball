@@ -29,7 +29,7 @@ use wcf\system\WCF;
 /**
  * Executes page-related actions.
  *
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -58,7 +58,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache
 	 */
-	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'restoreRevision', 'setAsHome', 'toggle', 'update', 'updatePosition');
+	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'publish', 'restoreRevision', 'setAsHome', 'toggle', 'update', 'updatePosition');
 
 	/**
 	 * Validates parameters to copy a page.
@@ -167,6 +167,11 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		PagePermissionCacheBuilder::getInstance()->reset();
 		$this->objects = array($pageEditor);
+
+		if (!$page->isDisabled && $page->isPublished) {
+			$action = new PageAction(array($pageEditor), 'triggerPublication');
+			$action->executeAction();
+		}
 
 		return $page;
 	}
@@ -344,6 +349,30 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 
 	/**
+	 * Publishes pages.
+	 */
+	public function publish() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+
+		$pageIDs = array();
+		foreach ($this->objects as $pageEditor) {
+			$pageIDs[] = $pageEditor->pageID;
+			$pageEditor->update(array(
+				'isPublished' => 1,
+				'publicationDate' => 0
+			));
+		}
+
+		// trigger publication
+		if (!empty($pageIDs)) {
+			$action = new PageAction($pageIDs, 'triggerPublication');
+			$action->executeAction();
+		}
+	}
+
+	/**
 	 * Refreshes the search index
 	 */
 	public function refreshSearchIndex() {
@@ -402,6 +431,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 	}
+
+	/**
+	 * Triggers the publication of pages. You may listen for this action to
+	 * execute certain code once the relevant pages are publicly available.
+	 */
+	public function triggerPublication() { /* nothing */ }
 
 	/**
 	 * Validates permissions to restore a revision.
@@ -504,6 +539,21 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		// perform update
 		parent::update();
+
+		// trigger new publications
+		if (isset($this->parameters['data']['isPublished']) && $this->parameters['data']['isPublished'] == 1) {
+			$publishedPageIDs = array();
+			foreach ($this->objects as $pageEditor) {
+				if (!$pageEditor->isPublished) {
+					$publishedPageIDs[] = $pageEditor->pageID;
+				}
+			}
+
+			if (!empty($publishedPageIDs)) {
+				$action = new PageAction($publishedPageIDs, 'triggerPublication');
+				$action->executeAction();
+			}
+		}
 	}
 
 	/**
