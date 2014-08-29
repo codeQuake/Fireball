@@ -80,6 +80,11 @@
 									<span class="pointer collapsibleButton icon icon16 icon-file-text-alt"></span>
 								{/if}
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}">{@$page->getTitle()}</a> - <small>/{$page->getAlias()}/</small>
+								{if !$page->isPublished}
+									- <small>{lang}cms.acp.page.delayedPublication{/lang}</small>
+								{elseif $page->deactivationDate}
+									- <small>{lang}cms.acp.page.delayedDeactivation{/lang}</small>
+								{/if}
 							</span>
 							<span class="statusDisplay buttons">
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>

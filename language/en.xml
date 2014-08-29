@@ -177,6 +177,8 @@
 		<item name="cms.acp.page.content.add"><![CDATA[Add contents to '{$page->title|language}']]></item>
 		<item name="cms.acp.page.content.list"><![CDATA[List contents of '{$page->title|language}']]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Copy page]]></item>
+		<item name="cms.acp.page.delayedDeactivation"><![CDATA[Deactivation on {@$page->deactivationDate|plainTime}]]></item>
+		<item name="cms.acp.page.delayedPublication"><![CDATA[Publication on {@$page->publicationDate|plainTime}]]></item>
 		<item name="cms.acp.page.delete.sure"><![CDATA[Are you sure you want to delete this page and all of its contents?]]></item>
 		<item name="cms.acp.page.description"><![CDATA[Description]]></item>
 		<item name="cms.acp.page.disable"><![CDATA[Toggle page]]></item>
@@ -214,6 +216,14 @@
 		]]></item>
 		<item name="cms.acp.page.position.invisible"><![CDATA[Invisible]]></item>
 		<item name="cms.acp.page.position.invisible.description"><![CDATA[]]></item>
+		<item name="cms.acp.page.publication"><![CDATA[Publication]]></item>
+		<item name="cms.acp.page.publication.enableDelayedDeactivation"><![CDATA[Enable delayed deactivation]]></item>
+		<item name="cms.acp.page.publication.enableDelayedPublication"><![CDATA[Enable delayed publication]]></item>
+		<item name="cms.acp.page.publication.deactivationDate"><![CDATA[Deactivation Date]]></item>
+		<item name="cms.acp.page.publication.deactivationDate.error.beforePublication"><![CDATA[Deactivation date needs to be after publication of the page.]]></item>
+		<item name="cms.acp.page.publication.deactivationDate.error.notValid"><![CDATA[Deactication date is invalid.]]></item>
+		<item name="cms.acp.page.publication.publicationDate"><![CDATA[Publication Date]]></item>
+		<item name="cms.acp.page.publication.publicationDate.error.notValid"><![CDATA[Publication date is invalid.]]></item>
 		<item name="cms.acp.page.remove"><![CDATA[Remove page]]></item>
 		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>
 		<item name="cms.acp.page.revision.action"><![CDATA[Action]]></item>
@@ -343,6 +353,7 @@
 		<item name="wcf.acp.group.option.mod.cms.page.canEditComment"><![CDATA[Can edit comments]]></item>
 		<item name="wcf.acp.group.option.mod.cms.page.canModerateComment"><![CDATA[Can moderate comments]]></item>
 		<item name="wcf.acp.group.option.mod.cms.page.canModeratePage"><![CDATA[Can moderate pages]]></item>
+		<item name="wcf.acp.group.option.mod.cms.canReadUnpublishedPage"><![CDATA[Can read pages that are not published yet]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canDownloadFile"><![CDATA[Can download files]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canVotePoll"><![CDATA[Can vote poll]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canAddComment"><![CDATA[Can add comments]]></item>

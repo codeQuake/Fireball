@@ -15,6 +15,7 @@ use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
+use wcf\util\DateUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -38,6 +39,7 @@ class PageEditForm extends PageAddForm {
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
+
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
 	}
 
@@ -79,6 +81,18 @@ class PageEditForm extends PageAddForm {
 			'styleID' => ($this->styleID) ?: null,
 			'stylesheets' => serialize($this->stylesheets)
 		);
+
+		// publication
+		if ($this->enableDelayedPublication) {
+			$data['isPublished'] = 0;
+			$data['publicationDate'] = @strtotime($this->publicationDate);
+		} else {
+			$data['isPublished'] = 1;
+		}
+		if ($this->enableDelayedDeactivation) {
+			$data['isDisabled'] = 0;
+			$data['deactivationDate'] = @strtotime($this->publicationDate);
+		}
 
 		$objectAction = new PageAction(array(
 			$this->pageID
@@ -224,6 +238,22 @@ class PageEditForm extends PageAddForm {
 			$this->alias = $this->page->alias;
 			$this->styleID = $this->page->styleID;
 			$this->stylesheets = @unserialize($this->page->stylesheets);
+
+			// publication
+			if (!$this->page->isPublished) {
+				$this->enableDelayedPublication = 1;
+
+				$dateTime = DateUtil::getDateTimeByTimestamp($this->page->publicationDate);
+				$dateTime->setTimezone(WCF::getUser()->getTimeZone());
+				$this->publicationDate = $dateTime->format('c');
+			}
+			if ($this->page->deactivationDate) {
+				$this->enableDelayedDeactivation = 1;
+
+				$dateTime = DateUtil::getDateTimeByTimestamp($this->page->deactivationDate);
+				$dateTime->setTimezone(WCF::getUser()->getTimeZone());
+				$this->deactivationDate = $dateTime->format('c');
+			}
 		}
 	}
 

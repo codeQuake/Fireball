@@ -66,8 +66,12 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 	}
 
 	public function isAccessible() {
-		if ($this->getPermission('canEnterPage')) return true;
-		return false;
+		if (!$this->isPublished && !WCF::getSession()->getPermission('mod.cms.canReadUnpublishedPage')) {
+			// user can't read unpublished pages
+			return false;
+		}
+
+		return $this->getPermission('canEnterPage');
 	}
 
 	public function isChild() {

@@ -177,6 +177,8 @@
 		<item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
 		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von „{$page->title|language}' auflisten]]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Seite kopieren]]></item>
+		<item name="cms.acp.page.delayedDeactivation"><![CDATA[Deaktivierung am {@$page->deactivationDate|plainTime}]]></item>
+		<item name="cms.acp.page.delayedPublication"><![CDATA[Veröffentlichung am {@$page->publicationDate|plainTime}]]></item>
 		<item name="cms.acp.page.delete.sure"><![CDATA[Wollen Sie diese Seite und all ihre Inhalte wirklich löschen?]]></item>
 		<item name="cms.acp.page.description"><![CDATA[Beschreibung]]></item>
 		<item name="cms.acp.page.disable"><![CDATA[Seite (de)-aktivieren]]></item>
@@ -212,6 +214,14 @@
 		<item name="cms.acp.page.position.description"><![CDATA[Legt die Reihenfolge fest, in der die Seiten aufgelistet werden.]]></item>
 		<item name="cms.acp.page.position.invisible"><![CDATA[Seite verstecken]]></item>
 		<item name="cms.acp.page.position.invisible.description"><![CDATA[Diese Seite und ihre Unterseiten werden in allen Listen ausgeblendet, sind aber weiterhin mittels Direktlink aufrufbar.]]></item>
+		<item name="cms.acp.page.publication"><![CDATA[Veröffentlichung]]></item>
+		<item name="cms.acp.page.publication.enableDelayedDeactivation"><![CDATA[Seite zu einem späteren Zeitpunkt automatisch deaktivieren]]></item>
+		<item name="cms.acp.page.publication.enableDelayedPublication"><![CDATA[Seite zu einem späteren Zeitpunkt veröffentlichen]]></item>
+		<item name="cms.acp.page.publication.deactivationDate"><![CDATA[Deaktivierungsdatum]]></item>
+		<item name="cms.acp.page.publication.deactivationDate.error.beforePublication"><![CDATA[Das Deaktivierungsdatum muss nach dem eingestellten Veröffentlichungsdatum liegen.]]></item>
+		<item name="cms.acp.page.publication.deactivationDate.error.notValid"><![CDATA[Sie haben ein ungültiges Deaktivierungsdatum angegeben.]]></item>
+		<item name="cms.acp.page.publication.publicationDate"><![CDATA[Veröffentlichungsdatum]]></item>
+		<item name="cms.acp.page.publication.publicationDate.error.notValid"><![CDATA[Sie haben ein ungültiges Veröffentlichungsdatum angegeben.]]></item>
 		<item name="cms.acp.page.remove"><![CDATA[Seite entfernen]]></item>
 		<item name="cms.acp.page.revision"><![CDATA[Version]]></item>
 		<item name="cms.acp.page.revision.action"><![CDATA[Aktion]]></item>
@@ -344,6 +354,7 @@
 		<item name="wcf.acp.group.option.mod.cms.page.canEditComment"><![CDATA[Kann Kommentare bearbeiten]]></item>
 		<item name="wcf.acp.group.option.mod.cms.page.canModerateComment"><![CDATA[Moderationsrecht für Kommentare]]></item>
 		<item name="wcf.acp.group.option.mod.cms.page.canModeratePage"><![CDATA[Moderationsrecht]]></item>
+		<item name="wcf.acp.group.option.mod.cms.canReadUnpublishedPage"><![CDATA[Kann noch nicht veröffentlichte Seiten sehen]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canDownloadFile"><![CDATA[Kann Dateien herunterladen]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canVotePoll"><![CDATA[Kann an Umfragen teilnehmen]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canAddComment"><![CDATA[Kann Kommentare hinzufügen]]></item>

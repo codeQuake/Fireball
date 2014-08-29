@@ -13,14 +13,19 @@ CREATE TABLE cms1_page (
 	showOrder INT(10) DEFAULT 0,
 	menuItemID INT(10),
 
-	--settings
+	-- publication
 	isDisabled TINYINT(1) DEFAULT 0,
+	isPublished TINYINT(1) NOT NULL DEFAULT 1,
+	publicationDate INT(10) NOT NULL DEFAULT 0,
+	deactivationDate INT(10) NOT NULL DEFAULT 0,
+
+	-- settings
 	isHome INT(1) DEFAULT 0,
 	showSidebar INT(1) DEFAULT 0,
 	invisible TINYINT(1) DEFAULT 0,
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
 
-	--properties
+	-- properties
 	authorID INT(10) DEFAULT NULL,
 	authorName VARCHAR(255) NOT NULL DEFAULT '',
 	lastEditorID INT(10) DEFAULT NULL,
@@ -30,7 +35,7 @@ CREATE TABLE cms1_page (
 	comments INT(10) NOT NULL DEFAULT 0,
 	clicks INT (20) NOT NULL DEFAULT 0,
 
-	--display
+	-- display
 	styleID INT(10) DEFAULT NULL,
 	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
 	stylesheets MEDIUMTEXT,

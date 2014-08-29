@@ -12,6 +12,10 @@
 
 		new CMS.ACP.Page.AddForm();
 
+		$('#enableDelayedDeactivation, #enableDelayedPublication').click(function() {
+			var $toggleContainerID = $(this).data('toggleContainer');
+			$('#'+ $toggleContainerID).toggle();
+		});
 	});
 	//]]>
 </script>
@@ -213,6 +217,58 @@
 				</dl>
 
 				{event name='positionFields'}
+			</fieldset>
+
+			<fieldset>
+				<legend>{lang}cms.acp.page.publication{/lang}</legend>
+
+				<dl>
+					<dt class="reversed"><label for="enableDelayedPublication">{lang}cms.acp.page.publication.enableDelayedPublication{/lang}</label></dt>
+					<dd>
+						<input type="checkbox" id="enableDelayedPublication" name="enableDelayedPublication" value="1"{if $enableDelayedPublication} checked="checked"{/if} data-toggle-container="publicationDateContainer" />
+					</dd>
+				</dl>
+
+				<dl id="publicationDateContainer"{if $errorField == 'publicationDate'} class="formError"{/if}{if !$enableDelayedPublication} style="display: none"{/if}>
+					<dt><label for="publicationDate">{lang}cms.acp.page.publication.publicationDate{/lang}</label></dt>
+					<dd>
+						<input type="datetime" id="publicationDate" name="publicationDate" class="medium" value="{$publicationDate}" />
+						{if $errorField == 'publicationDate'}
+							<small class="innerError">
+								{if $errorType == 'empty'}
+									{lang}wcf.global.form.error.empty{/lang}
+								{else}
+									{lang}cms.acp.page.publication.publicationDate.error.{@$errorType}{/lang}
+								{/if}
+							</small>
+						{/if}
+					</dd>
+				</dl>
+
+				<dl>
+					<dt class="reversed"><label for="enableDelayedDeactivation">{lang}cms.acp.page.publication.enableDelayedDeactivation{/lang}</label></dt>
+					<dd>
+						<input type="checkbox" id="enableDelayedDeactivation" name="enableDelayedDeactivation" value="1"{if $enableDelayedDeactivation} checked="checked"{/if} data-toggle-container="deactivationDateContainer" />
+					</dd>
+				</dl>
+
+				<dl id="deactivationDateContainer"{if $errorField == 'deactivationDate'} class="formError"{/if}{if !$enableDelayedDeactivation} style="display: none"{/if}>
+					<dt><label for="deactivationDate">{lang}cms.acp.page.publication.deactivationDate{/lang}</label></dt>
+					<dd>
+						<input type="datetime" id="deactivationDate" name="deactivationDate" class="medium" value="{$deactivationDate}" />
+						{if $errorField == 'deactivationDate'}
+							<small class="innerError">
+								{if $errorType == 'empty'}
+									{lang}wcf.global.form.error.empty{/lang}
+								{else}
+									{lang}cms.acp.page.publication.deactivationDate.error.{@$errorType}{/lang}
+								{/if}
+							</small>
+						{/if}
+					</dd>
+				</dl>
+
+				{event name='publicationFields'}
 			</fieldset>
 
 			<fieldset>
