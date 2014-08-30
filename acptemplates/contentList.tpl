@@ -200,7 +200,7 @@
 					<li><span class="icon icon16 icon-check"></span> <span>{lang}cms.acp.page.disable{/lang}</span></li>
 					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
 					<li><span class="icon icon16 icon-copy"></span> <span>{lang}cms.acp.content.copy{/lang}</span></li>
-					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.content.revisions{/lang}</span></li>
+					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.content.revision.list{/lang}</span></li>
 				</ul>
 			</li>
 		</ol>
