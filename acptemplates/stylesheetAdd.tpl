@@ -23,12 +23,12 @@
 <form method="post" action="{if $action == 'add'}{link controller='StylesheetAdd' application='cms'}{/link}{else}{link controller='StylesheetEdit' id=$stylesheetID application='cms'}{/link}{/if}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
-			<legend>{lang}cms.acp.stylesheet.general{/lang}</legend>
+			<legend>{lang}wcf.global.form.data{/lang}</legend>
 
 			<dl>
-				<dt><label for="title">{lang}cms.acp.stylesheet.title{/lang}</label></dt>
+				<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
 				<dd>
-					<input type="text" name="title" id="title" required="required" value="{$title}"/>
+					<input type="text" name="title" id="title" required="required" value="{$title}" class="long" />
 				</dd>
 			</dl>
 		</fieldset>
