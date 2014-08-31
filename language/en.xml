@@ -385,13 +385,13 @@
 		<item name="wcf.acp.option.category.dashboard.sidebar.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.acp.option.cms_dashboard_sidebar_entries"><![CDATA[Number of pages]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_effect_delay"><![CDATA[Slideshow-Effect delay]]></item>
-		<item name="wcf.acp.option.cms_pages_content_slideshow_effect_delay.description"><![CDATA[Enter a time for the sliding/fading effect. 1000 = 1 sec (Standard: 1000)]]></item>
+		<item name="wcf.acp.option.cms_pages_content_slideshow_effect_delay.description"><![CDATA[Enter a time for the sliding/fading effect. [time in milliseconds]]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_fx"><![CDATA[Slideshow-Effect]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_fx.description"><![CDATA[Choose a slideshow effect]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_fx.fade"><![CDATA[Fade]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_fx.slide"><![CDATA[Slide]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_interval"><![CDATA[Slideshow-Interval]]></item>
-		<item name="wcf.acp.option.cms_pages_content_slideshow_interval.description"><![CDATA[Enter the delay after a slide in a slideshow is automatically sliding. 1 sec = 1000]]></item>
+		<item name="wcf.acp.option.cms_pages_content_slideshow_interval.description"><![CDATA[Enter the delay after a slide in a slideshow is automatically sliding. [time in milliseconds]]]></item>
 		<item name="wcf.acp.option.cms_pages_default_allow_subscribing"><![CDATA[Allow subscription of this page]]></item>
 		<item name="wcf.acp.option.cms_pages_default_comments"><![CDATA[Enable Comments]]></item>
 		<item name="wcf.acp.option.cms_pages_default_global_sidebar"><![CDATA[Show global sidebar]]></item>
