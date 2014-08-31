@@ -3,6 +3,12 @@
 	<import>
 		<!-- page comments -->
 		<event>
+			<name>comment</name>
+			<objecttype>de.codequake.cms.page.comment</objecttype>
+			<classname>cms\system\user\notification\event\PageCommentUserNotificationEvent</classname>
+			<preset>1</preset>
+		</event>
+		<event>
 			<name>commentResponse</name>
 			<objecttype>de.codequake.cms.page.comment.response.notification</objecttype>
 			<classname>cms\system\user\notification\event\PageCommentResponseUserNotificationEvent</classname>

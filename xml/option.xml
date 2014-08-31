@@ -34,13 +34,11 @@
 			<!-- /general -->
 
 			<!-- cms.pages.default -->
-
 			<option name="cms_pages_default_menu_item">
 				<optiontype>boolean</optiontype>
 				<categoryname>cms.pages.default</categoryname>
 				<defaultvalue>1</defaultvalue>
 			</option>
-
 			<option name="cms_pages_default_robots">
 				<optiontype>select</optiontype>
 				<categoryname>cms.pages.default</categoryname>
@@ -50,13 +48,11 @@ noindex,follow:wcf.acp.option.cms_pages_default_robots.noindexfollow
 noindex,nofollow:wcf.acp.option.cms_pages_default_robots.noindexnofollow]]></selectoptions>
 				<defaultvalue><![CDATA[index,follow]]></defaultvalue>
 			</option>
-
 			<option name="cms_pages_default_global_sidebar">
 				<optiontype>boolean</optiontype>
 				<categoryname>cms.pages.default</categoryname>
 				<defaultvalue>0</defaultvalue>
 			</option>
-
 			<option name="cms_pages_default_sidebar">
 				<optiontype>select</optiontype>
 				<categoryname>cms.pages.default</categoryname>
@@ -64,17 +60,20 @@ noindex,nofollow:wcf.acp.option.cms_pages_default_robots.noindexnofollow]]></sel
 right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
 				<defaultvalue><![CDATA[right]]></defaultvalue>
 			</option>
-
 			<option name="cms_pages_default_comments">
 				<optiontype>boolean</optiontype>
 				<categoryname>cms.pages.default</categoryname>
 				<defaultvalue>0</defaultvalue>
 			</option>
-
 			<option name="cms_pages_default_offline">
 				<optiontype>boolean</optiontype>
 				<categoryname>cms.pages.default</categoryname>
 				<defaultvalue>0</defaultvalue>
+			</option>
+			<option name="cms_pages_default_allow_subscribing">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.pages.default</categoryname>
+				<defaultvalue>1</defaultvalue>
 			</option>
 			<!-- /cms.pages.default -->
 

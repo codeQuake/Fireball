@@ -306,6 +306,14 @@
 						<input type="checkbox" name="availableDuringOfflineMode" id="availableDuringOfflineMode" value="1"{if $availableDuringOfflineMode} checked="checked"{/if} />
 					</dd>
 				</dl>
+
+				<dl>
+					<dt class="reversed"><label for="allowSubscribing">{lang}cms.acp.page.settings.allowSubscribing{/lang}</label></dt>
+					<dd>
+						<input type="checkbox" id="allowSubscribing" name="allowSubscribing"{if $allowSubscribing} checked="checked"{/if} />
+						<small>{lang}cms.acp.page.settings.allowSubscribing.description{/lang}</small>
+					</dd>
+				</dl>
 			</fieldset>
 
 			{event name='fieldsets'}

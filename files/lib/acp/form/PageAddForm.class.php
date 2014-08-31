@@ -84,6 +84,12 @@ class PageAddForm extends AbstractForm {
 	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
 
 	/**
+	 * option to allow subscribing the created page
+	 * @var	integer
+	 */
+	public $allowSubscribing = CMS_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
+
+	/**
 	 * enables a delayed deactivation of this page
 	 * @var	integer
 	 */
@@ -161,6 +167,7 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);
 		if (isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
 		else $this->isCommentable = 0;
+		$this->allowSubscribing = (isset($_POST['allowSubscribing'])) ? 1 : 0;
 		if (isset($_POST['styleID'])) $this->styleID = intval($_POST['styleID']);
 		if (isset($_POST['stylesheets']) && is_array($_POST['stylesheets'])) $this->stylesheets = ArrayUtil::toIntegerArray($_POST['stylesheets']);
 
@@ -265,6 +272,7 @@ class PageAddForm extends AbstractForm {
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable,
+			'allowSubscribing' => $this->allowSubscribing,
 			'styleID' => ($this->styleID) ?: null,
 			'stylesheets' => serialize($this->stylesheets)
 		);
@@ -365,7 +373,7 @@ class PageAddForm extends AbstractForm {
 		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
 		$this->sidebarOrientation = 'right';
 		$this->deactivationDate = $this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->parentID = $this->publicationDate = $this->showOrder = $this->showSidebar = $this->styleID = 0;
-		$this->menuItem = 1;
+		$this->allowSubscribing = $this->menuItem = 1;
 		I18nHandler::getInstance()->reset();
 	}
 
@@ -391,6 +399,9 @@ class PageAddForm extends AbstractForm {
 		$this->stylesheetList->readObjects();
 	}
 
+	/**
+	 * @see	\wcf\page\IPage::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
 
@@ -414,6 +425,7 @@ class PageAddForm extends AbstractForm {
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'pageList' => $this->pageList,
 			'isCommentable' => $this->isCommentable,
+			'allowSubscribing' => $this->allowSubscribing,
 			'availableStyles' => $this->availableStyles,
 			'styleID' => $this->styleID,
 			'stylesheets' => $this->stylesheets,

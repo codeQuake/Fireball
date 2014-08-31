@@ -238,6 +238,8 @@
 		<item name="cms.acp.page.revision.user"><![CDATA[User]]></item>
 		<item name="cms.acp.page.setAsHome"><![CDATA[Set as startpage]]></item>
 		<item name="cms.acp.page.settings"><![CDATA[Settings]]></item>
+		<item name="cms.acp.page.settings.allowSubscribing"><![CDATA[Allow subscription of this page]]></item>
+		<item name="cms.acp.page.settings.allowSubscribing.description"><![CDATA[{if $action == 'edit' && $allowSubscribing}<strong>Warning:</strong> Changing this will delete all existing subscriptions.{/if}]]></item>
 		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Page is visible during offline mode]]></item>
 		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Allow comments]]></item>
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[]]></item>
@@ -291,20 +293,24 @@
 
 	<category name="cms.page">
 		<item name="cms.page.clickCounter"><![CDATA[{#$clicks} time{if $clicks != 1}s{/if} read]]></item>
-		<item name="cms.page.comment.notification.mail"><![CDATA[{@$author->username} commented on "{@$page->getTitle()}":
-{link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}]]></item>
-		<item name="cms.page.comment.notification.message"><![CDATA[commented on „{$page->getTitle()}“.]]></item>
+		<item name="cms.page.comment"><![CDATA[Comment]]></item>
+		<item name="cms.page.comment.notification.mail"><![CDATA[[{@$author->username} commented on “{$page->getTitle()}“:
+{if $notificationType == 'instant'}
+---------------------------------
+{@$comment->message}
+---------------------------------
+{/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+		<item name="cms.page.comment.notification.message"><![CDATA[Commented on “{$page->getTitle()}“.]]></item>
 		<item name="cms.page.comment.notification.title"><![CDATA[New comment (Page)]]></item>
-		<item name="cms.page.commentResponse.notification.mail"><![CDATA[{@$author->username} left a response to your comment on "{@$page->getTitle()}":
-{link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}
-		]]></item>
-		<item name="cms.page.commentResponse.notification.message"><![CDATA[left a response to your comment on „{$page->getTitle()}“.]]></item>
+		<item name="cms.page.commentResponse"><![CDATA[Reply to Page Comment]]></item>
+		<item name="cms.page.commentResponse.notification.mail"><![CDATA[[{@$author->username} replied to your comment on “{$page->getTitle()}“:
+{if $notificationType == 'instant'}
+---------------------------------
+{@$response->message}
+---------------------------------
+{/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+		<item name="cms.page.commentResponse.notification.message"><![CDATA[Replied to your comment on “{$page->getTitle()}“.]]></item>
 		<item name="cms.page.commentResponse.notification.title"><![CDATA[New response (Page)]]></item>
-		<item name="cms.page.commentResponseOwner.notification.mail"><![CDATA[{@$author->username} left a response to „{$commentAuthor->username}“'s comment on „{$page->getTitle()}“:
-{link application='cms' controller='Page' object=$page encode=false forceFrontend=true}#comments{/link}
-		]]></item>
-		<item name="cms.page.commentResponseOwner.notification.message"><![CDATA[left a response to „{$commentAuthor->username}“'s comment on „{$page->getTitle()}“.]]></item>
-		<item name="cms.page.commentResponseOwner.notification.title"><![CDATA[New Response (Page)]]></item>
 		<item name="cms.page.comments"><![CDATA[Comments]]></item>
 		<item name="cms.page.comments.noComments"><![CDATA[No Entries.]]></item>
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>codeQuake</strong></a></address>]]></item>
@@ -386,6 +392,7 @@
 		<item name="wcf.acp.option.cms_pages_content_slideshow_fx.slide"><![CDATA[Slide]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_interval"><![CDATA[Slideshow-Interval]]></item>
 		<item name="wcf.acp.option.cms_pages_content_slideshow_interval.description"><![CDATA[Enter the delay after a slide in a slideshow is automatically sliding. 1 sec = 1000]]></item>
+		<item name="wcf.acp.option.cms_pages_default_allow_subscribing"><![CDATA[Allow subscription of this page]]></item>
 		<item name="wcf.acp.option.cms_pages_default_comments"><![CDATA[Enable Comments]]></item>
 		<item name="wcf.acp.option.cms_pages_default_global_sidebar"><![CDATA[Show global sidebar]]></item>
 		<item name="wcf.acp.option.cms_pages_default_offline"><![CDATA[Available during offline mode]]></item>
@@ -444,6 +451,12 @@
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.de.codequake.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.user.notification.de.codequake.cms.page.comment.response.notification.commentResponse"><![CDATA[New response to a comment on a page]]></item>
+	</category>
+
+	<category name="wcf.user.objectWatch">
+		<item name="wcf.user.objectWatch.subscribe.de.codequake.cms.page"><![CDATA[Watch Page]]></item>
+		<item name="wcf.user.objectWatch.enableNotification.de.codequake.cms.page"><![CDATA[Enable notifications for new comments to this page]]></item>
+		<item name="wcf.user.objectWatch.unsubscribe.de.codequake.cms.page"><![CDATA[Do not watch page]]></item>
 	</category>
 
 	<category name="wcf.user.profile">
