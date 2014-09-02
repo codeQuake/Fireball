@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="cms.acp.content">
 		<item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
@@ -264,7 +263,7 @@
 		<item name="cms.acp.stats.mostClicked"><![CDATA[Meistgeklickte Seiten]]></item>
 		<item name="cms.acp.stats.page"><![CDATA[Seite]]></item>
 		<item name="cms.acp.stats.platforms"><![CDATA[Betriebssysteme]]></item>
-		<item name="cms.acp.stats.userOnline"><![CDATA[Zurzeit auf der Seite aktiv <span class="badge">{#objects|count}</span>)]]></item>
+		<item name="cms.acp.stats.userOnline"><![CDATA[Zurzeit auf der Seite aktiv <span class="badge">{#$objects|count}</span>]]></item>
 		<item name="cms.acp.stats.vistors"><![CDATA[Aktuelle Besucher]]></item>
 	</category>
 

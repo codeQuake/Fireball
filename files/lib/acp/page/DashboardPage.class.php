@@ -57,7 +57,7 @@ class DashboardPage extends AbstractPage {
 	protected function readFireballFeed() {
 		$url = "http://codequake.de/index.php/NewsFeed/26/";
 		try {
-			$request = new HTTPRequest("http://codequake.de/index.php/NewsFeed/14/");
+			$request = new HTTPRequest($url);
 			$request->execute();
 			$feedData = $request->getReply();
 			$feedData = $feedData['body'];

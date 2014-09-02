@@ -3,6 +3,19 @@
 	<h1>{lang}cms.acp.stats{/lang}</h1>
 </header>
 
+<script data-relocate="true">
+	//<![CDATA[
+	$(function() {
+		WCF.Language.addObject({
+			'cms.acp.stats.devices.desktop': '{lang}cms.acp.stats.devices.desktop{/lang}',
+			'cms.acp.stats.devices.mobile': '{lang}cms.acp.stats.devices.mobile{/lang}',
+			'cms.acp.stats.devices.tablet': '{lang}cms.acp.stats.devices.tablet{/lang}'
+		});
+
+	});
+	//]]>
+</script>
+
 <div class="contentNavigation">
 	<form method="post" action="{link application='cms' controller='Stats'}{/link}">
 		<input type="date" name="startDate" value="{$startDate|date}"/>
@@ -136,7 +149,7 @@
 			var data = google.visualization.arrayToDataTable([
 				['Device', 'Visits'],
 				{foreach from=$devices item=device key=name}
-				['cms.acp.stats.devices.{$name}', {$device['visits']}],
+				['{lang}cms.acp.stats.devices.{$name}{/lang}', {$device['visits']}],
 				{/foreach}
 			]);
 
