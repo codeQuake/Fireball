@@ -13,7 +13,7 @@ CMS.ACP.Page.AddForm = Class.extend({
 		var $aliasParent = $('#parentID option:selected').data('alias');
 		var $alias = $('#alias').val();
 		if ($alias != '') {
-			$aliasPreview = window.location.origin + '/index.php/';
+			$aliasPreview = 'index.php/';
 			if ($aliasParent != '' && typeof $aliasParent !== "undefined") {
 				$aliasPreview += $aliasParent + '/';
 			}
