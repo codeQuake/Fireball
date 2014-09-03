@@ -90,7 +90,7 @@ class ContentEditForm extends ContentAddForm {
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
 
-		foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+		foreach ($this->objectType->getProcessor()->multilingualFields as $field) {
 			if (!I18nHandler::getInstance()->isPlainValue($field)) {
 				I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
 				$contentData[$field] = 'cms.content.' . $field . $contentID;
@@ -142,7 +142,7 @@ class ContentEditForm extends ContentAddForm {
 			$this->title = $this->content->getTitle();
 			I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
 
-			foreach ($this->objectTypeProcessor->multilingualFields as $field) {
+			foreach ($this->objectType->getProcessor()->multilingualFields as $field) {
 				I18nHandler::getInstance()->setOptions($field, PACKAGE_ID, $this->contentData[$field], 'cms.content.' . $field . '\d+');
 			}
 		}
