@@ -16,8 +16,7 @@ class CMSSitemapProvider implements ISitemapProvider {
 	 * @see	\wcf\system\sitemap\ISitemapProvider::getTemplate()
 	 */
 	public function getTemplate() {
-		$nodeTree = new PageNodeTree(0);
-		$nodeList = $nodeTree->getIterator();
+		$nodeList = new PageNodeTree(0);
 
 		// sitemap only supports up to child-child-pages
 		$nodeList->setMaxDepth(2);
