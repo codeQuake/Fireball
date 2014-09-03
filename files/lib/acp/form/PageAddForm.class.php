@@ -416,7 +416,7 @@ class PageAddForm extends AbstractForm {
 			'isCommentable' => $this->isCommentable,
 			'availableStyles' => $this->availableStyles,
 			'styleID' => $this->styleID,
-			'stylesheets' => $this->stylesheets,
+			'stylesheets' => $this->stylesheets? :array(),
 			'stylesheetList' => $this->stylesheetList->getObjects(),
 			'enableDelayedDeactivation' => $this->enableDelayedDeactivation,
 			'enableDelayedPublication' => $this->enableDelayedPublication,
