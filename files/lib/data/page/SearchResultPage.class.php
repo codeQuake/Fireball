@@ -6,6 +6,7 @@ use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\system\request\LinkHandler;
 use wcf\system\search\SearchResultTextParser;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
@@ -19,7 +20,7 @@ class SearchResultPage extends ViewablePage implements ISearchResultObject {
 	protected $userProfile = null;
 
 	public function getFormattedMessage() {
-		return SearchResultTextParser::getInstance()->parse($this->description);
+		return SearchResultTextParser::getInstance()->parse(WCF::getLanguage()->get($this->description));
 	}
 
 	public function getLink($query = '') {
@@ -35,7 +36,7 @@ class SearchResultPage extends ViewablePage implements ISearchResultObject {
 	}
 
 	public function getSubject() {
-		return $this->title;
+		return WCF::getLanguage()->get($this->title);
 	}
 
 	public function getUserProfile() {
