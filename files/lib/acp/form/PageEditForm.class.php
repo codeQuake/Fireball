@@ -78,6 +78,7 @@ class PageEditForm extends PageAddForm {
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'robots' => $this->robots,
 			'isCommentable' => $this->isCommentable,
+			'allowSubscribing' => $this->allowSubscribing,
 			'styleID' => ($this->styleID) ?: null,
 			'stylesheets' => serialize($this->stylesheets)
 		);
@@ -231,6 +232,7 @@ class PageEditForm extends PageAddForm {
 			$this->showSidebar = $this->page->showSidebar;
 			$this->sidebarOrientation = $this->page->sidebarOrientation;
 			$this->isCommentable = $this->page->isCommentable;
+			$this->allowSubscribing = $this->page->allowSubscribing;
 			$this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
 			$this->menuItem = $this->page->menuItemID !== null ? 1 : 0;
 			$this->menuItemID = $this->page->menuItemID;

@@ -24,6 +24,7 @@ CREATE TABLE cms1_page (
 	showSidebar INT(1) DEFAULT 0,
 	invisible TINYINT(1) DEFAULT 0,
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
+	allowSubscribing TINYINT(1) NOT NULL DEFAULT 1,
 
 	-- properties
 	authorID INT(10) DEFAULT NULL,

@@ -229,12 +229,33 @@
 
 		<!-- notifications -->
 		<type>
+			<!--
+			To prevent that '\wcf\data\comment\CommentAction' fires
+			the event automatically, the name was changed from
+			'de.codequake.cms.page.comment.notification'. We have to
+			do that manually since otherwise only the owner of the
+			page gets notified, not all subscribers
+			-->
+			<name>de.codequake.cms.page.comment</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>cms\system\user\notification\object\type\PageCommentUserNotificationObjectType</classname>
+			<category>de.codequake.cms</category>
+		</type>
+		<type>
 			<name>de.codequake.cms.page.comment.response.notification</name>
 			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
 			<classname>cms\system\user\notification\object\type\PageCommentResponseUserNotificationObjectType</classname>
 			<category>de.codequake.cms</category>
 		</type>
 		<!-- /notifications -->
+
+		<!-- object watch -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.user.objectWatch</definitionname>
+			<classname>cms\system\user\object\watch\PageUserObjectWatch</classname>
+		</type>
+		<!-- /object watch -->
 
 		<!-- recent activity -->
 		<type>

@@ -9,6 +9,7 @@ ALTER TABLE cms1_page ADD COLUMN lastEditTime INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE cms1_page ADD isPublished TINYINT(1) NOT NULL DEFAULT 1 AFTER isDisabled;
 ALTER TABLE cms1_page ADD publicationDate INT(10) NOT NULL DEFAULT 0 AFTER isPublished;
 ALTER TABLE cms1_page ADD deactivationDate INT(10) NOT NULL DEFAULT 0 AFTER publicationDate;
+ALTER TABLE cms1_page ADD allowSubscribing TINYINT(1) NOT NULL DEFAULT 1 AFTER isCommentable;
 
 ALTER TABLE cms1_counter ADD COLUMN platforms MEDIUMTEXT;
 ALTER TABLE cms1_counter ADD COLUMN devices MEDIUMTEXT;
