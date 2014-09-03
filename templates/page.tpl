@@ -10,6 +10,13 @@
 		//<![CDATA[
 		$(function() {
 			new CMS.Content.Type.Slideshow({CMS_PAGES_CONTENT_SLIDESHOW_INTERVAL}, {CMS_PAGES_CONTENT_SLIDESHOW_EFFECT_DELAY}, '{CMS_PAGES_CONTENT_SLIDESHOW_FX}');
+
+			{if $page->allowSubscribing && $__wcf->user->userID}
+				WCF.Language.addObject({
+					'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}'
+				});
+				new WCF.User.ObjectWatch.Subscribe();
+			{/if}
 		});
 		//]]>
 	</script>
@@ -17,6 +24,12 @@
 </head>
 
 <body id="tpl{$templateName|ucfirst}" data-page-id="{$page->pageID}">
+
+{capture assign='headerNavigation'}
+	{if $page->allowSubscribing && $__wcf->user->userID}
+		<li class="jsOnly"><a title="{lang}wcf.user.objectWatch.manageSubscription{/lang}" class="jsSubscribeButton jsTooltip" data-object-type="de.codequake.cms.page" data-object-id="{@$page->pageID}"><span class="icon icon16 icon-bookmark"></span> <span class="invisible">{lang}wcf.user.objectWatch.manageSubscription{/lang}</span></a></li>
+	{/if}
+{/capture}
 
 {hascontent}
 {capture assign='sidebar'}

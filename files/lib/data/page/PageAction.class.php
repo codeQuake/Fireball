@@ -24,6 +24,7 @@ use wcf\system\exception\UserInputException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\request\LinkHandler;
 use wcf\system\search\SearchIndexManager;
+use wcf\system\user\object\watch\UserObjectWatchHandler;
 use wcf\system\WCF;
 
 /**
@@ -540,19 +541,24 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		// perform update
 		parent::update();
 
-		// trigger new publications
-		if (isset($this->parameters['data']['isPublished']) && $this->parameters['data']['isPublished'] == 1) {
-			$publishedPageIDs = array();
-			foreach ($this->objects as $pageEditor) {
-				if (!$pageEditor->isPublished) {
-					$publishedPageIDs[] = $pageEditor->pageID;
-				}
-			}
+		$pageIDs = $publishedPageIDs = array();
+		foreach ($this->objects as $pageEditor) {
+			$pageIDs[] = $pageEditor->pageID;
 
-			if (!empty($publishedPageIDs)) {
-				$action = new PageAction($publishedPageIDs, 'triggerPublication');
-				$action->executeAction();
+			if (!$pageEditor->isPublished) {
+				$publishedPageIDs[] = $pageEditor->pageID;
 			}
+		}
+
+		// delete subscriptions if subscribing isn't allowed anymore
+		if (isset($this->parameters['data']['allowSubscribing']) && !$this->parameters['data']['allowSubscribing']) {
+			UserObjectWatchHandler::getInstance()->deleteObjects('de.codequake.cms.page', $pageIDs);
+		}
+
+		// trigger new publications
+		if (isset($this->parameters['data']['isPublished']) && $this->parameters['data']['isPublished'] == 1 && !empty($publishedPageIDs)) {
+			$action = new PageAction($publishedPageIDs, 'triggerPublication');
+			$action->executeAction();
 		}
 	}
 
