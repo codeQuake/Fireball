@@ -16,13 +16,13 @@ class CMSSitemapProvider implements ISitemapProvider {
 	 * @see	\wcf\system\sitemap\ISitemapProvider::getTemplate()
 	 */
 	public function getTemplate() {
-		$nodeList = new PageNodeTree(0);
-
+		$nodeTree = new PageNodeTree(0);
+		$nodeList = $nodeTree->getIterator();
 		// sitemap only supports up to child-child-pages
 		$nodeList->setMaxDepth(2);
 
 		WCF::getTPL()->assign(array(
-			'pageList' => $nodeList->getIterator()
+			'pageList' => $nodeList
 		));
 
 		return WCF::getTPL()->fetch('cmsSitemap', 'cms');
