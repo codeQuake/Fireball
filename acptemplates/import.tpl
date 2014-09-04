@@ -49,7 +49,7 @@
 		<dl id="pageExportDiv">
 			<dt><label>{lang}cms.acp.page.export.download{/lang}</label></dt>
 			<dd>
-				<p><a href="{link controller='CMSExport'}{/link}" id="pageExport" class="button">{lang}cms.acp.page.export{/lang}</a></p>
+				<p><a href="{link application='cms' controller='CMSExport'}{/link}" id="pageExport" class="button">{lang}cms.acp.page.export{/lang}</a></p>
 				<small>{lang}cms.acp.page.export.download.description{/lang}</small>
 			</dd>
 		</dl>
