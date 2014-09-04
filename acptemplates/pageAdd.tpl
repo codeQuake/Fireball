@@ -84,7 +84,7 @@
 				<dl{if $errorField == 'alias'} class="formError"{/if}>
 					<dt><label for="alias">{lang}cms.acp.page.alias{/lang}</label></dt>
 					<dd>
-						<input type="text" id="alias" name="alias" value="{$alias}" class="long" required="required" />
+						<input type="text" id="alias" name="alias" value="{$alias}" class="long" />
 						{if $errorField == 'alias'}
 							<small class="innerError">
 								{if $errorType == 'empty'}
