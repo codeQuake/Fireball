@@ -244,6 +244,7 @@ CMS.ACP.Content.Image = Class.extend({
 			this._dialog.wcfDialog({
 				title: WCF.Language.get('cms.acp.content.type.de.codequake.cms.content.type.image.select')
 			});
+			this._dialog.wcfDialog('render');
 			this._didInit = true;
 		}
 
@@ -320,6 +321,7 @@ CMS.ACP.Content.Image.Gallery = Class.extend({
 			this._dialog.wcfDialog({
 				title: WCF.Language.get('cms.acp.content.type.de.codequake.cms.content.type.gallery.select')
 			});
+			this._dialog.wcfDialog('render');
 			this._didInit = true;
 		}
 
