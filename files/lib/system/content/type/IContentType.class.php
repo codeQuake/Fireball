@@ -28,6 +28,14 @@ interface IContentType {
 	public function getIcon();
 
 	/**
+	 * Returns whether it's currently possible to create a content of this
+	 * type.
+	 * 
+	 * @return	boolean
+	 */
+	public function isAvailableToAdd();
+
+	/**
 	 * Reads content type specific parameters.
 	 */
 	public function readParameters();

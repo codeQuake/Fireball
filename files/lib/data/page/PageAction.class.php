@@ -296,10 +296,17 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function getContentTypes() {
 		$types = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
+		foreach ($types as $key => $type) {
+			if (!$type->getProcessor()->isAvailableToAdd()) {
+				unset($types[$key]);
+			}
+		}
+
 		$categories = array();
 		foreach ($types as $type) {
 			$categories[$type->category] = array();
 		}
+
 		foreach ($types as $type) {
 			if ($this->parameters['position'] == 'body' && $type->allowcontent) array_push($categories[$type->category], $type);
 			if ($this->parameters['position'] == 'sidebar' && $type->allowsidebar) array_push($categories[$type->category], $type);
