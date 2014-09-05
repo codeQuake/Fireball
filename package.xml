@@ -76,12 +76,33 @@
 		<instruction type="acpMenu">xml/acpMenu_update.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption_update.xml</instruction>
 		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
+		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
 
 		<!-- others -->
 		<instruction type="sql">update_beta7.sql</instruction>
 		<instruction type="script">acp/update_de.codequake.cms_beta7.php</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="2.0.0 Beta 7">
+		<!--lang -->
+		<instruction type="language">language/*.xml</instruction>
+
+		<!-- xml -->
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+
+		<!-- tar -->
+		<instruction type="file">files.tar</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+
+		<!-- others -->
+		<instruction type="sql">update_beta8.sql</instruction>
 	</instructions>
 </package>
