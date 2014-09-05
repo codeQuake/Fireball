@@ -5,6 +5,7 @@
 	//<![CDATA[
 	$(function() {
 		WCF.Language.addObject({
+			'cms.acp.content.add': '{lang}cms.acp.content.add{/lang}',
 			{foreach from=$objectTypeList item=type}
 				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
 			{/foreach}

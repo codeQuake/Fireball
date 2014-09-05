@@ -41,48 +41,41 @@ CMS.ACP.Page.Menu = Class.extend({
 }),
 
 CMS.ACP.Page.AddContent = Class.extend({
-	_buttonSelector: '.jsContentAddButton',
 	_proxy: null,
 	_cache: {},
 	_dialog: null,
-	_didInit: false,
 
-	init: function(){
-		if (this._didInit) {
-			return;
-		}
+	init: function() {
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)
 		});
 
-		this._addButtons = $('.jsContentAddButton');
-		this._addButtons.click($.proxy(this._click, this));
-
-		this._didInit = true;
+		// bind events
+		$('.jsContentAddButton').click($.proxy(this._click, this));
 	},
 
-
-	_click: function(event){
+	_click: function(event) {
 		event.preventDefault();
-		var $pageID = $(event.currentTarget).data('objectID');
-		var $parentID = $(event.currentTarget).data('parentID');
-		var $position = $(event.currentTarget).data('position');
 
-			this._proxy.setOption('data', {
-				actionName: 'getContentTypes',
-				className: 'cms\\data\\page\\PageAction',
-				objectIDs: [ $pageID ],
-				parameters: {
-					position: $position,
-					parentID: $parentID
-				}
-			});
-			this._proxy.sendRequest();
+		var $button = $(event.currentTarget);
+
+		this._proxy.setOption('data', {
+			actionName: 'getContentTypes',
+			className: 'cms\\data\\page\\PageAction',
+			objectIDs: [ $button.data('objectID') ],
+			parameters: {
+				position: $button.data('position'),
+				parentID: $button.data('parentID')
+			}
+		});
+		this._proxy.sendRequest();
 	},
 
-	_show: function(pageID){
-			this._dialog = $('<div id="contentAddDialog">' + this._cache[pageID] + '</div>').appendTo(document.body);
-			this._dialog.wcfDialog();
+	_show: function(pageID) {
+		this._dialog = $('<div id="contentAddDialog">' + this._cache[pageID] + '</div>').appendTo(document.body);
+		this._dialog.wcfDialog({
+			title: WCF.Language.get('cms.acp.content.add')
+		});
 	},
 
 	_success: function(data, textStatus, jqXHR) {

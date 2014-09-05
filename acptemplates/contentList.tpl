@@ -24,16 +24,17 @@
 		new CMS.ACP.Content.Revisions();
 
 		WCF.Language.addObject({
-			{foreach from=$objectTypeList item=type}
-				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
-			{/foreach}
-			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
+			'cms.acp.content.add': '{lang}cms.acp.content.add{/lang}',
 			'cms.acp.content.revision.action.create': '{lang}cms.acp.content.revision.action.create{/lang}',
 			'cms.acp.content.revision.action.update': '{lang}cms.acp.content.revision.action.update{/lang}',
 			'cms.acp.content.revision.action.updatePosition': '{lang}cms.acp.content.revision.action.updatePosition{/lang}',
 			'cms.acp.content.revision.action.setAsHome': '{lang}cms.acp.content.revision.action.setAsHome{/lang}',
 			'cms.acp.content.revision.action.restore': '{lang}cms.acp.content.revision.action.restore{/lang}',
-			'cms.acp.content.revision.list': '{lang}cms.acp.content.revision.list{/lang}'
+			'cms.acp.content.revision.list': '{lang}cms.acp.content.revision.list{/lang}',
+			{foreach from=$objectTypeList item=type}
+				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
+			{/foreach}
+			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}'
 		});
 	});
 	//]]>
