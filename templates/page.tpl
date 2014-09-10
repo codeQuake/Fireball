@@ -3,8 +3,10 @@
 <head>
 	<title>{if !$page->getMenuItem() || $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->getMenuItem()->menuItem}{$page->getTitle()} - {/if}{PAGE_TITLE|language}</title>
 
-	{include file='headInclude' application='wcf' sandbox=false}
+	{include file='headInclude'}
 	{@$page->getLayout()}
+	<link rel="canonical" href="{$page->getLink()}" />
+
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS.js?v={@$__wcfVersion}"></script>
 	<script data-relocate="true">
 		//<![CDATA[
@@ -20,7 +22,6 @@
 		});
 		//]]>
 	</script>
-	<link rel="canonical" href="{$page->getLink()}" />
 </head>
 
 <body id="tpl{$templateName|ucfirst}" data-page-id="{$page->pageID}">
@@ -31,32 +32,34 @@
 	{/if}
 {/capture}
 
-{hascontent}
-{capture assign='sidebar'}
-	{content}
-	{if $page->showSidebar == 1}
-		{@$__boxSidebar}
-	{/if}
-	{if $sidebarNodeTree !== null}
-		{assign var=oldDepth value=0}
+{if $page->showSidebar || $sidebarNodeTree !== null}
+	{capture assign='sidebar'}
+		{if $page->showSidebar == 1}
+			{@$__boxSidebar}
+		{/if}
+
+		{if $sidebarNodeTree !== null}
+			{assign var=oldDepth value=0}
 			{foreach from=$sidebarNodeTree item=content}
 				{if $content->getTypeName() != 'de.codequake.cms.content.type.dashboard'}
-					{section name=i loop=$oldDepth-$sidebarNodeTree->getDepth()}</fieldset>{/section}<fieldset class="dashboardBox {if $content->getCSSClasses() != ""}{$content->getCSSClasses()}{/if}" {if $content->cssID != ""}id="{$content->cssID}"{/if} data-content-type="{$content->getTypeName()}">
+					{section name=i loop=$oldDepth-$sidebarNodeTree->getDepth()}</fieldset>{/section}
+					<fieldset class="dashboardBox {if $content->getCSSClasses() != ""}{$content->getCSSClasses()}{/if}" {if $content->cssID != ""}id="{$content->cssID}"{/if} data-content-type="{$content->getTypeName()}">
 						<legend>{$content->getTitle()}</legend>
-					{@$content->getOutput()|language}
-					{if !$sidebarNodeTree->current()->hasChildren()}
-						</fieldset>
-					{/if}
-					{assign var=oldDepth value=$sidebarNodeTree->getDepth()}
+
+						{@$content->getOutput()|language}
+						{if !$sidebarNodeTree->current()->hasChildren()}
+							</fieldset>
+						{/if}
+
+						{assign var=oldDepth value=$sidebarNodeTree->getDepth()}
 				{else}
 					{@$content->getOutput()|language}
 				{/if}
 			{/foreach}
 			{section name=i loop=$oldDepth}</fieldset>{/section}
-	{/if}
-	{/content}
-{/capture}
-{/hascontent}
+		{/if}
+	{/capture}
+{/if}
 
 {include file='header' sidebarOrientation=$page->sidebarOrientation}
 
