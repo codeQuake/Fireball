@@ -13,6 +13,8 @@
 	<dt><label for="text">{lang}cms.acp.content.type.de.codequake.cms.content.type.link.text{/lang}</label></dt>
 	<dd>
 		<input name="text" id="text" type="text" value="{$i18nPlainValues['text']}"  class="long" required="required" />
+
+		{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
 	</dd>
 </dl>
 
@@ -20,8 +22,7 @@
 	<dt><label for="link">{lang}cms.acp.content.type.de.codequake.cms.content.type.link.hyperlink{/lang}</label></dt>
 	<dd>
 		<input name="link" id="link" type="text" value="{$i18nPlainValues['link']}"  class="long" required="required" />
+
+		{include file='multipleLanguageInputJavascript' elementIdentifier='link' forceSelection=false}
 	</dd>
 </dl>
-
-{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
-{include file='multipleLanguageInputJavascript' elementIdentifier='link' forceSelection=false}

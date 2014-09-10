@@ -1,35 +1,35 @@
 {include file='header' pageTitle='cms.acp.news.image.list'}
 
+<script data-relocate="true">
+	//<![CDATA[
+	$(function () {
+		new WCF.Action.Delete('cms\\data\\news\\image\\NewsImageAction', '.jsImageRow');
+	});
+	//]]>
+</script>
 
 <header class="boxHeadline">
-    <h1>{lang}cms.acp.news.image.list{/lang}</h1>
-	<script data-relocate="true">
-	    //<![CDATA[
-	    $(function () {
-	        new WCF.Action.Delete('cms\\data\\news\\image\\NewsImageAction', '.jsImageRow');
-	    });
-	    //]]>
-	</script>
+	<h1>{lang}cms.acp.news.image.list{/lang}</h1>
 </header>
 
 <div class="contentNavigation">
-	{pages print=true assign=pagesLinks application='cms' controller="NewsImageList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+	{pages print=true assign=pagesLinks application='cms' controller='NewsImageList' link='pageNo=%d&sortField=$sortField&sortOrder=$sortOrder'}
+
 	<nav>
 		<ul>
 			<li><a href="{link controller='NewsImageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.news.image.add{/lang}</span></a></li>
-			
+
 			{event name='contentNavigationButtonsTop'}
 		</ul>
 	</nav>
 </div>
-
 
 {if $objects|count}
 	<div class="tabularBox tabularBoxTitle marginTop">
 		<header>
 			<h2>{lang}cms.acp.news.image.list{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
 		</header>
-		
+
 		<table class="table">
 			<thead>
 				<tr>
@@ -39,7 +39,7 @@
 					{event name='columnHeads'}
 				</tr>
 			</thead>
-			
+
 			<tbody>
 				{foreach from=$objects item=image}
 					<tr class="jsImageRow">
@@ -57,14 +57,14 @@
 		</table>
 		
 	</div>
-	
+
 	<div class="contentNavigation">
 		{@$pagesLinks}
-		
+
 		<nav>
 			<ul>
 				<li><a href="{link controller='NewsImageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.news.image.add{/lang}</span></a></li>
-				
+
 				{event name='contentNavigationButtonsBottom'}
 			</ul>
 		</nav>

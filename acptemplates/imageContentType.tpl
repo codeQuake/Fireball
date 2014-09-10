@@ -14,6 +14,7 @@
 				</li>
 			{/if}
 		</ul>
+
 		<div id="imageSelect" class="marginTop">
 			<span class="button small">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.select{/lang}</span>
 		</div>
@@ -21,10 +22,13 @@
 		<input type="hidden" name="contentData[imageID]" value="{if $contentData['imageID']|isset}{$contentData['imageID']}{else}0{/if}" id="imageID" />
 	</dd>
 </dl>
+
 <dl>
 	<dt><label for="text">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.text{/lang}</label></dt>
 	<dd>
 		<input name="text" id="text" type="text" value="{$i18nPlainValues['text']}"  class="long" />
+
+		{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
 	</dd>
 </dl>
 
@@ -49,18 +53,18 @@
 	</dd>
 </dl>
 
-{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
-
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true">
     //<![CDATA[
     $(function () {
 		WCF.Language.addObject({
-				'cms.acp.content.type.de.codequake.cms.content.type.image.select': '{lang}cms.acp.content.type.de.codequake.cms.content.type.image.select{/lang}'
+			'cms.acp.content.type.de.codequake.cms.content.type.image.select': '{lang}cms.acp.content.type.de.codequake.cms.content.type.image.select{/lang}'
 		});
-		new CMS.ACP.Content.Image($('#imageSelect'), $('#imageID'));
-		{if $contentData['width']|isset && $contentData['height']|isset}new CMS.ACP.Image.Ratio({$contentData['width']},{$contentData['height']}){/if}
-    });
 
-    //]]>
+		new CMS.ACP.Content.Image($('#imageSelect'), $('#imageID'));
+		{if $contentData['width']|isset && $contentData['height']|isset}
+			new CMS.ACP.Image.Ratio({$contentData['width']},{$contentData['height']});
+		{/if}
+	});
+	//]]>
 </script>

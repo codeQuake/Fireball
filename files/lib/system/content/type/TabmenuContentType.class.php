@@ -40,6 +40,6 @@ class TabmenuContentType extends AbstractStructureContentType {
 		WCF::getTPL()->assign(array(
 			'children' => $children
 		));
-		return WCF::getTPL()->fetch('tabMenuContentTypeOutput', 'cms');
+		return WCF::getTPL()->fetch('tabMenuContentType', 'cms');
 	}
 }

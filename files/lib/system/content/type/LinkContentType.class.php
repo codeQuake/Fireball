@@ -30,6 +30,6 @@ class LinkContentType extends AbstractContentType {
 		WCF::getTPL()->assign(array(
 			'data' => $data
 		));
-		return WCF::getTPL()->fetch('linkContentTypeOutput', 'cms');
+		return WCF::getTPL()->fetch('linkContentType', 'cms');
 	}
 }

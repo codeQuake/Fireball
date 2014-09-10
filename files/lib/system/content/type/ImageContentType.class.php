@@ -34,6 +34,6 @@ class ImageContentType extends AbstractContentType {
 			'image' => $image
 		));
 		
-		return WCF::getTPL()->fetch('imageContentTypeOutput', 'cms');
+		return WCF::getTPL()->fetch('imageContentType', 'cms');
 	}
 }
