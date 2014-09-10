@@ -9,6 +9,7 @@ use cms\data\page\Page;
 use cms\data\page\PageAction;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\poll\PollManager;
@@ -113,7 +114,11 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_REQUEST['position'])) $this->position = StringUtil::trim($_REQUEST['position']);
 		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
 		if ($this->parentID == 0) $this->parentID = null;
+
 		if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $_REQUEST['objectType']);
+		if ($this->objectType === null || !$this->objectType->getProcessor()->isAvailableToAdd()) {
+			throw new IllegalLinkException();
+		}
 
 		// read object type specific parameters
 		$this->objectType->getProcessor()->readParameters();

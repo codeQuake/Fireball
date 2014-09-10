@@ -19,6 +19,16 @@ class FileContentType extends AbstractContentType {
 	 */
 	protected $icon = 'icon-file';
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::isAvailableToAdd()
+	 */
+	public function isAvailableToAdd() {
+		$fileList = new FileList();
+		$count = $fileList->countObjects();
+
+		return $count > 0;
+	}
+
 	public function getFormTemplate() {
 		$list = new FileList();
 		$list->getConditionBuilder()->add('file.folderID =  ?', array(

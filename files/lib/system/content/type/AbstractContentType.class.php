@@ -36,6 +36,13 @@ abstract class AbstractContentType implements IContentType {
 	}
 
 	/**
+	 * @see	\cms\system\content\type\IContentType::isAvailableToAdd()
+	 */
+	public function isAvailableToAdd() {
+		return true;
+	}
+
+	/**
 	 * @see	\cms\system\content\type\IContentType::readParameters()
 	 */
 	public function readParameters() {
