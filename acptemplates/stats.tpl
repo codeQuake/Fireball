@@ -24,7 +24,7 @@
 	</form>
 </div>
 
-<div  class="container containerPadding shadow marginTop">
+<div  class="container containerPadding marginTop">
 	<fieldset>
 		<legend>{lang}cms.acp.stats.vistors{/lang}</legend>
 
@@ -34,7 +34,7 @@
 	</fieldset>
 </div>
 
-<div class="container containerPadding shadow marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
+<div class="container containerPadding marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
 	<fieldset>
 		<legend>{lang}cms.acp.stats.browsers{/lang}</legend>
 
@@ -44,7 +44,7 @@
 	</fieldset>
 </div>
 
-<div class="container containerPadding shadow marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
+<div class="container containerPadding marginTop" style="float: left; width: 49%; box-sizing: border-box;">
 	<fieldset>
 		<legend>{lang}cms.acp.stats.platforms{/lang}</legend>
 
@@ -56,7 +56,7 @@
 
 <br style="clear: both;" />
 
-<div class="container containerPadding shadow marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
+<div class="container containerPadding marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
 	<fieldset>
 		<legend>{lang}cms.acp.stats.devices{/lang}</legend>
 
@@ -66,27 +66,27 @@
 	</fieldset>
 </div>
 
-<div class="container containerPadding shadow marginTop clearfix" style="float: left; width: 49%; box-sizing: border-box; margin-left: 1%;">
-	<fieldset>
-		<legend>{lang}cms.acp.stats.mostClicked{/lang}</legend>
+<div class="tabularBox tabularBoxTitle marginTop clearfix" style="float: left; width: 49%; box-sizing: border-box;">
+	<header>
+		<h2>{lang}cms.acp.stats.mostClicked{/lang}</h2>
+	</header>
 
-		<table class="table">
-			<thead>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>{lang}cms.acp.stats.page{/lang}</th>
+				<th>{lang}cms.acp.stats.clicks{/lang}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach from=$pages item=page}
 				<tr>
-					<th>{lang}cms.acp.stats.page{/lang}</th>
-					<th>{lang}cms.acp.stats.clicks{/lang}</th>
+					<td>{$page->getTitle()|language}</td>
+					<td>{$page->clicks}</td>
 				</tr>
-			</thead>
-			<tbody>
-				{foreach from=$pages item=page}
-					<tr>
-						<td>{$page->getTitle()|language}</td>
-						<td>{$page->clicks}</td>
-					</tr>
-				{/foreach}
-			</tbody>
-		</table>
-	</fieldset>
+			{/foreach}
+		</tbody>
+	</table>
 </div>
 
 <br style="clear: both;" />
