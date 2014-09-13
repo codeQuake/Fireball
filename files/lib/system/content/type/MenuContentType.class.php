@@ -2,7 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use cms\data\page\PageNodeTree;
+use cms\data\page\AccessiblePageNodeTree;
 use wcf\system\WCF;
 
 /**
@@ -28,7 +28,7 @@ class MenuContentType extends AbstractStructureContentType {
 				$menuItems = $content->getPage()->getChildrenTree(isset($data['depth']) && $data['depth'] != 0 ? intval($data['depth']) - 1 : null);
 				break;
 			case "all":
-				$nodeTree = new PageNodeTree();
+				$nodeTree = new AccessiblePageNodeTree();
 				$menuItems = $nodeTree->getIterator();
 				if (isset($data['depth']) && $data['depth'] != 0) $menuItems->setMaxDepth(intval($data['depth']) - 1);
 				break;

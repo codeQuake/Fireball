@@ -2,6 +2,8 @@
 namespace cms\data\page;
 
 /**
+ * Generates a filtered tree of all pages.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -12,12 +14,18 @@ class DrainedPageNodeTree extends PageNodeTree {
 	public $drainedID = null;
 
 	public function __construct($parentID = null, $drainedID = null) {
-		$this->drainedID = $drainedID;
 		$this->parentID = $parentID;
+		$this->drainedID = $drainedID;
 	}
 
+	/**
+	 * @see	\cms\data\page\PageNodeTree::isIncluded()
+	 */
 	public function isIncluded(PageNode $pageNode) {
-		if ($pageNode->pageID == $this->drainedID) return false;
+		if ($pageNode->pageID == $this->drainedID) {
+			return false;
+		}
+
 		return parent::isIncluded($pageNode);
 	}
 }

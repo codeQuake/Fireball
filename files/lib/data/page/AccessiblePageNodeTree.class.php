@@ -1,0 +1,25 @@
+<?php
+namespace cms\data\page;
+
+/**
+ * Generates a tree of accessible pages. Pages are considered as accessible
+ * when they are viewable and the current user has the permission to access the
+ * page.
+ * 
+ * @author	Florian Frantzen
+ * @copyright	2014 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
+ */
+class AccessiblePageNodeTree extends ViewablePageNodeTree {
+	/**
+	 * @see	\cms\data\page\PageNodeTree::isIncluded()
+	 */
+	protected function isIncluded(PageNode $pageNode) {
+		if (!$pageNode->isAccessible()) {
+			return false;
+		}
+
+		return parent::isIncluded($pageNode);
+	}
+}

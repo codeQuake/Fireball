@@ -99,7 +99,7 @@ class Page extends CMSDatabaseObject implements IRouteController, ILinkableObjec
 	}
 
 	public function getChildrenTree($maxDepth = -1) {
-		$tree = new PageNodeTree($this->pageID);
+		$tree = new AccessiblePageNodeTree($this->pageID);
 		$tree = $tree->getIterator();
 		if ($maxDepth >= 0) $tree->setMaxDepth($maxDepth);
 		return $tree;
