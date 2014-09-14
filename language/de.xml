@@ -7,11 +7,11 @@
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
 		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie "container containerPadding". Für einen Abstand zum oberen Element nutzen sie zusätzlich "marginTop". <br/>
 <strong>Beispiele:</strong>
-<ul>
-	<li><pre>container</pre> - Legt einen Rahmen um das Element</li>
-	<li><pre>containerPadding</pre> - Zusammen mit container wird der Inhalt mit einem Abstand zum Rahmen versehen</li>
-	<li><pre>marginTop</pre> - Weist dem Element einen Abstand nach oben zu</li>
-	<li><pre>center</pre> - Zentriert den Inhalt des Elements</li>
+<ul class="nativeList">
+	<li><code class="inlineCode">container</code>: Legt einen Rahmen um das Element</li>
+	<li><code class="inlineCode">containerPadding</code>: Zusammen mit container wird der Inhalt mit einem Abstand zum Rahmen versehen</li>
+	<li><code class="inlineCode">marginTop</code>: Weist dem Element einen Abstand nach oben zu</li>
+	<li><code class="inlineCode">center</code>: Zentriert den Inhalt des Elements</li>
 </ul>]]></item>
 		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt wirklich löschen?]]></item>

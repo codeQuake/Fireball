@@ -8,11 +8,11 @@
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Classes]]></item>
 		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding". For a margin on top use "marginTop". <br />
 <strong>Examples:</strong>
-<ul>
-	<li><pre>container</pre> - Adds a border to your content</li>
-	<li><pre>containerPadding</pre> - Use it with container to add some padding</li>
-	<li><pre>marginTop</pre> - Adds a margin on top</li>
-	<li><pre>center</pre> - Centers the content</li>
+<ul class="inlineCode">
+	<li><code class="inlineCode">container</code>: Adds a border to your content</li>
+	<li><code class="inlineCode">containerPadding</code>: Use it with container to add some padding</li>
+	<li><code class="inlineCode">marginTop</code>: Adds a margin on top</li>
+	<li><code class="inlineCode">center</code>: Centers the content</li>
 </ul>]]></item>
 		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content?]]></item>
