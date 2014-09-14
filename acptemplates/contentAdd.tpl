@@ -38,7 +38,7 @@
 <form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{if $position|isset}&position={$position}{/if}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}objectType={$objectType->objectType}{if $position|isset}&position={$position}{/if}{/link}{/if}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
-			<legend>{lang}cms.acp.content.general{/lang}</legend>
+			<legend>{lang}wcf.global.form.data{/lang}</legend>
 
 			<dl{if $errorField == 'title'} class="formError"{/if}>
 				<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
@@ -57,6 +57,8 @@
 					{include file='multipleLanguageInputJavascript' elementIdentifier='title' forceSelection=false}
 				</dd>
 			</dl>
+
+			{event name='dataFields'}
 		</fieldset>
 
 		<fieldset>
@@ -92,6 +94,8 @@
 					<small>{lang}cms.acp.content.css.cssClasses.description{/lang}</small>
 				</dd>
 			</dl>
+
+			{event name='cssFields'}
 		</fieldset>
 
 		<fieldset>
@@ -115,6 +119,8 @@
 					<input type="number" name="showOrder" id="showorder" value="{$showOrder}" />
 				</dd>
 			</dl>
+
+			{event name='positionFields'}
 		</fieldset>
 
 		{event name='fieldsets'}

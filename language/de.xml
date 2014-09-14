@@ -17,7 +17,6 @@
 		<item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt wirklich löschen?]]></item>
 		<item name="cms.acp.content.disable"><![CDATA[Inhalt (de)-aktivieren]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
-		<item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
 		<item name="cms.acp.content.list"><![CDATA[Inhalte auflisten]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>

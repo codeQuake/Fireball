@@ -314,6 +314,8 @@
 						<small>{lang}cms.acp.page.settings.allowSubscribing.description{/lang}</small>
 					</dd>
 				</dl>
+
+				{event name='settingsFields'}
 			</fieldset>
 
 			{event name='fieldsets'}
@@ -356,6 +358,8 @@
 						</dd>
 					</dl>
 				{/hascontent}
+
+				{event name='displayFields'}
 			</fieldset>
 		</div>
 

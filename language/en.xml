@@ -18,7 +18,6 @@
 		<item name="cms.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content?]]></item>
 		<item name="cms.acp.content.disable"><![CDATA[Toggle content]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Edit content]]></item>
-		<item name="cms.acp.content.general"><![CDATA[General]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Page]]></item>
 		<item name="cms.acp.content.list"><![CDATA[List contents]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
