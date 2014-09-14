@@ -19,7 +19,6 @@
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
 		<item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
-		<item name="cms.acp.content.general.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.list"><![CDATA[Inhalte auflisten]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
@@ -37,7 +36,6 @@
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Version wiederherstellen wollen?]]></item>
 		<item name="cms.acp.content.revision.time"><![CDATA[Zeitpunkt]]></item>
 		<item name="cms.acp.content.revision.user"><![CDATA[Benutzer]]></item>
-		<item name="cms.acp.content.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Box auswählen]]></item>

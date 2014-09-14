@@ -20,7 +20,6 @@
 		<item name="cms.acp.content.edit"><![CDATA[Edit content]]></item>
 		<item name="cms.acp.content.general"><![CDATA[General]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Page]]></item>
-		<item name="cms.acp.content.general.title"><![CDATA[Title]]></item>
 		<item name="cms.acp.content.list"><![CDATA[List contents]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Parent content]]></item>
@@ -38,7 +37,6 @@
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
 		<item name="cms.acp.content.revision.time"><![CDATA[Time]]></item>
 		<item name="cms.acp.content.revision.user"><![CDATA[User]]></item>
-		<item name="cms.acp.content.title"><![CDATA[Title]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Choose box]]></item>

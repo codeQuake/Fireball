@@ -41,13 +41,13 @@
 			<legend>{lang}cms.acp.content.general{/lang}</legend>
 
 			<dl{if $errorField == 'title'} class="formError"{/if}>
-				<dt><label for="title">{lang}cms.acp.content.general.title{/lang}</label></dt>
+				<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
 				<dd>
 					<input type="text" id="title" name="title" value="{$i18nPlainValues['title']}" class="long" required="required" />
 					{if $errorField == 'title'}
 						<small class="innerError">
-							{if $errorType == 'empty'}
-								{lang}wcf.global.form.error.empty{/lang}
+							{if $errorType == 'empty' || $errorType == 'multilingual'}
+								{lang}wcf.global.form.error.{@$errorType}{/lang}
 							{else}
 								{lang}cms.acp.content.title.error.{@$errorType}{/lang}
 							{/if}
