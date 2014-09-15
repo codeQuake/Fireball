@@ -62,7 +62,7 @@ class ContentListPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 
-		$pageNodeTree = new PageNodeTree(0, 1);
+		$pageNodeTree = new PageNodeTree();
 		$this->pageList = $pageNodeTree->getIterator();
 
 		$this->contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body', 1);

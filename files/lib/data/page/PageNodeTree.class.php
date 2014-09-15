@@ -4,6 +4,8 @@ namespace cms\data\page;
 use cms\system\cache\builder\PageCacheBuilder;
 
 /**
+ * Generates a tree of all pages.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -17,11 +19,8 @@ class PageNodeTree implements \IteratorAggregate {
 
 	protected $parentNode = null;
 
-	protected $isACP = 0;
-
-	public function __construct($parentID = null, $isACP = 0) {
+	public function __construct($parentID = null) {
 		$this->parentID = $parentID;
-		$this->isACP = $isACP;
 	}
 
 	public function buildTree() {
@@ -65,6 +64,9 @@ class PageNodeTree implements \IteratorAggregate {
 
 	protected function getNode($pageID) {
 		if (! $pageID) {
+			// @todo: This needs to be changed. It creates a
+			// pointless database query to fetch an (of course) not
+			// existing page with the id '0'
 			$page = new Page(0);
 		}
 		else {
@@ -75,8 +77,6 @@ class PageNodeTree implements \IteratorAggregate {
 	}
 
 	protected function isIncluded(PageNode $pageNode) {
-		if ($this->isACP) return true;
-		if ($pageNode->isVisible() && $pageNode->isAccessible()) return true;
-		return false;
+		return true;
 	}
 }

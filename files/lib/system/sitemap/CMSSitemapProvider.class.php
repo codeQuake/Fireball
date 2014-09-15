@@ -1,7 +1,7 @@
 <?php
 namespace cms\system\sitemap;
 
-use cms\data\page\PageNodeTree;
+use cms\data\page\AccessiblePageNodeTree;
 use wcf\system\sitemap\ISitemapProvider;
 use wcf\system\WCF;
 
@@ -16,8 +16,9 @@ class CMSSitemapProvider implements ISitemapProvider {
 	 * @see	\wcf\system\sitemap\ISitemapProvider::getTemplate()
 	 */
 	public function getTemplate() {
-		$nodeTree = new PageNodeTree(0);
+		$nodeTree = new AccessiblePageNodeTree();
 		$nodeList = $nodeTree->getIterator();
+
 		// sitemap only supports up to child-child-pages
 		$nodeList->setMaxDepth(2);
 
