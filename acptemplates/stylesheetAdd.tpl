@@ -31,6 +31,8 @@
 					<input type="text" name="title" id="title" required="required" value="{$title}" class="long" />
 				</dd>
 			</dl>
+
+			{event name='dataFields'}
 		</fieldset>
 
 		<fieldset class="marginTop">
@@ -45,7 +47,11 @@
 					{include file='codemirror' codemirrorMode='less' codemirrorSelector='#less'}
 				</dd>
 			</dl>
+
+			{event name='lessFields'}
 		</fieldset>
+
+		{event name='fieldsets'}
 	</div>
 
 	<div class="formSubmit">

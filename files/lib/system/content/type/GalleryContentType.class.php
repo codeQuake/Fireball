@@ -33,6 +33,6 @@ class GalleryContentType extends AbstractContentType {
 		WCF::getTPL()->assign(array(
 			'images' => $list
 		));
-		return WCF::getTPL()->fetch('galleryContentTypeOutput', 'cms');
+		return WCF::getTPL()->fetch('galleryContentType', 'cms');
 	}
 }

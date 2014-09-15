@@ -1,4 +1,5 @@
 {include file='header' pageTitle='cms.acp.page.'|concat:$action}
+
 {include file='aclPermissions'}
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
 <script data-relocate="true">
@@ -25,7 +26,6 @@
 {else}
 	{include file='aclPermissionJavaScript' containerID='userPermissionsContainer'}
 {/if}
-
 
 <header class="boxHeadline">
 	<h1>{lang}cms.acp.page.{@$action}{/lang}</h1>
@@ -314,6 +314,8 @@
 						<small>{lang}cms.acp.page.settings.allowSubscribing.description{/lang}</small>
 					</dd>
 				</dl>
+
+				{event name='settingsFields'}
 			</fieldset>
 
 			{event name='fieldsets'}
@@ -356,6 +358,8 @@
 						</dd>
 					</dl>
 				{/hascontent}
+
+				{event name='displayFields'}
 			</fieldset>
 		</div>
 

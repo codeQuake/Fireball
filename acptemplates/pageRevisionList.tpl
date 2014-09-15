@@ -13,7 +13,7 @@
 				<tr>
 					<th class="columnID" colspan="2">{lang}wcf.global.objectID{/lang}</th>
 					<th class="columnAction">{lang}cms.acp.page.revision.action{/lang}</th>
-					<th class="columnUser">{lang}cms.acp.page.revision.user{/lang}</th>
+					<th class="columnUser">{lang}wcf.user.username{/lang}</th>
 					<th class="columnTime">{lang}cms.acp.page.revision.time{/lang}</th>
 
 					{event name='columnHeads'}

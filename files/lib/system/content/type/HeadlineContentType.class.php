@@ -33,6 +33,6 @@ class HeadlineContentType extends AbstractSearchableContentType {
 		WCF::getTPL()->assign(array(
 			'data' => $data
 		));
-		return WCF::getTPL()->fetch('headlineContentTypeOutput', 'cms');
+		return WCF::getTPL()->fetch('headlineContentType', 'cms');
 	}
 }

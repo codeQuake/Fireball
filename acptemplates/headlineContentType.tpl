@@ -15,6 +15,8 @@
 	<dt><label for="text">{lang}cms.acp.content.type.de.codequake.cms.content.type.headline.text{/lang}</label></dt>
 	<dd>
 		<input name="text" id="text" type="text" value="{$i18nPlainValues['text']}"  class="long" required="required" />
+
+		{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
 	</dd>
 </dl>
 
@@ -24,5 +26,3 @@
 		<input name="contentData[link]" id="contentData[link]" type="text" value="{if $contentData['link']|isset}{$contentData['link']}{/if}"  class="long" />
 	</dd>
 </dl>
-
-{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}

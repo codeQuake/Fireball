@@ -7,19 +7,17 @@
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
 		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie "container containerPadding". Für einen Abstand zum oberen Element nutzen sie zusätzlich "marginTop". <br/>
 <strong>Beispiele:</strong>
-<ul>
-	<li><pre>container</pre> - Legt einen Rahmen um das Element</li>
-	<li><pre>containerPadding</pre> - Zusammen mit container wird der Inhalt mit einem Abstand zum Rahmen versehen</li>
-	<li><pre>marginTop</pre> - Weist dem Element einen Abstand nach oben zu</li>
-	<li><pre>center</pre> - Zentriert den Inhalt des Elements</li>
+<ul class="nativeList">
+	<li><code class="inlineCode">container</code>: Legt einen Rahmen um das Element</li>
+	<li><code class="inlineCode">containerPadding</code>: Zusammen mit container wird der Inhalt mit einem Abstand zum Rahmen versehen</li>
+	<li><code class="inlineCode">marginTop</code>: Weist dem Element einen Abstand nach oben zu</li>
+	<li><code class="inlineCode">center</code>: Zentriert den Inhalt des Elements</li>
 </ul>]]></item>
 		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt wirklich löschen?]]></item>
 		<item name="cms.acp.content.disable"><![CDATA[Inhalt (de)-aktivieren]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
-		<item name="cms.acp.content.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
-		<item name="cms.acp.content.general.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.list"><![CDATA[Inhalte auflisten]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
@@ -36,8 +34,6 @@
 		<item name="cms.acp.content.revision.restore"><![CDATA[Wiederherstellen]]></item>
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Version wiederherstellen wollen?]]></item>
 		<item name="cms.acp.content.revision.time"><![CDATA[Zeitpunkt]]></item>
-		<item name="cms.acp.content.revision.user"><![CDATA[Benutzer]]></item>
-		<item name="cms.acp.content.title"><![CDATA[Titel]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboardbox]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Box auswählen]]></item>
@@ -232,7 +228,6 @@
 		<item name="cms.acp.page.revision.restore"><![CDATA[Wiederherstellen]]></item>
 		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Version wiederherstellen wollen?]]></item>
 		<item name="cms.acp.page.revision.time"><![CDATA[Zeitpunkt]]></item>
-		<item name="cms.acp.page.revision.user"><![CDATA[Benutzer]]></item>
 		<item name="cms.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
 		<item name="cms.acp.page.settings"><![CDATA[Einstellungen]]></item>
 		<item name="cms.acp.page.settings.allowSubscribing"><![CDATA[Seite kann abonniert werden]]></item>

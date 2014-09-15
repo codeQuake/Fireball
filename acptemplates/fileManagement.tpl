@@ -1,48 +1,23 @@
-{capture assign='pageTitle'}{lang}cms.acp.file.management{/lang}{/capture}
-{include file='header'}
+{include file='header' pageTitle='cms.acp.file.management'}
 
-<header class="boxHeadline">
-	<h1>{lang}cms.acp.file.management{/lang}</h1>
-	<p>{lang}cms.acp.file.management.description{/lang}</p>
-</header>
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function () {
+		WCF.Language.addObject({
+			'cms.acp.file.add': '{lang}cms.acp.file.add{/lang}',
+			'cms.acp.file.details': '{lang}cms.acp.file.details{/lang}',
+			'cms.acp.folder.add': '{lang}cms.acp.folder.add{/lang}',
+			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
+		});
+
 		new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow');
 		new WCF.Action.Delete('cms\\data\\folder\\FolderAction', '.jsFolderRow');
-		WCF.Language.addObject({
-				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
-		});
 		new CMS.ACP.File.Upload({$folderID}, true);
-	});
-	//]]>
-</script>
 
-{include file='formError'}
-
-{if $success|isset}
-<p class="success">{lang}wcf.global.success.add{/lang}</p>
-{/if}
-
-{if $errorField == 'file'}
-<p class="error">{lang}cms.acp.file.error.{$errorType}{/lang}</p>
-{/if}
-
-
-{if $errorField == 'folder'}
-<p class="error">{lang}cms.acp.folder.error.{$errorType}{/lang}</p>
-{/if}
-
-<script data-relocate="true">
-	//<![CDATA[
-	$(function() {
-		WCF.Language.addObject({
-				'cms.acp.file.add': '{lang}cms.acp.file.add{/lang}',
-				'cms.acp.folder.add': '{lang}cms.acp.folder.add{/lang}'
-				});
 		$('#fileAdd').hide();
 		$('#folderAdd').hide();
+
 		$('#fileAddButton').click(function() {
 			$('#fileAdd').wcfDialog({
 				title: WCF.Language.get('cms.acp.file.add'),
@@ -51,6 +26,7 @@
 				}
 			});
 		});
+
 		$('#folderAddButton').click(function() {
 			$('#folderAdd').wcfDialog({
 				title: WCF.Language.get('cms.acp.folder.add')
@@ -59,6 +35,26 @@
 	});
 	//]]>
 </script>
+
+<header class="boxHeadline">
+	<h1>{lang}cms.acp.file.management{/lang}</h1>
+	<p>{lang}cms.acp.file.management.description{/lang}</p>
+</header>
+
+{include file='formError'}
+
+{if $success|isset}
+	<p class="success">{lang}wcf.global.success.add{/lang}</p>
+{/if}
+
+{if $errorField == 'file'}
+	<p class="error">{lang}cms.acp.file.error.{$errorType}{/lang}</p>
+{/if}
+
+{if $errorField == 'folder'}
+	<p class="error">{lang}cms.acp.folder.error.{$errorType}{/lang}</p>
+{/if}
+
 <div class="contentNavigation">
 	<nav>
 		<ul>
@@ -67,6 +63,7 @@
 		</ul>
 	</nav>
 </div>
+
 <div id="fileAdd">
 	<div class="container containerPadding marginTop fileUpload" id="fileUpload" >
 		<ul>
@@ -80,6 +77,7 @@
 	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}cms.acp.folder{/lang}</legend>
+
 			<dl{if $errorField == 'folder'} class="formError"{/if}>
 				<dt><label for="folder">{lang}cms.acp.folder{/lang}</label></dt>
 				<dd>
@@ -105,32 +103,35 @@
 		<header>
 			<h2>{lang}cms.acp.file.list{/lang} <span class="badge badgeInverse">{#$fileList|count}</span></h2>
 		</header>
+
 		<table class="table">
 			<thead>
 				<th class="columnIcon">{lang}wcf.global.objectID{/lang}</th>
 				<th class="columnTitle columnFile">{lang}cms.acp.file.title{/lang}</th>
 				<th class="columnType">{lang}cms.acp.file.type{/lang}</th>
 				<th class="downloads">{lang}cms.acp.file.downloads{/lang}</th>
+
 				{event name='columnHeads'}
 			</thead>
 			<tbody>
-			{if !$isFolder}
-				{foreach from=$folderList item=folder}
-				<tr class="jsFolderRow">
-					<td class="columnIcon"><span class="icon icon-folder-close-alt icon16"></span> <span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$folder->folderID}" data-confirm-message="{lang}cms.acp.folder.delete.sure{/lang}"></span></td>
-					<td class="columnTitle"><a href="{link controller='FileManagement' application='cms' object=$folder}{/link}">{$folder->getTitle()|language}</a></td>
-					<td>{lang}cms.acp.folder{/lang}</td>
-					<td>-</td>
-				</tr>
-				{/foreach}
-			{else}
-				<tr class="noFolders">
-					<td class="columnIcon"><a href="{link controller='FileManagement' application='cms'}{/link}"><span class="icon icon16 icon-angle-left"></span></a></td>
-					<td class="columnTitle"><a href="{link controller='FileManagement' application='cms'}{/link}">...</a></td>
-					<td>{lang}cms.acp.folder.toRoot{/lang}</td>
-					<td>-</td>
-				</tr>
-			{/if}
+				{if !$isFolder}
+					{foreach from=$folderList item=folder}
+						<tr class="jsFolderRow">
+							<td class="columnIcon"><span class="icon icon-folder-close-alt icon16"></span> <span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$folder->folderID}" data-confirm-message="{lang}cms.acp.folder.delete.sure{/lang}"></span></td>
+							<td class="columnTitle"><a href="{link controller='FileManagement' application='cms' object=$folder}{/link}">{$folder->getTitle()|language}</a></td>
+							<td>{lang}cms.acp.folder{/lang}</td>
+							<td>-</td>
+						</tr>
+					{/foreach}
+				{else}
+					<tr class="noFolders">
+						<td class="columnIcon"><a href="{link controller='FileManagement' application='cms'}{/link}"><span class="icon icon16 icon-angle-left"></span></a></td>
+						<td class="columnTitle"><a href="{link controller='FileManagement' application='cms'}{/link}">...</a></td>
+						<td>{lang}cms.acp.folder.toRoot{/lang}</td>
+						<td>-</td>
+					</tr>
+				{/if}
+
 				{foreach from=$fileList item=file}
 					<tr class="jsFileRow">
 						<td class="columnIcon">
@@ -142,6 +143,7 @@
 						<td class="columnType">{$file->type}</td>
 						<td class="columnDownloads">{#$file->downloads}</td>
 					</tr>
+
 					<div class="details" id="details{$file->fileID}" style="display: none;">
 						<fieldset>
 							<legend>{@$file->getIconTag()} <a href="{$file->getURL()}">{$file->title|language}</a></fieldset>
@@ -163,12 +165,10 @@
 							<input type="text" readonly="readonly" class="long" value="{$file->getURL()}" />
 						</fieldset>
 					</div>
+
 					<script data-relocate="true">
 						//<![CDATA[
 						$(function() {
-							WCF.Language.addObject({
-									'cms.acp.file.details': '{lang}cms.acp.file.details{/lang}'
-									});
 							$('#details{$file->fileID}').hide();
 							$('#file{$file->fileID}').click(function() {
 								$('#details{$file->fileID}').wcfDialog({
