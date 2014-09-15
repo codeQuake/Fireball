@@ -35,7 +35,6 @@
 		<item name="cms.acp.content.revision.restore"><![CDATA[Restore]]></item>
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
 		<item name="cms.acp.content.revision.time"><![CDATA[Time]]></item>
-		<item name="cms.acp.content.revision.user"><![CDATA[User]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Choose box]]></item>
@@ -232,7 +231,6 @@
 		<item name="cms.acp.page.revision.restore"><![CDATA[Restore]]></item>
 		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
 		<item name="cms.acp.page.revision.time"><![CDATA[Time]]></item>
-		<item name="cms.acp.page.revision.user"><![CDATA[User]]></item>
 		<item name="cms.acp.page.setAsHome"><![CDATA[Set as startpage]]></item>
 		<item name="cms.acp.page.settings"><![CDATA[Settings]]></item>
 		<item name="cms.acp.page.settings.allowSubscribing"><![CDATA[Allow subscription of this page]]></item>
