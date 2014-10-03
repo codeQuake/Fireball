@@ -5,7 +5,6 @@ use cms\data\page\Page;
 use cms\data\page\PageCache;
 use cms\system\menu\page\CMSPageMenuItemProvider;
 use wcf\system\application\AbstractApplication;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\WCF;
 
@@ -66,7 +65,7 @@ class CMSCore extends AbstractApplication {
 
 		// add breadcrumbs
 		foreach ($page->getParentPages() as $child) {
-			WCF::getBreadcrumbs()->add(new Breadcrumb($child->getTitle(), $child->getLink()));
+			WCF::getBreadcrumbs()->add($child->getBreadcrumb());
 		}
 	}
 }
