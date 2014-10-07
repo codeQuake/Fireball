@@ -29,7 +29,7 @@ use wcf\system\WCF;
 
 /**
  * Executes page-related actions.
- *
+ * 
  * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -65,58 +65,49 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * Validates parameters to copy a page.
 	 */
 	public function validateCopy() {
-		if (empty($this->objects)) {
-			$this->readObjects();
-		}
-		if (count($this->objects) != 1) {
-			throw new UserInputException('objectIDs');
-		}
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
 	}
 
 	/**
 	 * Copies a specific page.
 	 */
 	public function copy() {
-		$object = reset($this->objects);
+		$object = $this->getSingleObject();
 		$data = $object->getDecoratedObject()->getData();
-		$data['alias'] .= '-copy';
+
+		// remove unique or irrelevant properties
 		unset($data['pageID']);
 		unset($data['isHome']);
 		unset($data['clicks']);
+
+		// ensure unique aliases
+		// @todo	multiple copies of a page have the same alias
+		$data['alias'] .= '-copy';
+
+		// perform creation of copy
 		$this->parameters['data'] = $data;
 		$page = $this->create();
 		$pageID = $page->pageID;
+
+		// copy contents
 		$contents = $object->getContents();
 		$tmp = array();
-		//body
-		foreach ($contents['body'] as $content) {
-			//recreate
-			$data = $content->getDecoratedObject()->getData();
-			$oldID = $data['contentID'];
-			unset($data['contentID']);
-			$data['pageID'] = $pageID;
-			$action = new ContentAction(array(), 'create', array(
-				'data' => $data
-			));
-			$return = $action->executeAction();
-			$tmp[$oldID] = $return['returnValues']->contentID;
-		}
 
-		//sidebar
-		foreach ($contents['sidebar'] as $content) {
-			//recreate
-			$data = $content->getData();
-			$oldID = $data['contentID'];
-			unset($data['contentID']);
-			$data['pageID'] = $pageID;
-			$action = new ContentAction(array(), 'create', array(
-				'data' => $data
-			));
-			$return = $action->executeAction();
-			$tmp[$oldID] = $return['returnValues']->contentID;
+		foreach (array('body', 'sidebar') as $position) {
+			foreach ($contents[$position] as $content) {
+				//recreate
+				$data = $content->getDecoratedObject()->getData();
+				$oldID = $data['contentID'];
+				unset($data['contentID']);
+				$data['pageID'] = $pageID;
+				$action = new ContentAction(array(), 'create', array(
+					'data' => $data
+				));
+				$return = $action->executeAction();
+				$tmp[$oldID] = $return['returnValues']->contentID;
+			}
 		}
-
-		//clear cache
 
 		//setting new IDs
 		$contents = new ContentList();
@@ -166,9 +157,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$pageEditor->setAsHome();
 		}
 
-		PagePermissionCacheBuilder::getInstance()->reset();
-		$this->objects = array($pageEditor);
-
+		// trigger publication
 		if (!$page->isDisabled && $page->isPublished) {
 			$action = new PageAction(array($pageEditor), 'triggerPublication');
 			$action->executeAction();
@@ -184,18 +173,11 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		if (empty($this->objects)) {
 			$this->readObjects();
 		}
-		$action = 'create';
-		if (isset($this->parameters['action'])) {
-			$action = $this->parameters['action'];
-		}
 
 		foreach ($this->objects as $object) {
-			call_user_func(array(
-				$this->className,
-				'createRevision'
-			), array(
+			call_user_func(array($this->className, 'createRevision'), array(
 				'pageID' => $object->getObjectID(),
-				'action' => $action,
+				'action' => (isset($this->parameters['action']) ? $this->parameters['action'] : 'create'),
 				'userID' => WCF::getUser()->userID,
 				'username' => WCF::getUser()->username,
 				'time' => TIME_NOW,
@@ -285,16 +267,24 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * Validates parameters to get a rendered list of content types.
 	 */
 	public function validateGetContentTypes() {
-		if (count($this->objectIDs) != 1) {
-			throw new UserInputException('objectIDs');
+		// validate 'position' parameter
+		if (!isset($this->parameters['position'])) {
+			throw new UserInputException('position');
 		}
-		if (! isset($this->parameters['position'])) $this->parameters['position'] = 'body';
+		if (!in_array($this->parameters['position'], array('body', 'sidebar'))) {
+			throw new UserInputException('position');
+		}
+
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
 	}
 
 	/**
 	 * Returns a rendered list of content types.
 	 */
 	public function getContentTypes() {
+		$page = $this->getSingleObject();
+
 		$types = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
 		foreach ($types as $key => $type) {
 			if (!$type->getProcessor()->isAvailableToAdd()) {
@@ -313,17 +303,17 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		WCF::getTPL()->assign(array(
-			'pageID' => reset($this->objectIDs),
 			'contentTypes' => $categories,
-			'position' => $this->parameters['position'],
-			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null
+			'page' => $page,
+			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null,
+			'position' => $this->parameters['position']
 		));
 
 		return array(
-			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms'),
-			'pageID' => reset($this->objectIDs),
+			'pageID' => $page->pageID,
+			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null,
 			'position' => $this->parameters['position'],
-			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null
+			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms')
 		);
 	}
 
@@ -331,28 +321,26 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * Validates permissions and parameters for page revision list.
 	 */
 	public function validateGetRevisions() {
-		if (count($this->objectIDs) != 1) {
-			throw new UserInputException('objectIDs');
-		}
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
 	}
 
 	/**
 	 * Returns a rendered list of page revisions.
 	 */
 	public function getRevisions() {
-		$objectID = reset($this->objectIDs);
-		$page = PageCache::getInstance()->getPage($objectID);
+		$page = $this->getSingleObject();
 		$revisions = $page->getRevisions();
 
 		WCF::getTPL()->assign(array(
-			'revisions' => $revisions,
-			'pageID' => $page->pageID
+			'pageID' => $page->pageID,
+			'revisions' => $revisions
 		));
 
 		return array(
-			'template' => WCF::getTPL()->fetch('pageRevisionList', 'cms'),
+			'pageID' => $page->pageID,
 			'revisions' => $revisions,
-			'pageID' => $page->pageID
+			'template' => WCF::getTPL()->fetch('pageRevisionList', 'cms')
 		);
 	}
 
@@ -402,38 +390,31 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
 				$metaData[$language->languageID] = '';
 			}
-			//body
-			foreach ($contents['body'] as $content) {
-				if ($content->getObjectType()->getProcessor() instanceof ISearchableContentType) {
-					$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData($content->getDecoratedObject());
 
-					foreach ($searchIndexData as $languageID => $data) {
-						if (!empty($metaData[$languageID])) $metaData[$languageID] .= "\n";
-						$metaData[$languageID] .= $data;
+			foreach (array('body', 'sidebar') as $position) {
+				foreach ($contents[$position] as $content) {
+					if ($content->getObjectType()->getProcessor() instanceof ISearchableContentType) {
+						$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData($content->getDecoratedObject());
+
+						foreach ($searchIndexData as $languageID => $data) {
+							if (!empty($metaData[$languageID])) $metaData[$languageID] .= "\n";
+							$metaData[$languageID] .= $data;
+						}
 					}
 				}
 			}
-			//sidebar
-			foreach ($contents['sidebar'] as $content) {
-				if ($content->getObjectType()->getProcessor() instanceof ISearchableContentType) {
-					$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData($content->getDecoratedObject());
-					foreach ($searchIndexData as $languageID => $data) {
-						if (!empty($metaData[$languageID])) $metaData[$languageID] .= "\n";
-						$metaData[$languageID] .= $data;
-					}
-				}
-			}
+
 			foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
 				SearchIndexManager::getInstance()->add(
-							'de.codequake.cms.page',
-							$pageEditor->pageID,
-							$language->get($pageEditor->description),
-							$language->get($pageEditor->title),
-							$pageEditor->creationTime,
-							$pageEditor->authorID,
-							$pageEditor->authorName,
-							$language->languageID,
-							isset($metaData[$language->languageID])? $metaData[$language->languageID]: ''
+					'de.codequake.cms.page',
+					$pageEditor->pageID,
+					$language->get($pageEditor->description),
+					$language->get($pageEditor->title),
+					$pageEditor->creationTime,
+					$pageEditor->authorID,
+					$pageEditor->authorName,
+					$language->languageID,
+					isset($metaData[$language->languageID])? $metaData[$language->languageID]: ''
 				);
 			}
 		}
