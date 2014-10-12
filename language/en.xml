@@ -36,7 +36,7 @@
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
 		<item name="cms.acp.content.revision.time"><![CDATA[Time]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard box]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard Box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Choose box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[File]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Choose file]]></item>
