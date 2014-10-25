@@ -35,7 +35,7 @@
 		<item name="cms.acp.content.revision.restore.sure"><![CDATA[Sind Sie sicher, dass Sie diese Version wiederherstellen wollen?]]></item>
 		<item name="cms.acp.content.revision.time"><![CDATA[Zeitpunkt]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboardbox]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard-Box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Box auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[Datei]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Datei auswählen]]></item>
