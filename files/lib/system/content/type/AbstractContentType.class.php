@@ -88,14 +88,14 @@ abstract class AbstractContentType extends AbstractObjectTypeProcessor implement
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getFormOutput()
+	 * @see	\cms\system\content\type\IContentType::getFormOutput()
 	 */
 	public function getFormOutput() {
 		return WCF::getTPL()->fetch($this->templateName, 'cms');
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getIcon()
+	 * @see	\cms\system\content\type\IContentType::getIcon()
 	 */
 	public function getIcon() {
 		return $this->icon;
