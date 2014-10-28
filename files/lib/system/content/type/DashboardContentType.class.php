@@ -1,12 +1,11 @@
 <?php
 namespace cms\system\content\type;
-
-use cms\data\content\Content;
-use cms\page\PagePage;
 use wcf\system\cache\builder\DashboardBoxCacheBuilder;
 use wcf\system\WCF;
 
 /**
+ * Dashboard content type implementation.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -19,26 +18,13 @@ class DashboardContentType extends AbstractContentType {
 	protected $icon = 'icon-dashboard';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 * @see	\cms\system\content\type\IContentType::getFormOutput()
 	 */
-	public function getFormTemplate() {
+	public function getFormOutput() {
 		WCF::getTPL()->assign(array(
 			'boxList' => DashboardBoxCacheBuilder::getInstance()->getData(array(), 'boxes')
 		));
-		return 'dashboardContentType';
-	}
 
-	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
-	 */
-	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$boxID = $data['box'];
-		$boxList = DashboardBoxCacheBuilder::getInstance()->getData(array(), 'boxes');
-		$className = $boxList[$boxID]->className;
-		$box = new $className();
-		$box->init($boxList[$boxID], new PagePage());
-
-		return $box->getTemplate();
+		return parent::getFormOutput();
 	}
 }

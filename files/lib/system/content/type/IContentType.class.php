@@ -1,24 +1,37 @@
 <?php
 namespace cms\system\content\type;
-
-use cms\data\content\Content;
+use wcf\data\IDatabaseObjectProcessor;
 
 /**
- * Interface for Basic Contenttypes
+ * Every content type has to implement this interface.
  * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-interface IContentType {
+interface IContentType extends IDatabaseObjectProcessor {
 	/**
-	 * Returns the formatted output for the given content.
+	 * Returns the name of the content form class. The form class is in
+	 * charge of handling the form inputs and save them to the database.
 	 * 
-	 * @param	\cms\data\content\Content	$content
 	 * @return	string
 	 */
-	public function getOutput(Content $content);
+	public static function getContentFormClass();
+
+	/**
+	 * Returns the name of the content processor class.
+	 * 
+	 * @return	string
+	 */
+	public static function getContentProcessorClass();
+
+	/**
+	 * Returns the form output used for adding/editing page contents.
+	 * 
+	 * @return	string
+	 */
+	public function getFormOutput();
 
 	/**
 	 * Returns the icon name (with icon prefix) for this content type.
@@ -34,27 +47,4 @@ interface IContentType {
 	 * @return	boolean
 	 */
 	public function isAvailableToAdd();
-
-	/**
-	 * Reads content type specific parameters.
-	 */
-	public function readParameters();
-
-	/**
-	 * Reads content type specific form parameters.
-	 */
-	public function readFormParameters();
-
-	/**
-	 * Validates the submitted form data. In case of invalid inputs, throw
-	 * an instance of '\wcf\system\exception\UserInputException'
-	 */
-	public function validate($data);
-
-	/**
-	 * Returns the template name for the acp forms
-	 * 
-	 * @return	string
-	 */
-	public function getFormTemplate();
 }

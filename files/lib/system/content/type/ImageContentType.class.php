@@ -1,11 +1,11 @@
 <?php
 namespace cms\system\content\type;
-
-use cms\data\content\Content;
 use cms\data\file\File;
 use wcf\system\WCF;
 
 /**
+ * Image content type implementation.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -17,23 +17,13 @@ class ImageContentType extends AbstractContentType {
 	 */
 	protected $icon = 'icon-picture';
 
-	public $multilingualFields = array(
-		'text'
-	);
-
-	public function getFormTemplate() {
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormOutput()
+	 */
+	public function getFormOutput() {
+		// todo: really needed?
 		WCF::getTPL()->assign('file', new File(0));
-		return 'imageContentType';
-	}
 
-	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$image = new File($data['imageID']);
-		WCF::getTPL()->assign(array(
-			'data' => $data,
-			'image' => $image
-		));
-		
-		return WCF::getTPL()->fetch('imageContentType', 'cms');
+		return parent::getFormOutput();
 	}
 }

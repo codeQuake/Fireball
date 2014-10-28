@@ -1,9 +1,9 @@
 <?php
 namespace cms\system\content\type;
 
-use cms\data\content\Content;
-
 /**
+ * PHP content type implementation.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -14,14 +14,4 @@ class PHPContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
 	protected $icon = 'icon-code';
-
-	public function getFormTemplate() {
-		return 'phpContentType';
-	}
-
-	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$php = substr($data['text'], 5);
-		return eval($php);
-	}
 }
