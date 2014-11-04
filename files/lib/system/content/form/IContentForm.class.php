@@ -62,7 +62,7 @@ interface IContentForm {
 
 	/**
 	 * Returns an array of all form variables for this content. Required
-	 * variables are 'identifier' and 'environment'. Other variables may be
+	 * variables are 'identifier' and 'position'. Other variables may be
 	 * needed by the specific content type.
 	 * 
 	 * @return	array

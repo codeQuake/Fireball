@@ -23,12 +23,6 @@ abstract class AbstractContentForm implements IContentForm {
 	public $additionalData = array();
 
 	/**
-	 * environment
-	 * @var	string
-	 */
-	public $environment = 'content';
-
-	/**
 	 * (temporary) identifier for this content
 	 * @var	string
 	 */
@@ -52,6 +46,12 @@ abstract class AbstractContentForm implements IContentForm {
 	 * @var	integer
 	 */
 	public $pageID = 0;
+
+	/**
+	 * position of the content ('body' or 'sidebar')
+	 * @var	string
+	 */
+	public $position = 'body';
 
 	/**
 	 * show order of this content
@@ -80,7 +80,7 @@ abstract class AbstractContentForm implements IContentForm {
 			}
 
 			$objectTypeID = $this->getObjectType()->objectTypeID;
-			if ($objectTypeID != $content->objectTypeID) {
+			if ($objectTypeID != $content->contentTypeID) {
 				throw new SystemException("Given object type and content's object type aren't identical.");
 			}
 		}
@@ -106,7 +106,7 @@ abstract class AbstractContentForm implements IContentForm {
 
 		// read general parameters
 		if (isset($_POST['content_'.$this->identifier.'_showOrder'])) $this->showOrder = intval($_POST['content_'.$this->identifier.'_showOrder']);
-		if (isset($_POST['content_'.$this->identifier.'_environment']) && in_array($_POST['content_'.$this->identifier.'_environment'], array('content', 'sidebar'))) $this->environment = $_POST['content_'.$this->identifier.'_environment'];
+		if (isset($_POST['content_'.$this->identifier.'_position']) && in_array($_POST['content_'.$this->identifier.'_position'], array('body', 'sidebar'))) $this->position = $_POST['content_'.$this->identifier.'_position'];
 	}
 
 	/**
@@ -114,7 +114,7 @@ abstract class AbstractContentForm implements IContentForm {
 	 */
 	public function validate() {
 		// todo:
-		// validate environment
+		// validate position
 		//if (!call_user_func(array($this->getObjectType()->getProcessor(), 'isAvailableIn'. StringUtil::firstCharToUpperCase($this->environment)))) {
 		//	throw new UserInputException('content_'.$this->identifier.'_environment');
 		//}
@@ -169,8 +169,8 @@ abstract class AbstractContentForm implements IContentForm {
 	 */
 	public function getFormVariables() {
 		return array_merge($this->additionalData, array(
-			'environment' => $this->environment,
-			'identifier' => $this->identifier
+			'identifier' => $this->identifier,
+			'position' => $this->position
 		));
 	}
 
