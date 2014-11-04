@@ -50,7 +50,6 @@ class TextContent extends AbstractSearchableContent {
 	public function setI18nOptions() {
 		parent::setI18nOptions();
 
-		I18nHandler::getInstance()->setOptions('content_'.$this->contentID.'_title', PackageCache::getInstance()->getPackageID('de.codequake.cms'), $this->title, 'cms.content.title\d+');
 		I18nHandler::getInstance()->setOptions('content_'.$this->contentID.'_text', PackageCache::getInstance()->getPackageID('de.codequake.cms'), $this->text, 'cms.content.text\d+');
 	}
 
