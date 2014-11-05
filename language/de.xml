@@ -169,6 +169,7 @@
 		<item name="cms.acp.page.alias.preview"><![CDATA[Link-Vorschau:]]></item>
 		<item name="cms.acp.page.backup"><![CDATA[Datensicherung]]></item>
 		<item name="cms.acp.page.backup.description"><![CDATA[Laden Sie sich hier Ihre aktuelle Datensicherung herunter: <a href="{link application='cms' controller='CMSExport'}{/link}"><span class="icon icon16 icon-cloud-download"></span> Herunterladen</a>]]></item>
+		<item name="cms.acp.page.button.choose"><![CDATA[Seite wählen]]></item>
 		<item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
 		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von „{$page->title|language}' auflisten]]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Seite kopieren]]></item>

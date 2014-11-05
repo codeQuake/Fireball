@@ -41,6 +41,18 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
+			{if $action == 'edit' && $choosePageNodeList|iterator_count > 1}
+				<li class="dropdown">
+					<a class="button dropdownToggle"><span class="icon icon16 icon-sort"></span> <span>{lang}cms.acp.page.button.choose{/lang}</span></a>
+					<div class="dropdownMenu">
+						<ul class="scrollableDropdownMenu">
+							{foreach from=$choosePageNodeList item=node}
+								<li{if $node->pageID == $pageID} class="active"{/if}><a href="{link application='cms' controller='PageEdit' id=$node->pageID}{/link}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</a></li>
+							{/foreach}
+						</ul>
+					</div>
+				</li>
+			{/if}
 			<li><a href="{link application='cms' controller='PageList'}{/link}" title="{lang}cms.acp.menu.link.cms.page.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.page.list{/lang}</span></a></li>
 
 			{event name='contentNavigationButtons'}

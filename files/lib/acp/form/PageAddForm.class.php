@@ -45,8 +45,6 @@ class PageAddForm extends AbstractForm {
 
 	public $pageID = 0;
 
-	public $action = 'add';
-
 	public $title = '';
 
 	public $alias = '';

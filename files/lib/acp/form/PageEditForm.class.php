@@ -1,10 +1,8 @@
 <?php
 namespace cms\acp\form;
-
 use cms\data\page\DrainedPageNodeTree;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
-use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\util\PageUtil;
 use wcf\data\page\menu\item\PageMenuItem;
@@ -12,27 +10,38 @@ use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\page\menu\item\PageMenuItemEditor;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
-use wcf\util\StringUtil;
 
 /**
  * Shows the page edit form.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
 class PageEditForm extends PageAddForm {
+	/**
+	 * page node list for 'choose page' button
+	 * @var	\RecursiveIteratorIterator
+	 */
+	public $choosePageNodeList = null;
 
+	/**
+	 * page id
+	 * @var	integer
+	 */
 	public $pageID = 0;
 
+	/**
+	 * page object
+	 * @var	\cms\data\page\Page
+	 */
 	public $page = null;
-
-	public $action = 'edit';
 
 	/**
 	 * @see	\wcf\form\IForm::readFormParameters()
@@ -41,6 +50,10 @@ class PageEditForm extends PageAddForm {
 		parent::readFormParameters();
 
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
+		$this->page = new Page($this->pageID);
+		if (!$this->page->pageID) {
+			throw new IllegalLinkException();
+		}
 	}
 
 	/**
@@ -207,13 +220,13 @@ class PageEditForm extends PageAddForm {
 	public function readData() {
 		parent::readData();
 
-		// reading data
-		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
-		$this->page = new Page($this->pageID);
-
 		// overwrite pagelist
-		$this->pageList = new DrainedPageNodeTree(null, $this->pageID);
-		$this->pageList = $this->pageList->getIterator();
+		$pageNodeTree = new DrainedPageNodeTree(null, $this->pageID);
+		$this->pageList = $pageNodeTree->getIterator();
+
+		// read page node list for 'choose page' button
+		$choosePageNodeTree = new PageNodeTree();
+		$this->choosePageNodeList = $choosePageNodeTree->getIterator();
 
 		if (empty($_POST)) {
 			I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->page->title, 'cms.page.title\d+');
@@ -269,6 +282,7 @@ class PageEditForm extends PageAddForm {
 
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
+			'choosePageNodeList' => $this->choosePageNodeList,
 			'pageID' => $this->pageID,
 			'page' => $this->page
 		));

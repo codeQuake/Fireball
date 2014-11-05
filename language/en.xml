@@ -170,6 +170,7 @@
 		<item name="cms.acp.page.alias.preview"><![CDATA[Link-Preview:]]></item>
 		<item name="cms.acp.page.backup"><![CDATA[Backup]]></item>
 		<item name="cms.acp.page.backup.description"><![CDATA[You can download a backup of your configuration here: <a href="{link application='cms' controller='CMSExport'}{/link}"><span class="icon icon16 icon-cloud-download"></span> Download</a>]]></item>
+		<item name="cms.acp.page.button.choose"><![CDATA[Choose Page]]></item>
 		<item name="cms.acp.page.content.add"><![CDATA[Add contents to '{$page->title|language}']]></item>
 		<item name="cms.acp.page.content.list"><![CDATA[List contents of '{$page->title|language}']]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Copy page]]></item>
