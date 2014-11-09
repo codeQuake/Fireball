@@ -3,7 +3,9 @@ namespace cms\acp\form;
 
 use cms\data\stylesheet\Stylesheet;
 use cms\data\stylesheet\StylesheetAction;
+use cms\data\stylesheet\StylesheetList;
 use wcf\form\AbstractForm;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
 /**
@@ -15,6 +17,11 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class StylesheetEditForm extends StylesheetAddForm {
+	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'cms.acp.menu.link.cms.stylesheet';
+
 	/**
 	 * stylesheet id
 	 * @var	integer
@@ -28,6 +35,12 @@ class StylesheetEditForm extends StylesheetAddForm {
 	public $stylesheet = null;
 
 	/**
+	 * list of available stylesheets
+	 * @var	array<\cms\data\stylesheet\Stylesheet>
+	 */
+	public $stylesheets = array();
+
+	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -35,6 +48,9 @@ class StylesheetEditForm extends StylesheetAddForm {
 
 		if (isset($_REQUEST['id'])) $this->stylesheetID = intval($_REQUEST['id']);
 		$this->stylesheet = new Stylesheet($this->stylesheetID);
+		if (!$this->stylesheet->sheetID) {
+			throw new IllegalLinkException();
+		}
 	}
 
 	/**
@@ -63,6 +79,11 @@ class StylesheetEditForm extends StylesheetAddForm {
 	public function readData() {
 		parent::readData();
 
+		$stylesheetList = new StylesheetList();
+		$stylesheetList->sqlOrderBy = 'stylesheet.title ASC';
+		$stylesheetList->readObjects();
+		$this->stylesheets = $stylesheetList->getObjects();
+
 		if (empty($_POST)) {
 			$this->title = $this->stylesheet->title;
 			$this->less = $this->stylesheet->less;
@@ -77,7 +98,8 @@ class StylesheetEditForm extends StylesheetAddForm {
 
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
-			'stylesheetID' => $this->stylesheetID
+			'stylesheetID' => $this->stylesheetID,
+			'stylesheets' => $this->stylesheets
 		));
 	}
 }

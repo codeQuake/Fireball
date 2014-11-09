@@ -267,6 +267,7 @@
 
 	<category name="cms.acp.stylesheet">
 		<item name="cms.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
+		<item name="cms.acp.stylesheet.button.choose"><![CDATA[Stylesheet wählen]]></item>
 		<item name="cms.acp.stylesheet.delete.sure"><![CDATA[Wollen Sie dieses Stylesheet wirklich löschen?]]></item>
 		<item name="cms.acp.stylesheet.edit"><![CDATA[Stylesheet bearbeiten]]></item>
 		<item name="cms.acp.stylesheet.less"><![CDATA[CSS & Less]]></item>
