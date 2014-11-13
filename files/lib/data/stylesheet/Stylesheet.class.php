@@ -3,7 +3,6 @@ namespace cms\data\stylesheet;
 
 use cms\data\CMSDatabaseObject;
 use wcf\system\request\IRouteController;
-use wcf\system\WCF;
 
 /**
  * Represents a stylesheet.

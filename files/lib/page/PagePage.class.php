@@ -10,7 +10,6 @@ use wcf\system\comment\CommentHandler;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\style\StyleHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
