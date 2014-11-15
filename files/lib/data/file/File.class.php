@@ -26,6 +26,12 @@ class File extends CMSDatabaseObject implements IRouteController {
 	protected static $databaseTableIndexName = 'fileID';
 
 	/**
+	 * object of the folder this element belongs to
+	 * @var	\cms\data\folder\Folder
+	 */
+	protected $folder = null;
+
+	/**
 	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
 	public function getTitle() {
@@ -46,8 +52,11 @@ class File extends CMSDatabaseObject implements IRouteController {
 	}
 
 	public function getFolder() {
-		return new Folder($this->folderID);
-		return null;
+		if ($this->folder === null) {
+			$this->folder = new Folder($this->folderID);
+		}
+
+		return $this->folder;
 	}
 
 	public function getURL() {
