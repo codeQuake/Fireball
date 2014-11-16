@@ -24,7 +24,7 @@ use wcf\util\StringUtil;
 
 /**
  * Shows the page add form.
- *
+ * 
  * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -59,8 +59,6 @@ class PageAddForm extends AbstractForm {
 
 	public $availableDuringOfflineMode = CMS_PAGES_DEFAULT_OFFLINE;
 
-	public $robots = CMS_PAGES_DEFAULT_ROBOTS;
-
 	public $showSidebar = CMS_PAGES_DEFAULT_GLOBAL_SIDEBAR;
 
 	public $sidebarOrientation = CMS_PAGES_DEFAULT_SIDEBAR;
@@ -80,6 +78,12 @@ class PageAddForm extends AbstractForm {
 	public $stylesheetList = null;
 
 	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
+
+	/**
+	 * option to allow spiders to index the created page
+	 * @var	integer
+	 */
+	public $allowIndexing = CMS_PAGES_DEFAULT_ALLOW_INDEXING;
 
 	/**
 	 * option to allow subscribing the created page
@@ -158,7 +162,7 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
 		if (isset($_POST['menuItem'])) $this->menuItem = intval($_POST['menuItem']);
 		else $this->menuItem = 0;
-		if (isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
+		$this->allowIndexing = (isset($_POST['allowIndexing'])) ? 1 : 0;
 		if (isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
 		if (isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
 		else $this->showSidebar = 0;
@@ -268,7 +272,7 @@ class PageAddForm extends AbstractForm {
 			'parentID' => ($this->parentID) ?  : null,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
-			'robots' => $this->robots,
+			'allowIndexing' => $this->allowIndexing,
 			'isCommentable' => $this->isCommentable,
 			'allowSubscribing' => $this->allowSubscribing,
 			'styleID' => ($this->styleID) ?: null,
@@ -368,10 +372,10 @@ class PageAddForm extends AbstractForm {
 
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
-		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
+		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->alias = '';
 		$this->sidebarOrientation = 'right';
 		$this->deactivationDate = $this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->parentID = $this->publicationDate = $this->showOrder = $this->showSidebar = $this->styleID = 0;
-		$this->allowSubscribing = $this->menuItem = 1;
+		$this->allowIndexing = $this->allowSubscribing = $this->menuItem = 1;
 		I18nHandler::getInstance()->reset();
 	}
 
@@ -411,7 +415,7 @@ class PageAddForm extends AbstractForm {
 			'objectTypeID' => $this->objectTypeID,
 			'invisible' => $this->invisible,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
-			'robots' => $this->robots,
+			'allowIndexing' => $this->allowIndexing,
 			'description' => $this->description,
 			'alias' => $this->alias,
 			'parentID' => $this->parentID,

@@ -173,15 +173,10 @@
 					</dd>
 				</dl>
 
-				<dl{if $errorField == 'robots'} class="formError"{/if}>
-					<dt><label for="robots">{lang}cms.acp.page.meta.robots{/lang}</label></dt>
+				<dl>
+					<dt class="reversed"><label for="allowIndexing">{lang}cms.acp.page.meta.allowIndexing{/lang}</label></dt>
 					<dd>
-						<select id="robots" name="robots">
-							<option value="index,follow"{if $robots =="index,follow"} selected="selected"{/if}>{lang}cms.acp.page.meta.robots.indexfollow{/lang}</option>
-							<option value="index,nofollow"{if $robots =="index,nofollow"} selected="selected"{/if}>{lang}cms.acp.page.meta.robots.indexnofollow{/lang}</option>
-							<option value="noindex,follow"{if $robots =="noindex,follow"} selected="selected"{/if}>{lang}cms.acp.page.meta.robots.noindexfollow{/lang}</option>
-							<option value="noindex,nofollow"{if $robots =="noindex,nofollow"} selected="selected"{/if}>{lang}cms.acp.page.meta.robots.noindexnofollow{/lang}</option>
-						</select>
+						<input type="checkbox" id="allowIndexing" name="allowIndexing"{if $allowIndexing} checked="checked"{/if} />
 					</dd>
 				</dl>
 
