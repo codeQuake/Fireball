@@ -1,15 +1,13 @@
 <?php
 namespace cms\acp\page;
-
 use cms\data\page\PageNodeTree;
-use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\AbstractPage;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\WCF;
 
 /**
  * Shows a list of pages.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -26,9 +24,11 @@ class PageListPage extends AbstractPage {
 	 */
 	public $neededPermissions = array('admin.cms.page.canListPage');
 
+	/**
+	 * list of pages
+	 * @var	\RecursiveIteratorIterator
+	 */
 	public $pageList = null;
-
-	public $objectTypeList = null;
 
 	/**
 	 * @see	\wcf\page\IPage::readData()
@@ -36,9 +36,8 @@ class PageListPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 
-		$this->pageList = new PageNodeTree();
-		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
-
+		$pageNodeTree = new PageNodeTree();
+		$this->pageList = $pageNodeTree->getIterator();
 	}
 
 	/**
@@ -49,8 +48,7 @@ class PageListPage extends AbstractPage {
 
 		WCF::getTPL()->assign(array(
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.page')),
-			'objectTypeList' => $this->objectTypeList,
-			'pageList' => $this->pageList->getIterator()
+			'pageList' => $this->pageList
 		));
 	}
 }
