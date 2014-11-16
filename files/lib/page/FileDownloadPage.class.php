@@ -17,6 +17,16 @@ use wcf\util\FileReader;
  * @package	de.codequake.cms
  */
 class FileDownloadPage extends AbstractPage {
+	/**
+	 * file id
+	 * @var	integer
+	 */
+	public $fileID = 0;
+
+	/**
+	 * file object
+	 * @var	\cms\data\file\File
+	 */
 	public $file = null;
 
 	public $fileReader = null;
@@ -37,9 +47,8 @@ class FileDownloadPage extends AbstractPage {
 	public function readParameters() {
 		parent::readParameters();
 
-		$fileID = 0;
-		if (isset($_REQUEST['id'])) $fileID = intval($_REQUEST['id']);
-		$this->file = new File($fileID);
+		if (isset($_REQUEST['id'])) $this->fileID = intval($_REQUEST['id']);
+		$this->file = new File($this->fileID);
 		if ($this->file === null) throw new IllegalLinkException();
 		
 		if (! $this->file->getPermission('canDownloadFile')) throw new PermissionDeniedException();
