@@ -28,7 +28,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link application='cms' controller='ContentList' pageID=$page->pageID}{/link}" title="{lang}cms.acp.menu.link.cms.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.content.list{/lang}</span></a></li>
+			<li><a href="{link application='cms' controller='ContentList' pageID=$page->pageID}{/link}" title="{lang}cms.acp.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.content.list{/lang}</span></a></li>
 
 			{event name='contentNavigationButtons'}
 		</ul>
