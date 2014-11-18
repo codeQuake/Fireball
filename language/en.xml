@@ -144,21 +144,18 @@
 
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="cms.acp.menu.link.cms.content"><![CDATA[Page management]]></item>
-		<item name="cms.acp.menu.link.cms.content.add"><![CDATA[Add content]]></item>
-		<item name="cms.acp.menu.link.cms.content.list"><![CDATA[List contents]]></item>
-		<item name="cms.acp.menu.link.cms.content.section.list"><![CDATA[List content sections]]></item>
+		<item name="cms.acp.menu.link.cms.content"><![CDATA[Pages]]></item>
 		<item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
-		<item name="cms.acp.menu.link.cms.file.management"><![CDATA[File management]]></item>
+		<item name="cms.acp.menu.link.cms.file.management"><![CDATA[File Management]]></item>
 		<item name="cms.acp.menu.link.cms.media"><![CDATA[Media]]></item>
-		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Add page]]></item>
+		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Add Page]]></item>
 		<item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.menu.link.cms.page.importAndExport"><![CDATA[Import &amp; Export]]></item>
-		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[List pages]]></item>
+		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[List Pages]]></item>
 		<item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistics]]></item>
-		<item name="cms.acp.menu.link.cms.style"><![CDATA[Display management]]></item>
-		<item name="cms.acp.menu.link.cms.stylesheet.add"><![CDATA[Add stylesheet]]></item>
-		<item name="cms.acp.menu.link.cms.stylesheet.list"><![CDATA[List stylesheets]]></item>
+		<item name="cms.acp.menu.link.cms.style"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.menu.link.cms.stylesheet.add"><![CDATA[Add Stylesheet]]></item>
+		<item name="cms.acp.menu.link.cms.stylesheet.list"><![CDATA[List Stylesheets]]></item>
 	</category>
 
 	<category name="cms.acp.page">
