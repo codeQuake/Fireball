@@ -177,6 +177,10 @@
 		<item name="cms.acp.page.description"><![CDATA[Beschreibung]]></item>
 		<item name="cms.acp.page.disable"><![CDATA[Seite (de)-aktivieren]]></item>
 		<item name="cms.acp.page.display"><![CDATA[Darstellung]]></item>
+		<item name="cms.acp.page.display.settings"><![CDATA[Darstellungsoptionen]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation.left"><![CDATA[Linke Seitenleiste]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation.right"><![CDATA[Rechte Seitenleiste]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
 		<item name="cms.acp.page.export"><![CDATA[Seiten sichern]]></item>
 		<item name="cms.acp.page.export.download"><![CDATA[Sicherung der CMS-Seiten herunterladen]]></item>
@@ -236,9 +240,6 @@
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[Erlaubt anderen Benutzern diese Seite zu kommentieren.]]></item>
 		<item name="cms.acp.page.settings.showSidebar"><![CDATA[Globale Seitenleiste anzeigen]]></item>
 		<item name="cms.acp.page.settings.showSidebar.description"><![CDATA[Sie können die globale Seitenleiste in der <a href="{link controller='DashboardList'}{/link}">Dashboard-Konfiguration</a> konfigurieren.]]></item>
-		<item name="cms.acp.page.settings.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
-		<item name="cms.acp.page.settings.sidebarOrientation.left"><![CDATA[Linke Seitenleiste]]></item>
-		<item name="cms.acp.page.settings.sidebarOrientation.right"><![CDATA[Rechte Seitenleiste]]></item>
 		<item name="cms.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>

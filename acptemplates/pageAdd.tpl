@@ -294,16 +294,6 @@
 					</dd>
 				</dl>
 
-				<dl{if $errorField == 'sidebarOrientation'} class="formError"{/if}>
-					<dt><label for="sidebarOrientation">{lang}cms.acp.page.settings.sidebarOrientation{/lang}</label></dt>
-					<dd>
-						<select id="sidebarOrientation" name="sidebarOrientation">
-							<option value="right"{if $sidebarOrientation =="right"} selected="selected"{/if}>{lang}cms.acp.page.settings.sidebarOrientation.right{/lang}</option>
-							<option value="left"{if $sidebarOrientation =="left"} selected="selected"{/if}>{lang}cms.acp.page.settings.sidebarOrientation.left{/lang}</option>
-						</select>
-					</dd>
-				</dl>
-
 				<dl{if $errorField == 'isCommentable'} class="formError"{/if}>
 					<dt class="reversed"><label for="isCommentable">{lang}cms.acp.page.settings.isCommentable{/lang}</label></dt>
 					<dd>
@@ -373,6 +363,24 @@
 
 				{event name='displayFields'}
 			</fieldset>
+
+			<fieldset>
+				<legend>{lang}cms.acp.page.display.settings{/lang}</legend>
+
+				<dl{if $errorField == 'sidebarOrientation'} class="formError"{/if}>
+					<dt><label for="sidebarOrientation">{lang}cms.acp.page.display.settings.sidebarOrientation{/lang}</label></dt>
+					<dd>
+						<select id="sidebarOrientation" name="sidebarOrientation">
+							<option value="right"{if $sidebarOrientation =="right"} selected="selected"{/if}>{lang}cms.acp.page.display.settings.sidebarOrientation.right{/lang}</option>
+							<option value="left"{if $sidebarOrientation =="left"} selected="selected"{/if}>{lang}cms.acp.page.display.settings.sidebarOrientation.left{/lang}</option>
+						</select>
+					</dd>
+				</dl>
+
+				{event name='displaySettingsFields'}
+			</fieldset>
+
+			{event name='afterDisplayFieldsets'}
 		</div>
 
 		<div id="userPermissions" class="container containerPadding tabMenuContent">

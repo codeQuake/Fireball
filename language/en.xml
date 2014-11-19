@@ -177,6 +177,10 @@
 		<item name="cms.acp.page.description"><![CDATA[Description]]></item>
 		<item name="cms.acp.page.disable"><![CDATA[Toggle page]]></item>
 		<item name="cms.acp.page.display"><![CDATA[Display]]></item>
+		<item name="cms.acp.page.display.settings"><![CDATA[Display Settings]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation"><![CDATA[Sidebar orientation]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation.left"><![CDATA[Left]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation.right"><![CDATA[Right]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Edit page]]></item>
 		<item name="cms.acp.page.export"><![CDATA[Download pages]]></item>
 		<item name="cms.acp.page.export.download"><![CDATA[Download pages]]></item>
@@ -238,9 +242,6 @@
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[]]></item>
 		<item name="cms.acp.page.settings.showSidebar"><![CDATA[Show global sidebar]]></item>
 		<item name="cms.acp.page.settings.showSidebar.description"><![CDATA[Shows the global sidebar, which you can set up <a href="{link controller='DashboardList'}{/link}">here</a>.]]></item>
-		<item name="cms.acp.page.settings.sidebarOrientation"><![CDATA[Sidebar orientation]]></item>
-		<item name="cms.acp.page.settings.sidebarOrientation.left"><![CDATA[Left]]></item>
-		<item name="cms.acp.page.settings.sidebarOrientation.right"><![CDATA[Right]]></item>
 		<item name="cms.acp.page.styleID"><![CDATA[Style]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Forces selected style upon page visit]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
