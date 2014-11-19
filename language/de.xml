@@ -243,6 +243,7 @@
 		<item name="cms.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.page.stylesheets.description"><![CDATA[Stylesheets, die beim Aufruf dieser Seite geladen werden sollen.]]></item>
 		<item name="cms.acp.page.title"><![CDATA[Seitentitel]]></item>
 		<item name="cms.acp.page.title.error.multilingual"><![CDATA[Der Seitentitel muss in allen Sprachen vorhanden sein!]]></item>
 		<item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>

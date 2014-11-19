@@ -332,9 +332,7 @@
 					<dd>
 						<select id="styleID" name="styleID">
 							<option value="0">{lang}wcf.global.noSelection{/lang}</option>
-							{foreach from=$availableStyles item=style}
-								<option value="{@$style->styleID}"{if $style->styleID == $styleID} selected="selected"{/if}>{$style->styleName}</option>
-							{/foreach}
+							{htmlOptions options=$availableStyles selected=$styleID}
 						</select>
 						<small>{lang}cms.acp.page.styleID.description{/lang}</small>
 					</dd>
@@ -344,19 +342,15 @@
 					<dl>
 						<dt>{lang}cms.acp.page.stylesheets{/lang}</dt>
 						<dd>
-							<select name="stylesheets[]" multiple="multiple" id="stylesheets" size="10">
-								{content}
-									{foreach from=$stylesheetList item=$sheet}
-										<option value="{$sheet->sheetID}" {if $sheet->sheetID|in_array:$stylesheets}selected="selected"{/if}>{$sheet->title}</option>
-									{/foreach}
-								{/content}
-							</select>
+							{content}
+								{htmlCheckboxes name='stylesheets' options=$stylesheetList selected=$stylesheets}
+							{/content}
 							{if $errorField == 'stylesheets'}
 								<small class="innerError">
 									{lang}cms.acp.page.stylesheets.error.{@$errorType}{/lang}
 								</small>
 							{/if}
-							<small>{lang}wcf.global.multiSelect{/lang}</small>
+							<small>{lang}cms.acp.page.stylesheets.description{/lang}</small>
 						</dd>
 					</dl>
 				{/hascontent}

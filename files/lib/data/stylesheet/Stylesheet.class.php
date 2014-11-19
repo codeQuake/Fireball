@@ -24,6 +24,15 @@ class Stylesheet extends CMSDatabaseObject implements IRouteController {
 	protected static $databaseTableIndexName = 'sheetID';
 
 	/**
+	 * Returns the title of this stylesheet.
+	 * 
+	 * @return	string
+	 */
+	public function __toString() {
+		return $this->title;
+	}
+
+	/**
 	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
 	public function getTitle() {

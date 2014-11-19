@@ -45,10 +45,10 @@ class PageEditForm extends PageAddForm {
 	public $page = null;
 
 	/**
-	 * @see	\wcf\form\IForm::readFormParameters()
+	 * @see	\wcf\page\IPage::readParameters()
 	 */
-	public function readFormParameters() {
-		parent::readFormParameters();
+	public function readParameters() {
+		parent::readParameters();
 
 		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
 		$this->page = new Page($this->pageID);
@@ -221,7 +221,7 @@ class PageEditForm extends PageAddForm {
 	public function readData() {
 		parent::readData();
 
-		// overwrite pagelist
+		// overwrite page list
 		$pageNodeTree = new DrainedPageNodeTree(null, $this->pageID);
 		$this->pageList = $pageNodeTree->getIterator();
 

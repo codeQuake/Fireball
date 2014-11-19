@@ -245,6 +245,7 @@
 		<item name="cms.acp.page.styleID"><![CDATA[Style]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Forces selected style upon page visit]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.page.stylesheets.description"><![CDATA[List of stylesheets that are loaded when viewing this page.]]></item>
 		<item name="cms.acp.page.title"><![CDATA[Page title]]></item>
 		<item name="cms.acp.page.title.error.multilingual"><![CDATA[Page title must be multilingual!]]></item>
 		<item name="cms.acp.page.userPermissions"><![CDATA[Permissions]]></item>
