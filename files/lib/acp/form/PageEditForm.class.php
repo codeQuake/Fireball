@@ -4,6 +4,7 @@ use cms\data\page\DrainedPageNodeTree;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
 use cms\data\page\PageEditor;
+use cms\data\page\PageNodeTree;
 use cms\util\PageUtil;
 use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemAction;
