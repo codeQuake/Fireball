@@ -65,32 +65,27 @@
 </div>
 
 <div id="fileAdd">
-	<div class="container containerPadding marginTop fileUpload" id="fileUpload" >
-		<ul>
-		</ul>
+	<div class="marginTop fileUpload" id="fileUpload">
+		<ul></ul>
 		<div id="fileUploadButton"></div>
 		<small>{lang}cms.acp.file.add.description{/lang}</small>
 	</div>
 </div>
 
 <form id="folderAdd" class="hidden" method="post" enctype="multipart/form-data" action="{link controller='FileManagement' application='cms'}action=folder{/link}">
-	<div class="container containerPadding marginTop">
-		<fieldset>
-			<legend>{lang}cms.acp.folder{/lang}</legend>
-
-			<dl{if $errorField == 'folder'} class="formError"{/if}>
-				<dt><label for="folder">{lang}cms.acp.folder{/lang}</label></dt>
-				<dd>
-					<input type="text" name="folder" id="folder" value="{$foldername}" required="required"/>
-					{if $errorField == 'folder'}
-						<small class="innerError">
-							{lang}cms.acp.folder.error.{$errorType}{/lang}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-		</fieldset>
-	</div>
+	<fieldset>
+		<dl{if $errorField == 'folder'} class="formError"{/if}>
+			<dt><label for="folder">{lang}cms.acp.folder{/lang}</label></dt>
+			<dd>
+				<input type="text" name="folder" id="folder" class="long" value="{$foldername}" required="required"/>
+				{if $errorField == 'folder'}
+					<small class="innerError">
+						{lang}cms.acp.folder.error.{$errorType}{/lang}
+					</small>
+				{/if}
+			</dd>
+		</dl>
+	</fieldset>
 
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
