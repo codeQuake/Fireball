@@ -95,7 +95,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 		foreach ($files as $file) {
 			try {
 				
-				if (! $file->getValidationErrorType()) {
+				if (!$file->getValidationErrorType()) {
 					$filename = 'FB-File-' . md5($file->getFilename() . time()) . '.' . $file->getFileExtension();
 					$folderID = $this->parameters['folderID'];
 					if ($folderID != 0) $folder = new Folder($folderID);

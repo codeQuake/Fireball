@@ -51,7 +51,7 @@ class FileDownloadPage extends AbstractPage {
 		$this->file = new File($this->fileID);
 		if ($this->file === null) throw new IllegalLinkException();
 		
-		if (! $this->file->getPermission('canDownloadFile')) throw new PermissionDeniedException();
+		if (!$this->file->getPermission('canDownloadFile')) throw new PermissionDeniedException();
 	}
 
 	/**

@@ -14,7 +14,7 @@ use wcf\system\SingletonFactory;
 class LayoutHandler extends SingletonFactory {
 	public function getStylesheet($pageID) {
 		$filename = RELATIVE_CMS_DIR . 'style/layout-' . $pageID . '.css';
-		if (! file_exists($filename)) {
+		if (!file_exists($filename)) {
 			LayoutCompiler::getInstance()->compile(PageCache::getInstance()->getPage($pageID));
 		}
 		return '<link rel="stylesheet" type="text/css" href="' . $filename . '" />';

@@ -62,56 +62,43 @@ class ContentEditForm extends ContentAddForm {
 			'contentData' => serialize($this->contentData),
 			'contentTypeID' => $this->objectType->objectTypeID
 		);
-		$objectAction = new ContentAction(array(
-			$this->contentID
-		), 'update', array(
+
+		$this->objectAction = new ContentAction(array($this->contentID), 'update', array(
 			'data' => $data
 		));
+		$returnValues = $this->objectAction->executeAction();
 
-		$objectAction->executeAction();
-		$contentID = $this->contentID;
-		$content = new Content($contentID);
 		$contentData = @unserialize($content->contentData);
 
 		$update = array();
 
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
-			$pollID = PollManager::getInstance()->save($contentID);
-			if ($pollID && $pollID != $contentData['pollID']) {
-				$contentData['pollID'] = $pollID;
-
-			} //happens for idiots :P
-			else if (! $pollID && $contentData['pollID']) {
-				$contentData['pollID'] = null;
-			}
+			$contentData['pollID'] = PollManager::getInstance()->save($this->contentID);
 		}
-		if (! I18nHandler::getInstance()->isPlainValue('title')) {
-			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
-			$update['title'] = 'cms.content.title' . $contentID;
+
+		if (!I18nHandler::getInstance()->isPlainValue('title')) {
+			I18nHandler::getInstance()->save('title', 'cms.content.title' . $this->contentID, 'cms.content', PACKAGE_ID);
+			$update['title'] = 'cms.content.title' . $this->contentID;
 		}
 
 		foreach ($this->objectType->getProcessor()->multilingualFields as $field) {
 			if (!I18nHandler::getInstance()->isPlainValue($field)) {
-				I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
-				$contentData[$field] = 'cms.content.' . $field . $contentID;
+				I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $this->contentID, 'cms.content', PACKAGE_ID);
+				$contentData[$field] = 'cms.content.' . $field . $this->contentID;
 			}
 		}
 
 		$update['contentData'] = serialize($contentData);
-		if (! empty($update)) {
-			$editor = new ContentEditor($content);
-			$editor->update($update);
-		}
+		$editor = new ContentEditor($returnValues['returnValues']);
+		$editor->update($update);
 
-		//create revision
-		$objectAction = new ContentAction(array(
-			$this->contentID
-		), 'createRevision', array(
+		// create revision
+		$objectAction = new ContentAction(array($this->contentID), 'createRevision', array(
 			'action' => 'update'
 		));
 		$objectAction->executeAction();
 
-		//update search index
+		// update search index
 		$objectAction = new PageAction(array($this->pageID), 'refreshSearchIndex');
 		$objectAction->executeAction();
 
@@ -147,7 +134,7 @@ class ContentEditForm extends ContentAddForm {
 			}
 		}
 
-		//overwrite contentlist
+		// overwrite content list
 		$this->contentList = new DrainedPositionContentNodeTree(null, $this->pageID, $this->contentID, $this->position);
 		$this->contentList = $this->contentList->getIterator();
 	}

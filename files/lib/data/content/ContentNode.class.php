@@ -68,7 +68,7 @@ class ContentNode extends DatabaseObjectDecorator implements \Countable, \Recurs
 	}
 
 	public function hasChildren() {
-		return ! empty($this->children);
+		return !empty($this->children);
 	}
 
 	public function key() {

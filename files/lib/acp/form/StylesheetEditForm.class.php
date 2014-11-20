@@ -64,10 +64,10 @@ class StylesheetEditForm extends StylesheetAddForm {
 			'less' => $this->less
 		);
 
-		$objectAction = new StylesheetAction(array($this->stylesheet), 'update', array(
+		$this->objectAction = new StylesheetAction(array($this->stylesheet), 'update', array(
 			'data' => $data
 		));
-		$objectAction->executeAction();
+		$this->objectAction->executeAction();
 
 		$this->saved();
 		WCF::getTPL()->assign('success', true);

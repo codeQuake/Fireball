@@ -11,7 +11,7 @@ use wcf\util\HTTPRequest;
 
 /**
  * Shows the dashboard.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -67,7 +67,7 @@ class DashboardPage extends AbstractPage {
 			));
 		}
 
-		if (! $xml = simplexml_load_string($feedData)) {
+		if (!$xml = simplexml_load_string($feedData)) {
 			return array();
 		}
 		$feed = array();

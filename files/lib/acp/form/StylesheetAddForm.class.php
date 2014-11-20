@@ -21,13 +21,21 @@ class StylesheetAddForm extends AbstractForm {
 	public $activeMenuItem = 'cms.acp.menu.link.cms.stylesheet.add';
 
 	/**
+	 * less
+	 * @var	string
+	 */
+	public $less = '';
+
+	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('admin.cms.style.canAddStylesheet');
 
+	/**
+	 * title of the stylesheet
+	 * @var	string
+	 */
 	public $title = '';
-
-	public $less = '';
 
 	/**
 	 * @see	\wcf\form\IForm::readFormParameters()
@@ -44,19 +52,20 @@ class StylesheetAddForm extends AbstractForm {
 	 */
 	public function save() {
 		parent::save();
-		
+
 		$data = array(
 			'title' => $this->title,
 			'less' => $this->less
 		);
-		$objectAction = new StylesheetAction(array(), 'create', array(
+
+		$this->objectAction = new StylesheetAction(array(), 'create', array(
 			'data' => $data
 		));
-		$objectAction->executeAction();
-		
+		$this->objectAction->executeAction();
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
-		
+
 		$this->title = $this->less = '';
 	}
 

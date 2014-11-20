@@ -459,7 +459,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		));
 
 		$this->pageEditor = $this->getSingleObject();
-		if (! $this->pageEditor->pageID) {
+		if (!$this->pageEditor->pageID) {
 			throw new UserInputException('objectIDs');
 		}
 

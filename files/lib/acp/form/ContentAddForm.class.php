@@ -161,14 +161,14 @@ class ContentAddForm extends AbstractForm {
 			'body',
 			'sidebar'
 		);
-		if (! in_array($this->position, $position)) throw new UserInputException('position');
-		if ($this->position == 'sidebar' && ! $this->objectType->allowsidebar) throw new UserInputException('position');
-		if ($this->position == 'body' && ! $this->objectType->allowcontent) throw new UserInputException('position');
+		if (!in_array($this->position, $position)) throw new UserInputException('position');
+		if ($this->position == 'sidebar' && !$this->objectType->allowsidebar) throw new UserInputException('position');
+		if ($this->position == 'body' && !$this->objectType->allowcontent) throw new UserInputException('position');
 
 		//validate showOrder
 		if ($this->showOrder == 0) {
 			$childIDs = ContentCache::getInstance()->getChildIDs($this->parentID ?  : null);
-			if (! empty($childIDs)) {
+			if (!empty($childIDs)) {
 				$showOrders = array();
 				foreach ($childIDs as $childID) {
 					$content = ContentCache::getInstance()->getContent($childID);
@@ -187,7 +187,7 @@ class ContentAddForm extends AbstractForm {
 				$this->showOrder = 1;
 		}
 
-		if (! I18nHandler::getInstance()->validateValue('title')) {
+		if (!I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
 			}
@@ -225,11 +225,12 @@ class ContentAddForm extends AbstractForm {
 			'contentData' => serialize($this->contentData),
 			'contentTypeID' => $this->objectType->objectTypeID
 		);
-		$objectAction = new ContentAction(array(), 'create', array(
+
+		$this->objectAction = new ContentAction(array(), 'create', array(
 			'data' => $data
 		));
-		$objectAction->executeAction();
-		$returnValues = $objectAction->getReturnValues();
+		$returnValues = $this->objectAction->executeAction();
+
 		$contentID = $returnValues['returnValues']->contentID;
 		$contentData = @unserialize($returnValues['returnValues']->contentData);
 		$update = array();
@@ -242,7 +243,7 @@ class ContentAddForm extends AbstractForm {
 			}
 		}
 
-		if (! I18nHandler::getInstance()->isPlainValue('title')) {
+		if (!I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
@@ -256,7 +257,7 @@ class ContentAddForm extends AbstractForm {
 
 		$update['contentData'] = serialize($contentData);
 
-		if (! empty($update)) {
+		if (!empty($update)) {
 			$editor = new ContentEditor($returnValues['returnValues']);
 			$editor->update($update);
 		}

@@ -23,7 +23,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		$keys = $values = '';
 		$statementParameters = array();
 		foreach ($parameters as $key => $value) {
-			if (! empty($keys)) {
+			if (!empty($keys)) {
 				$keys .= ',';
 				$values .= ',';
 			}

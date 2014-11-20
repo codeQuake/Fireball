@@ -80,7 +80,6 @@ class PageEditForm extends PageAddForm {
 
 		$data = array(
 			'alias' => $this->alias,
-			'title' => $this->title,
 			'description' => $this->description,
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords,
@@ -109,12 +108,10 @@ class PageEditForm extends PageAddForm {
 			$data['deactivationDate'] = @strtotime($this->publicationDate);
 		}
 
-		$objectAction = new PageAction(array(
-			$this->pageID
-		), 'update', array(
+		$this->objectAction = new PageAction(array($this->pageID), 'update', array(
 			'data' => $data
 		));
-		$objectAction->executeAction();
+		$this->objectAction->executeAction();
 
 		$update = array();
 
@@ -123,19 +120,18 @@ class PageEditForm extends PageAddForm {
 		ACLHandler::getInstance()->disableAssignVariables();
 
 		// update I18n
-		if (! I18nHandler::getInstance()->isPlainValue('title')) {
-			I18nHandler::getInstance()->save('title', 'cms.page.title' . $this->pageID, 'cms.page');
-			$update['title'] = 'cms.page.title' . $this->pageID;
-		}
-		if (! I18nHandler::getInstance()->isPlainValue('description')) {
+		I18nHandler::getInstance()->save('title', 'cms.page.title' . $this->pageID, 'cms.page');
+		$update['title'] = 'cms.page.title' . $this->pageID;
+
+		if (!I18nHandler::getInstance()->isPlainValue('description')) {
 			I18nHandler::getInstance()->save('description', 'cms.page.description' . $this->pageID, 'cms.page');
 			$update['description'] = 'cms.page.description' . $this->pageID;
 		}
-		if (! I18nHandler::getInstance()->isPlainValue('metaDescription')) {
+		if (!I18nHandler::getInstance()->isPlainValue('metaDescription')) {
 			I18nHandler::getInstance()->save('metaDescription', 'cms.page.metaDescription' . $this->pageID, 'cms.page');
 			$update['metaDescription'] = 'cms.page.metaDescription' . $this->pageID;
 		}
-		if (! I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
+		if (!I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
 			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $this->pageID, 'cms.page');
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $this->pageID;
 		}
@@ -143,8 +139,8 @@ class PageEditForm extends PageAddForm {
 		$page = new Page($this->pageID);
 		$this->menuItemID = $page->menuItemID;
 
-		if (! $this->menuItem && $this->menuItemID) {
-			//delete old item
+		if (!$this->menuItem && $this->menuItemID) {
+			// delete old item
 			$action = new PageMenuItemAction(array(
 				$this->menuItemID
 			), 'delete', array());
@@ -152,8 +148,8 @@ class PageEditForm extends PageAddForm {
 
 			$update['menuItemID'] = null;
 		}
-		else if ($this->menuItem && ! $this->menuItemID) {
-			//create menuitem
+		else if ($this->menuItem && !$this->menuItemID) {
+			// create menuitem
 			$page = new Page($this->pageID);
 			if ($page->getParentPage() !== null) {
 				$parentPage = $page->getParentPage();
@@ -194,7 +190,7 @@ class PageEditForm extends PageAddForm {
 			$editor->update($menuData);
 		}
 
-		if (! empty($update)) {
+		if (!empty($update)) {
 			$editor = new PageEditor(new Page($this->pageID));
 			$editor->update($update);
 		}
@@ -231,7 +227,6 @@ class PageEditForm extends PageAddForm {
 
 		if (empty($_POST)) {
 			I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->page->title, 'cms.page.title\d+');
-			$this->title = $this->page->title;
 			I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->page->description, 'cms.page.description\d+');
 			$this->description = $this->page->description;
 			I18nHandler::getInstance()->setOptions('metaDescription', PACKAGE_ID, $this->page->metaDescription, 'cms.page.metaDescription\d+');

@@ -46,7 +46,7 @@ class PageCache extends SingletonFactory {
 	public function getChildIDs($parentID = null) {
 		if ($parentID === null) $parentID = '';
 		
-		if (! isset($this->tree[$parentID])) return array();
+		if (!isset($this->tree[$parentID])) return array();
 		
 		return $this->tree[$parentID];
 	}

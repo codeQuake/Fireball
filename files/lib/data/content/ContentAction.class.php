@@ -221,13 +221,13 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 			'admin.cms.content.canAddContent'
 		));
 
-		if (! isset($this->parameters['data']['structure']) || ! is_array($this->parameters['data']['structure'])) {
+		if (!isset($this->parameters['data']['structure']) || !is_array($this->parameters['data']['structure'])) {
 			throw new UserInputException('structure');
 		}
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		foreach ($this->parameters['data']['structure'] as $parentID => $contentIDs) {
 			if ($parentID) {
-				if (! isset($contents[$parentID])) {
+				if (!isset($contents[$parentID])) {
 					throw new UserInputException('structure');
 				}
 
@@ -235,7 +235,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 			}
 
 			foreach ($contentIDs as $contentID) {
-				if (! isset($contents[$contentID])) {
+				if (!isset($contents[$contentID])) {
 					throw new UserInputException('structure');
 				}
 
