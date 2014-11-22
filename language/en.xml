@@ -24,7 +24,6 @@
 		<item name="cms.acp.content.position.parentID"><![CDATA[Parent content]]></item>
 		<item name="cms.acp.content.position.position.body"><![CDATA[Body]]></item>
 		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Sidebar]]></item>
-		<item name="cms.acp.content.position.showOrder"><![CDATA[Sort order]]></item>
 		<item name="cms.acp.content.remove"><![CDATA[Remove content]]></item>
 		<item name="cms.acp.content.revision"><![CDATA[Revision]]></item>
 		<item name="cms.acp.content.revision.action"><![CDATA[Action]]></item>
