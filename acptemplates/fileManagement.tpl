@@ -113,7 +113,7 @@
 					{foreach from=$folderList item=folder}
 						<tr class="jsFolderRow">
 							<td class="columnIcon"><span class="icon icon-folder-close-alt icon16"></span> <span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$folder->folderID}" data-confirm-message="{lang}cms.acp.folder.delete.sure{/lang}"></span></td>
-							<td class="columnTitle"><a href="{link controller='FileManagement' application='cms' object=$folder}{/link}">{$folder->getTitle()|language}</a></td>
+							<td class="columnTitle"><a href="{link controller='FileManagement' application='cms' object=$folder}{/link}">{$folder->getTitle()}</a></td>
 							<td>{lang}cms.acp.folder{/lang}</td>
 							<td>-</td>
 						</tr>
@@ -134,14 +134,14 @@
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
 							<span>{$file->fileID}</span>
 						</td>
-						<td class="columnTitle columnFile"><a id="file{$file->fileID}" class="jsTooltip" title="{lang}cms.acp.file.details{/lang}">{$file->title|language}</a></td>
+						<td class="columnTitle columnFile"><a id="file{$file->fileID}" class="jsTooltip" title="{lang}cms.acp.file.details{/lang}">{$file->getTitle()}</a></td>
 						<td class="columnType">{$file->type}</td>
 						<td class="columnDownloads">{#$file->downloads}</td>
 					</tr>
 
 					<div class="details" id="details{$file->fileID}" style="display: none;">
 						<fieldset>
-							<legend>{@$file->getIconTag()} <a href="{$file->getURL()}">{$file->title|language}</a></fieldset>
+							<legend>{@$file->getIconTag()} <a href="{$file->getURL()}">{$file->getTitle()}</a></fieldset>
 						{if $file->type == 'image/png' || $file->type == 'image/jpeg' || $file->type == 'image/gif'}
 							<figure class="framed">
 								<img style="max-width: 300px" src="{$file->getURL()}" alt="" />

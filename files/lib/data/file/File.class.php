@@ -35,7 +35,7 @@ class File extends CMSDatabaseObject implements IRouteController {
 	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
 	public function getTitle() {
-		return $this->title;
+		return WCF::getLanguage()->get($this->title);
 	}
 
 	public function getPermission($permission = 'canDownloadFile') {

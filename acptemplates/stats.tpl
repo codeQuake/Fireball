@@ -81,7 +81,7 @@
 		<tbody>
 			{foreach from=$pages item=page}
 				<tr>
-					<td>{$page->getTitle()|language}</td>
+					<td>{$page->getTitle()}</td>
 					<td>{$page->clicks}</td>
 				</tr>
 			{/foreach}

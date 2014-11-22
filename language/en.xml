@@ -167,8 +167,8 @@
 		<item name="cms.acp.page.backup"><![CDATA[Backup]]></item>
 		<item name="cms.acp.page.backup.description"><![CDATA[You can download a backup of your configuration here: <a href="{link application='cms' controller='CMSExport'}{/link}"><span class="icon icon16 icon-cloud-download"></span> Download</a>]]></item>
 		<item name="cms.acp.page.button.choose"><![CDATA[Choose Page]]></item>
-		<item name="cms.acp.page.content.add"><![CDATA[Add contents to '{$page->title|language}']]></item>
-		<item name="cms.acp.page.content.list"><![CDATA[List contents of '{$page->title|language}']]></item>
+		<item name="cms.acp.page.content.add"><![CDATA[Add contents to '{$page->getTitle()}']]></item>
+		<item name="cms.acp.page.content.list"><![CDATA[List contents of '{$page->getTitle()}']]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Copy page]]></item>
 		<item name="cms.acp.page.delayedDeactivation"><![CDATA[Deactivation on {@$page->deactivationDate|plainTime}]]></item>
 		<item name="cms.acp.page.delayedPublication"><![CDATA[Publication on {@$page->publicationDate|plainTime}]]></item>
@@ -315,7 +315,7 @@
 	</category>
 
 	<category name="cms.user">
-		<item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{$page->getLink()}">{@$page->getTitle()|language}</a>]]></item>
+		<item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
 	</category>
 
 	<category name="wcf.acl.option">

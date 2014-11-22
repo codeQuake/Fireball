@@ -27,6 +27,11 @@ use wcf\util\DateUtil;
  */
 class PageEditForm extends PageAddForm {
 	/**
+	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 */
+	public $activeMenuItem = 'cms.acp.menu.link.cms.content';
+
+	/**
 	 * page node list for 'choose page' button
 	 * @var	\RecursiveIteratorIterator
 	 */

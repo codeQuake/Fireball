@@ -78,7 +78,7 @@
 								{if $page->isHome}
 									<span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>
 								{else}
-									<span class="pointer collapsibleButton icon icon16 icon-file-text-alt"></span>
+									<span class="icon icon16 icon-file-text-alt"></span>
 								{/if}
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}">{@$page->getTitle()}</a> - <small>/{$page->getAlias()}/</small>
 								{if !$page->isPublished}

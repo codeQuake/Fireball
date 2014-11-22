@@ -29,7 +29,6 @@
 
 <header class="boxHeadline">
 	<h1>{lang}cms.acp.page.{@$action}{/lang}</h1>
-	{if $action == 'edit'}<p>{$page->getTitle()}</p>{/if}
 </header>
 
 {include file='formError'}
@@ -47,7 +46,7 @@
 					<div class="dropdownMenu">
 						<ul class="scrollableDropdownMenu">
 							{foreach from=$choosePageNodeList item=node}
-								<li{if $node->pageID == $pageID} class="active"{/if}><a href="{link application='cms' controller='PageEdit' id=$node->pageID}{/link}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</a></li>
+								<li{if $node->pageID == $pageID} class="active"{/if}><a href="{link application='cms' controller='PageEdit' id=$node->pageID}{/link}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$choosePageNodeList->getDepth()}{$node->getTitle()}</a></li>
 							{/foreach}
 						</ul>
 					</div>
@@ -199,7 +198,7 @@
 								<option value="0" {if $parentID == 0} selected="selected"{/if} data-alias="">{lang}wcf.global.noSelection{/lang}</option>
 								{content}
 									{foreach from=$pageList item=$node}
-										<option data-alias="{$node->getAlias()}" {if $node->pageID == $parentID} selected="selected" {/if} value="{@$node->pageID}">{section name=i loop=$pageList->getDepth()}&nbsp;&raquo;&raquo;&nbsp;{/section}{$node->getTitle()|language}</option>
+										<option data-alias="{$node->getAlias()}"{if $node->pageID == $parentID} selected="selected"{/if} value="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
 									{/foreach}
 								{/content}
 							</select>
