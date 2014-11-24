@@ -16,14 +16,23 @@ class SlideshowContentType extends AbstractStructureContentType {
 	 */
 	protected $icon = 'icon-play-sign';
 
+	/**
+	 * @see	\cms\system\content\type\IcontentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		return 'slideshowContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
+	 */
 	public function getCSSClasses() {
 		return 'fireballSlideContainer';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getChildCSSClasses()
+	 */
 	public function getChildCSSClasses(Content $content) {
 		return 'fireballSlide';
 	}

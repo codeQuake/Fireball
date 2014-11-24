@@ -17,18 +17,30 @@ class TabmenuContentType extends AbstractStructureContentType {
 	 */
 	protected $icon = 'icon-list-alt';
 
+	/**
+	 * @see	\cms\system\content\type\IcontentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		return 'tabMenuContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
+	 */
 	public function getCSSClasses() {
 		return 'tabMenuContainer';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getChildCSSClasses()
+	 */
 	public function getChildCSSClasses(Content $content) {
 		return 'tabMenuContent container containerPadding';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 */
 	public function getOutput(Content $content) {
 		$childIDs = ContentCache::getInstance()->getChildIDs($content->contentID);
 		$children = array();
@@ -40,6 +52,7 @@ class TabmenuContentType extends AbstractStructureContentType {
 		WCF::getTPL()->assign(array(
 			'children' => $children
 		));
+
 		return WCF::getTPL()->fetch('tabMenuContentType', 'cms');
 	}
 }

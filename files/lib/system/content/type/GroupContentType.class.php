@@ -8,10 +8,16 @@ namespace cms\system\content\type;
  * @package	de.codequake.cms
  */
 class GroupContentType extends AbstractStructureContentType {
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		return 'groupContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
+	 */
 	public function getCSSClasses() {
 		return 'contentCollection';
 	}

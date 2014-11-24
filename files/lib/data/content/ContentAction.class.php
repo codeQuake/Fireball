@@ -13,7 +13,7 @@ use wcf\system\WCF;
 
 /**
  * Executes content-related actions.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -30,32 +30,37 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	 */
 	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'restoreRevision', 'toggle', 'update', 'updatePosition');
 
-	protected $permissionsDelete = array(
-		'admin.cms.content.canAddContent'
-	);
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 */
+	protected $permissionsDelete = array('admin.cms.content.canAddContent');
 
-	protected $permissionsUpdate = array(
-		'admin.cms.content.canAddContent'
-	);
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 */
+	protected $permissionsUpdate = array('admin.cms.content.canAddContent');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
 	protected $requireACP = array('delete', 'updatePosition');
 
+	/**
+	 * Validates parameters to copy a content.
+	 */
 	public function validateCopy() {
-		if (empty($this->objects)) {
-			$this->readObjects();
-		}
-		if (count($this->objects) != 1) {
-			throw new UserInputException('objectIDs');
-		}
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
 	}
 
+	/**
+	 * Copies a specific content.
+	 */
 	public function copy() {
-		$object = reset($this->objects);
+		$object = $this->getSingleObject();
 		$data = $object->getDecoratedObject()->getData();
 		$childs = $object->getDecoratedObject()->getChildren();
+
 		$oldID = $data['contentID'];
 		unset($data['contentID']);
 		$this->parameters['data'] = $data;
@@ -87,6 +92,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		}
 	}
 
+	/**
+	 * Creates a revision.
+	 */
 	protected function createRevision() {
 		if (empty($this->objects)) {
 			$this->readObjects();
@@ -151,12 +159,18 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		}
 	}
 
+	/**
+	 * Validate parameters to get a list of content revisions.
+	 */
 	public function validateGetRevisions() {
 		if (count($this->objectIDs) != 1) {
 			throw new UserInputException('objectIDs');
 		}
 	}
 
+	/**
+	 * Returns a formatted list of content revisions.
+	 */
 	public function getRevisions() {
 		$objectID = reset($this->objectIDs);
 		$content = ContentCache::getInstance()->getContent($objectID);
@@ -173,10 +187,16 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		);
 	}
 
+	/**
+	 * Validates parameters and permissions to restore a revision.
+	 */
 	public function validateRestoreRevision() {
-		parent::validateUpdate();
+		$this->validateUpdate();
 	}
 
+	/**
+	 * Restores a content revision.
+	 */
 	public function restoreRevision() {
 		if (empty($this->objects)) {
 			$this->readObjects();
@@ -190,10 +210,16 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		$this->update();
 	}
 
+	/**
+	 * @see	\wcf\data\IToggleAction::validateToggle()
+	 */
 	public function validateToggle() {
 		$this->validateUpdate();
 	}
 
+	/**
+	 * @see	\wcf\data\IToggleAction::toggle()
+	 */
 	public function toggle() {
 		if (empty($this->objects)) $this->readObjects();
 
@@ -216,6 +242,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		ClipboardHandler::getInstance()->removeItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.content'));
 	}
 
+	/**
+	 * @see	\wcf\data\ISortableAction::validateUpdatePosition()
+	 */
 	public function validateUpdatePosition() {
 		WCF::getSession()->checkPermissions(array(
 			'admin.cms.content.canAddContent'
@@ -244,8 +273,12 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		}
 	}
 
+	/**
+	 * @see	\wcf\data\ISortableAction::updatePosition()
+	 */
 	public function updatePosition() {
 		WCF::getDB()->beginTransaction();
+
 		foreach ($this->parameters['data']['structure'] as $parentID => $contentIDs) {
 			$position = 1;
 			foreach ($contentIDs as $contentID) {
@@ -255,8 +288,10 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 				));
 			}
 		}
+
 		WCF::getDB()->commitTransaction();
-		//create revision
+
+		// create revision
 		$this->parameters['action'] = 'updatePosition';
 		$this->createRevision();
 	}

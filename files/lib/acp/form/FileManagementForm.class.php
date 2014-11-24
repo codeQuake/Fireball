@@ -14,7 +14,7 @@ use wcf\util\StringUtil;
 
 /**
  * Shows the file management form.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -60,8 +60,9 @@ class FileManagementForm extends AbstractForm {
 		}
 
 		$folderPath = StringUtil::firstCharToLowerCase($this->foldername);
-		if (file_exists(CMS_DIR . 'files/' . $folderPath)) throw new UserInputException('folder', 'exists');
-	
+		if (file_exists(CMS_DIR . 'files/' . $folderPath)) {
+			throw new UserInputException('folder', 'exists');
+		}
 	}
 
 	/**
@@ -72,20 +73,22 @@ class FileManagementForm extends AbstractForm {
 
 		$folderPath = StringUtil::firstCharToLowerCase($this->foldername);
 		mkdir(CMS_DIR . 'files/' . $folderPath, 0777);
+
 		$data = array(
 			'folderName' => $this->foldername,
 			'folderPath' => $folderPath
 		);
-		$action = new FolderAction(array(), 'create', array(
+
+		$this->objectAction = new FolderAction(array(), 'create', array(
 			'data' => $data
 		));
-		$action->executeAction();
-		
+		$this->objectAction->executeAction();
+
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
-		
-		$this->foldername = null;
-	
+
+		// reset values
+		$this->foldername = '';
 	}
 
 	/**

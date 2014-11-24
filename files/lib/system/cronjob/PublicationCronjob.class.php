@@ -1,5 +1,6 @@
 <?php
 namespace cms\system\cronjob;
+
 use cms\data\page\PageAction;
 use wcf\data\cronjob\Cronjob;
 use wcf\system\cronjob\AbstractCronjob;

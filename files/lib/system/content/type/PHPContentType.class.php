@@ -15,10 +15,16 @@ class PHPContentType extends AbstractContentType {
 	 */
 	protected $icon = 'icon-code';
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		return 'phpContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 */
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
 		$php = substr($data['text'], 5);

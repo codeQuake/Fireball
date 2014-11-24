@@ -12,7 +12,7 @@ use wcf\system\WCF;
 
 /**
  * Represents a content item.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -31,6 +31,11 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 
 	public $poll = null;
 
+	/**
+	 * Returns the page this content is assigned to.
+	 * 
+	 * @return	\cms\data\page\Page
+	 */
 	public function getPage() {
 		return PageCache::getInstance()->getPage($this->pageID);
 	}
@@ -42,10 +47,14 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 		return WCF::getLanguage()->get($this->title);
 	}
 
+	/**
+	 * Returns a list of all children of this content
+	 * 
+	 * @return	\RecursiveIteratorIterator
+	 */
 	public function getChildren() {
-		$tree = new ContentNodeTree($this->contentID);
-		$tree = $tree->getIterator();
-		return $tree;
+		$contentNodeTree = new ContentNodeTree($this->contentID);
+		return $contentNodeTree->getIterator();
 	}
 
 	public function getIcon() {
@@ -53,11 +62,21 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 		return $this->objectType->getProcessor()->getIcon();
 	}
 
+	/**
+	 * Returns the formatted output for this content.
+	 * 
+	 * @return	string
+	 */
 	public function getOutput() {
 		$this->objectType = $this->getObjectType();
 		return $this->objectType->getProcessor()->getOutput($this);
 	}
 
+	/**
+	 * Returns the category string of this content.
+	 * 
+	 * @return	string
+	 */
 	public function getCategory() {
 		$this->objectType = $this->getObjectType();
 		return $this->objectType->category;

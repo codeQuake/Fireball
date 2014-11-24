@@ -31,8 +31,6 @@ class PageStylesheetList extends ViewableStylesheetList {
 		$page = PageCache::getInstance()->getPage($this->pageID);
 		$data = @unserialize($page->stylesheets);
 
-		$this->getConditionBuilder()->add('stylesheet.sheetID IN (?)', array(
-			$data
-		));
+		$this->getConditionBuilder()->add('stylesheet.sheetID IN (?)', array($data));
 	}
 }

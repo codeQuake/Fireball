@@ -11,14 +11,23 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class FourColumnsContentType extends AbstractStructureContentType {
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		return 'fourColumnContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
+	 */
 	public function getCSSClasses() {
 		return 'gridContainer';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getChildCSSClasses()
+	 */
 	public function getChildCSSClasses(Content $content) {
 		$parent = $content->getParentContent();
 		$data = $parent->handleContentData();

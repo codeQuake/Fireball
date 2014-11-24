@@ -16,20 +16,28 @@ class LinkContentType extends AbstractContentType {
 	 */
 	protected $icon = 'icon-link';
 
-	public $multilingualFields = array(
-		'text',
-		'link'
-	);
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
+	 */
+	public $multilingualFields = array('text', 'link');
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		return 'linkContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 */
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
+
 		WCF::getTPL()->assign(array(
 			'data' => $data
 		));
+
 		return WCF::getTPL()->fetch('linkContentType', 'cms');
 	}
 }

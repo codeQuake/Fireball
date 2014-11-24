@@ -18,20 +18,35 @@ class UserContentType extends AbstractContentType {
 	 */
 	protected $icon = 'icon-user';
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		return 'userContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::validate()
+	 */
 	public function validate($data) {
-		if (!isset($data['name']) || $data['name'] == '') throw new UserInputException('data[name]', 'empty');
-		if (!UserProfile::getUserProfileByUsername($data['name'])) throw new UserInputException('data[name]', 'notValid');
+		if (!isset($data['name']) || $data['name'] == '') {
+			throw new UserInputException('data[name]');
+		}
+		if (!UserProfile::getUserProfileByUsername($data['name'])) {
+			throw new UserInputException('data[name]', 'notValid');
+		}
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 */
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
+
 		WCF::getTPL()->assign(array(
 			'user' => UserProfile::getUserProfileByUsername($data['name'])
 		));
+
 		return WCF::getTPL()->fetch('userContentType', 'cms');
 	}
 }

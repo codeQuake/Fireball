@@ -17,10 +17,16 @@ class YoutubeContentType extends AbstractContentType {
 	 */
 	protected $icon = 'icon-youtube';
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		return 'youtubeContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::validate()
+	 */
 	public function validate($data) {
 		if (!isset($data['video'])) {
 			throw new UserInputException('data[video]');
@@ -31,6 +37,9 @@ class YoutubeContentType extends AbstractContentType {
 		}
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 */
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
 		$url = $data['video'];

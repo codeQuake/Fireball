@@ -10,24 +10,31 @@ use wcf\util\FileUtil;
 
 /**
  * Executes file-related actions.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
 class FileAction extends AbstractDatabaseObjectAction {
-
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
+	 */
 	protected $className = 'cms\data\file\FileEditor';
 
-	protected $permissionsDelete = array(
-		'admin.cms.file.canAddFile'
-	);
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 */
+	protected $permissionsDelete = array('admin.cms.file.canAddFile');
 
-	protected $requireACP = array(
-		'delete'
-	);
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
+	 */
+	protected $requireACP = array('delete');
 
+	/**
+	 * @see	\wcf\data\IDeleteAction::delete()
+	 */
 	public function delete() {
 		// del files
 		foreach ($this->objectIDs as $objectID) {
@@ -38,13 +45,15 @@ class FileAction extends AbstractDatabaseObjectAction {
 				if (file_exists(CMS_DIR . 'files/' . $folder->folderPath . '/' . $file->filename)) unlink(CMS_DIR . 'files/' . $folder->folderPath . '/' . $file->filename);
 			}
 		}
+
 		parent::delete();
 	}
 
-	public function validateGetImages() {
-		// does nothing like a boss
-	}
+	public function validateGetImages() { /* nothing */ }
 
+	/**
+	 * Returns a formatted list of all images
+	 */
 	public function getImages() {
 		if ($this->parameters['imageID']) {
 			$image = new File($this->parameters['imageID']);
@@ -52,30 +61,23 @@ class FileAction extends AbstractDatabaseObjectAction {
 				WCF::getTPL()->assign('image', $image);
 			}
 		}
-		
+
 		// file images
 		$list = new FileList();
-		// get images only
-		$list->getConditionBuilder()->add('file.type LIKE ?', array(
-			'image/%'
-		));
-		
-		// main folder
-		$list->getConditionBuilder()->add('file.folderID =  ?', array(
-			'0'
-		));
+		$list->getConditionBuilder()->add('file.type LIKE ?', array('image/%'));
+		$list->getConditionBuilder()->add('file.folderID =  ?', array('0'));
 		$list->readObjects();
 		$imageList = $list->getObjects();
-		
+
 		$list = new FolderList();
 		$list->readObjects();
 		$folderList = $list->getObjects();
-		
+
 		WCF::getTPL()->assign(array(
 			'images' => $imageList,
 			'folders' => $folderList
 		));
-		
+
 		return array(
 			'images' => $imageList,
 			'template' => WCF::getTPL()->fetch('imageContentList', 'cms')

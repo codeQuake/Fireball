@@ -29,6 +29,9 @@ class FileContentType extends AbstractContentType {
 		return $count > 0;
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		$list = new FileList();
 		$list->getConditionBuilder()->add('file.folderID =  ?', array(
@@ -47,6 +50,9 @@ class FileContentType extends AbstractContentType {
 		return 'fileContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 */
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
 		$file = new File($data['fileID']);

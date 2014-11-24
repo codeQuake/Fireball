@@ -23,8 +23,16 @@ class DashboardPage extends AbstractPage {
 	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.dashboard';
 
+	/**
+	 * array of all pages
+	 * @var	array<\cms\data\page\Page>
+	 */
 	public $pages = null;
 
+	/**
+	 * users online list
+	 * @var	\wcf\data\user\online\UsersOnlineList
+	 */
 	public $usersOnlineList = null;
 
 	/**

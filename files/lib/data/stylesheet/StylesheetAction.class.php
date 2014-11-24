@@ -1,13 +1,11 @@
 <?php
 namespace cms\data\stylesheet;
 
-use cms\data\page\PageList;
-use cms\system\layout\LayoutHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 
 /**
  * Executes stylesheet-related actions.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -28,32 +26,4 @@ class StylesheetAction extends AbstractDatabaseObjectAction {
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
 	protected $requireACP = array('delete', 'update');
-
-	/**
-	 * @see	\wcf\data\IDeleteAction::delete()
-	 */
-	public function delete() {
-		parent::delete();
-
-		// kill all layout files to recreate them
-		$pageList = new PageList();
-		$pageList->readObjects();
-		foreach ($pageList->getObjects() as $page) {
-			LayoutHandler::getInstance()->deleteStylesheet($page->pageID);
-		}
-	}
-
-	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::update()
-	 */
-	public function update() {
-		parent::update();
-
-		// kill all layout files to recreate them
-		$pageList = new PageList();
-		$pageList->readObjects();
-		foreach ($pageList->getObjects() as $page) {
-			LayoutHandler::getInstance()->deleteStylesheet($page->pageID);
-		}
-	}
 }
