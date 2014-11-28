@@ -77,15 +77,6 @@ class File extends CMSDatabaseObject implements ICategorizedObject, IRouteContro
 	}
 
 	/**
-	 * Returns the url of this file.
-	 * 
-	 * @return	string
-	 */
-	public function getURL() {
-		return WCF::getPath('cms') . 'files/' . substr($this->fileHash, 0, 2) . '/' . $this->getFilename();
-	}
-
-	/**
 	 * @todo	Remove method
 	 */
 	public function getByID($id) {
