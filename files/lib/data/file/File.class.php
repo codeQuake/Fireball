@@ -38,22 +38,19 @@ class File extends CMSDatabaseObject implements ICategorizedObject, IRouteContro
 	}
 
 	/**
-	 * @todo	Really needed? This method is only used in the download
-	 * 		controller. Since permissions are not related to a
-	 * 		specific file, the controller can easily check the
-	 * 		permissions directly.
+	 * Returns the actual file name of this file.
+	 * 
+	 * @return	string
 	 */
-	public function getPermission($permission = 'canDownloadFile') {
-		return WCF::getSession()->getPermission('user.cms.content.' . $permission);
+	public function getFilename() {
+		return $this->fileID . '-' . $this->fileHash;
 	}
 
 	/**
-	 * @see	\wcf\data\ITitledObject::getTitle()
+	 * Returns an icon tag representing the mime type of this file.
+	 * 
+	 * @return	string
 	 */
-	public function getTitle() {
-		return WCF::getLanguage()->get($this->title);
-	}
-
 	public function getIconTag($width = 16) {
 		if (preg_match('/image/i', $this->type)) return '<span class="icon icon' . $width . ' icon-picture"></span>';
 		if (preg_match('/audio/i', $this->type)) return '<span class="icon icon' . $width . ' icon-music"></span>';
@@ -63,18 +60,29 @@ class File extends CMSDatabaseObject implements ICategorizedObject, IRouteContro
 		return '<span class="icon icon' . $width . ' icon-file"></span>';
 	}
 
-	public function getURL() {
-		if ($this->getFolder() && $this->getFolder()->folderPath != '') return WCF::getPath('cms') . 'files/' . $this->getFolder()->folderPath . '/' . $this->filename;
-		return WCF::getPath('cms') . 'files/' . $this->filename;
+	/**
+	 * Returns the physical location of this file.
+	 * 
+	 * @return	string
+	 */
+	public function getLocation() {
+		return CMS_DIR . 'files/' . substr($this->fileHash, 0, 2) . '/' . $this->getFilename();
 	}
 
 	/**
-	 * @todo	Remove method, the actual files should be accessed with
-	 * 		their absolute path.
+	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
-	public function getRelativeURL() {
-		if ($this->getFolder() && $this->getFolder()->folderPath != '') return RELATIVE_CMS_DIR . 'files/' . $this->getFolder()->folderPath . '/' . $this->filename;
-		return RELATIVE_CMS_DIR . 'files/' . $this->filename;
+	public function getTitle() {
+		return WCF::getLanguage()->get($this->title);
+	}
+
+	/**
+	 * Returns the url of this file.
+	 * 
+	 * @return	string
+	 */
+	public function getURL() {
+		return WCF::getPath('cms') . 'files/' . substr($this->fileHash, 0, 2) . '/' . $this->getFilename();
 	}
 
 	/**
@@ -85,6 +93,6 @@ class File extends CMSDatabaseObject implements ICategorizedObject, IRouteContro
 	}
 
 	public function getImageSize() {
-		return getimagesize($this->getRelativeURL());
+		return getimagesize($this->getLocation());
 	}
 }

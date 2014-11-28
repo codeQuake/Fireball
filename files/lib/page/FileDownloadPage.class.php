@@ -7,7 +7,6 @@ use cms\data\folder\Folder;
 use cms\system\counter\VisitCountHandler;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\util\FileReader;
 
 /**
@@ -29,10 +28,16 @@ class FileDownloadPage extends AbstractPage {
 	 */
 	public $file = null;
 
+	/**
+	 * file reader
+	 * @var	\wcf\util\FileReader
+	 */
 	public $fileReader = null;
 
-	public $useTemplate = false;
-
+	/**
+	 * list of mime types that are displayed inline
+	 * @var	array<string>
+	 */
 	public static $inlineMimeTypes = array(
 		'image/gif',
 		'image/jpeg',
@@ -40,6 +45,16 @@ class FileDownloadPage extends AbstractPage {
 		'application/pdf',
 		'image/pjpeg'
 	);
+
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('user.cms.content.canDownloadFile');
+
+	/**
+	 * @see	\wcf\page\AbstractPage::$useTemplate
+	 */
+	public $useTemplate = false;
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -50,8 +65,6 @@ class FileDownloadPage extends AbstractPage {
 		if (isset($_REQUEST['id'])) $this->fileID = intval($_REQUEST['id']);
 		$this->file = new File($this->fileID);
 		if ($this->file === null) throw new IllegalLinkException();
-		
-		if (!$this->file->getPermission('canDownloadFile')) throw new PermissionDeniedException();
 	}
 
 	/**
