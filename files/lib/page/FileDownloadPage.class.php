@@ -3,7 +3,6 @@ namespace cms\page;
 
 use cms\data\file\File;
 use cms\data\file\FileEditor;
-use cms\data\folder\Folder;
 use cms\system\counter\VisitCountHandler;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
@@ -74,14 +73,9 @@ class FileDownloadPage extends AbstractPage {
 		parent::readData();
 
 		VisitCountHandler::getInstance()->count();
-		$folderPath = '';
-		if ($this->file->folderID != 0) {
-			$folder = new Folder($this->file->folderID);
-			$folderPath = $folder->folderPath . '/';
-		}
-		
-		$this->fileReader = new FileReader(CMS_DIR . 'files/' . $folderPath . $this->file->filename, array(
-			'filename' => $this->file->title,
+
+		$this->fileReader = new FileReader($this->file->getLocation(), array(
+			'filename' => $this->file->getTitle(),
 			'mimeType' => $this->file->type,
 			'filesize' => $this->file->size,
 			'showInline' => (in_array($this->file->type, self::$inlineMimeTypes)),
@@ -90,11 +84,11 @@ class FileDownloadPage extends AbstractPage {
 			'expirationDate' => TIME_NOW + 31536000,
 			'maxAge' => 31536000
 		));
-		
-		$editor = new FileEditor($this->file);
-		$downloads = $this->file->downloads + 1;
-		$editor->update(array(
-			'downloads' => $downloads
+
+		// count downloads
+		$fileEditor = new FileEditor($this->file);
+		$fileEditor->updateCounters(array(
+			'downloads' => 1
 		));
 	}
 
