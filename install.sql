@@ -95,19 +95,12 @@ CREATE TABLE cms1_stylesheet (
 DROP TABLE IF EXISTS cms1_file;
 CREATE TABLE cms1_file (
 	fileID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	folderID INT(10) NOT NULL DEFAULT 0,
+	categoryID INT(10) DEFAULT NULL,
 	title VARCHAR(255) NOT NULL,
 	filename VARCHAR(255) NOT NULL,
 	size INT(10) NOT NULL,
 	type VARCHAR(255) NOT NULL,
 	downloads INT(10) DEFAULT 0
-);
-
-DROP TABLE IF EXISTS cms1_folder;
-CREATE TABLE cms1_folder (
-	folderID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	folderName VARCHAR(255) NOT NULL,
-	folderPath VARCHAR(255) NOT NULL
 );
 
 --counter
@@ -132,6 +125,8 @@ ALTER TABLE cms1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_
 
 ALTER TABLE cms1_content_revision ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE cms1_content_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+
+ALTER TABLE cms1_file ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE SET NULL;
 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;

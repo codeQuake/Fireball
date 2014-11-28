@@ -1,8 +1,9 @@
 <?php
 namespace cms\data\file;
 
-use cms\data\folder\Folder;
 use cms\data\CMSDatabaseObject;
+use wcf\data\ICategorizedObject;
+use wcf\system\category\CategoryHandler;
 use wcf\system\request\IRouteController;
 use wcf\system\WCF;
 
@@ -14,7 +15,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class File extends CMSDatabaseObject implements IRouteController {
+class File extends CMSDatabaseObject implements ICategorizedObject, IRouteController {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -26,20 +27,31 @@ class File extends CMSDatabaseObject implements IRouteController {
 	protected static $databaseTableIndexName = 'fileID';
 
 	/**
-	 * object of the folder this element belongs to
-	 * @var	\cms\data\folder\Folder
+	 * @see	\wcf\data\ICategorizedObject::getCategory()
 	 */
-	protected $folder = null;
+	public function getCategory() {
+		if ($this->categoryID) {
+			return CategoryHandler::getInstance()->getCategory($this->categoryID);
+		}
+
+		return null;
+	}
+
+	/**
+	 * @todo	Really needed? This method is only used in the download
+	 * 		controller. Since permissions are not related to a
+	 * 		specific file, the controller can easily check the
+	 * 		permissions directly.
+	 */
+	public function getPermission($permission = 'canDownloadFile') {
+		return WCF::getSession()->getPermission('user.cms.content.' . $permission);
+	}
 
 	/**
 	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
 	public function getTitle() {
 		return WCF::getLanguage()->get($this->title);
-	}
-
-	public function getPermission($permission = 'canDownloadFile') {
-		return WCF::getSession()->getPermission('user.cms.content.' . $permission);
 	}
 
 	public function getIconTag($width = 16) {
@@ -51,24 +63,23 @@ class File extends CMSDatabaseObject implements IRouteController {
 		return '<span class="icon icon' . $width . ' icon-file"></span>';
 	}
 
-	public function getFolder() {
-		if ($this->folder === null) {
-			$this->folder = new Folder($this->folderID);
-		}
-
-		return $this->folder;
-	}
-
 	public function getURL() {
 		if ($this->getFolder() && $this->getFolder()->folderPath != '') return WCF::getPath('cms') . 'files/' . $this->getFolder()->folderPath . '/' . $this->filename;
 		return WCF::getPath('cms') . 'files/' . $this->filename;
 	}
 
+	/**
+	 * @todo	Remove method, the actual files should be accessed with
+	 * 		their absolute path.
+	 */
 	public function getRelativeURL() {
 		if ($this->getFolder() && $this->getFolder()->folderPath != '') return RELATIVE_CMS_DIR . 'files/' . $this->getFolder()->folderPath . '/' . $this->filename;
 		return RELATIVE_CMS_DIR . 'files/' . $this->filename;
 	}
 
+	/**
+	 * @todo	Remove method
+	 */
 	public function getByID($id) {
 		return new File($id);
 	}
