@@ -3,6 +3,7 @@ namespace cms\data\file;
 
 use cms\data\CMSDatabaseObject;
 use wcf\data\ICategorizedObject;
+use wcf\data\ILinkableObject;
 use wcf\system\category\CategoryHandler;
 use wcf\system\request\IRouteController;
 use wcf\system\WCF;
@@ -15,7 +16,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class File extends CMSDatabaseObject implements ICategorizedObject, IRouteController {
+class File extends CMSDatabaseObject implements ICategorizedObject, ILinkableObject, IRouteController {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -58,6 +59,17 @@ class File extends CMSDatabaseObject implements ICategorizedObject, IRouteContro
 		if (preg_match('/pdf/i', $this->type)) return '<span class="icon icon' . $width . ' icon-file-text"></span>';
 		if (preg_match('/html/i', $this->type) || preg_match('/java/i', $this->type) || preg_match('/x-c/i', $this->type) || preg_match('/css/i', $this->type) || preg_match('/javascript/i', $this->type)) return '<span class="icon icon' . $width . ' icon-code"></span>';
 		return '<span class="icon icon' . $width . ' icon-file"></span>';
+	}
+
+	/**
+	 * @see	\wcf\data\ILinkableObject::getLink()
+	 */
+	public function getLink() {
+		return LinkHandler::getInstance()->getLink('FileDownload', array(
+			'application' => 'cms',
+			'forceFrontend' => true,
+			'object' => $this
+		));
 	}
 
 	/**

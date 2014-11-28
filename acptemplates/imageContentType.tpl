@@ -6,7 +6,7 @@
 				{assign var=image value=$file->getByID($contentData['imageID'])}
 				<li class="box32">
 					<div class="framed">
-						<img src="{$image->getURL()}" alt="{$image->title}" class="image" style="max-width: 32px; max-height: 32px;" />
+						<img src="{$image->getLink()}" alt="{$image->title}" class="image" style="max-width: 32px; max-height: 32px;" />
 					</div>
 					<div>
 						<p>{$image->title}</p>

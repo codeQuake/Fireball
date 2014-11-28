@@ -17,7 +17,7 @@
 					<li class="jsFileImage" data-object-id="{$image->fileID}" data-width="{$size[0]}" data-height="{$size[1]}">
 						<div class="box32 pointer">
 							<div class="framed">
-								<img src="{$image->getURL()}" alt="" style="max-width: 32px; max-height: 32px;" />
+								<img src="{$image->getLink()}" alt="" style="max-width: 32px; max-height: 32px;" />
 							</div>
 							<div>
 								<p>{$image->title|truncate:15}</p>
@@ -38,7 +38,7 @@
 						<li class="jsFileImage" data-object-id="{$image->fileID}" data-width="{$size[0]}" data-height="{$size[1]}">
 							<div class="box32 pointer">
 								<div class="framed">
-									<img src="{$image->getURL()}" alt="" style="max-width: 32px; max-height: 32px;" />
+									<img src="{$image->getLink()}" alt="" style="max-width: 32px; max-height: 32px;" />
 								</div>
 								<div>
 									<p>{$image->title|truncate:15}</p>
