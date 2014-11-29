@@ -1,9 +1,8 @@
 <?php
 namespace cms\data\file;
 
-use cms\data\folder\Folder;
-use cms\data\folder\FolderList;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\category\CategoryHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 use wcf\util\FileUtil;
@@ -31,23 +30,6 @@ class FileAction extends AbstractDatabaseObjectAction {
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
 	protected $requireACP = array('delete');
-
-	/**
-	 * @see	\wcf\data\IDeleteAction::delete()
-	 */
-	public function delete() {
-		// del files
-		foreach ($this->objectIDs as $objectID) {
-			$file = new File($objectID);
-			if ($file->folderID == 0 && file_exists(CMS_DIR . 'files/' . $file->filename)) unlink(CMS_DIR . 'files/' . $file->filename);
-			else {
-				$folder = new Folder($file->folderID);
-				if (file_exists(CMS_DIR . 'files/' . $folder->folderPath . '/' . $file->filename)) unlink(CMS_DIR . 'files/' . $folder->folderPath . '/' . $file->filename);
-			}
-		}
-
-		parent::delete();
-	}
 
 	public function validateGetImages() { /* nothing */ }
 
@@ -84,50 +66,58 @@ class FileAction extends AbstractDatabaseObjectAction {
 		);
 	}
 
+	/**
+	 * Validates parameters to upload a file.
+	 */
 	public function validateUpload() {
 		if (count($this->parameters['__files']->getFiles()) <= 0) {
 			throw new UserInputException('files');
 		}
+
+		// validate category
+		if (isset($this->parameters['categoryID']) && $this->parameters['categoryID'] != 0) {
+			$category = CategoryHandler::getInstance()->getCategory(intval($this->parameters['categoryID']));
+			if ($category === null) {
+				throw new UserInputException('categoryID');
+			}
+		}
 	}
 
+	/**
+	 * Handles upload of a file.
+	 */
 	public function upload() {
-		// get file
 		$files = $this->parameters['__files']->getFiles();
 		$return = array();
+
 		foreach ($files as $file) {
 			try {
 				
 				if (!$file->getValidationErrorType()) {
-					$filename = 'FB-File-' . md5($file->getFilename() . time()) . '.' . $file->getFileExtension();
-					$folderID = $this->parameters['folderID'];
-					if ($folderID != 0) $folder = new Folder($folderID);
 					$data = array(
 						'title' => $file->getFilename(),
-						'folderID' => $folderID,
-						'filename' => $filename,
+						'categoryID' => (isset($this->parameters['categoryID']) && $this->parameters['categoryID'] != 0) ? $this->parameters['categoryID'] : null,
 						'size' => $file->getFilesize(),
 						'type' => $file->getMimeType()
 					);
-					
+
 					$uploadedFile = FileEditor::create($data);
-					if ($folderID == 0) $path = CMS_DIR . 'files/' . $filename;
-					else $path = CMS_DIR . 'files/' . $folder->folderPath . '/' . $filename;
-					if (@move_uploaded_file($file->getLocation(), $path)) {
+
+					if (@move_uploaded_file($file->getLocation(), $uploadedFile->getLocation())) {
 						@unlink($file->getLocation());
-						
+
 						$return[] = array(
 							'fileID' => $uploadedFile->fileID,
-							'folderID' => $uploadedFile->folderID,
-							'title' => $uploadedFile->title,
-							'filename' => $uploadedFile->filename,
+							'categoryID' => $uploadedFile->categoryID,
+							'title' => $uploadedFile->getTitle(),
 							'filesize' => $uploadedFile->filesize,
 							'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->filesize)
 						);
-					}
-					else {
+					} else {
 						// failure
 						$editor = new FileEditor($uploadedFile);
 						$editor->delete();
+
 						throw new UserInputException('file', 'uploadFailed');
 					}
 				}
@@ -136,7 +126,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 				$file->setValidationErrorType($e->getType());
 			}
 		}
-		
+
 		return $return;
 	}
 }

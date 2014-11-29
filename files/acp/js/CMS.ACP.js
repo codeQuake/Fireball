@@ -128,34 +128,54 @@ CMS.ACP.Page.SetAsHome = Class.extend({
 CMS.ACP.File = {};
 
 CMS.ACP.File.Upload = WCF.Upload.extend({
-	_folderID: 0,
+	/**
+	 * category id
+	 * @var	integer
+	 */
+	_categoryID: 0,
 
-	//calls parent init with params
-	init: function(folderID, multiple) {
+	/**
+	 * @see	WCF.Upload.init()
+	 */
+	init: function(categoryID, multiple) {
 		var options = {
 			action: 'upload',
 			multiple: multiple,
 			url: 'index.php/AJAXUpload/?t=' + SECURITY_TOKEN + SID_ARG_2ND
 		};
-		this._folderID = folderID;
+
+		this._categoryID = categoryID;
 		this._super($('#fileUploadButton'), $('.fileUpload ul'), 'cms\\data\\file\\FileAction', options);
 	},
 
+	/**
+	 * @see	WCF.Upload._initFile()
+	 */
 	_initFile: function(file) {
 		return $('<li class="box32"><span class="icon icon32 icon-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
 	},
 
+	/**
+	 * @see	WCF.Upload._getParameters()
+	 */
 	_getParameters: function() {
-		return {'folderID': this._folderID};
+		return {
+			'categoryID': this._categoryID
+		};
 	},
 
+	/**
+	 * @see	WCF.Upload._success()
+	 */
 	_success: function(uploadID, data) {
 		var $li = this._fileListSelector.find('li');
-		//remove progressbar
+
+		// remove progressbar
 		$li.find('progress').remove();
-		$.each(data.returnValues, function (key, value){
+
+		$.each(data.returnValues, function(key, value) {
 			if (value.fileID) {
-				//remove spinner icon
+				// remove spinner icon
 				$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
 
 				// show noti
@@ -165,24 +185,26 @@ CMS.ACP.File.Upload = WCF.Upload.extend({
 				//add fail icon
 				$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
 
-				//err msg
+				// err msg
 				$li.find('div > div').append($('<small class="innerError">'+WCF.Language.get('cms.acp.file.error.' + data.returnValues.errorType)+'</small>'));
 				$li.addClass('uploadFailed');
 			}
-			//webkit suxxx
+
+			// webkit suxxx
 			$li.css('display', 'block');
 		});
 
 		WCF.DOMNodeInsertedHandler.execute();
 	},
 
+	/**
+	 * @see	WCF.Upload._error()
+	 */
 	_error: function() {
-		// FAIL!!
 		var $listItem = this._fileListSelector.find('li');
 		$listItem.addClass('uploadFailed').children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
 		$listItem.find('div > div').append($('<small class="innerError">'+WCF.Language.get('cms.acp.file.error.uploadFailed')+'</small>'));
 	}
-
 });
 
 CMS.ACP.Content = {};
