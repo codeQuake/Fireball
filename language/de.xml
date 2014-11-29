@@ -19,7 +19,7 @@
 		<item name="cms.acp.content.disable"><![CDATA[Inhalt (de)-aktivieren]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
-		<item name="cms.acp.content.list"><![CDATA[Inhalte auflisten]]></item>
+		<item name="cms.acp.content.list"><![CDATA[Inhalte]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
 		<item name="cms.acp.content.position.position.body"><![CDATA[Inhaltsbereich]]></item>
@@ -195,7 +195,7 @@
 		<item name="cms.acp.page.import.upload"><![CDATA[Sicherung der Seiten vom lokalen Computer hochladen]]></item>
 		<item name="cms.acp.page.import.upload.description"><![CDATA[Wählen Sie eine Sicherung der CMS-Seiten von Ihrem lokalen Rechner aus.]]></item>
 		<item name="cms.acp.page.legend"><![CDATA[Legende]]></item>
-		<item name="cms.acp.page.list"><![CDATA[Seiten auflisten]]></item>
+		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
 		<item name="cms.acp.page.list.description"><![CDATA[Seiten bilden die Grundlage des Fireball CMS. Erstellen Sie eine Seite um dieser später Inhalte verschiedener Typen zuordnen zu können.]]></item>
 		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
 		<item name="cms.acp.page.meta"><![CDATA[Meta-Informationen]]></item>
@@ -271,7 +271,7 @@
 		<item name="cms.acp.stylesheet.edit"><![CDATA[Stylesheet bearbeiten]]></item>
 		<item name="cms.acp.stylesheet.less"><![CDATA[CSS & Less]]></item>
 		<item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Sie haben zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins.]]></item>
-		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
+		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
 		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
 	</category>
 

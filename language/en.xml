@@ -19,7 +19,7 @@
 		<item name="cms.acp.content.disable"><![CDATA[Toggle content]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Edit content]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Page]]></item>
-		<item name="cms.acp.content.list"><![CDATA[List contents]]></item>
+		<item name="cms.acp.content.list"><![CDATA[Contents]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Parent content]]></item>
 		<item name="cms.acp.content.position.position.body"><![CDATA[Body]]></item>
@@ -228,7 +228,7 @@
 		<item name="cms.acp.page.revision.action.setAsHome"><![CDATA[Set as homepage]]></item>
 		<item name="cms.acp.page.revision.action.update"><![CDATA[Updated page]]></item>
 		<item name="cms.acp.page.revision.action.updatePosition"><![CDATA[Changed sorting]]></item>
-		<item name="cms.acp.page.revision.list"><![CDATA[Änderungsprotokoll]]></item>
+		<item name="cms.acp.page.revision.list"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.page.revision.restore"><![CDATA[Restore]]></item>
 		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
 		<item name="cms.acp.page.revision.time"><![CDATA[Time]]></item>
