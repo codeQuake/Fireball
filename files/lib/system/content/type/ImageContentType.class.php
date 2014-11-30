@@ -17,23 +17,32 @@ class ImageContentType extends AbstractContentType {
 	 */
 	protected $icon = 'icon-picture';
 
-	public $multilingualFields = array(
-		'text'
-	);
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
+	 */
+	public $multilingualFields = array('text');
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		WCF::getTPL()->assign('file', new File(0));
+
 		return 'imageContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 */
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
 		$image = new File($data['imageID']);
+
 		WCF::getTPL()->assign(array(
 			'data' => $data,
 			'image' => $image
 		));
-		
+
 		return WCF::getTPL()->fetch('imageContentType', 'cms');
 	}
 }

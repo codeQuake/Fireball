@@ -63,7 +63,7 @@ class PageNodeTree implements \IteratorAggregate {
 	}
 
 	protected function getNode($pageID) {
-		if (! $pageID) {
+		if (!$pageID) {
 			// @todo: This needs to be changed. It creates a
 			// pointless database query to fetch an (of course) not
 			// existing page with the id '0'

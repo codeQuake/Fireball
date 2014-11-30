@@ -25,9 +25,7 @@ class PageCommentUserActivityEvent extends SingletonFactory implements IUserActi
 
 		// comments
 		$commentList = new CommentList();
-		$commentList->getConditionBuilder()->add("comment.commentID IN (?)", array(
-			$objectIDs
-		));
+		$commentList->getConditionBuilder()->add("comment.commentID IN (?)", array($objectIDs));
 		$commentList->readObjects();
 		$comments = $commentList->getObjects();
 
@@ -38,9 +36,7 @@ class PageCommentUserActivityEvent extends SingletonFactory implements IUserActi
 		}
 
 		$list = new PageList();
-		$list->getConditionBuilder()->add("page.pageID IN (?)", array(
-			$pageIDs
-		));
+		$list->getConditionBuilder()->add("page.pageID IN (?)", array($pageIDs));
 		$list->readObjects();
 		$pages = $list->getObjects();
 

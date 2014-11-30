@@ -49,6 +49,6 @@ class Folder extends CMSDatabaseObject implements IRouteController {
 	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
 	public function getTitle() {
-		return $this->folderName;
+		return WCF::getLanguage()->get($this->folderName);
 	}
 }

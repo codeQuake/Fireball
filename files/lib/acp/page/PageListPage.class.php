@@ -9,7 +9,7 @@ use wcf\system\WCF;
 
 /**
  * Shows a list of pages.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -26,9 +26,17 @@ class PageListPage extends AbstractPage {
 	 */
 	public $neededPermissions = array('admin.cms.page.canListPage');
 
-	public $pageList = null;
-
+	/**
+	 * list of content types
+	 * @var	array<\wcf\data\object\type\ObjectType>
+	 */
 	public $objectTypeList = null;
+
+	/**
+	 * list of pages
+	 * @var	\RecursiveIteratorIterator
+	 */
+	public $pageList = null;
 
 	/**
 	 * @see	\wcf\page\IPage::readData()
@@ -36,9 +44,11 @@ class PageListPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 
-		$this->pageList = new PageNodeTree();
 		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
 
+		// read pages
+		$pageNodeTree = new PageNodeTree();
+		$this->pageList = $pageNodeTree->getIterator();
 	}
 
 	/**
@@ -50,7 +60,7 @@ class PageListPage extends AbstractPage {
 		WCF::getTPL()->assign(array(
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.page')),
 			'objectTypeList' => $this->objectTypeList,
-			'pageList' => $this->pageList->getIterator()
+			'pageList' => $this->pageList
 		));
 	}
 }

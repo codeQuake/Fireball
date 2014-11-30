@@ -5,12 +5,13 @@ use cms\data\page\SearchResultPageList;
 use wcf\system\search\AbstractSearchableObjectType;
 
 /**
+ * ISearchableObjectType implementation for searching pages.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-
 class PageSearch extends AbstractSearchableObjectType {
 	/**
 	 * page cache
@@ -42,7 +43,7 @@ class PageSearch extends AbstractSearchableObjectType {
 	 * @see	\wcf\system\search\ISearchableObjectType::getIDFieldName()
 	 */
 	public function getIDFieldName() {
-		return $this->getTableName() . '.pageID';
+		return $this->getTableName().'.pageID';
 	}
 
 	/**
@@ -60,27 +61,27 @@ class PageSearch extends AbstractSearchableObjectType {
 	 * @see	\wcf\system\search\ISearchableObjectType::getSubjectFieldName()
 	 */
 	public function getSubjectFieldName() {
-		return $this->getTableName() . '.title';
+		return $this->getTableName().'.title';
 	}
 
 	/**
 	 * @see	\wcf\system\search\ISearchableObjectType::getTableName()
 	 */
 	public function getTableName() {
-		return 'cms' . WCF_N . '_page';
+		return 'cms'.WCF_N.'_page';
 	}
 
 	/**
 	 * @see	\wcf\system\search\ISearchableObjectType::getTimeFieldName()
 	 */
 	public function getTimeFieldName() {
-		return $this->getTableName() . '.creationTime';
+		return $this->getTableName().'.creationTime';
 	}
 
 	/**
 	 * @see	\wcf\system\search\ISearchableObjectType::getUsernameFieldName()
 	 */
 	public function getUsernameFieldName() {
-		return $this->getTableName() . '.authorName';
+		return $this->getTableName().'.authorName';
 	}
 }

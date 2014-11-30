@@ -11,39 +11,55 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class ThreeColumnsContentType extends AbstractStructureContentType {
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		return 'threeColumnContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
+	 */
 	public function getCSSClasses() {
 		return 'gridContainer';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getChildCSSClasses()
+	 */
 	public function getChildCSSClasses(Content $content) {
 		$parent = $content->getParentContent();
 		$data = $parent->handleContentData();
-		if (isset($data['width'])) $width = array(
-			substr($data['width'], 0, 2),
-			substr($data['width'], 2, 2),
-			substr($data['width'], 4, 2)
-		);
-		else $width = array(
-			33,
-			33,
-			33
-		);
+
+		if (isset($data['width'])) {
+			$width = array(
+				substr($data['width'], 0, 2),
+				substr($data['width'], 2, 2),
+				substr($data['width'], 4, 2)
+			);
+		} else {
+			$width = array(
+				33,
+				33,
+				33
+			);
+		}
 		
 		switch ($content->showOrder % 3) {
 			case 0:
 				$gridWidth = $width[2];
-				break;
+			break;
+
 			case 1:
 				$gridWidth = $width[0];
-				break;
+			break;
+
 			case 2:
 				$gridWidth = $width[1];
-				break;
+			break;
 		}
+
 		return 'grid grid' . $gridWidth;
 	}
 }

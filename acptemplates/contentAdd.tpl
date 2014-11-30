@@ -1,19 +1,33 @@
 {include file='header' pageTitle='cms.acp.content.'|concat:$action}
 
-<nav class="breadcrumbs marginTop">
-	<ul>
-		{if $pageID != 0}
-			<li title="{$page->getTitle()|language}" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="{link controller='PageEdit' application='cms' id=$page->pageID}{/link}" itemprop="url">
-					<span itemprop="title">{$page->getTitle()|language}</span>
-				</a>
-				<span class="pointer">
-					<span>»</span>
-				</span>
-			</li>
-		{/if}
-	</ul>
-</nav>
+<script data-relocate="true">
+	//<![CDATA[
+	$(function() {
+		var $parentContentContainer = [ ];
+		var $pageIDInput = $('#pageID');
+		var $parentIDInput = $('#parentID');
+
+		function handlePageID() {
+			var $pageID = $pageIDInput.val();
+
+			for (var i = 0; i < $parentContentContainer.length; i++) {
+				$parentContentContainer[i].appendTo($parentIDInput);
+			}
+
+			$parentIDInput.children('option').each(function(index, element) {
+				var $option = $(element);
+
+				if ($option.data('pageID') !== undefined && $option.data('pageID') != $pageID) {
+					$parentContentContainer.push($option.removeAttr('disabled').detach());
+				}
+			});
+		}
+
+		$pageIDInput.change(handlePageID);
+		handlePageID();
+	});
+	//]]>
+</script>
 
 <header class="boxHeadline">
 	<h1>{lang}cms.acp.content.{@$action}{/lang}</h1>
@@ -28,15 +42,15 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link application='cms' controller='ContentList' pageID=$page->pageID}{/link}" title="{lang}cms.acp.menu.link.cms.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.content.list{/lang}</span></a></li>
+			{* <li><a href="{link application='cms' controller='ContentList' pageID=$pageID}{/link}" title="{lang}cms.acp.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.content.list{/lang}</span></a></li> *}
 
 			{event name='contentNavigationButtons'}
 		</ul>
 	</nav>
 </div>
 
-<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{if $position|isset}&position={$position}{/if}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}objectType={$objectType->objectType}{if $position|isset}&position={$position}{/if}{/link}{/if}">
-	<div class="container containerPadding marginTop shadow">
+<form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}{/link}{/if}">
+	<div class="container containerPadding marginTop">
 		<fieldset>
 			<legend>{lang}wcf.global.form.data{/lang}</legend>
 
@@ -62,9 +76,45 @@
 		</fieldset>
 
 		<fieldset>
+			<legend>{lang}cms.acp.content.position{/lang}</legend>
+
+			<dl>
+				<dt><label for="pageID">{lang}cms.global.page{/lang}</label></dt>
+				<dd>
+					<select name="pageID" id="pageID">
+						{foreach from=$pageList item=$node}
+							<option{if $node->pageID == $pageID} selected="selected"{/if} value="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
+						{/foreach}
+					</select>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><label for="parentID">{lang}cms.acp.content.position.parentID{/lang}</label></dt>
+				<dd>
+					<select id="parentID" name="parentID">
+						<option value="0" {if $parentID == 0} selected="selected"{/if}>{lang}wcf.global.noSelection{/lang}</option>
+						{foreach from=$contentList item=$node}
+							<option{if $node->contentID == $parentID} selected="selected"{/if} value="{@$node->contentID}" data-page-id="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$contentList->getDepth()}{$node->getTitle()}</option>
+						{/foreach}
+					</select>
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><label for="showOrder">{lang}cms.acp.content.position{/lang}</label></dt>
+				<dd>
+					<input type="number" name="showOrder" id="showorder" value="{$showOrder}" />
+				</dd>
+			</dl>
+
+			{event name='positionFields'}
+		</fieldset>
+
+		<fieldset>
 			<legend>{lang}cms.acp.content.type.{$objectType->objectType}{/lang}</legend>
 
-			{include file=$objectTypeProcessor->getFormTemplate() application='cms'}
+			{include file=$objectType->getProcessor()->getFormTemplate() application='cms'}
 		</fieldset>
 
 		<fieldset>
@@ -98,43 +148,12 @@
 			{event name='cssFields'}
 		</fieldset>
 
-		<fieldset>
-			<legend>{lang}cms.acp.content.position{/lang}</legend>
-
-			<dl>
-				<dt><label for="parentID">{lang}cms.acp.content.position.parentID{/lang}</label></dt>
-				<dd>
-					<select id="parentID" name="parentID">
-						<option value="0" {if $parentID == 0} selected="selected"{/if}>{lang}wcf.global.noSelection{/lang}</option>
-						{foreach from=$contentList item=$node}
-							<option {if $node->contentID == $parentID} selected="selected" {/if} value="{@$node->contentID}">{section name=i loop=$contentList->getDepth()}&nbsp;&raquo;&raquo;&nbsp;{/section}{$node->getTitle()|language}</option>
-						{/foreach}
-					</select>
-				</dd>
-			</dl>
-
-			<dl>
-				<dt><label for="showOrder">{lang}cms.acp.content.position.showOrder{/lang}</label></dt>
-				<dd>
-					<input type="number" name="showOrder" id="showorder" value="{$showOrder}" />
-				</dd>
-			</dl>
-
-			{event name='positionFields'}
-		</fieldset>
-
 		{event name='fieldsets'}
 	</div>
 
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 		{@SECURITY_TOKEN_INPUT_TAG}
-		<input type="hidden" name="action" value="{@$action}" />
-		<input type="hidden" name="objectType" value="{@$objectType->objectType}" />
-		{if $contentID|isset}<input type="hidden" name="contentID" value="{@$contentID}" />{/if}
-		{if $pageID|isset}<input type="hidden" name="pageID" value="{@$pageID}" />{/if}
-		{if $position|isset}<input type="hidden" name="position" value="{@$position}" />{/if}
 	</div>
 </form>
 

@@ -1,7 +1,7 @@
 <nav class="tabMenu">
 	<ul>
 		{foreach from=$children item=child}
-			<li><a href="{@$__wcf->getAnchor($child->cssID)}">{$child->getTitle()|language}</a></li>
+			<li><a href="{@$__wcf->getAnchor($child->cssID)}">{$child->getTitle()}</a></li>
 		{/foreach}
 
 		{event name='tabMenuTabs'}

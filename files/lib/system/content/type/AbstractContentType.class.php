@@ -6,7 +6,7 @@ use wcf\system\language\I18nHandler;
 
 /**
  * Abstract content type implementation.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -19,6 +19,10 @@ abstract class AbstractContentType implements IContentType {
 	 */
 	protected $icon = 'icon-unchecked';
 
+	/**
+	 * list of multilingual fields
+	 * @var	array<string>
+	 */
 	public $multilingualFields = array();
 
 	/**
@@ -55,12 +59,12 @@ abstract class AbstractContentType implements IContentType {
 	/**
 	 * @see	\cms\system\content\type\IContentType::readFormParameters()
 	 */
-	public function readFormParameters() { }
+	public function readFormParameters() { /* nothing */ }
 
 	/**
 	 * @see cms\system\content\type\IContentType::validate()
 	 */
-	public function validate($data) { }
+	public function validate($data) { /* nothing */ }
 
 	/**
 	 * @see \cms\system\content\type\IContentType::getFormTemplate()

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="cms.acp.content">
 		<item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
@@ -18,12 +19,11 @@
 		<item name="cms.acp.content.disable"><![CDATA[Inhalt (de)-aktivieren]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
 		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
-		<item name="cms.acp.content.list"><![CDATA[Inhalte auflisten]]></item>
+		<item name="cms.acp.content.list"><![CDATA[Inhalte]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
 		<item name="cms.acp.content.position.position.body"><![CDATA[Inhaltsbereich]]></item>
 		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Seitenleiste]]></item>
-		<item name="cms.acp.content.position.showOrder"><![CDATA[Sortierungsreihenfolge]]></item>
 		<item name="cms.acp.content.remove"><![CDATA[Inhalt entfernen]]></item>
 		<item name="cms.acp.content.revision"><![CDATA[Version]]></item>
 		<item name="cms.acp.content.revision.action"><![CDATA[Aktion]]></item>
@@ -143,10 +143,7 @@
 
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="cms.acp.menu.link.cms.content"><![CDATA[Seiten verwalten]]></item>
-		<item name="cms.acp.menu.link.cms.content.add"><![CDATA[Inhalt hinzufügen]]></item>
-		<item name="cms.acp.menu.link.cms.content.list"><![CDATA[Inhalte auflisten]]></item>
-		<item name="cms.acp.menu.link.cms.content.section.list"><![CDATA[Inhaltsabschnitte auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.content"><![CDATA[Seiten]]></item>
 		<item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.menu.link.cms.file.management"><![CDATA[Dateiverwaltung]]></item>
 		<item name="cms.acp.menu.link.cms.media"><![CDATA[Medien]]></item>
@@ -170,8 +167,8 @@
 		<item name="cms.acp.page.backup"><![CDATA[Datensicherung]]></item>
 		<item name="cms.acp.page.backup.description"><![CDATA[Laden Sie sich hier Ihre aktuelle Datensicherung herunter: <a href="{link application='cms' controller='CMSExport'}{/link}"><span class="icon icon16 icon-cloud-download"></span> Herunterladen</a>]]></item>
 		<item name="cms.acp.page.button.choose"><![CDATA[Seite wählen]]></item>
-		<item name="cms.acp.page.content.add"><![CDATA[Inhalte zu '{$page->title|language}' hinzufügen]]></item>
-		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von „{$page->title|language}' auflisten]]></item>
+		<item name="cms.acp.page.content.add"><![CDATA[Inhalte zu „{$page->getTitle()}“ hinzufügen]]></item>
+		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von „{$page->getTitle()}“ auflisten]]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Seite kopieren]]></item>
 		<item name="cms.acp.page.delayedDeactivation"><![CDATA[Deaktivierung am {@$page->deactivationDate|plainTime}]]></item>
 		<item name="cms.acp.page.delayedPublication"><![CDATA[Veröffentlichung am {@$page->publicationDate|plainTime}]]></item>
@@ -179,6 +176,10 @@
 		<item name="cms.acp.page.description"><![CDATA[Beschreibung]]></item>
 		<item name="cms.acp.page.disable"><![CDATA[Seite (de)-aktivieren]]></item>
 		<item name="cms.acp.page.display"><![CDATA[Darstellung]]></item>
+		<item name="cms.acp.page.display.settings"><![CDATA[Darstellungsoptionen]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation.left"><![CDATA[Linke Seitenleiste]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation.right"><![CDATA[Rechte Seitenleiste]]></item>
 		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
 		<item name="cms.acp.page.export"><![CDATA[Seiten sichern]]></item>
 		<item name="cms.acp.page.export.download"><![CDATA[Sicherung der CMS-Seiten herunterladen]]></item>
@@ -194,7 +195,7 @@
 		<item name="cms.acp.page.import.upload"><![CDATA[Sicherung der Seiten vom lokalen Computer hochladen]]></item>
 		<item name="cms.acp.page.import.upload.description"><![CDATA[Wählen Sie eine Sicherung der CMS-Seiten von Ihrem lokalen Rechner aus.]]></item>
 		<item name="cms.acp.page.legend"><![CDATA[Legende]]></item>
-		<item name="cms.acp.page.list"><![CDATA[Seiten auflisten]]></item>
+		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
 		<item name="cms.acp.page.list.description"><![CDATA[Seiten bilden die Grundlage des Fireball CMS. Erstellen Sie eine Seite um dieser später Inhalte verschiedener Typen zuordnen zu können.]]></item>
 		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
 		<item name="cms.acp.page.meta"><![CDATA[Meta-Informationen]]></item>
@@ -234,12 +235,10 @@
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[Erlaubt anderen Benutzern diese Seite zu kommentieren.]]></item>
 		<item name="cms.acp.page.settings.showSidebar"><![CDATA[Globale Seitenleiste anzeigen]]></item>
 		<item name="cms.acp.page.settings.showSidebar.description"><![CDATA[Sie können die globale Seitenleiste in der <a href="{link controller='DashboardList'}{/link}">Dashboard-Konfiguration</a> konfigurieren.]]></item>
-		<item name="cms.acp.page.settings.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
-		<item name="cms.acp.page.settings.sidebarOrientation.left"><![CDATA[Linke Seitenleiste]]></item>
-		<item name="cms.acp.page.settings.sidebarOrientation.right"><![CDATA[Rechte Seitenleiste]]></item>
 		<item name="cms.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.page.stylesheets.description"><![CDATA[Stylesheets, die beim Aufruf dieser Seite geladen werden sollen.]]></item>
 		<item name="cms.acp.page.title"><![CDATA[Seitentitel]]></item>
 		<item name="cms.acp.page.title.error.multilingual"><![CDATA[Der Seitentitel muss in allen Sprachen vorhanden sein!]]></item>
 		<item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
@@ -268,7 +267,7 @@
 		<item name="cms.acp.stylesheet.edit"><![CDATA[Stylesheet bearbeiten]]></item>
 		<item name="cms.acp.stylesheet.less"><![CDATA[CSS & Less]]></item>
 		<item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Sie haben zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins.]]></item>
-		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
+		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
 		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
 	</category>
 
@@ -309,7 +308,7 @@
 	</category>
 
 	<category name="cms.user">
-		<item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{$page->getLink()}">{@$page->getTitle()|language}</a>]]></item>
+		<item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
 	</category>
 
 	<category name="wcf.acl.option">

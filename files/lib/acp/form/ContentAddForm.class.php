@@ -4,9 +4,10 @@ namespace cms\acp\form;
 use cms\data\content\ContentAction;
 use cms\data\content\ContentCache;
 use cms\data\content\ContentEditor;
-use cms\data\content\DrainedPositionContentNodeTree;
+use cms\data\content\ContentNodeTree;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
+use cms\data\page\PageNodeTree;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
@@ -20,8 +21,8 @@ use wcf\util\StringUtil;
 
 /**
  * Shows the content add form.
- *
- * @author	Jens Krumsieck
+ * 
+ * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -33,27 +34,45 @@ class ContentAddForm extends AbstractForm {
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
 
 	/**
+	 * content data
+	 * @var	array<mixed>
+	 */
+	public $contentData = array();
+
+	/**
+	 * list of contents
+	 * @var	\RecursiveIteratorIterator
+	 */
+	public $contentList = null;
+
+	/**
+	 * css classes of the content
+	 * @var	string
+	 */
+	public $cssClasses = '';
+
+	/**
+	 * css id of the content
+	 * @var	string
+	 */
+	public $cssID = '';
+
+	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('admin.cms.content.canAddContent');
 
 	/**
-	 * content title
-	 * @var	string
+	 * content object type
+	 * @var	\wcf\data\object\type\ObjectType
 	 */
-	public $title = '';
+	public $objectType = null;
 
 	/**
 	 * id of the page the cotent will be assigned to
 	 * @var	integer
 	 */
 	public $pageID = 0;
-
-	/**
-	 * object of the page the content will be assigned to
-	 * @var	\cms\data\page\Page
-	 */
-	public $page = null;
 
 	/**
 	 * id of the parent content
@@ -74,34 +93,10 @@ class ContentAddForm extends AbstractForm {
 	public $showOrder = 0;
 
 	/**
-	 * css id of the content
+	 * content title
 	 * @var	string
 	 */
-	public $cssID = '';
-
-	/**
-	 * css classes of the content
-	 * @var	string
-	 */
-	public $cssClasses = '';
-
-	/**
-	 * content data
-	 * @var	array<mixed>
-	 */
-	public $contentData = array();
-
-	/**
-	 * list of contents
-	 * @var	\RecursiveIteratorIterator
-	 */
-	public $contentList = null;
-
-	/**
-	 * content object type
-	 * @var	\wcf\data\object\type\ObjectType
-	 */
-	public $objectType = null;
+	public $title = '';
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -109,16 +104,20 @@ class ContentAddForm extends AbstractForm {
 	public function readParameters() {
 		parent::readParameters();
 
-		I18nHandler::getInstance()->register('title');
-		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
+		if ($this->objectType === null) {
+			if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $_REQUEST['objectType']);
+			if ($this->objectType === null || !$this->objectType->getProcessor()->isAvailableToAdd()) {
+				throw new IllegalLinkException();
+			}
+		}
+
+		// form values that can be specified as get parameters
+		if (isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
 		if (isset($_REQUEST['position'])) $this->position = StringUtil::trim($_REQUEST['position']);
 		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
-		if ($this->parentID == 0) $this->parentID = null;
 
-		if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $_REQUEST['objectType']);
-		if ($this->objectType === null || !$this->objectType->getProcessor()->isAvailableToAdd()) {
-			throw new IllegalLinkException();
-		}
+		// register i18n-values
+		I18nHandler::getInstance()->register('title');
 
 		// read object type specific parameters
 		$this->objectType->getProcessor()->readParameters();
@@ -131,12 +130,10 @@ class ContentAddForm extends AbstractForm {
 		parent::readFormParameters();
 
 		I18nHandler::getInstance()->readValues();
+
 		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
-		if (isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
-		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
 		if (isset($_POST['cssID'])) $this->cssID = StringUtil::trim($_POST['cssID']);
 		if (isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
-		if (isset($_POST['position'])) $this->position = StringUtil::trim($_POST['position']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['contentData']) && is_array($_POST['contentData'])) $this->contentData = $_POST['contentData'];
 
@@ -156,19 +153,21 @@ class ContentAddForm extends AbstractForm {
 
 		$this->objectType->getProcessor()->validate($this->contentData);
 
-		//if this happens, user is a retard
-		$position = array(
-			'body',
-			'sidebar'
-		);
-		if (! in_array($this->position, $position)) throw new UserInputException('position');
-		if ($this->position == 'sidebar' && ! $this->objectType->allowsidebar) throw new UserInputException('position');
-		if ($this->position == 'body' && ! $this->objectType->allowcontent) throw new UserInputException('position');
+		// validate position
+		if (!in_array($this->position, array('body', 'sidebar'))) {
+			throw new UserInputException('position');
+		}
+		if ($this->position == 'sidebar' && !$this->objectType->allowsidebar) {
+			throw new UserInputException('position');
+		}
+		if ($this->position == 'body' && !$this->objectType->allowcontent) {
+			throw new UserInputException('position');
+		}
 
-		//validate showOrder
+		// validate show order
 		if ($this->showOrder == 0) {
-			$childIDs = ContentCache::getInstance()->getChildIDs($this->parentID ?  : null);
-			if (! empty($childIDs)) {
+			$childIDs = ContentCache::getInstance()->getChildIDs($this->parentID ?: null);
+			if (!empty($childIDs)) {
 				$showOrders = array();
 				foreach ($childIDs as $childID) {
 					$content = ContentCache::getInstance()->getContent($childID);
@@ -187,7 +186,7 @@ class ContentAddForm extends AbstractForm {
 				$this->showOrder = 1;
 		}
 
-		if (! I18nHandler::getInstance()->validateValue('title')) {
+		if (!I18nHandler::getInstance()->validateValue('title')) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
 			}
@@ -196,10 +195,12 @@ class ContentAddForm extends AbstractForm {
 			}
 		}
 
-		$this->page = new Page($this->pageID);
-		if ($this->page === null) throw new UserInputException('pageID', 'invalid');
+		$page = new Page($this->pageID);
+		if (!$page->pageID) {
+			throw new UserInputException('pageID', 'invalid');
+		}
 
-		//validate if parent is tabmenu, fallback to a cssID
+		// validate if parent is tabmenu, fallback to a cssID
 		if ($this->parentID) {
 			$parent = ContentCache::getInstance()->getContent($this->parentID);
 			if ($parent->contentTypeID == ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.tabmenu')) {
@@ -225,11 +226,12 @@ class ContentAddForm extends AbstractForm {
 			'contentData' => serialize($this->contentData),
 			'contentTypeID' => $this->objectType->objectTypeID
 		);
-		$objectAction = new ContentAction(array(), 'create', array(
+
+		$this->objectAction = new ContentAction(array(), 'create', array(
 			'data' => $data
 		));
-		$objectAction->executeAction();
-		$returnValues = $objectAction->getReturnValues();
+		$returnValues = $this->objectAction->executeAction();
+
 		$contentID = $returnValues['returnValues']->contentID;
 		$contentData = @unserialize($returnValues['returnValues']->contentData);
 		$update = array();
@@ -242,7 +244,7 @@ class ContentAddForm extends AbstractForm {
 			}
 		}
 
-		if (! I18nHandler::getInstance()->isPlainValue('title')) {
+		if (!I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
 			$update['title'] = 'cms.content.title' . $contentID;
 		}
@@ -256,20 +258,18 @@ class ContentAddForm extends AbstractForm {
 
 		$update['contentData'] = serialize($contentData);
 
-		if (! empty($update)) {
+		if (!empty($update)) {
 			$editor = new ContentEditor($returnValues['returnValues']);
 			$editor->update($update);
 		}
 
 		//create revision
-		$objectAction = new ContentAction(array(
-			$returnValues['returnValues']->contentID
-		), 'createRevision', array(
+		$objectAction = new ContentAction(array($returnValues['returnValues']->contentID), 'createRevision', array(
 			'action' => 'create'
 		));
 		$objectAction->executeAction();
 
-		//update search index
+		// update search index
 		$objectAction = new PageAction(array($returnValues['returnValues']->pageID), 'refreshSearchIndex');
 		$objectAction->executeAction();
 
@@ -278,7 +278,6 @@ class ContentAddForm extends AbstractForm {
 			'application' => 'cms',
 			'pageID' => $this->pageID
 		)));
-
 	}
 
 	/**
@@ -287,8 +286,13 @@ class ContentAddForm extends AbstractForm {
 	public function readData() {
 		parent::readData();
 
-		$this->contentList = new DrainedPositionContentNodeTree(null, $this->pageID, null, $this->position);
-		$this->contentList = $this->contentList->getIterator();
+		// read page list
+		$pageNodeTree = new PageNodeTree();
+		$this->pageList = $pageNodeTree->getIterator();
+
+		// read content list
+		$contentNodeTree = new ContentNodeTree(null, 0, 1);
+		$this->contentList = $contentNodeTree->getIterator();
 	}
 
 	/**
@@ -298,21 +302,23 @@ class ContentAddForm extends AbstractForm {
 		parent::assignVariables();
 
 		I18nHandler::getInstance()->assignVariables();
-		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') PollManager::getInstance()->assignVariables();
+
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
+			PollManager::getInstance()->assignVariables();
+		}
 
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
+			'contentData' => $this->contentData,
+			'contentList' => $this->contentList,
 			'cssClasses' => $this->cssClasses,
 			'cssID' => $this->cssID,
-			'showOrder' => $this->showOrder,
+			'objectType' => $this->objectType,
 			'pageID' => $this->pageID,
+			'pageList' => $this->pageList,
 			'parentID' => $this->parentID,
 			'position' => $this->position,
-			'contentList' => $this->contentList,
-			'page' => new Page($this->pageID),
-			'objectType' => $this->objectType,
-			'objectTypeProcessor' => $this->objectType->getProcessor(),
-			'contentData' => $this->contentData
+			'showOrder' => $this->showOrder
 		));
 	}
 }

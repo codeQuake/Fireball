@@ -32,7 +32,7 @@ class PagePermissionCacheBuilder extends AbstractCacheBuilder {
 			'user'
 		) as $type) {
 			foreach ($aclOptions[$type] as $pageID => $optionData) {
-				if (! isset($data[$pageID])) {
+				if (!isset($data[$pageID])) {
 					$data[$pageID] = array(
 						'group' => array(),
 						'user' => array()

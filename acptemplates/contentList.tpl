@@ -54,7 +54,7 @@
 				<dd>
 					<select name="pageID" id="pageID">
 						{foreach from=$pageList item=node}
-							<option value="{@$node->pageID}"{if $node->pageID == $pageID} selected="selected"{/if}>{@'&nbsp;&nbsp;&nbsp;&nbsp;'|str_repeat:$pageList->getDepth()}{$node->getTitle()|language}</option>
+							<option value="{@$node->pageID}"{if $node->pageID == $pageID} selected="selected"{/if}>{@'&nbsp;&nbsp;&nbsp;&nbsp;'|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
 						{/foreach}
 					</select>
 				</dd>
@@ -100,7 +100,7 @@
 										<span class="title">
 											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
 											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
-											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=body{/link}">{@$content->getTitle()|language}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
+											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=body{/link}">{@$content->getTitle()}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
 										</span>
 										<span class="statusDisplay buttons">
 											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
@@ -149,7 +149,7 @@
 										<span class="title">
 											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
 											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
-											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=sidebar{/link}">{@$content->getTitle()|language}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
+											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=sidebar{/link}">{@$content->getTitle()}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
 										</span>
 										<span class="statusDisplay buttons">
 											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>

@@ -6,7 +6,7 @@ use wcf\system\SingletonFactory;
 
 /**
  * Manages the page cache.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -46,7 +46,7 @@ class PageCache extends SingletonFactory {
 	public function getChildIDs($parentID = null) {
 		if ($parentID === null) $parentID = '';
 		
-		if (! isset($this->tree[$parentID])) return array();
+		if (!isset($this->tree[$parentID])) return array();
 		
 		return $this->tree[$parentID];
 	}

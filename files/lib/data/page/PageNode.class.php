@@ -67,7 +67,7 @@ class PageNode extends DatabaseObjectDecorator implements \Countable, \Recursive
 	}
 
 	public function hasChildren() {
-		return ! empty($this->children);
+		return !empty($this->children);
 	}
 
 	public function key() {

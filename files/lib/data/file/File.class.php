@@ -8,7 +8,7 @@ use wcf\system\WCF;
 
 /**
  * Represents a file.
- *
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -35,7 +35,7 @@ class File extends CMSDatabaseObject implements IRouteController {
 	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
 	public function getTitle() {
-		return $this->title;
+		return WCF::getLanguage()->get($this->title);
 	}
 
 	public function getPermission($permission = 'canDownloadFile') {

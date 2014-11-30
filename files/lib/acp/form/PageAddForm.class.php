@@ -41,43 +41,11 @@ class PageAddForm extends AbstractForm {
 	 */
 	public $neededPermissions = array('admin.cms.page.canAddPage');
 
-	public $objectTypeID = 0;
-
-	public $pageID = 0;
-
-	public $title = '';
-
+	/**
+	 * alias of the created page
+	 * @var	string
+	 */
 	public $alias = '';
-
-	public $description = '';
-
-	public $metaDescription = '';
-
-	public $metaKeywords = '';
-
-	public $invisible = 0;
-
-	public $availableDuringOfflineMode = CMS_PAGES_DEFAULT_OFFLINE;
-
-	public $showSidebar = CMS_PAGES_DEFAULT_GLOBAL_SIDEBAR;
-
-	public $sidebarOrientation = CMS_PAGES_DEFAULT_SIDEBAR;
-
-	public $showOrder = 0;
-
-	public $parentID = null;
-
-	public $menuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
-
-	public $menuItemID = null;
-
-	public $pageList = null;
-
-	public $stylesheets = array();
-
-	public $stylesheetList = null;
-
-	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
 
 	/**
 	 * option to allow spiders to index the created page
@@ -92,6 +60,30 @@ class PageAddForm extends AbstractForm {
 	public $allowSubscribing = CMS_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
 
 	/**
+	 * indication whether the created page is available during offline mode
+	 * @var	integer
+	 */
+	public $availableDuringOfflineMode = CMS_PAGES_DEFAULT_OFFLINE;
+
+	/**
+	 * list of available styles
+	 * @var	array<\wcf\data\style\Style>
+	 */
+	public $availableStyles = array();
+
+	/**
+	 * deactivation date (ISO 8601)
+	 * @var	string
+	 */
+	public $deactivationDate = '';
+
+	/**
+	 * description of the created page
+	 * @var	string
+	 */
+	public $description = '';
+
+	/**
 	 * enables a delayed deactivation of this page
 	 * @var	integer
 	 */
@@ -104,10 +96,60 @@ class PageAddForm extends AbstractForm {
 	public $enableDelayedPublication = 0;
 
 	/**
-	 * deactivation date (ISO 8601)
+	 * indication whether the created page is invisible
+	 * @var	integer
+	 */
+	public $invisible = 0;
+
+	/**
+	 * indication whether this page is commentable
+	 * @var	integer
+	 */
+	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
+
+	/**
+	 * indication whether a menu item should be created for the created
+	 * page
+	 * @var	integer
+	 */
+	public $menuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
+
+	/**
+	 * id of the menu item that should be active when viewing the created
+	 * page
+	 * @var	integer
+	 */
+	public $menuItemID = null;
+
+	/**
+	 * meta description of the created page
 	 * @var	string
 	 */
-	public $deactivationDate = '';
+	public $metaDescription = '';
+
+	/**
+	 * meta keywords of the created page
+	 * @var	string
+	 */
+	public $metaKeywords = '';
+
+	/**
+	 * object type id of the acl
+	 * @var	integer
+	 */
+	public $objectTypeID = 0;
+
+	/**
+	 * list of all pages the created page can be assigned to
+	 * @var	\RecursiveIteratorIterator
+	 */
+	public $pageList = null;
+
+	/**
+	 * id of the page the created page is assigned to
+	 * @var	integer
+	 */
+	public $parentID = null;
 
 	/**
 	 * publication date (ISO 8601)
@@ -116,10 +158,22 @@ class PageAddForm extends AbstractForm {
 	public $publicationDate = '';
 
 	/**
-	 * list of available styles
-	 * @var	array<\wcf\data\style\Style>
+	 * show order
+	 * @var	integer
 	 */
-	public $availableStyles = array();
+	public $showOrder = 0;
+
+	/**
+	 * indication whether the sidebar is visible
+	 * @var	integer
+	 */
+	public $showSidebar = CMS_PAGES_DEFAULT_GLOBAL_SIDEBAR;
+
+	/**
+	 * orientation of the sidebar ('left' or 'right')
+	 * @var	string
+	 */
+	public $sidebarOrientation = CMS_PAGES_DEFAULT_SIDEBAR;
 
 	/**
 	 * style id
@@ -128,17 +182,30 @@ class PageAddForm extends AbstractForm {
 	public $styleID = 0;
 
 	/**
+	 * list of all stylesheets
+	 * @var	\cms\data\stylesheet\StylesheetList
+	 */
+	public $stylesheetList = null;
+
+	/**
+	 * selected stylesheets
+	 * @var	array<integer>
+	 */
+	public $stylesheets = array();
+
+	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
 
+		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
+
+		// register i18n-values
 		I18nHandler::getInstance()->register('title');
 		I18nHandler::getInstance()->register('description');
 		I18nHandler::getInstance()->register('metaDescription');
 		I18nHandler::getInstance()->register('metaKeywords');
-
-		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
 
 		// get available styles
 		$this->availableStyles = StyleHandler::getInstance()->getStyles();
@@ -151,7 +218,6 @@ class PageAddForm extends AbstractForm {
 		parent::readFormParameters();
 
 		I18nHandler::getInstance()->readValues();
-		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
 		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
 		if (I18nHandler::getInstance()->isPlainValue('metaDescription')) $this->metaDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('metaDescription'));
 		if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
@@ -185,7 +251,7 @@ class PageAddForm extends AbstractForm {
 	public function validate() {
 		parent::validate();
 
-		if (!I18nHandler::getInstance()->validateValue('title')) {
+		if (!I18nHandler::getInstance()->validateValue('title', true)) {
 			throw new UserInputException('title', 'multilingual');
 		}
 
@@ -262,7 +328,6 @@ class PageAddForm extends AbstractForm {
 
 		$data = array(
 			'alias' => $this->alias,
-			'title' => $this->title,
 			'description' => $this->description,
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords,
@@ -290,33 +355,32 @@ class PageAddForm extends AbstractForm {
 			$data['deactivationDate'] = $dateTime->getTimestamp();
 		}
 
-		$objectAction = new PageAction(array(), 'create', array(
+		$this->objectAction = new PageAction(array(), 'create', array(
 			'data' => $data
 		));
-		$objectAction->executeAction();
+		$returnValues = $this->objectAction->executeAction();
 
-		$returnValues = $objectAction->getReturnValues();
 		$pageID = $returnValues['returnValues']->pageID;
 
 		// save ACL
 		ACLHandler::getInstance()->save($pageID, $this->objectTypeID);
 		ACLHandler::getInstance()->disableAssignVariables();
+
 		// update I18n
 		$update = array();
 
-		if (! I18nHandler::getInstance()->isPlainValue('title')) {
-			I18nHandler::getInstance()->save('title', 'cms.page.title' . $pageID, 'cms.page');
-			$update['title'] = 'cms.page.title' . $pageID;
-		}
-		if (! I18nHandler::getInstance()->isPlainValue('description')) {
+		I18nHandler::getInstance()->save('title', 'cms.page.title' . $pageID, 'cms.page');
+		$update['title'] = 'cms.page.title' . $pageID;
+
+		if (!I18nHandler::getInstance()->isPlainValue('description')) {
 			I18nHandler::getInstance()->save('description', 'cms.page.description' . $pageID, 'cms.page');
 			$update['description'] = 'cms.page.description' . $pageID;
 		}
-		if (! I18nHandler::getInstance()->isPlainValue('metaDescription')) {
+		if (!I18nHandler::getInstance()->isPlainValue('metaDescription')) {
 			I18nHandler::getInstance()->save('metaDescription', 'cms.page.metaDescription' . $pageID, 'cms.page');
 			$update['metaDescription'] = 'cms.page.metaDescription' . $pageID;
 		}
-		if (! I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
+		if (!I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
 			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $pageID, 'cms.page');
 			$update['metaKeywords'] = 'cms.page.metaKeywords' . $pageID;
 		}
@@ -353,26 +417,25 @@ class PageAddForm extends AbstractForm {
 			$update['menuItemID'] = $menuItem->menuItemID ?  : null;
 		}
 
-		if (! empty($update)) {
+		if (!empty($update)) {
 			$editor = new PageEditor($returnValues['returnValues']);
 			$editor->update($update);
 		}
 
-		//create revision
-		$objectAction = new PageAction(array(
-			$returnValues['returnValues']->pageID
-		), 'createRevision', array(
+		// create revision
+		$objectAction = new PageAction(array($pageID), 'createRevision', array(
 			'action' => 'create'
 		));
 		$objectAction->executeAction();
 
-		//update search index
-		$objectAction = new PageAction(array($returnValues['returnValues']->pageID), 'refreshSearchIndex');
+		// update search index
+		$objectAction = new PageAction(array($pageID), 'refreshSearchIndex');
 		$objectAction->executeAction();
 
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
-		$this->title = $this->description = $this->metaDescription = $this->metaKeywords = $this->alias = '';
+
+		$this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
 		$this->sidebarOrientation = 'right';
 		$this->deactivationDate = $this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->parentID = $this->publicationDate = $this->showOrder = $this->showSidebar = $this->styleID = 0;
 		$this->allowIndexing = $this->allowSubscribing = $this->menuItem = 1;

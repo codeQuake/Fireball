@@ -11,8 +11,8 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
 /**
- * Shows a list of contents
- *
+ * Shows a list of contents.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -35,10 +35,22 @@ class ContentListPage extends AbstractPage {
 	 */
 	public $pageList = null;
 
+	/**
+	 * list of content types
+	 * @var	array<\wcf\data\object\type\ObjectType>
+	 */
 	public $objectTypeList = null;
 
+	/**
+	 * id of the selected page
+	 * @var	integer
+	 */
 	public $pageID = 0;
 
+	/**
+	 * object of the selected page
+	 * @var	\cms\data\page\Page
+	 */
 	public $page = null;
 
 	/**
@@ -48,11 +60,9 @@ class ContentListPage extends AbstractPage {
 		parent::readParameters();
 
 		if (isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
-		if ($this->pageID) {
-			$this->page = PageCache::getInstance()->getPage($this->pageID);
-			if ($this->page === null) {
-				throw new IllegalLinkException();
-			}
+		$this->page = PageCache::getInstance()->getPage($this->pageID);
+		if ($this->page === null) {
+			throw new IllegalLinkException();
 		}
 	}
 
@@ -68,7 +78,6 @@ class ContentListPage extends AbstractPage {
 		$this->contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body', 1);
 		$this->contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar', 1);
 		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
-
 	}
 
 	/**

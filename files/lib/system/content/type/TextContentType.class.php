@@ -18,14 +18,19 @@ class TextContentType extends AbstractSearchableContentType {
 	 */
 	protected $icon = 'icon-file-text-alt';
 
-	public $multilingualFields = array(
-		'text'
-	);
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
+	 */
+	public $multilingualFields = array('text');
 
-	protected $searchableFields = array(
-		'text'
-	);
+	/**
+	 * @see	\cms\system\content\type\AbstractSearchableContentType::$searchableFields
+	 */
+	protected $searchableFields = array('text');
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 */
 	public function getFormTemplate() {
 		// init bbcodes
 		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
@@ -33,6 +38,9 @@ class TextContentType extends AbstractSearchableContentType {
 		return 'textContentType';
 	}
 
+	/**
+	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 */
 	public function getOutput(Content $content) {
 		$data = $content->handleContentData();
 		MessageParser::getInstance()->setOutputType('text/html');

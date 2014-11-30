@@ -45,16 +45,19 @@ final class PageUtil {
 	 * @return	string
 	 */
 	public static function buildAlias($title) {
+		// replace whitespace with hyphen
+		$alias = str_replace(' ', '-', $title);
+
 		// remove illegal characters
-		$title = preg_replace('~[^a-z0-9\-]+~', '', mb_strtolower($title));
+		$alias = preg_replace('~[^a-zA-Z0-9\-]+~', '', $alias);
 
 		// trim to maxlength
-		$title = mb_substr($title, 0, self::ALIAS_MAXLENGTH);
+		$alias = mb_substr($alias, 0, self::ALIAS_MAXLENGTH);
 
 		// remove hyphens from start and end of alias
-		$title = trim($title, '-');
+		$alias = trim($alias, '-');
 
-		return $title;
+		return $alias;
 	}
 
 	/**

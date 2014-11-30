@@ -29,7 +29,6 @@
 
 <header class="boxHeadline">
 	<h1>{lang}cms.acp.page.{@$action}{/lang}</h1>
-	{if $action == 'edit'}<p>{$page->getTitle()}</p>{/if}
 </header>
 
 {include file='formError'}
@@ -47,7 +46,7 @@
 					<div class="dropdownMenu">
 						<ul class="scrollableDropdownMenu">
 							{foreach from=$choosePageNodeList item=node}
-								<li{if $node->pageID == $pageID} class="active"{/if}><a href="{link application='cms' controller='PageEdit' id=$node->pageID}{/link}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</a></li>
+								<li{if $node->pageID == $pageID} class="active"{/if}><a href="{link application='cms' controller='PageEdit' id=$node->pageID}{/link}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$choosePageNodeList->getDepth()}{$node->getTitle()}</a></li>
 							{/foreach}
 						</ul>
 					</div>
@@ -194,7 +193,7 @@
 								<option value="0" {if $parentID == 0} selected="selected"{/if} data-alias="">{lang}wcf.global.noSelection{/lang}</option>
 								{content}
 									{foreach from=$pageList item=$node}
-										<option data-alias="{$node->getAlias()}" {if $node->pageID == $parentID} selected="selected" {/if} value="{@$node->pageID}">{section name=i loop=$pageList->getDepth()}&nbsp;&raquo;&raquo;&nbsp;{/section}{$node->getTitle()|language}</option>
+										<option data-alias="{$node->getAlias()}"{if $node->pageID == $parentID} selected="selected"{/if} value="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
 									{/foreach}
 								{/content}
 							</select>
@@ -289,16 +288,6 @@
 					</dd>
 				</dl>
 
-				<dl{if $errorField == 'sidebarOrientation'} class="formError"{/if}>
-					<dt><label for="sidebarOrientation">{lang}cms.acp.page.settings.sidebarOrientation{/lang}</label></dt>
-					<dd>
-						<select id="sidebarOrientation" name="sidebarOrientation">
-							<option value="right"{if $sidebarOrientation =="right"} selected="selected"{/if}>{lang}cms.acp.page.settings.sidebarOrientation.right{/lang}</option>
-							<option value="left"{if $sidebarOrientation =="left"} selected="selected"{/if}>{lang}cms.acp.page.settings.sidebarOrientation.left{/lang}</option>
-						</select>
-					</dd>
-				</dl>
-
 				<dl{if $errorField == 'isCommentable'} class="formError"{/if}>
 					<dt class="reversed"><label for="isCommentable">{lang}cms.acp.page.settings.isCommentable{/lang}</label></dt>
 					<dd>
@@ -337,9 +326,7 @@
 					<dd>
 						<select id="styleID" name="styleID">
 							<option value="0">{lang}wcf.global.noSelection{/lang}</option>
-							{foreach from=$availableStyles item=style}
-								<option value="{@$style->styleID}"{if $style->styleID == $styleID} selected="selected"{/if}>{$style->styleName}</option>
-							{/foreach}
+							{htmlOptions options=$availableStyles selected=$styleID}
 						</select>
 						<small>{lang}cms.acp.page.styleID.description{/lang}</small>
 					</dd>
@@ -349,25 +336,39 @@
 					<dl>
 						<dt>{lang}cms.acp.page.stylesheets{/lang}</dt>
 						<dd>
-							<select name="stylesheets[]" multiple="multiple" id="stylesheets" size="10">
-								{content}
-									{foreach from=$stylesheetList item=$sheet}
-										<option value="{$sheet->sheetID}" {if $sheet->sheetID|in_array:$stylesheets}selected="selected"{/if}>{$sheet->title}</option>
-									{/foreach}
-								{/content}
-							</select>
+							{content}
+								{htmlCheckboxes name='stylesheets' options=$stylesheetList selected=$stylesheets}
+							{/content}
 							{if $errorField == 'stylesheets'}
 								<small class="innerError">
 									{lang}cms.acp.page.stylesheets.error.{@$errorType}{/lang}
 								</small>
 							{/if}
-							<small>{lang}wcf.global.multiSelect{/lang}</small>
+							<small>{lang}cms.acp.page.stylesheets.description{/lang}</small>
 						</dd>
 					</dl>
 				{/hascontent}
 
 				{event name='displayFields'}
 			</fieldset>
+
+			<fieldset>
+				<legend>{lang}cms.acp.page.display.settings{/lang}</legend>
+
+				<dl{if $errorField == 'sidebarOrientation'} class="formError"{/if}>
+					<dt><label for="sidebarOrientation">{lang}cms.acp.page.display.settings.sidebarOrientation{/lang}</label></dt>
+					<dd>
+						<select id="sidebarOrientation" name="sidebarOrientation">
+							<option value="right"{if $sidebarOrientation =="right"} selected="selected"{/if}>{lang}cms.acp.page.display.settings.sidebarOrientation.right{/lang}</option>
+							<option value="left"{if $sidebarOrientation =="left"} selected="selected"{/if}>{lang}cms.acp.page.display.settings.sidebarOrientation.left{/lang}</option>
+						</select>
+					</dd>
+				</dl>
+
+				{event name='displaySettingsFields'}
+			</fieldset>
+
+			{event name='afterDisplayFieldsets'}
 		</div>
 
 		<div id="userPermissions" class="container containerPadding tabMenuContent">

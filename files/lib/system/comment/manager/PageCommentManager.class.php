@@ -8,6 +8,8 @@ use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
+ * Page comment manager.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -60,10 +62,9 @@ class PageCommentManager extends AbstractCommentManager {
 	 * @see	\wcf\system\comment\manager\ICommentManager::getLink()
 	 */
 	public function getLink($objectTypeID, $objectID) {
-		return LinkHandler::getInstance()->getLink('Page', array(
-			'application' => 'cms',
-			'id' => $objectID
-		));
+		$page = PageCache::getInstance()->getPage($objectID);
+
+		return $page->getLink();
 	}
 
 	/**
