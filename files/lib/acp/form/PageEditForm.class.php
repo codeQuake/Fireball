@@ -94,7 +94,7 @@ class PageEditForm extends PageAddForm {
 			'parentID' => ($this->parentID) ?  : null,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
-			'robots' => $this->robots,
+			'allowIndexing' => $this->allowIndexing,
 			'isCommentable' => $this->isCommentable,
 			'allowSubscribing' => $this->allowSubscribing,
 			'styleID' => ($this->styleID) ?: null,
@@ -242,7 +242,7 @@ class PageEditForm extends PageAddForm {
 			$this->parentID = $this->page->parentID;
 			$this->showOrder = $this->page->showOrder;
 			$this->invisible = $this->page->invisible;
-			$this->robots = $this->page->robots;
+			$this->allowIndexing = $this->page->allowIndexing;
 			$this->showSidebar = $this->page->showSidebar;
 			$this->sidebarOrientation = $this->page->sidebarOrientation;
 			$this->isCommentable = $this->page->isCommentable;
