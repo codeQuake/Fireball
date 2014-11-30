@@ -48,6 +48,12 @@ class PageAddForm extends AbstractForm {
 	public $alias = '';
 
 	/**
+	 * option to allow spiders to index the created page
+	 * @var	integer
+	 */
+	public $allowIndexing = CMS_PAGES_DEFAULT_ALLOW_INDEXING;
+
+	/**
 	 * option to allow subscribing the created page
 	 * @var	integer
 	 */
@@ -152,12 +158,6 @@ class PageAddForm extends AbstractForm {
 	public $publicationDate = '';
 
 	/**
-	 * directions for search robots
-	 * @var	string
-	 */
-	public $robots = CMS_PAGES_DEFAULT_ROBOTS;
-
-	/**
 	 * show order
 	 * @var	integer
 	 */
@@ -228,7 +228,7 @@ class PageAddForm extends AbstractForm {
 		if (isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
 		if (isset($_POST['menuItem'])) $this->menuItem = intval($_POST['menuItem']);
 		else $this->menuItem = 0;
-		if (isset($_POST['robots'])) $this->robots = StringUtil::trim($_POST['robots']);
+		$this->allowIndexing = (isset($_POST['allowIndexing'])) ? 1 : 0;
 		if (isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
 		if (isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
 		else $this->showSidebar = 0;
@@ -337,7 +337,7 @@ class PageAddForm extends AbstractForm {
 			'parentID' => ($this->parentID) ?  : null,
 			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
-			'robots' => $this->robots,
+			'allowIndexing' => $this->allowIndexing,
 			'isCommentable' => $this->isCommentable,
 			'allowSubscribing' => $this->allowSubscribing,
 			'styleID' => ($this->styleID) ?: null,
@@ -438,7 +438,7 @@ class PageAddForm extends AbstractForm {
 		$this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
 		$this->sidebarOrientation = 'right';
 		$this->deactivationDate = $this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->parentID = $this->publicationDate = $this->showOrder = $this->showSidebar = $this->styleID = 0;
-		$this->allowSubscribing = $this->menuItem = 1;
+		$this->allowIndexing = $this->allowSubscribing = $this->menuItem = 1;
 		I18nHandler::getInstance()->reset();
 	}
 
@@ -478,7 +478,7 @@ class PageAddForm extends AbstractForm {
 			'objectTypeID' => $this->objectTypeID,
 			'invisible' => $this->invisible,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
-			'robots' => $this->robots,
+			'allowIndexing' => $this->allowIndexing,
 			'description' => $this->description,
 			'alias' => $this->alias,
 			'parentID' => $this->parentID,

@@ -39,14 +39,10 @@
 				<categoryname>cms.pages.default</categoryname>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="cms_pages_default_robots">
-				<optiontype>select</optiontype>
+			<option name="cms_pages_default_allow_indexing">
+				<optiontype>boolean</optiontype>
 				<categoryname>cms.pages.default</categoryname>
-				<selectoptions><![CDATA[index,follow:wcf.acp.option.cms_pages_default_robots.indexfollow
-index,nofollow:wcf.acp.option.cms_pages_default_robots.indexnofollow
-noindex,follow:wcf.acp.option.cms_pages_default_robots.noindexfollow
-noindex,nofollow:wcf.acp.option.cms_pages_default_robots.noindexnofollow]]></selectoptions>
-				<defaultvalue><![CDATA[index,follow]]></defaultvalue>
+				<defaultvalue>1</defaultvalue>
 			</option>
 			<option name="cms_pages_default_global_sidebar">
 				<optiontype>boolean</optiontype>

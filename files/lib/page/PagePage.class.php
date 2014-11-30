@@ -164,7 +164,6 @@ class PagePage extends AbstractPage {
 		if ($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', WCF::getLanguage()->get($this->page->metaKeywords));
 		if ($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('description', 'description', WCF::getLanguage()->get($this->page->metaDescription));
 		if ($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('og:description', 'og:description', WCF::getLanguage()->get($this->page->metaDescription), true);
-		MetaTagHandler::getInstance()->addTag('robots', 'robots', $this->page->robots);
 		MetaTagHandler::getInstance()->addTag('generator', 'generator', 'Fireball CMS');
 		MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->page->getTitle() . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
 		MetaTagHandler::getInstance()->addTag('og:url', 'og:url', $this->page->getLink(), true);
@@ -187,7 +186,7 @@ class PagePage extends AbstractPage {
 			'commentList' => $this->commentList,
 			'commentObjectTypeID' => $this->commentObjectTypeID,
 			'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),
-			'allowSpidersToIndexThisPage' => true
+			'allowSpidersToIndexThisPage' => $this->page->allowIndexing
 		));
 
 		// sidebar

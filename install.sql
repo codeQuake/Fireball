@@ -9,7 +9,6 @@ CREATE TABLE cms1_page (
 	metaDescription MEDIUMTEXT,
 	metaKeywords VARCHAR(255),
 	availableDuringOfflineMode TINYINT(1) DEFAULT 0,
-	robots ENUM('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow') NOT NULL DEFAULT 'index,follow',
 	showOrder INT(10) DEFAULT 0,
 	menuItemID INT(10),
 
@@ -18,6 +17,11 @@ CREATE TABLE cms1_page (
 	isPublished TINYINT(1) NOT NULL DEFAULT 1,
 	publicationDate INT(10) NOT NULL DEFAULT 0,
 	deactivationDate INT(10) NOT NULL DEFAULT 0,
+
+	-- meta
+	metaDescription MEDIUMTEXT,
+	metaKeywords VARCHAR(255),
+	allowIndexing TINYINT(1) NOT NULL DEFAULT 1,
 
 	-- settings
 	isHome INT(1) DEFAULT 0,
