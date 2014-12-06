@@ -19,15 +19,6 @@
 		new CMS.ACP.File.Upload(true);
 
 		$('#fileAdd').hide();
-
-		$('#fileAddButton').click(function() {
-			$('#fileAdd').wcfDialog({
-				title: WCF.Language.get('cms.acp.file.add'),
-				onClose: function() {
-					location.reload();
-				}
-			});
-		});
 	});
 	//]]>
 </script>

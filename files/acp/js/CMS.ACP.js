@@ -195,25 +195,41 @@ CMS.ACP.File.Details = Class.extend({
 	}
 });
 
-CMS.ACP.File.Upload = WCF.Upload.extend({
+CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
+	/**
+	 * dialog overlay
+	 * @var	jQuery
+	 */
+	_dialog: null,
+
 	/**
 	 * @see	WCF.Upload.init()
 	 */
 	init: function(multiple) {
-		var options = {
-			action: 'upload',
-			multiple: multiple,
-			url: 'index.php/AJAXUpload/?t=' + SECURITY_TOKEN + SID_ARG_2ND
-		};
+		this._dialog = $('#fileAdd');
 
-		this._super($('#fileUploadButton'), $('.fileUpload ul'), 'cms\\data\\file\\FileAction', options);
+		$('#fileAddButton').click($.proxy(function() {
+			this._dialog.wcfDialog({
+				title: WCF.Language.get('cms.acp.file.add'),
+				onClose: function() {
+					location.reload();
+				}
+			});
+		}, this));
+
+		this._super($('#fileUploadButton'), $('.fileUpload ul'), 'cms\\data\\file\\FileAction');
 	},
 
 	/**
 	 * @see	WCF.Upload._initFile()
 	 */
 	_initFile: function(file) {
-		return $('<li class="box32"><span class="icon icon32 icon-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
+		$li = $('<li class="box32"><span class="icon icon32 icon-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
+
+		// redraw dialog
+		this._dialog.wcfDialog('render');
+
+		return $li;
 	},
 
 	/**
