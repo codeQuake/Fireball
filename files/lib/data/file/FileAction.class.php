@@ -75,11 +75,12 @@ class FileAction extends AbstractDatabaseObjectAction {
 		}
 
 		// validate category
-		if (isset($this->parameters['categoryID']) && $this->parameters['categoryID'] != 0) {
-			$category = CategoryHandler::getInstance()->getCategory(intval($this->parameters['categoryID']));
-			if ($category === null) {
-				throw new UserInputException('categoryID');
-			}
+		if (!isset($this->parameters['categoryID'])) {
+			throw new UserInputException('categoryID');
+		}
+		$category = CategoryHandler::getInstance()->getCategory(intval($this->parameters['categoryID']));
+		if ($category === null) {
+			throw new UserInputException('categoryID');
 		}
 	}
 
@@ -96,7 +97,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 				if (!$file->getValidationErrorType()) {
 					$data = array(
 						'title' => $file->getFilename(),
-						'categoryID' => (isset($this->parameters['categoryID']) && $this->parameters['categoryID'] != 0) ? $this->parameters['categoryID'] : null,
+						'categoryID' => $this->parameters['categoryID'],
 						'size' => $file->getFilesize(),
 						'type' => $file->getMimeType()
 					);

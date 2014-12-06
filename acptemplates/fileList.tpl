@@ -39,7 +39,6 @@
 				<a class="button dropdownToggle"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
 				<div class="dropdownMenu">
 					<ul class="scrollableDropdownMenu">
-						<li{if !$category} class="active"{/if}><a href="{link application='cms' controller='FileList'}{/link}">TODO</a></li>
 						{foreach from=$categoryList item=node}
 							<li{if $node->categoryID == $categoryID} class="active"{/if}><a href="{link application='cms' controller='FileList' id=$node->categoryID}{/link}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$categoryList->getDepth()}{$node->getTitle()}</a></li>
 						{/foreach}

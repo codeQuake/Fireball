@@ -32,11 +32,7 @@ class File extends CMSDatabaseObject implements ICategorizedObject, ILinkableObj
 	 * @see	\wcf\data\ICategorizedObject::getCategory()
 	 */
 	public function getCategory() {
-		if ($this->categoryID) {
-			return CategoryHandler::getInstance()->getCategory($this->categoryID);
-		}
-
-		return null;
+		return CategoryHandler::getInstance()->getCategory($this->categoryID);
 	}
 
 	/**

@@ -56,12 +56,10 @@ class FileListPage extends MultipleLinkPage {
 	public function readParameters() {
 		parent::readParameters();
 
-		if (isset($_REQUEST['id'])) {
-			$this->categoryID = intval($_REQUEST['id']);
-			$this->category = CategoryHandler::getInstance()->getCategory($this->categoryID);
-			if ($this->category === null) {
-				throw new IllegalLinkException();
-			}
+		if (isset($_REQUEST['id'])) $this->categoryID = intval($_REQUEST['id']);
+		$this->category = CategoryHandler::getInstance()->getCategory($this->categoryID);
+		if ($this->category === null) {
+			throw new IllegalLinkException();
 		}
 	}
 
@@ -82,11 +80,7 @@ class FileListPage extends MultipleLinkPage {
 	protected function initObjectList() {
 		parent::initObjectList();
 
-		if ($this->categoryID) {
-			$this->objectList->getConditionBuilder()->add('categoryID = ?', array($this->categoryID));
-		} else {
-			$this->objectList->getConditionBuilder()->add('categoryID IS NULL');
-		}
+		$this->objectList->getConditionBuilder()->add('categoryID = ?', array($this->categoryID));
 	}
 
 	/**

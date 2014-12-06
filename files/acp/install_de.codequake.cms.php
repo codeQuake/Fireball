@@ -1,6 +1,9 @@
 <?php
 use wcf\system\WCF;
 
+use wcf\data\category\CategoryEditor;
+use wcf\data\object\type\ObjectTypeCache;
+
 /**
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
@@ -19,3 +22,10 @@ $optionUpdate->execute(array(TIME_NOW, 'cms_install_date'));
 if (!defined('PAGE_TITLE') || !PAGE_TITLE) {
 	$optionUpdate->execute(array('Fireball CMS 2.0', 'page_title'));
 }
+
+// create default file category
+CategoryEditor::create(array(
+	'objectTypeID' => ObjectTypeCache::getInstance()->getObjectTypeIDByName('com.woltlab.wcf.category', 'de.codequake.cms.file'),
+	'title' => 'Default Category',
+	'time' => TIME_NOW
+));
