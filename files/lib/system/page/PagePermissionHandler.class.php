@@ -3,19 +3,28 @@ namespace cms\system\page;
 
 use cms\data\page\Page;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
+use wcf\data\user\User;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
 /**
+ * Manages page permissions.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
 class PagePermissionHandler extends SingletonFactory {
-
+	/**
+	 * cached permissions
+	 * @var	array
+	 */
 	protected $permissions = array();
 
+	/**
+	 * @see	\wcf\system\SingletonFactory::init()
+	 */
 	protected function init() {
 		$this->permissions = PagePermissionCacheBuilder::getInstance()->getData();
 	}
@@ -24,8 +33,18 @@ class PagePermissionHandler extends SingletonFactory {
 		PagePermissionCacheBuilder::getInstance()->reset();
 	}
 
-	public function getPermission(Page $page) {
-		$user = WCF::getUser();
+	/**
+	 * Returns the acl options for the given page and for the given user.
+	 * If no user is given, the active user is used.
+	 * 
+	 * @param	\cms\data\page\Page		$page
+	 * @param	\wcf\data\user\User		$user
+	 */
+	public function getPermission(Page $page, User $user = null) {
+		if ($user === null) {
+			$user = WCF::getUser();
+		}
+
 		$permissions = array();
 		if (isset($this->permissions[$page->pageID])) {
 			if (isset($this->permissions[$page->pageID]['group'])) {

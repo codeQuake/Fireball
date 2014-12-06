@@ -6,6 +6,8 @@ use wcf\data\comment\Comment;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 
 /**
+ * Notification event to notify the comment author about a new response.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>

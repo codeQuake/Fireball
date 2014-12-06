@@ -10,6 +10,8 @@ use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
 /**
+ * User activity event implementation for page comment responses.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>

@@ -18,7 +18,7 @@ use wcf\system\WCF;
  */
 class CMSCore extends AbstractApplication {
 	/**
-	 * @see AbstractApplication::$abbreviation
+	 * @see \wcf\system\application\AbstractApplication::$abbreviation
 	 */
 	protected $abbreviation = 'cms';
 
