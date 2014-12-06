@@ -17,8 +17,6 @@
 
 		new CMS.ACP.File.Details();
 		new CMS.ACP.File.Upload(true);
-
-		$('#fileAdd').hide();
 	});
 	//]]>
 </script>
@@ -29,7 +27,7 @@
 </header>
 
 <div class="contentNavigation">
-	{pages print=true assign=pagesLinks application='cms' controller="FileList" link="id=$categoryID&pageNo=%d"}
+	{pages print=true assign=pagesLinks application='cms' controller="FileList" link="id=$categoryID&pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 
 	<nav>
 		<ul>
@@ -54,7 +52,7 @@
 {if $objects|count}
 	<div class="tabularBox tabularBoxTitle marginTop">
 		<header>
-			<h2>{$category->getTitle()} <span class="badge badgeInverse">{#$objects|count}</span></h2>
+			<h2>{$category->getTitle()} <span class="badge badgeInverse">{#$items}</span></h2>
 		</header>
 
 		<table class="table jsClipboardContainer" data-type="de.codequake.cms.file">
@@ -106,7 +104,7 @@
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/if}
 
-<div id="fileAdd">
+<div id="fileAdd" style="display: none">
 	<div class="marginTop fileUpload" id="fileUpload">
 		<dl>
 			<dt>{lang}cms.acp.file.files{/lang}</dt>
