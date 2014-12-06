@@ -60,10 +60,10 @@
 		<table class="table jsClipboardContainer" data-type="de.codequake.cms.file">
 			<thead>
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-				<th class="columnID columnFileID" colspan="2">{lang}wcf.global.objectID{/lang}</th>
-				<th class="columnTitle columnFile" colspan="2">{lang}cms.acp.file.title{/lang}</th>
+				<th class="columnID columnFileID{if $sortField == 'fileID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=fileID&sortOrder={if $sortField == 'fileID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+				<th class="columnTitle columnFile{if $sortField == 'title'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=title&sortOrder={if $sortField == 'title' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.file.title{/lang}</a></th>
 				<th class="columnType">{lang}cms.acp.file.type{/lang}</th>
-				<th class="downloads">{lang}cms.acp.file.downloads{/lang}</th>
+				<th class="downloads{if $sortField == 'downloads'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=downloads&sortOrder={if $sortField == 'downloads' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.file.downloads{/lang}</a></th>
 
 				{event name='columnHeads'}
 			</thead>

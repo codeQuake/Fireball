@@ -3,7 +3,7 @@ namespace cms\acp\page;
 
 use cms\data\file\FileList;
 use wcf\data\category\CategoryNodeTree;
-use wcf\page\MultipleLinkPage;
+use wcf\page\SortablePage;
 use wcf\system\category\CategoryHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\IllegalLinkException;
@@ -17,7 +17,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class FileListPage extends MultipleLinkPage {
+class FileListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
@@ -42,6 +42,11 @@ class FileListPage extends MultipleLinkPage {
 	public $categoryList = null;
 
 	/**
+	 * @see	\wcf\page\SortablePage::$defaultSortField
+	 */
+	public $defaultSortField = 'title';
+
+	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('admin.cms.file.canAddFile');
@@ -50,6 +55,11 @@ class FileListPage extends MultipleLinkPage {
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
 	public $objectListClassName = 'cms\data\file\FileList';
+
+	/**
+	 * @see	\wcf\page\SortablePage::$validSortFields
+	 */
+	public $validSortFields = array('downloads', 'fileID', 'title');
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
