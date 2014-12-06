@@ -56,10 +56,17 @@ class FileListPage extends MultipleLinkPage {
 	public function readParameters() {
 		parent::readParameters();
 
-		if (isset($_REQUEST['id'])) $this->categoryID = intval($_REQUEST['id']);
-		$this->category = CategoryHandler::getInstance()->getCategory($this->categoryID);
-		if ($this->category === null) {
-			throw new IllegalLinkException();
+		if (isset($_REQUEST['id'])) {
+			$this->categoryID = intval($_REQUEST['id']);
+			$this->category = CategoryHandler::getInstance()->getCategory($this->categoryID);
+			if ($this->category === null) {
+				throw new IllegalLinkException();
+			}
+		} else {
+			// load first category
+			$categories = CategoryHandler::getInstance()->getCategories('de.codequake.cms.file');
+			$this->category = array_shift($categories);
+			$this->categoryID = $this->category->categoryID;
 		}
 	}
 

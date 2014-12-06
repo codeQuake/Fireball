@@ -129,22 +129,15 @@ CMS.ACP.File = {};
 
 CMS.ACP.File.Upload = WCF.Upload.extend({
 	/**
-	 * category id
-	 * @var	integer
-	 */
-	_categoryID: 0,
-
-	/**
 	 * @see	WCF.Upload.init()
 	 */
-	init: function(categoryID, multiple) {
+	init: function(multiple) {
 		var options = {
 			action: 'upload',
 			multiple: multiple,
 			url: 'index.php/AJAXUpload/?t=' + SECURITY_TOKEN + SID_ARG_2ND
 		};
 
-		this._categoryID = categoryID;
 		this._super($('#fileUploadButton'), $('.fileUpload ul'), 'cms\\data\\file\\FileAction', options);
 	},
 
@@ -160,7 +153,7 @@ CMS.ACP.File.Upload = WCF.Upload.extend({
 	 */
 	_getParameters: function() {
 		return {
-			'categoryID': this._categoryID
+			'categoryID': $('#categoryID').val()
 		};
 	},
 

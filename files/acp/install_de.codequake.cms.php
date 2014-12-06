@@ -1,8 +1,7 @@
 <?php
-use wcf\system\WCF;
-
 use wcf\data\category\CategoryEditor;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck

@@ -116,13 +116,15 @@
 
 	<category name="cms.acp.file">
 		<item name="cms.acp.file.add"><![CDATA[Dateien hochladen]]></item>
-		<item name="cms.acp.file.add.description"><![CDATA[Die Dateien werden im aktuell ausgewählten Ordner hochgeladen. Sie können mehrere Dateien auswählen, in dem Sie die STRG-Taste gedrückt halten.]]></item>
+		<item name="cms.acp.file.categoryID"><![CDATA[Kategorie]]></item>
 		<item name="cms.acp.file.delete.sure"><![CDATA[Wollen Sie diese Datei wirklich löschen?]]></item>
 		<item name="cms.acp.file.details"><![CDATA[Informationen]]></item>
 		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
 		<item name="cms.acp.file.error.empty"><![CDATA[Bitte laden Sie eine gültige Datei hoch.]]></item>
 		<item name="cms.acp.file.error.invalid"><![CDATA[Ungültige Dateiendung]]></item>
 		<item name="cms.acp.file.file"><![CDATA[Datei]]></item>
+		<item name="cms.acp.file.files"><![CDATA[Dateien]]></item>
+		<item name="cms.acp.file.files.description"><![CDATA[Sie können mehrere Dateien auswählen, in dem Sie die STRG-Taste gedrückt halten.]]></item>
 		<item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
 		<item name="cms.acp.file.list.description"><![CDATA[Hier finden Sie eine Auflistung Ihrer Dateien. Es gibt mehrere Möglichkeiten diese Dateien im System zu teilen. Standardmäßig geschieht dies über den entsprechenden Inhaltstyp. Aber auch ein Teilen über BBCode ist möglich.]]></item>
 		<item name="cms.acp.file.title"><![CDATA[Titel]]></item>

@@ -11,7 +11,7 @@
 		});
 
 		new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow');
-		new CMS.ACP.File.Upload({$categoryID}, true);
+		new CMS.ACP.File.Upload(true);
 
 		$('#fileAdd').hide();
 
@@ -127,9 +127,25 @@
 
 <div id="fileAdd">
 	<div class="marginTop fileUpload" id="fileUpload">
-		<ul></ul>
-		<div id="fileUploadButton"></div>
-		<small>{lang}cms.acp.file.add.description{/lang}</small>
+		<dl>
+			<dt>{lang}cms.acp.file.files{/lang}</dt>
+			<dd>
+				<ul></ul>
+				<div id="fileUploadButton"></div>
+				<small class="marginTopSmall">{lang}cms.acp.file.files.description{/lang}</small>
+			</dd>
+		</dl>
+
+		<dl class="marginTop">
+			<dt><label for="categoryID">{lang}cms.acp.file.categoryID{/lang}</label></dt>
+			<dd>
+				<select id="categoryID" name="categoryID">
+					{foreach from=$categoryList item=node}
+						<option value="{@$node->categoryID}"{if $node->categoryID == $categoryID} selected="selected"{/if}>{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$categoryList->getDepth()}{$node->getTitle()}</option>
+					{/foreach}
+				</select>
+			</dd>
+		</dl>
 	</div>
 </div>
 
