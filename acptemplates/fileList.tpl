@@ -9,7 +9,12 @@
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
-		new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow');
+		var actionObjects = { };
+		actionObjects['de.codequake.cms.file'] = { };
+		actionObjects['de.codequake.cms.file']['delete'] = new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow');
+
+		WCF.Clipboard.init('cms\\acp\\page\\FileListPage', {@$hasMarkedItems}, actionObjects);
+
 		new CMS.ACP.File.Details();
 		new CMS.ACP.File.Upload(true);
 
@@ -33,6 +38,8 @@
 </header>
 
 <div class="contentNavigation">
+	{pages print=true assign=pagesLinks application='cms' controller="FileList" link="id=$categoryID&pageNo=%d"}
+
 	<nav>
 		<ul>
 			<li class="dropdown">
@@ -48,7 +55,7 @@
 			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 icon-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
 			<li><a class="button" id="fileAddButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 
-			{event name='contentNavigationButtons'}
+			{event name='contentNavigationButtonsTop'}
 		</ul>
 	</nav>
 </div>
@@ -59,8 +66,9 @@
 			<h2>{$category->getTitle()} <span class="badge badgeInverse">{#$objects|count}</span></h2>
 		</header>
 
-		<table class="table">
+		<table class="table jsClipboardContainer" data-type="de.codequake.cms.file">
 			<thead>
+				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
 				<th class="columnID columnFileID" colspan="2">{lang}wcf.global.objectID{/lang}</th>
 				<th class="columnTitle columnFile" colspan="2">{lang}cms.acp.file.title{/lang}</th>
 				<th class="columnType">{lang}cms.acp.file.type{/lang}</th>
@@ -71,7 +79,8 @@
 
 			<tbody>
 				{foreach from=$objects item=file}
-					<tr class="jsFileRow">
+					<tr class="jsClipboardObject jsFileRow">
+						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$file->fileID}" /></td>
 						<td class="columnIcon">
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
 						</td>
@@ -86,6 +95,21 @@
 				{/foreach}
 			</tbody>
 		</table>
+	</div>
+
+	<div class="contentNavigation">
+		{@$pagesLinks}
+
+		<nav>
+			<ul>
+				<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 icon-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
+				<li><a class="button" id="fileAddButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+
+				{event name='contentNavigationButtonsBottom'}
+			</ul>
+		</nav>
+
+		<nav class="jsClipboardEditor" data-types="[ 'de.codequake.cms.file' ]"></nav>
 	</div>
 {else}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>

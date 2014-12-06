@@ -5,6 +5,7 @@ use cms\data\file\FileList;
 use wcf\data\category\CategoryNodeTree;
 use wcf\page\MultipleLinkPage;
 use wcf\system\category\CategoryHandler;
+use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
@@ -99,7 +100,8 @@ class FileListPage extends MultipleLinkPage {
 		WCF::getTPL()->assign(array(
 			'categoryID' => $this->categoryID,
 			'category' => $this->category,
-			'categoryList' => $this->categoryList
+			'categoryList' => $this->categoryList,
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.file'))
 		));
 	}
 }

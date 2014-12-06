@@ -399,6 +399,8 @@
 		<item name="wcf.clipboard.item.de.codequake.cms.content.delete.confirmMessage"><![CDATA[{if $count == 1}Ein Inhalt{else}{#$count} Inhalte{/if} löschen?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.disable"><![CDATA[Deaktivieren ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.enable"><![CDATA[Aktivieren ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.file.delete"><![CDATA[Löschen ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.file.delete.confirmMessage"><![CDATA[{if $count == 1}Eine Datei{else}{#$count} Dateien{/if} löschen?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete"><![CDATA[Löschen ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete.confirmMessage"><![CDATA[{if $count == 1}Eine Seite{else}{#$count} Seiten{/if} löschen?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.disable"><![CDATA[Deaktivieren ({#$count})]]></item>
@@ -406,6 +408,7 @@
 		<item name="wcf.clipboard.item.de.codequake.cms.stylesheet.delete"><![CDATA[Löschen ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.stylesheet.delete.confirmMessage"><![CDATA[{if $count == 1}Ein Stylesheet{else}{#$count} Stylesheets{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.content.marked"><![CDATA[{if $count == 1}Ein Inhalt{else}{#$count} Inhalte{/if} markiert]]></item>
+		<item name="wcf.clipboard.label.de.codequake.cms.file.marked"><![CDATA[{if $count == 1}Eine Datei{else}{#$count} Dateien{/if} markiert]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.page.marked"><![CDATA[{if $count == 1}Eine Seite{else}{#$count} Seiten{/if} markiert]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.stylesheet.marked"><![CDATA[{if $count == 1}Ein Stylesheet{else}{#$count} Stylesheets{/if} markiert]]></item>
 	</category>
