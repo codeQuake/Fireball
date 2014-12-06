@@ -1,4 +1,4 @@
-{include file='header' pageTitle='cms.acp.file.management'}
+{include file='header' pageTitle='cms.acp.file.list'}
 
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true">
