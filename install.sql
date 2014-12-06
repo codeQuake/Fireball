@@ -6,8 +6,6 @@ CREATE TABLE cms1_page (
 	parentID INT(10) DEFAULT NULL,
 	title VARCHAR(255) NOT NULL DEFAULT '',
 	description MEDIUMTEXT,
-	metaDescription MEDIUMTEXT,
-	metaKeywords VARCHAR(255),
 	availableDuringOfflineMode TINYINT(1) DEFAULT 0,
 	showOrder INT(10) DEFAULT 0,
 	menuItemID INT(10),
