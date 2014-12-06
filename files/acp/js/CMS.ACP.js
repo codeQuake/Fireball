@@ -127,6 +127,74 @@ CMS.ACP.Page.SetAsHome = Class.extend({
 
 CMS.ACP.File = {};
 
+CMS.ACP.File.Details = Class.extend({
+	/**
+	 * cache
+	 * @var	object
+	 */
+	_cache: { },
+
+	/**
+	 * list of 'fileDetails' links
+	 * @var	jQuery
+	 */
+	_links: null,
+
+	/**
+	 * proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+
+	/**
+	 * Initializes file details handler.
+	 */
+	init: function() {
+		this._links = $('.jsFileDetails');
+
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+
+		// bind events
+		this._links.click($.proxy(this._click, this));
+	},
+
+	/**
+	 * Handles clicking upon a 'fileDetails' button
+	 * 
+	 * @param	object		event
+	 */
+	_click: function(event) {
+		var $fileID = $(event.currentTarget).data('fileID');
+
+		if (this._cache[$fileID] === undefined) {
+			this._proxy.setOption('data', {
+				actionName: 'getDetails',
+				className: 'cms\\data\\file\\FileAction',
+				objectIDs: [$fileID]
+			});
+			this._proxy.sendRequest();
+		} else {
+			this._cache[$fileID].wcfDialog('open');
+		}
+	},
+
+	/**
+	 * Handles successful AJAX responses.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		this._cache[data.returnValues.fileID] = $(data.returnValues.template).hide().appendTo('body');
+		this._cache[data.returnValues.fileID].wcfDialog({
+			title: data.returnValues.title
+		});
+	}
+});
+
 CMS.ACP.File.Upload = WCF.Upload.extend({
 	/**
 	 * @see	WCF.Upload.init()

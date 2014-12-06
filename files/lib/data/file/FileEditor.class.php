@@ -36,7 +36,7 @@ class FileEditor extends DatabaseObjectEditor {
 	/**
 	 * Deletes the actual file.
 	 */
-	public function deletePicture() {
+	public function deleteFile() {
 		if (file_exists($this->getLocation())) {
 			@unlink($this->getLocation());
 		}

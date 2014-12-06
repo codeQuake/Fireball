@@ -6,11 +6,11 @@
 	$(function () {
 		WCF.Language.addObject({
 			'cms.acp.file.add': '{lang}cms.acp.file.add{/lang}',
-			'cms.acp.file.details': '{lang}cms.acp.file.details{/lang}',
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
 		new WCF.Action.Delete('cms\\data\\file\\FileAction', '.jsFileRow');
+		new CMS.ACP.File.Details();
 		new CMS.ACP.File.Upload(true);
 
 		$('#fileAdd').hide();
@@ -56,7 +56,7 @@
 {if $objects|count}
 	<div class="tabularBox tabularBoxTitle marginTop">
 		<header>
-			<h2>{lang}cms.acp.file.list{/lang} <span class="badge badgeInverse">{#$objects|count}</span></h2>
+			<h2>{$category->getTitle()} <span class="badge badgeInverse">{#$objects|count}</span></h2>
 		</header>
 
 		<table class="table">
@@ -77,46 +77,12 @@
 						</td>
 						<td class="columnID columnFileID">{@$file->fileID}</td>
 						<td class="columnIcon">{@$file->getIconTag()}</td>
-						<td class="columnTitle columnFile"><a id="file{$file->fileID}" class="jsTooltip" title="{lang}cms.acp.file.details{/lang}">{$file->getTitle()}</a></td>
+						<td class="columnTitle columnFile"><a class="jsFileDetails jsTooltip" title="{lang}cms.acp.file.details{/lang}" data-file-id="{@$file->fileID}">{$file->getTitle()}</a></td>
 						<td class="columnType">{$file->type}</td>
 						<td class="columnDownloads">{#$file->downloads}</td>
+
+						{event name='columnRows'}
 					</tr>
-
-					<div class="details" id="details{$file->fileID}" style="display: none;">
-						<fieldset>
-							<legend>{@$file->getIconTag()} <a href="{$file->getLink()}">{$file->getTitle()}</a></legend>
-
-							{if $file->type == 'image/png' || $file->type == 'image/jpeg' || $file->type == 'image/gif'}
-								<figure class="framed">
-									<img style="max-width: 300px" src="{$file->getLink()}" alt="" />
-									<figcaption><small>{$file->size|filesize} | {$file->type}</small></figcaption>
-								</figure>
-							{else}
-								<small>{$file->size|filesize} | {$file->type}</small>
-							{/if}
-						</fieldset>
-
-						<fieldset>
-							<legend>{lang}wcf.message.share{/lang}</legend>
-
-							<input type="text" readonly="readonly" class="long" value="[cmsfile={$file->fileID}][/cmsfile]" />
-							<br/><br/>
-							<input type="text" readonly="readonly" class="long" value="{$file->getLink()}" />
-						</fieldset>
-					</div>
-
-					<script data-relocate="true">
-						//<![CDATA[
-						$(function() {
-							$('#details{$file->fileID}').hide();
-							$('#file{$file->fileID}').click(function() {
-								$('#details{$file->fileID}').wcfDialog({
-									title: WCF.Language.get('cms.acp.file.details')
-								});
-							});
-						});
-						//]]>
-					</script>
 				{/foreach}
 			</tbody>
 		</table>

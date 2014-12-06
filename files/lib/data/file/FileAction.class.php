@@ -31,6 +31,31 @@ class FileAction extends AbstractDatabaseObjectAction {
 	 */
 	protected $requireACP = array('delete');
 
+	/**
+	 * Validate parameters and permissions to fetch details about a file.
+	 */
+	public function validateGetDetails() {
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
+	}
+
+	/**
+	 * Returns a formatted details view of a file.
+	 */
+	public function getDetails() {
+		$file = $this->getSingleObject();
+
+		WCF::getTPL()->assign(array(
+			'file' => $file
+		));
+
+		return array(
+			'fileID' => $file->fileID,
+			'template' => WCF::getTPL()->fetch('fileDetails', 'cms'),
+			'title' => $file->getTitle()
+		);
+	}
+
 	public function validateGetImages() { /* nothing */ }
 
 	/**
