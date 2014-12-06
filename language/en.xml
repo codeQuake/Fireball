@@ -422,6 +422,7 @@
 	</category>
 
 	<category name="wcf.dashboard">
+		<item name="wcf.dashboard.box.de.codequake.cms.latestPages"><![CDATA[Latest Pages]]></item>
 		<item name="wcf.dashboard.box.de.codequake.cms.mostViewedPages"><![CDATA[Most Viewed Pages]]></item>
 		<item name="wcf.dashboard.objectType.de.codequake.cms.page"><![CDATA[CMS: Pages]]></item>
 	</category>
