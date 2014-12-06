@@ -13,15 +13,24 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class ContentPollHandler extends AbstractPollHandler {
+	/**
+	 * @see	\wcf\system\poll\IPollHandler::canStartPublicPoll()
+	 */
 	public function canStartPublicPoll() {
 		return true;
 	}
 
+	/**
+	 * @see	\wcf\system\poll\IPollHandler::canVote()
+	 */
 	public function canVote() {
 		/**TODO**/
 		return (WCF::getSession()->getPermission('user.cms.content.canVotePoll') ? true : false);
 	}
 
+	/**
+	 * @see	\wcf\system\poll\IPollHandler::getRelatedObject()
+	 */
 	public function getRelatedObject(Poll $poll) {
 		$content = new Content($poll->objectID);
 		$data = $content->handleContentData();

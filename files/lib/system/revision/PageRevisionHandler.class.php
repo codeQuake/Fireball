@@ -11,9 +11,16 @@ use wcf\system\SingletonFactory;
  * @package	de.codequake.cms
  */
 class PageRevisionHandler extends SingletonFactory {
-
+	/**
+	 * list of revisions grouped by page id.
+	 * @var	array<array<\cms\data\page\Page>>
+	 */
 	protected $revisions = array();
 
+	/**
+	 * list of revision ids grouped by page id.
+	 * @var	array<array<integer>>
+	 */
 	protected $revisionIDs = array();
 
 	/**
@@ -24,6 +31,12 @@ class PageRevisionHandler extends SingletonFactory {
 		$this->revisionIDs = PageRevisionCacheBuilder::getInstance()->getData(array(), 'revisionIDs');
 	}
 
+	/**
+	 * Returns all revisions of the page with the given id.
+	 * 
+	 * @param	integer		$pageID
+	 * @return	array<\cms\data\page\Page>
+	 */
 	public function getRevisions($pageID) {
 		if (isset($this->revisions[$pageID])) {
 			return $this->revisions[$pageID];
@@ -32,6 +45,13 @@ class PageRevisionHandler extends SingletonFactory {
 		return array();
 	}
 
+	/**
+	 * Returns the revision with the given id.
+	 * 
+	 * @param	integer		$pageID
+	 * @param	integer		$revisionID
+	 * @return	\cms\data\page\Page
+	 */
 	public function getRevisionByID($pageID, $revisionID) {
 		if (isset($this->revisions[$pageID][$revisionID])) {
 			return $this->revisions[$pageID][$revisionID];
