@@ -237,7 +237,7 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 	 */
 	_getParameters: function() {
 		return {
-			'categoryID': $('#categoryID').val()
+			'categoryIDs': $('#categoryIDs').val()
 		};
 	},
 
@@ -255,14 +255,14 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 				// remove spinner icon
 				$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
 
-				// show noti
+				// show notification
 				var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
 				$notification.show();
 			} else {
-				//add fail icon
+				// add fail icon
 				$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
 
-				// err msg
+				// error message
 				$li.find('div > div').append($('<small class="innerError">'+WCF.Language.get('cms.acp.file.error.' + data.returnValues.errorType)+'</small>'));
 				$li.addClass('uploadFailed');
 			}

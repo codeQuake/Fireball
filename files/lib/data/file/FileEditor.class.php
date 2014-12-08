@@ -2,6 +2,7 @@
 namespace cms\data\file;
 
 use wcf\data\DatabaseObjectEditor;
+use wcf\system\WCF;
 
 /**
  * Functions to edit a file.
@@ -39,6 +40,34 @@ class FileEditor extends DatabaseObjectEditor {
 	public function deleteFile() {
 		if (file_exists($this->getLocation())) {
 			@unlink($this->getLocation());
+		}
+	}
+
+	/**
+	 * Updates category ids.
+	 * 
+	 * @param	array<integer>		$categoryIDs
+	 */
+	public function updateCategoryIDs(array $categoryIDs = array()) {
+		// remove old assigns
+		$sql = "DELETE FROM	cms".WCF_N."_file_to_category
+			WHERE		fileID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($this->fileID));
+
+		// new categories
+		if (!empty($categoryIDs)) {
+			WCF::getDB()->beginTransaction();
+
+			$sql = "INSERT INTO	cms".WCF_N."_file_to_category
+						(categoryID, fileID)
+				VALUES		(?, ?)";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			foreach ($categoryIDs as $categoryID) {
+				$statement->execute(array($categoryID, $this->fileID));
+			}
+
+			WCF::getDB()->commitTransaction();
 		}
 	}
 }

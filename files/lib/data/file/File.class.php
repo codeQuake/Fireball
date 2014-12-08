@@ -2,7 +2,6 @@
 namespace cms\data\file;
 
 use cms\data\CMSDatabaseObject;
-use wcf\data\ICategorizedObject;
 use wcf\data\ILinkableObject;
 use wcf\system\category\CategoryHandler;
 use wcf\system\request\IRouteController;
@@ -12,12 +11,24 @@ use wcf\system\WCF;
 /**
  * Represents a file.
  * 
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class File extends CMSDatabaseObject implements ICategorizedObject, ILinkableObject, IRouteController {
+class File extends CMSDatabaseObject implements ILinkableObject, IRouteController {
+	/**
+	 * list of category ids
+	 * @var	array<integer>
+	 */
+	public $categoryIDs = array();
+
+	/**
+	 * list of categories
+	 * @var	array<\wcf\data\category\Category>
+	 */
+	protected $categories = null;
+
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -29,10 +40,41 @@ class File extends CMSDatabaseObject implements ICategorizedObject, ILinkableObj
 	protected static $databaseTableIndexName = 'fileID';
 
 	/**
-	 * @see	\wcf\data\ICategorizedObject::getCategory()
+	 * Returns the category ids of this file.
+	 * 
+	 * @return	array<integer>
 	 */
-	public function getCategory() {
-		return CategoryHandler::getInstance()->getCategory($this->categoryID);
+	public function getCategoryIDs() {
+		if (empty($this->categoryIDs)) {
+			$sql = "SELECT	categoryID
+				FROM	cms".WCF_N."_file_to_category
+				WHERE	fileID = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($this->fileID));
+
+			while ($row = $statement->fetchArray()) {
+				$this->categoryIDs[] = $row['categoryID'];
+			}
+		}
+
+		return $this->categoryIDs;
+	}
+
+	/**
+	 * Returns the categories of this file.
+	 * 
+	 * @return	array<\wcf\data\category\Category>
+	 */
+	public function getCategories() {
+		if ($this->categories === null) {
+			$this->categories = array();
+
+			foreach ($this->getCategoryIDs() as $categoryID) {
+				$this->categories[$categoryID] = CategoryHandler::getInstance()->getCategory($categoryID);
+			}
+		}
+
+		return $this->categories;
 	}
 
 	/**

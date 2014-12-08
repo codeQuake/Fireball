@@ -118,7 +118,7 @@
 		<dl class="marginTop">
 			<dt><label for="categoryID">{lang}cms.acp.file.categoryID{/lang}</label></dt>
 			<dd>
-				<select id="categoryID" name="categoryID">
+				<select id="categoryIDs" name="categoryIDs" multiple="multiple" size="10">
 					{foreach from=$categoryList item=node}
 						<option value="{@$node->categoryID}"{if $node->categoryID == $categoryID} selected="selected"{/if}>{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$categoryList->getDepth()}{$node->getTitle()}</option>
 					{/foreach}

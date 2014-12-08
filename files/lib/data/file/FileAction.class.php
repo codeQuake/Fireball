@@ -5,6 +5,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\category\CategoryHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
+use wcf\util\ArrayUtil;
 use wcf\util\FileUtil;
 
 /**
@@ -100,12 +101,20 @@ class FileAction extends AbstractDatabaseObjectAction {
 		}
 
 		// validate category
-		if (!isset($this->parameters['categoryID'])) {
-			throw new UserInputException('categoryID');
+		if (!isset($this->parameters['categoryIDs'])) {
+			throw new UserInputException('categoryIDs');
 		}
-		$category = CategoryHandler::getInstance()->getCategory(intval($this->parameters['categoryID']));
-		if ($category === null) {
-			throw new UserInputException('categoryID');
+
+		// we receive the category ids as string due to convertion of
+		// javascript's FormData::append()
+		$this->parameters['categoryIDs'] = explode(',', $this->parameters['categoryIDs']);
+		$this->parameters['categoryIDs'] = ArrayUtil::toIntegerArray($this->parameters['categoryIDs']);
+
+		foreach ($this->parameters['categoryIDs'] as $categoryID) {
+			$category = CategoryHandler::getInstance()->getCategory($categoryID);
+			if ($category === null) {
+				throw new UserInputException('categoryIDs');
+			}
 		}
 	}
 
@@ -118,16 +127,16 @@ class FileAction extends AbstractDatabaseObjectAction {
 
 		foreach ($files as $file) {
 			try {
-				
 				if (!$file->getValidationErrorType()) {
 					$data = array(
 						'title' => $file->getFilename(),
-						'categoryID' => $this->parameters['categoryID'],
 						'size' => $file->getFilesize(),
 						'type' => $file->getMimeType()
 					);
 
 					$uploadedFile = FileEditor::create($data);
+					$uploadedFileEditor = new FileEditor($uploadedFile);
+					$uploadedFileEditor->updateCategoryIDs($this->parameters['categoryIDs']);
 
 					if (@move_uploaded_file($file->getLocation(), $uploadedFile->getLocation())) {
 						@unlink($file->getLocation());
@@ -141,8 +150,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 						);
 					} else {
 						// failure
-						$editor = new FileEditor($uploadedFile);
-						$editor->delete();
+						$uploadedFileEditor->delete();
 
 						throw new UserInputException('file', 'uploadFailed');
 					}

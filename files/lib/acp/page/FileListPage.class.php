@@ -1,7 +1,7 @@
 <?php
 namespace cms\acp\page;
 
-use cms\data\file\FileList;
+use cms\data\file\CategoryFileList;
 use wcf\data\category\CategoryNodeTree;
 use wcf\page\SortablePage;
 use wcf\system\category\CategoryHandler;
@@ -52,11 +52,6 @@ class FileListPage extends SortablePage {
 	public $neededPermissions = array('admin.cms.file.canAddFile');
 
 	/**
-	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
-	 */
-	public $objectListClassName = 'cms\data\file\FileList';
-
-	/**
 	 * @see	\wcf\page\SortablePage::$validSortFields
 	 */
 	public $validSortFields = array('downloads', 'fileID', 'title');
@@ -96,9 +91,7 @@ class FileListPage extends SortablePage {
 	 * @see	\wcf\page\MultipleLinkPage::initObjectList()
 	 */
 	protected function initObjectList() {
-		parent::initObjectList();
-
-		$this->objectList->getConditionBuilder()->add('categoryID = ?', array($this->categoryID));
+		$this->objectList = new CategoryFileList(array($this->categoryID));
 	}
 
 	/**

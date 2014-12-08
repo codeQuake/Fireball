@@ -97,11 +97,18 @@ CREATE TABLE cms1_stylesheet (
 DROP TABLE IF EXISTS cms1_file;
 CREATE TABLE cms1_file (
 	fileID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	categoryID INT(10) NOT NULL,
 	title VARCHAR(255) NOT NULL,
 	size INT(10) NOT NULL,
 	type VARCHAR(255) NOT NULL,
 	downloads INT(10) DEFAULT 0
+);
+
+DROP TABLE IF EXISTS cms1_file_to_category;
+CREATE TABLE cms1_file_to_category (
+	fileID INT(10) NOT NULL,
+	categoryID INT(10) NOT NULL,
+
+	PRIMARY KEY (fileID, categoryID)
 );
 
 -- counter
@@ -127,7 +134,8 @@ ALTER TABLE cms1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_
 ALTER TABLE cms1_content_revision ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE cms1_content_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 
-ALTER TABLE cms1_file ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
+ALTER TABLE cms1_file_to_category ADD FOREIGN KEY (fileID) REFERENCES cms1_file (fileID) ON DELETE CASCADE;
+ALTER TABLE cms1_file_to_category ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;
