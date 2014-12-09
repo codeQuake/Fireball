@@ -118,7 +118,6 @@
 		<item name="cms.acp.file.add"><![CDATA[Dateien hochladen]]></item>
 		<item name="cms.acp.file.categoryID"><![CDATA[Kategorie]]></item>
 		<item name="cms.acp.file.delete.sure"><![CDATA[Wollen Sie diese Datei wirklich löschen?]]></item>
-		<item name="cms.acp.file.details"><![CDATA[Informationen]]></item>
 		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
 		<item name="cms.acp.file.error.empty"><![CDATA[Bitte laden Sie eine gültige Datei hoch.]]></item>
 		<item name="cms.acp.file.error.invalid"><![CDATA[Ungültige Dateiendung]]></item>

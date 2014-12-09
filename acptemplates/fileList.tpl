@@ -75,7 +75,7 @@
 						</td>
 						<td class="columnID columnFileID">{@$file->fileID}</td>
 						<td class="columnIcon">{@$file->getIconTag()}</td>
-						<td class="columnTitle columnFile"><a class="jsFileDetails jsTooltip" title="{lang}cms.acp.file.details{/lang}" data-file-id="{@$file->fileID}">{$file->getTitle()}</a></td>
+						<td class="columnTitle columnFile"><a class="jsFileDetails" data-file-id="{@$file->fileID}">{$file->getTitle()}</a></td>
 						<td class="columnType">{$file->type}</td>
 						<td class="columnDownloads">{#$file->downloads}</td>
 

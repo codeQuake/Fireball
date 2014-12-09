@@ -118,7 +118,6 @@
 		<item name="cms.acp.file.add"><![CDATA[Upload Files]]></item>
 		<item name="cms.acp.file.categoryID"><![CDATA[Category]]></item>
 		<item name="cms.acp.file.delete.sure"><![CDATA[Are you sure you want to delete this file?]]></item>
-		<item name="cms.acp.file.details"><![CDATA[Information]]></item>
 		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
 		<item name="cms.acp.file.error.empty"><![CDATA[Please upload a file.]]></item>
 		<item name="cms.acp.file.error.invalid"><![CDATA[Invalid file]]></item>
