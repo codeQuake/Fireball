@@ -1,6 +1,7 @@
 <?php
 namespace cms\data\file;
 
+use wcf\data\category\CategoryNodeTree;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\category\CategoryHandler;
 use wcf\system\exception\UserInputException;
@@ -57,39 +58,79 @@ class FileAction extends AbstractDatabaseObjectAction {
 		);
 	}
 
-	public function validateGetImages() { /* nothing */ }
-
 	/**
-	 * Returns a formatted list of all images
+	 * Validates parameters and permissions to fetch a rendered list of
+	 * files.
 	 */
-	public function getImages() {
-		if ($this->parameters['imageID']) {
-			$image = new File($this->parameters['imageID']);
-			if ($image->imageID) {
-				WCF::getTPL()->assign('image', $image);
+	public function validateGetFileList() {
+		// validate category
+		$this->readInteger('categoryID', true);
+		if ($this->parameters['categoryID']) {
+			$category = CategoryHandler::getInstance()->getCategory($this->parameters['categoryID']);
+			if ($category === null) {
+				throw new UserInputException('categoryID');
 			}
 		}
 
-		// file images
-		$list = new FileList();
-		$list->getConditionBuilder()->add('file.type LIKE ?', array('image/%'));
-		$list->getConditionBuilder()->add('file.folderID =  ?', array('0'));
-		$list->readObjects();
-		$imageList = $list->getObjects();
+		// validate type
+		$this->readString('type', true);
+		$allowedTypes = array('code', 'film', 'music', 'pdf', 'picture');
+		if ($this->parameters['type'] && !in_array($this->parameters['type'], $allowedTypes)) {
+			throw new UserInputException('type');
+		}
+	}
 
-		$list = new FolderList();
-		$list->readObjects();
-		$folderList = $list->getObjects();
+	/**
+	 * Returns a formatted list of files. In case no category is specified,
+	 * the complete markup for a dialog is returned, otherwise only a
+	 * rendered list of files.
+	 */
+	public function getFileList() {
+		// load category
+		if ($this->parameters['categoryID']) {
+			$category = CategoryHandler::getInstance()->getCategory($this->parameters['categoryID']);
+		} else {
+			// load first category
+			$categories = CategoryHandler::getInstance()->getCategories('de.codequake.cms.file');
+			$category = array_shift($categories);
+		}
 
+		// load files assigned to the category
+		$fileList = new CategoryFileList(array($category->categoryID));
+		$fileList->sqlOrderBy = 'title ASC';
+		if ($this->parameters['type']) {
+			$fileList->getConditionBuilder()->add('file.type LIKE ?', array($this->parameters['type'].'%'));
+		}
+		$fileList->readObjects();
+
+		// output
 		WCF::getTPL()->assign(array(
-			'images' => $imageList,
-			'folders' => $folderList
+			'category' => $category,
+			'fileList' => $fileList
 		));
 
-		return array(
-			'images' => $imageList,
-			'template' => WCF::getTPL()->fetch('imageContentList', 'cms')
-		);
+		if ($this->parameters['categoryID']) {
+			// category specified => only return formatted list of
+			// files.
+			return array(
+				'categoryID' => $category->categoryID,
+				'template' => WCF::getTPL()->fetch('categoryFileListDialog', 'cms')
+			);
+		} else {
+			// category wasn't specified => return markup for a
+			// complete dialog, not only the formatted file list.
+			$categoryNodeTree = new CategoryNodeTree('de.codequake.cms.file', 0, true);
+			$this->categoryList = $categoryNodeTree->getIterator();
+
+			WCF::getTPL()->assign(array(
+				'categoryList' => $this->categoryList
+			));
+
+			return array(
+				'categoryID' => $category->categoryID,
+				'template' => WCF::getTPL()->fetch('fileListDialog', 'cms')
+			);
+		}
 	}
 
 	/**

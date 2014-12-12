@@ -195,6 +195,154 @@ CMS.ACP.File.Details = Class.extend({
 	}
 });
 
+CMS.ACP.File.Picker = Class.extend({
+	/**
+	 * dialog object
+	 * @var	jQuery
+	 */
+	_dialog: null,
+
+	/**
+	 * name of the input used to send selected files to server
+	 * @var	string
+	 */
+	_inputName: 'fileID',
+
+	/**
+	 * Options for this file picker.
+	 * 
+	 * Supported options:
+	 * - multiple: Indicates whether user only can select one or multiple
+	 *             files.
+	 * 
+	 * @var	object
+	 */
+	_options: null,
+
+	/**
+	 * proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+
+	/**
+	 * select button to open the picker
+	 * @var	jQuery
+	 */
+	_selectButton: null,
+
+	/**
+	 * ids of selected files
+	 * @var	array<integer>
+	 */
+	_selected: null,
+
+	/**
+	 * Initialises a new file picker.
+	 * 
+	 * @param	jQuery		selectButton
+	 * @param	string		inputName
+	 * @param	array		defaultValues
+	 * @param	object		options
+	 */
+	init: function(selectButton, inputName, defaultValues, options) {
+		this._selectButton = selectButton;
+		this._inputName = inputName;
+		this._selected = defaultValues || [ ];
+		this._options = $.extend(true, {
+			multiple: false
+		}, options);
+
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+
+		// bind events
+		this._selectButton.click($.proxy(this._openPicker, this));
+	},
+
+	/**
+	 * Handles clicking upon a category in the category selection dropdown.
+	 * 
+	 * @param	object		event
+	 */
+	_dropdownCategoryClick: function(event) {
+		var $categoryID = $(event.currentTarget).data('categoryID');
+		this._openCategory($categoryID);
+	},
+
+	/**
+	 * Displays the file list of the selected category. In case the file
+	 * list for that category wasn't loaded yet, the list will be fetched
+	 * automatically.
+	 * 
+	 * @param	integer		categoryID
+	 */
+	_openCategory: function(categoryID) {
+		var $tabularBox = this._dialog.find('.tabularBox[data-category-id="'+ categoryID +'"]');
+		if ($tabularBox.length) {
+			this._dialog.find('.tabularBox').hide();
+			$tabularBox.show();
+
+			// update dropdown
+			$dropdownMenu = WCF.Dropdown.getDropdownMenu($('.filePickerCategoryDropdown').wcfIdentify());
+			$dropdownMenu.find('li.active').removeClass('active');
+			$dropdownMenu.find('li[data-category-id="'+ categoryID +'"]').addClass('active');
+
+			// redraw dialog
+			this._dialog.wcfDialog('render');
+		} else {
+			this._proxy.setOption('data', {
+				actionName: 'getFileList',
+				className: 'cms\\data\\file\\FileAction',
+				parameters: {
+					categoryID: categoryID
+				}
+			});
+			this._proxy.sendRequest();
+		}
+	},
+
+	/**
+	 * Opens the picker when clicking on the select button
+	 */
+	_openPicker: function() {
+		if (this._dialog === null) {
+			this._proxy.setOption('data', {
+				actionName: 'getFileList',
+				className: 'cms\\data\\file\\FileAction'
+			});
+			this._proxy.sendRequest();
+		} else {
+			this._dialog.wcfDialog('open');
+		}
+	},
+
+	/**
+	 * Handles successful AJAX responses.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		if (this._dialog === null) {
+			// first call, init dialog
+			this._dialog = $(data.returnValues.template).hide();
+			this._dialog.find('.filePickerCategoryDropdown li').click($.proxy(this._dropdownCategoryClick, this));
+
+			this._dialog.appendTo('body');
+			this._dialog.wcfDialog({
+				title: WCF.Language.get('cms.acp.file.picker')
+			});
+		} else {
+			// loaded new category data
+			$(data.returnValues.template).hide().appendTo(this._dialog);
+			this._openCategory(data.returnValues.categoryID);
+		}
+	}
+});
+
 CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 	/**
 	 * dialog overlay
@@ -295,80 +443,7 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 });
 
 CMS.ACP.Content = {};
-
-CMS.ACP.Content.Image = Class.extend({
-	_cache: [],
-	_dialog: null,
-	_didInit: false,
-
-	_button: null,
-	_proxy: null,
-	_field: null,
-
-	init: function(button, field){
-		this._button = button;
-		this._field = field;
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success,this)
-		});
-
-		//add click event
-		this._button.click($.proxy(this._click, this));
-	},
-
-	_click: function(event) {
-		event.preventDefault();
-		var $target = $(event.currentTarget);
-		this.button = $target;
-
-		if (this._dialog == null) {
-			this._dialog = $('<div id="images" />').appendTo(document.body);
-
-			this._proxy.setOption('data',{
-				actionName: 'getImages',
-				className: 'cms\\data\\file\\FileAction',
-				parameters: {
-					imageID: this._field.val()
-				}
-			});
-			this._proxy.sendRequest();
-		} else this._dialog.wcfDialog('open');
-	},
-
-	_success: function(data, textStatus, jqXHR) {
-
-		if (this.didInit) {
-			this.dialog.find('#images').html(data.returnValues.template);
-			this._dialog.wcfDialog('render');
-		}
-		else {
-			this._dialog.html(data.returnValues.template);
-			this._dialog.wcfDialog({
-				title: WCF.Language.get('cms.acp.content.type.de.codequake.cms.content.type.image.select')
-			});
-			this._dialog.wcfDialog('render');
-			this._didInit = true;
-		}
-
-		//find image & add click handler
-		this._dialog.find('.jsFileImage').click($.proxy(this._imageSelect, this));
-		//mark as active
-		this._dialog.find('.jsFileImage[data-object-id="'+ this._field.val() +'"]').addClass('active');
-	},
-
-	_imageSelect: function(event) {
-		var $image = $(event.currentTarget);
-
-		this._field.val($image.data('objectID'));
-		$('#width').val($image.data('width'));
-		$('#height').val($image.data('height'));
-		ratio = new CMS.ACP.Image.Ratio($image.data('width'), $image.data('height'));
-
-		$image.clone().appendTo($('.image ul').html(''));
-
-		this._dialog.wcfDialog('close');
-	}
-});
+CMS.ACP.Content.Image = {};
 
 CMS.ACP.Content.Image.Gallery = Class.extend({
 	_cache: [],
