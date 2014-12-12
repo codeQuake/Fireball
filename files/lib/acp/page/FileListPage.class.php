@@ -54,7 +54,7 @@ class FileListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\SortablePage::$validSortFields
 	 */
-	public $validSortFields = array('downloads', 'fileID', 'title');
+	public $validSortFields = array('downloads', 'fileID', 'filesize', 'title', 'uploadTime');
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()

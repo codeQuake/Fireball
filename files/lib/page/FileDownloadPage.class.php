@@ -76,9 +76,9 @@ class FileDownloadPage extends AbstractPage {
 
 		$this->fileReader = new FileReader($this->file->getLocation(), array(
 			'filename' => $this->file->getTitle(),
-			'mimeType' => $this->file->type,
+			'mimeType' => $this->file->fileType,
 			'filesize' => $this->file->size,
-			'showInline' => (in_array($this->file->type, self::$inlineMimeTypes)),
+			'showInline' => (in_array($this->file->fileType, self::$inlineMimeTypes)),
 			'enableRangeSupport' => false,
 			'lastModificationTime' => TIME_NOW,
 			'expirationDate' => TIME_NOW + 31536000,

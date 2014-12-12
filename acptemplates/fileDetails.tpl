@@ -2,13 +2,13 @@
 	<fieldset>
 		<legend>{@$file->getIconTag()} <a href="{$file->getLink()}">{$file->getTitle()}</a></legend>
 
-		{if $file->type == 'image/png' || $file->type == 'image/jpeg' || $file->type == 'image/gif'}
+		{if $file->fileType == 'image/png' || $file->fileType == 'image/jpeg' || $file->fileType == 'image/gif'}
 			<figure class="framed">
 				<img style="max-width: 300px" src="{$file->getLink()}" alt="" />
-				<figcaption><small>{$file->size|filesize} | {$file->type}</small></figcaption>
+				<figcaption><small>{$file->size|filesize} | {$file->fileType}</small></figcaption>
 			</figure>
 		{else}
-			<small>{$file->size|filesize} | {$file->type}</small>
+			<small>{$file->size|filesize} | {$file->fileType}</small>
 		{/if}
 	</fieldset>
 

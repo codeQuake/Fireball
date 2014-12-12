@@ -124,10 +124,12 @@
 		<item name="cms.acp.file.file"><![CDATA[File]]></item>
 		<item name="cms.acp.file.files"><![CDATA[Files]]></item>
 		<item name="cms.acp.file.files.description"><![CDATA[You are able to upload multiple files by pressing CTRL.]]></item>
+		<item name="cms.acp.file.filesize"><![CDATA[Size]]></item>
+		<item name="cms.acp.file.fileType"><![CDATA[Type]]></item>
 		<item name="cms.acp.file.list"><![CDATA[Files]]></item>
 		<item name="cms.acp.file.list.description"><![CDATA[This is a list of all your files. You can easily share them via BBCode or content type.]]></item>
-		<item name="cms.acp.file.title"><![CDATA[Title]]></item>
-		<item name="cms.acp.file.type"><![CDATA[Type]]></item>
+		<item name="cms.acp.file.picker"><![CDATA[Choose File]]></item>
+		<item name="cms.acp.file.uploadTime"><![CDATA[Upload Time]]></item>
 	</category>
 
 	<category name="cms.acp.menu">

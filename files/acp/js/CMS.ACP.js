@@ -203,17 +203,23 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 	_dialog: null,
 
 	/**
+	 * callback executed when overlay is closed.
+	 * @var	function
+	 */
+	_onClose: null,
+
+	/**
+	 * @param	function		onClose
 	 * @see	WCF.Upload.init()
 	 */
-	init: function(multiple) {
+	init: function(onClose) {
+		this._onClose = onClose || null;
 		this._dialog = $('#fileAdd');
 
 		$('#fileAddButton').click($.proxy(function() {
 			this._dialog.wcfDialog({
 				title: WCF.Language.get('cms.acp.file.add'),
-				onClose: function() {
-					location.reload();
-				}
+				onClose: $.proxy(this._onClose, this)
 			});
 		}, this));
 
@@ -244,32 +250,36 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 	/**
 	 * @see	WCF.Upload._success()
 	 */
-	_success: function(uploadID, data) {
-		var $li = this._fileListSelector.find('li');
+	_success: function(internalFileID, data) {
+		var $li = this._uploadMatrix[internalFileID];
 
 		// remove progressbar
 		$li.find('progress').remove();
 
-		$.each(data.returnValues, function(key, value) {
-			if (value.fileID) {
-				// remove spinner icon
-				$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
+		if (data.returnValues.files[internalFileID]) {
+			var $fileData = data.returnValues.files[internalFileID];
 
-				// show notification
-				var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-				$notification.show();
-			} else {
-				// add fail icon
-				$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
+			// remove spinner icon
+			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
 
-				// error message
-				$li.find('div > div').append($('<small class="innerError">'+WCF.Language.get('cms.acp.file.error.' + data.returnValues.errorType)+'</small>'));
-				$li.addClass('uploadFailed');
+			// update file size
+			$li.find('small').append($fileData.formattedFilesize);
+		} else {
+			var $errorType = 'uploadFailed';
+			if (data.returnValues.errors[internalFileID]) {
+				$errorType = data.returnValues.errors[internalFileID].errorType;
 			}
 
-			// webkit suxxx
-			$li.css('display', 'block');
-		});
+			// add fail icon
+			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
+
+			// error message
+			$li.find('div > div').append($('<small class="innerError">' + WCF.Language.get('cms.acp.file.error.' + $errorType) + '</small>'));
+			$li.addClass('uploadFailed');
+		}
+
+		// webkit suxxx
+		$li.css('display', 'block');
 
 		WCF.DOMNodeInsertedHandler.execute();
 	},

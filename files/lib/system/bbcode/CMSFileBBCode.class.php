@@ -31,7 +31,7 @@ class CMSFileBBCode extends AbstractBBCode {
 
 		if ($file === null) return '';
 
-		if (preg_match('~(image/*)+~', $file->type)) $this->isImage = true;
+		if (preg_match('~(image/*)+~', $file->fileType)) $this->isImage = true;
 
 		if ($this->isImage && isset($openingTag['attributes'][1])) {
 			$this->align = $openingTag['attributes'][1];

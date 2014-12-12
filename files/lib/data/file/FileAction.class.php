@@ -11,7 +11,7 @@ use wcf\util\FileUtil;
 /**
  * Executes file-related actions.
  * 
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -105,8 +105,8 @@ class FileAction extends AbstractDatabaseObjectAction {
 			throw new UserInputException('categoryIDs');
 		}
 
-		// we receive the category ids as string due to convertion of
-		// javascript's FormData::append()
+		// we receive the category ids as string due to the convertion
+		// of javascript's FormData::append()
 		$this->parameters['categoryIDs'] = explode(',', $this->parameters['categoryIDs']);
 		$this->parameters['categoryIDs'] = ArrayUtil::toIntegerArray($this->parameters['categoryIDs']);
 
@@ -123,44 +123,66 @@ class FileAction extends AbstractDatabaseObjectAction {
 	 */
 	public function upload() {
 		$files = $this->parameters['__files']->getFiles();
-		$return = array();
+		$failedUploads = array();
+		$result = array('files' => array(), 'errors' => array());
 
 		foreach ($files as $file) {
 			try {
-				if (!$file->getValidationErrorType()) {
-					$data = array(
-						'title' => $file->getFilename(),
-						'size' => $file->getFilesize(),
-						'type' => $file->getMimeType()
+				if ($file->getValidationErrorType()) {
+					$failedUploads[] = $file;
+					continue;
+				}
+
+				$data = array(
+					'title' => $file->getFilename(),
+					'filesize' => $file->getFilesize(),
+					'fileType' => $file->getMimeType(),
+					'fileHash' => sha1_file($file->getLocation()),
+					'uploadTime' => TIME_NOW
+				);
+
+				$uploadedFile = FileEditor::create($data);
+				$uploadedFileEditor = new FileEditor($uploadedFile);
+				$uploadedFileEditor->updateCategoryIDs($this->parameters['categoryIDs']);
+
+				// create subdirectory if necessary
+				$dir = dirname($uploadedFile->getLocation());
+				if (!@file_exists($dir)) {
+					FileUtil::makePath($dir, 0777);
+				}
+
+				// move uploaded file
+				if (@move_uploaded_file($file->getLocation(), $uploadedFile->getLocation())) {
+					@unlink($file->getLocation());
+
+					$result['files'][$file->getInternalFileID()] = array(
+						'fileID' => $uploadedFile->fileID,
+						'title' => $uploadedFile->getTitle(),
+						'filesize' => $uploadedFile->filesize,
+						'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->filesize)
 					);
+				} else {
+					// failure
+					$uploadedFileEditor->delete();
 
-					$uploadedFile = FileEditor::create($data);
-					$uploadedFileEditor = new FileEditor($uploadedFile);
-					$uploadedFileEditor->updateCategoryIDs($this->parameters['categoryIDs']);
-
-					if (@move_uploaded_file($file->getLocation(), $uploadedFile->getLocation())) {
-						@unlink($file->getLocation());
-
-						$return[] = array(
-							'fileID' => $uploadedFile->fileID,
-							'categoryID' => $uploadedFile->categoryID,
-							'title' => $uploadedFile->getTitle(),
-							'filesize' => $uploadedFile->filesize,
-							'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->filesize)
-						);
-					} else {
-						// failure
-						$uploadedFileEditor->delete();
-
-						throw new UserInputException('file', 'uploadFailed');
-					}
+					throw new UserInputException('file', 'uploadFailed');
 				}
 			}
 			catch (UserInputException $e) {
 				$file->setValidationErrorType($e->getType());
+				$failedUploads[] = $file;
 			}
 		}
 
-		return $return;
+		// return results
+		foreach ($failedUploads as $failedUpload) {
+			$result['errors'][$failedUpload->getInternalFileID()] = array(
+				'title' => $failedUpload->getFilename(),
+				'filesize' => $failedUpload->getFilesize(),
+				'errorType' => $failedUpload->getValidationErrorType()
+			);
+		}
+
+		return $result;
 	}
 }

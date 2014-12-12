@@ -16,7 +16,11 @@
 		WCF.Clipboard.init('cms\\acp\\page\\FileListPage', {@$hasMarkedItems}, actionObjects);
 
 		new CMS.ACP.File.Details();
-		new CMS.ACP.File.Upload(true);
+		new CMS.ACP.File.Upload(function() {
+			if (this._fileListSelector.children('li').length) {
+				location.reload();
+			}
+		});
 	});
 	//]]>
 </script>
@@ -59,9 +63,11 @@
 			<thead>
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
 				<th class="columnID columnFileID{if $sortField == 'fileID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=fileID&sortOrder={if $sortField == 'fileID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
-				<th class="columnTitle columnFile{if $sortField == 'title'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=title&sortOrder={if $sortField == 'title' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.file.title{/lang}</a></th>
-				<th class="columnType">{lang}cms.acp.file.type{/lang}</th>
-				<th class="downloads{if $sortField == 'downloads'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=downloads&sortOrder={if $sortField == 'downloads' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.file.downloads{/lang}</a></th>
+				<th class="columnTitle columnFilename{if $sortField == 'title'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=title&sortOrder={if $sortField == 'title' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.title{/lang}</a></th>
+				<th class="columnType">{lang}cms.acp.file.fileType{/lang}</th>
+				<th class="columnDate columnUploadTime{if $sortField == 'uploadTime'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=uploadTime&sortOrder={if $sortField == 'uploadTime' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.file.uploadTime{/lang}</a></th>
+				<th class="columnDigits columnFilesize{if $sortField == 'filesize'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=filesize&sortOrder={if $sortField == 'filesize' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.file.filesize{/lang}</a></th>
+				<th class="columnDigits columnDownloads{if $sortField == 'downloads'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=downloads&sortOrder={if $sortField == 'downloads' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.file.downloads{/lang}</a></th>
 
 				{event name='columnHeads'}
 			</thead>
@@ -76,8 +82,10 @@
 						<td class="columnID columnFileID">{@$file->fileID}</td>
 						<td class="columnIcon">{@$file->getIconTag()}</td>
 						<td class="columnTitle columnFile"><a class="jsFileDetails" data-file-id="{@$file->fileID}">{$file->getTitle()}</a></td>
-						<td class="columnType">{$file->type}</td>
-						<td class="columnDownloads">{#$file->downloads}</td>
+						<td class="columnType">{$file->fileType}</td>
+						<td class="columnDate columnUploadTime">{@$file->uploadTime|time}</td>
+						<td class="columnDigits columnFilesize">{@$file->filesize|filesize}</td>
+						<td class="columnDigits columnDownloads">{#$file->downloads}</td>
 
 						{event name='columnRows'}
 					</tr>
@@ -109,7 +117,7 @@
 		<dl>
 			<dt>{lang}cms.acp.file.files{/lang}</dt>
 			<dd>
-				<ul></ul>
+				<ul class="formAttachmentList clearfix"></ul>
 				<div id="fileUploadButton"></div>
 				<small class="marginTopSmall">{lang}cms.acp.file.files.description{/lang}</small>
 			</dd>

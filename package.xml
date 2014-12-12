@@ -31,16 +31,16 @@
 	</optionalpackages>
 
 	<instructions type="install">
-		<!--lang -->
+		<!-- lang -->
 		<instruction type="language">language/*.xml</instruction>
 
-		<!--tar -->
+		<!-- tar -->
 		<instruction type="file">files.tar</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 
-		<!--xml -->
+		<!-- xml -->
 		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
@@ -57,15 +57,15 @@
 		<instruction type="eventListener">xml/eventlistener.xml</instruction>
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
 
-		<!--others -->
+		<!-- others -->
 		<instruction type="sql">install.sql</instruction>
 	</instructions>
 
 	<instructions type="update" fromversion="2.0.0 Beta 6">
-		<!--lang -->
+		<!-- lang -->
 		<instruction type="language">language/*.xml</instruction>
 
-		<!--tar -->
+		<!-- tar -->
 		<instruction type="file">files.tar</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
@@ -88,7 +88,7 @@
 	</instructions>
 
 	<instructions type="update" fromversion="2.0.0 Beta 7">
-		<!--lang -->
+		<!-- lang -->
 		<instruction type="language">language/*.xml</instruction>
 
 		<!-- xml -->

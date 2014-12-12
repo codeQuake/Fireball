@@ -92,19 +92,19 @@ class File extends CMSDatabaseObject implements ILinkableObject, IRouteControlle
 	 * @return	string
 	 */
 	public function getIconTag($width = 16) {
-		if (preg_match('/image/i', $this->type)) {
+		if (preg_match('/image/i', $this->fileType)) {
 			return '<span class="icon icon' . $width . ' icon-picture"></span>';
 		}
-		if (preg_match('/audio/i', $this->type)) {
+		if (preg_match('/audio/i', $this->fileType)) {
 			return '<span class="icon icon' . $width . ' icon-music"></span>';
 		}
-		if (preg_match('/video/i', $this->type)) {
+		if (preg_match('/video/i', $this->fileType)) {
 			return '<span class="icon icon' . $width . ' icon-film"></span>';
 		}
-		if (preg_match('/pdf/i', $this->type)) {
+		if (preg_match('/pdf/i', $this->fileType)) {
 			return '<span class="icon icon' . $width . ' icon-file-text"></span>';
 		}
-		if (preg_match('/html/i', $this->type) || preg_match('/java/i', $this->type) || preg_match('/x-c/i', $this->type) || preg_match('/css/i', $this->type) || preg_match('/javascript/i', $this->type)) {
+		if (preg_match('/html/i', $this->fileType) || preg_match('/java/i', $this->fileType) || preg_match('/x-c/i', $this->fileType) || preg_match('/css/i', $this->fileType) || preg_match('/javascript/i', $this->fileType)) {
 			return '<span class="icon icon' . $width . ' icon-code"></span>';
 		}
 
