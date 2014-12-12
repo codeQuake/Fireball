@@ -15,6 +15,18 @@
 
 		WCF.Clipboard.init('cms\\acp\\page\\FileListPage', {@$hasMarkedItems}, actionObjects);
 
+		var options = { };
+		{if $pages > 1}
+			options.refreshPage = true;
+			{if $pages == $pageNo}
+				options.updatePageNumber = -1;
+			{/if}
+		{else}
+			options.emptyMessage = '{lang}wcf.global.noItems{/lang}';
+		{/if}
+
+		new WCF.Table.EmptyTableHandler($('#fileListTableContainer'), 'jsFileRow', options);
+
 		new CMS.ACP.File.Details();
 		new CMS.ACP.File.Upload(function() {
 			if (this._fileListSelector.children('li').length) {
@@ -54,7 +66,7 @@
 </div>
 
 {if $objects|count}
-	<div class="tabularBox tabularBoxTitle marginTop">
+	<div id="fileListTableContainer" class="tabularBox tabularBoxTitle marginTop">
 		<header>
 			<h2>{$category->getTitle()} <span class="badge badgeInverse">{#$items}</span></h2>
 		</header>
