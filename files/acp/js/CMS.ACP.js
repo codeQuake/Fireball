@@ -345,33 +345,94 @@ CMS.ACP.File.Picker = Class.extend({
 
 CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 	/**
+	 * callback executed after submitting the upload form.
+	 * @var	function
+	 */
+	_afterSubmit: null,
+
+	/**
 	 * dialog overlay
 	 * @var	jQuery
 	 */
 	_dialog: null,
 
 	/**
-	 * callback executed when overlay is closed.
-	 * @var	function
+	 * list of ids of files that where uploaded successfully
+	 * @var	array
 	 */
-	_onClose: null,
+	_fileIDs: null,
 
 	/**
-	 * @param	function		onClose
+	 * submit button
+	 * @var	jQuery
+	 */
+	_submitButton: null,
+
+	/**
+	 * @param	function		afterSubmit
 	 * @see	WCF.Upload.init()
 	 */
-	init: function(onClose) {
-		this._onClose = onClose || null;
-		this._dialog = $('#fileAdd');
+	init: function(afterSubmit) {
+		this._afterSubmit = afterSubmit || null;
+
+		this._dialog = $('#fileUpload');
+		this._fileIDs = [ ];
+		this._submitButton = $('#fileUploadSubmitButton');
 
 		$('#fileAddButton').click($.proxy(function() {
 			this._dialog.wcfDialog({
-				title: WCF.Language.get('cms.acp.file.add'),
-				onClose: $.proxy(this._onClose, this)
+				title: WCF.Language.get('cms.acp.file.add')
 			});
 		}, this));
 
+		this._submitButton.click($.proxy(this._finalizeUpload, this));
+
 		this._super($('#fileUploadButton'), $('.fileUpload ul'), 'cms\\data\\file\\FileAction');
+	},
+
+	/**
+	 * @see	WCF.Upload._error()
+	 */
+	_error: function(jqXHR, textStatus, errorThrown) {
+		// there is no really something we can do here other than
+		// creating a log entry
+		console.log(jqXHR, textStatus, errorThrown);
+	},
+
+	/**
+	 * Finalize upload of new files by assigning the uploaded files to the
+	 * selected categories once the user submits the form.
+	 * 
+	 * @param	object		event
+	 */
+	_finalizeUpload: function(event) {
+		event.preventDefault();
+		var $categoryIDs = $('#categoryIDs').val();
+
+		if (!$categoryIDs.length) {
+			// no category selected, aborting
+			return;
+		}
+
+		if (!this._fileIDs.length) {
+			// no files uploaded, aborting
+			return;
+		}
+
+		this._submitButton.attr('disabled', 'disabled');
+
+		new WCF.Action.Proxy({
+			autoSend: true,
+			data: {
+				actionName: 'update',
+				className: 'cms\\data\\file\\FileAction',
+				objectIDs: this._fileIDs,
+				parameters: {
+					categoryIDs: $('#categoryIDs').val()
+				}
+			},
+			success: $.proxy(this._afterSubmit, this)
+		});
 	},
 
 	/**
@@ -387,15 +448,6 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 	},
 
 	/**
-	 * @see	WCF.Upload._getParameters()
-	 */
-	_getParameters: function() {
-		return {
-			'categoryIDs': $('#categoryIDs').val()
-		};
-	},
-
-	/**
 	 * @see	WCF.Upload._success()
 	 */
 	_success: function(internalFileID, data) {
@@ -406,12 +458,17 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 
 		if (data.returnValues.files[internalFileID]) {
 			var $fileData = data.returnValues.files[internalFileID];
+			this._fileIDs.push($fileData.fileID);
 
 			// remove spinner icon
 			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
 
 			// update file size
 			$li.find('small').append($fileData.formattedFilesize);
+
+			// there is at least one successfully uploaded file
+			// => activate submit button
+			this._submitButton.removeAttr('disabled');
 		} else {
 			var $errorType = 'uploadFailed';
 			if (data.returnValues.errors[internalFileID]) {
@@ -430,15 +487,6 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 		$li.css('display', 'block');
 
 		WCF.DOMNodeInsertedHandler.execute();
-	},
-
-	/**
-	 * @see	WCF.Upload._error()
-	 */
-	_error: function() {
-		var $listItem = this._fileListSelector.find('li');
-		$listItem.addClass('uploadFailed').children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
-		$listItem.find('div > div').append($('<small class="innerError">'+WCF.Language.get('cms.acp.file.error.uploadFailed')+'</small>'));
 	}
 });
 

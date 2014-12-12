@@ -116,7 +116,7 @@
 
 	<category name="cms.acp.file">
 		<item name="cms.acp.file.add"><![CDATA[Dateien hochladen]]></item>
-		<item name="cms.acp.file.categoryID"><![CDATA[Kategorie]]></item>
+		<item name="cms.acp.file.categoryIDs"><![CDATA[Kategorien]]></item>
 		<item name="cms.acp.file.delete.sure"><![CDATA[Wollen Sie diese Datei wirklich löschen?]]></item>
 		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
 		<item name="cms.acp.file.error.empty"><![CDATA[Bitte laden Sie eine gültige Datei hoch.]]></item>

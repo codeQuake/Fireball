@@ -29,6 +29,11 @@ class FileAction extends AbstractDatabaseObjectAction {
 	protected $permissionsDelete = array('admin.cms.file.canAddFile');
 
 	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 */
+	protected $permissionsUpdate = array('admin.cms.file.canAddFile');
+
+	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
 	protected $requireACP = array('delete');
@@ -134,28 +139,25 @@ class FileAction extends AbstractDatabaseObjectAction {
 	}
 
 	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::update()
+	 */
+	public function update() {
+		parent::update();
+
+		foreach ($this->objects as $fileEditor) {
+			// update categories
+			if (isset($this->parameters['categoryIDs'])) {
+				$fileEditor->updateCategoryIDs($this->parameters['categoryIDs']);
+			}
+		}
+	}
+
+	/**
 	 * Validates parameters to upload a file.
 	 */
 	public function validateUpload() {
 		if (count($this->parameters['__files']->getFiles()) <= 0) {
 			throw new UserInputException('files');
-		}
-
-		// validate category
-		if (!isset($this->parameters['categoryIDs'])) {
-			throw new UserInputException('categoryIDs');
-		}
-
-		// we receive the category ids as string due to the convertion
-		// of javascript's FormData::append()
-		$this->parameters['categoryIDs'] = explode(',', $this->parameters['categoryIDs']);
-		$this->parameters['categoryIDs'] = ArrayUtil::toIntegerArray($this->parameters['categoryIDs']);
-
-		foreach ($this->parameters['categoryIDs'] as $categoryID) {
-			$category = CategoryHandler::getInstance()->getCategory($categoryID);
-			if ($category === null) {
-				throw new UserInputException('categoryIDs');
-			}
 		}
 	}
 
@@ -183,8 +185,6 @@ class FileAction extends AbstractDatabaseObjectAction {
 				);
 
 				$uploadedFile = FileEditor::create($data);
-				$uploadedFileEditor = new FileEditor($uploadedFile);
-				$uploadedFileEditor->updateCategoryIDs($this->parameters['categoryIDs']);
 
 				// create subdirectory if necessary
 				$dir = dirname($uploadedFile->getLocation());
@@ -204,7 +204,8 @@ class FileAction extends AbstractDatabaseObjectAction {
 					);
 				} else {
 					// failure
-					$uploadedFileEditor->delete();
+					$editor = new FileEditor($uploadedFile);
+					$editor->delete();
 
 					throw new UserInputException('file', 'uploadFailed');
 				}

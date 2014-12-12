@@ -124,27 +124,29 @@
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/if}
 
-<div id="fileAdd" style="display: none">
-	<div class="marginTop fileUpload" id="fileUpload">
-		<dl>
-			<dt>{lang}cms.acp.file.files{/lang}</dt>
-			<dd>
-				<ul class="formAttachmentList clearfix"></ul>
-				<div id="fileUploadButton"></div>
-				<small class="marginTopSmall">{lang}cms.acp.file.files.description{/lang}</small>
-			</dd>
-		</dl>
+<div id="fileUpload" class="marginTop fileUpload" style="display: none">
+	<dl>
+		<dt>{lang}cms.acp.file.files{/lang}</dt>
+		<dd>
+			<ul class="formAttachmentList clearfix"></ul>
+			<div id="fileUploadButton"></div>
+			<small class="marginTopSmall">{lang}cms.acp.file.files.description{/lang}</small>
+		</dd>
+	</dl>
 
-		<dl class="marginTop">
-			<dt><label for="categoryID">{lang}cms.acp.file.categoryID{/lang}</label></dt>
-			<dd>
-				<select id="categoryIDs" name="categoryIDs" multiple="multiple" size="10">
-					{foreach from=$categoryList item=node}
-						<option value="{@$node->categoryID}"{if $node->categoryID == $categoryID} selected="selected"{/if}>{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$categoryList->getDepth()}{$node->getTitle()}</option>
-					{/foreach}
-				</select>
-			</dd>
-		</dl>
+	<dl class="marginTop">
+		<dt><label for="categoryID">{lang}cms.acp.file.categoryIDs{/lang}</label></dt>
+		<dd>
+			<select id="categoryIDs" name="categoryIDs" multiple="multiple" size="10">
+				{foreach from=$categoryList item=node}
+					<option value="{@$node->categoryID}"{if $node->categoryID == $categoryID} selected="selected"{/if}>{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$categoryList->getDepth()}{$node->getTitle()}</option>
+				{/foreach}
+			</select>
+		</dd>
+	</dl>
+
+	<div class="formSubmit">
+		<button id="fileUploadSubmitButton" type="submit" disabled="disabled">{lang}wcf.global.button.submit{/lang}</button>
 	</div>
 </div>
 
