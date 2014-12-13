@@ -11,7 +11,7 @@
 	//<![CDATA[
 	$(function() {
 		WCF.Language.addObject({
-			'cms.acp.file.picker': '{lang}cms.acp.file.picker{/lang}'
+			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
 		new CMS.ACP.File.Picker($('#filePicker'), 'fileID', [{if $contentData['fileID']|isset}{@$contentData['fileID']}{/if}]);

@@ -133,9 +133,41 @@ class FileAction extends AbstractDatabaseObjectAction {
 
 			return array(
 				'categoryID' => $category->categoryID,
-				'template' => WCF::getTPL()->fetch('fileListDialog', 'cms')
+				'template' => WCF::getTPL()->fetch('fileListDialog', 'cms'),
+				'title' => WCF::getLanguage()->get('cms.acp.file.picker')
 			);
 		}
+	}
+
+	/**
+	 * Validates parameters and permissions to get a upload dialog.
+	 */
+	public function validateGetUploadDialog() {
+		// validate category
+		$this->readInteger('categoryID', true);
+		if ($this->parameters['categoryID']) {
+			$category = CategoryHandler::getInstance()->getCategory($this->parameters['categoryID']);
+			if ($category === null) {
+				throw new UserInputException('categoryID');
+			}
+		}
+	}
+
+	/**
+	 * Returns a formatted upload dialog.
+	 */
+	public function getUploadDialog() {
+		$categoryNodeTree = new CategoryNodeTree('de.codequake.cms.file', 0, true);
+		$categoryList = $categoryNodeTree->getIterator();
+
+		WCF::getTPL()->assign(array(
+			'categoryList' => $categoryList
+		));
+
+		return array(
+			'template' => WCF::getTPL()->fetch('fileUploadDialog', 'cms'),
+			'title' => WCF::getLanguage()->get('cms.acp.file.add')
+		);
 	}
 
 	/**

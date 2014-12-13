@@ -5,7 +5,6 @@
 	//<![CDATA[
 	$(function () {
 		WCF.Language.addObject({
-			'cms.acp.file.add': '{lang}cms.acp.file.add{/lang}',
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
@@ -28,10 +27,8 @@
 		new WCF.Table.EmptyTableHandler($('#fileListTableContainer'), 'jsFileRow', options);
 
 		new CMS.ACP.File.Details();
-		new CMS.ACP.File.Upload(function() {
-			if (this._fileListSelector.children('li').length) {
-				location.reload();
-			}
+		CMS.ACP.File.Upload.init(function() {
+			window.location.reload();
 		});
 	});
 	//]]>
@@ -58,7 +55,7 @@
 				</div>
 			</li>
 			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 icon-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
-			<li><a class="button" id="fileAddButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+			<li><a class="button jsFileUploadButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -112,7 +109,7 @@
 		<nav>
 			<ul>
 				<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 icon-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
-				<li><a class="button" id="fileAddButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+				<li><a class="button jsFileUploadButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtonsBottom'}
 			</ul>
@@ -123,31 +120,5 @@
 {else}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/if}
-
-<div id="fileUpload" class="marginTop fileUpload" style="display: none">
-	<dl>
-		<dt>{lang}cms.acp.file.files{/lang}</dt>
-		<dd>
-			<ul class="formAttachmentList clearfix"></ul>
-			<div id="fileUploadButton"></div>
-			<small class="marginTopSmall">{lang}cms.acp.file.files.description{/lang}</small>
-		</dd>
-	</dl>
-
-	<dl class="marginTop">
-		<dt><label for="categoryID">{lang}cms.acp.file.categoryIDs{/lang}</label></dt>
-		<dd>
-			<select id="categoryIDs" name="categoryIDs" multiple="multiple" size="10">
-				{foreach from=$categoryList item=node}
-					<option value="{@$node->categoryID}"{if $node->categoryID == $categoryID} selected="selected"{/if}>{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$categoryList->getDepth()}{$node->getTitle()}</option>
-				{/foreach}
-			</select>
-		</dd>
-	</dl>
-
-	<div class="formSubmit">
-		<button id="fileUploadSubmitButton" type="submit" disabled="disabled">{lang}wcf.global.button.submit{/lang}</button>
-	</div>
-</div>
 
 {include file='footer'}

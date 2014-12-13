@@ -197,6 +197,12 @@ CMS.ACP.File.Details = Class.extend({
 
 CMS.ACP.File.Picker = Class.extend({
 	/**
+	 * id of the currently open category
+	 * @var	integer
+	 */
+	_currentlyOpenCategory: 0,
+
+	/**
 	 * dialog object
 	 * @var	jQuery
 	 */
@@ -281,6 +287,8 @@ CMS.ACP.File.Picker = Class.extend({
 	_openCategory: function(categoryID) {
 		var $tabularBox = this._dialog.find('.tabularBox[data-category-id="'+ categoryID +'"]');
 		if ($tabularBox.length) {
+			this._currentlyOpenCategory = categoryID;
+
 			this._dialog.find('.tabularBox').hide();
 			$tabularBox.show();
 
@@ -319,6 +327,15 @@ CMS.ACP.File.Picker = Class.extend({
 	},
 
 	/**
+	 * Removes caches of all already loaded categories and reload currently
+	 * open category.
+	 */
+	_reload: function() {
+		this._dialog.find('.tabularBox').remove();
+		this._openCategory(this._currentlyOpenCategory);
+	},
+
+	/**
 	 * Handles successful AJAX responses.
 	 * 
 	 * @param	object		data
@@ -331,10 +348,14 @@ CMS.ACP.File.Picker = Class.extend({
 			this._dialog = $(data.returnValues.template).hide();
 			this._dialog.find('.filePickerCategoryDropdown li').click($.proxy(this._dropdownCategoryClick, this));
 
+			this._currentlyOpenCategory = data.returnValues.categoryID;
+
 			this._dialog.appendTo('body');
 			this._dialog.wcfDialog({
-				title: WCF.Language.get('cms.acp.file.picker')
+				title: data.returnValues.title
 			});
+
+			CMS.ACP.File.Upload.init($.proxy(this._reload, this));
 		} else {
 			// loaded new category data
 			$(data.returnValues.template).hide().appendTo(this._dialog);
@@ -343,7 +364,7 @@ CMS.ACP.File.Picker = Class.extend({
 	}
 });
 
-CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
+CMS.ACP.File.Upload = {
 	/**
 	 * callback executed after submitting the upload form.
 	 * @var	function
@@ -363,40 +384,53 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 	_fileIDs: null,
 
 	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+
+	/**
 	 * submit button
 	 * @var	jQuery
 	 */
 	_submitButton: null,
 
 	/**
+	 * Initializes the file upload system.
+	 * 
 	 * @param	function		afterSubmit
-	 * @see	WCF.Upload.init()
 	 */
 	init: function(afterSubmit) {
 		this._afterSubmit = afterSubmit || null;
-
-		this._dialog = $('#fileUpload');
 		this._fileIDs = [ ];
-		this._submitButton = $('#fileUploadSubmitButton');
 
-		$('#fileAddButton').click($.proxy(function() {
-			this._dialog.wcfDialog({
-				title: WCF.Language.get('cms.acp.file.add')
-			});
-		}, this));
+		this._proxy = new WCF.Action.Proxy();
 
-		this._submitButton.click($.proxy(this._finalizeUpload, this));
-
-		this._super($('#fileUploadButton'), $('.fileUpload ul'), 'cms\\data\\file\\FileAction');
+		$('.jsFileUploadButton').click($.proxy(this._openDialog, this));
 	},
 
 	/**
-	 * @see	WCF.Upload._error()
+	 * Adds a file to the uploaded file list
+	 * 
+	 * @param	integer		fileID
 	 */
-	_error: function(jqXHR, textStatus, errorThrown) {
-		// there is no really something we can do here other than
-		// creating a log entry
-		console.log(jqXHR, textStatus, errorThrown);
+	addFile: function(fileID) {
+		this._fileIDs.push(fileID);
+
+		// there is at least one successfully uploaded file
+		// => activate submit button
+		if (this._submitButton !== null) {
+			this._submitButton.removeAttr('disabled');
+		}
+	},
+
+	/**
+	 * Redraws the dialog.
+	 */
+	redraw: function() {
+		if (this._dialog !== null) {
+			this._dialog.wcfDialog('render');
+		}
 	},
 
 	/**
@@ -421,18 +455,85 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 
 		this._submitButton.attr('disabled', 'disabled');
 
-		new WCF.Action.Proxy({
-			autoSend: true,
-			data: {
-				actionName: 'update',
-				className: 'cms\\data\\file\\FileAction',
-				objectIDs: this._fileIDs,
-				parameters: {
-					categoryIDs: $('#categoryIDs').val()
-				}
-			},
-			success: $.proxy(this._afterSubmit, this)
+		// send request
+		this._proxy.setOption('data', {
+			actionName: 'update',
+			className: 'cms\\data\\file\\FileAction',
+			objectIDs: this._fileIDs,
+			parameters: {
+				categoryIDs: $('#categoryIDs').val()
+			}
 		});
+		this._proxy.setOption('success', $.proxy(function() {
+			// destroy dialog
+			this._dialog.wcfDialog('close');
+			new WCF.PeriodicalExecuter($.proxy(function(pe) {
+				this._dialog.parents('.dialogContainer').remove();
+				this._dialog = null;
+
+				pe.stop();
+			}, this), 200);
+
+			if ($.isFunction(this._afterSubmit)) {
+				this._afterSubmit();
+			}
+		}, this));
+		this._proxy.sendRequest();
+	},
+
+	/**
+	 * Opens the dialog to upload files.
+	 */
+	_openDialog: function() {
+		if (this._dialog === null) {
+			this._proxy.setOption('data', {
+				actionName: 'getUploadDialog',
+				className: 'cms\\data\\file\\FileAction'
+			});
+			this._proxy.setOption('success', $.proxy(this._openDialogResponse, this));
+			this._proxy.sendRequest();
+		} else {
+			this._dialog.wcfDialog('render');
+		}
+	},
+
+	/**
+	 * Handles successful AJAX responses to open the dialog.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_openDialogResponse: function(data, textStatus, jqXHR) {
+		this._dialog = $(data.returnValues.template).hide().appendTo('body');
+
+		this._submitButton = $('#fileUploadSubmitButton');
+		this._submitButton.click($.proxy(this._finalizeUpload, this));
+
+		// init upload handler
+		new CMS.ACP.File.Upload.Handler();
+
+		this._dialog.wcfDialog({
+			title: data.returnValues.title
+		});
+	}
+};
+
+CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
+	/**
+	 * @see	WCF.Upload.init()
+	 */
+	init: function(afterSubmit) {
+		this._super($('#fileUploadButton'), $('.fileUpload ul'), 'cms\\data\\file\\FileAction');
+	},
+
+	/**
+	 * @see	WCF.Upload._error()
+	 */
+	_error: function(jqXHR, textStatus, errorThrown) {
+		// there is no really something we can do here other than
+		// creating a log entry
+		console.log(jqXHR, textStatus, errorThrown);
 	},
 
 	/**
@@ -442,7 +543,7 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 		$li = $('<li class="box32"><span class="icon icon32 icon-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
 
 		// redraw dialog
-		this._dialog.wcfDialog('render');
+		CMS.ACP.File.Upload.redraw();
 
 		return $li;
 	},
@@ -458,17 +559,13 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 
 		if (data.returnValues.files[internalFileID]) {
 			var $fileData = data.returnValues.files[internalFileID];
-			this._fileIDs.push($fileData.fileID);
+			CMS.ACP.File.Upload.addFile($fileData.fileID);
 
 			// remove spinner icon
 			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
 
 			// update file size
 			$li.find('small').append($fileData.formattedFilesize);
-
-			// there is at least one successfully uploaded file
-			// => activate submit button
-			this._submitButton.removeAttr('disabled');
 		} else {
 			var $errorType = 'uploadFailed';
 			if (data.returnValues.errors[internalFileID]) {
@@ -485,6 +582,9 @@ CMS.ACP.File.Upload = WCF.Upload.Parallel.extend({
 
 		// webkit suxxx
 		$li.css('display', 'block');
+
+		// redraw dialog
+		CMS.ACP.File.Upload.redraw();
 
 		WCF.DOMNodeInsertedHandler.execute();
 	}
