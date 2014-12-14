@@ -44,7 +44,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns.width"><![CDATA[Column width]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Gallery]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Images]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.select"><![CDATA[Pick images]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Content collection]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[A collection of contents.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Headline]]></item>
@@ -59,7 +58,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Picture]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Height (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.select"><![CDATA[Select a picture]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Caption]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.width"><![CDATA[Width (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
@@ -128,7 +126,7 @@
 		<item name="cms.acp.file.fileType"><![CDATA[Type]]></item>
 		<item name="cms.acp.file.list"><![CDATA[Files]]></item>
 		<item name="cms.acp.file.list.description"><![CDATA[This is a list of all your files. You can easily share them via BBCode or content type.]]></item>
-		<item name="cms.acp.file.picker"><![CDATA[Choose File]]></item>
+		<item name="cms.acp.file.picker"><![CDATA[File Picker]]></item>
 		<item name="cms.acp.file.uploadTime"><![CDATA[Upload Time]]></item>
 	</category>
 

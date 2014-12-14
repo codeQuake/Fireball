@@ -5,6 +5,7 @@
 
 	<table class="table">
 		<thead>
+			<th class="columnMark"></th>
 			<th class="columnID columnFileID">{lang}wcf.global.objectID{/lang}</th>
 			<th class="columnTitle columnFile" colspan="2">{lang}wcf.global.title{/lang}</th>
 			<th class="columnType">{lang}cms.acp.file.fileType{/lang}</th>
@@ -15,7 +16,8 @@
 
 		<tbody>
 			{foreach from=$fileList item=file}
-				<tr>
+				<tr data-file-id="{@$file->fileID}">
+					<td class="columnMark"></td>
 					<td class="columnID columnFileID">{@$file->fileID}</td>
 					<td class="columnIcon">{@$file->getIconTag()}</td>
 					<td class="columnTitle columnFile">{$file->getTitle()}</td>

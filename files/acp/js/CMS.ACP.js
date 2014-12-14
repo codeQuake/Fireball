@@ -135,10 +135,10 @@ CMS.ACP.File.Details = Class.extend({
 	_cache: { },
 
 	/**
-	 * list of 'fileDetails' links
-	 * @var	jQuery
+	 * initialization state
+	 * @var	boolean
 	 */
-	_links: null,
+	_didInit: false,
 
 	/**
 	 * proxy
@@ -150,14 +150,18 @@ CMS.ACP.File.Details = Class.extend({
 	 * Initializes file details handler.
 	 */
 	init: function() {
-		this._links = $('.jsFileDetails');
+		if (!this._didInit) {
+			this._didInit = true;
 
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
-		});
+			this._proxy = new WCF.Action.Proxy({
+				success: $.proxy(this._success, this)
+			});
+
+			WCF.DOMNodeInsertedHandler.addCallback('CMS.ACP.File.Details', $.proxy(this.init, this));
+		}
 
 		// bind events
-		this._links.click($.proxy(this._click, this));
+		$('.jsFileDetails:not(.jsFileDetailsEnabled)').addClass('jsFileDetailsEnabled').click($.proxy(this._click, this));
 	},
 
 	/**
@@ -212,7 +216,7 @@ CMS.ACP.File.Picker = Class.extend({
 	 * name of the input used to send selected files to server
 	 * @var	string
 	 */
-	_inputName: 'fileID',
+	_inputName: '',
 
 	/**
 	 * Options for this file picker.
@@ -263,8 +267,42 @@ CMS.ACP.File.Picker = Class.extend({
 			success: $.proxy(this._success, this)
 		});
 
-		// bind events
+		// bind form event to create input
+		var $form = this._selectButton.parents('form');
+		if (!$form.length) {
+			console.log('[CMS.ACP.File.Picker] Unable to determine form for file picker, aborting.');
+			return;
+		}
+		$form.submit($.proxy(this._submit, this));
+
+		// bind select event
 		this._selectButton.click($.proxy(this._openPicker, this));
+	},
+
+	/**
+	 * Selects all given files.
+	 * 
+	 * @param	array<integer>	fileIDs
+	 * @param	boolean		checkInput
+	 */
+	selectFiles: function(fileIDs, checkInput) {
+		if (!this._options.multiple && fileIDs.length > 1) {
+			console.log('[CMS.ACP.File.Picker] Selection of more than one file is not allowed, aborting.');
+			return;
+		}
+
+		var fileID;
+		for (var i = 0, length = fileIDs.length; i < length; i++) {
+			fileID = fileIDs[i];
+
+			if (this._selected.indexOf(fileID) !== -1) {
+				this._selected.push(fileID);
+
+				if (checkInput !== false) {
+					this._dialog.find('tr[data-file-id="'+ fileID +'"]').find('input').prop('checked', true);
+				}
+			}
+		}
 	},
 
 	/**
@@ -275,6 +313,22 @@ CMS.ACP.File.Picker = Class.extend({
 	_dropdownCategoryClick: function(event) {
 		var $categoryID = $(event.currentTarget).data('categoryID');
 		this._openCategory($categoryID);
+	},
+
+	/**
+	 * Handles clicking an input to select a file.
+	 * 
+	 * @param	object		event
+	 */
+	_inputClick: function(event) {
+		var $input = $(event.currentTarget);
+
+		if ($input.is(':checked')) {
+			this._selected.push($input.val());
+		} else {
+			var $index = $.inArray($input.val(), this._selected);
+			this._selected.splice($index, 1);
+		}
 	},
 
 	/**
@@ -336,6 +390,25 @@ CMS.ACP.File.Picker = Class.extend({
 	},
 
 	/**
+	 * Handles submitting the form of this file picker.
+	 * 
+	 * @param	object		event
+	 */
+	_submit: function(event) {
+		var $form = $(event.currentTarget);
+
+		if (this._options.multiple) {
+			for (var i = 0, length = this._selected.length; i < length; i++) {
+				var $fileID = this._selected[i];
+				$('<input type="hidden" name="'+ this._inputName +'[]" value="'+ $fileID +'" />').appendTo($form);
+			}
+		} else {
+			var $fileID = this._selected.shift();
+			$('<input type="hidden" name="'+ this._inputName +'" value="'+ $fileID +'" />').appendTo($form);
+		}
+	},
+
+	/**
 	 * Handles successful AJAX responses.
 	 * 
 	 * @param	object		data
@@ -355,12 +428,47 @@ CMS.ACP.File.Picker = Class.extend({
 				title: data.returnValues.title
 			});
 
-			CMS.ACP.File.Upload.init($.proxy(this._reload, this));
+			CMS.ACP.File.Upload.init($.proxy(this._uploadCallback, this));
 		} else {
 			// loaded new category data
 			$(data.returnValues.template).hide().appendTo(this._dialog);
 			this._openCategory(data.returnValues.categoryID);
 		}
+
+		// handle checkbox/radiobox
+		this._dialog.find('td.columnMark').each($.proxy(function(index, td) {
+			var $td = $(td),
+			    $fileID = $td.parent().data('fileID'),
+			    $input;
+
+			if (this._options.multiple) {
+				$input = $('<input type="checkbox" name="'+ this._inputName +'Picker[]" value="'+ $fileID +'" />').appendTo($td);
+			} else {
+				$input = $('<input type="radio" name="'+ this._inputName +'Picker" value="'+ $fileID +'" />').appendTo($td);
+			}
+
+			// handle default values
+			if (WCF.inArray($fileID, this._selected)) {
+				$input.prop('checked', true);
+			}
+
+			// bind click event
+			$input.click($.proxy(this._inputClick, this));
+		}, this));
+	},
+
+	/**
+	 * Handles successful uploads of new files. Reloads already loaded file
+	 * lists and automatically selects uploaded files.
+	 * 
+	 * @param	array		fileIDs
+	 */
+	_uploadCallback: function(fileIDs) {
+		if (this._options.multiple || fileIDs.length == 1) {
+			this.selectFiles(fileIDs, false);
+		}
+
+		this._reload();
 	}
 });
 
@@ -475,7 +583,7 @@ CMS.ACP.File.Upload = {
 			}, this), 200);
 
 			if ($.isFunction(this._afterSubmit)) {
-				this._afterSubmit();
+				this._afterSubmit(this._fileIDs);
 			}
 		}, this));
 		this._proxy.sendRequest();

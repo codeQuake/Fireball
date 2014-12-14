@@ -44,7 +44,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns.width"><![CDATA[Breite der Spalten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Galerie]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Bilder]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.select"><![CDATA[Bilder auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Gruppierung]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[Dieser Inhaltstyp gruppiert automatisch alle untergeordneten Inhalte.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Überschrift]]></item>
@@ -59,7 +58,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Bild]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Höhe (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.select"><![CDATA[Bild auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Untertitel]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.width"><![CDATA[Breite (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
@@ -128,7 +126,7 @@
 		<item name="cms.acp.file.fileType"><![CDATA[Typ]]></item>
 		<item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
 		<item name="cms.acp.file.list.description"><![CDATA[Hier finden Sie eine Auflistung Ihrer Dateien. Es gibt mehrere Möglichkeiten diese Dateien im System zu teilen. Standardmäßig geschieht dies über den entsprechenden Inhaltstyp. Aber auch ein Teilen über BBCode ist möglich.]]></item>
-		<item name="cms.acp.file.picker"><![CDATA[Datei auswählen]]></item>
+		<item name="cms.acp.file.picker"><![CDATA[Dateiverwaltung]]></item>
 		<item name="cms.acp.file.uploadTime"><![CDATA[Hochgeladen]]></item>
 	</category>
 

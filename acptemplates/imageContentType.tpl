@@ -1,25 +1,9 @@
 <dl class="image">
 	<dt><label for="image">{lang}cms.acp.content.type.de.codequake.cms.content.type.image{/lang}</label></dt>
 	<dd>
-		<ul>
-			{if $contentData['imageID']|isset && $file|isset}
-				{assign var=image value=$file->getByID($contentData['imageID'])}
-				<li class="box32">
-					<div class="framed">
-						<img src="{$image->getLink()}" alt="{$image->title}" class="image" style="max-width: 32px; max-height: 32px;" />
-					</div>
-					<div>
-						<p>{$image->title}</p>
-					</div>
-				</li>
-			{/if}
-		</ul>
-
-		<div id="imageSelect" class="marginTop">
-			<span class="button small">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.select{/lang}</span>
+		<div id="filePicker">
+			<span class="button small">{lang}cms.acp.file.picker{/lang}</span>
 		</div>
-
-		<input type="hidden" name="contentData[imageID]" value="{if $contentData['imageID']|isset}{$contentData['imageID']}{else}0{/if}" id="imageID" />
 	</dd>
 </dl>
 
@@ -53,15 +37,14 @@
 	</dd>
 </dl>
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true">
-    //<![CDATA[
-    $(function () {
+	//<![CDATA[
+	$(function () {
 		WCF.Language.addObject({
-			'cms.acp.content.type.de.codequake.cms.content.type.image.select': '{lang}cms.acp.content.type.de.codequake.cms.content.type.image.select{/lang}'
+			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
-		new CMS.ACP.Content.Image($('#imageSelect'), $('#imageID'));
+		new CMS.ACP.File.Picker($('#filePicker'), 'contentData[imageID]', [{if $contentData['imageID']|isset}{@$contentData['imageID']}{/if}]);
 		{if $contentData['width']|isset && $contentData['height']|isset}
 			new CMS.ACP.Image.Ratio({$contentData['width']},{$contentData['height']});
 		{/if}
