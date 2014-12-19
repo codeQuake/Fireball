@@ -4,60 +4,77 @@
 		<acpmenuitem name="cms.acp.menu.link.cms">
 			<showorder>6</showorder>
 		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.dashboard">
-			<parent>cms.acp.menu.link.cms</parent>
-		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.content">
-			<parent>cms.acp.menu.link.cms</parent>
-		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.media">
-			<parent>cms.acp.menu.link.cms</parent>
-		</acpmenuitem>
 
-		<acpmenuitem name="cms.acp.menu.link.cms.style">
+		<!-- dashboard -->
+		<acpmenuitem name="cms.acp.menu.link.cms.dashboard">
 			<parent>cms.acp.menu.link.cms</parent>
 		</acpmenuitem>
 		<acpmenuitem name="cms.acp.menu.link.cms.page.dashboard">
 			<parent>cms.acp.menu.link.cms.dashboard</parent>
-			<controller><![CDATA[cms\acp\page\DashboardPage]]></controller>
+			<controller>cms\acp\page\DashboardPage</controller>
 		</acpmenuitem>
 		<acpmenuitem name="cms.acp.menu.link.cms.page.statistics">
 			<parent>cms.acp.menu.link.cms.dashboard</parent>
-			<controller><![CDATA[cms\acp\page\StatsPage]]></controller>
+			<controller>cms\acp\page\StatsPage</controller>
+		</acpmenuitem>
+		<!-- /dashboard -->
+
+		<!-- page -->
+		<acpmenuitem name="cms.acp.menu.link.cms.content">
+			<parent>cms.acp.menu.link.cms</parent>
 		</acpmenuitem>
 		<acpmenuitem name="cms.acp.menu.link.cms.page.list">
 			<parent>cms.acp.menu.link.cms.content</parent>
-			<controller><![CDATA[cms\acp\page\PageListPage]]></controller>
+			<controller>cms\acp\page\PageListPage</controller>
 			<permissions>admin.cms.page.canListPage</permissions>
 		</acpmenuitem>
-
 		<acpmenuitem name="cms.acp.menu.link.cms.page.add">
 			<parent>cms.acp.menu.link.cms.content</parent>
-			<controller><![CDATA[cms\acp\form\PageAddForm]]></controller>
+			<controller>cms\acp\form\PageAddForm</controller>
 			<permissions>admin.cms.page.canAddPage</permissions>
 		</acpmenuitem>
-
 		<acpmenuitem name="cms.acp.menu.link.cms.page.importAndExport">
 			<parent>cms.acp.menu.link.cms.content</parent>
-			<controller><![CDATA[cms\acp\form\CMSImportForm]]></controller>
+			<controller>cms\acp\form\CMSImportForm</controller>
 			<permissions>admin.cms.page.canAddPage</permissions>
 		</acpmenuitem>
+		<!-- /page -->
 
-		<acpmenuitem name="cms.acp.menu.link.cms.file.management">
-			<parent>cms.acp.menu.link.cms.media</parent>
-			<controller><![CDATA[cms\acp\form\FileManagementForm]]></controller>
+		<!-- files -->
+		<acpmenuitem name="cms.acp.menu.link.cms.file">
+			<parent>cms.acp.menu.link.cms</parent>
+		</acpmenuitem>
+		<acpmenuitem name="cms.acp.menu.link.cms.file.list">
+			<parent>cms.acp.menu.link.cms.file</parent>
+			<controller>cms\acp\page\FileListPage</controller>
 			<permissions>admin.cms.file.canAddFile</permissions>
+		</acpmenuitem>
+		<acpmenuitem name="cms.acp.menu.link.cms.file.category.list">
+			<parent>cms.acp.menu.link.cms.file</parent>
+			<controller>cms\acp\page\FileCategoryListPage</controller>
+			<permissions>admin.cms.file.canAddFile</permissions>
+		</acpmenuitem>
+		<acpmenuitem name="cms.acp.menu.link.cms.file.category.add">
+			<parent>cms.acp.menu.link.cms.file</parent>
+			<controller>cms\acp\form\FileCategoryAddForm</controller>
+			<permissions>admin.cms.file.canAddFile</permissions>
+		</acpmenuitem>
+		<!-- /files -->
+
+		<!-- style -->
+		<acpmenuitem name="cms.acp.menu.link.cms.style">
+			<parent>cms.acp.menu.link.cms</parent>
 		</acpmenuitem>
 		<acpmenuitem name="cms.acp.menu.link.cms.stylesheet.list">
 			<parent>cms.acp.menu.link.cms.style</parent>
-			<controller><![CDATA[cms\acp\page\StylesheetListPage]]></controller>
+			<controller>cms\acp\page\StylesheetListPage</controller>
 			<permissions>admin.cms.style.canListStylesheet</permissions>
 		</acpmenuitem>
-
 		<acpmenuitem name="cms.acp.menu.link.cms.stylesheet.add">
 			<parent>cms.acp.menu.link.cms.style</parent>
-			<controller><![CDATA[cms\acp\form\StylesheetAddForm]]></controller>
+			<controller>cms\acp\form\StylesheetAddForm</controller>
 			<permissions>admin.cms.style.canAddStylesheet</permissions>
 		</acpmenuitem>
+		<!-- /style -->
 	</import>
 </data>

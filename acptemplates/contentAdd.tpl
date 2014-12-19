@@ -1,5 +1,6 @@
 {include file='header' pageTitle='cms.acp.content.'|concat:$action}
 
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {

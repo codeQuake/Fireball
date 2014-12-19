@@ -1,4 +1,4 @@
---page
+-- page
 DROP TABLE IF EXISTS cms1_page;
 CREATE TABLE cms1_page (
 	pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -44,7 +44,6 @@ CREATE TABLE cms1_page (
 	stylesheets MEDIUMTEXT,
 );
 
---page revisions
 DROP TABLE IF EXISTS cms1_page_revision;
 CREATE TABLE cms1_page_revision(
 	revisionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -56,7 +55,7 @@ CREATE TABLE cms1_page_revision(
 	data MEDIUMTEXT
 );
 
---content
+-- content
 DROP TABLE IF EXISTS cms1_content;
 CREATE TABLE cms1_content (
 	contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -73,7 +72,6 @@ CREATE TABLE cms1_content (
 	additionalData MEDIUMTEXT DEFAULT NULL
 );
 
---content revisions
 DROP TABLE IF EXISTS cms1_content_revision;
 CREATE TABLE cms1_content_revision(
 	revisionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -85,7 +83,7 @@ CREATE TABLE cms1_content_revision(
 	data MEDIUMTEXT
 );
 
---stylesheet
+-- stylesheet
 DROP TABLE IF EXISTS cms1_stylesheet;
 CREATE TABLE cms1_stylesheet (
 	sheetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -93,26 +91,27 @@ CREATE TABLE cms1_stylesheet (
 	less MEDIUMTEXT
 );
 
---file
+-- file
 DROP TABLE IF EXISTS cms1_file;
 CREATE TABLE cms1_file (
 	fileID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	folderID INT(10) NOT NULL DEFAULT 0,
-	title VARCHAR(255) NOT NULL,
-	filename VARCHAR(255) NOT NULL,
-	size INT(10) NOT NULL,
-	type VARCHAR(255) NOT NULL,
+	title VARCHAR(255) NOT NULL DEFAULT '',
+	filesize INT(10) NOT NULL DEFAULT 0,
+	fileType VARCHAR(255) NOT NULL DEFAULT '',
+	fileHash VARCHAR(40) NOT NULL DEFAULT '',
+	uploadTime INT(10) NOT NULL DEFAULT 0,
 	downloads INT(10) DEFAULT 0
 );
 
-DROP TABLE IF EXISTS cms1_folder;
-CREATE TABLE cms1_folder (
-	folderID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	folderName VARCHAR(255) NOT NULL,
-	folderPath VARCHAR(255) NOT NULL
+DROP TABLE IF EXISTS cms1_file_to_category;
+CREATE TABLE cms1_file_to_category (
+	fileID INT(10) NOT NULL,
+	categoryID INT(10) NOT NULL,
+
+	PRIMARY KEY (fileID, categoryID)
 );
 
---counter
+-- counter
 DROP TABLE IF EXISTS cms1_counter;
 CREATE TABLE cms1_counter (
 	day INT(2) NOT NULL DEFAULT '1',
@@ -126,14 +125,16 @@ CREATE TABLE cms1_counter (
 	devices MEDIUMTEXT
 );
 
---foreign keys
-ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
-
+-- foreign keys
 ALTER TABLE cms1_content ADD FOREIGN KEY (parentID) REFERENCES cms1_content (contentID) ON DELETE SET NULL;
+ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE cms1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 
 ALTER TABLE cms1_content_revision ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE cms1_content_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+
+ALTER TABLE cms1_file_to_category ADD FOREIGN KEY (fileID) REFERENCES cms1_file (fileID) ON DELETE CASCADE;
+ALTER TABLE cms1_file_to_category ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
 
 ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;

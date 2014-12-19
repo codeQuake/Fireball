@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/objectType.xsd">
 	<import>
+		<!-- category -->
+		<type>
+			<name>de.codequake.cms.file</name>
+			<definitionname>com.woltlab.wcf.category</definitionname>
+			<classname>cms\system\category\FileCategoryType</classname>
+		</type>
+		<!-- /category -->
+
 		<!-- clipboard -->
 		<type>
 			<name>de.codequake.cms.content</name>
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
 			<listclassname>cms\data\content\ContentList</listclassname>
+		</type>
+		<type>
+			<name>de.codequake.cms.file</name>
+			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+			<listclassname>cms\data\file\FileList</listclassname>
 		</type>
 		<type>
 			<name>de.codequake.cms.page</name>

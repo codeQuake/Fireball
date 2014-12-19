@@ -127,139 +127,609 @@ CMS.ACP.Page.SetAsHome = Class.extend({
 
 CMS.ACP.File = {};
 
-CMS.ACP.File.Upload = WCF.Upload.extend({
-	_folderID: 0,
+CMS.ACP.File.Details = Class.extend({
+	/**
+	 * cache
+	 * @var	object
+	 */
+	_cache: { },
 
-	//calls parent init with params
-	init: function(folderID, multiple) {
-		var options = {
-			action: 'upload',
-			multiple: multiple,
-			url: 'index.php/AJAXUpload/?t=' + SECURITY_TOKEN + SID_ARG_2ND
-		};
-		this._folderID = folderID;
-		this._super($('#fileUploadButton'), $('.fileUpload ul'), 'cms\\data\\file\\FileAction', options);
-	},
-
-	_initFile: function(file) {
-		return $('<li class="box32"><span class="icon icon32 icon-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
-	},
-
-	_getParameters: function() {
-		return {'folderID': this._folderID};
-	},
-
-	_success: function(uploadID, data) {
-		var $li = this._fileListSelector.find('li');
-		//remove progressbar
-		$li.find('progress').remove();
-		$.each(data.returnValues, function (key, value){
-			if (value.fileID) {
-				//remove spinner icon
-				$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
-
-				// show noti
-				var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-				$notification.show();
-			} else {
-				//add fail icon
-				$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
-
-				//err msg
-				$li.find('div > div').append($('<small class="innerError">'+WCF.Language.get('cms.acp.file.error.' + data.returnValues.errorType)+'</small>'));
-				$li.addClass('uploadFailed');
-			}
-			//webkit suxxx
-			$li.css('display', 'block');
-		});
-
-		WCF.DOMNodeInsertedHandler.execute();
-	},
-
-	_error: function() {
-		// FAIL!!
-		var $listItem = this._fileListSelector.find('li');
-		$listItem.addClass('uploadFailed').children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
-		$listItem.find('div > div').append($('<small class="innerError">'+WCF.Language.get('cms.acp.file.error.uploadFailed')+'</small>'));
-	}
-
-});
-
-CMS.ACP.Content = {};
-
-CMS.ACP.Content.Image = Class.extend({
-	_cache: [],
-	_dialog: null,
+	/**
+	 * initialization state
+	 * @var	boolean
+	 */
 	_didInit: false,
 
-	_button: null,
+	/**
+	 * proxy
+	 * @var	WCF.Action.Proxy
+	 */
 	_proxy: null,
-	_field: null,
 
-	init: function(button, field){
-		this._button = button;
-		this._field = field;
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success,this)
-		});
+	/**
+	 * Initializes file details handler.
+	 */
+	init: function() {
+		if (!this._didInit) {
+			this._didInit = true;
 
-		//add click event
-		this._button.click($.proxy(this._click, this));
+			this._proxy = new WCF.Action.Proxy({
+				success: $.proxy(this._success, this)
+			});
+
+			WCF.DOMNodeInsertedHandler.addCallback('CMS.ACP.File.Details', $.proxy(this.init, this));
+		}
+
+		// bind events
+		$('.jsFileDetails:not(.jsFileDetailsEnabled)').addClass('jsFileDetailsEnabled').click($.proxy(this._click, this));
 	},
 
+	/**
+	 * Handles clicking upon a 'fileDetails' button
+	 * 
+	 * @param	object		event
+	 */
 	_click: function(event) {
-		event.preventDefault();
-		var $target = $(event.currentTarget);
-		this.button = $target;
+		var $fileID = $(event.currentTarget).data('fileID');
 
-		if (this._dialog == null) {
-			this._dialog = $('<div id="images" />').appendTo(document.body);
+		if (this._cache[$fileID] === undefined) {
+			this._proxy.setOption('data', {
+				actionName: 'getDetails',
+				className: 'cms\\data\\file\\FileAction',
+				objectIDs: [$fileID]
+			});
+			this._proxy.sendRequest();
+		} else {
+			this._cache[$fileID].wcfDialog('open');
+		}
+	},
 
-			this._proxy.setOption('data',{
-				actionName: 'getImages',
+	/**
+	 * Handles successful AJAX responses.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		this._cache[data.returnValues.fileID] = $(data.returnValues.template).hide().appendTo('body');
+		this._cache[data.returnValues.fileID].wcfDialog({
+			title: data.returnValues.title
+		});
+	}
+});
+
+CMS.ACP.File.Picker = Class.extend({
+	/**
+	 * id of the currently open category
+	 * @var	integer
+	 */
+	_currentlyOpenCategory: 0,
+
+	/**
+	 * dialog object
+	 * @var	jQuery
+	 */
+	_dialog: null,
+
+	/**
+	 * name of the input used to send selected files to server
+	 * @var	string
+	 */
+	_inputName: '',
+
+	/**
+	 * Options for this file picker.
+	 * 
+	 * Supported options:
+	 * - multiple: Indicates whether user only can select one or multiple
+	 *             files.
+	 * 
+	 * @var	object
+	 */
+	_options: null,
+
+	/**
+	 * proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+
+	/**
+	 * select button to open the picker
+	 * @var	jQuery
+	 */
+	_selectButton: null,
+
+	/**
+	 * ids of selected files
+	 * @var	array<integer>
+	 */
+	_selected: null,
+
+	/**
+	 * Initialises a new file picker.
+	 * 
+	 * @param	jQuery		selectButton
+	 * @param	string		inputName
+	 * @param	array		defaultValues
+	 * @param	object		options
+	 */
+	init: function(selectButton, inputName, defaultValues, options) {
+		this._selectButton = selectButton;
+		this._inputName = inputName;
+		this._selected = defaultValues || [ ];
+		this._options = $.extend(true, {
+			multiple: false,
+			fileType: ''
+		}, options);
+
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+
+		// bind form event to create input
+		var $form = this._selectButton.parents('form');
+		if (!$form.length) {
+			console.log('[CMS.ACP.File.Picker] Unable to determine form for file picker, aborting.');
+			return;
+		}
+		$form.submit($.proxy(this._submit, this));
+
+		// bind select event
+		this._selectButton.click($.proxy(this._openPicker, this));
+	},
+
+	/**
+	 * Selects all given files.
+	 * 
+	 * @param	array<integer>	fileIDs
+	 * @param	boolean		checkInput
+	 */
+	selectFiles: function(fileIDs, checkInput) {
+		if (!this._options.multiple && fileIDs.length > 1) {
+			console.log('[CMS.ACP.File.Picker] Selection of more than one file is not allowed, aborting.');
+			return;
+		}
+
+		var fileID;
+		for (var i = 0, length = fileIDs.length; i < length; i++) {
+			fileID = fileIDs[i];
+
+			if (this._selected.indexOf(fileID) !== -1) {
+				this._selected.push(fileID);
+
+				if (checkInput !== false) {
+					this._dialog.find('tr[data-file-id="'+ fileID +'"]').find('input').prop('checked', true);
+				}
+			}
+		}
+	},
+
+	/**
+	 * Handles clicking upon a category in the category selection dropdown.
+	 * 
+	 * @param	object		event
+	 */
+	_dropdownCategoryClick: function(event) {
+		var $categoryID = $(event.currentTarget).data('categoryID');
+		this._openCategory($categoryID);
+	},
+
+	/**
+	 * Handles clicking an input to select a file.
+	 * 
+	 * @param	object		event
+	 */
+	_inputClick: function(event) {
+		var $input = $(event.currentTarget);
+
+		if ($input.is(':checked')) {
+			this._selected.push($input.val());
+		} else {
+			var $index = $.inArray($input.val(), this._selected);
+			this._selected.splice($index, 1);
+		}
+	},
+
+	/**
+	 * Displays the file list of the selected category. In case the file
+	 * list for that category wasn't loaded yet, the list will be fetched
+	 * automatically.
+	 * 
+	 * @param	integer		categoryID
+	 */
+	_openCategory: function(categoryID) {
+		var $tabularBox = this._dialog.find('.tabularBox[data-category-id="'+ categoryID +'"]');
+		if ($tabularBox.length) {
+			this._currentlyOpenCategory = categoryID;
+
+			this._dialog.find('.tabularBox').hide();
+			$tabularBox.show();
+
+			// update dropdown
+			$dropdownMenu = WCF.Dropdown.getDropdownMenu($('.filePickerCategoryDropdown').wcfIdentify());
+			$dropdownMenu.find('li.active').removeClass('active');
+			$dropdownMenu.find('li[data-category-id="'+ categoryID +'"]').addClass('active');
+
+			// redraw dialog
+			this._dialog.wcfDialog('render');
+		} else {
+			this._proxy.setOption('data', {
+				actionName: 'getFileList',
 				className: 'cms\\data\\file\\FileAction',
 				parameters: {
-					imageID: this._field.val()
+					categoryID: categoryID,
+					fileType: this._options.fileType
 				}
 			});
 			this._proxy.sendRequest();
-		} else this._dialog.wcfDialog('open');
+		}
 	},
 
-	_success: function(data, textStatus, jqXHR) {
-
-		if (this.didInit) {
-			this.dialog.find('#images').html(data.returnValues.template);
-			this._dialog.wcfDialog('render');
-		}
-		else {
-			this._dialog.html(data.returnValues.template);
-			this._dialog.wcfDialog({
-				title: WCF.Language.get('cms.acp.content.type.de.codequake.cms.content.type.image.select')
+	/**
+	 * Opens the picker when clicking on the select button
+	 */
+	_openPicker: function() {
+		if (this._dialog === null) {
+			this._proxy.setOption('data', {
+				actionName: 'getFileList',
+				className: 'cms\\data\\file\\FileAction',
+				parameters: {
+					fileType: this._options.fileType
+				}
 			});
-			this._dialog.wcfDialog('render');
-			this._didInit = true;
+			this._proxy.sendRequest();
+		} else {
+			this._dialog.wcfDialog('open');
 		}
-
-		//find image & add click handler
-		this._dialog.find('.jsFileImage').click($.proxy(this._imageSelect, this));
-		//mark as active
-		this._dialog.find('.jsFileImage[data-object-id="'+ this._field.val() +'"]').addClass('active');
 	},
 
-	_imageSelect: function(event) {
-		var $image = $(event.currentTarget);
+	/**
+	 * Removes caches of all already loaded categories and reload currently
+	 * open category.
+	 */
+	_reload: function() {
+		this._dialog.find('.tabularBox').remove();
+		this._openCategory(this._currentlyOpenCategory);
+	},
 
-		this._field.val($image.data('objectID'));
-		$('#width').val($image.data('width'));
-		$('#height').val($image.data('height'));
-		ratio = new CMS.ACP.Image.Ratio($image.data('width'), $image.data('height'));
+	/**
+	 * Handles submitting the form of this file picker.
+	 * 
+	 * @param	object		event
+	 */
+	_submit: function(event) {
+		var $form = $(event.currentTarget);
 
-		$image.clone().appendTo($('.image ul').html(''));
+		if (this._options.multiple) {
+			for (var i = 0, length = this._selected.length; i < length; i++) {
+				var $fileID = this._selected[i];
+				$('<input type="hidden" name="'+ this._inputName +'[]" value="'+ $fileID +'" />').appendTo($form);
+			}
+		} else {
+			var $fileID = this._selected.shift();
+			$('<input type="hidden" name="'+ this._inputName +'" value="'+ $fileID +'" />').appendTo($form);
+		}
+	},
 
-		this._dialog.wcfDialog('close');
+	/**
+	 * Handles successful AJAX responses.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		if (this._dialog === null) {
+			// first call, init dialog
+			this._dialog = $(data.returnValues.template).hide();
+			this._dialog.find('.filePickerCategoryDropdown li').click($.proxy(this._dropdownCategoryClick, this));
+
+			this._currentlyOpenCategory = data.returnValues.categoryID;
+
+			this._dialog.appendTo('body');
+			this._dialog.wcfDialog({
+				title: data.returnValues.title
+			});
+
+			CMS.ACP.File.Upload.init($.proxy(this._uploadCallback, this));
+		} else {
+			// loaded new category data
+			$(data.returnValues.template).hide().appendTo(this._dialog);
+			this._openCategory(data.returnValues.categoryID);
+		}
+
+		// handle checkbox/radiobox
+		this._dialog.find('td.columnMark').each($.proxy(function(index, td) {
+			var $td = $(td),
+			    $fileID = $td.parent().data('fileID'),
+			    $input;
+
+			if (this._options.multiple) {
+				$input = $('<input type="checkbox" name="'+ this._inputName +'Picker[]" value="'+ $fileID +'" />').appendTo($td);
+			} else {
+				$input = $('<input type="radio" name="'+ this._inputName +'Picker" value="'+ $fileID +'" />').appendTo($td);
+			}
+
+			// handle default values
+			if (WCF.inArray($fileID, this._selected)) {
+				$input.prop('checked', true);
+			}
+
+			// bind click event
+			$input.click($.proxy(this._inputClick, this));
+		}, this));
+	},
+
+	/**
+	 * Handles successful uploads of new files. Reloads already loaded file
+	 * lists and automatically selects uploaded files.
+	 * 
+	 * @param	array		fileIDs
+	 */
+	_uploadCallback: function(fileIDs) {
+		if (this._options.multiple || fileIDs.length == 1) {
+			this.selectFiles(fileIDs, false);
+		}
+
+		this._reload();
 	}
 });
+
+CMS.ACP.File.Upload = {
+	/**
+	 * callback executed after submitting the upload form.
+	 * @var	function
+	 */
+	_afterSubmit: null,
+
+	/**
+	 * category input object
+	 * @var	jQuery
+	 */
+	_categoryInput: null,
+
+	/**
+	 * dialog overlay
+	 * @var	jQuery
+	 */
+	_dialog: null,
+
+	/**
+	 * list of ids of files that where uploaded successfully
+	 * @var	array
+	 */
+	_fileIDs: null,
+
+	/**
+	 * action proxy
+	 * @var	WCF.Action.Proxy
+	 */
+	_proxy: null,
+
+	/**
+	 * submit button
+	 * @var	jQuery
+	 */
+	_submitButton: null,
+
+	/**
+	 * Initializes the file upload system.
+	 * 
+	 * @param	function		afterSubmit
+	 */
+	init: function(afterSubmit) {
+		this._afterSubmit = afterSubmit || null;
+		this._fileIDs = [ ];
+
+		this._proxy = new WCF.Action.Proxy();
+
+		$('.jsFileUploadButton').click($.proxy(this._openDialog, this));
+	},
+
+	/**
+	 * Adds a file to the uploaded file list
+	 * 
+	 * @param	integer		fileID
+	 */
+	addFile: function(fileID) {
+		this._fileIDs.push(fileID);
+		this._handleButtonState();
+	},
+
+	/**
+	 * Redraws the dialog.
+	 */
+	redraw: function() {
+		if (this._dialog !== null) {
+			this._dialog.wcfDialog('render');
+		}
+	},
+
+	/**
+	 * Finalize upload of new files by assigning the uploaded files to the
+	 * selected categories once the user submits the form.
+	 * 
+	 * @param	object		event
+	 */
+	_finalizeUpload: function(event) {
+		event.preventDefault();
+
+		if (!this._fileIDs.length) {
+			console.log('[CMS.ACP.File.Upload] Tried to finalize upload though no files where uploaded, aborting.');
+			return;
+		}
+
+		var $categoryIDs = this._categoryInput.val();
+		if ($categoryIDs === null) {
+			console.log('[CMS.ACP.File.Upload] Tried to finalize upload without a selected category, aborting.');
+			return;
+		}
+
+		this._submitButton.attr('disabled', 'disabled');
+
+		// send request
+		this._proxy.setOption('data', {
+			actionName: 'update',
+			className: 'cms\\data\\file\\FileAction',
+			objectIDs: this._fileIDs,
+			parameters: {
+				categoryIDs: $categoryIDs
+			}
+		});
+		this._proxy.setOption('success', $.proxy(function() {
+			// destroy dialog
+			this._dialog.wcfDialog('close');
+			new WCF.PeriodicalExecuter($.proxy(function(pe) {
+				this._dialog.parents('.dialogContainer').remove();
+				this._dialog = null;
+
+				pe.stop();
+			}, this), 200);
+
+			if ($.isFunction(this._afterSubmit)) {
+				this._afterSubmit(this._fileIDs);
+			}
+		}, this));
+		this._proxy.sendRequest();
+	},
+
+	/**
+	 * Activates the submit button once files where uploaded and a category
+	 * specified.
+	 */
+	_handleButtonState: function() {
+		if (!this._fileIDs.length) {
+			// no files uploaded
+			this._submitButton.attr('disabled', 'disabled');
+			return;
+		}
+
+		if (this._categoryInput.val() === null) {
+			// no category specified
+			this._submitButton.attr('disabled', 'disabled');
+			return;
+		}
+
+		// everything fine, activate button
+		this._submitButton.removeAttr('disabled');
+	},
+
+	/**
+	 * Opens the dialog to upload files.
+	 */
+	_openDialog: function() {
+		if (this._dialog === null) {
+			this._proxy.setOption('data', {
+				actionName: 'getUploadDialog',
+				className: 'cms\\data\\file\\FileAction'
+			});
+			this._proxy.setOption('success', $.proxy(this._openDialogResponse, this));
+			this._proxy.sendRequest();
+		} else {
+			this._dialog.wcfDialog('render');
+		}
+	},
+
+	/**
+	 * Handles successful AJAX responses to open the dialog.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_openDialogResponse: function(data, textStatus, jqXHR) {
+		this._dialog = $(data.returnValues.template).hide().appendTo('body');
+
+		this._categoryInput = $('#categoryIDs');
+		this._categoryInput.change($.proxy(this._handleButtonState, this));
+
+		this._submitButton = $('#fileUploadSubmitButton');
+		this._submitButton.click($.proxy(this._finalizeUpload, this));
+
+		// init upload handler
+		new CMS.ACP.File.Upload.Handler();
+
+		this._dialog.wcfDialog({
+			title: data.returnValues.title
+		});
+	}
+};
+
+CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
+	/**
+	 * @see	WCF.Upload.init()
+	 */
+	init: function(afterSubmit) {
+		this._super($('#fileUploadButton'), $('.fileUpload ul'), 'cms\\data\\file\\FileAction');
+	},
+
+	/**
+	 * @see	WCF.Upload._error()
+	 */
+	_error: function(jqXHR, textStatus, errorThrown) {
+		// there is no really something we can do here other than
+		// creating a log entry
+		console.log(jqXHR, textStatus, errorThrown);
+	},
+
+	/**
+	 * @see	WCF.Upload._initFile()
+	 */
+	_initFile: function(file) {
+		$li = $('<li class="box32"><span class="icon icon32 icon-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
+
+		// redraw dialog
+		CMS.ACP.File.Upload.redraw();
+
+		return $li;
+	},
+
+	/**
+	 * @see	WCF.Upload._success()
+	 */
+	_success: function(internalFileID, data) {
+		var $li = this._uploadMatrix[internalFileID];
+
+		// remove progressbar
+		$li.find('progress').remove();
+
+		if (data.returnValues.files[internalFileID]) {
+			var $fileData = data.returnValues.files[internalFileID];
+			CMS.ACP.File.Upload.addFile($fileData.fileID);
+
+			// remove spinner icon
+			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
+
+			// update file size
+			$li.find('small').append($fileData.formattedFilesize);
+		} else {
+			var $errorType = 'uploadFailed';
+			if (data.returnValues.errors[internalFileID]) {
+				$errorType = data.returnValues.errors[internalFileID].errorType;
+			}
+
+			// add fail icon
+			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
+
+			// error message
+			$li.find('div > div').append($('<small class="innerError">' + WCF.Language.get('cms.acp.file.error.' + $errorType) + '</small>'));
+			$li.addClass('uploadFailed');
+		}
+
+		// webkit suxxx
+		$li.css('display', 'block');
+
+		// redraw dialog
+		CMS.ACP.File.Upload.redraw();
+
+		WCF.DOMNodeInsertedHandler.execute();
+	}
+});
+
+CMS.ACP.Content = {};
+CMS.ACP.Content.Image = {};
 
 CMS.ACP.Content.Image.Gallery = Class.extend({
 	_cache: [],

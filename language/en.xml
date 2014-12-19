@@ -44,7 +44,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns.width"><![CDATA[Column width]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Gallery]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Images]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.select"><![CDATA[Pick images]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Content collection]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[A collection of contents.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Headline]]></item>
@@ -59,7 +58,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Picture]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Height (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.select"><![CDATA[Select a picture]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Caption]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.width"><![CDATA[Width (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
@@ -115,38 +113,31 @@
 	</category>
 
 	<category name="cms.acp.file">
-		<item name="cms.acp.file.add"><![CDATA[Upload files]]></item>
-		<item name="cms.acp.file.add.description"><![CDATA[Files will be uploaded into the current folder. You are able to upload multiple files by pressing CTRL.]]></item>
+		<item name="cms.acp.file.add"><![CDATA[Upload Files]]></item>
+		<item name="cms.acp.file.categoryIDs"><![CDATA[Categories]]></item>
 		<item name="cms.acp.file.delete.sure"><![CDATA[Are you sure you want to delete this file?]]></item>
-		<item name="cms.acp.file.details"><![CDATA[Information]]></item>
 		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
 		<item name="cms.acp.file.error.empty"><![CDATA[Please upload a file.]]></item>
 		<item name="cms.acp.file.error.invalid"><![CDATA[Invalid file]]></item>
 		<item name="cms.acp.file.file"><![CDATA[File]]></item>
-		<item name="cms.acp.file.folderID"><![CDATA[Folder]]></item>
-		<item name="cms.acp.file.folderID.root"><![CDATA[Root]]></item>
+		<item name="cms.acp.file.files"><![CDATA[Files]]></item>
+		<item name="cms.acp.file.files.description"><![CDATA[You are able to upload multiple files by pressing CTRL.]]></item>
+		<item name="cms.acp.file.filesize"><![CDATA[Size]]></item>
+		<item name="cms.acp.file.fileType"><![CDATA[Type]]></item>
 		<item name="cms.acp.file.list"><![CDATA[Files]]></item>
-		<item name="cms.acp.file.management"><![CDATA[File management]]></item>
-		<item name="cms.acp.file.management.description"><![CDATA[This is a list of all of your files & folders. You can easily share them via BBCode or content type.]]></item>
-		<item name="cms.acp.file.title"><![CDATA[Title]]></item>
-		<item name="cms.acp.file.type"><![CDATA[Type]]></item>
-	</category>
-
-	<category name="cms.acp.folder">
-		<item name="cms.acp.folder"><![CDATA[Folder]]></item>
-		<item name="cms.acp.folder.add"><![CDATA[Create folder]]></item>
-		<item name="cms.acp.folder.delete.sure"><![CDATA[Are you sure you want to delete this folder and all of its files?]]></item>
-		<item name="cms.acp.folder.error.exists"><![CDATA[The folder name is invalid or given.]]></item>
-		<item name="cms.acp.folder.open"><![CDATA[Click here to show files]]></item>
-		<item name="cms.acp.folder.toRoot"><![CDATA[Got to root]]></item>
+		<item name="cms.acp.file.list.description"><![CDATA[This is a list of all your files. You can easily share them via BBCode or content type.]]></item>
+		<item name="cms.acp.file.picker"><![CDATA[File Picker]]></item>
+		<item name="cms.acp.file.uploadTime"><![CDATA[Upload Time]]></item>
 	</category>
 
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
 		<item name="cms.acp.menu.link.cms.content"><![CDATA[Pages]]></item>
 		<item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
-		<item name="cms.acp.menu.link.cms.file.management"><![CDATA[File Management]]></item>
-		<item name="cms.acp.menu.link.cms.media"><![CDATA[Media]]></item>
+		<item name="cms.acp.menu.link.cms.file"><![CDATA[Files]]></item>
+		<item name="cms.acp.menu.link.cms.file.category.add"><![CDATA[Add Category]]></item>
+		<item name="cms.acp.menu.link.cms.file.category.list"><![CDATA[List Categories]]></item>
+		<item name="cms.acp.menu.link.cms.file.list"><![CDATA[List Files]]></item>
 		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Add Page]]></item>
 		<item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.menu.link.cms.page.importAndExport"><![CDATA[Import &amp; Export]]></item>
@@ -410,6 +401,8 @@
 		<item name="wcf.clipboard.item.de.codequake.cms.content.delete.confirmMessage"><![CDATA[Do you really want to delete {#$count} content{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.disable"><![CDATA[Deactivate ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.enable"><![CDATA[Activate ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.file.delete"><![CDATA[Delete ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.file.delete.confirmMessage"><![CDATA[Do you really want to delete {#$count} file{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete"><![CDATA[Delete ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete.confirmMessage"><![CDATA[Do you really want to delete {#$count} page{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.disable"><![CDATA[Deactivate ({#$count})]]></item>
@@ -417,6 +410,7 @@
 		<item name="wcf.clipboard.item.de.codequake.cms.stylesheet.delete"><![CDATA[Delete ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.stylesheet.delete.confirmMessage"><![CDATA[Do you really want to delete {#$count} stylesheet{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.content.marked"><![CDATA[{#$count} Content{if $count != 1}s{/if} marked]]></item>
+		<item name="wcf.clipboard.label.de.codequake.cms.file.marked"><![CDATA[{#$count} File{if $count != 1}s{/if} marked]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.page.marked"><![CDATA[{#$count} Page{if $count != 1}s{/if} marked]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.stylesheet.marked"><![CDATA[{#$count} Stylesheet{if $count != 1}s{/if} marked]]></item>
 	</category>

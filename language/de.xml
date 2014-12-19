@@ -44,7 +44,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns.width"><![CDATA[Breite der Spalten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Galerie]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Bilder]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.select"><![CDATA[Bilder auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Gruppierung]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[Dieser Inhaltstyp gruppiert automatisch alle untergeordneten Inhalte.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Überschrift]]></item>
@@ -59,7 +58,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Bild]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Höhe (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.select"><![CDATA[Bild auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Untertitel]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.width"><![CDATA[Breite (in px)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
@@ -116,37 +114,30 @@
 
 	<category name="cms.acp.file">
 		<item name="cms.acp.file.add"><![CDATA[Dateien hochladen]]></item>
-		<item name="cms.acp.file.add.description"><![CDATA[Die Dateien werden im aktuell ausgewählten Ordner hochgeladen. Sie können mehrere Dateien auswählen, in dem Sie die STRG-Taste gedrückt halten.]]></item>
+		<item name="cms.acp.file.categoryIDs"><![CDATA[Kategorien]]></item>
 		<item name="cms.acp.file.delete.sure"><![CDATA[Wollen Sie diese Datei wirklich löschen?]]></item>
-		<item name="cms.acp.file.details"><![CDATA[Informationen]]></item>
 		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
 		<item name="cms.acp.file.error.empty"><![CDATA[Bitte laden Sie eine gültige Datei hoch.]]></item>
 		<item name="cms.acp.file.error.invalid"><![CDATA[Ungültige Dateiendung]]></item>
 		<item name="cms.acp.file.file"><![CDATA[Datei]]></item>
-		<item name="cms.acp.file.folderID"><![CDATA[Ordner]]></item>
-		<item name="cms.acp.file.folderID.root"><![CDATA[Hauptverzeichnis]]></item>
+		<item name="cms.acp.file.files"><![CDATA[Dateien]]></item>
+		<item name="cms.acp.file.files.description"><![CDATA[Sie können mehrere Dateien auswählen, in dem Sie die STRG-Taste gedrückt halten.]]></item>
+		<item name="cms.acp.file.filesize"><![CDATA[Größe]]></item>
+		<item name="cms.acp.file.fileType"><![CDATA[Typ]]></item>
 		<item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
-		<item name="cms.acp.file.management"><![CDATA[Dateiverwaltung]]></item>
-		<item name="cms.acp.file.management.description"><![CDATA[Hier finden Sie eine Auflistung Ihrer Dateien und Ordner. Es gibt mehrere Möglichkeiten diese Dateien im System zu teilen. Standardmäßig geschieht dies über den entsprechenden Inhaltstyp. Aber auch ein Teilen über BBCode ist möglich.]]></item>
-		<item name="cms.acp.file.title"><![CDATA[Titel]]></item>
-		<item name="cms.acp.file.type"><![CDATA[Typ]]></item>
-	</category>
-
-	<category name="cms.acp.folder">
-		<item name="cms.acp.folder"><![CDATA[Ordner]]></item>
-		<item name="cms.acp.folder.add"><![CDATA[Ordner erstellen]]></item>
-		<item name="cms.acp.folder.delete.sure"><![CDATA[Wollen Sie diesen Ordner und alle sich darin befindenden Dateien wirklich löschen?]]></item>
-		<item name="cms.acp.folder.error.exists"><![CDATA[Der Ordnername ist ungültig oder existiert bereits.]]></item>
-		<item name="cms.acp.folder.open"><![CDATA[Hier klicken um Dateien anzuzeigen]]></item>
-		<item name="cms.acp.folder.toRoot"><![CDATA[Zum Hauptverzeichnis wechseln]]></item>
+		<item name="cms.acp.file.list.description"><![CDATA[Hier finden Sie eine Auflistung Ihrer Dateien. Es gibt mehrere Möglichkeiten diese Dateien im System zu teilen. Standardmäßig geschieht dies über den entsprechenden Inhaltstyp. Aber auch ein Teilen über BBCode ist möglich.]]></item>
+		<item name="cms.acp.file.picker"><![CDATA[Dateiverwaltung]]></item>
+		<item name="cms.acp.file.uploadTime"><![CDATA[Hochgeladen]]></item>
 	</category>
 
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
 		<item name="cms.acp.menu.link.cms.content"><![CDATA[Seiten]]></item>
 		<item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
-		<item name="cms.acp.menu.link.cms.file.management"><![CDATA[Dateiverwaltung]]></item>
-		<item name="cms.acp.menu.link.cms.media"><![CDATA[Medien]]></item>
+		<item name="cms.acp.menu.link.cms.file"><![CDATA[Dateien]]></item>
+		<item name="cms.acp.menu.link.cms.file.category.add"><![CDATA[Kategorie hinzufügen]]></item>
+		<item name="cms.acp.menu.link.cms.file.category.list"><![CDATA[Kategorien auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.file.list"><![CDATA[Dateien auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.menu.link.cms.page.importAndExport"><![CDATA[Sichern &amp; Wiederherstellen]]></item>
@@ -407,6 +398,8 @@
 		<item name="wcf.clipboard.item.de.codequake.cms.content.delete.confirmMessage"><![CDATA[{if $count == 1}Ein Inhalt{else}{#$count} Inhalte{/if} löschen?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.disable"><![CDATA[Deaktivieren ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.enable"><![CDATA[Aktivieren ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.file.delete"><![CDATA[Löschen ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.file.delete.confirmMessage"><![CDATA[{if $count == 1}Eine Datei{else}{#$count} Dateien{/if} löschen?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete"><![CDATA[Löschen ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete.confirmMessage"><![CDATA[{if $count == 1}Eine Seite{else}{#$count} Seiten{/if} löschen?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.disable"><![CDATA[Deaktivieren ({#$count})]]></item>
@@ -414,6 +407,7 @@
 		<item name="wcf.clipboard.item.de.codequake.cms.stylesheet.delete"><![CDATA[Löschen ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.stylesheet.delete.confirmMessage"><![CDATA[{if $count == 1}Ein Stylesheet{else}{#$count} Stylesheets{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.content.marked"><![CDATA[{if $count == 1}Ein Inhalt{else}{#$count} Inhalte{/if} markiert]]></item>
+		<item name="wcf.clipboard.label.de.codequake.cms.file.marked"><![CDATA[{if $count == 1}Eine Datei{else}{#$count} Dateien{/if} markiert]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.page.marked"><![CDATA[{if $count == 1}Eine Seite{else}{#$count} Seiten{/if} markiert]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.stylesheet.marked"><![CDATA[{if $count == 1}Ein Stylesheet{else}{#$count} Stylesheets{/if} markiert]]></item>
 	</category>
