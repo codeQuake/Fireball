@@ -19,7 +19,7 @@
 	</requiredpackages>
 
 	<excludedpackages>
-		<requiredpackage minversion="2.1.0 Alpha">com.woltlab.wcf</requiredpackage>
+		<excludedpackage version="2.1.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 	</excludedpackages>
 
 	<optionalpackages>
