@@ -267,10 +267,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * Validates parameters to get a rendered list of content types.
 	 */
 	public function validateGetContentTypes() {
-		// validate 'position' parameter
-		if (!isset($this->parameters['position'])) {
-			throw new UserInputException('position');
-		}
+		$this->readString('position');
 		if (!in_array($this->parameters['position'], array('body', 'sidebar'))) {
 			throw new UserInputException('position');
 		}

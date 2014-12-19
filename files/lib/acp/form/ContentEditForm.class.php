@@ -57,6 +57,29 @@ class ContentEditForm extends ContentAddForm {
 	public function save() {
 		AbstractForm::save();
 
+		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
+			$this->contentData['pollID'] = PollManager::getInstance()->save($this->contentID);
+		}
+
+		// save multilingual inputs
+		$languageVariable = 'cms.content.title'.$this->contentID;
+		if (I18nHandler::getInstance()->isPlainValue('title')) {
+			I18nHandler::getInstance()->remove($languageVariable);
+		} else {
+			I18nHandler::getInstance()->save('title', $languageVariable, 'cms.content', PACKAGE_ID);
+			$this->title = $languageVariable;
+		}
+
+		foreach ($this->objectType->getProcessor()->multilingualFields as $field) {
+			$languageVariable = 'cms.content.' . $field . $this->contentID;
+			if (I18nHandler::getInstance()->isPlainValue($field)) {
+				I18nHandler::getInstance()->remove($languageVariable);
+			} else {
+				I18nHandler::getInstance()->save($field, $languageVariable, 'cms.content', PACKAGE_ID);
+				$this->contentData[$field] = $languageVariable;
+			}
+		}
+
 		$data = array(
 			'title' => $this->title,
 			'pageID' => $this->pageID,
@@ -72,31 +95,7 @@ class ContentEditForm extends ContentAddForm {
 		$this->objectAction = new ContentAction(array($this->contentID), 'update', array(
 			'data' => $data
 		));
-		$returnValues = $this->objectAction->executeAction();
-
-		$contentData = @unserialize($content->contentData);
-
-		$update = array();
-
-		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
-			$contentData['pollID'] = PollManager::getInstance()->save($this->contentID);
-		}
-
-		if (!I18nHandler::getInstance()->isPlainValue('title')) {
-			I18nHandler::getInstance()->save('title', 'cms.content.title' . $this->contentID, 'cms.content', PACKAGE_ID);
-			$update['title'] = 'cms.content.title' . $this->contentID;
-		}
-
-		foreach ($this->objectType->getProcessor()->multilingualFields as $field) {
-			if (!I18nHandler::getInstance()->isPlainValue($field)) {
-				I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $this->contentID, 'cms.content', PACKAGE_ID);
-				$contentData[$field] = 'cms.content.' . $field . $this->contentID;
-			}
-		}
-
-		$update['contentData'] = serialize($contentData);
-		$editor = new ContentEditor($returnValues['returnValues']);
-		$editor->update($update);
+		$this->objectAction->executeAction();
 
 		// create revision
 		$objectAction = new ContentAction(array($this->contentID), 'createRevision', array(
