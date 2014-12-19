@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\stylesheet;
 
-use cms\data\CMSDatabaseObject;
+use wcf\data\DatabaseObject;
 use wcf\system\request\IRouteController;
 
 /**
@@ -12,7 +12,7 @@ use wcf\system\request\IRouteController;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Stylesheet extends CMSDatabaseObject implements IRouteController {
+class Stylesheet extends DatabaseObject implements IRouteController {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */

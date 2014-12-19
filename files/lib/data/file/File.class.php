@@ -2,7 +2,7 @@
 namespace cms\data\file;
 
 use cms\data\folder\Folder;
-use cms\data\CMSDatabaseObject;
+use wcf\data\DatabaseObject;
 use wcf\system\request\IRouteController;
 use wcf\system\WCF;
 
@@ -14,7 +14,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class File extends CMSDatabaseObject implements IRouteController {
+class File extends DatabaseObject implements IRouteController {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */

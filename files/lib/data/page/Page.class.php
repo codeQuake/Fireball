@@ -2,10 +2,10 @@
 namespace cms\data\page;
 
 use cms\data\content\DrainedPositionContentNodeTree;
-use cms\data\CMSDatabaseObject;
 use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
 use cms\system\revision\PageRevisionHandler;
+use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -23,7 +23,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableObject, IPermissionObject, IRouteController {
+class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObject, IPermissionObject, IRouteController {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */

@@ -33,13 +33,6 @@ class PageSearch extends AbstractSearchableObjectType {
 	}
 
 	/**
-	 * @see	\wcf\system\search\ISearchableObjectType::getApplication()
-	 */
-	public function getApplication() {
-		return 'cms';
-	}
-
-	/**
 	 * @see	\wcf\system\search\ISearchableObjectType::getIDFieldName()
 	 */
 	public function getIDFieldName() {
