@@ -14,7 +14,7 @@
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
-		new CMS.ACP.File.Picker($('#filePicker'), 'contentData[imageIDs]', [{if $contentData['imageIDs']|isset}{implode from=$contentData['imageIDs'] item='imageID'}{@$imageID}{/implode}{/if}], { multiple: true });
+		new CMS.ACP.File.Picker($('#filePicker'), 'contentData[imageIDs]', [{if $contentData['imageIDs']|isset}{implode from=$contentData['imageIDs'] item='imageID'}{@$imageID}{/implode}{/if}], { multiple: true, fileType: 'image' });
 	});
 	//]]>
 </script>

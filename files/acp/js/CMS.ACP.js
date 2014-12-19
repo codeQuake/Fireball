@@ -260,7 +260,8 @@ CMS.ACP.File.Picker = Class.extend({
 		this._inputName = inputName;
 		this._selected = defaultValues || [ ];
 		this._options = $.extend(true, {
-			multiple: false
+			multiple: false,
+			fileType: ''
 		}, options);
 
 		this._proxy = new WCF.Action.Proxy({
@@ -358,7 +359,8 @@ CMS.ACP.File.Picker = Class.extend({
 				actionName: 'getFileList',
 				className: 'cms\\data\\file\\FileAction',
 				parameters: {
-					categoryID: categoryID
+					categoryID: categoryID,
+					fileType: this._options.fileType
 				}
 			});
 			this._proxy.sendRequest();
@@ -372,7 +374,10 @@ CMS.ACP.File.Picker = Class.extend({
 		if (this._dialog === null) {
 			this._proxy.setOption('data', {
 				actionName: 'getFileList',
-				className: 'cms\\data\\file\\FileAction'
+				className: 'cms\\data\\file\\FileAction',
+				parameters: {
+					fileType: this._options.fileType
+				}
 			});
 			this._proxy.sendRequest();
 		} else {
@@ -480,6 +485,12 @@ CMS.ACP.File.Upload = {
 	_afterSubmit: null,
 
 	/**
+	 * category input object
+	 * @var	jQuery
+	 */
+	_categoryInput: null,
+
+	/**
 	 * dialog overlay
 	 * @var	jQuery
 	 */
@@ -524,12 +535,7 @@ CMS.ACP.File.Upload = {
 	 */
 	addFile: function(fileID) {
 		this._fileIDs.push(fileID);
-
-		// there is at least one successfully uploaded file
-		// => activate submit button
-		if (this._submitButton !== null) {
-			this._submitButton.removeAttr('disabled');
-		}
+		this._handleButtonState();
 	},
 
 	/**
@@ -549,15 +555,15 @@ CMS.ACP.File.Upload = {
 	 */
 	_finalizeUpload: function(event) {
 		event.preventDefault();
-		var $categoryIDs = $('#categoryIDs').val();
 
-		if (!$categoryIDs.length) {
-			// no category selected, aborting
+		if (!this._fileIDs.length) {
+			console.log('[CMS.ACP.File.Upload] Tried to finalize upload though no files where uploaded, aborting.');
 			return;
 		}
 
-		if (!this._fileIDs.length) {
-			// no files uploaded, aborting
+		var $categoryIDs = this._categoryInput.val();
+		if ($categoryIDs === null) {
+			console.log('[CMS.ACP.File.Upload] Tried to finalize upload without a selected category, aborting.');
 			return;
 		}
 
@@ -569,7 +575,7 @@ CMS.ACP.File.Upload = {
 			className: 'cms\\data\\file\\FileAction',
 			objectIDs: this._fileIDs,
 			parameters: {
-				categoryIDs: $('#categoryIDs').val()
+				categoryIDs: $categoryIDs
 			}
 		});
 		this._proxy.setOption('success', $.proxy(function() {
@@ -587,6 +593,27 @@ CMS.ACP.File.Upload = {
 			}
 		}, this));
 		this._proxy.sendRequest();
+	},
+
+	/**
+	 * Activates the submit button once files where uploaded and a category
+	 * specified.
+	 */
+	_handleButtonState: function() {
+		if (!this._fileIDs.length) {
+			// no files uploaded
+			this._submitButton.attr('disabled', 'disabled');
+			return;
+		}
+
+		if (this._categoryInput.val() === null) {
+			// no category specified
+			this._submitButton.attr('disabled', 'disabled');
+			return;
+		}
+
+		// everything fine, activate button
+		this._submitButton.removeAttr('disabled');
 	},
 
 	/**
@@ -614,6 +641,9 @@ CMS.ACP.File.Upload = {
 	 */
 	_openDialogResponse: function(data, textStatus, jqXHR) {
 		this._dialog = $(data.returnValues.template).hide().appendTo('body');
+
+		this._categoryInput = $('#categoryIDs');
+		this._categoryInput.change($.proxy(this._handleButtonState, this));
 
 		this._submitButton = $('#fileUploadSubmitButton');
 		this._submitButton.click($.proxy(this._finalizeUpload, this));

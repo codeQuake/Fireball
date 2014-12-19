@@ -77,11 +77,11 @@ class FileAction extends AbstractDatabaseObjectAction {
 			}
 		}
 
-		// validate type
-		$this->readString('type', true);
-		$allowedTypes = array('code', 'film', 'music', 'pdf', 'picture');
-		if ($this->parameters['type'] && !in_array($this->parameters['type'], $allowedTypes)) {
-			throw new UserInputException('type');
+		// validate file type
+		$this->readString('fileType', true);
+		$allowedTypes = array('code', 'film', 'image', 'music', 'pdf');
+		if ($this->parameters['fileType'] && !in_array($this->parameters['fileType'], $allowedTypes)) {
+			throw new UserInputException('fileType');
 		}
 	}
 
@@ -103,8 +103,8 @@ class FileAction extends AbstractDatabaseObjectAction {
 		// load files assigned to the category
 		$fileList = new CategoryFileList(array($category->categoryID));
 		$fileList->sqlOrderBy = 'title ASC';
-		if ($this->parameters['type']) {
-			$fileList->getConditionBuilder()->add('file.type LIKE ?', array($this->parameters['type'].'%'));
+		if ($this->parameters['fileType']) {
+			$fileList->getConditionBuilder()->add('file.fileType LIKE ?', array($this->parameters['fileType'].'%'));
 		}
 		$fileList->readObjects();
 
