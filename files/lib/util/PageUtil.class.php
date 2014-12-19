@@ -45,11 +45,14 @@ final class PageUtil {
 	 * @return	string
 	 */
 	public static function buildAlias($title) {
+		// make alias lowercase
+		$alias = mb_strtolower($title);
+
 		// replace whitespace with hyphen
-		$alias = str_replace(' ', '-', $title);
+		$alias = str_replace(' ', '-', $alias);
 
 		// remove illegal characters
-		$alias = preg_replace('~[^a-zA-Z0-9\-]+~', '', $alias);
+		$alias = preg_replace('~[^a-z0-9\-]+~', '', $alias);
 
 		// trim to maxlength
 		$alias = mb_substr($alias, 0, self::ALIAS_MAXLENGTH);

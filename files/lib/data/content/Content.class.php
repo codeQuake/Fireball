@@ -91,26 +91,24 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 	public function getCSSClasses() {
 		if ($this->getCategory() == 'structure') {
 			if ($this->parentID != null && $this->getParentContent()->getCategory() == 'structure') {
-				$childCSS = $this->getParentContent()
-					->getObjectType()
-					->getProcessor()
-					->getChildCSSClasses($this);
-				if ($childCSS != '') return $this->getObjectType()
-					->getProcessor()
-					->getCSSClasses() . ' ' . $childCSS . ' ' . $this->cssClasses;
+				$childCSS = $this->getParentContent()->getObjectType()->getProcessor()->getChildCSSClasses($this);
+				if ($childCSS != '') {
+					return $this->getObjectType()->getProcessor()->getCSSClasses() . ' ' . $childCSS . ' ' . $this->cssClasses;
+				}
 			}
-			return $this->getObjectType()
-				->getProcessor()
-				->getCSSClasses() . ' ' . $this->cssClasses;
+
+			return $this->getObjectType()->getProcessor()->getCSSClasses() . ' ' . $this->cssClasses;
 		}
+
 		if ($this->parentID != null && $this->getParentContent()->getCategory() == 'structure') {
-			$childCSS = $this->getParentContent()
-				->getObjectType()
-				->getProcessor()
-				->getChildCSSClasses($this);
-			if ($childCSS != '') return $childCSS . ' ' . $this->cssClasses;
+			$childCSS = $this->getParentContent()->getObjectType()->getProcessor()->getChildCSSClasses($this);
+			if ($childCSS != '') {
+				return $childCSS . ' ' . $this->cssClasses;
+			}
+
 			return $this->cssClasses;
 		}
+
 		return $this->cssClasses;
 	}
 

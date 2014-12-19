@@ -61,8 +61,7 @@ class BackupHandler extends SingletonFactory{
 	}
 
 	protected function buildXML() {
-
-		//start doc
+		// start doc
 		$xml = new XMLWriter();
 		$xml->beginDocument('data', '', '');
 
@@ -81,7 +80,7 @@ class BackupHandler extends SingletonFactory{
 			}
 		}
 
-		//end doc
+		// end doc
 		$xml->endDocument(FileUtil::getTempFolder().'cmsData.xml');
 	}
 
