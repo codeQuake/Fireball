@@ -60,8 +60,6 @@
 			{event name='contentNavigationButtonsTop'}
 		</ul>
 	</nav>
-
-	<nav class="jsClipboardEditor" data-types="[ 'de.codequake.cms.page' ]"></nav>
 </div>
 
 {hascontent}
@@ -110,10 +108,22 @@
 				{section name=i loop=$oldDepth}</ol></li>{/section}
 			{/content}
 		</ol>
+
+		<div class="formSubmit">
+			<button data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+		</div>
 	</section>
 
-	<div class="formSubmit">
-		<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+	<div class="contentNavigation">
+		<nav>
+			<ul>
+				<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
+
+				{event name='contentNavigationButtonsBottom'}
+			</ul>
+		</nav>
+
+		<nav class="jsClipboardEditor" data-types="[ 'de.codequake.cms.page' ]"></nav>
 	</div>
 
 	<div class="container marginTop">
