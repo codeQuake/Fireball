@@ -26,6 +26,24 @@ abstract class AbstractContentType implements IContentType {
 	public $multilingualFields = array();
 
 	/**
+	 * template name
+	 * @var	string
+	 */
+	public $templateName = '';
+
+	/**
+	 * Initialize a new content type instance
+	 */
+	public function __construct() {
+		// try to guess template name
+		if (empty($this->templateName)) {
+			$classParts = explode('\\', get_class($this));
+			$className = array_pop($classParts);
+			$this->templateName = lcfirst($className);
+		}
+	}
+
+	/**
 	 * @see \cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
@@ -70,6 +88,6 @@ abstract class AbstractContentType implements IContentType {
 	 * @see \cms\system\content\type\IContentType::getFormTemplate()
 	 */
 	public function getFormTemplate() {
-		return '';
+		return $this->templateName;
 	}
 }

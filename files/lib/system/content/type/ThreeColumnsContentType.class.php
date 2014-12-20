@@ -12,13 +12,6 @@ use wcf\system\WCF;
  */
 class ThreeColumnsContentType extends AbstractStructureContentType {
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'threeColumnContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
 	 */
 	public function getCSSClasses() {

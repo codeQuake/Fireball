@@ -22,13 +22,6 @@ class LinkContentType extends AbstractContentType {
 	public $multilingualFields = array('text', 'link');
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'linkContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {

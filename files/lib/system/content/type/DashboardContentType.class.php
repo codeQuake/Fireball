@@ -25,7 +25,8 @@ class DashboardContentType extends AbstractContentType {
 		WCF::getTPL()->assign(array(
 			'boxList' => DashboardBoxCacheBuilder::getInstance()->getData(array(), 'boxes')
 		));
-		return 'dashboardContentType';
+
+		return parent::getFormTemplate();
 	}
 
 	/**

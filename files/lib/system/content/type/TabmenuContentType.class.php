@@ -18,11 +18,9 @@ class TabmenuContentType extends AbstractStructureContentType {
 	protected $icon = 'icon-list-alt';
 
 	/**
-	 * @see	\cms\system\content\type\IcontentType::getFormTemplate()
+	 * @see	\cms\system\content\type\AbstractContentType::$templateName
 	 */
-	public function getFormTemplate() {
-		return 'tabMenuContentType';
-	}
+	public $templateName = 'tabMenuContentType';
 
 	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()

@@ -27,13 +27,6 @@ class HeadlineContentType extends AbstractSearchableContentType {
 	protected $searchableFields = array('text');
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'headlineContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {

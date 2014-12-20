@@ -19,13 +19,6 @@ class UserContentType extends AbstractContentType {
 	protected $icon = 'icon-user';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'userContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::validate()
 	 */
 	public function validate($data) {

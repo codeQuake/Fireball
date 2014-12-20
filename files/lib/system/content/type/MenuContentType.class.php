@@ -18,13 +18,6 @@ class MenuContentType extends AbstractStructureContentType {
 	protected $icon = 'icon-sitemap';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'menuContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {

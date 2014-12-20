@@ -29,13 +29,6 @@ class FileContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'fileContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {

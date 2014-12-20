@@ -16,11 +16,9 @@ class PHPContentType extends AbstractContentType {
 	protected $icon = 'icon-code';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 * @see	\cms\system\content\type\AbstractContentType::$templateName
 	 */
-	public function getFormTemplate() {
-		return 'phpContentType';
-	}
+	public $templateName = 'phpContentType';
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()

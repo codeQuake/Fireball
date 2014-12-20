@@ -12,13 +12,6 @@ use wcf\system\WCF;
  */
 class FourColumnsContentType extends AbstractStructureContentType {
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'fourColumnContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
 	 */
 	public function getCSSClasses() {

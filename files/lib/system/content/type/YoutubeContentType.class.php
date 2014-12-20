@@ -18,13 +18,6 @@ class YoutubeContentType extends AbstractContentType {
 	protected $icon = 'icon-youtube';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'youtubeContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::validate()
 	 */
 	public function validate($data) {

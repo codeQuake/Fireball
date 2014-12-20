@@ -28,7 +28,7 @@ class ImageContentType extends AbstractContentType {
 	public function getFormTemplate() {
 		WCF::getTPL()->assign('file', new File(0));
 
-		return 'imageContentType';
+		return parent::getFormTemplate();
 	}
 
 	/**

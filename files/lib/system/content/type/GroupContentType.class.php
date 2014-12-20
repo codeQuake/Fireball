@@ -9,13 +9,6 @@ namespace cms\system\content\type;
  */
 class GroupContentType extends AbstractStructureContentType {
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'groupContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
 	 */
 	public function getCSSClasses() {

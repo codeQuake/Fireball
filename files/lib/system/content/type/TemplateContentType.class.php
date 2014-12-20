@@ -19,13 +19,6 @@ class TemplateContentType extends AbstractContentType {
 	protected $icon = 'icon-code';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'templateContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::validate()
 	 */
 	public function validate($data) {

@@ -35,7 +35,7 @@ class TextContentType extends AbstractSearchableContentType {
 		// init bbcodes
 		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
 
-		return 'textContentType';
+		return parent::getFormTemplate();
 	}
 
 	/**

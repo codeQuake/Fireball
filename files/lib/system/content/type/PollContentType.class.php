@@ -47,11 +47,4 @@ class PollContentType extends AbstractContentType {
 	public function validate($data) {
 		PollManager::getInstance()->validate();
 	}
-
-	/**
-	 * @see	\cms\system\content\type\IcontentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'pollContentType';
-	}
 }

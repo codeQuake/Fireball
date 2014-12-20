@@ -18,13 +18,6 @@ class GalleryContentType extends AbstractContentType {
 	protected $icon = 'icon-picture';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'galleryContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {

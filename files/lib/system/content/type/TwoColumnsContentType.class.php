@@ -12,13 +12,6 @@ use wcf\system\WCF;
  */
 class TwoColumnsContentType extends AbstractStructureContentType {
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'twoColumnContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
 	 */
 	public function getCSSClasses() {
