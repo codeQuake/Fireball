@@ -32,13 +32,10 @@
 	{/if}
 {/capture}
 
-{if $page->showSidebar || $sidebarNodeTree !== null}
-	{capture assign='sidebar'}
-		{if $page->showSidebar == 1}
-			{@$__boxSidebar}
-		{/if}
 
-		{if $sidebarNodeTree !== null}
+{hascontent}
+	{capture assign='sidebar'}
+		{content}
 			{assign var=oldDepth value=0}
 			{foreach from=$sidebarNodeTree item=content}
 				{if $content->getTypeName() != 'de.codequake.cms.content.type.dashboard'}
@@ -57,9 +54,11 @@
 				{/if}
 			{/foreach}
 			{section name=i loop=$oldDepth}</fieldset>{/section}
-		{/if}
+
+			{event name='boxes'}
+		{/content}
 	{/capture}
-{/if}
+{/hascontent}
 
 {include file='header' sidebarOrientation=$page->sidebarOrientation}
 

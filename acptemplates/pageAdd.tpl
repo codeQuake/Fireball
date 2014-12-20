@@ -280,14 +280,6 @@
 			<fieldset>
 				<legend>{lang}cms.acp.page.settings{/lang}</legend>
 
-				<dl{if $errorField == 'showSidebar'} class="formError"{/if}>
-					<dt class="reversed"><label for="showSidebar">{lang}cms.acp.page.settings.showSidebar{/lang}</label></dt>
-					<dd>
-						<input type="checkbox" name="showSidebar" id="showSidebar" value="1"{if $showSidebar} checked="checked"{/if} />
-						<small>{lang}cms.acp.page.settings.showSidebar.description{/lang}</small>
-					</dd>
-				</dl>
-
 				<dl{if $errorField == 'isCommentable'} class="formError"{/if}>
 					<dt class="reversed"><label for="isCommentable">{lang}cms.acp.page.settings.isCommentable{/lang}</label></dt>
 					<dd>

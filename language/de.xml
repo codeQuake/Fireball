@@ -224,8 +224,6 @@
 		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
 		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Kommentare aktivieren]]></item>
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[Erlaubt anderen Benutzern diese Seite zu kommentieren.]]></item>
-		<item name="cms.acp.page.settings.showSidebar"><![CDATA[Globale Seitenleiste anzeigen]]></item>
-		<item name="cms.acp.page.settings.showSidebar.description"><![CDATA[Sie können die globale Seitenleiste in der <a href="{link controller='DashboardList'}{/link}">Dashboard-Konfiguration</a> konfigurieren.]]></item>
 		<item name="cms.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
@@ -374,7 +372,6 @@
 		<item name="wcf.acp.option.cms_pages_default_allow_indexing"><![CDATA[Suchmaschinen dürfen diese Seite indexieren]]></item>
 		<item name="wcf.acp.option.cms_pages_default_allow_subscribing"><![CDATA[Seite kann abonniert werden]]></item>
 		<item name="wcf.acp.option.cms_pages_default_comments"><![CDATA[Kommentare aktivieren]]></item>
-		<item name="wcf.acp.option.cms_pages_default_global_sidebar"><![CDATA[Globale Seitenleiste anzeigen]]></item>
 		<item name="wcf.acp.option.cms_pages_default_offline"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar"><![CDATA[Ausrichtung der Seitenleiste]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.left"><![CDATA[Linke Seitenleiste]]></item>

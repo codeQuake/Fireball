@@ -223,15 +223,6 @@
 		</type>
 		<!-- /acl -->
 
-		<!-- dashboard -->
-		<type>
-			<name>de.codequake.cms.page</name>
-			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
-			<allowcontent>0</allowcontent>
-			<allowsidebar>1</allowsidebar>
-		</type>
-		<!-- /dashboard -->
-
 		<!-- comments -->
 		<type>
 			<name>de.codequake.cms.page.comment</name>

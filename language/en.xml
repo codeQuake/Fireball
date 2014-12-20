@@ -226,8 +226,6 @@
 		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Page is visible during offline mode]]></item>
 		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Allow comments]]></item>
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[]]></item>
-		<item name="cms.acp.page.settings.showSidebar"><![CDATA[Show global sidebar]]></item>
-		<item name="cms.acp.page.settings.showSidebar.description"><![CDATA[Shows the global sidebar, which you can set up <a href="{link controller='DashboardList'}{/link}">here</a>.]]></item>
 		<item name="cms.acp.page.styleID"><![CDATA[Style]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Forces selected style upon page visit]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
@@ -377,7 +375,6 @@
 		<item name="wcf.acp.option.cms_pages_default_allow_indexing"><![CDATA[Search robots are allowed to index this page]]></item>
 		<item name="wcf.acp.option.cms_pages_default_allow_subscribing"><![CDATA[Allow subscription of this page]]></item>
 		<item name="wcf.acp.option.cms_pages_default_comments"><![CDATA[Enable Comments]]></item>
-		<item name="wcf.acp.option.cms_pages_default_global_sidebar"><![CDATA[Show global sidebar]]></item>
 		<item name="wcf.acp.option.cms_pages_default_offline"><![CDATA[Available during offline mode]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar"><![CDATA[Sidebar orientation]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.left"><![CDATA[Left]]></item>

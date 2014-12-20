@@ -92,7 +92,6 @@ class PageEditForm extends PageAddForm {
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'showOrder' => $this->showOrder,
 			'parentID' => ($this->parentID) ?  : null,
-			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'allowIndexing' => $this->allowIndexing,
 			'isCommentable' => $this->isCommentable,
@@ -243,7 +242,6 @@ class PageEditForm extends PageAddForm {
 			$this->showOrder = $this->page->showOrder;
 			$this->invisible = $this->page->invisible;
 			$this->allowIndexing = $this->page->allowIndexing;
-			$this->showSidebar = $this->page->showSidebar;
 			$this->sidebarOrientation = $this->page->sidebarOrientation;
 			$this->isCommentable = $this->page->isCommentable;
 			$this->allowSubscribing = $this->page->allowSubscribing;

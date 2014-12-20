@@ -7,7 +7,6 @@ use cms\system\counter\VisitCountHandler;
 use cms\system\CMSCore;
 use wcf\page\AbstractPage;
 use wcf\system\comment\CommentHandler;
-use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\LinkHandler;
@@ -190,7 +189,6 @@ class PagePage extends AbstractPage {
 		));
 
 		// sidebar
-		if ($this->page->showSidebar == 1) DashboardHandler::getInstance()->loadBoxes('de.codequake.cms.page', $this);
 		WCF::getTPL()->assign(array(
 			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.page'),
 			'sidebarName' => 'de.codequake.cms.page'

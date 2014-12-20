@@ -164,12 +164,6 @@ class PageAddForm extends AbstractForm {
 	public $showOrder = 0;
 
 	/**
-	 * indication whether the sidebar is visible
-	 * @var	integer
-	 */
-	public $showSidebar = CMS_PAGES_DEFAULT_GLOBAL_SIDEBAR;
-
-	/**
 	 * orientation of the sidebar ('left' or 'right')
 	 * @var	string
 	 */
@@ -230,8 +224,6 @@ class PageAddForm extends AbstractForm {
 		else $this->menuItem = 0;
 		$this->allowIndexing = (isset($_POST['allowIndexing'])) ? 1 : 0;
 		if (isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
-		if (isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
-		else $this->showSidebar = 0;
 		if (isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);
 		if (isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
 		else $this->isCommentable = 0;
@@ -335,7 +327,6 @@ class PageAddForm extends AbstractForm {
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'showOrder' => $this->showOrder,
 			'parentID' => ($this->parentID) ?  : null,
-			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'allowIndexing' => $this->allowIndexing,
 			'isCommentable' => $this->isCommentable,
@@ -437,7 +428,7 @@ class PageAddForm extends AbstractForm {
 
 		$this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
 		$this->sidebarOrientation = 'right';
-		$this->deactivationDate = $this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->parentID = $this->publicationDate = $this->showOrder = $this->showSidebar = $this->styleID = 0;
+		$this->deactivationDate = $this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->parentID = $this->publicationDate = $this->showOrder = $this->styleID = 0;
 		$this->allowIndexing = $this->allowSubscribing = $this->menuItem = 1;
 		I18nHandler::getInstance()->reset();
 	}
@@ -486,7 +477,6 @@ class PageAddForm extends AbstractForm {
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords,
 			'menu' => $this->menuItem,
-			'showSidebar' => $this->showSidebar,
 			'sidebarOrientation' => $this->sidebarOrientation,
 			'pageList' => $this->pageList,
 			'isCommentable' => $this->isCommentable,
