@@ -75,7 +75,7 @@
 				<legend>{lang}wcf.global.form.data{/lang}</legend>
 
 				<dl{if $errorField == 'title'} class="formError"{/if}>
-					<dt><label for="title">{lang}cms.acp.page.title{/lang}</label></dt>
+					<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
 					<dd>
 						<input type="text" id="title" name="title" value="{$i18nPlainValues['title']}" class="long" required="required" />
 						{if $errorField == 'title'}
