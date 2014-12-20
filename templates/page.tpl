@@ -11,7 +11,7 @@
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			new CMS.Content.Type.Slideshow({CMS_PAGES_CONTENT_SLIDESHOW_INTERVAL}, {CMS_PAGES_CONTENT_SLIDESHOW_EFFECT_DELAY}, '{CMS_PAGES_CONTENT_SLIDESHOW_FX}');
+			new CMS.Content.Type.Slideshow({CMS_CONTENT_SLIDESHOW_INTERVAL}, {CMS_CONTENT_SLIDESHOW_EFFECT_DELAY}, '{CMS_PAGES_CONTENT_SLIDESHOW_FX}');
 
 			{if $page->allowSubscribing && $__wcf->user->userID}
 				WCF.Language.addObject({
