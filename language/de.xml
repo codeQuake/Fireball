@@ -100,9 +100,7 @@
 	</category>
 
 	<category name="cms.acp.dashboard">
-		<item name="cms.acp.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.dashboard.all"><![CDATA[Alle Besucher]]></item>
-		<item name="cms.acp.dashboard.lastNews"><![CDATA[Fireball CMS - Neuigkeiten]]></item>
 		<item name="cms.acp.dashboard.lastWeeksVisitors"><![CDATA[Besucher der letzten Woche]]></item>
 		<item name="cms.acp.dashboard.registered"><![CDATA[Registrierte Benutzer]]></item>
 		<item name="cms.acp.dashboard.spiders"><![CDATA[Suchmaschinenroboter]]></item>
@@ -139,7 +137,6 @@
 		<item name="cms.acp.menu.link.cms.file.category.list"><![CDATA[Kategorien auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.file.list"><![CDATA[Dateien auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
-		<item name="cms.acp.menu.link.cms.page.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.menu.link.cms.page.importAndExport"><![CDATA[Sichern &amp; Wiederherstellen]]></item>
 		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[Seiten auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistiken]]></item>
