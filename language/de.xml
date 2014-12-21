@@ -2,7 +2,6 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="cms.acp.content">
 		<item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
-		<item name="cms.acp.content.contents"><![CDATA[Inhalte]]></item>
 		<item name="cms.acp.content.copy"><![CDATA[Inhalt kopieren]]></item>
 		<item name="cms.acp.content.css"><![CDATA[CSS-Einstellungen]]></item>
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
@@ -16,15 +15,11 @@
 </ul>]]></item>
 		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Wollen Sie diesen Inhalt wirklich löschen?]]></item>
-		<item name="cms.acp.content.disable"><![CDATA[Inhalt (de)-aktivieren]]></item>
-		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
-		<item name="cms.acp.content.general.pageID"><![CDATA[Seite auswählen]]></item>
 		<item name="cms.acp.content.list"><![CDATA[Inhalte]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
 		<item name="cms.acp.content.position.position.body"><![CDATA[Inhaltsbereich]]></item>
 		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Seitenleiste]]></item>
-		<item name="cms.acp.content.remove"><![CDATA[Inhalt entfernen]]></item>
 		<item name="cms.acp.content.revision"><![CDATA[Version]]></item>
 		<item name="cms.acp.content.revision.action"><![CDATA[Aktion]]></item>
 		<item name="cms.acp.content.revision.action.create"><![CDATA[Inhalt erstellt]]></item>
@@ -71,8 +66,8 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth"><![CDATA[Tiefe der Menüstruktur]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth.description"><![CDATA[Geben Sie hier die Tiefe der Menüstrukur an. Das heißt die Anzahl der aufzulistenden Ebenen des Menüs. Soll keine Beschränkung eingerichtet werden, so geben Sie 0 an.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Vorlage]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[Alle Seiten]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
@@ -101,13 +96,8 @@
 
 	<category name="cms.acp.dashboard">
 		<item name="cms.acp.dashboard.all"><![CDATA[Alle Besucher]]></item>
-		<item name="cms.acp.dashboard.lastWeeksVisitors"><![CDATA[Besucher der letzten Woche]]></item>
 		<item name="cms.acp.dashboard.registered"><![CDATA[Registrierte Benutzer]]></item>
 		<item name="cms.acp.dashboard.spiders"><![CDATA[Suchmaschinenroboter]]></item>
-		<item name="cms.acp.dashboard.visitsAll"><![CDATA[Besuche gesamt]]></item>
-		<item name="cms.acp.dashboard.visitsMonth"><![CDATA[Besuche diesen Monat]]></item>
-		<item name="cms.acp.dashboard.visitsToday"><![CDATA[Besuche heute]]></item>
-		<item name="cms.acp.dashboard.visitsYesterday"><![CDATA[Besuche gestern]]></item>
 	</category>
 
 	<category name="cms.acp.file">
@@ -118,10 +108,10 @@
 		<item name="cms.acp.file.error.empty"><![CDATA[Bitte laden Sie eine gültige Datei hoch.]]></item>
 		<item name="cms.acp.file.error.invalid"><![CDATA[Ungültige Dateiendung]]></item>
 		<item name="cms.acp.file.file"><![CDATA[Datei]]></item>
+		<item name="cms.acp.file.fileType"><![CDATA[Typ]]></item>
 		<item name="cms.acp.file.files"><![CDATA[Dateien]]></item>
 		<item name="cms.acp.file.files.description"><![CDATA[Sie können mehrere Dateien auswählen, in dem Sie die STRG-Taste gedrückt halten.]]></item>
 		<item name="cms.acp.file.filesize"><![CDATA[Größe]]></item>
-		<item name="cms.acp.file.fileType"><![CDATA[Typ]]></item>
 		<item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
 		<item name="cms.acp.file.list.description"><![CDATA[Hier finden Sie eine Auflistung Ihrer Dateien. Es gibt mehrere Möglichkeiten diese Dateien im System zu teilen. Standardmäßig geschieht dies über den entsprechenden Inhaltstyp. Aber auch ein Teilen über BBCode ist möglich.]]></item>
 		<item name="cms.acp.file.picker"><![CDATA[Dateiverwaltung]]></item>
@@ -130,17 +120,16 @@
 
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="cms.acp.menu.link.cms.content"><![CDATA[Seiten]]></item>
-		<item name="cms.acp.menu.link.cms.dashboard"><![CDATA[Dashboard]]></item>
 		<item name="cms.acp.menu.link.cms.file"><![CDATA[Dateien]]></item>
 		<item name="cms.acp.menu.link.cms.file.category.add"><![CDATA[Kategorie hinzufügen]]></item>
 		<item name="cms.acp.menu.link.cms.file.category.list"><![CDATA[Kategorien auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.file.list"><![CDATA[Dateien auflisten]]></item>
+		<item name="cms.acp.menu.link.cms.page"><![CDATA[Seiten]]></item>
 		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="cms.acp.menu.link.cms.page.importAndExport"><![CDATA[Sichern &amp; Wiederherstellen]]></item>
 		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[Seiten auflisten]]></item>
 		<item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistiken]]></item>
-		<item name="cms.acp.menu.link.cms.style"><![CDATA[Darstellungsoptionen]]></item>
+		<item name="cms.acp.menu.link.cms.stylesheet"><![CDATA[Stylesheets]]></item>
 		<item name="cms.acp.menu.link.cms.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
 		<item name="cms.acp.menu.link.cms.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
 	</category>
@@ -152,17 +141,13 @@
 		<item name="cms.acp.page.alias.error.notUnique"><![CDATA[Auf dieser Ebene existiert bereits eine Seite, die die gleiche Abkürzung besitzt.]]></item>
 		<item name="cms.acp.page.alias.error.notValid"><![CDATA[Die eingegebene Abkürzung ist ungültig.]]></item>
 		<item name="cms.acp.page.alias.preview"><![CDATA[Link-Vorschau:]]></item>
-		<item name="cms.acp.page.backup"><![CDATA[Datensicherung]]></item>
-		<item name="cms.acp.page.backup.description"><![CDATA[Laden Sie sich hier Ihre aktuelle Datensicherung herunter: <a href="{link application='cms' controller='CMSExport'}{/link}"><span class="icon icon16 icon-cloud-download"></span> Herunterladen</a>]]></item>
 		<item name="cms.acp.page.button.choose"><![CDATA[Seite wählen]]></item>
-		<item name="cms.acp.page.content.add"><![CDATA[Inhalte zu „{$page->getTitle()}“ hinzufügen]]></item>
 		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von „{$page->getTitle()}“ auflisten]]></item>
 		<item name="cms.acp.page.copy"><![CDATA[Seite kopieren]]></item>
 		<item name="cms.acp.page.delayedDeactivation"><![CDATA[Deaktivierung am {@$page->deactivationDate|plainTime}]]></item>
 		<item name="cms.acp.page.delayedPublication"><![CDATA[Veröffentlichung am {@$page->publicationDate|plainTime}]]></item>
 		<item name="cms.acp.page.delete.sure"><![CDATA[Wollen Sie diese Seite und all ihre Inhalte wirklich löschen?]]></item>
 		<item name="cms.acp.page.description"><![CDATA[Beschreibung]]></item>
-		<item name="cms.acp.page.disable"><![CDATA[Seite (de)-aktivieren]]></item>
 		<item name="cms.acp.page.display"><![CDATA[Darstellung]]></item>
 		<item name="cms.acp.page.display.settings"><![CDATA[Darstellungsoptionen]]></item>
 		<item name="cms.acp.page.display.settings.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
@@ -182,28 +167,26 @@
 		<item name="cms.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließen Sie auf keinen Fall das Fenster und achten Sie darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
 		<item name="cms.acp.page.import.upload"><![CDATA[Sicherung der Seiten vom lokalen Computer hochladen]]></item>
 		<item name="cms.acp.page.import.upload.description"><![CDATA[Wählen Sie eine Sicherung der CMS-Seiten von Ihrem lokalen Rechner aus.]]></item>
-		<item name="cms.acp.page.legend"><![CDATA[Legende]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
 		<item name="cms.acp.page.list.description"><![CDATA[Seiten bilden die Grundlage des Fireball CMS. Erstellen Sie eine Seite um dieser später Inhalte verschiedener Typen zuordnen zu können.]]></item>
 		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
 		<item name="cms.acp.page.meta"><![CDATA[Meta-Informationen]]></item>
 		<item name="cms.acp.page.meta.allowIndexing"><![CDATA[Suchmaschinen dürfen diese Seite indexieren]]></item>
-		<item name="cms.acp.page.meta.metaDescription"><![CDATA[Meta-Beschreibung]]></item>
-		<item name="cms.acp.page.meta.metaKeywords"><![CDATA[Meta-Schlüsselwörter]]></item>
-		<item name="cms.acp.page.metaDescription.description"><![CDATA[Das meta-Element Attribut “description” wird laut Google nicht zur Berechnung des Rankings ausgewertet, ist aber maßgeblich für die CTR (Click-Through-Rate) von Usern ausschlaggebend und sollte demnach Beachtung finden.]]></item>
+		<item name="cms.acp.page.meta.description"><![CDATA[Meta-Beschreibung]]></item>
+		<item name="cms.acp.page.meta.description.description"><![CDATA[Die Meta-Beschreibung wird laut Google nicht zur Berechnung des Rankings ausgewertet, ist aber maßgeblich für die CTR (Click-Through-Rate) von Usern ausschlaggebend und sollte demnach Beachtung finden.]]></item>
+		<item name="cms.acp.page.meta.keywords"><![CDATA[Schlüsselwörter]]></item>
 		<item name="cms.acp.page.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.page.position.description"><![CDATA[Legt die Reihenfolge fest, in der die Seiten aufgelistet werden.]]></item>
 		<item name="cms.acp.page.position.invisible"><![CDATA[Seite verstecken]]></item>
 		<item name="cms.acp.page.position.invisible.description"><![CDATA[Diese Seite und ihre Unterseiten werden in allen Listen ausgeblendet, sind aber weiterhin mittels Direktlink aufrufbar.]]></item>
 		<item name="cms.acp.page.publication"><![CDATA[Veröffentlichung]]></item>
-		<item name="cms.acp.page.publication.enableDelayedDeactivation"><![CDATA[Seite zu einem späteren Zeitpunkt automatisch deaktivieren]]></item>
-		<item name="cms.acp.page.publication.enableDelayedPublication"><![CDATA[Seite zu einem späteren Zeitpunkt veröffentlichen]]></item>
 		<item name="cms.acp.page.publication.deactivationDate"><![CDATA[Deaktivierungsdatum]]></item>
 		<item name="cms.acp.page.publication.deactivationDate.error.beforePublication"><![CDATA[Das Deaktivierungsdatum muss nach dem eingestellten Veröffentlichungsdatum liegen.]]></item>
 		<item name="cms.acp.page.publication.deactivationDate.error.notValid"><![CDATA[Sie haben ein ungültiges Deaktivierungsdatum angegeben.]]></item>
+		<item name="cms.acp.page.publication.enableDelayedDeactivation"><![CDATA[Seite zu einem späteren Zeitpunkt automatisch deaktivieren]]></item>
+		<item name="cms.acp.page.publication.enableDelayedPublication"><![CDATA[Seite zu einem späteren Zeitpunkt veröffentlichen]]></item>
 		<item name="cms.acp.page.publication.publicationDate"><![CDATA[Veröffentlichungsdatum]]></item>
 		<item name="cms.acp.page.publication.publicationDate.error.notValid"><![CDATA[Sie haben ein ungültiges Veröffentlichungsdatum angegeben.]]></item>
-		<item name="cms.acp.page.remove"><![CDATA[Seite entfernen]]></item>
 		<item name="cms.acp.page.revision"><![CDATA[Version]]></item>
 		<item name="cms.acp.page.revision.action"><![CDATA[Aktion]]></item>
 		<item name="cms.acp.page.revision.action.create"><![CDATA[Seite erstellt]]></item>
@@ -225,7 +208,6 @@
 		<item name="cms.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
 		<item name="cms.acp.page.stylesheets.description"><![CDATA[Stylesheets, die beim Aufruf dieser Seite geladen werden sollen.]]></item>
-		<item name="cms.acp.page.title.error.multilingual"><![CDATA[Der Seitentitel muss in allen Sprachen vorhanden sein!]]></item>
 		<item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
 		<item name="cms.acp.page.visibility"><![CDATA[Sichtbarkeit]]></item>
 	</category>
@@ -287,9 +269,7 @@
 		<item name="cms.page.comments"><![CDATA[Kommentare]]></item>
 		<item name="cms.page.comments.noComments"><![CDATA[Keine Kommentare vorhanden]]></item>
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
-		<item name="cms.page.news"><![CDATA[Nachrichten]]></item>
-		<item name="cms.page.news.archive"><![CDATA[Archiv]]></item>
-		<item name="cms.page.placeholder"><![CDATA[Fügen Sie eine Startseite hinzu...]]></item>
+		<item name="cms.page.parents"><![CDATA[{implode from=$page->getParentPages() item=parentPage glue=' » '}{$parentPage->getTitle()}{/implode}{if $includeSelf|isset && $includeSelf}{if $page->getParentPages()} » {/if}{$page->getTitle()}{/if}]]></item>
 	</category>
 
 	<category name="cms.user">
@@ -326,11 +306,11 @@
 		<item name="wcf.acp.group.option.category.user.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.acp.group.option.category.user.cms.content"><![CDATA[Inhalte]]></item>
 		<item name="wcf.acp.group.option.category.user.cms.page"><![CDATA[Seiten]]></item>
+		<item name="wcf.acp.group.option.mod.cms.canReadUnpublishedPage"><![CDATA[Kann noch nicht veröffentlichte Seiten sehen]]></item>
 		<item name="wcf.acp.group.option.mod.cms.page.canDeleteComment"><![CDATA[Kann Kommentare löschen]]></item>
 		<item name="wcf.acp.group.option.mod.cms.page.canEditComment"><![CDATA[Kann Kommentare bearbeiten]]></item>
 		<item name="wcf.acp.group.option.mod.cms.page.canModerateComment"><![CDATA[Moderationsrecht für Kommentare]]></item>
 		<item name="wcf.acp.group.option.mod.cms.page.canModeratePage"><![CDATA[Moderationsrecht]]></item>
-		<item name="wcf.acp.group.option.mod.cms.canReadUnpublishedPage"><![CDATA[Kann noch nicht veröffentlichte Seiten sehen]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canDownloadFile"><![CDATA[Kann Dateien herunterladen]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canVotePoll"><![CDATA[Kann an Umfragen teilnehmen]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canAddComment"><![CDATA[Kann Kommentare hinzufügen]]></item>
@@ -369,13 +349,13 @@
 		<item name="wcf.acp.option.cms_pages_default_allow_indexing"><![CDATA[Suchmaschinen dürfen diese Seite indexieren]]></item>
 		<item name="wcf.acp.option.cms_pages_default_allow_subscribing"><![CDATA[Seite kann abonniert werden]]></item>
 		<item name="wcf.acp.option.cms_pages_default_comments"><![CDATA[Kommentare aktivieren]]></item>
+		<item name="wcf.acp.option.cms_pages_default_menu_item"><![CDATA[Menüpunkt erstellen]]></item>
 		<item name="wcf.acp.option.cms_pages_default_offline"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar"><![CDATA[Ausrichtung der Seitenleiste]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.left"><![CDATA[Linke Seitenleiste]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.right"><![CDATA[Rechte Seitenleiste]]></item>
-		<item name="wcf.acp.option.cms_pages_default_menu_item"><![CDATA[Menüpunkt erstellen]]></item>
 		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Versionen automatisch löschen]]></item>
-		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Zeitraum nach dem alte Versionen automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]></item>
+		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Zeitraum nach dem alte Versionen automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]]></item>
 	</category>
 
 	<category name="wcf.acp.pageMenu">
@@ -409,7 +389,6 @@
 	<category name="wcf.dashboard">
 		<item name="wcf.dashboard.box.de.codequake.cms.latestPages"><![CDATA[Zuletzt erstellte Seiten]]></item>
 		<item name="wcf.dashboard.box.de.codequake.cms.mostViewedPages"><![CDATA[Meistbesuchte Seiten]]></item>
-		<item name="wcf.dashboard.objectType.de.codequake.cms.page"><![CDATA[CMS: Seiten]]></item>
 	</category>
 
 	<category name="wcf.page">
@@ -417,8 +396,8 @@
 	</category>
 
 	<category name="wcf.search">
-		<item name="wcf.search.type.de.codequake.cms.page"><![CDATA[Seiten]]></item>
 		<item name="wcf.search.object.de.codequake.cms.page"><![CDATA[Seite]]></item>
+		<item name="wcf.search.type.de.codequake.cms.page"><![CDATA[Seiten]]></item>
 	</category>
 
 	<category name="wcf.user.notification">
@@ -427,8 +406,8 @@
 	</category>
 
 	<category name="wcf.user.objectWatch">
-		<item name="wcf.user.objectWatch.subscribe.de.codequake.cms.page"><![CDATA[Seite abonnieren]]></item>
 		<item name="wcf.user.objectWatch.enableNotification.de.codequake.cms.page"><![CDATA[Benachrichtigung über neue Kommentare aktivieren]]></item>
+		<item name="wcf.user.objectWatch.subscribe.de.codequake.cms.page"><![CDATA[Seite abonnieren]]></item>
 		<item name="wcf.user.objectWatch.unsubscribe.de.codequake.cms.page"><![CDATA[Seite nicht abonnieren]]></item>
 	</category>
 

@@ -144,13 +144,13 @@
 				<legend>{lang}cms.acp.page.meta{/lang}</legend>
 
 				<dl{if $errorField == 'metaDescription'} class="formError"{/if}>
-					<dt><label for="metaDescription">{lang}cms.acp.page.meta.metaDescription{/lang}</label></dt>
+					<dt><label for="metaDescription">{lang}cms.acp.page.meta.description{/lang}</label></dt>
 					<dd>
 						<textarea id="metaDescription" name="metaDescription" rows="5" cols="40" class="long">{$i18nPlainValues['metaDescription']}</textarea>
-						<small>{lang}cms.acp.page.metaDescription.description{/lang}</small>
+						<small>{lang}cms.acp.page.meta.description.description{/lang}</small>
 						{if $errorField == 'metaDescription'}
 							<small class="innerError">
-								{lang}cms.acp.page.metaDescription.error.{@$errorType}{/lang}
+								{lang}cms.acp.page.meta.description.error.{@$errorType}{/lang}
 							</small>
 						{/if}
 
@@ -159,12 +159,12 @@
 				</dl>
 
 				<dl{if $errorField == 'metaKeywords'} class="formError"{/if}>
-					<dt><label for="metaKeywords">{lang}cms.acp.page.meta.metaKeywords{/lang}</label></dt>
+					<dt><label for="metaKeywords">{lang}cms.acp.page.meta.keywords{/lang}</label></dt>
 					<dd>
 						<input type="text" id="metaKeywords" name="metaKeywords" value="{$i18nPlainValues['metaKeywords']}" class="long" />
 						{if $errorField == 'metaKeywords'}
 							<small class="innerError">
-								{lang}cms.acp.page.metaKeywords.error.{@$errorType}{/lang}
+								{lang}cms.acp.page.meta.keywords.error.{@$errorType}{/lang}
 							</small>
 						{/if}
 

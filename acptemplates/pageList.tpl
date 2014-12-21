@@ -94,7 +94,7 @@
 								<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revision.list{/lang}" data-object-id="{@$page->pageID}"></span>
 
 								<!-- content controls -->
-								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.page.content.add{/lang}" data-object-id="{@$page->pageID}" data-position="body"></span>
+								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$page->pageID}" data-position="body"></span>
 								<a href="{link controller='ContentList' pageID=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
 							{event name='itemButtons'}
 							</span>
@@ -125,35 +125,8 @@
 
 		<nav class="jsClipboardEditor" data-types="[ 'de.codequake.cms.page' ]"></nav>
 	</div>
-
-	<div class="container marginTop">
-		<ol class="containerList infoBoxList">
-			<li class="box32">
-				<span class="icon icon-question-sign icon32"></span>
-				<div class="containerHeadline">
-					<h3>{lang}cms.acp.page.legend{/lang}</h3>
-				</div>
-				<ul class="dataList">
-					<li><span class="icon icon16 icon-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></li>
-					<li><span class="icon icon16 icon-remove"></span> <span>{lang}cms.acp.page.remove{/lang}</span></li>
-					<li><span class="icon icon16 icon-check"></span> <span>{lang}cms.acp.page.disable{/lang}</span></li>
-					<li><span class="icon icon16 icon-home"></span> <span>{lang}cms.acp.page.setAsHome{/lang}</span></li>
-					<li><span class="icon icon16 icon-copy"></span> <span>{lang}cms.acp.page.copy{/lang}</span></li>
-					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.page.revision.list{/lang}</span></li>
-					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
-					<li><span class="icon icon16 icon-file"></span> <span>{lang}cms.acp.content.list{/lang}</span></li>
-				</ul>
-			</li>
-			<li class="box32">
-				<span class="icon icon32 icon-cloud-download"></span>
-				<div class="containerHeadline">
-					<h3>{lang}cms.acp.page.backup{/lang}</h3>
-				</div>
-				<p>{lang}cms.acp.page.backup.description{/lang}</p>
-			</li>
-		</ol>
-	</div>
 {hascontentelse}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>
 {/hascontent}
+
 {include file='footer'}

@@ -29,7 +29,7 @@ class PageEditForm extends PageAddForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.content';
+	public $activeMenuItem = 'cms.acp.menu.link.cms.page';
 
 	/**
 	 * page node list for 'choose page' button
