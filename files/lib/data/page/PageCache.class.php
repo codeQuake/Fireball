@@ -7,47 +7,100 @@ use wcf\system\SingletonFactory;
 /**
  * Manages the page cache.
  * 
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2014 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
 class PageCache extends SingletonFactory {
+	/**
+	 * alias to page assignments
+	 * @var	array<integer>
+	 */
+	protected $aliasToPage = array();
 
-	protected $aliasToID = array();
-
+	/**
+	 * cached pages
+	 * @var	array<\cms\data\page\Page>
+	 */
 	protected $pages = array();
 
-	protected $tree = array();
+	/**
+	 * cached page structure
+	 * @var	array<array<integer>>
+	 */
+	protected $structure = array();
 
+	/**
+	 * @see	\wcf\system\SingletonFactory::init()
+	 */
 	protected function init() {
-		$this->tree = PageCacheBuilder::getInstance()->getData(array(), 'tree');
-		$this->aliasToID = PageCacheBuilder::getInstance()->getData(array(), 'aliasToID');
+		$this->aliasToPage = PageCacheBuilder::getInstance()->getData(array(), 'aliasToPage');
 		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
+		$this->stylesheetsToPage = PageCacheBuilder::getInstance()->getData(array(), 'stylesheetsToPage');
+		$this->structure = PageCacheBuilder::getInstance()->getData(array(), 'structure');
 	}
 
+	/**
+	 * Returns the page id of the page with the given alias.
+	 * 
+	 * @param	string		$alias
+	 * @return	integer
+	 */
 	public function getIDByAlias($alias) {
-		if (isset($this->aliasToID[$alias])) return $this->aliasToID[$alias];
+		if (isset($this->aliasToPage[$alias])) return $this->aliasToPage[$alias];
 		return 0;
 	}
 
-	public function getPage($id) {
-		if (isset($this->pages[$id])) return $this->pages[$id];
+	/**
+	 * Returns the page with the given id from cache.
+	 * 
+	 * @param	integer		$pageID
+	 * @return	\cms\data\page\Page
+	 */
+	public function getPage($pageID) {
+		if (isset($this->pages[$pageID])) {
+			return $this->pages[$pageID];
+		}
+
 		return null;
 	}
 
 	public function getHomePage() {
 		foreach ($this->pages as $page) {
-			if ($page->isHome) return $page;
+			if ($page->isHome) {
+				return $page;
+			}
 		}
+
 		return null;
 	}
 
-	public function getChildIDs($parentID = null) {
-		if ($parentID === null) $parentID = '';
-		
-		if (!isset($this->tree[$parentID])) return array();
-		
-		return $this->tree[$parentID];
+	/**
+	 * Returns the ids of the child pages of the given page.
+	 * 
+	 * @param	integer		$pageID
+	 * @return	array<integer>
+	 */
+	public function getChildIDs($pageID) {
+		if (isset($this->structure[$pageID])) {
+			return $this->structure[$pageID];
+		}
+
+		return array();
+	}
+
+	/**
+	 * Returns the stylesheet ids of the given page.
+	 * 
+	 * @param	integer		$pageID
+	 * @return	array<integer>
+	 */
+	public function getStylesheetIDs($pageID) {
+		if (isset($this->stylesheetsToPage[$pageID])) {
+			return $this->stylesheetsToPage[$pageID];
+		}
+
+		return array();
 	}
 }

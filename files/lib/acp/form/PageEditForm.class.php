@@ -96,8 +96,7 @@ class PageEditForm extends PageAddForm {
 			'allowIndexing' => $this->allowIndexing,
 			'isCommentable' => $this->isCommentable,
 			'allowSubscribing' => $this->allowSubscribing,
-			'styleID' => ($this->styleID) ?: null,
-			'stylesheets' => serialize($this->stylesheets)
+			'styleID' => ($this->styleID) ?: null
 		);
 
 		// publication
@@ -112,9 +111,12 @@ class PageEditForm extends PageAddForm {
 			$data['deactivationDate'] = @strtotime($this->publicationDate);
 		}
 
-		$this->objectAction = new PageAction(array($this->pageID), 'update', array(
-			'data' => $data
-		));
+		$pageData = array(
+			'data' => $data,
+			'stylesheetIDs' => $this->stylesheetIDs
+		);
+
+		$this->objectAction = new PageAction(array($this->pageID), 'update', $pageData);
 		$this->objectAction->executeAction();
 
 		$update = array();
@@ -251,7 +253,7 @@ class PageEditForm extends PageAddForm {
 
 			$this->alias = $this->page->alias;
 			$this->styleID = $this->page->styleID;
-			$this->stylesheets = @unserialize($this->page->stylesheets);
+			$this->stylesheetIDs = $this->page->getStylesheetIDs();
 
 			// publication
 			if (!$this->page->isPublished) {

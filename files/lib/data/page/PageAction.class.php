@@ -152,6 +152,11 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$page = parent::create();
 		$pageEditor = new PageEditor($page);
 
+		// handle stylesheets
+		if (isset($this->parameters['stylesheetIDs']) && !empty($this->parameters['stylesheetIDs'])) {
+			$pageEditor->updateStylesheetIDs($this->parameters['stylesheetIDs']);
+		}
+
 		// check if first page
 		if (PageCache::getInstance()->getHomePage() === null) {
 			$pageEditor->setAsHome();
@@ -529,6 +534,11 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$pageIDs = $publishedPageIDs = array();
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
+
+			// update stylesheets
+			if (isset($this->parameters['stylesheetIDs'])) {
+				$pageEditor->updateStylesheetIDs($this->parameters['stylesheetIDs']);
+			}
 
 			if (!$pageEditor->isPublished) {
 				$publishedPageIDs[] = $pageEditor->pageID;

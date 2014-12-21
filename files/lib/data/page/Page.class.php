@@ -2,8 +2,8 @@
 namespace cms\data\page;
 
 use cms\data\content\DrainedPositionContentNodeTree;
+use cms\data\stylesheet\StylesheetCache;
 use cms\data\CMSDatabaseObject;
-use cms\system\layout\LayoutHandler;
 use cms\system\page\PagePermissionHandler;
 use cms\system\revision\PageRevisionHandler;
 use wcf\data\ILinkableObject;
@@ -115,21 +115,6 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	}
 
 	/**
-	 * Returns the html stylesheet tag for this page. This method triggers
-	 * a stylehseet compilation in case the css files does not exist.
-	 *
-	 * @return	string
-	 */
-	public function getLayout() {
-		$stylesheets = @unserialize($this->stylesheets);
-		if (is_array($stylesheets) && !empty($stylesheets)) {
-			return LayoutHandler::getInstance()->getStylesheet($this->pageID);
-		}
-
-		return '';
-	}
-
-	/**
 	 * @see	\wcf\data\ILinkableObject::getLink()
 	 */
 	public function getLink() {
@@ -212,6 +197,29 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	 */
 	public function getRevisions() {
 		return PageRevisionHandler::getInstance()->getRevisions($this->pageID);
+	}
+
+	/**
+	 * Returns the ids of the stylesheets of this page.
+	 * 
+	 * @return	array<integer>
+	 */
+	public function getStylesheetIDs() {
+		return PageCache::getInstance()->getStylesheetIDs($this->pageID);
+	}
+
+	/**
+	 * Returns the stylesheets of this page.
+	 * 
+	 * @return	array<integer>
+	 */
+	public function getStylesheets() {
+		$stylesheets = array();
+		foreach ($this->getStylesheetIDs() as $stylesheetID) {
+			$stylesheets[$stylesheetID] = StylesheetCache::getInstance()->getStylesheet($stylesheetID);
+		}
+
+		return $stylesheets;
 	}
 
 	/**

@@ -250,8 +250,8 @@
 		<item name="cms.acp.stylesheet.button.choose"><![CDATA[Stylesheet wählen]]></item>
 		<item name="cms.acp.stylesheet.delete.sure"><![CDATA[Wollen Sie dieses Stylesheet wirklich löschen?]]></item>
 		<item name="cms.acp.stylesheet.edit"><![CDATA[Stylesheet bearbeiten]]></item>
-		<item name="cms.acp.stylesheet.less"><![CDATA[CSS & Less]]></item>
-		<item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Sie haben zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins.]]></item>
+		<item name="cms.acp.stylesheet.less"><![CDATA[Individuelles CSS und LESS]]></item>
+		<item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Sie haben zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins und LESS-Variablen.]]></item>
 		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
 		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
 	</category>

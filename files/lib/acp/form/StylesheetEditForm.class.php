@@ -48,7 +48,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 
 		if (isset($_REQUEST['id'])) $this->stylesheetID = intval($_REQUEST['id']);
 		$this->stylesheet = new Stylesheet($this->stylesheetID);
-		if (!$this->stylesheet->sheetID) {
+		if (!$this->stylesheet->stylesheetID) {
 			throw new IllegalLinkException();
 		}
 	}

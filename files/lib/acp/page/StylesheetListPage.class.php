@@ -37,7 +37,7 @@ class StylesheetListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\SortablePage::$validSortFields
 	 */
-	public $validSortFields = array('sheetID', 'title');
+	public $validSortFields = array('stylesheetID', 'title');
 
 	/**
 	 * @see	\wcf\page\IPage::assignVariables()

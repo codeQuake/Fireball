@@ -4,14 +4,16 @@
 	<title>{if !$page->getMenuItem() || $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->getMenuItem()->menuItem}{$page->getTitle()} - {/if}{PAGE_TITLE|language}</title>
 
 	{include file='headInclude'}
-	{@$page->getLayout()}
+	{foreach from=$page->getStylesheets() item=stylesheet}
+		<link rel="stylesheet" type="text/css" href="{$stylesheet->getURL()}" />
+	{/foreach}
 	<link rel="canonical" href="{$page->getLink()}" />
 
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS.js?v={@$__wcfVersion}"></script>
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			new CMS.Content.Type.Slideshow({CMS_CONTENT_SLIDESHOW_INTERVAL}, {CMS_CONTENT_SLIDESHOW_EFFECT_DELAY}, '{CMS_PAGES_CONTENT_SLIDESHOW_FX}');
+			new CMS.Content.Type.Slideshow({CMS_CONTENT_SLIDESHOW_INTERVAL}, {CMS_CONTENT_SLIDESHOW_EFFECT_DELAY}, '{CMS_CONTENT_SLIDESHOW_FX}');
 
 			{if $page->allowSubscribing && $__wcf->user->userID}
 				WCF.Language.addObject({

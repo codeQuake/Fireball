@@ -329,7 +329,7 @@
 						<dt>{lang}cms.acp.page.stylesheets{/lang}</dt>
 						<dd>
 							{content}
-								{htmlCheckboxes name='stylesheets' options=$stylesheetList selected=$stylesheets}
+								{htmlCheckboxes name='stylesheetIDs' options=$stylesheetList selected=$stylesheetIDs}
 							{/content}
 							{if $errorField == 'stylesheets'}
 								<small class="innerError">

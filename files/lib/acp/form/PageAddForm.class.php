@@ -182,10 +182,10 @@ class PageAddForm extends AbstractForm {
 	public $stylesheetList = null;
 
 	/**
-	 * selected stylesheets
+	 * stylesheet ids
 	 * @var	array<integer>
 	 */
-	public $stylesheets = array();
+	public $stylesheetIDs = array();
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -229,7 +229,7 @@ class PageAddForm extends AbstractForm {
 		else $this->isCommentable = 0;
 		$this->allowSubscribing = (isset($_POST['allowSubscribing'])) ? 1 : 0;
 		if (isset($_POST['styleID'])) $this->styleID = intval($_POST['styleID']);
-		if (isset($_POST['stylesheets']) && is_array($_POST['stylesheets'])) $this->stylesheets = ArrayUtil::toIntegerArray($_POST['stylesheets']);
+		if (isset($_POST['stylesheetIDs']) && is_array($_POST['stylesheetIDs'])) $this->stylesheetIDs = ArrayUtil::toIntegerArray($_POST['stylesheetIDs']);
 
 		if (isset($_POST['enableDelayedPublication'])) $this->enableDelayedPublication = intval($_POST['enableDelayedPublication']);
 		if (isset($_POST['publicationDate'])) $this->publicationDate = $_POST['publicationDate'];
@@ -288,6 +288,16 @@ class PageAddForm extends AbstractForm {
 
 		$page = new Page($this->parentID);
 		if ($page === null) throw new UserInputException('parentID', 'invalid');
+
+		// validate stylesheets
+		$stylesheetList = new StylesheetList();
+		$stylesheetList->setObjectIDs($this->stylesheetIDs);
+		$stylesheetList->readObjects();
+
+		$this->stylesheetIDs = array();
+		foreach ($stylesheetList as $stylesheet) {
+			$this->stylesheetIDs[] = $stylesheet->stylesheetID;
+		}
 	}
 
 	/**
@@ -331,8 +341,7 @@ class PageAddForm extends AbstractForm {
 			'allowIndexing' => $this->allowIndexing,
 			'isCommentable' => $this->isCommentable,
 			'allowSubscribing' => $this->allowSubscribing,
-			'styleID' => ($this->styleID) ?: null,
-			'stylesheets' => serialize($this->stylesheets)
+			'styleID' => ($this->styleID) ?: null
 		);
 
 		// publication
@@ -346,16 +355,18 @@ class PageAddForm extends AbstractForm {
 			$data['deactivationDate'] = $dateTime->getTimestamp();
 		}
 
-		$this->objectAction = new PageAction(array(), 'create', array(
-			'data' => $data
-		));
+		$pageData = array(
+			'data' => $data,
+			'stylesheetIDs' => $this->stylesheetIDs
+		);
+
+		$this->objectAction = new PageAction(array(), 'create', $pageData);
 		$returnValues = $this->objectAction->executeAction();
 
 		$pageID = $returnValues['returnValues']->pageID;
 
 		// save ACL
 		ACLHandler::getInstance()->save($pageID, $this->objectTypeID);
-		ACLHandler::getInstance()->disableAssignVariables();
 
 		// update I18n
 		$update = array();
@@ -430,7 +441,10 @@ class PageAddForm extends AbstractForm {
 		$this->sidebarOrientation = 'right';
 		$this->deactivationDate = $this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->parentID = $this->publicationDate = $this->showOrder = $this->styleID = 0;
 		$this->allowIndexing = $this->allowSubscribing = $this->menuItem = 1;
+		$this->stylesheetIDs = array();
+
 		I18nHandler::getInstance()->reset();
+		ACLHandler::getInstance()->disableAssignVariables();
 	}
 
 	/**
@@ -483,7 +497,7 @@ class PageAddForm extends AbstractForm {
 			'allowSubscribing' => $this->allowSubscribing,
 			'availableStyles' => $this->availableStyles,
 			'styleID' => $this->styleID,
-			'stylesheets' => $this->stylesheets? :array(),
+			'stylesheetIDs' => $this->stylesheetIDs,
 			'stylesheetList' => $this->stylesheetList->getObjects(),
 			'enableDelayedDeactivation' => $this->enableDelayedDeactivation,
 			'enableDelayedPublication' => $this->enableDelayedPublication,

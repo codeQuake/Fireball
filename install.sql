@@ -39,8 +39,7 @@ CREATE TABLE cms1_page (
 
 	-- display
 	styleID INT(10) DEFAULT NULL,
-	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
-	stylesheets MEDIUMTEXT,
+	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right'
 );
 
 DROP TABLE IF EXISTS cms1_page_revision;
@@ -85,9 +84,17 @@ CREATE TABLE cms1_content_revision(
 -- stylesheet
 DROP TABLE IF EXISTS cms1_stylesheet;
 CREATE TABLE cms1_stylesheet (
-	sheetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	stylesheetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	title VARCHAR(255) NOT NULL,
 	less MEDIUMTEXT
+);
+
+DROP TABLE IF EXISTS cms1_stylesheet_to_page;
+CREATE TABLE cms1_stylesheet_to_page (
+	stylesheetID INT(10) NOT NULL,
+	pageID INT(10) NOT NULL,
+
+	PRIMARY KEY (stylesheetID, pageID)
 );
 
 -- file
@@ -143,3 +150,6 @@ ALTER TABLE cms1_page ADD FOREIGN KEY (lastEditorID) REFERENCES wcf1_user (userI
 
 ALTER TABLE cms1_page_revision ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE cms1_page_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+
+ALTER TABLE cms1_stylesheet_to_page ADD FOREIGN KEY (stylesheetID) REFERENCES cms1_stylesheet (stylesheetID) ON DELETE CASCADE;
+ALTER TABLE cms1_stylesheet_to_page ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
