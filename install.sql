@@ -2,32 +2,8 @@
 DROP TABLE IF EXISTS cms1_page;
 CREATE TABLE cms1_page (
 	pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	alias VARCHAR(255) NOT NULL,
-	parentID INT(10) DEFAULT NULL,
-	title VARCHAR(255) NOT NULL DEFAULT '',
-	description MEDIUMTEXT,
-	availableDuringOfflineMode TINYINT(1) DEFAULT 0,
-	showOrder INT(10) DEFAULT 0,
-	menuItemID INT(10),
-
-	-- publication
-	isDisabled TINYINT(1) DEFAULT 0,
-	isPublished TINYINT(1) NOT NULL DEFAULT 1,
-	publicationDate INT(10) NOT NULL DEFAULT 0,
-	deactivationDate INT(10) NOT NULL DEFAULT 0,
-
-	-- meta
-	metaDescription MEDIUMTEXT,
-	metaKeywords VARCHAR(255),
-	allowIndexing TINYINT(1) NOT NULL DEFAULT 1,
-
-	-- settings
 	isHome INT(1) DEFAULT 0,
-	invisible TINYINT(1) DEFAULT 0,
-	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
-	allowSubscribing TINYINT(1) NOT NULL DEFAULT 1,
 
-	-- properties
 	authorID INT(10) DEFAULT NULL,
 	authorName VARCHAR(255) NOT NULL DEFAULT '',
 	lastEditorID INT(10) DEFAULT NULL,
@@ -37,8 +13,37 @@ CREATE TABLE cms1_page (
 	comments INT(10) NOT NULL DEFAULT 0,
 	clicks INT (20) NOT NULL DEFAULT 0,
 
+	-- general data
+	title VARCHAR(255) NOT NULL DEFAULT '',
+	alias VARCHAR(255) NOT NULL,
+	description MEDIUMTEXT,
+
+	-- meta information
+	metaDescription MEDIUMTEXT,
+	metaKeywords VARCHAR(255),
+	allowIndexing TINYINT(1) NOT NULL DEFAULT 1,
+
+	-- position
+	parentID INT(10) DEFAULT NULL,
+	showOrder INT(10) DEFAULT 0,
+	invisible TINYINT(1) DEFAULT 0,
+
+	-- publication
+	isDisabled TINYINT(1) DEFAULT 0,
+	isPublished TINYINT(1) NOT NULL DEFAULT 1,
+	publicationDate INT(10) NOT NULL DEFAULT 0,
+	deactivationDate INT(10) NOT NULL DEFAULT 0,
+
+	-- settings
+	menuItemID INT(10) DEFAULT NULL,
+	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
+	availableDuringOfflineMode TINYINT(1) DEFAULT 0,
+	allowSubscribing TINYINT(1) NOT NULL DEFAULT 1,
+
 	-- display
 	styleID INT(10) DEFAULT NULL,
+
+	-- display settings
 	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right'
 );
 

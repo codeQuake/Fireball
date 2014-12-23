@@ -158,9 +158,9 @@
 		<item name="cms.acp.page.export.download"><![CDATA[Sicherung der CMS-Seiten herunterladen]]></item>
 		<item name="cms.acp.page.export.download.description"><![CDATA[Laden Sie eine Sicherung aller CMS-Seiten, Stylesheets und hochgeladenen Dateien auf Ihren lokalen Rechner herunter.]]></item>
 		<item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
+		<item name="cms.acp.page.general.createMenuItem"><![CDATA[Menüpunkt erstellen]]></item>
+		<item name="cms.acp.page.general.createMenuItem.description"><![CDATA[Sie können den erstellten Menüpunkt anschließend in der <a href="{link controller='PageMenuItemList'}{/link}">Hauptmenüverwaltung</a> verschieben oder bearbeiten.]]></item>
 		<item name="cms.acp.page.general.description"><![CDATA[Beschreibung]]></item>
-		<item name="cms.acp.page.general.menuItem"><![CDATA[Menüpunkt erstellen]]></item>
-		<item name="cms.acp.page.general.menuItem.description"><![CDATA[Sie können den erstellten Menüpunkt anschließend in der <a href="{link controller='PageMenuItemList'}{/link}">Hauptmenüverwaltung</a> verschieben oder bearbeiten.]]></item>
 		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
 		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
 		<item name="cms.acp.page.import"><![CDATA[Seiten importieren]]></item>
@@ -204,6 +204,8 @@
 		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
 		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Kommentare aktivieren]]></item>
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[Erlaubt anderen Benutzern diese Seite zu kommentieren.]]></item>
+		<item name="cms.acp.page.settings.menuItemID"><![CDATA[Aktiver Menüpunkt]]></item>
+		<item name="cms.acp.page.settings.menuItemID.description"><![CDATA[Legt den aktiven Menüpunkt für diese Seite fest. Erfolgt keine Auswahl, wird automatisch der aktive Menüpunkt übergeordneter Seiten geerbt.]]></item>
 		<item name="cms.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>

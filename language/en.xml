@@ -159,9 +159,8 @@
 		<item name="cms.acp.page.export.download.description"><![CDATA[Downloads a backup of all cms pages, stylesheets and uploaded files to your local machine.]]></item>
 		<item name="cms.acp.page.general"><![CDATA[General]]></item>
 		<item name="cms.acp.page.general.description"><![CDATA[Description]]></item>
-		<item name="cms.acp.page.general.menuItem"><![CDATA[Add menu item]]></item>
-		<item name="cms.acp.page.general.menuItem.description"><![CDATA[
-		]]></item>
+		<item name="cms.acp.page.general.createMenuItem"><![CDATA[Create Menu Item]]></item>
+		<item name="cms.acp.page.general.createMenuItem.description"><![CDATA[]]></item>
 		<item name="cms.acp.page.general.parentID"><![CDATA[Parent page]]></item>
 		<item name="cms.acp.page.homePage"><![CDATA[Startpage]]></item>
 		<item name="cms.acp.page.import"><![CDATA[Import pages]]></item>
@@ -206,6 +205,9 @@
 		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Page is visible during offline mode]]></item>
 		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Allow comments]]></item>
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[]]></item>
+		<item name="cms.acp.page.settings.menuItemID"><![CDATA[Active Menu Item]]></item>
+		<item name="cms.acp.page.settings.menuItemID.description"><![CDATA[In case you don't select a menu item, the active menu item of parent pages will be inherited.]]></item>
+		<item name="cms.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
 		<item name="cms.acp.page.styleID"><![CDATA[Style]]></item>
 		<item name="cms.acp.page.styleID.description"><![CDATA[Forces selected style upon page visit]]></item>
 		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>

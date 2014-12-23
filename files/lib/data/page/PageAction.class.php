@@ -9,9 +9,11 @@ use cms\data\page\PageEditor;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
+use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\system\revision\PageRevisionHandler;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
+use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
@@ -210,8 +212,24 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		// delete related menu items
 		if (!empty($menuItemIDs)) {
-			$objectAction = new PageMenuItemAction($menuItemIDs, 'delete');
-			$objectAction->executeAction();
+			$menuItemList = new PageMenuItemList();
+			$menuItemList->setObjectIDs($menuItemIDs);
+			$menuItemList->readObjects();
+
+			$deleteMenuItemIDs = array();
+			foreach ($menuItemList as $menuItem) {
+				if ($menuItem->getProcessor() instanceof CMSPageMenuItemProvider) {
+					$page = $menuItem->getProcessor()->getPage();
+					if (in_array($page->pageID, $pageIDs)) {
+						$deleteMenuItemIDs[] = $menuItem->menuItemID;
+					}
+				}
+			}
+
+			if (!empty($deleteMenuItemIDs)) {
+				$pageMenuItemAction = new PageMenuItemAction($deleteMenuItemIDs, 'delete');
+				$pageMenuItemAction->executeAction();
+			}
 		}
 
 		// check if first page

@@ -13,6 +13,12 @@
 
 		new CMS.ACP.Page.AddForm();
 
+		{if $action == 'add'}
+			$('#createMenuItem').click(function() {
+				$('#menuItemID').parents('dl:eq(0)').toggle();
+			});
+		{/if}
+
 		$('#enableDelayedDeactivation, #enableDelayedPublication').click(function() {
 			var $toggleContainerID = $(this).data('toggleContainer');
 			$('#'+ $toggleContainerID).toggle();
@@ -124,18 +130,15 @@
 					</dd>
 				</dl>
 
-				<dl{if $errorField == 'menuItem'} class="formError"{/if}>
-					<dt class="reversed"><label for="menuItem">{lang}cms.acp.page.general.menuItem{/lang}</label></dt>
-					<dd>
-						<input type="checkbox" name="menuItem" id="menuItem" value="1"{if $menu == 1} checked="checked"{/if} />
-						{if $errorField == 'menuItem'}
-							<small class="innerError">
-								{lang}cms.acp.page.general.menuItem.error.{@$errorType}{/lang}
-							</small>
-						{/if}
-						<small>{lang}cms.acp.page.general.menuItem.description{/lang}</small>
-					</dd>
-				</dl>
+				{if $action == 'add'}
+					<dl>
+						<dt class="reversed"><label for="createMenuItem">{lang}cms.acp.page.general.createMenuItem{/lang}</label></dt>
+						<dd>
+							<input type="checkbox" id="createMenuItem" name="createMenuItem"{if $createMenuItem} checked="checked"{/if} />
+							<small>{lang}cms.acp.page.general.createMenuItem.description{/lang}</small>
+						</dd>
+					</dl>
+				{/if}
 
 				{event name='dataFields'}
 			</fieldset>
@@ -280,6 +283,25 @@
 			<fieldset>
 				<legend>{lang}cms.acp.page.settings{/lang}</legend>
 
+				<dl{if $errorField == 'menuItemID'} class="formError"{/if}{if $action == 'add' && $createMenuItem} style="display: none"{/if}>
+					<dt><label for="menuItemID">{lang}cms.acp.page.settings.menuItemID{/lang}</label></dt>
+					<dd>
+						<select id="menuItemID" name="menuItemID">
+							<option value="0">{lang}wcf.global.noSelection{/lang}</option>
+							{foreach from=$menuItems item=menuItem}
+								<option value="{@$menuItem->menuItemID}"{if $menuItemID == $menuItem->menuItemID} selected="selected"{/if}>{$menuItem->menuItem|language}</option>
+								{foreach from=$menuItem item=childMenuItem}
+									<option value="{@$childMenuItem->menuItemID}"{if $menuItemID == $childMenuItem->menuItemID} selected="selected"{/if}>&nbsp;&nbsp;&nbsp;&nbsp;{$childMenuItem->menuItem|language}</option>
+								{/foreach}
+							{/foreach}
+						</select>
+						{if $errorField == 'menuItemID'}
+							<small class="innerError">{lang}cms.acp.page.settings.menuItemID.error.{@$errorType}{/lang}</small>
+						{/if}
+						<small>{lang}cms.acp.page.settings.menuItemID.description{/lang}</small>
+					</dd>
+				</dl>
+
 				<dl{if $errorField == 'isCommentable'} class="formError"{/if}>
 					<dt class="reversed"><label for="isCommentable">{lang}cms.acp.page.settings.isCommentable{/lang}</label></dt>
 					<dd>
@@ -371,6 +393,8 @@
 					<dd></dd>
 				</dl>
 			</fieldset>
+
+			{event name='afterPermissionsFieldsets'}
 		</div>
 
 		{event name='tabMenuContents'}
@@ -379,8 +403,6 @@
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		{@SECURITY_TOKEN_INPUT_TAG}
-		<input type="hidden" name="action" value="{@$action}" />
-		{if $pageID|isset}<input type="hidden" name="id" value="{@$pageID}" />{/if}
 	</div>
 </form>
 

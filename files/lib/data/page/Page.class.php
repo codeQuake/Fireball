@@ -48,7 +48,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	/**
 	 * Returns the 'full' alias including prepended aliases from parent
 	 * pages.
-	 *
+	 * 
 	 * @return	string
 	 */
 	public function getAlias() {
@@ -81,7 +81,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 
 	/**
 	 * Returns a node tree with all children of this page.
-	 *
+	 * 
 	 * @param	integer		$maxDepth
 	 * @return	\cms\data\page\AccessiblePageNodeTree
 	 */
@@ -99,7 +99,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	/**
 	 * Returns node trees of all contents that are assigned to this page.
 	 * Contents are grouped by their position ('body' and 'sidebar').
-	 *
+	 * 
 	 * @return	array<\cms\data\content\DrainedPositionContentNodeTree>
 	 */
 	public function getContents() {
@@ -126,27 +126,8 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	}
 
 	/**
-	 * Returns the menu item this page is assigned to.
-	 */
-	public function getMenuItem() {
-		foreach (PageMenu::getInstance()->getMenuItems('header') as $item) {
-			if ($item->menuItemID == $this->menuItemID) {
-				return $item;
-			}
-		}
-
-		foreach (PageMenu::getInstance()->getMenuItems('footer') as $item) {
-			if ($item->menuItemID == $this->menuItemID) {
-				return $item;
-			}
-		}
-
-		return null;
-	}
-
-	/**
 	 * Returns the parent page.
-	 *
+	 * 
 	 * @return	\cms\data\page\Page
 	 */
 	public function getParentPage() {
@@ -159,7 +140,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 
 	/**
 	 * Returns the parent pages of this page.
-	 *
+	 * 
 	 * @return	array<\cms\data\page\Page>
 	 */
 	public function getParentPages() {
@@ -192,7 +173,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 
 	/**
 	 * Returns all revisions of this page.
-	 *
+	 * 
 	 * @return	array<array>
 	 */
 	public function getRevisions() {
@@ -231,7 +212,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 
 	/**
 	 * Returns whether the current user can access this page.
-	 *
+	 * 
 	 * @return	boolean
 	 */
 	public function isAccessible() {
@@ -245,7 +226,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 
 	/**
 	 * Returns whether this page is a child of an other page.
-	 *
+	 * 
 	 * @return	boolean
 	 */
 	public function isChild() {
@@ -258,7 +239,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 
 	/**
 	 * Returns whether this page is visible for the current user.
-	 *
+	 * 
 	 * @return	boolean
 	 */
 	public function isVisible() {
@@ -277,7 +258,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 
 	/**
 	 * Returns whether this page has other pages assigned as children
-	 *
+	 * 
 	 * @return	boolean
 	 */
 	public function hasChildren() {

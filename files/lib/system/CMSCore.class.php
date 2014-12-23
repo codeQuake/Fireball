@@ -28,26 +28,49 @@ class CMSCore extends AbstractApplication {
 	protected $primaryController = 'cms\page\PagePage';
 
 	/**
-	 * Finds and activates the related menu item for the given page.
+	 * Finds and activates the related menu item for the given page. This
+	 * function handles inherited menu items from parent pages and
+	 * activates the most important menu item for the given page.
+	 * Do notice that only header menu items are relevant for the search.
 	 * 
 	 * @param	\cms\data\page\Page	$page
 	 */
 	public static function setActiveMenuItem(Page $page) {
-		if ($page->menuItemID && $page->parentID === null) {
-			$menuItemID = $page->menuItemID;
+		$menuItemIDs = $menuItems = array();
+
+		// 1) Create an array with all menu item ids of all parent
+		//    pages. Menu items are sorted by their importance. The
+		//    first entry is the most important, the last the least
+		//    important.
+		if ($page->menuItemID) {
+			$menuItemIDs[] = $page->menuItemID;
 		}
-		else if ($page->parentID != null) {
-			foreach ($page->getParentPages() as $parentPage) {
-				if ($parentPage->parentID === null && $parentPage->menuItemID != 0) $menuItemID = $parentPage->menuItemID;
+		while ($page->parentPageID && $page = PageCache::getInstance()->getPage($page->parentPageID)) {
+			if ($page->menuItemID) {
+				$menuItemIDs[] = $page->menuItemID;
 			}
 		}
-		else if (PageCache::getInstance()->getHomePage() !== null) $menuItemID = PageCache::getInstance()->getHomePage()->menuItemID;
-		else $menuItemID = PageMenu::getInstance()->getLandingPage()->menuItemID;
 
-		foreach (PageMenu::getInstance()->getMenuItems('header') as $item) {
-			if ($item->menuItemID == $menuItemID) PageMenu::getInstance()->setActiveMenuItem($item->menuItem);
+		// 2) Search through all header menu items and check whether
+		//    they are related to the page or its parent pages. Found
+		//    menu items are again sorted by their importance.
+		foreach (PageMenu::getInstance()->getMenuItems('header') as $menuItem) {
+			if (($position = array_search($menuItem->menuItemID, $menuItemIDs)) !== false) {
+				$menuItems[$position] = $menuItem->menuItem;
+			}
+
+			foreach (PageMenu::getInstance()->getMenuItems($menuItem->menuItem) as $subMenuItem) {
+				if (($position = array_search($subMenuItem->menuItemID, $menuItemIDs)) !== false) {
+					$menuItems[$position] = $subMenuItem->menuItem;
+				}
+			}
 		}
 
+		// 3) Active the most important menu item for this page.
+		if (!empty($menuItems)) {
+			$menuItem = array_shift($menuItems);
+			PageMenu::getInstance()->setActiveMenuItem($menuItem);
+		}
 	}
 
 	/**

@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{if !$page->getMenuItem() || $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->getMenuItem()->menuItem}{$page->getTitle()} - {/if}{PAGE_TITLE|language}</title>
+	<title>{$page->getTitle()} - {PAGE_TITLE|language}</title>
 
 	{include file='headInclude'}
 	{foreach from=$page->getStylesheets() item=stylesheet}
