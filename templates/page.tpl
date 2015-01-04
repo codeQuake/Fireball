@@ -76,6 +76,10 @@
 
 {include file='userNotice'}
 
+{if !$page->isPublished}
+	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
+{/if}
+
 {assign var=oldDepth value=0}
 {foreach from=$contentNodeTree item=content}
 	{section name=i loop=$oldDepth-$contentNodeTree->getDepth()}</div>{/section}

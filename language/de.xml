@@ -271,6 +271,7 @@
 		<item name="cms.page.comments"><![CDATA[Kommentare]]></item>
 		<item name="cms.page.comments.noComments"><![CDATA[Keine Kommentare vorhanden]]></item>
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
+		<item name="cms.page.delayedPublication"><![CDATA[Diese Seite wird am {@$page->publicationDate|plainTime} veröffentlicht.]]></item>
 		<item name="cms.page.parents"><![CDATA[{implode from=$page->getParentPages() item=parentPage glue=' » '}{$parentPage->getTitle()}{/implode}{if $includeSelf|isset && $includeSelf}{if $page->getParentPages()} » {/if}{$page->getTitle()}{/if}]]></item>
 	</category>
 
