@@ -74,9 +74,9 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[Alle untergeordneten Elemente werden automatisch als Slideshow arrangiert.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu.description"><![CDATA[Alle untergeordneten Inhalte werden als Tabs des Tabmenüs behandelt. Der Titel eines untergeordneten Inhaltes wird als Titel des Tab-Buttons verwendet. Sollte für einen untergeordneten Inhalt keine CSS-ID für den Anker angegeben werden, so wird eine CSS-ID generiert.]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[Template (Smarty)]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Template-Quelltext]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[Hier können Sie Template-Quelltext verwenden (<a href="http://www.smarty.net/">Dokumentation</a>).]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[Template/HTML]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Quelltext]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[Hier können Sie Template-Quelltext (<a href="http://www.smarty.net/">Dokumentation</a>) und HTML verwenden.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.error.compileError"><![CDATA[Der eingegebene Inhalt enthält folgenden Template-Fehler:<br />{$compileError}]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
