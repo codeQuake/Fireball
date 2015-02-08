@@ -13,8 +13,10 @@ $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute();
 while ($row = $statement->fetchArray()) {
 	$dir = opendir(CMS_DIR.'images/'.$row['folderPath']);
-	while(($file = readdir($dir)) !== false) {
-		if($file != '.' && $file != '..') {copy($dir.'/'.$file, CMS_DIR.'images/'.$file);}
+	while (($file = readdir($dir)) !== false) {
+		if ($file != '.' && $file != '..') {
+			copy($dir.'/'.$file, CMS_DIR.'images/'.$file);
+		}
 	}
 	closedir($dir);
 	@unlink($dir);
