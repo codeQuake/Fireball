@@ -8,6 +8,8 @@ ALTER TABLE cms1_page DROP stylesheets;
 ALTER TABLE cms1_stylesheet CHANGE sheetID stylesheetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY;
 ALTER TABLE cms1_file DROP folderID;
 
+DROP TABLE IF EXISTS cms1_folder;
+
 DROP TABLE IF EXISTS cms1_stylesheet_to_page;
 CREATE TABLE cms1_stylesheet_to_page (
 	stylesheetID INT(10) NOT NULL,
