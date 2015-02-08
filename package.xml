@@ -68,6 +68,7 @@
 		<instruction type="template">templates.tar</instruction>
 
 		<instruction type="language">language/*.xml</instruction>
+    <instruction type="script">acp/update_de.codequake.cms_beta8.php</instruction>
 		<instruction type="sql">update_beta8.sql</instruction>
 
 		<!-- xml -->

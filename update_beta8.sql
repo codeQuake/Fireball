@@ -6,6 +6,7 @@ ALTER TABLE cms1_page ADD allowSubscribing TINYINT(1) NOT NULL DEFAULT 1 AFTER i
 ALTER TABLE cms1_page DROP stylesheets;
 
 ALTER TABLE cms1_stylesheet CHANGE sheetID stylesheetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY;
+ALTER TABLE cms1_file DROP folderID;
 
 DROP TABLE IF EXISTS cms1_stylesheet_to_page;
 CREATE TABLE cms1_stylesheet_to_page (
@@ -13,4 +14,12 @@ CREATE TABLE cms1_stylesheet_to_page (
 	pageID INT(10) NOT NULL,
 
 	PRIMARY KEY (stylesheetID, pageID)
+);
+
+DROP TABLE IF EXISTS cms1_file_to_category;
+CREATE TABLE cms1_file_to_category (
+	fileID INT(10) NOT NULL,
+	categoryID INT(10) NOT NULL,
+
+	PRIMARY KEY (fileID, categoryID)
 );
