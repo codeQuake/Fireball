@@ -20,7 +20,7 @@
 	</requiredpackages>
 
 	<excludedpackages>
-		<excludedpackage version="2.1.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+		<excludedpackage version="2.1.*">com.woltlab.wcf</excludedpackage>
 	</excludedpackages>
 
 	<optionalpackages>
@@ -73,7 +73,10 @@
 		<!-- xml -->
 		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
 		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="templateListener">xml/templateListener.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
+    <instruction type="acpMenu">xml/acpMenu.xml</instruction>
+    <instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 	</instructions>
