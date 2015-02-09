@@ -78,7 +78,7 @@
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
     
 		<instruction type="language">language/*.xml</instruction>
-    <instruction type="script">acp/update_de.codequake.cms_beta8.php</instruction>
 		<instruction type="sql">update_beta8.sql</instruction>
+    <instruction type="script">acp/update_de.codequake.cms_beta8.php</instruction>
 	</instructions>
 </package>

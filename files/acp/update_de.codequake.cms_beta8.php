@@ -46,8 +46,12 @@ while ($row = $statement->fetchArray()) {
 //get files into basic category
 $list = new FileList();
 $list->readObjects();
-foreach ($list->getObjects as $file) {
-	$sql = "INSERT INTO cms".CMS_N."_file_to_category VALUES (?, ?)";
+foreach ($list->getObjects() as $file) {
+	$sql = "INSERT INTO cms".WCF_N."_file_to_category VALUES (?, ?)";
 	$statement = WCF::getDB()->prepareStatement($sql);
 	$statement->execute(array($file->fileID, $categoryID));
 }
+
+$sql = "DROP TABLE cms".WCF_N."_folder";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute();
