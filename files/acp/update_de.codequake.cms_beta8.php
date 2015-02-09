@@ -32,7 +32,7 @@ $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute();
 $files = array();
 while ($row = $statement->fetchArray()) {
-	$files[] = array([$row['fileID']], $categoryID);
+	$files[] = array($row['fileID'], $categoryID);
 	$dir = opendir(CMS_DIR.'/files/'.$row['folderPath']);
 	while (($file = readdir($dir)) !== false) {
 		if ($file != '.' && $file != '..') {
