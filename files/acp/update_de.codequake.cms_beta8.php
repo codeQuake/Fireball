@@ -27,22 +27,6 @@ $objectAction->executeAction();
 $returnValues = $objectAction->getReturnValues();
 $categoryID = $returnValues['returnValues']->categoryID;
 
-//move files out of their old subfolders
-$sql = "SELECT * FROM cms".WCF_N."_folder";
-$statement = WCF::getDB()->prepareStatement($sql);
-$statement->execute();
-$files = array();
-while ($row = $statement->fetchArray()) {
-	$dir = opendir(CMS_DIR.'/files/'.$row['folderPath']);
-	while (($file = readdir($dir)) !== false) {
-		if ($file != '.' && $file != '..') {
-			@copy($dir.'/'.$file, CMS_DIR.'/files/'.$file);
-		}
-	}
-	closedir($dir);
-	@unlink($dir);
-}
-
 //get files into basic category
 $list = new FileList();
 $list->readObjects();
@@ -55,3 +39,5 @@ foreach ($list->getObjects() as $file) {
 $sql = "DROP TABLE cms".WCF_N."_folder";
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute();
+
+//TODO: create fileHash & move files...
