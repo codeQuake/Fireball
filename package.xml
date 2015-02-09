@@ -67,10 +67,6 @@
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 
-		<instruction type="language">language/*.xml</instruction>
-    <instruction type="script">acp/update_de.codequake.cms_beta8.php</instruction>
-		<instruction type="sql">update_beta8.sql</instruction>
-
 		<!-- xml -->
 		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
 		<instruction type="eventListener">xml/eventlistener.xml</instruction>
@@ -80,5 +76,9 @@
     <instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
+    
+		<instruction type="language">language/*.xml</instruction>
+    <instruction type="script">acp/update_de.codequake.cms_beta8.php</instruction>
+		<instruction type="sql">update_beta8.sql</instruction>
 	</instructions>
 </package>
