@@ -231,8 +231,8 @@ class FileAction extends AbstractDatabaseObjectAction {
 					$result['files'][$file->getInternalFileID()] = array(
 						'fileID' => $uploadedFile->fileID,
 						'title' => $uploadedFile->getTitle(),
-						'filesize' => $uploadedFile->filesize,
-						'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->filesize)
+						'fileSize' => $uploadedFile->fileSize,
+						'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->fileSize)
 					);
 				} else {
 					// failure
