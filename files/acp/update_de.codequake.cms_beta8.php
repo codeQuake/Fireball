@@ -1,4 +1,5 @@
 <?php
+use cms\data\file\FileList;
 use wcf\data\category\CategoryAction;
 use wcf\system\category\CategoryHandler;
 use wcf\system\WCF;
@@ -16,7 +17,7 @@ $objectAction = new CategoryAction(array(), 'create', array(
 		'data' => array(
 				'description' => '',
 				'isDisabled' => 0,
-				'objectTypeID' => $objectTypeID,
+				'objectTypeID' => $objectType->objectTypeID,
 				'parentCategoryID' => null,
 				'showOrder' => null,
 				'title' => 'default'
@@ -32,7 +33,6 @@ $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute();
 $files = array();
 while ($row = $statement->fetchArray()) {
-	$files[] = array($row['fileID'], $categoryID);
 	$dir = opendir(CMS_DIR.'/files/'.$row['folderPath']);
 	while (($file = readdir($dir)) !== false) {
 		if ($file != '.' && $file != '..') {
@@ -44,8 +44,10 @@ while ($row = $statement->fetchArray()) {
 }
 
 //get files into basic category
-foreach ($files as $file) {
+$list = new FileList();
+$list->readObjects();
+foreach ($list->getObjects as $file) {
 	$sql = "INSERT INTO cms".CMS_N."_file_to_category VALUES (?, ?)";
 	$statement = WCF::getDB()->prepareStatement($sql);
-	$statement->execute($file);
+	$statement->execute(array($file->fileID, $categoryID));
 }
