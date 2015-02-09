@@ -33,10 +33,10 @@ $statement->execute();
 $files = array();
 while ($row = $statement->fetchArray()) {
 	$files[] = array([$row['fileID']], $categoryID);
-	$dir = opendir(CMS_DIR.'files/'.$row['folderPath']);
+	$dir = opendir(CMS_DIR.'/files/'.$row['folderPath']);
 	while (($file = readdir($dir)) !== false) {
 		if ($file != '.' && $file != '..') {
-			@copy($dir.'/'.$file, CMS_DIR.'files/'.$file);
+			@copy($dir.'/'.$file, CMS_DIR.'/files/'.$file);
 		}
 	}
 	closedir($dir);
@@ -44,7 +44,7 @@ while ($row = $statement->fetchArray()) {
 }
 
 //get files into basic category
-foreach($files as $file) {
+foreach ($files as $file) {
 	$sql = "INSERT INTO cms".CMS_N."_file_to_category VALUES (?, ?)";
 	$statement = WCF::getDB()->prepareStatement($sql);
 	$statement->execute($file);
