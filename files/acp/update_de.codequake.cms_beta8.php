@@ -48,7 +48,7 @@ foreach ($list->getObjects() as $file) {
 		$fileHash = sha1_file(CMS_DIR . 'files/' . $file->filename);
 		$folder = substr($fileHash, 0, 2);
 		if (!is_dir(CMS_DIR . 'files/' . $folder)) mkdir(CMS_DIR . 'files/' . $folder);
-		copy (CMS_DIR . 'files/' . $file->filename, CMS_DIR . 'files/' . $folder . '/' $file->fileID . '-' . $fileHash);
+		copy (CMS_DIR . 'files/' . $file->filename, CMS_DIR . 'files/' . $folder . '/' . $file->fileID . '-' . $fileHash);
 		@unlink(CMS_DIR . 'files/' . $file->filename);
 		$editor->update(array('fileHash' => $fileHash));
 	}
