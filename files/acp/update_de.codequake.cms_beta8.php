@@ -1,4 +1,5 @@
 <?php
+use cms\data\file\FileEditor;
 use cms\data\file\FileList;
 use wcf\data\category\CategoryAction;
 use wcf\system\category\CategoryHandler;
@@ -36,8 +37,40 @@ foreach ($list->getObjects() as $file) {
 	$statement->execute(array($file->fileID, $categoryID));
 }
 
-$sql = "DROP TABLE cms".WCF_N."_folder";
+
+//hash files & copy
+copyFiles(CMS_DIR . 'files', CMS_DIR . 'files');
+
+foreach ($list->getObjects() as $file) {
+	//old file
+	if ($file->fileHash == '') {
+		$editor = new FileEditor($file);
+		$fileHash = sha1_file(CMS_DIR . 'files/' . $file->filename);
+		$folder = substr($fileHash, 0, 2);
+		if (!is_dir(CMS_DIR . 'files/' . $folder)) mkdir(CMS_DIR . 'files/' . $folder);
+		copy (CMS_DIR . 'files/' . $file->filename, CMS_DIR . 'files/' . $folder . '/' $file->fileID . '-' . $fileHash);
+		@unlink(CMS_DIR . 'files/' . $file->filename);
+		$editor->update(array('fileHash' => $fileHash));
+	}
+}
+	
+//copy files to files folder
+function copyFiles ($src, $dst) {
+		$handle = opendir($src);
+		while ( false !== ($file = readdir($handle))) {
+			if ($file != '.' && $file != '..') {
+				if (is_dir($src . '/' . $file)) {
+					copyFiles($src . '/' . $file, $dst);
+				}
+				else {
+					copy($src . '/' . $file, $dst . '/' . $file);
+				}
+			}
+		}
+		closedir($handle);
+}
+
+//finally fuck up the column
+$sql = "ALTER TABLE cms".WCF_N."_file DROP filename";
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute();
-
-//TODO: create fileHash & move files...

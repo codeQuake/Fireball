@@ -16,8 +16,9 @@ CREATE TABLE cms1_stylesheet_to_page (
 );
 
 
+DROP TABLE IF EXISTS cms1_folder;
+
 ALTER TABLE cms1_file DROP folderID;
-ALTER TABLE cms1_file DROP filename;
 ALTER TABLE cms1_file CHANGE size fileSize INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE cms1_file CHANGE type fileType VARCHAR(255) NOT NULL DEFAULT '';
 ALTER TABLE cms1_file ADD fileHash VARCHAR(40) NOT NULL DEFAULT '';

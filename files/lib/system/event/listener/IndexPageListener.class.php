@@ -13,7 +13,7 @@ use wcf\util\HTTPRequest;
  * @package	de.codequake.cms
  */
 class IndexPageListener implements IEventListener {
-	const FEED_URL = 'http://codequake.de/index.php/NewsFeed/26/';
+	const FEED_URL = 'http://codequake.de/index.php/NewsFeed/';
 
 	/**
 	 * @see	\wcf\system\event\IEventListener::execute()
@@ -37,7 +37,7 @@ class IndexPageListener implements IEventListener {
 		}
 
 		$feed = array();
-		$i = 2;
+		$i = 10;
 
 		foreach ($xml->channel[0]->item as $item) {
 			if ($i -- == 0) {
