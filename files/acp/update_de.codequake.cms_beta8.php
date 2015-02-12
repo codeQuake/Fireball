@@ -4,6 +4,7 @@ use cms\data\file\FileList;
 use wcf\data\category\CategoryAction;
 use wcf\system\category\CategoryHandler;
 use wcf\system\WCF;
+use wcf\util\FileUtil;
 
 /**
  * @author	Jens Krumsieck
@@ -47,7 +48,7 @@ foreach ($list->getObjects() as $file) {
 		$editor = new FileEditor($file);
 		$fileHash = sha1_file(CMS_DIR . 'files/' . $file->filename);
 		$folder = substr($fileHash, 0, 2);
-		if (!is_dir(CMS_DIR . 'files/' . $folder)) mkdir(CMS_DIR . 'files/' . $folder);
+		if (!is_dir(CMS_DIR . 'files/' . $folder)) FileUtil::makePath(CMS_DIR . 'files/' . $folder);
 		copy (CMS_DIR . 'files/' . $file->filename, CMS_DIR . 'files/' . $folder . '/' . $file->fileID . '-' . $fileHash);
 		@unlink(CMS_DIR . 'files/' . $file->filename);
 		$editor->update(array('fileHash' => $fileHash));
