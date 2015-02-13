@@ -160,7 +160,7 @@ class VisitCountHandler extends SingletonFactory {
 		return $count;
 	}
 
-	public function getDailyVisitors($day = 10, $month = 2, $year = 2013 - 2015) {
+	public function getDailyVisitors($day = 10, $month = 2, $year = 2014) {
 		$sql = "SELECT	*
 			FROM	cms" . WCF_N . "_counter
 			WHERE	day = ?
