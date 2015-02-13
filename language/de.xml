@@ -68,7 +68,11 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Vorlage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[Alle Seiten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Geben Sie hier die URL ein, von der die Inhalte bezogen werden sollen. Das Format des Feeds kann entweder <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Anzahl Einträge]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[Alle untergeordneten Elemente werden automatisch als Slideshow arrangiert.]]></item>

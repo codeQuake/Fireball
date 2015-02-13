@@ -30,7 +30,7 @@
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
 			<listclassname>cms\data\stylesheet\StylesheetList</listclassname>
 		</type>
-		<!-- /clipbaord -->
+		<!-- /clipboard -->
 
 		<!-- content types -->
 		<type>
@@ -81,6 +81,15 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
+
+    <type>
+      <name>de.codequake.cms.content.type.rss</name>
+      <definitionname>de.codequake.cms.content.type</definitionname>
+      <classname>cms\system\content\type\RssContentType</classname>
+      <category>general</category>
+      <allowcontent>1</allowcontent>
+      <allowsidebar>1</allowsidebar>
+    </type>
 
 		<type>
 			<name>de.codequake.cms.content.type.gallery</name>
