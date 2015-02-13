@@ -9,7 +9,7 @@ use wcf\util\DateUtil;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2014 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -160,7 +160,7 @@ class VisitCountHandler extends SingletonFactory {
 		return $count;
 	}
 
-	public function getDailyVisitors($day = 10, $month = 2, $year = 2014) {
+	public function getDailyVisitors($day = 10, $month = 2, $year = 2014 - 2015) {
 		$sql = "SELECT	*
 			FROM	cms" . WCF_N . "_counter
 			WHERE	day = ?
