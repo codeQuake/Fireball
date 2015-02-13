@@ -87,7 +87,7 @@ class RssContentType extends AbstractContentType {
 				break;
 			case 'atom':
 				foreach ($xml->children()->entry as $item) {
-					if ($i -- == 0){
+					if ($i -- == 0) {
 						break;
 					}
 					$url = $item->link->attributes();
