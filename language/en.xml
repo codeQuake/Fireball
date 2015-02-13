@@ -70,6 +70,10 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Child pages]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Poll]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Enter a valid feed URL. You can use the following data-types <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Number of entries]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[All children will be arranged in a slideshow.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
