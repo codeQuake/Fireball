@@ -90,7 +90,8 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		do {
 			$data['alias'] = $alias . $i;
 			$i++;
-		} while (!PageUtil::isAvailableAlias($data['alias'], $object->parentID));
+		} 
+		while (!PageUtil::isAvailableAlias($data['alias'], $object->parentID));
 
 		// perform creation of copy
 		$this->parameters['data'] = $data;
