@@ -495,12 +495,16 @@ class PageAddForm extends AbstractForm {
 		WCF::getTPL()->assign('success', true);
 
 		// reset values
-		// @todo: properly reset to default values
-		$this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
-		$this->sidebarOrientation = 'right';
-		$this->deactivationDate = $this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->parentID = $this->publicationDate = $this->showOrder = $this->styleID = 0;
-		$this->allowIndexing = $this->allowSubscribing = $this->createMenuItem = 1;
+		$this->alias = $this->deactivationDate = $this->description = $this->metaDescription = $this->metaKeywords = $this->publicationDate = '';
+		$this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->menuItemID = $this->parentID = $this->showOrder = $this->styleID = 0;
 		$this->stylesheetIDs = array();
+
+		$this->allowIndexing = CMS_PAGES_DEFAULT_ALLOW_INDEXING;
+		$this->allowSubscribing = CMS_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
+		$this->availableDuringOfflineMode = CMS_PAGES_DEFAULT_OFFLINE;
+		$this->createMenuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
+		$this->isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
+		$this->sidebarOrientation = CMS_PAGES_DEFAULT_SIDEBAR;
 
 		I18nHandler::getInstance()->reset();
 		ACLHandler::getInstance()->disableAssignVariables();
