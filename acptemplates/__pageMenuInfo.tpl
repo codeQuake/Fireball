@@ -1,4 +1,4 @@
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
