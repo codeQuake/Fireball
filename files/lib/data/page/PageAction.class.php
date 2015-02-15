@@ -11,6 +11,7 @@ use cms\system\cache\builder\PagePermissionCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
 use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\system\revision\PageRevisionHandler;
+use cms\util\PageUtil;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\page\menu\item\PageMenuItemList;
@@ -84,8 +85,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		unset($data['clicks']);
 
 		// ensure unique aliases
-		// @todo	multiple copies of a page have the same alias
-		$data['alias'] .= '-copy';
+		$i = 1;
+		$alias = $data['alias'] . '-copy';
+		do {
+			$data['alias'] = $alias . $i;
+			$i++;
+		} while (!PageUtil::isAvailableAlias($data['alias'], $object->parentID));
 
 		// perform creation of copy
 		$this->parameters['data'] = $data;
