@@ -14,9 +14,6 @@ $sql = "UPDATE	wcf".WCF_N."_option
 	WHERE	optionName = ?";
 $optionUpdate = WCF::getDB()->prepareStatement($sql);
 
-// install date
-$optionUpdate->execute(array(TIME_NOW, 'cms_install_date'));
-
 // set default page title
 if (!defined('PAGE_TITLE') || !PAGE_TITLE) {
 	$optionUpdate->execute(array('Fireball CMS 2.0', 'page_title'));
