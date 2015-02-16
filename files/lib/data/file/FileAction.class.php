@@ -1,18 +1,19 @@
 <?php
 namespace cms\data\file;
 
-use cms\data\folder\Folder;
-use cms\data\folder\FolderList;
+use wcf\data\category\CategoryNodeTree;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\category\CategoryHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
+use wcf\util\ArrayUtil;
 use wcf\util\FileUtil;
 
 /**
  * Executes file-related actions.
  * 
- * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @author	Jens Krumsieck, Florian Frantzen
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -28,115 +29,234 @@ class FileAction extends AbstractDatabaseObjectAction {
 	protected $permissionsDelete = array('admin.cms.file.canAddFile');
 
 	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 */
+	protected $permissionsUpdate = array('admin.cms.file.canAddFile');
+
+	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
 	protected $requireACP = array('delete');
 
 	/**
-	 * @see	\wcf\data\IDeleteAction::delete()
+	 * Validate parameters and permissions to fetch details about a file.
 	 */
-	public function delete() {
-		// del files
-		foreach ($this->objectIDs as $objectID) {
-			$file = new File($objectID);
-			if ($file->folderID == 0 && file_exists(CMS_DIR . 'files/' . $file->filename)) unlink(CMS_DIR . 'files/' . $file->filename);
-			else {
-				$folder = new Folder($file->folderID);
-				if (file_exists(CMS_DIR . 'files/' . $folder->folderPath . '/' . $file->filename)) unlink(CMS_DIR . 'files/' . $folder->folderPath . '/' . $file->filename);
-			}
-		}
-
-		parent::delete();
+	public function validateGetDetails() {
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
 	}
 
-	public function validateGetImages() { /* nothing */ }
-
 	/**
-	 * Returns a formatted list of all images
+	 * Returns a formatted details view of a file.
 	 */
-	public function getImages() {
-		if ($this->parameters['imageID']) {
-			$image = new File($this->parameters['imageID']);
-			if ($image->imageID) {
-				WCF::getTPL()->assign('image', $image);
-			}
-		}
-
-		// file images
-		$list = new FileList();
-		$list->getConditionBuilder()->add('file.type LIKE ?', array('image/%'));
-		$list->getConditionBuilder()->add('file.folderID =  ?', array('0'));
-		$list->readObjects();
-		$imageList = $list->getObjects();
-
-		$list = new FolderList();
-		$list->readObjects();
-		$folderList = $list->getObjects();
+	public function getDetails() {
+		$file = $this->getSingleObject();
 
 		WCF::getTPL()->assign(array(
-			'images' => $imageList,
-			'folders' => $folderList
+			'file' => $file
 		));
 
 		return array(
-			'images' => $imageList,
-			'template' => WCF::getTPL()->fetch('imageContentList', 'cms')
+			'fileID' => $file->fileID,
+			'template' => WCF::getTPL()->fetch('fileDetails', 'cms'),
+			'title' => $file->getTitle()
 		);
 	}
 
+	/**
+	 * Validates parameters and permissions to fetch a rendered list of
+	 * files.
+	 */
+	public function validateGetFileList() {
+		// validate category
+		$this->readInteger('categoryID', true);
+		if ($this->parameters['categoryID']) {
+			$category = CategoryHandler::getInstance()->getCategory($this->parameters['categoryID']);
+			if ($category === null) {
+				throw new UserInputException('categoryID');
+			}
+		}
+
+		// validate file type
+		$this->readString('fileType', true);
+		$allowedTypes = array('code', 'film', 'image', 'music', 'pdf');
+		if ($this->parameters['fileType'] && !in_array($this->parameters['fileType'], $allowedTypes)) {
+			throw new UserInputException('fileType');
+		}
+	}
+
+	/**
+	 * Returns a formatted list of files. In case no category is specified,
+	 * the complete markup for a dialog is returned, otherwise only a
+	 * rendered list of files.
+	 */
+	public function getFileList() {
+		// load category
+		if ($this->parameters['categoryID']) {
+			$category = CategoryHandler::getInstance()->getCategory($this->parameters['categoryID']);
+		} else {
+			// load first category
+			$categories = CategoryHandler::getInstance()->getCategories('de.codequake.cms.file');
+			$category = array_shift($categories);
+		}
+
+		// load files assigned to the category
+		$fileList = new CategoryFileList(array($category->categoryID));
+		$fileList->sqlOrderBy = 'title ASC';
+		if ($this->parameters['fileType']) {
+			$fileList->getConditionBuilder()->add('file.fileType LIKE ?', array($this->parameters['fileType'].'%'));
+		}
+		$fileList->readObjects();
+
+		// output
+		WCF::getTPL()->assign(array(
+			'category' => $category,
+			'fileList' => $fileList
+		));
+
+		if ($this->parameters['categoryID']) {
+			// category specified => only return formatted list of
+			// files.
+			return array(
+				'categoryID' => $category->categoryID,
+				'template' => WCF::getTPL()->fetch('categoryFileListDialog', 'cms')
+			);
+		} else {
+			// category wasn't specified => return markup for a
+			// complete dialog, not only the formatted file list.
+			$categoryNodeTree = new CategoryNodeTree('de.codequake.cms.file', 0, true);
+			$this->categoryList = $categoryNodeTree->getIterator();
+
+			WCF::getTPL()->assign(array(
+				'categoryList' => $this->categoryList
+			));
+
+			return array(
+				'categoryID' => $category->categoryID,
+				'template' => WCF::getTPL()->fetch('fileListDialog', 'cms'),
+				'title' => WCF::getLanguage()->get('cms.acp.file.picker')
+			);
+		}
+	}
+
+	/**
+	 * Validates parameters and permissions to get a upload dialog.
+	 */
+	public function validateGetUploadDialog() {
+		// validate category
+		$this->readInteger('categoryID', true);
+		if ($this->parameters['categoryID']) {
+			$category = CategoryHandler::getInstance()->getCategory($this->parameters['categoryID']);
+			if ($category === null) {
+				throw new UserInputException('categoryID');
+			}
+		}
+	}
+
+	/**
+	 * Returns a formatted upload dialog.
+	 */
+	public function getUploadDialog() {
+		$categoryNodeTree = new CategoryNodeTree('de.codequake.cms.file', 0, true);
+		$categoryList = $categoryNodeTree->getIterator();
+
+		WCF::getTPL()->assign(array(
+			'categoryList' => $categoryList
+		));
+
+		return array(
+			'template' => WCF::getTPL()->fetch('fileUploadDialog', 'cms'),
+			'title' => WCF::getLanguage()->get('cms.acp.file.add')
+		);
+	}
+
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::update()
+	 */
+	public function update() {
+		parent::update();
+
+		foreach ($this->objects as $fileEditor) {
+			// update categories
+			if (isset($this->parameters['categoryIDs'])) {
+				$fileEditor->updateCategoryIDs($this->parameters['categoryIDs']);
+			}
+		}
+	}
+
+	/**
+	 * Validates parameters to upload a file.
+	 */
 	public function validateUpload() {
 		if (count($this->parameters['__files']->getFiles()) <= 0) {
 			throw new UserInputException('files');
 		}
 	}
 
+	/**
+	 * Handles upload of a file.
+	 */
 	public function upload() {
-		// get file
 		$files = $this->parameters['__files']->getFiles();
-		$return = array();
+		$failedUploads = array();
+		$result = array('files' => array(), 'errors' => array());
+
 		foreach ($files as $file) {
 			try {
-				
-				if (!$file->getValidationErrorType()) {
-					$filename = 'FB-File-' . md5($file->getFilename() . time()) . '.' . $file->getFileExtension();
-					$folderID = $this->parameters['folderID'];
-					if ($folderID != 0) $folder = new Folder($folderID);
-					$data = array(
-						'title' => $file->getFilename(),
-						'folderID' => $folderID,
-						'filename' => $filename,
-						'size' => $file->getFilesize(),
-						'type' => $file->getMimeType()
+				if ($file->getValidationErrorType()) {
+					$failedUploads[] = $file;
+					continue;
+				}
+
+				$data = array(
+					'title' => $file->getFilename(),
+					'filesize' => $file->getFilesize(),
+					'fileType' => $file->getMimeType(),
+					'fileHash' => sha1_file($file->getLocation()),
+					'uploadTime' => TIME_NOW
+				);
+
+				$uploadedFile = FileEditor::create($data);
+
+				// create subdirectory if necessary
+				$dir = dirname($uploadedFile->getLocation());
+				if (!@file_exists($dir)) {
+					FileUtil::makePath($dir, 0777);
+				}
+
+				// move uploaded file
+				if (@move_uploaded_file($file->getLocation(), $uploadedFile->getLocation())) {
+					@unlink($file->getLocation());
+
+					$result['files'][$file->getInternalFileID()] = array(
+						'fileID' => $uploadedFile->fileID,
+						'title' => $uploadedFile->getTitle(),
+						'fileSize' => $uploadedFile->fileSize,
+						'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->fileSize)
 					);
-					
-					$uploadedFile = FileEditor::create($data);
-					if ($folderID == 0) $path = CMS_DIR . 'files/' . $filename;
-					else $path = CMS_DIR . 'files/' . $folder->folderPath . '/' . $filename;
-					if (@move_uploaded_file($file->getLocation(), $path)) {
-						@unlink($file->getLocation());
-						
-						$return[] = array(
-							'fileID' => $uploadedFile->fileID,
-							'folderID' => $uploadedFile->folderID,
-							'title' => $uploadedFile->title,
-							'filename' => $uploadedFile->filename,
-							'filesize' => $uploadedFile->filesize,
-							'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->filesize)
-						);
-					}
-					else {
-						// failure
-						$editor = new FileEditor($uploadedFile);
-						$editor->delete();
-						throw new UserInputException('file', 'uploadFailed');
-					}
+				} else {
+					// failure
+					$editor = new FileEditor($uploadedFile);
+					$editor->delete();
+
+					throw new UserInputException('file', 'uploadFailed');
 				}
 			}
 			catch (UserInputException $e) {
 				$file->setValidationErrorType($e->getType());
+				$failedUploads[] = $file;
 			}
 		}
-		
-		return $return;
+
+		// return results
+		foreach ($failedUploads as $failedUpload) {
+			$result['errors'][$failedUpload->getInternalFileID()] = array(
+				'title' => $failedUpload->getFilename(),
+				'filesize' => $failedUpload->getFilesize(),
+				'errorType' => $failedUpload->getValidationErrorType()
+			);
+		}
+
+		return $result;
 	}
 }

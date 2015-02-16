@@ -7,22 +7,15 @@ use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class TabmenuContentType extends AbstractStructureContentType {
+class TabMenuContentType extends AbstractStructureContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
 	protected $icon = 'icon-list-alt';
-
-	/**
-	 * @see	\cms\system\content\type\IcontentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'tabMenuContentType';
-	}
 
 	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
@@ -53,6 +46,6 @@ class TabmenuContentType extends AbstractStructureContentType {
 			'children' => $children
 		));
 
-		return WCF::getTPL()->fetch('tabMenuContentType', 'cms');
+		return parent::getOutput($content);
 	}
 }

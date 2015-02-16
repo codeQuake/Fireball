@@ -24,6 +24,8 @@
 					<tr class="jsRevisionRow">
 						<td class="columnIcon">
 							<span class="icon icon16 icon-undo jsRestoreRevisionButton jsTooltip pointer" title="{lang}cms.acp.page.revision.restore{/lang}" data-object-id="{@$revision->revisionID}" data-page-id="{@$revision->pageID}" data-confirm-message="{lang}cms.acp.page.revision.restore.sure{/lang}"></span>
+							<span class="icon icon-16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$revision->revisionID}" data-confirm-message="{lang}cms.acp.page.revision.delete.confirmMessage{/lang}"></span>
+
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$revision->revisionID}</td>

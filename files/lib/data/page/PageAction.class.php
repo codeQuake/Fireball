@@ -9,9 +9,12 @@ use cms\data\page\PageEditor;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
+use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\system\revision\PageRevisionHandler;
+use cms\util\PageUtil;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
+use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
@@ -31,7 +34,7 @@ use wcf\system\WCF;
  * Executes page-related actions.
  * 
  * @author	Jens Krumsieck, Florian Frantzen
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -82,8 +85,13 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		unset($data['clicks']);
 
 		// ensure unique aliases
-		// @todo	multiple copies of a page have the same alias
-		$data['alias'] .= '-copy';
+		$i = 1;
+		$alias = $data['alias'] . '-copy';
+		do {
+			$data['alias'] = $alias . $i;
+			$i++;
+		} 
+		while (!PageUtil::isAvailableAlias($data['alias'], $object->parentID));
 
 		// perform creation of copy
 		$this->parameters['data'] = $data;
@@ -152,6 +160,11 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$page = parent::create();
 		$pageEditor = new PageEditor($page);
 
+		// handle stylesheets
+		if (isset($this->parameters['stylesheetIDs']) && !empty($this->parameters['stylesheetIDs'])) {
+			$pageEditor->updateStylesheetIDs($this->parameters['stylesheetIDs']);
+		}
+
 		// check if first page
 		if (PageCache::getInstance()->getHomePage() === null) {
 			$pageEditor->setAsHome();
@@ -205,8 +218,24 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		// delete related menu items
 		if (!empty($menuItemIDs)) {
-			$objectAction = new PageMenuItemAction($menuItemIDs, 'delete');
-			$objectAction->executeAction();
+			$menuItemList = new PageMenuItemList();
+			$menuItemList->setObjectIDs($menuItemIDs);
+			$menuItemList->readObjects();
+
+			$deleteMenuItemIDs = array();
+			foreach ($menuItemList as $menuItem) {
+				if ($menuItem->getProcessor() instanceof CMSPageMenuItemProvider) {
+					$page = $menuItem->getProcessor()->getPage();
+					if (in_array($page->pageID, $pageIDs)) {
+						$deleteMenuItemIDs[] = $menuItem->menuItemID;
+					}
+				}
+			}
+
+			if (!empty($deleteMenuItemIDs)) {
+				$pageMenuItemAction = new PageMenuItemAction($deleteMenuItemIDs, 'delete');
+				$pageMenuItemAction->executeAction();
+			}
 		}
 
 		// check if first page
@@ -267,10 +296,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * Validates parameters to get a rendered list of content types.
 	 */
 	public function validateGetContentTypes() {
-		// validate 'position' parameter
-		if (!isset($this->parameters['position'])) {
-			throw new UserInputException('position');
-		}
+		$this->readString('position');
 		if (!in_array($this->parameters['position'], array('body', 'sidebar'))) {
 			throw new UserInputException('position');
 		}
@@ -532,6 +558,11 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$pageIDs = $publishedPageIDs = array();
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
+
+			// update stylesheets
+			if (isset($this->parameters['stylesheetIDs'])) {
+				$pageEditor->updateStylesheetIDs($this->parameters['stylesheetIDs']);
+			}
 
 			if (!$pageEditor->isPublished) {
 				$publishedPageIDs[] = $pageEditor->pageID;

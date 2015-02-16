@@ -1,5 +1,6 @@
 {include file='header' pageTitle='cms.acp.content.'|concat:$action}
 
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
@@ -154,6 +155,7 @@
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		{@SECURITY_TOKEN_INPUT_TAG}
+		<input type="hidden" name="position" value="{$position}" />
 	</div>
 </form>
 

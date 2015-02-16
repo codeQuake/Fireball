@@ -1,5 +1,6 @@
 <?php
 namespace cms\acp\form;
+
 use cms\data\page\DrainedPageNodeTree;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
@@ -20,8 +21,8 @@ use wcf\util\DateUtil;
 /**
  * Shows the page edit form.
  * 
- * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @author	Jens Krumsieck, Florian Frantzen
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -29,7 +30,7 @@ class PageEditForm extends PageAddForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.content';
+	public $activeMenuItem = 'cms.acp.menu.link.cms.page';
 
 	/**
 	 * page node list for 'choose page' button
@@ -83,22 +84,59 @@ class PageEditForm extends PageAddForm {
 	public function save() {
 		AbstractForm::save();
 
+		// save multilingual inputs
+		I18nHandler::getInstance()->save('title', 'cms.page.title'.$this->pageID, 'cms.page');
+
+		$languageVariable = 'cms.page.description'.$this->pageID;
+		if (I18nHandler::getInstance()->isPlainValue('description')) {
+			I18nHandler::getInstance()->remove($languageVariable);
+		} else {
+			I18nHandler::getInstance()->save('description', $languageVariable, 'cms.page');
+			$this->description = $languageVariable;
+		}
+
+		$languageVariable = 'cms.page.metaDescription'.$this->pageID;
+		if (I18nHandler::getInstance()->isPlainValue('metaDescription')) {
+			I18nHandler::getInstance()->remove($languageVariable);
+		} else {
+			I18nHandler::getInstance()->save('metaDescription', $languageVariable, 'cms.page');
+			$this->metaDescription = $languageVariable;
+		}
+
+		$languageVariable = 'cms.page.metaKeywords'.$this->pageID;
+		if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
+			I18nHandler::getInstance()->remove($languageVariable);
+		} else {
+			I18nHandler::getInstance()->save('metaKeywords', $languageVariable, 'cms.page');
+			$this->metaKeywords = $languageVariable;
+		}
+
 		$data = array(
+			// general data
 			'alias' => $this->alias,
 			'description' => $this->description,
+
+			// meta information
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords,
-			'invisible' => $this->invisible,
-			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
-			'showOrder' => $this->showOrder,
-			'parentID' => ($this->parentID) ?  : null,
-			'showSidebar' => $this->showSidebar,
-			'sidebarOrientation' => $this->sidebarOrientation,
 			'allowIndexing' => $this->allowIndexing,
+
+			// position
+			'parentID' => ($this->parentID) ?: null,
+			'showOrder' => $this->showOrder,
+			'invisible' => $this->invisible,
+
+			// settings
+			'menuItemID' => ($this->menuItemID) ?: null,
 			'isCommentable' => $this->isCommentable,
+			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'allowSubscribing' => $this->allowSubscribing,
+
+			// display
 			'styleID' => ($this->styleID) ?: null,
-			'stylesheets' => serialize($this->stylesheets)
+
+			// display settings
+			'sidebarOrientation' => $this->sidebarOrientation
 		);
 
 		// publication
@@ -108,107 +146,28 @@ class PageEditForm extends PageAddForm {
 		} else {
 			$data['isPublished'] = 1;
 		}
+
 		if ($this->enableDelayedDeactivation) {
 			$data['isDisabled'] = 0;
 			$data['deactivationDate'] = @strtotime($this->publicationDate);
 		}
 
-		$this->objectAction = new PageAction(array($this->pageID), 'update', array(
-			'data' => $data
-		));
-		$this->objectAction->executeAction();
+		$pageData = array(
+			'data' => $data,
+			'stylesheetIDs' => $this->stylesheetIDs
+		);
 
-		$update = array();
+		$this->objectAction = new PageAction(array($this->pageID), 'update', $pageData);
+		$this->objectAction->executeAction();
 
 		// save ACL
 		ACLHandler::getInstance()->save($this->pageID, $this->objectTypeID);
-		ACLHandler::getInstance()->disableAssignVariables();
 
-		// update I18n
-		I18nHandler::getInstance()->save('title', 'cms.page.title' . $this->pageID, 'cms.page');
-		$update['title'] = 'cms.page.title' . $this->pageID;
-
-		if (!I18nHandler::getInstance()->isPlainValue('description')) {
-			I18nHandler::getInstance()->save('description', 'cms.page.description' . $this->pageID, 'cms.page');
-			$update['description'] = 'cms.page.description' . $this->pageID;
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('metaDescription')) {
-			I18nHandler::getInstance()->save('metaDescription', 'cms.page.metaDescription' . $this->pageID, 'cms.page');
-			$update['metaDescription'] = 'cms.page.metaDescription' . $this->pageID;
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
-			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $this->pageID, 'cms.page');
-			$update['metaKeywords'] = 'cms.page.metaKeywords' . $this->pageID;
-		}
-
-		$page = new Page($this->pageID);
-		$this->menuItemID = $page->menuItemID;
-
-		if (!$this->menuItem && $this->menuItemID) {
-			// delete old item
-			$action = new PageMenuItemAction(array(
-				$this->menuItemID
-			), 'delete', array());
-			$action->executeAction();
-
-			$update['menuItemID'] = null;
-		}
-		else if ($this->menuItem && !$this->menuItemID) {
-			// create menuitem
-			$page = new Page($this->pageID);
-			if ($page->getParentPage() !== null) {
-				$parentPage = $page->getParentPage();
-				$parentItem = new PageMenuItem($parentPage->menuItemID);
-			}
-
-			$data = array(
-				'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
-				'menuItemController' => 'cms\page\PagePage',
-				'menuItemLink' => 'id=' . $this->pageID,
-				'menuPosition' => 'header',
-				'options' => '',
-				'permissions' => '',
-				'packageID' => PACKAGE_ID,
-				'parentMenuItem' => isset($parentItem) ? $parentItem->menuItem : '',
-				'showOrder' => 0
-			);
-
-			$menuItemAction = new PageMenuItemAction(array(), 'create', array(
-				'data' => $data
-			));
-			$itemReturnValues = $menuItemAction->executeAction();
-			$menuItem = $itemReturnValues['returnValues'];
-
-			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.' . $menuItem->menuItemID, 'wcf.page');
-			$data['menuItem'] = 'wcf.page.menuItem.' . $menuItem->menuItemID;
-			$editor = new PageMenuItemEditor($menuItem);
-			$editor->update($data);
-
-			$update['menuItemID'] = $menuItem->menuItemID ?  : null;
-		}
-		else if ($this->menuItem && $this->menuItemID) {
-			//update old item
-			$item = new PageMenuItem($this->menuItemID);
-			$editor = new PageMenuItemEditor($item);
-			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.' . $item->menuItemID, 'wcf.page');
-			$menuData['menuItem'] = 'wcf.page.menuItem.' . $item->menuItemID;
-			$editor->update($menuData);
-		}
-
-		if (!empty($update)) {
-			$editor = new PageEditor(new Page($this->pageID));
-			$editor->update($update);
-		}
-
-		//create revision
-		$objectAction = new PageAction(array(
-			$this->pageID
-		), 'createRevision', array(
-			'action' => 'update'
-		));
+		// create revision
+		$objectAction = new PageAction(array($this->pageID), 'createRevision', array('action' => 'update'));
 		$objectAction->executeAction();
 
-		//update search index
+		// update search index
 		$objectAction = new PageAction(array($this->pageID), 'refreshSearchIndex');
 		$objectAction->executeAction();
 
@@ -231,29 +190,20 @@ class PageEditForm extends PageAddForm {
 		$this->choosePageNodeList = $choosePageNodeTree->getIterator();
 
 		if (empty($_POST)) {
+			// general data
 			I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->page->title, 'cms.page.title\d+');
+			$this->alias = $this->page->alias;
 			I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->page->description, 'cms.page.description\d+');
-			$this->description = $this->page->description;
-			I18nHandler::getInstance()->setOptions('metaDescription', PACKAGE_ID, $this->page->metaDescription, 'cms.page.metaDescription\d+');
-			$this->metaDescription = $this->page->metaDescription;
-			I18nHandler::getInstance()->setOptions('metaKeywords', PACKAGE_ID, $this->page->metaKeywords, 'cms.page.metaKeywords\d+');
-			$this->metaKeywords = $this->page->metaKeywords;
 
+			// meta information
+			I18nHandler::getInstance()->setOptions('metaDescription', PACKAGE_ID, $this->page->metaDescription, 'cms.page.metaDescription\d+');
+			I18nHandler::getInstance()->setOptions('metaKeywords', PACKAGE_ID, $this->page->metaKeywords, 'cms.page.metaKeywords\d+');
+			$this->allowIndexing = $this->page->allowIndexing;
+
+			// position
 			$this->parentID = $this->page->parentID;
 			$this->showOrder = $this->page->showOrder;
 			$this->invisible = $this->page->invisible;
-			$this->allowIndexing = $this->page->allowIndexing;
-			$this->showSidebar = $this->page->showSidebar;
-			$this->sidebarOrientation = $this->page->sidebarOrientation;
-			$this->isCommentable = $this->page->isCommentable;
-			$this->allowSubscribing = $this->page->allowSubscribing;
-			$this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
-			$this->menuItem = $this->page->menuItemID !== null ? 1 : 0;
-			$this->menuItemID = $this->page->menuItemID;
-
-			$this->alias = $this->page->alias;
-			$this->styleID = $this->page->styleID;
-			$this->stylesheets = @unserialize($this->page->stylesheets);
 
 			// publication
 			if (!$this->page->isPublished) {
@@ -270,6 +220,19 @@ class PageEditForm extends PageAddForm {
 				$dateTime->setTimezone(WCF::getUser()->getTimeZone());
 				$this->deactivationDate = $dateTime->format('c');
 			}
+
+			// settings
+			$this->menuItemID = $this->page->menuItemID;
+			$this->isCommentable = $this->page->isCommentable;
+			$this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
+			$this->allowSubscribing = $this->page->allowSubscribing;
+
+			// display
+			$this->styleID = $this->page->styleID;
+			$this->stylesheetIDs = $this->page->getStylesheetIDs();
+
+			// display settings
+			$this->sidebarOrientation = $this->page->sidebarOrientation;
 		}
 	}
 

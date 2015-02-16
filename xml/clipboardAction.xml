@@ -25,6 +25,16 @@
 		</action>
 		<!-- /content -->
 
+		<!-- file -->
+		<action name="delete">
+			<actionclassname>cms\system\clipboard\action\FileClipboardAction</actionclassname>
+			<showorder>1</showorder>
+			<pages>
+				<page>cms\acp\page\FileListPage</page>
+			</pages>
+		</action>
+		<!-- /file -->
+
 		<!-- page -->
 		<action name="delete">
 			<actionclassname>cms\system\clipboard\action\PageClipboardAction</actionclassname>

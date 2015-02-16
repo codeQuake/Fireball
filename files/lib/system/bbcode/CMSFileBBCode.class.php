@@ -10,7 +10,7 @@ use wcf\system\WCF;
  * handles the cmsFile bbcode
  * 
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -31,7 +31,7 @@ class CMSFileBBCode extends AbstractBBCode {
 
 		if ($file === null) return '';
 
-		if (preg_match('~(image/*)+~', $file->type)) $this->isImage = true;
+		if (preg_match('~(image/*)+~', $file->fileType)) $this->isImage = true;
 
 		if ($this->isImage && isset($openingTag['attributes'][1])) {
 			$this->align = $openingTag['attributes'][1];

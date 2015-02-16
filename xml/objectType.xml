@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/objectType.xsd">
 	<import>
+		<!-- category -->
+		<type>
+			<name>de.codequake.cms.file</name>
+			<definitionname>com.woltlab.wcf.category</definitionname>
+			<classname>cms\system\category\FileCategoryType</classname>
+		</type>
+		<!-- /category -->
+
 		<!-- clipboard -->
 		<type>
 			<name>de.codequake.cms.content</name>
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
 			<listclassname>cms\data\content\ContentList</listclassname>
+		</type>
+		<type>
+			<name>de.codequake.cms.file</name>
+			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+			<listclassname>cms\data\file\FileList</listclassname>
 		</type>
 		<type>
 			<name>de.codequake.cms.page</name>
@@ -17,7 +30,7 @@
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
 			<listclassname>cms\data\stylesheet\StylesheetList</listclassname>
 		</type>
-		<!-- /clipbaord -->
+		<!-- /clipboard -->
 
 		<!-- content types -->
 		<type>
@@ -68,7 +81,14 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
-
+		<type>
+			<name>de.codequake.cms.content.type.rss</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\RssContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
 		<type>
 			<name>de.codequake.cms.content.type.gallery</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
@@ -125,7 +145,6 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
-
 		<type>
 			<name>de.codequake.cms.content.type.slideshow</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
@@ -134,7 +153,6 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
-
 		<type>
 			<name>de.codequake.cms.content.type.menu</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
@@ -146,7 +164,7 @@
 		<type>
 			<name>de.codequake.cms.content.type.tabmenu</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\TabmenuContentType</classname>
+			<classname>cms\system\content\type\TabMenuContentType</classname>
 			<category>structure</category>
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>
@@ -209,15 +227,6 @@
 			<definitionname>com.woltlab.wcf.acl</definitionname>
 		</type>
 		<!-- /acl -->
-
-		<!-- dashboard -->
-		<type>
-			<name>de.codequake.cms.page</name>
-			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
-			<allowcontent>0</allowcontent>
-			<allowsidebar>1</allowsidebar>
-		</type>
-		<!-- /dashboard -->
 
 		<!-- comments -->
 		<type>

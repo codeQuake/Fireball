@@ -3,13 +3,12 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use wcf\system\language\LanguageFactory;
-use wcf\system\WCF;
 
 /**
  * Abstract searchable content type implementation.
  * 
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -32,10 +31,11 @@ abstract class AbstractSearchableContentType extends AbstractContentType impleme
 	public function getSearchableData(Content $content) {
 		foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
 			$this->searchIndexData[$language->languageID] = array();
+
 			foreach ($this->searchableFields as $field) {
-				$data = @unserialize($content->contentData);
-				if (is_array($data) && !empty($data)) $this->searchIndexData[$language->languageID][] = $language->get($data[$field]);
+				$this->searchIndexData[$language->languageID][] = $language->get($content->{$field});
 			}
+
 			$this->searchIndexData[$language->languageID] = implode("\n", $this->searchIndexData[$language->languageID]);
 		}
 

@@ -8,7 +8,7 @@ use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -35,16 +35,15 @@ class TextContentType extends AbstractSearchableContentType {
 		// init bbcodes
 		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
 
-		return 'textContentType';
+		return parent::getFormTemplate();
 	}
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
 		MessageParser::getInstance()->setOutputType('text/html');
-		if (isset($data['text'])) return MessageParser::getInstance()->parse(WCF::getLanguage()->get($data['text']), 1, 0, 1);
-		return '';
+
+		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($content->text), 1, 0, 1);
 	}
 }

@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * Shows the stylesheet edit form.
  * 
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -48,7 +48,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 
 		if (isset($_REQUEST['id'])) $this->stylesheetID = intval($_REQUEST['id']);
 		$this->stylesheet = new Stylesheet($this->stylesheetID);
-		if (!$this->stylesheet->sheetID) {
+		if (!$this->stylesheet->stylesheetID) {
 			throw new IllegalLinkException();
 		}
 	}

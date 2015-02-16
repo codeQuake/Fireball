@@ -5,7 +5,7 @@ use cms\data\content\Content;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -16,18 +16,16 @@ class PHPContentType extends AbstractContentType {
 	protected $icon = 'icon-code';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 * @see	\cms\system\content\type\AbstractContentType::$templateName
 	 */
-	public function getFormTemplate() {
-		return 'phpContentType';
-	}
+	public $templateName = 'phpContentType';
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$php = substr($data['text'], 5);
+		$php = substr($content->text, 5);
+
 		return eval($php);
 	}
 }

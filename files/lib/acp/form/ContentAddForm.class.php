@@ -23,7 +23,7 @@ use wcf\util\StringUtil;
  * Shows the content add form.
  * 
  * @author	Jens Krumsieck, Florian Frantzen
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -233,7 +233,7 @@ class ContentAddForm extends AbstractForm {
 		$returnValues = $this->objectAction->executeAction();
 
 		$contentID = $returnValues['returnValues']->contentID;
-		$contentData = @unserialize($returnValues['returnValues']->contentData);
+		$contentData = $returnValues['returnValues']->contentData;
 		$update = array();
 
 		// save polls

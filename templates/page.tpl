@@ -1,17 +1,19 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{if !$page->getMenuItem() || $__wcf->getPageMenu()->getLandingPage()->menuItem != $page->getMenuItem()->menuItem}{$page->getTitle()} - {/if}{PAGE_TITLE|language}</title>
+	<title>{$page->getTitle()} - {PAGE_TITLE|language}</title>
 
 	{include file='headInclude'}
-	{@$page->getLayout()}
+	{foreach from=$page->getStylesheets() item=stylesheet}
+		<link rel="stylesheet" type="text/css" href="{$stylesheet->getURL()}" />
+	{/foreach}
 	<link rel="canonical" href="{$page->getLink()}" />
 
-	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS.js?v={@$__wcfVersion}"></script>
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			new CMS.Content.Type.Slideshow({CMS_PAGES_CONTENT_SLIDESHOW_INTERVAL}, {CMS_PAGES_CONTENT_SLIDESHOW_EFFECT_DELAY}, '{CMS_PAGES_CONTENT_SLIDESHOW_FX}');
+			new CMS.Content.Type.Slideshow({CMS_CONTENT_SLIDESHOW_INTERVAL}, {CMS_CONTENT_SLIDESHOW_EFFECT_DELAY}, '{CMS_CONTENT_SLIDESHOW_FX}');
 
 			{if $page->allowSubscribing && $__wcf->user->userID}
 				WCF.Language.addObject({
@@ -32,13 +34,10 @@
 	{/if}
 {/capture}
 
-{if $page->showSidebar || $sidebarNodeTree !== null}
-	{capture assign='sidebar'}
-		{if $page->showSidebar == 1}
-			{@$__boxSidebar}
-		{/if}
 
-		{if $sidebarNodeTree !== null}
+{hascontent}
+	{capture assign='sidebar'}
+		{content}
 			{assign var=oldDepth value=0}
 			{foreach from=$sidebarNodeTree item=content}
 				{if $content->getTypeName() != 'de.codequake.cms.content.type.dashboard'}
@@ -57,9 +56,11 @@
 				{/if}
 			{/foreach}
 			{section name=i loop=$oldDepth}</fieldset>{/section}
-		{/if}
+
+			{event name='boxes'}
+		{/content}
 	{/capture}
-{/if}
+{/hascontent}
 
 {include file='header' sidebarOrientation=$page->sidebarOrientation}
 
@@ -74,6 +75,10 @@
 </header>
 
 {include file='userNotice'}
+
+{if !$page->isPublished}
+	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
+{/if}
 
 {assign var=oldDepth value=0}
 {foreach from=$contentNodeTree item=content}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/templatelistener.xsd">
 	<import>
-		<!--user -->
+		<!-- user -->
 		<templatelistener name="copyright">
 			<environment>user</environment>
 			<templatename>footer</templatename>
@@ -16,7 +16,7 @@
 			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
 		</templatelistener>
 
-		<!--admin -->
+		<!-- admin -->
 		<templatelistener name="cmsVersion">
 			<environment>admin</environment>
 			<templatename>index</templatename>
@@ -36,6 +36,19 @@
 			<templatename>header</templatename>
 			<eventname>stylesheets</eventname>
 			<templatecode><![CDATA[<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('cms')}acp/style/fireball.css">]]></templatecode>
+		</templatelistener>
+
+		<templatelistener name="newsTabMenuTabs">
+			<environment>admin</environment>
+			<templatename>__indexNewsInjection</templatename>
+			<eventname>newsTabMenuTabs</eventname>
+			<templatecode><![CDATA[<li><a href="{@$__wcf->getAnchor('codequake')}">codeQuake</a></li>]]></templatecode>
+		</templatelistener>
+		<templatelistener name="newsTabMenuContents">
+			<environment>admin</environment>
+			<templatename>__indexNewsInjection</templatename>
+			<eventname>newsTabMenuContents</eventname>
+			<templatecode><![CDATA[{include file='__indexNews' application='cms'}]]></templatecode>
 		</templatelistener>
 
 		<templatelistener name="pagemenuInfo">

@@ -1,19 +1,20 @@
 <dl>
 	<dt><label for="contentData[fileID]">{lang}cms.acp.content.type.de.codequake.cms.content.type.file.fileID{/lang}</label></dt>
 	<dd>
-		<select id="contentData[fileID]" name="contentData[fileID]">
-			<optgroup label="{lang}cms.acp.content.type.de.codequake.cms.content.type.file.root{/lang}">
-				{foreach from=$rootList item=file}
-					<option value="{$file->fileID}" {if $contentData['fileID']|isset && $contentData['fileID'] == $file->fileID}selected="selected"{/if}>{$file->getTitle()}</option>
-				{/foreach}
-			</optgroup>
-			{foreach from=$folderList item=folder}
-				<optgroup label="{$folder->getTitle()}">
-					{foreach from=$folder->getFiles() item=file}
-						<option value="{$file->fileID}" {if $contentData['fileID']|isset && $contentData['fileID'] == $file->fileID}selected="selected"{/if}>{$file->getTitle()}</option>
-					{/foreach}
-				</optgroup>
-			{/foreach}
-		</select>
+		<div id="filePicker">
+			<span class="button small">{lang}cms.acp.file.picker{/lang}</span>
+		</div>
 	</dd>
 </dl>
+
+<script data-relocate="true">
+	//<![CDATA[
+	$(function() {
+		WCF.Language.addObject({
+			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
+		});
+
+		new CMS.ACP.File.Picker($('#filePicker'), 'contentData[fileID]', [{if $contentData['fileID']|isset}{@$contentData['fileID']}{/if}]);
+	});
+	//]]>
+</script>

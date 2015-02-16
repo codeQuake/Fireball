@@ -19,7 +19,7 @@
 					<div class="dropdownMenu">
 						<ul class="scrollableDropdownMenu">
 							{foreach from=$stylesheets item=item}
-								<li{if $item->sheetID == $sheetID} class="active"{/if}><a href="{link application='cms' controller='StylesheetEdit' id=$item->sheetID}{/link}">{$item->title}</a></li>
+								<li{if $item->stylesheetID == $stylesheetID} class="active"{/if}><a href="{link application='cms' controller='StylesheetEdit' id=$item->stylesheetID}{/link}">{$item->title}</a></li>
 							{/foreach}
 						</ul>
 					</div>

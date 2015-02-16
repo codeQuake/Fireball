@@ -7,7 +7,7 @@ use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -28,21 +28,19 @@ class ImageContentType extends AbstractContentType {
 	public function getFormTemplate() {
 		WCF::getTPL()->assign('file', new File(0));
 
-		return 'imageContentType';
+		return parent::getFormTemplate();
 	}
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$image = new File($data['imageID']);
+		$image = new File($content->imageID);
 
 		WCF::getTPL()->assign(array(
-			'data' => $data,
 			'image' => $image
 		));
 
-		return WCF::getTPL()->fetch('imageContentType', 'cms');
+		return parent::getOutput($content);
 	}
 }

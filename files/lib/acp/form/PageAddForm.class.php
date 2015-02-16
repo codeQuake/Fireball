@@ -11,6 +11,8 @@ use cms\util\PageUtil;
 use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\page\menu\item\PageMenuItemEditor;
+use wcf\data\page\menu\item\PageMenuItemList;
+use wcf\data\page\menu\item\ViewablePageMenuItem;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
@@ -26,7 +28,7 @@ use wcf\util\StringUtil;
  * Shows the page add form.
  * 
  * @author	Jens Krumsieck, Florian Frantzen
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -35,11 +37,6 @@ class PageAddForm extends AbstractForm {
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.add';
-
-	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
-	 */
-	public $neededPermissions = array('admin.cms.page.canAddPage');
 
 	/**
 	 * alias of the created page
@@ -70,6 +67,12 @@ class PageAddForm extends AbstractForm {
 	 * @var	array<\wcf\data\style\Style>
 	 */
 	public $availableStyles = array();
+
+	/**
+	 * create menu item
+	 * @var	integer
+	 */
+	public $createMenuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
 
 	/**
 	 * deactivation date (ISO 8601)
@@ -108,18 +111,17 @@ class PageAddForm extends AbstractForm {
 	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
 
 	/**
-	 * indication whether a menu item should be created for the created
-	 * page
-	 * @var	integer
-	 */
-	public $menuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
-
-	/**
 	 * id of the menu item that should be active when viewing the created
 	 * page
 	 * @var	integer
 	 */
-	public $menuItemID = null;
+	public $menuItemID = 0;
+
+	/**
+	 * list of available menu items
+	 * @var	array<\wcf\data\page\menu\item\PageMenuItem>
+	 */
+	public $menuItems = array();
 
 	/**
 	 * meta description of the created page
@@ -132,6 +134,11 @@ class PageAddForm extends AbstractForm {
 	 * @var	string
 	 */
 	public $metaKeywords = '';
+
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('admin.cms.page.canAddPage');
 
 	/**
 	 * object type id of the acl
@@ -149,7 +156,7 @@ class PageAddForm extends AbstractForm {
 	 * id of the page the created page is assigned to
 	 * @var	integer
 	 */
-	public $parentID = null;
+	public $parentID = 0;
 
 	/**
 	 * publication date (ISO 8601)
@@ -162,12 +169,6 @@ class PageAddForm extends AbstractForm {
 	 * @var	integer
 	 */
 	public $showOrder = 0;
-
-	/**
-	 * indication whether the sidebar is visible
-	 * @var	integer
-	 */
-	public $showSidebar = CMS_PAGES_DEFAULT_GLOBAL_SIDEBAR;
 
 	/**
 	 * orientation of the sidebar ('left' or 'right')
@@ -188,16 +189,18 @@ class PageAddForm extends AbstractForm {
 	public $stylesheetList = null;
 
 	/**
-	 * selected stylesheets
+	 * stylesheet ids
 	 * @var	array<integer>
 	 */
-	public $stylesheets = array();
+	public $stylesheetIDs = array();
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
+
+		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
 
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
 
@@ -218,31 +221,39 @@ class PageAddForm extends AbstractForm {
 		parent::readFormParameters();
 
 		I18nHandler::getInstance()->readValues();
+
+		// general data
+		if (isset($_POST['alias'])) $this->alias = StringUtil::trim($_POST['alias']);
 		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
+		$this->createMenuItem = (isset($_POST['createMenuItem'])) ? 1 : 0;
+
+		// meta information
 		if (I18nHandler::getInstance()->isPlainValue('metaDescription')) $this->metaDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('metaDescription'));
 		if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
-		if (isset($_POST['alias'])) $this->alias = StringUtil::trim($_POST['alias']);
-		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
-		if (isset($_POST['availableDuringOfflineMode'])) $this->availableDuringOfflineMode = intval($_POST['availableDuringOfflineMode']);
-		else $this->availableDuringOfflineMode = 0;
-		if (isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
-		if (isset($_POST['menuItem'])) $this->menuItem = intval($_POST['menuItem']);
-		else $this->menuItem = 0;
 		$this->allowIndexing = (isset($_POST['allowIndexing'])) ? 1 : 0;
-		if (isset($_POST['parentID'])) $this->parentID = intval($_POST['parentID']);
-		if (isset($_POST['showSidebar'])) $this->showSidebar = intval($_POST['showSidebar']);
-		else $this->showSidebar = 0;
-		if (isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);
-		if (isset($_POST['isCommentable'])) $this->isCommentable = intval($_POST['isCommentable']);
-		else $this->isCommentable = 0;
-		$this->allowSubscribing = (isset($_POST['allowSubscribing'])) ? 1 : 0;
-		if (isset($_POST['styleID'])) $this->styleID = intval($_POST['styleID']);
-		if (isset($_POST['stylesheets']) && is_array($_POST['stylesheets'])) $this->stylesheets = ArrayUtil::toIntegerArray($_POST['stylesheets']);
 
+		// position
+		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
+		if (isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
+
+		// publication
 		if (isset($_POST['enableDelayedPublication'])) $this->enableDelayedPublication = intval($_POST['enableDelayedPublication']);
 		if (isset($_POST['publicationDate'])) $this->publicationDate = $_POST['publicationDate'];
 		if (isset($_POST['enableDelayedDeactivation'])) $this->enableDelayedDeactivation = intval($_POST['enableDelayedDeactivation']);
 		if (isset($_POST['deactivationDate'])) $this->deactivationDate = $_POST['deactivationDate'];
+
+		// settings
+		if (isset($_POST['menuItemID'])) $this->menuItemID = intval($_POST['menuItemID']);
+		$this->isCommentable = (isset($_POST['isCommentable'])) ? 1 : 0;
+		$this->availableDuringOfflineMode = (isset($_POST['availableDuringOfflineMode'])) ? 1 : 0;
+		$this->allowSubscribing = (isset($_POST['allowSubscribing'])) ? 1 : 0;
+
+		// display
+		if (isset($_POST['styleID'])) $this->styleID = intval($_POST['styleID']);
+		if (isset($_POST['stylesheetIDs']) && is_array($_POST['stylesheetIDs'])) $this->stylesheetIDs = ArrayUtil::toIntegerArray($_POST['stylesheetIDs']);
+
+		// display settings
+		if (isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);
 	}
 
 	/**
@@ -251,12 +262,36 @@ class PageAddForm extends AbstractForm {
 	public function validate() {
 		parent::validate();
 
+		// validate title
 		if (!I18nHandler::getInstance()->validateValue('title', true)) {
 			throw new UserInputException('title', 'multilingual');
 		}
 
 		// validate alias
 		$this->validateAlias();
+
+		// validate description
+		if (!I18nHandler::getInstance()->validateValue('description', false, true)) {
+			throw new UserInputException('description', 'multilingual');
+		}
+
+		// validate meta description
+		if (!I18nHandler::getInstance()->validateValue('metaDescription', false, true)) {
+			throw new UserInputException('metaDescription', 'multilingual');
+		}
+
+		// validate meta keywords
+		if (!I18nHandler::getInstance()->validateValue('metaKeywords', false, true)) {
+			throw new UserInputException('metaKeywords', 'multilingual');
+		}
+
+		// validate parent page
+		if ($this->parentID) {
+			$parentPage = PageCache::getInstance()->getPage($this->parentID);
+			if ($parentPage === null) {
+				$this->parentID = 0;
+			}
+		}
 
 		// validate publication date
 		if ($this->enableDelayedPublication) {
@@ -294,8 +329,22 @@ class PageAddForm extends AbstractForm {
 			throw new UserInputException('styleID', 'notValid');
 		}
 
-		$page = new Page($this->parentID);
-		if ($page === null) throw new UserInputException('parentID', 'invalid');
+		// validate stylesheets
+		$stylesheetList = new StylesheetList();
+		$stylesheetList->setObjectIDs($this->stylesheetIDs);
+		$stylesheetList->readObjects();
+
+		$this->stylesheetIDs = array();
+		foreach ($stylesheetList as $stylesheet) {
+			$this->stylesheetIDs[] = $stylesheet->stylesheetID;
+		}
+
+		// validate sidebar orientation
+		if (!in_array($this->sidebarOrientation, array('left', 'right'))) {
+			// force default value if invalid sidebar orientation
+			// specified
+			$this->sidebarOrientation = 'right';
+		}
 	}
 
 	/**
@@ -323,25 +372,38 @@ class PageAddForm extends AbstractForm {
 		}
 	}
 
+	/**
+	 * @see	\wcf\form\IForm::save()
+	 */
 	public function save() {
 		parent::save();
 
 		$data = array(
+			// general data
 			'alias' => $this->alias,
 			'description' => $this->description,
+
+			// meta information
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords,
-			'invisible' => $this->invisible,
-			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
-			'showOrder' => $this->showOrder,
-			'parentID' => ($this->parentID) ?  : null,
-			'showSidebar' => $this->showSidebar,
-			'sidebarOrientation' => $this->sidebarOrientation,
 			'allowIndexing' => $this->allowIndexing,
+
+			// position
+			'parentID' => ($this->parentID) ?: null,
+			'showOrder' => $this->showOrder,
+			'invisible' => $this->invisible,
+
+			// settings
+			'menuItemID' => ($this->menuItemID) ?: null,
 			'isCommentable' => $this->isCommentable,
+			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'allowSubscribing' => $this->allowSubscribing,
+
+			// display
 			'styleID' => ($this->styleID) ?: null,
-			'stylesheets' => serialize($this->stylesheets)
+
+			// display settings
+			'sidebarOrientation' => $this->sidebarOrientation
 		);
 
 		// publication
@@ -355,91 +417,97 @@ class PageAddForm extends AbstractForm {
 			$data['deactivationDate'] = $dateTime->getTimestamp();
 		}
 
-		$this->objectAction = new PageAction(array(), 'create', array(
-			'data' => $data
-		));
+		$pageData = array(
+			'data' => $data,
+			'stylesheetIDs' => $this->stylesheetIDs
+		);
+
+		$this->objectAction = new PageAction(array(), 'create', $pageData);
 		$returnValues = $this->objectAction->executeAction();
 
-		$pageID = $returnValues['returnValues']->pageID;
+		$pageEditor = new PageEditor($returnValues['returnValues']);
+		$updateData = array();
 
 		// save ACL
-		ACLHandler::getInstance()->save($pageID, $this->objectTypeID);
-		ACLHandler::getInstance()->disableAssignVariables();
+		ACLHandler::getInstance()->save($pageEditor->pageID, $this->objectTypeID);
 
-		// update I18n
-		$update = array();
-
-		I18nHandler::getInstance()->save('title', 'cms.page.title' . $pageID, 'cms.page');
-		$update['title'] = 'cms.page.title' . $pageID;
+		// save multilingual inputs
+		$updateData['title'] = 'cms.page.title'.$pageEditor->pageID;
+		I18nHandler::getInstance()->save('title', $updateData['title'], 'cms.page');
 
 		if (!I18nHandler::getInstance()->isPlainValue('description')) {
-			I18nHandler::getInstance()->save('description', 'cms.page.description' . $pageID, 'cms.page');
-			$update['description'] = 'cms.page.description' . $pageID;
+			$updateData['description'] = 'cms.page.description'.$pageEditor->pageID;
+			I18nHandler::getInstance()->save('description', $updateData['description'], 'cms.page');
 		}
 		if (!I18nHandler::getInstance()->isPlainValue('metaDescription')) {
-			I18nHandler::getInstance()->save('metaDescription', 'cms.page.metaDescription' . $pageID, 'cms.page');
-			$update['metaDescription'] = 'cms.page.metaDescription' . $pageID;
+			$updateData['metaDescription'] = 'cms.page.metaDescription'.$pageEditor->pageID;
+			I18nHandler::getInstance()->save('metaDescription', $updateData['metaDescription'], 'cms.page');
 		}
 		if (!I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
-			I18nHandler::getInstance()->save('metaKeywords', 'cms.page.metaKeywords' . $pageID, 'cms.page');
-			$update['metaKeywords'] = 'cms.page.metaKeywords' . $pageID;
+			$updateData['metaKeywords'] = 'cms.page.metaKeywords'.$pageEditor->pageID;
+			I18nHandler::getInstance()->save('metaKeywords', $updateData['metaKeywords'], 'cms.page');
 		}
 
-		if ($this->menuItem) {
-			if ($returnValues['returnValues']->getParentPage() !== null) {
-				$parentPage = $returnValues['returnValues']->getParentPage();
-				$parentItem = new PageMenuItem($parentPage->menuItemID);
+		// create menu item for page
+		if ($this->createMenuItem) {
+			// set menu item of parent page as parent menu item
+			if ($pageEditor->getParentPage() !== null && $pageEditor->getParentPage()->menuItemID) {
+				$parentMenuItem = new PageMenuItem($pageEditor->getParentPage()->menuItemID);
 			}
 
-			$data = array(
+			$menuItemData = array(
 				'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
 				'menuItemController' => 'cms\page\PagePage',
-				'menuItemLink' => 'id=' . $pageID,
+				'menuItemLink' => 'id='.$pageEditor->pageID,
 				'menuPosition' => 'header',
 				'packageID' => PACKAGE_ID,
-				'options' => '',
-				'permissions' => '',
-				'parentMenuItem' => isset($parentItem) ? $parentItem->menuItem : '',
+				'parentMenuItem' => (isset($parentMenuItem) && $parentMenuItem->menuItemID) ? $parentMenuItem->menuItem : '',
 				'showOrder' => 0
 			);
 
-			$menuItemAction = new PageMenuItemAction(array(), 'create', array(
-				'data' => $data
-			));
-			$itemReturnValues = $menuItemAction->executeAction();
-			$menuItem = $itemReturnValues['returnValues'];
+			$menuItemAction = new PageMenuItemAction(array(), 'create', array('data' => $menuItemData));
+			$menuItemReturnValues = $menuItemAction->executeAction();
+			$menuItem = $menuItemReturnValues['returnValues'];
 
-			I18nHandler::getInstance()->save('title', 'wcf.page.menuItem.' . $menuItem->menuItemID, 'wcf.page');
-			$data['menuItem'] = 'wcf.page.menuItem.' . $menuItem->menuItemID;
-			$editor = new PageMenuItemEditor($menuItem);
-			$editor->update($data);
+			// save multilingual title
+			$menuItemData = array('menuItem' => 'wcf.page.menuItem'.$menuItem->menuItemID);
+			I18nHandler::getInstance()->save('title', $menuItemData['menuItem'], 'wcf.page');
 
-			$update['menuItemID'] = $menuItem->menuItemID ?  : null;
+			$menuItemEditor = new PageMenuItemEditor($menuItem);
+			$menuItemEditor->update($menuItemData);
+
+			// save menu item with page
+			$updateData['menuItemID'] = $menuItem->menuItemID;
 		}
 
-		if (!empty($update)) {
-			$editor = new PageEditor($returnValues['returnValues']);
-			$editor->update($update);
-		}
+		// save new information
+		$pageEditor->update($updateData);
 
 		// create revision
-		$objectAction = new PageAction(array($pageID), 'createRevision', array(
-			'action' => 'create'
-		));
+		$objectAction = new PageAction(array($pageEditor->pageID), 'createRevision', array('action' => 'create'));
 		$objectAction->executeAction();
 
 		// update search index
-		$objectAction = new PageAction(array($pageID), 'refreshSearchIndex');
+		$objectAction = new PageAction(array($pageEditor->pageID), 'refreshSearchIndex');
 		$objectAction->executeAction();
 
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
 
-		$this->description = $this->metaDescription = $this->metaKeywords = $this->robots = $this->alias = '';
-		$this->sidebarOrientation = 'right';
-		$this->deactivationDate = $this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->parentID = $this->publicationDate = $this->showOrder = $this->showSidebar = $this->styleID = 0;
-		$this->allowIndexing = $this->allowSubscribing = $this->menuItem = 1;
+		// reset values
+		$this->alias = $this->deactivationDate = $this->description = $this->metaDescription = $this->metaKeywords = $this->publicationDate = '';
+		$this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->menuItemID = $this->parentID = $this->showOrder = $this->styleID = 0;
+		$this->stylesheetIDs = array();
+
+		$this->allowIndexing = CMS_PAGES_DEFAULT_ALLOW_INDEXING;
+		$this->allowSubscribing = CMS_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
+		$this->availableDuringOfflineMode = CMS_PAGES_DEFAULT_OFFLINE;
+		$this->createMenuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
+		$this->isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
+		$this->sidebarOrientation = CMS_PAGES_DEFAULT_SIDEBAR;
+
 		I18nHandler::getInstance()->reset();
+		ACLHandler::getInstance()->disableAssignVariables();
 	}
 
 	/**
@@ -448,8 +516,6 @@ class PageAddForm extends AbstractForm {
 	public function readData() {
 		parent::readData();
 
-		if (isset($_REQUEST['id'])) $this->parentID = intval($_REQUEST['id']);
-
 		// set default values
 		if (empty($_POST)) {
 			$dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
@@ -457,11 +523,27 @@ class PageAddForm extends AbstractForm {
 			$this->deactivationDate = $this->publicationDate = $dateTime->format('c');
 		}
 
-		$this->pageList = new PageNodeTree();
-		$this->pageList = $this->pageList->getIterator();
+		$pageNodeTree = new PageNodeTree();
+		$this->pageList = $pageNodeTree->getIterator();
 
 		$this->stylesheetList = new StylesheetList();
 		$this->stylesheetList->readObjects();
+
+		// load menu items
+		$menuItemList = new PageMenuItemList();
+		$menuItemList->getConditionBuilder()->add('page_menu_item.menuPosition = ?', array('header'));
+		$menuItemList->sqlOrderBy = 'page_menu_item.parentMenuItem ASC, page_menu_item.showOrder ASC';
+		$menuItemList->readObjects();
+
+		foreach ($menuItemList as $menuItem) {
+			if ($menuItem->parentMenuItem) {
+				if (isset($this->menuItems[$menuItem->parentMenuItem])) {
+					$this->menuItems[$menuItem->parentMenuItem]->addChild($menuItem);
+				}
+			} else {
+				$this->menuItems[$menuItem->menuItem] = new ViewablePageMenuItem($menuItem);
+			}
+		}
 	}
 
 	/**
@@ -475,30 +557,45 @@ class PageAddForm extends AbstractForm {
 
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
+			'availableStyles' => $this->availableStyles,
+			'menuItems' => $this->menuItems,
 			'objectTypeID' => $this->objectTypeID,
-			'invisible' => $this->invisible,
-			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
-			'allowIndexing' => $this->allowIndexing,
-			'description' => $this->description,
+			'pageList' => $this->pageList,
+			'stylesheetList' => $this->stylesheetList->getObjects(),
+
+			// general data
 			'alias' => $this->alias,
-			'parentID' => $this->parentID,
-			'showOrder' => $this->showOrder,
+			'description' => $this->description,
+			'createMenuItem' => $this->createMenuItem,
+
+			// meta information
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords,
-			'menu' => $this->menuItem,
-			'showSidebar' => $this->showSidebar,
-			'sidebarOrientation' => $this->sidebarOrientation,
-			'pageList' => $this->pageList,
-			'isCommentable' => $this->isCommentable,
-			'allowSubscribing' => $this->allowSubscribing,
-			'availableStyles' => $this->availableStyles,
-			'styleID' => $this->styleID,
-			'stylesheets' => $this->stylesheets? :array(),
-			'stylesheetList' => $this->stylesheetList->getObjects(),
+			'allowIndexing' => $this->allowIndexing,
+
+			// position
+			'parentID' => $this->parentID,
+			'showOrder' => $this->showOrder,
+			'invisible' => $this->invisible,
+
+			// publication
 			'enableDelayedDeactivation' => $this->enableDelayedDeactivation,
+			'publicationDate' => $this->publicationDate,
 			'enableDelayedPublication' => $this->enableDelayedPublication,
 			'deactivationDate' => $this->deactivationDate,
-			'publicationDate' => $this->publicationDate
+
+			// settings
+			'menuItemID' => $this->menuItemID,
+			'isCommentable' => $this->isCommentable,
+			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
+			'allowSubscribing' => $this->allowSubscribing,
+
+			// display
+			'styleID' => $this->styleID,
+			'stylesheetIDs' => $this->stylesheetIDs,
+
+			// display settings
+			'sidebarOrientation' => $this->sidebarOrientation
 		));
 	}
 }

@@ -3,7 +3,7 @@
 /**
  * File: Browser.php
  * Author: Chris Schuld (http://chrisschuld.com/)
- * Last Modified: July 4th, 2014
+ * Last Modified: July 4th, 2013 - 2015
  * @version 1.9
  * @package PegasusPHP
  *

@@ -3,20 +3,26 @@
 	<import>
 		<categories>
 			<category name="cms"></category>
+
 			<category name="cms.general">
 				<parent>cms</parent>
 			</category>
 			<category name="cms.general.revision">
 				<parent>cms.general</parent>
 			</category>
+
 			<category name="cms.pages">
 				<parent>cms</parent>
 			</category>
 			<category name="cms.pages.default">
 				<parent>cms.pages</parent>
 			</category>
-			<category name="cms.pages.content">
-				<parent>cms.pages</parent>
+
+			<category name="cms.content">
+				<parent>cms</parent>
+			</category>
+			<category name="cms.content.slideshow">
+				<parent>cms.content</parent>
 			</category>
 
 			<category name="dashboard.sidebar.cms">
@@ -33,6 +39,15 @@
 			</option>
 			<!-- /general -->
 
+			<!-- cms.general.revision -->
+			<option name="cms_revision_delete">
+				<categoryname>cms.general.revision</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<min>0</min>
+			</option>
+			<!-- /cms.general.revision -->
+
 			<!-- cms.pages.default -->
 			<option name="cms_pages_default_menu_item">
 				<optiontype>boolean</optiontype>
@@ -43,11 +58,6 @@
 				<optiontype>boolean</optiontype>
 				<categoryname>cms.pages.default</categoryname>
 				<defaultvalue>1</defaultvalue>
-			</option>
-			<option name="cms_pages_default_global_sidebar">
-				<optiontype>boolean</optiontype>
-				<categoryname>cms.pages.default</categoryname>
-				<defaultvalue>0</defaultvalue>
 			</option>
 			<option name="cms_pages_default_sidebar">
 				<optiontype>select</optiontype>
@@ -73,34 +83,25 @@ right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
 			</option>
 			<!-- /cms.pages.default -->
 
-			<!-- cms.pages.content -->
-			<option name="cms_pages_content_slideshow_interval">
+			<!-- cms.content.slideshow -->
+			<option name="cms_content_slideshow_interval">
 				<optiontype>integer</optiontype>
-				<categoryname>cms.pages.content</categoryname>
+				<categoryname>cms.content.slideshow</categoryname>
 				<defaultvalue>5000</defaultvalue>
 			</option>
-			<option name="cms_pages_content_slideshow_effect_delay">
+			<option name="cms_content_slideshow_effect_delay">
 				<optiontype>integer</optiontype>
-				<categoryname>cms.pages.content</categoryname>
+				<categoryname>cms.content.slideshow</categoryname>
 				<defaultvalue>1000</defaultvalue>
 			</option>
-			<option name="cms_pages_content_slideshow_fx">
+			<option name="cms_content_slideshow_fx">
 				<optiontype>select</optiontype>
-				<categoryname>cms.pages.content</categoryname>
-				<selectoptions><![CDATA[fade:wcf.acp.option.cms_pages_content_slideshow_fx.fade
-slide:wcf.acp.option.cms_pages_content_slideshow_fx.slide]]></selectoptions>
+				<categoryname>cms.content.slideshow</categoryname>
+				<selectoptions><![CDATA[fade:wcf.acp.option.cms_content_slideshow_fx.fade
+slide:wcf.acp.option.cms_content_slideshow_fx.slide]]></selectoptions>
 				<defaultvalue><![CDATA[fade]]></defaultvalue>
 			</option>
-			<!-- /cms.pages.content -->
-
-			<!-- cms.general.revision -->
-			<option name="cms_revision_delete">
-				<categoryname>cms.general.revision</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<min>0</min>
-			</option>
-			<!-- /cms.general.revision -->
+			<!-- /cms.content.slideshow -->
 
 			<!-- dashboard.sidebar.cms -->
 			<option name="cms_dashboard_sidebar_entries">
@@ -111,4 +112,12 @@ slide:wcf.acp.option.cms_pages_content_slideshow_fx.slide]]></selectoptions>
 			<!-- /dashboard.sidebar.cms -->
 		</options>
 	</import>
+
+	<delete>
+		<option name="cms_pages_content_slideshow_effect_delay" />
+		<option name="cms_pages_content_slideshow_fx" />
+		<option name="cms_pages_content_slideshow_interval" />
+		<option name="cms_pages_default_global_sidebar" />
+		<option name="cms_pages_default_robots" />
+	</delete>
 </data>

@@ -9,7 +9,7 @@ use wcf\system\WCF;
  * Shows a list of stylesheets.
  * 
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -37,7 +37,7 @@ class StylesheetListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\SortablePage::$validSortFields
 	 */
-	public $validSortFields = array('sheetID', 'title');
+	public $validSortFields = array('stylesheetID', 'title');
 
 	/**
 	 * @see	\wcf\page\IPage::assignVariables()

@@ -2,7 +2,7 @@
 namespace cms\data\page;
 
 use cms\data\content\DrainedPositionContentNodeTree;
-use cms\system\layout\LayoutHandler;
+use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
 use cms\system\revision\PageRevisionHandler;
 use wcf\data\DatabaseObject;
@@ -19,7 +19,7 @@ use wcf\system\WCF;
  * Represents a page.
  * 
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -48,7 +48,7 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	/**
 	 * Returns the 'full' alias including prepended aliases from parent
 	 * pages.
-	 *
+	 * 
 	 * @return	string
 	 */
 	public function getAlias() {
@@ -81,7 +81,7 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 
 	/**
 	 * Returns a node tree with all children of this page.
-	 *
+	 * 
 	 * @param	integer		$maxDepth
 	 * @return	\cms\data\page\AccessiblePageNodeTree
 	 */
@@ -99,7 +99,7 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	/**
 	 * Returns node trees of all contents that are assigned to this page.
 	 * Contents are grouped by their position ('body' and 'sidebar').
-	 *
+	 * 
 	 * @return	array<\cms\data\content\DrainedPositionContentNodeTree>
 	 */
 	public function getContents() {
@@ -115,21 +115,6 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	}
 
 	/**
-	 * Returns the html stylesheet tag for this page. This method triggers
-	 * a stylehseet compilation in case the css files does not exist.
-	 *
-	 * @return	string
-	 */
-	public function getLayout() {
-		$stylesheets = @unserialize($this->stylesheets);
-		if (is_array($stylesheets) && !empty($stylesheets)) {
-			return LayoutHandler::getInstance()->getStylesheet($this->pageID);
-		}
-
-		return '';
-	}
-
-	/**
 	 * @see	\wcf\data\ILinkableObject::getLink()
 	 */
 	public function getLink() {
@@ -141,27 +126,8 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	}
 
 	/**
-	 * Returns the menu item this page is assigned to.
-	 */
-	public function getMenuItem() {
-		foreach (PageMenu::getInstance()->getMenuItems('header') as $item) {
-			if ($item->menuItemID == $this->menuItemID) {
-				return $item;
-			}
-		}
-
-		foreach (PageMenu::getInstance()->getMenuItems('footer') as $item) {
-			if ($item->menuItemID == $this->menuItemID) {
-				return $item;
-			}
-		}
-
-		return null;
-	}
-
-	/**
 	 * Returns the parent page.
-	 *
+	 * 
 	 * @return	\cms\data\page\Page
 	 */
 	public function getParentPage() {
@@ -174,7 +140,7 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 
 	/**
 	 * Returns the parent pages of this page.
-	 *
+	 * 
 	 * @return	array<\cms\data\page\Page>
 	 */
 	public function getParentPages() {
@@ -207,11 +173,34 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 
 	/**
 	 * Returns all revisions of this page.
-	 *
+	 * 
 	 * @return	array<array>
 	 */
 	public function getRevisions() {
 		return PageRevisionHandler::getInstance()->getRevisions($this->pageID);
+	}
+
+	/**
+	 * Returns the ids of the stylesheets of this page.
+	 * 
+	 * @return	array<integer>
+	 */
+	public function getStylesheetIDs() {
+		return PageCache::getInstance()->getStylesheetIDs($this->pageID);
+	}
+
+	/**
+	 * Returns the stylesheets of this page.
+	 * 
+	 * @return	array<integer>
+	 */
+	public function getStylesheets() {
+		$stylesheets = array();
+		foreach ($this->getStylesheetIDs() as $stylesheetID) {
+			$stylesheets[$stylesheetID] = StylesheetCache::getInstance()->getStylesheet($stylesheetID);
+		}
+
+		return $stylesheets;
 	}
 
 	/**
@@ -223,7 +212,7 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 
 	/**
 	 * Returns whether the current user can access this page.
-	 *
+	 * 
 	 * @return	boolean
 	 */
 	public function isAccessible() {
@@ -237,7 +226,7 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 
 	/**
 	 * Returns whether this page is a child of an other page.
-	 *
+	 * 
 	 * @return	boolean
 	 */
 	public function isChild() {
@@ -250,7 +239,7 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 
 	/**
 	 * Returns whether this page is visible for the current user.
-	 *
+	 * 
 	 * @return	boolean
 	 */
 	public function isVisible() {
@@ -269,7 +258,7 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 
 	/**
 	 * Returns whether this page has other pages assigned as children
-	 *
+	 * 
 	 * @return	boolean
 	 */
 	public function hasChildren() {

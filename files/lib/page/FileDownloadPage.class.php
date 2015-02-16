@@ -3,16 +3,14 @@ namespace cms\page;
 
 use cms\data\file\File;
 use cms\data\file\FileEditor;
-use cms\data\folder\Folder;
 use cms\system\counter\VisitCountHandler;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\util\FileReader;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -29,10 +27,16 @@ class FileDownloadPage extends AbstractPage {
 	 */
 	public $file = null;
 
+	/**
+	 * file reader
+	 * @var	\wcf\util\FileReader
+	 */
 	public $fileReader = null;
 
-	public $useTemplate = false;
-
+	/**
+	 * list of mime types that are displayed inline
+	 * @var	array<string>
+	 */
 	public static $inlineMimeTypes = array(
 		'image/gif',
 		'image/jpeg',
@@ -40,6 +44,16 @@ class FileDownloadPage extends AbstractPage {
 		'application/pdf',
 		'image/pjpeg'
 	);
+
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = array('user.cms.content.canDownloadFile');
+
+	/**
+	 * @see	\wcf\page\AbstractPage::$useTemplate
+	 */
+	public $useTemplate = false;
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -50,8 +64,6 @@ class FileDownloadPage extends AbstractPage {
 		if (isset($_REQUEST['id'])) $this->fileID = intval($_REQUEST['id']);
 		$this->file = new File($this->fileID);
 		if ($this->file === null) throw new IllegalLinkException();
-		
-		if (!$this->file->getPermission('canDownloadFile')) throw new PermissionDeniedException();
 	}
 
 	/**
@@ -61,27 +73,22 @@ class FileDownloadPage extends AbstractPage {
 		parent::readData();
 
 		VisitCountHandler::getInstance()->count();
-		$folderPath = '';
-		if ($this->file->folderID != 0) {
-			$folder = new Folder($this->file->folderID);
-			$folderPath = $folder->folderPath . '/';
-		}
 		
-		$this->fileReader = new FileReader(CMS_DIR . 'files/' . $folderPath . $this->file->filename, array(
-			'filename' => $this->file->title,
-			'mimeType' => $this->file->type,
-			'filesize' => $this->file->size,
-			'showInline' => (in_array($this->file->type, self::$inlineMimeTypes)),
+		$this->fileReader = new FileReader($this->file->getLocation(), array(
+			'filename' => $this->file->getTitle(),
+			'mimeType' => $this->file->fileType,
+			'filesize' => $this->file->fileSize,
+			'showInline' => (in_array($this->file->fileType, self::$inlineMimeTypes)),
 			'enableRangeSupport' => false,
 			'lastModificationTime' => TIME_NOW,
 			'expirationDate' => TIME_NOW + 31536000,
 			'maxAge' => 31536000
 		));
-		
-		$editor = new FileEditor($this->file);
-		$downloads = $this->file->downloads + 1;
-		$editor->update(array(
-			'downloads' => $downloads
+
+		// count downloads
+		$fileEditor = new FileEditor($this->file);
+		$fileEditor->updateCounters(array(
+			'downloads' => 1
 		));
 	}
 

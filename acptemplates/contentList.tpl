@@ -1,6 +1,6 @@
 {include file='header' pageTitle='cms.acp.content.list'}
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
@@ -42,35 +42,23 @@
 
 <header class="boxHeadline">
 	<h1>{lang}cms.acp.content.list{/lang}</h1>
+	<p>{lang includeSelf=true}cms.page.parents{/lang}</p>
 </header>
-
-<form method="post" action="{link application='cms' controller='ContentList'}{/link}">
-	<div id="filterContainer" class="container containerPadding marginTop">
-		<fieldset>
-			<legend>{lang}wcf.global.filter{/lang}</legend>
-
-			<dl>
-				<dt><label for="pageID">{lang}cms.global.page{/lang}</label></dt>
-				<dd>
-					<select name="pageID" id="pageID">
-						{foreach from=$pageList item=node}
-							<option value="{@$node->pageID}"{if $node->pageID == $pageID} selected="selected"{/if}>{@'&nbsp;&nbsp;&nbsp;&nbsp;'|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
-						{/foreach}
-					</select>
-				</dd>
-			</dl>
-		</fieldset>
-	</div>
-
-	<div class="formSubmit">
-		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		{@SECURITY_TOKEN_INPUT_TAG}
-	</div>
-</form>
 
 <div class="contentNavigation">
 	<nav>
 		<ul>
+			<li class="dropdown">
+				<a class="button dropdownToggle"><span class="icon icon16 icon-sort"></span> <span>{lang}cms.acp.page.button.choose{/lang}</span></a>
+				<div class="dropdownMenu">
+					<ul class="scrollableDropdownMenu">
+						{foreach from=$pageList item=node}
+							<li{if $node->pageID == $pageID} class="active"{/if}><a href="{link application='cms' controller='ContentList' pageID=$node->pageID}{/link}">{@'&nbsp;&nbsp;&nbsp;&nbsp;'|str_repeat:$pageList->getDepth()}{$node->getTitle()}</a></li>
+						{/foreach}
+					</ul>
+				</div>
+			</li>
+
 			{event name='contentNavigationButtonsTop'}
 		</ul>
 	</nav>
@@ -186,25 +174,6 @@
 
 	<div class="contentNavigation">
 		<nav class="jsClipboardEditor" data-types="[ 'de.codequake.cms.content' ]"></nav>
-	</div>
-
-	<div class="container marginTop">
-		<ol class="containerList infoBoxList">
-			<li class="box32">
-				<span class="icon icon32 icon-question-sign"></span>
-				<div class="containerHeadline">
-					<h3>{lang}cms.acp.page.legend{/lang}</h3>
-				</div>
-				<ul class="dataList">
-					<li><span class="icon icon16 icon-pencil"></span> <span>{lang}cms.acp.content.edit{/lang}</span></li>
-					<li><span class="icon icon16 icon-remove"></span> <span>{lang}cms.acp.content.remove{/lang}</span></li>
-					<li><span class="icon icon16 icon-check"></span> <span>{lang}cms.acp.page.disable{/lang}</span></li>
-					<li><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></li>
-					<li><span class="icon icon16 icon-copy"></span> <span>{lang}cms.acp.content.copy{/lang}</span></li>
-					<li><span class="icon icon16 icon-tasks"></span> <span>{lang}cms.acp.content.revision.list{/lang}</span></li>
-				</ul>
-			</li>
-		</ol>
 	</div>
 {/if}
 

@@ -2,8 +2,8 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use cms\page\PagePage;
 use wcf\system\cache\builder\DashboardBoxCacheBuilder;
+use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 
 /**
@@ -25,19 +25,23 @@ class DashboardContentType extends AbstractContentType {
 		WCF::getTPL()->assign(array(
 			'boxList' => DashboardBoxCacheBuilder::getInstance()->getData(array(), 'boxes')
 		));
-		return 'dashboardContentType';
+
+		return parent::getFormTemplate();
 	}
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$boxID = $data['box'];
-		$boxList = DashboardBoxCacheBuilder::getInstance()->getData(array(), 'boxes');
-		$className = $boxList[$boxID]->className;
+		$boxes = DashboardBoxCacheBuilder::getInstance()->getData(array(), 'boxes');
+		if (!isset($boxes[$content->box])) {
+			// dashboard box doesn't exist anymore
+			return '';
+		}
+
+		$className = $boxes[$content->box]->className;
 		$box = new $className();
-		$box->init($boxList[$boxID], new PagePage());
+		$box->init($boxes[$content->box], RequestHandler::getInstance()->getActiveRequest()->getRequestObject());
 
 		return $box->getTemplate();
 	}

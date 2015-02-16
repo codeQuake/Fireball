@@ -8,7 +8,7 @@ use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -33,11 +33,11 @@ class ContentPollHandler extends AbstractPollHandler {
 	 */
 	public function getRelatedObject(Poll $poll) {
 		$content = new Content($poll->objectID);
-		$data = $content->handleContentData();
-		if ($content->contentID && $data['pollID'] == $poll->pollID) {
+
+		if ($content->contentID && $content->pollID == $poll->pollID) {
 			return $content;
 		}
-		
+
 		return null;
 	}
 }

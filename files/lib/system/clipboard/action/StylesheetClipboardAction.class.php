@@ -1,5 +1,6 @@
 <?php
 namespace cms\system\clipboard\action;
+
 use wcf\data\clipboard\action\ClipboardAction;
 use wcf\system\clipboard\action\AbstractClipboardAction;
 use wcf\system\WCF;
@@ -8,7 +9,7 @@ use wcf\system\WCF;
  * Prepares clipboard editor items for stylesheet objects.
  * 
  * @author	Florian Frantzen
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -60,7 +61,7 @@ class StylesheetClipboardAction extends AbstractClipboardAction {
 	}
 
 	/**
-	 * Returns the ids of the menus which can be deleted.
+	 * Returns the ids of the stylesheets which can be deleted.
 	 * 
 	 * @return	array<integer>
 	 */

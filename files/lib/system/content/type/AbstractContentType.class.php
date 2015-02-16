@@ -3,12 +3,13 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use wcf\system\language\I18nHandler;
+use wcf\system\WCF;
 
 /**
  * Abstract content type implementation.
  * 
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -26,10 +27,32 @@ abstract class AbstractContentType implements IContentType {
 	public $multilingualFields = array();
 
 	/**
+	 * template name
+	 * @var	string
+	 */
+	public $templateName = '';
+
+	/**
+	 * Initialize a new content type instance
+	 */
+	public function __construct() {
+		// try to guess template name
+		if (empty($this->templateName)) {
+			$classParts = explode('\\', get_class($this));
+			$className = array_pop($classParts);
+			$this->templateName = lcfirst($className);
+		}
+	}
+
+	/**
 	 * @see \cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		return '';
+		WCF::getTPL()->assign(array(
+			'content' => $content
+		));
+
+		return WCF::getTPL()->fetch($this->templateName, 'cms');
 	}
 
 	/**
@@ -70,6 +93,6 @@ abstract class AbstractContentType implements IContentType {
 	 * @see \cms\system\content\type\IContentType::getFormTemplate()
 	 */
 	public function getFormTemplate() {
-		return '';
+		return $this->templateName;
 	}
 }

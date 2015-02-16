@@ -7,7 +7,7 @@ use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -22,6 +22,7 @@ class PollContentType extends AbstractContentType {
 	 */
 	public function getOutput(Content $content) {
 		WCF::getTPL()->assign('poll', $content->getPoll());
+
 		return WCF::getTPL()->fetch('poll', 'wcf');
 	}
 
@@ -46,12 +47,5 @@ class PollContentType extends AbstractContentType {
 	 */
 	public function validate($data) {
 		PollManager::getInstance()->validate();
-	}
-
-	/**
-	 * @see	\cms\system\content\type\IcontentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'pollContentType';
 	}
 }

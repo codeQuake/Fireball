@@ -1,7 +1,7 @@
 {include file='header' pageTitle='cms.acp.page.'|concat:$action}
 
 {include file='aclPermissions'}
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
@@ -12,6 +12,12 @@
 		WCF.TabMenu.init();
 
 		new CMS.ACP.Page.AddForm();
+
+		{if $action == 'add'}
+			$('#createMenuItem').click(function() {
+				$('#menuItemID').parents('dl:eq(0)').toggle();
+			});
+		{/if}
 
 		$('#enableDelayedDeactivation, #enableDelayedPublication').click(function() {
 			var $toggleContainerID = $(this).data('toggleContainer');
@@ -75,7 +81,7 @@
 				<legend>{lang}wcf.global.form.data{/lang}</legend>
 
 				<dl{if $errorField == 'title'} class="formError"{/if}>
-					<dt><label for="title">{lang}cms.acp.page.title{/lang}</label></dt>
+					<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
 					<dd>
 						<input type="text" id="title" name="title" value="{$i18nPlainValues['title']}" class="long" required="required" />
 						{if $errorField == 'title'}
@@ -124,18 +130,15 @@
 					</dd>
 				</dl>
 
-				<dl{if $errorField == 'menuItem'} class="formError"{/if}>
-					<dt class="reversed"><label for="menuItem">{lang}cms.acp.page.general.menuItem{/lang}</label></dt>
-					<dd>
-						<input type="checkbox" name="menuItem" id="menuItem" value="1"{if $menu == 1} checked="checked"{/if} />
-						{if $errorField == 'menuItem'}
-							<small class="innerError">
-								{lang}cms.acp.page.general.menuItem.error.{@$errorType}{/lang}
-							</small>
-						{/if}
-						<small>{lang}cms.acp.page.general.menuItem.description{/lang}</small>
-					</dd>
-				</dl>
+				{if $action == 'add'}
+					<dl>
+						<dt class="reversed"><label for="createMenuItem">{lang}cms.acp.page.general.createMenuItem{/lang}</label></dt>
+						<dd>
+							<input type="checkbox" id="createMenuItem" name="createMenuItem"{if $createMenuItem} checked="checked"{/if} />
+							<small>{lang}cms.acp.page.general.createMenuItem.description{/lang}</small>
+						</dd>
+					</dl>
+				{/if}
 
 				{event name='dataFields'}
 			</fieldset>
@@ -144,13 +147,13 @@
 				<legend>{lang}cms.acp.page.meta{/lang}</legend>
 
 				<dl{if $errorField == 'metaDescription'} class="formError"{/if}>
-					<dt><label for="metaDescription">{lang}cms.acp.page.meta.metaDescription{/lang}</label></dt>
+					<dt><label for="metaDescription">{lang}cms.acp.page.meta.description{/lang}</label></dt>
 					<dd>
 						<textarea id="metaDescription" name="metaDescription" rows="5" cols="40" class="long">{$i18nPlainValues['metaDescription']}</textarea>
-						<small>{lang}cms.acp.page.metaDescription.description{/lang}</small>
+						<small>{lang}cms.acp.page.meta.description.description{/lang}</small>
 						{if $errorField == 'metaDescription'}
 							<small class="innerError">
-								{lang}cms.acp.page.metaDescription.error.{@$errorType}{/lang}
+								{lang}cms.acp.page.meta.description.error.{@$errorType}{/lang}
 							</small>
 						{/if}
 
@@ -159,12 +162,12 @@
 				</dl>
 
 				<dl{if $errorField == 'metaKeywords'} class="formError"{/if}>
-					<dt><label for="metaKeywords">{lang}cms.acp.page.meta.metaKeywords{/lang}</label></dt>
+					<dt><label for="metaKeywords">{lang}cms.acp.page.meta.keywords{/lang}</label></dt>
 					<dd>
 						<input type="text" id="metaKeywords" name="metaKeywords" value="{$i18nPlainValues['metaKeywords']}" class="long" />
 						{if $errorField == 'metaKeywords'}
 							<small class="innerError">
-								{lang}cms.acp.page.metaKeywords.error.{@$errorType}{/lang}
+								{lang}cms.acp.page.meta.keywords.error.{@$errorType}{/lang}
 							</small>
 						{/if}
 
@@ -280,11 +283,22 @@
 			<fieldset>
 				<legend>{lang}cms.acp.page.settings{/lang}</legend>
 
-				<dl{if $errorField == 'showSidebar'} class="formError"{/if}>
-					<dt class="reversed"><label for="showSidebar">{lang}cms.acp.page.settings.showSidebar{/lang}</label></dt>
+				<dl{if $errorField == 'menuItemID'} class="formError"{/if}{if $action == 'add' && $createMenuItem} style="display: none"{/if}>
+					<dt><label for="menuItemID">{lang}cms.acp.page.settings.menuItemID{/lang}</label></dt>
 					<dd>
-						<input type="checkbox" name="showSidebar" id="showSidebar" value="1"{if $showSidebar} checked="checked"{/if} />
-						<small>{lang}cms.acp.page.settings.showSidebar.description{/lang}</small>
+						<select id="menuItemID" name="menuItemID">
+							<option value="0">{lang}wcf.global.noSelection{/lang}</option>
+							{foreach from=$menuItems item=menuItem}
+								<option value="{@$menuItem->menuItemID}"{if $menuItemID == $menuItem->menuItemID} selected="selected"{/if}>{$menuItem->menuItem|language}</option>
+								{foreach from=$menuItem item=childMenuItem}
+									<option value="{@$childMenuItem->menuItemID}"{if $menuItemID == $childMenuItem->menuItemID} selected="selected"{/if}>&nbsp;&nbsp;&nbsp;&nbsp;{$childMenuItem->menuItem|language}</option>
+								{/foreach}
+							{/foreach}
+						</select>
+						{if $errorField == 'menuItemID'}
+							<small class="innerError">{lang}cms.acp.page.settings.menuItemID.error.{@$errorType}{/lang}</small>
+						{/if}
+						<small>{lang}cms.acp.page.settings.menuItemID.description{/lang}</small>
 					</dd>
 				</dl>
 
@@ -337,7 +351,7 @@
 						<dt>{lang}cms.acp.page.stylesheets{/lang}</dt>
 						<dd>
 							{content}
-								{htmlCheckboxes name='stylesheets' options=$stylesheetList selected=$stylesheets}
+								{htmlCheckboxes name='stylesheetIDs' options=$stylesheetList selected=$stylesheetIDs}
 							{/content}
 							{if $errorField == 'stylesheets'}
 								<small class="innerError">
@@ -379,6 +393,8 @@
 					<dd></dd>
 				</dl>
 			</fieldset>
+
+			{event name='afterPermissionsFieldsets'}
 		</div>
 
 		{event name='tabMenuContents'}
@@ -387,8 +403,6 @@
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		{@SECURITY_TOKEN_INPUT_TAG}
-		<input type="hidden" name="action" value="{@$action}" />
-		{if $pageID|isset}<input type="hidden" name="id" value="{@$pageID}" />{/if}
 	</div>
 </form>
 

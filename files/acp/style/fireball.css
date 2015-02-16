@@ -3,3 +3,8 @@
 .jsFileImage.active {
 	background: rgba(116, 164, 70, 0.4) !important;
 }
+
+.fileUpload .formAttachmentList > li {
+	min-height: 36px;
+	width: 50%;
+}

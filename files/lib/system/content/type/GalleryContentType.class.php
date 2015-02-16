@@ -7,7 +7,7 @@ use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	2014 codeQuake
+ * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
@@ -18,18 +18,10 @@ class GalleryContentType extends AbstractContentType {
 	protected $icon = 'icon-picture';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		return 'galleryContentType';
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$imageIDs = explode(',', $data['imageIDs']);
+		$imageIDs = explode(',', $content->imageIDs);
 
 		$list = new FileList();
 		$list->getConditionBuilder()->add('fileID in (?)', array($imageIDs));
@@ -39,6 +31,6 @@ class GalleryContentType extends AbstractContentType {
 			'images' => $list
 		));
 
-		return WCF::getTPL()->fetch('galleryContentType', 'cms');
+		return parent::getOutput($content);
 	}
 }
