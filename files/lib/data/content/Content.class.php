@@ -32,6 +32,22 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 	public $poll = null;
 
 	/**
+	 * @see	\wcf\data\IStorableObject::__get()
+	 */
+	public function __get($name) {
+		$value = parent::__get($name);
+
+		// search content data if unknown information requested
+		if ($value === null) {
+			if (isset($this->data['contentData'][$name])) {
+				return $this->data['contentData'][$name];
+			}
+		}
+
+		return $value;
+	}
+
+	/**
 	 * Returns the page this content is assigned to.
 	 * 
 	 * @return	\cms\data\page\Page
@@ -57,6 +73,11 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 		return $contentNodeTree->getIterator();
 	}
 
+	/**
+	 * Returns the icon name (with icon prefix) for this content.
+	 * 
+	 * @return	string
+	 */
 	public function getIcon() {
 		$this->objectType = $this->getObjectType();
 		return $this->objectType->getProcessor()->getIcon();
@@ -82,12 +103,22 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 		return $this->objectType->category;
 	}
 
+	/**
+	 * Returns the parent content object or null if no parent content
+	 * exists.
+	 * 
+	 * @return	\cms\data\content\Content
+	 */
 	public function getParentContent() {
 		if ($this->parentID !== null) return ContentCache::getInstance()->getContent($this->parentID);
 		return null;
 	}
 
-	//build css structure
+	/**
+	 * Returns all css classes for this content.
+	 * 
+	 * @return	string
+	 */
 	public function getCSSClasses() {
 		if ($this->getCategory() == 'structure') {
 			if ($this->parentID != null && $this->getParentContent()->getCategory() == 'structure') {
@@ -112,10 +143,6 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 		return $this->cssClasses;
 	}
 
-	public function handleContentData() {
-		return @unserialize($this->contentData);
-	}
-
 	public function getObjectType() {
 		return ObjectTypeCache::getInstance()->getObjectType($this->contentTypeID);
 	}
@@ -126,9 +153,8 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 	}
 
 	public function getPoll() {
-		$data = $this->handleContentData();
-		if ($data['pollID'] && $this->poll === null) {
-			$this->poll = new Poll($data['pollID']);
+		if ($this->pollID && $this->poll === null) {
+			$this->poll = new Poll($this->pollID);
 			$this->poll->setRelatedObject($this);
 		}
 
@@ -147,5 +173,17 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 	public function getRevisions() {
 		//gets content revisions
 		return ContentRevisionHandler::getInstance()->getRevisions($this->contentID);
+	}
+
+	/**
+	 * @see	\wcf\data\DatabaseObject::handleData()
+	 */
+	protected function handleData($data) {
+		parent::handleData($data);
+
+		$this->data['contentData'] = @unserialize($this->data['contentData']);
+		if (!is_array($this->data['contentData'])) {
+			$this->data['contentData'] = array();
+		}
 	}
 }

@@ -2,7 +2,6 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
@@ -25,17 +24,4 @@ class HeadlineContentType extends AbstractSearchableContentType {
 	 * @see	\cms\system\content\type\AbstractSearchableContentType::$searchableFields
 	 */
 	protected $searchableFields = array('text');
-
-	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
-	 */
-	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-
-		WCF::getTPL()->assign(array(
-			'data' => $data
-		));
-
-		return WCF::getTPL()->fetch('headlineContentType', 'cms');
-	}
 }

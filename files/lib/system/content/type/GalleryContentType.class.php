@@ -21,8 +21,7 @@ class GalleryContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$imageIDs = explode(',', $data['imageIDs']);
+		$imageIDs = explode(',', $content->imageIDs);
 
 		$list = new FileList();
 		$list->getConditionBuilder()->add('fileID in (?)', array($imageIDs));
@@ -32,6 +31,6 @@ class GalleryContentType extends AbstractContentType {
 			'images' => $list
 		));
 
-		return WCF::getTPL()->fetch('galleryContentType', 'cms');
+		return parent::getOutput($content);
 	}
 }

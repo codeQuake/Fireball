@@ -33,11 +33,11 @@ class ContentPollHandler extends AbstractPollHandler {
 	 */
 	public function getRelatedObject(Poll $poll) {
 		$content = new Content($poll->objectID);
-		$data = $content->handleContentData();
-		if ($content->contentID && $data['pollID'] == $poll->pollID) {
+
+		if ($content->contentID && $content->pollID == $poll->pollID) {
 			return $content;
 		}
-		
+
 		return null;
 	}
 }

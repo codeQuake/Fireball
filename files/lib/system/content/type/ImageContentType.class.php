@@ -35,14 +35,12 @@ class ImageContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$image = new File($data['imageID']);
+		$image = new File($content->imageID);
 
 		WCF::getTPL()->assign(array(
-			'data' => $data,
 			'image' => $image
 		));
 
-		return WCF::getTPL()->fetch('imageContentType', 'cms');
+		return parent::getOutput($content);
 	}
 }

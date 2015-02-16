@@ -23,8 +23,7 @@ class RssContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$rssURL = $data['url'];
+		$rssURL = $content->url;
 		
 		//try {
 			$request = new HTTPRequest($rssURL);
@@ -43,7 +42,7 @@ class RssContentType extends AbstractContentType {
 			return;
 		}
 		$feed = array();
-		$i = $data['limit'];
+		$i = $content->limit;
 		$feedType = $this->getFeedType($xml);
 		$feed = $this->getFeedData($xml, $i, $feedType);
 		
@@ -51,7 +50,7 @@ class RssContentType extends AbstractContentType {
 			'rssFeed' => $feed
 		));
 		
-		return WCF::getTPL()->fetch('rssContentType', 'cms');
+		return parent::getOutput($content);
 
 	}
 	
@@ -65,6 +64,7 @@ class RssContentType extends AbstractContentType {
 	
 	public function getFeedData($xml, $i, $feedType) {
 		$feed = array();
+
 		switch($feedType) {
 			case 'rss':
 				foreach ($xml->channel[0]->item as $item) {
@@ -117,6 +117,7 @@ class RssContentType extends AbstractContentType {
 				}
 				break;
 		}
+
 		return $feed;
 	}
 }

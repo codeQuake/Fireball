@@ -81,16 +81,14 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
-
-    <type>
-      <name>de.codequake.cms.content.type.rss</name>
-      <definitionname>de.codequake.cms.content.type</definitionname>
-      <classname>cms\system\content\type\RssContentType</classname>
-      <category>general</category>
-      <allowcontent>1</allowcontent>
-      <allowsidebar>1</allowsidebar>
-    </type>
-
+		<type>
+			<name>de.codequake.cms.content.type.rss</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\RssContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
 		<type>
 			<name>de.codequake.cms.content.type.gallery</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
@@ -147,7 +145,6 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
-
 		<type>
 			<name>de.codequake.cms.content.type.slideshow</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
@@ -156,7 +153,6 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
 		</type>
-
 		<type>
 			<name>de.codequake.cms.content.type.menu</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
@@ -168,7 +164,7 @@
 		<type>
 			<name>de.codequake.cms.content.type.tabmenu</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\TabmenuContentType</classname>
+			<classname>cms\system\content\type\TabMenuContentType</classname>
 			<category>structure</category>
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>

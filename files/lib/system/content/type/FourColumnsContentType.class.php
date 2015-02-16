@@ -2,7 +2,6 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
@@ -23,12 +22,12 @@ class FourColumnsContentType extends AbstractStructureContentType {
 	 */
 	public function getChildCSSClasses(Content $content) {
 		$parent = $content->getParentContent();
-		$data = $parent->handleContentData();
-		if (isset($data['width'])) $width = array(
-			substr($data['width'], 0, 2),
-			substr($data['width'], 2, 2),
-			substr($data['width'], 4, 2),
-			substr($data['width'], 6, 2)
+
+		if (isset($parent->width)) $width = array(
+			substr($parent->width, 0, 2),
+			substr($parent->width, 2, 2),
+			substr($parent->width, 4, 2),
+			substr($parent->width, 6, 2)
 		);
 		else $width = array(
 			25,
@@ -51,6 +50,7 @@ class FourColumnsContentType extends AbstractStructureContentType {
 				$gridWidth = $width[3];
 				break;
 		}
+
 		return 'grid grid' . $gridWidth;
 	}
 }

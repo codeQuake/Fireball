@@ -33,8 +33,7 @@ class DashboardContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$boxID = $data['box'];
+		$boxID = $content->box;
 		$boxList = DashboardBoxCacheBuilder::getInstance()->getData(array(), 'boxes');
 		$className = $boxList[$boxID]->className;
 		$box = new $className();

@@ -11,16 +11,11 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class TabmenuContentType extends AbstractStructureContentType {
+class TabMenuContentType extends AbstractStructureContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
 	protected $icon = 'icon-list-alt';
-
-	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$templateName
-	 */
-	public $templateName = 'tabMenuContentType';
 
 	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
@@ -51,6 +46,6 @@ class TabmenuContentType extends AbstractStructureContentType {
 			'children' => $children
 		));
 
-		return WCF::getTPL()->fetch('tabMenuContentType', 'cms');
+		return parent::getOutput($content);
 	}
 }

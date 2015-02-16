@@ -2,7 +2,6 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
@@ -23,12 +22,11 @@ class TwoColumnsContentType extends AbstractStructureContentType {
 	 */
 	public function getChildCSSClasses(Content $content) {
 		$parent = $content->getParentContent();
-		$data = $parent->handleContentData();
 
-		if (isset($data['width'])) {
+		if (isset($parent->width)) {
 			$width = array(
-				substr($data['width'], 0, 2),
-				substr($data['width'], 2, 2)
+				substr($parent->width, 0, 2),
+				substr($parent->width, 2, 2)
 			);
 		} else {
 			$width = array(
@@ -38,6 +36,7 @@ class TwoColumnsContentType extends AbstractStructureContentType {
 		}
 
 		$width = ($content->showOrder % 2 == 1) ? $width[0] : $width[1];
+
 		return 'grid grid' . $width;
 	}
 }

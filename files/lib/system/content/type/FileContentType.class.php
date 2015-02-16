@@ -32,13 +32,12 @@ class FileContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$file = new File($data['fileID']);
+		$file = new File($content->fileID);
+
 		WCF::getTPL()->assign(array(
-			'data' => $data,
 			'file' => $file
 		));
 
-		return WCF::getTPL()->fetch('fileContentType', 'cms');
+		return parent::getOutput($content);
 	}
 }

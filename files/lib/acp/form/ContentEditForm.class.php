@@ -130,7 +130,7 @@ class ContentEditForm extends ContentAddForm {
 			$this->parentID = $this->content->parentID;
 			$this->showOrder = $this->content->showOrder;
 			$this->position = $this->content->position;
-			$this->contentData = $this->content->handleContentData();
+			$this->contentData = $this->content->contentData;
 
 			if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
 				PollManager::getInstance()->setObject('de.codequake.cms.content', $this->content->contentID, $this->contentData['pollID']);

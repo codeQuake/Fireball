@@ -1,1 +1,3 @@
-<a class="{if $data['type'] == 'button'}button{else if $data['type'] == 'smallbutton'}button small{/if}" href="{$data['link']|language}">{$data['text']|language}</a>
+<a class="{if $content->type == 'button'}button{else if $content->type == 'smallbutton'}button small{/if}" href="{$content->link|language}">
+	{$content->text|language}
+</a>

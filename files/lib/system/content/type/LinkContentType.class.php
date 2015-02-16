@@ -20,17 +20,4 @@ class LinkContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
 	 */
 	public $multilingualFields = array('text', 'link');
-
-	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
-	 */
-	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-
-		WCF::getTPL()->assign(array(
-			'data' => $data
-		));
-
-		return WCF::getTPL()->fetch('linkContentType', 'cms');
-	}
 }

@@ -34,9 +34,8 @@ class YoutubeContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$data = $content->handleContentData();
-		$url = $data['video'];
-		parse_str(parse_url($url, PHP_URL_QUERY), $var);
+		parse_str(parse_url($content->url, PHP_URL_QUERY), $var);
+
 		if (isset($var['v'])) {
 			$videoID = $var['v'];
 			return '<div class="elastic_video"><iframe width="640" height="360" src="http://youtube.com/embed/' . $videoID . '" frameborder="0" allowfullscreen></iframe></div>';

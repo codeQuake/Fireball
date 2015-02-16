@@ -3,6 +3,7 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use wcf\system\language\I18nHandler;
+use wcf\system\WCF;
 
 /**
  * Abstract content type implementation.
@@ -47,7 +48,11 @@ abstract class AbstractContentType implements IContentType {
 	 * @see \cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		return '';
+		WCF::getTPL()->assign(array(
+			'content' => $content
+		));
+
+		return WCF::getTPL()->fetch($this->templateName, 'cms');
 	}
 
 	/**

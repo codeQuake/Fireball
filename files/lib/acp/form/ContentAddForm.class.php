@@ -233,7 +233,7 @@ class ContentAddForm extends AbstractForm {
 		$returnValues = $this->objectAction->executeAction();
 
 		$contentID = $returnValues['returnValues']->contentID;
-		$contentData = @unserialize($returnValues['returnValues']->contentData);
+		$contentData = $returnValues['returnValues']->contentData;
 		$update = array();
 
 		// save polls
