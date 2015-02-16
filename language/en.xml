@@ -199,6 +199,7 @@
 		<item name="cms.acp.page.revision.action.setAsHome"><![CDATA[Set as homepage]]></item>
 		<item name="cms.acp.page.revision.action.update"><![CDATA[Updated page]]></item>
 		<item name="cms.acp.page.revision.action.updatePosition"><![CDATA[Changed sorting]]></item>
+		<item name="cms.acp.page.revision.delete.confirmMessage"><![CDATA[Are you sure you want to delete this revision?]]></item>
 		<item name="cms.acp.page.revision.list"><![CDATA[Revisions]]></item>
 		<item name="cms.acp.page.revision.restore"><![CDATA[Restore]]></item>
 		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>

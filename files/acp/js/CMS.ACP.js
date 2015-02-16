@@ -852,16 +852,19 @@ CMS.ACP.Page.Revisions = Class.extend({
 	_dialog: null,
 	_didInit: false,
 
-	init:function(){
+	init: function() {
 		if (this._didInit)  {
 			return;
 		}
+
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)
 		});
 
 		this._buttons = $('.jsRevisionsButton');
 		this._buttons.click($.proxy(this._click, this));
+
+		new WCF.Action.Delete('cms\\data\\page\\revision\\PageRevisionAction', '.jsRevisionRow');
 
 		this._didInit = true;
 	},
@@ -870,19 +873,19 @@ CMS.ACP.Page.Revisions = Class.extend({
 		event.preventDefault();
 		var $pageID = $(event.currentTarget).data('objectID');
 
-			this._proxy.setOption('data', {
-				actionName: 'getRevisions',
-				className: 'cms\\data\\page\\PageAction',
-				objectIDs: [ $pageID ]
-			});
-			this._proxy.sendRequest();
+		this._proxy.setOption('data', {
+			actionName: 'getRevisions',
+			className: 'cms\\data\\page\\PageAction',
+			objectIDs: [ $pageID ]
+		});
+		this._proxy.sendRequest();
 	},
 
 	_show: function(pageID){
-			this._dialog = $('<div id="revisionDialog">' + this._cache[pageID] + '</div>').appendTo(document.body);
-			this._dialog.wcfDialog({
-				title: WCF.Language.get('cms.acp.page.revision.list')
-			});
+		this._dialog = $('<div id="revisionDialog">' + this._cache[pageID] + '</div>').appendTo(document.body);
+		this._dialog.wcfDialog({
+			title: WCF.Language.get('cms.acp.page.revision.list')
+		});
 	},
 
 	_success: function(data, textStatus, jqXHR) {
