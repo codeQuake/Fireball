@@ -2,8 +2,6 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use cms\page\PagePage;
-use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 use wcf\util\HTTPRequest;
 
