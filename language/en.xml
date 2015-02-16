@@ -378,6 +378,10 @@
 		<item name="wcf.acp.rebuildData.de.codequake.cms.page.description"><![CDATA[Refreshes the search index of all Fireball CMS Pages]]></item>
 	</category>
 
+	<category name="wcf.acp.search">
+		<item name="wcf.acp.search.provider.de.voolia.cms.page"><![CDATA[CMS Pages]]></item>
+	</category>
+
 	<category name="wcf.clipboard">
 		<item name="wcf.clipboard.item.de.codequake.cms.content.delete"><![CDATA[Delete ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.delete.confirmMessage"><![CDATA[Do you really want to delete {#$count} content{if $count != 1}s{/if}?]]></item>

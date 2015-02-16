@@ -376,6 +376,10 @@
 		<item name="wcf.acp.rebuildData.de.codequake.cms.page.description"><![CDATA[Aktualisiert den Suchindex aller Fireball CMS Seiten]]></item>
 	</category>
 
+	<category name="wcf.acp.search">
+		<item name="wcf.acp.search.provider.de.codequake.cms.page"><![CDATA[CMS-Seiten]]></item>
+	</category>
+
 	<category name="wcf.clipboard">
 		<item name="wcf.clipboard.item.de.codequake.cms.content.delete"><![CDATA[Löschen ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.delete.confirmMessage"><![CDATA[{if $count == 1}Ein Inhalt{else}{#$count} Inhalte{/if} löschen?]]></item>
