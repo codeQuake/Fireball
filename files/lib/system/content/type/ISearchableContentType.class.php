@@ -4,7 +4,7 @@ namespace cms\system\content\type;
 use cms\data\content\Content;
 
 /**
- * Interface for searchable Contenttypes
+ * Interface for searchable content types.
  * 
  * @author	Jens Krumsieck
  * @copyright	2013 - 2015 codeQuake
