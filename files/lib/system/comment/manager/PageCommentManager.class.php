@@ -82,7 +82,7 @@ class PageCommentManager extends AbstractCommentManager {
 	public function isAccessible($objectID, $validateWritePermission = false) {
 		$page = PageCache::getInstance()->getPage($objectID);
 
-		return ($page !== null && $page->isVisible());
+		return ($page !== null && $page->canRead());
 	}
 
 	/**

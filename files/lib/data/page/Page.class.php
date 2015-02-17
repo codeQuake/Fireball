@@ -18,7 +18,7 @@ use wcf\system\WCF;
 /**
  * Represents a page.
  * 
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -50,6 +50,25 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 		}
 
 		return true;
+	}
+
+	/**
+	 * Returns whether the current user can read this page.
+	 * 
+	 * @return	boolean
+	 */
+	public function canRead() {
+		if ($this->isDisabled && !$this->getPermission('canViewDisabledPage')) {
+			// user can't read disabled pages
+			return false;
+		}
+
+		if (!$this->isPublished && !WCF::getSession()->getPermission('mod.cms.canReadUnpublishedPage')) {
+			// user can't read unpublished pages
+			return false;
+		}
+
+		return $this->getPermission('canEnterPage');
 	}
 
 	/**
@@ -85,33 +104,31 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	}
 
 	/**
-	 * Returns a list of direct children of this page
+	 * Returns a list of children of this page
 	 *
 	 * @return	array<\cms\data\page\Page>
 	 */
 	public function getChildren() {
-		$list = new PageList();
-		$list->getConditionBuilder()->add('page.parentID = (?)', array($this->pageID));
-		$list->readObjects();
+		$pageList = new PageList();
+		$pageList->getConditionBuilder()->add('page.parentID = (?)', array($this->pageID));
+		$pageList->readObjects();
 
-		return $list->getObjects();
+		return $pageList->getObjects();
 	}
 
 	/**
-	 * Returns a node tree with all children of this page.
+	 * Returns a list of all descendants of this page.
 	 * 
 	 * @param	integer		$maxDepth
-	 * @return	\cms\data\page\AccessiblePageNodeTree
+	 * @return	\RecursiveIteratorIterator
 	 */
 	public function getChildrenTree($maxDepth = -1) {
-		$tree = new AccessiblePageNodeTree($this->pageID);
-		$tree = $tree->getIterator();
+		$nodeTree = new AccessiblePageNodeTree($this->pageID);
 
-		if ($maxDepth >= 0) {
-			$tree->setMaxDepth($maxDepth);
-		}
+		$nodeList = $nodeTree->getIterator();
+		$nodeList->setMaxDepth($maxDepth);
 
-		return $tree;
+		return $nodeList;
 	}
 
 	/**
@@ -231,15 +248,11 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	/**
 	 * Returns whether the current user can access this page.
 	 * 
+	 * @deprecated	use \cms\data\page\Page::canRead() instead
 	 * @return	boolean
 	 */
 	public function isAccessible() {
-		if (!$this->isPublished && !WCF::getSession()->getPermission('mod.cms.canReadUnpublishedPage')) {
-			// user can't read unpublished pages
-			return false;
-		}
-
-		return $this->getPermission('canEnterPage');
+		return $this->canRead();
 	}
 
 	/**
