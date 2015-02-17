@@ -200,6 +200,19 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 
 	/**
+	 * @see	\wcf\data\IDeleteAction::validateDelete()
+	 */
+	public function validateDelete() {
+		parent::validateDelete();
+
+		foreach ($this->objects as $pageEditor) {
+			if (!$pageEditor->canDelete()) {
+				throw new PermissionDeniedException();
+			}
+		}
+	}
+
+	/**
 	 * @see	\wcf\data\IDeleteAction::delete()
 	 */
 	public function delete() {
@@ -235,17 +248,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if (!empty($deleteMenuItemIDs)) {
 				$pageMenuItemAction = new PageMenuItemAction($deleteMenuItemIDs, 'delete');
 				$pageMenuItemAction->executeAction();
-			}
-		}
-
-		// check if first page
-		PageCacheBuilder::getInstance()->reset();
-		if (PageCache::getInstance()->getHomePage() === null) {
-			$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
-			$page = reset($pages);
-			if ($page != null) {
-				$editor = new PageEditor($page);
-				$editor->setAsHome();
 			}
 		}
 

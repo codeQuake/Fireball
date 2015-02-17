@@ -125,7 +125,7 @@ class PagePage extends AbstractPage {
 		}
 
 		// check permissions
-		if (!$this->page->isVisible() || !$this->page->isAccessible()) {
+		if (!$this->page->canRead()) {
 			throw new PermissionDeniedException();
 		}
 	}
