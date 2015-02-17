@@ -16,7 +16,7 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 	 */
 	public function rebuild(array $parameters) {
 		$data = array(
-			'contens' => array(),
+			'contents' => array(),
 			'tree' => array()
 		);
 
