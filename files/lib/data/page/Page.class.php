@@ -35,6 +35,24 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	protected static $databaseTableIndexName = 'pageID';
 
 	/**
+	 * Returns whether the current user can delete this page.
+	 * 
+	 * @return	boolean
+	 */
+	public function canDelete() {
+		if (!WCF::getSession()->getPermission('admin.cms.page.canAddPage')) {
+			return false;
+		}
+
+		if ($this->isHome) {
+			// user can't delete landing page
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * @see	\wcf\data\IPermissionObject::checkPermissions()
 	 */
 	public function checkPermissions(array $permissions) {
