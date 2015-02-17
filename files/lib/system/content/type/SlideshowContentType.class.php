@@ -32,7 +32,7 @@ class SlideshowContentType extends AbstractStructureContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getOutput()
 	 */
-	public function getOutput(Content $content){
+	public function getOutput(Content $content) {
 		return '';
 	}
 }

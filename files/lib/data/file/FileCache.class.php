@@ -43,7 +43,7 @@ class FileCache extends SingletonFactory {
 	}
 	
 	public function getCategories($id) {
-		if ($this->categories === null){
+		if ($this->categories === null) {
 			$this->categories = array();
 			
 			foreach ($this->getCategoryIDs($id) as $categoryID) {

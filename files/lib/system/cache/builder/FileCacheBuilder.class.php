@@ -22,7 +22,7 @@ class FileCacheBuilder extends AbstractCacheBuilder {
 
 		$list = new FileList();
 		$list->readObjects();
-		foreach ($data['files'] = $list->getObjects() as $file){
+		foreach ($data['files'] = $list->getObjects() as $file) {
 			foreach ($file->getCategoryIDs() as $categoryID) {
 				$data['filesToCategory'][$file->fileID] = $categoryID;
 			}
