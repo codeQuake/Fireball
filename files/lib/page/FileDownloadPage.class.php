@@ -71,9 +71,8 @@ class FileDownloadPage extends AbstractPage {
 	 */
 	public function readData() {
 		parent::readData();
-
-		VisitCountHandler::getInstance()->count();
 		
+		VisitCountHandler::getInstance()->count();
 		$this->fileReader = new FileReader($this->file->getLocation(), array(
 			'filename' => $this->file->getTitle(),
 			'mimeType' => $this->file->fileType,
