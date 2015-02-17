@@ -53,4 +53,8 @@ class ThreeColumnsContentType extends AbstractStructureContentType {
 
 		return 'grid grid' . $gridWidth;
 	}
+	
+	public function getOutput(Content $content){
+		return '';
+	}
 }

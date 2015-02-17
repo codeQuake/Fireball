@@ -39,4 +39,8 @@ class TwoColumnsContentType extends AbstractStructureContentType {
 
 		return 'grid grid' . $width;
 	}
+	
+	public function getOutput(Content $content){
+		return '';
+	}
 }
