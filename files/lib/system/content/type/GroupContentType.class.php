@@ -17,6 +17,9 @@ class GroupContentType extends AbstractStructureContentType {
 		return 'contentCollection';
 	}
 	
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getOutput()
+	 */
 	public function getOutput(Content $content){
 		return '';
 	}

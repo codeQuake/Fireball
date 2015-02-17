@@ -40,6 +40,9 @@ class TwoColumnsContentType extends AbstractStructureContentType {
 		return 'grid grid' . $width;
 	}
 	
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getOutput()
+	 */
 	public function getOutput(Content $content){
 		return '';
 	}
