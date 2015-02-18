@@ -48,6 +48,24 @@ class Content extends CMSDatabaseObject implements IRouteController, IPollObject
 	}
 
 	/**
+	 * Returns whether the current user can read this content.
+	 * 
+	 * Notice: This function does NOT check whether the user actually can
+	 * access the assigned page. Make sure to call `canRead` of the page
+	 * object along with this function.
+	 * 
+	 * @return	boolean
+	 */
+	public function canRead() {
+		if ($this->isDisabled && !WCF::getSession()->getPermission('mod.cms.canViewDisabledContent')) {
+			// user can't read disabled contents
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Returns the page this content is assigned to.
 	 * 
 	 * @return	\cms\data\page\Page
