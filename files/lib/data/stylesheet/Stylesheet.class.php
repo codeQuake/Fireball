@@ -83,7 +83,8 @@ class Stylesheet extends CMSDatabaseObject {
 			$this->compile($styleID);
 		}
 
-		// FIXME: Caching parameter
-		return WCF::getPath('cms') .'style/style-'. $styleID .'-'. $this->stylesheetID . (($rtl) ? '-rtl' : '') .'.css';
+		//return filename with appended caching parameter
+		$filename ='style/style-'. $styleID .'-'. $this->stylesheetID . (($rtl) ? '-rtl' : '') .'.css';
+		return  WCF::getPath('cms') . $filename.'?m='.filemtime(CMS_DIR.$filename);
 	}
 }
