@@ -79,7 +79,7 @@ class FileDownloadPage extends AbstractPage {
 			'filesize' => $this->file->fileSize,
 			'showInline' => (in_array($this->file->fileType, self::$inlineMimeTypes)),
 			'enableRangeSupport' => false,
-			'lastModificationTime' => TIME_NOW,
+			'lastModificationTime' => $this->file->uploadTime,
 			'expirationDate' => TIME_NOW + 31536000,
 			'maxAge' => 31536000
 		));
