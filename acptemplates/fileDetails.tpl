@@ -5,7 +5,7 @@
 		{if $file->fileType == 'image/png' || $file->fileType == 'image/jpeg' || $file->fileType == 'image/gif'}
 			<figure class="framed">
 				<img style="max-width: 300px" src="{$file->getLink()}" alt="" />
-				<figcaption><small>{$file->filesize|filesize} | {$file->fileType}</small></figcaption>
+				<figcaption><small>{$file->fileSize|filesize} | {$file->fileType}</small></figcaption>
 			</figure>
 		{else}
 			<small>{$file->filesize|filesize} | {$file->fileType}</small>
