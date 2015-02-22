@@ -24,27 +24,27 @@ class PageCommentManager extends AbstractCommentManager {
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionCanModerate
 	 */
-	protected $permissionCanModerate = 'mod.cms.page.canModerateComment';
+	protected $permissionCanModerate = 'mod.cms.canModerateComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionDelete
 	 */
-	protected $permissionDelete = 'user.cms.page.canDeleteComment';
+	protected $permissionDelete = 'user.cms.canDeleteComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionEdit
 	 */
-	protected $permissionEdit = 'user.cms.page.canEditComment';
+	protected $permissionEdit = 'user.cms.canEditComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionModDelete
 	 */
-	protected $permissionModDelete = 'mod.cms.page.canDeleteComment';
+	protected $permissionModDelete = 'mod.cms.canDeleteComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionModEdit
 	 */
-	protected $permissionModEdit = 'mod.cms.page.canEditComment';
+	protected $permissionModEdit = 'mod.cms.canEditComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\ICommentManager::canAdd()

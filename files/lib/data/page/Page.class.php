@@ -58,7 +58,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	 * @return	boolean
 	 */
 	public function canRead() {
-		if ($this->isDisabled && !$this->getPermission('canViewDisabledPage')) {
+		if ($this->isDisabled && !WCF::getSession()->getPermission('mod.cms.canViewDisabledPage')) {
 			// user can't read disabled pages
 			return false;
 		}
@@ -274,12 +274,12 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	 * @return	boolean
 	 */
 	public function isVisible() {
-		if ($this->isDisabled && !$this->getPermission('canViewDisabledPage')) {
+		if ($this->isDisabled && !WCF::getSession()->getPermission('mod.cms.canViewDisabledPage')) {
 			// user can't view disabled pages
 			return false;
 		}
 
-		if ($this->invisible && !$this->getPermission('canViewInvisiblePage')) {
+		if ($this->invisible) {
 			// user can't view invisible pages
 			return false;
 		}

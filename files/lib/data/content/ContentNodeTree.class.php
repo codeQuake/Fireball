@@ -84,8 +84,8 @@ class ContentNodeTree implements \IteratorAggregate {
 			if ($contentNode->pageID != $this->pageID) return false;
 		}
 		if ($this->isACP) return true;
-		if ($contentNode->isDisabled && !WCF::getSession()->getPermission('user.cms.page.canViewDisabledContent')) return false;
-		return true;
+		
+		return $contentNode->canRead();
 	}
 }
 
