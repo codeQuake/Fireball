@@ -66,12 +66,14 @@ class PageClipboardAction extends AbstractClipboardAction {
 	 * @return	array<integer>
 	 */
 	protected function validateDelete() {
-		// check permissions
-		if (!WCF::getSession()->getPermission('admin.cms.page.canAddPage')) {
-			return array();
+		$pageIDs = array();
+		foreach ($this->objects as $page) {
+			if ($page->canDelete()) {
+				$pageIDs[] = $page->pageID;
+			}
 		}
 
-		return array_keys($this->objects);
+		return $pageIDs;
 	}
 
 	/**

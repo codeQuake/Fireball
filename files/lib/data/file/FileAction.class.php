@@ -1,6 +1,7 @@
 <?php
 namespace cms\data\file;
 
+use cms\system\cache\builder\FileCacheBuilder;
 use wcf\data\category\CategoryNodeTree;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\category\CategoryHandler;
@@ -217,6 +218,9 @@ class FileAction extends AbstractDatabaseObjectAction {
 				);
 
 				$uploadedFile = FileEditor::create($data);
+				
+				//clear cache
+				FileCacheBuilder::getInstance()->reset();
 
 				// create subdirectory if necessary
 				$dir = dirname($uploadedFile->getLocation());
@@ -256,7 +260,6 @@ class FileAction extends AbstractDatabaseObjectAction {
 				'errorType' => $failedUpload->getValidationErrorType()
 			);
 		}
-
 		return $result;
 	}
 }

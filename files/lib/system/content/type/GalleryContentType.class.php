@@ -21,7 +21,10 @@ class GalleryContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$imageIDs = explode(',', $content->imageIDs);
+		$imageIDs = $content->imageIDs;
+		
+		//neccessary for old data (version 2.0.0 Beta 7 or older)
+		if (is_string($content->imageIDs)) $imageIDs = explode(',', $content->imageIDs);
 
 		$list = new FileList();
 		$list->getConditionBuilder()->add('fileID in (?)', array($imageIDs));

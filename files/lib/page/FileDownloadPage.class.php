@@ -71,16 +71,15 @@ class FileDownloadPage extends AbstractPage {
 	 */
 	public function readData() {
 		parent::readData();
-
-		VisitCountHandler::getInstance()->count();
 		
+		VisitCountHandler::getInstance()->count();
 		$this->fileReader = new FileReader($this->file->getLocation(), array(
 			'filename' => $this->file->getTitle(),
 			'mimeType' => $this->file->fileType,
 			'filesize' => $this->file->fileSize,
 			'showInline' => (in_array($this->file->fileType, self::$inlineMimeTypes)),
 			'enableRangeSupport' => false,
-			'lastModificationTime' => TIME_NOW,
+			'lastModificationTime' => $this->file->uploadTime,
 			'expirationDate' => TIME_NOW + 31536000,
 			'maxAge' => 31536000
 		));

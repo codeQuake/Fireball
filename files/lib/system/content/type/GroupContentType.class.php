@@ -1,6 +1,8 @@
 <?php
 namespace cms\system\content\type;
 
+use cms\data\content\Content;
+
 /**
  * @author	Jens Krumsieck
  * @copyright	2013 - 2015 codeQuake
@@ -13,5 +15,12 @@ class GroupContentType extends AbstractStructureContentType {
 	 */
 	public function getCSSClasses() {
 		return 'contentCollection';
+	}
+	
+	/**
+	 * @see	\cms\system\content\type\AbstractStructureContentType::getOutput()
+	 */
+	public function getOutput(Content $content) {
+		return '';
 	}
 }

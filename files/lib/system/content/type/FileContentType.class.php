@@ -2,7 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use cms\data\file\File;
+use cms\data\file\FileCache;
 use cms\data\file\FileList;
 use wcf\system\WCF;
 
@@ -32,7 +32,7 @@ class FileContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$file = new File($content->fileID);
+		$file = FileCache::getInstance()->getFile($content->fileID);
 
 		WCF::getTPL()->assign(array(
 			'file' => $file

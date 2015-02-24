@@ -3,6 +3,7 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use cms\data\file\File;
+use cms\data\file\FileCache;
 use wcf\system\WCF;
 
 /**
@@ -35,7 +36,7 @@ class ImageContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$image = new File($content->imageID);
+		$image = FileCache::getInstance()->getFile($content->imageID);
 
 		WCF::getTPL()->assign(array(
 			'image' => $image

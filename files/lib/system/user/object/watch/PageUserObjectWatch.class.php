@@ -26,7 +26,7 @@ class PageUserObjectWatch implements IUserObjectWatch {
 		}
 
 		// check permission
-		if (!$page->isAccessible()) {
+		if (!$page->canRead()) {
 			throw new PermissionDeniedException();
 		}
 	}

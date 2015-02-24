@@ -293,8 +293,6 @@
 		<item name="wcf.acl.option.de.codequake.cms.page.canAddComment"><![CDATA[Can add comments]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canEnterPage"><![CDATA[Can enter page]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewComment"><![CDATA[Can view comments]]></item>
-		<item name="wcf.acl.option.de.codequake.cms.page.canViewDisabledPage"><![CDATA[Can view deactivated page]]></item>
-		<item name="wcf.acl.option.de.codequake.cms.page.canViewInvisiblePage"><![CDATA[Can view invisble page]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewPage"><![CDATA[Can view page]]></item>
 	</category>
 
@@ -313,15 +311,15 @@
 		<item name="wcf.acp.group.option.category.admin.cms.page"><![CDATA[Pages]]></item>
 		<item name="wcf.acp.group.option.category.admin.cms.style"><![CDATA[Style]]></item>
 		<item name="wcf.acp.group.option.category.mod.cms"><![CDATA[CMS]]></item>
-		<item name="wcf.acp.group.option.category.mod.cms.page"><![CDATA[Pages]]></item>
 		<item name="wcf.acp.group.option.category.user.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.acp.group.option.category.user.cms.content"><![CDATA[Contents]]></item>
 		<item name="wcf.acp.group.option.category.user.cms.page"><![CDATA[Pages]]></item>
+		<item name="wcf.acp.group.option.mod.cms.canDeleteComment"><![CDATA[Can delete comments]]></item>
+		<item name="wcf.acp.group.option.mod.cms.canEditComment"><![CDATA[Can edit comments]]></item>
+		<item name="wcf.acp.group.option.mod.cms.canModerateComment"><![CDATA[Can moderate comments]]></item>
 		<item name="wcf.acp.group.option.mod.cms.canReadUnpublishedPage"><![CDATA[Can read pages that are not published yet]]></item>
-		<item name="wcf.acp.group.option.mod.cms.page.canDeleteComment"><![CDATA[Can delete comments]]></item>
-		<item name="wcf.acp.group.option.mod.cms.page.canEditComment"><![CDATA[Can edit comments]]></item>
-		<item name="wcf.acp.group.option.mod.cms.page.canModerateComment"><![CDATA[Can moderate comments]]></item>
-		<item name="wcf.acp.group.option.mod.cms.page.canModeratePage"><![CDATA[Can moderate pages]]></item>
+		<item name="wcf.acp.group.option.mod.cms.canViewDisabledContent"><![CDATA[Can see disabled contents]]></item>
+		<item name="wcf.acp.group.option.mod.cms.canViewDisabledPage"><![CDATA[Can see disabled pages]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canDownloadFile"><![CDATA[Can download files]]></item>
 		<item name="wcf.acp.group.option.user.cms.content.canVotePoll"><![CDATA[Can vote poll]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canAddComment"><![CDATA[Can add comments]]></item>
@@ -329,9 +327,6 @@
 		<item name="wcf.acp.group.option.user.cms.page.canEditComment"><![CDATA[Can edit own comments]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canEnterPage"><![CDATA[Can enter pages]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canViewComment"><![CDATA[Can view comments]]></item>
-		<item name="wcf.acp.group.option.user.cms.page.canViewDisabledContent"><![CDATA[Can see disabled contents]]></item>
-		<item name="wcf.acp.group.option.user.cms.page.canViewDisabledPage"><![CDATA[Can see disabled pages]]></item>
-		<item name="wcf.acp.group.option.user.cms.page.canViewInvisiblePage"><![CDATA[Can see invisible pages]]></item>
 		<item name="wcf.acp.group.option.user.cms.page.canViewPage"><![CDATA[Can see pages]]></item>
 	</category>
 
