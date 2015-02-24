@@ -379,7 +379,7 @@
 	</category>
 
 	<category name="wcf.acp.search">
-		<item name="wcf.acp.search.provider.de.voolia.cms.page"><![CDATA[CMS Pages]]></item>
+		<item name="wcf.acp.search.provider.de.codequake.cms.page"><![CDATA[CMS Pages]]></item>
 	</category>
 
 	<category name="wcf.clipboard">
