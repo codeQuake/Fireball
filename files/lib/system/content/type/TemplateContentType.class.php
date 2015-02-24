@@ -2,8 +2,10 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use cms\data\content\ContentEditor;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
+use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 
 /**
@@ -28,7 +30,10 @@ class TemplateContentType extends AbstractContentType {
 
 		// check template code
 		try {
-			WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template', $data['text'], array(), true);
+			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template', $data['text'], array(), true);
+			
+			// cache compiled template with content
+			RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->contentData['compiled'] = $compiled;
 		}
 		catch (SystemException $e) {
 			WCF::getTPL()->assign(array(
@@ -43,7 +48,11 @@ class TemplateContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
+		if (!$content->compiled) {
+			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
+		} else {
+			$compiled = $content->compiled;
+		}
 
 		return WCF::getTPL()->fetchString($compiled['template']);
 	}
