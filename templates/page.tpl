@@ -26,7 +26,7 @@
 	</script>
 </head>
 
-<body id="tpl{$templateName|ucfirst}" data-page-id="{$page->pageID}">
+<body id="tpl_{$templateNameApplication}_{$templateName}" data-template="{$templateName}" data-application="{$templateNameApplication}" data-page-id="{$page->pageID}">
 
 {capture assign='headerNavigation'}
 	{if $page->allowSubscribing && $__wcf->user->userID}
