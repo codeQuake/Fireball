@@ -65,11 +65,13 @@
 				<categoryname>user.cms.page</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<option name="user.cms.page.canEditComment">
 				<categoryname>user.cms.page</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<!-- /user.cms.page -->
 
@@ -110,18 +112,21 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<option name="mod.cms.canEditComment">
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<option name="mod.cms.canDeleteComment">
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<!-- /mod.cms -->
 
@@ -131,12 +136,14 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<option name="admin.cms.page.canAddPage">
 				<categoryname>admin.cms.page</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<!-- /admin.cms.page -->
 
@@ -146,12 +153,14 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<option name="admin.cms.content.canAddContent">
 				<categoryname>admin.cms.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<!-- /admin.cms.content -->
 
@@ -161,12 +170,14 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<option name="admin.cms.style.canListStylesheet">
 				<categoryname>admin.cms.style</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<!-- /admin.cms.style -->
 
@@ -176,6 +187,7 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
 			</option>
 			<!-- /admin.cms.file -->
 		</options>
