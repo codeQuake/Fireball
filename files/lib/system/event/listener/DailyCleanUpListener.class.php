@@ -2,7 +2,7 @@
 namespace cms\system\event\listener;
 
 use cms\data\file\FileAction;
-use wcf\system\event\IEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\WCF;
 
 /**
@@ -13,11 +13,11 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class DailyCleanUpListener implements IEventListener {
+class DailyCleanUpListener implements IParameterizedEventListener {
 	/**
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
-	public function execute($eventObj, $className, $eventName) {
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		// delete obsolete file uploads
 		// files are considered obsolete when they are not assigned to
 		// at least one category and are older than one day

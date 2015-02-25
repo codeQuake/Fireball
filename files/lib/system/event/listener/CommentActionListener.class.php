@@ -1,7 +1,7 @@
 <?php
 namespace cms\system\event\listener;
 
-use wcf\system\event\IEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\user\notification\object\CommentUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\object\watch\UserObjectWatchHandler;
@@ -15,7 +15,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class CommentActionListener implements IEventListener {
+class CommentActionListener implements IParameterizedEventListener {
 	const OBJECT_TYPE = 'de.codequake.cms.page.comment';
 
 	/**
@@ -27,7 +27,7 @@ class CommentActionListener implements IEventListener {
 	/**
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
-	public function execute($eventObj, $className, $eventName) {
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		$this->eventObj = $eventObj;
 
 		if (method_exists($this, $this->eventObj->getActionName())) {
