@@ -6,6 +6,19 @@ The Fireball CMS is a very powerful CMS solution, based on WoltLab Community Fra
 
 [![Build Status](https://travis-ci.org/codeQuake/Fireball.svg?branch=master)](https://travis-ci.org/codeQuake/Fireball)
 
+Plugins
+-------------------
+Fireball CMS is easily extendable due to the WCF's plugin system. There are a lot of optional features packed in the following plugins:
+- [Fireball CMS - News System](https://github.com/codeQuake/Fireball_News)
+  - [Fireball CMS - News System - RSS Reader](https://github.com/codeQuake/Fireball-News-RSS-Reader)
+  - [Fireball CMS - News System - Burning Board Integration](https://github.com/codeQuake/Fireball_News_WBB)
+- [Fireball CMS - Burning Board Integration](https://github.com/codeQuake/Fireball_WBB)
+- [Fireball CMS - voolia Integration](https://github.com/codeQuake/Fireball_News_Voolia)
+
+The following plugins are required to install Fireball CMS:
+- [ACP WYSIWYG](https://github.com/codeQuake/WYSIWYG-ACP)
+- [codeQuake ACP News](https://github.com/codeQuake/de.codequake.wcf.acp.index.news)
+
 System Requirements
 -------------------
 PHP Version: 5.3.2 or greater
