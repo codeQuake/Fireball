@@ -6,8 +6,6 @@ use cms\system\cache\builder\PageCacheBuilder;
 use cms\data\content\ContentAction;
 use cms\data\file\FileAction;
 use cms\data\file\FileList;
-use cms\data\folder\FolderAction;
-use cms\data\folder\FolderList;
 use cms\data\page\PageAction;
 use cms\data\stylesheet\StylesheetList;
 use wcf\data\category\CategoryList;
