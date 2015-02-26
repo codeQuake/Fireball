@@ -286,5 +286,14 @@
 			<classname>cms\system\worker\PageRebuildDataWorker</classname>
 		</type>
 		<!-- /rebuild data worker -->
+
+		<!-- pages -->
+		<type>
+			<name>de.codequake.cms.PagePage</name>
+			<definitionname>com.woltlab.wcf.page</definitionname>
+			<classname><![CDATA[cms\page\PagePage]]></classname>
+			<categoryname>de.codequake.cms</categoryname>
+		</type>
+		<!-- /pages -->
 	</import>
 </data>
