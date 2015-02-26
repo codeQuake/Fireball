@@ -7,7 +7,7 @@
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Classes]]></item>
 		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding". For a margin on top use "marginTop". <br />
 <strong>Examples:</strong>
-<ul class="inlineCode">
+<ul class="nativeList">
 	<li><code class="inlineCode">container</code>: Adds a border to your content</li>
 	<li><code class="inlineCode">containerPadding</code>: Use it with container to add some padding</li>
 	<li><code class="inlineCode">marginTop</code>: Adds a margin on top</li>
