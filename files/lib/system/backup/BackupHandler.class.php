@@ -144,7 +144,7 @@ class BackupHandler extends SingletonFactory{
 					$currentID = $import[$object.'ID'];
 					
 					// unset current id to be save
-					unset($import[$object.'ID']);
+					if(isset($import[$object.'ID'])) unset($import[$object.'ID']);
 					
 					// check parent ids
 					if ($object == 'page' || $object == 'content') {
@@ -162,46 +162,52 @@ class BackupHandler extends SingletonFactory{
 					
 					// obsolete columns of pages
 					if ($object == 'page') {
-						unset($import['robots']);
-						unset($import['showSidebar']);
+						if(isset($import['robots'])) unset($import['robots']);
+						if(isset($import['showSidebar'])) unset($import['showSidebar']);
 						
-						if ($import['styleID'] == '')
+						if(isset($import['styleID']) && $import['styleID'] == '')
 							$import['styleID'] = null;
 						
-						$import['authorID'] = null;
-						$import['lastEditorID'] = null;
+						if(isset($import['authorID'])) $import['authorID'] = null;
+						if(isset($import['lastEditorID'])) $import['lastEditorID'] = null;
 						
 						// save stylesheets
-						if (isset($import['stylesheets']))
+						if (isset($import['stylesheets'])) {
 							$upperObjectIDs[$currentID] = unserialize($import['stylesheets']);
-						
-						unset($import['stylesheets']);
+							unset($import['stylesheets']);
+						}
 					}
 					
 					// obsolete columns for files
 					if ($object == 'file') {
-						unset($import['folderID']);
+						if(isset($import['folderID'])) unset($import['folderID']);
 						
-						$import['filesize'] = $import['size'];
-						unset($import['size']);
+						if(isset($import['size'])) {
+							$import['filesize'] = $import['size'];
+							unset($import['size']);
+						}
 						
-						$import['fileType'] = $import['type'];
-						unset($import['type']);
+						if(isset($import['type'])) {
+							$import['fileType'] = $import['type'];
+							unset($import['type']);
+						}
 						
 						// save folders
-						if (isset($import['folderID']))
+						if (isset($import['folderID'])) {
 							$upperObjectIDs[$currentID] = $import['folderID'];
-						
-						unset($import['filename']);
+							unset($import['filename']);
+						}
 					}
 					
 					// columns for folders
 					if ($object == 'folder') {
 						$import['objectTypeID'] = $this->categoryObjectType->objectTypeID;
 						
-						$import['title'] = $import['folderName'];
-						unset($import['folderName']);
-						unset($import['folderPath']);
+						if(isset($import['folderName'])) {
+							$import['title'] = $import['folderName'];
+							unset($import['folderName']);
+						}
+						if(isset($import['folderPath'])) unset($import['folderPath']);
 					}
 					
 					// columns for contents
