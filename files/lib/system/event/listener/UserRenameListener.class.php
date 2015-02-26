@@ -23,7 +23,7 @@ class UserRenameListener implements IParameterizedEventListener {
 		$username = $parameters['data']['username'];
 		
 		$sql = array();
-		// content versions
+		// content revisions
 		$sql[] = "SELECT		cms" . WCF_N . "_content_revision
 			SET		username = ?
 			WHERE		userID = ?";
