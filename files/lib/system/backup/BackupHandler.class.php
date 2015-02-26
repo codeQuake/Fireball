@@ -144,7 +144,7 @@ class BackupHandler extends SingletonFactory{
 					$currentID = $import[$object.'ID'];
 					
 					// unset current id to be save
-					if(isset($import[$object.'ID'])) unset($import[$object.'ID']);
+					if (isset($import[$object.'ID'])) unset($import[$object.'ID']);
 					
 					// check parent ids
 					if ($object == 'page' || $object == 'content') {
@@ -162,14 +162,14 @@ class BackupHandler extends SingletonFactory{
 					
 					// obsolete columns of pages
 					if ($object == 'page') {
-						if(isset($import['robots'])) unset($import['robots']);
-						if(isset($import['showSidebar'])) unset($import['showSidebar']);
+						if (isset($import['robots'])) unset($import['robots']);
+						if (isset($import['showSidebar'])) unset($import['showSidebar']);
 						
-						if(isset($import['styleID']) && $import['styleID'] == '')
+						if (isset($import['styleID']) && $import['styleID'] == '')
 							$import['styleID'] = null;
 						
-						if(isset($import['authorID'])) $import['authorID'] = null;
-						if(isset($import['lastEditorID'])) $import['lastEditorID'] = null;
+						if (isset($import['authorID'])) $import['authorID'] = null;
+						if (isset($import['lastEditorID'])) $import['lastEditorID'] = null;
 						
 						// save stylesheets
 						if (isset($import['stylesheets'])) {
@@ -180,14 +180,14 @@ class BackupHandler extends SingletonFactory{
 					
 					// obsolete columns for files
 					if ($object == 'file') {
-						if(isset($import['folderID'])) unset($import['folderID']);
+						if (isset($import['folderID'])) unset($import['folderID']);
 						
-						if(isset($import['size'])) {
+						if (isset($import['size'])) {
 							$import['filesize'] = $import['size'];
 							unset($import['size']);
 						}
 						
-						if(isset($import['type'])) {
+						if (isset($import['type'])) {
 							$import['fileType'] = $import['type'];
 							unset($import['type']);
 						}
@@ -203,11 +203,11 @@ class BackupHandler extends SingletonFactory{
 					if ($object == 'folder') {
 						$import['objectTypeID'] = $this->categoryObjectType->objectTypeID;
 						
-						if(isset($import['folderName'])) {
+						if (isset($import['folderName'])) {
 							$import['title'] = $import['folderName'];
 							unset($import['folderName']);
 						}
-						if(isset($import['folderPath'])) unset($import['folderPath']);
+						if (isset($import['folderPath'])) unset($import['folderPath']);
 					}
 					
 					// columns for contents
