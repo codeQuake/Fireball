@@ -1,6 +1,7 @@
 <?php
 namespace cms\data\page\revision;
 
+use cms\data\page\PageAction;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\WCF;
 
@@ -26,5 +27,25 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
-	protected $requireACP = array('delete');
+	protected $requireACP = array('delete', 'restore');
+
+	/**
+	 * Validates permissions to restore a specific revision.
+	 */
+	public function validateRestore() {
+		WCF::getSession()->checkPermissions(array('admin.cms.page.canAddPage'));
+
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
+	}
+
+	/**
+	 * Restores a specific revision.
+	 */
+	public function restore() {
+		$revision = $this->getSingleObject();
+
+		$pageAction = new PageAction(array($revision->pageID), 'update', array('data' => @unserialize($revision->data)));
+		$pageAction->executeAction();
+	}
 }

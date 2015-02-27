@@ -3,7 +3,6 @@ namespace cms\data\page;
 
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
-use cms\system\cache\builder\PageRevisionCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\WCF;
@@ -59,7 +58,6 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	public static function resetCache() {
 		PageCacheBuilder::getInstance()->reset();
 		PagePermissionCacheBuilder::getInstance()->reset();
-		PageRevisionCacheBuilder::getInstance()->reset();
 	}
 
 	/**

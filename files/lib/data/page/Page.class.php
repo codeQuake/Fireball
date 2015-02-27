@@ -2,10 +2,10 @@
 namespace cms\data\page;
 
 use cms\data\content\DrainedPositionContentNodeTree;
+use cms\data\page\revision\PageRevisionList;
 use cms\data\stylesheet\StylesheetCache;
 use cms\data\CMSDatabaseObject;
 use cms\system\page\PagePermissionHandler;
-use cms\system\revision\PageRevisionHandler;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -33,6 +33,12 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'pageID';
+
+	/**
+	 * revisions of this page
+	 * @var	array<\cms\data\page\revision\PageRevision>
+	 */
+	protected $revisions = null;
 
 	/**
 	 * Returns whether the current user can delete this page.
@@ -209,10 +215,18 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	/**
 	 * Returns all revisions of this page.
 	 * 
-	 * @return	array<array>
+	 * @return	array<\cms\data\page\revision\PageRevision>
 	 */
 	public function getRevisions() {
-		return PageRevisionHandler::getInstance()->getRevisions($this->pageID);
+		if ($this->revisions === null) {
+			$revisionList = new PageRevisionList();
+			$revisionList->getConditionBuilder()->add('page_revision.pageID = ?', array($this->pageID));
+			$revisionList->readObjects();
+
+			$this->revisions = $revisionList->getObjects();
+		}
+
+		return $this->revisions;
 	}
 
 	/**
