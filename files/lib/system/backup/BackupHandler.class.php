@@ -80,7 +80,7 @@ class BackupHandler extends SingletonFactory{
 					foreach ($$object->getData() as $key => $data) {
 						if ($key == 'contentTypeID')
 							$xml->writeElement($key, ObjectTypeCache::getInstance()->getObjectType($data)->objectType);
-						else if(is_array($data))
+						else if (is_array($data))
 							$xml->writeElement($key, base64_encode(serialize($data)));
 						else
 							$xml->writeElement($key, $data);
