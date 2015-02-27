@@ -10,7 +10,6 @@ use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
 use cms\system\menu\page\CMSPageMenuItemProvider;
-use cms\system\revision\PageRevisionHandler;
 use cms\util\PageUtil;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
@@ -62,7 +61,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache
 	 */
-	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'publish', 'restoreRevision', 'setAsHome', 'toggle', 'update', 'updatePosition');
+	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'publish', 'setAsHome', 'toggle', 'update', 'updatePosition');
 
 	/**
 	 * Validates parameters to copy a page.
@@ -454,29 +453,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * execute certain code once the relevant pages are publicly available.
 	 */
 	public function triggerPublication() { /* nothing */ }
-
-	/**
-	 * Validates permissions to restore a revision.
-	 */
-	public function validateRestoreRevision() {
-		$this->validateUpdate();
-	}
-
-	/**
-	 * Restores a specific revision.
-	 */
-	public function restoreRevision() {
-		if (empty($this->objects)) {
-			$this->readObjects();
-		}
-
-		foreach ($this->objects as $object) {
-			$restoreObject = PageRevisionHandler::getInstance()->getRevisionByID($object->pageID, $this->parameters['restoreObjectID']);
-			$this->parameters['data'] = @unserialize($restoreObject->data);
-		}
-
-		$this->update();
-	}
 
 	/**
 	 * Validates permissions and parameters to set a page ad home.

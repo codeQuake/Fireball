@@ -926,15 +926,12 @@ CMS.ACP.Page.Revisions.Restore = Class.extend({
 	},
 
 	_sendRequest: function (object) {
-		$pageID = $(object).data('pageID');
 		$versionID = $(object).data('objectID');
+
 		this._proxy.setOption('data', {
-			actionName: 'restoreRevision',
-			className: 'cms\\data\\page\\PageAction',
-			objectIDs: [ $pageID ],
-			parameters: {
-				'restoreObjectID': $versionID
-			}
+			actionName: 'restore',
+			className: 'cms\\data\\page\\revision\\PageRevisionAction',
+			objectIDs: [ $versionID ]
 		});
 		this._proxy.sendRequest();
 	},
