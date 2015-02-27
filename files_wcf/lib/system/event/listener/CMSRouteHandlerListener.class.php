@@ -22,12 +22,12 @@ class CMSRouteHandlerListener implements IParameterizedEventListener {
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		// thx to SoftCreatR http://www.woltlab.com/forum/index.php/Thread/224017-Request-Handler/?postID=1332856#post1332856
-		$application = ApplicationHandler::getInstance()->getActiveApplication();
-		if (PACKAGE_ID != 1 && $application != null) {
-			$route = new Route('cmsPageRoute');
-			$route->setSchema('/{alias}/', 'Page');
-			$route->setParameterOption('alias', null, PageUtil::ALIAS_PATTERN_STACK);
-			$eventObj->addRoute($route);
-		}
+// 		$application = ApplicationHandler::getInstance()->getActiveApplication();
+// 		if (PACKAGE_ID != 1 && $application != null) {
+// 			$route = new Route('cmsPageRoute');
+// 			$route->setSchema('/{alias}/', 'Page');
+// 			$route->setParameterOption('alias', null, PageUtil::ALIAS_PATTERN_STACK);
+// 			$eventObj->addRoute($route);
+// 		}
 	}
 }
