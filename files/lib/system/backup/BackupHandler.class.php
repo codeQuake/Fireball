@@ -70,7 +70,7 @@ class BackupHandler extends SingletonFactory{
 	protected function buildXML() {
 		// start doc
 		$xml = new XMLWriter();
-		$xml->beginDocument('data', '', '');
+		$xml->beginDocument('data', '', '', array('api' => '210b1'));
 
 		foreach ($this->objects as $object) {
 			if ($this->{$object.'s'} !== null && !empty($this->{$object.'s'})) {
@@ -78,8 +78,12 @@ class BackupHandler extends SingletonFactory{
 				foreach ($this->{$object.'s'} as $$object) {
 					$xml->startElement($object);
 					foreach ($$object->getData() as $key => $data) {
-						if ($key == 'contentTypeID') $xml->writeElement($key, ObjectTypeCache::getInstance()->getObjectType($data)->objectType);
-						else $xml->writeElement($key, $data);
+						if ($key == 'contentTypeID')
+							$xml->writeElement($key, ObjectTypeCache::getInstance()->getObjectType($data)->objectType);
+						else if(is_array($data))
+							$xml->writeElement($key, base64_encode(serialize($data)));
+						else
+							$xml->writeElement($key, $data);
 					}
 					$xml->endElement();
 				}
@@ -139,7 +143,7 @@ class BackupHandler extends SingletonFactory{
 				
 				// go through every single object
 				foreach ($this->data[$object.'s'] as $import) {
-					$currentID = $import[$object.'ID'];
+					$currentID = (isset($import[$object.'ID']) ? $import[$object.'ID'] : ($object == 'folder' ? $import['categoryID'] : null));
 					
 					// unset current id to be save
 					if (isset($import[$object.'ID'])) unset($import[$object.'ID']);
@@ -178,8 +182,6 @@ class BackupHandler extends SingletonFactory{
 					
 					// obsolete columns for files
 					if ($object == 'file') {
-						if (isset($import['folderID'])) unset($import['folderID']);
-						
 						if (isset($import['size'])) {
 							$import['filesize'] = $import['size'];
 							unset($import['size']);
@@ -193,8 +195,9 @@ class BackupHandler extends SingletonFactory{
 						// save folders
 						if (isset($import['folderID'])) {
 							$upperObjectIDs[$currentID] = $import['folderID'];
-							unset($import['filename']);
+							unset($import['folderID']);
 						}
+						if (isset($import['filename'])) unset($import['filename']);
 					}
 					
 					// columns for folders
@@ -211,6 +214,8 @@ class BackupHandler extends SingletonFactory{
 					// columns for contents
 					if ($object == 'content') {
 						$import['pageID'] = $this->tmp['pages'][$import['pageID']];
+						
+						$import['contentData'] = base64_decode($import['contentData']);
 					}
 					
 					// get action class name
