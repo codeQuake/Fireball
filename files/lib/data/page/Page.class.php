@@ -5,11 +5,6 @@ use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\revision\PageRevisionList;
 use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
-<<<<<<< HEAD
-use cms\system\revision\PageRevisionHandler;
-use wcf\data\DatabaseObject;
-=======
->>>>>>> c18d8dd... improve page revision system
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
 use wcf\system\breadcrumb\Breadcrumb;
