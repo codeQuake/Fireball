@@ -63,6 +63,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 
 		$oldID = $data['contentID'];
 		unset($data['contentID']);
+		$data['contentData'] = serialize($data['contentData']);
 		$this->parameters['data'] = $data;
 		$content = $this->create();
 		$contentID = $content->contentID;
@@ -74,7 +75,8 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 			$childID = $child->getDecoratedObject()->contentID;
 
 			$data = $child->getDecoratedObject()->getData();
-			unset($data['contentID']);
+			unset($data['contentID']);			
+			$data['contentData'] = serialize($data['contentData']);
 			$this->parameters['data'] = $data;
 			$new = $this->create();
 			$tmp[$childID] = $new->contentID;
