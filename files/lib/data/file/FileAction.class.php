@@ -153,8 +153,8 @@ class FileAction extends AbstractDatabaseObjectAction {
 		}
 	}
 	/**
-	* WCF.Popover implementation for files
-	*/
+	 * WCF.Popover implementation for files
+	 */
 	public function getFilePreview() {
 		$fileID = reset($this->objectIDs);
 		$file = FileCache::getInstance()->getFile($fileID);
