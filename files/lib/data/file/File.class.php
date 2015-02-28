@@ -150,9 +150,9 @@ class File extends CMSDatabaseObject implements ILinkableObject, IRouteControlle
 	}
 	
 	/**
-	  * Indicates whether a file is an image or not. Indication via MIME-Type
-	  * @return boolean
-	  */
+	 * Indicates whether a file is an image or not. Indication via MIME-Type
+	 * @return boolean
+	 */
 	public function isImage() {
 		if (preg_match('/image/i', $this->fileType)) {
 			return true;
