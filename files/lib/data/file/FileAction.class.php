@@ -1,6 +1,7 @@
 <?php
 namespace cms\data\file;
 
+use cms\data\file\FileCache;
 use cms\system\cache\builder\FileCacheBuilder;
 use wcf\data\category\CategoryNodeTree;
 use wcf\data\AbstractDatabaseObjectAction;
@@ -38,7 +39,13 @@ class FileAction extends AbstractDatabaseObjectAction {
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
 	protected $requireACP = array('delete');
-
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 */
+	protected $allowGuestAccess = array(
+		'getFilePreview'
+	);
+	
 	/**
 	 * Validate parameters and permissions to fetch details about a file.
 	 */
@@ -140,6 +147,24 @@ class FileAction extends AbstractDatabaseObjectAction {
 		}
 	}
 
+	public function validateGetFilePreview() {
+		if (count($this->objectIDs) != 1) {
+			throw new UserInputException('objectIDs');
+		}
+	}
+	/**
+	 * WCF.Popover implementation for files
+	 */
+	public function getFilePreview() {
+		$fileID = reset($this->objectIDs);
+		$file = FileCache::getInstance()->getFile($fileID);
+		WCF::getTPL()->assign('file', $file);
+		return array(
+			'template' => WCF::getTPL()->fetch('filePreview', 'cms'),
+			'fileID' => $fileID
+		);
+	}
+	
 	/**
 	 * Validates parameters and permissions to get a upload dialog.
 	 */

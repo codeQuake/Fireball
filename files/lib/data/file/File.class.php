@@ -148,4 +148,15 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	public function getImageSize() {
 		return getimagesize($this->getLocation());
 	}
+	
+	/**
+	 * Indicates whether a file is an image or not. Indication via MIME-Type
+	 * @return boolean
+	 */
+	public function isImage() {
+		if (preg_match('/image/i', $this->fileType)) {
+			return true;
+		}
+		return false;
+	}
 }

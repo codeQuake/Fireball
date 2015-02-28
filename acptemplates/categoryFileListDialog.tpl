@@ -20,7 +20,7 @@
 					<td class="columnMark"></td>
 					<td class="columnID columnFileID">{@$file->fileID}</td>
 					<td class="columnIcon">{@$file->getIconTag()}</td>
-					<td class="columnTitle columnFile">{$file->getTitle()}</td>
+					<td class="columnTitle columnFile"><a class="cmsFileLink" data-file-id="{@$file->fileID}">{$file->getTitle()}</a></td>
 					<td class="columnType">{$file->fileType}</td>
 					<td class="columnDownloads">{#$file->downloads}</td>
 

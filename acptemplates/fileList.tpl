@@ -27,6 +27,7 @@
 		new WCF.Table.EmptyTableHandler($('#fileListTableContainer'), 'jsFileRow', options);
 
 		new CMS.ACP.File.Details();
+		new CMS.ACP.File.Preview();
 		CMS.ACP.File.Upload.init(function() {
 			window.location.reload();
 		});
@@ -90,7 +91,7 @@
 						</td>
 						<td class="columnID columnFileID">{@$file->fileID}</td>
 						<td class="columnIcon">{@$file->getIconTag()}</td>
-						<td class="columnTitle columnFile"><a class="jsFileDetails" data-file-id="{@$file->fileID}">{$file->getTitle()}</a></td>
+						<td class="columnTitle columnFile"><a class="jsFileDetails cmsFileLink" data-file-id="{@$file->fileID}">{$file->getTitle()}</a></td>
 						<td class="columnType">{$file->fileType}</td>
 						<td class="columnDate columnUploadTime">{@$file->uploadTime|time}</td>
 						<td class="columnDigits columnFilesize">{@$file->fileSize|filesize}</td>
