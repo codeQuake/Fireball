@@ -96,8 +96,8 @@ class BackupHandler extends SingletonFactory {
 					foreach ($$object->getData() as $key => $data) {
 						if ($key == 'contentTypeID') {
 							$xml->writeElement($key, ObjectTypeCache::getInstance()->getObjectType($data)->objectType);
-						} else if ($key == 'title' || $key == 'description'
-								|| $key == 'metaDescription' || $key == 'metaKeywords') {
+						} else if (($key == 'title' || $key == 'description' || $key == 'metaDescription' ||
+								$key == 'metaKeywords') && $object != 'stylesheet') {
 							$langData = array();
 							
 							foreach ($availableLanguages as $lang) {
@@ -202,7 +202,7 @@ class BackupHandler extends SingletonFactory {
 						}
 					}
 					
-					// obsolete columns of pages
+					// obsolete columns for pages
 					if ($object == 'page') {
 						if (isset($import['robots'])) unset($import['robots']);
 						if (isset($import['showSidebar'])) unset($import['showSidebar']);
@@ -240,7 +240,7 @@ class BackupHandler extends SingletonFactory {
 						// multilingual description
 						$tmpDescription = base64_decode($import['description']);
 						if ($this->is_serialized($tmpDescription)) {
-							$tmpTitle = unserialize($tmpDescription);
+							$tmpDescription = unserialize($tmpDescription);
 							
 							foreach ($availableLanguages as $lang) {
 								if (isset($tmpDescription[$lang->countryCode])) {
@@ -253,6 +253,42 @@ class BackupHandler extends SingletonFactory {
 							$import['description'] = '';
 						} else {
 							$import['description'] = $tmpDescription;
+						}
+						
+						// multilingual meta description
+						$tmpMetaDescription = base64_decode($import['metaDescription']);
+						if ($this->is_serialized($tmpMetaDescription)) {
+							$tmpMetaDescription = unserialize($tmpMetaDescription);
+								
+							foreach ($availableLanguages as $lang) {
+								if (isset($tmpMetaDescription[$lang->countryCode])) {
+									$langData['metaDescription'][$lang->languageID] = $tmpMetaDescription[$lang->countryCode];
+								} else {
+									$langData['metaDescription'][$lang->languageID] = '';
+								}
+							}
+							
+							$import['metaDescription'] = '';
+						} else {
+							$import['metaDescription'] = $tmpMetaDescription;
+						}
+						
+						// multilingual description
+						$tmpMetaKeywords = base64_decode($import['metaKeywords']);
+						if ($this->is_serialized($tmpMetaKeywords)) {
+							$tmpMetaKeywords = unserialize($tmpMetaKeywords);
+								
+							foreach ($availableLanguages as $lang) {
+								if (isset($tmpMetaKeywords[$lang->countryCode])) {
+									$langData['metaKeywords'][$lang->languageID] = $tmpMetaKeywords[$lang->countryCode];
+								} else {
+									$langData['metaKeywords'][$lang->languageID] = '';
+								}
+							}
+							
+							$import['metaKeywords'] = '';
+						} else {
+							$import['metaKeywords'] = $tmpMetaKeywords;
 						}
 					}
 					
@@ -308,7 +344,7 @@ class BackupHandler extends SingletonFactory {
 						// multilingual description
 						$tmpDescription = base64_decode($import['description']);
 						if ($this->is_serialized($tmpDescription)) {
-							$tmpTitle = unserialize($tmpDescription);
+							$tmpDescription = unserialize($tmpDescription);
 								
 							foreach ($availableLanguages as $lang) {
 								if (isset($tmpDescription[$lang->countryCode])) {
@@ -321,42 +357,6 @@ class BackupHandler extends SingletonFactory {
 							$import['description'] = '';
 						} else {
 							$import['description'] = $tmpDescription;
-						}
-						
-						// multilingual meta description
-						$tmpMetaDescription = base64_decode($import['metaDescription']);
-						if ($this->is_serialized($tmpMetaDescription)) {
-							$tmpTitle = unserialize($tmpMetaDescription);
-								
-							foreach ($availableLanguages as $lang) {
-								if (isset($tmpMetaDescription[$lang->countryCode])) {
-									$langData['metaDescription'][$lang->languageID] = $tmpMetaDescription[$lang->countryCode];
-								} else {
-									$langData['metaDescription'][$lang->languageID] = '';
-								}
-							}
-							
-							$import['metaDescription'] = '';
-						} else {
-							$import['metaDescription'] = $tmpMetaDescription;
-						}
-						
-						// multilingual description
-						$tmpMetaKeywords = base64_decode($import['metaKeywords']);
-						if ($this->is_serialized($tmpMetaKeywords)) {
-							$tmpTitle = unserialize($tmpMetaKeywords);
-								
-							foreach ($availableLanguages as $lang) {
-								if (isset($tmpMetaKeywords[$lang->countryCode])) {
-									$langData['metaKeywords'][$lang->languageID] = $tmpMetaKeywords[$lang->countryCode];
-								} else {
-									$langData['metaKeywords'][$lang->languageID] = '';
-								}
-							}
-							
-							$import['metaKeywords'] = '';
-						} else {
-							$import['metaKeywords'] = $tmpMetaKeywords;
 						}
 					}
 					
@@ -393,7 +393,7 @@ class BackupHandler extends SingletonFactory {
 								$tmpText = unserialize($tmpText);
 								
 								foreach ($availableLanguages as $lang) {
-									if (isset($tmpTitle[$lang->countryCode])) {
+									if (isset($tmpText[$lang->countryCode])) {
 										$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
 									} else {
 										$langData['text'][$lang->languageID] = '';
@@ -424,6 +424,7 @@ class BackupHandler extends SingletonFactory {
 					else
 						$this->tmp[$object.'s'][$currentID] = $new->{$object.'ID'};
 					
+					// save lang items
 					if (!empty($langData)) {
 						foreach ($langData as $column => $values) {
 							I18nHandler::getInstance()->setValues($column, $values);
@@ -551,7 +552,7 @@ class BackupHandler extends SingletonFactory {
 			if ($object !== null) {
 				$editor = new $editorName($object);
 				
-				if ($object == 'content' && $columnName == 'text') {
+				if ($type == 'content' && $columnName == 'text') {
 					$tmpContentData = $object->contentData;
 					if ($this->is_serialized($tmpContentData)) {
 						$tmpContentData = unserialize($tmpContentData);
