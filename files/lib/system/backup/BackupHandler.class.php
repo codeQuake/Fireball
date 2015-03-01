@@ -93,11 +93,23 @@ class BackupHandler extends SingletonFactory {
 				$xml->startElement($object.'s');
 				foreach ($this->{$object.'s'} as $$object) {
 					$xml->startElement($object);
-					foreach ($$object->getData() as $key => $data) {
+					
+					$exportData = $$object->getData();
+					
+					if ($object == 'file') {
+						$exportData = array_merge(
+							array(
+								'categoryIDs' => $$object->getCategoryIDs()
+							),
+							$exportData
+						);
+					}
+					
+					foreach ($exportData as $key => $data) {
 						if ($key == 'contentTypeID') {
 							$xml->writeElement($key, ObjectTypeCache::getInstance()->getObjectType($data)->objectType);
 						} else if (($key == 'title' || $key == 'description' || $key == 'metaDescription' ||
-								$key == 'metaKeywords') && $object != 'stylesheet') {
+								$key == 'metaKeywords') && $object != 'stylesheet' && $object != 'file') {
 							$langData = array();
 							
 							foreach ($availableLanguages as $lang) {
@@ -304,12 +316,21 @@ class BackupHandler extends SingletonFactory {
 							unset($import['type']);
 						}
 						
-						// save folders
+						// save folders -- compatibility mode
 						if (isset($import['folderID'])) {
-							$upperObjectIDs[$currentID] = $import['folderID'];
+							$upperObjectIDs[$currentID] = array($import['folderID']);
 							unset($import['folderID']);
 						}
 						if (isset($import['filename'])) unset($import['filename']);
+						
+						// save folders
+						if (isset($import['categoryIDs'])) {
+							$tmpCategoryIDs = base64_decode($import['categoryIDs']);
+							if ($this->is_serialized($tmpCategoryIDs)) {
+								$upperObjectIDs[$currentID] = unserialize($tmpCategoryIDs);
+							}
+							unset($import['categoryIDs']);
+						}
 					}
 					
 					// columns for folders
@@ -454,7 +475,7 @@ class BackupHandler extends SingletonFactory {
 						
 						$newStylesheetIDs = array();
 						foreach ($stylesheetIDs as $stylesheet) {
-							$newStylesheetIDs[] = $this->tmp['stylesheets'][$stylesheet];
+							if (isset($this->tmp['stylesheets'][$stylesheet])) $newStylesheetIDs[] = $this->tmp['stylesheets'][$stylesheet];
 						}
 						
 						if ($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$pageID]) !== null && !empty($newStylesheetIDs)) {
@@ -466,13 +487,18 @@ class BackupHandler extends SingletonFactory {
 				
 				// link files and folders
 				if ($object == 'file') {
-					foreach ($upperObjectIDs as $file => $folder) {
+					foreach ($upperObjectIDs as $file => $folders) {
 						$editorName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
 						$cacheName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Cache';
 						
+						$newFolders = array();
+						foreach ($folders as $folder) {
+							if (isset($this->tmp['folders'][$folder])) $newFolders[] = $this->tmp['folders'][$folder];
+						}
+						
 						if ($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$file]) !== null) {
 							$editor = new $editorName($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$file]));
-							$editor->updateCategoryIDs(array($this->tmp['folders'][$folder]));
+							$editor->updateCategoryIDs($newFolders);
 						}
 					}
 				}
