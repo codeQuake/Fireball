@@ -74,7 +74,7 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 			return false;
 		}
 
-		return $this->getPermission('canEnterPage');
+		return $this->getPermission('canViewPage');
 	}
 
 	/**
@@ -280,25 +280,6 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 		}
 
 		return false;
-	}
-
-	/**
-	 * Returns whether this page is visible for the current user.
-	 * 
-	 * @return	boolean
-	 */
-	public function isVisible() {
-		if ($this->isDisabled && !WCF::getSession()->getPermission('mod.cms.canViewDisabledPage')) {
-			// user can't view disabled pages
-			return false;
-		}
-
-		if ($this->invisible) {
-			// user can't view invisible pages
-			return false;
-		}
-
-		return $this->getPermission('canViewPage');
 	}
 
 	/**

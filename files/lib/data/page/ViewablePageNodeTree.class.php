@@ -16,7 +16,7 @@ class ViewablePageNodeTree extends PageNodeTree {
 	 * @see	\cms\data\page\PageNodeTree::isIncluded()
 	 */
 	protected function isIncluded(PageNode $pageNode) {
-		if (!$pageNode->isVisible()) {
+		if ($pageNode->invisible) {
 			return false;
 		}
 

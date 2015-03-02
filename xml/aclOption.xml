@@ -16,10 +16,6 @@
 				<categoryname>user.cms.page</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
-			<option name="canEnterPage">
-				<categoryname>user.cms.page</categoryname>
-				<objecttype>de.codequake.cms.page</objecttype>
-			</option>
 			<!-- /user.cms.page -->
 
 			<!-- user.cms.page.comment -->
