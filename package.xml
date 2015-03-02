@@ -43,6 +43,7 @@
 
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
 		<instruction type="bbcode">xml/bbcode.xml</instruction>
 		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="cronjob">xml/cronjob.xml</instruction>

@@ -36,7 +36,7 @@ class PageACPSearchResultProvider implements IACPSearchResultProvider {
 				));
 
 				$subtitle = WCF::getLanguage()->getDynamicVariable('cms.page.parents', array(
-					'parentPages' => $page->getParents()
+					'page' => $page
 				));
 
 				$results[] = new ACPSearchResult($page->getTitle(), $link, $subtitle);
