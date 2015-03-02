@@ -90,17 +90,21 @@
 				</dd>
 			</dl>
 
-			<dl>
-				<dt><label for="parentID">{lang}cms.acp.content.position.parentID{/lang}</label></dt>
-				<dd>
-					<select id="parentID" name="parentID">
-						<option value="0" {if $parentID == 0} selected="selected"{/if}>{lang}wcf.global.noSelection{/lang}</option>
-						{foreach from=$contentList item=$node}
-							<option{if $node->contentID == $parentID} selected="selected"{/if} value="{@$node->contentID}" data-page-id="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$contentList->getDepth()}{$node->getTitle()}</option>
-						{/foreach}
-					</select>
-				</dd>
-			</dl>
+			{hascontent}
+				<dl>
+					<dt><label for="parentID">{lang}cms.acp.content.position.parentID{/lang}</label></dt>
+					<dd>
+						<select id="parentID" name="parentID">
+							<option value="0" {if $parentID == 0} selected="selected"{/if}>{lang}wcf.global.noSelection{/lang}</option>
+							{content}
+								{foreach from=$contentList item=$node}
+									<option{if $node->contentID == $parentID} selected="selected"{/if} value="{@$node->contentID}" data-page-id="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$contentList->getDepth()}{$node->getTitle()}</option>
+								{/foreach}
+							{/content}
+						</select>
+					</dd>
+				</dl>
+			{/hascontent}
 
 			<dl>
 				<dt><label for="showOrder">{lang}cms.acp.content.position{/lang}</label></dt>
