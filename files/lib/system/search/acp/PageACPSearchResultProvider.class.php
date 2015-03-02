@@ -29,7 +29,7 @@ class PageACPSearchResultProvider implements IACPSearchResultProvider {
 
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		foreach ($pages as $page) {
-			if (mb_strpos($page->getTitle(), $query) !== -1 || mb_strpos($page->alias, $query) !== -1) {
+			if (mb_stripos($page->getTitle(), $query) !== false || mb_stripos($page->alias, $query) !== false) {
 				$link = LinkHandler::getInstance()->getLink('PageEdit', array(
 					'application' => 'cms',
 					'id' => $page->pageID
