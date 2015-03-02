@@ -102,7 +102,6 @@ class FileDownloadPage extends AbstractPage {
 	public function show() {
 		parent::show();
 		$this->fileReader->send();
-		$this->fileReader->addHeader('Cache-control', 'max-age=31536000, public');
 		exit();
 	}
 }
