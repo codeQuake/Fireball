@@ -1,7 +1,7 @@
 <?php
 namespace cms\page;
 
-use cms\data\file\File;
+use cms\data\file\FileCache;
 use cms\data\file\FileEditor;
 use cms\system\counter\VisitCountHandler;
 use wcf\page\AbstractPage;
@@ -62,8 +62,14 @@ class FileDownloadPage extends AbstractPage {
 		parent::readParameters();
 
 		if (isset($_REQUEST['id'])) $this->fileID = intval($_REQUEST['id']);
-		$this->file = new File($this->fileID);
+		$this->file = FileCache::getInstance()->getFile($this->fileID);
 		if ($this->file === null) throw new IllegalLinkException();
+		//check if image file is in cache
+		if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && @strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $this->file->uploadTime && in_array($this->file->fileType, self::$inlineMimeTypes)) {
+			//send 304
+			header("HTTP/1.1 304 Not Modified");
+			exit;
+		}
 	}
 
 	/**
@@ -76,14 +82,13 @@ class FileDownloadPage extends AbstractPage {
 		$this->fileReader = new FileReader($this->file->getLocation(), array(
 			'filename' => $this->file->getTitle(),
 			'mimeType' => $this->file->fileType,
-			'filesize' => $this->file->fileSize,
+			'filesize' => $this->file->filesize,
 			'showInline' => (in_array($this->file->fileType, self::$inlineMimeTypes)),
 			'enableRangeSupport' => false,
 			'lastModificationTime' => $this->file->uploadTime,
 			'expirationDate' => TIME_NOW + 31536000,
 			'maxAge' => 31536000
-		));
-
+		));		
 		// count downloads
 		$fileEditor = new FileEditor($this->file);
 		$fileEditor->updateCounters(array(
@@ -96,8 +101,8 @@ class FileDownloadPage extends AbstractPage {
 	 */
 	public function show() {
 		parent::show();
-
 		$this->fileReader->send();
+		$this->fileReader->addHeader('Cache-control', 'max-age=31536000, public');
 		exit();
 	}
 }
