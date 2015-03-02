@@ -1,17 +1,15 @@
 <?php
 namespace wcf\system\event\listener;
 
-use cms\system\request\Route;
-use cms\util\PageUtil;
-use wcf\system\application\ApplicationHandler;
+use cms\system\request\PageRoute;
 use wcf\system\event\listener\IParameterizedEventListener;
-use wcf\system\request\RouteHandler;
 
 /**
- * Registers cms route. Listener has to be placed within wcf namespace because
- * application wouldn't be uninstallable otherwise.
+ * Registers all cms specific routes.
+ * Listener has to be placed within wcf namespace because application wouldn't
+ * be uninstallable otherwise.
  * 
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -21,12 +19,9 @@ class CMSRouteHandlerListener implements IParameterizedEventListener {
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
-		// thx to SoftCreatR http://www.woltlab.com/forum/index.php/Thread/224017-Request-Handler/?postID=1332856#post1332856
-		$application = ApplicationHandler::getInstance()->getActiveApplication();
-		if (PACKAGE_ID != 1 && $application != null) {
-			$route = new Route('cmsPageRoute');
-			$route->setSchema('/{alias}/', 'Page');
-			$route->setParameterOption('alias', null, PageUtil::ALIAS_PATTERN_STACK);
+		// only register routes when an application is active
+		if (PACKAGE_ID !== 1) {
+			$route = new PageRoute();
 			$eventObj->addRoute($route);
 		}
 	}

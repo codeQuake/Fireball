@@ -5,6 +5,7 @@ use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\revision\PageRevisionList;
 use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
+use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
 use wcf\system\breadcrumb\Breadcrumb;
