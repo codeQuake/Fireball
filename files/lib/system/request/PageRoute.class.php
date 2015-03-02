@@ -16,6 +16,15 @@ use wcf\system\request\IRoute;
  */
 class PageRoute implements IRoute {
 	/**
+	 * parsed request data
+	 * @var	array<mixed>
+	 */
+	protected $routeData = array(
+		'controller' => 'page',
+		'isDefaultController' => false
+	);
+
+	/**
 	 * @see	\wcf\system\request\IRoute::buildLink()
 	 */
 	public function buildLink(array $components) {
@@ -86,7 +95,7 @@ class PageRoute implements IRoute {
 	 * @see	\wcf\system\request\IRoute::getRouteData()
 	 */
 	public function getRouteData() {
-		// @todo
+		return $this->routeData;
 	}
 
 	/**
@@ -106,7 +115,12 @@ class PageRoute implements IRoute {
 		}
 
 		// validate alias
-		$alias = substr($requestURL, 5);
-		return preg_match('~^' . PageUtil::ALIAS_PATTERN_STACK . '$~', $alias);
+		$alias = substr($requestURL, 5, -1);
+		if (preg_match('~^' . PageUtil::ALIAS_PATTERN_STACK . '$~', $alias)) {
+			$this->routeData['alias'] = $alias;
+			return true;
+		}
+
+		return false;
 	}
 }
