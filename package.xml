@@ -14,8 +14,8 @@
 	</authorinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="2.1.0 Alpha 1">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="1.0.0" file="requirements/de.codequake.wysiwyg.acp.tar">de.codequake.wysiwyg.acp</requiredpackage>
+		<requiredpackage minversion="2.1.0">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wysiwyg.acp.tar">de.codequake.wysiwyg.acp</requiredpackage>
 		<requiredpackage minversion="1.0.0" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
 	</requiredpackages>
 
@@ -57,25 +57,5 @@
 
 		<!-- scripts -->
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
-	</instructions>
-
-	<instructions type="update" fromversion="2.0.0 Beta 7">
-		<instruction type="file">files.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-
-		<!-- xml -->
-		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-    <instruction type="acpMenu">xml/acpMenu.xml</instruction>
-    <instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
-    
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="sql">update_beta8.sql</instruction>
-    <instruction type="script">acp/update_de.codequake.cms_beta8.php</instruction>
 	</instructions>
 </package>
