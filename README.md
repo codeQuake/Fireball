@@ -13,7 +13,6 @@ Fireball CMS is easily extendable due to the WCF's plugin system. There are a lo
   - [Fireball CMS - News System - RSS Reader](https://github.com/codeQuake/Fireball-News-RSS-Reader)
   - [Fireball CMS - News System - Burning Board Integration](https://github.com/codeQuake/Fireball_News_WBB)
 - [Fireball CMS - Burning Board Integration](https://github.com/codeQuake/Fireball_WBB)
-- [Fireball CMS - voolia Integration](https://github.com/codeQuake/Fireball_News_Voolia)
 
 The following plugins are required to install Fireball CMS:
 - [ACP WYSIWYG](https://github.com/codeQuake/WYSIWYG-ACP)

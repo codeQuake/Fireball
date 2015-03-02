@@ -295,5 +295,20 @@
 			<categoryname>de.codequake.cms</categoryname>
 		</type>
 		<!-- /pages -->
+
+		<!-- stat handlers -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.statDailyHandler</definitionname>
+			<classname>cms\system\stat\PageStatDailyHandler</classname>
+			<categoryname>de.codequake.cms</categoryname>
+		</type>
+		<type>
+			<name>de.codequake.cms.page.comment</name>
+			<definitionname>com.woltlab.wcf.statDailyHandler</definitionname>
+			<classname>cms\system\stat\PageCommentStatDailyHandler</classname>
+			<categoryname>de.codequake.cms</categoryname>
+		</type>
+		<!-- /stat handlers -->
 	</import>
 </data>
