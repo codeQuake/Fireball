@@ -3,7 +3,7 @@
 	<dd>
 		<textarea name="text" id="text">{$i18nPlainValues['text']}</textarea>
 
-		{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
+		{include file='multipleLanguageWysiwygJavascript' elementIdentifier='text' forceSelection=false}
 	</dd>
 </dl>
 
