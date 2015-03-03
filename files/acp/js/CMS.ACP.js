@@ -84,47 +84,6 @@ CMS.ACP.Page.AddContent = Class.extend({
 	}
 });
 
-CMS.ACP.Page.SetAsHome = Class.extend({
-	_buttonSelector: '.jsSetAsHome',
-	_proxy: null,
-	_didInit: false,
-
-	init: function () {
-		if (this._didInit) {
-			return;
-		}
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
-		});
-
-		this._buttons = $('.jsSetAsHome');
-		this._buttons.click($.proxy(this._click, this));
-
-		this._didInit = true;
-	},
-
-	_click: function (event) {
-		event.preventDefault();
-		var $pageID = $(event.currentTarget).data('objectID');
-
-			this._proxy.setOption('data', {
-				actionName: 'setAsHome',
-				className: 'cms\\data\\page\\PageAction',
-				objectIDs: [ $pageID ]
-			});
-			WCF.LoadingOverlayHandler.updateIcon($(event.currentTarget));
-			this._proxy.sendRequest();
-	},
-
-	_success: function (data, textStatus, jqXHR) {
-		var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-		var self = this;
-		$notification.show(function() {
-			window.location = location;
-		});
-	}
-});
-
 CMS.ACP.File = {};
 
 CMS.ACP.File.Details = Class.extend({
@@ -478,51 +437,42 @@ CMS.ACP.File.Picker = Class.extend({
 });
 
 CMS.ACP.File.Preview = WCF.Popover.extend({
-    /**
+	/**
 	 * action proxy
 	 * @var	WCF.Action.Proxy
 	 */
-    _proxy: null,
+	_proxy: null,
 
-    /**
-	 * list of links
-	 * @var	object
-	 */
-    _files: {},
-
-    /**
+	/**
 	 * @see	WCF.Popover.init()
 	 */
-    init: function () {
-        this._super('.cmsFileLink');
+	init: function () {
+		this._super('.cmsFileLink');
 
-        this._proxy = new WCF.Action.Proxy({
-            showLoadingOverlay: false
-        });
-        WCF.DOMNodeInsertedHandler.addCallback('CMS.ACP.File.Preview', $.proxy(this._initContainers, this));
-    },
+		this._proxy = new WCF.Action.Proxy({
+			showLoadingOverlay: false
+		});
+	},
 
-    /**
+	/**
 	 * @see	WCF.Popover._loadContent()
 	 */
-    _loadContent: function () {
-        var $file = $('#' + this._activeElementID);
+	_loadContent: function () {
+		var $file = $('#' + this._activeElementID);
 
-        this._proxy.setOption('data', {
-            actionName: 'getFilePreview',
-            className: 'cms\\data\\file\\FileAction',
-            objectIDs: [$file.data('fileID')]
-        });
+		this._proxy.setOption('data', {
+			actionName: 'getFilePreview',
+			className: 'cms\\data\\file\\FileAction',
+			objectIDs: [$file.data('fileID')]
+		});
 
-        var $elementID = this._activeElementID;
-        var self = this;
-        this._proxy.setOption('success', function (data, textStatus, jqXHR) {
-            self._insertContent($elementID, data.returnValues.template, true);
-        });
-        this._proxy.sendRequest();
-
-
-    }
+		var $elementID = this._activeElementID;
+		var self = this;
+		this._proxy.setOption('success', function (data, textStatus, jqXHR) {
+			self._insertContent($elementID, data.returnValues.template, true);
+		});
+		this._proxy.sendRequest();
+	}
 });
 
 CMS.ACP.File.Upload = {
@@ -1104,49 +1054,6 @@ CMS.ACP.Content.Revisions.Restore = Class.extend({
 		var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
 		$notification.show(function() {
 			window.location = location;
-		});
-	}
-});
-
-CMS.ACP.Copy = Class.extend({
-	_buttonSelector: '.jsCopyButton',
-	_objectAction: 'cms\\data\\page\\PageAction',
-	_proxy: null,
-	_didInit: false,
-
-	init: function (buttonSelector, objectAction) {
-		if (this._didInit) {
-			return;
-		}
-		this._buttonSelector = buttonSelector;
-		this._objectAction = objectAction;
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
-		});
-
-		this._buttons = $(this._buttonSelector);
-		this._buttons.click($.proxy(this._click, this));
-
-		this._didInit = true;
-	},
-
-	_click: function (event) {
-		event.preventDefault();
-		var $objectID = $(event.currentTarget).data('objectID');
-
-			this._proxy.setOption('data', {
-				actionName: 'copy',
-				className: this._objectAction,
-				objectIDs: [ $objectID ]
-			});
-			WCF.LoadingOverlayHandler.updateIcon($(event.currentTarget));
-			this._proxy.sendRequest();
-	},
-
-	_success: function (data, textStatus, jqXHR) {
-		var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-		$notification.show(function() {
-			location.reload();
 		});
 	}
 });

@@ -19,9 +19,18 @@
 		new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
 		new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
 
-		new CMS.ACP.Copy('.jsCopyButton', 'cms\\data\\content\\ContentAction');
 		new CMS.ACP.Page.AddContent();
 		new CMS.ACP.Content.Revisions();
+
+		new WCF.Action.SimpleProxy({
+			action: 'copy',
+			className: 'cms\\data\\content\\ContentAction',
+			elements: $('.jsContentRow .jsCopyButton')
+		}, {
+			success: function() {
+				window.location.reload();
+			}
+		});
 
 		WCF.Language.addObject({
 			'cms.acp.content.add': '{lang}cms.acp.content.add{/lang}',

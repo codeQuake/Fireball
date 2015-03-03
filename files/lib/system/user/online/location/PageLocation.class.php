@@ -26,7 +26,7 @@ class PageLocation implements IUserOnlineLocation {
 	public function get(UserOnline $user, $languageVariable = '') {
 		$page = PageCache::getInstance()->getPage($user->objectID);
 
-		if (!$page || !$page->isVisible || !$page->canRead()) {
+		if (!$page || !$page->canRead()) {
 			return '';
 		}
 

@@ -21,9 +21,12 @@ class CMSPageMenuItemProvider extends DefaultPageMenuItemProvider {
 	 * @see	\wcf\system\menu\page\IPageMenuItemProvider::isVisible()
 	 */
 	public function isVisible() {
-		if ($this->page === null) $this->getPage();
+		if ($this->getPage()) {
+			return $this->getPage()->canRead();
+		}
 
-		return ($this->page !== null && $this->page->isVisible());
+		// can't handle menu item
+		return parent::isVisible();
 	}
 
 	/**

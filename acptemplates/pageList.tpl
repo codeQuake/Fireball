@@ -39,10 +39,28 @@
 			}
 		});
 
-		new CMS.ACP.Copy('.jsCopyButton', 'cms\\data\\page\\PageAction');
 		new CMS.ACP.Page.AddContent();
-		new CMS.ACP.Page.SetAsHome();
 		new CMS.ACP.Page.Revisions();
+
+		new WCF.Action.SimpleProxy({
+			action: 'copy',
+			className: 'cms\\data\\page\\PageAction',
+			elements: $('.jsPageRow .jsCopyButton')
+		}, {
+			success: function() {
+				window.location.reload();
+			}
+		});
+
+		new WCF.Action.SimpleProxy({
+			action: 'setAsHome',
+			className: 'cms\\data\\page\\PageAction',
+			elements: $('.jsPageRow .jsSetAsHome')
+		}, {
+			success: function() {
+				window.location.reload();
+			}
+		});
 	});
 	//]]>
 </script>
