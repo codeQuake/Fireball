@@ -1,8 +1,8 @@
 <?php
 namespace cms\data\page\revision;
 
-use cms\data\content\ContentList;
 use cms\data\content\ContentAction;
+use cms\data\content\ContentList;
 use cms\data\page\PageAction;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\WCF;
