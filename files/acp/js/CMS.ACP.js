@@ -437,51 +437,42 @@ CMS.ACP.File.Picker = Class.extend({
 });
 
 CMS.ACP.File.Preview = WCF.Popover.extend({
-    /**
+	/**
 	 * action proxy
 	 * @var	WCF.Action.Proxy
 	 */
-    _proxy: null,
+	_proxy: null,
 
-    /**
-	 * list of links
-	 * @var	object
-	 */
-    _files: {},
-
-    /**
+	/**
 	 * @see	WCF.Popover.init()
 	 */
-    init: function () {
-        this._super('.cmsFileLink');
+	init: function () {
+		this._super('.cmsFileLink');
 
-        this._proxy = new WCF.Action.Proxy({
-            showLoadingOverlay: false
-        });
-        WCF.DOMNodeInsertedHandler.addCallback('CMS.ACP.File.Preview', $.proxy(this._initContainers, this));
-    },
+		this._proxy = new WCF.Action.Proxy({
+			showLoadingOverlay: false
+		});
+	},
 
-    /**
+	/**
 	 * @see	WCF.Popover._loadContent()
 	 */
-    _loadContent: function () {
-        var $file = $('#' + this._activeElementID);
+	_loadContent: function () {
+		var $file = $('#' + this._activeElementID);
 
-        this._proxy.setOption('data', {
-            actionName: 'getFilePreview',
-            className: 'cms\\data\\file\\FileAction',
-            objectIDs: [$file.data('fileID')]
-        });
+		this._proxy.setOption('data', {
+			actionName: 'getFilePreview',
+			className: 'cms\\data\\file\\FileAction',
+			objectIDs: [$file.data('fileID')]
+		});
 
-        var $elementID = this._activeElementID;
-        var self = this;
-        this._proxy.setOption('success', function (data, textStatus, jqXHR) {
-            self._insertContent($elementID, data.returnValues.template, true);
-        });
-        this._proxy.sendRequest();
-
-
-    }
+		var $elementID = this._activeElementID;
+		var self = this;
+		this._proxy.setOption('success', function (data, textStatus, jqXHR) {
+			self._insertContent($elementID, data.returnValues.template, true);
+		});
+		this._proxy.sendRequest();
+	}
 });
 
 CMS.ACP.File.Upload = {
