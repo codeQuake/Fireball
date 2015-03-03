@@ -94,7 +94,7 @@
 						<td class="columnTitle columnFile"><a class="jsFileDetails cmsFileLink" data-file-id="{@$file->fileID}">{$file->getTitle()}</a></td>
 						<td class="columnType">{$file->fileType}</td>
 						<td class="columnDate columnUploadTime">{@$file->uploadTime|time}</td>
-						<td class="columnDigits columnFilesize">{@$file->fileSize|filesize}</td>
+						<td class="columnDigits columnFilesize">{@$file->filesize|filesize}</td>
 						<td class="columnDigits columnDownloads">{#$file->downloads}</td>
 
 						{event name='columnRows'}
