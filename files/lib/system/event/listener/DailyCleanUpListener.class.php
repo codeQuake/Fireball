@@ -44,12 +44,6 @@ class DailyCleanUpListener implements IEventListener {
 				WHERE		time < ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(TIME_NOW - (CMS_REVISION_DELETE * 86400)));
-
-			// content revisions
-			$sql = "DELETE FROM	cms".WCF_N."_content_revision
-				WHERE		time < ?";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(TIME_NOW - (CMS_REVISION_DELETE * 86400)));
 		}
 	}
 }
