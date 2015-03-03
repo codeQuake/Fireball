@@ -406,6 +406,8 @@
 	</category>
 
 	<category name="wcf.page">
+		<item name="wcf.page.category.de.codequake.cms"><![CDATA[Fireball CMS]]></item>
+		<item name="wcf.page.de.codequake.cms.PagePage"><![CDATA[CMS Page]]></item>
 		<item name="wcf.page.sitemap.cms"><![CDATA[Pages]]></item>
 	</category>
 
