@@ -2,7 +2,6 @@
 namespace cms\data\content;
 
 use cms\data\page\PageCache;
-use cms\system\revision\ContentRevisionHandler;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\poll\Poll;
 use wcf\data\DatabaseObject;
@@ -186,11 +185,6 @@ class Content extends DatabaseObject implements IRouteController, IPollObject {
 
 	public function canVote() {
 		return (WCF::getSession()->getPermission('user.cms.content.canVotePoll') ? true : false);
-	}
-
-	public function getRevisions() {
-		//gets content revisions
-		return ContentRevisionHandler::getInstance()->getRevisions($this->contentID);
 	}
 
 	/**

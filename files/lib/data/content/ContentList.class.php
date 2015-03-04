@@ -12,6 +12,8 @@ use wcf\data\DatabaseObjectList;
  * @package	de.codequake.cms
  */
 class ContentList extends DatabaseObjectList {
-
+	/**
+	 * @see	\wcf\data\DatabaseObjectList::$className
+	 */
 	public $className = 'cms\data\content\Content';
 }

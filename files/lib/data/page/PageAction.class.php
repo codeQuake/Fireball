@@ -116,7 +116,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			}
 		}
 
-		//setting new IDs
+		// setting new IDs
 		$contents = new ContentList();
 		$contents->getConditionBuilder()->add('pageID = ?', array(
 			$pageID
@@ -187,13 +187,25 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		foreach ($this->objects as $object) {
+			$contentData = array();
+
+			$contentList = new ContentList();
+			$contentList->getConditionBuilder()->add('content.pageID = ?', array($object->pageID));
+			$contentList->readObjects();
+
+			foreach ($contentList as $content) {
+				// @todo: handle multilingual values
+				$contentData[] = $content->getData();
+			}
+
 			call_user_func(array($this->className, 'createRevision'), array(
 				'pageID' => $object->getObjectID(),
 				'action' => (isset($this->parameters['action']) ? $this->parameters['action'] : 'create'),
 				'userID' => WCF::getUser()->userID,
 				'username' => WCF::getUser()->username,
 				'time' => TIME_NOW,
-				'data' => serialize($object->getDecoratedObject()->getData())
+				'data' => serialize($object->getDecoratedObject()->getData()),
+				'contentData' => serialize($contentData)
 			));
 		}
 	}
@@ -616,9 +628,5 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		WCF::getDB()->commitTransaction();
-
-		// create revision
-		$this->parameters['action'] = 'updatePosition';
-		$this->createRevision();
 	}
 }

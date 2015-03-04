@@ -223,7 +223,7 @@ class ContentAddForm extends AbstractForm {
 			'cssClasses' => $this->cssClasses,
 			'showOrder' => $this->showOrder,
 			'position' => $this->position,
-			'contentData' => serialize($this->contentData),
+			'contentData' => $this->contentData,
 			'contentTypeID' => $this->objectType->objectTypeID
 		);
 
@@ -263,9 +263,9 @@ class ContentAddForm extends AbstractForm {
 			$editor->update($update);
 		}
 
-		//create revision
-		$objectAction = new ContentAction(array($returnValues['returnValues']->contentID), 'createRevision', array(
-			'action' => 'create'
+		// create revision
+		$objectAction = new PageAction(array($this->pageID), 'createRevision', array(
+			'action' => 'content.create'
 		));
 		$objectAction->executeAction();
 

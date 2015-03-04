@@ -43,8 +43,10 @@
 		WCF.Language.addObject({
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
-    new CMS.ACP.File.Preview();
+
+		new CMS.ACP.File.Preview();
 		new CMS.ACP.File.Picker($('#filePicker'), 'contentData[imageID]', [{if $contentData['imageID']|isset}{@$contentData['imageID']}{/if}], { fileType: 'image' });
+
 		{if $contentData['width']|isset && $contentData['height']|isset}
 			new CMS.ACP.Image.Ratio({$contentData['width']},{$contentData['height']});
 		{/if}

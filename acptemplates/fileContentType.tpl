@@ -14,7 +14,7 @@
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
-    new CMS.ACP.File.Preview();
+		new CMS.ACP.File.Preview();
 		new CMS.ACP.File.Picker($('#filePicker'), 'contentData[fileID]', [{if $contentData['fileID']|isset}{@$contentData['fileID']}{/if}]);
 	});
 	//]]>

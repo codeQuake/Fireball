@@ -88,7 +88,7 @@ class ContentEditForm extends ContentAddForm {
 			'cssClasses' => $this->cssClasses,
 			'showOrder' => $this->showOrder,
 			'position' => $this->position,
-			'contentData' => serialize($this->contentData),
+			'contentData' => $this->contentData,
 			'contentTypeID' => $this->objectType->objectTypeID
 		);
 
@@ -98,10 +98,22 @@ class ContentEditForm extends ContentAddForm {
 		$this->objectAction->executeAction();
 
 		// create revision
-		$objectAction = new ContentAction(array($this->contentID), 'createRevision', array(
-			'action' => 'update'
-		));
-		$objectAction->executeAction();
+		if ($this->pageID == $this->content->pageID) {
+			$objectAction = new PageAction(array($this->pageID), 'createRevision', array(
+				'action' => 'content.update'
+			));
+			$objectAction->executeAction();
+		} else {
+			$objectAction = new PageAction(array($this->pageID), 'createRevision', array(
+				'action' => 'content.create'
+			));
+			$objectAction->executeAction();
+
+			$objectAction = new PageAction(array($this->content->pageID), 'createRevision', array(
+				'action' => 'content.delete'
+			));
+			$objectAction->executeAction();
+		}
 
 		// update search index
 		$objectAction = new PageAction(array($this->pageID), 'refreshSearchIndex');

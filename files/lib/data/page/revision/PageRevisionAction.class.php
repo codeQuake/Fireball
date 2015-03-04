@@ -1,6 +1,8 @@
 <?php
 namespace cms\data\page\revision;
 
+use cms\data\content\ContentAction;
+use cms\data\content\ContentList;
 use cms\data\page\PageAction;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\WCF;
@@ -45,7 +47,44 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 	public function restore() {
 		$revision = $this->getSingleObject();
 
+		WCF::getDB()->beginTransaction();
+
+		// restore page
 		$pageAction = new PageAction(array($revision->pageID), 'update', array('data' => @unserialize($revision->data)));
 		$pageAction->executeAction();
+
+		// restore contents
+		$contentData = @unserialize($revision->contentData);
+
+		$contentList = new ContentList();
+		$contentList->getConditionBuilder()->add('content.pageID = ?', array($revision->pageID));
+		$contentList->readObjects();
+
+		$existingContentIDs = $contentList->getObjectIDs();
+		$oldContents = array();
+		foreach ($contentData as $data) {
+			$oldContents[$data['contentID']] = $data;
+		}
+
+		// delete contents that where created after the revision
+		$orphanedElementIDs = array_diff($existingContentIDs, array_keys($oldContents));
+		if (!empty($orphanedElementIDs)) {
+			$contentAction = new ContentAction($orphanedElementIDs, 'delete');
+			$contentAction->executeAction();
+		}
+
+		foreach ($oldContents as $oldContent) {
+			if (in_array($oldContent['contentID'], $existingContentIDs)) {
+				// content this exists => update
+				$contentAction = new ContentAction(array($oldContent['contentID']), 'update', array('data' => $oldContent));
+				$contentAction->executeAction();
+			} else {
+				// content was deleted => re-create
+				$contentAction = new ContentAction(array($oldContent['contentID']), 'create', array('data' => $oldContent));
+				$contentAction->executeAction();
+			}
+		}
+
+		WCF::getDB()->commitTransaction();
 	}
 }

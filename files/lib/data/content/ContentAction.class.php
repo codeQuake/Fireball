@@ -1,8 +1,8 @@
 <?php
 namespace cms\data\content;
 
+use cms\data\page\PageAction;
 use cms\system\cache\builder\ContentCacheBuilder;
-use cms\system\revision\ContentRevisionHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
@@ -28,7 +28,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache
 	 */
-	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'restoreRevision', 'toggle', 'update', 'updatePosition');
+	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'toggle', 'update', 'updatePosition');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
@@ -95,30 +95,15 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	}
 
 	/**
-	 * Creates a revision.
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::create()
 	 */
-	protected function createRevision() {
-		if (empty($this->objects)) {
-			$this->readObjects();
-		}
-		$action = 'create';
-		if (isset($this->parameters['action'])) {
-			$action = $this->parameters['action'];
+	public function create() {
+		// serialize content data
+		if (isset($this->parameters['data']['contentData']) && is_array($this->parameters['data']['contentData'])) {
+			$this->parameters['data']['contentData'] = serialize($this->parameters['data']['contentData']);
 		}
 
-		foreach ($this->objects as $object) {
-			call_user_func(array(
-				$this->className,
-				'createRevision'
-			), array(
-				'contentID' => $object->getObjectID(),
-				'action' => $action,
-				'userID' => WCF::getUser()->userID,
-				'username' => WCF::getUser()->username,
-				'time' => TIME_NOW,
-				'data' => serialize($object->getDecoratedObject()->getData())
-			));
-		}
+		return parent::create();
 	}
 
 	/**
@@ -162,57 +147,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	}
 
 	/**
-	 * Validate parameters to get a list of content revisions.
-	 */
-	public function validateGetRevisions() {
-		if (count($this->objectIDs) != 1) {
-			throw new UserInputException('objectIDs');
-		}
-	}
-
-	/**
-	 * Returns a formatted list of content revisions.
-	 */
-	public function getRevisions() {
-		$objectID = reset($this->objectIDs);
-		$content = ContentCache::getInstance()->getContent($objectID);
-		$revisions = $content->getRevisions();
-		WCF::getTPL()->assign(array(
-			'revisions' => $revisions,
-			'contentID' => $content->contentID
-		));
-
-		return array(
-			'template' => WCF::getTPL()->fetch('contentRevisionList', 'cms'),
-			'revisions' => $revisions,
-			'contentID' => $content->contentID
-		);
-	}
-
-	/**
-	 * Validates parameters and permissions to restore a revision.
-	 */
-	public function validateRestoreRevision() {
-		$this->validateUpdate();
-	}
-
-	/**
-	 * Restores a content revision.
-	 */
-	public function restoreRevision() {
-		if (empty($this->objects)) {
-			$this->readObjects();
-		}
-
-		foreach ($this->objects as $object) {
-			$restoreObject = ContentRevisionHandler::getInstance()->getRevisionByID($object->contentID, $this->parameters['restoreObjectID']);
-			$this->parameters['data'] = @unserialize($restoreObject->data);
-		}
-
-		$this->update();
-	}
-
-	/**
 	 * @see	\wcf\data\IToggleAction::validateToggle()
 	 */
 	public function validateToggle() {
@@ -242,6 +176,18 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	 */
 	public function unmarkAll() {
 		ClipboardHandler::getInstance()->removeItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.content'));
+	}
+
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::update()
+	 */
+	public function update() {
+		// serialize content data
+		if (isset($this->parameters['data']['contentData']) && is_array($this->parameters['data']['contentData'])) {
+			$this->parameters['data']['contentData'] = serialize($this->parameters['data']['contentData']);
+		}
+
+		parent::update();
 	}
 
 	/**
@@ -281,9 +227,14 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	public function updatePosition() {
 		WCF::getDB()->beginTransaction();
 
+		$pageIDs = array();
 		foreach ($this->parameters['data']['structure'] as $parentID => $contentIDs) {
 			$position = 1;
 			foreach ($contentIDs as $contentID) {
+				if (!in_array($this->objects[$contentID]->pageID, $pageIDs)) {
+					$pageIDs[] = $this->objects[$contentID]->pageID;
+				}
+
 				$this->objects[$contentID]->update(array(
 					'parentID' => $parentID != 0 ? $this->objects[$parentID]->contentID : null,
 					'showOrder' => $position ++
@@ -294,7 +245,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		WCF::getDB()->commitTransaction();
 
 		// create revision
-		$this->parameters['action'] = 'updatePosition';
-		$this->createRevision();
+		$pageAction = new PageAction($pageIDs, 'createRevision', array(
+			'action' => 'content.updatePosition'
+		));
+		$pageAction->executeAction();
 	}
 }
