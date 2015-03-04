@@ -3,6 +3,7 @@ namespace cms\acp\form;
 
 use cms\data\stylesheet\StylesheetAction;
 use wcf\form\AbstractForm;
+use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -48,6 +49,23 @@ class StylesheetAddForm extends AbstractForm {
 	}
 
 	/**
+	 * @see	\wcf\form\IForm::validate()
+	 */
+	public function validate() {
+		parent::validate();
+
+		// validate title
+		if (empty($this->title)) {
+			throw new UserInputException('title');
+		}
+
+		// validate less
+		if (empty($_POST['less'])) {
+			throw new UserInputException('less');
+		}
+	}
+
+	/**
 	 * @see	\wcf\form\IForm::save()
 	 */
 	public function save() {
@@ -64,8 +82,11 @@ class StylesheetAddForm extends AbstractForm {
 		$this->objectAction->executeAction();
 
 		$this->saved();
+
+		// show success message
 		WCF::getTPL()->assign('success', true);
 
+		// reset variables
 		$this->title = $this->less = '';
 	}
 

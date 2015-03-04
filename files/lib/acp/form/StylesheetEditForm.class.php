@@ -70,6 +70,8 @@ class StylesheetEditForm extends StylesheetAddForm {
 		$this->objectAction->executeAction();
 
 		$this->saved();
+
+		// show success message
 		WCF::getTPL()->assign('success', true);
 	}
 

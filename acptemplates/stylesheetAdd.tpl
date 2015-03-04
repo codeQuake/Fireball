@@ -41,6 +41,15 @@
 				<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
 				<dd>
 					<input type="text" name="title" id="title" required="required" value="{$title}" class="long" />
+					{if $errorField == 'title'}
+						<small class="innerError">
+							{if $errorType == 'empty'}
+								{lang}wcf.global.form.error.empty{/lang}
+							{else}
+								{lang}cms.acp.stylesheet.title.error.{@$errorType}{/lang}
+							{/if}
+						</small>
+					{/if}
 				</dd>
 			</dl>
 
@@ -54,6 +63,15 @@
 				<dt></dt>
 				<dd>
 					<textarea id="less" rows="20" cols="40" name="less">{$less}</textarea>
+					{if $errorField == 'less'}
+						<small class="innerError">
+							{if $errorType == 'empty'}
+								{lang}wcf.global.form.error.empty{/lang}
+							{else}
+								{lang}cms.acp.stylesheet.less.error.{@$errorType}{/lang}
+							{/if}
+						</small>
+					{/if}
 					<small>{lang}cms.acp.stylesheet.less.description{/lang}</small>
 
 					{include file='codemirror' codemirrorMode='less' codemirrorSelector='#less'}
