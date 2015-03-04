@@ -7,9 +7,7 @@
 		{/if}
 	</div>
 	<div class="containerHeadline">
-		<h3>
-			{$file->getTitle()}
-       </h3>
-	   <small>{$file->fileSize|filesize} - {$file->fileType} - {@$file->uploadTime|time}</small>
+		<h3>{$file->getTitle()}</h3>
+		<small>{$file->fileSize|filesize} - {$file->fileType} - {@$file->uploadTime|time}</small>
 	</div>
- </div>
+</div>
