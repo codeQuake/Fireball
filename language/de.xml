@@ -5,7 +5,7 @@
 		<item name="cms.acp.content.copy"><![CDATA[Inhalt kopieren]]></item>
 		<item name="cms.acp.content.css"><![CDATA[CSS-Einstellungen]]></item>
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
-		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie "container containerPadding". Für einen Abstand zum oberen Element nutzen sie zusätzlich "marginTop". <br/>
+		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie „container containerPadding“. Für einen Abstand zum oberen Element nutzen sie zusätzlich „marginTop“.<br />
 <strong>Beispiele:</strong>
 <ul class="nativeList">
 	<li><code class="inlineCode">container</code>: Legt einen Rahmen um das Element</li>
@@ -60,12 +60,12 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Vorlage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[Alle Seiten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Geben Sie hier die URL ein, von der die Inhalte bezogen werden sollen. Das Format des Feeds kann entweder <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Anzahl Einträge]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Geben Sie hier die URL ein, von der die Inhalte bezogen werden sollen. Das Format des Feeds kann entweder <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Anzahl Einträge]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[Alle untergeordneten Elemente werden automatisch als Slideshow arrangiert.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
@@ -200,7 +200,7 @@
 		<item name="cms.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
 		<item name="cms.acp.page.settings"><![CDATA[Einstellungen]]></item>
 		<item name="cms.acp.page.settings.allowSubscribing"><![CDATA[Seite kann abonniert werden]]></item>
-		<item name="cms.acp.page.settings.allowSubscribing.description"><![CDATA[{if $action == 'edit' && $allowSubscribing}<strong>Hinweis:</strong> Alle bestehenden Abonnements werden gelöscht.{/if}]]></item>
+		<item name="cms.acp.page.settings.allowSubscribing.description"><![CDATA[{if $action == 'edit' && $allowSubscribing}<strong>Hinweis:</strong> Beim Deaktivieren dieser Option werden alle bestehenden Abonnements gelöscht.{/if}]]></item>
 		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
 		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Kommentare aktivieren]]></item>
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[Erlaubt anderen Benutzern diese Seite zu kommentieren.]]></item>

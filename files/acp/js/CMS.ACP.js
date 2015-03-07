@@ -10,15 +10,17 @@ CMS.ACP.Page.AddForm = Class.extend({
 	},
 
 	_buildAliasPreview: function() {
-		var $aliasParent = $('#parentID option:selected').data('alias');
+		var $aliasPrefix = $('#parentID option:selected').data('alias');
 		var $alias = $('#alias').val();
+		var $previewAlias = '';
+
 		if ($alias != '') {
-			$aliasPreview = 'index.php/';
-			if ($aliasParent != '' && typeof $aliasParent !== "undefined") {
-				$aliasPreview += $aliasParent + '/';
+			$previewAlias = 'index.php/';
+			if ($aliasPrefix != '' && typeof $aliasPrefix !== "undefined") {
+				$previewAlias += $aliasPrefix + '/';
 			}
-			$aliasPreview += $alias + '/';
-			$('#aliasPreview').html(WCF.Language.get('cms.acp.page.alias.preview') + ' ' +  $aliasPreview).show();
+			$previewAlias += $alias + '/';
+			$('#aliasPreview').html(WCF.Language.get('cms.acp.page.alias.preview') + ' ' +  $previewAlias).show();
 		}
 		else { $('#aliasPreview').hide(); }
 	}
