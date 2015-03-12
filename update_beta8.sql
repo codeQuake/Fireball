@@ -34,3 +34,4 @@ CREATE TABLE cms1_file_to_category (
 
 ALTER TABLE cms1_page_revision CHANGE data data LONGBLOB NOT NULL DEFAULT '';
 ALTER TABLE cms1_page_revision ADD contentData LONGBLOB NOT NULL DEFAULT '';
+DROP TABLE IF EXISTS cms1_content_revision;
