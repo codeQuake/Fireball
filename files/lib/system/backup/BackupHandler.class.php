@@ -121,7 +121,7 @@ class BackupHandler extends SingletonFactory {
 							if ($key == 'contentData') {
 								$langData = array();
 								
-								if (isset($data['text'])){
+								if (isset($data['text'])) {
 									foreach ($availableLanguages as $lang) {
 										$langData[$lang->countryCode] = $lang->get($data['text']);
 									}
