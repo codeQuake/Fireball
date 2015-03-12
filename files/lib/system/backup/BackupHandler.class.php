@@ -411,21 +411,23 @@ class BackupHandler extends SingletonFactory {
 						// multilingual text?
 						if ($this->is_serialized($import['contentData'])) {
 							$tmpData = unserialize($import['contentData']);
-							$tmpText = $tmpData['text'];
-							if ($this->is_serialized($tmpText)) {
-								$tmpText = unserialize($tmpText);
+							if (isset($tmpData['text'])) {
+								$tmpText = $tmpData['text'];
+								if ($this->is_serialized($tmpText)) {
+									$tmpText = unserialize($tmpText);
 								
-								foreach ($availableLanguages as $lang) {
-									if (isset($tmpText[$lang->countryCode])) {
-										$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
-									} else {
-										$langData['text'][$lang->languageID] = '';
+									foreach ($availableLanguages as $lang) {
+										if (isset($tmpText[$lang->countryCode])) {
+											$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
+										} else {
+											$langData['text'][$lang->languageID] = '';
+										}
 									}
+								
+									$tmpData['text'] = '';
+								
+									$import['contentData'] = serialize($tmpData);
 								}
-								
-								$tmpData['text'] = '';
-								
-								$import['contentData'] = serialize($tmpData);
 							}
 						}
 					}
