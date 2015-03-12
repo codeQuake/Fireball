@@ -211,7 +211,8 @@ class BackupHandler extends SingletonFactory {
 							} else {
 								// set when everything is imported
 								unset($import['parentID']);
-								$parentIDs[$currentID] = $import['parentID'];
+								//code will always fail?! why is it here?
+								//$parentIDs[$currentID] = $import['parentID'];
 							}
 						}
 					}
