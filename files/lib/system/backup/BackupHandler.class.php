@@ -134,6 +134,12 @@ class BackupHandler extends SingletonFactory {
 							$xml->writeElement($key, $data);
 						}
 					}
+					
+					if ($object == 'page') {
+						$stylesheetIDs = $$object->getStylesheetIDs();
+						$xml->writeElement('stylesheets', base64_encode(serialize($stylesheetIDs)));
+					}
+					
 					$xml->endElement();
 				}
 				$xml->endElement();
@@ -229,7 +235,12 @@ class BackupHandler extends SingletonFactory {
 						
 						// save stylesheets
 						if (isset($import['stylesheets'])) {
-							$upperObjectIDs[$currentID] = unserialize($import['stylesheets']);
+							$tmpStylesheets = base64_decode($import['stylesheets']);
+							if ($this->is_serialized($tmpStylesheets)) {
+								$tmpStylesheets = unserialize($tmpStylesheets);
+								if (!empty($tmpStylesheets))
+									$upperObjectIDs[$currentID] = $tmpStylesheets;
+							}
 							unset($import['stylesheets']);
 						}
 						
@@ -475,16 +486,16 @@ class BackupHandler extends SingletonFactory {
 				// link stylesheets and pages
 				if ($object == 'page') {
 					foreach ($upperObjectIDs as $pageID => $stylesheetIDs) {
-						$editorName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
-						$cacheName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Cache';
+						$editorName = '\\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
 						
 						$newStylesheetIDs = array();
 						foreach ($stylesheetIDs as $stylesheet) {
 							if (isset($this->tmp['stylesheets'][$stylesheet])) $newStylesheetIDs[] = $this->tmp['stylesheets'][$stylesheet];
 						}
-						
-						if ($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$pageID]) !== null && !empty($newStylesheetIDs)) {
-							$editor = new $editorName($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$pageID]));
+
+						$page = new \cms\data\page\Page($this->tmp[$object.'s'][$pageID]);
+						if ($page !== null && !empty($newStylesheetIDs)) {
+							$editor = new $editorName($page);
 							$editor->updateStylesheetIDs($newStylesheetIDs);
 						}
 					}
