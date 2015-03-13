@@ -171,7 +171,6 @@ class BackupHandler extends SingletonFactory {
 		$tar = new TarWriter(FileUtil::getTempFolder().'files.tar');
 		$fileList = $files->getFiles(SORT_ASC, new Regex('^'.CMS_DIR . 'files/$'), true);
 		$tar->add($fileList, '', CMS_DIR . 'files/');
-		
 		$tar->create();
 	}
 
