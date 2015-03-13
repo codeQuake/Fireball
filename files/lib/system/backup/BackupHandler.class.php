@@ -508,7 +508,7 @@ class BackupHandler extends SingletonFactory {
 				// link files and folders
 				if ($object == 'file') {
 					foreach ($upperObjectIDs as $file => $folders) {
-						$editorName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
+						$editorName = '\\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
 						$className = '\\cms\data\\'.$object.'\\'.ucfirst($object);
 						
 						$element = new $className($this->tmp[$object.'s'][$file]);
