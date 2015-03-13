@@ -208,8 +208,8 @@ class BackupHandler extends SingletonFactory {
 								$import['parentID'] = $this->tmp[$object.'s'][$import['parentID']];
 							} else {
 								// set when everything is imported
-								unset($import['parentID']);
 								$parentIDs[$currentID] = $import['parentID'];
+								unset($import['parentID']);
 							}
 						}
 					}
