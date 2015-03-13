@@ -17,6 +17,7 @@ use wcf\system\io\Tar;
 use wcf\system\io\TarWriter;
 use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
+use wcf\system\Regex;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 use wcf\util\DirectoryUtil;
@@ -168,7 +169,8 @@ class BackupHandler extends SingletonFactory {
 	protected function tarFiles() {
 		$files = new DirectoryUtil(CMS_DIR . 'files/');
 		$tar = new TarWriter(FileUtil::getTempFolder().'files.tar');
-		$tar->add($files->getFiles(), '', CMS_DIR . 'files/');
+		$fileList = $files->getFiles(SORT_ASC, new Regex('^'.CMS_DIR . 'files/$'), true);
+		$tar->add($fileList, '', CMS_DIR . 'files/');
 		
 		$tar->create();
 	}
