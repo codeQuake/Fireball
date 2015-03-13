@@ -14,6 +14,7 @@ use wcf\data\category\CategoryNodeTree;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
 use wcf\data\DatabaseObject;
+use wcf\system\exception\SystemException;
 use wcf\system\io\Tar;
 use wcf\system\io\TarWriter;
 use wcf\system\language\I18nHandler;
