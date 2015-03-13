@@ -2,6 +2,7 @@
 namespace cms\system\backup;
 
 use cms\system\cache\builder\ContentCacheBuilder;
+use cms\system\cache\builder\FileCacheBuilder;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\data\content\ContentAction;
 use cms\data\file\FileAction;
@@ -54,6 +55,9 @@ class BackupHandler extends SingletonFactory {
 	
 	protected $categoryObjectType = 0;
 
+	protected $cmsUrl = '';
+	protected $api = '';
+
 	protected function init() {
 		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
@@ -85,7 +89,10 @@ class BackupHandler extends SingletonFactory {
 		
 		// start doc
 		$xml = new XMLWriter();
-		$xml->beginDocument('data', '', '', array('api' => $cmsVersion));
+		$xml->beginDocument('data', '', '', array(
+			'api' => $cmsVersion,
+			'cmsUrl' => WCF::getPath('cms')
+		));
 		
 		// get available languages
 		$availableLanguages = LanguageFactory::getInstance()->getLanguages();
@@ -569,6 +576,8 @@ class BackupHandler extends SingletonFactory {
 							$editor->updateCategoryIDs($newFolders);
 						}
 					}
+					
+					$this->importFiles($filename);
 				}
 			}
 		}
@@ -577,25 +586,45 @@ class BackupHandler extends SingletonFactory {
 	protected function openTar($filename) {
 		$tar = new Tar($filename);
 		$this->data = $this->readXML($tar);
-		$this->importFiles($tar);
 		$tar->close();
 	}
 
-	protected function importFiles($tar) {
+	protected function importFiles($filename) {
+		$tar = new Tar($filename);
+		
 		$files = 'files.tar';
 		if ($tar->getIndexByFileName($files) === false) {
 			throw new SystemException("Unable to find required file '" . $files . "' in the import archive");
 		}
 		$tar->extract($files, CMS_DIR . 'files/files.tar');
-
+		
 		$ftar = new Tar(CMS_DIR . 'files/files.tar');
 		$contentList = $ftar->getContentList();
 		foreach ($contentList as $key => $val) {
-			if ($val['type'] == 'file' && $val['filename'] != '/files.tar' && $val['filename'] != 'files.tar') $ftar->extract($key, CMS_DIR . 'files/' . $val['filename']);
-			else if (!file_exists(CMS_DIR . 'files/' . $val['filename'])) mkdir(CMS_DIR . 'files/' . $val['filename']);
+			if ($val['type'] == 'file' && $val['filename'] != '/files.tar' && $val['filename'] != 'files.tar') {
+				$filename = preg_replace_callback(
+					'/([0-9]+)\-/',
+					function ($match) {
+						if (isset($match[1]) && isset($this->tmp['files'][$match[1]])) {
+							return $this->tmp['files'][$match[1]] . '-';
+						} else {
+							return $match[0];
+						}
+					},
+					$val['filename']
+				);
+				
+				$ftar->extract($key, CMS_DIR . 'files/' . $filename);
+			} else if (!file_exists(CMS_DIR . 'files/' . $val['filename'])) {
+				mkdir(CMS_DIR . 'files/' . $val['filename']);
+			}
 		}
 		$ftar->close();
 		@unlink(CMS_DIR . 'files/files.tar');
+		
+		$tar->close();
+		
+		FileCacheBuilder::getInstance()->reset();
 	}
 
 	protected function readXML($tar) {
@@ -607,6 +636,13 @@ class BackupHandler extends SingletonFactory {
 		$xmlData->loadXML($xml, $tar->extractToString($tar->getIndexByFileName($xml)));
 		$xpath = $xmlData->xpath();
 		$root = $xpath->query('/ns:data')->item(0);
+		
+		$test = $xpath->query('//data')->item(0);
+		if ($test !== null) {
+			$this->cmsUrl = $test->getAttribute('cmsUrl');
+			$this->api = $test->getAttribute('api');
+		}
+		
 		$items = $xpath->query('child::*', $root);
 		$data = array();
 		$i = 0;
@@ -623,6 +659,7 @@ class BackupHandler extends SingletonFactory {
 				$i++;
 			}
 		}
+		
 		return $data;
 	}
 	
@@ -790,6 +827,12 @@ class BackupHandler extends SingletonFactory {
 			},
 			$string
 		);
+		
+		// new domain
+		if (!empty($this->cmsUrl)) {
+			$cmsUrl = WCF::getPath('cms');
+			$string = str_replace($this->cmsUrl, $cmsUrl, $string);
+		}
 		
 		return $string;
 	}
