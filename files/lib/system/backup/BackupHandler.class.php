@@ -606,7 +606,7 @@ class BackupHandler extends SingletonFactory {
 					if ($this->is_serialized($tmpContentData)) {
 						$tmpContentData = unserialize($tmpContentData);
 						$tmpContentData['text'] = $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'};
-					} else if(is_array($tmpContentData)) {
+					} else if (is_array($tmpContentData)) {
 						$tmpContentData['text'] = $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'};
 					} else {
 						$tmpContentData = array();
