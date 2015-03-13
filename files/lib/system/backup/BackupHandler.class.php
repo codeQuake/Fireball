@@ -473,10 +473,13 @@ class BackupHandler extends SingletonFactory {
 				// set new parents if needed
 				if ($object == 'page' || $object == 'content') {
 					foreach ($parentIDs as $child => $parent) {
-						$editorName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
-						$cacheName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Cache';
-						if ($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$child]) !== null) {
-							$editor = new $editorName($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$child]));
+						$editorName = '\\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
+						$className = '\\cms\data\\'.$object.'\\'.ucfirst($object);
+						
+						$element = new $className($this->tmp[$object.'s'][$child]);
+						
+						if ($element !== null) {
+							$editor = new $editorName($element);
 							$update['parentID'] = $this->tmp[$object.'s'][$parent];
 							$editor->update($update);
 						}
@@ -487,13 +490,14 @@ class BackupHandler extends SingletonFactory {
 				if ($object == 'page') {
 					foreach ($upperObjectIDs as $pageID => $stylesheetIDs) {
 						$editorName = '\\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
+						$className = '\\cms\data\\'.$object.'\\'.ucfirst($object);
 						
 						$newStylesheetIDs = array();
 						foreach ($stylesheetIDs as $stylesheet) {
 							if (isset($this->tmp['stylesheets'][$stylesheet])) $newStylesheetIDs[] = $this->tmp['stylesheets'][$stylesheet];
 						}
 
-						$page = new \cms\data\page\Page($this->tmp[$object.'s'][$pageID]);
+						$page = new $className($this->tmp[$object.'s'][$pageID]);
 						if ($page !== null && !empty($newStylesheetIDs)) {
 							$editor = new $editorName($page);
 							$editor->updateStylesheetIDs($newStylesheetIDs);
@@ -505,15 +509,17 @@ class BackupHandler extends SingletonFactory {
 				if ($object == 'file') {
 					foreach ($upperObjectIDs as $file => $folders) {
 						$editorName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
-						$cacheName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Cache';
+						$className = '\\cms\data\\'.$object.'\\'.ucfirst($object);
+						
+						$element = new $className($this->tmp[$object.'s'][$file]);
 						
 						$newFolders = array();
 						foreach ($folders as $folder) {
 							if (isset($this->tmp['folders'][$folder])) $newFolders[] = $this->tmp['folders'][$folder];
 						}
 						
-						if ($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$file]) !== null) {
-							$editor = new $editorName($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$file]));
+						if ($element !== null) {
+							$editor = new $editorName($element);
 							$editor->updateCategoryIDs($newFolders);
 						}
 					}
