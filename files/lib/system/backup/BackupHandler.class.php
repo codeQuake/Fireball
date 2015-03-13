@@ -25,7 +25,7 @@ use wcf\util\XML;
 use wcf\util\XMLWriter;
 
 /**
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Gail
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -409,21 +409,24 @@ class BackupHandler extends SingletonFactory {
 						// multilingual text?
 						if ($this->is_serialized($import['contentData'])) {
 							$tmpData = unserialize($import['contentData']);
-							$tmpText = $tmpData['text'];
-							if ($this->is_serialized($tmpText)) {
-								$tmpText = unserialize($tmpText);
-								
-								foreach ($availableLanguages as $lang) {
-									if (isset($tmpText[$lang->countryCode])) {
-										$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
-									} else {
-										$langData['text'][$lang->languageID] = '';
+							
+							if (isset($tmpData['text'])) {
+								$tmpText = $tmpData['text'];
+								if ($this->is_serialized($tmpText)) {
+									$tmpText = unserialize($tmpText);
+									
+									foreach ($availableLanguages as $lang) {
+										if (isset($tmpText[$lang->countryCode])) {
+											$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
+										} else {
+											$langData['text'][$lang->languageID] = '';
+										}
 									}
+									
+									$tmpData['text'] = '';
+									
+									$import['contentData'] = serialize($tmpData);
 								}
-								
-								$tmpData['text'] = '';
-								
-								$import['contentData'] = serialize($tmpData);
 							}
 						}
 					}
