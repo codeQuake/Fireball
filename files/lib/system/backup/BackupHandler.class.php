@@ -18,6 +18,7 @@ use wcf\system\io\TarWriter;
 use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
 use wcf\system\SingletonFactory;
+use wcf\system\WCF;
 use wcf\util\DirectoryUtil;
 use wcf\util\FileUtil;
 use wcf\util\StringUtil;
@@ -423,6 +424,7 @@ class BackupHandler extends SingletonFactory {
 						if ($this->is_serialized($import['contentData'])) {
 							$tmpData = unserialize($import['contentData']);
 							
+							// text || php
 							if (isset($tmpData['text'])) {
 								$tmpText = $tmpData['text'];
 								if ($this->is_serialized($tmpText)) {
@@ -430,6 +432,9 @@ class BackupHandler extends SingletonFactory {
 									
 									foreach ($availableLanguages as $lang) {
 										if (isset($tmpText[$lang->countryCode])) {
+											// replace bbcode and urls
+											$tmpText[$lang->countryCode] = $this->replaceOldFileIDs($tmpText[$lang->countryCode]);
+											
 											$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
 										} else {
 											$langData['text'][$lang->languageID] = '';
@@ -437,10 +442,50 @@ class BackupHandler extends SingletonFactory {
 									}
 									
 									$tmpData['text'] = '';
-									
-									$import['contentData'] = serialize($tmpData);
+								} else {
+									$tmpData['text'] = $this->replaceOldFileIDs($tmpData['text']);
 								}
 							}
+							
+							// headline with link
+							if (isset($tmpData['link'])) {
+								$tmpData['link'] = $this->replaceOldFileIDs($tmpData['link']);
+							}
+							
+							// gallery
+							if (isset($tmpData['imageIDs'])) {
+								$imageIDs = array();
+								foreach ($tmpData['imageIDs'] as $fileID) {
+									if (isset($this->tmp['files'][$fileID]))
+										$imageIDs[] = $this->tmp['files'][$fileID];
+								}
+								
+								$tmpData['imageIDs'] = $imageIDs;
+							}
+							
+							// image
+							if (isset($tmpData['imageID'])) {
+								if (isset($this->tmp['files'][$tmpData['imageID']]))
+									$tmpData['imageID'] = $this->tmp['files'][$tmpData['imageID']];
+								else
+									$tmpData['imageID'] = null;
+							}
+							
+							// file
+							if (isset($tmpData['fileID'])) {
+								if (isset($this->tmp['files'][$tmpData['fileID']]))
+									$tmpData['fileID'] = $this->tmp['files'][$tmpData['fileID']];
+								else
+									$tmpData['fileID'] = null;
+							}
+							
+							// template
+							if (isset($tmpData['template'])) {
+								$tmpData['template'] = $this->replaceOldFileIDs($tmpData['template']);
+							}
+							
+							// get everything back serialized
+							$import['contentData'] = serialize($tmpData);
 						}
 					}
 					
@@ -691,5 +736,60 @@ class BackupHandler extends SingletonFactory {
 			return false;
 		}
 		return true;
+	}
+	
+	private function replaceOldFileIDs($string) {
+		// bbcode
+		$string = preg_replace_callback(
+			'/\[cmsfile=([0-9]+)\]/',
+			function ($match) {
+				if (isset($match[1]) && isset($this->tmp['files'][$match[1]])) {
+					$newFileID = $this->tmp['files'][$match[1]];
+					return '[cmsfile=' . $newFileID . ']';
+				} else {
+					return $match[0];
+				}
+			},
+			$string
+		);
+		
+		// urls
+		$cmsUrl = WCF::getPath('cms');
+		$typhoon = '/[^\/ ][index\.php]{0,}\?file\-download\/([0-9]+)\-|' . str_replace('/', '\\/', str_replace('.', '\\.', $cmsUrl)) . '[index\.php]{0,}\?file\-download\/([0-9]+)\-/';
+		$maelstrom = '/[^\/ ][index\.php]{0,}\/FileDownload\/([0-9]+)\-|' . str_replace('/', '\\/', str_replace('.', '\\.', $cmsUrl)) . '[index\.php]{0,}\/FileDownload\/([0-9]+)\-/';
+		$string = preg_replace_callback(
+			$typhoon,
+			function ($match) {
+				$cmsUrl = WCF::getPath('cms');
+				if (isset($match[1]) && isset($this->tmp['files'][$match[1]])) {
+					$newFileID = $this->tmp['files'][$match[1]];
+					return 'index.php?file-download/' . $newFileID . '-';
+				} else if (isset($match[2]) && isset($this->tmp['files'][$match[2]])) {
+					$newFileID = $this->tmp['files'][$match[2]];
+					return $cmsUrl . 'index.php?file-download/' . $newFileID . '-';
+				} else {
+					return $match[0];
+				}
+			},
+			$string
+		);
+		$string = preg_replace_callback(
+			$maelstrom,
+			function ($match) {
+				$cmsUrl = WCF::getPath('cms');
+				if (isset($match[1]) && isset($this->tmp['files'][$match[1]])) {
+					$newFileID = $this->tmp['files'][$match[1]];
+					return 'index.php/FileDownload/' . $newFileID . '-';
+				} else if (isset($match[2]) && isset($this->tmp['files'][$match[2]])) {
+					$newFileID = $this->tmp['files'][$match[2]];
+					return $cmsUrl . 'index.php/FileDownload/' . $newFileID . '-';
+				} else {
+					return $match[0];
+				}
+			},
+			$string
+		);
+		
+		return $string;
 	}
 }
