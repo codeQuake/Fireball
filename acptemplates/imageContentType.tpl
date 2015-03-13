@@ -47,8 +47,8 @@
 		new CMS.ACP.File.Preview();
 		new CMS.ACP.File.Picker($('#filePicker'), 'contentData[imageID]', [{if $contentData['imageID']|isset}{@$contentData['imageID']}{/if}], { fileType: 'image' });
 
-		{if $contentData['width']|isset && $contentData['height']|isset}
-			new CMS.ACP.Image.Ratio({$contentData['width']},{$contentData['height']});
+		{if $contentData['imageID']|isset && $contentData['imageID'] !== null}
+			new CMS.ACP.Image.Ratio({$contentData['imageID']});
 		{/if}
 	});
 	//]]>

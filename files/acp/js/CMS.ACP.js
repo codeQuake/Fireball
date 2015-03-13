@@ -291,6 +291,10 @@ CMS.ACP.File.Picker = Class.extend({
 			var $index = $.inArray($input.val(), this._selected);
 			this._selected.splice($index, 1);
 		}
+
+		if (!this._options.multiple) {
+		    new CMS.ACP.Image.Ratio($input.val());
+		}
 	},
 
 	/**
@@ -731,12 +735,26 @@ CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 CMS.ACP.Image = {};
 
 CMS.ACP.Image.Ratio = Class.extend({
-	_ratio: 1,
+    _ratio: 1,
+    _proxy: null,
 
-	init: function(width, height) {
-		this._ratio = width/height;
+	init: function (fileID) {
+	    this._proxy = new WCF.Action.Proxy({
+	        success: $.proxy(this._success, this)
+	    });
+	    this._proxy.setOption('data', {
+	        'actionName': 'getSize',
+	        'className': 'cms\\data\\file\\FileAction',
+	        'objectIDs': [fileID]
+	    });
+	    this._proxy.sendRequest();
+
 		$('#width').change($.proxy(this._calculateHeight, this));
 		$('#height').change($.proxy(this._calculateWidth, this));
+	},
+
+	_success: function(data, textStatus, jqXHR) {
+	    this._ratio = data.returnValues.width / data.returnValues.height;
 	},
 
 	_calculateHeight: function() {
