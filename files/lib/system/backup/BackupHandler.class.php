@@ -121,11 +121,13 @@ class BackupHandler extends SingletonFactory {
 							if ($key == 'contentData') {
 								$langData = array();
 								
-								foreach ($availableLanguages as $lang) {
-									$langData[$lang->countryCode] = $lang->get($data['text']);
+								if (isset($data['text'])) {
+									foreach ($availableLanguages as $lang) {
+										$langData[$lang->countryCode] = $lang->get($data['text']);
+									}
+									
+									$data['text'] = serialize($langData);
 								}
-								
-								$data['text'] = serialize($langData);
 							}
 							$xml->writeElement($key, base64_encode(serialize($data)));
 						} else {
