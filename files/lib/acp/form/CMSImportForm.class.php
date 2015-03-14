@@ -64,10 +64,10 @@ class CMSImportForm extends AbstractForm {
 
 		// check if file is uploaded or linked
 		if (!empty($this->file['tmp_name'])) $this->backup = $this->file['tmp_name'];
-		elseif ($this->fileLink != '') {
+		else if ($this->fileLink != '') {
 			//check if file is external url
 			if (FileUtil::isURL($this->fileLink)) {
-				try{
+				try {
 					//download file
 					$this->backup = FileUtil::downloadFileFromHttp($this->fileLink, 'cms_backup');
 				}
