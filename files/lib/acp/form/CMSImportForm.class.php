@@ -71,7 +71,7 @@ class CMSImportForm extends AbstractForm {
 					//download file
 					$this->backup = FileUtil::downloadFileFromHttp($this->fileLink, 'cms_backup');
 				}
-				catch(SystemException $e) {
+				catch (SystemException $e) {
 					//download failed
 					throw new UserInputException('fileLink', 'downloadFailed');
 				}
