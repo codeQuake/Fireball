@@ -5,14 +5,16 @@
 		<item name="cms.acp.content.copy"><![CDATA[Inhalt kopieren]]></item>
 		<item name="cms.acp.content.css"><![CDATA[CSS-Einstellungen]]></item>
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
-		<item name="cms.acp.content.css.cssClasses.description"><![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie „container containerPadding“. Für einen Abstand zum oberen Element nutzen sie zusätzlich „marginTop“.<br />
+		<item name="cms.acp.content.css.cssClasses.description">
+			<![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie „container containerPadding“. Für einen Abstand zum oberen Element nutzen sie zusätzlich „marginTop“.<br />
 <strong>Beispiele:</strong>
 <ul class="nativeList">
 	<li><code class="inlineCode">container</code>: Legt einen Rahmen um das Element</li>
 	<li><code class="inlineCode">containerPadding</code>: Zusammen mit container wird der Inhalt mit einem Abstand zum Rahmen versehen</li>
 	<li><code class="inlineCode">marginTop</code>: Weist dem Element einen Abstand nach oben zu</li>
 	<li><code class="inlineCode">center</code>: Zentriert den Inhalt des Elements</li>
-</ul>]]></item>
+</ul>]]>
+		</item>
 		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Willst du diesen Inhalt wirklich löschen?]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
@@ -159,16 +161,16 @@
 		<item name="cms.acp.page.general.description"><![CDATA[Beschreibung]]></item>
 		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
 		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
-    <item name="cms.acp.page.import"><![CDATA[Seiten importieren]]></item>
-    <item name="cms.acp.page.import.downloadFailed"><![CDATA[Download der Sicherungsdatei fehlgeschlagen]]></item>
-    <item name="cms.acp.page.import.empty"><![CDATA[Bitte lade eine Datei hoch oder gebe die URL zur Sicherungsdatei an.]]></item>
-    <item name="cms.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließe auf keinen Fall das Fenster und achte darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
-    <item name="cms.acp.page.import.link"><![CDATA[Sicherung herunterladen]]></item>
-    <item name="cms.acp.page.import.link.description"><![CDATA[Gebe den direkten Pfad zur Sicherungsdatei an. Dabei kann es sich um die Internetadresse der Sicherungsdatei oder alternativ den Pfad zur Sicherungsdatei im Dateisystem handeln.]]></item>
-    <item name="cms.acp.page.import.notFound"><![CDATA[Datei nicht gefunden]]></item>
-    <item name="cms.acp.page.import.upload"><![CDATA[Sicherung der Seiten vom lokalen Computer hochladen]]></item>
-    <item name="cms.acp.page.import.upload.description"><![CDATA[Wähle eine Sicherung der CMS-Seiten von deinem lokalen Rechner aus.]]></item>
-    <item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
+		<item name="cms.acp.page.import"><![CDATA[Seiten importieren]]></item>
+		<item name="cms.acp.page.import.downloadFailed"><![CDATA[Download der Sicherungsdatei fehlgeschlagen]]></item>
+		<item name="cms.acp.page.import.empty"><![CDATA[Bitte lade eine Datei hoch oder gebe die URL zur Sicherungsdatei an.]]></item>
+		<item name="cms.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließe auf keinen Fall das Fenster und achte darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
+		<item name="cms.acp.page.import.link"><![CDATA[Sicherung herunterladen]]></item>
+		<item name="cms.acp.page.import.link.description"><![CDATA[Gebe den direkten Pfad zur Sicherungsdatei an. Dabei kann es sich um die Internetadresse der Sicherungsdatei oder alternativ den Pfad zur Sicherungsdatei im Dateisystem handeln.]]></item>
+		<item name="cms.acp.page.import.notFound"><![CDATA[Datei nicht gefunden]]></item>
+		<item name="cms.acp.page.import.upload"><![CDATA[Sicherung der Seiten vom lokalen Computer hochladen]]></item>
+		<item name="cms.acp.page.import.upload.description"><![CDATA[Wähle eine Sicherung der CMS-Seiten von deinem lokalen Rechner aus.]]></item>
+		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
 		<item name="cms.acp.page.list.description"><![CDATA[Seiten bilden die Grundlage des Fireball CMS. Erstelle eine Seite um dieser später Inhalte verschiedener Typen zuordnen zu können.]]></item>
 		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
 		<item name="cms.acp.page.meta"><![CDATA[Meta-Informationen]]></item>
