@@ -464,9 +464,20 @@ class BackupHandler extends SingletonFactory {
 							// gallery
 							if (isset($tmpData['imageIDs'])) {
 								$imageIDs = array();
-								foreach ($tmpData['imageIDs'] as $fileID) {
-									if (isset($this->tmp['files'][$fileID]))
-										$imageIDs[] = $this->tmp['files'][$fileID];
+								
+								if (is_array($tmpData['imageIDs'])) {
+									foreach ($tmpData['imageIDs'] as $fileID) {
+										if (isset($this->tmp['files'][$fileID]))
+											$imageIDs[] = $this->tmp['files'][$fileID];
+									}
+								} else {
+									$oldIDs = explode(',', $tmpData['imageIDs']);
+									if (is_array($oldIDs) && !empty($oldIDs)) {
+										foreach ($oldIDs as $fileID) {
+											if (isset($this->tmp['files'][$fileID]))
+												$imageIDs[] = $this->tmp['files'][$fileID];
+										}
+									}
 								}
 								
 								$tmpData['imageIDs'] = $imageIDs;
