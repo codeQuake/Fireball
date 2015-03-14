@@ -160,8 +160,13 @@
 		<item name="cms.acp.page.general.parentID"><![CDATA[Parent page]]></item>
 		<item name="cms.acp.page.homePage"><![CDATA[Startpage]]></item>
 		<item name="cms.acp.page.import"><![CDATA[Import pages]]></item>
+    <item name="cms.acp.page.import.downloadFailed"><![CDATA[Download failed]]></item>
+    <item name="cms.acp.page.import.empty"><![CDATA[Please upload or link a file]]></item>
 		<item name="cms.acp.page.import.info"><![CDATA[Importing huge datasets needs a lot of time, please do not close this window! All data will be erased before the import.]]></item>
-		<item name="cms.acp.page.import.upload"><![CDATA[Upload pages]]></item>
+    <item name="cms.acp.page.import.link"><![CDATA[Download backup]]></item>
+    <item name="cms.acp.page.import.link.description"><![CDATA[Please enter a direct path to your backup file. You can enter an external link or a link to a file on your internal file system.]]></item>
+    <item name="cms.acp.page.import.notFound"><![CDATA[File not found!]]></item>
+    <item name="cms.acp.page.import.upload"><![CDATA[Upload pages]]></item>
 		<item name="cms.acp.page.import.upload.description"><![CDATA[Upload previously downloaded backup file.]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
 		<item name="cms.acp.page.list.description"><![CDATA[Pages are the base of this CMS. Create a page to add multiple types of content later.]]></item>

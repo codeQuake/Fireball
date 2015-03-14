@@ -160,8 +160,13 @@
 		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
 		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
 		<item name="cms.acp.page.import"><![CDATA[Seiten importieren]]></item>
-		<item name="cms.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließen Sie auf keinen Fall das Fenster und achten Sie darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
-		<item name="cms.acp.page.import.upload"><![CDATA[Sicherung der Seiten vom lokalen Computer hochladen]]></item>
+    <item name="cms.acp.page.import.downloadFailed"><![CDATA[Download der Sicherungsdatei fehlgeschlagen]]></item>
+		<item name="cms.acp.page.import.empty"><![CDATA[Bitte laden Sie eine Datei hoch oder geben Sie die URL zur Sicherungsdatei an.]]></item>
+    <item name="cms.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließen Sie auf keinen Fall das Fenster und achten Sie darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
+		<item name="cms.acp.page.import.link"><![CDATA[Sicherung herunterladen]]></item>
+		<item name="cms.acp.page.import.link.description"><![CDATA[Geben Sie den direkten Pfad zur Sicherungsdatei an. Dabei kann es sich um die Internetadresse der Sicherungsdatei oder alternativ den Pfad zur Sicherungsdatei im Dateisystem handeln.]]></item>
+		<item name="cms.acp.page.import.notFound"><![CDATA[Datei nicht gefunden]]></item>
+    <item name="cms.acp.page.import.upload"><![CDATA[Sicherung der Seiten vom lokalen Computer hochladen]]></item>
 		<item name="cms.acp.page.import.upload.description"><![CDATA[Wählen Sie eine Sicherung der CMS-Seiten von Ihrem lokalen Rechner aus.]]></item>
 		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
 		<item name="cms.acp.page.list.description"><![CDATA[Seiten bilden die Grundlage des Fireball CMS. Erstellen Sie eine Seite um dieser später Inhalte verschiedener Typen zuordnen zu können.]]></item>

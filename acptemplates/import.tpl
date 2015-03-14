@@ -20,13 +20,25 @@
 			<dl{if $errorField == 'file'} class="formError"{/if}>
 				<dt><label for="file">{lang}cms.acp.page.import.upload{/lang}</label></dt>
 				<dd>
-					<input type="file" name="file" id="file"  required="required"/>
+					<input type="file" name="file" id="file" />
 					{if $errorField == 'file'}
 						<small class="innerError">
 							{lang}cms.acp.page.import.{$errorType}{/lang}
 						</small>
 					{/if}
 					<small>{lang}cms.acp.page.import.upload.description{/lang}</small>
+				</dd>
+			</dl>
+			<dl{if $errorField == 'file'} class="formError"{/if}>
+				<dt><label for="fileLink">{lang}cms.acp.page.import.link{/lang}</label></dt>
+				<dd>
+					<input type="text" name="fileLink" id="fileLink" class="long" />
+					{if $errorField == 'fileLink'}
+						<small class="innerError">
+							{lang}cms.acp.page.import.{$errorType}{/lang}
+						</small>
+					{/if}
+					<small>{lang}cms.acp.page.import.link.description{/lang}</small>
 				</dd>
 			</dl>
 		</fieldset>

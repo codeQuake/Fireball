@@ -3,7 +3,11 @@ namespace cms\acp\form;
 
 use cms\system\backup\BackupHandler;
 use wcf\form\AbstractForm;
+use wcf\system\exception\SystemException;
+use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
+use wcf\util\FileUtil;
+use wcf\util\StringUtil;
 
 /**
  * Handles import of an uploaded backup.
@@ -20,10 +24,22 @@ class CMSImportForm extends AbstractForm {
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.importAndExport';
 
 	/**
+	 * link to backup file
+	 * @var	string
+	 */
+	public $backup = '';
+	
+	/**
 	 * uploaded file
 	 * @var	array<mixed>
 	 */
 	public $file = null;
+	
+	/**
+	 * linked file
+	 * @var	string
+	 */
+	public $fileLink = '';
 
 	/**
 	 * @see	\wcf\page\AbstractPage::$templateName
@@ -37,6 +53,7 @@ class CMSImportForm extends AbstractForm {
 		parent::readFormParameters();
 
 		if (isset($_FILES['file'])) $this->file = $_FILES['file'];
+		if (isset($_POST['fileLink'])) $this->fileLink = StringUtil::trim($_POST['fileLink']);
 	}
 
 	/**
@@ -45,22 +62,39 @@ class CMSImportForm extends AbstractForm {
 	public function validate() {
 		parent::validate();
 
-		// check if file is given
-		if (empty($this->file)) {
-			throw new UserInputException('file', 'empty');
+		// check if file is uploaded or linked
+		if (!empty($this->file['tmp_name'])) $this->backup = $this->file['tmp_name'];
+		elseif ($this->fileLink != '') {
+			//check if file is external url
+			if (FileUtil::isURL($this->fileLink)) {
+				try{
+					//download file
+					$this->backup = FileUtil::downloadFileFromHttp($this->fileLink, 'cms_backup');
+				}
+				catch(SystemException $e) {
+					//download failed
+					throw new UserInputException('fileLink', 'downloadFailed');
+				}
+			} 
+			//file is on same server or invalid
+			else {
+				//file not found
+				if (!file_exists($this->fileLink)) throw new UserInputException('fileLink', 'notFound');
+				//file found
+				else $this->backup = $this->fileLink;
+			}
 		}
-		if (empty($this->file['tmp_name'])) {
-			throw new UserInputException('file', 'empty');
-		}
+		else throw new UserInputException('file', 'empty');
 	}
-
+	
 	/**
 	 * @see	\wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
 
-		BackupHandler::getInstance()->handleImport($this->file['tmp_name']);
+		//perform import
+		BackupHandler::getInstance()->handleImport($this->backup);
 
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
