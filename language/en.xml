@@ -253,23 +253,31 @@
 	<category name="cms.page">
 		<item name="cms.page.clickCounter"><![CDATA[{#$clicks} time{if $clicks != 1}s{/if} read]]></item>
 		<item name="cms.page.comment"><![CDATA[Comment]]></item>
-		<item name="cms.page.comment.notification.mail"><![CDATA[[{@$author->username} commented on “{$page->getTitle()}“:
+		<item name="cms.page.comment.notification.mail"><![CDATA[{if !$author->userID}a guest{else}{@$author->username}{/if} commented on “{$page->getTitle()}“:
 {if $notificationType == 'instant'}
 ---------------------------------
 {@$comment->message}
 ---------------------------------
 {/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="cms.page.comment.notification.message"><![CDATA[Commented on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.comment.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} wrote comments on “{$page->getTitle()}“:
+{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+		<item name="cms.page.comment.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} commented on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.comment.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} commented on “{$page->getTitle()}“.]]></item>
 		<item name="cms.page.comment.notification.title"><![CDATA[New comment (Page)]]></item>
+		<item name="cms.page.comment.notification.title.stacked"><![CDATA[{#$timesTriggered} new comments (Page)]]></item>
 		<item name="cms.page.commentResponse"><![CDATA[Reply to Page Comment]]></item>
-		<item name="cms.page.commentResponse.notification.mail"><![CDATA[[{@$author->username} replied to your comment on “{$page->getTitle()}“:
+		<item name="cms.page.commentResponse.notification.mail"><![CDATA[{if !$author->userID}a guest{else}{@$author->username}{/if} replied to your comment on “{$page->getTitle()}“:
 {if $notificationType == 'instant'}
 ---------------------------------
 {@$response->message}
 ---------------------------------
 {/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="cms.page.commentResponse.notification.message"><![CDATA[Replied to your comment on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.commentResponse.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} replied to your comment on “{$page->getTitle()}“:
+{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+		<item name="cms.page.commentResponse.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.commentResponse.notification.message.stacked"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on “{$page->getTitle()}“.]]></item>
 		<item name="cms.page.commentResponse.notification.title"><![CDATA[New response (Page)]]></item>
+		<item name="cms.page.commentResponse.notification.title.stacked"><![CDATA[{#$timesTriggered} new responses (Page)]]></item>
 		<item name="cms.page.comments"><![CDATA[Comments]]></item>
 		<item name="cms.page.comments.noComments"><![CDATA[No Entries.]]></item>
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>codeQuake</strong></a></address>]]></item>

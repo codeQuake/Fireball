@@ -2,6 +2,7 @@
 namespace cms\system\backup;
 
 use cms\system\cache\builder\ContentCacheBuilder;
+use cms\system\cache\builder\FileCacheBuilder;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\data\content\ContentAction;
 use cms\data\file\FileAction;
@@ -13,11 +14,14 @@ use wcf\data\category\CategoryNodeTree;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
 use wcf\data\DatabaseObject;
+use wcf\system\exception\SystemException;
 use wcf\system\io\Tar;
 use wcf\system\io\TarWriter;
 use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
+use wcf\system\Regex;
 use wcf\system\SingletonFactory;
+use wcf\system\WCF;
 use wcf\util\DirectoryUtil;
 use wcf\util\FileUtil;
 use wcf\util\StringUtil;
@@ -25,7 +29,7 @@ use wcf\util\XML;
 use wcf\util\XMLWriter;
 
 /**
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Gail
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -51,6 +55,9 @@ class BackupHandler extends SingletonFactory {
 	);
 	
 	protected $categoryObjectType = 0;
+
+	protected $cmsUrl = '';
+	protected $api = '';
 
 	protected function init() {
 		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
@@ -83,7 +90,10 @@ class BackupHandler extends SingletonFactory {
 		
 		// start doc
 		$xml = new XMLWriter();
-		$xml->beginDocument('data', '', '', array('api' => $cmsVersion));
+		$xml->beginDocument('data', '', '', array(
+			'api' => $cmsVersion,
+			'cmsUrl' => WCF::getPath('cms')
+		));
 		
 		// get available languages
 		$availableLanguages = LanguageFactory::getInstance()->getLanguages();
@@ -121,17 +131,25 @@ class BackupHandler extends SingletonFactory {
 							if ($key == 'contentData') {
 								$langData = array();
 								
-								foreach ($availableLanguages as $lang) {
-									$langData[$lang->countryCode] = $lang->get($data['text']);
+								if (isset($data['text'])) {
+									foreach ($availableLanguages as $lang) {
+										$langData[$lang->countryCode] = $lang->get($data['text']);
+									}
+									
+									$data['text'] = serialize($langData);
 								}
-								
-								$data['text'] = serialize($langData);
 							}
 							$xml->writeElement($key, base64_encode(serialize($data)));
 						} else {
 							$xml->writeElement($key, $data);
 						}
 					}
+					
+					if ($object == 'page') {
+						$stylesheetIDs = $$object->getStylesheetIDs();
+						$xml->writeElement('stylesheets', base64_encode(serialize($stylesheetIDs)));
+					}
+					
 					$xml->endElement();
 				}
 				$xml->endElement();
@@ -159,8 +177,8 @@ class BackupHandler extends SingletonFactory {
 	protected function tarFiles() {
 		$files = new DirectoryUtil(CMS_DIR . 'files/');
 		$tar = new TarWriter(FileUtil::getTempFolder().'files.tar');
-		$tar->add($files->getFiles(), '', CMS_DIR . 'files/');
-		
+		$fileList = $files->getFiles(SORT_ASC, new Regex('^'.CMS_DIR . 'files/$'), true);
+		$tar->add($fileList, '', CMS_DIR . 'files/');
 		$tar->create();
 	}
 
@@ -208,8 +226,8 @@ class BackupHandler extends SingletonFactory {
 								$import['parentID'] = $this->tmp[$object.'s'][$import['parentID']];
 							} else {
 								// set when everything is imported
-								unset($import['parentID']);
 								$parentIDs[$currentID] = $import['parentID'];
+								unset($import['parentID']);
 							}
 						}
 					}
@@ -227,7 +245,12 @@ class BackupHandler extends SingletonFactory {
 						
 						// save stylesheets
 						if (isset($import['stylesheets'])) {
-							$upperObjectIDs[$currentID] = unserialize($import['stylesheets']);
+							$tmpStylesheets = base64_decode($import['stylesheets']);
+							if ($this->is_serialized($tmpStylesheets)) {
+								$tmpStylesheets = unserialize($tmpStylesheets);
+								if (!empty($tmpStylesheets))
+									$upperObjectIDs[$currentID] = $tmpStylesheets;
+							}
 							unset($import['stylesheets']);
 						}
 						
@@ -409,22 +432,80 @@ class BackupHandler extends SingletonFactory {
 						// multilingual text?
 						if ($this->is_serialized($import['contentData'])) {
 							$tmpData = unserialize($import['contentData']);
-							$tmpText = $tmpData['text'];
-							if ($this->is_serialized($tmpText)) {
-								$tmpText = unserialize($tmpText);
+							
+							// text || php
+							if (isset($tmpData['text'])) {
+								$tmpText = $tmpData['text'];
+								if ($this->is_serialized($tmpText)) {
+									$tmpText = unserialize($tmpText);
+									
+									foreach ($availableLanguages as $lang) {
+										if (isset($tmpText[$lang->countryCode])) {
+											// replace bbcode and urls
+											$tmpText[$lang->countryCode] = $this->replaceOldFileIDs($tmpText[$lang->countryCode]);
+											
+											$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
+										} else {
+											$langData['text'][$lang->languageID] = '';
+										}
+									}
+									
+									$tmpData['text'] = '';
+								} else {
+									$tmpData['text'] = $this->replaceOldFileIDs($tmpData['text']);
+								}
+							}
+							
+							// headline with link
+							if (isset($tmpData['link'])) {
+								$tmpData['link'] = $this->replaceOldFileIDs($tmpData['link']);
+							}
+							
+							// gallery
+							if (isset($tmpData['imageIDs'])) {
+								$imageIDs = array();
 								
-								foreach ($availableLanguages as $lang) {
-									if (isset($tmpText[$lang->countryCode])) {
-										$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
-									} else {
-										$langData['text'][$lang->languageID] = '';
+								if (is_array($tmpData['imageIDs'])) {
+									foreach ($tmpData['imageIDs'] as $fileID) {
+										if (isset($this->tmp['files'][$fileID]))
+											$imageIDs[] = $this->tmp['files'][$fileID];
+									}
+								} else {
+									$oldIDs = explode(',', $tmpData['imageIDs']);
+									if (is_array($oldIDs) && !empty($oldIDs)) {
+										foreach ($oldIDs as $fileID) {
+											if (isset($this->tmp['files'][$fileID]))
+												$imageIDs[] = $this->tmp['files'][$fileID];
+										}
 									}
 								}
 								
-								$tmpData['text'] = '';
-								
-								$import['contentData'] = serialize($tmpData);
+								$tmpData['imageIDs'] = $imageIDs;
 							}
+							
+							// image
+							if (isset($tmpData['imageID'])) {
+								if (isset($this->tmp['files'][$tmpData['imageID']]))
+									$tmpData['imageID'] = $this->tmp['files'][$tmpData['imageID']];
+								else
+									$tmpData['imageID'] = null;
+							}
+							
+							// file
+							if (isset($tmpData['fileID'])) {
+								if (isset($this->tmp['files'][$tmpData['fileID']]))
+									$tmpData['fileID'] = $this->tmp['files'][$tmpData['fileID']];
+								else
+									$tmpData['fileID'] = null;
+							}
+							
+							// template
+							if (isset($tmpData['template'])) {
+								$tmpData['template'] = $this->replaceOldFileIDs($tmpData['template']);
+							}
+							
+							// get everything back serialized
+							$import['contentData'] = serialize($tmpData);
 						}
 					}
 					
@@ -457,10 +538,13 @@ class BackupHandler extends SingletonFactory {
 				// set new parents if needed
 				if ($object == 'page' || $object == 'content') {
 					foreach ($parentIDs as $child => $parent) {
-						$editorName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
-						$cacheName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Cache';
-						if ($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$child]) !== null) {
-							$editor = new $editorName($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$child]));
+						$editorName = '\\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
+						$className = '\\cms\data\\'.$object.'\\'.ucfirst($object);
+						
+						$element = new $className($this->tmp[$object.'s'][$child]);
+						
+						if ($element !== null) {
+							$editor = new $editorName($element);
 							$update['parentID'] = $this->tmp[$object.'s'][$parent];
 							$editor->update($update);
 						}
@@ -470,16 +554,17 @@ class BackupHandler extends SingletonFactory {
 				// link stylesheets and pages
 				if ($object == 'page') {
 					foreach ($upperObjectIDs as $pageID => $stylesheetIDs) {
-						$editorName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
-						$cacheName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Cache';
+						$editorName = '\\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
+						$className = '\\cms\data\\'.$object.'\\'.ucfirst($object);
 						
 						$newStylesheetIDs = array();
 						foreach ($stylesheetIDs as $stylesheet) {
 							if (isset($this->tmp['stylesheets'][$stylesheet])) $newStylesheetIDs[] = $this->tmp['stylesheets'][$stylesheet];
 						}
-						
-						if ($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$pageID]) !== null && !empty($newStylesheetIDs)) {
-							$editor = new $editorName($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$pageID]));
+
+						$page = new $className($this->tmp[$object.'s'][$pageID]);
+						if ($page !== null && !empty($newStylesheetIDs)) {
+							$editor = new $editorName($page);
 							$editor->updateStylesheetIDs($newStylesheetIDs);
 						}
 					}
@@ -488,19 +573,23 @@ class BackupHandler extends SingletonFactory {
 				// link files and folders
 				if ($object == 'file') {
 					foreach ($upperObjectIDs as $file => $folders) {
-						$editorName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
-						$cacheName = '\cms\data\\'.$object.'\\'.ucfirst($object).'Cache';
+						$editorName = '\\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
+						$className = '\\cms\data\\'.$object.'\\'.ucfirst($object);
+						
+						$element = new $className($this->tmp[$object.'s'][$file]);
 						
 						$newFolders = array();
 						foreach ($folders as $folder) {
 							if (isset($this->tmp['folders'][$folder])) $newFolders[] = $this->tmp['folders'][$folder];
 						}
 						
-						if ($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$file]) !== null) {
-							$editor = new $editorName($cacheName::getInstance()->{'get'.ucfirst($object)}($this->tmp[$object.'s'][$file]));
+						if ($element !== null) {
+							$editor = new $editorName($element);
 							$editor->updateCategoryIDs($newFolders);
 						}
 					}
+					
+					$this->importFiles($filename);
 				}
 			}
 		}
@@ -509,25 +598,45 @@ class BackupHandler extends SingletonFactory {
 	protected function openTar($filename) {
 		$tar = new Tar($filename);
 		$this->data = $this->readXML($tar);
-		$this->importFiles($tar);
 		$tar->close();
 	}
 
-	protected function importFiles($tar) {
+	protected function importFiles($filename) {
+		$tar = new Tar($filename);
+		
 		$files = 'files.tar';
 		if ($tar->getIndexByFileName($files) === false) {
 			throw new SystemException("Unable to find required file '" . $files . "' in the import archive");
 		}
 		$tar->extract($files, CMS_DIR . 'files/files.tar');
-
+		
 		$ftar = new Tar(CMS_DIR . 'files/files.tar');
 		$contentList = $ftar->getContentList();
 		foreach ($contentList as $key => $val) {
-			if ($val['type'] == 'file' && $val['filename'] != '/files.tar' && $val['filename'] != 'files.tar') $ftar->extract($key, CMS_DIR . 'files/' . $val['filename']);
-			else if (!file_exists(CMS_DIR . 'files/' . $val['filename'])) mkdir(CMS_DIR . 'files/' . $val['filename']);
+			if ($val['type'] == 'file' && $val['filename'] != '/files.tar' && $val['filename'] != 'files.tar') {
+				$filename = preg_replace_callback(
+					'/([0-9]+)\-/',
+					function ($match) {
+						if (isset($match[1]) && isset($this->tmp['files'][$match[1]])) {
+							return $this->tmp['files'][$match[1]] . '-';
+						} else {
+							return $match[0];
+						}
+					},
+					$val['filename']
+				);
+				
+				$ftar->extract($key, CMS_DIR . 'files/' . $filename);
+			} else if (!file_exists(CMS_DIR . 'files/' . $val['filename'])) {
+				mkdir(CMS_DIR . 'files/' . $val['filename']);
+			}
 		}
 		$ftar->close();
 		@unlink(CMS_DIR . 'files/files.tar');
+		
+		$tar->close();
+		
+		FileCacheBuilder::getInstance()->reset();
 	}
 
 	protected function readXML($tar) {
@@ -539,6 +648,13 @@ class BackupHandler extends SingletonFactory {
 		$xmlData->loadXML($xml, $tar->extractToString($tar->getIndexByFileName($xml)));
 		$xpath = $xmlData->xpath();
 		$root = $xpath->query('/ns:data')->item(0);
+		
+		$test = $xpath->query('//data')->item(0);
+		if ($test !== null) {
+			$this->cmsUrl = $test->getAttribute('cmsUrl');
+			$this->api = $test->getAttribute('api');
+		}
+		
 		$items = $xpath->query('child::*', $root);
 		$data = array();
 		$i = 0;
@@ -555,6 +671,7 @@ class BackupHandler extends SingletonFactory {
 				$i++;
 			}
 		}
+		
 		return $data;
 	}
 	
@@ -580,13 +697,17 @@ class BackupHandler extends SingletonFactory {
 				
 				if ($type == 'content' && $columnName == 'text') {
 					$tmpContentData = $object->contentData;
+					
 					if ($this->is_serialized($tmpContentData)) {
 						$tmpContentData = unserialize($tmpContentData);
+						$tmpContentData['text'] = $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'};
+					} else if (is_array($tmpContentData)) {
 						$tmpContentData['text'] = $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'};
 					} else {
 						$tmpContentData = array();
 						$tmpContentData['text'] = $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'};
 					}
+					
 					$tmpContentData = serialize($tmpContentData);
 					
 					$editor->update(array(
@@ -665,5 +786,66 @@ class BackupHandler extends SingletonFactory {
 			return false;
 		}
 		return true;
+	}
+	
+	private function replaceOldFileIDs($string) {
+		// bbcode
+		$string = preg_replace_callback(
+			'/\[cmsfile=([0-9]+)\]/',
+			function ($match) {
+				if (isset($match[1]) && isset($this->tmp['files'][$match[1]])) {
+					$newFileID = $this->tmp['files'][$match[1]];
+					return '[cmsfile=' . $newFileID . ']';
+				} else {
+					return $match[0];
+				}
+			},
+			$string
+		);
+		
+		// urls
+		$cmsUrl = WCF::getPath('cms');
+		$typhoon = '/[^\/ ][index\.php]{0,}\?file\-download\/([0-9]+)\-|' . str_replace('/', '\\/', str_replace('.', '\\.', $cmsUrl)) . '[index\.php]{0,}\?file\-download\/([0-9]+)\-/';
+		$maelstrom = '/[^\/ ][index\.php]{0,}\/FileDownload\/([0-9]+)\-|' . str_replace('/', '\\/', str_replace('.', '\\.', $cmsUrl)) . '[index\.php]{0,}\/FileDownload\/([0-9]+)\-/';
+		$string = preg_replace_callback(
+			$typhoon,
+			function ($match) {
+				$cmsUrl = WCF::getPath('cms');
+				if (isset($match[1]) && isset($this->tmp['files'][$match[1]])) {
+					$newFileID = $this->tmp['files'][$match[1]];
+					return 'index.php?file-download/' . $newFileID . '-';
+				} else if (isset($match[2]) && isset($this->tmp['files'][$match[2]])) {
+					$newFileID = $this->tmp['files'][$match[2]];
+					return $cmsUrl . 'index.php?file-download/' . $newFileID . '-';
+				} else {
+					return $match[0];
+				}
+			},
+			$string
+		);
+		$string = preg_replace_callback(
+			$maelstrom,
+			function ($match) {
+				$cmsUrl = WCF::getPath('cms');
+				if (isset($match[1]) && isset($this->tmp['files'][$match[1]])) {
+					$newFileID = $this->tmp['files'][$match[1]];
+					return 'index.php/FileDownload/' . $newFileID . '-';
+				} else if (isset($match[2]) && isset($this->tmp['files'][$match[2]])) {
+					$newFileID = $this->tmp['files'][$match[2]];
+					return $cmsUrl . 'index.php/FileDownload/' . $newFileID . '-';
+				} else {
+					return $match[0];
+				}
+			},
+			$string
+		);
+		
+		// new domain
+		if (!empty($this->cmsUrl)) {
+			$cmsUrl = WCF::getPath('cms');
+			$string = str_replace($this->cmsUrl, $cmsUrl, $string);
+		}
+		
+		return $string;
 	}
 }

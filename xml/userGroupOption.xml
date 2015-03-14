@@ -88,24 +88,28 @@
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.cms.canViewDisabledPage">
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.cms.canViewDisabledContent">
 				<categoryname>user.cms.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.cms.canModerateComment">
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
@@ -113,6 +117,7 @@
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
@@ -120,6 +125,7 @@
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
+				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
