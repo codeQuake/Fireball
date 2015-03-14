@@ -23,12 +23,14 @@ class FourColumnsContentType extends AbstractStructureContentType {
 	public function getChildCSSClasses(Content $content) {
 		$parent = $content->getParentContent();
 
-		if (isset($parent->width)) $width = array(
-			substr($parent->width, 0, 2),
-			substr($parent->width, 2, 2),
-			substr($parent->width, 4, 2),
-			substr($parent->width, 6, 2)
-		);
+		if ($parent->width != "") {
+			$width = array(
+				substr($parent->width, 0, 2),
+				substr($parent->width, 2, 2),
+				substr($parent->width, 4, 2),
+				substr($parent->width, 6, 2)
+			);
+		}
 		else $width = array(
 			25,
 			25,

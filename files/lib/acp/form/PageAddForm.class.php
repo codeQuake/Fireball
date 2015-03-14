@@ -324,6 +324,19 @@ class PageAddForm extends AbstractForm {
 			}
 		}
 
+		// validate menu item
+		if ($this->createMenuItem) {
+			$this->menuItemID = 0;
+		}
+		if ($this->menuItemID) {
+			$menuItem = new PageMenuItem($this->menuItemID);
+			if (!$menuItem->menuItemID) {
+				// silently ignore menu item, user shouldn't be
+				// able to select this menu item in first place
+				$this->menuItemID = 0;
+			}
+		}
+
 		// validate style
 		if ($this->styleID && !isset($this->availableStyles[$this->styleID])) {
 			throw new UserInputException('styleID', 'notValid');

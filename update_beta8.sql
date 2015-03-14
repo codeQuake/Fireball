@@ -1,5 +1,6 @@
 ALTER TABLE cms1_page CHANGE title title VARCHAR(255) NOT NULL DEFAULT '';
 ALTER TABLE cms1_page DROP robots;
+ALTER TABLE cms1_page DROP layoutID;
 ALTER TABLE cms1_page ADD allowIndexing TINYINT(1) NOT NULL DEFAULT 1 AFTER metaKeywords;
 ALTER TABLE cms1_page DROP showSidebar;
 ALTER TABLE cms1_page ADD allowSubscribing TINYINT(1) NOT NULL DEFAULT 1 AFTER isCommentable;
@@ -31,3 +32,7 @@ CREATE TABLE cms1_file_to_category (
 
 	PRIMARY KEY (fileID, categoryID)
 );
+
+ALTER TABLE cms1_page_revision CHANGE data data LONGBLOB NOT NULL DEFAULT '';
+ALTER TABLE cms1_page_revision ADD contentData LONGBLOB NOT NULL DEFAULT '';
+DROP TABLE IF EXISTS cms1_content_revision;

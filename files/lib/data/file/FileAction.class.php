@@ -165,6 +165,30 @@ class FileAction extends AbstractDatabaseObjectAction {
 		);
 	}
 	
+	
+	
+	public function validateGetSize() {
+		if (count($this->objectIDs) != 1) {
+			throw new UserInputException('objectIDs');
+		}
+	}
+	/**
+	 * returns a file
+	 */
+	public function getSize() {
+		$fileID = reset($this->objectIDs);
+		$file = FileCache::getInstance()->getFile($fileID);
+		$size = $file->getImageSize();
+		if ($file->isImage()) {
+			return array(
+				'width' => $size[0],
+				'height' => $size[1]
+			);
+		}
+		else return false;
+		
+	}
+	
 	/**
 	 * Validates parameters and permissions to get a upload dialog.
 	 */

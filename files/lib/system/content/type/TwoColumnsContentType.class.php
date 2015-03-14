@@ -22,8 +22,7 @@ class TwoColumnsContentType extends AbstractStructureContentType {
 	 */
 	public function getChildCSSClasses(Content $content) {
 		$parent = $content->getParentContent();
-
-		if (isset($parent->width)) {
+		if ($parent->width != "") {
 			$width = array(
 				substr($parent->width, 0, 2),
 				substr($parent->width, 2, 2)

@@ -71,7 +71,9 @@
 	<delete>
 		<acpmenuitem name="cms.acp.menu.link.cms.content" />
 		<acpmenuitem name="cms.acp.menu.link.cms.dashboard" />
-		<acpmenuitem name="cms.acp.menu.link.cms.page.dashboard" />
+    <acpmenuitem name="cms.acp.menu.link.cms.page.dashboard" />
+    <acpmenuitem name="cms.acp.menu.link.cms.media" />
+    <acpmenuitem name="cms.acp.menu.link.cms.file.management" />
 		<acpmenuitem name="cms.acp.menu.link.cms.style" />
 	</delete>
 </data>

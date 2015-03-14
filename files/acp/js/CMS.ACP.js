@@ -10,15 +10,17 @@ CMS.ACP.Page.AddForm = Class.extend({
 	},
 
 	_buildAliasPreview: function() {
-		var $aliasParent = $('#parentID option:selected').data('alias');
+		var $aliasPrefix = $('#parentID option:selected').data('alias');
 		var $alias = $('#alias').val();
+		var $previewAlias = '';
+
 		if ($alias != '') {
-			$aliasPreview = 'index.php/';
-			if ($aliasParent != '' && typeof $aliasParent !== "undefined") {
-				$aliasPreview += $aliasParent + '/';
+			$previewAlias = 'index.php/';
+			if ($aliasPrefix != '' && typeof $aliasPrefix !== "undefined") {
+				$previewAlias += $aliasPrefix + '/';
 			}
-			$aliasPreview += $alias + '/';
-			$('#aliasPreview').html(WCF.Language.get('cms.acp.page.alias.preview') + ' ' +  $aliasPreview).show();
+			$previewAlias += $alias + '/';
+			$('#aliasPreview').html(WCF.Language.get('cms.acp.page.alias.preview') + ' ' +  $previewAlias).show();
 		}
 		else { $('#aliasPreview').hide(); }
 	}
@@ -288,6 +290,10 @@ CMS.ACP.File.Picker = Class.extend({
 		} else {
 			var $index = $.inArray($input.val(), this._selected);
 			this._selected.splice($index, 1);
+		}
+
+		if (!this._options.multiple) {
+		    new CMS.ACP.Image.Ratio($input.val());
 		}
 	},
 
@@ -726,109 +732,29 @@ CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 	}
 });
 
-CMS.ACP.Content = {};
-CMS.ACP.Content.Image = {};
-
-CMS.ACP.Content.Image.Gallery = Class.extend({
-	_cache: [],
-	_dialog: null,
-	_didInit: false,
-
-	_button: null,
-	_proxy: null,
-	_field: null,
-
-	init: function(button, field){
-		this._button = button;
-		this._field = field;
-		if (field.val() != 0 && field.val() != '') var length = field.val().split(',').length;
-		else length = 0;
-		$('#imageSelect').append('<span id="imagesBadge" class="badge green">'+length+'</span>');
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success,this)
-		});
-
-		//add click event
-		this._button.click($.proxy(this._click, this));
-	},
-
-	_click: function(event) {
-		event.preventDefault();
-		var $target = $(event.currentTarget);
-		this.button = $target;
-
-		if (this._dialog == null) {
-			this._dialog = $('<div id="images" />').appendTo(document.body);
-
-			this._proxy.setOption('data',{
-				actionName: 'getImages',
-				className: 'cms\\data\\file\\FileAction',
-				parameters: {
-					imageID: this._field.val()
-				}
-			});
-			this._proxy.sendRequest();
-		} else this._dialog.wcfDialog('open');
-	},
-
-	_success: function(data, textStatus, jqXHR) {
-
-		if (this.didInit) {
-			this.dialog.find('#images').html(data.returnValues.template);
-			this._dialog.wcfDialog('render');
-		}
-		else {
-			this._dialog.html(data.returnValues.template);
-			this._dialog.wcfDialog({
-				title: WCF.Language.get('cms.acp.content.type.de.codequake.cms.content.type.gallery.select')
-			});
-			this._dialog.wcfDialog('render');
-			this._didInit = true;
-		}
-
-		//find image & add click handler
-		this._dialog.find('.jsFileImage').click($.proxy(this._imageSelect, this));
-		var dialog = this._dialog;
-		var value = this._field.val();
-		value = value.split(",");
-		$.each(value, function(item, element){
-			dialog.find('.jsFileImage[data-object-id="'+ element +'"]').addClass('active');
-		});
-	},
-
-	_imageSelect: function(event) {
-		var $image = $(event.currentTarget);
-		if (!$image.hasClass('active')) {
-			$image.addClass('active');
-			var temp = this._field.val();
-			if (temp != '' && temp != 0) this._field.val(temp + ',' + $image.data('objectID'));
-			else this._field.val($image.data('objectID'));
-		}
-		else {
-			$image.removeClass('active');
-			var temp = this._field.val();
-			temp = temp.split(",");
-			$.each(temp, function(index, element){
-				if (element == $image.data('objectID')) temp.splice(index,1);
-			});
-			temp = temp.join();
-			this._field.val(temp);
-		}
-
-
-		$('#imagesBadge').html(this._field.val().split(',').length);
-	}
-});
-
 CMS.ACP.Image = {};
 
 CMS.ACP.Image.Ratio = Class.extend({
-	_ratio: 1,
+    _ratio: 1,
+    _proxy: null,
 
-	init: function(width, height) {
-		this._ratio = width/height;
+	init: function (fileID) {
+	    this._proxy = new WCF.Action.Proxy({
+	        success: $.proxy(this._success, this)
+	    });
+	    this._proxy.setOption('data', {
+	        'actionName': 'getSize',
+	        'className': 'cms\\data\\file\\FileAction',
+	        'objectIDs': [fileID]
+	    });
+	    this._proxy.sendRequest();
+
 		$('#width').change($.proxy(this._calculateHeight, this));
 		$('#height').change($.proxy(this._calculateWidth, this));
+	},
+
+	_success: function(data, textStatus, jqXHR) {
+	    this._ratio = data.returnValues.width / data.returnValues.height;
 	},
 
 	_calculateHeight: function() {
