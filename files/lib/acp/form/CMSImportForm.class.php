@@ -3,10 +3,7 @@ namespace cms\acp\form;
 
 use cms\system\backup\BackupHandler;
 use wcf\form\AbstractForm;
-<<<<<<< HEAD
-=======
 use wcf\system\exception\SystemException;
->>>>>>> master
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 use wcf\util\FileUtil;
