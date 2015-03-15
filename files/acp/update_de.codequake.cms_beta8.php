@@ -1,6 +1,9 @@
 <?php
 use cms\data\file\FileEditor;
 use cms\data\file\FileList;
+use cms\data\folder\FolderList;
+use cms\data\page\PageEditor;
+use cms\data\page\PageList;
 use wcf\data\category\CategoryAction;
 use wcf\system\category\CategoryHandler;
 use wcf\system\WCF;
@@ -12,9 +15,32 @@ use wcf\util\FileUtil;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-
-//add default category
+ 
+//category object type
 $objectType = CategoryHandler::getInstance()->getObjectTypeByName('de.codequake.cms.file');
+ 
+//get folders
+$folders = new FolderList();
+$folders->readObjects();
+//create categories
+$oldIDs = array();
+foreach ($folders->getObjects() as $folder) {
+	$objectAction = new CategoryAction(array(), 'create', array(
+		'data' => array(
+				'description' => '',
+				'isDisabled' => 0,
+				'objectTypeID' => $objectType->objectTypeID,
+				'parentCategoryID' => null,
+				'showOrder' => null,
+				'title' => $folder->getTitle()
+			)	
+		));
+	$objectAction->executeAction();
+	$returnValues = $objectAction->getReturnValues();
+	$categoryID = $returnValues['returnValues']->categoryID;
+	$oldIDs[$folder->folderID] = $categoryID;
+}
+//add default category
 $objectAction = new CategoryAction(array(), 'create', array(
 		'data' => array(
 				'description' => '',
@@ -27,17 +53,29 @@ $objectAction = new CategoryAction(array(), 'create', array(
 		));
 $objectAction->executeAction();
 $returnValues = $objectAction->getReturnValues();
-$categoryID = $returnValues['returnValues']->categoryID;
+$defaultCategoryID = $returnValues['returnValues']->categoryID;
 
-//get files into basic category
+//get files into categories
 $list = new FileList();
 $list->readObjects();
 foreach ($list->getObjects() as $file) {
 	$sql = "INSERT INTO cms".WCF_N."_file_to_category VALUES (?, ?)";
 	$statement = WCF::getDB()->prepareStatement($sql);
+	//check whether file has folder - if not -> default category
+	if ($file->folderID) $categoryID = $oldIDs[$file->folderID];
+	else $categoryID = $defaultCategoryID;
 	$statement->execute(array($file->fileID, $categoryID));
 }
 
+//drop folder ID
+$sql = "ALTER TABLE cms".WCF_N."_file DROP folderID;";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute();
+
+//Drop folder table
+$sql = "DROP TABLE IF EXISTS cms".WCF_N."_folder";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute();
 
 //hash files & copy
 copyFiles(CMS_DIR . 'files', CMS_DIR . 'files');
@@ -73,5 +111,23 @@ function copyFiles ($src, $dst) {
 
 //finally fuck up the column
 $sql = "ALTER TABLE cms".WCF_N."_file DROP filename";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute();
+
+//link pages & stylesheets
+$pages = new PageList();
+$pages->readObjects();
+foreach ($pages->getObjects() as $page) {
+	if ($page->stylesheets != '') {
+		$styleIDs = @unserialize($page->stylesheets);
+		foreach ($styleIDs as $styleID) {
+			$sql = "INSERT INTO cms".WCF_N."_stylesheet_to_page VALUES(?,?)";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($styleID, $page->pageID));
+		}
+	}
+}
+//drop column
+$sql = "ALTER TABLE cms".WCF_N."_page DROP stylesheets";
 $statement = WCF::getDB()->prepareStatement($sql);
 $statement->execute();

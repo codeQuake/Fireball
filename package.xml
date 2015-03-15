@@ -5,7 +5,7 @@
 		<packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
 		<isapplication>1</isapplication>
 		<version>2.0.0 Beta 8</version>
-		<date>2015-03-14</date>
+		<date>2015-03-15</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -72,13 +72,13 @@
 		<instruction type="eventListener">xml/eventlistener.xml</instruction>
 		<instruction type="templateListener">xml/templateListener.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
-    <instruction type="acpMenu">xml/acpMenu.xml</instruction>
-    <instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="option">xml/option.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
     
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="sql">update_beta8.sql</instruction>
-    <instruction type="script">acp/update_de.codequake.cms_beta8.php</instruction>
+		<instruction type="script">acp/update_de.codequake.cms_beta8.php</instruction>
 	</instructions>
 </package>
