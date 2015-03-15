@@ -15,10 +15,10 @@ use wcf\util\FileUtil;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
- 
+
 //category object type
 $objectType = CategoryHandler::getInstance()->getObjectTypeByName('de.codequake.cms.file');
- 
+
 //get folders
 $folders = new FolderList();
 $folders->readObjects();
