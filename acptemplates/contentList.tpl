@@ -19,7 +19,7 @@
 		new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
 		new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
 
-		new CMS.ACP.Page.AddContent();
+		new CMS.ACP.Content.AddDialog();
 
 		new WCF.Action.SimpleProxy({
 			action: 'copy',

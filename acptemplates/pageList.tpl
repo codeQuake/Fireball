@@ -39,7 +39,7 @@
 			}
 		});
 
-		new CMS.ACP.Page.AddContent();
+		new CMS.ACP.Content.AddDialog();
 		new CMS.ACP.Page.Revisions();
 
 		new WCF.Action.SimpleProxy({
