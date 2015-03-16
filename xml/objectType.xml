@@ -170,25 +170,9 @@
 			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
-			<name>de.codequake.cms.content.type.twocolumns</name>
+			<name>de.codequake.cms.content.type.columns</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\TwoColumnsContentType</classname>
-			<category>structure</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
-		</type>
-		<type>
-			<name>de.codequake.cms.content.type.threecolumns</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\ThreeColumnsContentType</classname>
-			<category>structure</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
-		</type>
-		<type>
-			<name>de.codequake.cms.content.type.fourcolumns</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\FourColumnsContentType</classname>
+			<classname>cms\system\content\type\ColumnsContentType</classname>
 			<category>structure</category>
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>

@@ -4,13 +4,8 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[CMS for WCF 2.1]]></packagedescription>
 		<isapplication>1</isapplication>
-<<<<<<< HEAD
 		<version>2.1.0 Beta 1</version>
 		<date>2015-01-29</date>
-=======
-		<version>2.0.0 Beta 8</version>
-		<date>2015-03-15</date>
->>>>>>> master
 	</packageinformation>
 
 	<authorinformation>
@@ -63,28 +58,4 @@
 		<!-- scripts -->
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
 	</instructions>
-<<<<<<< HEAD
 </package>
-=======
-
-	<instructions type="update" fromversion="2.0.0 Beta 7">
-		<instruction type="file">files.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-
-		<!-- xml -->
-		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
-    
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="sql">update_beta8.sql</instruction>
-		<instruction type="script">acp/update_de.codequake.cms_beta8.php</instruction>
-	</instructions>
-</package>
->>>>>>> master

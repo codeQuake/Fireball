@@ -22,15 +22,4 @@
 			padding-right: @wcfGapMedium;
 		}
 	}
-	.grid-mixin(@width) {
-		.grid@{width} { 
-			width: percentage(@width/100); 
-		}
-	}
-	.loop(@counter) when (@counter > 0){
-		.loop((@counter - 1));
-		.grid-mixin(@counter);
-	}
-
-	.loop(100);
 }

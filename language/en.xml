@@ -24,13 +24,12 @@
 		<item name="cms.acp.content.position.position.body"><![CDATA[Body]]></item>
 		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Sidebar]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Multiple Columns]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard Box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Choose box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[File]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Choose file]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Root]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns"><![CDATA[Four Columns]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns.width"><![CDATA[Column width]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Gallery]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Images]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Content collection]]></item>
@@ -78,10 +77,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.error.compileError"><![CDATA[The given text contains the following template errors:<br />{$compileError}]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns"><![CDATA[Three Columns]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns.width"><![CDATA[Column width]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Two Columns]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns.width"><![CDATA[Column width]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[User]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user.name"><![CDATA[Username]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>

@@ -66,6 +66,144 @@ CMS.ACP.Content.AddDialog = Class.extend({
 });
 
 /**
+ * Initialize CMS.ACP.Content.Type namespace
+ */
+CMS.ACP.Content.Type = { };
+
+/**
+ * Columns content type.
+ * 
+ * @param	array		columnData
+ */
+CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
+	_columnCount: 0,
+	_columnData: null,
+	_container: null,
+
+	/**
+	 * @var	integer
+	 */
+	_mouseDifference: 0,
+
+	init: function(columnData) {
+		this._columnData = columnData || [ ];
+		this._container = $('#columnContainer');
+
+		for (var i = 0; i < 2; i++) {
+			console.log('hh', this._columnData[i]);
+			this._addColumn(this._columnData[i] || null);
+		}
+
+		this._container.mouseup($.proxy(this._mouseup, this));
+		$('.jsAddColumn').click($.proxy(function(event) {
+			event.preventDefault();
+			this._addColumn();
+		}, this));
+
+		this._container.parents('form').submit($.proxy(this._submit, this));
+	},
+
+	/**
+	 * Adds a new column.
+	 */
+	_addColumn: function(width) {
+		console.log(width);
+		this._columnCount++;
+
+		if (!width) {
+			width = Math.round(100 / this._columnCount);
+		}
+
+		var $grid = $('<div class="grid" data-grid-number="' + this._columnCount + '"></div>').appendTo(this._container);
+		$('<div class="gridNumber">' + this._columnCount + '</div>').appendTo($grid);
+		$('<div class="gridResize"></div>').mousedown($.proxy(this._mousedown, this)).appendTo($grid);
+
+		this._columnData.push(width);
+		this._setWidth(this._columnCount, width);
+	},
+
+	_mousedown: function(event) {
+		event.preventDefault();
+
+		var $gridResize = $(event.currentTarget);
+		var $grid = $gridResize.parent();
+
+		this._mouseDifference = event.originalEvent.clientX - ($gridResize.offset().left + $gridResize.innerWidth()) + $(window).scrollLeft();
+
+		this._container.mousemove($.proxy(this._mousemove, this, $grid));
+	},
+
+	_mousemove: function(grid, event) {
+		var $columnNumber = grid.data('gridNumber');
+
+		var newWidth = event.pageX - grid.offset().left - this._mouseDifference;
+		var percentage = Math.round(newWidth / this._container.width() * 100);
+
+		if (percentage != this._columnData[$columnNumber - 1]) {
+			this._setWidth($columnNumber, percentage);
+		}
+	},
+
+	_mouseup: function() {
+		this._container.unbind('mousemove');
+	},
+
+	/**
+	 * Sets the width of a specific column.
+	 * 
+	 * @param	integer		width
+	 * @param	integer		width
+	 */
+	_setWidth: function(columnNumber, width) {
+		console.log('set width', width, 'for column', columnNumber);
+		var secondaryColumnNumber;
+
+		if (columnNumber == this._columnCount) {
+			secondaryColumnNumber = columnNumber - 1;
+		} else {
+			secondaryColumnNumber = columnNumber + 1;
+		}
+		console.log('secondary column number is', secondaryColumnNumber);
+
+		var accumulatedColumnWidth = width;
+		for (var i = 1, length = this._columnCount; i <= length; i++) {
+			if (i !== columnNumber && i !== secondaryColumnNumber) {
+				console.log('existing column', i, 'has a width of', this._columnData[i - 1]);
+				accumulatedColumnWidth += this._columnData[i - 1];
+			}
+		}
+		console.log('accumulated column width is', accumulatedColumnWidth);
+
+		var secondaryColumnWidth = 100 - accumulatedColumnWidth;
+		console.log('therefore, width of secondary column is', secondaryColumnWidth);
+
+		if (width < 5 || secondaryColumnWidth < 5) {
+			return;
+		}
+
+		this._columnData[columnNumber - 1] = width;
+		this._columnData[secondaryColumnNumber - 1] = secondaryColumnWidth;
+
+		// update dom
+		this._container.children(':nth-child(' + columnNumber + ')').innerWidth(width + '%');
+		this._container.children(':nth-child(' + secondaryColumnNumber + ')').innerWidth(secondaryColumnWidth + '%');
+	},
+
+	/**
+	 * Handles submitting the form.
+	 * 
+	 * @param	object		event
+	 */
+	_submit: function(event) {
+		var $form = $(event.currentTarget);
+
+		for (var i = 0, length = this._columnCount; i < length; i++) {
+			$('<input type="hidden" name="columnData[]" value="' + this._columnData[i] + '" />').appendTo($form);
+		}
+	}
+});
+
+/**
  * Initialize CMS.ACP.File namespace
  */
 CMS.ACP.File = { };

@@ -8,3 +8,41 @@
 	min-height: 36px;
 	width: 50%;
 }
+
+.gridContainer::before, .gridContainer::after {
+	display: table;
+	content: '';
+}
+
+.gridContainer::after {
+	clear: both;
+}
+
+.grid {
+	float: left;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	position: relative;
+}
+
+.grid:not(:last-child) {
+	padding-right: 7px;
+}
+
+.grid .gridNumber {
+	background: red;
+	height: 300px;
+}
+
+.grid .gridResize {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 7px;
+	background: green;
+	width: 20px;
+}
+
+.grid:last-child .gridResize {
+	display: none;
+}
