@@ -11,7 +11,7 @@
 
 		WCF.TabMenu.init();
 
-		new CMS.ACP.Page.AddForm();
+		new CMS.ACP.Page.Alias.Preview('#alias', '#parentID', '{link application="cms" controller="Page" alias="123456789" forceFrontend=true}{/link}');
 
 		{if $action == 'add'}
 			$('#createMenuItem').click(function() {
@@ -117,7 +117,7 @@
 							</small>
 						{/if}
 						<small>{lang}cms.acp.page.alias.description{/lang}</small>
-						<small id="aliasPreview"></small>
+						<small class="jsAliasPreview"></small>
 					</dd>
 				</dl>
 

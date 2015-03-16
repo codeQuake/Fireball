@@ -1,50 +1,29 @@
-if (!CMS) var CMS = {};
-CMS.ACP = {};
+/**
+ * Class and function collection for cms acp.
+ * 
+ * @author	Jens Krumsieck, Florian Frantzen
+ * @copyright	2013 - 2015 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
+ */
+if (!CMS) var CMS = { };
 
-CMS.ACP.Page = {};
+/**
+ * Initialize CMS.ACP namespace
+ */
+CMS.ACP = { };
 
-CMS.ACP.Page.AddForm = Class.extend({
-	init: function () {
-		$('#alias, #parentID').change($.proxy(this._buildAliasPreview, this));
-		this._buildAliasPreview();
-	},
+/**
+ * Initialize CMS.ACP.Content namespace
+ */
+CMS.ACP.Content = { };
 
-	_buildAliasPreview: function() {
-		var $aliasPrefix = $('#parentID option:selected').data('alias');
-		var $alias = $('#alias').val();
-		var $previewAlias = '';
-
-		if ($alias != '') {
-			$previewAlias = 'index.php/';
-			if ($aliasPrefix != '' && typeof $aliasPrefix !== "undefined") {
-				$previewAlias += $aliasPrefix + '/';
-			}
-			$previewAlias += $alias + '/';
-			$('#aliasPreview').html(WCF.Language.get('cms.acp.page.alias.preview') + ' ' +  $previewAlias).show();
-		}
-		else { $('#aliasPreview').hide(); }
-	}
-});
-
-CMS.ACP.Page.Menu = Class.extend({
-	init: function () {
-		$('#menuItemParameters').change($.proxy(this._showNotice, this));
-		$('#menuItemController').change($.proxy(this._showNotice, this));
-		$('#menuItemParametersContainer > dd').append('<p id="cmsNoticeContainer" />');
-		this._showNotice();
-	},
-
-	_showNotice: function () {
-		if ($('#menuItemController').val() == 'cms\\page\\PagePage') {
-			$('#cmsNoticeContainer').html('<small>' + WCF.Language.get('wcf.acp.pageMenu.parameters.notice') + '</small>');
-		}
-		else $('#cmsNoticeContainer').html("");
-	}
-}),
-
-CMS.ACP.Page.AddContent = Class.extend({
+/**
+ * Shows a dialog to add a new content to a page.
+ */
+CMS.ACP.Content.AddDialog = Class.extend({
 	_proxy: null,
-	_cache: {},
+	_cache: { },
 	_dialog: null,
 
 	init: function() {
@@ -86,8 +65,15 @@ CMS.ACP.Page.AddContent = Class.extend({
 	}
 });
 
-CMS.ACP.File = {};
+/**
+ * Initialize CMS.ACP.File namespace
+ */
+CMS.ACP.File = { };
 
+/**
+ * Handles showing details about a specific file upon clicking on the file
+ * title.
+ */
 CMS.ACP.File.Details = Class.extend({
 	/**
 	 * cache
@@ -160,6 +146,73 @@ CMS.ACP.File.Details = Class.extend({
 	}
 });
 
+/**
+ * Allows to specify width and height of an image when displayed in the
+ * frontend.
+ * 
+ * @param	integer		fileID
+ */
+CMS.ACP.File.ImageRatio = Class.extend({
+	_ratio: 1,
+
+	/**
+	 * Initialises a new image radio handler.
+	 * 
+	 * @param	integer		fileID
+	 */
+	init: function(fileID) {
+		new WCF.Action.Proxy({
+			autoSend: true,
+			data: {
+				actionName: 'getSize',
+				className: 'cms\\data\\file\\FileAction',
+				objectIDs: [fileID]
+			},
+			success: $.proxy(this._success, this)
+		});
+
+		$('#width').change($.proxy(this._calculateHeight, this));
+		$('#height').change($.proxy(this._calculateWidth, this));
+	},
+
+	/**
+	 * Calculates the height of the image when the width was changed.
+	 */
+	_calculateHeight: function() {
+		var $width = $('#width');
+		var height = $width.val() / this._ratio;
+		$('#height').val(Math.round(height));
+	},
+
+	/**
+	 * Calculates the width of the image when the height was changed.
+	 */
+	_calculateWidth: function() {
+		var $height = $('#height');
+		var width = $height.val() * this._ratio;
+		$('#width').val(Math.round(width));
+	},
+
+	/**
+	 * Handles successful AJAX responses.
+	 * 
+	 * @param	object		data
+	 * @param	string		textStatus
+	 * @param	jQuery		jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		this._ratio = data.returnValues.width / data.returnValues.height;
+	}
+});
+
+/**
+ * Provides a file picker to select one or multiple files in a form.
+ * 
+ * @param	jQuery		selectButton
+ * @param	string		inputName
+ * @param	array		defaultValues
+ * @param	object		options
+ */
 CMS.ACP.File.Picker = Class.extend({
 	/**
 	 * id of the currently open category
@@ -185,6 +238,7 @@ CMS.ACP.File.Picker = Class.extend({
 	 * Supported options:
 	 * - multiple: Indicates whether user only can select one or multiple
 	 *             files.
+	 * - fileType: Limit the listed files to the ones of a specific type.
 	 * 
 	 * @var	object
 	 */
@@ -293,7 +347,7 @@ CMS.ACP.File.Picker = Class.extend({
 		}
 
 		if (!this._options.multiple) {
-		    new CMS.ACP.Image.Ratio($input.val());
+		    new CMS.ACP.File.ImageRatio($input.val());
 		}
 	},
 
@@ -442,6 +496,9 @@ CMS.ACP.File.Picker = Class.extend({
 	}
 });
 
+/**
+ * Provides a popover preview for files.
+ */
 CMS.ACP.File.Preview = WCF.Popover.extend({
 	/**
 	 * action proxy
@@ -452,7 +509,7 @@ CMS.ACP.File.Preview = WCF.Popover.extend({
 	/**
 	 * @see	WCF.Popover.init()
 	 */
-	init: function () {
+	init: function() {
 		this._super('.cmsFileLink');
 
 		this._proxy = new WCF.Action.Proxy({
@@ -463,7 +520,7 @@ CMS.ACP.File.Preview = WCF.Popover.extend({
 	/**
 	 * @see	WCF.Popover._loadContent()
 	 */
-	_loadContent: function () {
+	_loadContent: function() {
 		var $file = $('#' + this._activeElementID);
 
 		this._proxy.setOption('data', {
@@ -474,13 +531,16 @@ CMS.ACP.File.Preview = WCF.Popover.extend({
 
 		var $elementID = this._activeElementID;
 		var self = this;
-		this._proxy.setOption('success', function (data, textStatus, jqXHR) {
+		this._proxy.setOption('success', function(data, textStatus, jqXHR) {
 			self._insertContent($elementID, data.returnValues.template, true);
 		});
 		this._proxy.sendRequest();
 	}
 });
 
+/**
+ * Provides an upload dialog for files.
+ */
 CMS.ACP.File.Upload = {
 	/**
 	 * callback executed after submitting the upload form.
@@ -661,6 +721,11 @@ CMS.ACP.File.Upload = {
 	}
 };
 
+/**
+ * Handles the upload of files.
+ * 
+ * @see	WCF.Upload.Parallel
+ */
 CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 	/**
 	 * @see	WCF.Upload.init()
@@ -673,7 +738,7 @@ CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 	 * @see	WCF.Upload._error()
 	 */
 	_error: function(jqXHR, textStatus, errorThrown) {
-		// there is no really something we can do here other than
+		// there is not really something we can do here other than
 		// creating a log entry
 		console.log(jqXHR, textStatus, errorThrown);
 	},
@@ -732,55 +797,124 @@ CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 	}
 });
 
-CMS.ACP.Image = {};
+/**
+ * Initialize CMS.ACP.Page namespace
+ */
+CMS.ACP.Page = { };
 
-CMS.ACP.Image.Ratio = Class.extend({
-    _ratio: 1,
-    _proxy: null,
+/**
+ * Initialize CMS.ACP.Page.Alias namespace
+ */
+CMS.ACP.Page.Alias = { };
 
-	init: function (fileID) {
-	    this._proxy = new WCF.Action.Proxy({
-	        success: $.proxy(this._success, this)
-	    });
-	    this._proxy.setOption('data', {
-	        'actionName': 'getSize',
-	        'className': 'cms\\data\\file\\FileAction',
-	        'objectIDs': [fileID]
-	    });
-	    this._proxy.sendRequest();
+/**
+ * Handles building of alias preview.
+ * 
+ * @param	string		inputSelector
+ * @param	string		parentPageSelectSelector
+ * @param	string		dummyLink
+ */
+CMS.ACP.Page.Alias.Preview = Class.extend({
+	/**
+	 * alias input element
+	 * @var	jQuery
+	 */
+	_aliasInput: null,
 
-		$('#width').change($.proxy(this._calculateHeight, this));
-		$('#height').change($.proxy(this._calculateWidth, this));
+	/**
+	 * Dummy page link to build alias preview. '123456789' will be replaced
+	 * by the actual alias stack based on the given alias and the selected
+	 * parent pages.
+	 * @var	string
+	 */
+	_dummyPageLink: '',
+
+	/**
+	 * parent page select element
+	 * @var	jQuery
+	 */
+	_parentPageSelect: null,
+
+	/**
+	 * Initializes the alias preview.
+	 * 
+	 * @param	string		inputSelector
+	 * @param	string		parentPageSelectSelector
+	 * @param	string		dummyPageLink
+	 */
+	init: function(inputSelector, parentPageSelectSelector, dummyPageLink) {
+		this._dummyPageLink = dummyPageLink;
+		this._aliasInput = $(inputSelector);
+		this._parentPageSelect = $(parentPageSelectSelector);
+
+		if (!this._aliasInput.length) {
+			console.debug("[CMS.ACP.Page.Alias.Preview] Invalid alias input selector given, aborting.");
+			return;
+		}
+
+		if (!this._parentPageSelect.length) {
+			console.debug("[CMS.ACP.Page.Alias.Preview] Invalid parent page selector given, aborting.");
+			return;
+		}
+
+		this._previewElement = this._aliasInput.parent().find('.jsAliasPreview');
+		if (!this._previewElement.length) {
+			console.debug("[CMS.ACP.Page.Alias.Preview] Unable to find preview element, aborting.");
+			return;
+		}
+
+		// bind events
+		this._aliasInput.change($.proxy(this._change, this));
+		this._parentPageSelect.change($.proxy(this._change, this));
+
+		// build alias on initialization
+		this._change();
 	},
 
-	_success: function(data, textStatus, jqXHR) {
-	    this._ratio = data.returnValues.width / data.returnValues.height;
+	/**
+	 * Builds alias preview when associated inputs were changed.
+	 */
+	_change: function() {
+		var $aliasPrefix = this._parentPageSelect.children('option:selected').data('alias');
+		var $alias = this._aliasInput.val();
+		var $previewAlias = '';
+
+		if ($alias != '') {
+			if ($aliasPrefix) $previewAlias += $aliasPrefix + '/';
+			$previewAlias += $alias;
+
+			this._previewElement.html(this._dummyPageLink.replace('123456789', $previewAlias)).show();
+		} else {
+			this._previewElement.hide();
+		}
+	}
+});
+
+/**
+ * Shows a notice about cms links when creating/editing a link of the page menu.
+ */
+CMS.ACP.Page.Menu = Class.extend({
+	init: function() {
+		$('#menuItemParameters').change($.proxy(this._showNotice, this));
+		$('#menuItemController').change($.proxy(this._showNotice, this));
+		$('#menuItemParametersContainer > dd').append('<p id="cmsNoticeContainer" />');
+		this._showNotice();
 	},
 
-	_calculateHeight: function() {
-		var $width = $('#width');
-		var height = $width.val() / this._ratio;
-		$('#height').val(Math.round(height));
-	},
-
-	_calculateWidth: function() {
-		var $height = $('#height');
-		var width = $height.val() * this._ratio;
-		$('#width').val(Math.round(width));
+	_showNotice: function() {
+		if ($('#menuItemController').val() == 'cms\\page\\PagePage') {
+			$('#cmsNoticeContainer').html('<small>' + WCF.Language.get('wcf.acp.pageMenu.parameters.notice') + '</small>');
+		}
+		else $('#cmsNoticeContainer').html("");
 	}
 });
 
 CMS.ACP.Page.Revisions = Class.extend({
 	_proxy: null,
-	_cache: {},
+	_cache: { },
 	_dialog: null,
-	_didInit: false,
 
 	init: function() {
-		if (this._didInit)  {
-			return;
-		}
-
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)
 		});
@@ -789,8 +923,6 @@ CMS.ACP.Page.Revisions = Class.extend({
 		this._buttons.click($.proxy(this._click, this));
 
 		new WCF.Action.Delete('cms\\data\\page\\revision\\PageRevisionAction', '.jsRevisionRow');
-
-		this._didInit = true;
 	},
 
 	_click: function(event){
@@ -822,7 +954,7 @@ CMS.ACP.Page.Revisions.Restore = Class.extend({
 	_proxy: null,
 	_didInit:false,
 
-	init: function () {
+	init: function() {
 		if (this._didInit) {
 			return;
 		}
@@ -836,20 +968,19 @@ CMS.ACP.Page.Revisions.Restore = Class.extend({
 		this._didInit = true;
 	},
 
-	_click: function (event) {
+	_click: function(event) {
 		event.preventDefault();
 		var $target = $(event.currentTarget);
 
 		if ($target.data('confirmMessage')) {
 			WCF.System.Confirmation.show($target.data('confirmMessage'), $.proxy(this._execute, this), { target: $target });
-		}
-		else {
+		} else {
 			WCF.LoadingOverlayHandler.updateIcon($target);
 			this._sendRequest($target);
 		}
 	},
 
-	_sendRequest: function (object) {
+	_sendRequest: function(object) {
 		$versionID = $(object).data('objectID');
 
 		this._proxy.setOption('data', {
@@ -860,7 +991,7 @@ CMS.ACP.Page.Revisions.Restore = Class.extend({
 		this._proxy.sendRequest();
 	},
 
-	_execute: function (action, parameters) {
+	_execute: function(action, parameters) {
 		if (action === 'cancel') {
 			return;
 		}
@@ -869,7 +1000,7 @@ CMS.ACP.Page.Revisions.Restore = Class.extend({
 		this._sendRequest(parameters.target);
 	},
 
-	_success: function (data, textStatus, jqXHR) {
+	_success: function(data, textStatus, jqXHR) {
 		var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
 		$notification.show(function() {
 			window.location = location;
