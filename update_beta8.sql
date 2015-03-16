@@ -4,7 +4,6 @@ ALTER TABLE cms1_page DROP layoutID;
 ALTER TABLE cms1_page ADD allowIndexing TINYINT(1) NOT NULL DEFAULT 1 AFTER metaKeywords;
 ALTER TABLE cms1_page DROP showSidebar;
 ALTER TABLE cms1_page ADD allowSubscribing TINYINT(1) NOT NULL DEFAULT 1 AFTER isCommentable;
-ALTER TABLE cms1_page DROP stylesheets;
 
 ALTER TABLE cms1_stylesheet CHANGE sheetID stylesheetID INT(10) NOT NULL AUTO_INCREMENT;
 
@@ -16,10 +15,6 @@ CREATE TABLE cms1_stylesheet_to_page (
 	PRIMARY KEY (stylesheetID, pageID)
 );
 
-
-DROP TABLE IF EXISTS cms1_folder;
-
-ALTER TABLE cms1_file DROP folderID;
 ALTER TABLE cms1_file CHANGE size fileSize INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE cms1_file CHANGE type fileType VARCHAR(255) NOT NULL DEFAULT '';
 ALTER TABLE cms1_file ADD fileHash VARCHAR(40) NOT NULL DEFAULT '';
@@ -33,6 +28,6 @@ CREATE TABLE cms1_file_to_category (
 	PRIMARY KEY (fileID, categoryID)
 );
 
-ALTER TABLE cms1_page_revision CHANGE data data LONGBLOB NOT NULL DEFAULT '';
-ALTER TABLE cms1_page_revision ADD contentData LONGBLOB NOT NULL DEFAULT '';
+ALTER TABLE cms1_page_revision CHANGE data data LONGBLOB NOT NULL;
+ALTER TABLE cms1_page_revision ADD contentData LONGBLOB NOT NULL;
 DROP TABLE IF EXISTS cms1_content_revision;
