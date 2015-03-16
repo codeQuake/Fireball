@@ -79,6 +79,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 	_columnCount: 0,
 	_columnData: null,
 	_container: null,
+	_minColumnWidth: 5,
 
 	/**
 	 * @var	integer
@@ -90,7 +91,6 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 		this._container = $('#columnContainer');
 
 		for (var i = 0; i < 2; i++) {
-			console.log('hh', this._columnData[i]);
 			this._addColumn(this._columnData[i] || null);
 		}
 
@@ -107,11 +107,13 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 	 * Adds a new column.
 	 */
 	_addColumn: function(width) {
-		console.log(width);
 		this._columnCount++;
 
 		if (!width) {
 			width = Math.round(100 / this._columnCount);
+			if (width < this._minColumnWidth) {
+				width = this._minColumnWidth;
+			}
 		}
 
 		var $grid = $('<div class="grid" data-grid-number="' + this._columnCount + '"></div>').appendTo(this._container);
@@ -155,20 +157,47 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 	 * @param	integer		width
 	 */
 	_setWidth: function(columnNumber, width) {
-		console.log('set width', width, 'for column', columnNumber);
-		var secondaryColumnNumber;
+		console.log('setting width', width, 'for column', columnNumber);
+		var oldColumnWidth = false, secondaryColumnNumber, i;
 
-		if (columnNumber == this._columnCount) {
-			secondaryColumnNumber = columnNumber - 1;
-		} else {
-			secondaryColumnNumber = columnNumber + 1;
+		// ensure min column width
+		if (width < this._minColumnWidth) {
+			return false;
 		}
+
+		// shortpass for first column
+		if (this._columnCount == 1) {
+			this._columnData[0] = width;
+			this._container.children().innerWidth(width + '%');
+			return true;
+		}
+
+		// search a column on the right that can be scaled down
+		i = 1;
+		do {
+			secondaryColumnNumber = columnNumber + i;
+			i++;
+		} while (secondaryColumnNumber <= this._columnCount && this._columnData[secondaryColumnNumber - 1] <= this._minColumnWidth);
+
+		// if no column found, search on the left for a column
+		if (secondaryColumnNumber > this._columnCount || this._columnData[secondaryColumnNumber - 1] <= this._minColumnWidth) {
+			i = 1;
+			do {
+				secondaryColumnNumber = columnNumber - i;
+				i++;
+			} while (secondaryColumnNumber > 1 && this._columnData[secondaryColumnNumber - 1] <= this._minColumnWidth);
+
+			if (this._columnData[secondaryColumnNumber - 1] <= this._minColumnWidth) {
+				console.log('Could not force column width. Neither on the left nor on the right is a column with enough width.');
+				return false;
+			}
+		}
+
 		console.log('secondary column number is', secondaryColumnNumber);
 
 		var accumulatedColumnWidth = width;
-		for (var i = 1, length = this._columnCount; i <= length; i++) {
+		for (i = 1, length = this._columnCount; i <= length; i++) {
 			if (i !== columnNumber && i !== secondaryColumnNumber) {
-				console.log('existing column', i, 'has a width of', this._columnData[i - 1]);
 				accumulatedColumnWidth += this._columnData[i - 1];
 			}
 		}
@@ -177,8 +206,12 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 		var secondaryColumnWidth = 100 - accumulatedColumnWidth;
 		console.log('therefore, width of secondary column is', secondaryColumnWidth);
 
-		if (width < 5 || secondaryColumnWidth < 5) {
-			return;
+		if (secondaryColumnWidth < this._minColumnWidth) {
+			oldColumnWidth = width;
+			secondaryColumnWidth = this._minColumnWidth;
+			width = 100 - (accumulatedColumnWidth + secondaryColumnWidth - width);
+
+			console.log('reduced column width to', width, 'to maintain min column width for secondary column');
 		}
 
 		this._columnData[columnNumber - 1] = width;
@@ -187,6 +220,11 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 		// update dom
 		this._container.children(':nth-child(' + columnNumber + ')').innerWidth(width + '%');
 		this._container.children(':nth-child(' + secondaryColumnNumber + ')').innerWidth(secondaryColumnWidth + '%');
+
+		// handle reduced column width
+		if (oldColumnWidth) {
+			this._setWidth(columnNumber, oldColumnWidth);
+		}
 	},
 
 	/**
