@@ -2,6 +2,8 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use wcf\system\exception\UserInputException;
+use wcf\util\ArrayUtil;
 
 /**
  * @author	Florian Frantzen
@@ -22,9 +24,48 @@ class ColumnsContentType extends AbstractStructureContentType {
 	 */
 	public function getChildCSSClasses(Content $content) {
 		$parent = $content->getParentContent();
-		die(var_dump($parent));
+
+		$columnData = $parent->columnData;
+		$columnCount = count($columnData);
+
+		$width = $columnData[$content->showOrder % $columnCount];
+		return 'grid grid'.$width;
 	}
-	
+
+	/**
+	 * @see	\cms\system\content\type\IContentType::validate()
+	 */
+	public function validate($data) {
+		$accumulatedColumnWidth = 0;
+
+		if (!isset($data['columnData']) || !is_array($data['columnData'])) {
+			throw new UserInputException('columnData');
+		}
+
+		$data['columnData'] = ArrayUtil::toIntegerArray($data['columnData']);
+		$columnCount = count($data['columnData']);
+
+		$minColumnCount = 2;
+		$maxColumnCount = 5;
+		$minColumnWidth = 20;
+
+		if ($columnCount < $minColumnCount || $columnCount > $maxColumnCount) {
+			throw new UserInputException('columnData');
+		}
+
+		foreach ($data['columnData'] as $column => $width) {
+			if ($width < $minColumnWidth) {
+				throw new UserInputException('columnData');
+			}
+
+			$accumulatedColumnWidth += $width;
+		}
+
+		if ($accumulatedColumnWidth !== 100) {
+			throw new UserInputException('columnData');
+		}
+	}
+
 	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getOutput()
 	 */

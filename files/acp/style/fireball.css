@@ -9,6 +9,10 @@
 	width: 50%;
 }
 
+.gridContainer {
+	border: 1px solid #ccc;
+}
+
 .gridContainer::before, .gridContainer::after {
 	display: table;
 	content: '';
@@ -29,18 +33,25 @@
 	padding-right: 7px;
 }
 
-.grid .gridNumber {
-	background: red;
+.grid > div {
+	background: #f1f5fa;
 	height: 300px;
+	padding-top: 60px;
+	text-align: center;
+}
+
+.grid .gridNumber > span {
+	display: block;
+	font-size: 100px;
 }
 
 .grid .gridResize {
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	right: 7px;
-	background: green;
-	width: 20px;
+	right: 0;
+	background: #ccc;
+	width: 14px;
 }
 
 .grid:last-child .gridResize {
