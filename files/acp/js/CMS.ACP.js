@@ -290,9 +290,9 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 		}
 
 		if (this._columnCount == this._maxColumnCount) {
-			this._addButton.prop('disabled', 'disabled');
+			this._addButton.prop('disabled', true);
 		} else {
-			this._addButton.removeProp('disabled');
+			this._addButton.prop('disabled', false);
 		}
 
 		if (this._columnCount <= this._minColumnCount) {
