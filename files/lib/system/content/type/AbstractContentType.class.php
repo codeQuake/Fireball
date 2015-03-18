@@ -4,6 +4,7 @@ namespace cms\system\content\type;
 use cms\data\content\Content;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Abstract content type implementation.
@@ -26,6 +27,18 @@ abstract class AbstractContentType implements IContentType {
 	 */
 	public $multilingualFields = array();
 
+	/**
+	 * list of preview fields
+	 * @var array<string>
+	 */
+	protected $previewFields = array();
+	
+	/**
+	 * content requires title
+	 * @var boolean
+	 */
+	public $requiresTitle = false;
+	
 	/**
 	 * template name
 	 * @var	string
@@ -60,6 +73,26 @@ abstract class AbstractContentType implements IContentType {
 	 */
 	public function getIcon() {
 		return $this->icon;
+	}
+	
+	/**
+	 * @see \cms\system\content\type\IContentType::getPreview()
+	 */
+	public function getPreview(Content $content) {
+		if (!empty($this->previewFields)) {
+			$preview = '';
+			foreach ($this->previewFields as $field) {
+				if ((string) $content->{$field} != '') {
+					$preview .= ' - ';
+					$preview .= $content->{$field};
+				}
+			}
+			return StringUtil::truncate(substr($preview, 3), 70);
+		}
+		else {
+			//no fields given, return ID
+			return 'Content #'.$content->contentID;
+		}
 	}
 
 	/**

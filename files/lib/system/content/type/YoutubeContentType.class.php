@@ -16,6 +16,11 @@ class YoutubeContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
 	protected $icon = 'icon-youtube';
+	
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 */
+	protected $previewFields = array('video');
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::validate()

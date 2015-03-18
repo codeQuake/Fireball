@@ -2,8 +2,9 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use cms\data\file\FileList;
+use cms\data\file\FileCache;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * @author	Jens Krumsieck
@@ -26,14 +27,34 @@ class GalleryContentType extends AbstractContentType {
 		//neccessary for old data (version 2.0.0 Beta 7 or older)
 		if (is_string($content->imageIDs)) $imageIDs = explode(',', $content->imageIDs);
 
-		$list = new FileList();
-		$list->getConditionBuilder()->add('fileID in (?)', array($imageIDs));
-		$list->readObjects();
+		$list = array();
+		foreach ($imageIDs as $imageID) {
+			$image = FileCache::getInstance()->getFile($imageID);
+			$list[$image->fileID] = $image;
+		}
 
 		WCF::getTPL()->assign(array(
 			'images' => $list
 		));
 
 		return parent::getOutput($content);
+	}
+	
+	/**
+	 * @see	\cms\system\content\type\IContentType::getPreview()
+	 */
+	public function getPreview(Content $content) {
+		$imageIDs = $content->imageIDs;
+		
+		//neccessary for old data (version 2.0.0 Beta 7 or older)
+		if (is_string($content->imageIDs)) $imageIDs = explode(',', $content->imageIDs);
+
+		$list = array();
+		foreach ($imageIDs as $imageID) {
+			$image = FileCache::getInstance()->getFile($imageID);
+			$list[$image->fileID] = $image->getTitle();
+		}
+		
+		return StringUtil::truncate(implode(', ', $list), 70);
 	}
 }

@@ -186,7 +186,7 @@ class ContentAddForm extends AbstractForm {
 				$this->showOrder = 1;
 		}
 
-		if (!I18nHandler::getInstance()->validateValue('title')) {
+		if (!I18nHandler::getInstance()->validateValue('title', false, (!$this->objectType->getProcessor()->requiresTitle && $this->position != 'sidebar'))) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
 			}

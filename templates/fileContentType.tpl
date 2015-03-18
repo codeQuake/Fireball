@@ -3,7 +3,7 @@
 	<div class="details">
 		<a href="{link controller='FileDownload' application='cms' object=$file}{/link}" type="{$file->fileType}">{$file->getTitle()}</a>
 		<p>
-			<small>{$file->size|filesize}</small>
+			<small>{$file->filesize|filesize}</small>
 		</p>
 	</div>
 </div>

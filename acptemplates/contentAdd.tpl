@@ -58,7 +58,7 @@
 			<dl{if $errorField == 'title'} class="formError"{/if}>
 				<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
 				<dd>
-					<input type="text" id="title" name="title" value="{$i18nPlainValues['title']}" class="long" required="required" />
+					<input type="text" id="title" name="title" value="{$i18nPlainValues['title']}" class="long" />
 					{if $errorField == 'title'}
 						<small class="innerError">
 							{if $errorType == 'empty' || $errorType == 'multilingual'}

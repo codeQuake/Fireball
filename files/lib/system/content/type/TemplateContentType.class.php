@@ -19,6 +19,11 @@ class TemplateContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
 	protected $icon = 'icon-code';
+	
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 */
+	protected $previewFields = array('text');
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::validate()

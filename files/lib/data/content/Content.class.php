@@ -1,6 +1,7 @@
 <?php
 namespace cms\data\content;
 
+use cms\data\file\FileCache;
 use cms\data\page\PageCache;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\poll\Poll;
@@ -77,7 +78,11 @@ class Content extends DatabaseObject implements IRouteController, IPollObject {
 	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
 	public function getTitle() {
-		return WCF::getLanguage()->get($this->title);
+		if ($this->title !=  '') return WCF::getLanguage()->get($this->title);
+		else {
+			$this->objectType = $this->getObjectType();
+			return $this->objectType->getProcessor()->getPreview($this);
+		}
 	}
 
 	/**
