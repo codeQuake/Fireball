@@ -133,7 +133,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 		this._container = $('#columnContainer');
 
 		for (var i = 0; i < this._minColumnCount; i++) {
-			this._addColumn(columnData[i] || null);
+			this._addColumn(columnData[i] || Math.round(100 / this._minColumnCount));
 		}
 
 		// bind events
