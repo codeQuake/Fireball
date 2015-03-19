@@ -7,7 +7,7 @@ use wcf\system\bbcode\BBCodeParser;
 use wcf\system\WCF;
 
 /**
- * handles the cmsFile bbcode
+ * Handles the output for the cmsFile bbcode.
  * 
  * @author	Jens Krumsieck
  * @copyright	2013 - 2015 codeQuake

@@ -13,11 +13,11 @@
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-
 			{if $page->allowSubscribing && $__wcf->user->userID}
 				WCF.Language.addObject({
 					'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}'
 				});
+
 				new WCF.User.ObjectWatch.Subscribe();
 			{/if}
 		});
@@ -32,7 +32,6 @@
 		<li class="jsOnly"><a title="{lang}wcf.user.objectWatch.manageSubscription{/lang}" class="jsSubscribeButton jsTooltip" data-object-type="de.codequake.cms.page" data-object-id="{@$page->pageID}"><span class="icon icon16 icon-bookmark"></span> <span class="invisible">{lang}wcf.user.objectWatch.manageSubscription{/lang}</span></a></li>
 	{/if}
 {/capture}
-
 
 {hascontent}
 	{capture assign='sidebar'}
@@ -93,7 +92,31 @@
 {section name=i loop=$oldDepth}</div>{/section}
 
 {if $page->isCommentable && $page->getPermission('canViewComment')}
-	{include file='pageCommentList' application='cms'}
+	<header id="comments" class="boxHeadline boxSubHeadline">
+		<h2>{lang}cms.page.comments{/lang} <span class="badge">{@$commentList->countObjects()}</span></h2>
+	</header>
+
+	{include file='__commentJavaScript' commentContainerID='pageCommentList'}
+
+	<div class="container containerList marginTop">
+		{if $commentCanAdd}
+			<ul id="pageCommentList" class="commentList containerList" data-can-add="true" data-object-id="{@$page->pageID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$lastCommentTime}">
+				{include file='commentList'}
+			</ul>
+		{else}
+			{hascontent}
+				<ul id="pageCommentList" class="commentList containerList" data-can-add="false" data-object-id="{@$page->pageID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$lastCommentTime}">
+					{content}
+						{include file='commentList'}
+					{/content}
+				</ul>
+			{hascontentelse}
+				<div class="containerPadding">
+					{lang}cms.page.comments.noComments{/lang}
+				</div>
+			{/hascontent}
+		{/if}
+	</div>
 {/if}
 
 {include file='footer'}

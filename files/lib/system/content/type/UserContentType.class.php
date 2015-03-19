@@ -4,8 +4,8 @@ namespace cms\system\content\type;
 use cms\data\content\Content;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
-use wcf\system\exception\UserInputException;
 use wcf\system\exception\SystemException;
+use wcf\system\exception\UserInputException;
 use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 
