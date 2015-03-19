@@ -71,8 +71,10 @@ class PageCommentManager extends AbstractCommentManager {
 	 * @see	\wcf\system\comment\manager\ICommentManager::getTitle()
 	 */
 	public function getTitle($objectTypeID, $objectID, $isResponse = false) {
-		if ($isResponse) return WCF::getLanguage()->get('cms.page.commentResponse');
-		
+		if ($isResponse) {
+			return WCF::getLanguage()->get('cms.page.commentResponse');
+		}
+
 		return WCF::getLanguage()->getDynamicVariable('cms.page.comment');
 	}
 

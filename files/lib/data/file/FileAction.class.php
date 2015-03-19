@@ -39,13 +39,12 @@ class FileAction extends AbstractDatabaseObjectAction {
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
 	protected $requireACP = array('delete');
+
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
 	 */
-	protected $allowGuestAccess = array(
-		'getFilePreview'
-	);
-	
+	protected $allowGuestAccess = array('getFilePreview');
+
 	/**
 	 * Validate parameters and permissions to fetch details about a file.
 	 */
@@ -147,48 +146,55 @@ class FileAction extends AbstractDatabaseObjectAction {
 		}
 	}
 
+	/**
+	 * Validate parameters and permissions to get a preview of a file.
+	 */
 	public function validateGetFilePreview() {
-		if (count($this->objectIDs) != 1) {
-			throw new UserInputException('objectIDs');
-		}
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
 	}
+
 	/**
 	 * WCF.Popover implementation for files
 	 */
 	public function getFilePreview() {
-		$fileID = reset($this->objectIDs);
-		$file = FileCache::getInstance()->getFile($fileID);
-		WCF::getTPL()->assign('file', $file);
+		$file = $this->getSingleObject();
+
+		WCF::getTPL()->assign(array(
+			'file' => $file
+		));
+
 		return array(
 			'template' => WCF::getTPL()->fetch('filePreview', 'cms'),
-			'fileID' => $fileID
+			'fileID' => $file->fileID
 		);
 	}
-	
-	
-	
-	public function validateGetSize() {
-		if (count($this->objectIDs) != 1) {
-			throw new UserInputException('objectIDs');
-		}
-	}
+
 	/**
-	 * returns a file
+	 * Validate parameters and permissions to fetch size information about a file.
+	 */
+	public function validateGetSize() {
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
+	}
+
+	/**
+	 * Returns size information about a file.
 	 */
 	public function getSize() {
-		$fileID = reset($this->objectIDs);
-		$file = FileCache::getInstance()->getFile($fileID);
+		$file = $this->getSingleObject();
 		$size = $file->getImageSize();
+
 		if ($file->isImage()) {
 			return array(
 				'width' => $size[0],
 				'height' => $size[1]
 			);
 		}
-		else return false;
-		
+
+		return false;
 	}
-	
+
 	/**
 	 * Validates parameters and permissions to get a upload dialog.
 	 */
@@ -309,6 +315,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 				'errorType' => $failedUpload->getValidationErrorType()
 			);
 		}
+
 		return $result;
 	}
 }

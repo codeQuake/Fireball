@@ -474,12 +474,10 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			'admin.cms.page.canAddPage'
 		));
 
-		$this->pageEditor = $this->getSingleObject();
-		if (!$this->pageEditor->pageID) {
-			throw new UserInputException('objectIDs');
-		}
+		// validate 'objectIDs' parameter
+		$page = $this->getSingleObject();
 
-		else if ($this->pageEditor->isHome) {
+		if ($page->isHome) {
 			throw new PermissionDeniedException();
 		}
 	}
@@ -488,7 +486,9 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * Sets a specific page as home.
 	 */
 	public function setAsHome() {
-		$this->pageEditor->setAsHome();
+		$page = $this->getSingleObject();
+
+		$page->setAsHome();
 
 		// create revision
 		$this->parameters['action'] = 'setAsHome';
@@ -506,7 +506,9 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * @see	\wcf\data\IToggleAction::toggle()
 	 */
 	public function toggle() {
-		if (empty($this->objects)) $this->readObjects();
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
 
 		foreach ($this->objects as $page) {
 			$page->update(array(

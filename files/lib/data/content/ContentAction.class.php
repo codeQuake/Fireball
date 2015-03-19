@@ -201,7 +201,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		if (!isset($this->parameters['data']['structure']) || !is_array($this->parameters['data']['structure'])) {
 			throw new UserInputException('structure');
 		}
+
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+
 		foreach ($this->parameters['data']['structure'] as $parentID => $contentIDs) {
 			if ($parentID) {
 				if (!isset($contents[$parentID])) {
