@@ -104,10 +104,5 @@ right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
 	<delete>
 		<option name="cms_content_slideshow_effect_delay" />
 		<option name="cms_content_slideshow_fx" />
-		<option name="cms_pages_content_slideshow_effect_delay" />
-		<option name="cms_pages_content_slideshow_fx" />
-		<option name="cms_pages_content_slideshow_interval" />
-		<option name="cms_pages_default_global_sidebar" />
-		<option name="cms_pages_default_robots" />
 	</delete>
 </data>
