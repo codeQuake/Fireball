@@ -15,7 +15,6 @@
 	<li><code class="inlineCode">center</code>: Centers the content</li>
 </ul>]]>
 		</item>
-		<item name="cms.acp.content.css.cssID"><![CDATA[CSS-ID]]></item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content?]]></item>
 		<item name="cms.acp.content.edit"><![CDATA[Edit Content]]></item>
 		<item name="cms.acp.content.list"><![CDATA[Contents]]></item>

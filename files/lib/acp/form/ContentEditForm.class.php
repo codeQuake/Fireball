@@ -84,7 +84,6 @@ class ContentEditForm extends ContentAddForm {
 			'title' => $this->title,
 			'pageID' => $this->pageID,
 			'parentID' => ($this->parentID) ?  : null,
-			'cssID' => $this->cssID,
 			'cssClasses' => $this->cssClasses,
 			'showOrder' => $this->showOrder,
 			'position' => $this->position,
@@ -138,7 +137,6 @@ class ContentEditForm extends ContentAddForm {
 			I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
 			$this->pageID = $this->content->pageID;
 			$this->cssClasses = $this->content->cssClasses;
-			$this->cssID = $this->content->cssID;
 			$this->parentID = $this->content->parentID;
 			$this->showOrder = $this->content->showOrder;
 			$this->position = $this->content->position;
