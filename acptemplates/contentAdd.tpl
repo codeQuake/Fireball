@@ -125,18 +125,6 @@
 		<fieldset>
 			<legend>{lang}cms.acp.content.css{/lang}</legend>
 
-			<dl{if $errorField == 'cssID'} class="formError"{/if}>
-				<dt><label for="cssID">{lang}cms.acp.content.css.cssID{/lang}</label></dt>
-				<dd>
-					<input type="text" id="cssID" name="cssID" value="{$cssID}" class="long" />
-					{if $errorField == 'cssID'}
-						<small class="innerError">
-							{lang}cms.acp.content.cssID.error.{@$errorType}{/lang}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-
 			<dl{if $errorField == 'cssClasses'} class="formError"{/if}>
 				<dt><label for="cssClasses">{lang}cms.acp.content.css.cssClasses{/lang}</label></dt>
 				<dd>

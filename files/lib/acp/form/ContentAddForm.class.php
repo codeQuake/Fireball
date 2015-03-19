@@ -52,12 +52,6 @@ class ContentAddForm extends AbstractForm {
 	public $cssClasses = '';
 
 	/**
-	 * css id of the content
-	 * @var	string
-	 */
-	public $cssID = '';
-
-	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('admin.cms.content.canAddContent');
@@ -132,7 +126,6 @@ class ContentAddForm extends AbstractForm {
 		I18nHandler::getInstance()->readValues();
 
 		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
-		if (isset($_POST['cssID'])) $this->cssID = StringUtil::trim($_POST['cssID']);
 		if (isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['contentData']) && is_array($_POST['contentData'])) $this->contentData = $_POST['contentData'];
@@ -208,11 +201,6 @@ class ContentAddForm extends AbstractForm {
 		if (!$page->pageID) {
 			throw new UserInputException('pageID', 'invalid');
 		}
-
-		// validate if parent is tabmenu, fallback to a cssID
-		if ($parentIsTabMenu) {
-				if ($this->cssID == '') $this->cssID = 'tab-' . $this->pageID . $this->parentID . $this->showOrder . $this->objectType->objectTypeID . rand(0, 20);
-		}
 	}
 
 	/**
@@ -225,7 +213,6 @@ class ContentAddForm extends AbstractForm {
 			'title' => $this->title,
 			'pageID' => $this->pageID,
 			'parentID' => ($this->parentID) ?  : null,
-			'cssID' => $this->cssID,
 			'cssClasses' => $this->cssClasses,
 			'showOrder' => $this->showOrder,
 			'position' => $this->position,
@@ -318,7 +305,6 @@ class ContentAddForm extends AbstractForm {
 			'contentData' => $this->contentData,
 			'contentList' => $this->contentList,
 			'cssClasses' => $this->cssClasses,
-			'cssID' => $this->cssID,
 			'objectType' => $this->objectType,
 			'pageID' => $this->pageID,
 			'pageList' => $this->pageList,

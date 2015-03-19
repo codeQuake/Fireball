@@ -71,7 +71,6 @@ CREATE TABLE cms1_content (
 	showOrder INT(10) DEFAULT 0,
 	isDisabled TINYINT(1) DEFAULT 0,
 	position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body',
-	cssID VARCHAR (255),
 	cssClasses VARCHAR(255),
 	additionalData MEDIUMTEXT DEFAULT NULL
 );
