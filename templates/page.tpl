@@ -33,7 +33,6 @@
 	{/if}
 {/capture}
 
-
 {hascontent}
 	{capture assign='sidebar'}
 		{content}
