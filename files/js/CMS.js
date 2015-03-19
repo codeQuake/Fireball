@@ -1,91 +1,153 @@
 if (!CMS) var CMS = {};
 
-CMS.Content = {};
+$.widget('ui.fireSlide', {
 
-CMS.Content.Type = {};
+	/**
+	 * button list object
+	 * @var	jQuery
+	 */
+	_buttonList: null,
 
-CMS.Content.Type.Slideshow = Class.extend({
+	/**
+	 * number of items
+	 * @var	integer
+	 */
+	_count: 0,
 
-	_speed: 5000,
-	_effectDelay: 1000,
-	_fx: 'fade',
+	/**
+	 * item index
+	 * @var	integer
+	 */
+	_index: 0,
 
-	init: function(speed, effectDelay, fx) {
-		this._speed = speed;
-		this._effectDelay = effectDelay;
-		this._fx = fx;
-		this._interval = '';
+	/**
+	 * items
+	 * @var jQuery
+	 */
+	_items: null,
 
-		// calc max-height
+	/**
+	 * item container
+	 * @var jQuery
+	 */
+	_itemContainer: null,
+
+	/**
+	 * timer object
+	 * @var	interval
+	 */
+	timer: null,
+
+	/**
+	 * list of options
+	 * @var	object
+	 */
+	options: {
+		/* cycle interval in milliseconds */
+		speed: 2000
+	},
+
+	/**
+	 * elements width
+	 * @var	integer
+	 */
+	width: 0,
+
+	/**
+	 * Creates a new instance of ui.FireSlide
+	 */
+	_create: function () {
+		var items = this.element.children('div');
+		this._itemContainer = $('<div />').appendTo(this.element).css('left', 0);
+		items.appendTo(this._itemContainer);
+		this._items = this._itemContainer.children('div');
+		this._count = this._items.length;
+		this._index = 0;
 		var max_height = 0;
-		$('.fireballSlideContainer').append('<ul class="slideshowButtonList" />');
 
-		$('.fireballSlideContainer').children('div').each(function() {
-			if ($(this).outerHeight() >= max_height) max_height = $(this).outerHeight();
-			$('.fireballSlideContainer > .slideshowButtonList').append('<li><a><span class="icon icon16 icon-circle"></span></a></li>');
-		});
+		this._width = this.element.innerWidth();
+		this._items.each($.proxy(function (index, item) {
+			$(item).css({
+				left: (index * (40 + this._width)),
+				width: this._width
+			}).show();
+		}, this));
 
-		//set first as active
-		$('.fireballSlideContainer > div:first').css('display', 'block').addClass('active');
-		this._interval = setInterval($.proxy(this.slide, this), this._speed);
+		//create button list & calculate max height
+		this._buttonList = $('<ul class="slideshowButtonList" />').appendTo(this.element);
 
-		$('.fireballSlideContainer > .slideshowButtonList > li:first').addClass('active');
-		$('.fireballSlideContainer').css('height', max_height);
+		for (var $i = 0; $i < this._count; $i++) {
+			if ($(this._items.get($i)).outerHeight() >= max_height) max_height = $(this._items.get($i)).outerHeight();
+			var $icon = $('<li><a><span class="icon icon16 icon-circle"></span></a></li>').click($.proxy(this._click, this)).appendTo(this._buttonList);
+			if ($i == 0) $icon.addClass('active');
+		}
+		this.element.css('height', max_height);
 
-		$('.fireballSlideContainer > .slideshowButtonList > li > a').click($.proxy(this._click, this));
+		//handle resize
 		$(window).resize($.proxy(this._resize, this));
+
+		//start slider
+		this._timer = setInterval($.proxy(this.slideTo, this), this.options.speed);
 	},
 
-	slide: function() {
-		$active = $('.fireballSlideContainer > div.active');
-		if ($active.length == 0) $active = $('.fireballSlideContainer > div:last');
-
-		$next = $active.next('div').length ? $active.next('div') : $('.fireballSlideContainer > div:first');
-
-		if (this._fx == 'slide') {
-			$active.addClass('last-active').slideUp(this._effectDelay);
-			$next.addClass('active').slideDown(this._effectDelay);
-		}
-		else{
-			$active.addClass('last-active').fadeOut(this._effectDelay);
-			$next.addClass('active').fadeIn(this._effectDelay);
-		}
-		$('.fireballSlideContainer > .slideshowButtonList > li').eq($active.index()).removeClass('active');
-		$('.fireballSlideContainer > .slideshowButtonList > li').eq($next.index()).addClass('active');
-		$active.removeClass('active last-active');
-	},
-
+	/**
+	 * manual slide via click
+	 */
 	_click: function (event) {
+		//stop slider
+		clearInterval(this._timer);
+
+		//handle click
 		event.preventDefault();
+		console.log('click');
+		console.log($(event.currentTarget).index());
+		this.slideTo($(event.currentTarget).index())
 
-		$active = $('.fireballSlideContainer > .slideshowButtonList > li.active');
-		oldIndex = $active.index();
-		$choosen = event.currentTarget;
-		$($choosen.parentNode).addClass('active');
-		$active.removeClass('active');
-
-		$newActive = $('.fireballSlideContainer > .slideshowButtonList > li.active');
-		newIndex = $newActive.index();
-
-		if (this._fx == 'slide') {
-			$('.fireballSlideContainer > div').eq(oldIndex).slideUp(this._effectDelay).removeClass('active');
-			$('.fireballSlideContainer > div').eq(newIndex).slideDown(this._effectDelay).addClass('active');
-		}
-		else{
-			$('.fireballSlideContainer > div').eq(oldIndex).fadeOut(this._effectDelay).removeClass('active');
-			$('.fireballSlideContainer > div').eq(newIndex).fadeIn(this._effectDelay).addClass('active');
-		}
-
-		clearInterval(this._interval);
-
+		//restart slider
+		this._timer = setInterval($.proxy(this.slideTo, this), this.options.speed);
 	},
 
+	/**
+	 * handles window resize
+	 */
 	_resize: function() {
-		// calc max-height
 		var max_height = 0;
-		$('.fireballSlideContainer').children('div').each(function() {
-			if ($(this).outerHeight() >= max_height) max_height = $(this).outerHeight();
+
+		// calc max-height again
+		for (var $i = 0; $i < this._count; $i++) {
+			if ($(this._items.get($i)).outerHeight() >= max_height) max_height = $(this._items.get($i)).outerHeight();
+		}
+		this.element.css('height', max_height);
+
+		//set new width
+		this._width = this.element.innerWidth();
+
+		//resize items
+		this._items.each($.proxy(function (index, item) {
+			$(item).css({
+				left: (index * (40 + this._width)),
+				width: this._width
+			});
+		}, this));
+
+		//reset slider
+		this._index = 0;
+		this.slideTo();
+	},
+
+	/**
+	 * slides to a specific index
+	 */
+	slideTo: function (index) {
+
+		if (typeof index !== 'undefined') this._index = index;
+		else this._index = this._index + 1;
+		if (this._index == this._count) this._index = 0;
+
+		this._buttonList.find('.active').removeClass('active');
+		$(this._buttonList.children().get(this._index)).addClass('active');
+		this._itemContainer.css({
+			'left': (this._index * (40 + this._width) * -1)
 		});
-		$('.fireballSlideContainer').css('height', max_height);
 	}
-});
+})

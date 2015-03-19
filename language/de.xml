@@ -343,12 +343,6 @@
 		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Standardwerte]]></item>
 		<item name="wcf.acp.option.category.dashboard.sidebar.cms"><![CDATA[CMS]]></item>
-		<item name="wcf.acp.option.cms_content_slideshow_effect_delay"><![CDATA[Effektzeit]]></item>
-		<item name="wcf.acp.option.cms_content_slideshow_effect_delay.description"><![CDATA[Geben Sie hier die Zeit an, die für die Effektdauer verwendet werden soll. [Zeit in Millisekunden]]]></item>
-		<item name="wcf.acp.option.cms_content_slideshow_fx"><![CDATA[Effekt]]></item>
-		<item name="wcf.acp.option.cms_content_slideshow_fx.description"><![CDATA[Wählen Sie den Slideshow-Effekt aus]]></item>
-		<item name="wcf.acp.option.cms_content_slideshow_fx.fade"><![CDATA[Fade]]></item>
-		<item name="wcf.acp.option.cms_content_slideshow_fx.slide"><![CDATA[Slide]]></item>
 		<item name="wcf.acp.option.cms_content_slideshow_interval"><![CDATA[Intervall]]></item>
 		<item name="wcf.acp.option.cms_content_slideshow_interval.description"><![CDATA[Geben Sie die Zeit an, nach der automatisch zum nächsten Slide gewechselt werden soll. [Zeit in Millisekunden]]]></item>
 		<item name="wcf.acp.option.cms_dashboard_sidebar_entries"><![CDATA[Anzahl Seiten]]></item>
