@@ -28,11 +28,5 @@ class SlideshowContentType extends AbstractStructureContentType {
 	public function getChildCSSClasses(Content $content) {
 		return 'fireballSlide';
 	}
-	
-	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getOutput()
-	 */
-	public function getOutput(Content $content) {
-		return '';
-	}
+
 }

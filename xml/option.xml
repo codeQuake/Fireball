@@ -89,18 +89,6 @@ right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
 				<categoryname>cms.content.slideshow</categoryname>
 				<defaultvalue>5000</defaultvalue>
 			</option>
-			<option name="cms_content_slideshow_effect_delay">
-				<optiontype>integer</optiontype>
-				<categoryname>cms.content.slideshow</categoryname>
-				<defaultvalue>1000</defaultvalue>
-			</option>
-			<option name="cms_content_slideshow_fx">
-				<optiontype>select</optiontype>
-				<categoryname>cms.content.slideshow</categoryname>
-				<selectoptions><![CDATA[fade:wcf.acp.option.cms_content_slideshow_fx.fade
-slide:wcf.acp.option.cms_content_slideshow_fx.slide]]></selectoptions>
-				<defaultvalue><![CDATA[fade]]></defaultvalue>
-			</option>
 			<!-- /cms.content.slideshow -->
 
 			<!-- dashboard.sidebar.cms -->
@@ -114,6 +102,8 @@ slide:wcf.acp.option.cms_content_slideshow_fx.slide]]></selectoptions>
 	</import>
 
 	<delete>
+		<option name="cms_content_slideshow_effect_delay" />
+		<option name="cms_content_slideshow_fx" />
 		<option name="cms_pages_content_slideshow_effect_delay" />
 		<option name="cms_pages_content_slideshow_fx" />
 		<option name="cms_pages_content_slideshow_interval" />
