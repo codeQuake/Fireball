@@ -5,6 +5,8 @@ use cms\data\content\ContentList;
 use wcf\system\cache\builder\AbstractCacheBuilder;
 
 /**
+ * Caches contents and the content structure.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>

@@ -6,7 +6,7 @@
 			<environment>user</environment>
 			<templatename>footer</templatename>
 			<eventname>copyright</eventname>
-			<templatecode><![CDATA[{if $__cms->isActiveApplication()}{lang}cms.page.copyright{/lang}{/if}]]></templatecode>
+			<templatecode><![CDATA[{include file='__copyright' application='cms'}]]></templatecode>
 		</templatelistener>
 
 		<templatelistener name="logo">
@@ -15,6 +15,7 @@
 			<eventname>headerLogo</eventname>
 			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
 		</templatelistener>
+		<!-- /user -->
 
 		<!-- admin -->
 		<templatelistener name="cmsVersion">
@@ -35,7 +36,7 @@
 			<environment>admin</environment>
 			<templatename>header</templatename>
 			<eventname>stylesheets</eventname>
-			<templatecode><![CDATA[<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('cms')}acp/style/fireball.css">]]></templatecode>
+			<templatecode><![CDATA[{if $__cms|isset && $__cms->isActiveApplication()}<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('cms')}acp/style/fireball.css">{/if}]]></templatecode>
 		</templatelistener>
 
 		<templatelistener name="newsTabMenuTabs">

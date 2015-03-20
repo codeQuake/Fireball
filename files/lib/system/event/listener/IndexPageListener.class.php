@@ -7,6 +7,8 @@ use wcf\system\WCF;
 use wcf\util\HTTPRequest;
 
 /**
+ * Fetches the codeQuake RSS feed to show news on the acp overciew page.
+ * 
  * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
