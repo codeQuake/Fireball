@@ -17,6 +17,9 @@
 			<category name="cms.pages.default">
 				<parent>cms.pages</parent>
 			</category>
+			<category name="cms.pages.statistics">
+				<parent>cms.pages</parent>
+			</category>
 
 			<category name="cms.content">
 				<parent>cms</parent>
@@ -82,6 +85,20 @@ right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
 				<defaultvalue>1</defaultvalue>
 			</option>
 			<!-- /cms.pages.default -->
+
+			<!-- cms.pages.statistics -->
+			<option name="cms_pages_enable_statistics">
+				<optiontype>boolean</optiontype>
+				<categoryname>cms.pages.statistics</categoryname>
+				<defaultvalue>1</defaultvalue>
+				<enableoptions>cms_pages_statistics_delete</enableoptions>
+			</option>
+			<option name="cms_pages_statistics_delete">
+				<optiontype>integer</optiontype>
+				<categoryname>cms.pages.statistics</categoryname>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			<!-- /cms.pages.statistics -->
 
 			<!-- cms.content.slideshow -->
 			<option name="cms_content_slideshow_interval">

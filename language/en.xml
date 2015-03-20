@@ -343,6 +343,7 @@
 		<item name="wcf.acp.option.category.cms.general.revision"><![CDATA[Revisions]]></item>
 		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Pages]]></item>
 		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Default values]]></item>
+		<item name="wcf.acp.option.category.cms.pages.statistics"><![CDATA[Statistics]]></item>
 		<item name="wcf.acp.option.category.dashboard.sidebar.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.acp.option.cms_content_slideshow_interval"><![CDATA[Interval]]></item>
 		<item name="wcf.acp.option.cms_content_slideshow_interval.description"><![CDATA[Enter the delay after a slide in a slideshow is automatically sliding. [time in milliseconds]]]></item>
@@ -355,8 +356,11 @@
 		<item name="wcf.acp.option.cms_pages_default_sidebar"><![CDATA[Sidebar orientation]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.left"><![CDATA[Left]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.right"><![CDATA[Right]]></item>
-		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Auto-Delete]]></item>
-		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[After X days old revisions will be deleted. (0 = deactivate auto-delete)]]></item>
+		<item name="wcf.acp.option.cms_pages_enable_statistics"><![CDATA[Enable Statistics]]></item>
+		<item name="wcf.acp.option.cms_pages_statistics_delete"><![CDATA[Delete Automatically]]></item>
+		<item name="wcf.acp.option.cms_pages_statistics_delete.description"><![CDATA[Old statistics will be deleted after the given period of time. [time in days, 0 to disable]]]></item>
+		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Delete Automatically]]></item>
+		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Old revisions will be deleted after the given period of time. [time in days, 0 to disable]]]></item>
 	</category>
 
 	<category name="wcf.acp.pageMenu">
