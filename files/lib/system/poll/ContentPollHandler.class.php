@@ -7,6 +7,8 @@ use wcf\system\poll\AbstractPollHandler;
 use wcf\system\WCF;
 
 /**
+ * Poll implementation for the poll content type.
+ * 
  * @author	Jens Krumsieck
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -15,6 +17,8 @@ use wcf\system\WCF;
 class ContentPollHandler extends AbstractPollHandler {
 	/**
 	 * @see	\wcf\system\poll\IPollHandler::canStartPublicPoll()
+	 * @todo	only admins with the right to create contents are
+	 * 		allowed to start a public poll.
 	 */
 	public function canStartPublicPoll() {
 		return true;
@@ -22,9 +26,10 @@ class ContentPollHandler extends AbstractPollHandler {
 
 	/**
 	 * @see	\wcf\system\poll\IPollHandler::canVote()
+	 * @todo	only users that can view the content are allowed to
+	 * 		vote.
 	 */
 	public function canVote() {
-		/**TODO**/
 		return (WCF::getSession()->getPermission('user.cms.content.canVotePoll') ? true : false);
 	}
 

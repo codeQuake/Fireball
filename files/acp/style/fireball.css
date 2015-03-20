@@ -1,5 +1,9 @@
-@CHARSET "ISO-8859-1";
-
+/**
+ * @author	Jens Krumsieck, Florian Frantzen
+ * @copyright	2013 - 2015 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
+ */
 .jsFileImage.active {
 	background: rgba(116, 164, 70, 0.4) !important;
 }

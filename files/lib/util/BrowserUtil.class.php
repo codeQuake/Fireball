@@ -11,7 +11,7 @@ namespace cms\util;
  */
 final class BrowserUtil {
 	/**
-	 * Returns the name of the browser with the given user agent
+	 * Returns the name of the browser with the given user agent.
 	 * 
 	 * @param	string		$userAgent
 	 * @return	string

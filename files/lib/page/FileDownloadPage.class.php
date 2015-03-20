@@ -63,10 +63,13 @@ class FileDownloadPage extends AbstractPage {
 
 		if (isset($_REQUEST['id'])) $this->fileID = intval($_REQUEST['id']);
 		$this->file = FileCache::getInstance()->getFile($this->fileID);
-		if ($this->file === null) throw new IllegalLinkException();
-		//check if image file is in cache
+		if ($this->file === null) {
+			throw new IllegalLinkException();
+		}
+
+		// check if image file is in cache
 		if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && @strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $this->file->uploadTime && in_array($this->file->fileType, self::$inlineMimeTypes)) {
-			//send 304
+			// send 304
 			header("HTTP/1.1 304 Not Modified");
 			exit;
 		}
@@ -77,8 +80,9 @@ class FileDownloadPage extends AbstractPage {
 	 */
 	public function readData() {
 		parent::readData();
-		
+
 		VisitCountHandler::getInstance()->count();
+
 		$this->fileReader = new FileReader($this->file->getLocation(), array(
 			'filename' => $this->file->getTitle(),
 			'mimeType' => $this->file->fileType,
@@ -88,7 +92,8 @@ class FileDownloadPage extends AbstractPage {
 			'lastModificationTime' => $this->file->uploadTime,
 			'expirationDate' => TIME_NOW + 31536000,
 			'maxAge' => 31536000
-		));		
+		));
+
 		// count downloads
 		$fileEditor = new FileEditor($this->file);
 		$fileEditor->updateCounters(array(
@@ -101,6 +106,7 @@ class FileDownloadPage extends AbstractPage {
 	 */
 	public function show() {
 		parent::show();
+
 		$this->fileReader->send();
 		exit();
 	}
