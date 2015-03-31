@@ -70,6 +70,7 @@
 		<instruction type="objectType">xml/objectType.xml</instruction>
 		
 		<!-- scripts -->
-		<instruction type="script">acp/update_2.0.php</instruction>
+		<instruction type="script">acp/update_2.0.php</instruction>	
+		<instruction type="objectType">xml/objectType_update.xml</instruction>
 	</instructions>
 </package>
