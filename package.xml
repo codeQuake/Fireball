@@ -58,4 +58,18 @@
 		<!-- scripts -->
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
 	</instructions>
+	
+	<instructions type="update" fromversion="2.0.0 RC 1">
+		<!--files-->
+		<instruction type="file">files.tar</instruction>
+		<instruction type="file" application="wcf">files_wcf.tar</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+
+		<!--xml-->
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		
+		<!-- scripts -->
+		<instruction type="script">acp/update_2.0.php</instruction>
+	</instructions>
 </package>
