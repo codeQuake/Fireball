@@ -1,6 +1,6 @@
 <?php
-use cms\data\content\ContentList;
 use cms\data\content\ContentEditor;
+use cms\data\content\ContentList;
 use wcf\data\object\type\ObjectTypeCache;
 
 $multiColumn = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.columns');
