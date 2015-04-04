@@ -15,6 +15,13 @@
 			<eventname>headerLogo</eventname>
 			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
 		</templatelistener>
+
+		<templatelistener name="pageAddButton">
+			<environment>user</environment>
+			<templatename>userPanel</templatename>
+			<eventname>menuItems</eventname>
+			<templatecode><![CDATA[{include file='__pageAddButton' application='cms'}]]></templatecode>
+		</templatelistener>
 		<!-- /user -->
 
 		<!-- admin -->
