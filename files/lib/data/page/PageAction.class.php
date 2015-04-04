@@ -71,7 +71,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache
 	 */
-	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'publish', 'setAsHome', 'toggle', 'update', 'updatePosition');
+	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'publish', 'setAsHome', 'toggle', 'update', 'updatePosition', 'frontendCreate');
 
 	/**
 	 * Validates parameters to copy a page.
@@ -433,7 +433,11 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$this->parameters['data'] = $data;
 		
 		//finally create new page
-		return $this->create();
+		$page = $this->create();
+		return array(
+			'page' => $page,
+			'link' => $page->getLink()
+			);
 	}
 	
 	/**

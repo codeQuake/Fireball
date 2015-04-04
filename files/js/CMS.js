@@ -206,7 +206,6 @@ CMS.Page.Add = Class.extend({
 			else parameters[input.attr('name')] = input.prop('checked') ? 1 : 0;
 		});
 
-		console.log(parameters);
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._executed, this)
 		});
@@ -223,7 +222,10 @@ CMS.Page.Add = Class.extend({
 
 	_executed: function (data, textStatus, jqXHR) {
 		if (typeof this._cache[data.returnValues.errors] === 'undefined'){
-			console.log('sucess!');
+			var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+			$notification.show(function () {
+				window.location = data.returnValues.link;
+			});
 		}
 	},
 
