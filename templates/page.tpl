@@ -20,6 +20,11 @@
 
 				new WCF.User.ObjectWatch.Subscribe();
 			{/if}
+
+			{if $__wcf->getSession()->getPermission('admin.cms.content.canAddContent')}
+				new CMS.Page.ContentTypes({$page->pageID});
+			{/if}
+
 		});
 		//]]>
 	</script>

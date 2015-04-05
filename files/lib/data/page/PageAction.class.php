@@ -568,7 +568,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateGetContentTypes() {
 		$this->readString('position');
-		if (!in_array($this->parameters['position'], array('body', 'sidebar'))) {
+		if (!in_array($this->parameters['position'], array('body', 'sidebar', 'both'))) {
 			throw new UserInputException('position');
 		}
 
@@ -597,6 +597,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		foreach ($types as $type) {
 			if ($this->parameters['position'] == 'body' && $type->allowcontent) array_push($categories[$type->category], $type);
 			if ($this->parameters['position'] == 'sidebar' && $type->allowsidebar) array_push($categories[$type->category], $type);
+			if ($this->parameters['position'] == 'both') array_push($categories[$type->category], $type);
 		}
 
 		WCF::getTPL()->assign(array(
