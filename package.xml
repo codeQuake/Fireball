@@ -68,6 +68,10 @@
 
 		<!--xml-->
 		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
 		
 		<!-- scripts -->
 		<instruction type="objectType">xml/objectType_update.xml</instruction>
