@@ -5,7 +5,7 @@
 		<packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
 		<isapplication>1</isapplication>
 		<version>2.0.0 RC 1</version>
-		<date>2015-03-15</date>
+		<date>2015-04-06</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -65,8 +65,12 @@
 	<instructions type="update" fromversion="2.0.0 Beta 8">
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
+		
 		<instruction type="template">templates.tar</instruction>
-
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="templateListener">xml/templateListener.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+		
 		<instruction type="sql">update_1.0.0_rc_1.sql</instruction>
 
 		<instruction type="language">language/*.xml</instruction>
