@@ -290,6 +290,8 @@
 
 	<delete>
 		<!-- finally remove html content type for people who updated from beta 6 -->
-		<type name="de.codequake.cms.content.type.html" />
+		<type name="de.codequake.cms.content.type.html">
+			<definitionname>de.codequake.cms.content.type</definitionname>
+		</type>
 	</delete>
 </data>
