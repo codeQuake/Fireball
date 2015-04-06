@@ -236,29 +236,58 @@ CMS.Page.Add = Class.extend({
 });
 
 CMS.Page.ContentTypes = Class.extend({
-
+	_pageID: 0,
 	_proxy: null,
+	_initialized: 0,
 	_cache: {},
+	_isOpen: 0,
 
 	init: function (pageID) {
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
-		});
-		this._proxy.setOption('data', {
-			actionName: 'getContentTypes',
-			className: 'cms\\data\\page\\PageAction',
-			objectIDs: [pageID],
-			parameters: {
-				position: 'both'
-			}
-		});
-		this._proxy.sendRequest();
+		this._pageID = pageID;
+		$('#main').before($('<a id="contentAddButton"><span class="icon icon16 icon-chevron-right"></span></a>'));
+		$('#main').before($('<div id="contentRibbon" />'));
+		$('#contentAddButton').click($.proxy(this._openSidebar, this));
 	},
 
 	_success: function (data, textStatus, jqXHR) {
 		this._cache[data.returnValues.pageID] = data.returnValues.template;
-		$('#main').before(data.returnValues.template);
+		$('#contentRibbon').append(data.returnValues.template);
 		new CMS.Content.Dragging(data.returnValues.pageID);
+	},
+
+	_openSidebar: function (event) {
+		event.preventDefault();
+		if (!this._isOpen) {
+			//send Request
+			if(!this._initialized){
+				this._proxy = new WCF.Action.Proxy({
+					success: $.proxy(this._success, this)
+				});
+				this._proxy.setOption('data', {
+					actionName: 'getContentTypes',
+					className: 'cms\\data\\page\\PageAction',
+					objectIDs: [this._pageID],
+					parameters: {
+						position: 'both'
+					}
+				});
+				this._proxy.sendRequest();
+				this._initialized = 1;
+			}
+			this._isOpen = 1;
+			//open
+			$('#contentRibbon').addClass('ribbonOpen');
+			$('#contentAddButton').addClass('ribbonOpen')
+			$('#contentAddButton > span.icon').addClass('icon-chevron-left').removeClass('icon-chevron-right');
+			$('body').addClass('ribbonOpen');
+		}
+		else {
+			$('#contentRibbon').removeClass('ribbonOpen')
+			$('#contentAddButton').removeClass('ribbonOpen')
+			$('#contentAddButton > span.icon').addClass('icon-chevron-right').removeClass('icon-chevron-left');
+			$('body').removeClass('ribbonOpen')
+			this._isOpen = 0;
+		}
 	}
 });
 
@@ -270,13 +299,16 @@ CMS.Content.Dragging = Class.extend({
 
 	init: function (pageID) {
 		this._pageID = pageID;
-		$('#contentRibbon > div').accordion();
+		var dropButton = '<div class="ui-droppable dropButton center container"><span class="icon icon32 icon-plus"></span></div>';
 
 		//no parent drag area
-		$('.userNotice').after($('<div class="ui-droppable" />'));
+		$('.userNotice').after($(dropButton));
 
 		//add ui-droppable class to all content, because we support infinte nesting
-		$("div[id^='cmsContent']").addClass('ui-droppable');
+		$("div[id^='cmsContent']").each(function () {
+			$(this).append($(dropButton));
+			$(this).children('.dropButton').attr('data-parent-id', $(this).attr('id').replace('cmsContent', ''));
+		});
 
 		$('.draggable').draggable({
 			cursor: "move",
@@ -296,10 +328,10 @@ CMS.Content.Dragging = Class.extend({
 		$(event.target).append('<div class="draggedContent ' + ui.draggable.attr('id') + '" />')
 		var type = ui.draggable.attr('id');
 		var position = 'body';
-		var id = $(event.target).attr('id');
+		var data = $(event.target).data('parentID');
 		var parentID = 0;
-		if (typeof id !== 'undefined' && id.match('^cmsContent')) {
-			parentID = id.replace('cmsContent', '');
+		if (typeof data !== 'undefined') {
+			parentID = data;
 		}
 		//call add form
 		new CMS.Content.AddForm(this._pageID, position, type, parentID);
