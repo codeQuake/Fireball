@@ -39,7 +39,7 @@ class YoutubeContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		parse_str(parse_url($content->url, PHP_URL_QUERY), $var);
+		parse_str(parse_url($content->video, PHP_URL_QUERY), $var);
 
 		if (isset($var['v'])) {
 			$videoID = $var['v'];

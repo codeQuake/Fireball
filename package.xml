@@ -4,8 +4,13 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[CMS for WCF 2.1]]></packagedescription>
 		<isapplication>1</isapplication>
+<<<<<<< HEAD
 		<version>2.1.0 Beta 1</version>
 		<date>2015-01-29</date>
+=======
+		<version>2.0.0 RC 1</version>
+		<date>2015-04-06</date>
+>>>>>>> master
 	</packageinformation>
 
 	<authorinformation>
@@ -62,6 +67,7 @@
 	<instructions type="update" fromversion="2.0.0 RC 1">
 		<!--files-->
 		<instruction type="file">files.tar</instruction>
+<<<<<<< HEAD
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
@@ -72,5 +78,16 @@
 		<!-- scripts -->
 		<instruction type="script">acp/update_2.0.php</instruction>	
 		<instruction type="objectType">xml/objectType_update.xml</instruction>
+=======
+		
+		<instruction type="template">templates.tar</instruction>
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="templateListener">xml/templateListener.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+		
+		<instruction type="sql">update_1.0.0_rc_1.sql</instruction>
+
+		<instruction type="language">language/*.xml</instruction>
+>>>>>>> master
 	</instructions>
 </package>
