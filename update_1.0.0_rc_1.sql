@@ -1,1 +1,1 @@
-ALTER TABLE cms1_page DROP cssID;
+ALTER TABLE cms1_content DROP cssID;
