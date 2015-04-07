@@ -274,10 +274,12 @@ CMS.Page.ContentTypes = Class.extend({
 			}
 			$('#contentRibbon').addClass('open');
 			$('#contentAddButton').addClass('open').children('span').addClass('icon-chevron-left').removeClass('icon-chevron-right');
+			$('body').addClass('ribbonOpen');
 		}
 		else {
 			$('#contentRibbon').removeClass('open');
 			$('#contentAddButton').removeClass('open').children('span').removeClass('icon-chevron-left').addClass('icon-chevron-right');
+			$('body').removeClass('ribbonOpen');
 		}
 	},
 });
