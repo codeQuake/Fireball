@@ -852,11 +852,6 @@ CMS.ACP.Page.Alias.Preview = Class.extend({
 			return;
 		}
 
-		if (!this._parentPageSelect.length) {
-			console.debug("[CMS.ACP.Page.Alias.Preview] Invalid parent page selector given, aborting.");
-			return;
-		}
-
 		this._previewElement = this._aliasInput.parent().find('.jsAliasPreview');
 		if (!this._previewElement.length) {
 			console.debug("[CMS.ACP.Page.Alias.Preview] Unable to find preview element, aborting.");
@@ -864,8 +859,10 @@ CMS.ACP.Page.Alias.Preview = Class.extend({
 		}
 
 		// bind events
-		this._aliasInput.change($.proxy(this._change, this));
-		this._parentPageSelect.change($.proxy(this._change, this));
+		this._aliasInput.keyup($.proxy(this._change, this));
+		if (!this._parentPageSelect.length) {
+			this._parentPageSelect.change($.proxy(this._change, this));
+		}
 
 		// build alias on initialization
 		this._change();
@@ -875,9 +872,13 @@ CMS.ACP.Page.Alias.Preview = Class.extend({
 	 * Builds alias preview when associated inputs were changed.
 	 */
 	_change: function() {
-		var $aliasPrefix = this._parentPageSelect.children('option:selected').data('alias');
+		var $aliasPrefix = '';
 		var $alias = this._aliasInput.val();
 		var $previewAlias = '';
+
+		if (!this._parentPageSelect.length) {
+			$aliasPrefix = this._parentPageSelect.children('option:selected').data('alias');
+		}
 
 		if ($alias != '') {
 			if ($aliasPrefix) $previewAlias += $aliasPrefix + '/';
