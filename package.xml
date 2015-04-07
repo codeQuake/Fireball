@@ -16,7 +16,7 @@
 	<requiredpackages>
 		<requiredpackage minversion="2.1.0">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wysiwyg.acp.tar">de.codequake.wysiwyg.acp</requiredpackage>
-		<requiredpackage minversion="1.0.0" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
+		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
 	</requiredpackages>
 
 	<optionalpackages>
@@ -79,6 +79,6 @@
 		<instruction type="script">acp/update_2.0.php</instruction>
 
 		<!-- delete old object types -->
-		<instruction type="objectType">xml/objectType_update.xml</instruction>	
+		<instruction type="objectType">xml/objectType_update.xml</instruction>
 	</instructions>
 </package>

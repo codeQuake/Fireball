@@ -1,25 +1,20 @@
 <div id="codequake">
-	<fieldset>
-		<legend>codeQuake</legend>
-
-		{hascontent}
-			<ul>
-				{content}
-					{if $codequakeNewsFeed|isset}
-						{foreach from=$codequakeNewsFeed item=item}
-							<li style="border-bottom: 1px dashed #dfdfdf; padding: 5px; margin-bottom: 5px;">
-								<div class="containerHeadline">
-									<h3><a href="{$item['link']}">{$item['title']}</a></h3>
-									<small>{@$item['time']|time}</small>
-								</div>
-								<div>
-									{@$item['description']}
-								</div>
-							</li>
-						{/foreach}
-					{/if}
-				{/content}
-			</ul>
-		{/hascontent}
-	</fieldset>
+	<ul class="containerList recentActivityList">
+		{if $codequakeNewsFeed|isset}
+			{foreach from=$codequakeNewsFeed item=item name='codequakeNews'}
+				<li{if $tpl.foreach.codequakeNews.first} style="border-top-left-radius: 0; border-top-right-radius: 0"{/if}>
+					<div class="containerHeadline">
+						<h3>
+							<a href="{$item['link']}">{$item['title']}</a>
+							<small>{@$item['time']|time}</small>
+						</h3>
+					</div>
+					<div>
+						{@$item['description']}
+					</div>
+				</li>
+			{/foreach}
+		{/if}
+		<li class="recentActivitiesMore showMore"><a href="http://codequake.de/index.php/NewsCategoryList/" class="button small">{lang}cms.acp.index.news.more{/lang}</a></li>
+	</ul>
 </div>
