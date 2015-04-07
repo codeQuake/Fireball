@@ -304,8 +304,12 @@ CMS.Content.Dragging = Class.extend({
 				'padding': '10px',
 				'marginTop': '10px'
 			}).prepend('<div class="cmsOptions"><span class="badge red infoBadge">' + $(this).data('contentType') + '</span></div>');
-			//add nested sortable to cms contents
-			$(this).nestedSortable({ connectWith: ".sideMenu", listType: "div[id^='cmsContent']" });
+			//add sortable to cms contents
+			$(this).parent().sortable({
+				connectWith: '.sideMenu',
+				helper: 'clone',
+				items: "div[id^='cmsContent']"
+			});
 		});
 
 		$('.draggable').draggable({
@@ -323,18 +327,20 @@ CMS.Content.Dragging = Class.extend({
 	},
 
 	_drop: function (event, ui) {
-		$(event.target).append('<div class="draggedContent ' + ui.draggable.attr('id') + '" />')
-		var type = ui.draggable.attr('id');
-		var position = 'body';
-		if (typeof $(event.target).attr('id') !== 'undefined' && $(event.target).attr('id').match('^cmsContent')) {
-			var data = $(event.target).attr('id').replace('cmsContent', '');
+		if (typeof ui.draggable.attr('id') !== 'undefined' && ui.draggable.attr('id').match('^de.codequake.cms')) {
+			$(event.target).append('<div class="draggedContent ' + ui.draggable.attr('id') + '" />')
+			var type = ui.draggable.attr('id');
+			var position = 'body';
+			if (typeof $(event.target).attr('id') !== 'undefined' && $(event.target).attr('id').match('^cmsContent')) {
+				var data = $(event.target).attr('id').replace('cmsContent', '');
+			}
+			var parentID = 0;
+			if (typeof data !== 'undefined') {
+				parentID = data;
+			}
+			//call add form
+			new CMS.Content.AddForm(this._pageID, position, type, parentID);
 		}
-		var parentID = 0;
-		if (typeof data !== 'undefined') {
-			parentID = data;
-		}
-		//call add form
-		new CMS.Content.AddForm(this._pageID, position, type, parentID);
 	}
 }),
 
