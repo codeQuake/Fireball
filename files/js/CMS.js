@@ -263,18 +263,21 @@ CMS.Page.ContentTypes = Class.extend({
 	_success: function (data, textStatus, jqXHR) {
 		this._cache[data.returnValues.pageID] = data.returnValues.template;
 		$('#contentRibbon').append(data.returnValues.template);
-		new CMS.Content.Dragging(data.returnValues.pageID);
 	},
 
 	_openSidebar: function (event) {
 		event.preventDefault();
 		if (!$('#contentRibbon').hasClass('open')) {
+			if (!this._initialized) {
+				new CMS.Content.Dragging(this._pageID);
+				this._initialized = 1;
+			}
 			$('#contentRibbon').addClass('open');
-			$('body').addClass('ribbonOpen');
+			$('#contentAddButton').addClass('open').children('span').addClass('icon-chevron-left').removeClass('icon-chevron-right');
 		}
 		else {
 			$('#contentRibbon').removeClass('open');
-			$('body').removeClass('ribbonOpen');
+			$('#contentAddButton').removeClass('open').children('span').removeClass('icon-chevron-left').addClass('icon-chevron-right');
 		}
 	},
 });
@@ -287,15 +290,20 @@ CMS.Content.Dragging = Class.extend({
 
 	init: function (pageID) {
 		this._pageID = pageID;
-		var dropButton = '<div class="ui-droppable dropButton center container"><span class="icon icon32 icon-plus"></span></div>';
-
+		var dropButton = '<div class="ui-droppable"></div>';
+	
 		//no parent drag area
 		$('.userNotice').after($(dropButton));
 
 		//add ui-droppable class to all content, because we support infinte nesting
 		$("div[id^='cmsContent']").each(function () {
-			$(this).append($(dropButton));
-			$(this).children('.dropButton').attr('data-parent-id', $(this).attr('id').replace('cmsContent', ''));
+			//add margins and paddings to all cms contents to show where exactly the drop-zone is
+			$(this).addClass('ui-droppable').css({
+				'padding': '10px',
+				'marginTop': '10px'
+			}).prepend('<div class="cmsOptions"><span class="badge red infoBadge">' + $(this).data('contentType') + '</span></div>');
+			//add nested sortable to cms contents
+			$(this).nestedSortable({ connectWith: ".sideMenu", listType: "div[id^='cmsContent']" });
 		});
 
 		$('.draggable').draggable({
@@ -308,6 +316,7 @@ CMS.Content.Dragging = Class.extend({
 		});
 		$('.ui-droppable').droppable({
 			activeClass: "droppable-state-active",
+			greedy: true,
 			drop: $.proxy(this._drop, this)
 		});
 	},
@@ -316,7 +325,9 @@ CMS.Content.Dragging = Class.extend({
 		$(event.target).append('<div class="draggedContent ' + ui.draggable.attr('id') + '" />')
 		var type = ui.draggable.attr('id');
 		var position = 'body';
-		var data = $(event.target).data('parentID');
+		if (typeof $(event.target).attr('id') !== 'undefined' && $(event.target).attr('id').match('^cmsContent')) {
+			var data = $(event.target).attr('id').replace('cmsContent', '');
+		}
 		var parentID = 0;
 		if (typeof data !== 'undefined') {
 			parentID = data;
