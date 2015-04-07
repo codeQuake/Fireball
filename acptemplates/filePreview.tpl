@@ -8,6 +8,6 @@
 	</div>
 	<div class="containerHeadline">
 		<h3>{$file->getTitle()}</h3>
-		<small>{$file->fileSize|filesize} - {$file->fileType} - {@$file->uploadTime|time}</small>
+		<small>{$file->filesize|filesize} - {$file->fileType} - {@$file->uploadTime|time}</small>
 	</div>
 </div>
