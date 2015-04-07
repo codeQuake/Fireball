@@ -240,12 +240,23 @@ CMS.Page.ContentTypes = Class.extend({
 	_proxy: null,
 	_initialized: 0,
 	_cache: {},
-	_isOpen: 0,
 
 	init: function (pageID) {
 		this._pageID = pageID;
-		$('#main').before($('<a id="contentAddButton"><span class="icon icon16 icon-chevron-right"></span></a>'));
-		$('#main').before($('<div id="contentRibbon" />'));
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		this._proxy.setOption('data', {
+			actionName: 'getContentTypes',
+			className: 'cms\\data\\page\\PageAction',
+			objectIDs: [this._pageID],
+			parameters: {
+				position: 'both'
+			}
+		});
+		this._proxy.sendRequest();
+		$('body').append($('<a id="contentAddButton"><span class="icon icon16 icon-chevron-right"></span></a>'));
+		$('body').append($('<div id="contentRibbon" />'));
 		$('#contentAddButton').click($.proxy(this._openSidebar, this));
 	},
 
@@ -257,38 +268,15 @@ CMS.Page.ContentTypes = Class.extend({
 
 	_openSidebar: function (event) {
 		event.preventDefault();
-		if (!this._isOpen) {
-			//send Request
-			if(!this._initialized){
-				this._proxy = new WCF.Action.Proxy({
-					success: $.proxy(this._success, this)
-				});
-				this._proxy.setOption('data', {
-					actionName: 'getContentTypes',
-					className: 'cms\\data\\page\\PageAction',
-					objectIDs: [this._pageID],
-					parameters: {
-						position: 'both'
-					}
-				});
-				this._proxy.sendRequest();
-				this._initialized = 1;
-			}
-			this._isOpen = 1;
-			//open
-			$('#contentRibbon').addClass('ribbonOpen');
-			$('#contentAddButton').addClass('ribbonOpen')
-			$('#contentAddButton > span.icon').addClass('icon-chevron-left').removeClass('icon-chevron-right');
+		if (!$('#contentRibbon').hasClass('open')) {
+			$('#contentRibbon').addClass('open');
 			$('body').addClass('ribbonOpen');
 		}
 		else {
-			$('#contentRibbon').removeClass('ribbonOpen')
-			$('#contentAddButton').removeClass('ribbonOpen')
-			$('#contentAddButton > span.icon').addClass('icon-chevron-right').removeClass('icon-chevron-left');
-			$('body').removeClass('ribbonOpen')
-			this._isOpen = 0;
+			$('#contentRibbon').removeClass('open');
+			$('body').removeClass('ribbonOpen');
 		}
-	}
+	},
 });
 
 CMS.Content = {};

@@ -7,13 +7,6 @@
 		> li > ul > li > ul > li > ul > li > ul > li > ul > li a {padding-left: 119px;}
 	}
 }
-body#tpl_cms_page{
-	.transition(all, 0.5s, ease);
-	&.ribbonOpen{
-		margin-left: 300px;
-		#topMenu{left: 300px;}
-	}
-}
 
 #contentAddButton{
 	position: fixed;
@@ -26,44 +19,61 @@ body#tpl_cms_page{
 	border-bottom-right-radius: 5px;
 	.transition(all, 0.5s, ease);
 	&.ribbonOpen{
-		left: 300px;
+		left: 180px;
 	}
 	.icon{color: #fff;}
 }
 
 #contentRibbon{
-	color: #fff;
 	z-index: 500;
-	width: 300px;
+	width: 250px;
 	height: 100%;
 	position: fixed;
-	left: -300px;
+	left: -250px;
 	top: 0;
-	overflow-y: scroll;
-	overflow-x: hidden;
 	.transition(all, 0.5s, ease);
-	background: rgba(0,0,0,0.7);
-	&.ribbonOpen{
-		left: 0px;
+	background: @wcfContainerBackgroundColor;
+	font-size: 1rem;
+	&.open{left: 0px;}
+	> .wideButton {
+		background: @wcfTabularBoxBackgroundColor;
+		border-top: 1px solid @wcfContainerBorderColor;
+		height: 10%;
+		padding-top: 5%;
+		text-align: center;
+		> button {
+			padding: 10px 45px;
+			border-radius: 5px;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px
+		}
 	}
-}
-.contentTypeList {
-		li {
-			color: #fff;
-			.icon{color: #fff;}
-			&.black{
-				background: #000;
+	> .sideMenu {
+		overflow-y:scroll;
+		height: 90%;
+		> ul{
+			 > li {		
+				> p {
+					font-size: 1.25rem;
+					color: @wcfLinkColor;
+					font-weight: 700;
+					padding: 8px 28px;
+				}
 			}
 		}
+		.sideSubMenu > li{
+			padding: 8px 28px;
+			color: @wcfDimmedColor;
+			border-bottom: 1px solid whitesmoke;
+			&:first-child{border-top: 1px solid whitesmoke;}
+			.icon{color:@wcfDimmedColor;}
+			&:hover{
+				background: @wcfContainerHoverBackgroundColor;
+			}
+		}
+	}
 }
-.ui-draggable-dragging.container.black.draggable{
-	background: #000;
-	color: #fff;
-	.icon{color: #fff;}
-	left: 0px;
-	list-style: none;
-	min-width: 300px;
-}
+
 
 .ui-droppable{
 	min-height: 50px;

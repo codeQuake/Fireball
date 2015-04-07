@@ -1,29 +1,32 @@
-﻿<div class="containerPadding">
-	{foreach from=$contentTypes key=category item=types}
-	<header>
-		<h2>
-			<a class="jsCollapsible" data-is-open="0" data-collapsible-container="{$category}"><span class="icon icon16 icon-chevron-right"></span></a>
-			{lang}cms.acp.content.type.{$category}{/lang}
-		<h2>
-	</header>
-	<div id="{$category}">
-		<ul class="containerBoxList contentTypeList">
-			{foreach from=$types item=type}
-			<li id="{$type->objectType}" class="draggable container black">
-				<h3 class="boxHeadline">
-					<span class="icon icon24 {$type->getProcessor()->getIcon()}"></span>
-					{lang}cms.acp.content.type.{$type->objectType}{/lang}
-				</h3>
-			</li>
-			{/foreach}
-		</ul>
+<div class="sideMenu">
+	<div class="sideDescription containerPadding">
+		<header class="containerHeadline">
+			<h3>Blabla</h3>
+		</header>
+		<small>
+			Blablabla Drag und Drop und so, hier kommt noch eine Sprachvariable hin zum erklären, dass Bäume Blätter haben und so...
+		</small>
 	</div>
-	{/foreach}
+	<ul>
+		{foreach from=$contentTypes key=category item=types}
+		<li data-category="{$category}">
+			<p>{lang}cms.acp.content.type.{$category}{/lang}</p>
+			<ul id="menu_{$category}" class="sideSubMenu">
+				{foreach from=$types item=type}
+				<li id="{$type->objectType}" class="draggable">
+					<p>
+						<span class="icon icon24 {$type->getProcessor()->getIcon()}"></span>
+						{lang}cms.acp.content.type.{$type->objectType}{/lang}
+					</p>
+				</li>
+				{/foreach}
+			</ul>
+		</li>
+		{/foreach}
+	</ul>
 </div>
-<script data-relocate="true">
-	//<![CDATA[
-	$(function() {
-		WCF.Collapsible.Simple.init();
-	});
-	//]]>
-</script>
+<div class="wideButton">
+	<button type="button" class="primary">
+		{lang}wcf.global.button.submit{/lang}
+	</button>
+</div>
