@@ -4,7 +4,14 @@ The Fireball CMS is a very powerful CMS solution, based on WoltLab Community Fra
 
 [More Information](http://codequake.de/index.php/products/fireball-cms/)
 
-[![Build Status](https://travis-ci.org/codeQuake/Fireball.svg?branch=wcf2.1)](https://travis-ci.org/codeQuake/Fireball)
+[![Build Status](https://travis-ci.org/codeQuake/Fireball.svg?branch=experimental_overhaul)](https://travis-ci.org/codeQuake/Fireball)
+
+DANGER
+---------------------------------------------------------------------------------------
+This is an experimental branch, working on a frontend editing feature. The Frontend-Editor can look similar like shown in the image below. Please do not install or use this branch as a public system due to a lot of issues. (Release not guaranteed - experiments are just for fun)
+
+<img src="http://codequake.de/index.php/FileDownload/41-ui-png/" alt=""width="300px" />
+
 
 Plugins
 -------------------
