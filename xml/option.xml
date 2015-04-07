@@ -100,9 +100,4 @@ right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
 			<!-- /dashboard.sidebar.cms -->
 		</options>
 	</import>
-
-	<delete>
-		<option name="cms_content_slideshow_effect_delay" />
-		<option name="cms_content_slideshow_fx" />
-	</delete>
 </data>
