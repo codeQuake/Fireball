@@ -313,7 +313,6 @@ CMS.Content.Dragging = Class.extend({
 			helper: "clone",
 			revert: "invalid",
 			containment: "document",
-			appendTo: "body",
 			drag: $.proxy(this._drag, this)
 		});
 		$('.ui-droppable').droppable({
