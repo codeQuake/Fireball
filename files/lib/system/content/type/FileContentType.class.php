@@ -19,16 +19,6 @@ class FileContentType extends AbstractContentType {
 	protected $icon = 'icon-file';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::isAvailableToAdd()
-	 */
-	public function isAvailableToAdd() {
-		$fileList = new FileList();
-		$count = $fileList->countObjects();
-
-		return $count > 0;
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
