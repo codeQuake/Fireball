@@ -25,15 +25,6 @@ class ImageContentType extends AbstractContentType {
 	public $multilingualFields = array('text');
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
-	 */
-	public function getFormTemplate() {
-		WCF::getTPL()->assign('file', new File(0));
-
-		return parent::getFormTemplate();
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
