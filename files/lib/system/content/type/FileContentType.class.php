@@ -2,8 +2,9 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use cms\data\file\File;
 use cms\data\file\FileCache;
-use cms\data\file\FileList;
+use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 
 /**
@@ -29,5 +30,22 @@ class FileContentType extends AbstractContentType {
 		));
 
 		return parent::getOutput($content);
+	}
+
+	/**
+	 * @see \cms\system\content\type\IContentType::getFormTemplate()
+	 */
+	public function getFormTemplate() {
+		$contentData = RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->contentData;
+		if (isset($contentData['fileID'])) {
+			$file = new File($contentData['fileID']);
+			if ($file->fileID) {
+				WCF::getTPL()->assign(array(
+					'file' => $file
+				));
+			}
+		}
+
+		return parent::getFormTemplate();
 	}
 }

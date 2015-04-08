@@ -2,6 +2,7 @@
 	<dt><label for="image">{lang}cms.acp.content.type.de.codequake.cms.content.type.image{/lang}</label></dt>
 	<dd>
 		<div id="filePicker">
+			<ul class="formAttachmentList clearfix"></ul>
 			<span class="button small">{lang}cms.acp.file.picker{/lang}</span>
 		</div>
 	</dd>
@@ -45,7 +46,15 @@
 		});
 
 		new CMS.ACP.File.Preview();
-		new CMS.ACP.File.Picker($('#filePicker'), 'contentData[imageID]', [{if $contentData['imageID']|isset}{@$contentData['imageID']}{/if}], { fileType: 'image' });
+		new CMS.ACP.File.Picker($('#filePicker > .button'), 'contentData[imageID]', {
+			{if $image|isset}
+				{@$image->fileID}: {
+					fileID: {@$image->fileID},
+					title: '{$image->getTitle()}',
+					formattedFilesize: '{@$image->filesize|filesize}'
+				}
+			{/if}
+		}, { fileType: 'image' });
 
 		{if $contentData['imageID']|isset && $contentData['imageID'] !== null}
 			new CMS.ACP.File.ImageRatio({$contentData['imageID']});
