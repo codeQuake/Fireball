@@ -65,6 +65,7 @@
 	<instructions type="update" fromversion="2.0.0 RC 1">
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
 	</instructions>
 </package>
