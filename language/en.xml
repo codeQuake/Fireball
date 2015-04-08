@@ -111,6 +111,10 @@
 		<item name="cms.acp.file.uploadTime"><![CDATA[Upload Time]]></item>
 	</category>
 
+	<category name="cms.acp.index">
+		<item name="cms.acp.index.news.more"><![CDATA[Further News]]></item>
+	</category>
+
 	<category name="cms.acp.menu">
 		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
 		<item name="cms.acp.menu.link.cms.file"><![CDATA[Files]]></item>

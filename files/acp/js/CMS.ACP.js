@@ -132,7 +132,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 		this._addButton = $('.jsAddColumn');
 		this._container = $('#columnContainer');
 
-		for (var i = 0; i < this._minColumnCount; i++) {
+		for (var i = 0; i < this._minColumnCount || i < columnData.length; i++) {
 			this._addColumn(columnData[i] || Math.round(100 / this._minColumnCount));
 		}
 
@@ -296,10 +296,8 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 		}
 
 		if (this._columnCount <= this._minColumnCount) {
-			console.log('lock remove buttons');
 			this._container.find('button').prop('disabled', true);
 		} else {
-			console.log('free remove buttons');
 			this._container.find('button').prop('disabled', false);
 		}
 	},

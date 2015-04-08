@@ -144,8 +144,6 @@ class ContentAddForm extends AbstractForm {
 	public function validate() {
 		parent::validate();
 
-		$this->objectType->getProcessor()->validate($this->contentData);
-
 		// validate position
 		if (!in_array($this->position, array('body', 'sidebar'))) {
 			throw new UserInputException('position');
@@ -201,6 +199,9 @@ class ContentAddForm extends AbstractForm {
 		if (!$page->pageID) {
 			throw new UserInputException('pageID', 'invalid');
 		}
+
+		// validate object type specific parameters
+		$this->objectType->getProcessor()->validate($this->contentData);
 	}
 
 	/**

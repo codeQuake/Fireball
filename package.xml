@@ -16,7 +16,7 @@
 	<requiredpackages>
 		<requiredpackage minversion="2.1.0">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wysiwyg.acp.tar">de.codequake.wysiwyg.acp</requiredpackage>
-		<requiredpackage minversion="1.0.0" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
+		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
 	</requiredpackages>
 
 	<optionalpackages>
@@ -58,19 +58,27 @@
 		<!-- scripts -->
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
 	</instructions>
-	
+
 	<instructions type="update" fromversion="2.0.0 RC 1">
-		<!--files-->
+		<instruction type="language">language/*.xml</instruction>
+
+		<!-- files -->
 		<instruction type="file">files.tar</instruction>
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 
-		<!--xml-->
+		<!-- xml -->
 		<instruction type="objectType">xml/objectType.xml</instruction>
-		
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+
 		<!-- scripts -->
-		<instruction type="script">acp/update_2.0.php</instruction>	
+		<instruction type="script">acp/update_2.0.php</instruction>
+
+		<!-- delete old object types -->
 		<instruction type="objectType">xml/objectType_update.xml</instruction>
 	</instructions>
 </package>

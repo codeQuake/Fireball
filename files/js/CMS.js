@@ -1,7 +1,14 @@
+/**
+ * Class and function collection for fireball cms.
+ * 
+ * @author	Jens Krumsieck
+ * @copyright	2013 - 2015 codeQuake
+ * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package	de.codequake.cms
+ */
 if (!CMS) var CMS = {};
 
 $.widget('ui.fireSlide', {
-
 	/**
 	 * button list object
 	 * @var	jQuery
@@ -36,14 +43,14 @@ $.widget('ui.fireSlide', {
 	 * timer object
 	 * @var	interval
 	 */
-	timer: null,
+	_timer: null,
 
 	/**
 	 * list of options
 	 * @var	object
 	 */
 	options: {
-		/* cycle interval in milliseconds */
+		// cycle interval in milliseconds
 		speed: 2000
 	},
 
@@ -51,7 +58,7 @@ $.widget('ui.fireSlide', {
 	 * elements width
 	 * @var	integer
 	 */
-	width: 0,
+	_width: 0,
 
 	/**
 	 * Creates a new instance of ui.FireSlide
@@ -73,7 +80,7 @@ $.widget('ui.fireSlide', {
 			}).show();
 		}, this));
 
-		//create button list & calculate max height
+		// create button list & calculate max height
 		this._buttonList = $('<ul class="slideshowButtonList" />').appendTo(this.element);
 
 		for (var $i = 0; $i < this._count; $i++) {
@@ -83,32 +90,25 @@ $.widget('ui.fireSlide', {
 		}
 		this.element.css('height', max_height);
 
-		//handle resize
+		// handle resize
 		$(window).resize($.proxy(this._resize, this));
 
-		//start slider
-		this._timer = setInterval($.proxy(this.slideTo, this), this.options.speed);
+		// start slider
+		this._restartTimer();
 	},
 
 	/**
-	 * manual slide via click
+	 * Manual slide via click
 	 */
 	_click: function (event) {
-		//stop slider
-		clearInterval(this._timer);
-
-		//handle click
 		event.preventDefault();
-		console.log('click');
-		console.log($(event.currentTarget).index());
-		this.slideTo($(event.currentTarget).index())
 
-		//restart slider
-		this._timer = setInterval($.proxy(this.slideTo, this), this.options.speed);
+		this.slideTo($(event.currentTarget).index());
+		this._restartTimer();
 	},
 
 	/**
-	 * handles window resize
+	 * Handles window resize
 	 */
 	_resize: function () {
 		var max_height = 0;
@@ -136,13 +136,32 @@ $.widget('ui.fireSlide', {
 	},
 
 	/**
-	 * slides to a specific index
+	 * Restarts the timer to slide to the next slide.
+	 */
+	_restartTimer: function() {
+		if (this._timer !== null) {
+			window.clearInterval(this._timer);
+		}
+
+		this._timer = window.setInterval($.proxy(this.slideTo, this), this.options.speed);
+	},
+
+	/**
+	 * Slides to a specific index or to the next slide if no index provided.
+	 * 
+	 * @param	integer		index
 	 */
 	slideTo: function (index) {
+		if (typeof index !== 'undefined') {
+			this._index = index;
+		}
+		else {
+			this._index = this._index + 1;
+		}
 
-		if (typeof index !== 'undefined') this._index = index;
-		else this._index = this._index + 1;
-		if (this._index == this._count) this._index = 0;
+		if (this._index == this._count) {
+			this._index = 0;
+		}
 
 		this._buttonList.find('.active').removeClass('active');
 		$(this._buttonList.children().get(this._index)).addClass('active');
@@ -490,4 +509,4 @@ CMS.Content.AddForm = Class.extend({
 		this._cache[this._pageID] = data.returnValues.template;
 		this._show(this._pageID);
 	}
-})
+});
