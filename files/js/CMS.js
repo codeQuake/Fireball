@@ -445,12 +445,14 @@ CMS.Content.AddForm = Class.extend({
 
 		//get all inputs
 		parameters['contentData'] = {};
+		parameters['contentData']['columnData'] = [];
 		$('#contentAddForm input, #contentAddForm textarea, #pageAddForm select').each(function (index) {
 			var input = $(this);
 			if (input.attr('type') != 'checkbox') {
 				parameters[input.attr('name')] = $.trim(input.val())
 			}
 			else parameters[input.attr('name')] = input.prop('checked') ? 1 : 0;
+
 			//fill contentData arra
 			if (typeof input.attr('name') !== 'undefined' && input.attr('name').match('^contentData')) {
 				delete parameters[input.attr('name')];
@@ -459,11 +461,17 @@ CMS.Content.AddForm = Class.extend({
 					//on toggling code, bbcode is saved to textarea
 					$('#' + input.attr('id')).redactor('code.toggle');
 				}
-				parameters['contentData'][input.attr('id')] = $.trim(input.val());
+				if (input.attr('name').match('columnData')) {
+					parameters['contentData']['columnData'].push($.trim(input.val()));
+				}
+				else parameters['contentData'][input.attr('id')] = $.trim(input.val());
+
+				if (typeof parameters['contentData']['columnData'] !== 'undefined' && parameters['contentData']['columnData'].length == 0) {
+					delete parameters['contentData']['columnData'];
+				}
 			}
 		});
 		console.log(parameters);
-
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._executed, this)
 		});

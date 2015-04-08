@@ -83,6 +83,54 @@ body.ribbonOpen{
 		}
 	}
 }
+
+#contentAddForm{
+	.gridContainer {
+		border: 1px solid #ccc;
+		&:before, &:after {
+			display: table;
+			content: '';
+		}
+		&:after {
+			clear: both;
+		}
+	}
+	.grid {
+		float: left;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		position: relative;
+		&:not(:last-child) {
+			padding-right: 7px;
+		}
+
+		> div {
+			background: #f1f5fa;
+			height: 300px;
+			padding-top: 60px;
+			text-align: center;
+		}
+
+		.gridNumber > span {
+			display: block;
+			font-size: 100px;
+		}
+
+		.gridResize {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			background: #ccc;
+			width: 14px;
+		}
+
+		&:last-child .gridResize {
+			display: none;
+		}
+	}
+}
+
 .sortableContentList {
 	.sortableList{margin-left: 0px;}
 	ol{list-style: none;}
