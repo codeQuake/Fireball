@@ -43,11 +43,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	protected $permissionsUpdate = array('admin.cms.content.canAddContent');
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
-	 */
-	protected $requireACP = array('delete', 'updatePosition');
-
-	/**
 	 * Validates parameters to copy a content.
 	 */
 	public function validateCopy() {

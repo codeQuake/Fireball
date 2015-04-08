@@ -41,6 +41,7 @@ body.ribbonOpen{
 	font-size: 1rem;
 	&.open{left: 0px;}
 	> .wideButton {
+		margin-top: 0px;
 		background: @wcfTabularBoxBackgroundColor;
 		border-top: 1px solid @wcfContainerBorderColor;
 		height: 10%;
@@ -81,6 +82,10 @@ body.ribbonOpen{
 			}
 		}
 	}
+}
+.sortableContentList {
+	.sortableList{margin-left: 0px;}
+	ol{list-style: none;}
 }
 
 

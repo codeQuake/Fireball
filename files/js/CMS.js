@@ -293,24 +293,53 @@ CMS.Content.Dragging = Class.extend({
 	init: function (pageID) {
 		this._pageID = pageID;
 		var dropButton = '<div class="ui-droppable"></div>';
-	
-		//no parent drag area
-		$('.userNotice').after($(dropButton));
 
+		//add sortable container
+		var sortable = $('<div class="sortableListContainer sortableContentList" id="sortableContentListBody" />').insertAfter($('.userNotice'));
+
+		//add root item
+		var nodeList = '<ol class="sortableList" data-object-id="0">';
+		var oldDepth = 0;
 		//add ui-droppable class to all content, because we support infinte nesting
 		$("div[id^='cmsContent']").each(function () {
-			//add margins and paddings to all cms contents to show where exactly the drop-zone is
-			$(this).addClass('ui-droppable').css({
-				'padding': '10px',
-				'marginTop': '10px'
-			}).prepend('<div class="cmsOptions"><span class="badge red infoBadge">' + $(this).data('contentType') + '</span></div>');
-			//add sortable to cms contents
-			$(this).parent().sortable({
-				connectWith: '.sideMenu',
-				helper: 'clone',
-				items: "div[id^='cmsContent']"
-			});
+			var depth = $(this).parents("div[id^='cmsContent']").length;
+			var children = $(this).children("div[id^='cmsContent']").length;
+			$(this).addClass('ui-droppable').attr({
+				'data-depth': depth,
+				'data-children': children
+			}).prepend('<span class="sortableNodeLabel">' + $(this).data('contentType') + '</span>');
 		});
+
+		//convert contents to a list for use of WCF.Sortable.List
+		$("div[id^='cmsContent']").each(function () {
+			var depth = $(this).data('depth');
+			for (var i = 0; i < (oldDepth - depth) ; i++) {
+				nodeList += '</ol></li>';
+			}
+
+			var cache = $(this);
+			cache.children("div[id^='cmsContent']").remove()
+			nodeList += '<li style="margin-top: 10px; padding-bottom: 10px;" class="sortableNode jsCollapsibleCategory ui-droppable ' + $(this).attr('class') + '" id="' + $(this).attr('id') + '" data-object-id="' + $(this).attr('id').replace('cmsContent', '') + '" data-depth="' + $(this).data('depth') + '">' + cache.html()
+						+ '<ol class="sortableList" data-object-id="' + $(this).attr('id').replace('cmsContent', '') + '" style="margin-left: 5px; margin-right: 5px;">';
+
+
+			if ($(this).data('children') == 0) {
+				//has no children
+				nodeList += '</ol></li>';
+			}
+			oldDepth = depth;
+			$(this).remove();
+		});
+		for (var i = 0; i < oldDepth; i++) {
+			nodeList += '</ol></li>';
+		}
+		nodeList += '</ol>';
+		$(nodeList).appendTo(sortable);
+
+		new CMS.Content.Sortable.List();
+
+		//no parent drag area
+		$('.userNotice').after($(dropButton));
 
 		$('.draggable').draggable({
 			cursor: "move",
@@ -327,6 +356,7 @@ CMS.Content.Dragging = Class.extend({
 	},
 
 	_drop: function (event, ui) {
+		//check if element comes from contenttype list
 		if (typeof ui.draggable.attr('id') !== 'undefined' && ui.draggable.attr('id').match('^de.codequake.cms')) {
 			$(event.target).append('<div class="draggedContent ' + ui.draggable.attr('id') + '" />')
 			var type = ui.draggable.attr('id');
@@ -343,6 +373,17 @@ CMS.Content.Dragging = Class.extend({
 		}
 	}
 }),
+
+CMS.Content.Sortable = {};
+
+CMS.Content.Sortable.List = WCF.Sortable.List.extend({
+
+	init: function () {
+		this._super('sortableContentListBody');
+		$('#contentRibbon .wideButton').children('button[data-type="submit"]').click($.proxy(this._submit, this));
+		this._className = 'cms\\data\\content\\ContentAction';
+	}
+});
 
 CMS.Content.AddForm = Class.extend({
 

@@ -25,8 +25,8 @@
 		{/foreach}
 	</ul>
 </div>
-<div class="wideButton">
-	<button type="button" class="primary">
+<div class="wideButton formSubmit">
+	<button data-type="submit" class="button">
 		{lang}wcf.global.button.submit{/lang}
 	</button>
 </div>
