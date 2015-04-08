@@ -4,11 +4,11 @@ namespace cms\data\content;
 use cms\data\page\PageAction;
 use cms\data\page\PageCache;
 use cms\system\cache\builder\ContentCacheBuilder;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
-use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
@@ -175,7 +175,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		//unset bullshit
 		unset($data['undefined']);
 		
-		
 		//set params
 		$this->parameters['data'] = $data;
 		
@@ -234,7 +233,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		if ($objectType === null || !$objectType->getProcessor()->isAvailableToAdd()) {
 			throw new UserInputException('objectType');
 		}
-		
 		
 		WCF::getTPL()->assign(array(
 			'action' => $action,
