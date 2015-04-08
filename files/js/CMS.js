@@ -382,6 +382,11 @@ CMS.Content.Sortable.List = WCF.Sortable.List.extend({
 		this._super('sortableContentListBody');
 		$('#contentRibbon .wideButton').children('button[data-type="submit"]').click($.proxy(this._submit, this));
 		this._className = 'cms\\data\\content\\ContentAction';
+	},
+
+	_success: function (data, textStatus, jqXHR) {
+		this._super(data, textStatus, jqXHR);
+		window.location = location;
 	}
 });
 
