@@ -1,7 +1,9 @@
 <nav class="tabMenu">
 	<ul>
 		{foreach from=$children item=child}
-			<li><a href="{@$__wcf->getAnchor('cmsContent'|concat:$child->contentID)}">{$child->getTitle()}</a></li>
+			{assign var='anchorName' value='cmsContent'|concat:$child->contentID}
+			<li><a href="{@$__wcf->getAnchor($anchorName)}">{$child->getTitle()}</a></li>
+		}
 		{/foreach}
 
 		{event name='tabMenuTabs'}
