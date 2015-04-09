@@ -2,6 +2,7 @@
 	<dt><label for="contentData[fileID]">{lang}cms.acp.content.type.de.codequake.cms.content.type.file.fileID{/lang}</label></dt>
 	<dd>
 		<div id="filePicker">
+			<ul class="formAttachmentList clearfix"></ul>
 			<span class="button small">{lang}cms.acp.file.picker{/lang}</span>
 		</div>
 	</dd>
@@ -15,7 +16,15 @@
 		});
 
 		new CMS.ACP.File.Preview();
-		new CMS.ACP.File.Picker($('#filePicker'), 'contentData[fileID]', [{if $contentData['fileID']|isset}{@$contentData['fileID']}{/if}]);
+		new CMS.ACP.File.Picker($('#filePicker > .button'), 'contentData[fileID]', {
+			{if $file|isset}
+				{@$file->fileID}: {
+					fileID: {@$file->fileID},
+					title: '{$file->getTitle()}',
+					formattedFilesize: '{@$file->filesize|filesize}'
+				}
+			{/if}
+		});
 	});
 	//]]>
 </script>
