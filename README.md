@@ -26,7 +26,7 @@ MySQL Version: 5.1.17 or greater
 
 WoltLab Community Framework Version: 2.1.0 Alpha 1 or greater
 
-WYSIWYG-ACP Plugin (included) Version: 1.0.0 or greater
+WYSIWYG-ACP Plugin (included) Version: 1.1.0 or greater
 
 ###PHP Extensions
 mbstring, libxml, dom, zlib, pdo, pdo_mysql, json, pcre
