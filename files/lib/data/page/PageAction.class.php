@@ -9,6 +9,7 @@ use cms\data\page\PageEditor;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\cache\builder\PagePermissionCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
+use cms\system\language\RevisionI18nHandler;
 use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\util\PageUtil;
 use wcf\data\object\type\ObjectTypeCache;
@@ -23,10 +24,12 @@ use wcf\system\exception\AJAXException;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
+use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
 use wcf\system\request\LinkHandler;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\user\object\watch\UserObjectWatchHandler;
+use wcf\system\Regex;
 use wcf\system\WCF;
 
 /**
@@ -182,6 +185,9 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * Creates a new revision for pages.
 	 */
 	protected function createRevision() {
+		// get available languages
+		$availableLanguages = LanguageFactory::getInstance()->getLanguages();
+		
 		if (empty($this->objects)) {
 			$this->readObjects();
 		}
@@ -194,18 +200,48 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$contentList->readObjects();
 
 			foreach ($contentList as $content) {
-				// @todo: handle multilingual values
-				$contentData[] = $content->getData();
+				$objectType = $content->getObjectType();
+				
+				$tmpContentData = $content->getData();
+				
+				$langItem = $tmpContentData['title'];
+				$tmpContentData['title'] = array();
+				foreach ($availableLanguages as $lang) {
+					$tmpContentData['title'][$lang->countryCode] = $lang->get($langItem);
+				}
+				
+				foreach ($objectType->getProcessor()->multilingualFields as $field) {
+					if (isset($tmpContentData['contentData'][$field])) {
+						$langItem = $tmpContentData['contentData'][$field];
+						$tmpContentData['contentData'][$field] = array();
+						foreach ($availableLanguages as $lang) {
+							$tmpContentData['contentData'][$field][$lang->countryCode] = $lang->get($langItem);
+						}
+					}
+				}
+				
+				$contentData[] = $tmpContentData;
 			}
-
+			
+			$pageData = $object->getDecoratedObject()->getData();
+			foreach ($pageData as $key => $element) {
+				if ($key == 'title' || $key == 'description' || $key == 'metaDescription' || $key == 'metaKeywords') {
+					$langItem = $pageData[$key];
+					$pageData[$key] = array();
+					foreach ($availableLanguages as $lang) {
+						$pageData[$key][$lang->countryCode] = $lang->get($langItem);
+					}
+				}
+			}
+			
 			call_user_func(array($this->className, 'createRevision'), array(
 				'pageID' => $object->getObjectID(),
 				'action' => (isset($this->parameters['action']) ? $this->parameters['action'] : 'create'),
 				'userID' => WCF::getUser()->userID,
 				'username' => WCF::getUser()->username,
 				'time' => TIME_NOW,
-				'data' => serialize($object->getDecoratedObject()->getData()),
-				'contentData' => serialize($contentData)
+				'data' => base64_encode(serialize($pageData)),
+				'contentData' => base64_encode(serialize($contentData))
 			));
 		}
 	}
