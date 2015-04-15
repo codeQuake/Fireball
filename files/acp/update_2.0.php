@@ -23,18 +23,18 @@ foreach ($list->getObjects() as $content) {
 	//three columns
 	else if ($content->getTypeName() == 'de.codequake.cms.content.type.threecolumns') {
 		$width = array(
-			substr($parent->width, 0, 2),
-			substr($parent->width, 2, 2),
-			substr($parent->width, 4, 2)
+			substr($content->width, 0, 2),
+			substr($content->width, 2, 2),
+			substr($content->width, 4, 2)
 		);
 	}
 	//four columns
 	else if ($content->getTypeName() == 'de.codequake.cms.content.type.fourcolumns') {
 		$width = array(
-			substr($parent->width, 0, 2),
-			substr($parent->width, 2, 2),
-			substr($parent->width, 4, 2),
-			substr($parent->width, 6, 2)
+			substr($content->width, 0, 2),
+			substr($content->width, 2, 2),
+			substr($content->width, 4, 2),
+			substr($content->width, 6, 2)
 		);
 	}
 
