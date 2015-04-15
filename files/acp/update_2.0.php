@@ -34,7 +34,7 @@ foreach ($list->getObjects() as $content) {
 			substr($content->width, 0, 2),
 			substr($content->width, 2, 2),
 			substr($content->width, 4, 2),
-			substr($parent->width, 6, 2)
+			substr($content->width, 6, 2)
 		);
 	}
 
