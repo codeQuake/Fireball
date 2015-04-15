@@ -1,6 +1,8 @@
 <?php
 use cms\data\content\ContentEditor;
 use cms\data\content\ContentList;
+use cms\data\page\revision\PageRevisionEditor;
+use cms\data\page\revision\PageRevisionList;
 use wcf\data\object\type\ObjectTypeCache;
 
 $multiColumn = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.columns');
@@ -45,5 +47,23 @@ foreach ($list->getObjects() as $content) {
 		);
 		$editor = new ContentEditor($content);
 		$edtior->update($update);
+	}
+}
+
+$revisionList = new PageRevisionList();
+$revisionList->readObjects();
+
+foreach ($revisionList->getObjects() as $revision) {
+	$teststring = $revision->data;
+	$teststring = base64_decode($teststring);
+	
+	if (@unserialize($teststring)) {
+		$updateData = array(
+			'data' => base64_encode($revision->data),
+			'contentData' => base64_encode($revision->contentData)
+		);
+		
+		$revisionEditor = new PageRevisionEditor($revision);
+		$revisionEditor->update($updateData);
 	}
 }
