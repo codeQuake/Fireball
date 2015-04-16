@@ -5,7 +5,7 @@ use cms\data\page\revision\PageRevisionEditor;
 use cms\data\page\revision\PageRevisionList;
 use wcf\data\object\type\ObjectTypeCache;
 
-$multiColumn = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.columns');
+$multiColumnID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.columns');
 
 $list = new ContentList();
 $list->readObjects();
@@ -42,7 +42,7 @@ foreach ($list->getObjects() as $content) {
 	if (!empty($width)) {
 		$columnData = array('columnData' => array($width));
 		$update = array(
-			'contentTypeID' => $multiColumn->objectTypeID,
+			'contentTypeID' => $multiColumnID,
 			'contentData' => serialize($columnData)
 		);
 		$editor = new ContentEditor($content);
