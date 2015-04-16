@@ -42,7 +42,7 @@ foreach ($list->getObjects() as $content) {
 	if (!empty($width)) {
 		$columnData = array('columnData' => array($width));
 		$update = array(
-			'contentTypeID' => $multicolumn->objectTypeID,
+			'contentTypeID' => $multiColumn->objectTypeID,
 			'contentData' => serialize($columnData)
 		);
 		$editor = new ContentEditor($content);
