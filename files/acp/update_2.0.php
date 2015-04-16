@@ -46,7 +46,7 @@ foreach ($list->getObjects() as $content) {
 			'contentData' => serialize($columnData)
 		);
 		$editor = new ContentEditor($content);
-		$edtior->update($update);
+		$editor->update($update);
 	}
 }
 
