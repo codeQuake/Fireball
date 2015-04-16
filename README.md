@@ -24,7 +24,7 @@ PHP Version: 5.3.2 or greater
 
 MySQL Version: 5.1.17 or greater
 
-WoltLab Community Framework Version: 2.1.0 Alpha 1 or greater
+WoltLab Community Framework Version: 2.1.0 or greater
 
 WYSIWYG-ACP Plugin (included) Version: 1.1.0 or greater
 
