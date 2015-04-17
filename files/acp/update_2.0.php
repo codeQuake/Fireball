@@ -40,7 +40,7 @@ foreach ($list->getObjects() as $content) {
 
 	// check if it's a multicolumn type
 	if (!empty($width)) {
-		$columnData = array('columnData' => array($width));
+		$columnData = array('columnData' => $width);
 		$update = array(
 			'contentTypeID' => $multiColumnID,
 			'contentData' => serialize($columnData)
