@@ -75,7 +75,30 @@
 		<instruction type="option">xml/option.xml</instruction>
 
 		<!-- scripts -->
-		<instruction type="script">acp/update_2.0.php</instruction>
+		<instruction type="script">acp/update_from_2.0.0_rc.1.php</instruction>
+
+		<!-- delete old object types -->
+		<instruction type="objectType">xml/objectType_update.xml</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="2.0.0">
+		<instruction type="language">language/*.xml</instruction>
+
+		<!-- files -->
+		<instruction type="file">files.tar</instruction>
+		<instruction type="file" application="wcf">files_wcf.tar</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+
+		<!-- xml -->
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+
+		<!-- scripts -->
+		<instruction type="script">acp/update_from_2.0.0.php</instruction>
 
 		<!-- delete old object types -->
 		<instruction type="objectType">xml/objectType_update.xml</instruction>
