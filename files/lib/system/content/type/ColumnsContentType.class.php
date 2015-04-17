@@ -27,8 +27,8 @@ class ColumnsContentType extends AbstractStructureContentType {
 
 		$columnData = $parent->columnData;
 		$columnCount = count($columnData);
-
-		$width = $columnData[$content->showOrder % $columnCount];
+		
+		$width = $columnData[($content->showOrder - 1) % $columnCount];
 		return 'grid grid'.$width;
 	}
 
