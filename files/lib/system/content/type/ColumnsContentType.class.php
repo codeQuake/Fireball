@@ -2,6 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use cms\data\content\ContentCache;
 use wcf\system\exception\UserInputException;
 use wcf\util\ArrayUtil;
 
@@ -27,8 +28,11 @@ class ColumnsContentType extends AbstractStructureContentType {
 
 		$columnData = $parent->columnData;
 		$columnCount = count($columnData);
-		
-		$width = $columnData[($content->showOrder - 1) % $columnCount];
+
+		$siblingIDs = ContentCache::getInstance()->getChildIDs($parent->contentID);
+		$siblingNumber = array_search($content->contentID, $siblingIDs);
+
+		$width = $columnData[$siblingNumber % $columnCount];
 		return 'grid grid'.$width;
 	}
 
