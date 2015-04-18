@@ -271,7 +271,7 @@ class PageAddForm extends AbstractForm {
 
 		// validate title
 		if (!I18nHandler::getInstance()->validateValue('title')) {
-			if (I18nHandler::getInstance()->isPlainValue) {
+			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
 			} else {
 				throw new UserInputException('title', 'multilingual');
@@ -457,7 +457,7 @@ class PageAddForm extends AbstractForm {
 		ACLHandler::getInstance()->save($pageEditor->pageID, $this->objectTypeID);
 
 		// save multilingual inputs
-		if (!I18nHandler::getInstance()->isPlainValue('description')) {
+		if (!I18nHandler::getInstance()->isPlainValue('title')) {
 			$updateData['title'] = 'cms.page.title'.$pageEditor->pageID;
 			I18nHandler::getInstance()->save('title', $updateData['title'], 'cms.page');
 		}
