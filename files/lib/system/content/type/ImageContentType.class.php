@@ -4,6 +4,7 @@ namespace cms\system\content\type;
 use cms\data\content\Content;
 use cms\data\file\File;
 use cms\data\file\FileCache;
+use wcf\system\exception\UserInputException;
 use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 
