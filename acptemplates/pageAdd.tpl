@@ -91,7 +91,7 @@
 						<input type="text" id="title" name="title" value="{$i18nPlainValues['title']}" class="long" required="required" />
 						{if $errorField == 'title'}
 							<small class="innerError">
-								{if $errorType == 'multilingual'}
+								{if $errorType == 'empty' || $errorType == 'multilingual'}
 									{lang}wcf.global.form.error.multilingual{/lang}
 								{else}
 									{lang}cms.acp.page.title.error.{@$errorType}{/lang}
@@ -99,7 +99,7 @@
 							</small>
 						{/if}
 
-						{include file='multipleLanguageInputJavascript' elementIdentifier='title' forceSelection=true}
+						{include file='multipleLanguageInputJavascript' elementIdentifier='title' forceSelection=false}
 					</dd>
 				</dl>
 
