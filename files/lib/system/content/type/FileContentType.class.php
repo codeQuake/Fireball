@@ -47,6 +47,20 @@ class FileContentType extends AbstractContentType {
 	}
 
 	/**
+	 * @see cms\system\content\type\IContentType::validate()
+	 */
+	public function validate($data) {
+		if (!isset($data['imageID'])) {
+			throw new UserInputException('imageID');
+		}
+
+		$file = new File($data['imageID']);
+		if (!$file->fileID) {
+			throw new UserInputException('imageID');
+		}
+	}
+
+	/**
 	 * @see \cms\system\content\type\IContentType::getFormTemplate()
 	 */
 	public function getFormTemplate() {

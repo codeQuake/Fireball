@@ -44,6 +44,20 @@ class ImageContentType extends FileContentType {
 	}
 
 	/**
+	 * @see cms\system\content\type\IContentType::validate()
+	 */
+	public function validate($data) {
+		if (!isset($data['imageID'])) {
+			throw new UserInputException('imageID');
+		}
+
+		$file = new File($data['imageID']);
+		if (!$file->fileID) {
+			throw new UserInputException('imageID');
+		}
+	}
+
+	/**
 	 * @see \cms\system\content\type\IContentType::getFormTemplate()
 	 */
 	public function getFormTemplate() {
@@ -52,7 +66,7 @@ class ImageContentType extends FileContentType {
 			$file = new File($contentData['imageID']);
 			if ($file->fileID) {
 				WCF::getTPL()->assign(array(
-					'file' => $file
+					'image' => $file
 				));
 			}
 		}
