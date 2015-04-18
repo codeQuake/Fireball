@@ -85,7 +85,13 @@ class PageEditForm extends PageAddForm {
 		AbstractForm::save();
 
 		// save multilingual inputs
-		I18nHandler::getInstance()->save('title', 'cms.page.title'.$this->pageID, 'cms.page');
+		$languageVariable = 'cms.page.title'.$this->pageID;
+		if (I18nHandler::getInstance()->isPlainValue('title')) {
+			I18nHandler::getInstance()->remove($languageVariable);
+		} else {
+			I18nHandler::getInstance()->save('title', $languageVariable, 'cms.page');
+			$this->title = $languageVariable;
+		}
 
 		$languageVariable = 'cms.page.description'.$this->pageID;
 		if (I18nHandler::getInstance()->isPlainValue('description')) {
@@ -113,6 +119,7 @@ class PageEditForm extends PageAddForm {
 
 		$data = array(
 			// general data
+			'title' => $this->title,
 			'alias' => $this->alias,
 			'description' => $this->description,
 
