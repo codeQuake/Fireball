@@ -4,8 +4,8 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[CMS for WCF 2.1]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>2.1.0 Beta 1</version>
-		<date>2015-01-29</date>
+		<version>2.1.0 RC 1</version>
+		<date>2015-04-19</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -19,9 +19,12 @@
 		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
 	</requiredpackages>
 
+	<excludedpackages>
+		<excludedpackage version="1.0.0 Alpha 1">de.voolia.cms</excludedpackage>
+	</excludedpackages>
+
 	<optionalpackages>
 		<optionalpackage file="optionals/de.codequake.cms.news.tar">de.codequake.cms.news</optionalpackage>
-		<optionalpackage file="optionals/de.codequake.cms.news.voolia.tar">de.codequake.cms.news.voolia</optionalpackage>
 		<optionalpackage file="optionals/de.codequake.cms.wbb.tar">de.codequake.cms.wbb</optionalpackage>
 		<optionalpackage file="optionals/de.codequake.bbcode.icon.tar">de.codequake.bbcode.icon</optionalpackage>
 		<optionalpackage file="optionals/com.woltlab.wcf.legalNotice.tar">com.woltlab.wcf.legalNotice</optionalpackage>
@@ -76,7 +79,30 @@
 		<instruction type="option">xml/option.xml</instruction>
 
 		<!-- scripts -->
-		<instruction type="script">acp/update_2.0.php</instruction>
+		<instruction type="script">acp/update_from_2.0.0_rc.1.php</instruction>
+
+		<!-- delete old object types -->
+		<instruction type="objectType">xml/objectType_update.xml</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="2.0.0">
+		<instruction type="language">language/*.xml</instruction>
+
+		<!-- files -->
+		<instruction type="file">files.tar</instruction>
+		<instruction type="file" application="wcf">files_wcf.tar</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+
+		<!-- xml -->
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+
+		<!-- scripts -->
+		<instruction type="script">acp/update_from_2.0.0.php</instruction>
 
 		<!-- delete old object types -->
 		<instruction type="objectType">xml/objectType_update.xml</instruction>

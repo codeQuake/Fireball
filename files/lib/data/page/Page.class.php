@@ -158,10 +158,11 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	/**
 	 * @see	\wcf\data\ILinkableObject::getLink()
 	 */
-	public function getLink() {
+	public function getLink($appendSession = true) {
 		return LinkHandler::getInstance()->getLink('Page', array(
 			'application' => 'cms',
 			'forceFrontend' => true,
+			'appendSession' => $appendSession,
 			'alias' => $this->getAlias()
 		));
 	}

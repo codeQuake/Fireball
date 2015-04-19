@@ -3,6 +3,8 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use cms\data\file\FileCache;
+use cms\data\file\FileList;
+use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -56,5 +58,23 @@ class GalleryContentType extends AbstractContentType {
 		}
 		
 		return StringUtil::truncate(implode(', ', $list), 70);
+	}
+
+	/**
+	 * @see \cms\system\content\type\IContentType::getFormTemplate()
+	 */
+	public function getFormTemplate() {
+		$contentData = RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->contentData;
+		if (isset($contentData['imageIDs'])) {
+			$imageList = new FileList();
+			$imageList->getConditionBuilder()->add('fileID in (?)', array($contentData['imageIDs']));
+			$imageList->readObjects();
+
+			WCF::getTPL()->assign(array(
+				'imageList' => $imageList
+			));
+		}
+
+		return parent::getFormTemplate();
 	}
 }

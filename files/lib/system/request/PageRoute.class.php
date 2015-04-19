@@ -28,7 +28,10 @@ class PageRoute implements IRoute {
 	 * @see	\wcf\system\request\IRoute::buildLink()
 	 */
 	public function buildLink(array $components) {
-		$link = 'page/';
+		$link = '';
+		if (!URL_LEGACY_MODE) {
+			$link = 'page/';
+		}
 
 		$alias = (isset($components['alias'])) ? $components['alias'] : '';
 
@@ -53,7 +56,11 @@ class PageRoute implements IRoute {
 
 		// prepend index.php
 		if (!URL_OMIT_INDEX_PHP) {
-			$link = 'index.php?' . $link;
+			if (URL_LEGACY_MODE) {
+				$link = 'index.php/' . $link;
+			} else {
+				$link = 'index.php?' . $link;
+			}
 		}
 
 		if (!empty($components)) {
@@ -109,13 +116,18 @@ class PageRoute implements IRoute {
 	 * @see	\wcf\system\request\IRoute::matches()
 	 */
 	public function matches($requestURL) {
-		// request URL must be prefixed with `page/`
-		if (substr($requestURL, 0, 5) != 'page/') {
-			return false;
+		if (!URL_LEGACY_MODE) {
+			// request URL must be prefixed with `page/`
+			if (substr($requestURL, 0, 5) != 'page/') {
+				return false;
+			}
+
+			$alias = substr($requestURL, 5, -1);
+		} else {
+			$alias = trim($requestURL, '/');
 		}
 
 		// validate alias
-		$alias = substr($requestURL, 5, -1);
 		if (preg_match('~^' . PageUtil::ALIAS_PATTERN_STACK . '$~', $alias)) {
 			$this->routeData['alias'] = $alias;
 			return true;

@@ -16,7 +16,7 @@
 
 		<tbody>
 			{foreach from=$fileList item=file}
-				<tr data-file-id="{@$file->fileID}">
+				<tr data-file-id="{@$file->fileID}" data-file-title="{$file->getTitle()}" data-file-formatted-size="{@$file->filesize|filesize}">
 					<td class="columnMark"></td>
 					<td class="columnID columnFileID">{@$file->fileID}</td>
 					<td class="columnIcon">{@$file->getIconTag()}</td>

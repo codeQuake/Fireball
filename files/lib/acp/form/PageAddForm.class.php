@@ -165,6 +165,12 @@ class PageAddForm extends AbstractForm {
 	public $publicationDate = '';
 
 	/**
+	 * page title
+	 * @var	string
+	 */
+	public $title = '';
+
+	/**
 	 * show order
 	 * @var	integer
 	 */
@@ -223,6 +229,7 @@ class PageAddForm extends AbstractForm {
 		I18nHandler::getInstance()->readValues();
 
 		// general data
+		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
 		if (isset($_POST['alias'])) $this->alias = StringUtil::trim($_POST['alias']);
 		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
 		$this->createMenuItem = (isset($_POST['createMenuItem'])) ? 1 : 0;
@@ -263,8 +270,12 @@ class PageAddForm extends AbstractForm {
 		parent::validate();
 
 		// validate title
-		if (!I18nHandler::getInstance()->validateValue('title', true)) {
-			throw new UserInputException('title', 'multilingual');
+		if (!I18nHandler::getInstance()->validateValue('title')) {
+			if (I18nHandler::getInstance()->isPlainValue('title')) {
+				throw new UserInputException('title');
+			} else {
+				throw new UserInputException('title', 'multilingual');
+			}
 		}
 
 		// validate alias
@@ -393,6 +404,7 @@ class PageAddForm extends AbstractForm {
 
 		$data = array(
 			// general data
+			'title' => $this->title,
 			'alias' => $this->alias,
 			'description' => $this->description,
 
@@ -445,9 +457,10 @@ class PageAddForm extends AbstractForm {
 		ACLHandler::getInstance()->save($pageEditor->pageID, $this->objectTypeID);
 
 		// save multilingual inputs
-		$updateData['title'] = 'cms.page.title'.$pageEditor->pageID;
-		I18nHandler::getInstance()->save('title', $updateData['title'], 'cms.page');
-
+		if (!I18nHandler::getInstance()->isPlainValue('title')) {
+			$updateData['title'] = 'cms.page.title'.$pageEditor->pageID;
+			I18nHandler::getInstance()->save('title', $updateData['title'], 'cms.page');
+		}
 		if (!I18nHandler::getInstance()->isPlainValue('description')) {
 			$updateData['description'] = 'cms.page.description'.$pageEditor->pageID;
 			I18nHandler::getInstance()->save('description', $updateData['description'], 'cms.page');
@@ -483,8 +496,11 @@ class PageAddForm extends AbstractForm {
 			$menuItem = $menuItemReturnValues['returnValues'];
 
 			// save multilingual title
+			I18nHandler::getInstance()->register('menuItemTitle');
+			I18nHandler::getInstance()->setValues('menuItemTitle', I18nHandler::getInstance()->getValues('title'));
+
 			$menuItemData = array('menuItem' => 'wcf.page.menuItem'.$menuItem->menuItemID);
-			I18nHandler::getInstance()->save('title', $menuItemData['menuItem'], 'wcf.page');
+			I18nHandler::getInstance()->save('menuItemTitle', $menuItemData['menuItem'], 'wcf.page');
 
 			$menuItemEditor = new PageMenuItemEditor($menuItem);
 			$menuItemEditor->update($menuItemData);
@@ -577,6 +593,7 @@ class PageAddForm extends AbstractForm {
 			'stylesheetList' => $this->stylesheetList->getObjects(),
 
 			// general data
+			'title' => $this->title,
 			'alias' => $this->alias,
 			'description' => $this->description,
 			'createMenuItem' => $this->createMenuItem,
