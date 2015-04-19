@@ -37,13 +37,13 @@ class FileContentType extends AbstractContentType {
 	 * @see cms\system\content\type\IContentType::validate()
 	 */
 	public function validate($data) {
-		if (!isset($data['imageID'])) {
-			throw new UserInputException('imageID');
+		if (!isset($data['fileID'])) {
+			throw new UserInputException('fileID');
 		}
 
-		$file = new File($data['imageID']);
+		$file = new File($data['fileID']);
 		if (!$file->fileID) {
-			throw new UserInputException('imageID');
+			throw new UserInputException('fileID');
 		}
 	}
 

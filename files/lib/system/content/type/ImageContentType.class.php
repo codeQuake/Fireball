@@ -35,7 +35,7 @@ class ImageContentType extends AbstractContentType {
 			'image' => $image
 		));
 
-		return parent::getOutput($content);
+		return AbstractContentType::getOutput($content);
 	}
 
 	/**
@@ -66,6 +66,6 @@ class ImageContentType extends AbstractContentType {
 			}
 		}
 
-		return parent::getFormTemplate();
+		return AbstractContentType::getFormTemplate();
 	}
 }
