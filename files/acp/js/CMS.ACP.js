@@ -447,7 +447,9 @@ CMS.ACP.File.Picker = Class.extend({
 				$('<input type="hidden" name="'+ _this._inputName +'[]" value="'+ fileID +'" />').appendTo($form);
 			});
 		} else {
-			var file = this._selected.pop();
+			var keys = Object.keys(this._selected);
+			var file = this._selected[keys[0]];
+
 			$('<input type="hidden" name="'+ this._inputName +'" value="'+ file.fileID +'" />').appendTo($form);
 		}
 	},
