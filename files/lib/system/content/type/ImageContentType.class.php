@@ -41,7 +41,7 @@ class ImageContentType extends FileContentType {
 			'width' => $content->width
 		));
 
-		return parent::getOutput($content);
+		return AbstractContentType::getOutput($content);
 	}
 
 	/**
@@ -72,6 +72,6 @@ class ImageContentType extends FileContentType {
 			}
 		}
 
-		return parent::getFormTemplate();
+		return AbstractContentType::getFormTemplate();
 	}
 }
