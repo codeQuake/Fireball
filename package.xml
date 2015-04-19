@@ -21,6 +21,7 @@
 
 	<excludedpackages>
 		<excludedpackage version="2.1.*">com.woltlab.wcf</excludedpackage>
+		<excludedpackage version="1.0.0 Alpha 1">de.voolia.cms</excludedpackage>
 	</excludedpackages>
 
 	<optionalpackages>
