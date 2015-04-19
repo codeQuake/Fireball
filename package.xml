@@ -19,6 +19,10 @@
 		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
 	</requiredpackages>
 
+	<excludedpackages>
+		<excludedpackage version="1.0.0 Alpha 1">de.voolia.cms</excludedpackage>
+	</excludedpackages>
+
 	<optionalpackages>
 		<optionalpackage file="optionals/de.codequake.cms.news.tar">de.codequake.cms.news</optionalpackage>
 		<optionalpackage file="optionals/de.codequake.cms.wbb.tar">de.codequake.cms.wbb</optionalpackage>
