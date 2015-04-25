@@ -57,7 +57,3 @@ nbactions.xml
 
 # Packagecreator
 *.bat
-
-files/lib/data/CMSDatabaseObject.class.php
-
-files/lib/data/folder/Folder.class.php
