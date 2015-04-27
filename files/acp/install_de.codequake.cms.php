@@ -1,6 +1,7 @@
 <?php
 use wcf\data\category\CategoryEditor;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\package\update\server\PackageUpdateServerAction;
 use wcf\system\WCF;
 
 /**
@@ -25,3 +26,22 @@ CategoryEditor::create(array(
 	'title' => 'Default Category',
 	'time' => TIME_NOW
 ));
+
+// add codequake update server
+if (isset($this->instruction['attributes']['installupdateserver']) && $this->instruction['attributes']['installupdateserver'] == 1) {
+	$serverURL = 'http://codequake.de/packages/typhoon/';
+
+	// check if update server already exists
+	$sql = "SELECT	packageUpdateServerID
+		FROM	wcf".WCF_N."_package_update_server
+		WHERE	serverURL = ?";
+	$statement = WCF::getDB()->prepareStatement($sql);
+	$statement->execute(array($serverURL));
+	$row = $statement->fetchArray();
+	if ($row === false) {
+		$objectAction = new PackageUpdateServerAction(array(), 'create', array('data' => array(
+			'serverURL' => $serverURL
+		)));
+		$objectAction->executeAction();
+	}
+}
