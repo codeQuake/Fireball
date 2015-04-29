@@ -681,7 +681,15 @@ CMS.ACP.File.Picker = Class.extend({
 		}
 
 		if (!this._options.multiple) {
-		    new CMS.ACP.File.ImageRatio($input.val());
+			new CMS.ACP.File.ImageRatio($input.val());
+
+			//delete old entries
+			var self = this;
+			$.each(self._selected, function(index){
+				if (index != $input.val()) {
+					delete self._selected[index];
+				}
+			});
 		}
 
 		this._updateSelectedFilesList();
@@ -764,9 +772,12 @@ CMS.ACP.File.Picker = Class.extend({
 			});
 		} else {
 			var keys = Object.keys(this._selected);
-			var file = this._selected[keys[0]];
-
-			$('<input type="hidden" name="'+ this._inputName +'" value="'+ file.fileID +'" />').appendTo($form);
+			var file = this._selected[keys[0]]; 
+			
+			if (typeof file !== 'undefined') {
+				$('<input type="hidden" name="' + this._inputName + '" value="' + file.fileID + '" />').appendTo($form);
+			}
+			else $('<input type="hidden" name="' + this._inputName + '" value="0" />').appendTo($form);
 		}
 	},
 

@@ -115,8 +115,10 @@ class PagePage extends AbstractPage {
 		// @see	\wcf\system\request\RequestHandler
 		if (OFFLINE) {
 			if (!WCF::getSession()->getPermission('admin.general.canViewPageDuringOfflineMode') && !$this->page->availableDuringOfflineMode) {
+				@header('HTTP/1.1 503 Service Unavailable');
 				WCF::getTPL()->assign(array(
-					'templateName' => 'offline'
+					'templateName' => 'offline',
+					'templateNameApplication' => 'wcf'
 				));
 				WCF::getTPL()->display('offline');
 
