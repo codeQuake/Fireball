@@ -69,4 +69,9 @@
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
 	</instructions>
+	
+	<instructions type="update" fromversion="2.0.0">
+		<instruction type="language">language/*.xml</instruction>
+		<instruction type="file">files.tar</instruction>
+	</instructions>
 </package>
