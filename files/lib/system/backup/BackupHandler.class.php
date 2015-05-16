@@ -410,6 +410,9 @@ class BackupHandler extends SingletonFactory {
 						
 						$import['contentData'] = base64_decode($import['contentData']);
 						
+						// unset css id
+						if (isset($import['cssID'])) unset($import['cssID']);
+						
 						// multilingual title
 						$tmpTitle = base64_decode($import['title']);
 						
