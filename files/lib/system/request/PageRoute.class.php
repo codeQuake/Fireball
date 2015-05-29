@@ -4,6 +4,8 @@ namespace cms\system\request;
 use cms\data\page\PageCache;
 use cms\util\PageUtil;
 use wcf\system\request\IRoute;
+use wcf\system\request\RequestHandler;
+use wcf\util\HeaderUtil;
 
 /**
  * Route implementation for cms pages.
@@ -20,6 +22,7 @@ class PageRoute implements IRoute {
 	 * @var	array<mixed>
 	 */
 	protected $routeData = array(
+		'application' => 'cms',
 		'controller' => 'page',
 		'isDefaultController' => false
 	);
@@ -30,7 +33,7 @@ class PageRoute implements IRoute {
 	public function buildLink(array $components) {
 		$link = '';
 		if (!URL_LEGACY_MODE) {
-			$link = 'page/';
+			$link = $this->getControllerName() . '/';
 		}
 
 		$alias = (isset($components['alias'])) ? $components['alias'] : '';
@@ -102,6 +105,11 @@ class PageRoute implements IRoute {
 	 * @see	\wcf\system\request\IRoute::getRouteData()
 	 */
 	public function getRouteData() {
+		$controller = $this->getControllerName();
+
+		if ($controller != 'page')
+			$this->routeData['controller'] = $controller;
+
 		return $this->routeData;
 	}
 
@@ -116,13 +124,21 @@ class PageRoute implements IRoute {
 	 * @see	\wcf\system\request\IRoute::matches()
 	 */
 	public function matches($requestURL) {
+		$controller = $this->getControllerName();
+
 		if (!URL_LEGACY_MODE) {
 			// request URL must be prefixed with `page/`
-			if (substr($requestURL, 0, 5) != 'page/') {
+			if (substr($requestURL, 0, strlen($controller) + 1) != $controller . '/' && substr($requestURL, 0, 5) != 'page/') {
 				return false;
 			}
 
-			$alias = substr($requestURL, 5, -1);
+			if (substr($requestURL, 0, 5) == 'page/' && $controller != 'page') {
+				$alias = substr($requestURL, 5, -1);
+				HeaderUtil::redirect($this->buildLink(array('alias' => $alias)), true);
+				exit;
+			}
+
+			$alias = substr($requestURL, strlen($controller) + 1, -1);
 		} else {
 			$alias = trim($requestURL, '/');
 		}
@@ -134,5 +150,23 @@ class PageRoute implements IRoute {
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Returns the transformed controller name.
+	 *
+	 * @param	string		$application
+	 * @param	string		$controller
+	 * @return	string
+	 */
+	protected function getControllerName($application = 'cms', $controller = 'Page') {
+		if (!isset($this->controllerNames[$controller])) {
+			$controllerName = RequestHandler::getTokenizedController($controller);
+			$alias = RequestHandler::getInstance()->getAliasByController($controllerName);
+				
+			$this->controllerNames[$controller] = ($alias) ?: $controllerName;
+		}
+
+		return $this->controllerNames[$controller];
 	}
 }
