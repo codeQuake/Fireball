@@ -367,6 +367,19 @@ class BackupHandler extends SingletonFactory {
 						if (isset($import['folderPath'])) unset($import['folderPath']);
 						if (!isset($import['description'])) $import['description'] = '';
 						
+						if (isset($import['categoryID'])) unset($import['categoryID']);
+						
+						if (isset($import['parentCategoryID']) && $import['parentCategoryID'] != '' && !empty($import['parentCategoryID'])) {
+							if (isset($this->tmp[$object.'s'][$import['parentCategoryID']])) {
+								// get new id for parent, if parent has been already processed
+								$import['parentCategoryID'] = $this->tmp['folders'][$import['parentCategoryID']];
+							} else {
+								// set when everything is imported
+								$parentIDs[$currentID] = $import['parentCategoryID'];
+								unset($import['parentCategoryID']);
+							}
+						}
+						
 						// multilingual title
 						$tmpTitle = base64_decode($import['title']);
 						if ($this->is_serialized($tmpTitle)) {
@@ -549,6 +562,22 @@ class BackupHandler extends SingletonFactory {
 						if ($element !== null) {
 							$editor = new $editorName($element);
 							$update['parentID'] = $this->tmp[$object.'s'][$parent];
+							$editor->update($update);
+						}
+					}
+				}
+				
+				// set new parents if needed
+				if ($object == 'folder') {
+					foreach ($parentIDs as $child => $parent) {
+						$editorName = '\\wcf\\data\\category\\CategoryEditor';
+						$className = '\\wcf\\data\\category\\Category';
+						
+						$element = new $className($this->tmp[$object.'s'][$child]);
+						
+						if ($element !== null) {
+							$editor = new $editorName($element);
+							$update['parentCategoryID'] = $this->tmp[$object.'s'][$parent];
 							$editor->update($update);
 						}
 					}
