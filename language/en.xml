@@ -423,6 +423,7 @@
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.de.codequake.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.user.notification.de.codequake.cms.page.comment.response.notification.commentResponse"><![CDATA[New response to a comment on a page]]></item>
+		<item name="wcf.user.notification.de.codequake.cms.page.comment.comment"><![CDATA[New comment on a page]></item>
 	</category>
 
 	<category name="wcf.user.objectWatch">
