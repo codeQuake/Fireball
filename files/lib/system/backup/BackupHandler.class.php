@@ -425,6 +425,8 @@ class BackupHandler extends SingletonFactory {
 						
 						$import['contentData'] = base64_decode($import['contentData']);
 						
+						if (isset($import['contentTypeID']) && $import['contentTypeID'] == null) continue;
+						
 						// unset css id
 						if (isset($import['cssID'])) unset($import['cssID']);
 						
