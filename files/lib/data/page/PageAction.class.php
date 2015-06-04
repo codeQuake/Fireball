@@ -200,6 +200,9 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$contentList->readObjects();
 
 			foreach ($contentList as $content) {
+				if ($content->getObjectType() === null)
+					continue;
+				
 				$objectType = $content->getObjectType();
 				
 				$tmpContentData = $content->getData();
