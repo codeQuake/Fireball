@@ -719,14 +719,18 @@ class BackupHandler extends SingletonFactory {
 									if ($tmpItem->tagName == 'contentData') {
 										$content = unserialize(base64_decode($tmpItem->nodeValue));
 										if (is_array($content)) {
-											if (count($content) == 2)
+											if (isset($content['columnData'])) {
+												if (count($content['columnData']) == 2)
+													$contentType = 'de.codequake.cms.content.type.twocolumns';
+												else if (count($content['columnData']) == 3)
+													$contentType = 'de.codequake.cms.content.type.threecolumns';
+												else if (count($content['columnData']) == 4)
+													$contentType = 'de.codequake.cms.content.type.fourcolumns';
+												else if (count($content['columnData']) == 5)
+													$contentType = 'de.codequake.cms.content.type.fourcolumns';
+											} else {
 												$contentType = 'de.codequake.cms.content.type.twocolumns';
-											else if (count($content) == 3)
-												$contentType = 'de.codequake.cms.content.type.threecolumns';
-											else if (count($content) == 4)
-												$contentType = 'de.codequake.cms.content.type.fourcolumns';
-											else if (count($content) == 5)
-												$contentType = 'de.codequake.cms.content.type.fourcolumns';
+											}
 										} else {
 											$contentType = 'de.codequake.cms.content.type.twocolumns';
 										}
