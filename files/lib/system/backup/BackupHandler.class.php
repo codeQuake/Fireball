@@ -89,8 +89,6 @@ class BackupHandler extends SingletonFactory {
 	}
 
 	protected function buildXML() {
-		
-		
 		// start doc
 		$xml = new XMLWriter();
 		$xml->beginDocument('data', '', '', array(
