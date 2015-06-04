@@ -236,6 +236,7 @@ class BackupHandler extends SingletonFactory {
 					if ($object == 'page') {
 						if (isset($import['robots'])) unset($import['robots']);
 						if (isset($import['showSidebar'])) unset($import['showSidebar']);
+						if (isset($import['layoutID'])) unset($import['layoutID']);
 						
 						if (isset($import['styleID']) && $import['styleID'] == '')
 							$import['styleID'] = null;
