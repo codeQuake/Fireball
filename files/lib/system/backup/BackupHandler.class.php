@@ -58,6 +58,7 @@ class BackupHandler extends SingletonFactory {
 
 	protected $cmsUrl = '';
 	protected $api = '';
+	protected $cmsVersion = 0;
 
 	protected function init() {
 		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
@@ -77,6 +78,9 @@ class BackupHandler extends SingletonFactory {
 		$list = new FileList();
 		$list->readObjects();
 		$this->files = $list->getObjects();
+		
+		$cms = PackageCache::getInstance()->getPackage(PackageCache::getInstance()->getPackageID('de.codequake.cms'));
+		$this->cmsVersion = $cms->packageVersion;
 	}
 
 	public function getExportArchive() {
@@ -85,13 +89,12 @@ class BackupHandler extends SingletonFactory {
 	}
 
 	protected function buildXML() {
-		$cms = PackageCache::getInstance()->getPackage(PackageCache::getInstance()->getPackageID('de.codequake.cms'));
-		$cmsVersion = $cms->packageVersion;
+		
 		
 		// start doc
 		$xml = new XMLWriter();
 		$xml->beginDocument('data', '', '', array(
-			'api' => $cmsVersion,
+			'api' => $this->cmsVersion,
 			'cmsUrl' => WCF::getPath('cms')
 		));
 		
@@ -693,13 +696,53 @@ class BackupHandler extends SingletonFactory {
 		$i = 0;
 		foreach ($items as $item) {
 			foreach ($xpath->query('child::*', $item) as $child) {
+				$contentData = array();
+				
 				foreach ($xpath->query('child::*', $child) as $property) {
-					if ($property->tagName == 'contentTypeID')
-						$data[$item->tagName][$i][$property->tagName] = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', $property->nodeValue);
-					else if ($property->tagName == 'parentID' && $property->nodeValue == '' || $property->tagName == 'menuItemID')
+					if ($property->tagName == 'contentTypeID') {
+						$contentType = $property->nodeValue;
+						
+						if (strpos($this->cmsVersion, '2.1.') !== false) {
+							if ($contentType == 'de.codequake.cms.content.type.twocolumns') {
+								$contentType = 'de.codequake.cms.content.type.columns';
+								$contentData = array(50, 50);
+							} else if ($contentType == 'de.codequake.cms.content.type.threecolumns') {
+								$contentType = 'de.codequake.cms.content.type.columns';
+								$contentData = array(33, 34, 33);
+							} else if ($contentType == 'de.codequake.cms.content.type.fourcolumns') {
+								$contentType = 'de.codequake.cms.content.type.columns';
+								$contentData = array(25, 25, 25, 25);
+							}
+						} else {
+							if ($contentType == 'de.codequake.cms.content.type.columns') {
+								foreach ($xpath->query('child::*', $child) as $tmpItem) {
+									if ($tmpItem->tagName == 'contentData') {
+										$content = unserialize(base64_decode($tmpItem->nodeValue));
+										if (is_array($content)) {
+											if (count($content) == 2)
+												$contentType = 'de.codequake.cms.content.type.twocolumns';
+											else if (count($content) == 3)
+												$contentType = 'de.codequake.cms.content.type.threecolumns';
+											else if (count($content) == 4)
+												$contentType = 'de.codequake.cms.content.type.fourcolumns';
+											else if (count($content) == 5)
+												$contentType = 'de.codequake.cms.content.type.fourcolumns';
+										} else {
+											$contentType = 'de.codequake.cms.content.type.twocolumns';
+										}
+									}
+								}
+							}
+						}
+						
+						$data[$item->tagName][$i][$property->tagName] = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', $contentType);
+					} else if ($property->tagName == 'parentID' && $property->nodeValue == '' || $property->tagName == 'menuItemID') {
 						$data[$item->tagName][$i][$property->tagName] = null;
-					else
+					} else if ($property->tagName == 'contentData' && !empty($contentData)) {
+						$data[$item->tagName][$i][$property->tagName] = base64_encode(serialize($contentData));
+					} else {
 						$data[$item->tagName][$i][$property->tagName] = $property->nodeValue;
+					}
 				}
 				$i++;
 			}
