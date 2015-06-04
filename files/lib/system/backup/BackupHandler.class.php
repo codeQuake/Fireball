@@ -705,13 +705,13 @@ class BackupHandler extends SingletonFactory {
 						if (strpos($this->cmsVersion, '2.1.') !== false) {
 							if ($contentType == 'de.codequake.cms.content.type.twocolumns') {
 								$contentType = 'de.codequake.cms.content.type.columns';
-								$contentData = array(50, 50);
+								$contentData = array('columnData' => array(50, 50));
 							} else if ($contentType == 'de.codequake.cms.content.type.threecolumns') {
 								$contentType = 'de.codequake.cms.content.type.columns';
-								$contentData = array(33, 34, 33);
+								$contentData = array('columnData' => array(33, 34, 33));
 							} else if ($contentType == 'de.codequake.cms.content.type.fourcolumns') {
 								$contentType = 'de.codequake.cms.content.type.columns';
-								$contentData = array(25, 25, 25, 25);
+								$contentData = array('columnData' => array(25, 25, 25, 25));
 							}
 						} else {
 							if ($contentType == 'de.codequake.cms.content.type.columns') {
