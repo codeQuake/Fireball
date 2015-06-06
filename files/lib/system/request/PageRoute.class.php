@@ -138,7 +138,8 @@ class PageRoute implements IRoute {
 				exit;
 			}
 
-			$alias = substr($requestURL, strlen($controller) + 1, -1);
+			$alias = substr($requestURL, strlen($controller) + 1);
+			$alias = trim($alias, '/');
 		} else {
 			$alias = trim($requestURL, '/');
 		}
