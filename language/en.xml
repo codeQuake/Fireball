@@ -413,8 +413,8 @@
 	</category>
 
 	<category name="wcf.user.profile">
-		<item name="wcf.user.profile.recentActivity.pageComment"><![CDATA[commented the page &raquo;<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=Page application='cms' object=$page}{/link}">{$page->getTitle()}</a>&laquo; hinzugefügt.]]></item>
-		<item name="wcf.user.profile.recentActivity.pageCommentResponse"><![CDATA[answered to the comment by <a class="userLink" data-user-id="{$author->userID}" href="{link controller=User object=$author}{/link}">{$author->username}</a> on the page &raquo;<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=Page application='cms' object=$page}#comments{/link}">{$page->getTitle()}</a>&laquo;.]]></item>
+		<item name="wcf.user.profile.recentActivity.pageComment"><![CDATA[commented the page “<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=Page application='cms' object=$page}{/link}">{$page->getTitle()}</a>” hinzugefügt.]]></item>
+		<item name="wcf.user.profile.recentActivity.pageCommentResponse"><![CDATA[answered to the comment by <a class="userLink" data-user-id="{$author->userID}" href="{link controller=User object=$author}{/link}">{$author->username}</a> on the page “<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=Page application='cms' object=$page}#comments{/link}">{$page->getTitle()}</a>”.]]></item>
 	</category>
 
 	<category name="wcf.user.recentActivity">
