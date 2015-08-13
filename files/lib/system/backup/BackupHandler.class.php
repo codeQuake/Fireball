@@ -206,6 +206,25 @@ class BackupHandler extends SingletonFactory {
 		if (file_exists(CMS_DIR . 'files/')) {
 			DirectoryUtil::getInstance(CMS_DIR . 'files/')->removeAll();
 		}
+		
+		// delete old lang items
+		$oldLangItems = array(
+				'cms.content.text%',
+				'cms.content.title%',
+				'cms.page.description%',
+				'cms.page.metaDescription%',
+				'cms.page.metaKeywords%',
+				'cms.page.title%'
+		);
+		$sql = "DELETE FROM	wcf".WCF_N."_language_item
+			WHERE		languageItem LIKE ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		foreach ($oldLangItems as $langItem) {
+			$statement->execute(array($langItem));
+		}
+		
+		// reset language cache
+		LanguageFactory::getInstance()->deleteLanguageCache();
 
 		// get available languages
 		$availableLanguages = LanguageFactory::getInstance()->getLanguages();
