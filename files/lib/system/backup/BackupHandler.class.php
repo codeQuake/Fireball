@@ -209,12 +209,12 @@ class BackupHandler extends SingletonFactory {
 		
 		// delete old lang items
 		$oldLangItems = array(
-				'cms.content.text%',
-				'cms.content.title%',
-				'cms.page.description%',
-				'cms.page.metaDescription%',
-				'cms.page.metaKeywords%',
-				'cms.page.title%'
+			'cms.content.text%',
+			'cms.content.title%',
+			'cms.page.description%',
+			'cms.page.metaDescription%',
+			'cms.page.metaKeywords%',
+			'cms.page.title%'
 		);
 		$sql = "DELETE FROM	wcf".WCF_N."_language_item
 			WHERE		languageItem LIKE ?";
