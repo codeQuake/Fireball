@@ -176,10 +176,18 @@ class BackupHandler extends SingletonFactory {
 	}
 
 	protected function tarFiles() {
-		$files = new DirectoryUtil(CMS_DIR . 'files/');
+		$files = new DirectoryUtil(CMS_DIR . 'files/', false);
 		$tar = new TarWriter(FileUtil::getTempFolder().'files.tar');
 		$fileList = $files->getFiles(SORT_ASC, new Regex('^'.CMS_DIR . 'files/$'), true);
-		$tar->add($fileList, '', CMS_DIR . 'files/');
+		
+		$newFileList = array();
+		foreach ($fileList as $file) {
+			if ($file == '.gitignore')
+				continue;
+			$newFileList[CMS_DIR . 'files/' . $file] = CMS_DIR . 'files/' . $file;
+		}
+		
+		$tar->add($newFileList, '', CMS_DIR . 'files/');
 		$tar->create();
 	}
 
