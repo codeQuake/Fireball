@@ -486,18 +486,25 @@ class BackupHandler extends SingletonFactory {
 								if ($this->is_serialized($tmpText)) {
 									$tmpText = unserialize($tmpText);
 									
-									foreach ($availableLanguages as $lang) {
-										if (isset($tmpText[$lang->countryCode])) {
-											// replace bbcode and urls
-											$tmpText[$lang->countryCode] = $this->replaceOldFileIDs($tmpText[$lang->countryCode]);
-											
-											$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
-										} else {
-											$langData['text'][$lang->languageID] = '';
-										}
-									}
 									
-									$tmpData['text'] = '';
+									$objectTypetmp = ObjectTypeCache::getInstance()->getObjectType($import['contentTypeID'])->objectType;
+									if ($objectTypetmp == 'de.codequake.cms.content.type.template' || $objectTypetmp == 'de.codequake.cms.content.type.php') {
+										$tmpText = array_shift($tmpText);
+										$tmpData['text'] = $this->replaceOldFileIDs($tmpText);
+									} else {
+										foreach ($availableLanguages as $lang) {
+											if (isset($tmpText[$lang->countryCode])) {
+												// replace bbcode and urls
+												$tmpText[$lang->countryCode] = $this->replaceOldFileIDs($tmpText[$lang->countryCode]);
+												
+												$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
+											} else {
+												$langData['text'][$lang->languageID] = '';
+											}
+										}
+										
+										$tmpData['text'] = '';
+									}
 								} else {
 									$tmpData['text'] = $this->replaceOldFileIDs($tmpData['text']);
 								}
