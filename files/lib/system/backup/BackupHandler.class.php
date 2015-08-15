@@ -486,7 +486,6 @@ class BackupHandler extends SingletonFactory {
 								if ($this->is_serialized($tmpText)) {
 									$tmpText = unserialize($tmpText);
 									
-									
 									$objectTypetmp = ObjectTypeCache::getInstance()->getObjectType($import['contentTypeID'])->objectType;
 									if ($objectTypetmp == 'de.codequake.cms.content.type.template' || $objectTypetmp == 'de.codequake.cms.content.type.php') {
 										$tmpText = array_shift($tmpText);
