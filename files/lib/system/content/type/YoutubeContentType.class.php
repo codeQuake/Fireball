@@ -43,7 +43,7 @@ class YoutubeContentType extends AbstractContentType {
 
 		if (isset($var['v'])) {
 			$videoID = $var['v'];
-			return '<div class="elastic_video"><iframe width="640" height="360" src="http://youtube.com/embed/' . $videoID . '" frameborder="0" allowfullscreen></iframe></div>';
+			return '<div class="elastic_video"><iframe width="640" height="360" src="https://youtube.com/embed/' . $videoID . '" frameborder="0" allowfullscreen></iframe></div>';
 		}
 		return '';
 	}

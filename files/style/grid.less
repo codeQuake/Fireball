@@ -29,7 +29,7 @@
 		}
 	}
 
-	.loop(@counter) when (@counter > 20){
+	.loop(@counter) when (@counter >= 20){
 		.loop((@counter - 1));
 		.grid-mixin(@counter);
 	}

@@ -18,6 +18,8 @@ class PageNodeTree implements \IteratorAggregate {
 	protected $parentID = null;
 
 	protected $parentNode = null;
+	
+	protected $maxDepth = -1;
 
 	public function __construct($parentID = null) {
 		$this->parentID = $parentID;
@@ -25,15 +27,19 @@ class PageNodeTree implements \IteratorAggregate {
 
 	public function buildTree() {
 		$this->parentNode = $this->getNode($this->parentID);
-		$this->buildTreeLevel($this->parentNode);
+		$this->buildTreeLevel($this->parentNode, $this->maxDepth);
 	}
 
-	public function buildTreeLevel(PageNode $pageNode) {
+	public function buildTreeLevel(PageNode $pageNode, $depth = 0) {
+		if ($this->maxDepth != -1 && $depth < 0) {
+			return;
+		}
+		
 		foreach ($this->getChildren($pageNode) as $child) {
 			$childNode = $this->getNode($child->pageID);
 			if ($this->isIncluded($childNode)) {
 				$pageNode->addChild($childNode);
-				$this->buildTreeLevel($childNode);
+				$this->buildTreeLevel($childNode, $depth - 1);
 			}
 		}
 	}
@@ -78,5 +84,10 @@ class PageNodeTree implements \IteratorAggregate {
 
 	protected function isIncluded(PageNode $pageNode) {
 		return true;
+	}
+	
+
+	public function setMaxDepth($maxDepth) {
+		$this->maxDepth = $maxDepth;
 	}
 }

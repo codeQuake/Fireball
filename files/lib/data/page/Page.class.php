@@ -130,11 +130,9 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	 */
 	public function getChildrenTree($maxDepth = -1) {
 		$nodeTree = new AccessiblePageNodeTree($this->pageID);
+		$nodeTree->setMaxDepth($maxDepth);
 
-		$nodeList = $nodeTree->getIterator();
-		$nodeList->setMaxDepth($maxDepth);
-
-		return $nodeList;
+		return $nodeTree->getIterator();
 	}
 
 	/**

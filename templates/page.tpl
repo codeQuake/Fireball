@@ -79,7 +79,7 @@
 
 {include file='userNotice'}
 
-{if !$page->isPublished}
+{if !$page->isPublished && $page->publicationDate}
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
 {/if}
 

@@ -183,7 +183,7 @@ class PagePage extends AbstractPage {
 			'sidebarNodeTree' => $this->sidebarNodeTree,
 			'page' => $this->page,
 			'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : array()),
-			'commentCanAdd' => (WCF::getUser()->userID && $this->page->getPermission('canAddComment')),
+			'commentCanAdd' => $this->page->getPermission('canAddComment'),
 			'commentList' => $this->commentList,
 			'commentObjectTypeID' => $this->commentObjectTypeID,
 			'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),
