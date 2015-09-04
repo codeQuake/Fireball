@@ -4,8 +4,8 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[CMS for WCF 2.1]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>2.1.0 RC 3</version>
-		<date>2015-08-14</date>
+		<version>2.2.0 alpha 1</version>
+		<date>2015-09-04</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -21,7 +21,6 @@
 
 	<excludedpackages>
 		<excludedpackage version="1.0.0 Alpha 1">de.voolia.cms</excludedpackage>
-		<excludedpackage version="2.2.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 	</excludedpackages>
 
 	<optionalpackages>
