@@ -84,7 +84,7 @@ abstract class AbstractContentType implements IContentType {
 			foreach ($this->previewFields as $field) {
 				if ((string) $content->{$field} != '') {
 					$preview .= ' - ';
-					$preview .= $content->{$field};
+					$preview .= strip_tags($content->{$field});
 				}
 			}
 			return StringUtil::truncate(substr($preview, 3), 70);
