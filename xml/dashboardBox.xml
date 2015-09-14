@@ -11,7 +11,7 @@
 		</dashboardbox>
 
 		<dashboardbox name="de.codequake.cms.visitorsWeekly">
-			<classname>cms\system\dashboard\box\VisitorsWeeklyDashboardBox</classname>
+			<classname>cms\system\dashboard\box\WeeklyVisitorsDashboardBox</classname>
 			<boxtype>content</boxtype>
 		</dashboardbox>
 	</import>
