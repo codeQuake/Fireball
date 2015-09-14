@@ -9,5 +9,10 @@
 			<classname>cms\system\dashboard\box\MostViewedPagesDashboardBox</classname>
 			<boxtype>sidebar</boxtype>
 		</dashboardbox>
+
+		<dashboardbox name="de.codequake.cms.visitorsWeekly">
+			<classname>cms\system\dashboard\box\VisitorsWeeklyDashboardBox</classname>
+			<boxtype>content</boxtype>
+		</dashboardbox>
 	</import>
 </data>

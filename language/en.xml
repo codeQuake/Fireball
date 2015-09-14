@@ -250,6 +250,12 @@
 		<item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, downloaded <strong>{$file->downloads}</strong> times)]]></item>
 	</category>
 
+	<category name="cms.dashboard">
+		<item name="cms.dashboard.all"><![CDATA[All]]></item>
+		<item name="cms.dashboard.registered"><![CDATA[Registered]]></item>
+		<item name="cms.dashboard.spiders"><![CDATA[Search Engines]]></item>
+	</category>
+
 	<category name="cms.global">
 		<item name="cms.global.page"><![CDATA[Page]]></item>
 	</category>
@@ -407,6 +413,7 @@
 	<category name="wcf.dashboard">
 		<item name="wcf.dashboard.box.de.codequake.cms.latestPages"><![CDATA[Latest Pages]]></item>
 		<item name="wcf.dashboard.box.de.codequake.cms.mostViewedPages"><![CDATA[Most Viewed Pages]]></item>
+		<item name="wcf.dashboard.box.de.codequake.cms.visitorsWeekly"><![CDATA[Last weeks visitors]]></item>
 	</category>
 
 	<category name="wcf.page">
