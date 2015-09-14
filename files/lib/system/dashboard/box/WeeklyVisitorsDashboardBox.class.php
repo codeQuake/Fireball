@@ -39,7 +39,7 @@ class WeeklyVisitorsDashboardBox extends AbstractContentDashboardBox{
 	 * @see	\wcf\system\dashboard\box\AbstractContentDashboardBox::render()
 	 */
 	protected function render() {
-		if (!count($this->vistis)) return '';
+		if (!count($this->visits)) return '';
 
 		WCF::getTPL()->assign(array(
 			'visits' => $this->visits

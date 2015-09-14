@@ -1,4 +1,4 @@
-﻿<header class="boxHeadline">
+﻿<header class="boxHeadline boxSubHeadline">
 	<h2>{lang}wcf.dashboard.box.de.codequake.cms.visitorsWeekly{/lang}</h2>
 </header>
 
