@@ -20,7 +20,7 @@ final class BrowserUtil {
 		require_once(CMS_DIR.'lib/util/Browser.php');
 		$browser = new \Browser($userAgent);
 		if (!$browser->isRobot()) return $browser->getBrowser();
-		return 'Unknown';
+		return 'unknown';
 	}
 
 	/**
