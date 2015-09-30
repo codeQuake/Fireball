@@ -1,8 +1,8 @@
 <div id="codequake">
 	<ul class="containerList recentActivityList">
 		{if $codequakeNewsFeed|isset}
-			{foreach from=$codequakeNewsFeed item=item name='codequakeNews'}
-				<li{if $tpl.foreach.codequakeNews.first} style="border-top-left-radius: 0; border-top-right-radius: 0"{/if}>
+			{foreach from=$codequakeNewsFeed item=item}
+				<li>
 					<div class="containerHeadline">
 						<h3>
 							<a href="{@$__wcf->getPath()}acp/dereferrer.php?url={$item['link']|rawurlencode}">{$item['title']}</a>
