@@ -1,10 +1,10 @@
 <?php
 namespace cms\system\user\activity\event;
 
-use cms\data\page\PageList;
+use cms\data\page\PageCache;
 use wcf\data\comment\response\CommentResponseList;
 use wcf\data\comment\CommentList;
-use wcf\data\user\User;
+use wcf\data\user\UserList;
 use wcf\system\user\activity\event\IUserActivityEvent;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -12,7 +12,7 @@ use wcf\system\WCF;
 /**
  * User activity event implementation for page comment responses.
  * 
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -22,58 +22,58 @@ class PageCommentResponseUserActivityEvent extends SingletonFactory implements I
 	 * @see	\wcf\system\user\activity\event\IUserActivityEvent::prepare()
 	 */
 	public function prepare(array $events) {
-		$objectIDs = array();
+		$commentsIDs = $responseIDs = $userIDs = array();
+
 		foreach ($events as $event) {
-			$objectIDs[] = $event->objectID;
+			$responseIDs[] = $event->objectID;
 		}
 
-		// comments responses
 		$responseList = new CommentResponseList();
-		$responseList->getConditionBuilder()->add("comment_response.responseID IN (?)", array(
-			$objectIDs
-		));
+		$responseList->setObjectIDs($responseIDs);
 		$responseList->readObjects();
 		$responses = $responseList->getObjects();
 
-		// comments
-		$commentIDs = array();
 		foreach ($responses as $response) {
 			$commentIDs[] = $response->commentID;
 		}
+
 		$commentList = new CommentList();
-		$commentList->getConditionBuilder()->add("comment.commentID IN (?)", array(
-			$commentIDs
-		));
+		$commentList->setObjectIDs($commentIDs);
 		$commentList->readObjects();
 		$comments = $commentList->getObjects();
 
-		// get pages
-		$pageIDs = array();
 		foreach ($comments as $comment) {
-			$pageIDs[] = $comment->objectID;
+			if (!in_array($comment->userID, $userIDs)) {
+				$userIDs[] = $comment->userID;
+			}
 		}
 
-		$list = new PageList();
-		$list->getConditionBuilder()->add("page.pageID IN (?)", array(
-			$pageIDs
-		));
-		$list->readObjects();
-		$pages = $list->getObjects();
+		$userList = new UserList();
+		$userList->setObjectIDs($userIDs);
+		$userList->readObjects();
+		$users = $userList->getObjects();
 
 		foreach ($events as $event) {
 			if (isset($responses[$event->objectID])) {
 				$response = $responses[$event->objectID];
-				if (isset($comments[$response->commentID])) {
-					$comment = $comments[$response->commentID];
-					if (isset($pages[$comment->objectID])) {
-						$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.pageCommentResponse', array(
-							'author' => new User($comment->userID),
-							'page' => $pages[$comment->objectID]
-						));
-						$event->setTitle($text);
-						$event->setDescription($response->getFormattedMessage());
-						$event->setIsAccessible();
+				$comment = $comments[$response->commentID];
+				$page = PageCache::getInstance()->getPage($comment->objectID);
+
+				if ($page !== null && isset($users[$comment->userID])) {
+					if (!$page->canRead()) {
+						continue;
 					}
+
+					$event->setIsAccessible();
+
+					$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.pageCommentResponse', array(
+						'author' => $users[$comment->userID],
+						'page' => $pages[$comment->objectID]
+					));
+					$event->setTitle($text);
+					$event->setDescription($response->getFormattedMessage());
+
+					continue;
 				}
 			}
 			else {
