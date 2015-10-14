@@ -4,8 +4,8 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>2.0.1</version>
-		<date>2015-04-29</date>
+		<version>2.0.2</version>
+		<date>2015-10-14</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -62,16 +62,20 @@
 		<!-- scripts -->
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
 	</instructions>
-
-	<instructions type="update" fromversion="2.0.0 RC 1">
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="file">files.tar</instruction>
-	</instructions>
 	
 	<instructions type="update" fromversion="2.0.0">
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="file">files.tar</instruction>
+		<instruction type="objectType">xml/objectType.xml</instruction>
+
+		<instruction type="script">acp/update202.php</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="2.0.1">
+		<instruction type="language">language/*.xml</instruction>
+		<instruction type="file">files.tar</instruction>
+		<instruction type="objectType">xml/objectType.xml</instruction>
+
+		<instruction type="script">acp/update202.php</instruction>
 	</instructions>
 </package>
