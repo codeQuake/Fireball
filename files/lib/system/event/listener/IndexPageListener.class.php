@@ -21,6 +21,8 @@ class IndexPageListener implements IEventListener {
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
+		$feedData = '';
+		
 		try {
 			$request = new HTTPRequest(self::FEED_URL);
 			$request->execute();
@@ -34,7 +36,7 @@ class IndexPageListener implements IEventListener {
 			return;
 		}
 
-		if (!$xml = simplexml_load_string($feedData)) {
+		if (empty($feedData) || !$xml = simplexml_load_string($feedData)) {
 			return;
 		}
 
