@@ -1,7 +1,7 @@
 <?php
 namespace cms\system\event\listener;
 
-use wcf\system\event\IEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 use wcf\util\HTTPRequest;
@@ -14,29 +14,27 @@ use wcf\util\HTTPRequest;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class IndexPageListener implements IEventListener {
+class IndexPageListener implements IParameterizedEventListener {
 	const FEED_URL = 'http://codequake.de/index.php/NewsFeed/';
 
 	/**
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
-	public function execute($eventObj, $className, $eventName) {
-		$feedData = '';
-		
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		try {
 			$request = new HTTPRequest(self::FEED_URL);
 			$request->execute();
 			$feedData = $request->getReply();
 			$feedData = $feedData['body'];
+			
+			if (empty($feedData) || !$xml = @simplexml_load_string($feedData)) {
+				return;
+			}
 		}
 		catch (SystemException $e) {
 			// log error
 			$e->getExceptionID();
 
-			return;
-		}
-
-		if (empty($feedData) || !$xml = simplexml_load_string($feedData)) {
 			return;
 		}
 
