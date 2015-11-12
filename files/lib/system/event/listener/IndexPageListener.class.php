@@ -21,38 +21,38 @@ class IndexPageListener implements IEventListener {
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-// 		try {
-// 			$request = new HTTPRequest(self::FEED_URL);
-// 			$request->execute();
-// 			$feedData = $request->getReply();
-// 			$feedData = $feedData['body'];
-// 		}
-// 		catch (SystemException $e) {
-// 			// log error
-// 			$e->getExceptionID();
+		try {
+			$request = new HTTPRequest(self::FEED_URL);
+			$request->execute();
+			$feedData = $request->getReply();
+			$feedData = $feedData['body'];
 
-// 			return;
-// 		}
+			if (empty($feedData) || !$xml = simplexml_load_string($feedData)) {
+				return;
+			}
+		}
+		catch (SystemException $e) {
+			// log error
+			$e->getExceptionID();
 
-// 		if (!$xml = simplexml_load_string($feedData)) {
-// 			return;
-// 		}
+			return;
+		}
 
 		$feed = array();
-// 		$i = 10;
+		$i = 10;
 
-// 		foreach ($xml->channel[0]->item as $item) {
-// 			if ($i -- == 0) {
-// 				break;
-// 			}
+		foreach ($xml->channel[0]->item as $item) {
+			if ($i -- == 0) {
+				break;
+			}
 
-// 			$feed[] = array(
-// 				'title' => (string) $item->title,
-// 				'description' => (string) $item->description,
-// 				'link' => (string) $item->guid,
-// 				'time' => strtotime((string) $item->pubDate)
-// 			);
-// 		}
+			$feed[] = array(
+				'title' => (string) $item->title,
+				'description' => (string) $item->description,
+				'link' => (string) $item->guid,
+				'time' => strtotime((string) $item->pubDate)
+			);
+		}
 
 		WCF::getTPL()->assign(array(
 			'codequakeNewsFeed' => $feed
