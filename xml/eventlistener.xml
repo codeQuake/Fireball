@@ -48,13 +48,13 @@
 			<listenerclassname>cms\system\event\listener\DailyCleanUpListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
-
-		<!-- show news on acp index -->
+	</import>
+	<delete>
 		<eventlistener>
 			<eventclassname>wcf\acp\page\IndexPage</eventclassname>
 			<eventname>readData</eventname>
 			<listenerclassname>cms\system\event\listener\IndexPageListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
-	</import>
+	</delete>
 </data>
