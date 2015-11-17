@@ -26,15 +26,15 @@ class IndexPageListener implements IParameterizedEventListener {
 			$request->execute();
 			$feedData = $request->getReply();
 			$feedData = $feedData['body'];
+			
+			if (empty($feedData) || !$xml = @simplexml_load_string($feedData)) {
+				return;
+			}
 		}
 		catch (SystemException $e) {
 			// log error
 			$e->getExceptionID();
 
-			return;
-		}
-
-		if (!$xml = simplexml_load_string($feedData)) {
 			return;
 		}
 
