@@ -73,7 +73,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu.description"><![CDATA[All children will be arranged in a tabmenu. The children's titles will be the titles of your tab buttons. Tab buttons need CSS-IDs for the anchors, if you don't enter a CSS-ID for each child, it will be generated automatically.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[Template/HTML]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Sourcecode]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[You can use Smarty-Syntax (<a href="http://www.smarty.net/">Documentation</a>) & HTML here.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[You can use Smarty-Syntax (<a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.smarty.net/">Documentation</a>) & HTML here.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.error.compileError"><![CDATA[The given text contains the following template errors:<br />{$compileError}]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
@@ -243,11 +243,17 @@
 		<item name="cms.acp.stylesheet.less"><![CDATA[Individual CSS and LESS]]></item>
 		<item name="cms.acp.stylesheet.less.description"><![CDATA[Content may contain pure CSS. Furthermore you can use LESS including all Mixins provided by Community Framework.]]></item>
 		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
-		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets or Cascading Stylesheets are neccessary to individualize your pages - stylesheets can be added to pages. Recommended for beginners: <a href="http://www.w3schools.com/css/default.asp">CSS Tutorial by W3Schools</a>.]]></item>
+		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets or Cascading Stylesheets are neccessary to individualize your pages - stylesheets can be added to pages. Recommended for beginners: <a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.w3schools.com/css/default.asp">CSS Tutorial by W3Schools</a>.]]></item>
 	</category>
 
 	<category name="cms.content">
 		<item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, downloaded <strong>{$file->downloads}</strong> times)]]></item>
+	</category>
+
+	<category name="cms.dashboard">
+		<item name="cms.dashboard.all"><![CDATA[All]]></item>
+		<item name="cms.dashboard.registered"><![CDATA[Registered]]></item>
+		<item name="cms.dashboard.spiders"><![CDATA[Search Engines]]></item>
 	</category>
 
 	<category name="cms.global">
@@ -284,7 +290,7 @@
 		<item name="cms.page.commentResponse.notification.title.stacked"><![CDATA[{#$timesTriggered} new responses (Page)]]></item>
 		<item name="cms.page.comments"><![CDATA[Comments]]></item>
 		<item name="cms.page.comments.noComments"><![CDATA[No Entries.]]></item>
-		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>codeQuake</strong></a></address>]]></item>
+		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>codeQuake</strong></a></address>]]></item>
 		<item name="cms.page.delayedPublication"><![CDATA[This page will be published on {@$page->publicationDate|plainTime}.]]></item>
 		<item name="cms.page.parents"><![CDATA[{implode from=$page->getParentPages() item=parentPage glue=' » '}{$parentPage->getTitle()}{/implode}{if $includeSelf|isset && $includeSelf}{if $page->getParentPages()} » {/if}{$page->getTitle()}{/if}]]></item>
 	</category>
@@ -407,6 +413,7 @@
 	<category name="wcf.dashboard">
 		<item name="wcf.dashboard.box.de.codequake.cms.latestPages"><![CDATA[Latest Pages]]></item>
 		<item name="wcf.dashboard.box.de.codequake.cms.mostViewedPages"><![CDATA[Most Viewed Pages]]></item>
+		<item name="wcf.dashboard.box.de.codequake.cms.visitorsWeekly"><![CDATA[Last weeks visitors]]></item>
 	</category>
 
 	<category name="wcf.page">

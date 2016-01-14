@@ -6,6 +6,9 @@
 		<isapplication>1</isapplication>
 		<version>2.2.0 alpha 1</version>
 		<date>2015-09-04</date>
+		<date>2015-10-14</date>
+=======
+>>>>>>> origin/wcf2.1
 	</packageinformation>
 
 	<authorinformation>
@@ -14,9 +17,14 @@
 	</authorinformation>
 
 	<requiredpackages>
+<<<<<<< HEAD
+		<requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="1.0.0">de.codequake.wysiwyg.acp</requiredpackage>
+=======
 		<requiredpackage minversion="2.1.0">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wysiwyg.acp.tar">de.codequake.wysiwyg.acp</requiredpackage>
-		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
+		<requiredpackage minversion="1.1.2" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
+>>>>>>> origin/wcf2.1
 	</requiredpackages>
 
 	<excludedpackages>
@@ -59,14 +67,36 @@
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 
 		<!-- scripts -->
+<<<<<<< HEAD
+		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
+	</instructions>
+	
+	<instructions type="update" fromversion="2.0.0">
+		<instruction type="language">language/*.xml</instruction>
+		<instruction type="file">files.tar</instruction>
+		<instruction type="objectType">xml/objectType.xml</instruction>
+
+		<instruction type="script">acp/update202.php</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="2.0.1">
+=======
 		<instruction type="script" installupdateserver="1">acp/install_de.codequake.cms.php</instruction>
 	</instructions>
 	
 	<instructions type="update" fromversion="2.1.0 RC 2">
+>>>>>>> origin/wcf2.1
 		<instruction type="language">language/*.xml</instruction>
-		
+		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
 		<!-- files -->
 		<instruction type="file">files.tar</instruction>
+<<<<<<< HEAD
+		<instruction type="objectType">xml/objectType.xml</instruction>
+
+		<instruction type="script">acp/update202.php</instruction>
+=======
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+>>>>>>> origin/wcf2.1
 	</instructions>
 </package>

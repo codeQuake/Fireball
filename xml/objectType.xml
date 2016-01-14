@@ -47,7 +47,7 @@
 			<classname>cms\system\content\type\HeadlineContentType</classname>
 			<category>general</category>
 			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
+			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.dashboard</name>
