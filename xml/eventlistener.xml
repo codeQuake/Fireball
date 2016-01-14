@@ -48,18 +48,7 @@
 			<listenerclassname>cms\system\event\listener\DailyCleanUpListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
-	</import>
-	<delete>
-		<eventlistener>
-			<eventclassname>wcf\acp\page\IndexPage</eventclassname>
-			<eventname>readData</eventname>
-			<listenerclassname>cms\system\event\listener\IndexPageListener</listenerclassname>
-			<environment>admin</environment>
-		</eventlistener>
-<<<<<<< HEAD
-	</delete>
-=======
-
+		
 		<!-- user rename -->
 		<eventlistener>
 			<environment>user</environment>
@@ -74,5 +63,12 @@
 			<listenerclassname>cms\system\event\listener\UserRenameListener</listenerclassname>
 		</eventlistener>
 	</import>
->>>>>>> origin/wcf2.1
+	<delete>
+		<eventlistener>
+			<eventclassname>wcf\acp\page\IndexPage</eventclassname>
+			<eventname>readData</eventname>
+			<listenerclassname>cms\system\event\listener\IndexPageListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+	</delete>
 </data>

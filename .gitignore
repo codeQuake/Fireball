@@ -55,9 +55,7 @@ nbactions.xml
 *.tar
 *.tar.gz
 
-<<<<<<< HEAD
 *.bat
 =======
 # Packagecreator
 *.bat
->>>>>>> origin/wcf2.1
