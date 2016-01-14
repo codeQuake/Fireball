@@ -61,14 +61,6 @@
 		<!-- scripts -->
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
 	</instructions>
-	
-	<instructions type="update" fromversion="2.0.0">
-		<instruction type="language">language/*.xml</instruction>
-		<instruction type="file">files.tar</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-
-		<instruction type="script">acp/update202.php</instruction>
-	</instructions>
 
 	<instructions type="update" fromversion="2.0.1">
 		<instruction type="language">language/*.xml</instruction>
