@@ -177,7 +177,16 @@ class ContentAddForm extends AbstractForm {
 				$this->showOrder = 1;
 		}
 
-		if (!I18nHandler::getInstance()->validateValue('title')) {
+		$parent = null;
+		$parentIsTabMenu = false;
+		
+		if ($this->parentID) {
+			$parent = ContentCache::getInstance()->getContent($this->parentID);
+			//check if parent is tab menu
+			if ($parent->contentTypeID == ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.tabmenu')) $parentIsTabMenu = true;
+		}
+		
+		if (!I18nHandler::getInstance()->validateValue('title', false, (!$this->objectType->getProcessor()->requiresTitle && $this->position != 'sidebar' && !$parentIsTabMenu))) {
 			if (I18nHandler::getInstance()->isPlainValue('title')) {
 				throw new UserInputException('title');
 			}

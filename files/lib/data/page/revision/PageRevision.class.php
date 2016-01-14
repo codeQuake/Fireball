@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\page\revision;
 
-use cms\data\CMSDatabaseObject;
+use wcf\data\DatabaseObject;
 
 /**
  * Represents a page revision.
@@ -11,7 +11,7 @@ use cms\data\CMSDatabaseObject;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class PageRevision extends CMSDatabaseObject {
+class PageRevision extends DatabaseObject {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */

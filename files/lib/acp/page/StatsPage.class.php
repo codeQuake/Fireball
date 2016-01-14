@@ -21,18 +21,16 @@ class StatsPage extends AbstractPage {
 	 */
 	public $activeMenuItem = 'cms.acp.menu.link.cms.page.statistics';
 
-	public $startDate = 0;
-
-	public $endDate = 0;
-
-	public $visits = array();
-
+	/**
+	 * list of browsers
+	 * @var	array
+	 */
 	public $browsers = array();
 
-	public $platforms = array();
-
-	public $devices = array();
-
+	/**
+	 * colors for the graphs
+	 * @var	array
+	 */
 	public $colors = array(
 		'#015294',
 		'#F7464A',
@@ -45,7 +43,46 @@ class StatsPage extends AbstractPage {
 		'#1f1f1'
 	);
 
+	/**
+	 * list of devices
+	 * @var	array
+	 */
+	public $devices = array();
+
+	/**
+	 * end date
+	 * @var	integer
+	 */
+	public $endDate = 0;
+
+	/**
+	 * @see	\wcf\page\AbstractPage::$neededModules
+	 */
+	public $neededModules = array('CMS_PAGES_ENABLE_STATISTICS');
+
+	/**
+	 * list of most viewed pages
+	 * @var	array<\cms\data\page\Page>
+	 */
 	public $pages = null;
+
+	/**
+	 * list of platforms
+	 * @var	array
+	 */
+	public $platforms = array();
+
+	/**
+	 * start date
+	 * @var	integer
+	 */
+	public $startDate = 0;
+
+	/**
+	 * list of visits
+	 * @var	array
+	 */
+	public $visits = array();
 
 	/**
 	 * @see	\wcf\page\IPage::readData()
@@ -65,6 +102,7 @@ class StatsPage extends AbstractPage {
 		foreach ($this->visits as $visit) {
 			$browsers = @unserialize($visit['visitors']['browsers']);
 			if (empty($browsers)) $browsers = array();
+
 			foreach ($browsers as $key => $value) {
 				$this->browsers[$key] = array(
 					'visits' => isset($this->browsers[$key]['visits']) ? $this->browsers[$key]['visits'] + $value : $value
@@ -73,6 +111,7 @@ class StatsPage extends AbstractPage {
 
 			$platforms = @unserialize($visit['visitors']['platforms']);
 			if (empty($platforms)) $platforms = array();
+
 			foreach ($platforms as $key => $value) {
 				$this->platforms[$key] = array(
 					'visits' => isset($this->platforms[$key]['visits']) ? $this->platforms[$key]['visits'] + $value : $value
@@ -81,6 +120,7 @@ class StatsPage extends AbstractPage {
 
 			$devices = @unserialize($visit['visitors']['devices']);
 			if (empty($devices)) $devices = array();
+
 			foreach ($devices as $key => $value) {
 				$this->devices[$key] = array(
 					'visits' => isset($this->devices[$key]['visits']) ? $this->devices[$key]['visits'] + $value : $value

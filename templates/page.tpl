@@ -9,7 +9,7 @@
 	{/foreach}
 	<link rel="canonical" href="{$page->getLink(false)}" />
 
-	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
@@ -25,7 +25,7 @@
 	</script>
 </head>
 
-<body id="tpl{$templateName|ucfirst}" data-page-id="{$page->pageID}">
+<body id="tpl_{$templateNameApplication}_{$templateName}" data-template="{$templateName}" data-application="{$templateNameApplication}" data-page-id="{$page->pageID}">
 
 {capture assign='headerNavigation'}
 	{if $page->allowSubscribing && $__wcf->user->userID}
@@ -74,7 +74,7 @@
 
 {include file='userNotice'}
 
-{if !$page->isPublished}
+{if !$page->isPublished && $page->publicationDate}
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
 {/if}
 

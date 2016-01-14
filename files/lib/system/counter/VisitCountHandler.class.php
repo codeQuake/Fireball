@@ -20,6 +20,10 @@ class VisitCountHandler extends SingletonFactory {
 	}
 
 	public function count() {
+		if (!CMS_PAGES_ENABLE_STATISTICS) {
+			return;
+		}
+
 		if ($this->canCount()) {
 			$userID = WCF::getUser()->userID;
 			$spider = $this->getSpiderID(WCF::getSession()->userAgent);

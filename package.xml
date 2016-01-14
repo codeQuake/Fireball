@@ -2,10 +2,15 @@
 <package name="de.codequake.cms" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
 	<packageinformation>
 		<packagename>Fireball CMS</packagename>
-		<packagedescription><![CDATA[CMS for WCF 2.0]]></packagedescription>
+		<packagedescription><![CDATA[CMS for WCF 2.1]]></packagedescription>
 		<isapplication>1</isapplication>
+<<<<<<< HEAD
 		<version>2.0.2</version>
 		<date>2015-10-14</date>
+=======
+		<version>2.1.0 RC 3</version>
+		<date>2015-09-14</date>
+>>>>>>> origin/wcf2.1
 	</packageinformation>
 
 	<authorinformation>
@@ -14,18 +19,23 @@
 	</authorinformation>
 
 	<requiredpackages>
+<<<<<<< HEAD
 		<requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.0.0">de.codequake.wysiwyg.acp</requiredpackage>
+=======
+		<requiredpackage minversion="2.1.0">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wysiwyg.acp.tar">de.codequake.wysiwyg.acp</requiredpackage>
+		<requiredpackage minversion="1.1.2" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
+>>>>>>> origin/wcf2.1
 	</requiredpackages>
 
 	<excludedpackages>
-		<excludedpackage version="2.1.*">com.woltlab.wcf</excludedpackage>
 		<excludedpackage version="1.0.0 Alpha 1">de.voolia.cms</excludedpackage>
+		<excludedpackage version="2.2.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 	</excludedpackages>
 
 	<optionalpackages>
 		<optionalpackage file="optionals/de.codequake.cms.news.tar">de.codequake.cms.news</optionalpackage>
-		<optionalpackage file="optionals/de.codequake.cms.news.voolia.tar">de.codequake.cms.news.voolia</optionalpackage>
 		<optionalpackage file="optionals/de.codequake.cms.wbb.tar">de.codequake.cms.wbb</optionalpackage>
 		<optionalpackage file="optionals/de.codequake.bbcode.icon.tar">de.codequake.bbcode.icon</optionalpackage>
 		<optionalpackage file="optionals/com.woltlab.wcf.legalNotice.tar">com.woltlab.wcf.legalNotice</optionalpackage>
@@ -47,6 +57,7 @@
 
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
 		<instruction type="bbcode">xml/bbcode.xml</instruction>
 		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
 		<instruction type="cronjob">xml/cronjob.xml</instruction>
@@ -59,6 +70,7 @@
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 
 		<!-- scripts -->
+<<<<<<< HEAD
 		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
 	</instructions>
 	
@@ -71,10 +83,23 @@
 	</instructions>
 
 	<instructions type="update" fromversion="2.0.1">
+=======
+		<instruction type="script" installupdateserver="1">acp/install_de.codequake.cms.php</instruction>
+	</instructions>
+	
+	<instructions type="update" fromversion="2.1.0 RC 2">
+>>>>>>> origin/wcf2.1
 		<instruction type="language">language/*.xml</instruction>
+		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
+		<!-- files -->
 		<instruction type="file">files.tar</instruction>
+<<<<<<< HEAD
 		<instruction type="objectType">xml/objectType.xml</instruction>
 
 		<instruction type="script">acp/update202.php</instruction>
+=======
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+>>>>>>> origin/wcf2.1
 	</instructions>
 </package>

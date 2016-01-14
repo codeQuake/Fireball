@@ -8,7 +8,7 @@
 		<item name="cms.acp.content.css.cssClasses.description">
 			<![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding". For a margin on top use "marginTop". <br />
 <strong>Examples:</strong>
-<ul class="inlineCode">
+<ul class="nativeList">
 	<li><code class="inlineCode">container</code>: Adds a border to your content</li>
 	<li><code class="inlineCode">containerPadding</code>: Use it with container to add some padding</li>
 	<li><code class="inlineCode">marginTop</code>: Adds a margin on top</li>
@@ -23,13 +23,13 @@
 		<item name="cms.acp.content.position.position.body"><![CDATA[Body]]></item>
 		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Sidebar]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Multiple Columns]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns.column.add"><![CDATA[Add Column]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard Box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Choose box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[File]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Choose file]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Root]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns"><![CDATA[Four Columns]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns.width"><![CDATA[Column width]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Gallery]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Images]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Content collection]]></item>
@@ -77,10 +77,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.error.compileError"><![CDATA[The given text contains the following template errors:<br />{$compileError}]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns"><![CDATA[Three Columns]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns.width"><![CDATA[Column width]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Two Columns]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns.width"><![CDATA[Column width]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[User]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user.name"><![CDATA[Username]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
@@ -267,23 +263,31 @@
 	<category name="cms.page">
 		<item name="cms.page.clickCounter"><![CDATA[{#$clicks} time{if $clicks != 1}s{/if} read]]></item>
 		<item name="cms.page.comment"><![CDATA[Comment]]></item>
-		<item name="cms.page.comment.notification.mail"><![CDATA[[{@$author->username} commented on “{$page->getTitle()}“:
+		<item name="cms.page.comment.notification.mail"><![CDATA[{if !$author->userID}a guest{else}{@$author->username}{/if} commented on “{$page->getTitle()}“:
 {if $notificationType == 'instant'}
 ---------------------------------
 {@$comment->message}
 ---------------------------------
 {/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="cms.page.comment.notification.message"><![CDATA[Commented on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.comment.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} wrote comments on “{$page->getTitle()}“:
+{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+		<item name="cms.page.comment.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} commented on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.comment.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} commented on “{$page->getTitle()}“.]]></item>
 		<item name="cms.page.comment.notification.title"><![CDATA[New comment (Page)]]></item>
+		<item name="cms.page.comment.notification.title.stacked"><![CDATA[{#$timesTriggered} new comments (Page)]]></item>
 		<item name="cms.page.commentResponse"><![CDATA[Reply to Page Comment]]></item>
-		<item name="cms.page.commentResponse.notification.mail"><![CDATA[[{@$author->username} replied to your comment on “{$page->getTitle()}“:
+		<item name="cms.page.commentResponse.notification.mail"><![CDATA[{if !$author->userID}a guest{else}{@$author->username}{/if} replied to your comment on “{$page->getTitle()}“:
 {if $notificationType == 'instant'}
 ---------------------------------
 {@$response->message}
 ---------------------------------
 {/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="cms.page.commentResponse.notification.message"><![CDATA[Replied to your comment on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.commentResponse.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} replied to your comment on “{$page->getTitle()}“:
+{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+		<item name="cms.page.commentResponse.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.commentResponse.notification.message.stacked"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on “{$page->getTitle()}“.]]></item>
 		<item name="cms.page.commentResponse.notification.title"><![CDATA[New response (Page)]]></item>
+		<item name="cms.page.commentResponse.notification.title.stacked"><![CDATA[{#$timesTriggered} new responses (Page)]]></item>
 		<item name="cms.page.comments"><![CDATA[Comments]]></item>
 		<item name="cms.page.comments.noComments"><![CDATA[No Entries.]]></item>
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>codeQuake</strong></a></address>]]></item>
@@ -292,7 +296,7 @@
 	</category>
 
 	<category name="cms.user">
-		<item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
+		<item name="cms.user.usersOnline.location.page"><![CDATA[Views the page <a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
 	</category>
 
 	<category name="wcf.acl.option">
@@ -348,6 +352,7 @@
 		<item name="wcf.acp.option.category.cms.general.revision"><![CDATA[Revisions]]></item>
 		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Pages]]></item>
 		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Default values]]></item>
+		<item name="wcf.acp.option.category.cms.pages.statistics"><![CDATA[Statistics]]></item>
 		<item name="wcf.acp.option.category.dashboard.sidebar.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.acp.option.cms_content_slideshow_interval"><![CDATA[Interval]]></item>
 		<item name="wcf.acp.option.cms_content_slideshow_interval.description"><![CDATA[Enter the delay after a slide in a slideshow is automatically sliding. [time in milliseconds]]]></item>
@@ -360,8 +365,11 @@
 		<item name="wcf.acp.option.cms_pages_default_sidebar"><![CDATA[Sidebar orientation]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.left"><![CDATA[Left]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.right"><![CDATA[Right]]></item>
-		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Auto-Delete]]></item>
-		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[After X days old revisions will be deleted. (0 = deactivate auto-delete)]]></item>
+		<item name="wcf.acp.option.cms_pages_enable_statistics"><![CDATA[Enable Statistics]]></item>
+		<item name="wcf.acp.option.cms_pages_statistics_delete"><![CDATA[Delete Automatically]]></item>
+		<item name="wcf.acp.option.cms_pages_statistics_delete.description"><![CDATA[Old statistics will be deleted after the given period of time. [time in days, 0 to disable]]]></item>
+		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Delete Automatically]]></item>
+		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Old revisions will be deleted after the given period of time. [time in days, 0 to disable]]]></item>
 	</category>
 
 	<category name="wcf.acp.pageMenu">
@@ -371,6 +379,16 @@
 	<category name="wcf.acp.rebuildData">
 		<item name="wcf.acp.rebuildData.de.codequake.cms.page"><![CDATA[Refresh pages]]></item>
 		<item name="wcf.acp.rebuildData.de.codequake.cms.page.description"><![CDATA[Refreshes the search index of all Fireball CMS Pages]]></item>
+	</category>
+
+	<category name="wcf.acp.search">
+		<item name="wcf.acp.search.provider.de.codequake.cms.page"><![CDATA[CMS Pages]]></item>
+	</category>
+
+	<category name="wcf.acp.stat">
+		<item name="wcf.acp.stat.category.de.codequake.cms"><![CDATA[Fireball CMS]]></item>
+		<item name="wcf.acp.stat.de.codequake.cms.page"><![CDATA[Pages]]></item>
+		<item name="wcf.acp.stat.de.codequake.cms.page.comment"><![CDATA[Page Comments]]></item>
 	</category>
 
 	<category name="wcf.clipboard">
@@ -399,6 +417,8 @@
 	</category>
 
 	<category name="wcf.page">
+		<item name="wcf.page.category.de.codequake.cms"><![CDATA[Fireball CMS]]></item>
+		<item name="wcf.page.de.codequake.cms.PagePage"><![CDATA[CMS Page]]></item>
 		<item name="wcf.page.sitemap.cms"><![CDATA[Pages]]></item>
 	</category>
 

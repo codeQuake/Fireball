@@ -58,6 +58,7 @@ class BackupHandler extends SingletonFactory {
 
 	protected $cmsUrl = '';
 	protected $api = '';
+	protected $cmsVersion = 0;
 
 	protected function init() {
 		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
@@ -77,6 +78,9 @@ class BackupHandler extends SingletonFactory {
 		$list = new FileList();
 		$list->readObjects();
 		$this->files = $list->getObjects();
+		
+		$cms = PackageCache::getInstance()->getPackage(PackageCache::getInstance()->getPackageID('de.codequake.cms'));
+		$this->cmsVersion = $cms->packageVersion;
 	}
 
 	public function getExportArchive() {
@@ -85,13 +89,10 @@ class BackupHandler extends SingletonFactory {
 	}
 
 	protected function buildXML() {
-		$cms = PackageCache::getInstance()->getPackage(PackageCache::getInstance()->getPackageID('de.codequake.cms'));
-		$cmsVersion = $cms->packageVersion;
-		
 		// start doc
 		$xml = new XMLWriter();
 		$xml->beginDocument('data', '', '', array(
-			'api' => $cmsVersion,
+			'api' => $this->cmsVersion,
 			'cmsUrl' => WCF::getPath('cms')
 		));
 		
@@ -175,10 +176,18 @@ class BackupHandler extends SingletonFactory {
 	}
 
 	protected function tarFiles() {
-		$files = new DirectoryUtil(CMS_DIR . 'files/');
+		$files = new DirectoryUtil(CMS_DIR . 'files/', false);
 		$tar = new TarWriter(FileUtil::getTempFolder().'files.tar');
 		$fileList = $files->getFiles(SORT_ASC, new Regex('^'.CMS_DIR . 'files/$'), true);
-		$tar->add($fileList, '', CMS_DIR . 'files/');
+		
+		$newFileList = array();
+		foreach ($fileList as $file) {
+			if ($file == '.gitignore')
+				continue;
+			$newFileList[CMS_DIR . 'files/' . $file] = CMS_DIR . 'files/' . $file;
+		}
+		
+		$tar->add($newFileList, '', CMS_DIR . 'files/');
 		$tar->create();
 	}
 
@@ -197,6 +206,25 @@ class BackupHandler extends SingletonFactory {
 		if (file_exists(CMS_DIR . 'files/')) {
 			DirectoryUtil::getInstance(CMS_DIR . 'files/')->removeAll();
 		}
+		
+		// delete old lang items
+		$oldLangItems = array(
+			'cms.content.text%',
+			'cms.content.title%',
+			'cms.page.description%',
+			'cms.page.metaDescription%',
+			'cms.page.metaKeywords%',
+			'cms.page.title%'
+		);
+		$sql = "DELETE FROM	wcf".WCF_N."_language_item
+			WHERE		languageItem LIKE ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		foreach ($oldLangItems as $langItem) {
+			$statement->execute(array($langItem));
+		}
+		
+		// reset language cache
+		LanguageFactory::getInstance()->deleteLanguageCache();
 
 		// get available languages
 		$availableLanguages = LanguageFactory::getInstance()->getLanguages();
@@ -236,6 +264,7 @@ class BackupHandler extends SingletonFactory {
 					if ($object == 'page') {
 						if (isset($import['robots'])) unset($import['robots']);
 						if (isset($import['showSidebar'])) unset($import['showSidebar']);
+						if (isset($import['layoutID'])) unset($import['layoutID']);
 						
 						if (isset($import['styleID']) && $import['styleID'] == '')
 							$import['styleID'] = null;
@@ -367,6 +396,19 @@ class BackupHandler extends SingletonFactory {
 						if (isset($import['folderPath'])) unset($import['folderPath']);
 						if (!isset($import['description'])) $import['description'] = '';
 						
+						if (isset($import['categoryID'])) unset($import['categoryID']);
+						
+						if (isset($import['parentCategoryID']) && $import['parentCategoryID'] != '' && !empty($import['parentCategoryID'])) {
+							if (isset($this->tmp[$object.'s'][$import['parentCategoryID']])) {
+								// get new id for parent, if parent has been already processed
+								$import['parentCategoryID'] = $this->tmp['folders'][$import['parentCategoryID']];
+							} else {
+								// set when everything is imported
+								$parentIDs[$currentID] = $import['parentCategoryID'];
+								unset($import['parentCategoryID']);
+							}
+						}
+						
 						// multilingual title
 						$tmpTitle = base64_decode($import['title']);
 						if ($this->is_serialized($tmpTitle)) {
@@ -410,6 +452,11 @@ class BackupHandler extends SingletonFactory {
 						
 						$import['contentData'] = base64_decode($import['contentData']);
 						
+						if (!isset($import['contentTypeID']) || $import['contentTypeID'] == null) continue;
+						
+						// unset css id
+						if (isset($import['cssID'])) unset($import['cssID']);
+						
 						// multilingual title
 						$tmpTitle = base64_decode($import['title']);
 						
@@ -439,18 +486,24 @@ class BackupHandler extends SingletonFactory {
 								if ($this->is_serialized($tmpText)) {
 									$tmpText = unserialize($tmpText);
 									
-									foreach ($availableLanguages as $lang) {
-										if (isset($tmpText[$lang->countryCode])) {
-											// replace bbcode and urls
-											$tmpText[$lang->countryCode] = $this->replaceOldFileIDs($tmpText[$lang->countryCode]);
-											
-											$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
-										} else {
-											$langData['text'][$lang->languageID] = '';
+									$objectTypetmp = ObjectTypeCache::getInstance()->getObjectType($import['contentTypeID'])->objectType;
+									if ($objectTypetmp == 'de.codequake.cms.content.type.template' || $objectTypetmp == 'de.codequake.cms.content.type.php') {
+										$tmpText = array_shift($tmpText);
+										$tmpData['text'] = $this->replaceOldFileIDs($tmpText);
+									} else {
+										foreach ($availableLanguages as $lang) {
+											if (isset($tmpText[$lang->countryCode])) {
+												// replace bbcode and urls
+												$tmpText[$lang->countryCode] = $this->replaceOldFileIDs($tmpText[$lang->countryCode]);
+												
+												$langData['text'][$lang->languageID] = $tmpText[$lang->countryCode];
+											} else {
+												$langData['text'][$lang->languageID] = '';
+											}
 										}
+										
+										$tmpData['text'] = '';
 									}
-									
-									$tmpData['text'] = '';
 								} else {
 									$tmpData['text'] = $this->replaceOldFileIDs($tmpData['text']);
 								}
@@ -546,6 +599,22 @@ class BackupHandler extends SingletonFactory {
 						if ($element !== null) {
 							$editor = new $editorName($element);
 							$update['parentID'] = $this->tmp[$object.'s'][$parent];
+							$editor->update($update);
+						}
+					}
+				}
+				
+				// set new parents if needed
+				if ($object == 'folder') {
+					foreach ($parentIDs as $child => $parent) {
+						$editorName = '\\wcf\\data\\category\\CategoryEditor';
+						$className = '\\wcf\\data\\category\\Category';
+						
+						$element = new $className($this->tmp[$object.'s'][$child]);
+						
+						if ($element !== null) {
+							$editor = new $editorName($element);
+							$update['parentCategoryID'] = $this->tmp[$object.'s'][$parent];
 							$editor->update($update);
 						}
 					}
@@ -660,13 +729,57 @@ class BackupHandler extends SingletonFactory {
 		$i = 0;
 		foreach ($items as $item) {
 			foreach ($xpath->query('child::*', $item) as $child) {
+				$contentData = array();
+				
 				foreach ($xpath->query('child::*', $child) as $property) {
-					if ($property->tagName == 'contentTypeID')
-						$data[$item->tagName][$i][$property->tagName] = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', $property->nodeValue);
-					else if ($property->tagName == 'parentID' && $property->nodeValue == '' || $property->tagName == 'menuItemID')
+					if ($property->tagName == 'contentTypeID') {
+						$contentType = $property->nodeValue;
+						
+						if (strpos($this->cmsVersion, '2.1.') !== false) {
+							if ($contentType == 'de.codequake.cms.content.type.twocolumns') {
+								$contentType = 'de.codequake.cms.content.type.columns';
+								$contentData = array('columnData' => array(50, 50));
+							} else if ($contentType == 'de.codequake.cms.content.type.threecolumns') {
+								$contentType = 'de.codequake.cms.content.type.columns';
+								$contentData = array('columnData' => array(33, 34, 33));
+							} else if ($contentType == 'de.codequake.cms.content.type.fourcolumns') {
+								$contentType = 'de.codequake.cms.content.type.columns';
+								$contentData = array('columnData' => array(25, 25, 25, 25));
+							}
+						} else {
+							if ($contentType == 'de.codequake.cms.content.type.columns') {
+								foreach ($xpath->query('child::*', $child) as $tmpItem) {
+									if ($tmpItem->tagName == 'contentData') {
+										$content = unserialize(base64_decode($tmpItem->nodeValue));
+										if (is_array($content)) {
+											if (isset($content['columnData'])) {
+												if (count($content['columnData']) == 2)
+													$contentType = 'de.codequake.cms.content.type.twocolumns';
+												else if (count($content['columnData']) == 3)
+													$contentType = 'de.codequake.cms.content.type.threecolumns';
+												else if (count($content['columnData']) == 4)
+													$contentType = 'de.codequake.cms.content.type.fourcolumns';
+												else if (count($content['columnData']) == 5)
+													$contentType = 'de.codequake.cms.content.type.fourcolumns';
+											} else {
+												$contentType = 'de.codequake.cms.content.type.twocolumns';
+											}
+										} else {
+											$contentType = 'de.codequake.cms.content.type.twocolumns';
+										}
+									}
+								}
+							}
+						}
+						
+						$data[$item->tagName][$i][$property->tagName] = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', $contentType);
+					} else if ($property->tagName == 'parentID' && $property->nodeValue == '' || $property->tagName == 'menuItemID') {
 						$data[$item->tagName][$i][$property->tagName] = null;
-					else
+					} else if ($property->tagName == 'contentData' && !empty($contentData)) {
+						$data[$item->tagName][$i][$property->tagName] = base64_encode(serialize($contentData));
+					} else {
 						$data[$item->tagName][$i][$property->tagName] = $property->nodeValue;
+					}
 				}
 				$i++;
 			}

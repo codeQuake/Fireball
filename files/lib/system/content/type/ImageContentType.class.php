@@ -14,11 +14,16 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class ImageContentType extends AbstractContentType {
+class ImageContentType extends FileContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
 	protected $icon = 'icon-picture';
+	
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 */
+	protected $previewFields = array('imageID');
 
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
@@ -32,7 +37,8 @@ class ImageContentType extends AbstractContentType {
 		$image = FileCache::getInstance()->getFile($content->imageID);
 
 		WCF::getTPL()->assign(array(
-			'image' => $image
+			'image' => $image,
+			'width' => $content->width
 		));
 
 		return AbstractContentType::getOutput($content);

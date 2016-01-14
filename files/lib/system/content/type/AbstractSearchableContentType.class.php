@@ -3,6 +3,7 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use wcf\system\language\LanguageFactory;
+use wcf\util\StringUtil;
 
 /**
  * Abstract searchable content type implementation.
@@ -24,6 +25,26 @@ abstract class AbstractSearchableContentType extends AbstractContentType impleme
 	 * @var	array<array>
 	 */
 	public $searchIndexData = array();
+	
+	/**
+	 * @see \cms\system\content\type\IContentType::getPreview()
+	 * use searchableFields instead of previewFields
+	 */
+	public function getPreview(Content $content) {
+		if (!empty($this->searchableFields)) {
+			$preview = '';
+			foreach ($this->searchableFields as $field) {
+				if ((string) $content->{$field} != '') {
+					$preview .= ' - ';
+					$preview .= $content->{$field};
+				}
+			}
+			return StringUtil::truncate(substr($preview, 3), 70);
+		}
+		else {
+			parent::getPreview($content);
+		}
+	}
 
 	/**
 	 * @see	\cms\system\content\type\ISearchableContentType::getSearchableData()

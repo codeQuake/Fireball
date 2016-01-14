@@ -19,6 +19,11 @@ class FileContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
 	protected $icon = 'icon-file';
+	
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 */
+	protected $previewFields = array('fileID');
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
@@ -31,6 +36,15 @@ class FileContentType extends AbstractContentType {
 		));
 
 		return parent::getOutput($content);
+	}
+	
+	/**
+	 * @see	\cms\system\content\type\IContentType::getPreview()
+	 */
+	public function getPreview(Content $content) {
+		$file = FileCache::getInstance()->getFile($content->{$this->previewFields[0]});
+		if ($file !== null) return $file->getTitle();
+		else parent::getPreview($content);
 	}
 
 	/**

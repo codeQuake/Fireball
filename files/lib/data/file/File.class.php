@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\file;
 
-use cms\data\CMSDatabaseObject;
+use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\system\category\CategoryHandler;
 use wcf\system\request\IRouteController;
@@ -16,7 +16,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class File extends CMSDatabaseObject implements ILinkableObject, IRouteController {
+class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	/**
 	 * list of category ids
 	 * @var	array<integer>

@@ -4,8 +4,8 @@ namespace cms\data\page;
 use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\revision\PageRevisionList;
 use cms\data\stylesheet\StylesheetCache;
-use cms\data\CMSDatabaseObject;
 use cms\system\page\PagePermissionHandler;
+use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -23,7 +23,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableObject, IPermissionObject, IRouteController {
+class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObject, IPermissionObject, IRouteController {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -130,11 +130,9 @@ class Page extends CMSDatabaseObject implements IBreadcrumbProvider, ILinkableOb
 	 */
 	public function getChildrenTree($maxDepth = -1) {
 		$nodeTree = new AccessiblePageNodeTree($this->pageID);
+		$nodeTree->setMaxDepth($maxDepth);
 
-		$nodeList = $nodeTree->getIterator();
-		$nodeList->setMaxDepth($maxDepth);
-
-		return $nodeList;
+		return $nodeTree->getIterator();
 	}
 
 	/**

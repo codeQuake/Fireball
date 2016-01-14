@@ -23,18 +23,16 @@
 		}
 	}
 
-	.grid10 { width: 10%; }
-	.grid15 { width: 15%; }
-	.grid20 { width: 20%; }
-	.grid25 { width: 25%; }
-	.grid30 { width: 30%; }
-	.grid33 { width: 33%; }
-	.grid40 { width: 40%; }
-	.grid50 { width: 50%; }
-	.grid60 { width: 60%; }
-	.grid70 { width: 70%; }
-	.grid75 { width: 75%; }
-	.grid80 { width: 80%; }
-	.grid90 { width: 90%; }
-	.grid100 { width: 100%; }
+	.grid-mixin(@width) {
+		.grid@{width} { 
+			width: percentage(@width / 100);
+		}
+	}
+
+	.loop(@counter) when (@counter >= 20){
+		.loop((@counter - 1));
+		.grid-mixin(@counter);
+	}
+
+	.loop(80);
 }

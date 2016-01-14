@@ -20,6 +20,12 @@ class UserContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
 	protected $icon = 'icon-user';
+	
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 */
+	protected $previewFields = array('name');
+	
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::validate()

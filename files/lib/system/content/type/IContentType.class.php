@@ -26,6 +26,13 @@ interface IContentType {
 	 * @return	string
 	 */
 	public function getIcon();
+	
+	/**
+	 * Returns a short preview for this content type.
+	 * 
+	 * @return	string
+	 */
+	public function getPreview(Content $content);
 
 	/**
 	 * Returns whether it's currently possible to create a content of this

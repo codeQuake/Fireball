@@ -22,6 +22,7 @@
 		<acpmenuitem name="cms.acp.menu.link.cms.page.statistics">
 			<parent>cms.acp.menu.link.cms.page</parent>
 			<controller>cms\acp\page\StatsPage</controller>
+			<options>cms_pages_enable_statistics</options>
 		</acpmenuitem>
 		<acpmenuitem name="cms.acp.menu.link.cms.page.importAndExport">
 			<parent>cms.acp.menu.link.cms.page</parent>

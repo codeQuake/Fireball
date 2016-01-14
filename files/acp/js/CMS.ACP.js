@@ -66,6 +66,322 @@ CMS.ACP.Content.AddDialog = Class.extend({
 });
 
 /**
+ * Initialize CMS.ACP.Content.Type namespace
+ */
+CMS.ACP.Content.Type = { };
+
+/**
+ * Columns content type.
+ * 
+ * @param	array		columnData
+ */
+CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
+	_addButton: null,
+
+	/**
+	 * count of added columns
+	 * @var	integer
+	 */
+	_columnCount: 0,
+
+	/**
+	 * column data
+	 * @var	array<integer>
+	 */
+	_columnData: null,
+
+	/**
+	 * container object
+	 * @var	jQuery
+	 */
+	_container: null,
+
+	/**
+	 * max column count
+	 * @var	integer
+	 */
+	_maxColumnCount: 5,
+
+	/**
+	 * min column count
+	 * @var	integer
+	 */
+	_minColumnCount: 2,
+
+	/**
+	 * min column width
+	 * @var	integer
+	 */
+	_minColumnWidth: 20,
+
+	/**
+	 * difference between mouse and left edge of resizer when dragging a
+	 * column resizer
+	 * @var	integer
+	 */
+	_mouseDifference: 0,
+
+	/**
+	 * Initializes a form for a columns content type.
+	 * 
+	 * @param	array		columnData
+	 */
+	init: function(columnData) {
+		this._columnData = [ ];
+
+		this._addButton = $('.jsAddColumn');
+		this._container = $('#columnContainer');
+
+		for (var i = 0; i < this._minColumnCount || i < columnData.length; i++) {
+			this._addColumn(columnData[i] || Math.round(100 / this._minColumnCount));
+		}
+
+		// bind events
+		this._container.mouseup($.proxy(this._mouseup, this));
+		this._addButton.click($.proxy(function(event) {
+			event.preventDefault();
+
+			if (this._addColumn(0)) {
+				var width = Math.round(100 / this._columnCount);
+				this._setWidth(this._columnCount, width);
+			}
+		}, this));
+	},
+
+	/**
+	 * Adds a new column.
+	 * 
+	 * @param	integer		width
+	 */
+	_addColumn: function(width) {
+		if (this._columnCount == this._maxColumnCount) {
+			return false;
+		}
+
+		this._columnCount++;
+
+		var $grid = $('<div class="grid" data-column-number="' + this._columnCount + '"></div>').appendTo(this._container);
+		var $gridInner = $('<div></div>').appendTo($grid);
+		
+		var $gridNumber = $('<div class="gridNumber"></div>').appendTo($gridInner);
+		$('<span>' + this._columnCount + '</span>').appendTo($gridNumber);
+		$('<input type="number" name="contentData[columnData][]" min="' + this._minColumnWidth + '" />').keydown($.proxy(this._preventSubmit, this)).change($.proxy(this._change, this)).appendTo($gridNumber);
+		$('<button type="button">' + WCF.Language.get('wcf.global.button.delete') + '</button>').click($.proxy(this._deleteClick, this)).appendTo($gridNumber);
+
+		$('<div class="gridResize"></div>').mousedown($.proxy(this._mousedown, this)).appendTo($grid);
+
+		this._columnData.push(width);
+
+		this._updateGUI();
+
+		return true;
+	},
+
+	/**
+	 * Handles changes of a column width input.
+	 * 
+	 * @param	object		event
+	 */
+	_change: function(event) {
+		var $input = $(event.currentTarget);
+		var $columnNumber = parseInt($input.parents('.grid').data('columnNumber'));
+		var $width = parseInt($input.val());
+
+		this._setWidth($columnNumber, $width);
+	},
+
+	_deleteClick: function(event) {
+		var $button = $(event.currentTarget);
+		var $columnNumber = parseInt($button.parents('.grid').data('columnNumber'));
+
+		this._deleteColumn($columnNumber);
+	},
+
+	_deleteColumn: function(columnNumber) {
+		if (this._columnCount == this._minColumnCount) {
+			console.debug("[CMS.ACP.Content.Type['de.codequake.cms.content.type.columns']] Couldn't delete column '" + columnNumber + "', reached min column count.");
+			return;
+		}
+
+		var secondaryColumnNumber = columnNumber + 1;
+		if (secondaryColumnNumber > this._columnCount) {
+			secondaryColumnNumber = columnNumber - 1;
+		}
+
+		var oldWidth = this._columnData[columnNumber - 1];
+		var secondaryColumnWidth = this._columnData[secondaryColumnNumber - 1] + oldWidth;
+
+		this._columnData.splice(columnNumber - 1, 1);
+		this._container.children(':nth-child(' + columnNumber + ')').remove();
+		this._columnCount--;
+
+		// secondary column moved one to the left if it was at the
+		// right of the deleted column
+		if (secondaryColumnNumber > columnNumber) secondaryColumnNumber--;
+
+		this._columnData[secondaryColumnNumber - 1] = secondaryColumnWidth;
+		this._updateGUI();
+	},
+
+	/**
+	 * Starts dragging a column resizer to set the width of a column.
+	 * 
+	 * @param	object		event
+	 */
+	_mousedown: function(event) {
+		event.preventDefault();
+
+		var $gridResize = $(event.currentTarget);
+		var $grid = $gridResize.parent();
+
+		this._mouseDifference = event.originalEvent.clientX - ($gridResize.offset().left + $gridResize.innerWidth()) + $(window).scrollLeft();
+
+		this._container.mousemove($.proxy(this._mousemove, this, $grid));
+	},
+
+	/**
+	 * Updates the column widths while dragging the resizer of a column.
+	 * 
+	 * @param	jQuery		grid
+	 * @param	object		event
+	 */
+	_mousemove: function(grid, event) {
+		var $columnNumber = grid.data('columnNumber');
+
+		var newWidth = event.pageX - grid.offset().left - this._mouseDifference;
+		var percentage = Math.round(newWidth / this._container.width() * 100);
+
+		if (percentage != this._columnData[$columnNumber - 1]) {
+			this._setWidth($columnNumber, percentage);
+		}
+	},
+
+	/**
+	 * Unbinds the mouse move event when the mouse button is released.
+	 */
+	_mouseup: function() {
+		this._container.unbind('mousemove');
+	},
+
+	/**
+	 * Prevents submitting the form when enter is pressed in a column width
+	 * input to update the column width.
+	 * 
+	 * @param	object		event
+	 */
+	_preventSubmit: function(event) {
+		if (event.keyCode == $.ui.keyCode.ENTER) {
+			event.preventDefault();
+			this._change(event);
+		}
+	},
+
+	_updateGUI: function() {
+		var $column, $width;
+
+		for (var i = 1; i <= this._columnCount; i++) {
+			$column = this._container.children(':nth-child(' + i + ')');
+			$width = this._columnData[i - 1];
+
+			$column.data('columnNumber', i);
+			$column.innerWidth($width + '%');
+			$column.find('span').text(i);
+			$column.find('input').val($width).prop('max', 100 - this._minColumnWidth * (this._columnCount - 1));
+		}
+
+		if (this._columnCount == this._maxColumnCount) {
+			this._addButton.prop('disabled', true);
+		} else {
+			this._addButton.prop('disabled', false);
+		}
+
+		if (this._columnCount <= this._minColumnCount) {
+			this._container.find('button').prop('disabled', true);
+		} else {
+			this._container.find('button').prop('disabled', false);
+		}
+	},
+
+	/**
+	 * Sets the width of a specific column.
+	 * 
+	 * @param	integer		width
+	 * @param	integer		width
+	 */
+	_setWidth: function(columnNumber, width) {
+		if (columnNumber > this._columnCount) {
+			console.debug("[CMS.ACP.Content.Type['de.codequake.cms.content.type.columns']] Couldn't set column width for column '" + columnNumber + "', out of boundary.");
+			return;
+		}
+
+		if (width == this._columnData[columnNumber - 1]) {
+			// nothing to change
+			return true;
+		}
+
+		var oldColumnWidth = false, secondaryColumnNumber, i;
+
+		// ensure min column width
+		if (width < this._minColumnWidth) {
+			return false;
+		}
+
+		// shortpass for first column
+		if (this._columnCount == 1) {
+			this._columnData[0] = width;
+			this._container.children().innerWidth(width + '%');
+			return true;
+		}
+
+		// search for a column on the right that can be scaled
+		i = 1;
+		do {
+			secondaryColumnNumber = columnNumber + i;
+			i++;
+		} while (width > this._columnData[columnNumber - 1] && secondaryColumnNumber <= this._columnCount && this._columnData[secondaryColumnNumber - 1] <= this._minColumnWidth);
+
+		// if no column found, search on the left for a column
+		if (width > this._columnData[columnNumber - 1] && (secondaryColumnNumber > this._columnCount || this._columnData[secondaryColumnNumber - 1] <= this._minColumnWidth)) {
+			i = 1;
+			do {
+				secondaryColumnNumber = columnNumber - i;
+				i++;
+			} while (secondaryColumnNumber > 1 && this._columnData[secondaryColumnNumber - 1] <= this._minColumnWidth);
+
+			if (secondaryColumnNumber < 1 || this._columnData[secondaryColumnNumber - 1] <= this._minColumnWidth) {
+				return false;
+			}
+		}
+
+		var accumulatedColumnWidth = width;
+		for (i = 1; i <= this._columnCount; i++) {
+			if (i !== columnNumber && i !== secondaryColumnNumber) {
+				accumulatedColumnWidth += this._columnData[i - 1];
+			}
+		}
+
+		var secondaryColumnWidth = 100 - accumulatedColumnWidth;
+
+		if (secondaryColumnWidth < this._minColumnWidth) {
+			oldColumnWidth = width;
+			secondaryColumnWidth = this._minColumnWidth;
+			width = 100 - (accumulatedColumnWidth + secondaryColumnWidth - width);
+		}
+
+		this._columnData[columnNumber - 1] = width;
+		this._columnData[secondaryColumnNumber - 1] = secondaryColumnWidth;
+
+		// update dom
+		this._updateGUI();
+
+		// handle reduced column width
+		if (oldColumnWidth) {
+			this._setWidth(columnNumber, oldColumnWidth);
+		}
+	}
+});
+
+/**
  * Initialize CMS.ACP.File namespace
  */
 CMS.ACP.File = { };
@@ -286,7 +602,7 @@ CMS.ACP.File.Picker = Class.extend({
 		// bind form event to create input
 		var $form = this._selectButton.parents('form');
 		if (!$form.length) {
-			console.log('[CMS.ACP.File.Picker] Unable to determine form for file picker, aborting.');
+			console.debug('[CMS.ACP.File.Picker] Unable to determine form for file picker, aborting.');
 			return;
 		}
 		$form.submit($.proxy(this._submit, this));
@@ -669,7 +985,7 @@ CMS.ACP.File.Upload = {
 
 		var $categoryIDs = this._categoryInput.val();
 		if ($categoryIDs === null) {
-			console.log('[CMS.ACP.File.Upload] Tried to finalize upload without a selected category, aborting.');
+			console.debug('[CMS.ACP.File.Upload] Tried to finalize upload without a selected category, aborting.');
 			return;
 		}
 

@@ -1,7 +1,8 @@
 <?php
 namespace cms\system\event\listener;
 
-use wcf\system\event\IEventListener;
+use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\user\notification\object\CommentUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\object\watch\UserObjectWatchHandler;
@@ -15,7 +16,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class CommentActionListener implements IEventListener {
+class CommentActionListener implements IParameterizedEventListener {
 	const OBJECT_TYPE = 'de.codequake.cms.page.comment';
 
 	/**
@@ -27,7 +28,7 @@ class CommentActionListener implements IEventListener {
 	/**
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
-	public function execute($eventObj, $className, $eventName) {
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		$this->eventObj = $eventObj;
 
 		if (method_exists($this, $this->eventObj->getActionName())) {
@@ -39,18 +40,15 @@ class CommentActionListener implements IEventListener {
 	 * Fires notification event to notify all subscribers when added a commit.
 	 */
 	protected function addComment() {
-		// Fetch latest comment, it's the one we want to work with.
-		// WCF 2.1 will provide direct access to the comment
-		$sql = "SELECT		*
-			FROM		wcf".WCF_N."_comment
-			ORDER BY	commentID DESC";
-		$statement = WCF::getDB()->prepareStatement($sql, 1);
-		$statement->execute();
-		$comment = $statement->fetchObject('wcf\data\comment\Comment');
-
-		$notificationObjectType = UserNotificationHandler::getInstance()->getObjectTypeProcessor(self::OBJECT_TYPE);
-		$notificationObject = new CommentUserNotificationObject($comment);
-
-		UserObjectWatchHandler::getInstance()->updateObject('de.codequake.cms.page', $comment->objectID, 'comment', self::OBJECT_TYPE, $notificationObject);
+		$params = $this->eventObj->getParameters();
+		$objectType = ObjectTypeCache::getInstance()->getObjectType($params['data']['objectTypeID']);
+		$comment = $this->eventObj->createdComment;
+		
+		if ($comment !== null && $objectType->objectType == self::OBJECT_TYPE) {
+			$notificationObjectType = UserNotificationHandler::getInstance()->getObjectTypeProcessor(self::OBJECT_TYPE);
+			$notificationObject = new CommentUserNotificationObject($comment);
+			
+			UserObjectWatchHandler::getInstance()->updateObject('de.codequake.cms.page', $comment->objectID, 'comment', self::OBJECT_TYPE, $notificationObject);
+		}
 	}
 }

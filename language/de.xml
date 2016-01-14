@@ -23,13 +23,13 @@
 		<item name="cms.acp.content.position.position.body"><![CDATA[Inhaltsbereich]]></item>
 		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Seitenleiste]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Mehrspaltig]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns.column.add"><![CDATA[Spalte hinzufügen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard-Box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Box auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[Datei]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Datei auswählen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Hauptverzeichnis]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns"><![CDATA[Vierspaltig]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.fourcolumns.width"><![CDATA[Breite der Spalten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Galerie]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Bilder]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Gruppierung]]></item>
@@ -61,12 +61,12 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Vorlage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[Alle Seiten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Geben Sie hier die URL ein, von der die Inhalte bezogen werden sollen. Das Format des Feeds kann entweder <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Anzahl Einträge]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Geben Sie hier die URL ein, von der die Inhalte bezogen werden sollen. Das Format des Feeds kann entweder <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Anzahl Einträge]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[Alle untergeordneten Elemente werden automatisch als Slideshow arrangiert.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
@@ -77,10 +77,6 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.error.compileError"><![CDATA[Der eingegebene Inhalt enthält folgenden Template-Fehler:<br />{$compileError}]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns"><![CDATA[Dreispaltig]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.threecolumns.width"><![CDATA[Breite der Spalten]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns"><![CDATA[Zweispaltig]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.twocolumns.width"><![CDATA[Breite der Spalten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[Benutzer]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user.name"><![CDATA[Benutzername]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
@@ -210,7 +206,7 @@
 		<item name="cms.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
 		<item name="cms.acp.page.settings"><![CDATA[Einstellungen]]></item>
 		<item name="cms.acp.page.settings.allowSubscribing"><![CDATA[Seite kann abonniert werden]]></item>
-		<item name="cms.acp.page.settings.allowSubscribing.description"><![CDATA[{if $action == 'edit' && $allowSubscribing}<strong>Hinweis:</strong> Beim Deaktivieren dieser Option werden alle bestehenden Abonnements gelöscht.{/if}]]></item>
+		<item name="cms.acp.page.settings.allowSubscribing.description"><![CDATA[{if $action == 'edit' && $allowSubscribing}<strong>Hinweis:</strong> Alle bestehenden Abonnements werden gelöscht.{/if}]]></item>
 		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
 		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Kommentare aktivieren]]></item>
 		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[Erlaubt anderen Benutzern diese Seite zu kommentieren.]]></item>
@@ -267,23 +263,31 @@
 	<category name="cms.page">
 		<item name="cms.page.clickCounter"><![CDATA[{#$clicks} mal aufgerufen]]></item>
 		<item name="cms.page.comment"><![CDATA[Kommentar]]></item>
-		<item name="cms.page.comment.notification.mail"><![CDATA[[{@$author->username} hat einen Kommentar zur Seite „{$page->getTitle()}“ verfasst:
+		<item name="cms.page.comment.notification.mail"><![CDATA[{if !$author->userID}ein Gast{else}{@$author->username}{/if} hat einen Kommentar zur Seite „{$page->getTitle()}“ verfasst:
 {if $notificationType == 'instant'}
 ---------------------------------
 {@$comment->message}
 ---------------------------------
 {/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="cms.page.comment.notification.message"><![CDATA[Hat einen Kommentar zur Seite „{$page->getTitle()}“ verfasst.]]></item>
+		<item name="cms.page.comment.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben Kommentare zur Seite „{$page->getTitle()}“ verfasst:
+{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+		<item name="cms.page.comment.notification.message"><![CDATA[{if !$author->userID}Ein Gast{else}{@$author->getAnchorTag()}{/if} hat einen Kommentar zur Seite „{$page->getTitle()}“ verfasst.]]></item>
+		<item name="cms.page.comment.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben Kommentare zur Seite „{$page->getTitle()}“ verfasst.]]></item>
 		<item name="cms.page.comment.notification.title"><![CDATA[Neuer Kommentar (Seite)]]></item>
+		<item name="cms.page.comment.notification.title.stacked"><![CDATA[{#$timesTriggered} neue Kommentare (Seite)]]></item>
 		<item name="cms.page.commentResponse"><![CDATA[Kommentar-Antwort]]></item>
-		<item name="cms.page.commentResponse.notification.mail"><![CDATA[[{@$author->username} hat eine Antwort zu Ihrem Kommentar zur Seite „{$page->getTitle()}“ verfasst:
+		<item name="cms.page.commentResponse.notification.mail"><![CDATA[{if !$author->userID}ein Gast{else}{@$author->username}{/if} hat eine Antwort zu Ihrem Kommentar zur Seite „{$page->getTitle()}“ verfasst:
 {if $notificationType == 'instant'}
 ---------------------------------
 {@$response->message}
 ---------------------------------
 {/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="cms.page.commentResponse.notification.message"><![CDATA[Hat eine Antwort zu ihrem Kommentar zur Seite „{$page->getTitle()}“ verfasst.]]></item>
+		<item name="cms.page.commentResponse.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben auf Ihren Kommentar zur Seite „{$page->getTitle()}“ geantwortet:
+{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+		<item name="cms.page.commentResponse.notification.message"><![CDATA[{if !$author->userID}Ein Gast{else}{@$author->getAnchorTag()}{/if} hat eine Antwort zu ihrem Kommentar zur Seite „{$page->getTitle()}“ verfasst.]]></item>
+		<item name="cms.page.commentResponse.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben auf Ihren Kommentar zur Seite „{$page->getTitle()}“ geantwortet.]]></item>
 		<item name="cms.page.commentResponse.notification.title"><![CDATA[Neue Antwort (Seite)]]></item>
+		<item name="cms.page.commentResponse.notification.title.stacked"><![CDATA[{#$timesTriggered} neue Antworten (Seite)]]></item>
 		<item name="cms.page.comments"><![CDATA[Kommentare]]></item>
 		<item name="cms.page.comments.noComments"><![CDATA[Keine Kommentare vorhanden]]></item>
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
@@ -292,7 +296,7 @@
 	</category>
 
 	<category name="cms.user">
-		<item name="cms.user.usersOnline.location.page"><![CDATA[<a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
+		<item name="cms.user.usersOnline.location.page"><![CDATA[Betrachtet die Seite <a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
 	</category>
 
 	<category name="wcf.acl.option">
@@ -348,6 +352,7 @@
 		<item name="wcf.acp.option.category.cms.general.revision"><![CDATA[Versionen]]></item>
 		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Standardwerte]]></item>
+		<item name="wcf.acp.option.category.cms.pages.statistics"><![CDATA[Statistiken]]></item>
 		<item name="wcf.acp.option.category.dashboard.sidebar.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.acp.option.cms_content_slideshow_interval"><![CDATA[Intervall]]></item>
 		<item name="wcf.acp.option.cms_content_slideshow_interval.description"><![CDATA[Geben Sie die Zeit an, nach der automatisch zum nächsten Slide gewechselt werden soll. [Zeit in Millisekunden]]]></item>
@@ -360,6 +365,9 @@
 		<item name="wcf.acp.option.cms_pages_default_sidebar"><![CDATA[Ausrichtung der Seitenleiste]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.left"><![CDATA[Linke Seitenleiste]]></item>
 		<item name="wcf.acp.option.cms_pages_default_sidebar.right"><![CDATA[Rechte Seitenleiste]]></item>
+		<item name="wcf.acp.option.cms_pages_enable_statistics"><![CDATA[Statistiken aktivieren]]></item>
+		<item name="wcf.acp.option.cms_pages_statistics_delete"><![CDATA[Automatisch löschen]]></item>
+		<item name="wcf.acp.option.cms_pages_statistics_delete.description"><![CDATA[Zeitraum nach dem alte Statistiken automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]]></item>
 		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Versionen automatisch löschen]]></item>
 		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Zeitraum nach dem alte Versionen automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]]></item>
 	</category>
@@ -371,6 +379,16 @@
 	<category name="wcf.acp.rebuildData">
 		<item name="wcf.acp.rebuildData.de.codequake.cms.page"><![CDATA[Seiten aktualisieren]]></item>
 		<item name="wcf.acp.rebuildData.de.codequake.cms.page.description"><![CDATA[Aktualisiert den Suchindex aller Fireball CMS Seiten]]></item>
+	</category>
+
+	<category name="wcf.acp.search">
+		<item name="wcf.acp.search.provider.de.codequake.cms.page"><![CDATA[CMS-Seiten]]></item>
+	</category>
+
+	<category name="wcf.acp.stat">
+		<item name="wcf.acp.stat.category.de.codequake.cms"><![CDATA[Fireball CMS]]></item>
+		<item name="wcf.acp.stat.de.codequake.cms.page"><![CDATA[Seiten]]></item>
+		<item name="wcf.acp.stat.de.codequake.cms.page.comment"><![CDATA[Seiten-Kommentare]]></item>
 	</category>
 
 	<category name="wcf.clipboard">
@@ -399,6 +417,8 @@
 	</category>
 
 	<category name="wcf.page">
+		<item name="wcf.page.category.de.codequake.cms"><![CDATA[Fireball CMS]]></item>
+		<item name="wcf.page.de.codequake.cms.PagePage"><![CDATA[CMS-Seite]]></item>
 		<item name="wcf.page.sitemap.cms"><![CDATA[Seiten]]></item>
 	</category>
 

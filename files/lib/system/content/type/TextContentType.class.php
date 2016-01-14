@@ -22,7 +22,7 @@ class TextContentType extends AbstractSearchableContentType {
 	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
 	 */
 	public $multilingualFields = array('text');
-
+	
 	/**
 	 * @see	\cms\system\content\type\AbstractSearchableContentType::$searchableFields
 	 */

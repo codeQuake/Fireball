@@ -18,11 +18,6 @@ use wcf\system\WCF;
  */
 class CMSCore extends AbstractApplication {
 	/**
-	 * @see \wcf\system\application\AbstractApplication::$abbreviation
-	 */
-	protected $abbreviation = 'cms';
-
-	/**
 	 * @see \wcf\system\application\AbstractApplication::$primaryController
 	 */
 	protected $primaryController = 'cms\page\PagePage';

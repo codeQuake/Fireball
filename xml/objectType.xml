@@ -170,25 +170,9 @@
 			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
-			<name>de.codequake.cms.content.type.twocolumns</name>
+			<name>de.codequake.cms.content.type.columns</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\TwoColumnsContentType</classname>
-			<category>structure</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
-		</type>
-		<type>
-			<name>de.codequake.cms.content.type.threecolumns</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\ThreeColumnsContentType</classname>
-			<category>structure</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
-		</type>
-		<type>
-			<name>de.codequake.cms.content.type.fourcolumns</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\FourColumnsContentType</classname>
+			<classname>cms\system\content\type\ColumnsContentType</classname>
 			<category>structure</category>
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>
@@ -286,6 +270,30 @@
 			<classname>cms\system\worker\PageRebuildDataWorker</classname>
 		</type>
 		<!-- /rebuild data worker -->
+
+		<!-- pages -->
+		<type>
+			<name>de.codequake.cms.PagePage</name>
+			<definitionname>com.woltlab.wcf.page</definitionname>
+			<classname><![CDATA[cms\page\PagePage]]></classname>
+			<categoryname>de.codequake.cms</categoryname>
+		</type>
+		<!-- /pages -->
+
+		<!-- stat handlers -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.statDailyHandler</definitionname>
+			<classname>cms\system\stat\PageStatDailyHandler</classname>
+			<categoryname>de.codequake.cms</categoryname>
+		</type>
+		<type>
+			<name>de.codequake.cms.page.comment</name>
+			<definitionname>com.woltlab.wcf.statDailyHandler</definitionname>
+			<classname>cms\system\stat\PageCommentStatDailyHandler</classname>
+			<categoryname>de.codequake.cms</categoryname>
+		</type>
+		<!-- /stat handlers -->
 	</import>
 
 	<delete>

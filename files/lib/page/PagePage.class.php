@@ -117,7 +117,8 @@ class PagePage extends AbstractPage {
 			if (!WCF::getSession()->getPermission('admin.general.canViewPageDuringOfflineMode') && !$this->page->availableDuringOfflineMode) {
 				@header('HTTP/1.1 503 Service Unavailable');
 				WCF::getTPL()->assign(array(
-					'templateName' => 'offline'
+					'templateName' => 'offline',
+					'templateNameApplication' => 'wcf'
 				));
 				WCF::getTPL()->display('offline');
 
@@ -182,7 +183,7 @@ class PagePage extends AbstractPage {
 			'sidebarNodeTree' => $this->sidebarNodeTree,
 			'page' => $this->page,
 			'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : array()),
-			'commentCanAdd' => (WCF::getUser()->userID && $this->page->getPermission('canAddComment')),
+			'commentCanAdd' => $this->page->getPermission('canAddComment'),
 			'commentList' => $this->commentList,
 			'commentObjectTypeID' => $this->commentObjectTypeID,
 			'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0),

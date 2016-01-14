@@ -1,8 +1,8 @@
 <?php
 namespace cms\data\stylesheet;
 
-use cms\data\CMSDatabaseObject;
 use cms\system\style\StylesheetCompiler;
+use wcf\data\DatabaseObject;
 use wcf\system\cache\builder\StyleCacheBuilder;
 use wcf\system\WCF;
 
@@ -14,7 +14,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Stylesheet extends CMSDatabaseObject {
+class Stylesheet extends DatabaseObject {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */

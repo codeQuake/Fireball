@@ -56,5 +56,23 @@
 			<listenerclassname>cms\system\event\listener\IndexPageListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
+<<<<<<< HEAD
 	</delete>
+=======
+
+		<!-- user rename -->
+		<eventlistener>
+			<environment>user</environment>
+			<eventclassname>wcf\data\user\UserAction</eventclassname>
+			<eventname>rename</eventname>
+			<listenerclassname>cms\system\event\listener\UserRenameListener</listenerclassname>
+		</eventlistener>
+		<eventlistener>
+			<environment>admin</environment>
+			<eventclassname>wcf\data\user\UserAction</eventclassname>
+			<eventname>rename</eventname>
+			<listenerclassname>cms\system\event\listener\UserRenameListener</listenerclassname>
+		</eventlistener>
+	</import>
+>>>>>>> origin/wcf2.1
 </data>
