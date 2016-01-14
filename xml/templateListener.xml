@@ -39,19 +39,6 @@
 			<templatecode><![CDATA[{if $__cms|isset && $__cms->isActiveApplication()}<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('cms')}acp/style/fireball.css">{/if}]]></templatecode>
 		</templatelistener>
 
-		<templatelistener name="newsTabMenuTabs">
-			<environment>admin</environment>
-			<templatename>__indexNewsInjection</templatename>
-			<eventname>newsTabMenuTabs</eventname>
-			<templatecode><![CDATA[<li><a href="{@$__wcf->getAnchor('codequake')}">codeQuake</a></li>]]></templatecode>
-		</templatelistener>
-		<templatelistener name="newsTabMenuContents">
-			<environment>admin</environment>
-			<templatename>__indexNewsInjection</templatename>
-			<eventname>newsTabMenuContents</eventname>
-			<templatecode><![CDATA[{include file='__indexNews' application='cms'}]]></templatecode>
-		</templatelistener>
-
 		<templatelistener name="pagemenuInfo">
 			<environment>admin</environment>
 			<templatename>pageMenuItemAdd</templatename>
@@ -60,4 +47,8 @@
 		</templatelistener>
 		<!-- /admin -->
 	</import>
+	<delete>
+		<templatelistener name="newsTabMenuTabs" />
+		<templatelistener name="newsTabMenuContents" />
+	</delete>
 </data>

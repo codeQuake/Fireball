@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS cms1_page;
 CREATE TABLE cms1_page (
 	pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	isHome INT(1) DEFAULT 0,
+	isHome TINYINT(1) NOT NULL DEFAULT 0,
 
 	authorID INT(10) DEFAULT NULL,
 	authorName VARCHAR(255) NOT NULL DEFAULT '',
@@ -11,7 +11,7 @@ CREATE TABLE cms1_page (
 	creationTime INT(10) NOT NULL DEFAULT 0,
 	lastEditTime INT(10) NOT NULL DEFAULT 0,
 	comments INT(10) NOT NULL DEFAULT 0,
-	clicks INT (20) NOT NULL DEFAULT 0,
+	clicks INT (10) NOT NULL DEFAULT 0,
 
 	-- general data
 	title VARCHAR(255) NOT NULL DEFAULT '',
@@ -25,11 +25,11 @@ CREATE TABLE cms1_page (
 
 	-- position
 	parentID INT(10) DEFAULT NULL,
-	showOrder INT(10) DEFAULT 0,
-	invisible TINYINT(1) DEFAULT 0,
+	showOrder INT(10) NOT NULL DEFAULT 0,
+	invisible TINYINT(1) NOT NULL DEFAULT 0,
 
 	-- publication
-	isDisabled TINYINT(1) DEFAULT 0,
+	isDisabled TINYINT(1) NOT NULL DEFAULT 0,
 	isPublished TINYINT(1) NOT NULL DEFAULT 1,
 	publicationDate INT(10) NOT NULL DEFAULT 0,
 	deactivationDate INT(10) NOT NULL DEFAULT 0,
@@ -37,7 +37,7 @@ CREATE TABLE cms1_page (
 	-- settings
 	menuItemID INT(10) DEFAULT NULL,
 	isCommentable TINYINT(1) NOT NULL DEFAULT 0,
-	availableDuringOfflineMode TINYINT(1) DEFAULT 0,
+	availableDuringOfflineMode TINYINT(1) NOT NULL DEFAULT 0,
 	allowSubscribing TINYINT(1) NOT NULL DEFAULT 1,
 
 	-- display
@@ -117,9 +117,9 @@ CREATE TABLE cms1_counter (
 	day INT(2) NOT NULL DEFAULT '1',
 	month INT(2) NOT NULL DEFAULT '1',
 	year INT(4) NOT NULL DEFAULT '2014',
-	visits INT(20) NOT NULL DEFAULT 0,
-	users INT(20) NOT NULL DEFAULT 0,
-	spiders INT(20) NOT NULL DEFAULT 0,
+	visits INT(10) NOT NULL DEFAULT 0,
+	users INT(10) NOT NULL DEFAULT 0,
+	spiders INT(10) NOT NULL DEFAULT 0,
 	browsers MEDIUMTEXT,
 	platforms MEDIUMTEXT,
 	devices MEDIUMTEXT
