@@ -1,4 +1,4 @@
-﻿{if $__wcf->getSession()->getPermission('admin.cms.page.canAddPage')}
+﻿{if $__wcf->getSession()->getPermission('admin.fireball.page.canAddPage')}
 <li id="pageAddButton">
 	<a href="{link controller='PageAdd'}{/link}">
 		<span class="icon icon16 fa-plus-square"></span>

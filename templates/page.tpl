@@ -21,7 +21,7 @@
 				new WCF.User.ObjectWatch.Subscribe();
 			{/if}
 
-			{if $__wcf->getSession()->getPermission('admin.cms.content.canAddContent')}
+			{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
 				new CMS.Page.ContentTypes({$page->pageID});
 			{/if}
 
