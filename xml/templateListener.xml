@@ -54,8 +54,4 @@
 		</templatelistener>
 		<!-- /admin -->
 	</import>
-	<delete>
-		<templatelistener name="newsTabMenuTabs" />
-		<templatelistener name="newsTabMenuContents" />
-	</delete>
 </data>
