@@ -6,10 +6,10 @@
 			<category name="user.cms">
 				<parent>user</parent>
 			</category>
-			<category name="user.cms.page">
+			<category name="user.fireball.page">
 				<parent>user.cms</parent>
 			</category>
-			<category name="user.cms.content">
+			<category name="user.fireball.content">
 				<parent>user.cms</parent>
 			</category>
 			<!-- /user -->
@@ -24,96 +24,88 @@
 			<category name="admin.cms">
 				<parent>admin</parent>
 			</category>
-			<category name="admin.cms.page">
+			<category name="admin.fireball.page">
 				<parent>admin.cms</parent>
 			</category>
-			<category name="admin.cms.content">
+			<category name="admin.fireball.content">
 				<parent>admin.cms</parent>
 			</category>
-			<category name="admin.cms.style">
+			<category name="admin.fireball.style">
 				<parent>admin.cms</parent>
 			</category>
-			<category name="admin.cms.file">
+			<category name="admin.fireball.file">
 				<parent>admin.cms</parent>
 			</category>
 			<!-- /admin -->
 		</categories>
 
 		<options>
-			<!-- user.cms.page -->
-			<option name="user.cms.page.canViewPage">
-				<categoryname>user.cms.page</categoryname>
+			<!-- user.fireball.page -->
+			<option name="user.fireball.page.canViewPage">
+				<categoryname>user.fireball.page</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="user.cms.page.canViewComment">
-				<categoryname>user.cms.page</categoryname>
+			<option name="user.fireball.page.canViewComment">
+				<categoryname>user.fireball.page</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="user.cms.page.canAddComment">
-				<categoryname>user.cms.page</categoryname>
+			<option name="user.fireball.page.canAddComment">
+				<categoryname>user.fireball.page</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="user.cms.page.canDeleteComment">
-				<categoryname>user.cms.page</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-				<usersonly>1</usersonly>
-			</option>
-			<option name="user.cms.page.canEditComment">
-				<categoryname>user.cms.page</categoryname>
+			<option name="user.fireball.page.canDeleteComment">
+				<categoryname>user.fireball.page</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 				<usersonly>1</usersonly>
 			</option>
-			<!-- /user.cms.page -->
+			<option name="user.fireball.page.canEditComment">
+				<categoryname>user.fireball.page</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<usersonly>1</usersonly>
+			</option>
+			<!-- /user.fireball.page -->
 
-			<!-- user.cms.content -->
-			<option name="user.cms.content.canDownloadFile">
-				<categoryname>user.cms.content</categoryname>
+			<!-- user.fireball.content -->
+			<option name="user.fireball.content.canDownloadFile">
+				<categoryname>user.fireball.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="user.cms.content.canVotePoll">
-				<categoryname>user.cms.content</categoryname>
+			<option name="user.fireball.content.canVotePoll">
+				<categoryname>user.fireball.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<!-- /user.cms.content -->
+			<!-- /user.fireball.content -->
 
 			<!-- mod.cms -->
-			<option name="mod.cms.canReadUnpublishedPage">
+			<option name="mod.fireball.canReadUnpublishedPage">
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="mod.cms.canViewDisabledPage">
+			<option name="mod.fireball.canViewDisabledPage">
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="mod.cms.canViewDisabledContent">
-				<categoryname>user.cms.content</categoryname>
+			<option name="mod.fireball.canViewDisabledContent">
+				<categoryname>user.fireball.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			<option name="mod.cms.canModerateComment">
-				<categoryname>mod.cms</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<moddefaultvalue>1</moddefaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-				<usersonly>1</usersonly>
-			</option>
-			<option name="mod.cms.canEditComment">
+			<option name="mod.fireball.canModerateComment">
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
@@ -121,7 +113,15 @@
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
-			<option name="mod.cms.canDeleteComment">
+			<option name="mod.fireball.canEditComment">
+				<categoryname>mod.cms</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<moddefaultvalue>1</moddefaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+				<usersonly>1</usersonly>
+			</option>
+			<option name="mod.fireball.canDeleteComment">
 				<categoryname>mod.cms</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
@@ -131,66 +131,66 @@
 			</option>
 			<!-- /mod.cms -->
 
-			<!-- admin.cms.page -->
-			<option name="admin.cms.page.canListPage">
-				<categoryname>admin.cms.page</categoryname>
+			<!-- admin.fireball.page -->
+			<option name="admin.fireball.page.canListPage">
+				<categoryname>admin.fireball.page</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
-			<option name="admin.cms.page.canAddPage">
-				<categoryname>admin.cms.page</categoryname>
+			<option name="admin.fireball.page.canAddPage">
+				<categoryname>admin.fireball.page</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
-			<!-- /admin.cms.page -->
+			<!-- /admin.fireball.page -->
 
-			<!-- admin.cms.content -->
-			<option name="admin.cms.content.canListContent">
-				<categoryname>admin.cms.content</categoryname>
+			<!-- admin.fireball.content -->
+			<option name="admin.fireball.content.canListContent">
+				<categoryname>admin.fireball.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
-			<option name="admin.cms.content.canAddContent">
-				<categoryname>admin.cms.content</categoryname>
+			<option name="admin.fireball.content.canAddContent">
+				<categoryname>admin.fireball.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
-			<!-- /admin.cms.content -->
+			<!-- /admin.fireball.content -->
 
-			<!-- admin.cms.style -->
-			<option name="admin.cms.style.canAddStylesheet">
-				<categoryname>admin.cms.style</categoryname>
+			<!-- admin.fireball.style -->
+			<option name="admin.fireball.style.canAddStylesheet">
+				<categoryname>admin.fireball.style</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
-			<option name="admin.cms.style.canListStylesheet">
-				<categoryname>admin.cms.style</categoryname>
+			<option name="admin.fireball.style.canListStylesheet">
+				<categoryname>admin.fireball.style</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
-			<!-- /admin.cms.style -->
+			<!-- /admin.fireball.style -->
 
-			<!-- admin.cms.file -->
-			<option name="admin.cms.file.canAddFile">
-				<categoryname>admin.cms.file</categoryname>
+			<!-- admin.fireball.file -->
+			<option name="admin.fireball.file.canAddFile">
+				<categoryname>admin.fireball.file</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
-			<!-- /admin.cms.file -->
+			<!-- /admin.fireball.file -->
 		</options>
 	</import>
 </data>

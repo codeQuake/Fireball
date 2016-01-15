@@ -2,119 +2,119 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
 	<import>
 		<categories>
-			<category name="cms"></category>
+			<category name="fireball"></category>
 
-			<category name="cms.general">
-				<parent>cms</parent>
+			<category name="fireball.general">
+				<parent>fireball</parent>
 			</category>
-			<category name="cms.general.revision">
-				<parent>cms.general</parent>
-			</category>
-
-			<category name="cms.pages">
-				<parent>cms</parent>
-			</category>
-			<category name="cms.pages.default">
-				<parent>cms.pages</parent>
-			</category>
-			<category name="cms.pages.statistics">
-				<parent>cms.pages</parent>
+			<category name="fireball.general.revision">
+				<parent>fireball.general</parent>
 			</category>
 
-			<category name="cms.content">
-				<parent>cms</parent>
+			<category name="fireball.pages">
+				<parent>fireball</parent>
 			</category>
-			<category name="cms.content.slideshow">
-				<parent>cms.content</parent>
+			<category name="fireball.pages.default">
+				<parent>fireball.pages</parent>
+			</category>
+			<category name="fireball.pages.statistics">
+				<parent>fireball.pages</parent>
 			</category>
 
-			<category name="dashboard.sidebar.cms">
+			<category name="fireball.content">
+				<parent>fireball</parent>
+			</category>
+			<category name="fireball.content.slideshow">
+				<parent>fireball.content</parent>
+			</category>
+
+			<category name="dashboard.sidebar.fireball">
 				<parent>dashboard.sidebar</parent>
 			</category>
 		</categories>
 
 		<options>
 			<!-- general -->
-			<option name="cms_install_date">
+			<option name="fireball_install_date">
 				<optiontype>integer</optiontype>
 				<hidden>1</hidden>
 				<categoryname>general</categoryname>
 			</option>
 			<!-- /general -->
 
-			<!-- cms.general.revision -->
-			<option name="cms_revision_delete">
-				<categoryname>cms.general.revision</categoryname>
+			<!-- fireball.general.revision -->
+			<option name="fireball_revision_delete">
+				<categoryname>fireball.general.revision</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>0</defaultvalue>
 				<min>0</min>
 			</option>
-			<!-- /cms.general.revision -->
+			<!-- /fireball.general.revision -->
 
-			<!-- cms.pages.default -->
-			<option name="cms_pages_default_menu_item">
+			<!-- fireball.pages.default -->
+			<option name="fireball_pages_default_menu_item">
 				<optiontype>boolean</optiontype>
-				<categoryname>cms.pages.default</categoryname>
+				<categoryname>fireball.pages.default</categoryname>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="cms_pages_default_allow_indexing">
+			<option name="fireball_pages_default_allow_indexing">
 				<optiontype>boolean</optiontype>
-				<categoryname>cms.pages.default</categoryname>
+				<categoryname>fireball.pages.default</categoryname>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<option name="cms_pages_default_sidebar">
+			<option name="fireball_pages_default_sidebar">
 				<optiontype>select</optiontype>
-				<categoryname>cms.pages.default</categoryname>
-				<selectoptions><![CDATA[left:wcf.acp.option.cms_pages_default_sidebar.left
-right:wcf.acp.option.cms_pages_default_sidebar.right]]></selectoptions>
+				<categoryname>fireball.pages.default</categoryname>
+				<selectoptions><![CDATA[left:wcf.acp.option.fireball_pages_default_sidebar.left
+right:wcf.acp.option.fireball_pages_default_sidebar.right]]></selectoptions>
 				<defaultvalue><![CDATA[right]]></defaultvalue>
 			</option>
-			<option name="cms_pages_default_comments">
+			<option name="fireball_pages_default_comments">
 				<optiontype>boolean</optiontype>
-				<categoryname>cms.pages.default</categoryname>
+				<categoryname>fireball.pages.default</categoryname>
 				<defaultvalue>0</defaultvalue>
 			</option>
-			<option name="cms_pages_default_offline">
+			<option name="fireball_pages_default_offline">
 				<optiontype>boolean</optiontype>
-				<categoryname>cms.pages.default</categoryname>
+				<categoryname>fireball.pages.default</categoryname>
 				<defaultvalue>0</defaultvalue>
 			</option>
-			<option name="cms_pages_default_allow_subscribing">
+			<option name="fireball_pages_default_allow_subscribing">
 				<optiontype>boolean</optiontype>
-				<categoryname>cms.pages.default</categoryname>
+				<categoryname>fireball.pages.default</categoryname>
 				<defaultvalue>1</defaultvalue>
 			</option>
-			<!-- /cms.pages.default -->
+			<!-- /fireball.pages.default -->
 
-			<!-- cms.pages.statistics -->
-			<option name="cms_pages_enable_statistics">
+			<!-- fireball.pages.statistics -->
+			<option name="fireball_pages_enable_statistics">
 				<optiontype>boolean</optiontype>
-				<categoryname>cms.pages.statistics</categoryname>
+				<categoryname>fireball.pages.statistics</categoryname>
 				<defaultvalue>1</defaultvalue>
-				<enableoptions>cms_pages_statistics_delete</enableoptions>
+				<enableoptions>fireball_pages_statistics_delete</enableoptions>
 			</option>
-			<option name="cms_pages_statistics_delete">
+			<option name="fireball_pages_statistics_delete">
 				<optiontype>integer</optiontype>
-				<categoryname>cms.pages.statistics</categoryname>
+				<categoryname>fireball.pages.statistics</categoryname>
 				<defaultvalue>0</defaultvalue>
 			</option>
-			<!-- /cms.pages.statistics -->
+			<!-- /fireball.pages.statistics -->
 
-			<!-- cms.content.slideshow -->
-			<option name="cms_content_slideshow_interval">
+			<!-- fireball.content.slideshow -->
+			<option name="fireball_content_slideshow_interval">
 				<optiontype>integer</optiontype>
-				<categoryname>cms.content.slideshow</categoryname>
+				<categoryname>fireball.content.slideshow</categoryname>
 				<defaultvalue>5000</defaultvalue>
 			</option>
-			<!-- /cms.content.slideshow -->
+			<!-- /fireball.content.slideshow -->
 
-			<!-- dashboard.sidebar.cms -->
-			<option name="cms_dashboard_sidebar_entries">
-				<categoryname>dashboard.sidebar.cms</categoryname>
+			<!-- dashboard.sidebar.fireball -->
+			<option name="fireball_dashboard_sidebar_entries">
+				<categoryname>dashboard.sidebar.fireball</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>5</defaultvalue>
 			</option>
-			<!-- /dashboard.sidebar.cms -->
+			<!-- /dashboard.sidebar.fireball -->
 		</options>
 	</import>
 </data>

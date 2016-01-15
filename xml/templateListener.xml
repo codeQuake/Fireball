@@ -25,7 +25,7 @@
 		<!-- /user -->
 
 		<!-- admin -->
-		<templatelistener name="cmsVersion">
+		<templatelistener name="fireballVersion">
 			<environment>admin</environment>
 			<templatename>index</templatename>
 			<eventname>softwareVersions</eventname>
