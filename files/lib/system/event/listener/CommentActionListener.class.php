@@ -3,6 +3,7 @@ namespace cms\system\event\listener;
 
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\event\listener\IParameterizedEventListener;
+// use wcf\system\event\listener\IEventListener;
 use wcf\system\user\notification\object\CommentUserNotificationObject;
 use wcf\system\user\notification\UserNotificationHandler;
 use wcf\system\user\object\watch\UserObjectWatchHandler;
