@@ -38,19 +38,19 @@ class DailyCleanUpListener implements IParameterizedEventListener {
 		$fileAction->executeAction();
 
 		// delete outdated revisions
-		if (CMS_REVISION_DELETE) {
+		if (FIREBALL_REVISION_DELETE) {
 			$sql = "DELETE FROM	cms".WCF_N."_page_revision
 				WHERE		time < ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(TIME_NOW - (CMS_REVISION_DELETE * 86400)));
+			$statement->execute(array(TIME_NOW - (FIREBALL_REVISION_DELETE * 86400)));
 		}
 
 		// delete old statistics
-		if (CMS_PAGES_STATISTICS_DELETE) {
+		if (FIREBALL_PAGES_STATISTICS_DELETE) {
 			$sql = "DELETE FROM	cms".WCF_N."_counter
 				WHERE		UNIX_TIMESTAMP(DATE_ADD(DATE_ADD(MAKEDATE(year, 1), INTERVAL (month)-1 MONTH), INTERVAL (day)-1 DAY)) < ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(TIME_NOW - (CMS_PAGES_STATISTICS_DELETE * 86400)));
+			$statement->execute(array(TIME_NOW - (FIREBALL_PAGES_STATISTICS_DELETE * 86400)));
 		}
 	}
 }

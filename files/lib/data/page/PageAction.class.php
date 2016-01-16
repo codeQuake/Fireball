@@ -519,16 +519,16 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		//get initial data
 		$alias = $page ? $page->alias : '';
-		$allowIndexing = $page ? $page->allowIndexing : CMS_PAGES_DEFAULT_ALLOW_INDEXING;
-		$allowSubscribing = $page ? $page->allowSubscribing : CMS_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
-		$availableDuringOfflineMode = $page ? $page->availableDuringOfflineMode : CMS_PAGES_DEFAULT_OFFLINE;
-		$createMenuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
+		$allowIndexing = $page ? $page->allowIndexing : FIREBALL_PAGES_DEFAULT_ALLOW_INDEXING;
+		$allowSubscribing = $page ? $page->allowSubscribing : FIREBALL_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
+		$availableDuringOfflineMode = $page ? $page->availableDuringOfflineMode : FIREBALL_PAGES_DEFAULT_OFFLINE;
+		$createMenuItem = FIREBALL_PAGES_DEFAULT_MENU_ITEM;
 		$deactivationDate = $page ? $page->deactivationDate : $defaultDate;
 		$description = $page ? $page->description : '';
 		$enableDelayedDeactivation = $page ? $page->enableDelayedDeactivation : 0;
 		$enableDelayedPublication = $page ? $page->enableDelayedPublication : 0;
 		$invisible = $page ? $page->invisible : 0;
-		$isCommentable = $page ? $page->isCommentable : CMS_PAGES_DEFAULT_COMMENTS;
+		$isCommentable = $page ? $page->isCommentable : FIREBALL_PAGES_DEFAULT_COMMENTS;
 		$menuItemID = $page ? $page->menuItemID : 0;
 		$metaDescription = $page ? $page->metaDescription : '';
 		$metaKeywords = $page ? $page->metaKeywords : '';
@@ -536,7 +536,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$publicationDate = $page ? $page->publicationDate : $defaultDate;
 		$parentID = $page ? $page->parentID : 0;
 		$showOrder = $page ? $page->showOrder : 0;
-		$sidebarOrientation = $page ? $page->sidebarOrientation : CMS_PAGES_DEFAULT_SIDEBAR;
+		$sidebarOrientation = $page ? $page->sidebarOrientation : FIREBALL_PAGES_DEFAULT_SIDEBAR;
 		$styleID = $page ? $page->styleID : 0;
 		$stylesheetIDs = $page ? $page->getStylesheetIDs() : array();
 		$title = $page ? $page->title : '';

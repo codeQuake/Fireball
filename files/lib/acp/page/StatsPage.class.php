@@ -58,7 +58,7 @@ class StatsPage extends AbstractPage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededModules
 	 */
-	public $neededModules = array('CMS_PAGES_ENABLE_STATISTICS');
+	public $neededModules = array('FIREBALL_PAGES_ENABLE_STATISTICS');
 
 	/**
 	 * list of most viewed pages

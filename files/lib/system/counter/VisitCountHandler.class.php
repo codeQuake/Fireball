@@ -20,7 +20,7 @@ class VisitCountHandler extends SingletonFactory {
 	}
 
 	public function count() {
-		if (!CMS_PAGES_ENABLE_STATISTICS) {
+		if (!FIREBALL_PAGES_ENABLE_STATISTICS) {
 			return;
 		}
 

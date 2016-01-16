@@ -30,7 +30,7 @@ class MostViewedPagesDashboardBox extends AbstractSidebarDashboardBox {
 
 		$this->pageList = new PageList();
 		$this->pageList->getConditionBuilder()->add('page.clicks > 0');
-		$this->pageList->sqlLimit = CMS_DASHBOARD_SIDEBAR_ENTRIES;
+		$this->pageList->sqlLimit = FIREBALL_DASHBOARD_SIDEBAR_ENTRIES;
 		$this->pageList->sqlOrderBy = 'page.clicks DESC';
 		$this->pageList->readObjects();
 
