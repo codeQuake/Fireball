@@ -31,7 +31,7 @@ class ContentAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page.list';
 
 	/**
 	 * content data
@@ -54,7 +54,7 @@ class ContentAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.cms.content.canAddContent');
+	public $neededPermissions = array('admin.fireball.content.canAddContent');
 
 	/**
 	 * content object type

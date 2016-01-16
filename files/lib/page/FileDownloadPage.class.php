@@ -48,7 +48,7 @@ class FileDownloadPage extends AbstractPage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('user.cms.content.canDownloadFile');
+	public $neededPermissions = array('user.fireball.content.canDownloadFile');
 
 	/**
 	 * @see	\wcf\page\AbstractPage::$useTemplate

@@ -19,12 +19,12 @@ class PageListPage extends AbstractPage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.page.list';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page.list';
 
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.cms.page.canListPage');
+	public $neededPermissions = array('admin.fireball.page.canListPage');
 
 	/**
 	 * list of content types

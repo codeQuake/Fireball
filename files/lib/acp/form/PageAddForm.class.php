@@ -36,7 +36,7 @@ class PageAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.page.add';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page.add';
 
 	/**
 	 * alias of the created page
@@ -138,7 +138,7 @@ class PageAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.cms.page.canAddPage');
+	public $neededPermissions = array('admin.fireball.page.canAddPage');
 
 	/**
 	 * object type id of the acl

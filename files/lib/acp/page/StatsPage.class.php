@@ -19,7 +19,7 @@ class StatsPage extends AbstractPage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.page.statistics';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page.statistics';
 
 	/**
 	 * list of browsers

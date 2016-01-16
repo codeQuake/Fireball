@@ -20,7 +20,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.stylesheet';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.stylesheet';
 
 	/**
 	 * stylesheet id
