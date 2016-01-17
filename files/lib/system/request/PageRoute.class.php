@@ -3,6 +3,7 @@ namespace cms\system\request;
 
 use cms\data\page\PageCache;
 use cms\util\PageUtil;
+use wcf\system\request\ControllerMap;
 use wcf\system\request\IRoute;
 use wcf\system\request\RequestHandler;
 use wcf\util\HeaderUtil;
@@ -161,13 +162,6 @@ class PageRoute implements IRoute {
 	 * @return	string
 	 */
 	protected function getControllerName($application = 'cms', $controller = 'Page') {
-		if (!isset($this->controllerNames[$controller])) {
-			$controllerName = RequestHandler::getTokenizedController($controller);
-			$alias = RequestHandler::getInstance()->getAliasByController($controllerName);
-				
-			$this->controllerNames[$controller] = ($alias) ?: $controllerName;
-		}
-
-		return $this->controllerNames[$controller];
+		return ControllerMap::getInstance()->lookup($application, $controller);
 	}
 }
