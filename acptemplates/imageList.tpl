@@ -9,7 +9,7 @@
 </script>
 
 <header class="boxHeadline">
-	<h1>{lang}cms.acp.news.image.list{/lang}</h1>
+	<h1>{lang}fireball.acp.news.image.list{/lang}</h1>
 </header>
 
 <div class="contentNavigation">
@@ -17,7 +17,7 @@
 
 	<nav>
 		<ul>
-			<li><a href="{link controller='NewsImageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.news.image.add{/lang}</span></a></li>
+			<li><a href="{link controller='NewsImageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.news.image.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -27,15 +27,15 @@
 {if $objects|count}
 	<div class="tabularBox tabularBoxTitle marginTop">
 		<header>
-			<h2>{lang}cms.acp.news.image.list{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
+			<h2>{lang}fireball.acp.news.image.list{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
 		</header>
 
 		<table class="table">
 			<thead>
 				<tr>
 					<th class="columnID columnImageID" colspan="2">{lang}wcf.global.objectID{/lang}</th>
-					<th class="columnTitle">{lang}cms.acp.news.image.title{/lang}</th>
-					<th class="columnImage">{lang}cms.acp.news.image{/lang}</th>
+					<th class="columnTitle">{lang}fireball.acp.news.image.title{/lang}</th>
+					<th class="columnImage">{lang}fireball.acp.news.image{/lang}</th>
 					{event name='columnHeads'}
 				</tr>
 			</thead>
@@ -44,7 +44,7 @@
 				{foreach from=$objects item=image}
 					<tr class="jsImageRow">
 						<td class="columnIcon">
-							<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$image->imageID}" data-confirm-message="{lang}cms.acp.news.image.delete.sure{/lang}"></span>
+							<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$image->imageID}" data-confirm-message="{lang}fireball.acp.news.image.delete.sure{/lang}"></span>
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$image->imageID}</td>
@@ -63,7 +63,7 @@
 
 		<nav>
 			<ul>
-				<li><a href="{link controller='NewsImageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.news.image.add{/lang}</span></a></li>
+				<li><a href="{link controller='NewsImageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.news.image.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtonsBottom'}
 			</ul>

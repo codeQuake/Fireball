@@ -75,7 +75,7 @@
 {include file='userNotice'}
 
 {if !$page->isPublished && $page->publicationDate}
-	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
+	<p class="info">{lang}fireball.page.delayedPublication{/lang}</p>
 {/if}
 
 {assign var=oldDepth value=0}
@@ -93,7 +93,7 @@
 
 {if $page->isCommentable && $page->getPermission('canViewComment')}
 	<header id="comments" class="boxHeadline boxSubHeadline">
-		<h2>{lang}cms.page.comments{/lang} <span class="badge">{@$commentList->countObjects()}</span></h2>
+		<h2>{lang}fireball.page.comments{/lang} <span class="badge">{@$commentList->countObjects()}</span></h2>
 	</header>
 
 	{include file='__commentJavaScript' commentContainerID='pageCommentList'}
@@ -112,7 +112,7 @@
 				</ul>
 			{hascontentelse}
 				<div class="containerPadding">
-					{lang}cms.page.comments.noComments{/lang}
+					{lang}fireball.page.comments.noComments{/lang}
 				</div>
 			{/hascontent}
 		{/if}

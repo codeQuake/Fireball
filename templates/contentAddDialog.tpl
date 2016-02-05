@@ -1,17 +1,17 @@
 <div id="contentAddForm">
 	<fieldset>
-			<legend>{lang}cms.acp.content.type.{$objectType->objectType}{/lang}</legend>
+			<legend>{lang}fireball.acp.content.type.{$objectType->objectType}{/lang}</legend>
 
 			{include file=$objectType->getProcessor()->getFormTemplate()|concat:'Form' application='cms'}
 	</fieldset>
 	<fieldset>
-			<legend>{lang}cms.acp.content.css{/lang}</legend>
+			<legend>{lang}fireball.acp.content.css{/lang}</legend>
 
 			<dl>
-				<dt><label for="cssClasses">{lang}cms.acp.content.css.cssClasses{/lang}</label></dt>
+				<dt><label for="cssClasses">{lang}fireball.acp.content.css.cssClasses{/lang}</label></dt>
 				<dd>
 					<input type="text" id="cssClasses" name="cssClasses" value="{$cssClasses}" class="long" />
-					<small>{lang}cms.acp.content.css.cssClasses.description{/lang}</small>
+					<small>{lang}fireball.acp.content.css.cssClasses.description{/lang}</small>
 				</dd>
 			</dl>
 

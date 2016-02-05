@@ -5,17 +5,17 @@
 	//<![CDATA[
 	$(function() {
 		WCF.Language.addObject({
-			'cms.acp.content.add': '{lang}cms.acp.content.add{/lang}',
+			'cms.acp.content.add': '{lang}fireball.acp.content.add{/lang}',
 			{foreach from=$objectTypeList item=type}
-				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
+				'cms.acp.content.type.{$type->objectType}': '{lang}fireball.acp.content.type.{$type->objectType}{/lang}',
 			{/foreach}
-			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}',
-			'cms.acp.page.revision.action.create': '{lang}cms.acp.page.revision.action.create{/lang}',
-			'cms.acp.page.revision.action.update': '{lang}cms.acp.page.revision.action.update{/lang}',
-			'cms.acp.page.revision.action.updatePosition': '{lang}cms.acp.page.revision.action.updatePosition{/lang}',
-			'cms.acp.page.revision.action.setAsHome': '{lang}cms.acp.page.revision.action.setAsHome{/lang}',
-			'cms.acp.page.revision.action.restore': '{lang}cms.acp.page.revision.action.restore{/lang}',
-			'cms.acp.page.revision.list': '{lang}cms.acp.page.revision.list{/lang}',
+			'cms.acp.content.type.content': '{lang}fireball.acp.content.type.content{/lang}',
+			'cms.acp.page.revision.action.create': '{lang}fireball.acp.page.revision.action.create{/lang}',
+			'cms.acp.page.revision.action.update': '{lang}fireball.acp.page.revision.action.update{/lang}',
+			'cms.acp.page.revision.action.updatePosition': '{lang}fireball.acp.page.revision.action.updatePosition{/lang}',
+			'cms.acp.page.revision.action.setAsHome': '{lang}fireball.acp.page.revision.action.setAsHome{/lang}',
+			'cms.acp.page.revision.action.restore': '{lang}fireball.acp.page.revision.action.restore{/lang}',
+			'cms.acp.page.revision.list': '{lang}fireball.acp.page.revision.list{/lang}',
 		});
 
 		var deleteAction = new WCF.Action.NestedDelete('cms\\data\\page\\PageAction', '.jsPageRow');
@@ -66,14 +66,14 @@
 </script>
 
 <header class="boxHeadline">
-	<h1>{lang}cms.acp.page.list{/lang}</h1>
-	<p>{lang}cms.acp.page.list.description{/lang}</p>
+	<h1>{lang}fireball.acp.page.list{/lang}</h1>
+	<p>{lang}fireball.acp.page.list.description{/lang}</p>
 </header>
 
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
+			<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.page.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -92,30 +92,30 @@
 							<span class="title">
 								<input type="checkbox" class="jsClipboardItem" data-object-id="{@$page->pageID}" />
 								{if $page->isHome}
-									<span class="icon icon16 fa-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>
+									<span class="icon icon16 fa-home jsTooltip" title="{lang}fireball.acp.page.homePage{/lang}"></span>
 								{/if}
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}">{@$page->getTitle()}</a> - <small>/{$page->getAlias()}/</small>
 								{if !$page->isPublished}
-									- <small>{lang}cms.acp.page.delayedPublication{/lang}</small>
+									- <small>{lang}fireball.acp.page.delayedPublication{/lang}</small>
 								{elseif $page->deactivationDate}
-									- <small>{lang}cms.acp.page.delayedDeactivation{/lang}</small>
+									- <small>{lang}fireball.acp.page.delayedDeactivation{/lang}</small>
 								{/if}
 							</span>
 							<span class="statusDisplay buttons">
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
 								{if $page->canDelete()}
-									<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
+									<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}fireball.acp.page.delete.sure{/lang}"></span>
 								{else}
 									<span class="icon icon16 fa-remove disabled"></span>
 								{/if}
-								{if !$page->isHome && !$page->isChild()}<span class="icon icon16 fa-home jsTooltip jsSetAsHome pointer" data-object-id="{$page->pageID}" title="{lang}cms.acp.page.setAsHome{/lang}"></span>{/if}
+								{if !$page->isHome && !$page->isChild()}<span class="icon icon16 fa-home jsTooltip jsSetAsHome pointer" data-object-id="{$page->pageID}" title="{lang}fireball.acp.page.setAsHome{/lang}"></span>{/if}
 								<span class="icon icon16 fa-check{if $page->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$page->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$page->pageID}"></span>
-								<span class="icon icon16 fa-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.page.copy{/lang}" data-object-id="{@$page->pageID}"></span>
-								<span class="icon icon16 fa-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revision.list{/lang}" data-object-id="{@$page->pageID}"></span>
+								<span class="icon icon16 fa-copy jsCopyButton jsTooltip pointer" title="{lang}fireball.acp.page.copy{/lang}" data-object-id="{@$page->pageID}"></span>
+								<span class="icon icon16 fa-tasks jsRevisionsButton jsTooltip pointer" title="{lang}fireball.acp.page.revision.list{/lang}" data-object-id="{@$page->pageID}"></span>
 
 								<!-- content controls -->
-								<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$page->pageID}" data-position="body"></span>
-								<a href="{link controller='ContentList' pageID=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 fa-file"></span></a>
+								<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}fireball.acp.content.add{/lang}" data-object-id="{@$page->pageID}" data-position="body"></span>
+								<a href="{link controller='ContentList' pageID=$page->pageID application='cms'}{/link}" title="{lang}fireball.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 fa-file"></span></a>
 							{event name='itemButtons'}
 							</span>
 						</span>
@@ -137,7 +137,7 @@
 	<div class="contentNavigation">
 		<nav>
 			<ul>
-				<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
+				<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.page.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtonsBottom'}
 			</ul>

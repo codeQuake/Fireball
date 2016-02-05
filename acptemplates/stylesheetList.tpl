@@ -13,8 +13,8 @@
 </script>
 
 <header class="boxHeadline">
-	<h1>{lang}cms.acp.stylesheet.list{/lang}</h1>
-	<p>{lang}cms.acp.stylesheet.list.description{/lang}</p>
+	<h1>{lang}fireball.acp.stylesheet.list{/lang}</h1>
+	<p>{lang}fireball.acp.stylesheet.list.description{/lang}</p>
 </header>
 
 <div class="contentNavigation">
@@ -22,7 +22,7 @@
 
 	<nav>
 		<ul>
-			<li><a href="{link controller='StylesheetAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.stylesheet.add{/lang}</span></a></li>
+			<li><a href="{link controller='StylesheetAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.stylesheet.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -33,7 +33,7 @@
 {if $objects|count}
 	<div class="tabularBox tabularBoxTitle marginTop">
 		<header>
-			<h2>{lang}cms.acp.stylesheet.list{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
+			<h2>{lang}fireball.acp.stylesheet.list{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
 		</header>
 
 		<table class="table jsClipboardContainer" data-type="de.codequake.cms.stylesheet">
@@ -53,7 +53,7 @@
 						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$sheet->stylesheetID}" /></td>
 						<td class="columnIcon">
 							<a href="{link controller='StylesheetEdit' id=$sheet->stylesheetID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
-							<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$sheet->stylesheetID}" data-confirm-message="{lang}cms.acp.stylesheet.delete.sure{/lang}"></span>
+							<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$sheet->stylesheetID}" data-confirm-message="{lang}fireball.acp.stylesheet.delete.sure{/lang}"></span>
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$sheet->stylesheetID}</td>
@@ -72,7 +72,7 @@
 
 		<nav>
 			<ul>
-				<li><a href="{link controller='StylesheetAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.stylesheet.add{/lang}</span></a></li>
+				<li><a href="{link controller='StylesheetAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.stylesheet.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtonsBottom'}
 			</ul>

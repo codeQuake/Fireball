@@ -12,7 +12,7 @@
 						</ul>
 					</div>
 				</li>
-				<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+				<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}fireball.acp.file.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtons'}
 			</ul>

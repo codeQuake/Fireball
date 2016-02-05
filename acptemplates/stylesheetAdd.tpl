@@ -1,7 +1,7 @@
 {include file='header' pageTitle='cms.acp.stylesheet.'|concat:$action}
 
 <header class="boxHeadline">
-	<h1>{lang}cms.acp.stylesheet.{$action}{/lang}</h1>
+	<h1>{lang}fireball.acp.stylesheet.{$action}{/lang}</h1>
 </header>
 
 {include file='formError'}
@@ -15,7 +15,7 @@
 		<ul>
 			{if $action == 'edit' && $stylesheets|count > 1}
 				<li class="dropdown">
-					<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}cms.acp.stylesheet.button.choose{/lang}</span></a>
+					<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}fireball.acp.stylesheet.button.choose{/lang}</span></a>
 					<div class="dropdownMenu">
 						<ul class="scrollableDropdownMenu">
 							{foreach from=$stylesheets item=item}
@@ -25,7 +25,7 @@
 					</div>
 				</li>
 			{/if}
-			<li><a href="{link application='cms' controller='StylesheetList'}{/link}" title="{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}</span></a></li>
+			<li><a href="{link application='cms' controller='StylesheetList'}{/link}" title="{lang}fireball.acp.menu.link.cms.stylesheet.list{/lang}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}fireball.acp.menu.link.cms.stylesheet.list{/lang}</span></a></li>
 
 			{event name='contentNavigationButtons'}
 		</ul>
@@ -46,7 +46,7 @@
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
-								{lang}cms.acp.stylesheet.title.error.{@$errorType}{/lang}
+								{lang}fireball.acp.stylesheet.title.error.{@$errorType}{/lang}
 							{/if}
 						</small>
 					{/if}
@@ -57,7 +57,7 @@
 		</fieldset>
 
 		<fieldset class="marginTop">
-			<legend>{lang}cms.acp.stylesheet.less{/lang}</legend>
+			<legend>{lang}fireball.acp.stylesheet.less{/lang}</legend>
 
 			<dl class="wide">
 				<dt></dt>
@@ -68,11 +68,11 @@
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
-								{lang}cms.acp.stylesheet.less.error.{@$errorType}{/lang}
+								{lang}fireball.acp.stylesheet.less.error.{@$errorType}{/lang}
 							{/if}
 						</small>
 					{/if}
-					<small>{lang}cms.acp.stylesheet.less.description{/lang}</small>
+					<small>{lang}fireball.acp.stylesheet.less.description{/lang}</small>
 
 					{include file='codemirror' codemirrorMode='text/x-less' codemirrorSelector='#less'}
 				</dd>

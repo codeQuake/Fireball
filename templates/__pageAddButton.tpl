@@ -2,7 +2,7 @@
 <li id="pageAddButton">
 	<a href="{link controller='PageAdd'}{/link}">
 		<span class="icon icon16 fa-plus-square"></span>
-		<span>{lang}cms.acp.page.add{/lang}</span>
+		<span>{lang}fireball.acp.page.add{/lang}</span>
 	</a>
 	
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
