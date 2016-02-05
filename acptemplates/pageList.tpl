@@ -73,7 +73,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
+			<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -92,7 +92,7 @@
 							<span class="title">
 								<input type="checkbox" class="jsClipboardItem" data-object-id="{@$page->pageID}" />
 								{if $page->isHome}
-									<span class="icon icon16 icon-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>
+									<span class="icon icon16 fa-home jsTooltip" title="{lang}cms.acp.page.homePage{/lang}"></span>
 								{/if}
 								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}">{@$page->getTitle()}</a> - <small>/{$page->getAlias()}/</small>
 								{if !$page->isPublished}
@@ -102,20 +102,20 @@
 								{/if}
 							</span>
 							<span class="statusDisplay buttons">
-								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+								<a href="{link controller='PageEdit' application='cms' object=$page}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
 								{if $page->canDelete()}
-									<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
+									<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$page->pageID}" data-confirm-message="{lang}cms.acp.page.delete.sure{/lang}"></span>
 								{else}
-									<span class="icon icon16 icon-remove disabled"></span>
+									<span class="icon icon16 fa-remove disabled"></span>
 								{/if}
-								{if !$page->isHome && !$page->isChild()}<span class="icon icon16 icon-home jsTooltip jsSetAsHome pointer" data-object-id="{$page->pageID}" title="{lang}cms.acp.page.setAsHome{/lang}"></span>{/if}
-								<span class="icon icon16 icon-check{if $page->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$page->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$page->pageID}"></span>
-								<span class="icon icon16 icon-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.page.copy{/lang}" data-object-id="{@$page->pageID}"></span>
-								<span class="icon icon16 icon-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revision.list{/lang}" data-object-id="{@$page->pageID}"></span>
+								{if !$page->isHome && !$page->isChild()}<span class="icon icon16 fa-home jsTooltip jsSetAsHome pointer" data-object-id="{$page->pageID}" title="{lang}cms.acp.page.setAsHome{/lang}"></span>{/if}
+								<span class="icon icon16 fa-check{if $page->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$page->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$page->pageID}"></span>
+								<span class="icon icon16 fa-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.page.copy{/lang}" data-object-id="{@$page->pageID}"></span>
+								<span class="icon icon16 fa-tasks jsRevisionsButton jsTooltip pointer" title="{lang}cms.acp.page.revision.list{/lang}" data-object-id="{@$page->pageID}"></span>
 
 								<!-- content controls -->
-								<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$page->pageID}" data-position="body"></span>
-								<a href="{link controller='ContentList' pageID=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-file"></span></a>
+								<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$page->pageID}" data-position="body"></span>
+								<a href="{link controller='ContentList' pageID=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 fa-file"></span></a>
 							{event name='itemButtons'}
 							</span>
 						</span>
@@ -137,7 +137,7 @@
 	<div class="contentNavigation">
 		<nav>
 			<ul>
-				<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
+				<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtonsBottom'}
 			</ul>
