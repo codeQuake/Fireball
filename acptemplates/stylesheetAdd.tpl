@@ -74,7 +74,7 @@
 					{/if}
 					<small>{lang}cms.acp.stylesheet.less.description{/lang}</small>
 
-					{include file='codemirror' codemirrorMode='less' codemirrorSelector='#less'}
+					{include file='codemirror' codemirrorMode='text/x-less' codemirrorSelector='#less'}
 				</dd>
 			</dl>
 
