@@ -20,10 +20,7 @@ class CMSRouteHandlerListener implements IParameterizedEventListener {
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
-		// only register routes when an application is active
-		if (PACKAGE_ID !== 1) {
-			$route = new PageRoute();
-			$eventObj->addRoute($route);
-		}
+		$route = new PageRoute();
+		$eventObj->addRoute($route);
 	}
 }
