@@ -2,8 +2,8 @@
 namespace cms\system\event\listener;
 
 use wcf\data\package\PackageCache;
-use wcf\system\event\listener\IParameterizedEventListener;
 // use wcf\system\event\listener\IEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 
 /**
  * Sets costum menu item provider in order to manipulate menu link on runtime.
