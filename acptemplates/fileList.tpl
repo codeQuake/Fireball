@@ -46,7 +46,7 @@
 	<nav>
 		<ul>
 			<li class="dropdown">
-				<a class="button dropdownToggle"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
+				<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
 				<div class="dropdownMenu">
 					<ul class="scrollableDropdownMenu">
 						{foreach from=$categoryList item=node}
@@ -55,8 +55,8 @@
 					</ul>
 				</div>
 			</li>
-			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 icon-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
-			<li><a class="button jsFileUploadButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
+			<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -87,7 +87,7 @@
 					<tr class="jsClipboardObject jsFileRow">
 						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$file->fileID}" /></td>
 						<td class="columnIcon">
-							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
+							<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
 						</td>
 						<td class="columnID columnFileID">{@$file->fileID}</td>
 						<td class="columnIcon">{@$file->getIconTag()}</td>
@@ -109,8 +109,8 @@
 
 		<nav>
 			<ul>
-				<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 icon-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
-				<li><a class="button jsFileUploadButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+				<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
+				<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtonsBottom'}
 			</ul>

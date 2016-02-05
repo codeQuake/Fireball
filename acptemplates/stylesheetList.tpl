@@ -22,7 +22,7 @@
 
 	<nav>
 		<ul>
-			<li><a href="{link controller='StylesheetAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.stylesheet.add{/lang}</span></a></li>
+			<li><a href="{link controller='StylesheetAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.stylesheet.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -52,8 +52,8 @@
 					<tr class="jsClipboardObject jsStylesheetRow">
 						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$sheet->stylesheetID}" /></td>
 						<td class="columnIcon">
-							<a href="{link controller='StylesheetEdit' id=$sheet->stylesheetID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
-							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$sheet->stylesheetID}" data-confirm-message="{lang}cms.acp.stylesheet.delete.sure{/lang}"></span>
+							<a href="{link controller='StylesheetEdit' id=$sheet->stylesheetID application='cms'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
+							<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$sheet->stylesheetID}" data-confirm-message="{lang}cms.acp.stylesheet.delete.sure{/lang}"></span>
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$sheet->stylesheetID}</td>
@@ -72,7 +72,7 @@
 
 		<nav>
 			<ul>
-				<li><a href="{link controller='StylesheetAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.stylesheet.add{/lang}</span></a></li>
+				<li><a href="{link controller='StylesheetAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.stylesheet.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtonsBottom'}
 			</ul>

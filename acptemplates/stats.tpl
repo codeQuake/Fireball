@@ -180,7 +180,7 @@
 <div class="container marginTop">
 	<ol class="containerList infoBoxList">
 		<li class="box32">
-			<span class="icon icon32 icon-user"></span>
+			<span class="icon icon32 fa-user"></span>
 			<div class="containerHeadline">
 				<h3>{lang}cms.acp.stats.userOnline{/lang}</h3>
 			</div>
@@ -188,7 +188,7 @@
 				{foreach from=$objects item=user}
 					{if $user->userID}
 						<li>
-							<span class="icon icon16 icon-user"></span>
+							<span class="icon icon16 fa-user"></span>
 							<a href="{link controller='User' object=$user forceFrontend=true}{/link}">{@$user->getFormattedUsername()}</a>
 							-
 							<small>{@$user->lastActivityTime|time}</small>
@@ -197,7 +197,7 @@
 						</li>
 					{elseif $user->spiderID}
 						<li>
-							<span class="icon icon16 icon-bullseye"></span>
+							<span class="icon icon16 fa-bullseye"></span>
 							{$user->getSpider()->spiderName}
 							-
 							<small>{@$user->lastActivityTime|time}</small>
@@ -206,7 +206,7 @@
 						</li>
 					{else}
 						<li>
-							<span class="icon icon16 icon-question-sign"></span>
+							<span class="icon icon16 fa-question-sign"></span>
 							{lang}wcf.user.guest{/lang}
 							-
 							<small>{@$user->lastActivityTime|time}</small>

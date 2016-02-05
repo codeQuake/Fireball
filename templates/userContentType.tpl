@@ -6,7 +6,7 @@
 				{if $user->homepage != ""}
 					<li>
 						<a href="{$user->homepage}" title="{lang}wcf.user.option.homepage{/lang}" class="jsTooltip">
-							<span class="icon icon16 icon-home"></span>
+							<span class="icon icon16 fa-home"></span>
 							<span class="invisible">{lang}wcf.user.option.homepage{/lang}</span>
 						</a>
 					</li>
@@ -14,7 +14,7 @@
 				{if $user->facebook != ""}
 					<li>
 						<a href="http://facebook.com/{$user->facebook}" title="{lang}wcf.user.option.facebook{/lang}" class="jsTooltip">
-							<span class="icon icon16 icon-facebook"></span>
+							<span class="icon icon16 fa-facebook"></span>
 							<span class="invisible">{lang}wcf.user.option.facebook{/lang}</span>
 						</a>
 					</li>
@@ -22,7 +22,7 @@
 				{if $user->twitter != ""}
 					<li>
 						<a href="http://twitter.com/{$user->twitter}" title="{lang}wcf.user.option.twitter{/lang}" class="jsTooltip">
-							<span class="icon icon16 icon-twitter"></span>
+							<span class="icon icon16 fa-twitter"></span>
 							<span class="invisible">{lang}wcf.user.option.twitter{/lang}</span>
 						</a>
 					</li>

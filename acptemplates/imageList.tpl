@@ -17,7 +17,7 @@
 
 	<nav>
 		<ul>
-			<li><a href="{link controller='NewsImageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.news.image.add{/lang}</span></a></li>
+			<li><a href="{link controller='NewsImageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.news.image.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -44,7 +44,7 @@
 				{foreach from=$objects item=image}
 					<tr class="jsImageRow">
 						<td class="columnIcon">
-							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$image->imageID}" data-confirm-message="{lang}cms.acp.news.image.delete.sure{/lang}"></span>
+							<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$image->imageID}" data-confirm-message="{lang}cms.acp.news.image.delete.sure{/lang}"></span>
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$image->imageID}</td>
@@ -63,7 +63,7 @@
 
 		<nav>
 			<ul>
-				<li><a href="{link controller='NewsImageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}cms.acp.news.image.add{/lang}</span></a></li>
+				<li><a href="{link controller='NewsImageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.news.image.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtonsBottom'}
 			</ul>

@@ -15,7 +15,7 @@
 		<ul>
 			{if $action == 'edit' && $stylesheets|count > 1}
 				<li class="dropdown">
-					<a class="button dropdownToggle"><span class="icon icon16 icon-sort"></span> <span>{lang}cms.acp.stylesheet.button.choose{/lang}</span></a>
+					<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}cms.acp.stylesheet.button.choose{/lang}</span></a>
 					<div class="dropdownMenu">
 						<ul class="scrollableDropdownMenu">
 							{foreach from=$stylesheets item=item}
@@ -25,7 +25,7 @@
 					</div>
 				</li>
 			{/if}
-			<li><a href="{link application='cms' controller='StylesheetList'}{/link}" title="{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}</span></a></li>
+			<li><a href="{link application='cms' controller='StylesheetList'}{/link}" title="{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}</span></a></li>
 
 			{event name='contentNavigationButtons'}
 		</ul>
