@@ -1,7 +1,7 @@
 {include file='documentHeader'}
 
 <head>
-	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItemID != $page->menuItemID}{$page->getTitle()} - {/if}{PAGE_TITLE|language}</title>
+	<title>{$page->getTitle()} - {PAGE_TITLE|language}</title>
 
 	{include file='headInclude'}
 	{foreach from=$page->getStylesheets() item=stylesheet}
@@ -68,13 +68,8 @@
 {include file='header' sidebarOrientation=$page->sidebarOrientation}
 
 <header class="boxHeadline">
-	{if $__wcf->getPageMenu()->getLandingPage()->menuItemID == $page->menuItemID}
-		<h1>{PAGE_TITLE|language}</h1>
-		{hascontent}<p>{content}{PAGE_DESCRIPTION|language}{/content}</p>{/hascontent}
-	{else}
-		<h1>{$page->getTitle()}</h1>
-		<p>{$page->description|language}</p>
-	{/if}
+	<h1>{$page->getTitle()}</h1>
+	<p>{$page->description|language}</p>
 </header>
 
 {include file='userNotice'}
