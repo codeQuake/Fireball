@@ -39,13 +39,6 @@
 			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
 		</templatelistener>
 
-		<templatelistener name="stylesheets">
-			<environment>admin</environment>
-			<templatename>header</templatename>
-			<eventname>stylesheets</eventname>
-			<templatecode><![CDATA[{if $__cms|isset && $__cms->isActiveApplication()}<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('cms')}acp/style/fireball.css">{/if}]]></templatecode>
-		</templatelistener>
-
 		<templatelistener name="pagemenuInfo">
 			<environment>admin</environment>
 			<templatename>pageMenuItemAdd</templatename>
