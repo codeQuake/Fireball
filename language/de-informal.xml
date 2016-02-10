@@ -117,18 +117,18 @@
 
 	<category name="fireball.acp.menu">
 		<item name="fireball.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="fireball.acp.menu.link.cms.file"><![CDATA[Dateien]]></item>
-		<item name="fireball.acp.menu.link.cms.file.category.add"><![CDATA[Kategorie hinzufügen]]></item>
-		<item name="fireball.acp.menu.link.cms.file.category.list"><![CDATA[Kategorien auflisten]]></item>
-		<item name="fireball.acp.menu.link.cms.file.list"><![CDATA[Dateien auflisten]]></item>
-		<item name="fireball.acp.menu.link.cms.page"><![CDATA[Seiten]]></item>
-		<item name="fireball.acp.menu.link.cms.page.add"><![CDATA[Seite hinzufügen]]></item>
-		<item name="fireball.acp.menu.link.cms.page.importAndExport"><![CDATA[Sichern &amp; Wiederherstellen]]></item>
-		<item name="fireball.acp.menu.link.cms.page.list"><![CDATA[Seiten auflisten]]></item>
-		<item name="fireball.acp.menu.link.cms.page.statistics"><![CDATA[Statistiken]]></item>
-		<item name="fireball.acp.menu.link.cms.stylesheet"><![CDATA[Stylesheets]]></item>
-		<item name="fireball.acp.menu.link.cms.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
-		<item name="fireball.acp.menu.link.cms.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
+		<item name="fireball.acp.menu.link.fireball.file"><![CDATA[Dateien]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.category.add"><![CDATA[Kategorie hinzufügen]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.category.list"><![CDATA[Kategorien auflisten]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.list"><![CDATA[Dateien auflisten]]></item>
+		<item name="fireball.acp.menu.link.fireball.page"><![CDATA[Seiten]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.add"><![CDATA[Seite hinzufügen]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.importAndExport"><![CDATA[Sichern &amp; Wiederherstellen]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.list"><![CDATA[Seiten auflisten]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.statistics"><![CDATA[Statistiken]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
 	</category>
 
 	<category name="fireball.acp.page">
