@@ -2,7 +2,9 @@
 namespace cms\system\request;
 
 use cms\data\page\PageCache;
+use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\util\PageUtil;
+use wcf\system\menu\page\PageMenu;
 use wcf\system\request\IRoute;
 use wcf\system\request\RequestHandler;
 use wcf\util\HeaderUtil;
@@ -26,11 +28,23 @@ class PageRoute implements IRoute {
 		'controller' => 'page',
 		'isDefaultController' => false
 	);
+	
+	protected $landingPage = null;
 
 	/**
 	 * @see	\wcf\system\request\IRoute::buildLink()
 	 */
 	public function buildLink(array $components) {
+		$this->landingPage = PageMenu::getInstance()->getLandingPage();
+		$processor = $this->landingPage->getProcessor();
+		if ($processor instanceof CMSPageMenuItemProvider) {
+			$page = $processor->getPage();
+			if (isset($components['alias']) && $components['alias'] == $page->alias)
+				return '';
+			if (isset($components['id']) && $components['id'] == $page->pageID)
+				return '';
+		}
+		
 		$link = '';
 		if (!URL_LEGACY_MODE) {
 			$link = $this->getControllerName() . '/';
