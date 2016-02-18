@@ -1,6 +1,16 @@
 {include file='header' pageTitle='cms.acp.page.list'}
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@LAST_UPDATE_TIME}"></script>
+<script data-relocate="true">
+	require.config({
+		paths: { "codeQuake/CMS": "{@$__wcf->getPath('cms')}js/codeQuake/CMS" }
+	});
+	require(['codeQuake/CMS/Acp/Content/AddDialog'], function(AddDialog) {
+		AddDialog();
+	});
+	require(['codeQuake/CMS/Acp/Page/Revisions'], function(Revisions) {
+		Revisions();
+	});
+</script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
@@ -38,9 +48,6 @@
 				return (parent.children('ol').children('li.sortableNode[data-alias="'+ item.data('alias') +'"]:not(#'+ item.wcfIdentify() +')').length == 0);
 			}
 		});
-
-		new CMS.ACP.Content.AddDialog();
-		new CMS.ACP.Page.Revisions();
 
 		new WCF.Action.SimpleProxy({
 			action: 'copy',
