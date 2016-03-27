@@ -5,7 +5,7 @@
 		paths: { "codeQuake/CMS": "{@$__wcf->getPath('cms')}js/codeQuake/CMS" }
 	});
 	require(['codeQuake/CMS/Acp/Content/AddDialog'], function(AddDialog) {
-		AddDialog();
+		AddDialog.init();
 	});
 	require(['codeQuake/CMS/Acp/Page/Revisions'], function(Revisions) {
 		Revisions();
