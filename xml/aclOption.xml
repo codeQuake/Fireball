@@ -2,32 +2,32 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/aclOption.xsd">
 	<import>
 		<categories>
-			<category name="user.cms.page">
+			<category name="user.fireball.page">
 				<objecttype>de.codequake.cms.page</objecttype>
 			</category>
-			<category name="user.cms.page.comment">
+			<category name="user.fireball.page.comment">
 				<objecttype>de.codequake.cms.page</objecttype>
 			</category>
 		</categories>
 
 		<options>
-			<!-- user.cms.page -->
+			<!-- user.fireball.page -->
 			<option name="canViewPage">
-				<categoryname>user.cms.page</categoryname>
+				<categoryname>user.fireball.page</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
-			<!-- /user.cms.page -->
+			<!-- /user.fireball.page -->
 
-			<!-- user.cms.page.comment -->
+			<!-- user.fireball.page.comment -->
 			<option name="canViewComment">
-				<categoryname>user.cms.page.comment</categoryname>
+				<categoryname>user.fireball.page.comment</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
 			<option name="canAddComment">
-				<categoryname>user.cms.page.comment</categoryname>
+				<categoryname>user.fireball.page.comment</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
-			<!-- /user.cms.page.comment -->
+			<!-- /user.fireball.page.comment -->
 		</options>
 	</import>
 </data>
