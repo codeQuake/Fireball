@@ -1,6 +1,5 @@
 language: php
 php:
- - '7.0'
   - 5.6
   - 5.5
   - 5.4
@@ -12,4 +11,6 @@ before_script:
   - git clone --branch=master --depth=1 --quiet git://github.com/WoltLab/WCF.git WCF
 script:
   - find files -type f -name '*.php' |xargs -I file php -l file
+  - find files_wcf -type f -name '*.php' |xargs -I file php -l file
   - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" files
+  - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" files_wcf
