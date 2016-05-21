@@ -48,7 +48,15 @@
 		<!-- /admin -->
 	</import>
 	<delete>
-		<templatelistener name="newsTabMenuTabs" />
-		<templatelistener name="newsTabMenuContents" />
+		<templatelistener name="newsTabMenuTabs">
+			<environment>admin</environment>
+			<templatename>__indexNewsInjection</templatename>
+			<eventname>newsTabMenuTabs</eventname>
+		</templatelistener>
+		<templatelistener name="newsTabMenuContents">
+			<environment>admin</environment>
+			<templatename>__indexNewsInjection</templatename>
+			<eventname>newsTabMenuContents</eventname>
+		</templatelistener>
 	</delete>
 </data>
