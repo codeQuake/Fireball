@@ -29,7 +29,7 @@ CategoryEditor::create(array(
 
 // add codequake update server
 if (isset($this->instruction['attributes']['installupdateserver']) && $this->instruction['attributes']['installupdateserver'] == 1) {
-	$serverURL = 'http://codequake.de/packages/typhoon/';
+	$serverURL = 'https://update.mysterycode.de/typhoon/';
 
 	// check if update server already exists
 	$sql = "SELECT	packageUpdateServerID
