@@ -53,7 +53,8 @@ class TemplateContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		if (empty($content->compiled[WCF::getLanguage()->languageCode])) {
+		$compiled = $content->compiled;
+		if (empty($compiled[WCF::getLanguage()->languageCode])) {
 			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
 			
 			$contentData = $content->contentData;
