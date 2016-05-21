@@ -15,8 +15,8 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="2.1.0">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="1.1.0" file="requirements/de.codequake.wysiwyg.acp.tar">de.codequake.wysiwyg.acp</requiredpackage>
-		<requiredpackage minversion="1.1.2" file="requirements/de.codequake.wcf.acp.index.news.tar">de.codequake.wcf.acp.index.news</requiredpackage>
+		<requiredpackage minversion="1.1.0">de.codequake.wysiwyg.acp</requiredpackage>
+		<requiredpackage minversion="1.1.2">de.codequake.wcf.acp.index.news</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
