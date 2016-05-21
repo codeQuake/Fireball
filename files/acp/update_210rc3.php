@@ -14,14 +14,15 @@ use wcf\data\object\type\ObjectTypeCache;
  */
 
 $id = ObjectTypeCache::getInstance()->getObjectTypeIDByName(
-        'de.codequake.cms.content.type', 
-        'de.codequake.cms.content.type.headline');
+		'de.codequake.cms.content.type', 
+		'de.codequake.cms.content.type.headline');
 $list = new ContentList();
-$list->getConditionBuilder()->add('content.position', array(
-        'sidebar'
-));
+$list->getConditionBuilder()->add('content.position', 
+	array(
+		'sidebar'
+	));
 $list->getConditionBuilder()->add('content.contentTypeID', array(
-        $id
+	$id
 ));
 $list->readObjects();
 
@@ -32,26 +33,28 @@ $action = new ContentAction($affectedObjects, 'delete', array());
 $action->executeAction();
 
 $id = ObjectTypeCache::getInstance()->getObjectTypeIDByName(
-        'de.codequake.cms.content.type', 
-        'de.codequake.cms.content.type.template');
+	'de.codequake.cms.content.type', 
+	'de.codequake.cms.content.type.template'
+);
 $list = new ContentList();
 $list->getConditionBuilder()->add('content.contentTypeID', array(
-        $id
+	$id
 ));
 $list->readObjects();
 $affectedObjects = $list->getObjects();
 
 // clear compiled
 foreach ($affectedObjects as $content) {
-    if (! empty($content->compiled)) {
-        $contentData = $content->contentData;
-        $tmpArray = unserialze($contentData);
-        unset($tmpArray['compiled']);
-        $contentData = serialze($tmpArray);
-        
-        $contentEditor = new ContentEditor($content);
-        $contentEditor->update(array(
-                'contentData' => $contentData
-        ));
-    }
+	if (! empty($content->compiled)) {
+		$contentData = $content->contentData;
+		$tmpArray = unserialze($contentData);
+		unset($tmpArray['compiled']);
+		$contentData = serialze($tmpArray);
+		
+		$contentEditor = new ContentEditor($content);
+		$contentEditor->update(
+			array(
+				'contentData' => $contentData
+			));
+	}
 }
