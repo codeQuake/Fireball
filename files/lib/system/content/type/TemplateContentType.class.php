@@ -2,7 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use cms\data\content\ContentEditor;
+use cms\data\content\ContentAction;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\RequestHandler;
@@ -32,13 +32,13 @@ class TemplateContentType extends AbstractContentType {
 		if (!isset($data['text']) || empty($data['text'])) {
 			throw new UserInputException('text');
 		}
-
+		
 		// check template code
 		try {
 			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template', $data['text'], array(), true);
 			
 			// cache compiled template with content
-			RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->contentData['compiled'] = $compiled;
+			RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
 		}
 		catch (SystemException $e) {
 			WCF::getTPL()->assign(array(
@@ -53,10 +53,25 @@ class TemplateContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		if (!$content->compiled) {
-			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
+		$compiled = empty($content->contentData['compiled']) ? array() : $content->compiled;
+		
+		if (empty($compiled[WCF::getLanguage()->languageCode])) {
+			$compiled[WCF::getLanguage()->languageCode] = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
+			
+			$contentData = array(
+				'contentData' => array_merge (
+					$content->contentData,
+					array (
+						'compiled' => $compiled
+					)
+				)
+			);
+			$contentAction = new ContentAction(array($content), 'update', array('data' => $contentData));
+			$contentAction->executeAction();
+			
+			$compiled = $compiled[WCF::getLanguage()->languageCode];
 		} else {
-			$compiled = $content->compiled;
+			$compiled = $content->compiled[WCF::getLanguage()->languageCode];
 		}
 
 		return WCF::getTPL()->fetchString($compiled['template']);
