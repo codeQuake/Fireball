@@ -53,27 +53,20 @@ class TemplateContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$compiled = empty($content->contentData['compiled']) ? array() : $content->compiled;
-		
-		if (empty($compiled[WCF::getLanguage()->languageCode])) {
-			$compiled[WCF::getLanguage()->languageCode] = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
+		if (empty($content->compiled[WCF::getLanguage()->languageCode])) {
+			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
 			
-			$contentData = array(
-				'contentData' => array_merge (
-					$content->contentData,
-					array (
-						'compiled' => $compiled
-					)
-				)
-			);
-			$contentAction = new ContentAction(array($content), 'update', array('data' => $contentData));
+			$contentData = $content->contentData;
+			if (!is_array($contentData))
+				$contentData = unserialize($contentData);
+			$contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
+			
+			$contentAction = new ContentAction(array($content), 'update', array('data' => array('contentData' => $contentData)));
 			$contentAction->executeAction();
-			
-			$compiled = $compiled[WCF::getLanguage()->languageCode];
 		} else {
 			$compiled = $content->compiled[WCF::getLanguage()->languageCode];
 		}
-
+		
 		return WCF::getTPL()->fetchString($compiled['template']);
 	}
 }
