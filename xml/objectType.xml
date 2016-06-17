@@ -302,6 +302,21 @@
 			<classname><![CDATA[cms\system\importer\PageImporter]]></classname>
 		</type>
 		<type>
+			<name>de.codequake.cms.content</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\ContentImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.file</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\FileImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.stylesheet</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\StylesheetImporter]]></classname>
+		</type>
+		<type>
 			<name>de.codequake.cms.page.comment</name>
 			<definitionname>com.woltlab.wcf.importer</definitionname>
 			<classname><![CDATA[cms\system\importer\PageCommentImporter]]></classname>
