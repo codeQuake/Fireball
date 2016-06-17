@@ -294,6 +294,32 @@
 			<categoryname>de.codequake.cms</categoryname>
 		</type>
 		<!-- /stat handlers -->
+		
+		<!-- importer -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\PageImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.page.comment</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\PageCommentImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.page.comment.response</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\PageCommentResponseImporter]]></classname>
+		</type>
+		<!-- /importer -->
+		
+		<!-- exporter -->
+		<type>
+			<name>de.codequake.cms.infinitePortalToFireball</name>
+			<definitionname>com.woltlab.wcf.exporter</definitionname>
+			<classname>cms\system\exporter\InfinitePortalExporter</classname>
+		</type>
+		<!-- /exporter -->
 	</import>
 
 	<delete>
