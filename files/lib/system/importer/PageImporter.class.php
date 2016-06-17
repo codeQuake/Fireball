@@ -1,10 +1,10 @@
 <?php
 
 namespace cms\system\importer;
-use wcf\system\importer\AbstractImporter;
-use wcf\system\importer\ImportHandler;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
+use wcf\system\importer\AbstractImporter;
+use wcf\system\importer\ImportHandler;
 
 /**
  * Provides an importer for pages
