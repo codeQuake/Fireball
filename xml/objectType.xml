@@ -321,11 +321,4 @@
 		</type>
 		<!-- /exporter -->
 	</import>
-
-	<delete>
-		<!-- finally remove dashboard container for people who updated from beta 7 -->
-		<type name="de.codequake.cms.page">
-			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
-		</type>
-	</delete>
 </data>
