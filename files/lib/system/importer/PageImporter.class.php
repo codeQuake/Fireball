@@ -24,7 +24,18 @@ class PageImporter extends AbstractImporter {
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
-		$data['userID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['userID']);
+		if (!empty($data['authorID']))
+			$data['authorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['authorID']);
+		if (!empty($data['lastEditorID']))
+			$data['lastEditorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['lastEditorID']);
+		
+		$stylesheetIDs = array();
+		if (!empty($additionalData['stylesheetIDs'])) {
+			foreach ($additionalData['stylesheetIDs'] as $stylesheetID) {
+				$stylesheetIDs[] = ImportHandler::getInstance()->getNewID('de.codequake.cms.stylesheet', $stylesheetID);
+			}
+			$additionalData['stylesheetIDs'] = $stylesheetIDs;
+		}
 		
 		if (is_numeric($oldID)) {
 			$page = new Page($oldID);
@@ -32,9 +43,9 @@ class PageImporter extends AbstractImporter {
 				$data['pageID'] = $oldID;
 		}
 		
-		$action = new PageAction(array(), 'create', array(
-			'data' => $data
-		));
+		$action = new PageAction(array(), 'create', array_merge($additionalData, array(
+			'data' => $data,
+		)));
 		$returnValues = $action->executeAction();
 		$newID = $returnValues['returnValues']->pageID;
 		$page = new Page($newID);
