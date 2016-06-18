@@ -2,7 +2,6 @@
 
 namespace cms\system\importer;
 use cms\data\content\Content;
-use cms\data\content\Content;
 use cms\data\content\ContentAction;
 use wcf\system\importer\AbstractImporter;
 use wcf\system\importer\ImportHandler;
