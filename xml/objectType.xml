@@ -312,6 +312,11 @@
 			<classname><![CDATA[cms\system\importer\FileImporter]]></classname>
 		</type>
 		<type>
+			<name>de.codequake.cms.file.category</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\FileCategoryImporter]]></classname>
+		</type>
+		<type>
 			<name>de.codequake.cms.stylesheet</name>
 			<definitionname>com.woltlab.wcf.importer</definitionname>
 			<classname><![CDATA[cms\system\importer\StylesheetImporter]]></classname>
