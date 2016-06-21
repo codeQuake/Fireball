@@ -24,13 +24,21 @@ class ContentImporter extends AbstractImporter {
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
-		$data['parentID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.content', $data['parentID']);
+		if (empty($data['dontUpdateParentID']))
+			$data['parentID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.content', $data['parentID']);
+		else
+			unset($data['dontUpdateParentID']);
+		
 		$data['pageID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.page', $data['pageID']);
 		
 		if (is_numeric($oldID)) {
 			$content = new Content($oldID);
 			if (!$content->contentID)
 				$data['contentID'] = $oldID;
+		}
+		
+		if (!empty($data['contentData']['pageID'])) {
+			$data['contentData']['pageID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.page', $data['pageID']);
 		}
 		
 		if (is_array($data['contentData'])) {
