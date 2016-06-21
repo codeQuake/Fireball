@@ -204,11 +204,11 @@ class InfinitePortalExporter extends AbstractExporter {
 			
 			$additionalDataColumn = array();
 			if ($row['contentItemType'] == 1) {
-				$pageObjectType = ObjectTypeCache::getInstance()->getObjectType('de.codequake.cms.page.type.link');
+				$pageObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.page.type.link', 'de.codequake.cms.page.type');
 				$additionalDataColumn['url'] = $row['externalURL'];
 				$additionalDataColumn['delayedRedirect'] = 1;
 			} else {
-				$pageObjectType = ObjectTypeCache::getInstance()->getObjectType('de.codequake.cms.page.type.page');
+				$pageObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.page.type.page', 'de.codequake.cms.page.type');
 			}
 			
 			$pageID = ImportHandler::getInstance()->getImporter('de.codequake.cms.page')->import($row['contentItemID'], array(
@@ -277,7 +277,7 @@ class InfinitePortalExporter extends AbstractExporter {
 					$tabListStatement = $this->database->prepareStatement($sql);
 					$tabListStatement->execute(array($box['boxID']));
 					
-					$contentObjectType = ObjectTypeCache::getInstance()->getObjectType('de.codequake.cms.content.type.tabmenu');
+					$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type.tabmenu', 'de.codequake.cms.content.type');
 					$contentID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import('b' . $box['boxID'], array(
 						'pageID' => $row['contentItemID'],
 						'title' => '',
@@ -302,13 +302,13 @@ class InfinitePortalExporter extends AbstractExporter {
 						
 						$contentData = array();
 						if ($tab['boxTabType'] == 'html') {
-							$contentObjectType = ObjectTypeCache::getInstance()->getObjectType('de.codequake.cms.content.type.template');
+							$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type.template', 'de.codequake.cms.content.type');
 							$contentData['text'] = $this->getLangItem($options['text'], $this->oldLanguages['default']['languageID']);
 						} else if ($tab['boxTabType'] == 'html') {
-							$contentObjectType = ObjectTypeCache::getInstance()->getObjectType('de.codequake.cms.content.type.wsipimport');
+							$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type.wsipimport', 'de.codequake.cms.content.type');
 							$contentData['text'] = $options['htmlCode'];
 						} else if ($tab['boxTabType'] == 'contentItems') {
-							$contentObjectType = ObjectTypeCache::getInstance()->getObjectType('de.codequake.cms.content.type.menu');
+							$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type.menu', 'de.codequake.cms.content.type');
 							$contentData['type'] = 'children';
 							$contentData['pageID'] = $options['contentItems'];
 						} else {
@@ -329,7 +329,7 @@ class InfinitePortalExporter extends AbstractExporter {
 				}
 			} else {
 				// html content
-				$contentObjectType = ObjectTypeCache::getInstance()->getObjectType('de.codequake.cms.content.type.wsipimport');
+				$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type.wsipimport', 'de.codequake.cms.content.type');
 				$contentID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import($row['contentItemID'], array(
 					'pageID' => $row['contentItemID'],
 					'title' => '',
