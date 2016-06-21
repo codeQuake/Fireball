@@ -39,6 +39,10 @@ class PageImporter extends AbstractImporter {
 			$additionalData['stylesheetIDs'] = $stylesheetIDs;
 		}
 		
+		if (is_array($data['additionalData'])) {
+			$data['additionalData'] = serialize($data['additionalData']);
+		}
+		
 		if (is_numeric($oldID)) {
 			$page = new Page($oldID);
 			if (!$page->pageID)
