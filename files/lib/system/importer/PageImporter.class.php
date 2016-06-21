@@ -28,6 +28,8 @@ class PageImporter extends AbstractImporter {
 			$data['authorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['authorID']);
 		if (!empty($data['lastEditorID']))
 			$data['lastEditorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['lastEditorID']);
+		if (!empty($data['parentID']))
+			$data['parentID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.page', $data['parentID']);
 		
 		$stylesheetIDs = array();
 		if (!empty($additionalData['stylesheetIDs'])) {
