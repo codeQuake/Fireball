@@ -3,9 +3,9 @@
 namespace cms\system\exporter;
 use cms\data\page\Page;
 use cms\util\PageUtil;
-use wcf\data\DatabaseObject;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
+use wcf\data\DatabaseObject;
 use wcf\system\database\DatabaseException;
 use wcf\system\exporter\AbstractExporter;
 use wcf\system\importer\ImportHandler;
