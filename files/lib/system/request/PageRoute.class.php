@@ -174,7 +174,7 @@ class PageRoute implements IRoute {
 	 * @param	string		$controller
 	 * @return	string
 	 */
-	protected function getControllerName($application = 'cms', $controller = 'Page') {
+	protected function getControllerName($controller = 'Page') {
 		if (!isset($this->controllerNames[$controller])) {
 			$controllerName = RequestHandler::getTokenizedController($controller);
 			$alias = RequestHandler::getInstance()->getAliasByController($controllerName);
