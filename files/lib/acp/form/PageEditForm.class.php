@@ -4,12 +4,9 @@ namespace cms\acp\form;
 use cms\data\page\DrainedPageNodeTree;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
-use cms\data\page\PageEditor;
 use cms\data\page\PageNodeTree;
 use cms\util\PageUtil;
-use wcf\data\page\menu\item\PageMenuItem;
-use wcf\data\page\menu\item\PageMenuItemAction;
-use wcf\data\page\menu\item\PageMenuItemEditor;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
@@ -60,6 +57,11 @@ class PageEditForm extends PageAddForm {
 		$this->page = new Page($this->pageID);
 		if (!$this->page->pageID) {
 			throw new IllegalLinkException();
+		}
+		
+		if (empty($_POST)) {
+			$this->pageObjectType = ObjectTypeCache::getInstance()->getObjectType($this->page->objectTypeID);
+			$this->pageObjectTypeID = $this->pageObjectType->objectTypeID;
 		}
 	}
 
@@ -143,7 +145,10 @@ class PageEditForm extends PageAddForm {
 			'styleID' => ($this->styleID) ?: null,
 
 			// display settings
-			'sidebarOrientation' => $this->sidebarOrientation
+			'sidebarOrientation' => $this->sidebarOrientation,
+			
+			// page type
+			'objectTypeID' => $this->pageObjectTypeID
 		);
 
 		// publication
@@ -159,10 +164,11 @@ class PageEditForm extends PageAddForm {
 			$data['deactivationDate'] = @strtotime($this->publicationDate);
 		}
 
-		$pageData = array(
+		$specificPageData =  $this->pageObjectType->getProcessor()->getSaveArray();
+		$pageData = array_merge_recursive($specificPageData, array(
 			'data' => $data,
 			'stylesheetIDs' => $this->stylesheetIDs
-		);
+		));
 
 		$this->objectAction = new PageAction(array($this->pageID), 'update', $pageData);
 		$this->objectAction->executeAction();
@@ -240,6 +246,10 @@ class PageEditForm extends PageAddForm {
 
 			// display settings
 			$this->sidebarOrientation = $this->page->sidebarOrientation;
+			
+			// page type
+			$this->pageObjectTypeID = $this->page->objectTypeID;
+			$this->pageObjectType = ObjectTypeCache::getInstance()->getObjectType($this->pageObjectTypeID);
 		}
 	}
 

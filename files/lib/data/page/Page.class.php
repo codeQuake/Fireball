@@ -8,9 +8,9 @@ use cms\system\page\PagePermissionHandler;
 use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
-use wcf\system\menu\page\PageMenu;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -39,6 +39,34 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	 * @var	array<\cms\data\page\revision\PageRevision>
 	 */
 	protected $revisions = null;
+
+	/**
+	 * @see	\wcf\data\IStorableObject::__get()
+	 */
+	public function __get($name) {
+		$value = parent::__get($name);
+	
+		// search additional data if unknown information requested
+		if ($value === null) {
+			if (isset($this->data['additionalData'][$name])) {
+				return $this->data['additionalData'][$name];
+			}
+		}
+	
+		return $value;
+	}
+
+	/**
+	 * @see	\wcf\data\DatabaseObject::handleData()
+	 */
+	protected function handleData($data) {
+		parent::handleData($data);
+
+		$this->data['additionalData'] = @unserialize($this->data['additionalData']);
+		if (!is_array($this->data['additionalData'])) {
+			$this->data['additionalData'] = array();
+		}
+	}
 
 	/**
 	 * Returns whether the current user can delete this page.
@@ -295,5 +323,19 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Returns the object type of the page
+	 * 
+	 * @return \wcf\data\object\type\ObjectType
+	 */
+	public function getObjectType() {
+		return ObjectTypeCache::getInstance()->getObjectType($this->objectTypeID);
+	}
+	
+	public function getTypeName() {
+		$this->objectType = $this->getObjectType();
+		return $this->objectType->objectType;
 	}
 }

@@ -7,30 +7,24 @@ use cms\data\content\ContentList;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\cache\builder\PageCacheBuilder;
-use cms\system\cache\builder\PagePermissionCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
-use cms\system\language\RevisionI18nHandler;
 use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\util\PageUtil;
-use wcf\data\object\type\ObjectTypeCache;
-use wcf\data\page\menu\item\PageMenuItemAction;
-use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
+use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\page\menu\item\PageMenuItemAction;
+use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\system\clipboard\ClipboardHandler;
-use wcf\system\exception\AJAXException;
-use wcf\system\exception\NamedUserException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
-use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
-use wcf\system\request\LinkHandler;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\user\object\watch\UserObjectWatchHandler;
-use wcf\system\Regex;
 use wcf\system\WCF;
+use cms\system\page\type\PagePageType;
 
 /**
  * Executes page-related actions.
@@ -156,6 +150,10 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 		if (!isset($this->parameters['data']['lastEditTime'])) {
 			$this->parameters['data']['lastEditTime'] = $this->parameters['data']['creationTime'];
+		}
+		
+		if (isset($this->parameters['data']['additionalData']) && is_array($this->parameters['data']['additionalData'])) {
+			$this->parameters['data']['additionalData'] = serialize($this->parameters['data']['additionalData']);
 		}
 
 		// create page itself
@@ -582,6 +580,10 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		if (!isset($this->parameters['data']['lastEditTime'])) {
 			$this->parameters['data']['lastEditTime'] = TIME_NOW;
 		}
+		
+		if (isset($this->parameters['data']['additionalData']) && is_array($this->parameters['data']['additionalData'])) {
+			$this->parameters['data']['additionalData'] = serialize($this->parameters['data']['additionalData']);
+		}
 
 		// perform update
 		parent::update();
@@ -669,5 +671,29 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		WCF::getDB()->commitTransaction();
+	}
+
+	public function validateGetTypeSpecificForm() {
+		if (empty($this->parameters['objectTypeID']))
+			throw new UserInputException('objectTypeID');
+		
+		$processor = ObjectTypeCache::getInstance()->getObjectType($this->parameters['objectTypeID'])->getProcessor();
+		if (!$processor->isAvailableToAdd())
+			throw new PermissionDeniedException();
+	}
+
+	public function getTypeSpecificForm() {
+		$processor = ObjectTypeCache::getInstance()->getObjectType($this->parameters['objectTypeID'])->getProcessor();
+		$template = $processor->getCompiledFormTemplate();
+		
+		if (!empty($this->parameters['pageID'])) {
+			$page = PageCache::getInstance()->getPage($this->parameters['pageID']);
+			if ($page === null)
+				throw new UserInputException('pageID');
+		}
+		
+		return array(
+			'template' => $template
+		);
 	}
 }

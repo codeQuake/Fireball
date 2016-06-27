@@ -31,7 +31,22 @@
 			<listclassname>cms\data\stylesheet\StylesheetList</listclassname>
 		</type>
 		<!-- /clipboard -->
-
+		
+		<!-- page types -->
+		<type>
+			<name>de.codequake.cms.page.type.page</name>
+			<definitionname>de.codequake.cms.page.type</definitionname>
+			<classname>cms\system\page\type\PagePageType</classname>
+			<pageclass>cms\page\Page</pageclass>
+		</type>
+		<type>
+			<name>de.codequake.cms.page.type.link</name>
+			<definitionname>de.codequake.cms.page.type</definitionname>
+			<classname>cms\system\page\type\LinkPageType</classname>
+			<pageclass>cms\page\Link</pageclass>
+		</type>
+		<!-- /page types -->
+		
 		<!-- content types -->
 		<type>
 			<name>de.codequake.cms.content.type.text</name>

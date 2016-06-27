@@ -23,6 +23,8 @@
 			var $toggleContainerID = $(this).data('toggleContainer');
 			$('#'+ $toggleContainerID).toggle();
 		});
+
+		new CMS.ACP.Page.TypePicker({if $pageObjectTypeID}{$pageObjectTypeID}{/if}{if !$pageID|empty}, {$pageID}{/if});
 	});
 	//]]>
 </script>
@@ -71,10 +73,33 @@
 </div>
 
 <form method="post" action="{if $action == 'add'}{link application='cms' controller='PageAdd'}{/link}{else}{link application='cms' controller='PageEdit' id=$pageID}{/link}{/if}">
+	<div class="container containerPadding marginTop">
+		<dl{if $errorField == 'pageObjectTypeID'} class="formError"{/if}>
+			<dt><label for="pageObjectTypeID">{lang}cms.page.type{/lang}</label></dt>
+			<dd>
+				<select id="pageObjectTypeID" name="pageObjectTypeID" required="required">
+					{foreach from=$availablePageTypes item=pageType}
+						<option value="{$pageType->objectTypeID}"{if $pageObjectTypeID == $pageType->objectTypeID} selected="selected"{/if}>{lang}cms.acp.page.type.{$pageType->objectType}{/lang}</option>
+					{/foreach}
+				</select>
+				{if $errorField == 'pageObjectTypeID'}
+					<small class="innerError">
+						{if $errorType == 'empty'}
+							{lang}wcf.global.form.error.empty{/lang}
+						{else}
+							{lang}cms.acp.page.type.error.{@$errorType}{/lang}
+						{/if}
+					</small>
+				{/if}
+			</dd>
+		</dl>
+	</div>
+	
 	<div class="tabMenuContainer" data-active="{$activeTabMenuItem}" data-store="activeTabMenuItem">
 		<nav class="tabMenu">
 			<ul>
 				<li><a href="{@$__wcf->getAnchor('general')}">{lang}cms.acp.page.general{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('specific')}">{lang}cms.acp.page.specific{/lang}</a></li>
 				<li><a href="{@$__wcf->getAnchor('display')}">{lang}cms.acp.page.display{/lang}</a></li>
 				<li><a href="{@$__wcf->getAnchor('userPermissions')}">{lang}cms.acp.page.userPermissions{/lang}</a></li>
 				{event name='tabMenuTabs'}
@@ -84,7 +109,7 @@
 		<div id="general" class="container containerPadding tabMenuContent">
 			<fieldset>
 				<legend>{lang}wcf.global.form.data{/lang}</legend>
-
+				
 				<dl{if $errorField == 'title'} class="formError"{/if}>
 					<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
 					<dd>
@@ -307,14 +332,6 @@
 					</dd>
 				</dl>
 
-				<dl{if $errorField == 'isCommentable'} class="formError"{/if}>
-					<dt class="reversed"><label for="isCommentable">{lang}cms.acp.page.settings.isCommentable{/lang}</label></dt>
-					<dd>
-						<input type="checkbox" name="isCommentable" id="isCommentable" value="1"{if $isCommentable == 1} checked="checked"{/if} />
-						<small>{lang}cms.acp.page.settings.isCommentable.description{/lang}</small>
-					</dd>
-				</dl>
-
 				<dl{if $errorField == 'availableDuringOfflineMode'} class="formError"{/if}>
 					<dt class="reversed"><label for="availableDuringOfflineMode">{lang}cms.acp.page.settings.availableDuringOfflineMode{/lang}</label></dt>
 					<dd>
@@ -334,6 +351,10 @@
 			</fieldset>
 
 			{event name='fieldsets'}
+		</div>
+
+		<div id="specific" class="container containerPadding tabMenuContent">
+			{@$pageForm}
 		</div>
 
 		<div id="display" class="container containerPadding tabMenuContent">

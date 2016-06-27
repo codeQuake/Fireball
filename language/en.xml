@@ -218,6 +218,17 @@
 		<item name="cms.acp.page.stylesheets.description"><![CDATA[List of stylesheets that are loaded when viewing this page.]]></item>
 		<item name="cms.acp.page.userPermissions"><![CDATA[Permissions]]></item>
 		<item name="cms.acp.page.visibility"><![CDATA[Visibility]]></item>
+		<item name="cms.acp.page.specific"><![CDATA[Type-specific data]]></item>
+		<item name="cms.acp.page.type"><![CDATA[Pagetype]]></item>
+		<item name="cms.acp.page.type.link.general"><![CDATA[Redirection]]></item>
+		<item name="cms.acp.page.type.page.comments"><![CDATA[Comments]]></item>
+		<item name="cms.acp.page.settings.url"><![CDATA[URL]]></item>
+		<item name="cms.acp.page.settings.delay"><![CDATA[Delay]]></item>
+		<item name="cms.acp.page.settings.delayedRedirect"><![CDATA[Delayed redirect]]></item>
+		<item name="cms.acp.page.settings.delayedRedirect.description"><![CDATA[Enable this option to inform your visitors that they will get redirected. Optionally you can provide a custom hint within the following field.]]></item>
+		<item name="cms.acp.page.settings.redirectMessage"><![CDATA[Hint (optional)]]></item>
+		<item name="cms.acp.page.type.de.codequake.cms.page.type.page"><![CDATA[Page]]></item>
+		<item name="cms.acp.page.type.de.codequake.cms.page.type.link"><![CDATA[External link]]></item>
 	</category>
 
 	<category name="cms.acp.stats">
