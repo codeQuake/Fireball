@@ -16,7 +16,8 @@ final class PageUtil {
 	 * maximum length of an alias
 	 * @var	integer
 	 */
-	const ALIAS_MAXLENGTH = 25;
+	//const ALIAS_MAXLENGTH = 25;
+	const ALIAS_MAXLENGTH = 100;
 
 	/**
 	 * minimum length of an alias
