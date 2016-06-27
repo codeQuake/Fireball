@@ -192,6 +192,14 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>
 		</type>
+		<type>
+			<name>de.codequake.cms.content.type.wsipimport</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\WSIPImportContentType</classname>
+			<category>code</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>0</allowsidebar>
+		</type>
 		<!-- /content types -->
 
 		<!-- search -->
