@@ -335,11 +335,6 @@
 		
 		<!-- exporter -->
 		<type>
-			<name>de.codequake.cms.infinitePortalToFireball</name>
-			<definitionname>com.woltlab.wcf.exporter</definitionname>
-			<classname>cms\system\exporter\InfinitePortalExporter</classname>
-		</type>
-		<type>
 			<name>de.codequake.cms.fireball2ToFireball</name>
 			<definitionname>com.woltlab.wcf.exporter</definitionname>
 			<classname>cms\system\exporter\Fireball2Exporter</classname>
