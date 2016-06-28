@@ -3,7 +3,6 @@ namespace wcf\system\event\listener;
 
 use cms\system\request\PageRoute;
 use wcf\system\event\listener\IParameterizedEventListener;
-// use wcf\system\event\listener\IEventListener;
 
 /**
  * Registers all cms specific routes.
