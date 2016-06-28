@@ -326,7 +326,7 @@ class Fireball2Exporter extends AbstractExporter {
 			FROM	wcf".$this->dbNo."_package
 			WHERE	package = ?";
 		$statement = $this->database->prepareStatement($sql, 1);
-		$statement->execute(['de.codequake.cms']);
+		$statement->execute(array('de.codequake.cms'));
 		$packageDir = $statement->fetchColumn();
 		$path = FileUtil::getRealPath($this->fileSystemPath . '/' . $packageDir);
 		
