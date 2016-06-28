@@ -24,6 +24,11 @@ class WSIPImportContentType extends TemplateContentType {
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
 	 */
 	protected $previewFields = array('text');
+	
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$templateName
+	 */
+	public $templateName = 'wsipImportContentType';
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::validate()
