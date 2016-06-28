@@ -250,6 +250,12 @@
 		<item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
 	</category>
 
+	<category name="cms.dashboard">
+		<item name="cms.dashboard.all"><![CDATA[Alle Besucher]]></item>
+		<item name="cms.dashboard.registered"><![CDATA[Registrierte Benutzer]]></item>
+		<item name="cms.dashboard.spiders"><![CDATA[Suchmaschinenroboter]]></item>
+	</category>
+
 	<category name="cms.global">
 		<item name="cms.global.page"><![CDATA[Seite]]></item>
 	</category>
@@ -299,6 +305,16 @@
 		<item name="wcf.acl.option.de.codequake.cms.page.canAddComment"><![CDATA[Kann Kommentare erstellen]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewComment"><![CDATA[Kann Kommentare sehen]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewPage"><![CDATA[Kann Seite sehen]]></item>
+	</category>
+
+	<category name="wcf.acp.dataImport">
+		<item name="wcf.acp.dataImport.exporter.de.codequake.cms.fireball2ToFireball"><![CDATA[Fireball CMS 2.0/2.1]]></item>
+		<item name="wcf.acp.dataImport.data.de.codequake.cms.page"><![CDATA[Seiten]]></item>
+		<item name="wcf.acp.dataImport.data.de.codequake.cms.page.content"><![CDATA[Inhalte]]></item>
+		<item name="wcf.acp.dataImport.data.de.codequake.cms.page.comment"><![CDATA[Kommentare]]></item>
+		<item name="wcf.acp.dataImport.data.de.codequake.cms.file.category"><![CDATA[Kategorien]]></item>
+		<item name="wcf.acp.dataImport.data.de.codequake.cms.file"><![CDATA[Dateien]]></item>
+		<item name="wcf.acp.dataImport.data.de.codequake.cms.stylesheet"><![CDATA[Stylesheets]]></item>
 	</category>
 
 	<category name="wcf.acp.group">
@@ -407,6 +423,7 @@
 	<category name="wcf.dashboard">
 		<item name="wcf.dashboard.box.de.codequake.cms.latestPages"><![CDATA[Zuletzt erstellte Seiten]]></item>
 		<item name="wcf.dashboard.box.de.codequake.cms.mostViewedPages"><![CDATA[Meistbesuchte Seiten]]></item>
+		<item name="wcf.dashboard.box.de.codequake.cms.visitorsWeekly"><![CDATA[Statistik der letzten 7 Tage]]></item>
 	</category>
 
 	<category name="wcf.page">
