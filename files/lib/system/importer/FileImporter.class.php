@@ -5,6 +5,7 @@ use cms\data\file\File;
 use cms\data\file\FileAction;
 use wcf\system\importer\AbstractImporter;
 use wcf\system\importer\ImportHandler;
+use wcf\util\FileUtil;
 
 /**
  * Provides an importer for files
@@ -49,13 +50,23 @@ class FileImporter extends AbstractImporter {
 			$updateAction->executeAction();
 		}
 		
-		if (copy($additionalData['fileLocation'], $file->getLocation())) {
-			ImportHandler::getInstance()->saveNewID('de.codequake.cms.file', $oldID, $file->fileID);
-		} else {
+		$dir = dirname($file->getLocation());
+		if (!@file_exists($dir)) {
+			FileUtil::makePath($dir, 0777);
+		}
+		
+		// copy file
+		try {
+			if (!copy($additionalData['fileLocation'], $file->getLocation()))
+				throw new SystemException();
+		}
+		catch (SystemException $e) {
 			$deleteAction = new FileAction(array($file), 'delete');
 			$deleteAction->executeAction();
-			return;
+			return 0;
 		}
+		
+		ImportHandler::getInstance()->saveNewID('de.codequake.cms.file', $oldID, $file->fileID);
 		
 		return $file->fileID;
 	}

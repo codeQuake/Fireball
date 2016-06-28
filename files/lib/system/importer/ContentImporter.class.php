@@ -24,10 +24,14 @@ class ContentImporter extends AbstractImporter {
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
-		if (empty($data['dontUpdateParentID']))
-			$data['parentID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.content', $data['parentID']);
-		else
+		if (empty($data['dontUpdateParentID'])) {
+			if (!empty($data['parentID']))
+				$data['parentID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.content', $data['parentID']);
+			if (isset($data['parentID']) && $data['parentID'] == 0)
+				unset($data['parentID']);
+		} else {
 			unset($data['dontUpdateParentID']);
+		}
 		
 		$data['pageID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.page', $data['pageID']);
 		
@@ -41,11 +45,11 @@ class ContentImporter extends AbstractImporter {
 			$data['contentData']['pageID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.page', $data['pageID']);
 		}
 		
-		if (is_array($data['contentData'])) {
+		if (isset($data['contentData']) && is_array($data['contentData'])) {
 			$data['contentData'] = serialize($data['contentData']);
 		}
 		
-		if (is_array($data['additionalData'])) {
+		if (isset($data['additionalData']) && is_array($data['additionalData'])) {
 			$data['additionalData'] = serialize($data['additionalData']);
 		}
 		

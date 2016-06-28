@@ -25,12 +25,19 @@ class PageImporter extends AbstractImporter {
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
 		if (!empty($data['authorID']))
-			$data['authorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['authorID']);
+			$data['authorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['authorID']) ?: null;
 		if (!empty($data['lastEditorID']))
-			$data['lastEditorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['lastEditorID']);
+			$data['lastEditorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['lastEditorID']) ?: null;
 		if (!empty($data['parentID']))
-			$data['parentID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.page', $data['parentID']);
+			$data['parentID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.page', $data['parentID']) ?: null;
 		
+		if (isset($data['authorID']) && $data['authorID'] == 0)
+			unset($data['authorID']);
+		if (isset($data['lastEditorID']) && $data['lastEditorID'] == 0)
+			unset($data['lastEditorID']);
+		if (isset($data['parentID']) && $data['parentID'] == 0)
+			unset($data['parentID']);
+			
 		$stylesheetIDs = array();
 		if (!empty($additionalData['stylesheetIDs'])) {
 			foreach ($additionalData['stylesheetIDs'] as $stylesheetID) {

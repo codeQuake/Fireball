@@ -1,20 +1,28 @@
 <?php
 
 namespace cms\system\importer;
+use wcf\data\category\CategoryEditor;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\importer\AbstractCategoryImporter;
+use wcf\system\importer\ImportHandler;
 
 class FileCategoryImporter extends AbstractCategoryImporter {
 	/**
-	 * @see	\wcf\system\importer\AbstractCategoryImporter::$objectTypeName
+	 * @see	\wcf\system\importer\AbstractImporter::$className
 	 */
-	protected $objectTypeName = 'de.codequake.cms.file';
+	protected $className = 'wcf\data\category\Category';
 	
 	/**
-	 * Initializes the file category importer.
+	 * @see	\wcf\system\importer\IImporter::import()
 	 */
-	public function __construct() {
-		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.file', $this->objectTypeName);
-		$this->objectTypeID = $objectType->objectTypeID;
+	public function import($oldID, array $data, array $additionalData = array()) {
+		if (!empty($data['parentCategoryID'])) $data['parentCategoryID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.file.category', $data['parentCategoryID']);
+		
+		$objectTypeID = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.codequake.cms.file')->objectTypeID;
+		$category = CategoryEditor::create(array_merge($data, array('objectTypeID' => $objectTypeID)));
+		
+		ImportHandler::getInstance()->saveNewID('de.codequake.cms.file.category', $oldID, $category->categoryID);
+		
+		return $category->categoryID;
 	}
 }
