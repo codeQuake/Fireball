@@ -275,6 +275,7 @@ class InfinitePortalExporter extends AbstractExporter {
 					$sql = "SELECT	*
 						FROM	wcf" . $this->wcfNo . "_box_tab tab
 						WHERE	tab.boxID = ?
+							AND item_box.boxID = box.boxID
 						ORDER BY	showOrder";
 					$tabListStatement = $this->database->prepareStatement($sql);
 					$tabListStatement->execute(array($box['boxID']));
