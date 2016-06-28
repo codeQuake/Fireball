@@ -13,7 +13,7 @@ use wcf\form\AbstractForm;
  */
 class PagePageType extends AbstractPageType {
 	/**
-	 *  @see  \cms\system\page\type\AbstractPageType::$assignValues
+	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
 	 */
 	public $assignValues = array(
 		'isCommentable' => CMS_PAGES_DEFAULT_COMMENTS

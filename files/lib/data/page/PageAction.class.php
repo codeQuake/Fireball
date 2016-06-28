@@ -10,13 +10,13 @@ use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
 use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\util\PageUtil;
+use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\page\menu\item\PageMenuItemAction;
+use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
-use wcf\data\object\type\ObjectTypeCache;
-use wcf\data\page\menu\item\PageMenuItemAction;
-use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
@@ -24,7 +24,6 @@ use wcf\system\language\LanguageFactory;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\user\object\watch\UserObjectWatchHandler;
 use wcf\system\WCF;
-use cms\system\page\type\PagePageType;
 
 /**
  * Executes page-related actions.

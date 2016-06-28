@@ -4,11 +4,11 @@ namespace cms\system\request;
 use cms\data\page\PageCache;
 use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\util\PageUtil;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\request\IRoute;
 use wcf\system\request\RequestHandler;
 use wcf\util\HeaderUtil;
-use wcf\data\object\type\ObjectTypeCache;
 
 /**
  * Route implementation for cms pages.
