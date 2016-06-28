@@ -476,8 +476,6 @@ class PageAddForm extends AbstractForm {
 			'data' => $data,
 			'stylesheetIDs' => $this->stylesheetIDs
 		));
-		var_dump($specificPageData, $pageData);
-		exit;
 
 		$this->objectAction = new PageAction(array(), 'create', $pageData);
 		$returnValues = $this->objectAction->executeAction();
