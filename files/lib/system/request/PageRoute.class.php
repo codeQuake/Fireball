@@ -35,7 +35,8 @@ class PageRoute implements IRoute {
 	 * @see	\wcf\system\request\IRoute::buildLink()
 	 */
 	public function buildLink(array $components) {
-		$this->landingPage = PageMenu::getInstance()->getLandingPage();
+		if ($this->landingPage === null)
+			$this->landingPage = PageMenu::getInstance()->getLandingPage();
 		$processor = $this->landingPage->getProcessor();
 		if ($processor instanceof CMSPageMenuItemProvider) {
 			$page = $processor->getPage();
@@ -164,7 +165,8 @@ class PageRoute implements IRoute {
 			return true;
 		}
 		
-		$this->landingPage = PageMenu::getInstance()->getLandingPage();
+		if ($this->landingPage === null)
+			$this->landingPage = PageMenu::getInstance()->getLandingPage();
 		$processor = $this->landingPage->getProcessor();
 		if (empty($_GET['ajax-proxy']) && empty($_GET['t']) && empty($_POST['actionName']) && empty($_POST['className']) && empty($_GET['alias']) && $processor instanceof CMSPageMenuItemProvider) {
 			$page = $processor->getPage();
