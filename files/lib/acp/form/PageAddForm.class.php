@@ -470,8 +470,6 @@ class PageAddForm extends AbstractForm {
 		));
 
 		$this->objectAction = new PageAction(array(), 'create', $pageData);
-		var_dump($pageData);
-		exit;
 		$returnValues = $this->objectAction->executeAction();
 
 		$pageEditor = new PageEditor($returnValues['returnValues']);
