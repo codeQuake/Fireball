@@ -78,7 +78,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		
 		$this->availableLanguages = LanguageFactory::getInstance()->getLanguages();
 		
-		$this->getOldLanguage();
+		$this->getOldLanguages();
 	}
 	
 	/**
@@ -91,6 +91,8 @@ class InfinitePortalExporter extends AbstractExporter {
 			} else {
 				return true;
 			}
+		} else {
+			return true;
 		}
 	}
 	
@@ -185,7 +187,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		foreach ($this->pages[$parentID] as $row) {
 			$additionalData = array();
 			
-			foreach ($availableLanguages as $lang) {
+			foreach ($this->availableLanguages as $lang) {
 				if (!empty($this->oldLanguages[$lang->languageCode]))
 					$titleValues[$lang->languageID] = $this->getLangItem('wsip.contentItem.' . $row['contentItem'], $this->oldLanguages[$lang->languageCode]['languageID']);
 				else
@@ -204,11 +206,11 @@ class InfinitePortalExporter extends AbstractExporter {
 			
 			$additionalDataColumn = array();
 			if ($row['contentItemType'] == 1) {
-				$pageObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.page.type.link', 'de.codequake.cms.page.type');
+				$pageObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.link');
 				$additionalDataColumn['url'] = $row['externalURL'];
 				$additionalDataColumn['delayedRedirect'] = 1;
 			} else {
-				$pageObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.page.type.page', 'de.codequake.cms.page.type');
+				$pageObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page');
 			}
 			
 			$pageID = ImportHandler::getInstance()->getImporter('de.codequake.cms.page')->import($row['contentItemID'], array(
@@ -217,7 +219,7 @@ class InfinitePortalExporter extends AbstractExporter {
 				//'styleID' => $row['styleID'], //TODO
 				'alias' => $alias,
 				'allowIndexing' => $row['allowSpidersToIndexThisPage'],
-				'pageTypeID' => $pageObjectType->objectTypeID,
+				'objectTypeID' => $pageObjectType->objectTypeID,
 				'metaKeywords' => $this->getLangItem('wsip.contentItem.' . $row['contentItem'] . '.metaKeywords', $this->oldLanguages['default']['languageID']),
 				'metaDescription' => $this->getLangItem('wsip.contentItem.' . $row['contentItem'] . '.metaDescription', $this->oldLanguages['default']['languageID']),
 				'additionalData' => serialize($additionalDataColumn)
@@ -277,7 +279,7 @@ class InfinitePortalExporter extends AbstractExporter {
 					$tabListStatement = $this->database->prepareStatement($sql);
 					$tabListStatement->execute(array($box['boxID']));
 					
-					$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type.tabmenu', 'de.codequake.cms.content.type');
+					$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.tabmenu');
 					$contentID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import('b' . $box['boxID'], array(
 						'pageID' => $row['contentItemID'],
 						'title' => '',
@@ -287,12 +289,12 @@ class InfinitePortalExporter extends AbstractExporter {
 					), $additionalData);
 					
 					while ($tab = $tabListStatement->fetchArray()) {
-						$sql = "SELECT option.*, value.*
-							FROM	wcf" . $this->wcfNo . "_box_tab_option option,
-								wcf" . $this->wcfNo . "_box_tab_option_value value,
-							WHERE	value.boxTabID = ?
-								AND option.optionID = value.optionID
-								AND option.boxTabType = ?";
+						$sql = "SELECT option_table.*, value_table.*
+							FROM	wcf" . $this->wcfNo . "_box_tab_option option_table,
+								wcf" . $this->wcfNo . "_box_tab_option_value value_table
+							WHERE	value_table.boxTabID = ?
+								AND option_table.optionID = value_table.optionID
+								AND option_table.boxTabType = ?";
 						$optionStatement = $this->database->prepareStatement($sql);
 						$optionStatement->execute(array($tab['boxTabID'], $tab['boxTabType']));
 						$options = array();
@@ -301,16 +303,16 @@ class InfinitePortalExporter extends AbstractExporter {
 						}
 						
 						$contentData = array();
-						if ($tab['boxTabType'] == 'html') {
-							$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type.template', 'de.codequake.cms.content.type');
-							$contentData['text'] = $this->getLangItem($options['text'], $this->oldLanguages['default']['languageID']);
+						if ($tab['boxTabType'] == 'content') {
+							$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.wsipimport');
+							$contentData['text'] = $this->getLangItem($options['text']['optionValue'], $this->oldLanguages['default']['languageID']);
 						} else if ($tab['boxTabType'] == 'html') {
-							$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type.wsipimport', 'de.codequake.cms.content.type');
-							$contentData['text'] = $options['htmlCode'];
+							$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.template');
+							$contentData['text'] = $options['htmlCode']['optionValue'];
 						} else if ($tab['boxTabType'] == 'contentItems') {
-							$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type.menu', 'de.codequake.cms.content.type');
+							$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.menu');
 							$contentData['type'] = 'children';
-							$contentData['pageID'] = $options['contentItems'];
+							$contentData['pageID'] = $options['contentItems']['optionValue'];
 						} else {
 							// can't import other types without problems
 							continue;
@@ -318,7 +320,7 @@ class InfinitePortalExporter extends AbstractExporter {
 						
 						$contentTabID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import('t' . $tab['boxTabID'], array(
 							'pageID' => $row['contentItemID'],
-							'title' => $this->getLangItem('wcf.box.tab.' . $row['boxTab'], $this->oldLanguages['default']['languageID']),
+							'title' => $this->getLangItem('wcf.box.tab.' . $tab['boxTab'], $this->oldLanguages['default']['languageID']),
 							'contentTypeID' => $contentObjectType->objectTypeID,
 							'contentData' => $contentData,
 							'showOrder' => $tab['showOrder'],
@@ -329,7 +331,7 @@ class InfinitePortalExporter extends AbstractExporter {
 				}
 			} else {
 				// html content
-				$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type.wsipimport', 'de.codequake.cms.content.type');
+				$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.wsipimport');
 				$contentID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import($row['contentItemID'], array(
 					'pageID' => $row['contentItemID'],
 					'title' => '',
@@ -347,9 +349,9 @@ class InfinitePortalExporter extends AbstractExporter {
 		$sql = "SELECT	*
 			FROM	wcf" . $this->wcfNo . "_language_item
 			WHERE	languageItem = ?
-				AND language = ?
-			ORDER BY	contentItemID";
-		$statement = $this->database->prepareStatement($sql, $limit, $offset);
+				AND languageID = ?
+			ORDER BY	languageItemID";
+		$statement = $this->database->prepareStatement($sql);
 		$statement->execute(array($langItem, $languageID));
 		
 		$row = $statement->fetchSingleRow();
@@ -421,8 +423,9 @@ class InfinitePortalExporter extends AbstractExporter {
 		while ($row = $statement->fetchArray()) {
 			$this->oldLanguages[$row['languageCode']] = $row;
 			
-			if (intval($row['isDefault']) == 1)
+			if (intval($row['isDefault']) == 1) {
 				$this->oldLanguages['default'] = $row;
+			}
 		}
 	}
 }
