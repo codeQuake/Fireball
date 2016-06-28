@@ -23,6 +23,8 @@
 			var $toggleContainerID = $(this).data('toggleContainer');
 			$('#'+ $toggleContainerID).toggle();
 		});
+
+		new CMS.ACP.Page.TypePicker({if $pageObjectTypeID}{$pageObjectTypeID}{/if}{if !$pageID|empty}, {$pageID}{/if});
 	});
 	//]]>
 </script>
@@ -71,10 +73,33 @@
 </div>
 
 <form method="post" action="{if $action == 'add'}{link application='cms' controller='PageAdd'}{/link}{else}{link application='cms' controller='PageEdit' id=$pageID}{/link}{/if}">
+	<div class="container containerPadding marginTop">
+		<dl{if $errorField == 'pageObjectTypeID'} class="formError"{/if}>
+			<dt><label for="pageObjectTypeID">{lang}cms.page.type{/lang}</label></dt>
+			<dd>
+				<select id="pageObjectTypeID" name="pageObjectTypeID" required="required">
+					{foreach from=$availablePageTypes item=pageType}
+						<option value="{$pageType->objectTypeID}"{if $pageObjectTypeID == $pageType->objectTypeID} selected="selected"{/if}>{lang}cms.acp.page.type.{$pageType->objectType}{/lang}</option>
+					{/foreach}
+				</select>
+				{if $errorField == 'pageObjectTypeID'}
+					<small class="innerError">
+						{if $errorType == 'empty'}
+							{lang}wcf.global.form.error.empty{/lang}
+						{else}
+							{lang}cms.acp.page.type.error.{@$errorType}{/lang}
+						{/if}
+					</small>
+				{/if}
+			</dd>
+		</dl>
+	</div>
+
 	<div class="tabMenuContainer" data-active="{$activeTabMenuItem}" data-store="activeTabMenuItem">
 		<nav class="tabMenu">
 			<ul>
 				<li><a href="{@$__wcf->getAnchor('general')}">{lang}fireball.acp.page.general{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('specific')}">{lang}fireball.acp.page.specific{/lang}</a></li>
 				<li><a href="{@$__wcf->getAnchor('display')}">{lang}fireball.acp.page.display{/lang}</a></li>
 				<li><a href="{@$__wcf->getAnchor('userPermissions')}">{lang}fireball.acp.page.userPermissions{/lang}</a></li>
 				{event name='tabMenuTabs'}
@@ -307,14 +332,6 @@
 					</dd>
 				</dl>
 
-				<dl{if $errorField == 'isCommentable'} class="formError"{/if}>
-					<dt class="reversed"><label for="isCommentable">{lang}fireball.acp.page.settings.isCommentable{/lang}</label></dt>
-					<dd>
-						<input type="checkbox" name="isCommentable" id="isCommentable" value="1"{if $isCommentable == 1} checked="checked"{/if} />
-						<small>{lang}fireball.acp.page.settings.isCommentable.description{/lang}</small>
-					</dd>
-				</dl>
-
 				<dl{if $errorField == 'availableDuringOfflineMode'} class="formError"{/if}>
 					<dt class="reversed"><label for="availableDuringOfflineMode">{lang}fireball.acp.page.settings.availableDuringOfflineMode{/lang}</label></dt>
 					<dd>
@@ -334,6 +351,10 @@
 			</fieldset>
 
 			{event name='fieldsets'}
+		</div>
+
+		<div id="specific" class="container containerPadding tabMenuContent">
+			{@$pageForm}
 		</div>
 
 		<div id="display" class="container containerPadding tabMenuContent">
@@ -378,8 +399,8 @@
 					<dt><label for="sidebarOrientation">{lang}fireball.acp.page.display.settings.sidebarOrientation{/lang}</label></dt>
 					<dd>
 						<select id="sidebarOrientation" name="sidebarOrientation">
-							<option value="right"{if $sidebarOrientation =="right"} selected="selected"{/if}>{lang}fireball.acp.page.display.settings.sidebarOrientation.right{/lang}</option>
-							<option value="left"{if $sidebarOrientation =="left"} selected="selected"{/if}>{lang}fireball.acp.page.display.settings.sidebarOrientation.left{/lang}</option>
+							<option value="right"{if $sidebarOrientation == "right"} selected="selected"{/if}>{lang}fireball.acp.page.display.settings.sidebarOrientation.right{/lang}</option>
+							<option value="left"{if $sidebarOrientation == "left"} selected="selected"{/if}>{lang}fireball.acp.page.display.settings.sidebarOrientation.left{/lang}</option>
 						</select>
 					</dd>
 				</dl>

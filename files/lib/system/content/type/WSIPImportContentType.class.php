@@ -1,6 +1,6 @@
 <?php
-namespace cms\system\content\type;
 
+namespace cms\system\content\type;
 use cms\data\content\Content;
 use cms\data\content\ContentAction;
 use wcf\system\exception\SystemException;
@@ -9,12 +9,12 @@ use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 
 /**
- * @author	Jens Krumsieck, Florian Frantzen
- * @copyright	2013 - 2015 codeQuake
+ * @author	Florian Gail
+ * @copyright	2013 - 2016 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class TemplateContentType extends AbstractContentType {
+class WSIPImportContentType extends TemplateContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
@@ -69,5 +69,13 @@ class TemplateContentType extends AbstractContentType {
 		}
 		
 		return WCF::getTPL()->fetchString($compiled['template']);
+	}
+	
+	/**
+	 * @see \cms\system\content\type\AbstractContentType::isAvailableToAdd()
+	 */
+	public function isAvailableToAdd() {
+		// only available for imported contents
+		return false;
 	}
 }

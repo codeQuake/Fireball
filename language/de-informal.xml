@@ -218,6 +218,17 @@
 		<item name="fireball.acp.page.stylesheets.description"><![CDATA[Stylesheets, die beim Aufruf dieser Seite geladen werden sollen.]]></item>
 		<item name="fireball.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
 		<item name="fireball.acp.page.visibility"><![CDATA[Sichtbarkeit]]></item>
+		<item name="fireball.acp.page.specific"><![CDATA[Typ-Spezifische Angaben]]></item>
+		<item name="fireball.acp.page.type"><![CDATA[Seitentyp]]></item>
+		<item name="fireball.acp.page.type.link.general"><![CDATA[Angaben zur Weiterleitung]]></item>
+		<item name="fireball.acp.page.type.page.comments"><![CDATA[Kommentare]]></item>
+		<item name="fireball.acp.page.settings.url"><![CDATA[URL]]></item>
+		<item name="fireball.acp.page.settings.delay"><![CDATA[Verzögerung]]></item>
+		<item name="fireball.acp.page.settings.delayedRedirect"><![CDATA[Verzögerte Weiterleitung]]></item>
+		<item name="fireball.acp.page.settings.delayedRedirect.description"><![CDATA[Aktivieren Sie diese Option, um den Besucher darauf hinzuweisen, dass er weitergeleitet wird. Optional können Sie im folgenden Feld auch einen Hinweistext angeben.]]></item>
+		<item name="fireball.acp.page.settings.redirectMessage"><![CDATA[Weiterleitungshinweis (optional)]]></item>
+		<item name="fireball.acp.page.type.de.codequake.cms.page.type.page"><![CDATA[Seite]]></item>
+		<item name="fireball.acp.page.type.de.codequake.cms.page.type.link"><![CDATA[Weiterleitung]]></item>
 	</category>
   
 	<category name="fireball.acp.stats">

@@ -33,7 +33,7 @@
 			<h2><a class="framed userLink" href="{link controller='User' object=$user}{/link}" data-user-id="{$user->userID}">{@$user->username}</a></h2>
 			<p class="title">{$user->getUserTitle()}</p>
 		</div>
-	
+
 		<div class="details marginTop">
 			{@$user->getFormattedUserOption('aboutMe')}
 		</div>

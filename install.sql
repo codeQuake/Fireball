@@ -44,7 +44,13 @@ CREATE TABLE cms1_page (
 	styleID INT(10) DEFAULT NULL,
 
 	-- display settings
-	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right'
+	sidebarOrientation ENUM('left', 'right') NOT NULL DEFAULT 'right',
+	
+	-- page type
+	objectTypeID INT(10),
+	
+	-- additional data
+	additionalData MEDIUMTEXT DEFAULT NULL
 );
 
 DROP TABLE IF EXISTS cms1_page_revision;
@@ -138,6 +144,7 @@ ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_ite
 ALTER TABLE cms1_page ADD FOREIGN KEY (styleID) REFERENCES wcf1_style (styleID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (lastEditorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE cms1_page ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 
 ALTER TABLE cms1_page_revision ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE cms1_page_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;

@@ -8,6 +8,7 @@ use cms\data\page\PageEditor;
 use cms\data\page\PageNodeTree;
 use cms\data\stylesheet\StylesheetList;
 use cms\util\PageUtil;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\page\menu\item\PageMenuItemEditor;
@@ -105,12 +106,6 @@ class PageAddForm extends AbstractForm {
 	public $invisible = 0;
 
 	/**
-	 * indication whether this page is commentable
-	 * @var	integer
-	 */
-	public $isCommentable = FIREBALL_PAGES_DEFAULT_COMMENTS;
-
-	/**
 	 * id of the menu item that should be active when viewing the created
 	 * page
 	 * @var	integer
@@ -199,7 +194,14 @@ class PageAddForm extends AbstractForm {
 	 * @var	array<integer>
 	 */
 	public $stylesheetIDs = array();
-
+	
+	public $availablePageTypes = array();
+	
+	public $pageObjectTypeID = 0;
+	public $pageObjectType = null;
+	
+	public $specificFormParameters = array();
+	
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
@@ -207,6 +209,11 @@ class PageAddForm extends AbstractForm {
 		parent::readParameters();
 
 		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
+		
+		if (empty($_REQUEST['id']) && empty($_POST['pageObjectTypeID'])) {
+			$this->pageObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page');
+			$this->pageObjectTypeID = $this->pageObjectType->objectTypeID;
+		}
 
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
 
@@ -242,7 +249,13 @@ class PageAddForm extends AbstractForm {
 		// position
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['invisible'])) $this->invisible = intval($_POST['invisible']);
-
+		
+		// page type
+		if (isset($_POST['pageObjectTypeID'])) $this->pageObjectTypeID = intval($_POST['pageObjectTypeID']);
+		if (empty($this->pageObjectTypeID))
+			$this->pageObjectTypeID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page');
+		$this->pageObjectType = ObjectTypeCache::getInstance()->getObjectType($this->pageObjectTypeID);
+		
 		// publication
 		if (isset($_POST['enableDelayedPublication'])) $this->enableDelayedPublication = intval($_POST['enableDelayedPublication']);
 		if (isset($_POST['publicationDate'])) $this->publicationDate = $_POST['publicationDate'];
@@ -251,7 +264,6 @@ class PageAddForm extends AbstractForm {
 
 		// settings
 		if (isset($_POST['menuItemID'])) $this->menuItemID = intval($_POST['menuItemID']);
-		$this->isCommentable = (isset($_POST['isCommentable'])) ? 1 : 0;
 		$this->availableDuringOfflineMode = (isset($_POST['availableDuringOfflineMode'])) ? 1 : 0;
 		$this->allowSubscribing = (isset($_POST['allowSubscribing'])) ? 1 : 0;
 
@@ -261,6 +273,8 @@ class PageAddForm extends AbstractForm {
 
 		// display settings
 		if (isset($_POST['sidebarOrientation'])) $this->sidebarOrientation = StringUtil::trim($_POST['sidebarOrientation']);
+		
+		$this->specificFormParameters = $this->pageObjectType->getProcessor()->readFormParameters($this);
 	}
 
 	/**
@@ -268,6 +282,9 @@ class PageAddForm extends AbstractForm {
 	 */
 	public function validate() {
 		parent::validate();
+		
+		if (empty($this->pageObjectType) || $this->pageObjectType === null)
+			throw new UserInputException('objectTypeID');
 
 		// validate title
 		if (!I18nHandler::getInstance()->validateValue('title')) {
@@ -369,6 +386,8 @@ class PageAddForm extends AbstractForm {
 			// specified
 			$this->sidebarOrientation = 'right';
 		}
+		
+		$this->pageObjectType->getProcessor()->validate($this);
 	}
 
 	/**
@@ -420,7 +439,6 @@ class PageAddForm extends AbstractForm {
 
 			// settings
 			'menuItemID' => ($this->menuItemID) ?: null,
-			'isCommentable' => $this->isCommentable,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'allowSubscribing' => $this->allowSubscribing,
 
@@ -428,7 +446,10 @@ class PageAddForm extends AbstractForm {
 			'styleID' => ($this->styleID) ?: null,
 
 			// display settings
-			'sidebarOrientation' => $this->sidebarOrientation
+			'sidebarOrientation' => $this->sidebarOrientation,
+			
+			// page type
+			'objectTypeID' => $this->pageObjectTypeID
 		);
 
 		// publication
@@ -441,11 +462,12 @@ class PageAddForm extends AbstractForm {
 			$dateTime = \DateTime::createFromFormat('Y-m-d H:i', $this->deactivationDate, WCF::getUser()->getTimeZone());
 			$data['deactivationDate'] = $dateTime->getTimestamp();
 		}
-
-		$pageData = array(
+		
+		$specificPageData =  $this->pageObjectType->getProcessor()->getSaveArray();
+		$pageData = array_merge_recursive($specificPageData, array(
 			'data' => $data,
 			'stylesheetIDs' => $this->stylesheetIDs
-		);
+		));
 
 		$this->objectAction = new PageAction(array(), 'create', $pageData);
 		$returnValues = $this->objectAction->executeAction();
@@ -519,6 +541,8 @@ class PageAddForm extends AbstractForm {
 		// update search index
 		$objectAction = new PageAction(array($pageEditor->pageID), 'refreshSearchIndex');
 		$objectAction->executeAction();
+		
+		$this->pageObjectType->getProcessor()->save($this);
 
 		$this->saved();
 		WCF::getTPL()->assign('success', true);
@@ -526,13 +550,12 @@ class PageAddForm extends AbstractForm {
 		// reset values
 		$this->alias = $this->deactivationDate = $this->description = $this->metaDescription = $this->metaKeywords = $this->publicationDate = '';
 		$this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->menuItemID = $this->parentID = $this->showOrder = $this->styleID = 0;
-		$this->stylesheetIDs = array();
+		$this->stylesheetIDs = $this->specificFormParameters = array();
 
 		$this->allowIndexing = FIREBALL_PAGES_DEFAULT_ALLOW_INDEXING;
 		$this->allowSubscribing = FIREBALL_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
 		$this->availableDuringOfflineMode = FIREBALL_PAGES_DEFAULT_OFFLINE;
 		$this->createMenuItem = FIREBALL_PAGES_DEFAULT_MENU_ITEM;
-		$this->isCommentable = FIREBALL_PAGES_DEFAULT_COMMENTS;
 		$this->sidebarOrientation = FIREBALL_PAGES_DEFAULT_SIDEBAR;
 
 		I18nHandler::getInstance()->reset();
@@ -557,7 +580,14 @@ class PageAddForm extends AbstractForm {
 
 		$this->stylesheetList = new StylesheetList();
 		$this->stylesheetList->readObjects();
-
+		
+		$this->availablePageTypes = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.page.type');
+		foreach ($this->availablePageTypes as $key => $type) {
+			if (!$type->getProcessor()->isAvailableToAdd()) {
+				unset($this->availablePageTypes[$key]);
+			}
+		}
+		
 		// load menu items
 		$menuItemList = new PageMenuItemList();
 		$menuItemList->getConditionBuilder()->add('page_menu_item.menuPosition = ?', array('header'));
@@ -573,6 +603,8 @@ class PageAddForm extends AbstractForm {
 				$this->menuItems[$menuItem->menuItem] = new ViewablePageMenuItem($menuItem);
 			}
 		}
+		
+		$this->specificFormParameters = $this->pageObjectType->getProcessor()->readData($this);
 	}
 
 	/**
@@ -580,11 +612,11 @@ class PageAddForm extends AbstractForm {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-
+		
 		I18nHandler::getInstance()->assignVariables();
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
-
-		WCF::getTPL()->assign(array(
+		
+		WCF::getTPL()->assign(array_merge_recursive($this->specificFormParameters, array(
 			'action' => 'add',
 			'availableStyles' => $this->availableStyles,
 			'menuItems' => $this->menuItems,
@@ -616,7 +648,6 @@ class PageAddForm extends AbstractForm {
 
 			// settings
 			'menuItemID' => $this->menuItemID,
-			'isCommentable' => $this->isCommentable,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'allowSubscribing' => $this->allowSubscribing,
 
@@ -625,7 +656,12 @@ class PageAddForm extends AbstractForm {
 			'stylesheetIDs' => $this->stylesheetIDs,
 
 			// display settings
-			'sidebarOrientation' => $this->sidebarOrientation
-		));
+			'sidebarOrientation' => $this->sidebarOrientation,
+			
+			// page type
+			'availablePageTypes' => $this->availablePageTypes,
+			'pageObjectTypeID' => $this->pageObjectTypeID,
+			'pageForm' => $this->pageObjectType->getProcessor()->getCompiledFormTemplate($this->specificFormParameters)
+		)));
 	}
 }

@@ -31,7 +31,22 @@
 			<listclassname>cms\data\stylesheet\StylesheetList</listclassname>
 		</type>
 		<!-- /clipboard -->
-
+		
+		<!-- page types -->
+		<type>
+			<name>de.codequake.cms.page.type.page</name>
+			<definitionname>de.codequake.cms.page.type</definitionname>
+			<classname>cms\system\page\type\PagePageType</classname>
+			<pageclass>cms\page\Page</pageclass>
+		</type>
+		<type>
+			<name>de.codequake.cms.page.type.link</name>
+			<definitionname>de.codequake.cms.page.type</definitionname>
+			<classname>cms\system\page\type\LinkPageType</classname>
+			<pageclass>cms\page\Link</pageclass>
+		</type>
+		<!-- /page types -->
+		
 		<!-- content types -->
 		<type>
 			<name>de.codequake.cms.content.type.text</name>
@@ -177,6 +192,14 @@
 			<allowcontent>1</allowcontent>
 			<allowsidebar>0</allowsidebar>
 		</type>
+		<type>
+			<name>de.codequake.cms.content.type.wsipimport</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\WSIPImportContentType</classname>
+			<category>code</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>0</allowsidebar>
+		</type>
 		<!-- /content types -->
 
 		<!-- search -->
@@ -294,12 +317,56 @@
 			<categoryname>de.codequake.cms</categoryname>
 		</type>
 		<!-- /stat handlers -->
-	</import>
-
-	<delete>
-		<!-- finally remove dashboard container for people who updated from beta 7 -->
-		<type name="de.codequake.cms.page">
-			<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+		
+		<!-- importer -->
+		<type>
+			<name>de.codequake.cms.page</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\PageImporter]]></classname>
 		</type>
-	</delete>
+		<type>
+			<name>de.codequake.cms.content</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\ContentImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.file</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\FileImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.file.category</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\FileCategoryImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.stylesheet</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\StylesheetImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.page.comment</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\PageCommentImporter]]></classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.page.comment.response</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\PageCommentResponseImporter]]></classname>
+		</type>
+		<!-- /importer -->
+		
+		<!-- exporter -->
+		<type>
+			<name>de.codequake.cms.infinitePortalToFireball</name>
+			<definitionname>com.woltlab.wcf.exporter</definitionname>
+			<classname>cms\system\exporter\InfinitePortalExporter</classname>
+		</type>
+		<type>
+			<name>de.codequake.cms.fireball2ToFireball</name>
+			<definitionname>com.woltlab.wcf.exporter</definitionname>
+			<classname>cms\system\exporter\Fireball2Exporter</classname>
+		</type>
+		<!-- /exporter -->
+	</import>
 </data>

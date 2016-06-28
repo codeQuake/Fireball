@@ -2,8 +2,11 @@
 namespace cms\system\request;
 
 use cms\data\page\PageCache;
+use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\util\PageUtil;
 use wcf\system\request\ControllerMap;
+use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\menu\page\PageMenu;
 use wcf\system\request\IRoute;
 use wcf\system\request\RequestHandler;
 use wcf\util\HeaderUtil;
@@ -106,11 +109,17 @@ class PageRoute implements IRoute {
 	 * @see	\wcf\system\request\IRoute::getRouteData()
 	 */
 	public function getRouteData() {
-		$controller = $this->getControllerName();
-
-		if ($controller != 'page')
-			$this->routeData['controller'] = $controller;
-
+		$page = PageCache::getInstance()->getPage(PageCache::getInstance()->getIDByAlias($this->routeData['alias']));
+		if ($page !== null) {
+			$classParts = explode('\\', $page->getObjectType()->pageclass);
+			$className = array_pop($classParts);
+			$pageController = lcfirst($className);
+			$controller = $this->getControllerName($className);
+			
+			if ($controller != $pageController || $this->routeData['controller'] != $pageController)
+				$this->routeData['controller'] = $controller;
+		}
+		
 		return $this->routeData;
 	}
 
@@ -126,31 +135,34 @@ class PageRoute implements IRoute {
 	 */
 	public function matches($requestURL) {
 		$controller = $this->getControllerName();
-
+		
 		if (!URL_LEGACY_MODE) {
 			// request URL must be prefixed with `page/`
 			if (substr($requestURL, 0, strlen($controller) + 1) != $controller . '/' && substr($requestURL, 0, 5) != 'page/') {
 				return false;
 			}
-
-			if (substr($requestURL, 0, 5) == 'page/' && $controller != 'page') {
-				$alias = substr($requestURL, 5, -1);
-				HeaderUtil::redirect($this->buildLink(array('alias' => $alias)), true);
-				exit;
+			
+			$availableControllers = $this->getSupportedControllers();
+			foreach ($availableControllers as $supportedController) {
+				if (substr($requestURL, 0, 5) == $supportedController . '/' && $controller != $supportedController) {
+					$alias = substr($requestURL, 5, -1);
+					HeaderUtil::redirect($this->buildLink(array('alias' => $alias)), true);
+					exit;
+				}
 			}
-
+			
 			$alias = substr($requestURL, strlen($controller) + 1);
 			$alias = trim($alias, '/');
 		} else {
 			$alias = trim($requestURL, '/');
 		}
-
+		
 		// validate alias
 		if (preg_match('~^' . PageUtil::ALIAS_PATTERN_STACK . '$~', $alias)) {
 			$this->routeData['alias'] = $alias;
 			return true;
 		}
-
+		
 		return false;
 	}
 	
@@ -161,7 +173,24 @@ class PageRoute implements IRoute {
 	 * @param	string		$controller
 	 * @return	string
 	 */
-	protected function getControllerName($application = 'cms', $controller = 'Page') {
-		return ControllerMap::getInstance()->lookup($application, $controller);
+	protected function getControllerName($controller = 'Page') {
+		if (!isset($this->controllerNames[$controller])) {
+			$controllerName = RequestHandler::getTokenizedController($controller);
+			$alias = RequestHandler::getInstance()->getAliasByController($controllerName);
+				
+			$this->controllerNames[$controller] = ($alias) ?: $controllerName;
+		}
+		
+		return $this->controllerNames[$controller];
+	}
+	
+	protected function getSupportedControllers() {
+		$types = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.page.type');
+		$controllers = array();
+		foreach ($types as $type) {
+			$controllers[] = $type->pageclass;
+		}
+		
+		return $controllers;
 	}
 }

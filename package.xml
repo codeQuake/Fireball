@@ -5,7 +5,7 @@
 		<packagedescription><![CDATA[Advanced CMS for WCF 2.2]]></packagedescription>
 		<isapplication>1</isapplication>
 		<version>2.2.0 Alpha 1</version>
-		<date>2016-01-15</date>
+		<date>2016-06-27</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -14,13 +14,13 @@
 	</authorinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="2.2.0 Alpha 1">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="3.0.0 Alpha 1">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.1.0">de.codequake.wysiwyg.acp</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
 		<excludedpackage version="1.0.0 Alpha 1">de.voolia.cms</excludedpackage>
-		<excludedpackage version="2.3.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+		<excludedpackage version="3.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 	</excludedpackages>
 
 	<instructions type="install">
@@ -52,6 +52,34 @@
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 
 		<!-- scripts -->
-		<instruction type="script">acp/install_de.codequake.cms.php</instruction>
+		<instruction type="script" installupdateserver="1">acp/install_de.codequake.cms.php</instruction>
+	</instructions>
+
+	<instructions type="update" romversion="3.0.0 Alpha *">
+		<instruction type="sql">update.sql</instruction>
+		<instruction type="language">language/*.xml</instruction>
+
+		<!-- files -->
+		<instruction type="file">files.tar</instruction>
+		<instruction type="file" application="wcf">files_wcf.tar</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+
+		<!-- xml -->
+		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
+		<instruction type="objectType">xml/objectType.xml</instruction>
+
+		<instruction type="aclOption">xml/aclOption.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
+		<instruction type="bbcode">xml/bbcode.xml</instruction>
+		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
+		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="sitemap">xml/sitemap.xml</instruction>
+		<instruction type="templateListener">xml/templateListener.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 	</instructions>
 </package>

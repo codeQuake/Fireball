@@ -16,7 +16,8 @@ final class PageUtil {
 	 * maximum length of an alias
 	 * @var	integer
 	 */
-	const ALIAS_MAXLENGTH = 25;
+	//const ALIAS_MAXLENGTH = 25;
+	const ALIAS_MAXLENGTH = 100;
 
 	/**
 	 * minimum length of an alias
@@ -50,6 +51,9 @@ final class PageUtil {
 
 		// replace whitespace with hyphen
 		$alias = str_replace(' ', '-', $alias);
+		
+		// replace öäüß with combinations
+		$alias = str_replace(array('ä', 'ö', 'ü', 'ß'), array('ae', 'oe', 'ue', 'ss'), $alias);
 
 		// remove illegal characters
 		$alias = preg_replace('~[^a-z0-9\-]+~', '', $alias);

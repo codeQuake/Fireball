@@ -3,6 +3,7 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use cms\data\page\AccessiblePageNodeTree;
+use cms\data\page\PageCache;
 use wcf\system\WCF;
 
 /**
@@ -23,7 +24,10 @@ class MenuContentType extends AbstractStructureContentType {
 	public function getOutput(Content $content) {
 		switch ($content->type) {
 			case "children":
-				$menuItems = $content->getPage()->getChildrenTree(($content->depth) ? intval($content->depth) - 1 : null);
+				if ($content->pageID)
+					$menuItems = PageCache::getInstance()->getPage($content->pageID)->getChildrenTree(($content->depth) ? intval($content->depth) - 1 : null);
+				else
+					$menuItems = $content->getPage()->getChildrenTree(($content->depth) ? intval($content->depth) - 1 : null);
 			break;
 
 			case "all":

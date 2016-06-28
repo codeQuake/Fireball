@@ -1,4 +1,5 @@
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@LAST_UPDATE_TIME}"></script>
+
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
