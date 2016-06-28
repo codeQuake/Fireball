@@ -16,7 +16,7 @@ class PagePageType extends AbstractPageType {
 	 *  @see  \cms\system\page\type\AbstractPageType::$assignValues
 	 */
 	public $assignValues = array(
-		'isCommentable' => 0
+		'isCommentable' => CMS_PAGES_DEFAULT_COMMENTS
 	);
 	
 	/**

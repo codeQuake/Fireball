@@ -106,12 +106,6 @@ class PageAddForm extends AbstractForm {
 	public $invisible = 0;
 
 	/**
-	 * indication whether this page is commentable
-	 * @var	integer
-	 */
-	public $isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
-
-	/**
 	 * id of the menu item that should be active when viewing the created
 	 * page
 	 * @var	integer
@@ -270,7 +264,6 @@ class PageAddForm extends AbstractForm {
 
 		// settings
 		if (isset($_POST['menuItemID'])) $this->menuItemID = intval($_POST['menuItemID']);
-		$this->isCommentable = (isset($_POST['isCommentable'])) ? 1 : 0;
 		$this->availableDuringOfflineMode = (isset($_POST['availableDuringOfflineMode'])) ? 1 : 0;
 		$this->allowSubscribing = (isset($_POST['allowSubscribing'])) ? 1 : 0;
 
@@ -446,7 +439,6 @@ class PageAddForm extends AbstractForm {
 
 			// settings
 			'menuItemID' => ($this->menuItemID) ?: null,
-			'isCommentable' => $this->isCommentable,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'allowSubscribing' => $this->allowSubscribing,
 
@@ -478,6 +470,8 @@ class PageAddForm extends AbstractForm {
 		));
 
 		$this->objectAction = new PageAction(array(), 'create', $pageData);
+		var_dump($pageData);
+		exit;
 		$returnValues = $this->objectAction->executeAction();
 
 		$pageEditor = new PageEditor($returnValues['returnValues']);
@@ -564,7 +558,6 @@ class PageAddForm extends AbstractForm {
 		$this->allowSubscribing = CMS_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
 		$this->availableDuringOfflineMode = CMS_PAGES_DEFAULT_OFFLINE;
 		$this->createMenuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
-		$this->isCommentable = CMS_PAGES_DEFAULT_COMMENTS;
 		$this->sidebarOrientation = CMS_PAGES_DEFAULT_SIDEBAR;
 
 		I18nHandler::getInstance()->reset();
@@ -657,7 +650,6 @@ class PageAddForm extends AbstractForm {
 
 			// settings
 			'menuItemID' => $this->menuItemID,
-			'isCommentable' => $this->isCommentable,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'allowSubscribing' => $this->allowSubscribing,
 
