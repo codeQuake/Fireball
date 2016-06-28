@@ -142,7 +142,7 @@ class PageRoute implements IRoute {
 		
 		$this->landingPage = PageMenu::getInstance()->getLandingPage();
 		$processor = $this->landingPage->getProcessor();
-		if ($processor instanceof CMSPageMenuItemProvider) {
+		if (empty($_GET['ajax-proxy']) && empty($_GET['t']) && empty($_POST['actionName']) && empty($_POST['className']) && $processor instanceof CMSPageMenuItemProvider) {
 			$page = $processor->getPage();
 			$alias = $page->getAlias();
 			$this->routeData['alias'] = $alias;
