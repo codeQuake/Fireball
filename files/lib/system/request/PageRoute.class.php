@@ -147,6 +147,15 @@ class PageRoute implements IRoute {
 	public function matches($requestURL) {
 		$controller = $this->getControllerName();
 		
+		$this->landingPage = PageMenu::getInstance()->getLandingPage();
+		$processor = $this->landingPage->getProcessor();
+		if ($processor instanceof CMSPageMenuItemProvider) {
+			$page = $processor->getPage();
+			$alias = $page->getAlias();
+			$this->routeData['alias'] = $alias;
+			return true;
+		}
+		
 		if (!URL_LEGACY_MODE) {
 			// request URL must be prefixed with `page/`
 			if (substr($requestURL, 0, strlen($controller) + 1) != $controller . '/' && substr($requestURL, 0, 5) != 'page/') {
