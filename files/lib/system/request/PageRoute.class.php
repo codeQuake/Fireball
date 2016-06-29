@@ -36,7 +36,8 @@ class PageRoute implements IRoute {
 	 * @see	\wcf\system\request\IRoute::buildLink()
 	 */
 	public function buildLink(array $components) {
-		$this->landingPage = PageMenu::getInstance()->getLandingPage();
+		if ($this->landingPage === null)
+			$this->landingPage = PageMenu::getInstance()->getLandingPage();
 		$processor = $this->landingPage->getProcessor();
 		if ($processor instanceof CMSPageMenuItemProvider) {
 			$page = $processor->getPage();
@@ -147,15 +148,6 @@ class PageRoute implements IRoute {
 	public function matches($requestURL) {
 		$controller = $this->getControllerName();
 		
-		$this->landingPage = PageMenu::getInstance()->getLandingPage();
-		$processor = $this->landingPage->getProcessor();
-		if (empty($_GET['ajax-proxy']) && empty($_GET['t']) && empty($_POST['actionName']) && empty($_POST['className']) && $processor instanceof CMSPageMenuItemProvider) {
-			$page = $processor->getPage();
-			$alias = $page->getAlias();
-			$this->routeData['alias'] = $alias;
-			return true;
-		}
-		
 		if (!URL_LEGACY_MODE) {
 			// request URL must be prefixed with `page/`
 			if (substr($requestURL, 0, strlen($controller) + 1) != $controller . '/' && substr($requestURL, 0, 5) != 'page/') {
@@ -179,6 +171,16 @@ class PageRoute implements IRoute {
 		
 		// validate alias
 		if (preg_match('~^' . PageUtil::ALIAS_PATTERN_STACK . '$~', $alias)) {
+			$this->routeData['alias'] = $alias;
+			return true;
+		}
+		
+		if ($this->landingPage === null)
+			$this->landingPage = PageMenu::getInstance()->getLandingPage();
+		$processor = $this->landingPage->getProcessor();
+		if (empty($_GET['ajax-proxy']) && empty($_GET['t']) && empty($_POST['actionName']) && empty($_POST['className']) && empty($_GET['alias']) && $processor instanceof CMSPageMenuItemProvider) {
+			$page = $processor->getPage();
+			$alias = $page->getAlias();
 			$this->routeData['alias'] = $alias;
 			return true;
 		}
