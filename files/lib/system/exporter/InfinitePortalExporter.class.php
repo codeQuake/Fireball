@@ -260,7 +260,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	 * @param	integer		$limit
 	 */
 	public function exportACLs($offset, $limit) {
-		$user = $group = [];
+		$user = $group = array();
 		$sql = "(
 				SELECT	contentItemID, 0 AS userID, groupID, 'group' AS type
 				FROM	wsip".$this->dbNo."_content_item_to_group
