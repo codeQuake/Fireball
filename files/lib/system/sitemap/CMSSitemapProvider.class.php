@@ -20,7 +20,7 @@ class CMSSitemapProvider implements ISitemapProvider {
 		$nodeList = $nodeTree->getIterator();
 
 		// sitemap only supports up to child-child-pages
-		$nodeList->setMaxDepth(2);
+		$nodeList->setMaxDepth(1);
 
 		WCF::getTPL()->assign(array(
 			'pageList' => $nodeList
