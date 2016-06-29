@@ -2,6 +2,7 @@
 namespace cms\system\importer;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\importer\AbstractACLImporter;
+use wcf\system\importer\ImportHandler;
 
 /**
  * Imports ACLs of pages.

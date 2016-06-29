@@ -150,7 +150,7 @@ class PageRoute implements IRoute {
 		
 		if (!URL_LEGACY_MODE) {
 			// request URL must be prefixed with `page/`
-			if (substr($requestURL, 0, strlen($controller) + 1) != $controller . '/' && substr($requestURL, 0, 5) != 'page/') {
+			if (substr($requestURL, 0, strlen($controller) + 1) != $controller . '/' && substr($requestURL, 0, 5) != 'page/' && !empty($requestURL)) {
 				return false;
 			}
 			
