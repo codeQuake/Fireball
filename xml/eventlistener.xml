@@ -71,12 +71,4 @@
 			<listenerclassname>cms\system\event\listener\WSIPImportContentTypeListener</listenerclassname>
 		</eventlistener>
 	</import>
-	<delete>
-		<eventlistener>
-			<eventclassname>wcf\acp\page\IndexPage</eventclassname>
-			<eventname>readData</eventname>
-			<listenerclassname>cms\system\event\listener\IndexPageListener</listenerclassname>
-			<environment>admin</environment>
-		</eventlistener>
-	</delete>
 </data>
