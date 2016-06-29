@@ -212,6 +212,20 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	}
 
 	/**
+	 * Returns the most parental page.
+	 * 
+	 * @return	\cms\data\page\Page
+	 */
+	public function getRootPage() {
+		$page = $this;
+		while ($page->isChild()) {
+			$page = PageCache::getInstance()->getPage($this->parentID);
+		}
+		
+		return $page;
+	}
+
+	/**
 	 * Returns the parent pages of this page.
 	 * 
 	 * @return	array<\cms\data\page\Page>
