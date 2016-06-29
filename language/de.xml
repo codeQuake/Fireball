@@ -258,6 +258,10 @@
 		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
 	</category>
 
+	<category name="cms.bbcode">
+		<item name="cms.bbcode.button.page"><![CDATA[Fireball-Seite]]></item>
+	</category>
+
 	<category name="cms.content">
 		<item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
 	</category>
