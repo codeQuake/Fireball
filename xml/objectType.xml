@@ -302,6 +302,11 @@
 			<classname><![CDATA[cms\system\importer\PageImporter]]></classname>
 		</type>
 		<type>
+			<name>de.codequake.cms.page.acl</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[cms\system\importer\PageACLImporter]]></classname>
+		</type>
+		<type>
 			<name>de.codequake.cms.content</name>
 			<definitionname>com.woltlab.wcf.importer</definitionname>
 			<classname><![CDATA[cms\system\importer\ContentImporter]]></classname>
