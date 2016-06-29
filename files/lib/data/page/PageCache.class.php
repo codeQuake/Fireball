@@ -1,6 +1,7 @@
 <?php
 namespace cms\data\page;
 
+use cms\data\page\AccessiblePageNodeTree;
 use cms\system\cache\builder\PageCacheBuilder;
 use wcf\system\SingletonFactory;
 
@@ -32,6 +33,18 @@ class PageCache extends SingletonFactory {
 	protected $structure = array();
 
 	/**
+	 * cached menu node tree (max depth = 1)
+	 * @var	\cms\data\page\AccessiblePageNodeTree
+	 */
+	protected $menuNodeTree = null;
+
+	/**
+	 * cached menu node list (max depth = 1)
+	 * @var	\cms\data\page\AccessiblePageNodeTree
+	 */
+	protected $menuNodeList = null;
+
+	/**
 	 * @see	\wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
@@ -39,6 +52,9 @@ class PageCache extends SingletonFactory {
 		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		$this->stylesheetsToPage = PageCacheBuilder::getInstance()->getData(array(), 'stylesheetsToPage');
 		$this->structure = PageCacheBuilder::getInstance()->getData(array(), 'structure');
+		
+		$this->menuNodeTree = new AccessiblePageNodeTree();
+		$this->menuNodeTree->setMaxDepth(1);
 	}
 
 	/**
@@ -66,6 +82,37 @@ class PageCache extends SingletonFactory {
 		return null;
 	}
 
+	public function getMenuNodeTree() {
+		if ($this->menuNodeTree) {
+			$this->menuNodeTree = new AccessiblePageNodeTree();
+			$this->menuNodeTree->setMaxDepth(1);
+		}
+		
+		return $this->menuNodeTree;
+	}
+
+	/**
+	 * Returns a node tree with max depth 1
+	 * can be used for an automatic page menu or sitemap
+	 * 
+	 * @return \cms\data\page\AccessiblePageNodeTree
+	 */
+	public function getMenuNodeList() {
+		if ($this->menuNodeList) {
+			$nodeTree = $this->getMenuNodeTree();
+			$this->menuNodeList = $nodeTree->getIterator();
+			$this->menuNodeList->setMaxDepth(1);
+		}
+		
+		return $this->menuNodeList;
+	}
+
+	/**
+	 * Returns a node list with max depth 1
+	 * can be used for an automatic page menu or sitemap
+	 *
+	 * @return \cms\data\page\AccessiblePageNodeTree
+	 */
 	public function getHomePage() {
 		foreach ($this->pages as $page) {
 			if ($page->isHome) {
