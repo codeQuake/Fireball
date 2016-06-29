@@ -310,7 +310,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		if (!empty($user)) {
 			$conditionBuilder = new PreparedStatementConditionBuilder(true, 'OR');
 			foreach ($user as $row) {
-				$conditionBuilder->add('(contentItemID = ? AND userID = ?)', [$row['contentItemID'], $row['userID']]);
+				$conditionBuilder->add('(contentItemID = ? AND userID = ?)', array($row['contentItemID'], $row['userID']));
 			}
 			
 			$sql = "SELECT	*
