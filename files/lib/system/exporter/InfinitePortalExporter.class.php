@@ -219,6 +219,8 @@ class InfinitePortalExporter extends AbstractExporter {
 				//'styleID' => $row['styleID'], //TODO
 				'alias' => $alias,
 				'allowIndexing' => $row['allowSpidersToIndexThisPage'],
+				'publicationDate' => $row['publishingStartTime'],
+				'deactivationDate' => $row['publishingEndTime'],
 				'objectTypeID' => $pageObjectType->objectTypeID,
 				'metaKeywords' => $this->getLangItem('wsip.contentItem.' . $row['contentItem'] . '.metaKeywords', $this->oldLanguages['default']['languageID']),
 				'metaDescription' => $this->getLangItem('wsip.contentItem.' . $row['contentItem'] . '.metaDescription', $this->oldLanguages['default']['languageID']),
