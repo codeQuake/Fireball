@@ -62,6 +62,14 @@
 			<eventname>rename</eventname>
 			<listenerclassname>cms\system\event\listener\UserRenameListener</listenerclassname>
 		</eventlistener>
+		
+		<!-- convert wsip import into text content type -->
+		<eventlistener>
+			<environment>admin</environment>
+			<eventclassname>cms\acp\form\ContentEditForm</eventclassname>
+			<eventname>saved</eventname>
+			<listenerclassname>cms\system\event\listener\WSIPImportContentTypeListener</listenerclassname>
+		</eventlistener>
 	</import>
 	<delete>
 		<eventlistener>
