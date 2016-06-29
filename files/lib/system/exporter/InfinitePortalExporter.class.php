@@ -6,6 +6,7 @@ use cms\util\PageUtil;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
 use wcf\data\DatabaseObject;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\database\DatabaseException;
 use wcf\system\exporter\AbstractExporter;
 use wcf\system\importer\ImportHandler;
@@ -58,13 +59,13 @@ class InfinitePortalExporter extends AbstractExporter {
 		'de.codequake.cms.content' => 50
 	);
 	
-	private $availableLanguages = array();
+	protected $availableLanguages = array();
 	
-	private $oldLanguages = array();
+	protected $oldLanguages = array();
 
-	private $pages = array();
+	protected $pages = array();
 	
-	private $contents = array();
+	protected $contents = array();
 	
 	/**
 	 * @see	\wcf\system\exporter\IExporter::init()
@@ -245,7 +246,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	 */
 	public function countACLs() {
 		$sql = "SELECT	((SELECT COUNT(*) FROM wsip" . $this->dbNo . "_content_item_to_group)
-			+ (SELECT COUNT(*) FROM wsip" . $this->dbNo . "_content_item_to_user) AS count";
+			+ (SELECT COUNT(*) FROM wsip" . $this->dbNo . "_content_item_to_user)) AS count";
 		$statement = $this->database->prepareStatement($sql);
 		$statement->execute();
 		$row = $statement->fetchArray();
@@ -449,7 +450,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		}
 	}
 	
-	private function getLangItem($langItem, $languageID = 1) {
+	protected function getLangItem($langItem, $languageID = 1) {
 		$sql = "SELECT	*
 			FROM	wcf" . $this->wcfNo . "_language_item
 			WHERE	languageItem = ?
@@ -473,7 +474,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		return '';
 	}
 	
-	private function saveI18nValue(DatabaseObject $object, $type, $columnName) {
+	protected function saveI18nValue(DatabaseObject $object, $type, $columnName) {
 		$application = 'cms';
 		if ($type == 'category')
 			$application = 'wcf';
@@ -518,7 +519,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		}
 	}
 	
-	private function getOldLanguages() {
+	protected function getOldLanguages() {
 		$sql = "SELECT *
 			FROM	wcf" . $this->wcfNo . "_language";
 		$statement = $this->database->prepareStatement($sql);
@@ -533,7 +534,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		}
 	}
 	
-	private function convertACL($oldPermission) {
+	protected function convertACL($oldPermission) {
 		if ($oldPermission == 'canViewContentItem')
 			return 'canViewPage';
 		else if ($oldPermission == 'canEnterContentItem')
