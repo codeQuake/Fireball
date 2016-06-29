@@ -79,6 +79,7 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[User]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.user.name"><![CDATA[Username]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.wsipimport"><![CDATA[Text (imported from Infinite Portal)]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video"><![CDATA[Video-URL]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video.error.notValid"><![CDATA[URL not valid]]></item>
