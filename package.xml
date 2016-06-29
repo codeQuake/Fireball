@@ -55,7 +55,7 @@
 		<instruction type="script" installupdateserver="1">acp/install_de.codequake.cms.php</instruction>
 	</instructions>
 	
-	<instructions type="update" romversion="2.2.0 Alpha *">
+	<instructions type="update" fromversion="2.2.0 Alpha *">
 		<instruction type="sql">update.sql</instruction>
 		<instruction type="language">language/*.xml</instruction>
 
