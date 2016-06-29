@@ -97,9 +97,14 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 			return false;
 		}
 
-		if (!$this->isPublished && !WCF::getSession()->getPermission('mod.cms.canReadUnpublishedPage')) {
+		if (!$this->isPublished && !WCF::getSession()->getPermission('mod.cms.canReadUnpublishedPage') && !$this->getPermission('canViewUnpublishedPage')) {
 			// user can't read unpublished pages
 			return false;
+		}
+
+		if (!$this->isPublished && $this->getPermission('canViewUnpublishedPage')) {
+			// page is not published, but user is allowed to read it
+			return true;
 		}
 
 		return $this->getPermission('canViewPage');

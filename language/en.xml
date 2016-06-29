@@ -317,6 +317,7 @@
 		<item name="wcf.acl.option.de.codequake.cms.page.canAddComment"><![CDATA[Can add comments]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewComment"><![CDATA[Can view comments]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewPage"><![CDATA[Can view page]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.page.canViewUnpublishedPage"><![CDATA[Can view unpublished page]]></item>
 	</category>
 
 	<category name="wcf.acp.dataImport">
