@@ -69,11 +69,20 @@ class WSIPImportContentType extends TemplateContentType {
 			}, $source);
 			$source = preg_replace_callback("/\[cmsfile\=([0-9]+)( ?, ?'(left|right)')?( ?, ?([0-9]+))?( ?, ?'(.*)')?\](.*)\[\/cmsfile\]/",function ($match) {
 				$file = FileCache::getInstance()->getFile($match[1]);
-				$float = !empty($match[3]) ? $match[3] : 'none';
-				$width = !empty($match[5]) ? $match[5] : 'auto';
-				$title = !empty($match[7]) ? $match[7] : '';
-				return '<span style="' . ($float ? 'float:' . $float . ';' : '') . '"><img src="' . $source . '" class="framed" alt="' . $title . '" style="' . ($width ? 'width:' . $width . ';height:auto;' : '') . '" /></span>';
-			}, $input);
+				if ($file === null) return '';
+				
+				$align = !empty($match[3]) ? $match[3] : '';
+				$width = !empty($match[5]) ? $match[5] : 0;
+				$caption = !empty($match[7]) ? $match[7] : '';
+				
+				return WCF::getTPL()->fetch('cmsFileBBCodeTag', 'cms', array(
+					'_file' => $file,
+					'_align' => $align,
+					'_width' => $width,
+					'_isImage' => preg_match('~(image/*)+~', $file->fileType),
+					'_caption' => $caption
+				));
+			}, $source);
 			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $source);
 			
 			$contentData = $content->contentData;
