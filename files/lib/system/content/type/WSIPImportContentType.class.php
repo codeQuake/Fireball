@@ -8,6 +8,7 @@ use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
+use cms\data\file\FileCache;
 
 /**
  * @author	Florian Gail
@@ -66,6 +67,13 @@ class WSIPImportContentType extends TemplateContentType {
 				$page = PageCache::getInstance()->getPage($match[1]);
 				return '<a href="' . $page->getLink() . '" class="pagePreview">' . $page->getTitle() . '</a>';
 			}, $source);
+			$source = preg_replace_callback("/\[cmsfile\=([0-9]+)( ?, ?'(left|right)')?( ?, ?([0-9]+))?( ?, ?'(.*)')?\](.*)\[\/cmsfile\]/",function ($match) {
+				$file = FileCache::getInstance()->getFile($match[1]);
+				$float = !empty($match[3]) ? $match[3] : 'none';
+				$width = !empty($match[5]) ? $match[5] : 'auto';
+				$title = !empty($match[7]) ? $match[7] : '';
+				return '<span style="' . ($float ? 'float:' . $float . ';' : '') . '"><img src="' . $source . '" class="framed" alt="' . $title . '" style="' . ($width ? 'width:' . $width . ';height:auto;' : '') . '" /></span>';
+			}, $input);
 			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $source);
 			
 			$contentData = $content->contentData;
