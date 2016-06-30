@@ -28,10 +28,15 @@
 		<bbcode name="fireball">
 			<classname><![CDATA[cms\system\bbcode\PageBBCode]]></classname>
 			<allowedchildren><![CDATA[none]]></allowedchildren>
-			<classname><![CDATA[cms\system\bbcode\PageBBCode]]></classname>
 			<wysiwyg>1</wysiwyg>
 			<wysiwygicon>fireballPage.png</wysiwygicon>
 			<buttonlabel>cms.bbcode.button.page</buttonlabel>
+		</bbcode>
+	</import>
+	<import>
+		<bbcode name="cmsfileurl">
+			<classname><![CDATA[cms\system\bbcode\CMSFileUrlBBCode]]></classname>
+			<allowedchildren><![CDATA[none]]></allowedchildren>
 		</bbcode>
 	</import>
 </data>
