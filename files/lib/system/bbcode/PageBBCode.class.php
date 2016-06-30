@@ -19,12 +19,16 @@ class PageBBCode extends AbstractBBCode {
 	public $page = null;
 
 	public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser) {
-		$this->pageID = $content;
+		if (isset($openingTag['attributes'][0])) {
+			$this->pageID = $openingTag['attributes'][0];
+		}
 		$this->page = PageCache::getInstance()->getPage($this->pageID);
 		
-		if ($this->page == null)
+		if ($this->page == null && empty($content))
 			return WCF::getLanguage()->get('cms.page.bbcode.notFound');
+		else if ($this->page == null && !empty($content))
+			return $content . WCF::getLanguage()->get('cms.page.bbcode.notFound.inline');
 		
-		return '<a href="' . $this->page->getLink() . '" class="pagePreview">' . $this->page->getTitle() . '</a>';
+		return '<a href="' . $this->page->getLink() . '" class="pagePreview">' . (!empty($content) ? $content : $this->page->getTitle()) . '</a>';
 	}
 }

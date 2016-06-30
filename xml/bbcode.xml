@@ -28,6 +28,13 @@
 		<bbcode name="fireball">
 			<classname><![CDATA[cms\system\bbcode\PageBBCode]]></classname>
 			<allowedchildren><![CDATA[none]]></allowedchildren>
+			<attributes>
+				<attribute name="0">
+					<validationpattern><![CDATA[^\d+$]]></validationpattern>
+					<required>1</required>
+					<usetext>1</usetext>
+				</attribute>
+			</attributes>
 			<wysiwyg>1</wysiwyg>
 			<wysiwygicon>fireballPage.png</wysiwygicon>
 			<buttonlabel>cms.bbcode.button.page</buttonlabel>

@@ -260,6 +260,8 @@
 
 	<category name="cms.bbcode">
 		<item name="cms.bbcode.button.page"><![CDATA[Fireball-Seite]]></item>
+		<item name="cms.bbcode.page.notFound"><![CDATA[<i>(Die an dieser Stelle verlinkte Seite wurde entfernt.)</i>]]></item>
+		<item name="cms.bbcode.page.notFound.inline"><![CDATA[ <i>(Diese Seite ist nicht mehr abrufbar.</i>)]]></item>
 	</category>
 
 	<category name="cms.content">
