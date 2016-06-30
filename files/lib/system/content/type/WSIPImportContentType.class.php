@@ -3,12 +3,12 @@
 namespace cms\system\content\type;
 use cms\data\content\Content;
 use cms\data\content\ContentAction;
+use cms\data\file\FileCache;
 use cms\data\page\PageCache;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
-use cms\data\file\FileCache;
 
 /**
  * @author	Florian Gail
