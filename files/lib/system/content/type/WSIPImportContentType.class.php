@@ -67,7 +67,7 @@ class WSIPImportContentType extends TemplateContentType {
 				$page = PageCache::getInstance()->getPage($match[1]);
 				return '<a href="' . $page->getLink() . '" class="pagePreview">' . $page->getTitle() . '</a>';
 			}, $source);
-			$source = preg_replace_callback("/\[cmsfile\=([0-9]+)( ?, ?'(left|right)')?( ?, ?([0-9]+))?( ?, ?'(.*)')?\](.*)\[\/cmsfile\]/",function ($match) {
+			$source = preg_replace_callback("/\[cmsfile\=([0-9]+)( ?, ?'(left|right)')?( ?, ?([0-9]+))?( ?, ?'(.*)')?\](.*)\[\/cmsfile\]/", function ($match) {
 				$file = FileCache::getInstance()->getFile($match[1]);
 				if ($file === null) return '';
 				
