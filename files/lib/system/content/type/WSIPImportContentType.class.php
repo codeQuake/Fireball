@@ -3,6 +3,7 @@
 namespace cms\system\content\type;
 use cms\data\content\Content;
 use cms\data\content\ContentAction;
+use cms\data\page\PageCache;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\RequestHandler;
@@ -60,7 +61,12 @@ class WSIPImportContentType extends TemplateContentType {
 	public function getOutput(Content $content) {
 		$compiled = $content->compiled;
 		if (empty($compiled[WCF::getLanguage()->languageCode])) {
-			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
+			$source = $content->text;
+			$source = preg_replace_callback('/\[fireball\]([0-9]+)\[\/fireball\]/', function ($match) {
+				$page = PageCache::getInstance()->getPage($match[1]);
+				return '<a href="' . $page->getLink() . '" class="pagePreview">' . $page->getTitle() . '</a>';
+			}, $source);
+			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $source);
 			
 			$contentData = $content->contentData;
 			if (!is_array($contentData))
