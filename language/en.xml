@@ -330,7 +330,8 @@
 		<item name="wcf.acp.dataImport.exporter.de.codequake.cms.fireball2ToFireball"><![CDATA[Fireball CMS 2.0/2.1]]></item>
 		<item name="wcf.acp.dataImport.exporter.de.codequake.cms.infinitePortalToFireball"><![CDATA[Infinite Portal 1.1]]></item>
 		<item name="wcf.acp.dataImport.data.de.codequake.cms.page"><![CDATA[Pages]]></item>
-		<item name="wcf.acp.dataImport.data.de.codequake.cms.page.content"><![CDATA[Contents]]></item>
+		<item name="wcf.acp.dataImport.data.de.codequake.cms.page.acl"><![CDATA[Permissions]]></item>
+		<item name="wcf.acp.dataImport.data.de.codequake.cms.content"><![CDATA[Contents]]></item>
 		<item name="wcf.acp.dataImport.data.de.codequake.cms.page.comment"><![CDATA[Comments]]></item>
 		<item name="wcf.acp.dataImport.data.de.codequake.cms.file.category"><![CDATA[Categories]]></item>
 		<item name="wcf.acp.dataImport.data.de.codequake.cms.file"><![CDATA[Files]]></item>
