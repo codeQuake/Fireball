@@ -219,7 +219,7 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	public function getRootPage() {
 		$page = $this;
 		while ($page->isChild()) {
-			$page = PageCache::getInstance()->getPage($this->parentID);
+			$page = PageCache::getInstance()->getPage($page->parentID);
 		}
 		
 		return $page;
