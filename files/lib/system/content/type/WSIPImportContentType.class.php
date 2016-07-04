@@ -63,11 +63,12 @@ class WSIPImportContentType extends TemplateContentType {
 		$compiled = $content->compiled;
 		if (empty($compiled[WCF::getLanguage()->languageCode])) {
 			$source = $content->text;
-			$source = preg_replace_callback('/\[fireball\]([0-9]+)\[\/fireball\]/', function ($match) {
+			$source = preg_replace_callback('/\[fireball\=([0-9]+)\](.*)\[\/fireball\]/', function ($match) {
 				$page = PageCache::getInstance()->getPage($match[1]);
-				return '<a href="' . $page->getLink() . '" class="pagePreview">' . $page->getTitle() . '</a>';
+				$title = empty($match[2]) ? $page->getTitle() : $match[2];
+				return '<a href="' . $page->getLink() . '" class="pagePreview">' . $title . '</a>';
 			}, $source);
-			$source = preg_replace_callback("/\[cmsfile\=([0-9]+)( ?, ?'(left|right)')?( ?, ?([0-9]+))?( ?, ?'(.*)')?\](.*)\[\/cmsfile\]/", function ($match) {
+			$source = preg_replace_callback("/\[cmsfile\=([0-9]+)( ?, ?(left|right|none))?( ?, ?([0-9]+))?( ?, ?'(.*)')?\](.*)\[\/cmsfile\]/", function ($match) {
 				$file = FileCache::getInstance()->getFile($match[1]);
 				if ($file === null) return '';
 				
