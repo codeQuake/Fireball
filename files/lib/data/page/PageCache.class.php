@@ -83,7 +83,7 @@ class PageCache extends SingletonFactory {
 	}
 
 	public function getMenuNodeTree() {
-		if ($this->menuNodeTree) {
+		if ($this->menuNodeTree === null) {
 			$this->menuNodeTree = new AccessiblePageNodeTree();
 			$this->menuNodeTree->setMaxDepth(1);
 		}
@@ -98,7 +98,7 @@ class PageCache extends SingletonFactory {
 	 * @return \cms\data\page\AccessiblePageNodeTree
 	 */
 	public function getMenuNodeList() {
-		if ($this->menuNodeList) {
+		if ($this->menuNodeList === null) {
 			$nodeTree = $this->getMenuNodeTree();
 			$this->menuNodeList = $nodeTree->getIterator();
 			$this->menuNodeList->setMaxDepth(1);
