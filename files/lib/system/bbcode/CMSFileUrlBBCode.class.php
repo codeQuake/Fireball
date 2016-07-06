@@ -1,6 +1,7 @@
 <?php
 
 namespace cms\system\bbcode;
+use cms\data\file\File;
 use cms\data\file\FileCache;
 use wcf\system\bbcode\AbstractBBCode;
 use wcf\system\bbcode\BBCodeParser;
@@ -20,6 +21,8 @@ class CMSFileUrlBBCode extends AbstractBBCode {
 	public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser) {
 		$this->fileID = $content;
 		$this->file = FileCache::getInstance()->getFile($this->fileID);
+		if ($this->file === null)
+			$this->file = new File($this->fileID);
 		
 		if ($this->file == null)
 			return '';

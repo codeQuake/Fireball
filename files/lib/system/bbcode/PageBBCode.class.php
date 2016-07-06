@@ -1,6 +1,7 @@
 <?php
 
 namespace cms\system\bbcode;
+use cms\data\page\Page;
 use cms\data\page\PageCache;
 use wcf\system\bbcode\AbstractBBCode;
 use wcf\system\bbcode\BBCodeParser;
@@ -23,6 +24,8 @@ class PageBBCode extends AbstractBBCode {
 			$this->pageID = $openingTag['attributes'][0];
 		}
 		$this->page = PageCache::getInstance()->getPage($this->pageID);
+		if ($this->page === null)
+			$this->page = new Page($this->pageID);
 		
 		if ($this->page == null && empty($content))
 			return WCF::getLanguage()->get('cms.page.bbcode.notFound');
