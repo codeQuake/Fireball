@@ -169,7 +169,7 @@ class PageRoute implements IRoute {
 		}
 		
 		// validate alias
-		if (preg_match('~^' . '([a-z0-9]+((?:[a-z0-9-]+)*)*\/?)*' . '$~', $alias)) {
+		if (!empty($alias) && preg_match('~^' . '([a-z0-9]+((?:[a-z0-9-]+)*)*\/?)*' . '$~', $alias)) {
 			$this->routeData['alias'] = $alias;
 			return true;
 		}
