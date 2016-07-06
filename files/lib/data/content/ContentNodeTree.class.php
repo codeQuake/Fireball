@@ -70,7 +70,7 @@ class ContentNodeTree implements \IteratorAggregate {
 
 	protected function getNode($contentID) {
 		if (!$contentID) {
-			$content = new Content(0);
+			$content = new Content(null, array('contentID' => 0));
 		}
 		else {
 			$content = $this->getContent($contentID);
