@@ -4,7 +4,7 @@ The Fireball CMS is a very powerful CMS solution, based on WoltLab Community Fra
 
 [More Information](http://codequake.de/index.php/products/fireball-cms/)
 
-[![Build Status](https://travis-ci.org/codeQuake/Fireball.svg?branch=wcf2.1)](https://travis-ci.org/codeQuake/Fireball)
+[![Build Status](https://travis-ci.org/codeQuake/Fireball.svg?branch=v2.1)](https://travis-ci.org/codeQuake/Fireball)
 
 Plugins
 -------------------
