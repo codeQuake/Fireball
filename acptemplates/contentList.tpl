@@ -87,11 +87,6 @@
 								{section name=i loop=$oldDepth-$contentListBody->getDepth()}</ol></li>{/section}
 								<li class="content jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
 									<span class="sortableNodeLabel">
-										<span class="title">
-											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
-											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
-											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=body{/link}">{@$content->getTitle()}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
-										</span>
 										<span class="statusDisplay buttons">
 											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 											<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
@@ -100,6 +95,11 @@
 											<span class="icon icon16 icon-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
 
 											{event name='itemButtons'}
+										</span>
+										<span class="title">
+											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
+											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
+											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=body{/link}">{@$content->getTitle()}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
 										</span>
 									</span>
 									<ol class="contentListBody sortableList" data-object-id="{@$content->contentID}">
