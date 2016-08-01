@@ -65,6 +65,10 @@ class WSIPImportContentType extends TemplateContentType {
 			$source = $content->text;
 			$source = preg_replace_callback('/\[fireball\=([0-9]+)\](.*)\[\/fireball\]/', function ($match) {
 				$page = PageCache::getInstance()->getPage($match[1]);
+				
+				if ($page === null)
+					return '(page not found)';
+				
 				$title = empty($match[2]) ? $page->getTitle() : $match[2];
 				return '<a href="' . $page->getLink() . '" class="pagePreview">' . $title . '</a>';
 			}, $source);
