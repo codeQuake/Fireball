@@ -137,7 +137,7 @@ class PageEditForm extends PageAddForm {
 
 			// settings
 			'menuItemID' => ($this->menuItemID) ?: null,
-			'isCommentable' => $this->isCommentable,
+			//'isCommentable' => $this->isCommentable,
 			'availableDuringOfflineMode' => $this->availableDuringOfflineMode,
 			'allowSubscribing' => $this->allowSubscribing,
 
@@ -236,7 +236,7 @@ class PageEditForm extends PageAddForm {
 
 			// settings
 			$this->menuItemID = $this->page->menuItemID;
-			$this->isCommentable = $this->page->isCommentable;
+			//$this->isCommentable = $this->page->isCommentable;
 			$this->availableDuringOfflineMode = $this->page->availableDuringOfflineMode;
 			$this->allowSubscribing = $this->page->allowSubscribing;
 
