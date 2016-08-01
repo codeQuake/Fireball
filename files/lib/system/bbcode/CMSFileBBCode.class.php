@@ -23,6 +23,10 @@ class CMSFileBBCode extends AbstractBBCode {
 	public $caption = '';
 
 	public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser) {
+		$this->isImage = false;
+		$this->align = $this->caption = '';
+		$this->width = 0;
+		
 		//get id attribute
 		$fileID = 0;
 		if (isset($openingTag['attributes'][0])) {
