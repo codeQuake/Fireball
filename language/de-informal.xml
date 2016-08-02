@@ -279,6 +279,8 @@
 	</category>
 
 	<category name="cms.page">
+		<item name="cms.page.type"><![CDATA[Seitentyp]]></item>
+		<item name="cms.page.link.redirect"><![CDATA[Du wirst weitergeleitet.]]></item>
 		<item name="cms.page.sitemap"><![CDATA[Seitenübersicht]]></item>
 		<item name="cms.page.clickCounter"><![CDATA[{#$clicks} mal aufgerufen]]></item>
 		<item name="cms.page.comment"><![CDATA[Kommentar]]></item>
