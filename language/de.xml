@@ -402,6 +402,7 @@
 		<item name="wcf.acp.option.cms_pages_statistics_delete.description"><![CDATA[Zeitraum nach dem alte Statistiken automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]]></item>
 		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Versionen automatisch löschen]]></item>
 		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Zeitraum nach dem alte Versionen automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]]></item>
+		<item name="cms_sitemap_enable"><![CDATA[Vollständige Seitenübersicht aktivieren]]></item>
 	</category>
 
 	<category name="wcf.acp.pageMenu">

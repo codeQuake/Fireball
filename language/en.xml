@@ -402,6 +402,7 @@
 		<item name="wcf.acp.option.cms_pages_statistics_delete.description"><![CDATA[Old statistics will be deleted after the given period of time. [time in days, 0 to disable]]]></item>
 		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Delete Automatically]]></item>
 		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Old revisions will be deleted after the given period of time. [time in days, 0 to disable]]]></item>
+		<item name="cms_sitemap_enable"><![CDATA[Enable full sitemap]]></item>
 	</category>
 
 	<category name="wcf.acp.pageMenu">

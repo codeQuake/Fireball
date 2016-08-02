@@ -3,6 +3,7 @@
 namespace cms\page;
 use cms\data\page\AccessiblePageNodeTree;
 use wcf\page\AbstractPage;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
 class SitemapPage extends AbstractPage {
@@ -16,6 +17,13 @@ class SitemapPage extends AbstractPage {
 	 * @var \cms\data\page\AccessiblePageNodeTree
 	 */
 	public $pageNodeTree = null;
+	
+	public function checkPermissions() {
+		parent::checkPermissions();
+		
+		if (!CMS_SITEMAP_ENABLE)
+			throw new IllegalLinkException();
+	}
 
 	/**
 	 * @see \wcf\page\AbstractPage::readData()
