@@ -279,6 +279,7 @@
 	</category>
 
 	<category name="cms.page">
+		<item name="cms.page.sitemap"><![CDATA[Seitenübersicht]]></item>
 		<item name="cms.page.clickCounter"><![CDATA[{#$clicks} mal aufgerufen]]></item>
 		<item name="cms.page.comment"><![CDATA[Kommentar]]></item>
 		<item name="cms.page.comment.notification.mail"><![CDATA[{if !$author->userID}ein Gast{else}{@$author->username}{/if} hat einen Kommentar zur Seite „{$page->getTitle()}“ verfasst:
