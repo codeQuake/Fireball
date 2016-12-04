@@ -2,9 +2,8 @@
 namespace cms\system\request;
 
 use cms\data\page\PageCache;
-use cms\util\PageUtil;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\system\request\IRoute;
+use wcf\system\request\route\IRequestRoute;
 use wcf\system\request\RequestHandler;
 use wcf\util\HeaderUtil;
 
@@ -17,7 +16,7 @@ use wcf\util\HeaderUtil;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class PageRoute implements IRoute {
+class PageRoute implements IRequestRoute {
 	/**
 	 * parsed request data
 	 * @var	array<mixed>
@@ -199,5 +198,14 @@ class PageRoute implements IRoute {
 		}
 		
 		return $controllers;
+	}
+
+	/**
+	 * Configures this route to handle either ACP or frontend requests.
+	 *
+	 * @param    boolean $isACP true if route handles ACP requests
+	 */
+	public function setIsACP($isACP) {
+		$this->isACP = $isACP;
 	}
 }
