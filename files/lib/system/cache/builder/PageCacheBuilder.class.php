@@ -50,7 +50,7 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 
 		// stylesheets
 		$sql = "SELECT	*
-			FROM	cms".WCF_N."_stylesheet_to_page";
+			FROM	fireball".WCF_N."_stylesheet_to_page";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		while ($row = $statement->fetchArray()) {

@@ -1,7 +1,7 @@
 <?php
 namespace cms\data\file;
 
-use wcf\data\DatabaseObject;
+use cms\data\FireballDatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\system\category\CategoryHandler;
 use wcf\system\request\IRouteController;
@@ -16,7 +16,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class File extends DatabaseObject implements ILinkableObject, IRouteController {
+class File extends FireballDatabaseObject implements ILinkableObject, IRouteController {
 	/**
 	 * list of category ids
 	 * @var	array<integer>
@@ -47,7 +47,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	public function getCategoryIDs() {
 		if (empty($this->categoryIDs)) {
 			$sql = "SELECT	categoryID
-				FROM	cms".WCF_N."_file_to_category
+				FROM	fireball".WCF_N."_file_to_category
 				WHERE	fileID = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array($this->fileID));

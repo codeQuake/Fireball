@@ -1,6 +1,6 @@
 -- page
-DROP TABLE IF EXISTS cms1_page;
-CREATE TABLE cms1_page (
+DROP TABLE IF EXISTS fireball1_page;
+CREATE TABLE fireball1_page (
 	pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	isHome TINYINT(1) NOT NULL DEFAULT 0,
 
@@ -53,8 +53,8 @@ CREATE TABLE cms1_page (
 	additionalData MEDIUMTEXT DEFAULT NULL
 );
 
-DROP TABLE IF EXISTS cms1_page_revision;
-CREATE TABLE cms1_page_revision(
+DROP TABLE IF EXISTS fireball1_page_revision;
+CREATE TABLE fireball1_page_revision(
 	revisionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	pageID INT(10) NOT NULL,
 	action VARCHAR(255),
@@ -66,8 +66,8 @@ CREATE TABLE cms1_page_revision(
 );
 
 -- content
-DROP TABLE IF EXISTS cms1_content;
-CREATE TABLE cms1_content (
+DROP TABLE IF EXISTS fireball1_content;
+CREATE TABLE fireball1_content (
 	contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	parentID INT(10),
 	pageID INT(10),
@@ -82,15 +82,15 @@ CREATE TABLE cms1_content (
 );
 
 -- stylesheet
-DROP TABLE IF EXISTS cms1_stylesheet;
-CREATE TABLE cms1_stylesheet (
+DROP TABLE IF EXISTS fireball1_stylesheet;
+CREATE TABLE fireball1_stylesheet (
 	stylesheetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	title VARCHAR(255) NOT NULL,
 	less MEDIUMTEXT
 );
 
-DROP TABLE IF EXISTS cms1_stylesheet_to_page;
-CREATE TABLE cms1_stylesheet_to_page (
+DROP TABLE IF EXISTS fireball1_stylesheet_to_page;
+CREATE TABLE fireball1_stylesheet_to_page (
 	stylesheetID INT(10) NOT NULL,
 	pageID INT(10) NOT NULL,
 
@@ -98,8 +98,8 @@ CREATE TABLE cms1_stylesheet_to_page (
 );
 
 -- file
-DROP TABLE IF EXISTS cms1_file;
-CREATE TABLE cms1_file (
+DROP TABLE IF EXISTS fireball1_file;
+CREATE TABLE fireball1_file (
 	fileID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	title VARCHAR(255) NOT NULL DEFAULT '',
 	filesize INT(10) NOT NULL DEFAULT 0,
@@ -109,8 +109,8 @@ CREATE TABLE cms1_file (
 	downloads INT(10) DEFAULT 0
 );
 
-DROP TABLE IF EXISTS cms1_file_to_category;
-CREATE TABLE cms1_file_to_category (
+DROP TABLE IF EXISTS fireball1_file_to_category;
+CREATE TABLE fireball1_file_to_category (
 	fileID INT(10) NOT NULL,
 	categoryID INT(10) NOT NULL,
 
@@ -118,8 +118,8 @@ CREATE TABLE cms1_file_to_category (
 );
 
 -- counter
-DROP TABLE IF EXISTS cms1_counter;
-CREATE TABLE cms1_counter (
+DROP TABLE IF EXISTS fireball1_counter;
+CREATE TABLE fireball1_counter (
 	day INT(2) NOT NULL DEFAULT '1',
 	month INT(2) NOT NULL DEFAULT '1',
 	year INT(4) NOT NULL DEFAULT '2014',
@@ -132,22 +132,22 @@ CREATE TABLE cms1_counter (
 );
 
 -- foreign keys
-ALTER TABLE cms1_content ADD FOREIGN KEY (parentID) REFERENCES cms1_content (contentID) ON DELETE SET NULL;
-ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
-ALTER TABLE cms1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+ALTER TABLE fireball1_content ADD FOREIGN KEY (parentID) REFERENCES fireball1_content (contentID) ON DELETE SET NULL;
+ALTER TABLE fireball1_content ADD FOREIGN KEY (pageID) REFERENCES fireball1_page (pageID) ON DELETE CASCADE;
+ALTER TABLE fireball1_content ADD FOREIGN KEY (contentTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 
-ALTER TABLE cms1_file_to_category ADD FOREIGN KEY (fileID) REFERENCES cms1_file (fileID) ON DELETE CASCADE;
-ALTER TABLE cms1_file_to_category ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
+ALTER TABLE fireball1_file_to_category ADD FOREIGN KEY (fileID) REFERENCES fireball1_file (fileID) ON DELETE CASCADE;
+ALTER TABLE fireball1_file_to_category ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
 
-ALTER TABLE cms1_page ADD FOREIGN KEY (parentID) REFERENCES cms1_page (pageID) ON DELETE SET NULL;
-ALTER TABLE cms1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;
-ALTER TABLE cms1_page ADD FOREIGN KEY (styleID) REFERENCES wcf1_style (styleID) ON DELETE SET NULL;
-ALTER TABLE cms1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE cms1_page ADD FOREIGN KEY (lastEditorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
-ALTER TABLE cms1_page ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+ALTER TABLE fireball1_page ADD FOREIGN KEY (parentID) REFERENCES fireball1_page (pageID) ON DELETE SET NULL;
+ALTER TABLE fireball1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_page_menu_item (menuItemID) ON DELETE SET NULL;
+ALTER TABLE fireball1_page ADD FOREIGN KEY (styleID) REFERENCES wcf1_style (styleID) ON DELETE SET NULL;
+ALTER TABLE fireball1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE fireball1_page ADD FOREIGN KEY (lastEditorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE fireball1_page ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 
-ALTER TABLE cms1_page_revision ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
-ALTER TABLE cms1_page_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
+ALTER TABLE fireball1_page_revision ADD FOREIGN KEY (pageID) REFERENCES fireball1_page (pageID) ON DELETE CASCADE;
+ALTER TABLE fireball1_page_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 
-ALTER TABLE cms1_stylesheet_to_page ADD FOREIGN KEY (stylesheetID) REFERENCES cms1_stylesheet (stylesheetID) ON DELETE CASCADE;
-ALTER TABLE cms1_stylesheet_to_page ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
+ALTER TABLE fireball1_stylesheet_to_page ADD FOREIGN KEY (stylesheetID) REFERENCES fireball1_stylesheet (stylesheetID) ON DELETE CASCADE;
+ALTER TABLE fireball1_stylesheet_to_page ADD FOREIGN KEY (pageID) REFERENCES fireball1_page (pageID) ON DELETE CASCADE;

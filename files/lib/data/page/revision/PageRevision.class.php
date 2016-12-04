@@ -1,7 +1,6 @@
 <?php
 namespace cms\data\page\revision;
-
-use wcf\data\DatabaseObject;
+use cms\data\FireballDatabaseObject;
 
 /**
  * Represents a page revision.
@@ -11,7 +10,7 @@ use wcf\data\DatabaseObject;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class PageRevision extends DatabaseObject {
+class PageRevision extends FireballDatabaseObject {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */

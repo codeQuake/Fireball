@@ -41,13 +41,13 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		}
 
 		// save object
-		$sql = "INSERT INTO	cms".WCF_N."_page_revision
+		$sql = "INSERT INTO	fireball".WCF_N."_page_revision
 					(".$keys.")
 			VALUES		(".$values.")";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($statementParameters);
 
-		$id = WCF::getDB()->getInsertID("cms".WCF_N."_page_revision", "revisionID");
+		$id = WCF::getDB()->getInsertID("fireball".WCF_N."_page_revision", "revisionID");
 
 		return new static::$baseClass($id);
 	}
@@ -64,12 +64,12 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * Sets this page as front page.
 	 */
 	public function setAsHome() {
-		$sql = "UPDATE	cms".WCF_N."_page
+		$sql = "UPDATE	fireball".WCF_N."_page
 			SET	isHome = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(0));
 
-		$sql = "UPDATE	cms".WCF_N."_page
+		$sql = "UPDATE	fireball".WCF_N."_page
 			SET	isHome = ?
 			WHERE	pageID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -83,7 +83,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 */
 	public function updateStylesheetIDs(array $stylesheetIDs = array()) {
 		// remove old assigns
-		$sql = "DELETE FROM	cms".WCF_N."_stylesheet_to_page
+		$sql = "DELETE FROM	fireball".WCF_N."_stylesheet_to_page
 			WHERE		pageID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->pageID));
@@ -92,7 +92,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		if (!empty($stylesheetIDs)) {
 			WCF::getDB()->beginTransaction();
 
-			$sql = "INSERT INTO	cms".WCF_N."_stylesheet_to_page
+			$sql = "INSERT INTO	fireball".WCF_N."_stylesheet_to_page
 						(stylesheetID, pageID)
 				VALUES		(?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);

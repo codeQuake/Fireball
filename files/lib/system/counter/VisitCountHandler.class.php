@@ -36,7 +36,7 @@ class VisitCountHandler extends SingletonFactory {
 			// update
 			if ($this->existingColumn()) {
 				$sql = "SELECT	*
-					FROM	cms" . WCF_N . "_counter
+					FROM	fireball" . WCF_N . "_counter
 					WHERE	day = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j') . "
 						AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . "
 						AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
@@ -66,7 +66,7 @@ class VisitCountHandler extends SingletonFactory {
 				if ($spider != 0) $spiders ++;
 				$visits = $counter['visits'] + 1;
 
-				$sql = "UPDATE	cms" . WCF_N . "_counter
+				$sql = "UPDATE	fireball" . WCF_N . "_counter
 					SET	visits = ?,
 						users = ?,
 						spiders = ?,
@@ -105,7 +105,7 @@ class VisitCountHandler extends SingletonFactory {
 				$devices = array();
 				$devices[$device] = 1;
 
-				$sql = "INSERT INTO	cms" . WCF_N . "_counter
+				$sql = "INSERT INTO	fireball" . WCF_N . "_counter
 							(day, month, year, visits, users, spiders, browsers, platforms, devices)
 					VALUES		(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				$statement = WCF::getDB()->prepareStatement($sql);
@@ -127,7 +127,7 @@ class VisitCountHandler extends SingletonFactory {
 
 	public function existingColumn() {
 		$sql = "SELECT	COUNT(*) AS amount
-			FROM	cms" . WCF_N . "_counter
+			FROM	fireball" . WCF_N . "_counter
 			WHERE	day = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j') . "
 				AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . "
 				AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
@@ -154,7 +154,7 @@ class VisitCountHandler extends SingletonFactory {
 
 	public function getAllVisitors() {
 		$sql = "SELECT	*
-			FROM	cms" . WCF_N . "_counter";
+			FROM	fireball" . WCF_N . "_counter";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		$count = 0;
@@ -166,7 +166,7 @@ class VisitCountHandler extends SingletonFactory {
 
 	public function getDailyVisitors($day = 10, $month = 2, $year = 2014) {
 		$sql = "SELECT	*
-			FROM	cms" . WCF_N . "_counter
+			FROM	fireball" . WCF_N . "_counter
 			WHERE	day = ?
 				AND month = ?
 				AND year = ?";
