@@ -8,6 +8,8 @@ use cms\data\page\PageEditor;
 use cms\data\page\PageNodeTree;
 use cms\data\stylesheet\StylesheetList;
 use cms\util\PageUtil;
+use wcf\data\menu\item\MenuItemList;
+use wcf\data\menu\MenuCache;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\menu\item\PageMenuItemAction;
@@ -589,10 +591,8 @@ class PageAddForm extends AbstractForm {
 		}
 		
 		// load menu items
-		$menuItemList = new PageMenuItemList();
-		$menuItemList->getConditionBuilder()->add('page_menu_item.menuPosition = ?', array('header'));
-		$menuItemList->sqlOrderBy = 'page_menu_item.parentMenuItem ASC, page_menu_item.showOrder ASC';
-		$menuItemList->readObjects();
+		$mainMenu = MenuCache::getInstance()->getMainMenu();
+		$menuItemList = $mainMenu->getMenuItemNodeList();
 
 		foreach ($menuItemList as $menuItem) {
 			if ($menuItem->parentMenuItem) {
@@ -600,7 +600,7 @@ class PageAddForm extends AbstractForm {
 					$this->menuItems[$menuItem->parentMenuItem]->addChild($menuItem);
 				}
 			} else {
-				$this->menuItems[$menuItem->menuItem] = new ViewablePageMenuItem($menuItem);
+				$this->menuItems[$menuItem->menuItem] = $menuItem;
 			}
 		}
 		
