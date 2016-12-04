@@ -17,7 +17,7 @@
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
 			<option name="canViewUnpublishedPage">
-				<categoryname>user.cms.page</categoryname>
+				<categoryname>user.fireball.page</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
 			<!-- /user.fireball.page -->
