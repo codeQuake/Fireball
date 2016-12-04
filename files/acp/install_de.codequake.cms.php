@@ -17,7 +17,7 @@ $optionUpdate = WCF::getDB()->prepareStatement($sql);
 
 // set default page title
 if (!defined('PAGE_TITLE') || !PAGE_TITLE) {
-	$optionUpdate->execute(array('Fireball CMS 2.2', 'page_title'));
+	$optionUpdate->execute(array('Fireball CMS 3.0', 'page_title'));
 }
 
 // create default file category

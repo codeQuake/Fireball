@@ -9,13 +9,6 @@
 			<templatecode><![CDATA[{include file='__copyright' application='cms'}]]></templatecode>
 		</templatelistener>
 
-		<templatelistener name="logo">
-			<environment>user</environment>
-			<templatename>header</templatename>
-			<eventname>headerLogo</eventname>
-			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
-		</templatelistener>
-
 		<templatelistener name="pageAddButton">
 			<environment>user</environment>
 			<templatename>userPanel</templatename>
@@ -30,13 +23,6 @@
 			<templatename>index</templatename>
 			<eventname>softwareVersions</eventname>
 			<templatecode><![CDATA[{include file='__cmsVersion' application='cms'}]]></templatecode>
-		</templatelistener>
-
-		<templatelistener name="headerLogo">
-			<environment>admin</environment>
-			<templatename>header</templatename>
-			<eventname>headerLogo</eventname>
-			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
 		</templatelistener>
 
 		<templatelistener name="pagemenuInfo">
@@ -57,6 +43,18 @@
 			<environment>admin</environment>
 			<templatename>__indexNewsInjection</templatename>
 			<eventname>newsTabMenuContents</eventname>
+		</templatelistener>
+		<templatelistener name="logo">
+			<environment>user</environment>
+			<templatename>header</templatename>
+			<eventname>headerLogo</eventname>
+			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
+		</templatelistener>
+		<templatelistener name="headerLogo">
+			<environment>admin</environment>
+			<templatename>header</templatename>
+			<eventname>headerLogo</eventname>
+			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
 		</templatelistener>
 	</delete>
 </data>

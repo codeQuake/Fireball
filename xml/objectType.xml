@@ -218,16 +218,6 @@
 		</type>
 		<!-- /Poll -->
 
-		<!-- user online location -->
-		<type>
-			<name>de.codequake.cms.page</name>
-			<definitionname>com.woltlab.wcf.user.online.location</definitionname>
-			<controller>cms\page\PagePage</controller>
-			<classname>cms\system\user\online\location\PageLocation</classname>
-			<languagevariable>cms.user.usersOnline.location.page</languagevariable>
-		</type>
-		<!-- /user online location -->
-
 		<!-- acl -->
 		<type>
 			<name>de.codequake.cms.page</name>
@@ -293,15 +283,6 @@
 			<classname>cms\system\worker\PageRebuildDataWorker</classname>
 		</type>
 		<!-- /rebuild data worker -->
-
-		<!-- pages -->
-		<type>
-			<name>de.codequake.cms.PagePage</name>
-			<definitionname>com.woltlab.wcf.page</definitionname>
-			<classname><![CDATA[cms\page\PagePage]]></classname>
-			<categoryname>de.codequake.cms</categoryname>
-		</type>
-		<!-- /pages -->
 
 		<!-- stat handlers -->
 		<type>

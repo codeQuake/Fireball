@@ -2,7 +2,7 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/acpMenu.xsd">
 	<import>
 		<acpmenuitem name="fireball.acp.menu.link.cms">
-			<showorder>6</showorder>
+			<icon>fa-files-o</icon>
 		</acpmenuitem>
 
 		<!-- page -->
@@ -15,9 +15,10 @@
 			<permissions>admin.fireball.page.canListPage</permissions>
 		</acpmenuitem>
 		<acpmenuitem name="fireball.acp.menu.link.fireball.page.add">
-			<parent>fireball.acp.menu.link.fireball.page</parent>
+			<parent>fireball.acp.menu.link.fireball.page.list</parent>
 			<controller>cms\acp\form\PageAddForm</controller>
 			<permissions>admin.fireball.page.canAddPage</permissions>
+			<icon>fa-plus</icon>
 		</acpmenuitem>
 		<acpmenuitem name="fireball.acp.menu.link.fireball.page.statistics">
 			<parent>fireball.acp.menu.link.fireball.page</parent>
@@ -46,9 +47,10 @@
 			<permissions>admin.fireball.file.canAddFile</permissions>
 		</acpmenuitem>
 		<acpmenuitem name="fireball.acp.menu.link.fireball.file.category.add">
-			<parent>fireball.acp.menu.link.fireball.file</parent>
+			<parent>fireball.acp.menu.link.fireball.file.category.list</parent>
 			<controller>cms\acp\form\FileCategoryAddForm</controller>
 			<permissions>admin.fireball.file.canAddFile</permissions>
+			<icon>fa-plus</icon>
 		</acpmenuitem>
 		<!-- /file -->
 
@@ -62,9 +64,10 @@
 			<permissions>admin.fireball.style.canListStylesheet</permissions>
 		</acpmenuitem>
 		<acpmenuitem name="fireball.acp.menu.link.fireball.stylesheet.add">
-			<parent>fireball.acp.menu.link.fireball.stylesheet</parent>
+			<parent>fireball.acp.menu.link.fireball.stylesheet.list</parent>
 			<controller>cms\acp\form\StylesheetAddForm</controller>
 			<permissions>admin.fireball.style.canAddStylesheet</permissions>
+			<icon>fa-plus</icon>
 		</acpmenuitem>
 		<!-- /stylesheet -->
 	</import>
