@@ -140,7 +140,7 @@ ALTER TABLE fireball1_file_to_category ADD FOREIGN KEY (fileID) REFERENCES fireb
 ALTER TABLE fireball1_file_to_category ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
 
 ALTER TABLE fireball1_page ADD FOREIGN KEY (parentID) REFERENCES fireball1_page (pageID) ON DELETE SET NULL;
-ALTER TABLE fireball1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_menu_item (menuItemID) ON DELETE SET NULL;
+ALTER TABLE fireball1_page ADD FOREIGN KEY (menuItemID) REFERENCES wcf1_menu_item (itemID) ON DELETE SET NULL;
 ALTER TABLE fireball1_page ADD FOREIGN KEY (styleID) REFERENCES wcf1_style (styleID) ON DELETE SET NULL;
 ALTER TABLE fireball1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE fireball1_page ADD FOREIGN KEY (lastEditorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
