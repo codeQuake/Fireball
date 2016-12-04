@@ -23,8 +23,8 @@ class DailyCleanUpListener implements IParameterizedEventListener {
 		// files are considered obsolete when they are not assigned to
 		// at least one category and are older than one day
 		$sql = "SELECT		file.fileID
-			FROM		fireball".WCF_N."_file file
-			LEFT JOIN	fireball".WCF_N."_file_to_category file_to_category ON (file.fileID = file_to_category.fileID)
+			FROM		cms".WCF_N."_file file
+			LEFT JOIN	cms".WCF_N."_file_to_category file_to_category ON (file.fileID = file_to_category.fileID)
 			WHERE		file_to_category.categoryID IS NULL
 					AND	file.uploadTime < ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -40,7 +40,7 @@ class DailyCleanUpListener implements IParameterizedEventListener {
 
 		// delete outdated revisions
 		if (FIREBALL_REVISION_DELETE) {
-			$sql = "DELETE FROM	fireball".WCF_N."_page_revision
+			$sql = "DELETE FROM	cms".WCF_N."_page_revision
 				WHERE		time < ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(TIME_NOW - (FIREBALL_REVISION_DELETE * 86400)));
@@ -48,7 +48,7 @@ class DailyCleanUpListener implements IParameterizedEventListener {
 
 		// delete old statistics
 		if (FIREBALL_PAGES_STATISTICS_DELETE) {
-			$sql = "DELETE FROM	fireball".WCF_N."_counter
+			$sql = "DELETE FROM	cms".WCF_N."_counter
 				WHERE		UNIX_TIMESTAMP(DATE_ADD(DATE_ADD(MAKEDATE(year, 1), INTERVAL (month)-1 MONTH), INTERVAL (day)-1 DAY)) < ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(TIME_NOW - (FIREBALL_PAGES_STATISTICS_DELETE * 86400)));

@@ -2,10 +2,10 @@
 namespace cms\data\page;
 
 use cms\data\content\DrainedPositionContentNodeTree;
-use cms\data\FireballDatabaseObject;
 use cms\data\page\revision\PageRevisionList;
 use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
+use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
 use wcf\data\object\type\ObjectTypeCache;
@@ -23,7 +23,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Page extends FireballDatabaseObject implements IBreadcrumbProvider, ILinkableObject, IPermissionObject, IRouteController {
+class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObject, IPermissionObject, IRouteController {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */

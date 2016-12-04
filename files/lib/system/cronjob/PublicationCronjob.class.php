@@ -21,7 +21,7 @@ class PublicationCronjob extends AbstractCronjob {
 	public function execute(Cronjob $cronjob) {
 		// publish pages
 		$sql = "SELECT	pageID
-			FROM	fireball".WCF_N."_page
+			FROM	cms".WCF_N."_page
 			WHERE	isPublished = 0
 				AND publicationDate <= ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -37,7 +37,7 @@ class PublicationCronjob extends AbstractCronjob {
 
 		// disable pages
 		$sql = "SELECT	pageID
-			FROM	fireball".WCF_N."_page
+			FROM	cms".WCF_N."_page
 			WHERE	isDisabled = 0
 				AND deactivationDate BETWEEN 1 AND ?";
 		$statement = WCF::getDB()->prepareStatement($sql);

@@ -50,7 +50,7 @@ class FileEditor extends DatabaseObjectEditor {
 	 */
 	public function updateCategoryIDs(array $categoryIDs = array()) {
 		// remove old assigns
-		$sql = "DELETE FROM	fireball".WCF_N."_file_to_category
+		$sql = "DELETE FROM	cms".WCF_N."_file_to_category
 			WHERE		fileID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->fileID));
@@ -59,7 +59,7 @@ class FileEditor extends DatabaseObjectEditor {
 		if (!empty($categoryIDs)) {
 			WCF::getDB()->beginTransaction();
 
-			$sql = "INSERT INTO	fireball".WCF_N."_file_to_category
+			$sql = "INSERT INTO	cms".WCF_N."_file_to_category
 						(categoryID, fileID)
 				VALUES		(?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);

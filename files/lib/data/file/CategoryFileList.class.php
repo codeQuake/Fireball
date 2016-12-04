@@ -22,7 +22,7 @@ class CategoryFileList extends FileList {
 	public function __construct(array $categoryIDs) {
 		parent::__construct();
 
-		$this->sqlJoins .= " LEFT JOIN fireball".WCF_N."_file_to_category file_to_category ON (file.fileID = file_to_category.fileID)";
+		$this->sqlJoins .= " LEFT JOIN cms".WCF_N."_file_to_category file_to_category ON (file.fileID = file_to_category.fileID)";
 
 		if (!empty($categoryIDs)) {
 			$this->getConditionBuilder()->add('file_to_category.categoryID IN (?)', array($categoryIDs));
@@ -37,8 +37,8 @@ class CategoryFileList extends FileList {
 	 */
 	public function countObjects() {
 		$sql = "SELECT	COUNT(*) AS count
-			FROM	fireball".WCF_N."_file_to_category file_to_category,
-				fireball".WCF_N."_file file
+			FROM	cms".WCF_N."_file_to_category file_to_category,
+				cms".WCF_N."_file file
 			".$this->sqlConditionJoins."
 			".$this->getConditionBuilder();
 		$statement = WCF::getDB()->prepareStatement($sql);

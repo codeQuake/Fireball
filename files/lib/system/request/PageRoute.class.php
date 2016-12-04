@@ -181,7 +181,7 @@ class PageRoute implements IRequestRoute {
 	 */
 	protected function getControllerName($controller = 'Page') {
 		if (!isset($this->controllerNames[$controller])) {
-			$controllerName = RequestHandler::getTokenizedController($controller);
+			$controllerName = RequestHandler::getInstance()->getgetTokenizedController($controller);
 			$alias = RequestHandler::getInstance()->getAliasByController($controllerName);
 				
 			$this->controllerNames[$controller] = ($alias) ?: $controllerName;
