@@ -72,5 +72,4 @@
 			<listenerclassname>cms\system\event\listener\WSIPImportContentTypeListener</listenerclassname>
 		</eventlistener>
 	</import>
-	</import>
 </data>
