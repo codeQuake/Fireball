@@ -21,7 +21,7 @@ class SitemapPage extends AbstractPage {
 	public function checkPermissions() {
 		parent::checkPermissions();
 		
-		if (!CMS_SITEMAP_ENABLE)
+		if (!FIREBALL_SITEMAP_ENABLE)
 			throw new IllegalLinkException();
 	}
 
