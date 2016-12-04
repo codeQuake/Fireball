@@ -10,7 +10,7 @@
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
-		new CMS.ACP.Content.Type['de.codequake.cms.content.type.columns']([{if $contentData['columnData']|isset}{implode from=$contentData['columnData'] item=column}{@$column}{/implode}{/if}]);
+		new Fireball.ACP.Content.Type['de.codequake.cms.content.type.columns']([{if $contentData['columnData']|isset}{implode from=$contentData['columnData'] item=column}{@$column}{/implode}{/if}]);
 	});
 	//]]>
 </script>

@@ -1,6 +1,6 @@
 {include file='header' pageTitle='cms.acp.content.list'}
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@LAST_UPDATE_TIME}"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
@@ -19,7 +19,7 @@
 		new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
 		new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
 
-		new CMS.ACP.Content.AddDialog();
+		new Fireball.ACP.Content.AddDialog();
 
 		new WCF.Action.SimpleProxy({
 			action: 'copy',

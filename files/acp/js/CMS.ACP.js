@@ -1,4 +1,4 @@
-CMS.ACP.Page.TypePicker = Class.extend({
+Fireball.ACP.Page.TypePicker = Class.extend({
 	_proxy: null,
 	_didInit: false,
 	_objectTypeID: 0,

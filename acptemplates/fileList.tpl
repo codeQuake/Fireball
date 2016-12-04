@@ -1,6 +1,6 @@
 {include file='header' pageTitle='cms.acp.file.list'}
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@LAST_UPDATE_TIME}"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function () {
@@ -26,9 +26,9 @@
 
 		new WCF.Table.EmptyTableHandler($('#fileListTableContainer'), 'jsFileRow', options);
 
-		new CMS.ACP.File.Details();
-		new CMS.ACP.File.Preview();
-		CMS.ACP.File.Upload.init(function() {
+		new Fireball.ACP.File.Details();
+		new Fireball.ACP.File.Preview();
+		Fireball.ACP.File.Upload.init(function() {
 			window.location.reload();
 		});
 	});

@@ -1,6 +1,6 @@
 {include file='header' pageTitle='cms.acp.page.list'}
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@LAST_UPDATE_TIME}"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
@@ -39,8 +39,8 @@
 			}
 		});
 
-		new CMS.ACP.Content.AddDialog();
-		new CMS.ACP.Page.Revisions();
+		new Fireball.ACP.Content.AddDialog();
+		new Fireball.ACP.Page.Revisions();
 
 		new WCF.Action.SimpleProxy({
 			action: 'copy',

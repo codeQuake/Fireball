@@ -45,8 +45,8 @@
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
-		new CMS.ACP.File.Preview();
-		new CMS.ACP.File.Picker($('#filePicker > .button'), 'contentData[imageID]', {
+		new Fireball.ACP.File.Preview();
+		new Fireball.ACP.File.Picker($('#filePicker > .button'), 'contentData[imageID]', {
 			{if $image|isset}
 				{@$image->fileID}: {
 					fileID: {@$image->fileID},
@@ -57,7 +57,7 @@
 		}, { fileType: 'image' });
 
 		{if $contentData['imageID']|isset && $contentData['imageID'] !== null}
-			new CMS.ACP.File.ImageRatio({$contentData['imageID']});
+			new Fireball.ACP.File.ImageRatio({$contentData['imageID']});
 		{/if}
 	});
 	//]]>

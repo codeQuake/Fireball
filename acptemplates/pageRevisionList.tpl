@@ -2,7 +2,7 @@
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			new CMS.ACP.Page.Revisions.Restore();
+			new Fireball.ACP.Page.Revisions.Restore();
 		});
 		//]]>
 	</script>

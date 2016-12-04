@@ -1,5 +1,5 @@
 ﻿<div id="pageAddForm">
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
@@ -17,7 +17,7 @@
 		WCF.Language.addObject({
 			'cms.acp.page.alias.preview': '{lang}fireball.acp.page.alias.preview{/lang}',
 		});
-		new CMS.ACP.Page.Alias.Preview('#alias', '#parentID', '{link application="cms" controller="Page" alias="123456789" forceFrontend=true}{/link}');
+		new Fireball.ACP.Page.Alias.Preview('#alias', '#parentID', '{link application="cms" controller="Page" alias="123456789" forceFrontend=true}{/link}');
 
 	});
 	//]]>

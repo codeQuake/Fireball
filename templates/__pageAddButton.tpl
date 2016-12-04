@@ -9,7 +9,7 @@
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			new CMS.Page.Add({if $page|isset && $page != null}{$page->pageID}{/if})
+			new Fireball.Page.Add({if $page|isset && $page != null}{$page->pageID}{/if})
 		});
 		//]]>
 	</script>

@@ -22,7 +22,7 @@
 			{/if}
 
 			{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
-				new CMS.Page.ContentTypes({$page->pageID});
+				new Fireball.Page.ContentTypes({$page->pageID});
 			{/if}
 
 		});
