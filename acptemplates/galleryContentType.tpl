@@ -15,8 +15,8 @@
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
-		new CMS.ACP.File.Preview();
-		new CMS.ACP.File.Picker($('#filePicker > .button'), 'contentData[imageIDs]', {
+		new Fireball.ACP.File.Preview();
+		new Fireball.ACP.File.Picker($('#filePicker > .button'), 'contentData[imageIDs]', {
 			{if $imageList|isset}
 				{implode from=$imageList item='image'}
 					{@$image->fileID}: {
