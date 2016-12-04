@@ -4,8 +4,8 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[Advanced CMS for WCF 2.2]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>2.2.0 Alpha 1</version>
-		<date>2016-06-27</date>
+		<version>3.0.0 Alpha 1</version>
+		<date>2016-12-04</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -19,19 +19,18 @@
 	</requiredpackages>
 
 	<excludedpackages>
-		<excludedpackage version="1.0.0 Alpha 1">de.voolia.cms</excludedpackage>
-		<excludedpackage version="3.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+		<excludedpackage version="3.1.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 	</excludedpackages>
 
 	<instructions type="install">
-		<instruction type="sql">install.sql</instruction>
-		<instruction type="language">language/*.xml</instruction>
+		<instruction type="sql" />
+		<instruction type="language" />
 
 		<!-- files -->
-		<instruction type="file">files.tar</instruction>
+		<instruction type="file" />
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
+		<instruction type="acpTemplate" />
+		<instruction type="template" />
 
 		<!-- xml -->
 		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
@@ -56,14 +55,14 @@
 	</instructions>
 
 	<instructions type="update" romversion="3.0.0 Alpha *">
-		<instruction type="sql">update.sql</instruction>
-		<instruction type="language">language/*.xml</instruction>
+		<instruction type="sql" />
+		<instruction type="language" />
 
 		<!-- files -->
-		<instruction type="file">files.tar</instruction>
+		<instruction type="file" />
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
+		<instruction type="acpTemplate" />
+		<instruction type="template" />
 
 		<!-- xml -->
 		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
