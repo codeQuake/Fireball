@@ -3,25 +3,47 @@
 	<import>
 		<bbcode name="cmsfile">
 			<classname><![CDATA[cms\system\bbcode\CMSFileBBCode]]></classname>
-			<allowedchildren>none^b,i,u,s,sub,sup,color,font,url</allowedchildren>
+			<allowedchildren><![CDATA[none^b,i,u,s,sub,sup,color,font,url]]></allowedchildren>
 			<attributes>
 				<attribute name="0">
-					<validationpattern>^\d+$</validationpattern>
+					<validationpattern><![CDATA[^\d+$]]></validationpattern>
 					<required>1</required>
 					<usetext>1</usetext>
 				</attribute>
 				<attribute name="1">
-					<validationpattern>^(left|right)$</validationpattern>
+					<validationpattern>^(left|right|none)$</validationpattern>
 					<required>0</required>
 				</attribute>
 				<attribute name="2">
-					<validationpattern>^\d+$</validationpattern>
+					<validationpattern><![CDATA[^\d+$]]></validationpattern>
 					<required>0</required>
 				</attribute>
 				<attribute name="3">
 					<usetext>1</usetext>
 				</attribute>
 			</attributes>
+		</bbcode>
+	</import>
+	<import>
+		<bbcode name="fireball">
+			<classname><![CDATA[cms\system\bbcode\PageBBCode]]></classname>
+			<allowedchildren><![CDATA[none]]></allowedchildren>
+			<attributes>
+				<attribute name="0">
+					<validationpattern><![CDATA[^\d+$]]></validationpattern>
+					<required>1</required>
+					<usetext>1</usetext>
+				</attribute>
+			</attributes>
+			<wysiwyg>1</wysiwyg>
+			<wysiwygicon>fireballPage.png</wysiwygicon>
+			<buttonlabel>cms.bbcode.button.page</buttonlabel>
+		</bbcode>
+	</import>
+	<import>
+		<bbcode name="cmsfileurl">
+			<classname><![CDATA[cms\system\bbcode\CMSFileUrlBBCode]]></classname>
+			<allowedchildren><![CDATA[none]]></allowedchildren>
 		</bbcode>
 	</import>
 </data>

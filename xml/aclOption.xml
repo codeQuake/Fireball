@@ -16,6 +16,10 @@
 				<categoryname>user.fireball.page</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
+			<option name="canViewUnpublishedPage">
+				<categoryname>user.cms.page</categoryname>
+				<objecttype>de.codequake.cms.page</objecttype>
+			</option>
 			<!-- /user.fireball.page -->
 
 			<!-- user.fireball.page.comment -->

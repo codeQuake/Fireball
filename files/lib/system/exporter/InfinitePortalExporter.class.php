@@ -6,6 +6,7 @@ use cms\util\PageUtil;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
 use wcf\data\DatabaseObject;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\database\DatabaseException;
 use wcf\system\exporter\AbstractExporter;
 use wcf\system\importer\ImportHandler;
@@ -45,6 +46,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	 */
 	protected $methods = array(
 		'de.codequake.cms.page' => 'Pages',
+		'de.codequake.cms.page.acl' => 'ACLs',
 		'de.codequake.cms.content' => 'Contents'
 	);
 	
@@ -53,16 +55,17 @@ class InfinitePortalExporter extends AbstractExporter {
 	 */
 	protected $limits = array(
 		'de.codequake.cms.page' => 300,
-		'de.codequake.cms.content' => 100
+		'de.codequake.cms.page.acl' => 50,
+		'de.codequake.cms.content' => 50
 	);
 	
-	private $availableLanguages = array();
+	protected $availableLanguages = array();
 	
-	private $oldLanguages = array();
+	protected $oldLanguages = array();
 
-	private $pages = array();
+	protected $pages = array();
 	
-	private $contents = array();
+	protected $contents = array();
 	
 	/**
 	 * @see	\wcf\system\exporter\IExporter::init()
@@ -102,6 +105,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	public function getSupportedData() {
 		return array(
 			'de.codequake.cms.page' => array(
+				'de.codequake.cms.page.acl',
 				'de.codequake.cms.content'
 			)
 		);
@@ -136,6 +140,9 @@ class InfinitePortalExporter extends AbstractExporter {
 		
 		if (in_array('de.codequake.cms.page', $this->selectedData)) {
 			$queue[] = 'de.codequake.cms.page';
+			
+			if (in_array('de.codequake.cms.page.acl', $this->selectedData))
+				$queue[] = 'de.codequake.cms.page.acl';
 			
 			if (in_array('de.codequake.cms.content', $this->selectedData))
 				$queue[] = 'de.codequake.cms.content';
@@ -216,9 +223,10 @@ class InfinitePortalExporter extends AbstractExporter {
 			$pageID = ImportHandler::getInstance()->getImporter('de.codequake.cms.page')->import($row['contentItemID'], array(
 				'showOrder' => $row['showOrder'],
 				'parentID' => $row['parentID'],
-				//'styleID' => $row['styleID'], //TODO
 				'alias' => $alias,
 				'allowIndexing' => $row['allowSpidersToIndexThisPage'],
+				'publicationDate' => $row['publishingStartTime'],
+				'deactivationDate' => $row['publishingEndTime'],
 				'objectTypeID' => $pageObjectType->objectTypeID,
 				'metaKeywords' => $this->getLangItem('wsip.contentItem.' . $row['contentItem'] . '.metaKeywords', $this->oldLanguages['default']['languageID']),
 				'metaDescription' => $this->getLangItem('wsip.contentItem.' . $row['contentItem'] . '.metaDescription', $this->oldLanguages['default']['languageID']),
@@ -230,6 +238,102 @@ class InfinitePortalExporter extends AbstractExporter {
 			}
 			
 			$this->exportPagesRecursively($row['contentItemID']);
+		}
+	}
+	
+	/**
+	 * Counts ACLs.
+	 */
+	public function countACLs() {
+		$sql = "SELECT	((SELECT COUNT(*) FROM wsip" . $this->dbNo . "_content_item_to_group)
+			+ (SELECT COUNT(*) FROM wsip" . $this->dbNo . "_content_item_to_user)) AS count";
+		$statement = $this->database->prepareStatement($sql);
+		$statement->execute();
+		$row = $statement->fetchArray();
+		
+		return $row['count'];
+	}
+	
+	/**
+	 * Exports ACLs.
+	 *
+	 * @param	integer		$offset
+	 * @param	integer		$limit
+	 */
+	public function exportACLs($offset, $limit) {
+		$user = $group = array();
+		$sql = "(
+				SELECT	contentItemID, 0 AS userID, groupID, 'group' AS type
+				FROM	wsip".$this->dbNo."_content_item_to_group
+			)
+			UNION
+			(
+				SELECT	contentItemID, userID, 0 AS groupID, 'user' AS type
+				FROM	wsip".$this->dbNo."_content_item_to_user
+			)
+			ORDER BY	contentItemID, userID, groupID, type";
+		$statement = $this->database->prepareStatement($sql, $limit, $offset);
+		$statement->execute();
+		while ($row = $statement->fetchArray()) {
+			${$row['type']}[] = $row;
+		}
+		
+		// group acls
+		if (!empty($group)) {
+			$conditionBuilder = new PreparedStatementConditionBuilder(true, 'OR');
+			foreach ($group as $row) {
+				$conditionBuilder->add('(contentItemID = ? AND groupID = ?)', array($row['contentItemID'], $row['groupID']));
+			}
+			
+			$sql = "SELECT	*
+				FROM	wsip".$this->dbNo."_content_item_to_group
+				".$conditionBuilder;
+			$statement = $this->database->prepareStatement($sql);
+			$statement->execute($conditionBuilder->getParameters());
+			while ($row = $statement->fetchArray()) {
+				$data = array('objectID' => $row['contentItemID']);
+				$data['groupID'] = $row['groupID'];
+				
+				unset($row['contentItemID'], $row['groupID']);
+				
+				foreach ($row as $permission => $value) {
+					if ($value == -1)
+						continue;
+					
+					$permission = $this->convertACL($permission);
+					
+					ImportHandler::getInstance()->getImporter('de.codequake.cms.page.acl')->import(0, array_merge($data, array('optionValue' => $value)), array('optionName' => $permission));
+				}
+			}
+		}
+		
+		// user acls
+		if (!empty($user)) {
+			$conditionBuilder = new PreparedStatementConditionBuilder(true, 'OR');
+			foreach ($user as $row) {
+				$conditionBuilder->add('(contentItemID = ? AND userID = ?)', array($row['contentItemID'], $row['userID']));
+			}
+			
+			$sql = "SELECT	*
+				FROM	wsip".$this->dbNo."_content_item_to_user
+				".$conditionBuilder;
+			$statement = $this->database->prepareStatement($sql);
+			$statement->execute($conditionBuilder->getParameters());
+			while ($row = $statement->fetchArray()) {
+				$data = array('objectID' => $row['contentItemID']);
+				$data['userID'] = $row['userID'];
+				
+				unset($row['contentItemID'], $row['userID']);
+				
+				foreach ($row as $permission => $value) {
+					if ($value == -1)
+						continue;
+					
+					$permission = $this->convertACL($permission);
+					
+					ImportHandler::getInstance()->getImporter('de.codequake.cms.page.acl')->import(0, array_merge($data, array('optionValue' => $value)), array('optionName' => $permission));
+				}
+			}
 		}
 	}
 	
@@ -275,6 +379,7 @@ class InfinitePortalExporter extends AbstractExporter {
 					$sql = "SELECT	*
 						FROM	wcf" . $this->wcfNo . "_box_tab tab
 						WHERE	tab.boxID = ?
+							AND item_box.boxID = box.boxID
 						ORDER BY	showOrder";
 					$tabListStatement = $this->database->prepareStatement($sql);
 					$tabListStatement->execute(array($box['boxID']));
@@ -339,13 +444,13 @@ class InfinitePortalExporter extends AbstractExporter {
 					'contentData' => array(
 						'text' => $this->getLangItem('wsip.contentItem.' . $row['contentItem'] . '.text', $this->oldLanguages['default']['languageID'])
 					),
-					//'cssClasses' => 'container containerPadding marginTop' //TODO
+					'cssClasses' => 'container containerPadding marginTop'
 				), $additionalData);
 			}
 		}
 	}
 	
-	private function getLangItem($langItem, $languageID = 1) {
+	protected function getLangItem($langItem, $languageID = 1) {
 		$sql = "SELECT	*
 			FROM	wcf" . $this->wcfNo . "_language_item
 			WHERE	languageItem = ?
@@ -369,7 +474,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		return '';
 	}
 	
-	private function saveI18nValue(DatabaseObject $object, $type, $columnName) {
+	protected function saveI18nValue(DatabaseObject $object, $type, $columnName) {
 		$application = 'cms';
 		if ($type == 'category')
 			$application = 'wcf';
@@ -414,7 +519,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		}
 	}
 	
-	private function getOldLanguages() {
+	protected function getOldLanguages() {
 		$sql = "SELECT *
 			FROM	wcf" . $this->wcfNo . "_language";
 		$statement = $this->database->prepareStatement($sql);
@@ -427,5 +532,16 @@ class InfinitePortalExporter extends AbstractExporter {
 				$this->oldLanguages['default'] = $row;
 			}
 		}
+	}
+	
+	protected function convertACL($oldPermission) {
+		if ($oldPermission == 'canViewContentItem')
+			return 'canViewPage';
+		else if ($oldPermission == 'canEnterContentItem')
+			return 'canViewPage';
+		else if ($oldPermission == 'canViewHiddenContentItem')
+			return 'canViewUnpublishedPage';
+		else
+			return $oldPermission;
 	}
 }

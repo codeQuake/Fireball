@@ -3,6 +3,8 @@
 namespace cms\system\content\type;
 use cms\data\content\Content;
 use cms\data\content\ContentAction;
+use cms\data\file\FileCache;
+use cms\data\page\PageCache;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\RequestHandler;
@@ -24,6 +26,11 @@ class WSIPImportContentType extends TemplateContentType {
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
 	 */
 	protected $previewFields = array('text');
+	
+	/**
+	 * @see	\cms\system\content\type\AbstractContentType::$templateName
+	 */
+	public $templateName = 'wsipImportContentType';
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::validate()
@@ -55,7 +62,33 @@ class WSIPImportContentType extends TemplateContentType {
 	public function getOutput(Content $content) {
 		$compiled = $content->compiled;
 		if (empty($compiled[WCF::getLanguage()->languageCode])) {
-			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
+			$source = $content->text;
+			$source = preg_replace_callback('/\[fireball\=([0-9]+)\](.*)\[\/fireball\]/', function ($match) {
+				$page = PageCache::getInstance()->getPage($match[1]);
+				
+				if ($page === null)
+					return '(page not found)';
+				
+				$title = empty($match[2]) ? $page->getTitle() : $match[2];
+				return '<a href="' . $page->getLink() . '" class="pagePreview">' . $title . '</a>';
+			}, $source);
+			$source = preg_replace_callback("/\[cmsfile\=([0-9]+)( ?, ?(left|right|none))?( ?, ?([0-9]+))?( ?, ?'(.*)')?\](.*)\[\/cmsfile\]/", function ($match) {
+				$file = FileCache::getInstance()->getFile($match[1]);
+				if ($file === null) return '';
+				
+				$align = !empty($match[3]) ? $match[3] : '';
+				$width = !empty($match[5]) ? $match[5] : 0;
+				$caption = !empty($match[7]) ? $match[7] : '';
+				
+				return WCF::getTPL()->fetch('cmsFileBBCodeTag', 'cms', array(
+					'_file' => $file,
+					'_align' => $align,
+					'_width' => $width,
+					'_isImage' => preg_match('~(image/*)+~', $file->fileType),
+					'_caption' => $caption
+				));
+			}, $source);
+			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $source);
 			
 			$contentData = $content->contentData;
 			if (!is_array($contentData))

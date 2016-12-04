@@ -5,7 +5,7 @@
 		<li>
 			<a href="{$page->getLink()}">{$page->getTitle()}</a>
 			<ul>
-				{if !$pageList->current()->hasChildren()}</ul></li>{/if}
+				{if !$pageList->current()->hasChildren() || $pageList->getDepth() == 1}</ul></li>{/if}
 				{assign var=oldDepth value=$pageList->getDepth()}
 		</li>
 	{/foreach}

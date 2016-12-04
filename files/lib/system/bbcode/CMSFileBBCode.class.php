@@ -2,6 +2,7 @@
 namespace cms\system\bbcode;
 
 use cms\data\file\File;
+use cms\data\file\FileCache;
 use wcf\system\bbcode\AbstractBBCode;
 use wcf\system\bbcode\BBCodeParser;
 use wcf\system\WCF;
@@ -22,12 +23,18 @@ class CMSFileBBCode extends AbstractBBCode {
 	public $caption = '';
 
 	public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser) {
+		$this->isImage = false;
+		$this->align = $this->caption = '';
+		$this->width = 0;
+		
 		//get id attribute
 		$fileID = 0;
 		if (isset($openingTag['attributes'][0])) {
 			$fileID = $openingTag['attributes'][0];
 		}
-		$file = new File($fileID);
+		$file = FileCache::getInstance()->getFile($fileID);
+		if ($file === null)
+			$file = new File($fileID);
 
 		if ($file === null) return '';
 

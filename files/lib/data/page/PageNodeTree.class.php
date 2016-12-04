@@ -73,7 +73,7 @@ class PageNodeTree implements \IteratorAggregate {
 			// @todo: This needs to be changed. It creates a
 			// pointless database query to fetch an (of course) not
 			// existing page with the id '0'
-			$page = new Page(0);
+			$page = new Page(null, array('pageID' => 0));
 		}
 		else {
 			$page = $this->getPage($pageID);

@@ -138,7 +138,7 @@ class PageRoute implements IRoute {
 		
 		if (!URL_LEGACY_MODE) {
 			// request URL must be prefixed with `page/`
-			if (substr($requestURL, 0, strlen($controller) + 1) != $controller . '/' && substr($requestURL, 0, 5) != 'page/') {
+			if (substr($requestURL, 0, strlen($controller) + 1) != $controller . '/' && substr($requestURL, 0, 5) != 'page/' && !empty($requestURL)) {
 				return false;
 			}
 			
@@ -158,7 +158,17 @@ class PageRoute implements IRoute {
 		}
 		
 		// validate alias
-		if (preg_match('~^' . PageUtil::ALIAS_PATTERN_STACK . '$~', $alias)) {
+		if (!empty($alias) && preg_match('~^' . '([a-z0-9]+((?:[a-z0-9-]+)*)*\/?)*' . '$~', $alias)) {
+			$this->routeData['alias'] = $alias;
+			return true;
+		}
+
+		if ($this->landingPage === null)
+			$this->landingPage = PageMenu::getInstance()->getLandingPage();
+		$processor = $this->landingPage->getProcessor();
+		if (empty($_GET['ajax-proxy']) && empty($_GET['t']) && empty($_POST['actionName']) && empty($_POST['className']) && empty($_GET['alias']) && $processor instanceof CMSPageMenuItemProvider) {
+			$page = $processor->getPage();
+			$alias = $page->getAlias();
 			$this->routeData['alias'] = $alias;
 			return true;
 		}

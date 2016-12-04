@@ -101,6 +101,11 @@
 
 											{event name='itemButtons'}
 										</span>
+										<span class="title">
+											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
+											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
+											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=body{/link}">{@$content->getTitle()}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
+										</span>
 									</span>
 									<ol class="contentListBody sortableList" data-object-id="{@$content->contentID}">
 									{if !$contentListBody->current()->hasChildren()}
