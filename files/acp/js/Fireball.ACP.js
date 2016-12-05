@@ -1,3 +1,9 @@
+if (!Fireball) var Fireball = {};
+
+Fireball.ACP = {};
+
+Fireball.ACP.Page = {};
+
 Fireball.ACP.Page.TypePicker = Class.extend({
 	_proxy: null,
 	_didInit: false,
