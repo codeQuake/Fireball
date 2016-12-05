@@ -1,36 +1,9 @@
-{include file='documentHeader'}
-
-<head>
-	<title>{$page->getTitle()} - {PAGE_TITLE|language}</title>
-
-	{include file='headInclude'}
+{capture assign='headContent'}
 	{foreach from=$page->getStylesheets() item=stylesheet}
 		<link rel="stylesheet" type="text/css" href="{$stylesheet->getURL()}" />
 	{/foreach}
-	<link rel="canonical" href="{$page->getLink(false)}" />
-
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
-	<script data-relocate="true">
-		//<![CDATA[
-		$(function() {
-			{if $page->allowSubscribing && $__wcf->user->userID}
-				WCF.Language.addObject({
-					'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}'
-				});
-
-				new WCF.User.ObjectWatch.Subscribe();
-			{/if}
-
-			{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
-				new Fireball.Page.ContentTypes({$page->pageID});
-			{/if}
-
-		});
-		//]]>
-	</script>
-</head>
-
-<body id="tpl_{$templateNameApplication}_{$templateName}" data-template="{$templateName}" data-application="{$templateNameApplication}" data-page-id="{$page->pageID}">
+{/capture}
 
 {capture assign='headerNavigation'}
 	{if $page->allowSubscribing && $__wcf->user->userID}
@@ -38,8 +11,31 @@
 	{/if}
 {/capture}
 
+{capture assign='pageTitle'}{$page->getTitle()}{/capture}
+
+{capture assign='contentHeader'}
+	<header class="contentHeader">
+		<div class="contentHeaderTitle">
+			<h1 class="contentTitle">{$page->getTitle()}</h1>
+			<p class="contentHeaderDescription">
+				{if $product->getLabel()}{@$product->getLabel()}{/if}
+			</p>
+		</div>
+
+		{hascontent}
+			<nav class="contentHeaderNavigation">
+				<ul>
+					{content}
+						{event name='contentHeaderNavigation'}
+					{/content}
+				</ul>
+			</nav>
+		{/hascontent}
+	</header>
+{/capture}
+
 {hascontent}
-	{capture assign='sidebar'}
+	{capture assign='sidebarRight'}
 		{content}
 			{assign var=oldDepth value=0}
 			{foreach from=$sidebarNodeTree item=content}
@@ -119,7 +115,20 @@
 	</div>
 {/if}
 
-{include file='footer'}
+<script data-relocate="true">
+	$(function() {
+		{if $page->allowSubscribing && $__wcf->user->userID}
+			WCF.Language.addObject({
+				'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}'
+			});
 
-</body>
-</html>
+			new WCF.User.ObjectWatch.Subscribe();
+		{/if}
+
+		{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
+			new Fireball.Page.ContentTypes({$page->pageID});
+		{/if}
+	});
+</script>
+
+{include file='footer'}

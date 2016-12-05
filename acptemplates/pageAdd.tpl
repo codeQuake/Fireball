@@ -3,7 +3,6 @@
 {include file='aclPermissions'}
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
-	//<![CDATA[
 	$(function() {
 		WCF.Language.addObject({
 			'cms.acp.page.alias.preview': '{lang}fireball.acp.page.alias.preview{/lang}',
@@ -14,9 +13,9 @@
 		new Fireball.ACP.Page.Alias.Preview('#alias', '#parentID', '{link application="cms" controller="Page" alias="123456789" forceFrontend=true}{/link}');
 
 		{if $action == 'add'}
-			$('#createMenuItem').click(function() {
-				$('#menuItemID').parents('dl:eq(0)').toggle();
-			});
+		$('#createMenuItem').click(function() {
+			$('#menuItemID').parents('dl:eq(0)').toggle();
+		});
 		{/if}
 
 		$('#enableDelayedDeactivation, #enableDelayedPublication').click(function() {
@@ -26,7 +25,6 @@
 
 		new Fireball.ACP.Page.TypePicker({if $pageObjectTypeID}{$pageObjectTypeID}{/if}{if !$pageID|empty}, {$pageID}{/if});
 	});
-	//]]>
 </script>
 
 {if $pageID|isset}
@@ -47,7 +45,7 @@
 
 <div class="contentNavigation">
 	<nav>
-		<ul>		
+		<ul>
 			{if $action == 'edit'}
 				<li>
 					<a class="button" href="{link application='cms' controller='ContentList' pageID=$pageID}{/link}"><span class="icon icon16 fa-file"></span> <span>{lang}fireball.acp.content.list{/lang}</span></a>
@@ -95,7 +93,7 @@
 		</dl>
 	</div>
 
-	<div class="tabMenuContainer" data-active="{$activeTabMenuItem}" data-store="activeTabMenuItem">
+	<div class="section tabMenuContainer" data-active="{$activeTabMenuItem}" data-store="activeTabMenuItem">
 		<nav class="tabMenu">
 			<ul>
 				<li><a href="{@$__wcf->getAnchor('general')}">{lang}fireball.acp.page.general{/lang}</a></li>
@@ -106,9 +104,9 @@
 			</ul>
 		</nav>
 
-		<div id="general" class="container containerPadding tabMenuContent">
-			<fieldset>
-				<legend>{lang}wcf.global.form.data{/lang}</legend>
+		<div id="general" class="tabMenuContent">
+			<section class="section">
+				<h2 class="sectionTitle">{lang}wcf.global.form.data{/lang}</h2>
 
 				<dl{if $errorField == 'title'} class="formError"{/if}>
 					<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
@@ -171,10 +169,10 @@
 				{/if}
 
 				{event name='dataFields'}
-			</fieldset>
+			</section>
 
-			<fieldset>
-				<legend>{lang}fireball.acp.page.meta{/lang}</legend>
+			<section class="section">
+				<h2 class="sectionTitle">{lang}fireball.acp.page.meta{/lang}</h2>
 
 				<dl{if $errorField == 'metaDescription'} class="formError"{/if}>
 					<dt><label for="metaDescription">{lang}fireball.acp.page.meta.description{/lang}</label></dt>
@@ -213,10 +211,10 @@
 				</dl>
 
 				{event name='metaFields'}
-			</fieldset>
+			</section>
 
-			<fieldset>
-				<legend>{lang}fireball.acp.page.position{/lang}</legend>
+			<section class="section">
+				<h2 class="sectionTitle">{lang}fireball.acp.page.position{/lang}</h2>
 
 				{hascontent}
 					<dl{if $errorField == 'parentID'} class="formError"{/if}>
@@ -225,9 +223,9 @@
 							<select id="parentID" name="parentID">
 								<option value="0" {if $parentID == 0} selected="selected"{/if} data-alias="">{lang}wcf.global.noSelection{/lang}</option>
 								{content}
-									{foreach from=$pageList item=$node}
-										<option data-alias="{$node->getAlias()}"{if $node->pageID == $parentID} selected="selected"{/if} value="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
-									{/foreach}
+								{foreach from=$pageList item=$node}
+									<option data-alias="{$node->getAlias()}"{if $node->pageID == $parentID} selected="selected"{/if} value="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
+								{/foreach}
 								{/content}
 							</select>
 						</dd>
@@ -256,10 +254,10 @@
 				</dl>
 
 				{event name='positionFields'}
-			</fieldset>
+			</section>
 
-			<fieldset>
-				<legend>{lang}fireball.acp.page.publication{/lang}</legend>
+			<section class="section">
+				<h2 class="sectionTitle">{lang}fireball.acp.page.publication{/lang}</h2>
 
 				<dl>
 					<dt class="reversed"><label for="enableDelayedPublication">{lang}fireball.acp.page.publication.enableDelayedPublication{/lang}</label></dt>
@@ -308,10 +306,10 @@
 				</dl>
 
 				{event name='publicationFields'}
-			</fieldset>
+			</section>
 
-			<fieldset>
-				<legend>{lang}fireball.acp.page.settings{/lang}</legend>
+			<section class="section">
+				<h2 class="sectionTitle">{lang}fireball.acp.page.settings{/lang}</h2>
 
 				<dl{if $errorField == 'menuItemID'} class="formError"{/if}{if $action == 'add' && $createMenuItem} style="display: none"{/if}>
 					<dt><label for="menuItemID">{lang}fireball.acp.page.settings.menuItemID{/lang}</label></dt>
@@ -348,18 +346,18 @@
 				</dl>
 
 				{event name='settingsFields'}
-			</fieldset>
+			</section>
 
 			{event name='fieldsets'}
 		</div>
 
-		<div id="specific" class="container containerPadding tabMenuContent">
+		<div id="specific" class="tabMenuContent">
 			{@$pageForm}
 		</div>
 
-		<div id="display" class="container containerPadding tabMenuContent">
-			<fieldset>
-				<legend>{lang}fireball.acp.page.display{/lang}</legend>
+		<div id="display" class="tabMenuContent">
+			<section class="section">
+				<h2 class="sectionTitle">{lang}fireball.acp.page.display{/lang}</h2>
 
 				<dl>
 					<dt><label for="styleID">{lang}fireball.acp.page.styleID{/lang}</label></dt>
@@ -377,7 +375,7 @@
 						<dt>{lang}fireball.acp.page.stylesheets{/lang}</dt>
 						<dd>
 							{content}
-								{htmlCheckboxes name='stylesheetIDs' options=$stylesheetList selected=$stylesheetIDs}
+							{htmlCheckboxes name='stylesheetIDs' options=$stylesheetList selected=$stylesheetIDs}
 							{/content}
 							{if $errorField == 'stylesheets'}
 								<small class="innerError">
@@ -390,10 +388,10 @@
 				{/hascontent}
 
 				{event name='displayFields'}
-			</fieldset>
+			</section>
 
-			<fieldset>
-				<legend>{lang}fireball.acp.page.display.settings{/lang}</legend>
+			<section class="section">
+				<h2 class="sectionTitle">{lang}fireball.acp.page.display.settings{/lang}</h2>
 
 				<dl{if $errorField == 'sidebarOrientation'} class="formError"{/if}>
 					<dt><label for="sidebarOrientation">{lang}fireball.acp.page.display.settings.sidebarOrientation{/lang}</label></dt>
@@ -406,19 +404,19 @@
 				</dl>
 
 				{event name='displaySettingsFields'}
-			</fieldset>
+			</section>
 
 			{event name='afterDisplayFieldsets'}
 		</div>
 
-		<div id="userPermissions" class="container containerPadding tabMenuContent">
-			<fieldset>
-				<legend>{lang}wcf.acl.permissions{/lang}</legend>
+		<div id="userPermissions" class="tabMenuContent">
+			<section class="section">
+				<h2 class="sectionTitle">{lang}wcf.acl.permissions{/lang}</h2>
 
 				<dl id="userPermissionsContainer" class="wide">
 					<dd></dd>
 				</dl>
-			</fieldset>
+			</section>
 
 			{event name='afterPermissionsFieldsets'}
 		</div>
