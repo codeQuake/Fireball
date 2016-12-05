@@ -9,19 +9,19 @@
 if (!CMS) var CMS = { };
 
 /**
- * Initialize CMS.ACP namespace
+ * Initialize Fireball.ACP namespace
  */
-CMS.ACP = { };
+Fireball.ACP = { };
 
 /**
- * Initialize CMS.ACP.Content namespace
+ * Initialize Fireball.ACP.Content namespace
  */
-CMS.ACP.Content = { };
+Fireball.ACP.Content = { };
 
 /**
  * Shows a dialog to add a new content to a page.
  */
-CMS.ACP.Content.AddDialog = Class.extend({
+Fireball.ACP.Content.AddDialog = Class.extend({
 	_proxy: null,
 	_cache: { },
 	_dialog: null,
@@ -66,16 +66,16 @@ CMS.ACP.Content.AddDialog = Class.extend({
 });
 
 /**
- * Initialize CMS.ACP.Content.Type namespace
+ * Initialize Fireball.ACP.Content.Type namespace
  */
-CMS.ACP.Content.Type = { };
+Fireball.ACP.Content.Type = { };
 
 /**
  * Columns content type.
  *
  * @param	array		columnData
  */
-CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
+Fireball.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 	_addButton: null,
 
 	/**
@@ -199,7 +199,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 
 	_deleteColumn: function(columnNumber) {
 		if (this._columnCount == this._minColumnCount) {
-			console.debug("[CMS.ACP.Content.Type['de.codequake.cms.content.type.columns']] Couldn't delete column '" + columnNumber + "', reached min column count.");
+			console.debug("[Fireball.ACP.Content.Type['de.codequake.cms.content.type.columns']] Couldn't delete column '" + columnNumber + "', reached min column count.");
 			return;
 		}
 
@@ -310,7 +310,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 	 */
 	_setWidth: function(columnNumber, width) {
 		if (columnNumber > this._columnCount) {
-			console.debug("[CMS.ACP.Content.Type['de.codequake.cms.content.type.columns']] Couldn't set column width for column '" + columnNumber + "', out of boundary.");
+			console.debug("[Fireball.ACP.Content.Type['de.codequake.cms.content.type.columns']] Couldn't set column width for column '" + columnNumber + "', out of boundary.");
 			return;
 		}
 
@@ -382,15 +382,15 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 });
 
 /**
- * Initialize CMS.ACP.File namespace
+ * Initialize Fireball.ACP.File namespace
  */
-CMS.ACP.File = { };
+Fireball.ACP.File = { };
 
 /**
  * Handles showing details about a specific file upon clicking on the file
  * title.
  */
-CMS.ACP.File.Details = Class.extend({
+Fireball.ACP.File.Details = Class.extend({
 	/**
 	 * cache
 	 * @var	object
@@ -420,7 +420,7 @@ CMS.ACP.File.Details = Class.extend({
 				success: $.proxy(this._success, this)
 			});
 
-			WCF.DOMNodeInsertedHandler.addCallback('CMS.ACP.File.Details', $.proxy(this.init, this));
+			WCF.DOMNodeInsertedHandler.addCallback('Fireball.ACP.File.Details', $.proxy(this.init, this));
 		}
 
 		// bind events
@@ -468,7 +468,7 @@ CMS.ACP.File.Details = Class.extend({
  *
  * @param	integer		fileID
  */
-CMS.ACP.File.ImageRatio = Class.extend({
+Fireball.ACP.File.ImageRatio = Class.extend({
 	_ratio: 1,
 
 	/**
@@ -529,7 +529,7 @@ CMS.ACP.File.ImageRatio = Class.extend({
  * @param	array		defaultValues
  * @param	object		options
  */
-CMS.ACP.File.Picker = Class.extend({
+Fireball.ACP.File.Picker = Class.extend({
 	/**
 	 * id of the currently open category
 	 * @var	integer
@@ -602,7 +602,7 @@ CMS.ACP.File.Picker = Class.extend({
 		// bind form event to create input
 		var $form = this._selectButton.parents('form');
 		if (!$form.length) {
-			console.debug('[CMS.ACP.File.Picker] Unable to determine form for file picker, aborting.');
+			console.debug('[Fireball.ACP.File.Picker] Unable to determine form for file picker, aborting.');
 			return;
 		}
 		$form.submit($.proxy(this._submit, this));
@@ -681,7 +681,7 @@ CMS.ACP.File.Picker = Class.extend({
 		}
 
 		if (!this._options.multiple) {
-			new CMS.ACP.File.ImageRatio($input.val());
+			new Fireball.ACP.File.ImageRatio($input.val());
 
 			//delete old entries
 			var self = this;
@@ -801,7 +801,7 @@ CMS.ACP.File.Picker = Class.extend({
 				title: data.returnValues.title
 			});
 
-			CMS.ACP.File.Upload.init($.proxy(this._uploadCallback, this));
+			Fireball.ACP.File.Upload.init($.proxy(this._uploadCallback, this));
 		} else {
 			// loaded new category data
 			$(data.returnValues.template).hide().appendTo(this._dialog);
@@ -857,7 +857,7 @@ CMS.ACP.File.Picker = Class.extend({
 /**
  * Provides a popover preview for files.
  */
-CMS.ACP.File.Preview = WCF.Popover.extend({
+Fireball.ACP.File.Preview = WCF.Popover.extend({
 	/**
 	 * action proxy
 	 * @var	WCF.Action.Proxy
@@ -899,7 +899,7 @@ CMS.ACP.File.Preview = WCF.Popover.extend({
 /**
  * Provides an upload dialog for files.
  */
-CMS.ACP.File.Upload = {
+Fireball.ACP.File.Upload = {
 	/**
 	 * callback executed after submitting the upload form.
 	 * @var	function
@@ -979,13 +979,13 @@ CMS.ACP.File.Upload = {
 		event.preventDefault();
 
 		if ($.isEmptyObject(this._files)) {
-			console.log('[CMS.ACP.File.Upload] Tried to finalize upload though no files where uploaded, aborting.');
+			console.log('[Fireball.ACP.File.Upload] Tried to finalize upload though no files where uploaded, aborting.');
 			return;
 		}
 
 		var $categoryIDs = this._categoryInput.val();
 		if ($categoryIDs === null) {
-			console.debug('[CMS.ACP.File.Upload] Tried to finalize upload without a selected category, aborting.');
+			console.debug('[Fireball.ACP.File.Upload] Tried to finalize upload without a selected category, aborting.');
 			return;
 		}
 
@@ -1071,7 +1071,7 @@ CMS.ACP.File.Upload = {
 		this._submitButton.click($.proxy(this._finalizeUpload, this));
 
 		// init upload handler
-		new CMS.ACP.File.Upload.Handler();
+		new Fireball.ACP.File.Upload.Handler();
 
 		this._dialog.wcfDialog({
 			title: data.returnValues.title
@@ -1084,7 +1084,7 @@ CMS.ACP.File.Upload = {
  *
  * @see	WCF.Upload.Parallel
  */
-CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
+Fireball.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 	/**
 	 * @see	WCF.Upload.init()
 	 */
@@ -1108,7 +1108,7 @@ CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 		$li = $('<li class="box32"><span class="icon icon32 icon-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
 
 		// redraw dialog
-		CMS.ACP.File.Upload.redraw();
+		Fireball.ACP.File.Upload.redraw();
 
 		return $li;
 	},
@@ -1124,7 +1124,7 @@ CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 
 		if (data.returnValues.files[internalFileID]) {
 			var $fileData = data.returnValues.files[internalFileID];
-			CMS.ACP.File.Upload.addFile($fileData);
+			Fireball.ACP.File.Upload.addFile($fileData);
 
 			// remove spinner icon
 			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
@@ -1149,21 +1149,21 @@ CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 		$li.css('display', 'block');
 
 		// redraw dialog
-		CMS.ACP.File.Upload.redraw();
+		Fireball.ACP.File.Upload.redraw();
 
 		WCF.DOMNodeInsertedHandler.execute();
 	}
 });
 
 /**
- * Initialize CMS.ACP.Page namespace
+ * Initialize Fireball.ACP.Page namespace
  */
-CMS.ACP.Page = { };
+Fireball.ACP.Page = { };
 
 /**
- * Initialize CMS.ACP.Page.Alias namespace
+ * Initialize Fireball.ACP.Page.Alias namespace
  */
-CMS.ACP.Page.Alias = { };
+Fireball.ACP.Page.Alias = { };
 
 /**
  * Handles building of alias preview.
@@ -1172,7 +1172,7 @@ CMS.ACP.Page.Alias = { };
  * @param	string		parentPageSelectSelector
  * @param	string		dummyLink
  */
-CMS.ACP.Page.Alias.Preview = Class.extend({
+Fireball.ACP.Page.Alias.Preview = Class.extend({
 	/**
 	 * alias input element
 	 * @var	jQuery
@@ -1206,13 +1206,13 @@ CMS.ACP.Page.Alias.Preview = Class.extend({
 		this._parentPageSelect = $(parentPageSelectSelector);
 
 		if (!this._aliasInput.length) {
-			console.debug("[CMS.ACP.Page.Alias.Preview] Invalid alias input selector given, aborting.");
+			console.debug("[Fireball.ACP.Page.Alias.Preview] Invalid alias input selector given, aborting.");
 			return;
 		}
 
 		this._previewElement = this._aliasInput.parent().find('.jsAliasPreview');
 		if (!this._previewElement.length) {
-			console.debug("[CMS.ACP.Page.Alias.Preview] Unable to find preview element, aborting.");
+			console.debug("[Fireball.ACP.Page.Alias.Preview] Unable to find preview element, aborting.");
 			return;
 		}
 
@@ -1252,7 +1252,7 @@ CMS.ACP.Page.Alias.Preview = Class.extend({
 /**
  * Shows a notice about cms links when creating/editing a link of the page menu.
  */
-CMS.ACP.Page.Menu = Class.extend({
+Fireball.ACP.Page.Menu = Class.extend({
 	init: function() {
 		$('#menuItemParameters').change($.proxy(this._showNotice, this));
 		$('#menuItemController').change($.proxy(this._showNotice, this));
@@ -1268,7 +1268,7 @@ CMS.ACP.Page.Menu = Class.extend({
 	}
 });
 
-CMS.ACP.Page.Revisions = Class.extend({
+Fireball.ACP.Page.Revisions = Class.extend({
 	_proxy: null,
 	_cache: { },
 	_dialog: null,
@@ -1309,7 +1309,7 @@ CMS.ACP.Page.Revisions = Class.extend({
 	}
 });
 
-CMS.ACP.Page.Revisions.Restore = Class.extend({
+Fireball.ACP.Page.Revisions.Restore = Class.extend({
 	_proxy: null,
 	_didInit:false,
 
@@ -1367,7 +1367,7 @@ CMS.ACP.Page.Revisions.Restore = Class.extend({
 	}
 });
 
-CMS.ACP.Page.TypePicker = Class.extend({
+Fireball.ACP.Page.TypePicker = Class.extend({
 	_proxy: null,
 	_didInit: false,
 	_objectTypeID: 0,
