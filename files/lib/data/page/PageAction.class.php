@@ -173,7 +173,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				'name' => (!empty($this->parameters['data']['title']) ? $this->parameters['data']['title'] : ''),
 				'identifier' => 'de.codequake.cms.Page',
 				'pageType' => 'system',
-				'isDisabled' => (isset($this->parameters['data']['isDisabled']) && $this->parameters['data']['isDisabled']),
+				'isDisabled' => (isset($this->parameters['data']['isDisabled']) && intval($this->parameters['data']['isDisabled']) == 1),
 				'originIsSystem' => 1,
 				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
 				'applicationPackageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
