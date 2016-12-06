@@ -18,7 +18,7 @@
 		<div class="contentHeaderTitle">
 			<h1 class="contentTitle">{$page->getTitle()}</h1>
 			<p class="contentHeaderDescription">
-				{if $product->getLabel()}{@$product->getLabel()}{/if}
+				{if $page->description}{@$page->description}{/if}
 			</p>
 		</div>
 
