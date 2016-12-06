@@ -183,7 +183,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				'applicationPackageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
 				'controller' => 'cms\\page\\PagePage',
 				'requireObjectID' => 1,
-				'lastUpdateTime' => $page->time
+				'lastUpdateTime' => $page->lastEditTime
 			)
 		);
 		$wcfPageAction = new WCFPageAction(array(), 'create', $wcfPageData);
