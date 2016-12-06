@@ -5,6 +5,7 @@ use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\counter\VisitCountHandler;
 use cms\system\CMSCore;
+use wcf\data\menu\item\MenuItem;
 use wcf\page\AbstractPage;
 use wcf\system\comment\CommentHandler;
 use wcf\system\exception\IllegalLinkException;
@@ -121,7 +122,8 @@ abstract class AbstractCMSPage extends AbstractPage {
 		parent::readData();
 
 		// set active menu item
-		CMSCore::setActiveMenuItem($this->page);
+		$menuItem = new MenuItem($this->page->menuItemID);
+		$this->activeMenuItem = $menuItem->identifier;
 
 		// set breadcrumbs
 		foreach ($this->page->getParentPages() as $parent) {
