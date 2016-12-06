@@ -1,8 +1,8 @@
 <?php
 
 namespace cms\system\page\handler;
-use cms\data\page\Page;
 use cms\data\page\PageCache;
+use wcf\data\page\Page;
 use wcf\data\user\online\UserOnline;
 use wcf\system\page\handler\TOnlineLocationPageHandler;
 use wcf\system\WCF;
