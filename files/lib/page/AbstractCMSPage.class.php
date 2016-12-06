@@ -9,6 +9,7 @@ use wcf\page\AbstractPage;
 use wcf\system\comment\CommentHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\page\PageLocationManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\style\StyleHandler;
 use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
@@ -123,7 +124,9 @@ abstract class AbstractCMSPage extends AbstractPage {
 		CMSCore::setActiveMenuItem($this->page);
 
 		// set breadcrumbs
-		CMSCore::setBreadcrumbs($this->page);
+		foreach ($this->page->getParentPages() as $parent) {
+			PageLocationManager::getInstance()->addParentLocation('de.codequake.cms.Page', $parent->pageID);
+		}
 
 		// get contents
 		$this->contents = $this->page->getContents();

@@ -67,23 +67,4 @@ class CMSCore extends AbstractApplication {
 			PageMenu::getInstance()->setActiveMenuItem($menuItem);
 		}
 	}
-
-	/**
-	 * Sets breadcrumbs for the given page.
-	 * 
-	 * @param	\cms\data\page\Page	$page
-	 */
-	public static function setBreadcrumbs(Page $page) {
-// 		if (PageMenu::getInstance()->getLandingPage()->getProcessor() instanceof CMSPageMenuItemProvider) {
-// 			$pageID = PageMenu::getInstance()->getLandingPage()->getProcessor()->getPage()->pageID;
-// 		}
-// 		if (isset($pageID) && $pageID == $page->pageID) {
-// 			WCF::getBreadcrumbs()->remove(0);
-// 		}
-
-		// add breadcrumbs
-		foreach ($page->getParentPages() as $child) {
-			WCF::getBreadcrumbs()->add($child->getBreadcrumb());
-		}
-	}
 }
