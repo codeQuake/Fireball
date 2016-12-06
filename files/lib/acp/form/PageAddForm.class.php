@@ -505,11 +505,11 @@ class PageAddForm extends AbstractForm {
 			$menuItemData = array(
 				'menuID' => MenuCache::getInstance()->getMainMenu()->menuID,
 				'parentItemID' => (isset($parentMenuItem) && $parentMenuItem->itemID) ? $parentMenuItem->itemID : null,
-				'identifier' => 'de.codequake.cms.Page' . $pageEditor->pageID,
-				'title' => $pageEditor->title,
-				'pageID' => $pageEditor->wcfPageID,
+				'identifier' => 'de.codequake.cms.Page' . $returnValues['returnValues']->pageID,
+				'title' => $returnValues['returnValues']->title,
+				'pageID' => $returnValues['returnValues']->wcfPageID,
 				'originIsSystem' => 1,
-				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms'),
+				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
 			);
 
 			$menuItemAction = new MenuItemAction(array(), 'create', array('data' => $menuItemData));
