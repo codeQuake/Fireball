@@ -156,12 +156,6 @@ abstract class AbstractCMSPage extends AbstractPage {
 			'page' => $this->page,
 			'allowSpidersToIndexThisPage' => $this->page->allowIndexing
 		));
-
-		// sidebar
-		WCF::getTPL()->assign(array(
-			'sidebarCollapsed' => UserCollapsibleContentHandler::getInstance()->isCollapsed('com.woltlab.wcf.collapsibleSidebar', 'de.codequake.cms.page'),
-			'sidebarName' => 'de.codequake.cms.page'
-		));
 	}
 
 	/**
