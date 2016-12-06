@@ -13,9 +13,11 @@ use cms\system\content\type\ISearchableContentType;
 use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\util\PageUtil;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\package\PackageCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\data\page\menu\item\ViewablePageMenuItem;
+use wcf\data\page\PageAction as WCFPageAction;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
@@ -166,8 +168,27 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		// create page itself
+		/** @var $page Page */
 		$page = parent::create();
 		$pageEditor = new PageEditor($page);
+
+		$wcfPageData = array(
+			'data' => array(
+				'name' => $page->getTitle(),
+				'identifier' => 'de.codequake.cms.Page',
+				'pageType' => 'system',
+				'isDisabled' => 0,
+				'originIsSystem' => 1,
+				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
+				'applicationPackageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
+				'controller' => 'cms\\page\\PagePage',
+				'requireObjectID' => 1,
+				'lastUpdateTime' => $page->time
+			)
+		);
+		$wcfPageAction = new WCFPageAction(array(), 'create', $wcfPageData);
+		$wcfPage = $wcfPageAction->executeAction();
+		$pageEditor->update(array('wcfPageID' => $wcfPage['returnValues']->pageID));
 
 		// handle stylesheets
 		if (isset($this->parameters['stylesheetIDs']) && !empty($this->parameters['stylesheetIDs'])) {

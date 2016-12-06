@@ -50,7 +50,10 @@ CREATE TABLE cms1_page (
 	objectTypeID INT(10),
 	
 	-- additional data
-	additionalData MEDIUMTEXT DEFAULT NULL
+	additionalData MEDIUMTEXT DEFAULT NULL,
+
+	-- matching wcf's pages
+	wcfPageID INT(10)
 );
 
 DROP TABLE IF EXISTS cms1_page_revision;
@@ -145,6 +148,7 @@ ALTER TABLE cms1_page ADD FOREIGN KEY (styleID) REFERENCES wcf1_style (styleID) 
 ALTER TABLE cms1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (lastEditorID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+ALTER TABLE cms1_page ADD FOREIGN KEY (wcfPageID) REFERENCES wcf1_page (pageID) ON DELETE CASCADE;
 
 ALTER TABLE cms1_page_revision ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE cms1_page_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE SET NULL;

@@ -1,21 +1,18 @@
 <?php
 namespace cms\acp\form;
 
-use cms\data\page\Page;
 use cms\data\page\PageAction;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\data\page\PageNodeTree;
 use cms\data\stylesheet\StylesheetList;
 use cms\util\PageUtil;
-use wcf\data\menu\item\MenuItemList;
+use wcf\data\menu\item\MenuItemAction;
+use wcf\data\menu\item\MenuItemEditor;
 use wcf\data\menu\MenuCache;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\data\page\menu\item\PageMenuItem;
-use wcf\data\page\menu\item\PageMenuItemAction;
-use wcf\data\page\menu\item\PageMenuItemEditor;
-use wcf\data\page\menu\item\PageMenuItemList;
-use wcf\data\page\menu\item\ViewablePageMenuItem;
+use wcf\data\package\PackageCache;
+use wcf\data\page\PageAction as WCFPageAction;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
@@ -116,7 +113,7 @@ class PageAddForm extends AbstractForm {
 
 	/**
 	 * list of available menu items
-	 * @var	array<\wcf\data\page\menu\item\PageMenuItem>
+	 * @var	\wcf\data\menu\item\MenuItem[]
 	 */
 	public $menuItems = array();
 
@@ -359,7 +356,7 @@ class PageAddForm extends AbstractForm {
 			$this->menuItemID = 0;
 		}
 		if ($this->menuItemID) {
-			$menuItem = new PageMenuItem($this->menuItemID);
+			$menuItem = new MenuItem($this->menuItemID);
 			if (!$menuItem->menuItemID) {
 				// silently ignore menu item, user shouldn't be
 				// able to select this menu item in first place
@@ -502,32 +499,22 @@ class PageAddForm extends AbstractForm {
 		if ($this->createMenuItem) {
 			// set menu item of parent page as parent menu item
 			if ($pageEditor->getParentPage() !== null && $pageEditor->getParentPage()->menuItemID) {
-				$parentMenuItem = new PageMenuItem($pageEditor->getParentPage()->menuItemID);
+				$parentMenuItem = new MenuItem($pageEditor->getParentPage()->menuItemID);
 			}
 
 			$menuItemData = array(
-				'className' => 'cms\system\menu\page\CMSPageMenuItemProvider',
-				'menuItemController' => 'cms\page\PagePage',
-				'menuItemLink' => 'id='.$pageEditor->pageID,
-				'menuPosition' => 'header',
-				'packageID' => PACKAGE_ID,
-				'parentMenuItem' => (isset($parentMenuItem) && $parentMenuItem->menuItemID) ? $parentMenuItem->menuItem : '',
-				'showOrder' => 0
+				'menuID' => MenuCache::getInstance()->getMainMenu()->menuID,
+				'parentItemID' => (isset($parentMenuItem) && $parentMenuItem->itemID) ? $parentMenuItem->itemID : null,
+				'identifier' => 'de.codequake.cms.Page' . $pageEditor->pageID,
+				'title' => $pageEditor->title,
+				'pageID' => $pageEditor->wcfPageID,
+				'originIsSystem' => 1,
+				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms'),
 			);
 
-			$menuItemAction = new PageMenuItemAction(array(), 'create', array('data' => $menuItemData));
+			$menuItemAction = new MenuItemAction(array(), 'create', array('data' => $menuItemData));
 			$menuItemReturnValues = $menuItemAction->executeAction();
 			$menuItem = $menuItemReturnValues['returnValues'];
-
-			// save multilingual title
-			I18nHandler::getInstance()->register('menuItemTitle');
-			I18nHandler::getInstance()->setValues('menuItemTitle', I18nHandler::getInstance()->getValues('title'));
-
-			$menuItemData = array('menuItem' => 'wcf.page.menuItem'.$menuItem->menuItemID);
-			I18nHandler::getInstance()->save('menuItemTitle', $menuItemData['menuItem'], 'wcf.page');
-
-			$menuItemEditor = new PageMenuItemEditor($menuItem);
-			$menuItemEditor->update($menuItemData);
 
 			// save menu item with page
 			$updateData['menuItemID'] = $menuItem->menuItemID;
