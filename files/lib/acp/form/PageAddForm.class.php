@@ -471,36 +471,37 @@ class PageAddForm extends AbstractForm {
 
 		$this->objectAction = new PageAction(array(), 'create', $pageData);
 		$returnValues = $this->objectAction->executeAction();
+		$page = $returnValues['returnValues'];
 
 		$pageEditor = new PageEditor($returnValues['returnValues']);
 		$updateData = array();
 
 		// save ACL
-		ACLHandler::getInstance()->save($pageEditor->pageID, $this->objectTypeID);
+		ACLHandler::getInstance()->save($page->pageID, $this->objectTypeID);
 
 		// save multilingual inputs
 		if (!I18nHandler::getInstance()->isPlainValue('title')) {
-			$updateData['title'] = 'cms.page.title'.$pageEditor->pageID;
+			$updateData['title'] = 'cms.page.title'.$page->pageID;
 			I18nHandler::getInstance()->save('title', $updateData['title'], 'cms.page');
 		}
 		if (!I18nHandler::getInstance()->isPlainValue('description')) {
-			$updateData['description'] = 'cms.page.description'.$pageEditor->pageID;
+			$updateData['description'] = 'cms.page.description'.$page->pageID;
 			I18nHandler::getInstance()->save('description', $updateData['description'], 'cms.page');
 		}
 		if (!I18nHandler::getInstance()->isPlainValue('metaDescription')) {
-			$updateData['metaDescription'] = 'cms.page.metaDescription'.$pageEditor->pageID;
+			$updateData['metaDescription'] = 'cms.page.metaDescription'.$page->pageID;
 			I18nHandler::getInstance()->save('metaDescription', $updateData['metaDescription'], 'cms.page');
 		}
 		if (!I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
-			$updateData['metaKeywords'] = 'cms.page.metaKeywords'.$pageEditor->pageID;
+			$updateData['metaKeywords'] = 'cms.page.metaKeywords'.$page->pageID;
 			I18nHandler::getInstance()->save('metaKeywords', $updateData['metaKeywords'], 'cms.page');
 		}
 
 		// create menu item for page
 		if ($this->createMenuItem) {
 			// set menu item of parent page as parent menu item
-			if ($pageEditor->getParentPage() !== null && $pageEditor->getParentPage()->menuItemID) {
-				$parentMenuItem = new PageMenuItem($pageEditor->getParentPage()->menuItemID);
+			if ($page->getParentPage() !== null && $page->getParentPage()->menuItemID) {
+				$parentMenuItem = new PageMenuItem($page->getParentPage()->menuItemID);
 			}
 
 			$menuItemData = array(
@@ -532,7 +533,8 @@ class PageAddForm extends AbstractForm {
 		}
 
 		// save new information
-		$pageEditor->update($updateData);
+		$updateAction = new PageAction(array($page), 'update', array('data' => $updateData));
+		$updateAction->executeAction();
 
 		// create revision
 		$objectAction = new PageAction(array($pageEditor->pageID), 'createRevision', array('action' => 'create'));
