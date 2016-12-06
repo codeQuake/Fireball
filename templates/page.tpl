@@ -18,7 +18,7 @@
 		<div class="contentHeaderTitle">
 			<h1 class="contentTitle">{$page->getTitle()}</h1>
 			<p class="contentHeaderDescription">
-				{if $page->description}{@$page->description}{/if}
+				{if $page->description}{@$page->description|language}{/if}
 			</p>
 		</div>
 
@@ -62,13 +62,6 @@
 {/hascontent}
 
 {include file='header' sidebarOrientation=$page->sidebarOrientation}
-
-<header class="boxHeadline">
-	<h1>{$page->getTitle()}</h1>
-	<p>{$page->description|language}</p>
-</header>
-
-{include file='userNotice'}
 
 {if !$page->isPublished && $page->publicationDate}
 	<p class="info">{lang}fireball.page.delayedPublication{/lang}</p>
