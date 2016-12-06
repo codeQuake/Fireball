@@ -167,28 +167,29 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$this->parameters['data']['additionalData'] = serialize($this->parameters['data']['additionalData']);
 		}
 
-		// create page itself
-		/** @var $page Page */
-		$page = parent::create();
-		$pageEditor = new PageEditor($page);
-
 		$wcfPageData = array(
 			'data' => array(
-				'name' => $page->getTitle(),
+				'name' => (!empty($this->parameters['data']['authorName']) ? $this->parameters['data']['authorName'] : ''),
 				'identifier' => 'de.codequake.cms.Page',
 				'pageType' => 'system',
-				'isDisabled' => 0,
+				'isDisabled' => (isset($this->parameters['data']['isDisabled']) && $this->parameters['data']['isDisabled']),
 				'originIsSystem' => 1,
 				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
 				'applicationPackageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
 				'controller' => 'cms\\page\\PagePage',
 				'requireObjectID' => 1,
-				'lastUpdateTime' => $page->lastEditTime
+				'lastUpdateTime' => $this->parameters['data']['creationTime']
 			)
 		);
 		$wcfPageAction = new WCFPageAction(array(), 'create', $wcfPageData);
-		$wcfPage = $wcfPageAction->executeAction();
-		$pageEditor->update(array('wcfPageID' => $wcfPage['returnValues']->pageID));
+		$wcfPage = $wcfPageAction->executeAction()['returnValues'];
+
+		$this->parameters['data']['wcfPageID'] = $wcfPage->pageID;
+
+		// create page itself
+		/** @var $page Page */
+		$page = parent::create();
+		$pageEditor = new PageEditor($page);
 
 		// handle stylesheets
 		if (isset($this->parameters['stylesheetIDs']) && !empty($this->parameters['stylesheetIDs'])) {

@@ -509,7 +509,9 @@ class PageAddForm extends AbstractForm {
 				'title' => $returnValues['returnValues']->title,
 				'pageID' => $returnValues['returnValues']->wcfPageID,
 				'originIsSystem' => 1,
-				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
+				'pageObjectID' => $returnValues['returnValues']->pageID,
+				'isDisabled' => $this->invisible,
+				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID
 			);
 
 			$menuItemAction = new MenuItemAction(array(), 'create', array('data' => $menuItemData));
