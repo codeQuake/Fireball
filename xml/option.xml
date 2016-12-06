@@ -35,15 +35,15 @@
 
 		<options>
 			<!-- general -->
-			<option name="fireball_install_date">
+			<option name="cms_install_date">
 				<optiontype>integer</optiontype>
 				<hidden>1</hidden>
-				<categoryname>general</categoryname>
+				<categoryname>fireball.general</categoryname>
 			</option>
-			<option name="cms_sitemap_enable">
+			<option name="fireball_sitemap_enable">
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
-				<categoryname>cms.general</categoryname>
+				<categoryname>fireball.general</categoryname>
 			</option>
 			<!-- /general -->
 
