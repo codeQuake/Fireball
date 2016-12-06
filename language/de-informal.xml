@@ -1,11 +1,11 @@
 ﻿﻿<?xml version="1.0" encoding="utf-8" ?>
 <language xmlns="http://woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de-informal">
-	<category name="fireball.acp.content">
-		<item name="fireball.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
-		<item name="fireball.acp.content.copy"><![CDATA[Inhalt kopieren]]></item>
-		<item name="fireball.acp.content.css"><![CDATA[CSS-Einstellungen]]></item>
-		<item name="fireball.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
-		<item name="fireball.acp.content.css.cssClasses.description">
+	<category name="cms.acp.content">
+		<item name="cms.acp.content.add"><![CDATA[Inhalt hinzufügen]]></item>
+		<item name="cms.acp.content.copy"><![CDATA[Inhalt kopieren]]></item>
+		<item name="cms.acp.content.css"><![CDATA[CSS-Einstellungen]]></item>
+		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Klassen]]></item>
+		<item name="cms.acp.content.css.cssClasses.description">
 			<![CDATA[CSS Klassen sind wichtig für das spätere Aussehen der Inhalte, es empfehlen sich Einträge wie „container containerPadding“. Für einen Abstand zum oberen Element nutzen sie zusätzlich „marginTop“.<br />
 <strong>Beispiele:</strong>
 <ul class="nativeList">
@@ -15,299 +15,299 @@
 	<li><code class="inlineCode">center</code>: Zentriert den Inhalt des Elements</li>
 </ul>]]>
 		</item>
-		<item name="fireball.acp.content.delete.sure"><![CDATA[Willst du diesen Inhalt wirklich löschen?]]></item>
-		<item name="fireball.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
-		<item name="fireball.acp.content.list"><![CDATA[Inhalte]]></item>
-		<item name="fireball.acp.content.position"><![CDATA[Position]]></item>
-		<item name="fireball.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
-		<item name="fireball.acp.content.position.position.body"><![CDATA[Inhaltsbereich]]></item>
-		<item name="fireball.acp.content.position.position.sidebar"><![CDATA[Seitenleiste]]></item>
-		<item name="fireball.acp.content.type.code"><![CDATA[Code]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Mehrspaltig]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.columns.column.add"><![CDATA[Spalte hinzufügen]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard-Box]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Box auswählen]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[Datei]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Datei auswählen]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Hauptverzeichnis]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Galerie]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Bilder]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Gruppierung]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[Dieser Inhaltstyp gruppiert automatisch alle untergeordneten Inhalte.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Überschrift]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Überschrift]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Formatvorlage]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Überschrift 1]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Überschrift 2]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Überschrift 3]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Überschrift 4]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Überschrift 5]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Bild]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Höhe (in px)]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Untertitel]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.image.width"><![CDATA[Breite (in px)]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.text"><![CDATA[Text]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.type"><![CDATA[Vorlage]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.type.button"><![CDATA[Button]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.type.link"><![CDATA[Hyperlink]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.type.smallbutton"><![CDATA[Kleiner Button]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu"><![CDATA[Menü]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu.depth"><![CDATA[Tiefe der Menüstruktur]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu.depth.description"><![CDATA[Gib hier die Tiefe der Menüstrukur an. Das heißt die Anzahl der aufzulistenden Ebenen des Menüs. Soll keine Beschränkung eingerichtet werden, so gib 0 an.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Vorlage]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[Alle Seiten]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Gib hier die URL ein, von der die Inhalte bezogen werden sollen. Das Format des Feeds kann entweder <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Anzahl Einträge]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[Alle untergeordneten Elemente werden automatisch als Slideshow arrangiert.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.tabmenu.description"><![CDATA[Alle untergeordneten Inhalte werden als Tabs des Tabmenüs behandelt. Der Titel eines untergeordneten Inhaltes wird als Titel des Tab-Buttons verwendet. Sollte für einen untergeordneten Inhalt keine CSS-ID für den Anker angegeben werden, so wird eine CSS-ID generiert.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[Template/HTML]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Quelltext]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[Hier kannst du Template-Quelltext (<a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.smarty.net/">Dokumentation</a>) und HTML verwenden.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.template.text.error.compileError"><![CDATA[Der eingegebene Inhalt enthält folgenden Template-Fehler:<br />{$compileError}]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[Benutzer]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.user.name"><![CDATA[Benutzername]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.youtube.video"><![CDATA[Video-URL]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.youtube.video.error.notValid"><![CDATA[Keine gültige URL]]></item>
-		<item name="fireball.acp.content.type.general"><![CDATA[Allgemein]]></item>
-		<item name="fireball.acp.content.type.media"><![CDATA[Medien]]></item>
-		<item name="fireball.acp.content.type.structure"><![CDATA[Struktur]]></item>
+		<item name="cms.acp.content.delete.sure"><![CDATA[Willst du diesen Inhalt wirklich löschen?]]></item>
+		<item name="cms.acp.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
+		<item name="cms.acp.content.list"><![CDATA[Inhalte]]></item>
+		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
+		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
+		<item name="cms.acp.content.position.position.body"><![CDATA[Inhaltsbereich]]></item>
+		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Seitenleiste]]></item>
+		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Mehrspaltig]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns.column.add"><![CDATA[Spalte hinzufügen]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard-Box]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Box auswählen]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[Datei]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Datei auswählen]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Hauptverzeichnis]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Galerie]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Bilder]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Gruppierung]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[Dieser Inhaltstyp gruppiert automatisch alle untergeordneten Inhalte.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Überschrift]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.hyperlink"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Überschrift]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Formatvorlage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Überschrift 1]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Überschrift 2]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Überschrift 3]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Überschrift 4]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Überschrift 5]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Bild]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Höhe (in px)]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Untertitel]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.width"><![CDATA[Breite (in px)]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.hyperlink"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type"><![CDATA[Vorlage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.button"><![CDATA[Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.link"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.smallbutton"><![CDATA[Kleiner Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu"><![CDATA[Menü]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth"><![CDATA[Tiefe der Menüstruktur]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth.description"><![CDATA[Gib hier die Tiefe der Menüstrukur an. Das heißt die Anzahl der aufzulistenden Ebenen des Menüs. Soll keine Beschränkung eingerichtet werden, so gib 0 an.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Vorlage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[Alle Seiten]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Gib hier die URL ein, von der die Inhalte bezogen werden sollen. Das Format des Feeds kann entweder <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Anzahl Einträge]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[Alle untergeordneten Elemente werden automatisch als Slideshow arrangiert.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu.description"><![CDATA[Alle untergeordneten Inhalte werden als Tabs des Tabmenüs behandelt. Der Titel eines untergeordneten Inhaltes wird als Titel des Tab-Buttons verwendet. Sollte für einen untergeordneten Inhalt keine CSS-ID für den Anker angegeben werden, so wird eine CSS-ID generiert.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[Template/HTML]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Quelltext]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[Hier kannst du Template-Quelltext (<a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.smarty.net/">Dokumentation</a>) und HTML verwenden.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.error.compileError"><![CDATA[Der eingegebene Inhalt enthält folgenden Template-Fehler:<br />{$compileError}]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[Benutzer]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.user.name"><![CDATA[Benutzername]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video"><![CDATA[Video-URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video.error.notValid"><![CDATA[Keine gültige URL]]></item>
+		<item name="cms.acp.content.type.general"><![CDATA[Allgemein]]></item>
+		<item name="cms.acp.content.type.media"><![CDATA[Medien]]></item>
+		<item name="cms.acp.content.type.structure"><![CDATA[Struktur]]></item>
 	</category>
 
-	<category name="fireball.acp.dashboard">
-		<item name="fireball.acp.dashboard.all"><![CDATA[Alle Besucher]]></item>
-		<item name="fireball.acp.dashboard.registered"><![CDATA[Registrierte Benutzer]]></item>
-		<item name="fireball.acp.dashboard.spiders"><![CDATA[Suchmaschinenroboter]]></item>
+	<category name="cms.acp.dashboard">
+		<item name="cms.acp.dashboard.all"><![CDATA[Alle Besucher]]></item>
+		<item name="cms.acp.dashboard.registered"><![CDATA[Registrierte Benutzer]]></item>
+		<item name="cms.acp.dashboard.spiders"><![CDATA[Suchmaschinenroboter]]></item>
 	</category>
 
-	<category name="fireball.acp.file">
-		<item name="fireball.acp.file.add"><![CDATA[Dateien hochladen]]></item>
-		<item name="fireball.acp.file.categoryIDs"><![CDATA[Kategorien]]></item>
-		<item name="fireball.acp.file.delete.sure"><![CDATA[Wilst du diese Datei wirklich löschen?]]></item>
-		<item name="fireball.acp.file.downloads"><![CDATA[Downloads]]></item>
-		<item name="fireball.acp.file.error.empty"><![CDATA[Bitte lade eine gültige Datei hoch.]]></item>
-		<item name="fireball.acp.file.error.invalid"><![CDATA[Ungültige Dateiendung]]></item>
-		<item name="fireball.acp.file.file"><![CDATA[Datei]]></item>
-		<item name="fireball.acp.file.fileType"><![CDATA[Typ]]></item>
-		<item name="fireball.acp.file.files"><![CDATA[Dateien]]></item>
-		<item name="fireball.acp.file.files.description"><![CDATA[Du kannst mehrere Dateien auswählen, in dem du die STRG-Taste gedrückt hälst.]]></item>
-		<item name="fireball.acp.file.filesize"><![CDATA[Größe]]></item>
-		<item name="fireball.acp.file.list"><![CDATA[Dateien]]></item>
-		<item name="fireball.acp.file.list.description"><![CDATA[Hier findest du eine Auflistung deiner Dateien. Es gibt mehrere Möglichkeiten diese Dateien im System zu teilen. Standardmäßig geschieht dies über den entsprechenden Inhaltstyp. Aber auch ein Teilen über BBCode ist möglich.]]></item>
-		<item name="fireball.acp.file.picker"><![CDATA[Dateiverwaltung]]></item>
-		<item name="fireball.acp.file.uploadTime"><![CDATA[Hochgeladen]]></item>
+	<category name="cms.acp.file">
+		<item name="cms.acp.file.add"><![CDATA[Dateien hochladen]]></item>
+		<item name="cms.acp.file.categoryIDs"><![CDATA[Kategorien]]></item>
+		<item name="cms.acp.file.delete.sure"><![CDATA[Wilst du diese Datei wirklich löschen?]]></item>
+		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
+		<item name="cms.acp.file.error.empty"><![CDATA[Bitte lade eine gültige Datei hoch.]]></item>
+		<item name="cms.acp.file.error.invalid"><![CDATA[Ungültige Dateiendung]]></item>
+		<item name="cms.acp.file.file"><![CDATA[Datei]]></item>
+		<item name="cms.acp.file.fileType"><![CDATA[Typ]]></item>
+		<item name="cms.acp.file.files"><![CDATA[Dateien]]></item>
+		<item name="cms.acp.file.files.description"><![CDATA[Du kannst mehrere Dateien auswählen, in dem du die STRG-Taste gedrückt hälst.]]></item>
+		<item name="cms.acp.file.filesize"><![CDATA[Größe]]></item>
+		<item name="cms.acp.file.list"><![CDATA[Dateien]]></item>
+		<item name="cms.acp.file.list.description"><![CDATA[Hier findest du eine Auflistung deiner Dateien. Es gibt mehrere Möglichkeiten diese Dateien im System zu teilen. Standardmäßig geschieht dies über den entsprechenden Inhaltstyp. Aber auch ein Teilen über BBCode ist möglich.]]></item>
+		<item name="cms.acp.file.picker"><![CDATA[Dateiverwaltung]]></item>
+		<item name="cms.acp.file.uploadTime"><![CDATA[Hochgeladen]]></item>
 	</category>
 
-	<category name="fireball.acp.index">
-		<item name="fireball.acp.index.news.more"><![CDATA[Weitere Nachrichten]]></item>
+	<category name="cms.acp.index">
+		<item name="cms.acp.index.news.more"><![CDATA[Weitere Nachrichten]]></item>
 	</category>
 
-	<category name="fireball.acp.menu">
-		<item name="fireball.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="fireball.acp.menu.link.fireball.file"><![CDATA[Dateien]]></item>
-		<item name="fireball.acp.menu.link.fireball.file.category.add"><![CDATA[Kategorie hinzufügen]]></item>
-		<item name="fireball.acp.menu.link.fireball.file.category.list"><![CDATA[Kategorien auflisten]]></item>
-		<item name="fireball.acp.menu.link.fireball.file.list"><![CDATA[Dateien auflisten]]></item>
-		<item name="fireball.acp.menu.link.fireball.page"><![CDATA[Seiten]]></item>
-		<item name="fireball.acp.menu.link.fireball.page.add"><![CDATA[Seite hinzufügen]]></item>
-		<item name="fireball.acp.menu.link.fireball.page.importAndExport"><![CDATA[Sichern &amp; Wiederherstellen]]></item>
-		<item name="fireball.acp.menu.link.fireball.page.list"><![CDATA[Seiten auflisten]]></item>
-		<item name="fireball.acp.menu.link.fireball.page.statistics"><![CDATA[Statistiken]]></item>
-		<item name="fireball.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
-		<item name="fireball.acp.menu.link.fireball.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
-		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
+	<category name="cms.acp.menu">
+		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
+		<item name="cms.acp.menu.link.fireball.file"><![CDATA[Dateien]]></item>
+		<item name="cms.acp.menu.link.fireball.file.category.add"><![CDATA[Kategorie hinzufügen]]></item>
+		<item name="cms.acp.menu.link.fireball.file.category.list"><![CDATA[Kategorien auflisten]]></item>
+		<item name="cms.acp.menu.link.fireball.file.list"><![CDATA[Dateien auflisten]]></item>
+		<item name="cms.acp.menu.link.fireball.page"><![CDATA[Seiten]]></item>
+		<item name="cms.acp.menu.link.fireball.page.add"><![CDATA[Seite hinzufügen]]></item>
+		<item name="cms.acp.menu.link.fireball.page.importAndExport"><![CDATA[Sichern &amp; Wiederherstellen]]></item>
+		<item name="cms.acp.menu.link.fireball.page.list"><![CDATA[Seiten auflisten]]></item>
+		<item name="cms.acp.menu.link.fireball.page.statistics"><![CDATA[Statistiken]]></item>
+		<item name="cms.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.menu.link.fireball.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
+		<item name="cms.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
 	</category>
 
-	<category name="fireball.acp.page">
-		<item name="fireball.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
-		<item name="fireball.acp.page.alias"><![CDATA[Abkürzung]]></item>
-		<item name="fireball.acp.page.alias.description"><![CDATA[Die Abkürzung darf ausschließlich aus Kleinbuchstaben, Ziffern und Bindestrichen bestehen. Bindestriche sind am Anfang und Ende der Abkürzung nicht erlaubt. Abkürzungen müssen auf ihrer jeweiligen Ebene einzigartig sein. Solltest du keine Abkürzung vorgeben, wird diese automatisch auf Basis des Seitentitels erstellt.]]></item>
-		<item name="fireball.acp.page.alias.error.notUnique"><![CDATA[Auf dieser Ebene existiert bereits eine Seite, die die gleiche Abkürzung besitzt.]]></item>
-		<item name="fireball.acp.page.alias.error.notValid"><![CDATA[Die eingegebene Abkürzung ist ungültig.]]></item>
-		<item name="fireball.acp.page.alias.preview"><![CDATA[Link-Vorschau:]]></item>
-		<item name="fireball.acp.page.button.choose"><![CDATA[Seite wählen]]></item>
-		<item name="fireball.acp.page.content.list"><![CDATA[Inhalte von „{$page->getTitle()}“ auflisten]]></item>
-		<item name="fireball.acp.page.copy"><![CDATA[Seite kopieren]]></item>
-		<item name="fireball.acp.page.delayedDeactivation"><![CDATA[Deaktivierung am {@$page->deactivationDate|plainTime}]]></item>
-		<item name="fireball.acp.page.delayedPublication"><![CDATA[Veröffentlichung am {@$page->publicationDate|plainTime}]]></item>
-		<item name="fireball.acp.page.delete.sure"><![CDATA[Willst du diese Seite und all ihre Inhalte wirklich löschen?]]></item>
-		<item name="fireball.acp.page.description"><![CDATA[Beschreibung]]></item>
-		<item name="fireball.acp.page.display"><![CDATA[Darstellung]]></item>
-		<item name="fireball.acp.page.display.settings"><![CDATA[Darstellungsoptionen]]></item>
-		<item name="fireball.acp.page.display.settings.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
-		<item name="fireball.acp.page.display.settings.sidebarOrientation.left"><![CDATA[Linke Seitenleiste]]></item>
-		<item name="fireball.acp.page.display.settings.sidebarOrientation.right"><![CDATA[Rechte Seitenleiste]]></item>
-		<item name="fireball.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
-		<item name="fireball.acp.page.export"><![CDATA[Seiten sichern]]></item>
-		<item name="fireball.acp.page.export.download"><![CDATA[Sicherung der CMS-Seiten herunterladen]]></item>
-		<item name="fireball.acp.page.export.download.description"><![CDATA[Du kannst hier eine Sicherung aller CMS-Seiten, Stylesheets und hochgeladenen Dateien auf Deinen lokalen Rechner herunterladen.]]></item>
-		<item name="fireball.acp.page.general"><![CDATA[Allgemein]]></item>
-		<item name="fireball.acp.page.general.createMenuItem"><![CDATA[Menüpunkt erstellen]]></item>
-		<item name="fireball.acp.page.general.createMenuItem.description"><![CDATA[Du kannst den erstellten Menüpunkt anschließend in der <a href="{link controller='PageMenuItemList'}{/link}">Hauptmenüverwaltung</a> verschieben oder bearbeiten.]]></item>
-		<item name="fireball.acp.page.general.description"><![CDATA[Beschreibung]]></item>
-		<item name="fireball.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
-		<item name="fireball.acp.page.homePage"><![CDATA[Startseite]]></item>
-		<item name="fireball.acp.page.import"><![CDATA[Seiten importieren]]></item>
-		<item name="fireball.acp.page.import.downloadFailed"><![CDATA[Download der Sicherungsdatei fehlgeschlagen]]></item>
-		<item name="fireball.acp.page.import.empty"><![CDATA[Bitte lade eine Datei hoch oder gebe die URL zur Sicherungsdatei an.]]></item>
-		<item name="fireball.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließe auf keinen Fall das Fenster und achte darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
-		<item name="fireball.acp.page.import.link"><![CDATA[Sicherung herunterladen]]></item>
-		<item name="fireball.acp.page.import.link.description"><![CDATA[Gebe den direkten Pfad zur Sicherungsdatei an. Dabei kann es sich um die Internetadresse der Sicherungsdatei oder alternativ den Pfad zur Sicherungsdatei im Dateisystem handeln.]]></item>
-		<item name="fireball.acp.page.import.notFound"><![CDATA[Datei nicht gefunden]]></item>
-		<item name="fireball.acp.page.import.upload"><![CDATA[Sicherung der Seiten vom lokalen Computer hochladen]]></item>
-		<item name="fireball.acp.page.import.upload.description"><![CDATA[Wähle eine Sicherung der CMS-Seiten von deinem lokalen Rechner aus.]]></item>
-		<item name="fireball.acp.page.list"><![CDATA[Seiten]]></item>
-		<item name="fireball.acp.page.list.description"><![CDATA[Seiten bilden die Grundlage des Fireball CMS. Erstelle eine Seite um dieser später Inhalte verschiedener Typen zuordnen zu können.]]></item>
-		<item name="fireball.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
-		<item name="fireball.acp.page.meta"><![CDATA[Meta-Informationen]]></item>
-		<item name="fireball.acp.page.meta.allowIndexing"><![CDATA[Suchmaschinen dürfen diese Seite indexieren]]></item>
-		<item name="fireball.acp.page.meta.description"><![CDATA[Meta-Beschreibung]]></item>
-		<item name="fireball.acp.page.meta.description.description"><![CDATA[Die Meta-Beschreibung wird laut Google nicht zur Berechnung des Rankings ausgewertet, ist aber maßgeblich für die CTR (Click-Through-Rate) von Usern ausschlaggebend und sollte demnach Beachtung finden.]]></item>
-		<item name="fireball.acp.page.meta.keywords"><![CDATA[Schlüsselwörter]]></item>
-		<item name="fireball.acp.page.position"><![CDATA[Position]]></item>
-		<item name="fireball.acp.page.position.description"><![CDATA[Legt die Reihenfolge fest, in der die Seiten aufgelistet werden.]]></item>
-		<item name="fireball.acp.page.position.invisible"><![CDATA[Seite verstecken]]></item>
-		<item name="fireball.acp.page.position.invisible.description"><![CDATA[Diese Seite und ihre Unterseiten werden in allen Listen ausgeblendet, sind aber weiterhin mittels Direktlink aufrufbar.]]></item>
-		<item name="fireball.acp.page.publication"><![CDATA[Veröffentlichung]]></item>
-		<item name="fireball.acp.page.publication.deactivationDate"><![CDATA[Deaktivierungsdatum]]></item>
-		<item name="fireball.acp.page.publication.deactivationDate.error.beforePublication"><![CDATA[Das Deaktivierungsdatum muss nach dem eingestellten Veröffentlichungsdatum liegen.]]></item>
-		<item name="fireball.acp.page.publication.deactivationDate.error.notValid"><![CDATA[Sie haben ein ungültiges Deaktivierungsdatum angegeben.]]></item>
-		<item name="fireball.acp.page.publication.enableDelayedDeactivation"><![CDATA[Seite zu einem späteren Zeitpunkt automatisch deaktivieren]]></item>
-		<item name="fireball.acp.page.publication.enableDelayedPublication"><![CDATA[Seite zu einem späteren Zeitpunkt veröffentlichen]]></item>
-		<item name="fireball.acp.page.publication.publicationDate"><![CDATA[Veröffentlichungsdatum]]></item>
-		<item name="fireball.acp.page.publication.publicationDate.error.notValid"><![CDATA[Du hast ein ungültiges Veröffentlichungsdatum angegeben.]]></item>
-		<item name="fireball.acp.page.revision"><![CDATA[Version]]></item>
-		<item name="fireball.acp.page.revision.action"><![CDATA[Aktion]]></item>
-		<item name="fireball.acp.page.revision.action.content.create"><![CDATA[Inhalt hinzugefügt]]></item>
-		<item name="fireball.acp.page.revision.action.content.delete"><![CDATA[Inhalt gelöscht]]></item>
-		<item name="fireball.acp.page.revision.action.content.update"><![CDATA[Inhalt bearbeitet]]></item>
-		<item name="fireball.acp.page.revision.action.content.updatePosition"><![CDATA[Sortierung der Inhalte geändert]]></item>
-		<item name="fireball.acp.page.revision.action.create"><![CDATA[Seite erstellt]]></item>
-		<item name="fireball.acp.page.revision.action.setAsHome"><![CDATA[Als Startseite gesetzt]]></item>
-		<item name="fireball.acp.page.revision.action.update"><![CDATA[Seite bearbeitet]]></item>
-		<item name="fireball.acp.page.revision.delete.confirmMessage"><![CDATA[Willst du diese Version wirklich löschen?]]></item>
-		<item name="fireball.acp.page.revision.list"><![CDATA[Änderungsprotokoll]]></item>
-		<item name="fireball.acp.page.revision.restore"><![CDATA[Wiederherstellen]]></item>
-		<item name="fireball.acp.page.revision.restore.sure"><![CDATA[Bist du sicher, dass du diese Version wiederherstellen willst?]]></item>
-		<item name="fireball.acp.page.revision.time"><![CDATA[Zeitpunkt]]></item>
-		<item name="fireball.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
-		<item name="fireball.acp.page.settings"><![CDATA[Einstellungen]]></item>
-		<item name="fireball.acp.page.settings.allowSubscribing"><![CDATA[Seite kann abonniert werden]]></item>
-		<item name="fireball.acp.page.settings.allowSubscribing.description"><![CDATA[{if $action == 'edit' && $allowSubscribing}<strong>Hinweis:</strong> Beim Deaktivieren dieser Option werden alle bestehenden Abonnements gelöscht.{/if}]]></item>
-		<item name="fireball.acp.page.settings.availableDuringOfflineMode"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
-		<item name="fireball.acp.page.settings.isCommentable"><![CDATA[Kommentare aktivieren]]></item>
-		<item name="fireball.acp.page.settings.isCommentable.description"><![CDATA[Erlaubt anderen Benutzern diese Seite zu kommentieren.]]></item>
-		<item name="fireball.acp.page.settings.menuItemID"><![CDATA[Aktiver Menüpunkt]]></item>
-		<item name="fireball.acp.page.settings.menuItemID.description"><![CDATA[Legt den aktiven Menüpunkt für diese Seite fest. Erfolgt keine Auswahl, wird automatisch der aktive Menüpunkt übergeordneter Seiten geerbt.]]></item>
-		<item name="fireball.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
-		<item name="fireball.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
-		<item name="fireball.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
-		<item name="fireball.acp.page.stylesheets.description"><![CDATA[Stylesheets, die beim Aufruf dieser Seite geladen werden sollen.]]></item>
-		<item name="fireball.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
-		<item name="fireball.acp.page.visibility"><![CDATA[Sichtbarkeit]]></item>
-		<item name="fireball.acp.page.specific"><![CDATA[Typ-Spezifische Angaben]]></item>
-		<item name="fireball.acp.page.type"><![CDATA[Seitentyp]]></item>
-		<item name="fireball.acp.page.type.link.general"><![CDATA[Angaben zur Weiterleitung]]></item>
-		<item name="fireball.acp.page.type.page.comments"><![CDATA[Kommentare]]></item>
-		<item name="fireball.acp.page.settings.url"><![CDATA[URL]]></item>
-		<item name="fireball.acp.page.settings.delay"><![CDATA[Verzögerung]]></item>
-		<item name="fireball.acp.page.settings.delayedRedirect"><![CDATA[Verzögerte Weiterleitung]]></item>
-		<item name="fireball.acp.page.settings.delayedRedirect.description"><![CDATA[Aktivieren Sie diese Option, um den Besucher darauf hinzuweisen, dass er weitergeleitet wird. Optional können Sie im folgenden Feld auch einen Hinweistext angeben.]]></item>
-		<item name="fireball.acp.page.settings.redirectMessage"><![CDATA[Weiterleitungshinweis (optional)]]></item>
-		<item name="fireball.acp.page.type.de.codequake.cms.page.type.page"><![CDATA[Seite]]></item>
-		<item name="fireball.acp.page.type.de.codequake.cms.page.type.link"><![CDATA[Weiterleitung]]></item>
+	<category name="cms.acp.page">
+		<item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
+		<item name="cms.acp.page.alias"><![CDATA[Abkürzung]]></item>
+		<item name="cms.acp.page.alias.description"><![CDATA[Die Abkürzung darf ausschließlich aus Kleinbuchstaben, Ziffern und Bindestrichen bestehen. Bindestriche sind am Anfang und Ende der Abkürzung nicht erlaubt. Abkürzungen müssen auf ihrer jeweiligen Ebene einzigartig sein. Solltest du keine Abkürzung vorgeben, wird diese automatisch auf Basis des Seitentitels erstellt.]]></item>
+		<item name="cms.acp.page.alias.error.notUnique"><![CDATA[Auf dieser Ebene existiert bereits eine Seite, die die gleiche Abkürzung besitzt.]]></item>
+		<item name="cms.acp.page.alias.error.notValid"><![CDATA[Die eingegebene Abkürzung ist ungültig.]]></item>
+		<item name="cms.acp.page.alias.preview"><![CDATA[Link-Vorschau:]]></item>
+		<item name="cms.acp.page.button.choose"><![CDATA[Seite wählen]]></item>
+		<item name="cms.acp.page.content.list"><![CDATA[Inhalte von „{$page->getTitle()}“ auflisten]]></item>
+		<item name="cms.acp.page.copy"><![CDATA[Seite kopieren]]></item>
+		<item name="cms.acp.page.delayedDeactivation"><![CDATA[Deaktivierung am {@$page->deactivationDate|plainTime}]]></item>
+		<item name="cms.acp.page.delayedPublication"><![CDATA[Veröffentlichung am {@$page->publicationDate|plainTime}]]></item>
+		<item name="cms.acp.page.delete.sure"><![CDATA[Willst du diese Seite und all ihre Inhalte wirklich löschen?]]></item>
+		<item name="cms.acp.page.description"><![CDATA[Beschreibung]]></item>
+		<item name="cms.acp.page.display"><![CDATA[Darstellung]]></item>
+		<item name="cms.acp.page.display.settings"><![CDATA[Darstellungsoptionen]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation"><![CDATA[Ausrichtung der Seitenleiste]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation.left"><![CDATA[Linke Seitenleiste]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation.right"><![CDATA[Rechte Seitenleiste]]></item>
+		<item name="cms.acp.page.edit"><![CDATA[Seite bearbeiten]]></item>
+		<item name="cms.acp.page.export"><![CDATA[Seiten sichern]]></item>
+		<item name="cms.acp.page.export.download"><![CDATA[Sicherung der CMS-Seiten herunterladen]]></item>
+		<item name="cms.acp.page.export.download.description"><![CDATA[Du kannst hier eine Sicherung aller CMS-Seiten, Stylesheets und hochgeladenen Dateien auf Deinen lokalen Rechner herunterladen.]]></item>
+		<item name="cms.acp.page.general"><![CDATA[Allgemein]]></item>
+		<item name="cms.acp.page.general.createMenuItem"><![CDATA[Menüpunkt erstellen]]></item>
+		<item name="cms.acp.page.general.createMenuItem.description"><![CDATA[Du kannst den erstellten Menüpunkt anschließend in der <a href="{link controller='PageMenuItemList'}{/link}">Hauptmenüverwaltung</a> verschieben oder bearbeiten.]]></item>
+		<item name="cms.acp.page.general.description"><![CDATA[Beschreibung]]></item>
+		<item name="cms.acp.page.general.parentID"><![CDATA[Übergeordnete Seite]]></item>
+		<item name="cms.acp.page.homePage"><![CDATA[Startseite]]></item>
+		<item name="cms.acp.page.import"><![CDATA[Seiten importieren]]></item>
+		<item name="cms.acp.page.import.downloadFailed"><![CDATA[Download der Sicherungsdatei fehlgeschlagen]]></item>
+		<item name="cms.acp.page.import.empty"><![CDATA[Bitte lade eine Datei hoch oder gebe die URL zur Sicherungsdatei an.]]></item>
+		<item name="cms.acp.page.import.info"><![CDATA[Unmittelbar nach dem Hochladen der Sicherungsdatei werden alle Daten gelöscht um sie mit den Daten aus dem Archiv zu ersetzen. Diese Aktion kann nicht rückgängig gemacht werden. Ein Datenimport ist nur von CMS Version 2.0.0 aufwärts möglich. Der Import kann besonders bei großen Datenmengen eine Zeit lang dauern, schließe auf keinen Fall das Fenster und achte darauf, dass das Limit für Dateigrößen beim Upload in der php.ini ausreichend hoch gesetzt ist.]]></item>
+		<item name="cms.acp.page.import.link"><![CDATA[Sicherung herunterladen]]></item>
+		<item name="cms.acp.page.import.link.description"><![CDATA[Gebe den direkten Pfad zur Sicherungsdatei an. Dabei kann es sich um die Internetadresse der Sicherungsdatei oder alternativ den Pfad zur Sicherungsdatei im Dateisystem handeln.]]></item>
+		<item name="cms.acp.page.import.notFound"><![CDATA[Datei nicht gefunden]]></item>
+		<item name="cms.acp.page.import.upload"><![CDATA[Sicherung der Seiten vom lokalen Computer hochladen]]></item>
+		<item name="cms.acp.page.import.upload.description"><![CDATA[Wähle eine Sicherung der CMS-Seiten von deinem lokalen Rechner aus.]]></item>
+		<item name="cms.acp.page.list"><![CDATA[Seiten]]></item>
+		<item name="cms.acp.page.list.description"><![CDATA[Seiten bilden die Grundlage des Fireball CMS. Erstelle eine Seite um dieser später Inhalte verschiedener Typen zuordnen zu können.]]></item>
+		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[Es existiert bereits ein Menüpunkt mit gleichem Bezeichner. Aus technischen Gründen ist es nicht möglich einen weiteren Menüpunkt zu erstellen.]]></item>
+		<item name="cms.acp.page.meta"><![CDATA[Meta-Informationen]]></item>
+		<item name="cms.acp.page.meta.allowIndexing"><![CDATA[Suchmaschinen dürfen diese Seite indexieren]]></item>
+		<item name="cms.acp.page.meta.description"><![CDATA[Meta-Beschreibung]]></item>
+		<item name="cms.acp.page.meta.description.description"><![CDATA[Die Meta-Beschreibung wird laut Google nicht zur Berechnung des Rankings ausgewertet, ist aber maßgeblich für die CTR (Click-Through-Rate) von Usern ausschlaggebend und sollte demnach Beachtung finden.]]></item>
+		<item name="cms.acp.page.meta.keywords"><![CDATA[Schlüsselwörter]]></item>
+		<item name="cms.acp.page.position"><![CDATA[Position]]></item>
+		<item name="cms.acp.page.position.description"><![CDATA[Legt die Reihenfolge fest, in der die Seiten aufgelistet werden.]]></item>
+		<item name="cms.acp.page.position.invisible"><![CDATA[Seite verstecken]]></item>
+		<item name="cms.acp.page.position.invisible.description"><![CDATA[Diese Seite und ihre Unterseiten werden in allen Listen ausgeblendet, sind aber weiterhin mittels Direktlink aufrufbar.]]></item>
+		<item name="cms.acp.page.publication"><![CDATA[Veröffentlichung]]></item>
+		<item name="cms.acp.page.publication.deactivationDate"><![CDATA[Deaktivierungsdatum]]></item>
+		<item name="cms.acp.page.publication.deactivationDate.error.beforePublication"><![CDATA[Das Deaktivierungsdatum muss nach dem eingestellten Veröffentlichungsdatum liegen.]]></item>
+		<item name="cms.acp.page.publication.deactivationDate.error.notValid"><![CDATA[Sie haben ein ungültiges Deaktivierungsdatum angegeben.]]></item>
+		<item name="cms.acp.page.publication.enableDelayedDeactivation"><![CDATA[Seite zu einem späteren Zeitpunkt automatisch deaktivieren]]></item>
+		<item name="cms.acp.page.publication.enableDelayedPublication"><![CDATA[Seite zu einem späteren Zeitpunkt veröffentlichen]]></item>
+		<item name="cms.acp.page.publication.publicationDate"><![CDATA[Veröffentlichungsdatum]]></item>
+		<item name="cms.acp.page.publication.publicationDate.error.notValid"><![CDATA[Du hast ein ungültiges Veröffentlichungsdatum angegeben.]]></item>
+		<item name="cms.acp.page.revision"><![CDATA[Version]]></item>
+		<item name="cms.acp.page.revision.action"><![CDATA[Aktion]]></item>
+		<item name="cms.acp.page.revision.action.content.create"><![CDATA[Inhalt hinzugefügt]]></item>
+		<item name="cms.acp.page.revision.action.content.delete"><![CDATA[Inhalt gelöscht]]></item>
+		<item name="cms.acp.page.revision.action.content.update"><![CDATA[Inhalt bearbeitet]]></item>
+		<item name="cms.acp.page.revision.action.content.updatePosition"><![CDATA[Sortierung der Inhalte geändert]]></item>
+		<item name="cms.acp.page.revision.action.create"><![CDATA[Seite erstellt]]></item>
+		<item name="cms.acp.page.revision.action.setAsHome"><![CDATA[Als Startseite gesetzt]]></item>
+		<item name="cms.acp.page.revision.action.update"><![CDATA[Seite bearbeitet]]></item>
+		<item name="cms.acp.page.revision.delete.confirmMessage"><![CDATA[Willst du diese Version wirklich löschen?]]></item>
+		<item name="cms.acp.page.revision.list"><![CDATA[Änderungsprotokoll]]></item>
+		<item name="cms.acp.page.revision.restore"><![CDATA[Wiederherstellen]]></item>
+		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Bist du sicher, dass du diese Version wiederherstellen willst?]]></item>
+		<item name="cms.acp.page.revision.time"><![CDATA[Zeitpunkt]]></item>
+		<item name="cms.acp.page.setAsHome"><![CDATA[Als Startseite setzen]]></item>
+		<item name="cms.acp.page.settings"><![CDATA[Einstellungen]]></item>
+		<item name="cms.acp.page.settings.allowSubscribing"><![CDATA[Seite kann abonniert werden]]></item>
+		<item name="cms.acp.page.settings.allowSubscribing.description"><![CDATA[{if $action == 'edit' && $allowSubscribing}<strong>Hinweis:</strong> Beim Deaktivieren dieser Option werden alle bestehenden Abonnements gelöscht.{/if}]]></item>
+		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Seite ist im Wartungsmodus verfügbar]]></item>
+		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Kommentare aktivieren]]></item>
+		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[Erlaubt anderen Benutzern diese Seite zu kommentieren.]]></item>
+		<item name="cms.acp.page.settings.menuItemID"><![CDATA[Aktiver Menüpunkt]]></item>
+		<item name="cms.acp.page.settings.menuItemID.description"><![CDATA[Legt den aktiven Menüpunkt für diese Seite fest. Erfolgt keine Auswahl, wird automatisch der aktive Menüpunkt übergeordneter Seiten geerbt.]]></item>
+		<item name="cms.acp.page.styleID"><![CDATA[Spezieller Stil]]></item>
+		<item name="cms.acp.page.styleID.description"><![CDATA[Beim Aufrufen dieser Seite wird der ausgewählte Stil aktiviert.]]></item>
+		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.page.stylesheets.description"><![CDATA[Stylesheets, die beim Aufruf dieser Seite geladen werden sollen.]]></item>
+		<item name="cms.acp.page.userPermissions"><![CDATA[Berechtigungen]]></item>
+		<item name="cms.acp.page.visibility"><![CDATA[Sichtbarkeit]]></item>
+		<item name="cms.acp.page.specific"><![CDATA[Typ-Spezifische Angaben]]></item>
+		<item name="cms.acp.page.type"><![CDATA[Seitentyp]]></item>
+		<item name="cms.acp.page.type.link.general"><![CDATA[Angaben zur Weiterleitung]]></item>
+		<item name="cms.acp.page.type.page.comments"><![CDATA[Kommentare]]></item>
+		<item name="cms.acp.page.settings.url"><![CDATA[URL]]></item>
+		<item name="cms.acp.page.settings.delay"><![CDATA[Verzögerung]]></item>
+		<item name="cms.acp.page.settings.delayedRedirect"><![CDATA[Verzögerte Weiterleitung]]></item>
+		<item name="cms.acp.page.settings.delayedRedirect.description"><![CDATA[Aktivieren Sie diese Option, um den Besucher darauf hinzuweisen, dass er weitergeleitet wird. Optional können Sie im folgenden Feld auch einen Hinweistext angeben.]]></item>
+		<item name="cms.acp.page.settings.redirectMessage"><![CDATA[Weiterleitungshinweis (optional)]]></item>
+		<item name="cms.acp.page.type.de.codequake.cms.page.type.page"><![CDATA[Seite]]></item>
+		<item name="cms.acp.page.type.de.codequake.cms.page.type.link"><![CDATA[Weiterleitung]]></item>
 	</category>
   
-	<category name="fireball.acp.stats">
-		<item name="fireball.acp.stats"><![CDATA[Statistiken]]></item>
-		<item name="fireball.acp.stats.browsers"><![CDATA[Browserfamilien]]></item>
-		<item name="fireball.acp.stats.clicks"><![CDATA[Clicks]]></item>
-		<item name="fireball.acp.stats.devices"><![CDATA[Geräte]]></item>
-		<item name="fireball.acp.stats.devices.desktop"><![CDATA[Desktop-PC]]></item>
-		<item name="fireball.acp.stats.devices.mobile"><![CDATA[Smartphone]]></item>
-		<item name="fireball.acp.stats.devices.tablet"><![CDATA[Tablet]]></item>
-		<item name="fireball.acp.stats.mostClicked"><![CDATA[Meistgeklickte Seiten]]></item>
-		<item name="fireball.acp.stats.page"><![CDATA[Seite]]></item>
-		<item name="fireball.acp.stats.platforms"><![CDATA[Betriebssysteme]]></item>
-		<item name="fireball.acp.stats.userOnline"><![CDATA[Zurzeit auf der Seite aktiv <span class="badge">{#$objects|count}</span>]]></item>
-		<item name="fireball.acp.stats.vistors"><![CDATA[Aktuelle Besucher]]></item>
+	<category name="cms.acp.stats">
+		<item name="cms.acp.stats"><![CDATA[Statistiken]]></item>
+		<item name="cms.acp.stats.browsers"><![CDATA[Browserfamilien]]></item>
+		<item name="cms.acp.stats.clicks"><![CDATA[Clicks]]></item>
+		<item name="cms.acp.stats.devices"><![CDATA[Geräte]]></item>
+		<item name="cms.acp.stats.devices.desktop"><![CDATA[Desktop-PC]]></item>
+		<item name="cms.acp.stats.devices.mobile"><![CDATA[Smartphone]]></item>
+		<item name="cms.acp.stats.devices.tablet"><![CDATA[Tablet]]></item>
+		<item name="cms.acp.stats.mostClicked"><![CDATA[Meistgeklickte Seiten]]></item>
+		<item name="cms.acp.stats.page"><![CDATA[Seite]]></item>
+		<item name="cms.acp.stats.platforms"><![CDATA[Betriebssysteme]]></item>
+		<item name="cms.acp.stats.userOnline"><![CDATA[Zurzeit auf der Seite aktiv <span class="badge">{#$objects|count}</span>]]></item>
+		<item name="cms.acp.stats.vistors"><![CDATA[Aktuelle Besucher]]></item>
 	</category>
 
-	<category name="fireball.acp.stylesheet">
-		<item name="fireball.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
-		<item name="fireball.acp.stylesheet.button.choose"><![CDATA[Stylesheet wählen]]></item>
-		<item name="fireball.acp.stylesheet.delete.sure"><![CDATA[Willst du dieses Stylesheet wirklich löschen?]]></item>
-		<item name="fireball.acp.stylesheet.edit"><![CDATA[Stylesheet bearbeiten]]></item>
-		<item name="fireball.acp.stylesheet.less"><![CDATA[Individuelles CSS und LESS]]></item>
-		<item name="fireball.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Du hast zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins und LESS-Variablen.]]></item>
-		<item name="fireball.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
-		<item name="fireball.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
+	<category name="cms.acp.stylesheet">
+		<item name="cms.acp.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
+		<item name="cms.acp.stylesheet.button.choose"><![CDATA[Stylesheet wählen]]></item>
+		<item name="cms.acp.stylesheet.delete.sure"><![CDATA[Willst du dieses Stylesheet wirklich löschen?]]></item>
+		<item name="cms.acp.stylesheet.edit"><![CDATA[Stylesheet bearbeiten]]></item>
+		<item name="cms.acp.stylesheet.less"><![CDATA[Individuelles CSS und LESS]]></item>
+		<item name="cms.acp.stylesheet.less.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Du hast zusätzlich den Zugriff auf LESS und alle von Community Framework zur Verfügung gestellten Mixins und LESS-Variablen.]]></item>
+		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
 	</category>
 
-	<category name="fireball.content">
-		<item name="fireball.content.file.details"><![CDATA[({$file->size|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
+	<category name="cms.content">
+		<item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
 	</category>
 
-	<category name="fireball.dashboard">
-		<item name="fireball.dashboard.all"><![CDATA[Alle Besucher]]></item>
-		<item name="fireball.dashboard.registered"><![CDATA[Registrierte Benutzer]]></item>
-		<item name="fireball.dashboard.spiders"><![CDATA[Suchmaschinenroboter]]></item>
+	<category name="cms.dashboard">
+		<item name="cms.dashboard.all"><![CDATA[Alle Besucher]]></item>
+		<item name="cms.dashboard.registered"><![CDATA[Registrierte Benutzer]]></item>
+		<item name="cms.dashboard.spiders"><![CDATA[Suchmaschinenroboter]]></item>
 	</category>
 
-	<category name="fireball.global">
-		<item name="fireball.global.page"><![CDATA[Seite]]></item>
+	<category name="cms.global">
+		<item name="cms.global.page"><![CDATA[Seite]]></item>
 	</category>
 
-	<category name="fireball.page">
-		<item name="fireball.page.clickCounter"><![CDATA[{#$clicks} mal aufgerufen]]></item>
-		<item name="fireball.page.comment"><![CDATA[Kommentar]]></item>
-		<item name="fireball.page.comment.notification.mail"><![CDATA[{if !$author->userID}ein Gast{else}{@$author->username}{/if} hat einen Kommentar zur Seite „{$page->getTitle()}“ verfasst:
+	<category name="cms.page">
+		<item name="cms.page.clickCounter"><![CDATA[{#$clicks} mal aufgerufen]]></item>
+		<item name="cms.page.comment"><![CDATA[Kommentar]]></item>
+		<item name="cms.page.comment.notification.mail"><![CDATA[{if !$author->userID}ein Gast{else}{@$author->username}{/if} hat einen Kommentar zur Seite „{$page->getTitle()}“ verfasst:
 {if $notificationType == 'instant'}
 ---------------------------------
 {@$comment->message}
 ---------------------------------
 {/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="fireball.page.comment.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben Kommentare zur Seite „{$page->getTitle()}“ verfasst:
+		<item name="cms.page.comment.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben Kommentare zur Seite „{$page->getTitle()}“ verfasst:
 {link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="fireball.page.comment.notification.message"><![CDATA[{if !$author->userID}Ein Gast{else}{@$author->getAnchorTag()}{/if} hat einen Kommentar zur Seite „{$page->getTitle()}“ verfasst.]]></item>
-		<item name="fireball.page.comment.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben Kommentare zur Seite „{$page->getTitle()}“ verfasst.]]></item>
-		<item name="fireball.page.comment.notification.title"><![CDATA[Neuer Kommentar (Seite)]]></item>
-		<item name="fireball.page.comment.notification.title.stacked"><![CDATA[{#$timesTriggered} neue Kommentare (Seite)]]></item>
-		<item name="fireball.page.commentResponse"><![CDATA[Kommentar-Antwort]]></item>
-		<item name="fireball.page.commentResponse.notification.mail"><![CDATA[{if !$author->userID}ein Gast{else}{@$author->username}{/if} hat eine Antwort zu deinem Kommentar zur Seite „{$page->getTitle()}“ verfasst:
+		<item name="cms.page.comment.notification.message"><![CDATA[{if !$author->userID}Ein Gast{else}{@$author->getAnchorTag()}{/if} hat einen Kommentar zur Seite „{$page->getTitle()}“ verfasst.]]></item>
+		<item name="cms.page.comment.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben Kommentare zur Seite „{$page->getTitle()}“ verfasst.]]></item>
+		<item name="cms.page.comment.notification.title"><![CDATA[Neuer Kommentar (Seite)]]></item>
+		<item name="cms.page.comment.notification.title.stacked"><![CDATA[{#$timesTriggered} neue Kommentare (Seite)]]></item>
+		<item name="cms.page.commentResponse"><![CDATA[Kommentar-Antwort]]></item>
+		<item name="cms.page.commentResponse.notification.mail"><![CDATA[{if !$author->userID}ein Gast{else}{@$author->username}{/if} hat eine Antwort zu deinem Kommentar zur Seite „{$page->getTitle()}“ verfasst:
 {if $notificationType == 'instant'}
 ---------------------------------
 {@$response->message}
 ---------------------------------
 {/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="fireball.page.commentResponse.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben auf deinen Kommentar zur Seite „{$page->getTitle()}“ geantwortet:
+		<item name="cms.page.commentResponse.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben auf deinen Kommentar zur Seite „{$page->getTitle()}“ geantwortet:
 {link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="fireball.page.commentResponse.notification.message"><![CDATA[{if !$author->userID}Ein Gast{else}{@$author->getAnchorTag()}{/if} hat eine Antwort zu ihrem Kommentar zur Seite „{$page->getTitle()}“ verfasst.]]></item>
-		<item name="fireball.page.commentResponse.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben auf deinen Kommentar zur Seite „{$page->getTitle()}“ geantwortet.]]></item>
-		<item name="fireball.page.commentResponse.notification.title"><![CDATA[Neue Antwort (Seite)]]></item>
-		<item name="fireball.page.commentResponse.notification.title.stacked"><![CDATA[{#$timesTriggered} neue Antworten (Seite)]]></item>
-		<item name="fireball.page.comments"><![CDATA[Kommentare]]></item>
-		<item name="fireball.page.comments.noComments"><![CDATA[Keine Kommentare vorhanden]]></item>
-		<item name="fireball.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
-		<item name="fireball.page.delayedPublication"><![CDATA[Diese Seite wird am {@$page->publicationDate|plainTime} veröffentlicht.]]></item>
-		<item name="fireball.page.parents"><![CDATA[{implode from=$page->getParentPages() item=parentPage glue=' » '}{$parentPage->getTitle()}{/implode}{if $includeSelf|isset && $includeSelf}{if $page->getParentPages()} » {/if}{$page->getTitle()}{/if}]]></item>
+		<item name="cms.page.commentResponse.notification.message"><![CDATA[{if !$author->userID}Ein Gast{else}{@$author->getAnchorTag()}{/if} hat eine Antwort zu ihrem Kommentar zur Seite „{$page->getTitle()}“ verfasst.]]></item>
+		<item name="cms.page.commentResponse.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} und {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} und {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} und{/if} {#$others} weitere Benutzer {if $guestTimesTriggered}und {if $guestTimesTriggered == 1}ein Gast{else}Gäste{/if}{/if}{/if} haben auf deinen Kommentar zur Seite „{$page->getTitle()}“ geantwortet.]]></item>
+		<item name="cms.page.commentResponse.notification.title"><![CDATA[Neue Antwort (Seite)]]></item>
+		<item name="cms.page.commentResponse.notification.title.stacked"><![CDATA[{#$timesTriggered} neue Antworten (Seite)]]></item>
+		<item name="cms.page.comments"><![CDATA[Kommentare]]></item>
+		<item name="cms.page.comments.noComments"><![CDATA[Keine Kommentare vorhanden]]></item>
+		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>codeQuake</strong></a></address>]]></item>
+		<item name="cms.page.delayedPublication"><![CDATA[Diese Seite wird am {@$page->publicationDate|plainTime} veröffentlicht.]]></item>
+		<item name="cms.page.parents"><![CDATA[{implode from=$page->getParentPages() item=parentPage glue=' » '}{$parentPage->getTitle()}{/implode}{if $includeSelf|isset && $includeSelf}{if $page->getParentPages()} » {/if}{$page->getTitle()}{/if}]]></item>
 	</category>
 
-	<category name="fireball.user">
-		<item name="fireball.user.usersOnline.location.page"><![CDATA[Betrachtet die Seite <a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
+	<category name="cms.user">
+		<item name="cms.user.usersOnline.location.page"><![CDATA[Betrachtet die Seite <a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
 	</category>
 
 	<category name="wcf.acl.option">

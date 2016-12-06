@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
-	<category name="fireball.acp.content">
-		<item name="fireball.acp.content.add"><![CDATA[Add content]]></item>
-		<item name="fireball.acp.content.copy"><![CDATA[Copy content]]></item>
-		<item name="fireball.acp.content.css"><![CDATA[CSS]]></item>
-		<item name="fireball.acp.content.css.cssClasses"><![CDATA[CSS-Classes]]></item>
-		<item name="fireball.acp.content.css.cssClasses.description">
+	<category name="cms.acp.content">
+		<item name="cms.acp.content.add"><![CDATA[Add content]]></item>
+		<item name="cms.acp.content.copy"><![CDATA[Copy content]]></item>
+		<item name="cms.acp.content.css"><![CDATA[CSS]]></item>
+		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Classes]]></item>
+		<item name="cms.acp.content.css.cssClasses.description">
 			<![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding". For a margin on top use "marginTop". <br />
 <strong>Examples:</strong>
 <ul class="nativeList">
@@ -15,299 +15,299 @@
 	<li><code class="inlineCode">center</code>: Centers the content</li>
 </ul>]]>
 		</item>
-		<item name="fireball.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content?]]></item>
-		<item name="fireball.acp.content.edit"><![CDATA[Edit Content]]></item>
-		<item name="fireball.acp.content.list"><![CDATA[Contents]]></item>
-		<item name="fireball.acp.content.position"><![CDATA[Position]]></item>
-		<item name="fireball.acp.content.position.parentID"><![CDATA[Parent content]]></item>
-		<item name="fireball.acp.content.position.position.body"><![CDATA[Body]]></item>
-		<item name="fireball.acp.content.position.position.sidebar"><![CDATA[Sidebar]]></item>
-		<item name="fireball.acp.content.type.code"><![CDATA[Code]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Multiple Columns]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.columns.column.add"><![CDATA[Add Column]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard Box]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Choose box]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[File]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Choose file]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Root]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Gallery]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Images]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Content collection]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[A collection of contents.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Headline]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Headline]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Pattern]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Headline 1]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Headline 2]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Headline 3]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Headline 4]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Headline 5]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Picture]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Height (in px)]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Caption]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.image.width"><![CDATA[Width (in px)]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.hyperlink"><![CDATA[Hyperlink]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.text"><![CDATA[Text]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.type"><![CDATA[Pattern]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.type.button"><![CDATA[Button]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.type.link"><![CDATA[Hyperlink]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.link.type.smallbutton"><![CDATA[Small Button]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu"><![CDATA[Menu]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu.depth"><![CDATA[Menu depth]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu.depth.description"><![CDATA[Number of listed menu levels. Type 0 for unlimited.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Pattern]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[All pages]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Child pages]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Poll]]></item>
-    <item name="fireball.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
-    <item name="fireball.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
-    <item name="fireball.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Enter a valid feed URL. You can use the following data-types <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
-    <item name="fireball.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Number of entries]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[All children will be arranged in a slideshow.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.tabmenu.description"><![CDATA[All children will be arranged in a tabmenu. The children's titles will be the titles of your tab buttons. Tab buttons need CSS-IDs for the anchors, if you don't enter a CSS-ID for each child, it will be generated automatically.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[Template/HTML]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Sourcecode]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[You can use Smarty-Syntax (<a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.smarty.net/">Documentation</a>) & HTML here.]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.template.text.error.compileError"><![CDATA[The given text contains the following template errors:<br />{$compileError}]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[User]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.user.name"><![CDATA[Username]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.youtube.video"><![CDATA[Video-URL]]></item>
-		<item name="fireball.acp.content.type.de.codequake.cms.content.type.youtube.video.error.notValid"><![CDATA[URL not valid]]></item>
-		<item name="fireball.acp.content.type.general"><![CDATA[General]]></item>
-		<item name="fireball.acp.content.type.media"><![CDATA[Media]]></item>
-		<item name="fireball.acp.content.type.structure"><![CDATA[Structure]]></item>
+		<item name="cms.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content?]]></item>
+		<item name="cms.acp.content.edit"><![CDATA[Edit Content]]></item>
+		<item name="cms.acp.content.list"><![CDATA[Contents]]></item>
+		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
+		<item name="cms.acp.content.position.parentID"><![CDATA[Parent content]]></item>
+		<item name="cms.acp.content.position.position.body"><![CDATA[Body]]></item>
+		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Sidebar]]></item>
+		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Multiple Columns]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns.column.add"><![CDATA[Add Column]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard Box]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Choose box]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[File]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Choose file]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Root]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery"><![CDATA[Gallery]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.gallery.images"><![CDATA[Images]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.group"><![CDATA[Content collection]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.group.description"><![CDATA[A collection of contents.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline"><![CDATA[Headline]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.hyperlink"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.text"><![CDATA[Headline]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type"><![CDATA[Pattern]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h1"><![CDATA[Headline 1]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h2"><![CDATA[Headline 2]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h3"><![CDATA[Headline 3]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h4"><![CDATA[Headline 4]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5"><![CDATA[Headline 5]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image"><![CDATA[Picture]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.height"><![CDATA[Height (in px)]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.text"><![CDATA[Caption]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.image.width"><![CDATA[Width (in px)]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link"><![CDATA[Hyperlink/Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.hyperlink"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type"><![CDATA[Pattern]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.button"><![CDATA[Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.link"><![CDATA[Hyperlink]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.link.type.smallbutton"><![CDATA[Small Button]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu"><![CDATA[Menu]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth"><![CDATA[Menu depth]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.depth.description"><![CDATA[Number of listed menu levels. Type 0 for unlimited.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Pattern]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[All pages]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Child pages]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Poll]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Enter a valid feed URL. You can use the following data-types <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
+    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Number of entries]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[All children will be arranged in a slideshow.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu.description"><![CDATA[All children will be arranged in a tabmenu. The children's titles will be the titles of your tab buttons. Tab buttons need CSS-IDs for the anchors, if you don't enter a CSS-ID for each child, it will be generated automatically.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template"><![CDATA[Template/HTML]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text"><![CDATA[Sourcecode]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.description"><![CDATA[You can use Smarty-Syntax (<a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.smarty.net/">Documentation</a>) & HTML here.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.template.text.error.compileError"><![CDATA[The given text contains the following template errors:<br />{$compileError}]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.text.text"><![CDATA[Text]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.user"><![CDATA[User]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.user.name"><![CDATA[Username]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video"><![CDATA[Video-URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video.error.notValid"><![CDATA[URL not valid]]></item>
+		<item name="cms.acp.content.type.general"><![CDATA[General]]></item>
+		<item name="cms.acp.content.type.media"><![CDATA[Media]]></item>
+		<item name="cms.acp.content.type.structure"><![CDATA[Structure]]></item>
 	</category>
 
-	<category name="fireball.acp.dashboard">
-		<item name="fireball.acp.dashboard.all"><![CDATA[All]]></item>
-		<item name="fireball.acp.dashboard.registered"><![CDATA[Registered]]></item>
-		<item name="fireball.acp.dashboard.spiders"><![CDATA[Search Engines]]></item>
+	<category name="cms.acp.dashboard">
+		<item name="cms.acp.dashboard.all"><![CDATA[All]]></item>
+		<item name="cms.acp.dashboard.registered"><![CDATA[Registered]]></item>
+		<item name="cms.acp.dashboard.spiders"><![CDATA[Search Engines]]></item>
 	</category>
 
-	<category name="fireball.acp.file">
-		<item name="fireball.acp.file.add"><![CDATA[Upload Files]]></item>
-		<item name="fireball.acp.file.categoryIDs"><![CDATA[Categories]]></item>
-		<item name="fireball.acp.file.delete.sure"><![CDATA[Are you sure you want to delete this file?]]></item>
-		<item name="fireball.acp.file.downloads"><![CDATA[Downloads]]></item>
-		<item name="fireball.acp.file.error.empty"><![CDATA[Please upload a file.]]></item>
-		<item name="fireball.acp.file.error.invalid"><![CDATA[Invalid file]]></item>
-		<item name="fireball.acp.file.file"><![CDATA[File]]></item>
-		<item name="fireball.acp.file.fileType"><![CDATA[Type]]></item>
-		<item name="fireball.acp.file.files"><![CDATA[Files]]></item>
-		<item name="fireball.acp.file.files.description"><![CDATA[You are able to upload multiple files by pressing CTRL.]]></item>
-		<item name="fireball.acp.file.filesize"><![CDATA[Size]]></item>
-		<item name="fireball.acp.file.list"><![CDATA[Files]]></item>
-		<item name="fireball.acp.file.list.description"><![CDATA[This is a list of all your files. You can easily share them via BBCode or content type.]]></item>
-		<item name="fireball.acp.file.picker"><![CDATA[File Picker]]></item>
-		<item name="fireball.acp.file.uploadTime"><![CDATA[Upload Time]]></item>
+	<category name="cms.acp.file">
+		<item name="cms.acp.file.add"><![CDATA[Upload Files]]></item>
+		<item name="cms.acp.file.categoryIDs"><![CDATA[Categories]]></item>
+		<item name="cms.acp.file.delete.sure"><![CDATA[Are you sure you want to delete this file?]]></item>
+		<item name="cms.acp.file.downloads"><![CDATA[Downloads]]></item>
+		<item name="cms.acp.file.error.empty"><![CDATA[Please upload a file.]]></item>
+		<item name="cms.acp.file.error.invalid"><![CDATA[Invalid file]]></item>
+		<item name="cms.acp.file.file"><![CDATA[File]]></item>
+		<item name="cms.acp.file.fileType"><![CDATA[Type]]></item>
+		<item name="cms.acp.file.files"><![CDATA[Files]]></item>
+		<item name="cms.acp.file.files.description"><![CDATA[You are able to upload multiple files by pressing CTRL.]]></item>
+		<item name="cms.acp.file.filesize"><![CDATA[Size]]></item>
+		<item name="cms.acp.file.list"><![CDATA[Files]]></item>
+		<item name="cms.acp.file.list.description"><![CDATA[This is a list of all your files. You can easily share them via BBCode or content type.]]></item>
+		<item name="cms.acp.file.picker"><![CDATA[File Picker]]></item>
+		<item name="cms.acp.file.uploadTime"><![CDATA[Upload Time]]></item>
 	</category>
 
-	<category name="fireball.acp.index">
-		<item name="fireball.acp.index.news.more"><![CDATA[Further News]]></item>
+	<category name="cms.acp.index">
+		<item name="cms.acp.index.news.more"><![CDATA[Further News]]></item>
 	</category>
 
-	<category name="fireball.acp.menu">
-		<item name="fireball.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="fireball.acp.menu.link.fireball.file"><![CDATA[Files]]></item>
-		<item name="fireball.acp.menu.link.fireball.file.category.add"><![CDATA[Add Category]]></item>
-		<item name="fireball.acp.menu.link.fireball.file.category.list"><![CDATA[List Categories]]></item>
-		<item name="fireball.acp.menu.link.fireball.file.list"><![CDATA[List Files]]></item>
-		<item name="fireball.acp.menu.link.fireball.page"><![CDATA[Pages]]></item>
-		<item name="fireball.acp.menu.link.fireball.page.add"><![CDATA[Add Page]]></item>
-		<item name="fireball.acp.menu.link.fireball.page.importAndExport"><![CDATA[Import &amp; Export]]></item>
-		<item name="fireball.acp.menu.link.fireball.page.list"><![CDATA[List Pages]]></item>
-		<item name="fireball.acp.menu.link.fireball.page.statistics"><![CDATA[Statistics]]></item>
-		<item name="fireball.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
-		<item name="fireball.acp.menu.link.fireball.stylesheet.add"><![CDATA[Add Stylesheet]]></item>
-		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[List Stylesheets]]></item>
+	<category name="cms.acp.menu">
+		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
+		<item name="cms.acp.menu.link.fireball.file"><![CDATA[Files]]></item>
+		<item name="cms.acp.menu.link.fireball.file.category.add"><![CDATA[Add Category]]></item>
+		<item name="cms.acp.menu.link.fireball.file.category.list"><![CDATA[List Categories]]></item>
+		<item name="cms.acp.menu.link.fireball.file.list"><![CDATA[List Files]]></item>
+		<item name="cms.acp.menu.link.fireball.page"><![CDATA[Pages]]></item>
+		<item name="cms.acp.menu.link.fireball.page.add"><![CDATA[Add Page]]></item>
+		<item name="cms.acp.menu.link.fireball.page.importAndExport"><![CDATA[Import &amp; Export]]></item>
+		<item name="cms.acp.menu.link.fireball.page.list"><![CDATA[List Pages]]></item>
+		<item name="cms.acp.menu.link.fireball.page.statistics"><![CDATA[Statistics]]></item>
+		<item name="cms.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.menu.link.fireball.stylesheet.add"><![CDATA[Add Stylesheet]]></item>
+		<item name="cms.acp.menu.link.fireball.stylesheet.list"><![CDATA[List Stylesheets]]></item>
 	</category>
 
-	<category name="fireball.acp.page">
-		<item name="fireball.acp.page.add"><![CDATA[Add page]]></item>
-		<item name="fireball.acp.page.alias"><![CDATA[URL-Shortcut]]></item>
-		<item name="fireball.acp.page.alias.description"><![CDATA[The URL-Shortcut will be part of this page's hyperlink. It must not contain any other items than lowercase-letters, numbers and hyphens.]]></item>
-		<item name="fireball.acp.page.alias.error.notUnique"><![CDATA[Alias exists!]]></item>
-		<item name="fireball.acp.page.alias.error.notValid"><![CDATA[Invalid Alias!]]></item>
-		<item name="fireball.acp.page.alias.preview"><![CDATA[Link-Preview:]]></item>
-		<item name="fireball.acp.page.button.choose"><![CDATA[Choose Page]]></item>
-		<item name="fireball.acp.page.content.list"><![CDATA[List contents of '{$page->getTitle()}']]></item>
-		<item name="fireball.acp.page.copy"><![CDATA[Copy page]]></item>
-		<item name="fireball.acp.page.delayedDeactivation"><![CDATA[Deactivation on {@$page->deactivationDate|plainTime}]]></item>
-		<item name="fireball.acp.page.delayedPublication"><![CDATA[Publication on {@$page->publicationDate|plainTime}]]></item>
-		<item name="fireball.acp.page.delete.sure"><![CDATA[Are you sure you want to delete this page and all of its contents?]]></item>
-		<item name="fireball.acp.page.description"><![CDATA[Description]]></item>
-		<item name="fireball.acp.page.display"><![CDATA[Display]]></item>
-		<item name="fireball.acp.page.display.settings"><![CDATA[Display Settings]]></item>
-		<item name="fireball.acp.page.display.settings.sidebarOrientation"><![CDATA[Sidebar orientation]]></item>
-		<item name="fireball.acp.page.display.settings.sidebarOrientation.left"><![CDATA[Left]]></item>
-		<item name="fireball.acp.page.display.settings.sidebarOrientation.right"><![CDATA[Right]]></item>
-		<item name="fireball.acp.page.edit"><![CDATA[Edit Page]]></item>
-		<item name="fireball.acp.page.export"><![CDATA[Download pages]]></item>
-		<item name="fireball.acp.page.export.download"><![CDATA[Download pages]]></item>
-		<item name="fireball.acp.page.export.download.description"><![CDATA[Downloads a backup of all cms pages, stylesheets and uploaded files to your local machine.]]></item>
-		<item name="fireball.acp.page.general"><![CDATA[General]]></item>
-		<item name="fireball.acp.page.general.description"><![CDATA[Description]]></item>
-		<item name="fireball.acp.page.general.createMenuItem"><![CDATA[Create Menu Item]]></item>
-		<item name="fireball.acp.page.general.createMenuItem.description"><![CDATA[]]></item>
-		<item name="fireball.acp.page.general.parentID"><![CDATA[Parent page]]></item>
-		<item name="fireball.acp.page.homePage"><![CDATA[Startpage]]></item>
-		<item name="fireball.acp.page.import"><![CDATA[Import pages]]></item>
-		<item name="fireball.acp.page.import.downloadFailed"><![CDATA[Download failed]]></item>
-		<item name="fireball.acp.page.import.empty"><![CDATA[Please upload or link a file]]></item>
-		<item name="fireball.acp.page.import.info"><![CDATA[Importing huge datasets needs a lot of time, please do not close this window! All data will be erased before the import.]]></item>
-		<item name="fireball.acp.page.import.link"><![CDATA[Download backup]]></item>
-		<item name="fireball.acp.page.import.link.description"><![CDATA[Please enter a direct path to your backup file. You can enter an external link or a link to a file on your internal file system.]]></item>
-		<item name="fireball.acp.page.import.notFound"><![CDATA[File not found!]]></item>
-		<item name="fireball.acp.page.import.upload"><![CDATA[Upload pages]]></item>
-		<item name="fireball.acp.page.import.upload.description"><![CDATA[Upload previously downloaded backup file.]]></item>
-		<item name="fireball.acp.page.list"><![CDATA[Pages]]></item>
-		<item name="fireball.acp.page.list.description"><![CDATA[Pages are the base of this CMS. Create a page to add multiple types of content later.]]></item>
-		<item name="fireball.acp.page.menuItem.error.exists"><![CDATA[A Menuitem with this values already exists. For technical reasons you cannnot create a new one.]]></item>
-		<item name="fireball.acp.page.meta"><![CDATA[Metainfomation]]></item>
-		<item name="fireball.acp.page.meta.allowIndexing"><![CDATA[Search robots are allowed to index this page]]></item>
-		<item name="fireball.acp.page.meta.description"><![CDATA[Meta-Description]]></item>
-		<item name="fireball.acp.page.meta.description.description"><![CDATA[The meta element "description" is neccessary for a good CTR (Click-Through-Rate).]]></item>
-		<item name="fireball.acp.page.meta.keywords"><![CDATA[Keywords]]></item>
-		<item name="fireball.acp.page.position"><![CDATA[Position]]></item>
-		<item name="fireball.acp.page.position.description"><![CDATA[]]></item>
-		<item name="fireball.acp.page.position.invisible"><![CDATA[Invisible]]></item>
-		<item name="fireball.acp.page.position.invisible.description"><![CDATA[]]></item>
-		<item name="fireball.acp.page.publication"><![CDATA[Publication]]></item>
-		<item name="fireball.acp.page.publication.deactivationDate"><![CDATA[Deactivation Date]]></item>
-		<item name="fireball.acp.page.publication.deactivationDate.error.beforePublication"><![CDATA[Deactivation date needs to be after publication of the page.]]></item>
-		<item name="fireball.acp.page.publication.deactivationDate.error.notValid"><![CDATA[Deactication date is invalid.]]></item>
-		<item name="fireball.acp.page.publication.enableDelayedDeactivation"><![CDATA[Enable delayed deactivation]]></item>
-		<item name="fireball.acp.page.publication.enableDelayedPublication"><![CDATA[Enable delayed publication]]></item>
-		<item name="fireball.acp.page.publication.publicationDate"><![CDATA[Publication Date]]></item>
-		<item name="fireball.acp.page.publication.publicationDate.error.notValid"><![CDATA[Publication date is invalid.]]></item>
-		<item name="fireball.acp.page.revision"><![CDATA[Revision]]></item>
-		<item name="fireball.acp.page.revision.action"><![CDATA[Action]]></item>
-		<item name="fireball.acp.page.revision.action.content.create"><![CDATA[Added content]]></item>
-		<item name="fireball.acp.page.revision.action.content.delete"><![CDATA[Deleted content]]></item>
-		<item name="fireball.acp.page.revision.action.content.update"><![CDATA[Updated content]]></item>
-		<item name="fireball.acp.page.revision.action.content.updatePosition"><![CDATA[Changed sorting of contents]]></item>
-		<item name="fireball.acp.page.revision.action.create"><![CDATA[Created page]]></item>
-		<item name="fireball.acp.page.revision.action.setAsHome"><![CDATA[Set as homepage]]></item>
-		<item name="fireball.acp.page.revision.action.update"><![CDATA[Updated page]]></item>
-		<item name="fireball.acp.page.revision.delete.confirmMessage"><![CDATA[Are you sure you want to delete this revision?]]></item>
-		<item name="fireball.acp.page.revision.list"><![CDATA[Revisions]]></item>
-		<item name="fireball.acp.page.revision.restore"><![CDATA[Restore]]></item>
-		<item name="fireball.acp.page.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
-		<item name="fireball.acp.page.revision.time"><![CDATA[Time]]></item>
-		<item name="fireball.acp.page.setAsHome"><![CDATA[Set as startpage]]></item>
-		<item name="fireball.acp.page.settings"><![CDATA[Settings]]></item>
-		<item name="fireball.acp.page.settings.allowSubscribing"><![CDATA[Allow subscription of this page]]></item>
-		<item name="fireball.acp.page.settings.allowSubscribing.description"><![CDATA[{if $action == 'edit' && $allowSubscribing}<strong>Warning:</strong> Changing this will delete all existing subscriptions.{/if}]]></item>
-		<item name="fireball.acp.page.settings.availableDuringOfflineMode"><![CDATA[Page is visible during offline mode]]></item>
-		<item name="fireball.acp.page.settings.isCommentable"><![CDATA[Allow comments]]></item>
-		<item name="fireball.acp.page.settings.isCommentable.description"><![CDATA[]]></item>
-		<item name="fireball.acp.page.settings.menuItemID"><![CDATA[Active Menu Item]]></item>
-		<item name="fireball.acp.page.settings.menuItemID.description"><![CDATA[In case you don't select a menu item, the active menu item of parent pages will be inherited.]]></item>
-		<item name="fireball.acp.page.styleID"><![CDATA[Style]]></item>
-		<item name="fireball.acp.page.styleID.description"><![CDATA[Forces selected style upon page visit]]></item>
-		<item name="fireball.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
-		<item name="fireball.acp.page.stylesheets.description"><![CDATA[List of stylesheets that are loaded when viewing this page.]]></item>
-		<item name="fireball.acp.page.userPermissions"><![CDATA[Permissions]]></item>
-		<item name="fireball.acp.page.visibility"><![CDATA[Visibility]]></item>
-		<item name="fireball.acp.page.specific"><![CDATA[Type-specific data]]></item>
-		<item name="fireball.acp.page.type"><![CDATA[Pagetype]]></item>
-		<item name="fireball.acp.page.type.link.general"><![CDATA[Redirection]]></item>
-		<item name="fireball.acp.page.type.page.comments"><![CDATA[Comments]]></item>
-		<item name="fireball.acp.page.settings.url"><![CDATA[URL]]></item>
-		<item name="fireball.acp.page.settings.delay"><![CDATA[Delay]]></item>
-		<item name="fireball.acp.page.settings.delayedRedirect"><![CDATA[Delayed redirect]]></item>
-		<item name="fireball.acp.page.settings.delayedRedirect.description"><![CDATA[Enable this option to inform your visitors that they will get redirected. Optionally you can provide a custom hint within the following field.]]></item>
-		<item name="fireball.acp.page.settings.redirectMessage"><![CDATA[Hint (optional)]]></item>
-		<item name="fireball.acp.page.type.de.codequake.cms.page.type.page"><![CDATA[Page]]></item>
-		<item name="fireball.acp.page.type.de.codequake.cms.page.type.link"><![CDATA[External link]]></item>
+	<category name="cms.acp.page">
+		<item name="cms.acp.page.add"><![CDATA[Add page]]></item>
+		<item name="cms.acp.page.alias"><![CDATA[URL-Shortcut]]></item>
+		<item name="cms.acp.page.alias.description"><![CDATA[The URL-Shortcut will be part of this page's hyperlink. It must not contain any other items than lowercase-letters, numbers and hyphens.]]></item>
+		<item name="cms.acp.page.alias.error.notUnique"><![CDATA[Alias exists!]]></item>
+		<item name="cms.acp.page.alias.error.notValid"><![CDATA[Invalid Alias!]]></item>
+		<item name="cms.acp.page.alias.preview"><![CDATA[Link-Preview:]]></item>
+		<item name="cms.acp.page.button.choose"><![CDATA[Choose Page]]></item>
+		<item name="cms.acp.page.content.list"><![CDATA[List contents of '{$page->getTitle()}']]></item>
+		<item name="cms.acp.page.copy"><![CDATA[Copy page]]></item>
+		<item name="cms.acp.page.delayedDeactivation"><![CDATA[Deactivation on {@$page->deactivationDate|plainTime}]]></item>
+		<item name="cms.acp.page.delayedPublication"><![CDATA[Publication on {@$page->publicationDate|plainTime}]]></item>
+		<item name="cms.acp.page.delete.sure"><![CDATA[Are you sure you want to delete this page and all of its contents?]]></item>
+		<item name="cms.acp.page.description"><![CDATA[Description]]></item>
+		<item name="cms.acp.page.display"><![CDATA[Display]]></item>
+		<item name="cms.acp.page.display.settings"><![CDATA[Display Settings]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation"><![CDATA[Sidebar orientation]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation.left"><![CDATA[Left]]></item>
+		<item name="cms.acp.page.display.settings.sidebarOrientation.right"><![CDATA[Right]]></item>
+		<item name="cms.acp.page.edit"><![CDATA[Edit Page]]></item>
+		<item name="cms.acp.page.export"><![CDATA[Download pages]]></item>
+		<item name="cms.acp.page.export.download"><![CDATA[Download pages]]></item>
+		<item name="cms.acp.page.export.download.description"><![CDATA[Downloads a backup of all cms pages, stylesheets and uploaded files to your local machine.]]></item>
+		<item name="cms.acp.page.general"><![CDATA[General]]></item>
+		<item name="cms.acp.page.general.description"><![CDATA[Description]]></item>
+		<item name="cms.acp.page.general.createMenuItem"><![CDATA[Create Menu Item]]></item>
+		<item name="cms.acp.page.general.createMenuItem.description"><![CDATA[]]></item>
+		<item name="cms.acp.page.general.parentID"><![CDATA[Parent page]]></item>
+		<item name="cms.acp.page.homePage"><![CDATA[Startpage]]></item>
+		<item name="cms.acp.page.import"><![CDATA[Import pages]]></item>
+		<item name="cms.acp.page.import.downloadFailed"><![CDATA[Download failed]]></item>
+		<item name="cms.acp.page.import.empty"><![CDATA[Please upload or link a file]]></item>
+		<item name="cms.acp.page.import.info"><![CDATA[Importing huge datasets needs a lot of time, please do not close this window! All data will be erased before the import.]]></item>
+		<item name="cms.acp.page.import.link"><![CDATA[Download backup]]></item>
+		<item name="cms.acp.page.import.link.description"><![CDATA[Please enter a direct path to your backup file. You can enter an external link or a link to a file on your internal file system.]]></item>
+		<item name="cms.acp.page.import.notFound"><![CDATA[File not found!]]></item>
+		<item name="cms.acp.page.import.upload"><![CDATA[Upload pages]]></item>
+		<item name="cms.acp.page.import.upload.description"><![CDATA[Upload previously downloaded backup file.]]></item>
+		<item name="cms.acp.page.list"><![CDATA[Pages]]></item>
+		<item name="cms.acp.page.list.description"><![CDATA[Pages are the base of this CMS. Create a page to add multiple types of content later.]]></item>
+		<item name="cms.acp.page.menuItem.error.exists"><![CDATA[A Menuitem with this values already exists. For technical reasons you cannnot create a new one.]]></item>
+		<item name="cms.acp.page.meta"><![CDATA[Metainfomation]]></item>
+		<item name="cms.acp.page.meta.allowIndexing"><![CDATA[Search robots are allowed to index this page]]></item>
+		<item name="cms.acp.page.meta.description"><![CDATA[Meta-Description]]></item>
+		<item name="cms.acp.page.meta.description.description"><![CDATA[The meta element "description" is neccessary for a good CTR (Click-Through-Rate).]]></item>
+		<item name="cms.acp.page.meta.keywords"><![CDATA[Keywords]]></item>
+		<item name="cms.acp.page.position"><![CDATA[Position]]></item>
+		<item name="cms.acp.page.position.description"><![CDATA[]]></item>
+		<item name="cms.acp.page.position.invisible"><![CDATA[Invisible]]></item>
+		<item name="cms.acp.page.position.invisible.description"><![CDATA[]]></item>
+		<item name="cms.acp.page.publication"><![CDATA[Publication]]></item>
+		<item name="cms.acp.page.publication.deactivationDate"><![CDATA[Deactivation Date]]></item>
+		<item name="cms.acp.page.publication.deactivationDate.error.beforePublication"><![CDATA[Deactivation date needs to be after publication of the page.]]></item>
+		<item name="cms.acp.page.publication.deactivationDate.error.notValid"><![CDATA[Deactication date is invalid.]]></item>
+		<item name="cms.acp.page.publication.enableDelayedDeactivation"><![CDATA[Enable delayed deactivation]]></item>
+		<item name="cms.acp.page.publication.enableDelayedPublication"><![CDATA[Enable delayed publication]]></item>
+		<item name="cms.acp.page.publication.publicationDate"><![CDATA[Publication Date]]></item>
+		<item name="cms.acp.page.publication.publicationDate.error.notValid"><![CDATA[Publication date is invalid.]]></item>
+		<item name="cms.acp.page.revision"><![CDATA[Revision]]></item>
+		<item name="cms.acp.page.revision.action"><![CDATA[Action]]></item>
+		<item name="cms.acp.page.revision.action.content.create"><![CDATA[Added content]]></item>
+		<item name="cms.acp.page.revision.action.content.delete"><![CDATA[Deleted content]]></item>
+		<item name="cms.acp.page.revision.action.content.update"><![CDATA[Updated content]]></item>
+		<item name="cms.acp.page.revision.action.content.updatePosition"><![CDATA[Changed sorting of contents]]></item>
+		<item name="cms.acp.page.revision.action.create"><![CDATA[Created page]]></item>
+		<item name="cms.acp.page.revision.action.setAsHome"><![CDATA[Set as homepage]]></item>
+		<item name="cms.acp.page.revision.action.update"><![CDATA[Updated page]]></item>
+		<item name="cms.acp.page.revision.delete.confirmMessage"><![CDATA[Are you sure you want to delete this revision?]]></item>
+		<item name="cms.acp.page.revision.list"><![CDATA[Revisions]]></item>
+		<item name="cms.acp.page.revision.restore"><![CDATA[Restore]]></item>
+		<item name="cms.acp.page.revision.restore.sure"><![CDATA[Are you sure you want to restore this revision?]]></item>
+		<item name="cms.acp.page.revision.time"><![CDATA[Time]]></item>
+		<item name="cms.acp.page.setAsHome"><![CDATA[Set as startpage]]></item>
+		<item name="cms.acp.page.settings"><![CDATA[Settings]]></item>
+		<item name="cms.acp.page.settings.allowSubscribing"><![CDATA[Allow subscription of this page]]></item>
+		<item name="cms.acp.page.settings.allowSubscribing.description"><![CDATA[{if $action == 'edit' && $allowSubscribing}<strong>Warning:</strong> Changing this will delete all existing subscriptions.{/if}]]></item>
+		<item name="cms.acp.page.settings.availableDuringOfflineMode"><![CDATA[Page is visible during offline mode]]></item>
+		<item name="cms.acp.page.settings.isCommentable"><![CDATA[Allow comments]]></item>
+		<item name="cms.acp.page.settings.isCommentable.description"><![CDATA[]]></item>
+		<item name="cms.acp.page.settings.menuItemID"><![CDATA[Active Menu Item]]></item>
+		<item name="cms.acp.page.settings.menuItemID.description"><![CDATA[In case you don't select a menu item, the active menu item of parent pages will be inherited.]]></item>
+		<item name="cms.acp.page.styleID"><![CDATA[Style]]></item>
+		<item name="cms.acp.page.styleID.description"><![CDATA[Forces selected style upon page visit]]></item>
+		<item name="cms.acp.page.stylesheets"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.page.stylesheets.description"><![CDATA[List of stylesheets that are loaded when viewing this page.]]></item>
+		<item name="cms.acp.page.userPermissions"><![CDATA[Permissions]]></item>
+		<item name="cms.acp.page.visibility"><![CDATA[Visibility]]></item>
+		<item name="cms.acp.page.specific"><![CDATA[Type-specific data]]></item>
+		<item name="cms.acp.page.type"><![CDATA[Pagetype]]></item>
+		<item name="cms.acp.page.type.link.general"><![CDATA[Redirection]]></item>
+		<item name="cms.acp.page.type.page.comments"><![CDATA[Comments]]></item>
+		<item name="cms.acp.page.settings.url"><![CDATA[URL]]></item>
+		<item name="cms.acp.page.settings.delay"><![CDATA[Delay]]></item>
+		<item name="cms.acp.page.settings.delayedRedirect"><![CDATA[Delayed redirect]]></item>
+		<item name="cms.acp.page.settings.delayedRedirect.description"><![CDATA[Enable this option to inform your visitors that they will get redirected. Optionally you can provide a custom hint within the following field.]]></item>
+		<item name="cms.acp.page.settings.redirectMessage"><![CDATA[Hint (optional)]]></item>
+		<item name="cms.acp.page.type.de.codequake.cms.page.type.page"><![CDATA[Page]]></item>
+		<item name="cms.acp.page.type.de.codequake.cms.page.type.link"><![CDATA[External link]]></item>
 	</category>
 
-	<category name="fireball.acp.stats">
-		<item name="fireball.acp.stats"><![CDATA[Statistics]]></item>
-		<item name="fireball.acp.stats.browsers"><![CDATA[Browsers]]></item>
-		<item name="fireball.acp.stats.clicks"><![CDATA[Clicks]]></item>
-		<item name="fireball.acp.stats.devices"><![CDATA[Devices]]></item>
-		<item name="fireball.acp.stats.devices.desktop"><![CDATA[Desktop-PC]]></item>
-		<item name="fireball.acp.stats.devices.mobile"><![CDATA[Smartphone]]></item>
-		<item name="fireball.acp.stats.devices.tablet"><![CDATA[Tablet]]></item>
-		<item name="fireball.acp.stats.mostClicked"><![CDATA[Most visited pages]]></item>
-		<item name="fireball.acp.stats.page"><![CDATA[Page]]></item>
-		<item name="fireball.acp.stats.platforms"><![CDATA[Operating Systems]]></item>
-		<item name="fireball.acp.stats.userOnline"><![CDATA[Current activity <span class="badge">{#$objects|count}</span>]]></item>
-		<item name="fireball.acp.stats.vistors"><![CDATA[Current visitors]]></item>
+	<category name="cms.acp.stats">
+		<item name="cms.acp.stats"><![CDATA[Statistics]]></item>
+		<item name="cms.acp.stats.browsers"><![CDATA[Browsers]]></item>
+		<item name="cms.acp.stats.clicks"><![CDATA[Clicks]]></item>
+		<item name="cms.acp.stats.devices"><![CDATA[Devices]]></item>
+		<item name="cms.acp.stats.devices.desktop"><![CDATA[Desktop-PC]]></item>
+		<item name="cms.acp.stats.devices.mobile"><![CDATA[Smartphone]]></item>
+		<item name="cms.acp.stats.devices.tablet"><![CDATA[Tablet]]></item>
+		<item name="cms.acp.stats.mostClicked"><![CDATA[Most visited pages]]></item>
+		<item name="cms.acp.stats.page"><![CDATA[Page]]></item>
+		<item name="cms.acp.stats.platforms"><![CDATA[Operating Systems]]></item>
+		<item name="cms.acp.stats.userOnline"><![CDATA[Current activity <span class="badge">{#$objects|count}</span>]]></item>
+		<item name="cms.acp.stats.vistors"><![CDATA[Current visitors]]></item>
 	</category>
 
-	<category name="fireball.acp.stylesheet">
-		<item name="fireball.acp.stylesheet.add"><![CDATA[Add stylesheet]]></item>
-		<item name="fireball.acp.stylesheet.button.choose"><![CDATA[Choose Stylesheet]]></item>
-		<item name="fireball.acp.stylesheet.delete.sure"><![CDATA[Are you sure you want to delete this stylesheet?]]></item>
-		<item name="fireball.acp.stylesheet.edit"><![CDATA[Edit stylesheet]]></item>
-		<item name="fireball.acp.stylesheet.less"><![CDATA[Individual CSS and LESS]]></item>
-		<item name="fireball.acp.stylesheet.less.description"><![CDATA[Content may contain pure CSS. Furthermore you can use LESS including all Mixins provided by Community Framework.]]></item>
-		<item name="fireball.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
-		<item name="fireball.acp.stylesheet.list.description"><![CDATA[Stylesheets or Cascading Stylesheets are neccessary to individualize your pages - stylesheets can be added to pages. Recommended for beginners: <a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.w3schools.com/css/default.asp">CSS Tutorial by W3Schools</a>.]]></item>
+	<category name="cms.acp.stylesheet">
+		<item name="cms.acp.stylesheet.add"><![CDATA[Add stylesheet]]></item>
+		<item name="cms.acp.stylesheet.button.choose"><![CDATA[Choose Stylesheet]]></item>
+		<item name="cms.acp.stylesheet.delete.sure"><![CDATA[Are you sure you want to delete this stylesheet?]]></item>
+		<item name="cms.acp.stylesheet.edit"><![CDATA[Edit stylesheet]]></item>
+		<item name="cms.acp.stylesheet.less"><![CDATA[Individual CSS and LESS]]></item>
+		<item name="cms.acp.stylesheet.less.description"><![CDATA[Content may contain pure CSS. Furthermore you can use LESS including all Mixins provided by Community Framework.]]></item>
+		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
+		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets or Cascading Stylesheets are neccessary to individualize your pages - stylesheets can be added to pages. Recommended for beginners: <a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.w3schools.com/css/default.asp">CSS Tutorial by W3Schools</a>.]]></item>
 	</category>
 
-	<category name="fireball.content">
-		<item name="fireball.content.file.details"><![CDATA[({$file->size|filesize}, downloaded <strong>{$file->downloads}</strong> times)]]></item>
+	<category name="cms.content">
+		<item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, downloaded <strong>{$file->downloads}</strong> times)]]></item>
 	</category>
 
-	<category name="fireball.dashboard">
-		<item name="fireball.dashboard.all"><![CDATA[All]]></item>
-		<item name="fireball.dashboard.registered"><![CDATA[Registered]]></item>
-		<item name="fireball.dashboard.spiders"><![CDATA[Search Engines]]></item>
+	<category name="cms.dashboard">
+		<item name="cms.dashboard.all"><![CDATA[All]]></item>
+		<item name="cms.dashboard.registered"><![CDATA[Registered]]></item>
+		<item name="cms.dashboard.spiders"><![CDATA[Search Engines]]></item>
 	</category>
 
-	<category name="fireball.global">
-		<item name="fireball.global.page"><![CDATA[Page]]></item>
+	<category name="cms.global">
+		<item name="cms.global.page"><![CDATA[Page]]></item>
 	</category>
 
-	<category name="fireball.page">
-		<item name="fireball.page.clickCounter"><![CDATA[{#$clicks} time{if $clicks != 1}s{/if} read]]></item>
-		<item name="fireball.page.comment"><![CDATA[Comment]]></item>
-		<item name="fireball.page.comment.notification.mail"><![CDATA[{if !$author->userID}a guest{else}{@$author->username}{/if} commented on “{$page->getTitle()}“:
+	<category name="cms.page">
+		<item name="cms.page.clickCounter"><![CDATA[{#$clicks} time{if $clicks != 1}s{/if} read]]></item>
+		<item name="cms.page.comment"><![CDATA[Comment]]></item>
+		<item name="cms.page.comment.notification.mail"><![CDATA[{if !$author->userID}a guest{else}{@$author->username}{/if} commented on “{$page->getTitle()}“:
 {if $notificationType == 'instant'}
 ---------------------------------
 {@$comment->message}
 ---------------------------------
 {/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="fireball.page.comment.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} wrote comments on “{$page->getTitle()}“:
+		<item name="cms.page.comment.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} wrote comments on “{$page->getTitle()}“:
 {link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="fireball.page.comment.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} commented on “{$page->getTitle()}“.]]></item>
-		<item name="fireball.page.comment.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} commented on “{$page->getTitle()}“.]]></item>
-		<item name="fireball.page.comment.notification.title"><![CDATA[New comment (Page)]]></item>
-		<item name="fireball.page.comment.notification.title.stacked"><![CDATA[{#$timesTriggered} new comments (Page)]]></item>
-		<item name="fireball.page.commentResponse"><![CDATA[Reply to Page Comment]]></item>
-		<item name="fireball.page.commentResponse.notification.mail"><![CDATA[{if !$author->userID}a guest{else}{@$author->username}{/if} replied to your comment on “{$page->getTitle()}“:
+		<item name="cms.page.comment.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} commented on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.comment.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} commented on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.comment.notification.title"><![CDATA[New comment (Page)]]></item>
+		<item name="cms.page.comment.notification.title.stacked"><![CDATA[{#$timesTriggered} new comments (Page)]]></item>
+		<item name="cms.page.commentResponse"><![CDATA[Reply to Page Comment]]></item>
+		<item name="cms.page.commentResponse.notification.mail"><![CDATA[{if !$author->userID}a guest{else}{@$author->username}{/if} replied to your comment on “{$page->getTitle()}“:
 {if $notificationType == 'instant'}
 ---------------------------------
 {@$response->message}
 ---------------------------------
 {/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="fireball.page.commentResponse.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} replied to your comment on “{$page->getTitle()}“:
+		<item name="cms.page.commentResponse.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} replied to your comment on “{$page->getTitle()}“:
 {link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
-		<item name="fireball.page.commentResponse.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on “{$page->getTitle()}“.]]></item>
-		<item name="fireball.page.commentResponse.notification.message.stacked"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on “{$page->getTitle()}“.]]></item>
-		<item name="fireball.page.commentResponse.notification.title"><![CDATA[New response (Page)]]></item>
-		<item name="fireball.page.commentResponse.notification.title.stacked"><![CDATA[{#$timesTriggered} new responses (Page)]]></item>
-		<item name="fireball.page.comments"><![CDATA[Comments]]></item>
-		<item name="fireball.page.comments.noComments"><![CDATA[No Entries.]]></item>
-		<item name="fireball.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>codeQuake</strong></a></address>]]></item>
-		<item name="fireball.page.delayedPublication"><![CDATA[This page will be published on {@$page->publicationDate|plainTime}.]]></item>
-		<item name="fireball.page.parents"><![CDATA[{implode from=$page->getParentPages() item=parentPage glue=' » '}{$parentPage->getTitle()}{/implode}{if $includeSelf|isset && $includeSelf}{if $page->getParentPages()} » {/if}{$page->getTitle()}{/if}]]></item>
+		<item name="cms.page.commentResponse.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.commentResponse.notification.message.stacked"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on “{$page->getTitle()}“.]]></item>
+		<item name="cms.page.commentResponse.notification.title"><![CDATA[New response (Page)]]></item>
+		<item name="cms.page.commentResponse.notification.title.stacked"><![CDATA[{#$timesTriggered} new responses (Page)]]></item>
+		<item name="cms.page.comments"><![CDATA[Comments]]></item>
+		<item name="cms.page.comments.noComments"><![CDATA[No Entries.]]></item>
+		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>codeQuake</strong></a></address>]]></item>
+		<item name="cms.page.delayedPublication"><![CDATA[This page will be published on {@$page->publicationDate|plainTime}.]]></item>
+		<item name="cms.page.parents"><![CDATA[{implode from=$page->getParentPages() item=parentPage glue=' » '}{$parentPage->getTitle()}{/implode}{if $includeSelf|isset && $includeSelf}{if $page->getParentPages()} » {/if}{$page->getTitle()}{/if}]]></item>
 	</category>
 
-	<category name="fireball.user">
-		<item name="fireball.user.usersOnline.location.page"><![CDATA[Views the page <a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
+	<category name="cms.user">
+		<item name="cms.user.usersOnline.location.page"><![CDATA[Views the page <a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
 	</category>
 
 	<category name="wcf.acl.option">
