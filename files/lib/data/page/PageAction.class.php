@@ -4,20 +4,21 @@ namespace cms\data\page;
 use cms\data\content\ContentAction;
 use cms\data\content\ContentEditor;
 use cms\data\content\ContentList;
-use cms\data\page\PageCache;
-use cms\data\page\PageEditor;
-use cms\data\page\PageNodeTree;
 use cms\data\stylesheet\StylesheetList;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
 use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\util\PageUtil;
+use wcf\data\menu\item\MenuItem;
+use wcf\data\menu\item\MenuItemAction;
+use wcf\data\menu\item\MenuItemEditor;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
 use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\data\page\menu\item\ViewablePageMenuItem;
 use wcf\data\page\PageAction as WCFPageAction;
+use wcf\data\page\PageEditor as WCFPageEditor;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
@@ -169,7 +170,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		$wcfPageData = array(
 			'data' => array(
-				'name' => (!empty($this->parameters['data']['authorName']) ? $this->parameters['data']['authorName'] : ''),
+				'name' => (!empty($this->parameters['data']['title']) ? $this->parameters['data']['title'] : ''),
 				'identifier' => 'de.codequake.cms.Page',
 				'pageType' => 'system',
 				'isDisabled' => (isset($this->parameters['data']['isDisabled']) && $this->parameters['data']['isDisabled']),
@@ -297,37 +298,33 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	public function delete() {
 		$returnValues = parent::delete();
 
-		$menuItemIDs = $pageIDs = array();
+		$wcfPageIDs = $menuItemIDs = $pageIDs = array();
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
-			if ($pageEditor->menuItemID) $menuItemIDs[] = $pageEditor->menuItemID;
+
+			if ($pageEditor->wcfPageID !== null) {
+				$wcfPageIDs[] = $pageEditor->wcfPageID;
+			}
+
+
+			if ($pageEditor->menuItemID !== null) {
+				$menuItemIDs[] = $pageEditor->menuItemID;
+			}
+		}
+
+		if (!empty($wcfPageIDs)) {
+			$wcfPageAction = new WCFPageAction(array($wcfPageIDs), 'delete');
+			$wcfPageAction->executeAction();
+		}
+
+		if (!empty($menuItemIDs)) {
+			$menuItemAction = new MenuItemAction(array($menuItemIDs), 'delete');
+			$menuItemAction->executeAction();
 		}
 
 		// update search index
 		if (!empty($pageIDs)) {
 			SearchIndexManager::getInstance()->delete('de.codequake.cms.page', $pageIDs);
-		}
-
-		// delete related menu items
-		if (!empty($menuItemIDs)) {
-			$menuItemList = new PageMenuItemList();
-			$menuItemList->setObjectIDs($menuItemIDs);
-			$menuItemList->readObjects();
-
-			$deleteMenuItemIDs = array();
-			foreach ($menuItemList as $menuItem) {
-				if ($menuItem->getProcessor() instanceof CMSPageMenuItemProvider) {
-					$page = $menuItem->getProcessor()->getPage();
-					if (in_array($page->pageID, $pageIDs)) {
-						$deleteMenuItemIDs[] = $menuItem->menuItemID;
-					}
-				}
-			}
-
-			if (!empty($deleteMenuItemIDs)) {
-				$pageMenuItemAction = new PageMenuItemAction($deleteMenuItemIDs, 'delete');
-				$pageMenuItemAction->executeAction();
-			}
 		}
 
 		return $returnValues;
@@ -350,6 +347,15 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		foreach ($this->objects as $pageEditor) {
 			$pageEditor->update(array('isDisabled' => 1));
+
+			$wcfPageEditor = new WCFPageEditor($pageEditor->getWCFPage());
+			$wcfPageEditor->update(array('isDisabled' => 1));
+
+			$menuItem = $pageEditor->getMenuItem();
+			if ($menuItem !== null) {
+				$menuItemEditor = new MenuItemEditor($pageEditor->getMenuItem());
+				$menuItemEditor->update(array('isDisabled' => 1));
+			}
 		}
 	}
 
@@ -370,6 +376,15 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		foreach ($this->objects as $pageEditor) {
 			$pageEditor->update(array('isDisabled' => 0));
+
+			$wcfPageEditor = new WCFPageEditor($pageEditor->getWCFPage());
+			$wcfPageEditor->update(array('isDisabled' => 0));
+
+			$menuItem = $pageEditor->getMenuItem();
+			if ($menuItem !== null) {
+				$menuItemEditor = new MenuItemEditor($pageEditor->getMenuItem());
+				$menuItemEditor->update(array('isDisabled' => 0));
+			}
 		}
 	}
 	
@@ -879,6 +894,19 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 			if (!$pageEditor->isPublished) {
 				$publishedPageIDs[] = $pageEditor->pageID;
+			}
+
+			if ($pageEditor->menuItemID !== null && !empty($this->parameters['data']['title'])) {
+				$menuItemEditor = new MenuItemEditor($pageEditor->getMenuItem());
+				$menuItemEditor->update(array('title' => $this->parameters['data']['title']));
+			}
+
+			if ($pageEditor->wcfPageID !== null && !empty($this->parameters['data']['title'])) {
+				$wcfPageEditor = new WCFPageEditor($pageEditor->getWCFPage());
+				$wcfPageEditor->update(array(
+					'name' => $this->parameters['data']['title'],
+					'lastUpdateTime' => TIME_NOW
+				));
 			}
 		}
 

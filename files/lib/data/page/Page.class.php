@@ -5,10 +5,12 @@ use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\revision\PageRevisionList;
 use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
+use wcf\data\menu\item\MenuItem;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
+use wcf\data\page\PageCache as WCFPageCache;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\request\IRouteController;
@@ -356,5 +358,19 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	public function getTypeName() {
 		$this->objectType = $this->getObjectType();
 		return $this->objectType->objectType;
+	}
+
+	public function getMenuItem() {
+		if ($this->menuItemID === null)
+			return null;
+
+		return new MenuItem($this->menuItemID);
+	}
+
+	public function getWCFPage() {
+		if ($this->wcfPageID === null)
+			return null;
+
+		return WCFPageCache::getInstance()->getPage($this->wcfPageID);
 	}
 }
