@@ -307,7 +307,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				$wcfPageIDs[] = $pageEditor->wcfPageID;
 			}
 
-
 			if ($pageEditor->menuItemID !== null) {
 				$menuItemIDs[] = $pageEditor->menuItemID;
 			}
