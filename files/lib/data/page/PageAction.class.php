@@ -178,6 +178,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
 				'applicationPackageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
 				'controller' => 'cms\\page\\PagePage',
+				'handler' => 'cms\\system\\page\\handler\\PagePageHandler',
 				'requireObjectID' => 1,
 				'lastUpdateTime' => $this->parameters['data']['creationTime']
 			)
