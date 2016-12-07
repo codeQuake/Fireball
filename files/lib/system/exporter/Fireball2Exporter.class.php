@@ -209,6 +209,14 @@ class Fireball2Exporter extends AbstractExporter {
 		$statement->execute();
 		
 		while ($row = $statement->fetchArray()) {
+			$contentType = $this->getObjectType($row['contentTypeID']);
+			if ($contentType === null)
+				continue;
+			$contentTypeID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', $contentType['objectType']);
+			if (!$contentTypeID)
+				continue;
+
+			$row['contentTypeID'] = $contentTypeID;
 			ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import($row['contentID'], $row);
 		}
 	}
@@ -532,6 +540,28 @@ class Fireball2Exporter extends AbstractExporter {
 		
 		if ($row !== false)
 			return $row['objectTypeID'];
+		return null;
+	}
+
+	/**
+	 * Returns the object type with the given id.
+	 *
+	 * @param	string		$objectTypeID
+	 * @return	array
+	 */
+	protected function getObjectType($objectTypeID) {
+		$sql = "SELECT	*
+			FROM	wcf".$this->dbNo."_object_type object_type,
+					wcf".$this->dbNo."_object_type_definition definition
+			WHERE	object_type.objectTypeID = ?
+				AND object_type.definitionID = definition.definitonID";
+		$statement = $this->database->prepareStatement($sql, 1);
+		$statement->execute(array($objectTypeID));
+		$row = $statement->fetchArray();
+
+		if ($row !== false)
+			return $row;
+
 		return null;
 	}
 }
