@@ -1,6 +1,6 @@
 {foreach from=$contentTypes key=category item=types}
-	<fieldset>
-		<legend>{lang}fireball.acp.content.type.{$category}{/lang}</legend>
+<section class="section">
+		<h2 class="sectionTitle">{lang}fireball.acp.content.type.{$category}{/lang}</h2>
 
 		<ul class="containerBoxList tripleColumned">
 			{foreach from=$types item=type}
@@ -9,5 +9,5 @@
 				</li>
 			{/foreach}
 		</ul>
-	</fieldset>
+	</section>
 {/foreach}

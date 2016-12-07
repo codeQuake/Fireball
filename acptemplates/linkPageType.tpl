@@ -1,5 +1,5 @@
-<fieldset>
-	<legend>{lang}cms.acp.page.type.link.general{/lang}</legend>
+<section class="section">
+	<h2 class="sectionTitle">{lang}cms.acp.page.type.link.general{/lang}</h2>
 	
 	<dl id="url"{if $errorField == 'url'} class="formError"{/if}>
 		<dt><label for="url">{lang}cms.acp.page.settings.url{/lang}</label></dt>
@@ -56,7 +56,7 @@
 			{/if}
 		</dd>
 	</dl>
-</fieldset>
+</section>
 
 <script data-relocate="true">
 	//<![CDATA[

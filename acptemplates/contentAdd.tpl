@@ -52,8 +52,8 @@
 
 <form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}{/link}{/if}">
 	<div class="container containerPadding marginTop">
-		<fieldset>
-			<legend>{lang}wcf.global.form.data{/lang}</legend>
+		<section class="section">
+			<h2 class="sectionTitle">{lang}wcf.global.form.data{/lang}</h2>
 
 			<dl{if $errorField == 'title'} class="formError"{/if}>
 				<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
@@ -74,10 +74,10 @@
 			</dl>
 
 			{event name='dataFields'}
-		</fieldset>
+		</section>
 
-		<fieldset>
-			<legend>{lang}fireball.acp.content.position{/lang}</legend>
+		<section class="section">
+			<h2 class="sectionTitle">{lang}fireball.acp.content.position{/lang}</h2>
 
 			<dl>
 				<dt><label for="pageID">{lang}fireball.global.page{/lang}</label></dt>
@@ -114,16 +114,16 @@
 			</dl>
 
 			{event name='positionFields'}
-		</fieldset>
+		</section>
 
-		<fieldset>
-			<legend>{lang}fireball.acp.content.type.{$objectType->objectType}{/lang}</legend>
+		<section class="section">
+			<h2 class="sectionTitle">{lang}fireball.acp.content.type.{$objectType->objectType}{/lang}</h2>
 
 			{include file=$objectType->getProcessor()->getFormTemplate() application='cms'}
-		</fieldset>
+		</section>
 
-		<fieldset>
-			<legend>{lang}fireball.acp.content.css{/lang}</legend>
+		<section class="section">
+			<h2 class="sectionTitle">{lang}fireball.acp.content.css{/lang}</h2>
 
 			<dl{if $errorField == 'cssClasses'} class="formError"{/if}>
 				<dt><label for="cssClasses">{lang}fireball.acp.content.css.cssClasses{/lang}</label></dt>
@@ -139,7 +139,7 @@
 			</dl>
 
 			{event name='cssFields'}
-		</fieldset>
+		</section>
 
 		{event name='fieldsets'}
 	</div>
