@@ -15,6 +15,16 @@ use wcf\util\StringUtil;
  */
 class LinkPageType extends AbstractPageType {
 	/**
+	 * @inheritdoc
+	 */
+	public $frontendController = LinkPage::class;
+
+	/**
+	 * @inheritdoc
+	 */
+	public $canHaveContent = false;
+
+	/**
 	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
 	 */
 	public $assignValues = array (

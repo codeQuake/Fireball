@@ -15,6 +15,18 @@ use wcf\system\WCF;
  */
 abstract class AbstractPageType implements IPageType {
 	/**
+	 * controller of the frontend page
+	 * @var Class
+	 */
+	public $frontendController;
+
+	/**
+	 * this type of page can contain contents
+	 * @var boolean
+	 */
+	public $canHaveContent = true;
+
+	/**
 	 * template name
 	 * @var	string
 	 */
