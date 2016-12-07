@@ -33,12 +33,12 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.cms.content.canAddContent');
+	protected $permissionsDelete = array('admin.fireball.content.canAddContent');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.cms.content.canAddContent');
+	protected $permissionsUpdate = array('admin.fireball.content.canAddContent');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
@@ -145,6 +145,114 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 			$contentEditor->update(array('isDisabled' => 0));
 		}
 	}
+	
+	/**
+	 * Validates parameters to create a content in frontend
+	 */
+	 public function validateFrontendCreate() {
+		//check permission
+		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) throw new AJAXException();
+		//TODO I18n & other error handling
+		if (!isset($this->parameters['data']['parentID'])) $this->parameters['data']['parentID'] = null;
+	 }
+
+	/**
+	 * performs frontend create
+	 */
+	public function frontendCreate() {
+		$data = $this->parameters['data'];
+		//check foreigns
+		if ($data['parentID'] == 0) $data['parentID'] = null;
+
+		//content type
+		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $data['objectType']);
+		if ($objectType === null || !$objectType->getProcessor()->isAvailableToAdd()) {
+			throw new UserInputException('objectType');
+		}
+		$data['contentTypeID'] = $objectType->objectTypeID;
+
+		//unset unused
+		unset($data['t']);
+		unset($data['objectType']);
+
+		//unset bullshit
+		unset($data['undefined']);
+
+		//set params
+		$this->parameters['data'] = $data;
+
+		//finally create new page
+		$content = $this->create();
+		return array(
+			'content' => $content,
+			'output' => $content->getOutput(),
+			'parentID' => $content->parentID ?: 0
+			);
+	}
+
+	/**
+	 * Validates parameters to get the content add  dialog.
+	 */
+	public function validateGetAddDialog() {
+		//check permission
+		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) throw new AJAXException();
+		
+		//validate position
+		if (!isset($this->parameters['position']) || !in_array($this->parameters['position'], array('body', 'sidebar'))) throw new UserInputException('position');
+		
+		//validate parent
+		if (isset($this->parameters['parentID']) && $this->parameters['parentID'] != 0) {
+			$content = ContentCache::getInstance()->getContent($this->parameters['parentID']);
+			if($content === null || $content->contentID == 0) throw new UserInputException('parentID');
+		}
+		
+		//TODO validate content type & content
+	}
+
+	/**
+	 * Returns the content add dialog.
+	 */
+	public function getAddDialog() {
+		$page = PageCache::getInstance()->getPage($this->parameters['pageID']);
+		if (isset($this->parameters['contentID'])) {
+			//TODO
+		}
+		
+		//get initial data (TODO: EDIT)
+		$action = 'add';
+		$contentData = array();
+		$cssClasses = '';
+		$pageID = $page->pageID;
+		if (isset($this->parameters['parentID']) && $this->parameters['parentID'] != 0) {
+			$parent = ContentCache::getInstance()->getContent($this->parameters['parentID']);
+			$parentID = $parent->contentID;
+		}
+		else $parentID = 0;
+		$position = $this->parameters['position'];
+		$showOrder = 0;
+		$title = '';
+		
+		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $this->parameters['type']);
+		if ($objectType === null || !$objectType->getProcessor()->isAvailableToAdd()) {
+			throw new UserInputException('objectType');
+		}
+		
+		WCF::getTPL()->assign(array(
+			'action' => $action,
+			'contentData' => $contentData,
+			'cssClasses' => $cssClasses,
+			'pageID' => $pageID,
+			'parentID' => $parentID,
+			'position' => $position,
+			'showOrder' => $showOrder,
+			'title' => $title,
+			'objectType' => $objectType
+		));
+
+		return array(
+			'template' => WCF::getTPL()->fetch('contentAddDialog', 'cms')
+		);
+	}
 
 	/**
 	 * @see	\wcf\data\IToggleAction::validateToggle()
@@ -195,7 +303,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	 */
 	public function validateUpdatePosition() {
 		WCF::getSession()->checkPermissions(array(
-			'admin.cms.content.canAddContent'
+			'admin.fireball.content.canAddContent'
 		));
 
 		if (!isset($this->parameters['data']['structure']) || !is_array($this->parameters['data']['structure'])) {

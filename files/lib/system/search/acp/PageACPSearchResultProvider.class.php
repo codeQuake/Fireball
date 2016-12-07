@@ -21,7 +21,7 @@ class PageACPSearchResultProvider implements IACPSearchResultProvider {
 	 */
 	public function search($query) {
 		// check permissions
-		if (!WCF::getSession()->getPermission('admin.cms.page.canAddPage')) {
+		if (!WCF::getSession()->getPermission('admin.fireball.page.canAddPage')) {
 			return array();
 		}
 
