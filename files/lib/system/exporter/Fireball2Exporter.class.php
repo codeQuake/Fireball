@@ -212,7 +212,7 @@ class Fireball2Exporter extends AbstractExporter {
 			$contentType = $this->getObjectType($row['contentTypeID']);
 			if ($contentType === null)
 				continue;
-			$contentTypeID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', $contentType['objectType']);
+			$contentTypeID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', $contentType['objectType'])->objectTypeID;
 			if (!$contentTypeID)
 				continue;
 
