@@ -246,7 +246,7 @@ class Fireball2Exporter extends AbstractExporter {
 		$objectTypeID = $this->getObjectTypeID('com.woltlab.wcf.category', 'de.codequake.cms.file');
 		
 		$sql = "SELECT	COUNT(*) AS count
-			FROM	wcf'.$this->dbNo.'_category
+			FROM	wcf".$this->dbNo."_category
 			WHERE	objectTypeID = ?";
 		$statement = $this->database->prepareStatement($sql);
 		$statement->execute(array($objectTypeID));
@@ -262,7 +262,7 @@ class Fireball2Exporter extends AbstractExporter {
 		$objectTypeID = $this->getObjectTypeID('com.woltlab.wcf.category', 'de.codequake.cms.file');
 		
 		$sql = "SELECT	*
-			FROM	wcf'.$this->dbNo.'_category
+			FROM	wcf".$this->dbNo."_category
 			WHERE	objectTypeID = ?
 			ORDER BY parentCategoryID, showOrder, categoryID";
 		$statement = $this->database->prepareStatement($sql, $limit, $offset);
