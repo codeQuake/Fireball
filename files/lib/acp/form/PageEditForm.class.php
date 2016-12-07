@@ -49,6 +49,11 @@ class PageEditForm extends PageAddForm {
 	public $page = null;
 
 	/**
+	 * @inheritdoc
+	 */
+	public $createMenuItem = 0;
+
+	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
