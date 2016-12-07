@@ -21,6 +21,12 @@ abstract class AbstractPageType implements IPageType {
 	public $frontendController;
 
 	/**
+	 * this type of page can contain contents
+	 * @var boolean
+	 */
+	public $canHaveContent = true;
+
+	/**
 	 * template name
 	 * @var	string
 	 */

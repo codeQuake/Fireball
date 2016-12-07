@@ -19,6 +19,11 @@ class LinkPageType extends AbstractPageType {
 	public $frontendController = LinkPage::class;
 
 	/**
+	 * @inheritdoc
+	 */
+	public $canHaveContent = false;
+
+	/**
 	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
 	 */
 	public $assignValues = array (
