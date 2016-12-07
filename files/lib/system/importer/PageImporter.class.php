@@ -25,6 +25,7 @@ class PageImporter extends AbstractImporter {
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
 		unset($data['pageID']);
+		unset($data['menuItemID']);
 
 		if (!empty($data['authorID']))
 			$data['authorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['authorID']) ?: null;
