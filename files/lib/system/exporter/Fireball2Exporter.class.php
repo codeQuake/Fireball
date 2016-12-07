@@ -62,7 +62,7 @@ class Fireball2Exporter extends AbstractExporter {
 	public function init() {
 		parent::init();
 		
-		if (preg_match('/^wsip(\d+)_$/', $this->databasePrefix, $match))
+		if (preg_match('/^cms(\d+)_$/', $this->databasePrefix, $match))
 			$this->dbNo = $match[1];
 	}
 	
@@ -152,7 +152,7 @@ class Fireball2Exporter extends AbstractExporter {
 	 * @see	\wcf\system\exporter\IExporter::getDefaultDatabasePrefix()
 	 */
 	public function getDefaultDatabasePrefix() {
-		return 'wcf1_';
+		return 'cms1_';
 	}
 	
 	/**
