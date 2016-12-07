@@ -508,7 +508,7 @@ class PageAddForm extends AbstractForm {
 				'identifier' => 'de.codequake.cms.Page' . $returnValues['returnValues']->pageID,
 				'title' => (!empty($updateData['title'])) ? $updateData['title'] : $this->title,
 				'pageID' => WCFPageCache::getInstance()->getPageByIdentifier('de.codequake.cms.Page')->pageID,
-				'originIsSystem' => 1,
+				'originIsSystem' => 0,
 				'pageObjectID' => $returnValues['returnValues']->pageID,
 				'isDisabled' => $this->invisible,
 				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID
