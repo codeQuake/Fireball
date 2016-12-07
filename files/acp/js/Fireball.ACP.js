@@ -1378,7 +1378,8 @@ Fireball.ACP.Page.TypePicker = Class.extend({
 			return;
 
 		this._objectTypeID = objectTypeID;
-		this._pageID = pageID;
+		if (pageID != undefined)
+			this._pageID = pageID;
 
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)
