@@ -73,7 +73,7 @@
 <form method="post" action="{if $action == 'add'}{link application='cms' controller='PageAdd'}{/link}{else}{link application='cms' controller='PageEdit' id=$pageID}{/link}{/if}">
 	<div class="container containerPadding marginTop">
 		<dl{if $errorField == 'pageObjectTypeID'} class="formError"{/if}>
-			<dt><label for="pageObjectTypeID">{lang}cms.page.type{/lang}</label></dt>
+			<dt><label for="pageObjectTypeID">{lang}cms.acp.page.type{/lang}</label></dt>
 			<dd>
 				<select id="pageObjectTypeID" name="pageObjectTypeID" required="required">
 					{foreach from=$availablePageTypes item=pageType}
