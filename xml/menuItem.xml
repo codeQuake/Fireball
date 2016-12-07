@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/menuItem.xsd">
+	<import>
+		<item identifier="de.codequake.cms.Sitemap">
+			<menu>com.woltlab.wcf.FooterMenu</menu>
+			<page>de.codequake.cms.Sitemap</page>
+			<title language="de">Seitenübersicht</title>
+			<title language="en">Sitemap</title>
+		</item>
+	</import>
+</data>

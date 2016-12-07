@@ -48,6 +48,7 @@
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 		<instruction type="page">xml/page.xml</instruction>
+		<instruction type="page">xml/menuItem.xml</instruction>
 
 		<!-- scripts -->
 		<instruction type="script" installupdateserver="1">acp/install_de.codequake.cms.php</instruction>
@@ -78,5 +79,6 @@
 		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 		<instruction type="page">xml/page.xml</instruction>
+		<instruction type="page">xml/menuItem.xml</instruction>
 	</instructions>
 </package>
