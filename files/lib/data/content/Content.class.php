@@ -57,7 +57,7 @@ class Content extends DatabaseObject implements IRouteController, IPollObject {
 	 * @return	boolean
 	 */
 	public function canRead() {
-		if ($this->isDisabled && !WCF::getSession()->getPermission('mod.cms.canViewDisabledContent')) {
+		if ($this->isDisabled && !WCF::getSession()->getPermission('mod.fireball.canViewDisabledContent')) {
 			// user can't read disabled contents
 			return false;
 		}
@@ -189,7 +189,7 @@ class Content extends DatabaseObject implements IRouteController, IPollObject {
 	}
 
 	public function canVote() {
-		return (WCF::getSession()->getPermission('user.cms.content.canVotePoll') ? true : false);
+		return (WCF::getSession()->getPermission('user.fireball.content.canVotePoll') ? true : false);
 	}
 
 	/**
