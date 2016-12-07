@@ -34,7 +34,7 @@
 
 <form method="post" action="{if $action == 'add'}{link controller='StylesheetAdd' application='cms'}{/link}{else}{link controller='StylesheetEdit' id=$stylesheetID application='cms'}{/link}{/if}">
 	<div class="container containerPadding marginTop">
-		<fieldset>
+		<section class="section">
 			<legend>{lang}wcf.global.form.data{/lang}</legend>
 
 			<dl>
@@ -54,9 +54,9 @@
 			</dl>
 
 			{event name='dataFields'}
-		</fieldset>
+		</section>
 
-		<fieldset class="marginTop">
+		<section class="section marginTop">
 			<legend>{lang}fireball.acp.stylesheet.less{/lang}</legend>
 
 			<dl class="wide">
@@ -79,7 +79,7 @@
 			</dl>
 
 			{event name='lessFields'}
-		</fieldset>
+		</section>
 
 		{event name='fieldsets'}
 	</div>
