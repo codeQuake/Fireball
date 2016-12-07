@@ -180,10 +180,10 @@ class Fireball2Exporter extends AbstractExporter {
 		$statement->execute();
 		
 		while ($row = $statement->fetchArray()) {
-			$objectType = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page');
-			if ($objectType === null)
+			$objectTypeID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page');
+			if (!$objectTypeID)
 				continue;
-			$row['objectTypeID'] = $objectType->objectTypeID;
+			$row['objectTypeID'] = $objectTypeID;
 
 			ImportHandler::getInstance()->getImporter('de.codequake.cms.page')->import($row['pageID'], $row);
 		}
@@ -216,11 +216,11 @@ class Fireball2Exporter extends AbstractExporter {
 			$contentType = $this->getObjectType($row['contentTypeID']);
 			if ($contentType === null)
 				continue;
-			$contentType = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', $contentType['objectType']);
-			if ($contentType === null)
+			$contentTypeID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', $contentType['objectType']);
+			if (!$contentTypeID)
 				continue;
 
-			$row['contentTypeID'] = $contentType->objectTypeID;
+			$row['contentTypeID'] = $contentTypeID;
 			ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import($row['contentID'], $row);
 		}
 	}
