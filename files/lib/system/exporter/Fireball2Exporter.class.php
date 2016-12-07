@@ -3,6 +3,7 @@
 namespace cms\system\exporter;
 use wcf\data\category\Category;
 use wcf\data\category\CategoryEditor;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\database\DatabaseException;
 use wcf\system\exporter\AbstractExporter;
 use wcf\system\importer\ImportHandler;
@@ -179,6 +180,7 @@ class Fireball2Exporter extends AbstractExporter {
 		$statement->execute();
 		
 		while ($row = $statement->fetchArray()) {
+			$row['objectTypeID'] = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page');
 			ImportHandler::getInstance()->getImporter('de.codequake.cms.page')->import($row['pageID'], $row);
 		}
 	}
