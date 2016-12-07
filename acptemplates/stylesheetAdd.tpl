@@ -25,7 +25,7 @@
 					</div>
 				</li>
 			{/if}
-			<li><a href="{link application='cms' controller='StylesheetList'}{/link}" title="{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}</span></a></li>
+			<li><a href="{link application='cms' controller='StylesheetList'}{/link}" title="{lang}cms.acp.menu.link.fireball.stylesheet.list{/lang}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}cms.acp.menu.link.cms.stylesheet.list{/lang}</span></a></li>
 
 			{event name='contentNavigationButtons'}
 		</ul>
