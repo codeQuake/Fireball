@@ -2,7 +2,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><button type="button" class="jsAddColumn">{lang}fireball.acp.content.type.de.codequake.cms.content.type.columns.column.add{/lang}</button></li>
+			<li><button type="button" class="jsAddColumn">{lang}cms.acp.content.type.de.codequake.cms.content.type.columns.column.add{/lang}</button></li>
 		</ul>
 	</nav>
 </div>

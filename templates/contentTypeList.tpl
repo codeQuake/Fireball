@@ -10,13 +10,13 @@
 	<ul>
 		{foreach from=$contentTypes key=category item=types}
 		<li data-category="{$category}">
-			<p>{lang}fireball.acp.content.type.{$category}{/lang}</p>
+			<p>{lang}cms.acp.content.type.{$category}{/lang}</p>
 			<ul id="menu_{$category}" class="sideSubMenu">
 				{foreach from=$types item=type}
 				<li id="{$type->objectType}" class="draggable">
 					<p>
 						<span class="icon icon24 {$type->getProcessor()->getIcon()}"></span>
-						{lang}fireball.acp.content.type.{$type->objectType}{/lang}
+						{lang}cms.acp.content.type.{$type->objectType}{/lang}
 					</p>
 				</li>
 				{/foreach}

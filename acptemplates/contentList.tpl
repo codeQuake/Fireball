@@ -32,18 +32,18 @@
 		});
 
 		WCF.Language.addObject({
-			'cms.acp.content.add': '{lang}fireball.acp.content.add{/lang}',
+			'cms.acp.content.add': '{lang}cms.acp.content.add{/lang}',
 			{foreach from=$objectTypeList item=type}
-				'cms.acp.content.type.{$type->objectType}': '{lang}fireball.acp.content.type.{$type->objectType}{/lang}',
+				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
 			{/foreach}
-			'cms.acp.content.type.content': '{lang}fireball.acp.content.type.content{/lang}'
+			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}'
 		});
 	});
 	//]]>
 </script>
 
 <header class="boxHeadline">
-	<h1>{lang}fireball.acp.content.list{/lang}</h1>
+	<h1>{lang}cms.acp.content.list{/lang}</h1>
 	<p>{lang includeSelf=true}cms.page.parents{/lang}</p>
 </header>
 
@@ -51,7 +51,7 @@
 	<nav>
 		<ul>
 			<li class="dropdown">
-				<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}fireball.acp.page.button.choose{/lang}</span></a>
+				<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}cms.acp.page.button.choose{/lang}</span></a>
 				<div class="dropdownMenu">
 					<ul class="scrollableDropdownMenu">
 						{foreach from=$pageList item=node}
@@ -70,8 +70,8 @@
 	<div class="jsClipboardContainer tabMenuContainer" data-type="de.codequake.cms.content">
 		<nav class="tabMenu">
 			<ul>
-				<li><a href="{@$__wcf->getAnchor('body')}">{lang}fireball.acp.content.position.position.body{/lang}</a></li>
-				<li><a href="{@$__wcf->getAnchor('sidebar')}">{lang}fireball.acp.content.position.position.sidebar{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('body')}">{lang}cms.acp.content.position.position.body{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('sidebar')}">{lang}cms.acp.content.position.position.sidebar{/lang}</a></li>
 
 				{event name='tabMenuTabs'}
 			</ul>
@@ -90,14 +90,14 @@
 										<span class="title">
 											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
 											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
-											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=body{/link}">{@$content->getTitle()}</a> - <small>{lang}fireball.acp.content.type.{$content->getTypeName()}{/lang}</small>
+											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=body{/link}">{@$content->getTitle()}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
 										</span>
 										<span class="statusDisplay buttons">
 											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
-											<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}fireball.acp.content.delete.sure{/lang}"></span>
+											<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
 											<span class="icon icon16 fa-check{if $content->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$content->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$content->contentID}"></span>
-											<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}fireball.acp.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="body" data-parent-id="{$content->contentID}"></span>
-											<span class="icon icon16 fa-copy jsCopyButton jsTooltip pointer" title="{lang}fireball.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
+											<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="body" data-parent-id="{$content->contentID}"></span>
+											<span class="icon icon16 fa-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
 
 											{event name='itemButtons'}
 										</span>
@@ -120,12 +120,12 @@
 
 				<div class="formSubmit">
 						<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
-						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="body"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.content.add{/lang}</span></button>
+						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="body"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
 				</div>
 			{hascontentelse}
 				<p class="info">{lang}wcf.global.noItems{/lang}</p>
 				<div class="formSubmit">
-						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="body"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.content.add{/lang}</span></button>
+						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="body"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
 				</div>
 			{/hascontent}
 		</div>
@@ -143,13 +143,13 @@
 										<span class="title">
 											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
 											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
-											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=sidebar{/link}">{@$content->getTitle()}</a> - <small>{lang}fireball.acp.content.type.{$content->getTypeName()}{/lang}</small>
+											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=sidebar{/link}">{@$content->getTitle()}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
 										</span>
 										<span class="statusDisplay buttons">
 											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
-											<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}fireball.acp.content.delete.sure{/lang}"></span>
-											<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}fireball.acp.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="sidebar" data-parent-id="{$content->contentID}"></span>
-											<span class="icon icon16 fa-copy jsCopyButton jsTooltip pointer" title="{lang}fireball.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
+											<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
+											<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="sidebar" data-parent-id="{$content->contentID}"></span>
+											<span class="icon icon16 fa-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
 
 											{event name='itemButtons'}
 										</span>
@@ -166,12 +166,12 @@
 				</section>
 				<div class="formSubmit">
 						<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
-						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="sidebar"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.content.add{/lang}</span></button>
+						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="sidebar"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
 				</div>
 			{hascontentelse}
 				<p class="info">{lang}wcf.global.noItems{/lang}</p>
 				<div class="formSubmit">
-					<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="sidebar"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.content.add{/lang}</span></button>
+					<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="sidebar"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
 				</div>
 			{/hascontent}
 		</div>

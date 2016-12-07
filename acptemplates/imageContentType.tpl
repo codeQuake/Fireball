@@ -1,15 +1,15 @@
 <dl class="image">
-	<dt><label for="image">{lang}fireball.acp.content.type.de.codequake.cms.content.type.image{/lang}</label></dt>
+	<dt><label for="image">{lang}cms.acp.content.type.de.codequake.cms.content.type.image{/lang}</label></dt>
 	<dd>
 		<div id="filePicker">
 			<ul class="formAttachmentList clearfix"></ul>
-			<span class="button small">{lang}fireball.acp.file.picker{/lang}</span>
+			<span class="button small">{lang}cms.acp.file.picker{/lang}</span>
 		</div>
 	</dd>
 </dl>
 
 <dl>
-	<dt><label for="text">{lang}fireball.acp.content.type.de.codequake.cms.content.type.image.text{/lang}</label></dt>
+	<dt><label for="text">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.text{/lang}</label></dt>
 	<dd>
 		<input name="text" id="text" type="text" value="{$i18nPlainValues['text']}"  class="long" />
 
@@ -18,21 +18,21 @@
 </dl>
 
 <dl>
-	<dt><label for="width">{lang}fireball.acp.content.type.de.codequake.cms.content.type.image.width{/lang}</label></dt>
+	<dt><label for="width">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.width{/lang}</label></dt>
 	<dd>
 		<input name="contentData[width]" id="width" type="number" value="{if $contentData['width']|isset}{$contentData['width']}{else}0{/if}"  />
 	</dd>
 </dl>
 
 <dl>
-	<dt><label for="height">{lang}fireball.acp.content.type.de.codequake.cms.content.type.image.height{/lang}</label></dt>
+	<dt><label for="height">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.height{/lang}</label></dt>
 	<dd>
 		<input name="contentData[height]" id="height" type="number" value="{if $contentData['height']|isset}{$contentData['height']}{else}0{/if}" />
 	</dd>
 </dl>
 
 <dl>
-	<dt><label for="contentData[link]">{lang}fireball.acp.content.type.de.codequake.cms.content.type.image.hyperlink{/lang}</label></dt>
+	<dt><label for="contentData[link]">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink{/lang}</label></dt>
 	<dd>
 		<input name="contentData[link]" id="contentData[link]" type="text" value="{if $contentData['link']|isset}{$contentData['link']}{/if}"  class="long" />
 	</dd>

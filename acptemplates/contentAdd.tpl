@@ -31,7 +31,7 @@
 </script>
 
 <header class="boxHeadline">
-	<h1>{lang}fireball.acp.content.{@$action}{/lang}</h1>
+	<h1>{lang}cms.acp.content.{@$action}{/lang}</h1>
 </header>
 
 {include file='formError'}
@@ -43,7 +43,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			{* <li><a href="{link application='cms' controller='ContentList' pageID=$pageID}{/link}" title="{lang}fireball.acp.content.list{/lang}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}fireball.acp.content.list{/lang}</span></a></li> *}
+			{* <li><a href="{link application='cms' controller='ContentList' pageID=$pageID}{/link}" title="{lang}cms.acp.content.list{/lang}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}cms.acp.content.list{/lang}</span></a></li> *}
 
 			{event name='contentNavigationButtons'}
 		</ul>
@@ -64,7 +64,7 @@
 							{if $errorType == 'empty' || $errorType == 'multilingual'}
 								{lang}wcf.global.form.error.{@$errorType}{/lang}
 							{else}
-								{lang}fireball.acp.content.title.error.{@$errorType}{/lang}
+								{lang}cms.acp.content.title.error.{@$errorType}{/lang}
 							{/if}
 						</small>
 					{/if}
@@ -77,10 +77,10 @@
 		</section>
 
 		<section class="section">
-			<h2 class="sectionTitle">{lang}fireball.acp.content.position{/lang}</h2>
+			<h2 class="sectionTitle">{lang}cms.acp.content.position{/lang}</h2>
 
 			<dl>
-				<dt><label for="pageID">{lang}fireball.global.page{/lang}</label></dt>
+				<dt><label for="pageID">{lang}cms.global.page{/lang}</label></dt>
 				<dd>
 					<select name="pageID" id="pageID">
 						{foreach from=$pageList item=$node}
@@ -92,7 +92,7 @@
 
 			{hascontent}
 				<dl>
-					<dt><label for="parentID">{lang}fireball.acp.content.position.parentID{/lang}</label></dt>
+					<dt><label for="parentID">{lang}cms.acp.content.position.parentID{/lang}</label></dt>
 					<dd>
 						<select id="parentID" name="parentID">
 							<option value="0" {if $parentID == 0} selected="selected"{/if}>{lang}wcf.global.noSelection{/lang}</option>
@@ -107,7 +107,7 @@
 			{/hascontent}
 
 			<dl>
-				<dt><label for="showOrder">{lang}fireball.acp.content.position{/lang}</label></dt>
+				<dt><label for="showOrder">{lang}cms.acp.content.position{/lang}</label></dt>
 				<dd>
 					<input type="number" name="showOrder" id="showorder" value="{$showOrder}" />
 				</dd>
@@ -117,24 +117,24 @@
 		</section>
 
 		<section class="section">
-			<h2 class="sectionTitle">{lang}fireball.acp.content.type.{$objectType->objectType}{/lang}</h2>
+			<h2 class="sectionTitle">{lang}cms.acp.content.type.{$objectType->objectType}{/lang}</h2>
 
 			{include file=$objectType->getProcessor()->getFormTemplate() application='cms'}
 		</section>
 
 		<section class="section">
-			<h2 class="sectionTitle">{lang}fireball.acp.content.css{/lang}</h2>
+			<h2 class="sectionTitle">{lang}cms.acp.content.css{/lang}</h2>
 
 			<dl{if $errorField == 'cssClasses'} class="formError"{/if}>
-				<dt><label for="cssClasses">{lang}fireball.acp.content.css.cssClasses{/lang}</label></dt>
+				<dt><label for="cssClasses">{lang}cms.acp.content.css.cssClasses{/lang}</label></dt>
 				<dd>
 					<input type="text" id="cssClasses" name="cssClasses" value="{$cssClasses}" class="long" />
 					{if $errorField == 'cssClasses'}
 						<small class="innerError">
-							{lang}fireball.acp.content.cssClasses.error.{@$errorType}{/lang}
+							{lang}cms.acp.content.cssClasses.error.{@$errorType}{/lang}
 						</small>
 					{/if}
-					<small>{lang}fireball.acp.content.css.cssClasses.description{/lang}</small>
+					<small>{lang}cms.acp.content.css.cssClasses.description{/lang}</small>
 				</dd>
 			</dl>
 

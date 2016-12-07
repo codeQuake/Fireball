@@ -1,9 +1,9 @@
 <dl>
-	<dt><label for="contentData[fileID]">{lang}fireball.acp.content.type.de.codequake.cms.content.type.file.fileID{/lang}</label></dt>
+	<dt><label for="contentData[fileID]">{lang}cms.acp.content.type.de.codequake.cms.content.type.file.fileID{/lang}</label></dt>
 	<dd>
 		<div id="filePicker">
 			<ul class="formAttachmentList clearfix"></ul>
-			<span class="button small">{lang}fireball.acp.file.picker{/lang}</span>
+			<span class="button small">{lang}cms.acp.file.picker{/lang}</span>
 		</div>
 	</dd>
 </dl>

@@ -1,15 +1,15 @@
 <div id="fileUpload" class="marginTop fileUpload">
 	<dl>
-		<dt>{lang}fireball.acp.file.files{/lang}</dt>
+		<dt>{lang}cms.acp.file.files{/lang}</dt>
 		<dd>
 			<ul class="formAttachmentList clearfix"></ul>
 			<div id="fileUploadButton"></div>
-			<small class="marginTopSmall">{lang}fireball.acp.file.files.description{/lang}</small>
+			<small class="marginTopSmall">{lang}cms.acp.file.files.description{/lang}</small>
 		</dd>
 	</dl>
 
 	<dl class="marginTop">
-		<dt><label for="categoryID">{lang}fireball.acp.file.categoryIDs{/lang}</label></dt>
+		<dt><label for="categoryID">{lang}cms.acp.file.categoryIDs{/lang}</label></dt>
 		<dd>
 			<select id="categoryIDs" name="categoryIDs" multiple="multiple" size="10">
 				{foreach from=$categoryList item=node}

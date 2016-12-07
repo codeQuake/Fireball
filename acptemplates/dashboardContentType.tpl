@@ -1,5 +1,5 @@
 <dl>
-	<dt><label for="contentData[box]">{lang}fireball.acp.content.type.de.codequake.cms.content.type.dashboard.box{/lang}</label></dt>
+	<dt><label for="contentData[box]">{lang}cms.acp.content.type.de.codequake.cms.content.type.dashboard.box{/lang}</label></dt>
 	<dd>
 		<select name="contentData[box]" id="contentData[box]">
 			{foreach from=$boxList item=box}

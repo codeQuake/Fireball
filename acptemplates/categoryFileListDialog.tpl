@@ -8,8 +8,8 @@
 			<th class="columnMark"></th>
 			<th class="columnID columnFileID">{lang}wcf.global.objectID{/lang}</th>
 			<th class="columnTitle columnFile" colspan="2">{lang}wcf.global.title{/lang}</th>
-			<th class="columnType">{lang}fireball.acp.file.fileType{/lang}</th>
-			<th class="columnDownloads">{lang}fireball.acp.file.downloads{/lang}</th>
+			<th class="columnType">{lang}cms.acp.file.fileType{/lang}</th>
+			<th class="columnDownloads">{lang}cms.acp.file.downloads{/lang}</th>
 
 			{event name='columnHeads'}
 		</thead>

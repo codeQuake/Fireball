@@ -1,16 +1,16 @@
 {include file='header' pageTitle='cms.acp.stats'}
 
 <header class="boxHeadline">
-	<h1>{lang}fireball.acp.stats{/lang}</h1>
+	<h1>{lang}cms.acp.stats{/lang}</h1>
 </header>
 
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
 		WCF.Language.addObject({
-			'cms.acp.stats.devices.desktop': '{lang}fireball.acp.stats.devices.desktop{/lang}',
-			'cms.acp.stats.devices.mobile': '{lang}fireball.acp.stats.devices.mobile{/lang}',
-			'cms.acp.stats.devices.tablet': '{lang}fireball.acp.stats.devices.tablet{/lang}'
+			'cms.acp.stats.devices.desktop': '{lang}cms.acp.stats.devices.desktop{/lang}',
+			'cms.acp.stats.devices.mobile': '{lang}cms.acp.stats.devices.mobile{/lang}',
+			'cms.acp.stats.devices.tablet': '{lang}cms.acp.stats.devices.tablet{/lang}'
 		});
 	});
 	//]]>
@@ -26,7 +26,7 @@
 
 <div  class="container containerPadding marginTop">
 	<fieldset>
-		<legend>{lang}fireball.acp.stats.vistors{/lang}</legend>
+		<legend>{lang}cms.acp.stats.vistors{/lang}</legend>
 
 		<div class="center">
 			<div id="canvas" style="height: 250px;"></div>
@@ -36,7 +36,7 @@
 
 <div class="container containerPadding marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
 	<fieldset>
-		<legend>{lang}fireball.acp.stats.browsers{/lang}</legend>
+		<legend>{lang}cms.acp.stats.browsers{/lang}</legend>
 
 		<div class="center">
 			<div id="browsers"></div>
@@ -46,7 +46,7 @@
 
 <div class="container containerPadding marginTop" style="float: left; width: 49%; box-sizing: border-box;">
 	<fieldset>
-		<legend>{lang}fireball.acp.stats.platforms{/lang}</legend>
+		<legend>{lang}cms.acp.stats.platforms{/lang}</legend>
 
 		<div class="center">
 			<div id="platforms"></div>
@@ -58,7 +58,7 @@
 
 <div class="container containerPadding marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
 	<fieldset>
-		<legend>{lang}fireball.acp.stats.devices{/lang}</legend>
+		<legend>{lang}cms.acp.stats.devices{/lang}</legend>
 
 		<div class="center">
 			<div id="devices"></div>
@@ -68,14 +68,14 @@
 
 <div class="tabularBox tabularBoxTitle marginTop clearfix" style="float: left; width: 49%; box-sizing: border-box;">
 	<header>
-		<h2>{lang}fireball.acp.stats.mostClicked{/lang}</h2>
+		<h2>{lang}cms.acp.stats.mostClicked{/lang}</h2>
 	</header>
 
 	<table class="table">
 		<thead>
 			<tr>
-				<th>{lang}fireball.acp.stats.page{/lang}</th>
-				<th>{lang}fireball.acp.stats.clicks{/lang}</th>
+				<th>{lang}cms.acp.stats.page{/lang}</th>
+				<th>{lang}cms.acp.stats.clicks{/lang}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -98,7 +98,7 @@
 
 	function drawArea() {
 		var data = google.visualization.arrayToDataTable([
-			['Visits', '{lang}fireball.acp.dashboard.all{/lang}', '{lang}fireball.acp.dashboard.registered{/lang}', '{lang}fireball.acp.dashboard.spiders{/lang}'],
+			['Visits', '{lang}cms.acp.dashboard.all{/lang}', '{lang}cms.acp.dashboard.registered{/lang}', '{lang}cms.acp.dashboard.spiders{/lang}'],
 			{foreach from=$visits item=visit}
 				['{$visit['string']}', {if $visit['visitors']['visits']|isset}{$visit['visitors']['visits']}{else}0{/if}, {if $visit['visitors']['users']|isset}{$visit['visitors']['users']}{else}0{/if}, {if $visit['visitors']['spiders']|isset}{$visit['visitors']['spiders']}{else}0{/if}],
 			{/foreach}
@@ -161,7 +161,7 @@
 		var data = google.visualization.arrayToDataTable([
 			['Device', 'Visits'],
 			{foreach from=$devices item=device key=name}
-				['{lang}fireball.acp.stats.devices.{$name}{/lang}', {$device['visits']}],
+				['{lang}cms.acp.stats.devices.{$name}{/lang}', {$device['visits']}],
 			{/foreach}
 		]);
 
@@ -182,7 +182,7 @@
 		<li class="box32">
 			<span class="icon icon32 fa-user"></span>
 			<div class="containerHeadline">
-				<h3>{lang}fireball.acp.stats.userOnline{/lang}</h3>
+				<h3>{lang}cms.acp.stats.userOnline{/lang}</h3>
 			</div>
 			<ul class="containerBoxList doubleColumned">
 				{foreach from=$objects item=user}

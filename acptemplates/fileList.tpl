@@ -36,8 +36,8 @@
 </script>
 
 <header class="boxHeadline">
-	<h1>{lang}fireball.acp.file.list{/lang}</h1>
-	<p>{lang}fireball.acp.file.list.description{/lang}</p>
+	<h1>{lang}cms.acp.file.list{/lang}</h1>
+	<p>{lang}cms.acp.file.list.description{/lang}</p>
 </header>
 
 <div class="contentNavigation">
@@ -56,7 +56,7 @@
 				</div>
 			</li>
 			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
-			<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}fireball.acp.file.add{/lang}</span></a></li>
+			<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -74,10 +74,10 @@
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
 				<th class="columnID columnFileID{if $sortField == 'fileID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=fileID&sortOrder={if $sortField == 'fileID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
 				<th class="columnTitle columnFilename{if $sortField == 'title'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=title&sortOrder={if $sortField == 'title' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.title{/lang}</a></th>
-				<th class="columnType">{lang}fireball.acp.file.fileType{/lang}</th>
-				<th class="columnDate columnUploadTime{if $sortField == 'uploadTime'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=uploadTime&sortOrder={if $sortField == 'uploadTime' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}fireball.acp.file.uploadTime{/lang}</a></th>
-				<th class="columnDigits columnFilesize{if $sortField == 'filesize'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=filesize&sortOrder={if $sortField == 'filesize' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}fireball.acp.file.filesize{/lang}</a></th>
-				<th class="columnDigits columnDownloads{if $sortField == 'downloads'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=downloads&sortOrder={if $sortField == 'downloads' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}fireball.acp.file.downloads{/lang}</a></th>
+				<th class="columnType">{lang}cms.acp.file.fileType{/lang}</th>
+				<th class="columnDate columnUploadTime{if $sortField == 'uploadTime'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=uploadTime&sortOrder={if $sortField == 'uploadTime' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.file.uploadTime{/lang}</a></th>
+				<th class="columnDigits columnFilesize{if $sortField == 'filesize'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=filesize&sortOrder={if $sortField == 'filesize' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.file.filesize{/lang}</a></th>
+				<th class="columnDigits columnDownloads{if $sortField == 'downloads'} active {@$sortOrder}{/if}"><a href="{link application='cms' controller='FileList' id=$categoryID}pageNo={@$pageNo}&sortField=downloads&sortOrder={if $sortField == 'downloads' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}cms.acp.file.downloads{/lang}</a></th>
 
 				{event name='columnHeads'}
 			</thead>
@@ -87,7 +87,7 @@
 					<tr class="jsClipboardObject jsFileRow">
 						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$file->fileID}" /></td>
 						<td class="columnIcon">
-							<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}fireball.acp.file.delete.sure{/lang}"></span>
+							<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$file->fileID}" data-confirm-message="{lang}cms.acp.file.delete.sure{/lang}"></span>
 						</td>
 						<td class="columnID columnFileID">{@$file->fileID}</td>
 						<td class="columnIcon">{@$file->getIconTag()}</td>
@@ -110,7 +110,7 @@
 		<nav>
 			<ul>
 				<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
-				<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}fireball.acp.file.add{/lang}</span></a></li>
+				<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtonsBottom'}
 			</ul>

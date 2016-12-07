@@ -1,7 +1,7 @@
 {include file='header' pageTitle='cms.acp.page.import'}
 
 <header class="boxHeadline">
-	<h1>{lang}fireball.acp.page.import{/lang}</h1>
+	<h1>{lang}cms.acp.page.import{/lang}</h1>
 </header>
 
 {include file='formError'}
@@ -10,35 +10,35 @@
 	<p class="success">{lang}wcf.global.success{/lang}</p>
 {/if}
 
-<p class="info">{lang}fireball.acp.page.import.info{/lang}</p>
+<p class="info">{lang}cms.acp.page.import.info{/lang}</p>
 
 <form method="post" enctype="multipart/form-data" action="{link controller='CMSImport' application='cms'}{/link}">
 	<div class="container containerPadding marginTop">
 		<fieldset>
-			<legend>{lang}fireball.acp.page.import{/lang}</legend>
+			<legend>{lang}cms.acp.page.import{/lang}</legend>
 
 			<dl{if $errorField == 'file'} class="formError"{/if}>
-				<dt><label for="file">{lang}fireball.acp.page.import.upload{/lang}</label></dt>
+				<dt><label for="file">{lang}cms.acp.page.import.upload{/lang}</label></dt>
 				<dd>
 					<input type="file" name="file" id="file" />
 					{if $errorField == 'file'}
 						<small class="innerError">
-							{lang}fireball.acp.page.import.{$errorType}{/lang}
+							{lang}cms.acp.page.import.{$errorType}{/lang}
 						</small>
 					{/if}
-					<small>{lang}fireball.acp.page.import.upload.description{/lang}</small>
+					<small>{lang}cms.acp.page.import.upload.description{/lang}</small>
 				</dd>
 			</dl>
 			<dl{if $errorField == 'file'} class="formError"{/if}>
-				<dt><label for="fileLink">{lang}fireball.acp.page.import.link{/lang}</label></dt>
+				<dt><label for="fileLink">{lang}cms.acp.page.import.link{/lang}</label></dt>
 				<dd>
 					<input type="text" name="fileLink" id="fileLink" class="long" />
 					{if $errorField == 'fileLink'}
 						<small class="innerError">
-							{lang}fireball.acp.page.import.{$errorType}{/lang}
+							{lang}cms.acp.page.import.{$errorType}{/lang}
 						</small>
 					{/if}
-					<small>{lang}fireball.acp.page.import.link.description{/lang}</small>
+					<small>{lang}cms.acp.page.import.link.description{/lang}</small>
 				</dd>
 			</dl>
 		</fieldset>
@@ -51,18 +51,18 @@
 </form>
 
 <header class="boxHeadline">
-	<h1>{lang}fireball.acp.page.export{/lang}</h1>
+	<h1>{lang}cms.acp.page.export{/lang}</h1>
 </header>
 
 <div class="container containerPadding marginTop">
 	<fieldset>
-		<legend>{lang}fireball.acp.page.export{/lang}</legend>
+		<legend>{lang}cms.acp.page.export{/lang}</legend>
 
 		<dl id="pageExportDiv">
-			<dt><label>{lang}fireball.acp.page.export.download{/lang}</label></dt>
+			<dt><label>{lang}cms.acp.page.export.download{/lang}</label></dt>
 			<dd>
-				<p><a href="{link application='cms' controller='CMSExport'}{/link}" id="pageExport" class="button">{lang}fireball.acp.page.export{/lang}</a></p>
-				<small>{lang}fireball.acp.page.export.download.description{/lang}</small>
+				<p><a href="{link application='cms' controller='CMSExport'}{/link}" id="pageExport" class="button">{lang}cms.acp.page.export{/lang}</a></p>
+				<small>{lang}cms.acp.page.export.download.description{/lang}</small>
 			</dd>
 		</dl>
 
