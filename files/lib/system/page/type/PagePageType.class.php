@@ -2,6 +2,7 @@
 
 namespace cms\system\page\type;
 use cms\data\page\Page;
+use cms\page\PagePage;
 use cms\system\page\type\AbstractPageType;
 use wcf\form\AbstractForm;
 
@@ -12,6 +13,8 @@ use wcf\form\AbstractForm;
  * @package	de.codequake.cms
  */
 class PagePageType extends AbstractPageType {
+	public $frontendController = PagePage::class;
+
 	/**
 	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
 	 */

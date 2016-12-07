@@ -1,8 +1,7 @@
 <?php
 
 namespace cms\system\page\type;
-use cms\data\page\Page;
-use cms\system\page\type\AbstractPageType;
+use cms\page\LinkPage;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
 use wcf\util\StringUtil;
@@ -14,6 +13,11 @@ use wcf\util\StringUtil;
  * @package	de.codequake.cms
  */
 class LinkPageType extends AbstractPageType {
+	/**
+	 * @inheritdoc
+	 */
+	public $frontendController = LinkPage::class;
+
 	/**
 	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
 	 */

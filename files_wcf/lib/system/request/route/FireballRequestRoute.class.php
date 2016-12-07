@@ -2,8 +2,10 @@
 
 namespace wcf\system\request\route;
 
+use cms\data\page\PageCache;
 use cms\page\PagePage;
-use wcf\data\page\PageCache;
+use wcf\system\application\ApplicationHandler;
+use wcf\util\FileUtil;
 
 class FireballRequestRoute implements IRequestRoute {
 	/**
@@ -42,22 +44,30 @@ class FireballRequestRoute implements IRequestRoute {
 				$pageList = PageCache::getInstance()->getPages();
 				$urlList = array();
 				foreach ($pageList as $page) {
-					$urlList[$page->alias] = $page;
+					$urlList[$page->getAlias()] = $page;
 				}
 
-				/*
-				$routeData = array(
-					'className' => PagePage::class,
-					'controller' => 'page',
-					'pageType' => 'system',
+				if (empty($matches['id'])) {
+					if (preg_match('~(([A-Za-z0-9]+)/?){0,}$~x', $requestURL, $urlParts)) {
+						$alias = FileUtil::removeTrailingSlash($urlParts[0]);
 
-					// CMS page meta data
-					'cmsPageID' => $matches['pageID'],
-					'cmsPageLanguageID' => $matches['languageID']
-				);
-				*/
+						if (!empty($urlList[$alias])) {
+							$this->routeData = array(
+								'className' => $page->getProcessor()->frontendController,
+								'controller' => 'page',
+								'pageType' => 'system',
+								'id' => $urlList[$alias]->pageID
+							);
+						}
+					}
+				}
+
+				if (!empty($this->routeData)) {
+					$this->routeData['isDefaultController'] = false;
+
+					return true;
+				}
 			}
-
 		}
 
 		return false;

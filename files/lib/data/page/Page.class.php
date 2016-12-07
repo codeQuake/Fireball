@@ -182,11 +182,10 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * @see	\wcf\data\ILinkableObject::getLink()
 	 */
 	public function getLink($appendSession = true) {
-		return LinkHandler::getInstance()->getLink('Page', array(
+		return LinkHandler::getInstance()->getLink($this->getAlias(), array(
 			'application' => 'cms',
 			'forceFrontend' => true,
-			'appendSession' => $appendSession,
-			'alias' => $this->getAlias()
+			'appendSession' => $appendSession
 		));
 	}
 
@@ -355,5 +354,14 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 			return null;
 
 		return new MenuItem($this->menuItemID);
+	}
+
+	/**
+	 * Returns the processor of the page
+	 *
+	 * @return \cms\system\page\type\AbstractPageType
+	 */
+	public function getProcessor() {
+		return ObjectTypeCache::getInstance()->getObjectType($this->objectTypeID)->getProcessor();
 	}
 }

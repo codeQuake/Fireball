@@ -1,8 +1,8 @@
 <?php
 
 namespace cms\system\page\type;
-use cms\data\page\Page;
 use wcf\form\AbstractForm;
+use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 
 /**
@@ -14,6 +14,12 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 abstract class AbstractPageType implements IPageType {
+	/**
+	 * controller of the frontend page
+	 * @var Class
+	 */
+	public $frontendController;
+
 	/**
 	 * template name
 	 * @var	string
@@ -42,6 +48,9 @@ abstract class AbstractPageType implements IPageType {
 			$className = array_pop($classParts);
 			$this->templateName = lcfirst($className);
 		}
+
+		if ($this->frontendController === null)
+			throw new SystemException('Page type "' . get_class($this) . '" does not provide a valid frontend controller.');
 	}
 	
 	/**
@@ -82,12 +91,12 @@ abstract class AbstractPageType implements IPageType {
 	}
 	
 	/**
-	 * @see cms\system\page\type\IPageType::validate()
+	 * @see \cms\system\page\type\IPageType::validate()
 	 */
 	public function validate(AbstractForm $form) { /* nothing */ }
 	
 	/**
-	 * @see cms\system\page\type\IPageType::save()
+	 * @see \cms\system\page\type\IPageType::save()
 	 */
 	public function save(AbstractForm $form) { /* nothing */ }
 	
@@ -125,8 +134,7 @@ abstract class AbstractPageType implements IPageType {
 	 * @see \cms\system\page\type\IPageType::getController()
 	 */
 	public function getController() {
-		$objectType = $page->getObjectType();
-		return $objectType->pageclass;
+		return $this->frontendController;
 	}
 	
 	/**
