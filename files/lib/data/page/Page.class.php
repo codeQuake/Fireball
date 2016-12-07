@@ -5,13 +5,12 @@ use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\revision\PageRevisionList;
 use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
-use wcf\data\menu\item\MenuItem;
-use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
-use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\breadcrumb\IBreadcrumbProvider;
+use wcf\data\ITitledLinkObject;
+use wcf\data\menu\item\MenuItem;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -24,7 +23,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObject, IPermissionObject, IRouteController {
+class Page extends DatabaseObject implements ITitledLinkObject, ILinkableObject, IPermissionObject, IRouteController {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -134,13 +133,6 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 		}
 
 		return $this->alias;
-	}
-
-	/**
-	 * @see	\wcf\system\breadrcumb\IBreadcrumbProvider::getBreadcrumb()
-	 */
-	public function getBreadcrumb() {
-		return new Breadcrumb($this->getTitle(), $this->getLink());
 	}
 
 	/**
