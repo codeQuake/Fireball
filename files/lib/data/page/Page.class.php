@@ -246,7 +246,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 			return $permissions[$permission];
 		}
 
-		return WCF::getSession()->getPermission('user.cms.page.' . $permission);
+		return WCF::getSession()->getPermission('user.fireball.page.' . $permission);
 	}
 
 	/**
