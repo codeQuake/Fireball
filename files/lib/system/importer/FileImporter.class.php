@@ -25,6 +25,8 @@ class FileImporter extends AbstractImporter {
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
+		unset($data['fileID']);
+
 		if (is_numeric($oldID)) {
 			$file = new File($oldID);
 			if (!$file->fileID)

@@ -24,6 +24,8 @@ class StylesheetImporter extends AbstractImporter {
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
+		unset($data['stylesheetID']);
+
 		if (is_numeric($oldID)) {
 			$stylesheet = new Stylesheet($oldID);
 			if (!$stylesheet->stylesheetID)

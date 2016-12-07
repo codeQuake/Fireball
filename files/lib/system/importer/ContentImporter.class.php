@@ -24,6 +24,8 @@ class ContentImporter extends AbstractImporter {
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
+		unset($data['contentID']);
+
 		if (empty($data['dontUpdateParentID'])) {
 			if (!empty($data['parentID']))
 				$data['parentID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.content', $data['parentID']);

@@ -24,6 +24,8 @@ class PageImporter extends AbstractImporter {
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
+		unset($data['pageID']);
+
 		if (!empty($data['authorID']))
 			$data['authorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['authorID']) ?: null;
 		if (!empty($data['lastEditorID']))
@@ -46,7 +48,7 @@ class PageImporter extends AbstractImporter {
 			$additionalData['stylesheetIDs'] = $stylesheetIDs;
 		}
 		
-		if (is_array($data['additionalData'])) {
+		if (!empty($data['additionalData']) && is_array($data['additionalData'])) {
 			$data['additionalData'] = serialize($data['additionalData']);
 		}
 		
