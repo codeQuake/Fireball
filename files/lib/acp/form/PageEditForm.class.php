@@ -6,6 +6,7 @@ use cms\data\page\Page;
 use cms\data\page\PageAction;
 use cms\data\page\PageNodeTree;
 use cms\util\PageUtil;
+use wcf\data\menu\item\MenuItemAction;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
@@ -171,6 +172,14 @@ class PageEditForm extends PageAddForm {
 
 		$this->objectAction = new PageAction(array($this->pageID), 'update', $pageData);
 		$this->objectAction->executeAction();
+
+		// update menu item
+		if ($this->menuItemID) {
+			$menuItemAction = new MenuItemAction(array($this->menuItemID), 'update', array('data' => array(
+				'title' => $this->title,
+			)));
+			$menuItemAction->executeAction();
+		}
 
 		// save ACL
 		ACLHandler::getInstance()->save($this->pageID, $this->objectTypeID);
