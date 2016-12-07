@@ -338,7 +338,7 @@ class Fireball2Exporter extends AbstractExporter {
 		
 		while ($row = $statement->fetchArray()) {
 			$additionalData = array();
-			$additionalData['fileLocation'] = $path . 'files/' . substr($this->fileHash, 0, 2) . '/' . $row['fileID'] . '-' . $row['fileHash'];
+			$additionalData['fileLocation'] = $path . 'files/' . substr($row['fileHash'], 0, 2) . '/' . $row['fileID'] . '-' . $row['fileHash'];
 			
 			ImportHandler::getInstance()->getImporter('de.codequake.cms.file')->import($row['fileID'], $row, $additionalData);
 		}
