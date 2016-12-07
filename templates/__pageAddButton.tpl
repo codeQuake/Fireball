@@ -5,7 +5,7 @@
 		<span>{lang}cms.acp.page.add{/lang}</span>
 	</a>
 	
-	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/Fireball{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {

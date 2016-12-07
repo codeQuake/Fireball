@@ -2,7 +2,7 @@
 	{foreach from=$page->getStylesheets() item=stylesheet}
 		<link rel="stylesheet" type="text/css" href="{$stylesheet->getURL()}" />
 	{/foreach}
-	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/Fireball{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
 {/capture}
 
 {capture assign='headerNavigation'}
