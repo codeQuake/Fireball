@@ -1,7 +1,7 @@
 {include file='header' pageTitle='cms.acp.page.'|concat:$action}
 
 {include file='aclPermissions'}
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@LAST_UPDATE_TIME}"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
@@ -11,7 +11,7 @@
 
 		WCF.TabMenu.init();
 
-		new CMS.ACP.Page.Alias.Preview('#alias', '#parentID', '{link application="cms" controller="Page" alias="123456789" forceFrontend=true}{/link}');
+		new Fireball.ACP.Page.Alias.Preview('#alias', '#parentID', '{link application="cms" controller="Page" alias="123456789" forceFrontend=true}{/link}');
 
 		{if $action == 'add'}
 			$('#createMenuItem').click(function() {
@@ -24,7 +24,7 @@
 			$('#'+ $toggleContainerID).toggle();
 		});
 
-		new CMS.ACP.Page.TypePicker({if $pageObjectTypeID}{$pageObjectTypeID}{/if}{if !$pageID|empty}, {$pageID}{/if});
+		new Fireball.ACP.Page.TypePicker({if $pageObjectTypeID}{$pageObjectTypeID}{/if}{if !$pageID|empty}, {$pageID}{/if});
 	});
 	//]]>
 </script>
