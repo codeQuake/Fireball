@@ -73,7 +73,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * @return	boolean
 	 */
 	public function canDelete() {
-		if (!WCF::getSession()->getPermission('admin.cms.page.canAddPage')) {
+		if (!WCF::getSession()->getPermission('admin.fireball.page.canAddPage')) {
 			return false;
 		}
 
@@ -91,12 +91,12 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * @return	boolean
 	 */
 	public function canRead() {
-		if ($this->isDisabled && !WCF::getSession()->getPermission('mod.cms.canViewDisabledPage')) {
+		if ($this->isDisabled && !WCF::getSession()->getPermission('mod.fireball.canViewDisabledPage')) {
 			// user can't read disabled pages
 			return false;
 		}
 
-		if (!$this->isPublished && !WCF::getSession()->getPermission('mod.cms.canReadUnpublishedPage') && !$this->getPermission('canViewUnpublishedPage')) {
+		if (!$this->isPublished && !WCF::getSession()->getPermission('mod.fireball.canReadUnpublishedPage') && !$this->getPermission('canViewUnpublishedPage')) {
 			// user can't read unpublished pages
 			return false;
 		}
