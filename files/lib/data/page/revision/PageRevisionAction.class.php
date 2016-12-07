@@ -31,7 +31,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.cms.page.canAddPage');
+	protected $permissionsDelete = array('admin.fireball.page.canAddPage');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
@@ -42,7 +42,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 	 * Validates permissions to restore a specific revision.
 	 */
 	public function validateRestore() {
-		WCF::getSession()->checkPermissions(array('admin.cms.page.canAddPage'));
+		WCF::getSession()->checkPermissions(array('admin.fireball.page.canAddPage'));
 
 		// validate 'objectIDs' parameter
 		$this->getSingleObject();

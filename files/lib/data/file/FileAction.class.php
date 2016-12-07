@@ -28,12 +28,12 @@ class FileAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.cms.file.canAddFile');
+	protected $permissionsDelete = array('admin.fireball.file.canAddFile');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.cms.file.canAddFile');
+	protected $permissionsUpdate = array('admin.fireball.file.canAddFile');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP

@@ -30,7 +30,7 @@ class ContentPollHandler extends AbstractPollHandler {
 	 * 		vote.
 	 */
 	public function canVote() {
-		return (WCF::getSession()->getPermission('user.cms.content.canVotePoll') ? true : false);
+		return (WCF::getSession()->getPermission('user.fireball.content.canVotePoll') ? true : false);
 	}
 
 	/**

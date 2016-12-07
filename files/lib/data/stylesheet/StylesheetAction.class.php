@@ -20,7 +20,7 @@ class StylesheetAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.cms.style.canAddStylesheet');
+	protected $permissionsDelete = array('admin.fireball.style.canAddStylesheet');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP

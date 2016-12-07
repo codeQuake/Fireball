@@ -42,17 +42,17 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.cms.page.canAddPage');
+	protected $permissionsCreate = array('admin.fireball.page.canAddPage');
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.cms.page.canAddPage');
+	protected $permissionsDelete = array('admin.fireball.page.canAddPage');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.cms.page.canAddPage');
+	protected $permissionsUpdate = array('admin.fireball.page.canAddPage');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
@@ -350,7 +350,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	 public function validateFrontendCreate() {
 		//check permission
-		if (!WCF::getSession()->getPermission('admin.cms.page.canAddPage')) throw new AJAXException();
+		if (!WCF::getSession()->getPermission('admin.fireball.page.canAddPage')) throw new AJAXException();
 		//TODO I18n & other error handling
 		if (!isset($this->parameters['data']['parentID'])) $this->parameters['data']['parentID'] = null;
 		
@@ -475,7 +475,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateGetAddDialog() {
 		//check permission
-		if (!WCF::getSession()->getPermission('admin.cms.page.canAddPage')) throw new AJAXException();
+		if (!WCF::getSession()->getPermission('admin.fireball.page.canAddPage')) throw new AJAXException();
 	}
 
 	/**
@@ -760,7 +760,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateSetAsHome() {
 		WCF::getSession()->checkPermissions(array(
-			'admin.cms.page.canAddPage'
+			'admin.fireball.page.canAddPage'
 		));
 
 		// validate 'objectIDs' parameter

@@ -35,12 +35,12 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.cms.content.canAddContent');
+	protected $permissionsDelete = array('admin.fireball.content.canAddContent');
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.cms.content.canAddContent');
+	protected $permissionsUpdate = array('admin.fireball.content.canAddContent');
 
 	/**
 	 * Validates parameters to copy a content.
@@ -148,7 +148,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	 */
 	 public function validateFrontendCreate() {
 		//check permission
-		if (!WCF::getSession()->getPermission('admin.cms.content.canAddContent')) throw new AJAXException();
+		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) throw new AJAXException();
 		//TODO I18n & other error handling
 		if (!isset($this->parameters['data']['parentID'])) $this->parameters['data']['parentID'] = null;
 	 }
@@ -192,7 +192,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	 */
 	public function validateGetAddDialog() {
 		//check permission
-		if (!WCF::getSession()->getPermission('admin.cms.content.canAddContent')) throw new AJAXException();
+		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) throw new AJAXException();
 		
 		//validate position
 		if (!isset($this->parameters['position']) || !in_array($this->parameters['position'], array('body', 'sidebar'))) throw new UserInputException('position');
@@ -300,7 +300,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	 */
 	public function validateUpdatePosition() {
 		WCF::getSession()->checkPermissions(array(
-			'admin.cms.content.canAddContent'
+			'admin.fireball.content.canAddContent'
 		));
 
 		if (!isset($this->parameters['data']['structure']) || !is_array($this->parameters['data']['structure'])) {
