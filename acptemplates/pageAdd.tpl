@@ -76,7 +76,7 @@
 			<dt><label for="pageObjectTypeID">{lang}cms.acp.page.type{/lang}</label></dt>
 			<dd>
 				<select id="pageObjectTypeID" name="pageObjectTypeID" required="required">
-					{foreach from=$availablePageTypes item=pageType}
+					{foreach from=$availablePageTypes item=pageType}W
 						<option value="{$pageType->objectTypeID}"{if $pageObjectTypeID == $pageType->objectTypeID} selected="selected"{/if}>{lang}cms.acp.page.type.{$pageType->objectType}{/lang}</option>
 					{/foreach}
 				</select>
