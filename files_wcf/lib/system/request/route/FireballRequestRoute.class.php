@@ -53,7 +53,7 @@ class FireballRequestRoute implements IRequestRoute {
 
 						if (!empty($urlList[$alias])) {
 							$this->routeData = array(
-								'className' => $page->getProcessor()->frontendController,
+								'className' => $urlList[$alias]->getProcessor()->frontendController,
 								'controller' => 'page',
 								'pageType' => 'system',
 								'id' => $urlList[$alias]->pageID
