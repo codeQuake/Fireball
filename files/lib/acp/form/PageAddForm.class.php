@@ -8,11 +8,10 @@ use cms\data\page\PageNodeTree;
 use cms\data\stylesheet\StylesheetList;
 use cms\util\PageUtil;
 use wcf\data\menu\item\MenuItemAction;
-use wcf\data\menu\item\MenuItemEditor;
 use wcf\data\menu\MenuCache;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
-use wcf\data\page\PageAction as WCFPageAction;
+use wcf\data\page\PageCache as WCFPageCache;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
@@ -507,8 +506,8 @@ class PageAddForm extends AbstractForm {
 				'menuID' => MenuCache::getInstance()->getMainMenu()->menuID,
 				'parentItemID' => (isset($parentMenuItem) && $parentMenuItem->itemID) ? $parentMenuItem->itemID : null,
 				'identifier' => 'de.codequake.cms.Page' . $returnValues['returnValues']->pageID,
-				'title' => $returnValues['returnValues']->title,
-				'pageID' => $returnValues['returnValues']->wcfPageID,
+				'title' => (!empty($updateData['title'])) ? $updateData['title'] : $this->title,
+				'pageID' => WCFPageCache::getInstance()->getPageByIdentifier('de.codequake.cms.Page')->pageID,
 				'originIsSystem' => 1,
 				'pageObjectID' => $returnValues['returnValues']->pageID,
 				'isDisabled' => $this->invisible,

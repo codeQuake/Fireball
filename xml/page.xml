@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com https://mysterycode.de/XSD/page.xsd">
+	<import>
+		<page identifier="de.codequake.cms.Page">
+			<controller>cms\page\AbstractCMSPage</controller>
+			<handler>cms\system\page\handler\PagePageHandler</handler>
+			<pageType>system</pageType>
+			<requireObjectID>1</requireObjectID>
+
+			<name language="de">CMS: Seite</name>
+			<name language="en">CMS: Page</name>
+		</page>
+		<page identifier="de.codequake.cms.Sitemap">
+			<controller>cms\page\SitemapPage</controller>
+			<pageType>system</pageType>
+
+			<name language="de">CMS: Seitenübersicht</name>
+			<name language="en">CMS: Sitemap</name>
+		</page>
+	</import>
+</data>

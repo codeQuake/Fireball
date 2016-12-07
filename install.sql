@@ -50,10 +50,7 @@ CREATE TABLE cms1_page (
 	objectTypeID INT(10),
 	
 	-- additional data
-	additionalData MEDIUMTEXT DEFAULT NULL,
-
-	-- matching wcf's pages
-	wcfPageID INT(10)
+	additionalData MEDIUMTEXT DEFAULT NULL
 );
 
 DROP TABLE IF EXISTS cms1_page_revision;

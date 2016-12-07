@@ -7,22 +7,14 @@ use cms\data\content\ContentList;
 use cms\data\stylesheet\StylesheetList;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
-use cms\system\menu\page\CMSPageMenuItemProvider;
 use cms\util\PageUtil;
-use wcf\data\menu\item\MenuItem;
-use wcf\data\menu\item\MenuItemAction;
-use wcf\data\menu\item\MenuItemEditor;
-use wcf\data\object\type\ObjectTypeCache;
-use wcf\data\package\PackageCache;
-use wcf\data\page\menu\item\PageMenuItemAction;
-use wcf\data\page\menu\item\PageMenuItemList;
-use wcf\data\page\menu\item\ViewablePageMenuItem;
-use wcf\data\page\PageAction as WCFPageAction;
-use wcf\data\page\PageEditor as WCFPageEditor;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
+use wcf\data\menu\item\MenuItemAction;
+use wcf\data\menu\item\MenuItemEditor;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
@@ -168,26 +160,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$this->parameters['data']['additionalData'] = serialize($this->parameters['data']['additionalData']);
 		}
 
-		$wcfPageData = array(
-			'data' => array(
-				'name' => (!empty($this->parameters['data']['title']) ? $this->parameters['data']['title'] : ''),
-				'identifier' => 'de.codequake.cms.Page',
-				'pageType' => 'system',
-				'isDisabled' => (isset($this->parameters['data']['isDisabled']) && intval($this->parameters['data']['isDisabled']) == 1) ? 1 : 0,
-				'originIsSystem' => 1,
-				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
-				'applicationPackageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
-				'controller' => 'cms\\page\\PagePage',
-				'handler' => 'cms\\system\\page\\handler\\PagePageHandler',
-				'requireObjectID' => 1,
-				'lastUpdateTime' => $this->parameters['data']['creationTime']
-			)
-		);
-		$wcfPageAction = new WCFPageAction(array(), 'create', $wcfPageData);
-		$wcfPage = $wcfPageAction->executeAction()['returnValues'];
-
-		$this->parameters['data']['wcfPageID'] = $wcfPage->pageID;
-
 		// create page itself
 		/** @var $page Page */
 		$page = parent::create();
@@ -299,22 +271,13 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	public function delete() {
 		$returnValues = parent::delete();
 
-		$wcfPageIDs = $menuItemIDs = $pageIDs = array();
+		$menuItemIDs = $pageIDs = array();
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
-
-			if ($pageEditor->wcfPageID !== null) {
-				$wcfPageIDs[] = $pageEditor->wcfPageID;
-			}
 
 			if ($pageEditor->menuItemID !== null) {
 				$menuItemIDs[] = $pageEditor->menuItemID;
 			}
-		}
-
-		if (!empty($wcfPageIDs)) {
-			$wcfPageAction = new WCFPageAction(array($wcfPageIDs), 'delete');
-			$wcfPageAction->executeAction();
 		}
 
 		if (!empty($menuItemIDs)) {
@@ -348,9 +311,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		foreach ($this->objects as $pageEditor) {
 			$pageEditor->update(array('isDisabled' => 1));
 
-			$wcfPageEditor = new WCFPageEditor($pageEditor->getWCFPage());
-			$wcfPageEditor->update(array('isDisabled' => 1));
-
 			$menuItem = $pageEditor->getMenuItem();
 			if ($menuItem !== null) {
 				$menuItemEditor = new MenuItemEditor($pageEditor->getMenuItem());
@@ -376,9 +336,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		foreach ($this->objects as $pageEditor) {
 			$pageEditor->update(array('isDisabled' => 0));
-
-			$wcfPageEditor = new WCFPageEditor($pageEditor->getWCFPage());
-			$wcfPageEditor->update(array('isDisabled' => 0));
 
 			$menuItem = $pageEditor->getMenuItem();
 			if ($menuItem !== null) {
@@ -899,14 +856,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if ($pageEditor->menuItemID !== null && !empty($this->parameters['data']['title'])) {
 				$menuItemEditor = new MenuItemEditor($pageEditor->getMenuItem());
 				$menuItemEditor->update(array('title' => $this->parameters['data']['title']));
-			}
-
-			if ($pageEditor->wcfPageID !== null && !empty($this->parameters['data']['title'])) {
-				$wcfPageEditor = new WCFPageEditor($pageEditor->getWCFPage());
-				$wcfPageEditor->update(array(
-					'name' => $this->parameters['data']['title'],
-					'lastUpdateTime' => TIME_NOW
-				));
 			}
 		}
 

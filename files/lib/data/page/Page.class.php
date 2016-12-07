@@ -7,7 +7,6 @@ use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
 use wcf\data\menu\item\MenuItem;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\data\page\PageCache as WCFPageCache;
 use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
@@ -365,12 +364,5 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 			return null;
 
 		return new MenuItem($this->menuItemID);
-	}
-
-	public function getWCFPage() {
-		if ($this->wcfPageID === null)
-			return null;
-
-		return WCFPageCache::getInstance()->getPage($this->wcfPageID);
 	}
 }
