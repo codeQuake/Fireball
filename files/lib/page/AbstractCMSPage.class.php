@@ -20,7 +20,7 @@ use wcf\util\HeaderUtil;
 
 /**
  * Shows a created page.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -51,7 +51,7 @@ abstract class AbstractCMSPage extends AbstractPage {
 	 * @var	\RecursiveIteratorIterator
 	 */
 	public $sidebarNodeTree = null;
-	
+
 	/**
 	 * list of contents
 	 * keys body, sidebar are arrays
@@ -126,8 +126,9 @@ abstract class AbstractCMSPage extends AbstractPage {
 		$this->activeMenuItem = $menuItem->identifier;
 
 		// set breadcrumbs
+		PageLocationManager::getInstance()->addParentLocation('de.codequake.cms.Page', $this->pageID, $this->page);
 		foreach ($this->page->getParentPages() as $parent) {
-			PageLocationManager::getInstance()->addParentLocation('de.codequake.cms.Page', $parent->pageID);
+			PageLocationManager::getInstance()->addParentLocation('de.codequake.cms.Page', $parent->pageID, $parent);
 		}
 
 		// get contents

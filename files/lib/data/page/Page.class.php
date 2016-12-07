@@ -6,7 +6,6 @@ use cms\data\page\revision\PageRevisionList;
 use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
 use wcf\data\DatabaseObject;
-use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
 use wcf\data\ITitledLinkObject;
 use wcf\data\menu\item\MenuItem;
@@ -23,7 +22,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class Page extends DatabaseObject implements ITitledLinkObject, ILinkableObject, IPermissionObject, IRouteController {
+class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObject, IRouteController {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
