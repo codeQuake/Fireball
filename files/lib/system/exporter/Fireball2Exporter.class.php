@@ -558,7 +558,7 @@ class Fireball2Exporter extends AbstractExporter {
 			FROM	wcf".$this->dbNo."_object_type object_type,
 					wcf".$this->dbNo."_object_type_definition definition
 			WHERE	object_type.objectTypeID = ?
-				AND object_type.definitionID = definition.definitonID";
+				AND object_type.definitionID = definition.definitionID";
 		$statement = $this->database->prepareStatement($sql, 1);
 		$statement->execute(array($objectTypeID));
 		$row = $statement->fetchArray();
