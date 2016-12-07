@@ -1,6 +1,7 @@
 <?php
 namespace cms\acp\form;
 
+use cms\data\page\Page;
 use cms\data\page\PageAction;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
@@ -495,32 +496,7 @@ class PageAddForm extends AbstractForm {
 			I18nHandler::getInstance()->save('metaKeywords', $updateData['metaKeywords'], 'cms.page');
 		}
 
-		// create menu item for page
-		if ($this->createMenuItem) {
-			// set menu item of parent page as parent menu item
-			if ($page->getParentPage() !== null && $page->getParentPage()->menuItemID) {
-				$parentMenuItem = new MenuItem($page->getParentPage()->menuItemID);
-			}
-
-			$menuItemData = array(
-				'menuID' => MenuCache::getInstance()->getMainMenu()->menuID,
-				'parentItemID' => (isset($parentMenuItem) && $parentMenuItem->itemID) ? $parentMenuItem->itemID : null,
-				'identifier' => 'de.codequake.cms.Page' . $returnValues['returnValues']->pageID,
-				'title' => (!empty($updateData['title'])) ? $updateData['title'] : $this->title,
-				'pageID' => WCFPageCache::getInstance()->getPageByIdentifier('de.codequake.cms.Page')->pageID,
-				'originIsSystem' => 0,
-				'pageObjectID' => $returnValues['returnValues']->pageID,
-				'isDisabled' => $this->invisible,
-				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID
-			);
-
-			$menuItemAction = new MenuItemAction(array(), 'create', array('data' => $menuItemData));
-			$menuItemReturnValues = $menuItemAction->executeAction();
-			$menuItem = $menuItemReturnValues['returnValues'];
-
-			// save menu item with page
-			$updateData['menuItemID'] = $menuItem->menuItemID;
-		}
+		$this->createMenuItem($page, !empty($updateData['title']) ? $updateData['title'] : $this->title);
 
 		// save new information
 		$updateAction = new PageAction(array($page), 'update', array('data' => $updateData));
@@ -653,5 +629,43 @@ class PageAddForm extends AbstractForm {
 			'pageObjectTypeID' => $this->pageObjectTypeID,
 			'pageForm' => $this->pageObjectType->getProcessor()->getCompiledFormTemplate($this->specificFormParameters)
 		)));
+	}
+
+	/**
+	 * Creates the menu item for this page
+	 * @param \cms\data\page\Page $page
+	 */
+	public function createMenuItem(Page $page, $title) {
+		// create menu item for page
+		if ($this->createMenuItem) {
+			// set menu item of parent page as parent menu item
+			$parents = $page->getParentPages();
+			$parentMenuItemID = null;
+			foreach ($parents as $parent) {
+				if ($parent->menuItemID) {
+					$parentMenuItemID = $parent->menuItemID;
+					break;
+				}
+			}
+
+			$menuItemData = array(
+				'menuID' => MenuCache::getInstance()->getMainMenu()->menuID,
+				'parentItemID' => $parentMenuItemID,
+				'identifier' => 'de.codequake.cms.Page' . $page->pageID,
+				'title' => $title,
+				'pageID' => WCFPageCache::getInstance()->getPageByIdentifier('de.codequake.cms.Page')->pageID,
+				'originIsSystem' => 0,
+				'pageObjectID' => $page->pageID,
+				'isDisabled' => $this->invisible,
+				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID
+			);
+
+			$menuItemAction = new MenuItemAction(array(), 'create', array('data' => $menuItemData));
+			$menuItemReturnValues = $menuItemAction->executeAction();
+			$menuItem = $menuItemReturnValues['returnValues'];
+
+			// save menu item with page
+			$updateData['menuItemID'] = $menuItem->menuItemID;
+		}
 	}
 }

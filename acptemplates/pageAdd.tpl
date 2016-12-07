@@ -158,7 +158,7 @@
 					</dd>
 				</dl>
 
-				{if $action == 'add'}
+				{if !$menuItemID}
 					<dl>
 						<dt class="reversed"><label for="createMenuItem">{lang}cms.acp.page.general.createMenuItem{/lang}</label></dt>
 						<dd>
