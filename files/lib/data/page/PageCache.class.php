@@ -70,7 +70,7 @@ class PageCache extends SingletonFactory {
 
 	/**
 	 * Returns the page with the given id from cache.
-	 * 
+	 *
 	 * @param	integer		$pageID
 	 * @return	\cms\data\page\Page
 	 */
@@ -80,6 +80,15 @@ class PageCache extends SingletonFactory {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Returns the pages from cache.
+	 *
+	 * @return	\cms\data\page\Page[]
+	 */
+	public function getPages() {
+		return $this->pages;
 	}
 
 	public function getMenuNodeTree() {
