@@ -235,7 +235,7 @@ class Fireball2Exporter extends AbstractExporter {
 		$statement->execute();
 		
 		while ($row = $statement->fetchArray()) {
-			ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import($row['contentID'], $row);
+			ImportHandler::getInstance()->getImporter('de.codequake.cms.stylesheet')->import($row['stylesheetID'], $row);
 		}
 	}
 	
