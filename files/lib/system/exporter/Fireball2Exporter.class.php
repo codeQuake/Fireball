@@ -180,7 +180,7 @@ class Fireball2Exporter extends AbstractExporter {
 		$statement->execute();
 		
 		while ($row = $statement->fetchArray()) {
-			$row['objectTypeID'] = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page');
+			$row['objectTypeID'] = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page')->objectTypeID;
 			ImportHandler::getInstance()->getImporter('de.codequake.cms.page')->import($row['pageID'], $row);
 		}
 	}
