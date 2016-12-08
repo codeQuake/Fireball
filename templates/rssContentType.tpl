@@ -1,27 +1,35 @@
 {hascontent}
 	<div class="rssFeedContainer">
-		<ul>
+		<ul class="articleList">
 			{content}
-				{if $rssFeed|isset}
-					{foreach from=$rssFeed item=item}
-						<li class="rssItemContainer">
-							<div class="rssItemContainerHeadline containerHeadline">
-								<h3>
-									<a href="{$item['link']}">{$item['title']}</a>
-								</h3>
-								<small>
-									<span class="usename">
-										 {$item['author']}
-									</span> 
-									({@$item['time']|time})
-								</small>
-							</div>
-							<div class="rssItemContainerContent">
-								{@$item['description']}
-							</div>
-						</li>
-					{/foreach}
-				{/if}
+			{if $rssFeed|isset}
+				{foreach from=$rssFeed item=item}
+					<li class="rssItemContainer">
+						<a href="{$item['link']}"><a href="{$item['link']}">
+								<div>
+									<div class="containerHeadline">
+										<h3 class="articleListTitle">{$item['title']}</h3>
+
+										<ul class="inlineList articleListMetaData">
+											<li>
+												<span class="icon icon16 fa-clock-o"></span>
+												{@$item['time']|time}
+											</li>
+
+											<li>
+												<span class="icon icon16 fa-user"></span>
+												{$item['author']}
+											</li>
+									</div>
+
+									<div class="containerContent articleListTeaser">
+										{@$item['description']}
+									</div>
+								</div>
+							</a>
+					</li>
+				{/foreach}
+			{/if}
 			{/content}
 		</ul>
 	</div>
