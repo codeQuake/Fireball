@@ -43,24 +43,26 @@
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks application='cms' controller="FileList" link="id=$categoryID&pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 
-	<nav>
-		<ul>
-			<li class="dropdown">
-				<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
-				<div class="dropdownMenu">
-					<ul class="scrollableDropdownMenu">
-						{foreach from=$categoryList item=node}
-							<li{if $node->categoryID == $categoryID} class="active"{/if}><a href="{link application='cms' controller='FileList' id=$node->categoryID}{/link}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$categoryList->getDepth()}{$node->getTitle()}</a></li>
-						{/foreach}
-					</ul>
-				</div>
-			</li>
-			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
-			<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+	{if !$categoryList|empty}
+		<nav>
+			<ul>
+				<li class="dropdown">
+					<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
+					<div class="dropdownMenu">
+						<ul class="scrollableDropdownMenu">
+							{foreach from=$categoryList item=node}
+								<li{if $node->categoryID == $categoryID} class="active"{/if}><a href="{link application='cms' controller='FileList' id=$node->categoryID}{/link}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$categoryList->getDepth()}{$node->getTitle()}</a></li>
+							{/foreach}
+						</ul>
+					</div>
+				</li>
+				<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
+				<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 
-			{event name='contentNavigationButtonsTop'}
-		</ul>
-	</nav>
+				{event name='contentNavigationButtonsTop'}
+			</ul>
+		</nav>
+	{/if}
 </div>
 
 {if $objects|count}
