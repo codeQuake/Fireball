@@ -1,12 +1,7 @@
 <?php
 namespace cms\system;
 
-use cms\data\page\Page;
-use cms\data\page\PageCache;
-use cms\system\menu\page\CMSPageMenuItemProvider;
 use wcf\system\application\AbstractApplication;
-use wcf\system\menu\page\PageMenu;
-use wcf\system\WCF;
 
 /**
  * Fireball core.

@@ -8,19 +8,6 @@
 			<environment>user</environment>
 		</eventlistener>
 
-		<eventlistener>
-			<eventclassname>wcf\acp\form\PageMenuItemAddForm</eventclassname>
-			<eventname>save</eventname>
-			<listenerclassname>cms\system\event\listener\PageMenuListener</listenerclassname>
-			<environment>admin</environment>
-		</eventlistener>
-		<eventlistener>
-			<eventclassname>wcf\acp\form\PageMenuItemEditForm</eventclassname>
-			<eventname>save</eventname>
-			<listenerclassname>cms\system\event\listener\PageMenuListener</listenerclassname>
-			<environment>admin</environment>
-		</eventlistener>
-
 		<!-- delete revisions/old data -->
 		<eventlistener>
 			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
@@ -34,7 +21,6 @@
 			<listenerclassname>cms\system\event\listener\DailyCleanUpListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
-
 
 		<!-- user rename -->
 		<eventlistener>
@@ -72,4 +58,18 @@
 			<environment>admin</environment>
 		</eventlistener>
 	</import>
+	<delete>
+		<eventlistener>
+			<eventclassname>wcf\acp\form\PageMenuItemAddForm</eventclassname>
+			<eventname>save</eventname>
+			<listenerclassname>cms\system\event\listener\PageMenuListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\acp\form\PageMenuItemEditForm</eventclassname>
+			<eventname>save</eventname>
+			<listenerclassname>cms\system\event\listener\PageMenuListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+	</delete>
 </data>
