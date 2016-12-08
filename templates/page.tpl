@@ -45,17 +45,18 @@
 					<section class="box{if $content->getCSSClasses() != ""} {$content->getCSSClasses()}{/if}" id="cmsContent{@$content->contentID}" data-content-type="{$content->getTypeName()}">
 						<h2 class="boxTitle">{$content->getTitle()}</h2>
 
-						{@$content->getOutput()|language}
-						{if !$sidebarNodeTree->current()->hasChildren()}
-							</section>
-						{/if}
+						<div class="boxContent">
+							{@$content->getOutput()|language}
+							{if !$sidebarNodeTree->current()->hasChildren()}
+								</div></section>
+							{/if}
 
-						{assign var=oldDepth value=$sidebarNodeTree->getDepth()}
+							{assign var=oldDepth value=$sidebarNodeTree->getDepth()}
 				{else}
 					{@$content->getOutput()|language}
 				{/if}
 			{/foreach}
-			{section name=i loop=$oldDepth}</fieldset>{/section}
+			{section name=i loop=$oldDepth}</div></section>{/section}
 
 			{event name='boxes'}
 		{/content}
