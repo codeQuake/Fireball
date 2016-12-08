@@ -4,7 +4,7 @@
 		<!-- user -->
 		<templatelistener name="copyright">
 			<environment>user</environment>
-			<templatename>footer</templatename>
+			<templatename>pageFooterCopyright</templatename>
 			<eventname>copyright</eventname>
 			<templatecode><![CDATA[{include file='__copyright' application='cms'}]]></templatecode>
 		</templatelistener>
