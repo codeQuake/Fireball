@@ -1,1 +1,1 @@
-{if $__cms->isActiveApplication()}{lang}cms.page.copyright{/lang}{/if}
+{if $__cms->isActiveApplication()}<div class="copyright">{lang}cms.page.copyright{/lang}</div>{/if}
