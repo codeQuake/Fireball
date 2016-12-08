@@ -443,6 +443,8 @@
 		<item name="wcf.page.category.de.codequake.cms"><![CDATA[Fireball CMS]]></item>
 		<item name="wcf.page.de.codequake.cms.PagePage"><![CDATA[CMS-Seite]]></item>
 		<item name="wcf.page.sitemap.cms"><![CDATA[Seiten]]></item>
+
+		<item name="wcf.page.onlineLocation.de.codequake.cms.Page"><![Seite <a href="{$page->getLink()}">{$page->getTitle()}]]></item>
 	</category>
 
 	<category name="wcf.search">

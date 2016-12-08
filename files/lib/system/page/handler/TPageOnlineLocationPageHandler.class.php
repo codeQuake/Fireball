@@ -17,10 +17,10 @@ trait TPageOnlineLocationPageHandler {
 		if ($user->pageObjectID === null)
 			return '';
 
-		$page = PageCache::getInstance()->getPage($user->pageObjectID);
-		if ($page === null || $page->canRead())
+		$fPage = PageCache::getInstance()->getPage($user->pageObjectID);
+		if ($fPage === null || !$fPage->canRead())
 			return '';
-		
-		return WCF::getLanguage()->getDynamicVariable('wcf.page.onlineLocation.' . $page->identifier, array('page' => $page));
+
+		return WCF::getLanguage()->getDynamicVariable('wcf.page.onlineLocation.' . $page->identifier, array('page' => $fPage));
 	}
 }
