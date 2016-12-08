@@ -35,6 +35,10 @@ class Fireball2Exporter extends AbstractExporter {
 	 * @see \wcf\system\exporter\AbstractExporter::$methods
 	 */
 	protected $methods = array(
+		// WoltLab
+		'com.woltlab.wcf.user' => 'Users',
+		'com.woltlab.wcf.user.group' => 'UserGroups',
+		// Fireball
 		'de.codequake.cms.page' => 'Pages',
 		'de.codequake.cms.content' => 'Contents',
 		'de.codequake.cms.file.category' => 'FileCategories',
@@ -48,6 +52,7 @@ class Fireball2Exporter extends AbstractExporter {
 	 * @see	\wcf\system\exporter\AbstractExporter::$limits
 	 */
 	protected $limits = array(
+		'com.woltlab.wcf.user' => 100,
 		'de.codequake.cms.page' => 300,
 		'de.codequake.cms.content' => 100,
 		'de.codequake.cms.file.category' => 300,
@@ -85,6 +90,11 @@ class Fireball2Exporter extends AbstractExporter {
 	 */
 	public function getSupportedData() {
 		return array(
+			// WoltLab
+			'com.woltlab.wcf.user' => array(
+				'com.woltlab.wcf.user.group'
+			),
+			// Fireball
 			'de.codequake.cms.page' => array(
 				'de.codequake.cms.page.comment',
 				'de.codequake.cms.content'
@@ -122,6 +132,13 @@ class Fireball2Exporter extends AbstractExporter {
 	 */
 	public function getQueue() {
 		$queue = array();
+
+		// user
+		if (in_array('com.woltlab.wcf.user', $this->selectedData)) {
+			if (in_array('com.woltlab.wcf.user.group', $this->selectedData)) {
+				$queue[] = 'com.woltlab.wcf.user.group';
+			}
+		}
 		
 		if (in_array('de.codequake.cms.stylesheet', $this->selectedData)) {
 			$queue[] = 'de.codequake.cms.stylesheet';
@@ -155,6 +172,157 @@ class Fireball2Exporter extends AbstractExporter {
 	public function getDefaultDatabasePrefix() {
 		return 'cms1_';
 	}
+
+	/* ---------------------------------- */
+	/* CODE BY WOLTLAB (license: LGPL v3) */
+	/* ---------------------------------- */
+
+	/**
+	 * Counts user groups.
+	 */
+	public function countUserGroups() {
+		$sql = "SELECT	COUNT(*) AS count
+			FROM	wcf".$this->dbNo."_user_group";
+		$statement = $this->database->prepareStatement($sql);
+		$statement->execute();
+		$row = $statement->fetchArray();
+		return $row['count'];
+	}
+
+	/**
+	 * Exports user groups.
+	 *
+	 * @param	integer		$offset
+	 * @param	integer		$limit
+	 */
+	public function exportUserGroups($offset, $limit) {
+		$sql = "SELECT		*
+			FROM		wcf".$this->dbNo."_user_group
+			ORDER BY	groupID";
+		$statement = $this->database->prepareStatement($sql, $limit, $offset);
+		$statement->execute();
+		while ($row = $statement->fetchArray()) {
+			ImportHandler::getInstance()->getImporter('com.woltlab.wcf.user.group')->import($row['groupID'], [
+				'groupName' => $row['groupName'],
+				'groupDescription' => $row['groupDescription'],
+				'groupType' => $row['groupType'],
+				'priority' => $row['priority'],
+				'userOnlineMarking' => !empty($row['userOnlineMarking']) ? $row['userOnlineMarking'] : '',
+				'showOnTeamPage' => !empty($row['showOnTeamPage']) ? $row['showOnTeamPage'] : 0
+			]);
+		}
+	}
+
+	/**
+	 * Counts users.
+	 */
+	public function countUsers() {
+		return $this->__getMaxID("wcf".$this->dbNo."_user", 'userID');
+	}
+
+	/**
+	 * Exports users.
+	 *
+	 * @param	integer		$offset
+	 * @param	integer		$limit
+	 */
+	public function exportUsers($offset, $limit) {
+		// cache existing user options
+		$existingUserOptions = [];
+		$sql = "SELECT	optionName, optionID
+			FROM	wcf".WCF_N."_user_option
+			WHERE	optionName NOT LIKE 'option%'";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute();
+		while ($row = $statement->fetchArray()) {
+			$existingUserOptions[$row['optionName']] = true;
+		}
+
+		// cache user options
+		$userOptions = [];
+		$sql = "SELECT	optionName, optionID
+			FROM	wcf".$this->dbNo."_user_option";
+		$statement = $this->database->prepareStatement($sql);
+		$statement->execute();
+		while ($row = $statement->fetchArray()) {
+			$userOptions[$row['optionID']] = (isset($existingUserOptions[$row['optionName']]) ? $row['optionName'] : $row['optionID']);
+		}
+
+		// prepare password update
+		$sql = "UPDATE	wcf".WCF_N."_user
+			SET	password = ?
+			WHERE	userID = ?";
+		$passwordUpdateStatement = WCF::getDB()->prepareStatement($sql);
+
+		// get users
+		$sql = "SELECT		user_option_value.*, user_table.*,
+					(
+						SELECT	GROUP_CONCAT(groupID)
+						FROM	wcf".$this->dbNo."_user_to_group
+						WHERE	userID = user_table.userID
+					) AS groupIDs,
+					(
+						SELECT		GROUP_CONCAT(language.languageCode)
+						FROM		wcf".$this->dbNo."_user_to_language user_to_language
+						LEFT JOIN	wcf".$this->dbNo."_language language
+						ON		(language.languageID = user_to_language.languageID)
+						WHERE		user_to_language.userID = user_table.userID
+					) AS languageCodes
+			FROM		wcf".$this->dbNo."_user user_table
+			LEFT JOIN	wcf".$this->dbNo."_user_option_value user_option_value
+			ON		(user_option_value.userID = user_table.userID)
+			WHERE		user_table.userID BETWEEN ? AND ?
+			ORDER BY	user_table.userID";
+		$statement = $this->database->prepareStatement($sql);
+		$statement->execute([$offset + 1, $offset + $limit]);
+		while ($row = $statement->fetchArray()) {
+			$data = [
+				'username' => $row['username'],
+				'password' => '',
+				'email' => $row['email'],
+				'registrationDate' => $row['registrationDate'],
+				'banned' => $row['banned'],
+				'banReason' => $row['banReason'],
+				'activationCode' => $row['activationCode'],
+				'oldUsername' => $row['oldUsername'],
+				'registrationIpAddress' => $row['registrationIpAddress'],
+				'disableAvatar' => $row['disableAvatar'],
+				'disableAvatarReason' => $row['disableAvatarReason'],
+				'enableGravatar' => $row['enableGravatar'],
+				'signature' => $row['signature'],
+				'signatureEnableHtml' => $row['signatureEnableHtml'],
+				'disableSignature' => $row['disableSignature'],
+				'disableSignatureReason' => $row['disableSignatureReason'],
+				'profileHits' => $row['profileHits'],
+				'userTitle' => $row['userTitle'],
+				'lastActivityTime' => $row['lastActivityTime']
+			];
+			$additionalData = [
+				'groupIDs' => explode(',', $row['groupIDs']),
+				'languages' => explode(',', $row['languageCodes']),
+				'options' => []
+			];
+
+			// handle user options
+			foreach ($userOptions as $optionID => $optionName) {
+				if (isset($row['userOption'.$optionID])) {
+					$additionalData['options'][$optionName] = $row['userOption'.$optionID];
+				}
+			}
+
+			// import user
+			$newUserID = ImportHandler::getInstance()->getImporter('com.woltlab.wcf.user')->import($row['userID'], $data, $additionalData);
+
+			// update password hash
+			if ($newUserID) {
+				$passwordUpdateStatement->execute([$row['password'], $newUserID]);
+			}
+		}
+	}
+
+	/* ---------------------- */
+	/* END OF CODE BY WOLTLAB */
+	/* ---------------------- */
 	
 	/**
 	 * Counts pages.
