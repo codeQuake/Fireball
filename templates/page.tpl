@@ -17,9 +17,11 @@
 	<header class="contentHeader">
 		<div class="contentHeaderTitle">
 			<h1 class="contentTitle">{$page->getTitle()}</h1>
-			<p class="contentHeaderDescription">
-				{if $page->description}{@$page->description|language}{/if}
-			</p>
+			{if $page->description}
+				<p class="contentHeaderDescription">
+					{@$page->description|language}
+				</p>
+			{/if}
 		</div>
 
 		{hascontent}
