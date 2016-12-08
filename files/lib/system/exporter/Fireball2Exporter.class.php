@@ -7,7 +7,6 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\database\DatabaseException;
 use wcf\system\exporter\AbstractExporter;
 use wcf\system\importer\ImportHandler;
-use wcf\system\WCF;
 use wcf\util\FileUtil;
 
 /**
@@ -36,6 +35,7 @@ class Fireball2Exporter extends AbstractExporter {
 	 */
 	protected $methods = array(
 		'de.codequake.cms.page' => 'Pages',
+		'de.codequake.cms.page.acl' => 'PagesACLs',
 		'de.codequake.cms.content' => 'Contents',
 		'de.codequake.cms.file.category' => 'FileCategories',
 		'de.codequake.cms.file' => 'Files',
@@ -86,6 +86,7 @@ class Fireball2Exporter extends AbstractExporter {
 	public function getSupportedData() {
 		return array(
 			'de.codequake.cms.page' => array(
+				'de.codequake.cms.page.acl',
 				'de.codequake.cms.page.comment',
 				'de.codequake.cms.content'
 			),
@@ -136,6 +137,9 @@ class Fireball2Exporter extends AbstractExporter {
 
 		if (in_array('de.codequake.cms.page', $this->selectedData)) {
 			$queue[] = 'de.codequake.cms.page';
+
+			if (in_array('de.codequake.cms.page.acl', $this->selectedData))
+				$queue[] = 'de.codequake.cms.page.acl';
 
 			if (in_array('de.codequake.cms.content', $this->selectedData))
 				$queue[] = 'de.codequake.cms.content';
@@ -460,6 +464,20 @@ class Fireball2Exporter extends AbstractExporter {
 	}
 
 	/**
+	 * Counts server acls.
+	 */
+	public function countPagesACLs() {
+		$this->countACLs();
+	}
+
+	/**
+	 * Exports server acls.
+	 */
+	public function exportPagesACLs($offset, $limit) {
+		$this->exportACLs($offset, $limit, 'de.codequake.cms.page', 'de.codequake.cms.page.acl');
+	}
+
+	/**
 	 * Updates the i18n data of the category with the given id.
 	 *
 	 * @param int   $categoryID
@@ -567,5 +585,55 @@ class Fireball2Exporter extends AbstractExporter {
 			return $row;
 
 		return null;
+	}
+
+	/**
+	 * Counts ACLs.
+	 */
+	protected function countACLs() {
+		$sql = "SELECT	(SELECT COUNT(*) FROM wcf".$this->dbNo."_acl_option_to_group)
+				+ (SELECT COUNT(*) FROM wcf".$this->dbNo."_acl_option_to_user) AS count";
+		$statement = $this->database->prepareStatement($sql);
+		$statement->execute();
+		$row = $statement->fetchArray();
+		return $row['count'];
+	}
+
+	/**
+	 * Exports ACLs.
+	 */
+	protected function exportACLs($offset, $limit, $aclObjectType, $importerObjectType) {
+		$objectTypeID = $this->getObjectTypeID('com.woltlab.wcf.acl', $aclObjectType);
+
+		$sql = "(
+				SELECT		acl_option.optionName, acl_option.optionID,
+						option_to_group.objectID, option_to_group.optionValue, 0 AS userID, option_to_group.groupID
+				FROM		wcf".$this->dbNo."_acl_option_to_group option_to_group,
+						wcf".$this->dbNo."_acl_option acl_option
+				WHERE		acl_option.optionID = option_to_group.optionID
+						AND acl_option.objectTypeID = ?
+			)
+			UNION
+			(
+				SELECT		acl_option.optionName, acl_option.optionID,
+						option_to_user.objectID, option_to_user.optionValue, option_to_user.userID, 0 AS groupID
+				FROM		wcf".$this->dbNo."_acl_option_to_user option_to_user,
+						wcf".$this->dbNo."_acl_option acl_option
+				WHERE		acl_option.optionID = option_to_user.optionID
+						AND acl_option.objectTypeID = ?
+			)
+			ORDER BY	optionID, objectID, userID, groupID";
+		$statement = $this->database->prepareStatement($sql, $limit, $offset);
+		$statement->execute(array($objectTypeID, $objectTypeID));
+		while ($row = $statement->fetchArray()) {
+			$data = array(
+				'objectID' => $row['objectID'],
+				'optionValue' => $row['optionValue']
+			);
+			if ($row['userID']) $data['userID'] = $row['userID'];
+			if ($row['groupID']) $data['groupID'] = $row['groupID'];
+
+			ImportHandler::getInstance()->getImporter($importerObjectType)->import(0, $data, array('optionName' => $row['optionName']));
+		}
 	}
 }
