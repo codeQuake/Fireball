@@ -1,6 +1,6 @@
 {include file='header' pageTitle='cms.acp.file.list'}
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@LAST_UPDATE_TIME}"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function () {
@@ -26,9 +26,9 @@
 
 		new WCF.Table.EmptyTableHandler($('#fileListTableContainer'), 'jsFileRow', options);
 
-		new CMS.ACP.File.Details();
-		new CMS.ACP.File.Preview();
-		CMS.ACP.File.Upload.init(function() {
+		new Fireball.ACP.File.Details();
+		new Fireball.ACP.File.Preview();
+		Fireball.ACP.File.Upload.init(function() {
 			window.location.reload();
 		});
 	});
@@ -45,18 +45,22 @@
 
 	<nav>
 		<ul>
-			<li class="dropdown">
-				<a class="button dropdownToggle"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
-				<div class="dropdownMenu">
-					<ul class="scrollableDropdownMenu">
-						{foreach from=$categoryList item=node}
-							<li{if $node->categoryID == $categoryID} class="active"{/if}><a href="{link application='cms' controller='FileList' id=$node->categoryID}{/link}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$categoryList->getDepth()}{$node->getTitle()}</a></li>
-						{/foreach}
-					</ul>
-				</div>
-			</li>
-			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 icon-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
-			<li><a class="button jsFileUploadButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+			{if $categoryList|iterator_count}
+				<li class="dropdown">
+					<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
+					<div class="dropdownMenu">
+						<ul class="scrollableDropdownMenu">
+							{foreach from=$categoryList item=node}
+								<li{if $node->categoryID == $categoryID} class="active"{/if}><a href="{link application='cms' controller='FileList' id=$node->categoryID}{/link}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$categoryList->getDepth()}{$node->getTitle()}</a></li>
+							{/foreach}
+						</ul>
+					</div>
+				</li>
+			{/if}
+			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
+			{if $categoryList|iterator_count}
+				<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+			{/if}
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
