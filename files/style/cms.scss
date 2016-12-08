@@ -1,49 +1,63 @@
-.menuContainer{
-	.cmsMenu{
-		> li > ul > li > a {padding-left: 35px;}
-		> li > ul > li > ul > li a {padding-left: 56px;}
-		> li > ul > li > ul > li > ul > li a {padding-left: 77px;}
-		> li > ul > li > ul > li > ul > li > ul > li a {padding-left: 98px;}
-		> li > ul > li > ul > li > ul > li > ul > li > ul > li a {padding-left: 119px;}
+.menuContainer {
+	.cmsMenu {
+		> li > ul > li > a {
+			padding-left: 35px;
+		}
+		> li > ul > li > ul > li a {
+			padding-left: 56px;
+		}
+		> li > ul > li > ul > li > ul > li a {
+			padding-left: 77px;
+		}
+		> li > ul > li > ul > li > ul > li > ul > li a {
+			padding-left: 98px;
+		}
+		> li > ul > li > ul > li > ul > li > ul > li > ul > li a {
+			padding-left: 119px;
+		}
 	}
 }
 
-#contentAddButton{
+#contentAddButton {
 	position: fixed;
 	top: 50%;
-	left:0px;
+	left: 0;
 	z-index: 500;
 	padding: 5px;
-	background: @wcfTabularBoxBackgroundColor;
+	//background: @wcfTabularBoxBackgroundColor;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
-	.transition(all, 0.5s, ease);
-	&.open{
+	.transition(all, 0.5 s, ease);
+	&.open {
 		left: 250px;
 	}
-	.icon{color: @wcfTabularBoxColor;}
+	.icon {
+		//color: @wcfTabularBoxColor;
+	}
 }
 
-body.ribbonOpen{
+body.ribbonOpen {
 	position: absolute;
 	left: 250px;
 }
 
-#contentRibbon{
+#contentRibbon {
 	z-index: 500;
 	width: 250px;
 	height: 100%;
 	position: fixed;
 	left: -250px;
 	top: 0;
-	.transition(all, 0.5s, ease);
-	background: @wcfContainerBackgroundColor;
+	.transition(all, 0.5 s, ease);
+	//background: @wcfContainerBackgroundColor;
 	font-size: 1rem;
-	&.open{left: 0px;}
+	&.open {
+		left: 0;
+	}
 	> .wideButton {
-		margin-top: 0px;
-		background: @wcfTabularBoxBackgroundColor;
-		border-top: 1px solid @wcfContainerBorderColor;
+		margin-top: 0;
+		//background: @wcfTabularBoxBackgroundColor;
+		//border-top: 1px solid @wcfContainerBorderColor;
 		height: 10%;
 		padding-top: 5%;
 		text-align: center;
@@ -55,36 +69,40 @@ body.ribbonOpen{
 		}
 	}
 	> .sideMenu {
-		overflow-y:scroll;
+		overflow-y: scroll;
 		height: 90%;
-		> ul{
-			 > li {		
+		> ul {
+			> li {
 				> p {
 					font-size: 1.25rem;
-					color: @wcfLinkColor;
+					//color: @wcfLinkColor;
 					font-weight: 700;
 					padding: 8px 28px;
 				}
 			}
 		}
-		.sideSubMenu > li{
+		.sideSubMenu > li {
 			padding: 8px 28px;
-			color: @wcfDimmedColor;
+			//color: @wcfDimmedColor;
 			border-bottom: 1px solid whitesmoke;
-			&:first-child{border-top: 1px solid whitesmoke;}
-			.icon{color:@wcfDimmedColor;}
-			&:hover{
-				background: @wcfContainerHoverBackgroundColor;
+			&:first-child {
+				border-top: 1px solid whitesmoke;
 			}
-			&.ui-draggable-dragging{
-				background:@wcfContainerHoverBackgroundColor;
+			.icon {
+				//color: @wcfDimmedColor;
+			}
+			&:hover {
+				//background: @wcfContainerHoverBackgroundColor;
+			}
+			&.ui-draggable-dragging {
+				//background: @wcfContainerHoverBackgroundColor;
 				width: 200px;
 			}
 		}
 	}
 }
 
-#contentAddForm{
+#contentAddForm {
 	.gridContainer {
 		border: 1px solid #ccc;
 		&:before, &:after {
@@ -132,21 +150,26 @@ body.ribbonOpen{
 }
 
 .sortableContentList {
-	.sortableList{margin-left: 0px;}
-	ol{list-style: none;}
+	.sortableList {
+		margin-left: 0;
+	}
+	ol {
+		list-style: none;
+	}
 }
 
-
-.ui-droppable{
+.ui-droppable {
 	min-height: 50px;
 	border: 1px dashed blue;
-	> .cmsOptions {text-align: right;}
-	&.droppable-state-active{
+	> .cmsOptions {
+		text-align: right;
+	}
+	&.droppable-state-active {
 		border: 1px dashed green;
 	}
 	> .draggedContent {
 		min-height: 50px;
-		border: 1px dotted rgba(0,0,0,0.5);
+		border: 1px dotted rgba(0, 0, 0, 0.5);
 	}
 }
 
@@ -173,19 +196,19 @@ body.ribbonOpen{
 
 	.fireballSlideContainer {
 		position: relative;
-		margin-bottom: @wcfGapLarge;
+		//margin-bottom: @wcfGapLarge;
 		overflow: hidden;
 		> div {
 			position: absolute;
-			.transition(all, 1s, ease-out);
-			> div.fireballSlide{
+			.transition(all, 1 s, ease-out);
+			> div.fireballSlide {
 				float: left;
 				position: absolute;
 				top: 0;
-				overflow: hidden;				
+				overflow: hidden;
 			}
-			&.fireballSlide{
-				float: none; 
+			&.fireballSlide {
+				float: none;
 				position: relative;
 				&:not(:first-child) {
 					display: none;
@@ -205,21 +228,20 @@ body.ribbonOpen{
 
 				&.active > a > span {
 					transition: 0.5s all ease-in-out;
-					color: @wcfContainerHoverBackgroundColor;
+					//color: @wcfContainerHoverBackgroundColor;
 				}
 			}
 		}
 	}
 
-
 	figure {
-		margin-top: @wcfGapMedium;
-		margin-bottom: @wcfGapMedium;
+		//margin-top: @wcfGapMedium;
+		//margin-bottom: @wcfGapMedium;
 		overflow: hidden;
 
 		> figcaption {
 			font-style: italic;
-			font-size: @wcfSmallFontSize;
+			//font-size: @wcfSmallFontSize;
 		}
 
 		> a.framed > img {
@@ -244,18 +266,18 @@ body.ribbonOpen{
 		height: auto;
 
 		> figure {
-			background: @wcfContainerBackgroundColor;
-			border: 1px solid @wcfContainerBorderColor;
+			//background: @wcfContainerBackgroundColor;
+			//border: 1px solid @wcfContainerBorderColor;
 			width: 100%;
-			border-radius: @wcfContainerBorderRadius;
-			-webkit-border-radius: @wcfContainerBorderRadius;
-			-moz-border-radius: @wcfContainerBorderRadius;
+			//border-radius: @wcfContainerBorderRadius;
+			//-webkit-border-radius: @wcfContainerBorderRadius;
+			//-moz-border-radius: @wcfContainerBorderRadius;
 			line-height: 170px;
 			height: 190px;
 			transition: .2s all ease-in-out;
 
 			&:hover {
-				background: @wcfContainerHoverBackgroundColor;
+				//background: @wcfContainerHoverBackgroundColor;
 			}
 		}
 	}
@@ -266,30 +288,30 @@ body.ribbonOpen{
 		div[data-content-type="de.codequake.cms.content.type.php"],
 		div[data-content-type="de.codequake.cms.content.type.text"] {
 			h1 {
-				font-size: @wcfHeadlineFontSize;
+				//font-size: @wcfHeadlineFontSize;
 				font-weight: bold;
-				color: @wcfHeadlineColor;
-				font-family: @wcfHeadlineFontFamily;
+				//color: @wcfHeadlineColor;
+				//font-family: @wcfHeadlineFontFamily;
 			}
 
 			h2 {
-				font-size: @wcfSubHeadlineFontSize;
+				//font-size: @wcfSubHeadlineFontSize;
 				font-weight: bold;
-				color: @wcfHeadlineColor;
-				font-family: @wcfHeadlineFontFamily;
+				//color: @wcfHeadlineColor;
+				//font-family: @wcfHeadlineFontFamily;
 			}
 
 			h3 {
-				font-size: @wcfTitleFontSize;
+				//font-size: @wcfTitleFontSize;
 				font-weight: bold;
-				color: @wcfHeadlineColor;
-				font-family: @wcfHeadlineFontFamily;
+				//color: @wcfHeadlineColor;
+				//font-family: @wcfHeadlineFontFamily;
 			}
 
 			h4 {
 				font-weight: bold;
-				color: @wcfHeadlineColor;
-				font-family: @wcfHeadlineFontFamily;
+				//color: @wcfHeadlineColor;
+				//font-family: @wcfHeadlineFontFamily;
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 /*
-	Fireball Grid System for WCF
-*/
+ *	Fireball Grid System for WCF
+ */
 .gridContainer {
 	&::before, &::after {
 		display: table;
@@ -19,20 +19,13 @@
 		-moz-box-sizing: border-box;
 
 		&:not(:last-child) {
-			padding-right: @wcfGapMedium;
+			//padding-right: @wcfGapMedium;
 		}
 	}
 
-	.grid-mixin(@width) {
-		.grid@{width} { 
-			width: percentage(@width / 100);
+	@for $i from 1 through 100 {
+		.grid#{$i} {
+			width: percentage($i/100);
 		}
 	}
-
-	.loop(@counter) when (@counter >= 20){
-		.loop((@counter - 1));
-		.grid-mixin(@counter);
-	}
-
-	.loop(80);
 }
