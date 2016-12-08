@@ -443,7 +443,7 @@
 		<item name="wcf.page.de.codequake.cms.PagePage"><![CDATA[CMS Page]]></item>
 		<item name="wcf.page.sitemap.cms"><![CDATA[Pages]]></item>
 
-		<item name="wcf.page.onlineLocation.de.codequake.cms.Page"><![Page <a href="{$page->getLink()}">{$page->getTitle()}]]></item>
+		<item name="wcf.page.onlineLocation.de.codequake.cms.Page"><![CDATA[Page <a href="{$page->getLink()}">{$page->getTitle()}</a>]]></item>
 	</category>
 
 	<category name="wcf.search">
