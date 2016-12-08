@@ -34,19 +34,20 @@
 	</header>
 {/capture}
 
+{assign var=sidebarUc value=$page->sidebarOrientation|ucfirst}
 {hascontent}
-	{capture assign='sidebarRight'}
+	{capture assign='sidebar'|concat:$sidebarUc}
 		{content}
 			{assign var=oldDepth value=0}
 			{foreach from=$sidebarNodeTree item=content}
 				{if $content->getTypeName() != 'de.codequake.cms.content.type.dashboard'}
 					{section name=i loop=$oldDepth-$sidebarNodeTree->getDepth()}</fieldset>{/section}
-					<fieldset class="dashboardBox{if $content->getCSSClasses() != ""} {$content->getCSSClasses()}{/if}" id="cmsContent{@$content->contentID}" data-content-type="{$content->getTypeName()}">
-						<legend>{$content->getTitle()}</legend>
+					<section class="box{if $content->getCSSClasses() != ""} {$content->getCSSClasses()}{/if}" id="cmsContent{@$content->contentID}" data-content-type="{$content->getTypeName()}">
+						<h2 class="boxTitle">{$content->getTitle()}</h2>
 
 						{@$content->getOutput()|language}
 						{if !$sidebarNodeTree->current()->hasChildren()}
-							</fieldset>
+							</section>
 						{/if}
 
 						{assign var=oldDepth value=$sidebarNodeTree->getDepth()}
