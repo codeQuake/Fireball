@@ -72,7 +72,8 @@ class FileListPage extends SortablePage {
 			// load first category
 			$categories = CategoryHandler::getInstance()->getCategories('de.codequake.cms.file');
 			$this->category = array_shift($categories);
-			$this->categoryID = $this->category->categoryID;
+			if ($this->category !== null)
+				$this->categoryID = $this->category->categoryID;
 		}
 	}
 
