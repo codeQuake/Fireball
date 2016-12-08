@@ -16,7 +16,7 @@ class MenuContentType extends AbstractStructureContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-sitemap';
+	protected $icon = 'fa-sitemap';
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()

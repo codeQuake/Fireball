@@ -15,7 +15,7 @@ class RssContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-rss';
+	protected $icon = 'fa-rss';
 	
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields

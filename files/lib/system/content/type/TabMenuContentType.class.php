@@ -15,7 +15,7 @@ class TabMenuContentType extends AbstractStructureContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-list-alt';
+	protected $icon = 'fa-list-alt';
 
 	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()

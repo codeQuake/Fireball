@@ -16,7 +16,7 @@ class TextContentType extends AbstractSearchableContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-file-text-alt';
+	protected $icon = 'fa-file-text-o';
 
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields

@@ -19,7 +19,7 @@ class UserContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-user';
+	protected $icon = 'fa-user';
 	
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields

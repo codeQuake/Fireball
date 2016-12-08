@@ -11,7 +11,7 @@ class LinkContentType extends AbstractSearchableContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-link';
+	protected $icon = 'fa-link';
 
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields

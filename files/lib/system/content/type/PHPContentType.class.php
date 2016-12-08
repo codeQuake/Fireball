@@ -13,7 +13,7 @@ class PHPContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-code';
+	protected $icon = 'fa-code';
 	
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields

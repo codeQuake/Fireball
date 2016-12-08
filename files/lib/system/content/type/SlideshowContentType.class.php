@@ -13,7 +13,7 @@ class SlideshowContentType extends AbstractStructureContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-play-sign';
+	protected $icon = 'fa-play';
 
 	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()

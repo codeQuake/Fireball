@@ -19,7 +19,7 @@ abstract class AbstractContentType implements IContentType {
 	 * name of the icon to display
 	 * @var	string
 	 */
-	protected $icon = 'icon-unchecked';
+	protected $icon = 'fa-unchecked';
 
 	/**
 	 * list of multilingual fields

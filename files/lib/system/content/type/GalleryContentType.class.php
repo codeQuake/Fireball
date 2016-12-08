@@ -18,7 +18,7 @@ class GalleryContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-picture';
+	protected $icon = 'fa-picture-o';
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()

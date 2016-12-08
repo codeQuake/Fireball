@@ -11,7 +11,7 @@ class HeadlineContentType extends AbstractSearchableContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-underline';
+	protected $icon = 'fa-underline';
 
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields

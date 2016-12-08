@@ -15,7 +15,7 @@ abstract class AbstractStructureContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-columns';
+	protected $icon = 'fa-columns';
 
 	/**
 	 * Returns the css classes for structuring the output

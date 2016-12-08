@@ -15,7 +15,7 @@ class PollContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-bar-chart';
+	protected $icon = 'fa-bar-chart';
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()

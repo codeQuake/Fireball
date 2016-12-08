@@ -18,7 +18,7 @@ class FileContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-file';
+	protected $icon = 'fa-file';
 	
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
