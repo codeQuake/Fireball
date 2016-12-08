@@ -45,7 +45,7 @@
 
 	<nav>
 		<ul>
-			{if !$categoryList|empty}
+			{if $categoryList|iterator_count}
 				<li class="dropdown">
 					<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
 					<div class="dropdownMenu">
@@ -58,7 +58,7 @@
 				</li>
 			{/if}
 			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
-			{if !$categoryList|empty}
+			{if $categoryList|iterator_count}
 				<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 			{/if}
 
