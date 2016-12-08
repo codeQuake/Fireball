@@ -43,9 +43,9 @@
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks application='cms' controller="FileList" link="id=$categoryID&pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 
-	{if !$categoryList|empty}
-		<nav>
-			<ul>
+	<nav>
+		<ul>
+			{if !$categoryList|empty}
 				<li class="dropdown">
 					<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
 					<div class="dropdownMenu">
@@ -56,13 +56,15 @@
 						</ul>
 					</div>
 				</li>
-				<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
+			{/if}
+			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
+			{if !$categoryList|empty}
 				<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+			{/if}
 
-				{event name='contentNavigationButtonsTop'}
-			</ul>
-		</nav>
-	{/if}
+			{event name='contentNavigationButtonsTop'}
+		</ul>
+	</nav>
 </div>
 
 {if $objects|count}
