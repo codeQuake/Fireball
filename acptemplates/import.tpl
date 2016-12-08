@@ -13,36 +13,34 @@
 <p class="info">{lang}cms.acp.page.import.info{/lang}</p>
 
 <form method="post" enctype="multipart/form-data" action="{link controller='CMSImport' application='cms'}{/link}">
-	<div class="container containerPadding marginTop">
-		<fieldset>
-			<legend>{lang}cms.acp.page.import{/lang}</legend>
+	<section class="section">
+		<h2 class="sectionTitle">{lang}cms.acp.page.import{/lang}</h2>
 
-			<dl{if $errorField == 'file'} class="formError"{/if}>
-				<dt><label for="file">{lang}cms.acp.page.import.upload{/lang}</label></dt>
-				<dd>
-					<input type="file" name="file" id="file" />
-					{if $errorField == 'file'}
-						<small class="innerError">
-							{lang}cms.acp.page.import.{$errorType}{/lang}
-						</small>
-					{/if}
-					<small>{lang}cms.acp.page.import.upload.description{/lang}</small>
-				</dd>
-			</dl>
-			<dl{if $errorField == 'file'} class="formError"{/if}>
-				<dt><label for="fileLink">{lang}cms.acp.page.import.link{/lang}</label></dt>
-				<dd>
-					<input type="text" name="fileLink" id="fileLink" class="long" />
-					{if $errorField == 'fileLink'}
-						<small class="innerError">
-							{lang}cms.acp.page.import.{$errorType}{/lang}
-						</small>
-					{/if}
-					<small>{lang}cms.acp.page.import.link.description{/lang}</small>
-				</dd>
-			</dl>
-		</fieldset>
-	</div>
+		<dl{if $errorField == 'file'} class="formError"{/if}>
+			<dt><label for="file">{lang}cms.acp.page.import.upload{/lang}</label></dt>
+			<dd>
+				<input type="file" name="file" id="file" />
+				{if $errorField == 'file'}
+					<small class="innerError">
+						{lang}cms.acp.page.import.{$errorType}{/lang}
+					</small>
+				{/if}
+				<small>{lang}cms.acp.page.import.upload.description{/lang}</small>
+			</dd>
+		</dl>
+		<dl{if $errorField == 'file'} class="formError"{/if}>
+			<dt><label for="fileLink">{lang}cms.acp.page.import.link{/lang}</label></dt>
+			<dd>
+				<input type="text" name="fileLink" id="fileLink" class="long" />
+				{if $errorField == 'fileLink'}
+					<small class="innerError">
+						{lang}cms.acp.page.import.{$errorType}{/lang}
+					</small>
+				{/if}
+				<small>{lang}cms.acp.page.import.link.description{/lang}</small>
+			</dd>
+		</dl>
+	</section>
 
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
@@ -50,26 +48,18 @@
 	</div>
 </form>
 
-<header class="boxHeadline">
-	<h1>{lang}cms.acp.page.export{/lang}</h1>
-</header>
+<section class="section">
+	<h2 class="sectionTitle">{lang}cms.acp.page.export{/lang}</h2>
 
-<div class="container containerPadding marginTop">
-	<fieldset>
-		<legend>{lang}cms.acp.page.export{/lang}</legend>
+	<dl id="pageExportDiv">
+		<dt><label>{lang}cms.acp.page.export.download{/lang}</label></dt>
+		<dd>
+			<p><a href="{link application='cms' controller='CMSExport'}{/link}" id="pageExport" class="button">{lang}cms.acp.page.export{/lang}</a></p>
+			<small>{lang}cms.acp.page.export.download.description{/lang}</small>
+		</dd>
+	</dl>
 
-		<dl id="pageExportDiv">
-			<dt><label>{lang}cms.acp.page.export.download{/lang}</label></dt>
-			<dd>
-				<p><a href="{link application='cms' controller='CMSExport'}{/link}" id="pageExport" class="button">{lang}cms.acp.page.export{/lang}</a></p>
-				<small>{lang}cms.acp.page.export.download.description{/lang}</small>
-			</dd>
-		</dl>
-
-		{event name='exportFields'}
-	</fieldset>
-
-	{event name='exportFieldsets'}
-</div>
+	{event name='exportFields'}
+</section>
 
 {include file='footer'}
