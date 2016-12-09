@@ -29,8 +29,6 @@ class PHPContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$php = substr($content->text, 5);
-
-		return eval($php);
+		return eval($content->text);
 	}
 }
