@@ -4,7 +4,6 @@ namespace cms\system\content\type;
 use cms\data\content\Content;
 use wcf\data\box\Box;
 use wcf\data\box\BoxList;
-use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 
 /**
@@ -38,7 +37,7 @@ class BoxContentType extends AbstractContentType {
 			if ($box->boxType == 'menu' || ($controller === null && $box->boxType == 'system')) {
 				continue;
 			} elseif ($controller === null && $box->boxType == 'text') {
-				$boxesByPosition['content'] = $box;
+				$boxesByPosition['content'][] = $box;
 				continue;
 			}
 			$positions = call_user_func(array($controller, 'getSupportedPositions'));
