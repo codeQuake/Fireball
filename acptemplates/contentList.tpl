@@ -1,6 +1,6 @@
 {include file='header' pageTitle='cms.acp.content.list'}
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/CMS.ACP.js?v={@LAST_UPDATE_TIME}"></script>
+<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
 	//<![CDATA[
 	$(function() {
@@ -19,7 +19,7 @@
 		new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
 		new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
 
-		new CMS.ACP.Content.AddDialog();
+		new Fireball.ACP.Content.AddDialog();
 
 		new WCF.Action.SimpleProxy({
 			action: 'copy',
@@ -143,6 +143,7 @@
 										<span class="statusDisplay buttons">
 											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 											<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
+											<span class="icon icon16 icon-{if !$content->isDisabled}check-{/if}square-o jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$content->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$content->contentID}"></span>
 											<span class="icon icon16 icon-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="sidebar" data-parent-id="{$content->contentID}"></span>
 											<span class="icon icon16 icon-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
 
