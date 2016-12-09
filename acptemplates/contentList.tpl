@@ -85,7 +85,7 @@
 							{assign var=oldDepth value=0}
 							{foreach from=$contentListBody item=content}
 								{section name=i loop=$oldDepth-$contentListBody->getDepth()}</ol></li>{/section}
-								<li class="content jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
+								<li class="jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
 									<span class="sortableNodeLabel">
 										<span class="title">
 											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
