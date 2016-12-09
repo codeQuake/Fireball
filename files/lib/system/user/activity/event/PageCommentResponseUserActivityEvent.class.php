@@ -68,7 +68,7 @@ class PageCommentResponseUserActivityEvent extends SingletonFactory implements I
 
 					$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.pageCommentResponse', array(
 						'author' => $users[$comment->userID],
-						'page' => $pages[$comment->objectID]
+						'page' => $page
 					));
 					$event->setTitle($text);
 					$event->setDescription($response->getFormattedMessage());
