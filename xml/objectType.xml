@@ -65,9 +65,9 @@
 			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
-			<name>de.codequake.cms.content.type.dashboard</name>
+			<name>de.codequake.cms.content.type.box</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\DashboardContentType</classname>
+			<classname>cms\system\content\type\BoxContentType</classname>
 			<category>general</category>
 			<allowcontent>1</allowcontent>
 			<allowsidebar>1</allowsidebar>
@@ -355,4 +355,10 @@
 		</type>
 		<!-- /exporter -->
 	</import>
+	<delete>
+		<type name="de.codequake.cms.content.type.dashboard">
+			<name>de.codequake.cms.content.type.dashboard</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+		</type>
+	</delete>
 </data>

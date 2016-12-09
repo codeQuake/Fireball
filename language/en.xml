@@ -25,8 +25,8 @@
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Multiple Columns]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns.column.add"><![CDATA[Add Column]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard Box]]></item>
-		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard.box"><![CDATA[Choose box]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.box"><![CDATA[Box]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.box.box"><![CDATA[Choose box]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file"><![CDATA[File]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.fileID"><![CDATA[Choose file]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.file.root"><![CDATA[Root]]></item>
