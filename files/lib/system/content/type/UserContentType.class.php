@@ -4,7 +4,7 @@ namespace cms\system\content\type;
 use cms\data\content\Content;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
-use wcf\system\exception\SystemException;
+use wcf\system\cache\runtime\UserProfileRuntimeCache;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
@@ -78,13 +78,26 @@ class UserContentType extends AbstractContentType {
 	 */
 	public function getOutput(Content $content) {
 		if ($content->userID) {
-			$user = UserProfile::getUserProfile($content->userID);
+			$user = UserProfileRuntimeCache::getInstance()->getObject($content->userID);
 		}
 		else if ($content->name) {
 			$user = UserProfile::getUserProfileByUsername($content->name);
 		}
 		else {
-			throw new SystemException('Neither user id nor username provided');
+			if (WCF::getUser()->hasAdministrativeAccess()) {
+				return '<p class="error">Neither user id nor username provided</p>';
+			} else {
+				return '';
+			}
+		}
+
+		if ($user === null) {
+			if (WCF::getUser()->hasAdministrativeAccess()) {
+				return '<p class="error">Please check content #' . $content->contentID . '. The specified user could not be found.</p>';
+			}
+			else {
+				return '';
+			}
 		}
 
 		WCF::getTPL()->assign(array(
