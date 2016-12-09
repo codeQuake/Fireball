@@ -1,25 +1,6 @@
-{include file='documentHeader'}
-
-<head>
-	<title>{lang}cms.page.sitemap{/lang} - {PAGE_TITLE|language}</title>
-
-	{include file='headInclude'}
-	<link rel="canonical" href="{link controller='Sitemap' application='cms'}{/link}" />
-</head>
-
-<body id="tpl_{$templateNameApplication}_{$templateName}" data-template="{$templateName}" data-application="{$templateNameApplication}">
-
-{capture assign='headerNavigation'}{/capture}
-
 {include file='header'}
 
-<header class="boxHeadline">
-	<h1>{lang}cms.page.sitemap{/lang}</h1>
-</header>
-
-{include file='userNotice'}
-
-<div class="container containerPadding marginTop">
+<section class="section">
 	{assign var=oldDepth value=0}
 	<ul class="sitemapList">
 		{foreach from=$pageNodeTree item=node}
@@ -37,9 +18,6 @@
 		{/foreach}
 		{section name=i loop=$oldDepth}</ul></li>{/section}
 	</ul>
-</div>
+</section>
 
 {include file='footer'}
-
-</body>
-</html>
