@@ -85,7 +85,7 @@ $.widget('ui.fireSlide', {
 
 		for (var $i = 0; $i < this._count; $i++) {
 			if ($(this._items.get($i)).outerHeight() >= max_height) max_height = $(this._items.get($i)).outerHeight();
-			var $icon = $('<li><a><span class="icon icon16 icon-circle"></span></a></li>').click($.proxy(this._click, this)).appendTo(this._buttonList);
+			var $icon = $('<li><a><span class="icon icon16 fa-circle"></span></a></li>').click($.proxy(this._click, this)).appendTo(this._buttonList);
 			if ($i == 0) $icon.addClass('active');
 		}
 		this.element.css('height', max_height);
@@ -274,7 +274,7 @@ Fireball.Page.ContentTypes = Class.extend({
 			}
 		});
 		this._proxy.sendRequest();
-		$('body').append($('<a id="contentAddButton"><span class="icon icon16 icon-chevron-right"></span></a>'));
+		$('body').append($('<a id="contentAddButton"><span class="icon icon16 fa-chevron-right"></span></a>'));
 		$('body').append($('<div id="contentRibbon" />'));
 		$('#contentAddButton').click($.proxy(this._openSidebar, this));
 	},
@@ -292,12 +292,12 @@ Fireball.Page.ContentTypes = Class.extend({
 				this._initialized = 1;
 			}
 			$('#contentRibbon').addClass('open');
-			$('#contentAddButton').addClass('open').children('span').addClass('icon-chevron-left').removeClass('icon-chevron-right');
+			$('#contentAddButton').addClass('open').children('span').addClass('fa-chevron-left').removeClass('fa-chevron-right');
 			$('body').addClass('ribbonOpen');
 		}
 		else {
 			$('#contentRibbon').removeClass('open');
-			$('#contentAddButton').removeClass('open').children('span').removeClass('icon-chevron-left').addClass('icon-chevron-right');
+			$('#contentAddButton').removeClass('open').children('span').removeClass('fa-chevron-left').addClass('fa-chevron-right');
 			$('body').removeClass('ribbonOpen');
 		}
 	},

@@ -838,7 +838,7 @@ Fireball.ACP.File.Picker = Class.extend({
 
 		// insert new files
 		$.each(this._selected, function(fileID, file) {
-			$('<li class="box32"><span class="icon icon32 icon-paperclip" /><div><div><p>' + file.title + '</p><small>' + file.formattedFilesize + '</small></div></div></li>').appendTo($ul);
+			$('<li class="box32"><span class="icon icon32 fa-paperclip" /><div><div><p>' + file.title + '</p><small>' + file.formattedFilesize + '</small></div></div></li>').appendTo($ul);
 		});
 	},
 
@@ -1105,7 +1105,7 @@ Fireball.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 	 * @see	WCF.Upload._initFile()
 	 */
 	_initFile: function(file) {
-		$li = $('<li class="box32"><span class="icon icon32 icon-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
+		$li = $('<li class="box32"><span class="icon icon32 fa-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
 
 		// redraw dialog
 		Fireball.ACP.File.Upload.redraw();
@@ -1127,7 +1127,7 @@ Fireball.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 			Fireball.ACP.File.Upload.addFile($fileData);
 
 			// remove spinner icon
-			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
+			$li.children('.fa-spinner').removeClass('fa-spinner').addClass('fa-paperclip');
 
 			// update file size
 			$li.find('small').append($fileData.formattedFilesize);
@@ -1138,7 +1138,7 @@ Fireball.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 			}
 
 			// add fail icon
-			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-ban-circle');
+			$li.children('.fa-spinner').removeClass('fa-spinner').addClass('fa-ban-circle');
 
 			// error message
 			$li.find('div > div').append($('<small class="innerError">' + WCF.Language.get('cms.acp.file.error.' + $errorType) + '</small>'));

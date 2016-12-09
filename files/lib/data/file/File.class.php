@@ -93,22 +93,22 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	 */
 	public function getIconTag($width = 16) {
 		if (preg_match('/image/i', $this->fileType)) {
-			return '<span class="icon icon' . $width . ' icon-picture"></span>';
+			return '<span class="icon icon' . $width . ' fa-picture"></span>';
 		}
 		if (preg_match('/audio/i', $this->fileType)) {
-			return '<span class="icon icon' . $width . ' icon-music"></span>';
+			return '<span class="icon icon' . $width . ' fa-music"></span>';
 		}
 		if (preg_match('/video/i', $this->fileType)) {
-			return '<span class="icon icon' . $width . ' icon-film"></span>';
+			return '<span class="icon icon' . $width . ' fa-film"></span>';
 		}
 		if (preg_match('/pdf/i', $this->fileType)) {
-			return '<span class="icon icon' . $width . ' icon-file-text"></span>';
+			return '<span class="icon icon' . $width . ' fa-file-text"></span>';
 		}
 		if (preg_match('/html/i', $this->fileType) || preg_match('/java/i', $this->fileType) || preg_match('/x-c/i', $this->fileType) || preg_match('/css/i', $this->fileType) || preg_match('/javascript/i', $this->fileType)) {
-			return '<span class="icon icon' . $width . ' icon-code"></span>';
+			return '<span class="icon icon' . $width . ' fa-code"></span>';
 		}
 
-		return '<span class="icon icon' . $width . ' icon-file"></span>';
+		return '<span class="icon icon' . $width . ' fa-file"></span>';
 	}
 
 	/**
