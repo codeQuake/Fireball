@@ -4,7 +4,6 @@ namespace cms\system\comment\manager;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use wcf\system\comment\manager\AbstractCommentManager;
-use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
@@ -19,32 +18,32 @@ class PageCommentManager extends AbstractCommentManager {
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionAdd
 	 */
-	protected $permissionAdd = 'user.cms.page.canAddComment';
+	protected $permissionAdd = 'user.fireball.page.canAddComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionCanModerate
 	 */
-	protected $permissionCanModerate = 'mod.cms.canModerateComment';
+	protected $permissionCanModerate = 'mod.fireball.canModerateComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionDelete
 	 */
-	protected $permissionDelete = 'user.cms.canDeleteComment';
+	protected $permissionDelete = 'user.fireball.canDeleteComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionEdit
 	 */
-	protected $permissionEdit = 'user.cms.canEditComment';
+	protected $permissionEdit = 'user.fireball.canEditComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionModDelete
 	 */
-	protected $permissionModDelete = 'mod.cms.canDeleteComment';
+	protected $permissionModDelete = 'mod.fireball.canDeleteComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionModEdit
 	 */
-	protected $permissionModEdit = 'mod.cms.canEditComment';
+	protected $permissionModEdit = 'mod.fireball.canEditComment';
 
 	/**
 	 * @see	\wcf\system\comment\manager\ICommentManager::canAdd()
@@ -83,7 +82,6 @@ class PageCommentManager extends AbstractCommentManager {
 	 */
 	public function isAccessible($objectID, $validateWritePermission = false) {
 		$page = PageCache::getInstance()->getPage($objectID);
-
 		return ($page !== null && $page->canRead());
 	}
 
