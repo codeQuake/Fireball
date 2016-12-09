@@ -95,7 +95,7 @@
 										<span class="statusDisplay buttons">
 											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
 											<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
-											<span class="icon icon16 fa-check{if $content->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$content->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$content->contentID}"></span>
+											<span class="icon icon16 fa-{if !$content->isDisabled}check-{/if}square-o jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$content->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$content->contentID}"></span>
 											<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="body" data-parent-id="{$content->contentID}"></span>
 											<span class="icon icon16 fa-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
 
