@@ -35,20 +35,29 @@ class BoxContentType extends AbstractContentType {
 
 		foreach ($boxList as $box) {
 			$controller = $box->getController();
-			$positions = $controller::getSupportedPositions();
+			if ($box->boxType == 'menu' || ($controller === null && $box->boxType == 'system')) {
+				continue;
+			} elseif ($controller === null && $box->boxType == 'text') {
+				$boxesByPosition['content'] = $box;
+				continue;
+			}
+			$positions = call_user_func(array($controller, 'getSupportedPositions'));
 
 			if (in_array('contentTop', $positions) || in_array('contentBottom', $positions)) {
-				$boxesByPosition['content'] = $box;
+				$boxesByPosition['content'][] = $box;
 			}
 
 			if (in_array('sidebarLeft', $positions)) {
-				$boxesByPosition['sidebarLeft'] = $box;
+				$boxesByPosition['sidebarLeft'][] = $box;
 			}
 
 			if (in_array('sidebarRight', $positions)) {
-				$boxesByPosition['sidebarRight'] = $box;
+				$boxesByPosition['sidebarRight'][] = $box;
 			}
 		}
+
+		$boxesByPosition['body'] = $boxesByPosition['content'];
+		$boxesByPosition['sidebar'] = $boxesByPosition['sidebarRight'];
 
 		WCF::getTPL()->assign(array(
 			'boxList' => $boxList,
