@@ -26,7 +26,7 @@ class PageCommentUserActivityEvent extends SingletonFactory implements IUserActi
 		}
 
 		$commentList = new CommentList();
-		$commentList->getConditionBuilder()->add('comment.commentID IN (?)', array($objectIDs));
+		$commentList->getConditionBuilder()->add('comment.commentID IN (?)', array($commentIDs));
 		$commentList->readObjects();
 		$comments = $commentList->getObjects();
 
