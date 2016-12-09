@@ -16,6 +16,13 @@
 
 			<name language="de">CMS: Seitenübersicht</name>
 			<name language="en">CMS: Sitemap</name>
+
+			<content language="de">
+				<title>Seitenübersicht</title>
+			</content>
+			<content language="en">
+				<title>Sitemap</title>
+			</content>
 		</page>
 	</import>
 </data>
