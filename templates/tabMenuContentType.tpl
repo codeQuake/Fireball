@@ -10,9 +10,7 @@
 </nav>
 
 <script data-relocate="true">
-	//<![CDATA[
 	$(function() {
 		WCF.TabMenu.init();
 	});
-	//]]>
 </script>

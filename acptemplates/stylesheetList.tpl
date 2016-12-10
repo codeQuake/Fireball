@@ -1,7 +1,6 @@
 {include file='header' pageTitle='cms.acp.stylesheet.list'}
 
 <script data-relocate="true">
-	//<![CDATA[
 	$(function() {
 		var actionObjects = { };
 		actionObjects['de.codequake.cms.stylesheet'] = { };
@@ -9,7 +8,6 @@
 
 		WCF.Clipboard.init('cms\\acp\\page\\StylesheetListPage', {@$hasMarkedItems}, actionObjects);
 	});
-	//]]>
 </script>
 
 <header class="boxHeadline">

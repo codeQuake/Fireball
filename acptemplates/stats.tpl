@@ -5,15 +5,15 @@
 </header>
 
 <script data-relocate="true">
-	//<![CDATA[
 	$(function() {
-		WCF.Language.addObject({
-			'cms.acp.stats.devices.desktop': '{lang}cms.acp.stats.devices.desktop{/lang}',
-			'cms.acp.stats.devices.mobile': '{lang}cms.acp.stats.devices.mobile{/lang}',
-			'cms.acp.stats.devices.tablet': '{lang}cms.acp.stats.devices.tablet{/lang}'
+		require(['Language',], function(Language) {
+			Language.addObject({
+				'cms.acp.stats.devices.desktop': '{lang}cms.acp.stats.devices.desktop{/lang}',
+				'cms.acp.stats.devices.mobile': '{lang}cms.acp.stats.devices.mobile{/lang}',
+				'cms.acp.stats.devices.tablet': '{lang}cms.acp.stats.devices.tablet{/lang}'
+			});
 		});
 	});
-	//]]>
 </script>
 
 <div class="contentNavigation">

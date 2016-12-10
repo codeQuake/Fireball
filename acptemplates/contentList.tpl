@@ -2,8 +2,17 @@
 
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
-	//<![CDATA[
 	$(function() {
+		require(['Language',], function(Language) {
+			Language.addObject({
+				'cms.acp.content.add': '{lang}cms.acp.content.add{/lang}',
+				{foreach from=$objectTypeList item=type}
+					'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
+				{/foreach}
+				'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}'
+			});
+		});
+
 		WCF.TabMenu.init();
 
 		var deleteAction = new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '.jsContentRow');
@@ -30,16 +39,7 @@
 				window.location.reload();
 			}
 		});
-
-		WCF.Language.addObject({
-			'cms.acp.content.add': '{lang}cms.acp.content.add{/lang}',
-			{foreach from=$objectTypeList item=type}
-			'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
-			{/foreach}
-			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}'
-		});
 	});
-	//]]>
 </script>
 
 <header class="boxHeadline">

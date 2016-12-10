@@ -2,7 +2,6 @@
 
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
-	//<![CDATA[
 	$(function() {
 		var $parentContentContainer = [ ];
 		var $pageIDInput = $('#pageID');
@@ -27,7 +26,6 @@
 		$pageIDInput.change(handlePageID);
 		handlePageID();
 	});
-	//]]>
 </script>
 
 <header class="boxHeadline">

@@ -1,11 +1,9 @@
 {include file='header' pageTitle='cms.acp.news.image.list'}
 
 <script data-relocate="true">
-	//<![CDATA[
 	$(function () {
 		new WCF.Action.Delete('cms\\data\\news\\image\\NewsImageAction', '.jsImageRow');
 	});
-	//]]>
 </script>
 
 <header class="boxHeadline">

@@ -9,10 +9,11 @@
 </dl>
 
 <script data-relocate="true">
-	//<![CDATA[
 	$(function() {
-		WCF.Language.addObject({
-			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
+		require(['Language',], function(Language) {
+			Language.addObject({
+				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
+			});
 		});
 
 		new Fireball.ACP.File.Preview();
@@ -26,5 +27,4 @@
 			{/if}
 		});
 	});
-	//]]>
 </script>

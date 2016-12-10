@@ -7,11 +7,9 @@
 	
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/Fireball{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
 	<script data-relocate="true">
-		//<![CDATA[
 		$(function() {
 			new Fireball.Page.Add({if $page|isset && $page != null}{$page->pageID}{/if})
 		});
-		//]]>
 	</script>
 </li>
 {/if}

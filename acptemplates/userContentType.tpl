@@ -1,9 +1,7 @@
 <script data-relocate="true">
-	//<![CDATA[
 	$(function() {
 		new WCF.Search.User('#username');
 	});
-	//]]>
 </script>
 
 <dl{if $errorField == 'data[name]'} class="formError"{/if}>

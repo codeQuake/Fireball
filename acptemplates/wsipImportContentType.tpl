@@ -18,7 +18,6 @@
 {include file='wysiwyg'}
 
 <script data-relocate="true">
-	//<![CDATA[
 		$(function() {
 			console.l
 			WCF.System.Dependency.Manager.register('Redactor_text', function() {
@@ -26,5 +25,4 @@
 				$('#text').redactor('wutil.replaceText', $converted);
 			});
 		});
-	//]]>
 </script>

@@ -110,11 +110,14 @@
 
 <script data-relocate="true">
 	$(function() {
-		{if $page->allowSubscribing && $__wcf->user->userID}
-			WCF.Language.addObject({
-				'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}'
+		require(['Language',], function(Language) {
+			Language.addObject({
+				'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}',
+				'cms.content.add': '{lang}cms.acp.content.add{/lang}'
 			});
+		});
 
+		{if $page->allowSubscribing && $__wcf->user->userID}
 			new WCF.User.ObjectWatch.Subscribe();
 		{/if}
 

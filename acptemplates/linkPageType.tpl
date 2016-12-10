@@ -59,12 +59,10 @@
 </section>
 
 <script data-relocate="true">
-	//<![CDATA[
 	$(function() {
 		$('#delayedRedirect').click(function() {
 			var $toggleContainerID = $(this).data('toggleContainer');
 			$('#'+ $toggleContainerID).toggle();
 		});
 	});
-	//]]>
 </script>

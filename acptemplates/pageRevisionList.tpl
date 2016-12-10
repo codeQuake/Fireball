@@ -1,10 +1,8 @@
 {if $revisions|count}
 	<script data-relocate="true">
-		//<![CDATA[
 		$(function() {
 			new Fireball.ACP.Page.Revisions.Restore();
 		});
-		//]]>
 	</script>
 
 	<div class="marginTop tabularBox">

@@ -2,10 +2,11 @@
 
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
-	//<![CDATA[
 	$(function () {
-		WCF.Language.addObject({
-			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
+		require(['Language',], function(Language) {
+			Language.addObject({
+				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
+			});
 		});
 
 		var actionObjects = { };
@@ -32,7 +33,6 @@
 			window.location.reload();
 		});
 	});
-	//]]>
 </script>
 
 <header class="boxHeadline">
