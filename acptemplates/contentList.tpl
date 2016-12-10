@@ -34,7 +34,7 @@
 		WCF.Language.addObject({
 			'cms.acp.content.add': '{lang}cms.acp.content.add{/lang}',
 			{foreach from=$objectTypeList item=type}
-				'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
+			'cms.acp.content.type.{$type->objectType}': '{lang}cms.acp.content.type.{$type->objectType}{/lang}',
 			{/foreach}
 			'cms.acp.content.type.content': '{lang}cms.acp.content.type.content{/lang}'
 		});
@@ -82,9 +82,7 @@
 				<section id="contentListBody" class="sortableListContainer">
 					<ol class="contentListBody sortableList" data-object-id="0">
 						{content}
-							{assign var=oldDepth value=0}
 							{foreach from=$contentListBody item=content}
-								{section name=i loop=$oldDepth-$contentListBody->getDepth()}</ol></li>{/section}
 								<li class="jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
 									<span class="sortableNodeLabel">
 										<span class="title">
@@ -102,27 +100,27 @@
 											{event name='itemButtons'}
 										</span>
 									</span>
-									<ol class="contentListBody sortableList" data-object-id="{@$content->contentID}">
-									{if !$contentListBody->current()->hasChildren()}
-										</ol></li>
+
+									<ol class="contentListBody sortableList" data-object-id="{@$content->contentID}">{if !$content->hasChildren()}</ol></li>{/if}
+									{if !$content->hasChildren() && $content->isLastSibling()}
+										{@"</ol></li>"|str_repeat:$content->getOpenParentNodes()}
 									{/if}
-									{assign var=oldDepth value=$contentListBody->getDepth()}
 							{/foreach}
-							{section name=i loop=$oldDepth}</ol></li>{/section}
 						{/content}
 					</ol>
 				</section>
 
 				<div class="formSubmit">
-						<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
-						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="body"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
+					<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+					<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="body"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
 				</div>
-			{hascontentelse}
-				<p class="info">{lang}wcf.global.noItems{/lang}</p>
-				<div class="formSubmit">
+
+				{hascontentelse}
+					<p class="info">{lang}wcf.global.noItems{/lang}</p>
+					<div class="formSubmit">
 						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="body"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
-				</div>
-			{/hascontent}
+					</div>
+				{/hascontent}
 		</div>
 
 		<div id="sidebar" class="tabMenuContent container containerPadding">
@@ -130,10 +128,8 @@
 				<section id="contentListSidebar" class="sortableListContainer">
 					<ol class="contentListSidebar sortableList" data-object-id="0">
 						{content}
-							{assign var=oldDepth value=0}
 							{foreach from=$contentListSidebar item=content}
-								{section name=i loop=$oldDepth-$contentListSidebar->getDepth()}</ol></li>{/section}
-								<li class="content jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
+								<li class="jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
 									<span class="sortableNodeLabel">
 										<span class="title">
 											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
@@ -150,26 +146,26 @@
 											{event name='itemButtons'}
 										</span>
 									</span>
-									<ol class="contentListSidebar sortableList" data-object-id="{@$content->contentID}">
-									{if !$contentListSidebar->current()->hasChildren()}
-										</ol></li>
+
+									<ol class="contentListSidebar sortableList" data-object-id="{@$content->contentID}">{if !$content->hasChildren()}</ol></li>{/if}
+									{if !$content->hasChildren() && $content->isLastSibling()}
+										{@"</ol></li>"|str_repeat:$content->getOpenParentNodes()}
 									{/if}
-									{assign var=oldDepth value=$contentListSidebar->getDepth()}
 							{/foreach}
-							{section name=i loop=$oldDepth}</ol></li>{/section}
 						{/content}
 					</ol>
 				</section>
 				<div class="formSubmit">
-						<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
-						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="sidebar"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
-				</div>
-			{hascontentelse}
-				<p class="info">{lang}wcf.global.noItems{/lang}</p>
-				<div class="formSubmit">
+					<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 					<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="sidebar"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
 				</div>
-			{/hascontent}
+
+				{hascontentelse}
+					<p class="info">{lang}wcf.global.noItems{/lang}</p>
+					<div class="formSubmit">
+						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="sidebar"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
+					</div>
+				{/hascontent}
 		</div>
 	</div>
 
