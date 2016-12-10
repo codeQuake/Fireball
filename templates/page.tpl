@@ -42,7 +42,7 @@
 		{content}
 			{assign var=oldDepth value=0}
 			{foreach from=$sidebarNodeTree item=content}
-				{if $content->getTypeName() != 'de.codequake.cms.content.type.dashboard'}
+				{if $content->getTypeName() != 'de.codequake.cms.content.type.box'}
 					{section name=i loop=$oldDepth-$sidebarNodeTree->getDepth()}</fieldset>{/section}
 					<section class="box{if $content->getCSSClasses() != ""} {$content->getCSSClasses()}{/if}" id="cmsContent{@$content->contentID}" data-content-type="{$content->getTypeName()}">
 						<h2 class="boxTitle">{$content->getTitle()}</h2>
