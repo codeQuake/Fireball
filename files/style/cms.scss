@@ -19,21 +19,22 @@
 }
 
 #contentAddButton {
+	@extend .button;
+	@extend .buttonPrimary;
+
 	position: fixed;
 	top: 50%;
 	left: 0;
 	z-index: 500;
-	padding: 5px;
-	//background: @wcfTabularBoxBackgroundColor;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
 	@include transition(all, 0.5 s, ease);
+
 	&.open {
 		left: 250px;
 	}
-	.icon {
-		//color: @wcfTabularBoxColor;
-	}
+}
+
+a#contentAddButton {
+	padding: 2px;
 }
 
 body.ribbonOpen {
