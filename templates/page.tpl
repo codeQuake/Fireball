@@ -65,7 +65,7 @@
 	{/capture}
 {/hascontent}
 
-{include file='header' sidebarOrientation=$page->sidebarOrientation}
+{include file='header'}
 
 {if !$page->isPublished && $page->publicationDate}
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
