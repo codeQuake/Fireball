@@ -1,29 +1,29 @@
 /**
  * Class and function collection for fireball cms.
  *
- * @author	Jens Krumsieck
- * @copyright	2013 - 2015 codeQuake
- * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.codequake.cms
+ * @author    Jens Krumsieck
+ * @copyright    2013 - 2015 codeQuake
+ * @license    GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package    de.codequake.cms
  */
 if (!Fireball) var Fireball = {};
 
 $.widget('ui.fireSlide', {
 	/**
 	 * button list object
-	 * @var	jQuery
+	 * @var    jQuery
 	 */
 	_buttonList: null,
 
 	/**
 	 * number of items
-	 * @var	integer
+	 * @var    integer
 	 */
 	_count: 0,
 
 	/**
 	 * item index
-	 * @var	integer
+	 * @var    integer
 	 */
 	_index: 0,
 
@@ -41,13 +41,13 @@ $.widget('ui.fireSlide', {
 
 	/**
 	 * timer object
-	 * @var	interval
+	 * @var    interval
 	 */
 	_timer: null,
 
 	/**
 	 * list of options
-	 * @var	object
+	 * @var    object
 	 */
 	options: {
 		// cycle interval in milliseconds
@@ -56,7 +56,7 @@ $.widget('ui.fireSlide', {
 
 	/**
 	 * elements width
-	 * @var	integer
+	 * @var    integer
 	 */
 	_width: 0,
 
@@ -138,7 +138,7 @@ $.widget('ui.fireSlide', {
 	/**
 	 * Restarts the timer to slide to the next slide.
 	 */
-	_restartTimer: function() {
+	_restartTimer: function () {
 		if (this._timer !== null) {
 			window.clearInterval(this._timer);
 		}
@@ -149,7 +149,7 @@ $.widget('ui.fireSlide', {
 	/**
 	 * Slides to a specific index or to the next slide if no index provided.
 	 *
-	 * @param	integer		index
+	 * @param    integer        index
 	 */
 	slideTo: function (index) {
 		if (typeof index !== 'undefined') {
@@ -171,7 +171,7 @@ $.widget('ui.fireSlide', {
 	}
 });
 
-Fireball.Page = { };
+Fireball.Page = {};
 
 /**
  * Shows a dialog to add a new page.
@@ -311,8 +311,9 @@ Fireball.Content.Dragging = Class.extend({
 		this._pageID = pageID;
 		var dropButton = '<div class="ui-droppable"></div>';
 
+		$header = $('.content .contentHeader');
 		//add sortable container
-		var sortable = $('<div class="sortableListContainer sortableContentList" id="sortableContentListBody" />').insertAfter($('.userNotice'));
+		var sortable = $('<div class="sortableListContainer sortableContentList" id="sortableContentListBody" />').insertAfter($header);
 
 		//add root item
 		var nodeList = '<ol class="sortableList" data-object-id="0">';
@@ -330,7 +331,7 @@ Fireball.Content.Dragging = Class.extend({
 		//convert contents to a list for use of WCF.Sortable.List
 		$("div[id^='cmsContent']").each(function () {
 			var depth = $(this).data('depth');
-			for (var i = 0; i < (oldDepth - depth) ; i++) {
+			for (var i = 0; i < (oldDepth - depth); i++) {
 				nodeList += '</ol></li>';
 			}
 

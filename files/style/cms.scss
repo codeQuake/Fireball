@@ -285,8 +285,8 @@
   }
 
   > div  {
-	overflow: auto;
-	-webkit-overflow-scrolling: touch;
+	//overflow: auto;
+	//-webkit-overflow-scrolling: touch;
 	left: 0;
 	transition: transform 0.24s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	visibility: visible;
