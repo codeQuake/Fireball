@@ -21,14 +21,14 @@ class TabMenuContentType extends AbstractStructureContentType {
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
 	 */
 	public function getCSSClasses() {
-		return 'tabMenuContainer';
+		return 'section tabMenuContainer';
 	}
 
 	/**
 	 * @see	\cms\system\content\type\AbstractStructureContentType::getChildCSSClasses()
 	 */
 	public function getChildCSSClasses(Content $content) {
-		return 'tabMenuContent container containerPadding';
+		return 'tabMenuContent';
 	}
 
 	/**
