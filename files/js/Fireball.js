@@ -274,31 +274,29 @@ Fireball.Page.ContentTypes = Class.extend({
 			}
 		});
 		this._proxy.sendRequest();
-		$('body').append($('<a id="contentAddButton"><span class="icon icon32 fa-angle-right"></span></a>'));
-		$('body').append($('<div id="contentRibbon" />'));
-		$('#contentAddButton').click($.proxy(this._openSidebar, this));
 	},
 
 	_success: function (data, textStatus, jqXHR) {
 		this._cache[data.returnValues.pageID] = data.returnValues.template;
-		$('#contentRibbon').append(data.returnValues.template);
+		$('body').append(data.returnValues.template);
+		$('body').append($('<a id="contentTypeListOpen" class="button buttonPrimary"><span class="icon icon32 fa-angle-right"></span></a>'));
+		$('#contentTypeListOpen').click($.proxy(this._toggleSidebar, this));
+		$('#contentTypeListClose').click($.proxy(this._toggleSidebar, this));
 	},
 
-	_openSidebar: function (event) {
+	_toggleSidebar: function (event) {
 		event.preventDefault();
-		if (!$('#contentRibbon').hasClass('open')) {
+		if (!$('#contentTypeList').hasClass('open')) {
 			if (!this._initialized) {
 				new Fireball.Content.Dragging(this._pageID);
 				this._initialized = 1;
 			}
-			$('#contentRibbon').addClass('open');
-			$('#contentAddButton').addClass('open').children('span').addClass('fa-angle-left').removeClass('fa-angle-right');
-			$('body').addClass('ribbonOpen');
+			$('#contentTypeList').addClass('open');
+			$('#contentTypeListOpen').toggle();
 		}
 		else {
-			$('#contentRibbon').removeClass('open');
-			$('#contentAddButton').removeClass('open').children('span').removeClass('fa-angle-left').addClass('fa-angle-right');
-			$('body').removeClass('ribbonOpen');
+			$('#contentTypeList').removeClass('open');
+			$('#contentTypeListOpen').toggle();
 		}
 	},
 });
@@ -399,7 +397,7 @@ Fireball.Content.Sortable.List = WCF.Sortable.List.extend({
 
 	init: function () {
 		this._super('sortableContentListBody');
-		$('#contentRibbon .wideButton').children('button[data-type="submit"]').click($.proxy(this._submit, this));
+		$('#contentTypeList .wideButton').children('button[data-type="submit"]').click($.proxy(this._submit, this));
 		this._className = 'cms\\data\\content\\ContentAction';
 	},
 
