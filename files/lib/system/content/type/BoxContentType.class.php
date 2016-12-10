@@ -36,8 +36,8 @@ class BoxContentType extends AbstractContentType {
 			$controller = $box->getController();
 			if ($box->boxType == 'menu' || ($controller === null && $box->boxType == 'system')) {
 				continue;
-			} else if ($controller === null && $box->boxType == 'text') {
-				$boxesByPosition['content'][] = $box;
+			} else if ($controller === null) {
+				$boxesByPosition[$box->position][] = $box;
 				continue;
 			}
 			$positions = call_user_func(array($controller, 'getSupportedPositions'));
