@@ -85,13 +85,11 @@
 {section name=i loop=$oldDepth}</div>{/section}
 
 {if $page->isCommentable && $page->getPermission('canViewComment')}
-	<header id="comments" class="boxHeadline boxSubHeadline">
-		<h2>{lang}cms.page.comments{/lang} <span class="badge">{@$commentList->countObjects()}</span></h2>
-	</header>
+	<section id="comments" class="section sectionContainerList">
+		<h2 class="sectionTitle">{lang}cms.page.comments{/lang} <span class="badge">{@$commentList->countObjects()}</span></h2>
 
-	{include file='__commentJavaScript' commentContainerID='pageCommentList'}
+		{include file='__commentJavaScript' commentContainerID='pageCommentList'}
 
-	<div class="container containerList marginTop">
 		{if $commentCanAdd}
 			<ul id="pageCommentList" class="commentList containerList" data-can-add="true" data-object-id="{@$page->pageID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$lastCommentTime}">
 				{include file='commentList'}
@@ -104,12 +102,10 @@
 					{/content}
 				</ul>
 			{hascontentelse}
-				<div class="containerPadding">
-					{lang}cms.page.comments.noComments{/lang}
-				</div>
+				<p class="info">{lang}cms.page.comments.noComments{/lang}</p>
 			{/hascontent}
 		{/if}
-	</div>
+	</section>
 {/if}
 
 <script data-relocate="true">
