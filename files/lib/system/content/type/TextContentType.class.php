@@ -44,6 +44,6 @@ class TextContentType extends AbstractSearchableContentType {
 	public function getOutput(Content $content) {
 		MessageParser::getInstance()->setOutputType('text/html');
 
-		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($content->text), 1, 0, 1);
+		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($content->text), 1, 1, 1);
 	}
 }
