@@ -357,7 +357,7 @@ Fireball.Content.Dragging = Class.extend({
 		new Fireball.Content.Sortable.List();
 
 		//no parent drag area
-		$('.userNotice').after($(dropButton));
+		$header.after($(dropButton));
 
 		$('.draggable').draggable({
 			cursor: "move",
