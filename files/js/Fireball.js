@@ -474,11 +474,6 @@ Fireball.Content.AddForm = Class.extend({
 			//fill contentData arra
 			if (typeof input.attr('name') !== 'undefined' && input.attr('name').match('^contentData')) {
 				delete parameters[input.attr('name')];
-				//watch for wysiwyg
-				if ($('#contentAddForm .redactor-box').length != 0) {
-					//on toggling code, bbcode is saved to textarea
-					$('#' + input.attr('id')).redactor('code.toggle');
-				}
 				if (input.attr('name').match('columnData')) {
 					parameters['contentData']['columnData'].push($.trim(input.val()));
 				}
