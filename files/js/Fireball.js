@@ -339,8 +339,6 @@ Fireball.Content.Dragging = Class.extend({
 		});
 		this._proxy.sendRequest();
 
-		new Fireball.Content.Sortable.List();
-
 		$('.draggable').draggable({
 			cursor: "move",
 			helper: "clone",
@@ -348,11 +346,14 @@ Fireball.Content.Dragging = Class.extend({
 			containment: "document",
 			drag: $.proxy(this._drag, this)
 		});
-		$('.ui-droppable').droppable({
-			activeClass: "droppable-state-active",
-			greedy: true,
-			drop: $.proxy(this._drop, this)
-		});
+	},
+
+	_drag: function (event, ui) {
+		ui.helper.css('position', 'fixed');
+		ui.helper.css('margin-top', event.pageY);
+		ui.helper.css('margin-left', event.pageX);
+		ui.position.top = 0;
+		ui.position.left = 0;
 	},
 
 	_drop: function (event, ui) {
@@ -374,14 +375,27 @@ Fireball.Content.Dragging = Class.extend({
 	},
 
 	_success: function (data, textStatus, jqXHR) {
+		template = data.returnValues.template;
+
 		if (data.returnValues.position == 'body')
-			$('body').append(data.returnValues.template);
+			$(template).insertAfter($('.content .contentHeader'));
 		else if (data.returnValues.position == 'sidebar')
-			$('aside.sidebar').append(data.returnValues.template);
+			$('aside.sidebar').append(template);
 		else if (data.returnValues.position == 'sidebarLeft')
-			$('aside.boxesSidebarLeft').append(data.returnValues.template);
+			$('aside.boxesSidebarLeft').append(template);
 		else if (data.returnValues.position == 'sidebarRight')
-			$('aside.boxesSidebarRight').append(data.returnValues.template);
+			$('aside.boxesSidebarRight').append(template);
+
+		new Fireball.Content.Sortable.List();
+
+		$container = $('#sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1));
+		if ($container !== undefined) {
+			$container.parent().find('.ui-droppable').droppable({
+				activeClass: "droppable-state-active",
+				greedy: true,
+				drop: $.proxy(this._drop, this)
+			});
+		}
 	}
 });
 
@@ -475,7 +489,7 @@ Fireball.Content.AddForm = Class.extend({
 				}
 			}
 		});
-		console.log(parameters);
+
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._executed, this)
 		});
