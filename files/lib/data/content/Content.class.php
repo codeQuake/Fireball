@@ -17,6 +17,18 @@ use wcf\system\WCF;
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @property-read	integer		$contentID		id of the content
+ * @property-read	integer		$parentID		id of the parent content
+ * @property-read	integer		$pageID		    id of the page
+ * @property-read	string		$title		    title of the content
+ * @property-read	integer		$contentTypeID	id of the objecttype of the contenttype
+ * @property-read	array		$contentData	content data
+ * @property-read	integer		$showOrder		show order of the content
+ * @property-read	integer		$isDisabled		content is disabled
+ * @property-read	string		$position		position of the content (body|sidebar|sidebarLeft|sidebarRight)
+ * @property-read	string		$cssClasses		css classes of the content
+ * @property-read	array		$additionalData	additional data
  */
 class Content extends DatabaseObject implements IRouteController, IPollObject {
 	/**

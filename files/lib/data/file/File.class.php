@@ -15,6 +15,14 @@ use wcf\system\WCF;
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @property-read	integer		$fileID		    id of the file
+ * @property-read	string		$title		    filename
+ * @property-read	integer		$filesize		filesize in bytes
+ * @property-read	string		$fileType		mime type of the file
+ * @property-read	string		$fileHash		hash of the file
+ * @property-read	integer		$uploadTime		timestamp of upload
+ * @property-read	integer		$downloads		amount of downloads
  */
 class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	/**

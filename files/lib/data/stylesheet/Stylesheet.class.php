@@ -13,6 +13,10 @@ use wcf\system\WCF;
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @property-read	integer		$stylesheetID	id of the stylesheet
+ * @property-read	string		$title	    	title of the stylesheet
+ * @property-read	string		$less   		scss code
  */
 class Stylesheet extends DatabaseObject {
 	/**

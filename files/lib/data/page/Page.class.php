@@ -21,6 +21,38 @@ use wcf\system\WCF;
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @property-read	integer		$pageID		                    id of the page
+ * @property-read	integer		$isHome		                    page is set as home
+ * @property-read	integer		$authorID		                id of the user who created the page
+ * @property-read	string		$authorName		                username of the user who created the page
+ * @property-read	integer		$lastEditorID	                id of the user who's edit was the last one
+ * @property-read	string		$lastEditorName	                username of the user who's edit was the last one
+ * @property-read	integer		$creationTime	                timestamp of creation
+ * @property-read	integer		$lastEditTime	                timestamp of last edit
+ * @property-read	integer		$comments		                amount of comments
+ * @property-read	integer		$clicks		                    amount of clicks since creation/reset
+ * @property-read	string		$title		                    title of the page
+ * @property-read	string		$alias		                    url-alias of the page
+ * @property-read	string		$description    	            a page's description
+ * @property-read	string		$metaDescription                a page's meta-description
+ * @property-read	string		$metaKeywords		            a page's meta-keywords
+ * @property-read	string		$allowIndexing		            page is allowed to be indexed by spiders
+ * @property-read	integer		$parentID		                id of the parent page
+ * @property-read	integer		$showOrder		                show order of the page
+ * @property-read	integer		$invisible		                page is invisible
+ * @property-read	integer		$isDisabled		                page is disabled
+ * @property-read	integer		$isPublished		            page is published
+ * @property-read	integer		$publicationDate	            timestamp of publication (0 if it should be enabled from now on)
+ * @property-read	integer		$deactivationDate	            timestamp of deactivation (0 if it shouldn't be disabled)
+ * @property-read	integer		$menuItemID		                id of the menu item
+ * @property-read	integer		$isCommentable		            page can be commented
+ * @property-read	integer		$availableDuringOfflineMode		page is viewable during offline-mode
+ * @property-read	integer		$allowSubscribing	            page can be subscribed to
+ * @property-read	integer		$styleID		                id of the style the page should use
+ * @property-read	string		$sidebarOrientation	            orientation of the sidebar (left|right)
+ * @property-read	integer		$objectTypeID		            id of the objecttype of the page type
+ * @property-read	array		$additionalData		            additional data
  */
 class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObject, IRouteController {
 	/**
