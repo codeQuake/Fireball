@@ -645,6 +645,35 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		);
 	}
 
+
+
+	/**
+	 * Validates parameters to get a rendered list of contents.
+	 */
+	public function validateGetSortableContentList() {
+		$this->readString('position');
+		if (!in_array($this->parameters['position'], array('body', 'sidebar', 'sidebarLeft', 'sidebarRight'))) {
+			throw new UserInputException('position');
+		}
+
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
+	}
+
+	public function getSortableContentList() {
+		/** @var $page Page */
+		$page = $this->getSingleObject();
+		$position = $this->parameters['position'];
+
+		return array(
+			'position' => $position,
+			'template' => WCF::getTPL()->fetch('sortableContent', 'cms', array(
+				'contentNodeTree' => $page->getContents()[$position],
+				'position' => $position
+			))
+		);
+	}
+
 	/**
 	 * Validates permissions and parameters for page revision list.
 	 */

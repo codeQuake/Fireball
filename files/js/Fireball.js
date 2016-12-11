@@ -304,60 +304,42 @@ Fireball.Page.ContentTypes = Class.extend({
 Fireball.Content = {};
 
 Fireball.Content.Dragging = Class.extend({
-
+	_proxy: null,
 	_pageID: 0,
 
 	init: function (pageID) {
 		this._pageID = pageID;
-		var dropButton = '<div class="ui-droppable"></div>';
 
-		$header = $('.content .contentHeader');
-		//add sortable container
-		var sortable = $('<div class="sortableListContainer sortableContentList" id="sortableContentListBody" />').insertAfter($header);
-
-		//add root item
-		var nodeList = '<ol class="sortableList" data-object-id="0">';
-		var oldDepth = 0;
-		//add ui-droppable class to all content, because we support infinte nesting
 		$("div[id^='cmsContent']").each(function () {
-			var depth = $(this).parents("div[id^='cmsContent']").length;
-			var children = $(this).children("div[id^='cmsContent']").length;
-			$(this).addClass('ui-droppable').attr({
-				'data-depth': depth,
-				'data-children': children
-			}).prepend('<span class="sortableNodeLabel">' + $(this).data('contentType') + '</span>');
-		});
-
-		//convert contents to a list for use of WCF.Sortable.List
-		$("div[id^='cmsContent']").each(function () {
-			var depth = $(this).data('depth');
-			for (var i = 0; i < (oldDepth - depth); i++) {
-				nodeList += '</ol></li>';
-			}
-
-			var cache = $(this);
-			cache.children("div[id^='cmsContent']").remove()
-			nodeList += '<li style="margin-top: 10px; padding-bottom: 10px;" class="sortableNode jsCollapsibleCategory ui-droppable ' + $(this).attr('class') + '" id="' + $(this).attr('id') + '" data-object-id="' + $(this).attr('id').replace('cmsContent', '') + '" data-depth="' + $(this).data('depth') + '">' + cache.html()
-				+ '<ol class="sortableList" data-object-id="' + $(this).attr('id').replace('cmsContent', '') + '" style="margin-left: 5px; margin-right: 5px;">';
-
-
-			if ($(this).data('children') == 0) {
-				//has no children
-				nodeList += '</ol></li>';
-			}
-			oldDepth = depth;
 			$(this).remove();
 		});
-		for (var i = 0; i < oldDepth; i++) {
-			nodeList += '</ol></li>';
-		}
-		nodeList += '</ol>';
-		$(nodeList).appendTo(sortable);
+		$("section[id^='cmsContent']").each(function () {
+			$(this).remove();
+		});
+
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		this._proxy.setOption('data', {
+			actionName: 'getSortableContentList',
+			className: 'cms\\data\\page\\PageAction',
+			objectIDs: [this._pageID],
+			parameters: {
+				position: 'body'
+			}
+		});
+		this._proxy.sendRequest();
+		this._proxy.setOption('data', {
+			actionName: 'getSortableContentList',
+			className: 'cms\\data\\page\\PageAction',
+			objectIDs: [this._pageID],
+			parameters: {
+				position: 'sidebar'
+			}
+		});
+		this._proxy.sendRequest();
 
 		new Fireball.Content.Sortable.List();
-
-		//no parent drag area
-		$header.after($(dropButton));
 
 		$('.draggable').draggable({
 			cursor: "move",
@@ -389,13 +371,23 @@ Fireball.Content.Dragging = Class.extend({
 			//call add form
 			new Fireball.Content.AddForm(this._pageID, position, type, parentID);
 		}
-	}
-}),
+	},
 
-	Fireball.Content.Sortable = {};
+	_success: function (data, textStatus, jqXHR) {
+		if (data.returnValues.position == 'body')
+			$('body').append(data.returnValues.template);
+		else if (data.returnValues.position == 'sidebar')
+			$('aside.sidebar').append(data.returnValues.template);
+		else if (data.returnValues.position == 'sidebarLeft')
+			$('aside.boxesSidebarLeft').append(data.returnValues.template);
+		else if (data.returnValues.position == 'sidebarRight')
+			$('aside.boxesSidebarRight').append(data.returnValues.template);
+	}
+});
+
+Fireball.Content.Sortable = {};
 
 Fireball.Content.Sortable.List = WCF.Sortable.List.extend({
-
 	init: function () {
 		this._super('sortableContentListBody');
 		$('#contentTypeList .wideButton').children('button[data-type="submit"]').click($.proxy(this._submit, this));
@@ -409,7 +401,6 @@ Fireball.Content.Sortable.List = WCF.Sortable.List.extend({
 });
 
 Fireball.Content.AddForm = Class.extend({
-
 	_pageID: 0,
 	_cache: {},
 	_dialog: null,
