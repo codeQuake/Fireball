@@ -46,6 +46,18 @@ abstract class AbstractContentType implements IContentType {
 	public $templateName = '';
 
 	/**
+	 * content type supports inline editing
+	 * @var boolean
+	 */
+	public $inlineEditingEnabled = false;
+
+	/**
+	 * template name for inline editing
+	 * @var	string
+	 */
+	public $inlineTemplateName = '';
+
+	/**
 	 * Initialize a new content type instance
 	 */
 	public function __construct() {
@@ -127,5 +139,12 @@ abstract class AbstractContentType implements IContentType {
 	 */
 	public function getFormTemplate() {
 		return $this->templateName;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getInlineFormTemplate() {
+		return $this->inlineTemplateName;
 	}
 }

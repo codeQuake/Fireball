@@ -64,4 +64,11 @@ interface IContentType {
 	 * @return	string
 	 */
 	public function getFormTemplate();
+
+	/**
+	 * Returns the template name for the frontend inline editing forms
+	 *
+	 * @return	string
+	 */
+	public function getInlineFormTemplate();
 }
