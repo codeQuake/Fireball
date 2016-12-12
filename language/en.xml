@@ -6,13 +6,13 @@
 		<item name="cms.acp.content.css"><![CDATA[CSS]]></item>
 		<item name="cms.acp.content.css.cssClasses"><![CDATA[CSS-Classes]]></item>
 		<item name="cms.acp.content.css.cssClasses.description">
-			<![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding". For a margin on top use "marginTop". <br />
+			<![CDATA[CSS classes are neccessary for the content's appearance. Recommended is "container containerPadding".<br />
 <strong>Examples:</strong>
 <ul class="nativeList">
-	<li><code class="inlineCode">container</code>: Adds a border to your content</li>
-	<li><code class="inlineCode">containerPadding</code>: Use it with container to add some padding</li>
-	<li><code class="inlineCode">marginTop</code>: Adds a margin on top</li>
-	<li><code class="inlineCode">center</code>: Centers the content</li>
+	<li><code class="inlineCode">section</code>: Provides basic settings based on your style and adds some space between this and the content above this one</li>
+	<li><code class="inlineCode">sectionPadding</code>: Use it with section to add some padding</li>
+	<li><code class="inlineCode">sectionBorder</code>: Adds a border to your content</li>
+	<li><code class="inlineCode">sectionCenter</code>: Centers the content</li>
 </ul>]]>
 		</item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content?]]></item>
@@ -279,9 +279,9 @@
 ---------------------------------
 {@$comment->message}
 ---------------------------------
-{/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+{/if}{link controller=$page->getAlias() isEmail=true}{/link}#comments]]></item>
 		<item name="cms.page.comment.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} wrote comments on “{$page->getTitle()}“:
-{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+{link controller=$page->getAlias() isEmail=true}{/link}#comments]]></item>
 		<item name="cms.page.comment.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} commented on “{$page->getTitle()}“.]]></item>
 		<item name="cms.page.comment.notification.message.stacked"><![CDATA[{if $count < 4}{@$authors[0]->getAnchorTag()}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->getAnchorTag()}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->getAnchorTag()}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->getAnchorTag()}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} commented on “{$page->getTitle()}“.]]></item>
 		<item name="cms.page.comment.notification.title"><![CDATA[New comment (Page)]]></item>
@@ -292,9 +292,9 @@
 ---------------------------------
 {@$response->message}
 ---------------------------------
-{/if}{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+{/if}{link controller=$page->getAlias() isEmail=true}{/link}#comments]]></item>
 		<item name="cms.page.commentResponse.notification.mail.stacked"><![CDATA[{if $count < 4}{@$authors[0]->username}{if $count != 1}{if $count == 2 && !$guestTimesTriggered} and {else}, {/if}{@$authors[1]->username}{if $count == 3}{if !$guestTimesTriggered} and {else}, {/if} {@$authors[2]->username}{/if}{/if}{if $guestTimesTriggered} and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{else}{@$authors[0]->username}{if $guestTimesTriggered},{else} and{/if} {#$others} other users {if $guestTimesTriggered}and {if $guestTimesTriggered == 1}a guest{else}guests{/if}{/if}{/if} replied to your comment on “{$page->getTitle()}“:
-{link controller='Page' alias=$page->getAlias() isEmail=true}{/link}#comments]]></item>
+{link controller=$page->getAlias() isEmail=true}{/link}#comments]]></item>
 		<item name="cms.page.commentResponse.notification.message"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on “{$page->getTitle()}“.]]></item>
 		<item name="cms.page.commentResponse.notification.message.stacked"><![CDATA[{if !$author->userID}A guest{else}{@$author->getAnchorTag()}{/if} replied to your comment on “{$page->getTitle()}“.]]></item>
 		<item name="cms.page.commentResponse.notification.title"><![CDATA[New response (Page)]]></item>
@@ -316,6 +316,7 @@
 		<item name="wcf.acl.option.de.codequake.cms.page.canAddComment"><![CDATA[Can add comments]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewComment"><![CDATA[Can view comments]]></item>
 		<item name="wcf.acl.option.de.codequake.cms.page.canViewPage"><![CDATA[Can view page]]></item>
+		<item name="wcf.acl.option.de.codequake.cms.page.canViewUnpublishedPage"><![CDATA[Can view unpublished page]]></item>
 	</category>
 
 	<category name="wcf.acp.dataImport">
@@ -464,8 +465,8 @@
 	</category>
 
 	<category name="wcf.user.profile">
-		<item name="wcf.user.profile.recentActivity.pageComment"><![CDATA[commented the page “<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=Page application='cms' object=$page}{/link}">{$page->getTitle()}</a>” hinzugefügt.]]></item>
-		<item name="wcf.user.profile.recentActivity.pageCommentResponse"><![CDATA[answered to the comment by <a class="userLink" data-user-id="{$author->userID}" href="{link controller=User object=$author}{/link}">{$author->username}</a> on the page “<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=Page application='cms' object=$page}#comments{/link}">{$page->getTitle()}</a>”.]]></item>
+		<item name="wcf.user.profile.recentActivity.pageComment"><![CDATA[Commented the page “<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=$page->getAlias() application='cms'}{/link}">{$page->getTitle()}</a>” hinzugefügt.]]></item>
+		<item name="wcf.user.profile.recentActivity.pageCommentResponse"><![CDATA[Answered to the comment by <a class="userLink" data-user-id="{$author->userID}" href="{link controller=User object=$author}{/link}">{$author->username}</a> on the page “<a class="cmsPageLink" data-page-id="{$page->pageID}" href="{link controller=$page->getAlias() application='cms'}#comments{/link}">{$page->getTitle()}</a>”.]]></item>
 	</category>
 
 	<category name="wcf.user.recentActivity">
