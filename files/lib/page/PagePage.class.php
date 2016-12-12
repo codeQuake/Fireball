@@ -36,7 +36,7 @@ class PagePage extends AbstractCMSPage {
 	 * list of content nodes
 	 * @var	\RecursiveIteratorIterator
 	 */
-	public $contentNodeTree = null;
+	public $contentContentNodeTree = null;
 
 	/**
 	 * @see	\wcf\page\IPage::readData()
@@ -50,7 +50,7 @@ class PagePage extends AbstractCMSPage {
 		}
 
 		// get contents
-		$this->contentNodeTree = $this->contents['body'];
+		$this->contentContentNodeTree = $this->contents['body'];
 		
 		// comments
 		if ($this->page->isCommentable) {
@@ -67,7 +67,7 @@ class PagePage extends AbstractCMSPage {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign(array(
-			'contentContentNodeTree' => $this->contentNodeTree,
+			'contentContentNodeTree' => $this->contentContentNodeTree,
 			'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : array()),
 			'commentCanAdd' => $this->page->getPermission('canAddComment'),
 			'commentList' => $this->commentList,

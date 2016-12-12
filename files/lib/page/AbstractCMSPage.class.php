@@ -50,7 +50,7 @@ abstract class AbstractCMSPage extends AbstractPage {
 	 * list of sidebar nodes
 	 * @var	\RecursiveIteratorIterator
 	 */
-	public $sidebarNodeTree = null;
+	public $sidebarContentNodeTree = null;
 
 	/**
 	 * list of contents
@@ -133,7 +133,7 @@ abstract class AbstractCMSPage extends AbstractPage {
 
 		// get contents
 		$this->contents = $this->page->getContents();
-		$this->sidebarNodeTree = $this->contents['sidebar'];
+		$this->sidebarContentNodeTree = $this->contents['sidebar'];
 
 		// meta tags
 		if ($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', WCF::getLanguage()->get($this->page->metaKeywords));
