@@ -424,14 +424,14 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 				break;
 
 			case 'save':
-				$list = this._dragging.getSortableListObject()._submit();
+				this._dragging.getSortableListObject('body')._submit();
+				this._dragging.getSortableListObject('sidebar')._submit();
 				break;
 
 			case 'finish':
 				var self = this;
 				WCF.System.Confirmation.show(WCF.Language.get('cms.page.edit.finish.confirm'), function(action) {
 					if (action === 'confirm') {
-						$list = self._dragging.getSortableListObject()._submit();
 						self._contentTypeOverlay._closeSidebar();
 
 						this._proxy = new WCF.Action.Proxy({
@@ -685,7 +685,7 @@ Fireball.Content.AddForm = Class.extend({
  * Handles the preparation for sorting contents
  */
 Fireball.Content.Dragging = Class.extend({
-	_sortableList : null,
+	_sortableList : {},
 	_proxy : null,
 	_pageID : 0,
 
@@ -765,7 +765,7 @@ Fireball.Content.Dragging = Class.extend({
 
 		$container = $('#sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1));
 
-		this._sortableList = new Fireball.Content.Sortable.List('sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1));
+		this._sortableList[data.returnValues.position] = new Fireball.Content.Sortable.List('sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1));
 
 		if ($container !== undefined) {
 			$container.parent().find('.ui-droppable').droppable({
@@ -776,8 +776,8 @@ Fireball.Content.Dragging = Class.extend({
 		}
 	},
 
-	getSortableListObject: function () {
-		return this._sortableList;
+	getSortableListObject: function (position) {
+		return this._sortableList[position];
 	}
 });
 

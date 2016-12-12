@@ -307,7 +307,8 @@
 
 		<item name="cms.page.edit.start"><![CDATA[Start editing]]></item>
 		<item name="cms.page.edit.save"><![CDATA[Save changes]]></item>
-		<item name="cms.page.edit.finish"><![CDATA[Save and Finish]]></item>
+		<item name="cms.page.edit.finish"><![CDATA[Finish]]></item>
+		<item name="cms.page.edit.finish.confirm"><![CDATA[Are you sure you saved all changes? Changes after the last saving won't be committed.]]></item>
 		<item name="cms.page.edit.addContent"><![CDATA[Add Content]]></item>
 		<item name="cms.page.edit.acp"><![CDATA[Edit page]]></item>
 	</category>
