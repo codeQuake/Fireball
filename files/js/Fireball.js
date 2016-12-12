@@ -435,13 +435,13 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 						self._contentTypeOverlay._closeSidebar();
 
 						this._proxy = new WCF.Action.Proxy({
-							success: $.proxy(this._loadParsedContents, this)
+							success: $.proxy(self._loadParsedContents, self)
 						});
 
 						this._proxy.setOption('data', {
 							actionName: 'getParsedContentList',
 							className: 'cms\\data\\page\\PageAction',
-							objectIDs: [this._pageID],
+							objectIDs: [self._pageID],
 							parameters: {
 								position: 'body'
 							}
@@ -451,12 +451,14 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 						this._proxy.setOption('data', {
 							actionName: 'getParsedContentList',
 							className: 'cms\\data\\page\\PageAction',
-							objectIDs: [this._pageID],
+							objectIDs: [self._pageID],
 							parameters: {
 								position: 'sidebar'
 							}
 						});
 						this._proxy.sendRequest();
+
+						self._editStarted = false;
 					}
 				});
 				break;
