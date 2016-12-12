@@ -304,6 +304,12 @@
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>codeQuake</strong></a></address>]]></item>
 		<item name="cms.page.delayedPublication"><![CDATA[This page will be published on {@$page->publicationDate|plainTime}.]]></item>
 		<item name="cms.page.parents"><![CDATA[{implode from=$page->getParentPages() item=parentPage glue=' » '}{$parentPage->getTitle()}{/implode}{if $includeSelf|isset && $includeSelf}{if $page->getParentPages()} » {/if}{$page->getTitle()}{/if}]]></item>
+
+		<item name="cms.page.edit.start"><![CDATA[Start editing]]></item>
+		<item name="cms.page.edit.save"><![CDATA[Save changes]]></item>
+		<item name="cms.page.edit.finish"><![CDATA[Save and Finish]]></item>
+		<item name="cms.page.edit.addContent"><![CDATA[Add Content]]></item>
+		<item name="cms.page.edit.acp"><![CDATA[Edit page]]></item>
 	</category>
 
 	<category name="cms.user">

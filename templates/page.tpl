@@ -84,7 +84,11 @@
 		require(['Language',], function(Language) {
 			Language.addObject({
 				'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}',
-				'cms.content.add': '{lang}cms.acp.content.add{/lang}'
+				'cms.content.add': '{lang}cms.acp.content.add{/lang}',
+				'cms.page.edit.start': '{lang}cms.page.edit.start{/lang}',
+				'cms.page.edit.finish': '{lang}cms.page.edit.finish{/lang}',
+				'cms.page.edit.acp': '{lang}cms.page.edit.acp{/lang}',
+				'cms.page.edit.addContent': '{lang}cms.page.edit.addContent{/lang}'
 			});
 		});
 
@@ -93,7 +97,10 @@
 		{/if}
 
 		{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
-			new Fireball.Page.ContentTypes({$page->pageID});
+			var $inlineEditor = new Fireball.Page.InlineEditor('.jsPageInlineEditorContainer');
+			var $updateHandler = new Fireball.Page.UpdateHandler.Thread({@$page->pageID});
+			$inlineEditor.setUpdateHandler($updateHandler);
+			$inlineEditor.setEnvironment('page', {@$page->pageID});
 		{/if}
 	});
 </script>
