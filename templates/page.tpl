@@ -41,7 +41,7 @@
 				    data-is-disabled="{@$page->isDisabled}"
 				    data-advanced-url="{link controller='PageEdit' object=$page isACP=1 application='cms'}{/link}">
 					{content}
-						<li><a href="#" class="button jsPageInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></a></li>
+						{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}<li><a href="#" class="button jsPageInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></a></li>{/if}
 						{event name='contentHeaderNavigation'}
 					{/content}
 				</ul>

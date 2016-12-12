@@ -18,7 +18,8 @@
 
 		new Fireball.ACP.File.Preview();
 		new Fireball.ACP.File.Picker($('#filePicker > .button'), 'contentData[fileID]', {
-			{if $file|isset}
+		{if !$contentData['fileID']|empty}
+				{assign var=file value=$objectType->getProcessor()->getFile($contentData['fileID'])}
 				{@$file->fileID}: {
 					fileID: {@$file->fileID},
 					title: '{$file->getTitle()}',

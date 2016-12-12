@@ -5,7 +5,6 @@ use cms\data\content\Content;
 use cms\data\file\File;
 use cms\data\file\FileCache;
 use wcf\system\exception\UserInputException;
-use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 
 /**
@@ -62,19 +61,10 @@ class FileContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getFormTemplate()
+	 * @param $fileID  image id
+	 * @return File
 	 */
-	public function getFormTemplate() {
-		$contentData = RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->contentData;
-		if (isset($contentData['fileID'])) {
-			$file = new File($contentData['fileID']);
-			if ($file->fileID) {
-				WCF::getTPL()->assign(array(
-					'file' => $file
-				));
-			}
-		}
-
-		return parent::getFormTemplate();
+	public function getFile($fileID) {
+		return new File($fileID);
 	}
 }

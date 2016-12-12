@@ -645,8 +645,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		);
 	}
 
-
-
 	/**
 	 * Validates parameters to get a rendered list of contents.
 	 */
@@ -668,6 +666,33 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		return array(
 			'position' => $position,
 			'template' => WCF::getTPL()->fetch('sortableContentList', 'cms', array(
+				'contentNodeTree' => $page->getContents()[$position],
+				'position' => $position
+			))
+		);
+	}
+
+	/**
+	 * Validates parameters to get a rendered list of contents.
+	 */
+	public function validateGetParsedContentList() {
+		$this->readString('position');
+		if (!in_array($this->parameters['position'], array('body', 'sidebar', 'sidebarLeft', 'sidebarRight'))) {
+			throw new UserInputException('position');
+		}
+
+		// validate 'objectIDs' parameter
+		$this->getSingleObject();
+	}
+
+	public function getParsedContentList() {
+		/** @var $page Page */
+		$page = $this->getSingleObject();
+		$position = $this->parameters['position'];
+
+		return array(
+			'position' => $position,
+			'template' => WCF::getTPL()->fetch('contentNodeList', 'cms', array(
 				'contentNodeTree' => $page->getContents()[$position],
 				'position' => $position
 			))

@@ -4,13 +4,14 @@ namespace cms\data\content;
 use cms\data\page\PageAction;
 use cms\data\page\PageCache;
 use cms\system\cache\builder\ContentCacheBuilder;
-use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\UserInputException;
+use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 
 /**
@@ -233,21 +234,28 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		if ($objectType === null || !$objectType->getProcessor()->isAvailableToAdd()) {
 			throw new UserInputException('objectType');
 		}
-		
-		WCF::getTPL()->assign(array(
-			'action' => $action,
-			'contentData' => $contentData,
-			'cssClasses' => $cssClasses,
-			'pageID' => $pageID,
-			'parentID' => $parentID,
-			'position' => $position,
-			'showOrder' => $showOrder,
-			'title' => $title,
-			'objectType' => $objectType
-		));
+
+		$objectType->getProcessor()->readParameters();
+		I18nHandler::getInstance()->assignVariables();
 
 		return array(
-			'template' => WCF::getTPL()->fetch('contentAddDialog', 'cms')
+			'template' => WCF::getTPL()->fetch('contentAddDialog', 'cms', array(
+				'action' => $action,
+				'cssClasses' => $cssClasses,
+				'pageID' => $pageID,
+				'parentID' => $parentID,
+				'position' => $position,
+				'showOrder' => $showOrder,
+				'title' => $title,
+				'objectType' => $objectType,
+				'typeTemplate' => WCF::getTPL()->fetch($objectType->getProcessor()->getFormTemplate() . 'Form', 'cms', array(
+					'contentData' => $contentData,
+					'objectType' => $objectType,
+					'errorField' => '',
+					'errorType' => '',
+					'position' => $position
+				))
+			))
 		);
 	}
 

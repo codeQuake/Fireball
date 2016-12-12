@@ -301,9 +301,14 @@ Fireball.Page.ContentTypes = Class.extend({
 			$('#contentTypeList').addClass('open');
 		}
 		else {
-			$('#contentTypeList').removeClass('open');
+			this._closeSidebar()
 		}
 	},
+
+	_closeSidebar: function () {
+		if ($('#contentTypeList').hasClass('open'))
+			$('#contentTypeList').removeClass('open');
+	}
 });
 
 /**
@@ -318,6 +323,7 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 	_editStarted : false,
 	_contentTypeOverlay : null,
 	_dragging : null,
+	_proxy: null,
 
 	/**
 	 * @see	WCF.InlineEditor._setOptions()
@@ -426,7 +432,31 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 				WCF.System.Confirmation.show(WCF.Language.get('cms.page.edit.finish.confirm'), function(action) {
 					if (action === 'confirm') {
 						$list = self._dragging.getSortableListObject()._submit();
-						//TODO: reset contents
+						self._contentTypeOverlay._closeSidebar();
+
+						this._proxy = new WCF.Action.Proxy({
+							success: $.proxy(this._loadParsedContents, this)
+						});
+
+						this._proxy.setOption('data', {
+							actionName: 'getParsedContentList',
+							className: 'cms\\data\\page\\PageAction',
+							objectIDs: [this._pageID],
+							parameters: {
+								position: 'body'
+							}
+						});
+						this._proxy.sendRequest();
+
+						this._proxy.setOption('data', {
+							actionName: 'getParsedContentList',
+							className: 'cms\\data\\page\\PageAction',
+							objectIDs: [this._pageID],
+							parameters: {
+								position: 'sidebar'
+							}
+						});
+						this._proxy.sendRequest();
 					}
 				});
 				break;
@@ -435,6 +465,23 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 				window.location = $('#' + elementID).data('advancedUrl');
 				break;
 		}
+	},
+
+	_loadParsedContents: function (data, textStatus, jqXHR) {
+		position = data.returnValues.position;
+
+		// remove draggable stuff
+		$('.ui-droppable[data-position="' + position + '"]').remove();
+		$('#sortableContentList' + position.charAt(0).toUpperCase() + position.slice(1)).remove();
+
+		if (data.returnValues.position == 'body')
+			$(data.returnValues.template).insertAfter($('.content .contentHeader'));
+		else if (data.returnValues.position == 'sidebar')
+			$('aside.sidebar').append(data.returnValues.template);
+		else if (data.returnValues.position == 'sidebarLeft')
+			$('aside.boxesSidebarLeft').append(data.returnValues.template);
+		else if (data.returnValues.position == 'sidebarRight')
+			$('aside.boxesSidebarRight').append(data.returnValues.template);
 	},
 
 	/**

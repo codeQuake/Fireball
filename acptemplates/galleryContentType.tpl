@@ -18,7 +18,8 @@
 
 		new Fireball.ACP.File.Preview();
 		new Fireball.ACP.File.Picker($('#filePicker > .button'), 'contentData[imageIDs]', {
-			{if $imageList|isset}
+			{if !$contentData['imageIDs']|empty}
+				{assign var='imageList' value=$objectType->getProcessor()->getImageList($contentData['imageIDs'])}
 				{implode from=$imageList item='image'}
 					{@$image->fileID}: {
 						fileID: {@$image->fileID},
