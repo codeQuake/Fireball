@@ -1,4 +1,4 @@
-.sectionBorder {
+.sectionBorder:not(.sortableNode) {
   border: 1px solid $wcfContentBorder;
 }
 

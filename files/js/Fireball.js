@@ -591,7 +591,7 @@ Fireball.Content.AddForm = Class.extend({
 		//get all inputs
 		parameters['contentData'] = {};
 		parameters['contentData']['columnData'] = [];
-		$('#contentAddForm input, #contentAddForm textarea, #pageAddForm select').each(function (index) {
+		$('#contentAddForm input, #contentAddForm textarea, #contentAddForm select').each(function (index) {
 			var input = $(this);
 			if (input.attr('type') != 'checkbox') {
 				parameters[input.attr('name')] = $.trim(input.val())

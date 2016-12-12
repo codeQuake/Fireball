@@ -76,6 +76,10 @@ class BoxContentType extends AbstractContentType {
 			return '';
 		}
 
-		return $box->render();
+		$output = $box->render();
+		$output = preg_replace_callback('/^<([A-Za-z]+)(.*)(class=\"([^"]+)\")/', function($match) use ($content) {
+			return '<' . $match[1] . ' id="cmsContent' . $content->contentID . '"' . $match[2] . 'class="' . ((!empty($content->getCSSClasses()) ? $content->getCSSClasses() . ' ' : '')) . $match[4] . '"';
+		}, $output);
+		return $output;
 	}
 }
