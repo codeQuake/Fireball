@@ -67,7 +67,7 @@ class PagePage extends AbstractCMSPage {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign(array(
-			'contentNodeTree' => $this->contentNodeTree,
+			'contentContentNodeTree' => $this->contentNodeTree,
 			'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : array()),
 			'commentCanAdd' => $this->page->getPermission('canAddComment'),
 			'commentList' => $this->commentList,

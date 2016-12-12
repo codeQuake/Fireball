@@ -40,25 +40,7 @@
 {hascontent}
 	{capture assign='sidebar'|concat:$sidebarUc}
 		{content}
-			{assign var=oldDepth value=0}
-			{foreach from=$sidebarNodeTree item=content}
-				{if $content->getTypeName() != 'de.codequake.cms.content.type.box'}
-					{section name=i loop=$oldDepth-$sidebarNodeTree->getDepth()}</fieldset>{/section}
-					<section class="box{if $content->getCSSClasses() != ""} {$content->getCSSClasses()}{/if}" id="cmsContent{@$content->contentID}" data-content-type="{$content->getTypeName()}">
-						<h2 class="boxTitle">{$content->getTitle()}</h2>
-
-						<div class="boxContent">
-							{@$content->getOutput()|language}
-							{if !$sidebarNodeTree->current()->hasChildren()}
-								</div></section>
-							{/if}
-
-							{assign var=oldDepth value=$sidebarNodeTree->getDepth()}
-				{else}
-					{@$content->getOutput()|language}
-				{/if}
-			{/foreach}
-			{section name=i loop=$oldDepth}</div></section>{/section}
+			{include file='contentNodeList' application='cms' contentNodeTree=$sidebarContentNodeTree position='sidebar'}
 
 			{event name='boxes'}
 		{/content}
@@ -71,18 +53,7 @@
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
 {/if}
 
-{assign var=oldDepth value=0}
-{foreach from=$contentNodeTree item=content}
-	{section name=i loop=$oldDepth-$contentNodeTree->getDepth()}</div>{/section}
-	<div{if $content->getCSSClasses() != ""} class="{$content->getCSSClasses()}"{/if} id="cmsContent{@$content->contentID}" data-content-type="{$content->getTypeName()}">
-		{@$content->getOutput()|language}
-		{if !$contentNodeTree->current()->hasChildren()}
-			</div>
-		{/if}
-		{assign var=oldDepth value=$contentNodeTree->getDepth()}
-{/foreach}
-
-{section name=i loop=$oldDepth}</div>{/section}
+{include file='contentNodeList' application='cms' contentNodeTree=$bodyContentNodeTree}
 
 {if $page->isCommentable && $page->getPermission('canViewComment')}
 	<section id="comments" class="section sectionContainerList">

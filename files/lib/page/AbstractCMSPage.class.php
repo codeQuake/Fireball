@@ -153,7 +153,7 @@ abstract class AbstractCMSPage extends AbstractPage {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign(array(
-			'sidebarNodeTree' => $this->sidebarNodeTree,
+			'sidebarContentNodeTree' => $this->sidebarContentNodeTree,
 			'page' => $this->page,
 			'allowSpidersToIndexThisPage' => $this->page->allowIndexing
 		));
