@@ -53,7 +53,7 @@
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
 {/if}
 
-{include file='contentNodeList' application='cms' contentNodeTree=$bodyContentNodeTree}
+{include file='contentNodeList' application='cms' contentNodeTree=$contentContentNodeTree}
 
 {if $page->isCommentable && $page->getPermission('canViewComment')}
 	<section id="comments" class="section sectionContainerList">
