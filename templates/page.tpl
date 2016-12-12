@@ -104,18 +104,18 @@
 				'cms.page.edit.acp': '{lang}cms.page.edit.acp{/lang}',
 				'cms.page.edit.addContent': '{lang}cms.page.edit.addContent{/lang}'
 			});
+
+			{if $page->allowSubscribing && $__wcf->user->userID}
+				new WCF.User.ObjectWatch.Subscribe();
+			{/if}
+
+			{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
+				var $inlineEditor = new Fireball.Page.InlineEditor('.jsPageInlineEditorContainer');
+				var $updateHandler = new Fireball.Page.UpdateHandler({@$page->pageID});
+				$inlineEditor.setUpdateHandler($updateHandler);
+				$inlineEditor.setEnvironment('page', {@$page->pageID});
+			{/if}
 		});
-
-		{if $page->allowSubscribing && $__wcf->user->userID}
-			new WCF.User.ObjectWatch.Subscribe();
-		{/if}
-
-		{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
-			var $inlineEditor = new Fireball.Page.InlineEditor('.jsPageInlineEditorContainer');
-			var $updateHandler = new Fireball.Page.UpdateHandler.Thread({@$page->pageID});
-			$inlineEditor.setUpdateHandler($updateHandler);
-			$inlineEditor.setEnvironment('page', {@$page->pageID});
-		{/if}
 	});
 </script>
 
