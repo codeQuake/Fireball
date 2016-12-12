@@ -1,6 +1,6 @@
-<div id="contentTypeList" class="contentTypeList allowScroll">
+<div id="contentTypeList" class="contentTypeList leftSide allowScroll">
 	<div class="section">
-		<a id="contentTypeListClose" class="button buttonPrimary"><span class="icon icon24 fa-times"></span></a>
+		<a id="contentTypeListMove" class="button buttonPrimary"><span class="icon icon24 fa-angle-right"></span></a>
 		<h2 class="sectionTitle">{lang}cms.acp.content.add{/lang}</h2>
 
 		{foreach from=$contentTypes key=category item=types}
@@ -25,3 +25,17 @@
 		</div>
 	</div>
 </div>
+
+<script data-relocate="true">
+	$(function() {
+		$('#contentTypeListMove').click(function () {
+			if ($('#contentTypeList').hasClass('leftSide')) {
+				$('#contentTypeListMove > span').removeClass('fa-angle-right').addClass('fa-angle-left');
+				$('#contentTypeList').removeClass('leftSide').addClass('rightSide');
+			} else {
+				$('#contentTypeListMove > span').removeClass('fa-angle-left').addClass('fa-angle-right');
+				$('#contentTypeList').removeClass('rightSide').addClass('leftSide');
+			}
+		})
+	});
+</script>

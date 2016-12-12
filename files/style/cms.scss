@@ -256,22 +256,14 @@
 /**
  * Frontend Content Management
  */
-#contentTypeListOpen {
-  padding: 2px;
-  position: fixed;
-  top: 50%;
-  left: 0;
-  z-index: 500;
-}
 
-#contentTypeListClose {
+#contentTypeListMove {
   float: right;
   padding: 2px;
   margin-right: 8px;
 }
 
 .contentTypeList {
-  left: 0;
   width: 350px;
   background-color: rgba(255, 255, 255, 1);
   bottom: 0;
@@ -280,6 +272,14 @@
   z-index: 320;
   display: none;
   position: fixed;
+
+  &.leftSide {
+	left: 0;
+  }
+
+  &.rightSide {
+	right: 0;
+  }
 
   &.open {
 	display: block;
