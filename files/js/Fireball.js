@@ -329,14 +329,17 @@ Fireball.Content.Dragging = Class.extend({
 			}
 		});
 		this._proxy.sendRequest();
-		this._proxy.setOption('data', {
-			actionName: 'getSortableContentList',
-			className: 'cms\\data\\page\\PageAction',
-			objectIDs: [this._pageID],
-			parameters: {
-				position: 'sidebar'
-			}
-		});
+
+		if ($(''))
+
+			this._proxy.setOption('data', {
+				actionName: 'getSortableContentList',
+				className: 'cms\\data\\page\\PageAction',
+				objectIDs: [this._pageID],
+				parameters: {
+					position: 'sidebar'
+				}
+			});
 		this._proxy.sendRequest();
 
 		$('.draggable').draggable({
@@ -386,9 +389,10 @@ Fireball.Content.Dragging = Class.extend({
 		else if (data.returnValues.position == 'sidebarRight')
 			$('aside.boxesSidebarRight').append(template);
 
-		new Fireball.Content.Sortable.List();
-
 		$container = $('#sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1));
+
+		new Fireball.Content.Sortable.List('sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1));
+
 		if ($container !== undefined) {
 			$container.parent().find('.ui-droppable').droppable({
 				activeClass: "droppable-state-active",
@@ -402,16 +406,57 @@ Fireball.Content.Dragging = Class.extend({
 Fireball.Content.Sortable = {};
 
 Fireball.Content.Sortable.List = WCF.Sortable.List.extend({
-	init: function () {
-		this._super('sortableContentListBody');
+	init: function (container) {
+		this._super(container);
 		$('#contentTypeList .wideButton').children('button[data-type="submit"]').click($.proxy(this._submit, this));
 		this._className = 'cms\\data\\content\\ContentAction';
 	},
 
-	_success: function (data, textStatus, jqXHR) {
-		this._super(data, textStatus, jqXHR);
-		window.location = location;
-	}
+	/**
+	 * Saves object structure.
+	 */
+	_submit: function() {
+		// reset structure
+		this._structure = { };
+
+		// build structure
+		this._container.find('.sortableList').each($.proxy(function(index, list) {
+			var $list = $(list);
+			var $parentID = $list.data('objectID');
+
+			if ($parentID !== undefined) {
+				$list.children(this._options.items).each($.proxy(function(index, listItem) {
+					var $objectID = $(listItem).data('objectID');
+
+					if (!this._structure[$parentID]) {
+						this._structure[$parentID] = [ ];
+					}
+
+					this._structure[$parentID].push($objectID);
+				}, this));
+			}
+		}, this));
+
+		// catch empty structures
+		if (Object.keys(this._structure).length === 0)
+			return;
+
+		// send request
+		var $parameters = $.extend(true, {
+			data: {
+				offset: this._offset,
+				structure: this._structure
+			}
+		}, this._additionalParameters);
+
+		this._proxy.setOption('data', {
+			actionName: 'updatePosition',
+			className: this._className,
+			interfaceName: 'wcf\\data\\ISortableAction',
+			parameters: $parameters
+		});
+		this._proxy.sendRequest();
+	},
 });
 
 Fireball.Content.AddForm = Class.extend({

@@ -14,7 +14,7 @@
 				<li><span class="icon icon16 fa{if !$content->isDisabled}-check{/if}-square-o jsToggleButton jsTooltip pointer" data-object-id="{$content->contentID}"></span></li>
 			</ul>
 
-			<h2 class="{if $position == 'sidebar'}boxTitle{else}sectionTitle{/if}">{$content->getTitle()} <small>({$content->getTypeName()})</small></h2>
+			<span class="{if $position == 'sidebar'}boxTitle{else}sectionTitle{/if}">{$content->getTitle()} <small>({$content->getTypeName()})</small></span>
 
 			{if $position == 'sidebar'}
 				<div class="boxContent">{@$content->getOutput()|language}</div>
