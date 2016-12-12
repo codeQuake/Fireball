@@ -1,4 +1,4 @@
-<div class="ui-droppable"></div>
+<div class="ui-droppable" data-position="{$position}"></div>
 
 <div class="sortableListContainer sortableContentList" id="sortableContentList{$position|ucfirst}">
 	<ol class="sortableList ui-sortable" data-object-id="0">
@@ -7,7 +7,8 @@
 		    data-object-id="{$content->contentID}"
 		    data-depth="{$contentNodeTree->getDepth()}"
 		    data-content-type="{$content->getTypeName()}"
-		    data-children="{$content->count()}">
+		    data-children="{$content->count()}"
+		    data-position="{$position}">
 			<ul class="buttonList">
 				<li><span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.delete{/lang}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span></li>
 				<li><span class="icon icon16 fa-pencil jsEditButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.edit{/lang}"></span></li>
@@ -22,7 +23,9 @@
 				{@$content->getOutput()|language}
 			{/if}
 
-			<ol class="sortableList ui-sortable" data-object-id="{$content->contentID}" style="margin-left: 5px; margin-right: 5px;">{if !$content->hasChildren()}</ol></li>{/if}
+			<ol class="sortableList ui-sortable" style="margin-left: 5px; margin-right: 5px;"
+			    data-object-id="{$content->contentID}"
+			    data-position="{$position}">{if !$content->hasChildren()}</ol></li>{/if}
 			{if !$content->hasChildren() && $content->isLastSibling()}
 				{@"</ol></li>"|str_repeat:$content->getOpenParentNodes()}
 			{/if}

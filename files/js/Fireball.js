@@ -270,6 +270,7 @@ Fireball.Page.Add = Class.extend({
 Fireball.Page.ContentTypes = Class.extend({
 	_pageID: 0,
 	_proxy: null,
+	_setDraggable: false,
 
 	init: function (pageID) {
 		this._pageID = pageID;
@@ -285,6 +286,10 @@ Fireball.Page.ContentTypes = Class.extend({
 			}
 		});
 		this._proxy.sendRequest();
+	},
+
+	setSet: function () {
+		this._setDraggable = true;
 	},
 
 	_success: function (data, textStatus, jqXHR) {
@@ -394,11 +399,22 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 				var self = this;
 				this._contentTypeOverlay = new Fireball.Page.ContentTypes(this._pageID);
 				this._dragging = new Fireball.Content.Dragging(this._pageID);
+
 				this._editStarted = true;
 				break;
 
 			case 'addContent':
 				this._contentTypeOverlay._toggleSidebar();
+				if (!this._contentTypeOverlay._setDraggable) {
+					$('.draggable').draggable({
+						cursor: "move",
+						helper: "clone",
+						revert: "invalid",
+						containment: "document",
+						drag: $.proxy(this._dragging._drag, this._dragging)
+					});
+				}
+
 				break;
 
 			case 'save':
@@ -656,14 +672,6 @@ Fireball.Content.Dragging = Class.extend({
 			}
 		});
 		this._proxy.sendRequest();
-
-		$('.draggable').draggable({
-			cursor: "move",
-			helper: "clone",
-			revert: "invalid",
-			containment: "document",
-			drag: $.proxy(this._drag, this)
-		});
 	},
 
 	_drag: function (event, ui) {
@@ -680,6 +688,8 @@ Fireball.Content.Dragging = Class.extend({
 			$(event.target).append('<div class="draggedContent ' + ui.draggable.attr('id') + '" />')
 			var type = ui.draggable.attr('id');
 			var position = 'body';
+			if (typeof $(event.target).data('position') !== 'undefined')
+				position = $(event.target).data('position');
 			if (typeof $(event.target).attr('id') !== 'undefined' && $(event.target).attr('id').match('^cmsContent')) {
 				var data = $(event.target).attr('id').replace('cmsContent', '');
 			}

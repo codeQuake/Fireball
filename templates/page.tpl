@@ -101,6 +101,7 @@
 				'cms.content.add': '{lang}cms.acp.content.add{/lang}',
 				'cms.page.edit.start': '{lang}cms.page.edit.start{/lang}',
 				'cms.page.edit.finish': '{lang}cms.page.edit.finish{/lang}',
+				'cms.page.edit.save': '{lang}cms.page.edit.save{/lang}',
 				'cms.page.edit.acp': '{lang}cms.page.edit.acp{/lang}',
 				'cms.page.edit.addContent': '{lang}cms.page.edit.addContent{/lang}'
 			});
