@@ -48,7 +48,7 @@ class RssContentType extends AbstractContentType {
 		$feedType = $this->getFeedType($xml);
 		
 		WCF::getTPL()->assign(array(
-			'rssFeed' => $this->getFeedData($xml, $$content->limit, $feedType)
+			'rssFeed' => $this->getFeedData($xml, $content->limit, $feedType)
 		));
 		
 		return parent::getOutput($content);
