@@ -16,7 +16,7 @@ use wcf\system\WCF;
  *
  * @property-read	integer		$stylesheetID	id of the stylesheet
  * @property-read	string		$title	    	title of the stylesheet
- * @property-read	string		$less   		scss code
+ * @property-read	string		$scss   		scss code
  */
 class Stylesheet extends DatabaseObject {
 	/**

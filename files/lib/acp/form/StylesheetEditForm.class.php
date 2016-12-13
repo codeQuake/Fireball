@@ -61,7 +61,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 
 		$data = array(
 			'title' => $this->title,
-			'less' => $this->less
+			'scss' => $this->scss
 		);
 
 		$this->objectAction = new StylesheetAction(array($this->stylesheet), 'update', array(
@@ -88,7 +88,12 @@ class StylesheetEditForm extends StylesheetAddForm {
 
 		if (empty($_POST)) {
 			$this->title = $this->stylesheet->title;
-			$this->less = $this->stylesheet->less;
+			$this->scss = $this->stylesheet->scss;
+
+			// backward compatibility to maelstrom & typhoon
+			if (empty($this->scss) && !empty($this->stylesheet->less)) {
+				$this->scss = $this->stylesheet->less;
+			}
 		}
 	}
 

@@ -2,6 +2,7 @@
 namespace cms\system\style;
 
 use cms\data\stylesheet\Stylesheet;
+use Leafo\ScssPhp\Compiler;
 use wcf\data\option\Option;
 use wcf\system\style\StyleHandler;
 use wcf\system\SingletonFactory;
@@ -20,16 +21,15 @@ use wcf\util\StyleUtil;
 class StylesheetCompiler extends SingletonFactory {
 	/**
 	 * less compiler object.
-	 * @var	\lessc
-	 */
+	 * @var	Compiler
 	protected $compiler = null;
 
 	/**
 	 * @see	\wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
-		require_once(WCF_DIR.'lib/system/style/lessc.inc.php');
-		$this->compiler = new \lessc();
+		require_once(WCF_DIR.'lib/system/style/scssphp/scss.inc.php');
+		$this->compiler = new Compiler();
 		$this->compiler->setImportDir(array(WCF_DIR));
 	}
 
@@ -87,7 +87,12 @@ class StylesheetCompiler extends SingletonFactory {
 		// compile
 		$this->compiler->setVariables($variables);
 		$content  = "/* stylesheet for '". $stylesheet->getTitle() ."', generated on ". gmdate('r') ." -- DO NOT EDIT */\n\n";
-		$content .= $this->compiler->compile($stylesheet->less);
+		if (!empty($stylesheet->scss)) {
+			$content .= $this->compiler->compile($stylesheet->scss);
+		} else {
+			// backward compatibility to maelstrom & typhoon
+			$content .= $this->compiler->compile($stylesheet->less);
+		}
 
 		// compress stylesheet
 		$lines = explode("\n", $content);

@@ -22,10 +22,10 @@ class StylesheetAddForm extends AbstractForm {
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.stylesheet.add';
 
 	/**
-	 * less
+	 * scss
 	 * @var	string
 	 */
-	public $less = '';
+	public $scss = '';
 
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
@@ -45,7 +45,7 @@ class StylesheetAddForm extends AbstractForm {
 		parent::readFormParameters();
 
 		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
-		if (isset($_POST['less'])) $this->less = StringUtil::trim($_POST['less']);
+		if (isset($_POST['scss'])) $this->scss = StringUtil::trim($_POST['scss']);
 	}
 
 	/**
@@ -59,9 +59,9 @@ class StylesheetAddForm extends AbstractForm {
 			throw new UserInputException('title');
 		}
 
-		// validate less
-		if (empty($_POST['less'])) {
-			throw new UserInputException('less');
+		// validate scss
+		if (empty($_POST['scss'])) {
+			throw new UserInputException('scss');
 		}
 	}
 
@@ -73,7 +73,7 @@ class StylesheetAddForm extends AbstractForm {
 
 		$data = array(
 			'title' => $this->title,
-			'less' => $this->less
+			'scss' => $this->scss
 		);
 
 		$this->objectAction = new StylesheetAction(array(), 'create', array(
@@ -87,7 +87,7 @@ class StylesheetAddForm extends AbstractForm {
 		WCF::getTPL()->assign('success', true);
 
 		// reset variables
-		$this->title = $this->less = '';
+		$this->title = $this->scss = '';
 	}
 
 	/**
@@ -99,7 +99,7 @@ class StylesheetAddForm extends AbstractForm {
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'title' => $this->title,
-			'less' => $this->less
+			'scss' => $this->scss
 		));
 	}
 }

@@ -57,28 +57,28 @@
 		</section>
 
 		<section class="section marginTop">
-			<legend>{lang}cms.acp.stylesheet.less{/lang}</legend>
+			<legend>{lang}cms.acp.stylesheet.scss{/lang}</legend>
 
 			<dl class="wide">
 				<dt></dt>
 				<dd>
-					<textarea id="less" rows="20" cols="40" name="less">{$less}</textarea>
-					{if $errorField == 'less'}
+					<textarea id="scss" rows="20" cols="40" name="scss">{$scss}</textarea>
+					{if $errorField == 'scss'}
 						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
-								{lang}cms.acp.stylesheet.less.error.{@$errorType}{/lang}
+								{lang}cms.acp.stylesheet.scss.error.{@$errorType}{/lang}
 							{/if}
 						</small>
 					{/if}
-					<small>{lang}cms.acp.stylesheet.less.description{/lang}</small>
+					<small>{lang}cms.acp.stylesheet.scss.description{/lang}</small>
 
-					{include file='codemirror' codemirrorMode='text/x-less' codemirrorSelector='#less'}
+					{include file='codemirror' codemirrorMode='text/x-less' codemirrorSelector='#scss'}
 				</dd>
 			</dl>
 
-			{event name='lessFields'}
+			{event name='scssFields'}
 		</section>
 
 		{event name='fieldsets'}
