@@ -130,7 +130,7 @@ abstract class AbstractContentType implements IContentType {
 	public function readFormParameters() { /* nothing */ }
 
 	/**
-	 * @see cms\system\content\type\IContentType::validate()
+	 * @see \cms\system\content\type\IContentType::validate()
 	 */
 	public function validate($data) { /* nothing */ }
 
@@ -146,5 +146,12 @@ abstract class AbstractContentType implements IContentType {
 	 */
 	public function getInlineFormTemplate() {
 		return $this->inlineTemplateName;
+	}
+
+	/**
+	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 */
+	public function getSortableOutput(Content $content) {
+		return $this->getOutput($content);
 	}
 }

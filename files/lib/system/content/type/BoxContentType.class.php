@@ -82,4 +82,11 @@ class BoxContentType extends AbstractContentType {
 		}, $output);
 		return $output;
 	}
+
+	/**
+	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 */
+	public function getSortableOutput(Content $content) {
+		return '';
+	}
 }

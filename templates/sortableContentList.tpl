@@ -18,9 +18,9 @@
 			<span class="{if $position == 'sidebar'}boxTitle{else}sectionTitle{/if}">{$contentNode->getTitle()} <small>({$contentNode->getTypeName()})</small></span>
 
 			{if $position == 'sidebar'}
-				<div class="boxContent">{@$contentNode->getOutput()|language}</div>
+				<div class="boxContent">{@$contentNode->getOutput(true)|language}</div>
 			{else}
-				{@$contentNode->getOutput()|language}
+				{@$contentNode->getOutput(true)|language}
 			{/if}
 
 			<ol class="sortableList ui-sortable" style="margin-left: 5px; margin-right: 5px;"

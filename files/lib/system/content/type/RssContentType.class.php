@@ -56,6 +56,13 @@ class RssContentType extends AbstractContentType {
 		return parent::getOutput($content);
 
 	}
+
+	/**
+	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 */
+	public function getSortableOutput(Content $content) {
+		return '<span class="inlineCode"></span>' . $content->url . '<span>';
+	}
 	
 	public function getFeedType($xml) {
 		// get feed type

@@ -14,11 +14,18 @@ use cms\data\content\Content;
 interface IContentType {
 	/**
 	 * Returns the formatted output for the given content.
-	 * 
+	 *
 	 * @param	\cms\data\content\Content	$content
 	 * @return	string
 	 */
 	public function getOutput(Content $content);
+	/**
+	 * Returns the formatted output for the given content used by sortable lists.
+	 *
+	 * @param	\cms\data\content\Content	$content
+	 * @return	string
+	 */
+	public function getSortableOutput(Content $content);
 
 	/**
 	 * Returns the icon name (with icon prefix) for this content type.
