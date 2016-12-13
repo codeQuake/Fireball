@@ -49,4 +49,11 @@ class PHPContentType extends AbstractContentType {
 
 		return $output;
 	}
+
+	/**
+	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 */
+	public function getSortableOutput(Content $content) {
+		return '';
+	}
 }

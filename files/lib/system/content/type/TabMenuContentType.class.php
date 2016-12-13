@@ -48,4 +48,11 @@ class TabMenuContentType extends AbstractStructureContentType {
 
 		return parent::getOutput($content);
 	}
+
+	/**
+	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 */
+	public function getSortableOutput(Content $content) {
+		return '';
+	}
 }
