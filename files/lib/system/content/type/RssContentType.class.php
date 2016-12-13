@@ -2,6 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 use wcf\util\HTTPRequest;
 
@@ -26,31 +27,28 @@ class RssContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$rssURL = $content->url;
-		
-		//try {
-			$request = new HTTPRequest($rssURL);
+		try {
+			$request = new HTTPRequest($content->url);
 			$request->execute();
 			$feedData = $request->getReply();
 			$feedData = $feedData['body'];
-		//}
-		//catch (SystemException $e) {
-			//// log error
-			//$e->getExceptionID();
-
-			//return;
-		//}
+		}
+		catch (SystemException $e) {
+			if (WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) {
+				$url = LinkHandler::getInstance()->getLink('ContentEdit', array('application' => 'cms', 'object' => $content, 'isACP' => true));
+				return '<div class="error">Please check <a href="' . $url . '">content #' . $content->contentID . '</a>. The following error occurred fetching the feed from <span class="inlineCode">' . $content->url . '</span>:<br><br>' . $e->getMessage() . '</div>';
+			} else {
+				return '';
+			}
+		}
 		
 		if (!$xml = simplexml_load_string($feedData)) {
-			return;
+			return '';
 		}
-		$feed = array();
-		$i = $content->limit;
 		$feedType = $this->getFeedType($xml);
-		$feed = $this->getFeedData($xml, $i, $feedType);
 		
 		WCF::getTPL()->assign(array(
-			'rssFeed' => $feed
+			'rssFeed' => $this->getFeedData($xml, $$content->limit, $feedType)
 		));
 		
 		return parent::getOutput($content);
