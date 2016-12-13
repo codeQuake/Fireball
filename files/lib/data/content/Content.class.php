@@ -125,9 +125,9 @@ class Content extends DatabaseObject implements IRouteController, IPollObject {
 	public function getOutput($sortableOutput = false) {
 		$this->objectType = $this->getObjectType();
 		if ($sortableOutput)
-			return $this->objectType->getProcessor()->getOutput($this);
-		else
 			return $this->objectType->getProcessor()->getSortableOutput($this);
+		else
+			return $this->objectType->getProcessor()->getOutput($this);
 	}
 
 	/**
