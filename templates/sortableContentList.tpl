@@ -2,32 +2,32 @@
 
 <div class="sortableListContainer sortableContentList" id="sortableContentList{$position|ucfirst}">
 	<ol class="sortableList ui-sortable" data-object-id="0">
-		{foreach from=$contentNodeTree item=content}
-		<li style="margin-top: 10px; padding-bottom: 10px;" class="jsContentRow sortableNode jsCollapsibleCategory ui-droppable {$content->getCSSClasses()}" id="cmsContent{$content->contentID}"
-		    data-object-id="{$content->contentID}"
+		{foreach from=$contentNodeTree item=contentNode}
+		<li style="margin-top: 10px; padding-bottom: 10px;" class="jsContentRow sortableNode jsCollapsibleCategory ui-droppable {$contentNode->getCSSClasses()}" id="cmsContent{$contentNode->contentID}"
+		    data-object-id="{$contentNode->contentID}"
 		    data-depth="{$contentNodeTree->getDepth()}"
-		    data-content-type="{$content->getTypeName()}"
-		    data-children="{$content->count()}"
+		    data-content-type="{$contentNode->getTypeName()}"
+		    data-children="{$contentNode->count()}"
 		    data-position="{$position}">
 			<ul class="buttonList">
-				<li><span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.delete{/lang}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span></li>
-				<li><span class="icon icon16 fa-pencil jsEditButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.edit{/lang}"></span></li>
-				<li><span class="icon icon16 fa{if !$content->isDisabled}-check{/if}-square-o jsToggleButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.{if !$content->isDisabled}disable{else}enable{/if}{/lang}"></span></li>
+				<li><span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" data-object-id="{$contentNode->contentID}" title="{lang}wcf.global.button.delete{/lang}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span></li>
+				<li><span class="icon icon16 fa-pencil jsEditButton jsTooltip pointer" data-object-id="{$contentNode->contentID}" title="{lang}wcf.global.button.edit{/lang}"></span></li>
+				<li><span class="icon icon16 fa{if !$contentNode->isDisabled}-check{/if}-square-o jsToggleButton jsTooltip pointer" data-object-id="{$contentNode->contentID}" title="{lang}wcf.global.button.{if !$contentNode->isDisabled}disable{else}enable{/if}{/lang}"></span></li>
 			</ul>
 
-			<span class="{if $position == 'sidebar'}boxTitle{else}sectionTitle{/if}">{$content->getTitle()} <small>({$content->getTypeName()})</small></span>
+			<span class="{if $position == 'sidebar'}boxTitle{else}sectionTitle{/if}">{$contentNode->getTitle()} <small>({$contentNode->getTypeName()})</small></span>
 
 			{if $position == 'sidebar'}
-				<div class="boxContent">{@$content->getOutput()|language}</div>
+				<div class="boxContent">{@$contentNode->getOutput()|language}</div>
 			{else}
-				{@$content->getOutput()|language}
+				{@$contentNode->getOutput()|language}
 			{/if}
 
 			<ol class="sortableList ui-sortable" style="margin-left: 5px; margin-right: 5px;"
-			    data-object-id="{$content->contentID}"
-			    data-position="{$position}">{if !$content->hasChildren()}</ol></li>{/if}
-			{if !$content->hasChildren() && $content->isLastSibling()}
-				{@"</ol></li>"|str_repeat:$content->getOpenParentNodes()}
+			    data-object-id="{$contentNode->contentID}"
+			    data-position="{$position}">{if !$contentNode->hasChildren()}</ol></li>{/if}
+			{if !$contentNode->hasChildren() && $contentNode->isLastSibling()}
+				{@"</ol></li>"|str_repeat:$contentNode->getOpenParentNodes()}
 			{/if}
 		{/foreach}
 	</ol>
