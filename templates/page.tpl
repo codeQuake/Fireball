@@ -1,109 +1,80 @@
-{include file='documentHeader'}
-
-<head>
-	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItemID != $page->menuItemID}{$page->getTitle()} - {/if}{PAGE_TITLE|language}</title>
-
-	{include file='headInclude'}
+{capture assign='headContent'}
 	{foreach from=$page->getStylesheets() item=stylesheet}
 		<link rel="stylesheet" type="text/css" href="{$stylesheet->getURL()}" />
 	{/foreach}
-	<link rel="canonical" href="{$page->getLink(false)}" />
-
-	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/CMS{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
-	<script data-relocate="true">
-		//<![CDATA[
-		$(function() {
-			{if $page->allowSubscribing && $__wcf->user->userID}
-				WCF.Language.addObject({
-					'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}'
-				});
-
-				new WCF.User.ObjectWatch.Subscribe();
-			{/if}
-
-			{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
-				new Fireball.Page.ContentTypes({$page->pageID});
-			{/if}
-
-		});
-		//]]>
-	</script>
-</head>
-
-<body id="tpl_{$templateNameApplication}_{$templateName}" data-template="{$templateName}" data-application="{$templateNameApplication}" data-page-id="{$page->pageID}">
+	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/Fireball{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
+{/capture}
 
 {capture assign='headerNavigation'}
 	{if $page->allowSubscribing && $__wcf->user->userID}
-		<li class="jsOnly"><a title="{lang}wcf.user.objectWatch.manageSubscription{/lang}" class="jsSubscribeButton jsTooltip" data-object-type="de.codequake.cms.page" data-object-id="{@$page->pageID}"><span class="icon icon16 icon-bookmark"></span> <span class="invisible">{lang}wcf.user.objectWatch.manageSubscription{/lang}</span></a></li>
+		<li class="jsOnly"><a title="{lang}wcf.user.objectWatch.manageSubscription{/lang}" class="jsSubscribeButton jsTooltip" data-object-type="de.codequake.cms.page" data-object-id="{@$page->pageID}"><span class="icon icon16 fa-bookmark"></span> <span class="invisible">{lang}wcf.user.objectWatch.manageSubscription{/lang}</span></a></li>
 	{/if}
 {/capture}
 
+{capture assign='pageTitle'}{$page->getTitle()}{/capture}
+
+{capture assign='contentHeader'}
+	<header class="contentHeader">
+		<div class="contentHeaderTitle">
+			<h1 class="contentTitle">{$page->getTitle()}</h1>
+			{if $page->description}
+				<p class="contentHeaderDescription">
+					{@$page->description|language}
+				</p>
+			{/if}
+		</div>
+
+		{hascontent}
+			<nav class="contentHeaderNavigation">
+				<ul>
+					{content}
+						{event name='contentHeaderNavigation'}
+					{/content}
+				</ul>
+			</nav>
+		{/hascontent}
+
+		{hascontent}
+			<nav class="contentHeaderNavigation">
+				<ul class="jsPageInlineEditorContainer"
+				    data-page-id="{@$page->pageID}"
+				    data-is-disabled="{@$page->isDisabled}"
+				    data-advanced-url="{link controller='PageEdit' object=$page isACP=1 application='cms'}{/link}">
+					{content}
+						<li><a href="#" class="button jsPageInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></a></li>
+						{event name='contentHeaderNavigation'}
+					{/content}
+				</ul>
+			</nav>
+		{/hascontent}
+	</header>
+{/capture}
+
+{assign var=sidebarUc value=$page->sidebarOrientation|ucfirst}
 {hascontent}
-	{capture assign='sidebar'}
+	{capture assign='sidebar'|concat:$sidebarUc}
 		{content}
-			{assign var=oldDepth value=0}
-			{foreach from=$sidebarNodeTree item=content}
-				{if $content->getTypeName() != 'de.codequake.cms.content.type.dashboard'}
-					{section name=i loop=$oldDepth-$sidebarNodeTree->getDepth()}</fieldset>{/section}
-					<fieldset class="dashboardBox{if $content->getCSSClasses() != ""} {$content->getCSSClasses()}{/if}" id="cmsContent{@$content->contentID}" data-content-type="{$content->getTypeName()}">
-						<legend>{$content->getTitle()}</legend>
-
-						{@$content->getOutput()|language}
-						{if !$sidebarNodeTree->current()->hasChildren()}
-							</fieldset>
-						{/if}
-
-						{assign var=oldDepth value=$sidebarNodeTree->getDepth()}
-				{else}
-					{@$content->getOutput()|language}
-				{/if}
-			{/foreach}
-			{section name=i loop=$oldDepth}</fieldset>{/section}
+			{include file='contentNodeList' application='cms' contentNodeTree=$sidebarContentNodeTree position='sidebar'}
 
 			{event name='boxes'}
 		{/content}
 	{/capture}
 {/hascontent}
 
-{include file='header' sidebarOrientation=$page->sidebarOrientation}
-
-<header class="boxHeadline">
-	{if $__wcf->getPageMenu()->getLandingPage()->menuItemID == $page->menuItemID}
-		<h1>{PAGE_TITLE|language}</h1>
-		{hascontent}<p>{content}{PAGE_DESCRIPTION|language}{/content}</p>{/hascontent}
-	{else}
-		<h1>{$page->getTitle()}</h1>
-		<p>{$page->description|language}</p>
-	{/if}
-</header>
-
-{include file='userNotice'}
+{include file='header'}
 
 {if !$page->isPublished && $page->publicationDate}
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
 {/if}
 
-{assign var=oldDepth value=0}
-{foreach from=$contentNodeTree item=content}
-	{section name=i loop=$oldDepth-$contentNodeTree->getDepth()}</div>{/section}
-	<div{if $content->getCSSClasses() != ""} class="{$content->getCSSClasses()}"{/if} id="cmsContent{@$content->contentID}" data-content-type="{$content->getTypeName()}">
-		{@$content->getOutput()|language}
-		{if !$contentNodeTree->current()->hasChildren()}
-			</div>
-		{/if}
-		{assign var=oldDepth value=$contentNodeTree->getDepth()}
-{/foreach}
-
-{section name=i loop=$oldDepth}</div>{/section}
+{include file='contentNodeList' application='cms' contentNodeTree=$contentContentNodeTree position='content'}
 
 {if $page->isCommentable && $page->getPermission('canViewComment')}
-	<header id="comments" class="boxHeadline boxSubHeadline">
-		<h2>{lang}cms.page.comments{/lang} <span class="badge">{@$commentList->countObjects()}</span></h2>
-	</header>
+	<section id="comments" class="section sectionContainerList">
+		<h2 class="sectionTitle">{lang}cms.page.comments{/lang} <span class="badge">{@$commentList->countObjects()}</span></h2>
 
-	{include file='__commentJavaScript' commentContainerID='pageCommentList'}
+		{include file='__commentJavaScript' commentContainerID='pageCommentList'}
 
-	<div class="container containerList marginTop">
 		{if $commentCanAdd}
 			<ul id="pageCommentList" class="commentList containerList" data-can-add="true" data-object-id="{@$page->pageID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$lastCommentTime}">
 				{include file='commentList'}
@@ -116,15 +87,37 @@
 					{/content}
 				</ul>
 			{hascontentelse}
-				<div class="containerPadding">
-					{lang}cms.page.comments.noComments{/lang}
-				</div>
+				<p class="info">{lang}cms.page.comments.noComments{/lang}</p>
 			{/hascontent}
 		{/if}
-	</div>
+	</section>
 {/if}
 
-{include file='footer'}
+<script data-relocate="true">
+	$(function() {
+		require(['Language',], function(Language) {
+			Language.addObject({
+				'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}',
+				'cms.content.add': '{lang}cms.acp.content.add{/lang}',
+				'cms.page.edit.start': '{lang}cms.page.edit.start{/lang}',
+				'cms.page.edit.finish': '{lang}cms.page.edit.finish{/lang}',
+				'cms.page.edit.save': '{lang}cms.page.edit.save{/lang}',
+				'cms.page.edit.acp': '{lang}cms.page.edit.acp{/lang}',
+				'cms.page.edit.addContent': '{lang}cms.page.edit.addContent{/lang}'
+			});
 
-</body>
-</html>
+			{if $page->allowSubscribing && $__wcf->user->userID}
+				new WCF.User.ObjectWatch.Subscribe();
+			{/if}
+
+			{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
+				var $inlineEditor = new Fireball.Page.InlineEditor('.jsPageInlineEditorContainer');
+				var $updateHandler = new Fireball.Page.UpdateHandler({@$page->pageID});
+				$inlineEditor.setUpdateHandler($updateHandler);
+				$inlineEditor.setEnvironment('page', {@$page->pageID});
+			{/if}
+		});
+	});
+</script>
+
+{include file='footer'}
