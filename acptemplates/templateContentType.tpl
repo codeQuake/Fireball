@@ -13,7 +13,7 @@
 		{/if}
 		<small>{lang}cms.acp.content.type.de.codequake.cms.content.type.template.text.description{/lang}</small>
 
-		{if ACE_THEME|empty}
+		{if !'ACE_THEME'|defined}
 			{include file='codemirror' codemirrorMode='smartymixed' codemirrorSelector='#text'}
 		{else}
 			{include file='ace' aceMode='smarty' aceSelector='text'}
