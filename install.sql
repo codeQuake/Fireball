@@ -86,7 +86,7 @@ DROP TABLE IF EXISTS cms1_stylesheet;
 CREATE TABLE cms1_stylesheet (
 	stylesheetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	title VARCHAR(255) NOT NULL,
-	less MEDIUMTEXT
+	scss MEDIUMTEXT
 );
 
 DROP TABLE IF EXISTS cms1_stylesheet_to_page;
