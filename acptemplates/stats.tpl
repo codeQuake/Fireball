@@ -18,8 +18,8 @@
 
 <div class="contentNavigation">
 	<form method="post" action="{link application='cms' controller='Stats'}{/link}">
-		<input type="date" name="startDate" value="{$startDate|date}"/>
-		<input type="date" name="endDate" value="{$endDate|date}"/>
+		<input type="date" name="startDate" value="{$startDate}"/>
+		<input type="date" name="endDate" value="{$endDate}"/>
 		<input type="submit" />
 	</form>
 </div>
