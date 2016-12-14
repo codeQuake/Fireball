@@ -74,7 +74,11 @@
 					{/if}
 					<small>{lang}cms.acp.stylesheet.scss.description{/lang}</small>
 
-					{include file='codemirror' codemirrorMode='text/x-less' codemirrorSelector='#scss'}
+					{if ACE_THEME|empty}
+						{include file='codemirror' codemirrorMode='text/x-less' codemirrorSelector='#scss'}
+					{else}
+						{include file='ace' aceMode='scss' aceSelector='scss'}
+					{/if}
 				</dd>
 			</dl>
 

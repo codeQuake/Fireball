@@ -3,6 +3,10 @@
 	<dd>
 		<textarea id="text" rows="20" cols="40" name="contentData[text]">{if $contentData['text']|isset}{$contentData['text']}{/if}</textarea>
 
-		{include file='codemirror' codemirrorMode='php' codemirrorSelector='#text'}
+		{if ACE_THEME|empty}
+			{include file='codemirror' codemirrorMode='php' codemirrorSelector='#text'}
+		{else}
+			{include file='ace' aceMode='php' aceSelector='text'}
+		{/if}
 	</dd>
 </dl>
