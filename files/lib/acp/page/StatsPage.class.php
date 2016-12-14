@@ -6,10 +6,11 @@ use cms\system\counter\VisitCountHandler;
 use wcf\data\user\online\UsersOnlineList;
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
+use wcf\util\DateUtil;
 
 /**
  * Shows the stats page.
- * 
+ *
  * @author	Jens Krumsieck
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -91,8 +92,8 @@ class StatsPage extends AbstractPage {
 		parent::readData();
 
 		// set dates
-		if (isset($_POST['startDate'])) $this->startDate = strtotime($_POST['startDate']);
-		if (isset($_POST['endDate'])) $this->endDate = strtotime($_POST['endDate']);
+		if (isset($_POST['startDate']) && $_POST['startDate'] > 0 && $_POST['startDate'] != '') $this->startDate = \DateTime::createFromFormat('Y-m-d', $_POST['startDate'], WCF::getUser()->getTimeZone())->getTimestamp();
+		if (isset($_POST['endDate']) && $_POST['endDate'] > 0 && $_POST['endDate'] != '') $this->endDate = \DateTime::createFromFormat('Y-m-d', $_POST['endDate'], WCF::getUser()->getTimeZone())->getTimestamp();
 		if ($this->startDate == 0) $this->startDate = TIME_NOW - 604800;
 		if ($this->endDate == 0) $this->endDate = TIME_NOW;
 
@@ -147,6 +148,14 @@ class StatsPage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 
+		$startDate = DateUtil::getDateTimeByTimestamp($this->startDate);
+		$startDate->setTimezone(WCF::getUser()->getTimeZone());
+		$startDate = $startDate->format('Y-m-d');
+
+		$endDate = DateUtil::getDateTimeByTimestamp($this->endDate);
+		$endDate->setTimezone(WCF::getUser()->getTimeZone());
+		$endDate = $endDate->format('Y-m-d');
+
 		WCF::getTPL()->assign(array(
 			'visits' => $this->visits,
 			'browsers' => $this->browsers,
@@ -155,8 +164,8 @@ class StatsPage extends AbstractPage {
 			'objects' => $this->usersOnlineList,
 			'colors' => $this->colors,
 			'pages' => $this->pages,
-			'startDate' => $this->startDate,
-			'endDate' => $this->endDate
+			'startDate' => $startDate,
+			'endDate' => $endDate
 		));
 	}
 }
