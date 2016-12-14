@@ -24,70 +24,60 @@
 	</form>
 </div>
 
-<div  class="container containerPadding marginTop">
-	<fieldset>
-		<legend>{lang}cms.acp.stats.vistors{/lang}</legend>
+<section class="section">
+	<h2 class="sectionTitle">{lang}cms.acp.stats.vistors{/lang}</h2>
 
-		<div class="center">
-			<div id="canvas" style="height: 250px;"></div>
-		</div>
-	</fieldset>
-</div>
+	<div class="center">
+		<div id="canvas" style="height: 250px;"></div>
+	</div>
+</section>
 
-<div class="container containerPadding marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
-	<fieldset>
-		<legend>{lang}cms.acp.stats.browsers{/lang}</legend>
+<section class="section" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
+	<h2 class="sectionTitle">{lang}cms.acp.stats.browsers{/lang}</h2>
 
-		<div class="center">
-			<div id="browsers"></div>
-		</div>
-	</fieldset>
-</div>
+	<div class="center">
+		<div id="browsers"></div>
+	</div>
+</section>
 
-<div class="container containerPadding marginTop" style="float: left; width: 49%; box-sizing: border-box;">
-	<fieldset>
-		<legend>{lang}cms.acp.stats.platforms{/lang}</legend>
+<section class="section" style="float: left; width: 49%; box-sizing: border-box;">
+	<h2 class="sectionTitle">{lang}cms.acp.stats.platforms{/lang}</h2>
 
-		<div class="center">
-			<div id="platforms"></div>
-		</div>
-	</fieldset>
-</div>
+	<div class="center">
+		<div id="platforms"></div>
+	</div>
+</section>
 
 <br style="clear: both;" />
 
-<div class="container containerPadding marginTop" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
-	<fieldset>
-		<legend>{lang}cms.acp.stats.devices{/lang}</legend>
+<section class="section" style="float: left; width: 49%; box-sizing: border-box; margin-right: 1%;">
+	<h2 class="sectionTitle">{lang}cms.acp.stats.devices{/lang}</h2>
 
-		<div class="center">
-			<div id="devices"></div>
-		</div>
-	</fieldset>
-</div>
+	<div class="center">
+		<div id="devices"></div>
+	</div>
+</section>
 
-<div class="tabularBox tabularBoxTitle marginTop clearfix" style="float: left; width: 49%; box-sizing: border-box;">
-	<header>
-		<h2>{lang}cms.acp.stats.mostClicked{/lang}</h2>
-	</header>
+<section class="section" style="float: left; width: 49%; box-sizing: border-box;">
+	<h2 class="sectionTitle">{lang}cms.acp.stats.mostClicked{/lang}</h2>
 
 	<table class="table">
 		<thead>
-			<tr>
-				<th>{lang}cms.acp.stats.page{/lang}</th>
-				<th>{lang}cms.acp.stats.clicks{/lang}</th>
-			</tr>
+		<tr>
+			<th>{lang}cms.acp.stats.page{/lang}</th>
+			<th>{lang}cms.acp.stats.clicks{/lang}</th>
+		</tr>
 		</thead>
 		<tbody>
-			{foreach from=$pages item=page}
-				<tr>
-					<td>{$page->getTitle()}</td>
-					<td>{$page->clicks}</td>
-				</tr>
-			{/foreach}
+		{foreach from=$pages item=page}
+			<tr>
+				<td>{$page->getTitle()}</td>
+				<td>{$page->clicks}</td>
+			</tr>
+		{/foreach}
 		</tbody>
 	</table>
-</div>
+</section>
 
 <br style="clear: both;" />
 
@@ -100,7 +90,7 @@
 		var data = google.visualization.arrayToDataTable([
 			['Visits', '{lang}cms.acp.dashboard.all{/lang}', '{lang}cms.acp.dashboard.registered{/lang}', '{lang}cms.acp.dashboard.spiders{/lang}'],
 			{foreach from=$visits item=visit}
-				['{$visit['string']}', {if $visit['visitors']['visits']|isset}{$visit['visitors']['visits']}{else}0{/if}, {if $visit['visitors']['users']|isset}{$visit['visitors']['users']}{else}0{/if}, {if $visit['visitors']['spiders']|isset}{$visit['visitors']['spiders']}{else}0{/if}],
+			['{$visit['string']}', {if $visit['visitors']['visits']|isset}{$visit['visitors']['visits']}{else}0{/if}, {if $visit['visitors']['users']|isset}{$visit['visitors']['users']}{else}0{/if}, {if $visit['visitors']['spiders']|isset}{$visit['visitors']['spiders']}{else}0{/if}],
 			{/foreach}
 		]);
 
@@ -121,7 +111,7 @@
 		var data = google.visualization.arrayToDataTable([
 			['Browser', 'Visits'],
 			{foreach from=$browsers item=browser key=name}
-				['{$name}', {$browser['visits']}],
+			['{$name}', {$browser['visits']}],
 			{/foreach}
 		]);
 
@@ -141,7 +131,7 @@
 		var data = google.visualization.arrayToDataTable([
 			['Platform', 'Visits'],
 			{foreach from=$platforms item=platform key=name}
-				['{$name}', {$platform['visits']}],
+			['{$name}', {$platform['visits']}],
 			{/foreach}
 		]);
 
@@ -161,7 +151,7 @@
 		var data = google.visualization.arrayToDataTable([
 			['Device', 'Visits'],
 			{foreach from=$devices item=device key=name}
-				['{lang}cms.acp.stats.devices.{$name}{/lang}', {$device['visits']}],
+			['{lang}cms.acp.stats.devices.{$name}{/lang}', {$device['visits']}],
 			{/foreach}
 		]);
 
@@ -177,7 +167,7 @@
 	}
 </script>
 
-<div class="container marginTop">
+<section class="section">
 	<ol class="containerList infoBoxList">
 		<li class="box32">
 			<span class="icon icon32 fa-user"></span>
@@ -218,6 +208,6 @@
 			</ul>
 		</li>
 	</ol>
-</div>
+</section>
 
 {include file='footer'}

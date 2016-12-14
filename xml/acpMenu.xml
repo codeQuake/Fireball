@@ -23,7 +23,7 @@
 		<acpmenuitem name="fireball.acp.menu.link.fireball.page.statistics">
 			<parent>fireball.acp.menu.link.fireball.page</parent>
 			<controller>cms\acp\page\StatsPage</controller>
-			<options>cms_pages_enable_statistics</options>
+			<options>fireball_pages_enable_statistics</options>
 		</acpmenuitem>
 		<acpmenuitem name="fireball.acp.menu.link.fireball.page.importAndExport">
 			<parent>fireball.acp.menu.link.fireball.page</parent>
