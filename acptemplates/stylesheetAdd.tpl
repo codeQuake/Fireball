@@ -35,7 +35,7 @@
 <form method="post" action="{if $action == 'add'}{link controller='StylesheetAdd' application='cms'}{/link}{else}{link controller='StylesheetEdit' id=$stylesheetID application='cms'}{/link}{/if}">
 	<div class="container containerPadding marginTop">
 		<section class="section">
-			<legend>{lang}wcf.global.form.data{/lang}</legend>
+			<h2 class="sectionTitle">{lang}wcf.global.form.data{/lang}</h2>
 
 			<dl>
 				<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
@@ -57,7 +57,7 @@
 		</section>
 
 		<section class="section marginTop">
-			<legend>{lang}cms.acp.stylesheet.scss{/lang}</legend>
+			<h2 class="sectionTitle">{lang}cms.acp.stylesheet.scss{/lang}</h2>
 
 			<dl class="wide">
 				<dt></dt>

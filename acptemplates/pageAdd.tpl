@@ -15,9 +15,9 @@
 		new Fireball.ACP.Page.Alias.Preview('#alias', '#parentID', '{link application="cms" controller="Page" alias="123456789" forceFrontend=true}{/link}');
 
 		{if $action == 'add'}
-		$('#createMenuItem').click(function() {
-			$('#menuItemID').parents('dl:eq(0)').toggle();
-		});
+			$('#createMenuItem').click(function() {
+				$('#menuItemID').parents('dl:eq(0)').toggle();
+			});
 		{/if}
 
 		$('#enableDelayedDeactivation, #enableDelayedPublication').click(function() {
@@ -162,9 +162,10 @@
 
 				{if !$menuItemID}
 					<dl>
-						<dt class="reversed"><label for="createMenuItem">{lang}cms.acp.page.general.createMenuItem{/lang}</label></dt>
+						<dt></dt>
 						<dd>
 							<input type="checkbox" id="createMenuItem" name="createMenuItem"{if $createMenuItem} checked="checked"{/if} />
+							<label for="createMenuItem">{lang}cms.acp.page.general.createMenuItem{/lang}</label>
 							<small>{lang}cms.acp.page.general.createMenuItem.description{/lang}</small>
 						</dd>
 					</dl>
@@ -206,9 +207,10 @@
 				</dl>
 
 				<dl>
-					<dt class="reversed"><label for="allowIndexing">{lang}cms.acp.page.meta.allowIndexing{/lang}</label></dt>
+					<dt></dt>
 					<dd>
 						<input type="checkbox" id="allowIndexing" name="allowIndexing"{if $allowIndexing} checked="checked"{/if} />
+						<label for="allowIndexing">{lang}cms.acp.page.meta.allowIndexing{/lang}</label>
 					</dd>
 				</dl>
 
@@ -225,9 +227,9 @@
 							<select id="parentID" name="parentID">
 								<option value="0" {if $parentID == 0} selected="selected"{/if} data-alias="">{lang}wcf.global.noSelection{/lang}</option>
 								{content}
-								{foreach from=$pageList item=$node}
-									<option data-alias="{$node->getAlias()}"{if $node->pageID == $parentID} selected="selected"{/if} value="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
-								{/foreach}
+									{foreach from=$pageList item=$node}
+										<option data-alias="{$node->getAlias()}"{if $node->pageID == $parentID} selected="selected"{/if} value="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
+									{/foreach}
 								{/content}
 							</select>
 						</dd>
@@ -248,9 +250,10 @@
 				</dl>
 
 				<dl{if $errorField == 'invisible'} class="formError"{/if}>
-					<dt class="reversed"><label for="invisible">{lang}cms.acp.page.position.invisible{/lang}</label></dt>
+					<dt></dt>
 					<dd>
 						<input type="checkbox" name="invisible" id="invisible" value="1"{if $invisible} checked="checked"{/if} />
+						<label for="invisible">{lang}cms.acp.page.position.invisible{/lang}</label>
 						<small>{lang}cms.acp.page.position.invisible.description{/lang}</small>
 					</dd>
 				</dl>
@@ -262,9 +265,10 @@
 				<h2 class="sectionTitle">{lang}cms.acp.page.publication{/lang}</h2>
 
 				<dl>
-					<dt class="reversed"><label for="enableDelayedPublication">{lang}cms.acp.page.publication.enableDelayedPublication{/lang}</label></dt>
+					<dt></dt>
 					<dd>
 						<input type="checkbox" id="enableDelayedPublication" name="enableDelayedPublication" value="1"{if $enableDelayedPublication} checked="checked"{/if} data-toggle-container="publicationDateContainer" />
+						<label for="enableDelayedPublication">{lang}cms.acp.page.publication.enableDelayedPublication{/lang}</label>
 					</dd>
 				</dl>
 
@@ -285,9 +289,10 @@
 				</dl>
 
 				<dl>
-					<dt class="reversed"><label for="enableDelayedDeactivation">{lang}cms.acp.page.publication.enableDelayedDeactivation{/lang}</label></dt>
+					<dt></dt>
 					<dd>
 						<input type="checkbox" id="enableDelayedDeactivation" name="enableDelayedDeactivation" value="1"{if $enableDelayedDeactivation} checked="checked"{/if} data-toggle-container="deactivationDateContainer" />
+						<label for="enableDelayedDeactivation">{lang}cms.acp.page.publication.enableDelayedDeactivation{/lang}</label>
 					</dd>
 				</dl>
 
@@ -333,16 +338,18 @@
 				</dl>
 
 				<dl{if $errorField == 'availableDuringOfflineMode'} class="formError"{/if}>
-					<dt class="reversed"><label for="availableDuringOfflineMode">{lang}cms.acp.page.settings.availableDuringOfflineMode{/lang}</label></dt>
+					<dt></dt>
 					<dd>
 						<input type="checkbox" name="availableDuringOfflineMode" id="availableDuringOfflineMode" value="1"{if $availableDuringOfflineMode} checked="checked"{/if} />
+						<label for="availableDuringOfflineMode">{lang}cms.acp.page.settings.availableDuringOfflineMode{/lang}</label>
 					</dd>
 				</dl>
 
 				<dl>
-					<dt class="reversed"><label for="allowSubscribing">{lang}cms.acp.page.settings.allowSubscribing{/lang}</label></dt>
+					<dt></dt>
 					<dd>
 						<input type="checkbox" id="allowSubscribing" name="allowSubscribing"{if $allowSubscribing} checked="checked"{/if} />
+						<label for="allowSubscribing">{lang}cms.acp.page.settings.allowSubscribing{/lang}</label>
 						<small>{lang}cms.acp.page.settings.allowSubscribing.description{/lang}</small>
 					</dd>
 				</dl>
@@ -377,7 +384,7 @@
 						<dt>{lang}cms.acp.page.stylesheets{/lang}</dt>
 						<dd>
 							{content}
-							{htmlCheckboxes name='stylesheetIDs' options=$stylesheetList selected=$stylesheetIDs}
+								{htmlCheckboxes name='stylesheetIDs' options=$stylesheetList selected=$stylesheetIDs}
 							{/content}
 							{if $errorField == 'stylesheets'}
 								<small class="innerError">

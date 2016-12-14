@@ -13,6 +13,7 @@
 		<page identifier="de.codequake.cms.Sitemap">
 			<controller>cms\page\SitemapPage</controller>
 			<pageType>system</pageType>
+			<options>fireball_sitemap_enable</options>
 
 			<name language="de">CMS: Seitenübersicht</name>
 			<name language="en">CMS: Sitemap</name>

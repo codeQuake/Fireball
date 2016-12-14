@@ -346,13 +346,13 @@
 		<item name="wcf.acp.group.option.admin.fireball.page.canListPage"><![CDATA[Kann Seiten auflisten]]></item>
 		<item name="wcf.acp.group.option.admin.fireball.style.canAddStylesheet"><![CDATA[Kann Stylesheets verwalten]]></item>
 		<item name="wcf.acp.group.option.admin.fireball.style.canListStylesheet"><![CDATA[Kann Stylesheets auflisten]]></item>
-		<item name="wcf.acp.group.option.category.admin.fireball"><![CDATA[CMS]]></item>
+		<item name="wcf.acp.group.option.category.admin.fireball"><![CDATA[Fireball CMS]]></item>
 		<item name="wcf.acp.group.option.category.admin.fireball.content"><![CDATA[Inhalte]]></item>
 		<item name="wcf.acp.group.option.category.admin.fireball.file"><![CDATA[Dateien]]></item>
 		<item name="wcf.acp.group.option.category.admin.fireball.page"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.group.option.category.admin.fireball.style"><![CDATA[Stile]]></item>
-		<item name="wcf.acp.group.option.category.mod.fireball"><![CDATA[CMS]]></item>
-		<item name="wcf.acp.group.option.category.user.fireball"><![CDATA[CMS]]></item>
+		<item name="wcf.acp.group.option.category.mod.fireball"><![CDATA[Fireball CMS]]></item>
+		<item name="wcf.acp.group.option.category.user.fireball"><![CDATA[Fireball CMS]]></item>
 		<item name="wcf.acp.group.option.category.user.fireball.content"><![CDATA[Inhalte]]></item>
 		<item name="wcf.acp.group.option.category.user.fireball.page"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.group.option.mod.fireball.canDeleteComment"><![CDATA[Kann Kommentare löschen]]></item>
@@ -375,7 +375,7 @@
 	</category>
 
 	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.category.fireball"><![CDATA[CMS]]></item>
+		<item name="wcf.acp.option.category.fireball"><![CDATA[Fireball CMS]]></item>
 		<item name="wcf.acp.option.category.fireball.content"><![CDATA[Inhalte]]></item>
 		<item name="wcf.acp.option.category.fireball.content.slideshow"><![CDATA[Slideshow]]></item>
 		<item name="wcf.acp.option.category.fireball.general"><![CDATA[Allgemein]]></item>
@@ -400,6 +400,7 @@
 		<item name="wcf.acp.option.fireball_pages_statistics_delete.description"><![CDATA[Zeitraum nach dem alte Statistiken automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]]></item>
 		<item name="wcf.acp.option.fireball_revision_delete"><![CDATA[Versionen automatisch löschen]]></item>
 		<item name="wcf.acp.option.fireball_revision_delete.description"><![CDATA[Zeitraum nach dem alte Versionen automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]]></item>
+		<item name="wcf.acp.option.fireball_sitemap_enable"><![CDATA[Seitenübersicht anzeigen]]]></item>
 	</category>
 
 	<category name="wcf.acp.pageMenu">

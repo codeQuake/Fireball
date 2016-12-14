@@ -18,9 +18,10 @@
 	</dl>
 	
 	<dl{if $errorField == 'delayedRedirect'} class="formError"{/if}>
-		<dt class="reversed"><label for="delayedRedirect">{lang}cms.acp.page.settings.delayedRedirect{/lang}</label></dt>
+		<dt></dt>
 		<dd>
 			<input type="checkbox" name="delayedRedirect" id="delayedRedirect" value="1"{if $delayedRedirect == 1} checked="checked"{/if} data-toggle-container="redirectMessage" />
+			<label for="delayedRedirect">{lang}cms.acp.page.settings.delayedRedirect{/lang}</label>
 			<small>{lang}cms.acp.page.settings.delayedRedirect.description{/lang}</small>
 		</dd>
 	</dl>
