@@ -1,11 +1,9 @@
 ﻿<div id="pageAddForm">
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
 <script data-relocate="true">
-	$(function() {
-		require(['Language'], function(Language) {
-			Language.addObject({
-				'cms.acp.page.alias.preview': '{lang}cms.acp.page.alias.preview{/lang}'
-			});
+	require(['Language'], function(Language) {
+		Language.addObject({
+			'cms.acp.page.alias.preview': '{lang}cms.acp.page.alias.preview{/lang}'
 		});
 
 		WCF.TabMenu.init();
@@ -20,7 +18,6 @@
 			$('#'+ $toggleContainerID).toggle();
 		});
 		new Fireball.ACP.Page.Alias.Preview('#alias', '#parentID', '{link application="cms" controller="Page" alias="123456789" forceFrontend=true}{/link}');
-
 	});
 </script>
 <div class="tabMenuContainer" data-active="" data-store="activeTabMenuItem">

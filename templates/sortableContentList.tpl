@@ -34,20 +34,18 @@
 </div>
 
 <script data-relocate="true">
-	$(function() {
-		require(['WoltLabSuite/Core/Controller/Clipboard', 'Language'], function(ControllerClipboard, Language) {
-			var actionObjects = { };
+	require(['WoltLabSuite/Core/Controller/Clipboard', 'Language'], function(ControllerClipboard, Language) {
+		var actionObjects = { };
 
-			var deleteAction = new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '#sortableContentList{$position|ucfirst} .jsContentRow');
-			deleteAction.setCallback(ControllerClipboard.reload.bind(ControllerClipboard));
+		var deleteAction = new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '#sortableContentList{$position|ucfirst} .jsContentRow');
+		deleteAction.setCallback(ControllerClipboard.reload.bind(ControllerClipboard));
 
-			var toggleAction = new WCF.Action.Toggle('cms\\data\\content\\ContentAction', '#sortableContentList{$position|ucfirst} .jsContentRow');
+		var toggleAction = new WCF.Action.Toggle('cms\\data\\content\\ContentAction', '#sortableContentList{$position|ucfirst} .jsContentRow');
 
-			actionObjects['de.codequake.cms.content'] = { };
-			actionObjects['de.codequake.cms.content']['disable'] = actionObjects['de.codequake.cms.content']['enable'] = toggleAction;
-			actionObjects['de.codequake.cms.content']['delete'] = deleteAction;
+		actionObjects['de.codequake.cms.content'] = { };
+		actionObjects['de.codequake.cms.content']['disable'] = actionObjects['de.codequake.cms.content']['enable'] = toggleAction;
+		actionObjects['de.codequake.cms.content']['delete'] = deleteAction;
 
-			WCF.Clipboard.init('cms\\page\\AbstractPagePage', 0, actionObjects);
-		});
+		WCF.Clipboard.init('cms\\page\\AbstractPagePage', 0, actionObjects);
 	});
 </script>

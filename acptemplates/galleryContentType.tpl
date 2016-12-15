@@ -9,25 +9,23 @@
 </dl>
 
 <script data-relocate="true">
-	$(function () {
-		require(['Language'], function(Language) {
-			Language.addObject({
-				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
-			});
+	require(['Language'], function(Language) {
+		Language.addObject({
+			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
 		new Fireball.ACP.File.Preview();
 		new Fireball.ACP.File.Picker($('#filePicker > .button'), 'contentData[imageIDs]', {
-			{if !$contentData['imageIDs']|empty}
-				{assign var='imageList' value=$objectType->getProcessor()->getImageList($contentData['imageIDs'])}
-				{implode from=$imageList item='image'}
-					{@$image->fileID}: {
-						fileID: {@$image->fileID},
-						title: '{$image->getTitle()}',
+		{if !$contentData['imageIDs']|empty}
+			{assign var='imageList' value=$objectType->getProcessor()->getImageList($contentData['imageIDs'])}
+			{implode from=$imageList item='image'}
+				{@$image->fileID}: {
+					fileID: {@$image->fileID},
+					title: '{$image->getTitle()}',
 						formattedFilesize: '{@$image->filesize|filesize}'
-					}
-				{/implode}
-			{/if}
+				}
+			{/implode}
+		{/if}
 		}, { multiple: true, fileType: 'image' });
 	});
 </script>

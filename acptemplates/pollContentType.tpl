@@ -1,11 +1,9 @@
 <script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Poll.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
-	$(function() {
-		require(['Language'], function(Language) {
-			Language.addObject({
-				'wcf.poll.button.addOption': '{lang}wcf.poll.button.addOption{/lang}',
-				'wcf.poll.button.removeOption': '{lang}wcf.poll.button.removeOption{/lang}'
-			});
+	require(['Language'], function(Language) {
+		Language.addObject({
+			'wcf.poll.button.addOption': '{lang}wcf.poll.button.addOption{/lang}',
+			'wcf.poll.button.removeOption': '{lang}wcf.poll.button.removeOption{/lang}'
 		});
 
 		new WCF.Poll.Management('pollOptionContainer', [ {implode from=$pollOptions item=pollOption}{ optionID: {@$pollOption[optionID]}, optionValue: '{$pollOption[optionValue]|encodeJS}' }{/implode} ], {@POLL_MAX_OPTIONS});

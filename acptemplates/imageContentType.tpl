@@ -39,23 +39,21 @@
 </dl>
 
 <script data-relocate="true">
-	$(function () {
-		require(['Language'], function(Language) {
-			Language.addObject({
-				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
-			});
+	require(['Language'], function(Language) {
+		Language.addObject({
+			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
 		new Fireball.ACP.File.Preview();
 		new Fireball.ACP.File.Picker($('#filePicker > .button'), 'contentData[imageID]', {
-			{if !$contentData['imageID']|empty}
-				{assign var=image value=$objectType->getProcessor()->getImage($contentData['imageID'])}
-				{@$image->fileID}: {
-					fileID: {@$image->fileID},
-					title: '{$image->getTitle()}',
+		{if !$contentData['imageID']|empty}
+			{assign var=image value=$objectType->getProcessor()->getImage($contentData['imageID'])}
+			{@$image->fileID}: {
+				fileID: {@$image->fileID},
+				title: '{$image->getTitle()}',
 					formattedFilesize: '{@$image->filesize|filesize}'
-				}
-			{/if}
+			}
+		{/if}
 		}, { fileType: 'image' });
 
 		{if $contentData['imageID']|isset && $contentData['imageID'] !== null}

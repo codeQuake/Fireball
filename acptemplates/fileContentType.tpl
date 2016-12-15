@@ -9,23 +9,20 @@
 </dl>
 
 <script data-relocate="true">
-	$(function() {
-		require(['Language'], function(Language) {
-			Language.addObject({
-				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
-			});
+	require(['Language'], function(Language) {
+		Language.addObject({
+			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
 
 		new Fireball.ACP.File.Preview();
 		new Fireball.ACP.File.Picker($('#filePicker > .button'), 'contentData[fileID]', {
 		{if !$contentData['fileID']|empty}
-				{assign var=file value=$objectType->getProcessor()->getFile($contentData['fileID'])}
-				{@$file->fileID}: {
-					fileID: {@$file->fileID},
-					title: '{$file->getTitle()}',
+			{assign var=file value=$objectType->getProcessor()->getFile($contentData['fileID'])}
+			{@$file->fileID}: {
+				fileID: {@$file->fileID},
+				title: '{$file->getTitle()}',
 					formattedFilesize: '{@$file->filesize|filesize}'
-				}
-			{/if}
-		});
+			}
+		{/if}
 	});
 </script>
