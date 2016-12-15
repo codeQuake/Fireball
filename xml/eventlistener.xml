@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/eventListener.xsd">
 	<import>
-		<eventlistener>
+		<eventlistener name="commentAction">
 			<eventclassname>wcf\data\comment\CommentAction</eventclassname>
 			<eventname>finalizeAction</eventname>
 			<listenerclassname>cms\system\event\listener\CommentActionListener</listenerclassname>
@@ -9,13 +9,13 @@
 		</eventlistener>
 
 		<!-- delete revisions/old data -->
-		<eventlistener>
+		<eventlistener name="cleanupCronjobUser">
 			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
 			<eventname>execute</eventname>
 			<listenerclassname>cms\system\event\listener\DailyCleanUpListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
-		<eventlistener>
+		<eventlistener name="cleanupCronjobAdmin">
 			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
 			<eventname>execute</eventname>
 			<listenerclassname>cms\system\event\listener\DailyCleanUpListener</listenerclassname>
@@ -23,13 +23,13 @@
 		</eventlistener>
 
 		<!-- user rename -->
-		<eventlistener>
+		<eventlistener name="renameUser">
 			<environment>user</environment>
 			<eventclassname>wcf\data\user\UserAction</eventclassname>
 			<eventname>rename</eventname>
 			<listenerclassname>cms\system\event\listener\UserRenameListener</listenerclassname>
 		</eventlistener>
-		<eventlistener>
+		<eventlistener name="renameAdmin">
 			<environment>admin</environment>
 			<eventclassname>wcf\data\user\UserAction</eventclassname>
 			<eventname>rename</eventname>
@@ -37,7 +37,7 @@
 		</eventlistener>
 
 		<!-- convert wsip import into text content type -->
-		<eventlistener>
+		<eventlistener name="wsipContentTransform">
 			<environment>admin</environment>
 			<eventclassname>cms\acp\form\ContentEditForm</eventclassname>
 			<eventname>saved</eventname>
@@ -45,13 +45,13 @@
 		</eventlistener>
 
 		<!-- routing -->
-		<eventlistener>
+		<eventlistener name="routeUser">
 			<eventclassname>wcf\system\request\RouteHandler</eventclassname>
 			<eventname>didInit</eventname>
 			<listenerclassname>wcf\system\event\listener\FireballRouteListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
-		<eventlistener>
+		<eventlistener name="routeAdmin">
 			<eventclassname>wcf\system\request\RouteHandler</eventclassname>
 			<eventname>didInit</eventname>
 			<listenerclassname>wcf\system\event\listener\FireballRouteListener</listenerclassname>

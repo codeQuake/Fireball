@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/cronjob.xsd">
 	<import>
-		<cronjob>
+		<cronjob name="publication">
 			<classname>cms\system\cronjob\PublicationCronjob</classname>
 			<description><![CDATA[Publishes and deactivates cms pages]]></description>
 			<description language="de"><![CDATA[Veröffentlicht und deaktiviert CMS-Seiten]]></description>
