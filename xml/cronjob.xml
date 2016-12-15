@@ -14,4 +14,9 @@
 			<canbedisabled>1</canbedisabled>
 		</cronjob>
 	</import>
+	<delete>
+		<cronjob>
+			<classname>cms\system\cronjob\PublicationCronjob</classname>
+		</cronjob>
+	</delete>
 </data>
