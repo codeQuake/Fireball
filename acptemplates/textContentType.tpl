@@ -3,8 +3,8 @@
 	<dd>
 		<textarea name="text" id="text">{$i18nPlainValues['text']}</textarea>
 
-		{include file='multipleLanguageWysiwygJavascript' elementIdentifier='text' forceSelection=false}
+		{include file='wysiwyg'}
+		{include file='wysiwygI18n' elementIdentifier='text' forceSelection=false}
 	</dd>
 </dl>
 
-{include file='wysiwyg'}

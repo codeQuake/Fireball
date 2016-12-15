@@ -15,7 +15,7 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="3.0.0 RC 1">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="1.1.0">de.codequake.wysiwyg.acp</requiredpackage>
+		<requiredpackage minversion="1.0.0 Alpha 1">de.mysterycode.wcf.redactor.extended</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
