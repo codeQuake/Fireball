@@ -2,19 +2,19 @@
 <package name="de.codequake.cms" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
 	<packageinformation>
 		<packagename>Fireball CMS</packagename>
-		<packagedescription><![CDATA[Advanced CMS for WCF 2.2]]></packagedescription>
+		<packagedescription><![CDATA[Advanced CMS for WSC 3.0]]></packagedescription>
 		<isapplication>1</isapplication>
 		<version>3.0.0 Alpha 1</version>
-		<date>2016-12-04</date>
+		<date>2016-12-15</date>
 	</packageinformation>
 
 	<authorinformation>
-		<author><![CDATA[Jens Krumsieck]]></author>
-		<authorurl><![CDATA[http://codequake.de]]></authorurl>
+		<author><![CDATA[Jens Krumsieck, Florian Gail]]></author>
+		<authorurl><![CDATA[https://www.mysterycode.de]]></authorurl>
 	</authorinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="3.0.0 Alpha 1">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="3.0.0 RC 1">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.1.0">de.codequake.wysiwyg.acp</requiredpackage>
 	</requiredpackages>
 
@@ -35,7 +35,6 @@
 		<!-- xml -->
 		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
-
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
 		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
@@ -67,7 +66,6 @@
 		<!-- xml -->
 		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
 		<instruction type="objectType">xml/objectType.xml</instruction>
-
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
 		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
@@ -80,5 +78,38 @@
 		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 		<instruction type="page">xml/page.xml</instruction>
 		<instruction type="menuItem">xml/menuItem.xml</instruction>
+	</instructions>
+
+	<instructions type="update" romversion="2.2.0">
+		<instruction type="sql" />
+		<instruction type="language" />
+
+		<!-- files -->
+		<instruction type="file" />
+		<instruction type="file" application="wcf">files_wcf.tar</instruction>
+		<instruction type="acpTemplate" />
+		<instruction type="template" />
+
+		<!-- xml -->
+		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="aclOption">xml/aclOption.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
+		<instruction type="bbcode">xml/bbcode.xml</instruction>
+		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="templateListener">xml/templateListener.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
+		<instruction type="page">xml/page.xml</instruction>
+		<instruction type="menuItem">xml/menuItem.xml</instruction>
+
+		<!-- scripts -->
+		<instruction type="script">acp/update_de.codequake.cms_22.php</instruction>
+
+		<!-- cleanup database -->
+		<instruction type="sql">post_update.sql</instruction>
 	</instructions>
 </package>
