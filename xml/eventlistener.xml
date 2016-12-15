@@ -60,6 +60,42 @@
 	</import>
 	<delete>
 		<eventlistener>
+			<eventclassname>wcf\data\comment\CommentAction</eventclassname>
+			<eventname>finalizeAction</eventname>
+			<listenerclassname>cms\system\event\listener\CommentActionListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
+			<eventname>execute</eventname>
+			<listenerclassname>cms\system\event\listener\DailyCleanUpListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\system\cronjob\DailyCleanUpCronjob</eventclassname>
+			<eventname>execute</eventname>
+			<listenerclassname>cms\system\event\listener\DailyCleanUpListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+		<eventlistener>
+			<environment>user</environment>
+			<eventclassname>wcf\data\user\UserAction</eventclassname>
+			<eventname>rename</eventname>
+			<listenerclassname>cms\system\event\listener\UserRenameListener</listenerclassname>
+		</eventlistener>
+		<eventlistener>
+			<environment>admin</environment>
+			<eventclassname>wcf\data\user\UserAction</eventclassname>
+			<eventname>rename</eventname>
+			<listenerclassname>cms\system\event\listener\UserRenameListener</listenerclassname>
+		</eventlistener>
+		<eventlistener>
+			<environment>admin</environment>
+			<eventclassname>cms\acp\form\ContentEditForm</eventclassname>
+			<eventname>saved</eventname>
+			<listenerclassname>cms\system\event\listener\WSIPImportContentTypeListener</listenerclassname>
+		</eventlistener>
+		<eventlistener>
 			<eventclassname>wcf\acp\form\PageMenuItemAddForm</eventclassname>
 			<eventname>save</eventname>
 			<listenerclassname>cms\system\event\listener\PageMenuListener</listenerclassname>
@@ -71,8 +107,6 @@
 			<listenerclassname>cms\system\event\listener\PageMenuListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
-
-		<!-- routing -->
 		<eventlistener>
 			<eventclassname>wcf\system\request\RouteHandler</eventclassname>
 			<eventname>didInit</eventname>
