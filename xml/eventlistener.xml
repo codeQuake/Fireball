@@ -48,13 +48,13 @@
 		<eventlistener>
 			<eventclassname>wcf\system\request\RouteHandler</eventclassname>
 			<eventname>didInit</eventname>
-			<listenerclassname>wcf\system\event\listener\RouteListener</listenerclassname>
+			<listenerclassname>wcf\system\event\listener\FireballRouteListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
 		<eventlistener>
 			<eventclassname>wcf\system\request\RouteHandler</eventclassname>
 			<eventname>didInit</eventname>
-			<listenerclassname>wcf\system\event\listener\RouteListener</listenerclassname>
+			<listenerclassname>wcf\system\event\listener\FireballRouteListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
 	</import>
