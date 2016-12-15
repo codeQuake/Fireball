@@ -1,5 +1,5 @@
 <?php
-namespace cms\system\event\listener;
+namespace wcf\system\event\listener;
 
 use wcf\data\package\PackageCache;
 // use wcf\system\event\listener\IEventListener;
@@ -15,7 +15,7 @@ use wcf\system\request\route\FireballRequestRoute;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class RouteListener implements IParameterizedEventListener {
+class FireballRouteListener implements IParameterizedEventListener {
 	/**
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */

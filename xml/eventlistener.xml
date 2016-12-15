@@ -48,13 +48,13 @@
 		<eventlistener>
 			<eventclassname>wcf\system\request\RouteHandler</eventclassname>
 			<eventname>didInit</eventname>
-			<listenerclassname>cms\system\event\listener\RouteListener</listenerclassname>
+			<listenerclassname>wcf\system\event\listener\RouteListener</listenerclassname>
 			<environment>user</environment>
 		</eventlistener>
 		<eventlistener>
 			<eventclassname>wcf\system\request\RouteHandler</eventclassname>
 			<eventname>didInit</eventname>
-			<listenerclassname>cms\system\event\listener\RouteListener</listenerclassname>
+			<listenerclassname>wcf\system\event\listener\RouteListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
 	</import>
@@ -69,6 +69,20 @@
 			<eventclassname>wcf\acp\form\PageMenuItemEditForm</eventclassname>
 			<eventname>save</eventname>
 			<listenerclassname>cms\system\event\listener\PageMenuListener</listenerclassname>
+			<environment>admin</environment>
+		</eventlistener>
+
+		<!-- routing -->
+		<eventlistener>
+			<eventclassname>wcf\system\request\RouteHandler</eventclassname>
+			<eventname>didInit</eventname>
+			<listenerclassname>cms\system\event\listener\RouteListener</listenerclassname>
+			<environment>user</environment>
+		</eventlistener>
+		<eventlistener>
+			<eventclassname>wcf\system\request\RouteHandler</eventclassname>
+			<eventname>didInit</eventname>
+			<listenerclassname>cms\system\event\listener\RouteListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
 	</delete>
