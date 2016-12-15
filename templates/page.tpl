@@ -95,7 +95,7 @@
 
 <script data-relocate="true">
 	$(function() {
-		require(['Language',], function(Language) {
+		require(['Language'], function(Language) {
 			Language.addObject({
 				'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}',
 				'cms.content.add': '{lang}cms.acp.content.add{/lang}',

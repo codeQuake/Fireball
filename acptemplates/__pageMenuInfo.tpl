@@ -2,7 +2,7 @@
 
 <script data-relocate="true">
 	$(function() {
-		require(['Language',], function(Language) {
+		require(['Language'], function(Language) {
 			Language.addObject({
 				'wcf.acp.pageMenu.parameters.notice': '{lang}wcf.acp.pageMenu.parameters.notice{/lang}'
 			});

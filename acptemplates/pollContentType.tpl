@@ -1,7 +1,7 @@
 <script data-relocate="true" src="{@$__wcf->getPath()}js/WCF.Poll.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
 	$(function() {
-		require(['Language',], function(Language) {
+		require(['Language'], function(Language) {
 			Language.addObject({
 				'wcf.poll.button.addOption': '{lang}wcf.poll.button.addOption{/lang}',
 				'wcf.poll.button.removeOption': '{lang}wcf.poll.button.removeOption{/lang}'

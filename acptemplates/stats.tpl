@@ -6,7 +6,7 @@
 
 <script data-relocate="true">
 	$(function() {
-		require(['Language',], function(Language) {
+		require(['Language'], function(Language) {
 			Language.addObject({
 				'cms.acp.stats.devices.desktop': '{lang}cms.acp.stats.devices.desktop{/lang}',
 				'cms.acp.stats.devices.mobile': '{lang}cms.acp.stats.devices.mobile{/lang}',

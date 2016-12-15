@@ -10,7 +10,7 @@
 
 <script data-relocate="true">
 	$(function() {
-		require(['Language',], function(Language) {
+		require(['Language'], function(Language) {
 			Language.addObject({
 				'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 			});

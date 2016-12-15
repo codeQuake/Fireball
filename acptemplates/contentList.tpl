@@ -3,7 +3,7 @@
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
 	$(function() {
-		require(['Language',], function(Language) {
+		require(['Language'], function(Language) {
 			Language.addObject({
 				'cms.acp.content.add': '{lang}cms.acp.content.add{/lang}',
 				{foreach from=$objectTypeList item=type}
