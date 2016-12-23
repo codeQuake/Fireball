@@ -23,7 +23,7 @@ System Requirements
 -------------------
 - PHP Version: 5.5.4 or greater
 - MySQL Version: 5.1.17 or greater
-- WoltLab Suite Core Version: 3.0 RC 2 or greater
+- WoltLab Suite Core Version: 3.0 RC 1 or greater
 - WYSIWYG-ACP Plugin (included) Version: 1.2.0 or greater
 
 ###PHP Extensions
