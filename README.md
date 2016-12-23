@@ -1,6 +1,6 @@
 Fireball CMS
 ========
-The Fireball CMS is a very powerful CMS solution, based on WoltLab Community Framework 2.2. It's full responsive, so you can use the CMS on any device you want (PC, Smartphones or Tablet-PCs). With Fireball CMS you can easily build up your own professional website with all features you like. You can use the latest technologies of CSS3, HTML5, LESS & PHP.
+The Fireball CMS is a very powerful CMS solution, based on WoltLab Suite Core 3.0. It's full responsive, so you can use the CMS on any device you want (PC, Smartphones or Tablet-PCs). With Fireball CMS you can easily build up your own professional website with all features you like. You can use the latest technologies of CSS3, HTML5, SASS & PHP.
 
 [![Build Status](https://travis-ci.org/codeQuake/Fireball.svg?branch=vortex-experimental)](https://travis-ci.org/codeQuake/Fireball)
 
@@ -23,7 +23,7 @@ System Requirements
 -------------------
 - PHP Version: 5.5.4 or greater
 - MySQL Version: 5.1.17 or greater
-- WoltLab Community Framework Version: 2.2.0 or greater
+- WoltLab Suite Core Version: 3.0 RC 2 or greater
 - WYSIWYG-ACP Plugin (included) Version: 1.2.0 or greater
 
 ###PHP Extensions
