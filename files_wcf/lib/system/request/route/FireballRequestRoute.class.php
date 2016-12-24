@@ -25,17 +25,26 @@ class FireballRequestRoute implements IRequestRoute {
 			return false;
 		}
 
-		$regex = '~^
-			(?P<controller>.+?)
-			(?:
-				(?P<id>[0-9]+)
+		$regex = '~^(
+			(
+				(?P<controller>.+?)
 				(?:
-					-
-					(?P<title>[^/]+)
-				)?
-				/
-			)?
-		$~x';
+					(?P<id>[0-9]+)
+					(?:
+						-
+						(?P<title>[^/]+)
+					)?
+					/
+				)
+			)
+		|
+			(
+				(?:
+					(?P<alias>.*)
+					/
+				)
+			)
+		)$~x';
 
 		if (preg_match($regex, $requestURL, $matches)) {
 			$application = ApplicationHandler::getInstance()->getActiveApplication()->getAbbreviation();
@@ -47,7 +56,17 @@ class FireballRequestRoute implements IRequestRoute {
 					$urlList[$page->getAlias()] = $page;
 				}
 
-				if (empty($matches['id'])) {
+				if (!empty($matches['alias'])) {
+					$alias = FileUtil::removeTrailingSlash($matches['alias']);
+					if (!empty($urlList[$alias])) {
+						$this->routeData = array(
+							'className' => $urlList[$alias]->getProcessor()->frontendController,
+							'controller' => 'page',
+							'pageType' => 'system',
+							'id' => $urlList[$alias]->pageID
+						);
+					}
+				} else if (empty($matches['id'])) {
 					if (preg_match('~(([A-Za-z0-9]+)/?){0,}$~x', $requestURL, $urlParts)) {
 						$alias = FileUtil::removeTrailingSlash($urlParts[0]);
 
