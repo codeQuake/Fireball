@@ -10,9 +10,9 @@
 		    data-children="{$content->count()}"
 		    data-position="{$position}">
 			<ul class="buttonList">
-				<li><span class="icon icon16 fa-times jsDeleteButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.delete{/lang}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span></li>
-				<li><span class="icon icon16 fa-pencil jsEditButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.edit{/lang}"></span></li>
-				<li><span class="icon icon16 fa{if !$content->isDisabled}-check{/if}-square-o jsToggleButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.{if !$content->isDisabled}disable{else}enable{/if}{/lang}"></span></li>
+				<li><span class="icon icon16 icon-times jsDeleteButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.delete{/lang}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span></li>
+				<li><span class="icon icon16 icon-pencil jsEditButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.edit{/lang}"></span></li>
+				<li><span class="icon icon16 icon{if !$content->isDisabled}-check{/if}-square-o jsToggleButton jsTooltip pointer" data-object-id="{$content->contentID}" title="{lang}wcf.global.button.{if !$content->isDisabled}disable{else}enable{/if}{/lang}"></span></li>
 			</ul>
 
 			<span class="{if $position == 'sidebar'}boxTitle{else}sectionTitle{/if}">{$content->getTitle()} <small>({$content->getTypeName()})</small></span>

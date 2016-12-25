@@ -279,7 +279,7 @@ Fireball.Page.ContentTypes = Class.extend({
 	_success: function (data, textStatus, jqXHR) {
 		this._cache[data.returnValues.pageID] = data.returnValues.template;
 		$('body').append(data.returnValues.template);
-		$('body').append($('<a id="contentTypeListOpen" class="button buttonPrimary"><span class="icon icon32 fa-angle-right"></span></a>'));
+		$('body').append($('<a id="contentTypeListOpen" class="button buttonPrimary"><span class="icon icon32 icon-angle-right"></span></a>'));
 		$('#contentTypeListOpen').click($.proxy(this._toggleSidebar, this));
 		$('#contentTypeListClose').click($.proxy(this._toggleSidebar, this));
 	},
