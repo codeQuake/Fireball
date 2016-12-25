@@ -70,11 +70,13 @@
 {include file='contentNodeList' application='cms' contentNodeTree=$contentContentNodeTree position='content'}
 
 {if $page->isCommentable && $page->getPermission('canViewComment')}
-	<section id="comments" class="section sectionContainerList">
-		<h2 class="sectionTitle">{lang}cms.page.comments{/lang} <span class="badge">{@$commentList->countObjects()}</span></h2>
+	<header id="comments" class="boxHeadline boxSubHeadline">
+		<h2>{lang}cms.page.comments{/lang} <span class="badge">{@$commentList->countObjects()}</span></h2>
+	</header>
 
-		{include file='__commentJavaScript' commentContainerID='pageCommentList'}
+	{include file='__commentJavaScript' commentContainerID='pageCommentList'}
 
+	<div class="container containerList marginTop">
 		{if $commentCanAdd}
 			<ul id="pageCommentList" class="commentList containerList" data-can-add="true" data-object-id="{@$page->pageID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$lastCommentTime}">
 				{include file='commentList'}
@@ -90,7 +92,7 @@
 				<p class="info">{lang}cms.page.comments.noComments{/lang}</p>
 			{/hascontent}
 		{/if}
-	</section>
+	</div>
 {/if}
 
 <script data-relocate="true">
