@@ -1,48 +1,13 @@
-{include file='documentHeader'}
-
-<head>
-	<title>{if $__wcf->getPageMenu()->getLandingPage()->menuItemID != $page->menuItemID}{$page->getTitle()} - {/if}{PAGE_TITLE|language}</title>
-
-	{include file='headInclude'}
+{capture assign='headContent'}
 	{foreach from=$page->getStylesheets() item=stylesheet}
 		<link rel="stylesheet" type="text/css" href="{$stylesheet->getURL()}" />
 	{/foreach}
-	<link rel="canonical" href="{$page->getLink(false)}" />
-
 	<script data-relocate="true" src="{@$__wcf->getPath('cms')}js/Fireball{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
-	<script data-relocate="true">
-		//<![CDATA[
-		$(function() {
-			WCF.Language.addObject({
-				'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}',
-				'cms.content.add': '{lang}cms.acp.content.add{/lang}',
-				'cms.page.edit.start': '{lang}cms.page.edit.start{/lang}',
-				'cms.page.edit.finish': '{lang}cms.page.edit.finish{/lang}',
-				'cms.page.edit.save': '{lang}cms.page.edit.save{/lang}',
-				'cms.page.edit.acp': '{lang}cms.page.edit.acp{/lang}',
-				'cms.page.edit.addContent': '{lang}cms.page.edit.addContent{/lang}'
-			});
-
-			{if $page->allowSubscribing && $__wcf->user->userID}
-				new WCF.User.ObjectWatch.Subscribe();
-			{/if}
-
-			{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
-				var $inlineEditor = new Fireball.Page.InlineEditor('.jsPageInlineEditorContainer');
-				var $updateHandler = new Fireball.Page.UpdateHandler({@$page->pageID});
-				$inlineEditor.setUpdateHandler($updateHandler);
-				$inlineEditor.setEnvironment('page', {@$page->pageID});
-			{/if}
-		});
-		//]]>
-	</script>
-</head>
-
-<body id="tpl_{$templateNameApplication}_{$templateName}" data-template="{$templateName}" data-application="{$templateNameApplication}" data-page-id="{$page->pageID}">
+{/capture}
 
 {capture assign='headerNavigation'}
 	{if $page->allowSubscribing && $__wcf->user->userID}
-		<li class="jsOnly"><a title="{lang}wcf.user.objectWatch.manageSubscription{/lang}" class="jsSubscribeButton jsTooltip" data-object-type="de.codequake.cms.page" data-object-id="{@$page->pageID}"><span class="icon icon16 icon-bookmark"></span> <span class="invisible">{lang}wcf.user.objectWatch.manageSubscription{/lang}</span></a></li>
+		<li class="jsOnly"><a title="{lang}wcf.user.objectWatch.manageSubscription{/lang}" class="jsSubscribeButton jsTooltip" data-object-type="de.codequake.cms.page" data-object-id="{@$page->pageID}"><span class="icon icon16 fa-bookmark"></span> <span class="invisible">{lang}wcf.user.objectWatch.manageSubscription{/lang}</span></a></li>
 	{/if}
 {/capture}
 
@@ -76,7 +41,7 @@
 				    data-is-disabled="{@$page->isDisabled}"
 				    data-advanced-url="{link controller='PageEdit' object=$page isACP=1 application='cms'}{/link}">
 					{content}
-						{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}<li><a href="#" class="button jsPageInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></a></li>{/if}
+						<li><a href="#" class="button jsPageInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></a></li>
 						{event name='contentHeaderNavigation'}
 					{/content}
 				</ul>
@@ -87,7 +52,7 @@
 
 {assign var=sidebarUc value=$page->sidebarOrientation|ucfirst}
 {hascontent}
-	{capture assign='sidebar'}
+	{capture assign='sidebar'|concat:$sidebarUc}
 		{content}
 			{include file='contentNodeList' application='cms' contentNodeTree=$sidebarContentNodeTree position='sidebar'}
 			{event name='boxes'}
@@ -95,19 +60,7 @@
 	{/capture}
 {/hascontent}
 
-{include file='header' sidebarOrientation=$page->sidebarOrientation}
-
-<header class="boxHeadline">
-	{if $__wcf->getPageMenu()->getLandingPage()->menuItemID == $page->menuItemID}
-		<h1>{PAGE_TITLE|language}</h1>
-		{hascontent}<p>{content}{PAGE_DESCRIPTION|language}{/content}</p>{/hascontent}
-	{else}
-		<h1>{$page->getTitle()}</h1>
-		<p>{$page->description|language}</p>
-	{/if}
-</header>
-
-{include file='userNotice'}
+{include file='header'}
 
 {if !$page->isPublished && $page->publicationDate}
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
@@ -133,41 +86,37 @@
 					{/content}
 				</ul>
 			{hascontentelse}
-				<div class="containerPadding">
-					{lang}cms.page.comments.noComments{/lang}
-				</div>
+				<p class="info">{lang}cms.page.comments.noComments{/lang}</p>
 			{/hascontent}
 		{/if}
 	</section>
 {/if}
 
 <script data-relocate="true">
-	require(['Language'], function(Language) {
-		Language.addObject({
-			'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}',
-			'cms.content.add': '{lang}cms.acp.content.add{/lang}',
-			'cms.page.edit.start': '{lang}cms.page.edit.start{/lang}',
-			'cms.page.edit.finish': '{lang}cms.page.edit.finish{/lang}',
-			'cms.page.edit.finish.confirm': '{lang}cms.page.edit.finish.confirm{/lang}',
-			'cms.page.edit.save': '{lang}cms.page.edit.save{/lang}',
-			'cms.page.edit.acp': '{lang}cms.page.edit.acp{/lang}',
-			'cms.page.edit.addContent': '{lang}cms.page.edit.addContent{/lang}'
+	$(function() {
+		require(['Language',], function(Language) {
+			Language.addObject({
+				'wcf.user.objectWatch.manageSubscription': '{lang}wcf.user.objectWatch.manageSubscription{/lang}',
+				'cms.content.add': '{lang}cms.acp.content.add{/lang}',
+				'cms.page.edit.start': '{lang}cms.page.edit.start{/lang}',
+				'cms.page.edit.finish': '{lang}cms.page.edit.finish{/lang}',
+				'cms.page.edit.save': '{lang}cms.page.edit.save{/lang}',
+				'cms.page.edit.acp': '{lang}cms.page.edit.acp{/lang}',
+				'cms.page.edit.addContent': '{lang}cms.page.edit.addContent{/lang}'
+			});
+
+			{if $page->allowSubscribing && $__wcf->user->userID}
+				new WCF.User.ObjectWatch.Subscribe();
+			{/if}
+
+			{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
+				var $inlineEditor = new Fireball.Page.InlineEditor('.jsPageInlineEditorContainer');
+				var $updateHandler = new Fireball.Page.UpdateHandler({@$page->pageID});
+				$inlineEditor.setUpdateHandler($updateHandler);
+				$inlineEditor.setEnvironment('page', {@$page->pageID});
+			{/if}
 		});
-
-		{if $page->allowSubscribing && $__wcf->user->userID}
-			new WCF.User.ObjectWatch.Subscribe();
-		{/if}
-
-		{if $__wcf->getSession()->getPermission('admin.fireball.content.canAddContent')}
-			var $inlineEditor = new Fireball.Page.InlineEditor('.jsPageInlineEditorContainer');
-			var $updateHandler = new Fireball.Page.UpdateHandler({@$page->pageID});
-			$inlineEditor.setUpdateHandler($updateHandler);
-			$inlineEditor.setEnvironment('page', {@$page->pageID});
-		{/if}
 	});
 </script>
 
 {include file='footer'}
-
-</body>
-</html>
