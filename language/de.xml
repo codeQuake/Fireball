@@ -61,12 +61,12 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Vorlage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[Alle Seiten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Geben Sie hier die URL ein, von der die Inhalte bezogen werden sollen. Das Format des Feeds kann entweder <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Anzahl Einträge]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Geben Sie hier die URL ein, von der die Inhalte bezogen werden sollen. Das Format des Feeds kann entweder <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Anzahl Einträge]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[Alle untergeordneten Elemente werden automatisch als Slideshow arrangiert.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
@@ -115,20 +115,20 @@
 		<item name="cms.acp.index.news.more"><![CDATA[Weitere Nachrichten]]></item>
 	</category>
 
-	<category name="cms.acp.menu">
-		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="cms.acp.menu.link.fireball.file"><![CDATA[Dateien]]></item>
-		<item name="cms.acp.menu.link.fireball.file.category.add"><![CDATA[Kategorie hinzufügen]]></item>
-		<item name="cms.acp.menu.link.fireball.file.category.list"><![CDATA[Kategorien auflisten]]></item>
-		<item name="cms.acp.menu.link.fireball.file.list"><![CDATA[Dateien auflisten]]></item>
-		<item name="cms.acp.menu.link.fireball.page"><![CDATA[Seiten]]></item>
-		<item name="cms.acp.menu.link.fireball.page.add"><![CDATA[Seite hinzufügen]]></item>
-		<item name="cms.acp.menu.link.fireball.page.importAndExport"><![CDATA[Sichern &amp; Wiederherstellen]]></item>
-		<item name="cms.acp.menu.link.fireball.page.list"><![CDATA[Seiten auflisten]]></item>
-		<item name="cms.acp.menu.link.fireball.page.statistics"><![CDATA[Statistiken]]></item>
-		<item name="cms.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
-		<item name="cms.acp.menu.link.fireball.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
-		<item name="cms.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
+	<category name="fireball.acp.menu">
+		<item name="fireball.acp.menu.link.fireball"><![CDATA[Fireball CMS]]></item>
+		<item name="fireball.acp.menu.link.fireball.file"><![CDATA[Dateien]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.category.add"><![CDATA[Kategorie hinzufügen]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.category.list"><![CDATA[Kategorien auflisten]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.list"><![CDATA[Dateien auflisten]]></item>
+		<item name="fireball.acp.menu.link.fireball.page"><![CDATA[Seiten]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.add"><![CDATA[Seite hinzufügen]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.importAndExport"><![CDATA[Sichern &amp; Wiederherstellen]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.list"><![CDATA[Seiten auflisten]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.statistics"><![CDATA[Statistiken]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
 	</category>
 
 	<category name="cms.acp.page">
@@ -383,7 +383,7 @@
 		<item name="wcf.acp.option.category.fireball.pages"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.option.category.fireball.pages.default"><![CDATA[Standardwerte]]></item>
 		<item name="wcf.acp.option.category.fireball.pages.statistics"><![CDATA[Statistiken]]></item>
-		<item name="wcf.acp.option.category.dashboard.sidebar.fireball"><![CDATA[CMS]]></item>
+		<item name="wcf.acp.option.category.dashboard.sidebar.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.acp.option.fireball_content_slideshow_interval"><![CDATA[Intervall]]></item>
 		<item name="wcf.acp.option.fireball_content_slideshow_interval.description"><![CDATA[Geben Sie die Zeit an, nach der automatisch zum nächsten Slide gewechselt werden soll. [Zeit in Millisekunden]]]></item>
 		<item name="wcf.acp.option.fireball_dashboard_sidebar_entries"><![CDATA[Anzahl Seiten]]></item>
@@ -400,7 +400,7 @@
 		<item name="wcf.acp.option.fireball_pages_statistics_delete.description"><![CDATA[Zeitraum nach dem alte Statistiken automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]]></item>
 		<item name="wcf.acp.option.fireball_revision_delete"><![CDATA[Versionen automatisch löschen]]></item>
 		<item name="wcf.acp.option.fireball_revision_delete.description"><![CDATA[Zeitraum nach dem alte Versionen automatisch gelöscht werden. [Zeit in Tagen, 0 um die Löschung gänzlich zu deaktivieren]]]></item>
-		<item name="wcf.acp.option.fireball_sitemap_enable"><![CDATA[Seitenübersicht anzeigen]]]></item>
+		<item name="wcf.acp.option.fireball_sitemap_enable"><![CDATA[Vollständige Seitenübersicht aktivieren]]></item>
 	</category>
 
 	<category name="wcf.acp.pageMenu">

@@ -45,7 +45,7 @@
 		<ul>
 			{if $categoryList|iterator_count}
 				<li class="dropdown">
-					<a class="button dropdownToggle"><span class="icon icon16 fa-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
+					<a class="button dropdownToggle"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.category.button.choose{/lang}</span></a>
 					<div class="dropdownMenu">
 						<ul class="scrollableDropdownMenu">
 							{foreach from=$categoryList item=node}
@@ -55,9 +55,9 @@
 					</div>
 				</li>
 			{/if}
-			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 fa-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
+			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
 			{if $categoryList|iterator_count}
-				<li><a class="button jsFileUploadButton"><span class="icon icon16 fa-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
+				<li><a class="button jsFileUploadButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 			{/if}
 
 			{event name='contentNavigationButtonsTop'}
