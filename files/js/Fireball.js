@@ -1,29 +1,31 @@
 /**
  * Class and function collection for fireball cms.
  *
- * @author	Jens Krumsieck
- * @copyright	2013 - 2015 codeQuake
- * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.codequake.cms
+ * @author    Jens Krumsieck
+ * @copyright    2013 - 2015 codeQuake
+ * @license    GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package    de.codequake.cms
  */
-if (!Fireball) var Fireball = {};
 
+/**
+ * jquery ui fire slider
+ */
 $.widget('ui.fireSlide', {
 	/**
 	 * button list object
-	 * @var	jQuery
+	 * @var    jQuery
 	 */
 	_buttonList: null,
 
 	/**
 	 * number of items
-	 * @var	integer
+	 * @var    integer
 	 */
 	_count: 0,
 
 	/**
 	 * item index
-	 * @var	integer
+	 * @var    integer
 	 */
 	_index: 0,
 
@@ -41,13 +43,13 @@ $.widget('ui.fireSlide', {
 
 	/**
 	 * timer object
-	 * @var	interval
+	 * @var    interval
 	 */
 	_timer: null,
 
 	/**
 	 * list of options
-	 * @var	object
+	 * @var    object
 	 */
 	options: {
 		// cycle interval in milliseconds
@@ -56,7 +58,7 @@ $.widget('ui.fireSlide', {
 
 	/**
 	 * elements width
-	 * @var	integer
+	 * @var    integer
 	 */
 	_width: 0,
 
@@ -85,7 +87,7 @@ $.widget('ui.fireSlide', {
 
 		for (var $i = 0; $i < this._count; $i++) {
 			if ($(this._items.get($i)).outerHeight() >= max_height) max_height = $(this._items.get($i)).outerHeight();
-			var $icon = $('<li><a><span class="icon icon16 icon-circle"></span></a></li>').click($.proxy(this._click, this)).appendTo(this._buttonList);
+			var $icon = $('<li><a><span class="icon icon16 fa-circle"></span></a></li>').click($.proxy(this._click, this)).appendTo(this._buttonList);
 			if ($i == 0) $icon.addClass('active');
 		}
 		this.element.css('height', max_height);
@@ -110,7 +112,7 @@ $.widget('ui.fireSlide', {
 	/**
 	 * Handles window resize
 	 */
-	_resize: function() {
+	_resize: function () {
 		var max_height = 0;
 
 		// calc max-height again
@@ -138,7 +140,7 @@ $.widget('ui.fireSlide', {
 	/**
 	 * Restarts the timer to slide to the next slide.
 	 */
-	_restartTimer: function() {
+	_restartTimer: function () {
 		if (this._timer !== null) {
 			window.clearInterval(this._timer);
 		}
@@ -149,7 +151,7 @@ $.widget('ui.fireSlide', {
 	/**
 	 * Slides to a specific index or to the next slide if no index provided.
 	 *
-	 * @param	integer		index
+	 * @param    integer        index
 	 */
 	slideTo: function (index) {
 		if (typeof index !== 'undefined') {
@@ -171,6 +173,14 @@ $.widget('ui.fireSlide', {
 	}
 });
 
+/**
+ * namespace Fireball
+ */
+if (!Fireball) var Fireball = {};
+
+/**
+ * namespace Fireball.Page
+ */
 Fireball.Page = {};
 
 /**
@@ -182,7 +192,6 @@ Fireball.Page.Add = Class.extend({
 	_dialog: null,
 
 	init: function (pageID) {
-
 		this._pageID = pageID;
 
 		// bind click event
@@ -254,11 +263,14 @@ Fireball.Page.Add = Class.extend({
 	}
 });
 
+/**
+ * Handles the sidebar overlay with a list of all content types
+ * which can be added via drag'n'drop
+ */
 Fireball.Page.ContentTypes = Class.extend({
 	_pageID: 0,
 	_proxy: null,
-	_initialized: 0,
-	_cache: {},
+	_setDraggable: false,
 
 	init: function (pageID) {
 		this._pageID = pageID;
@@ -276,130 +288,306 @@ Fireball.Page.ContentTypes = Class.extend({
 		this._proxy.sendRequest();
 	},
 
+	setSet: function () {
+		this._setDraggable = true;
+	},
+
 	_success: function (data, textStatus, jqXHR) {
-		this._cache[data.returnValues.pageID] = data.returnValues.template;
 		$('body').append(data.returnValues.template);
-		$('body').append($('<a id="contentTypeListOpen" class="button buttonPrimary"><span class="icon icon32 icon-angle-right"></span></a>'));
+		$('body').append($('<a id="contentTypeListOpen" class="button buttonPrimary"><span class="icon icon32 fa-angle-right"></span></a>'));
 		$('#contentTypeListOpen').click($.proxy(this._toggleSidebar, this));
 		$('#contentTypeListClose').click($.proxy(this._toggleSidebar, this));
 	},
 
-	_toggleSidebar: function (event) {
-		event.preventDefault();
+	_toggleSidebar: function () {
 		if (!$('#contentTypeList').hasClass('open')) {
-			if (!this._initialized) {
-				new Fireball.Content.Dragging(this._pageID);
-				this._initialized = 1;
-			}
 			$('#contentTypeList').addClass('open');
-			$('#contentTypeListOpen').toggle();
 		}
 		else {
-			$('#contentTypeList').removeClass('open');
-			$('#contentTypeListOpen').toggle();
+			this._closeSidebar()
 		}
 	},
+
+	_closeSidebar: function () {
+		if ($('#contentTypeList').hasClass('open'))
+			$('#contentTypeList').removeClass('open');
+	}
 });
 
-Fireball.Content = {};
-
-Fireball.Content.Dragging = Class.extend({
+/**
+ * Handles inline edits of pages and basic content edits
+ */
+Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
+	_pageID : 0,
+	_environment : 'page',
+	_permissions : { },
+	_redirectURL : '',
+	_updateHandler : null,
+	_editStarted : false,
+	_contentTypeOverlay : null,
+	_dragging : null,
 	_proxy: null,
-	_pageID: 0,
 
-	init: function (pageID) {
-		this._pageID = pageID;
+	/**
+	 * @see	WCF.InlineEditor._setOptions()
+	 */
+	_setOptions: function() {
+		this._environment = 'page';
 
-		$("div[id^='cmsContent']").each(function () {
-			$(this).remove();
-		});
-		$("section[id^='cmsContent']").each(function () {
-			$(this).remove();
-		});
+		this._options = [
+			{ label: WCF.Language.get('cms.page.edit.start'), optionName: 'start' },
+			{ label: WCF.Language.get('cms.page.edit.addContent'), optionName: 'addContent' },
+			{ label: WCF.Language.get('cms.page.edit.save'), optionName: 'save' },
 
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
-		});
-		this._proxy.setOption('data', {
-			actionName: 'getSortableContentList',
-			className: 'cms\\data\\page\\PageAction',
-			objectIDs: [this._pageID],
-			parameters: {
-				position: 'body'
-			}
-		});
-		this._proxy.sendRequest();
-		this._proxy.setOption('data', {
-			actionName: 'getSortableContentList',
-			className: 'cms\\data\\page\\PageAction',
-			objectIDs: [this._pageID],
-			parameters: {
-				position: 'sidebar'
-			}
-		});
-		this._proxy.sendRequest();
+			{ optionName: 'divider' },
 
-		new Fireball.Content.Sortable.List();
-
-		$('.draggable').draggable({
-			cursor: "move",
-			helper: "clone",
-			revert: "invalid",
-			containment: "document",
-			drag: $.proxy(this._drag, this)
-		});
-		$('.ui-droppable').droppable({
-			activeClass: "droppable-state-active",
-			greedy: true,
-			drop: $.proxy(this._drop, this)
-		});
+			{ label: WCF.Language.get('cms.page.edit.finish'), optionName: 'finish' },
+			{ label: WCF.Language.get('cms.page.edit.acp'), optionName: 'acp', isQuickOption: true }
+		];
 	},
 
-	_drop: function (event, ui) {
-		//check if element comes from contenttype list
-		if (typeof ui.draggable.attr('id') !== 'undefined' && ui.draggable.attr('id').match('^de.codequake.cms')) {
-			$(event.target).append('<div class="draggedContent ' + ui.draggable.attr('id') + '" />')
-			var type = ui.draggable.attr('id');
-			var position = 'body';
-			if (typeof $(event.target).attr('id') !== 'undefined' && $(event.target).attr('id').match('^cmsContent')) {
-				var data = $(event.target).attr('id').replace('cmsContent', '');
-			}
-			var parentID = 0;
-			if (typeof data !== 'undefined') {
-				parentID = data;
-			}
-			//call add form
-			new Fireball.Content.AddForm(this._pageID, position, type, parentID);
+	/**
+	 * Returns current update handler.
+	 *
+	 * @return	Fireball.Page.UpdateHandler
+	 */
+	setUpdateHandler: function(updateHandler) {
+		this._updateHandler = updateHandler;
+	},
+
+	/**
+	 * @see	WCF.InlineEditor._getTriggerElement()
+	 */
+	_getTriggerElement: function(element) {
+		return element.find('.jsPageInlineEditor');
+	},
+
+	/**
+	 * @see	WCF.InlineEditor._validate()
+	 */
+	_validate: function(elementID, optionName) {
+		switch (optionName) {
+			case 'addContent':
+				return this._editStarted;
+				break;
+
+			case 'start':
+				return !this._editStarted;
+				break;
+
+			case 'save':
+				return this._editStarted;
+				break;
+
+			case 'finish':
+				return this._editStarted;
+				break;
+
+			case 'acp':
+				return true;
+				break;
+		}
+
+		return false;
+	},
+
+	/**
+	 * @see	WCF.InlineEditor._execute()
+	 */
+	_execute: function(elementID, optionName) {
+		// abort if option is invalid or not accessible
+		if (!this._validate(elementID, optionName)) {
+			return false;
+		}
+
+		switch (optionName) {
+			case 'start':
+				if (this._editStarted)
+					return;
+
+				var self = this;
+				this._contentTypeOverlay = new Fireball.Page.ContentTypes(this._pageID);
+				this._dragging = new Fireball.Content.Dragging(this._pageID);
+
+				this._editStarted = true;
+				break;
+
+			case 'addContent':
+				this._contentTypeOverlay._toggleSidebar();
+				if (!this._contentTypeOverlay._setDraggable) {
+					$('.draggable').draggable({
+						cursor: "move",
+						helper: "clone",
+						revert: "invalid",
+						containment: "document",
+						drag: $.proxy(this._dragging._drag, this._dragging)
+					});
+				}
+
+				break;
+
+			case 'save':
+				this._dragging.getSortableListObject('body')._submit();
+				this._dragging.getSortableListObject('sidebar')._submit();
+				break;
+
+			case 'finish':
+				var self = this;
+				WCF.System.Confirmation.show(WCF.Language.get('cms.page.edit.finish.confirm'), function(action) {
+					if (action === 'confirm') {
+						self._contentTypeOverlay._closeSidebar();
+
+						this._proxy = new WCF.Action.Proxy({
+							success: $.proxy(self._loadParsedContents, self)
+						});
+
+						this._proxy.setOption('data', {
+							actionName: 'getParsedContentList',
+							className: 'cms\\data\\page\\PageAction',
+							objectIDs: [self._pageID],
+							parameters: {
+								position: 'body'
+							}
+						});
+						this._proxy.sendRequest();
+
+						this._proxy.setOption('data', {
+							actionName: 'getParsedContentList',
+							className: 'cms\\data\\page\\PageAction',
+							objectIDs: [self._pageID],
+							parameters: {
+								position: 'sidebar'
+							}
+						});
+						this._proxy.sendRequest();
+
+						self._editStarted = false;
+					}
+				});
+				break;
+
+			case 'acp':
+				window.location = $('#' + elementID).data('advancedUrl');
+				break;
 		}
 	},
 
-	_success: function (data, textStatus, jqXHR) {
+	_loadParsedContents: function (data, textStatus, jqXHR) {
+		position = data.returnValues.position;
+
+		// remove draggable stuff
+		$('.ui-droppable[data-position="' + position + '"]').remove();
+		$('#sortableContentList' + position.charAt(0).toUpperCase() + position.slice(1)).remove();
+
 		if (data.returnValues.position == 'body')
-			$('body').append(data.returnValues.template);
+			$(data.returnValues.template).insertAfter($('.content .contentHeader'));
 		else if (data.returnValues.position == 'sidebar')
 			$('aside.sidebar').append(data.returnValues.template);
 		else if (data.returnValues.position == 'sidebarLeft')
 			$('aside.boxesSidebarLeft').append(data.returnValues.template);
 		else if (data.returnValues.position == 'sidebarRight')
 			$('aside.boxesSidebarRight').append(data.returnValues.template);
-	}
-});
-
-Fireball.Content.Sortable = {};
-
-Fireball.Content.Sortable.List = WCF.Sortable.List.extend({
-	init: function () {
-		this._super('sortableContentListBody');
-		$('#contentTypeList .wideButton').children('button[data-type="submit"]').click($.proxy(this._submit, this));
-		this._className = 'cms\\data\\content\\ContentAction';
 	},
 
-	_success: function (data, textStatus, jqXHR) {
-		this._super(data, textStatus, jqXHR);
-		window.location = location;
+	/**
+	 * Updates page properties.
+	 *
+	 * @param	string		elementID
+	 * @param	string		optionName
+	 * @param	object		data
+	 */
+	_updatePage: function(elementID, optionName, data) {
+		var self = this;
+		var $pageID = this._elements[elementID].data('pageID');
+
+		this._updateData.push({
+			data: data,
+			elementID: elementID,
+			optionName: optionName
+		});
+
+		this._proxy.setOption('data', {
+			actionName: optionName,
+			className: 'cms\\data\\page\\PageAction',
+			objectIDs: [ this._elements[elementID].data('pageID') ],
+			parameters: {
+				data: data
+			},
+			success: function(data) {
+				self._updateHandler.update($pageID, data.returnValues.pageData[$pageID]);
+			}
+		});
+		this._proxy.sendRequest();
+	},
+
+	/**
+	 * Returns a specific permission.
+	 *
+	 * @param	string		permission
+	 * @return	integer
+	 */
+	_getPermission: function(permission) {
+		if (this._permissions[permission]) {
+			return this._permissions[permission];
+		}
+
+		return 0;
+	},
+
+	/**
+	 * Sets current environment.
+	 *
+	 * @param	string		environment
+	 * @param	integer		pageID
+	 * @param	string		redirectURL
+	 */
+	setEnvironment: function(environment, pageID, redirectURL) {
+		if (environment !== 'page') {
+			environment = 'page';
+		}
+
+		this._environment = environment;
+		this._pageID = pageID;
+		this._redirectURL = redirectURL;
+	},
+
+	/**
+	 * Sets a permission.
+	 *
+	 * @param	string		permission
+	 * @param	integer		value
+	 */
+	setPermission: function(permission, value) {
+		this._permissions[permission] = value;
+	},
+
+	/**
+	 * Sets permissions.
+	 *
+	 * @param	object		permissions
+	 */
+	setPermissions: function(permissions) {
+		for (var $permission in permissions) {
+			this.setPermission($permission, permissions[$permission]);
+		}
 	}
 });
 
+/**
+ * updatehandler for pages
+ */
+Fireball.Page.UpdateHandler = Class.extend({
+
+});
+
+/**
+ * namespace Fireball.Content
+ */
+Fireball.Content = {};
+
+/**
+ * Handles the content specific add dialog
+ */
 Fireball.Content.AddForm = Class.extend({
 	_pageID: 0,
 	_cache: {},
@@ -455,7 +643,7 @@ Fireball.Content.AddForm = Class.extend({
 		//get all inputs
 		parameters['contentData'] = {};
 		parameters['contentData']['columnData'] = [];
-		$('#contentAddForm input, #contentAddForm textarea, #pageAddForm select').each(function (index) {
+		$('#contentAddForm input, #contentAddForm textarea, #contentAddForm select').each(function (index) {
 			var input = $(this);
 			if (input.attr('type') != 'checkbox') {
 				parameters[input.attr('name')] = $.trim(input.val())
@@ -475,7 +663,7 @@ Fireball.Content.AddForm = Class.extend({
 				}
 			}
 		});
-		console.log(parameters);
+
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._executed, this)
 		});
@@ -494,4 +682,165 @@ Fireball.Content.AddForm = Class.extend({
 		this._cache[this._pageID] = data.returnValues.template;
 		this._show(this._pageID);
 	}
+});
+
+/**
+ * Handles the preparation for sorting contents
+ */
+Fireball.Content.Dragging = Class.extend({
+	_sortableList : {},
+	_proxy : null,
+	_pageID : 0,
+
+	init: function (pageID) {
+		this._pageID = pageID;
+
+		$("div[id^='cmsContent']").each(function () {
+			$(this).remove();
+		});
+		$("fieldset[id^='cmsContent']").each(function () {
+			$(this).remove();
+		});
+
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		this._proxy.setOption('data', {
+			actionName: 'getSortableContentList',
+			className: 'cms\\data\\page\\PageAction',
+			objectIDs: [this._pageID],
+			parameters: {
+				position: 'body'
+			}
+		});
+		this._proxy.sendRequest();
+
+		this._proxy.setOption('data', {
+			actionName: 'getSortableContentList',
+			className: 'cms\\data\\page\\PageAction',
+			objectIDs: [this._pageID],
+			parameters: {
+				position: 'sidebar'
+			}
+		});
+		this._proxy.sendRequest();
+	},
+
+	_drag: function (event, ui) {
+		ui.helper.css('position', 'fixed');
+		ui.helper.css('margin-top', event.pageY);
+		ui.helper.css('margin-left', event.pageX);
+		ui.position.top = 0;
+		ui.position.left = 0;
+	},
+
+	_drop: function (event, ui) {
+		//check if element comes from contenttype list
+		if (typeof ui.draggable.attr('id') !== 'undefined' && ui.draggable.attr('id').match('^de.codequake.cms')) {
+			$(event.target).append('<div class="draggedContent ' + ui.draggable.attr('id') + '" />')
+			var type = ui.draggable.attr('id');
+			var position = 'body';
+			if (typeof $(event.target).data('position') !== 'undefined')
+				position = $(event.target).data('position');
+			if (typeof $(event.target).attr('id') !== 'undefined' && $(event.target).attr('id').match('^cmsContent')) {
+				var data = $(event.target).attr('id').replace('cmsContent', '');
+			}
+			var parentID = 0;
+			if (typeof data !== 'undefined') {
+				parentID = data;
+			}
+			//call add form
+			new Fireball.Content.AddForm(this._pageID, position, type, parentID);
+		}
+	},
+
+	_success: function (data, textStatus, jqXHR) {
+		template = data.returnValues.template;
+
+		if (data.returnValues.position == 'body')
+			$(template).insertAfter($('.content .contentHeader'));
+		else if (data.returnValues.position == 'sidebar')
+			$('aside.sidebar').append(template);
+		else if (data.returnValues.position == 'sidebarLeft')
+			$('aside.boxesSidebarLeft').append(template);
+		else if (data.returnValues.position == 'sidebarRight')
+			$('aside.boxesSidebarRight').append(template);
+
+		$container = $('#sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1));
+
+		this._sortableList[data.returnValues.position] = new Fireball.Content.Sortable.List('sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1));
+
+		if ($container !== undefined) {
+			$container.parent().find('.ui-droppable').droppable({
+				activeClass: "droppable-state-active",
+				greedy: true,
+				drop: $.proxy(this._drop, this)
+			});
+		}
+	},
+
+	getSortableListObject: function (position) {
+		return this._sortableList[position];
+	}
+});
+
+/**
+ * namespace Fireball.Content.Sortable
+ */
+Fireball.Content.Sortable = {};
+
+/**
+ * Handles the sorting of contents
+ */
+Fireball.Content.Sortable.List = WCF.Sortable.List.extend({
+	init: function (container) {
+		this._super(container);
+		this._className = 'cms\\data\\content\\ContentAction';
+	},
+
+	/**
+	 * Saves object structure.
+	 */
+	_submit: function() {
+		// reset structure
+		this._structure = { };
+
+		// build structure
+		this._container.find('.sortableList').each($.proxy(function(index, list) {
+			var $list = $(list);
+			var $parentID = $list.data('objectID');
+
+			if ($parentID !== undefined) {
+				$list.children(this._options.items).each($.proxy(function(index, listItem) {
+					var $objectID = $(listItem).data('objectID');
+
+					if (!this._structure[$parentID]) {
+						this._structure[$parentID] = [ ];
+					}
+
+					this._structure[$parentID].push($objectID);
+				}, this));
+			}
+		}, this));
+
+		// catch empty structures
+		if (Object.keys(this._structure).length === 0)
+			return;
+
+		// send request
+		var $parameters = $.extend(true, {
+			data: {
+				offset: this._offset,
+				structure: this._structure
+			}
+		}, this._additionalParameters);
+
+		this._proxy.setOption('data', {
+			actionName: 'updatePosition',
+			className: this._className,
+			interfaceName: 'wcf\\data\\ISortableAction',
+			parameters: $parameters
+		});
+		this._proxy.sendRequest();
+	},
 });
