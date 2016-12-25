@@ -1,27 +1,27 @@
 /**
  * Class and function collection for cms acp.
- * 
+ *
  * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-if (!CMS) var CMS = { };
+if (!Fireball) var Fireball = { };
 
 /**
- * Initialize CMS.ACP namespace
+ * Initialize Fireball.ACP namespace
  */
-CMS.ACP = { };
+Fireball.ACP = { };
 
 /**
- * Initialize CMS.ACP.Content namespace
+ * Initialize Fireball.ACP.Content namespace
  */
-CMS.ACP.Content = { };
+Fireball.ACP.Content = { };
 
 /**
  * Shows a dialog to add a new content to a page.
  */
-CMS.ACP.Content.AddDialog = Class.extend({
+Fireball.ACP.Content.AddDialog = Class.extend({
 	_proxy: null,
 	_cache: { },
 	_dialog: null,
@@ -66,16 +66,16 @@ CMS.ACP.Content.AddDialog = Class.extend({
 });
 
 /**
- * Initialize CMS.ACP.Content.Type namespace
+ * Initialize Fireball.ACP.Content.Type namespace
  */
-CMS.ACP.Content.Type = { };
+Fireball.ACP.Content.Type = { };
 
 /**
  * Columns content type.
- * 
+ *
  * @param	array		columnData
  */
-CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
+Fireball.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 	_addButton: null,
 
 	/**
@@ -123,7 +123,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 
 	/**
 	 * Initializes a form for a columns content type.
-	 * 
+	 *
 	 * @param	array		columnData
 	 */
 	init: function(columnData) {
@@ -150,7 +150,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 
 	/**
 	 * Adds a new column.
-	 * 
+	 *
 	 * @param	integer		width
 	 */
 	_addColumn: function(width) {
@@ -162,7 +162,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 
 		var $grid = $('<div class="grid" data-column-number="' + this._columnCount + '"></div>').appendTo(this._container);
 		var $gridInner = $('<div></div>').appendTo($grid);
-		
+
 		var $gridNumber = $('<div class="gridNumber"></div>').appendTo($gridInner);
 		$('<span>' + this._columnCount + '</span>').appendTo($gridNumber);
 		$('<input type="number" name="contentData[columnData][]" min="' + this._minColumnWidth + '" />').keydown($.proxy(this._preventSubmit, this)).change($.proxy(this._change, this)).appendTo($gridNumber);
@@ -179,7 +179,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 
 	/**
 	 * Handles changes of a column width input.
-	 * 
+	 *
 	 * @param	object		event
 	 */
 	_change: function(event) {
@@ -199,7 +199,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 
 	_deleteColumn: function(columnNumber) {
 		if (this._columnCount == this._minColumnCount) {
-			console.debug("[CMS.ACP.Content.Type['de.codequake.cms.content.type.columns']] Couldn't delete column '" + columnNumber + "', reached min column count.");
+			console.debug("[Fireball.ACP.Content.Type['de.codequake.cms.content.type.columns']] Couldn't delete column '" + columnNumber + "', reached min column count.");
 			return;
 		}
 
@@ -225,7 +225,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 
 	/**
 	 * Starts dragging a column resizer to set the width of a column.
-	 * 
+	 *
 	 * @param	object		event
 	 */
 	_mousedown: function(event) {
@@ -241,7 +241,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 
 	/**
 	 * Updates the column widths while dragging the resizer of a column.
-	 * 
+	 *
 	 * @param	jQuery		grid
 	 * @param	object		event
 	 */
@@ -266,7 +266,7 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 	/**
 	 * Prevents submitting the form when enter is pressed in a column width
 	 * input to update the column width.
-	 * 
+	 *
 	 * @param	object		event
 	 */
 	_preventSubmit: function(event) {
@@ -304,13 +304,13 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 
 	/**
 	 * Sets the width of a specific column.
-	 * 
+	 *
 	 * @param	integer		width
 	 * @param	integer		width
 	 */
 	_setWidth: function(columnNumber, width) {
 		if (columnNumber > this._columnCount) {
-			console.debug("[CMS.ACP.Content.Type['de.codequake.cms.content.type.columns']] Couldn't set column width for column '" + columnNumber + "', out of boundary.");
+			console.debug("[Fireball.ACP.Content.Type['de.codequake.cms.content.type.columns']] Couldn't set column width for column '" + columnNumber + "', out of boundary.");
 			return;
 		}
 
@@ -382,15 +382,15 @@ CMS.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.extend({
 });
 
 /**
- * Initialize CMS.ACP.File namespace
+ * Initialize Fireball.ACP.File namespace
  */
-CMS.ACP.File = { };
+Fireball.ACP.File = { };
 
 /**
  * Handles showing details about a specific file upon clicking on the file
  * title.
  */
-CMS.ACP.File.Details = Class.extend({
+Fireball.ACP.File.Details = Class.extend({
 	/**
 	 * cache
 	 * @var	object
@@ -420,7 +420,7 @@ CMS.ACP.File.Details = Class.extend({
 				success: $.proxy(this._success, this)
 			});
 
-			WCF.DOMNodeInsertedHandler.addCallback('CMS.ACP.File.Details', $.proxy(this.init, this));
+			WCF.DOMNodeInsertedHandler.addCallback('Fireball.ACP.File.Details', $.proxy(this.init, this));
 		}
 
 		// bind events
@@ -429,7 +429,7 @@ CMS.ACP.File.Details = Class.extend({
 
 	/**
 	 * Handles clicking upon a 'fileDetails' button
-	 * 
+	 *
 	 * @param	object		event
 	 */
 	_click: function(event) {
@@ -449,7 +449,7 @@ CMS.ACP.File.Details = Class.extend({
 
 	/**
 	 * Handles successful AJAX responses.
-	 * 
+	 *
 	 * @param	object		data
 	 * @param	string		textStatus
 	 * @param	jQuery		jqXHR
@@ -465,15 +465,15 @@ CMS.ACP.File.Details = Class.extend({
 /**
  * Allows to specify width and height of an image when displayed in the
  * frontend.
- * 
+ *
  * @param	integer		fileID
  */
-CMS.ACP.File.ImageRatio = Class.extend({
+Fireball.ACP.File.ImageRatio = Class.extend({
 	_ratio: 1,
 
 	/**
 	 * Initialises a new image radio handler.
-	 * 
+	 *
 	 * @param	integer		fileID
 	 */
 	init: function(fileID) {
@@ -511,7 +511,7 @@ CMS.ACP.File.ImageRatio = Class.extend({
 
 	/**
 	 * Handles successful AJAX responses.
-	 * 
+	 *
 	 * @param	object		data
 	 * @param	string		textStatus
 	 * @param	jQuery		jqXHR
@@ -523,13 +523,13 @@ CMS.ACP.File.ImageRatio = Class.extend({
 
 /**
  * Provides a file picker to select one or multiple files in a form.
- * 
+ *
  * @param	jQuery		selectButton
  * @param	string		inputName
  * @param	array		defaultValues
  * @param	object		options
  */
-CMS.ACP.File.Picker = Class.extend({
+Fireball.ACP.File.Picker = Class.extend({
 	/**
 	 * id of the currently open category
 	 * @var	integer
@@ -550,12 +550,12 @@ CMS.ACP.File.Picker = Class.extend({
 
 	/**
 	 * Options for this file picker.
-	 * 
+	 *
 	 * Supported options:
 	 * - multiple: Indicates whether user only can select one or multiple
 	 *             files.
 	 * - fileType: Limit the listed files to the ones of a specific type.
-	 * 
+	 *
 	 * @var	object
 	 */
 	_options: null,
@@ -580,7 +580,7 @@ CMS.ACP.File.Picker = Class.extend({
 
 	/**
 	 * Initialises a new file picker.
-	 * 
+	 *
 	 * @param	jQuery		selectButton
 	 * @param	string		inputName
 	 * @param	array		defaultValues
@@ -602,7 +602,7 @@ CMS.ACP.File.Picker = Class.extend({
 		// bind form event to create input
 		var $form = this._selectButton.parents('form');
 		if (!$form.length) {
-			console.debug('[CMS.ACP.File.Picker] Unable to determine form for file picker, aborting.');
+			console.debug('[Fireball.ACP.File.Picker] Unable to determine form for file picker, aborting.');
 			return;
 		}
 		$form.submit($.proxy(this._submit, this));
@@ -615,7 +615,7 @@ CMS.ACP.File.Picker = Class.extend({
 
 	/**
 	 * Selects all given files.
-	 * 
+	 *
 	 * @param	array		files
 	 * @param	boolean		checkInput
 	 */
@@ -650,7 +650,7 @@ CMS.ACP.File.Picker = Class.extend({
 
 	/**
 	 * Handles clicking upon a category in the category selection dropdown.
-	 * 
+	 *
 	 * @param	object		event
 	 */
 	_dropdownCategoryClick: function(event) {
@@ -660,7 +660,7 @@ CMS.ACP.File.Picker = Class.extend({
 
 	/**
 	 * Handles clicking an input to select a file.
-	 * 
+	 *
 	 * @param	object		event
 	 */
 	_inputClick: function(event) {
@@ -681,7 +681,7 @@ CMS.ACP.File.Picker = Class.extend({
 		}
 
 		if (!this._options.multiple) {
-			new CMS.ACP.File.ImageRatio($input.val());
+			new Fireball.ACP.File.ImageRatio($input.val());
 
 			//delete old entries
 			var self = this;
@@ -699,7 +699,7 @@ CMS.ACP.File.Picker = Class.extend({
 	 * Displays the file list of the selected category. In case the file
 	 * list for that category wasn't loaded yet, the list will be fetched
 	 * automatically.
-	 * 
+	 *
 	 * @param	integer		categoryID
 	 */
 	_openCategory: function(categoryID) {
@@ -759,7 +759,7 @@ CMS.ACP.File.Picker = Class.extend({
 
 	/**
 	 * Handles submitting the form of this file picker.
-	 * 
+	 *
 	 * @param	object		event
 	 */
 	_submit: function(event) {
@@ -772,8 +772,8 @@ CMS.ACP.File.Picker = Class.extend({
 			});
 		} else {
 			var keys = Object.keys(this._selected);
-			var file = this._selected[keys[0]]; 
-			
+			var file = this._selected[keys[0]];
+
 			if (typeof file !== 'undefined') {
 				$('<input type="hidden" name="' + this._inputName + '" value="' + file.fileID + '" />').appendTo($form);
 			}
@@ -783,7 +783,7 @@ CMS.ACP.File.Picker = Class.extend({
 
 	/**
 	 * Handles successful AJAX responses.
-	 * 
+	 *
 	 * @param	object		data
 	 * @param	string		textStatus
 	 * @param	jQuery		jqXHR
@@ -801,7 +801,7 @@ CMS.ACP.File.Picker = Class.extend({
 				title: data.returnValues.title
 			});
 
-			CMS.ACP.File.Upload.init($.proxy(this._uploadCallback, this));
+			Fireball.ACP.File.Upload.init($.proxy(this._uploadCallback, this));
 		} else {
 			// loaded new category data
 			$(data.returnValues.template).hide().appendTo(this._dialog);
@@ -811,8 +811,8 @@ CMS.ACP.File.Picker = Class.extend({
 		// handle checkbox/radiobox
 		this._dialog.find('td.columnMark').each($.proxy(function(index, td) {
 			var $td = $(td),
-			    $fileID = $td.parent().data('fileID'),
-			    $input;
+				$fileID = $td.parent().data('fileID'),
+				$input;
 
 			if (this._options.multiple) {
 				$input = $('<input type="checkbox" name="'+ this._inputName +'Picker[]" value="'+ $fileID +'" />').appendTo($td);
@@ -845,7 +845,7 @@ CMS.ACP.File.Picker = Class.extend({
 	/**
 	 * Handles successful uploads of new files. Reloads already loaded file
 	 * lists and automatically selects uploaded files.
-	 * 
+	 *
 	 * @param	array		files
 	 */
 	_uploadCallback: function(files) {
@@ -857,7 +857,7 @@ CMS.ACP.File.Picker = Class.extend({
 /**
  * Provides a popover preview for files.
  */
-CMS.ACP.File.Preview = WCF.Popover.extend({
+Fireball.ACP.File.Preview = WCF.Popover.extend({
 	/**
 	 * action proxy
 	 * @var	WCF.Action.Proxy
@@ -899,7 +899,7 @@ CMS.ACP.File.Preview = WCF.Popover.extend({
 /**
  * Provides an upload dialog for files.
  */
-CMS.ACP.File.Upload = {
+Fireball.ACP.File.Upload = {
 	/**
 	 * callback executed after submitting the upload form.
 	 * @var	function
@@ -938,7 +938,7 @@ CMS.ACP.File.Upload = {
 
 	/**
 	 * Initializes the file upload system.
-	 * 
+	 *
 	 * @param	function		afterSubmit
 	 */
 	init: function(afterSubmit) {
@@ -952,7 +952,7 @@ CMS.ACP.File.Upload = {
 
 	/**
 	 * Adds a file to the uploaded file list
-	 * 
+	 *
 	 * @param	object		file
 	 */
 	addFile: function(file) {
@@ -972,20 +972,20 @@ CMS.ACP.File.Upload = {
 	/**
 	 * Finalize upload of new files by assigning the uploaded files to the
 	 * selected categories once the user submits the form.
-	 * 
+	 *
 	 * @param	object		event
 	 */
 	_finalizeUpload: function(event) {
 		event.preventDefault();
 
 		if ($.isEmptyObject(this._files)) {
-			console.log('[CMS.ACP.File.Upload] Tried to finalize upload though no files where uploaded, aborting.');
+			console.log('[Fireball.ACP.File.Upload] Tried to finalize upload though no files where uploaded, aborting.');
 			return;
 		}
 
 		var $categoryIDs = this._categoryInput.val();
 		if ($categoryIDs === null) {
-			console.debug('[CMS.ACP.File.Upload] Tried to finalize upload without a selected category, aborting.');
+			console.debug('[Fireball.ACP.File.Upload] Tried to finalize upload without a selected category, aborting.');
 			return;
 		}
 
@@ -1056,7 +1056,7 @@ CMS.ACP.File.Upload = {
 
 	/**
 	 * Handles successful AJAX responses to open the dialog.
-	 * 
+	 *
 	 * @param	object		data
 	 * @param	string		textStatus
 	 * @param	jQuery		jqXHR
@@ -1071,7 +1071,7 @@ CMS.ACP.File.Upload = {
 		this._submitButton.click($.proxy(this._finalizeUpload, this));
 
 		// init upload handler
-		new CMS.ACP.File.Upload.Handler();
+		new Fireball.ACP.File.Upload.Handler();
 
 		this._dialog.wcfDialog({
 			title: data.returnValues.title
@@ -1081,10 +1081,10 @@ CMS.ACP.File.Upload = {
 
 /**
  * Handles the upload of files.
- * 
+ *
  * @see	WCF.Upload.Parallel
  */
-CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
+Fireball.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 	/**
 	 * @see	WCF.Upload.init()
 	 */
@@ -1108,7 +1108,7 @@ CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 		$li = $('<li class="box32"><span class="icon icon32 icon-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
 
 		// redraw dialog
-		CMS.ACP.File.Upload.redraw();
+		Fireball.ACP.File.Upload.redraw();
 
 		return $li;
 	},
@@ -1124,7 +1124,7 @@ CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 
 		if (data.returnValues.files[internalFileID]) {
 			var $fileData = data.returnValues.files[internalFileID];
-			CMS.ACP.File.Upload.addFile($fileData);
+			Fireball.ACP.File.Upload.addFile($fileData);
 
 			// remove spinner icon
 			$li.children('.icon-spinner').removeClass('icon-spinner').addClass('icon-paperclip');
@@ -1149,30 +1149,30 @@ CMS.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 		$li.css('display', 'block');
 
 		// redraw dialog
-		CMS.ACP.File.Upload.redraw();
+		Fireball.ACP.File.Upload.redraw();
 
 		WCF.DOMNodeInsertedHandler.execute();
 	}
 });
 
 /**
- * Initialize CMS.ACP.Page namespace
+ * Initialize Fireball.ACP.Page namespace
  */
-CMS.ACP.Page = { };
+Fireball.ACP.Page = { };
 
 /**
- * Initialize CMS.ACP.Page.Alias namespace
+ * Initialize Fireball.ACP.Page.Alias namespace
  */
-CMS.ACP.Page.Alias = { };
+Fireball.ACP.Page.Alias = { };
 
 /**
  * Handles building of alias preview.
- * 
+ *
  * @param	string		inputSelector
  * @param	string		parentPageSelectSelector
  * @param	string		dummyLink
  */
-CMS.ACP.Page.Alias.Preview = Class.extend({
+Fireball.ACP.Page.Alias.Preview = Class.extend({
 	/**
 	 * alias input element
 	 * @var	jQuery
@@ -1195,7 +1195,7 @@ CMS.ACP.Page.Alias.Preview = Class.extend({
 
 	/**
 	 * Initializes the alias preview.
-	 * 
+	 *
 	 * @param	string		inputSelector
 	 * @param	string		parentPageSelectSelector
 	 * @param	string		dummyPageLink
@@ -1206,13 +1206,13 @@ CMS.ACP.Page.Alias.Preview = Class.extend({
 		this._parentPageSelect = $(parentPageSelectSelector);
 
 		if (!this._aliasInput.length) {
-			console.debug("[CMS.ACP.Page.Alias.Preview] Invalid alias input selector given, aborting.");
+			console.debug("[Fireball.ACP.Page.Alias.Preview] Invalid alias input selector given, aborting.");
 			return;
 		}
 
 		this._previewElement = this._aliasInput.parent().find('.jsAliasPreview');
 		if (!this._previewElement.length) {
-			console.debug("[CMS.ACP.Page.Alias.Preview] Unable to find preview element, aborting.");
+			console.debug("[Fireball.ACP.Page.Alias.Preview] Unable to find preview element, aborting.");
 			return;
 		}
 
@@ -1252,7 +1252,7 @@ CMS.ACP.Page.Alias.Preview = Class.extend({
 /**
  * Shows a notice about cms links when creating/editing a link of the page menu.
  */
-CMS.ACP.Page.Menu = Class.extend({
+Fireball.ACP.Page.Menu = Class.extend({
 	init: function() {
 		$('#menuItemParameters').change($.proxy(this._showNotice, this));
 		$('#menuItemController').change($.proxy(this._showNotice, this));
@@ -1268,7 +1268,7 @@ CMS.ACP.Page.Menu = Class.extend({
 	}
 });
 
-CMS.ACP.Page.Revisions = Class.extend({
+Fireball.ACP.Page.Revisions = Class.extend({
 	_proxy: null,
 	_cache: { },
 	_dialog: null,
@@ -1309,7 +1309,7 @@ CMS.ACP.Page.Revisions = Class.extend({
 	}
 });
 
-CMS.ACP.Page.Revisions.Restore = Class.extend({
+Fireball.ACP.Page.Revisions.Restore = Class.extend({
 	_proxy: null,
 	_didInit:false,
 
@@ -1367,36 +1367,37 @@ CMS.ACP.Page.Revisions.Restore = Class.extend({
 	}
 });
 
-CMS.ACP.Page.TypePicker = Class.extend({
+Fireball.ACP.Page.TypePicker = Class.extend({
 	_proxy: null,
 	_didInit: false,
 	_objectTypeID: 0,
 	_pageID: 0,
-	
+
 	init: function(objectTypeID, pageID) {
 		if (this._didInit)
 			return;
 
 		this._objectTypeID = objectTypeID;
-		this._pageID = pageID;
-		
+		if (pageID != undefined)
+			this._pageID = pageID;
+
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)
 		});
-		
+
 //		if (this._objectTypeID != null && this._objectTypeID != undefined) {
 //			this._click();
 //		}
-		
+
 		this._buttons = $('#pageObjectTypeID');
 		this._buttons.change($.proxy(this._click, this));
-		
+
 		this._didInit = true;
 	},
 
 	_click: function(event) {
 		$objectTypeID = $('#pageObjectTypeID').val();
-		
+
 		this._proxy.setOption('data', {
 			actionName: 'getTypeSpecificForm',
 			className: 'cms\\data\\page\\PageAction',
@@ -1407,7 +1408,7 @@ CMS.ACP.Page.TypePicker = Class.extend({
 		});
 		this._proxy.sendRequest();
 	},
-	
+
 	_success: function(data, textStatus, jqXHR) {
 		$('#specific').html(data.returnValues.template);
 	}
