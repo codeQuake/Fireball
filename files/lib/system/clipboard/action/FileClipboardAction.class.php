@@ -66,7 +66,7 @@ class FileClipboardAction extends AbstractClipboardAction {
 	 * @return	array<integer>
 	 */
 	protected function validateDelete() {
-		if (WCF::getSession()->getPermission('admin.cms.file.canAddFile')) {
+		if (WCF::getSession()->getPermission('admin.fireball.file.canAddFile')) {
 			return array_keys($this->objects);
 		}
 

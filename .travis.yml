@@ -14,7 +14,5 @@ before_install:
 before_script:
   - git clone --branch=master --depth=1 --quiet git://github.com/WoltLab/WCF.git WCF
 script:
-  - find files -type f -name '*.php' |xargs -I file php -l file
-  - find files_wcf -type f -name '*.php' |xargs -I file php -l file
-  - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" files
-  - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" files_wcf
+  - find . -type f -name '*.php' -not -path './WCF/*' -print0 |xargs -0 -I file -P 4 php -l file > /dev/null
+  - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" . --ignore="/WCF/*"

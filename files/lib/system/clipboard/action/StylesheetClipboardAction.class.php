@@ -66,7 +66,7 @@ class StylesheetClipboardAction extends AbstractClipboardAction {
 	 * @return	array<integer>
 	 */
 	protected function validateDelete() {
-		if (WCF::getSession()->getPermission('admin.cms.style.canAddStylesheet')) {
+		if (WCF::getSession()->getPermission('admin.fireball.style.canAddStylesheet')) {
 			return array_keys($this->objects);
 		}
 
