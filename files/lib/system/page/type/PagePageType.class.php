@@ -16,6 +16,11 @@ class PagePageType extends AbstractPageType {
 	public $frontendController = PagePage::class;
 
 	/**
+	 * @inheritdoc
+	 */
+	public $frontendController = 'cms\\page\\PagePage';
+
+	/**
 	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
 	 */
 	public $assignValues = array(

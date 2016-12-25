@@ -388,7 +388,7 @@ class Fireball2Exporter extends AbstractExporter {
 			if (!$contentTypeID)
 				continue;
 
-			$row['contentTypeID'] = $contentTypeID;
+			$row['contentTypeID'] = $contentType->objectTypeID;
 			ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import($row['contentID'], $row);
 		}
 	}
