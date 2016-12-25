@@ -17,7 +17,7 @@ class LinkPageType extends AbstractPageType {
 	/**
 	 * @inheritdoc
 	 */
-	public $frontendController = LinkPage::class;
+	public $frontendController = 'cms\\page\\LinkPage';
 
 	/**
 	 * @inheritdoc

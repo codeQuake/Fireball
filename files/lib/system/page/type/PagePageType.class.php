@@ -13,6 +13,11 @@ use wcf\form\AbstractForm;
  */
 class PagePageType extends AbstractPageType {
 	/**
+	 * @inheritdoc
+	 */
+	public $frontendController = 'cms\\page\\PagePage';
+
+	/**
 	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
 	 */
 	public $assignValues = array(
