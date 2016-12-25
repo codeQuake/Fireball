@@ -29,7 +29,7 @@ class LatestPagesDashboardBox extends AbstractSidebarDashboardBox {
 		parent::init($box, $page);
 
 		$this->pageList = new PageList();
-		$this->pageList->sqlLimit = CMS_DASHBOARD_SIDEBAR_ENTRIES;
+		$this->pageList->sqlLimit = FIREBALL_DASHBOARD_SIDEBAR_ENTRIES;
 		$this->pageList->sqlOrderBy = 'page.creationTime DESC';
 		$this->pageList->readObjects();
 

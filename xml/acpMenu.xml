@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/acpMenu.xsd">
 	<import>
-		<acpmenuitem name="cms.acp.menu.link.cms">
+		<acpmenuitem name="fireball.acp.menu.link.fireball">
 			<showorder>6</showorder>
 		</acpmenuitem>
 
 		<!-- page -->
-		<acpmenuitem name="cms.acp.menu.link.cms.page">
-			<parent>cms.acp.menu.link.cms</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.page">
+			<parent>fireball.acp.menu.link.fireball</parent>
 		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.page.list">
-			<parent>cms.acp.menu.link.cms.page</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.page.list">
+			<parent>fireball.acp.menu.link.fireball.page</parent>
 			<controller>cms\acp\page\PageListPage</controller>
-			<permissions>admin.cms.page.canListPage</permissions>
+			<permissions>admin.fireball.page.canListPage</permissions>
 		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.page.add">
-			<parent>cms.acp.menu.link.cms.page</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.page.add">
+			<parent>fireball.acp.menu.link.fireball.page</parent>
 			<controller>cms\acp\form\PageAddForm</controller>
-			<permissions>admin.cms.page.canAddPage</permissions>
+			<permissions>admin.fireball.page.canAddPage</permissions>
 		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.page.statistics">
-			<parent>cms.acp.menu.link.cms.page</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.page.statistics">
+			<parent>fireball.acp.menu.link.fireball.page</parent>
 			<controller>cms\acp\page\StatsPage</controller>
-			<options>cms_pages_enable_statistics</options>
+			<options>fireball_pages_enable_statistics</options>
 		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.page.importAndExport">
-			<parent>cms.acp.menu.link.cms.page</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.page.importAndExport">
+			<parent>fireball.acp.menu.link.fireball.page</parent>
 			<controller>cms\acp\form\CMSImportForm</controller>
-			<permissions>admin.cms.page.canAddPage</permissions>
+			<permissions>admin.fireball.page.canAddPage</permissions>
 		</acpmenuitem>
 		<!-- /page -->
 
 		<!-- file -->
-		<acpmenuitem name="cms.acp.menu.link.cms.file">
-			<parent>cms.acp.menu.link.cms</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.file">
+			<parent>fireball.acp.menu.link.fireball</parent>
 		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.file.list">
-			<parent>cms.acp.menu.link.cms.file</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.file.list">
+			<parent>fireball.acp.menu.link.fireball.file</parent>
 			<controller>cms\acp\page\FileListPage</controller>
-			<permissions>admin.cms.file.canAddFile</permissions>
+			<permissions>admin.fireball.file.canAddFile</permissions>
 		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.file.category.list">
-			<parent>cms.acp.menu.link.cms.file</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.file.category.list">
+			<parent>fireball.acp.menu.link.fireball.file</parent>
 			<controller>cms\acp\page\FileCategoryListPage</controller>
-			<permissions>admin.cms.file.canAddFile</permissions>
+			<permissions>admin.fireball.file.canAddFile</permissions>
 		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.file.category.add">
-			<parent>cms.acp.menu.link.cms.file</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.file.category.add">
+			<parent>fireball.acp.menu.link.fireball.file</parent>
 			<controller>cms\acp\form\FileCategoryAddForm</controller>
-			<permissions>admin.cms.file.canAddFile</permissions>
+			<permissions>admin.fireball.file.canAddFile</permissions>
 		</acpmenuitem>
 		<!-- /file -->
 
 		<!-- stylesheet -->
-		<acpmenuitem name="cms.acp.menu.link.cms.stylesheet">
-			<parent>cms.acp.menu.link.cms</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.stylesheet">
+			<parent>fireball.acp.menu.link.fireball</parent>
 		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.stylesheet.list">
-			<parent>cms.acp.menu.link.cms.stylesheet</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.stylesheet.list">
+			<parent>fireball.acp.menu.link.fireball.stylesheet</parent>
 			<controller>cms\acp\page\StylesheetListPage</controller>
-			<permissions>admin.cms.style.canListStylesheet</permissions>
+			<permissions>admin.fireball.style.canListStylesheet</permissions>
 		</acpmenuitem>
-		<acpmenuitem name="cms.acp.menu.link.cms.stylesheet.add">
-			<parent>cms.acp.menu.link.cms.stylesheet</parent>
+		<acpmenuitem name="fireball.acp.menu.link.fireball.stylesheet.add">
+			<parent>fireball.acp.menu.link.fireball.stylesheet</parent>
 			<controller>cms\acp\form\StylesheetAddForm</controller>
-			<permissions>admin.cms.style.canAddStylesheet</permissions>
+			<permissions>admin.fireball.style.canAddStylesheet</permissions>
 		</acpmenuitem>
 		<!-- /stylesheet -->
 	</import>

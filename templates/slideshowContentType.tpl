@@ -2,7 +2,7 @@
 	//<![CDATA[
 	$(window).load(function() {
 		$("{'#cmsContent'|concat:$content->contentID}").fireSlide({
-			speed: {CMS_CONTENT_SLIDESHOW_INTERVAL}
+			speed: {FIREBALL_CONTENT_SLIDESHOW_INTERVAL}
 		});
 	});
 	//]]>

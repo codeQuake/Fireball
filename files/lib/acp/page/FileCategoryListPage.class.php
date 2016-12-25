@@ -15,7 +15,7 @@ class FileCategoryListPage extends AbstractCategoryListPage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.file.category.list';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.file.category.list';
 	
 	/**
 	 * @see	\wcf\acp\page\AbstractCategoryListPage::$activeMenuItem

@@ -21,7 +21,7 @@ class CMSImportForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.page.importAndExport';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page.importAndExport';
 
 	/**
 	 * link to backup file

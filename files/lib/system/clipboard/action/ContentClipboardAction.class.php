@@ -67,7 +67,7 @@ class ContentClipboardAction extends AbstractClipboardAction {
 	 */
 	protected function validateDelete() {
 		// check permissions
-		if (!WCF::getSession()->getPermission('admin.cms.content.canAddContent')) {
+		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) {
 			return array();
 		}
 
@@ -81,7 +81,7 @@ class ContentClipboardAction extends AbstractClipboardAction {
 	 */
 	protected function validateDisable() {
 		// check permissions
-		if (!WCF::getSession()->getPermission('admin.cms.content.canAddContent')) {
+		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) {
 			return array();
 		}
 
@@ -100,7 +100,7 @@ class ContentClipboardAction extends AbstractClipboardAction {
 	 */
 	protected function validateEnable() {
 		// check permissions
-		if (!WCF::getSession()->getPermission('admin.cms.content.canAddContent')) {
+		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) {
 			return array();
 		}
 

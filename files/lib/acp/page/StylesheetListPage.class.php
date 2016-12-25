@@ -17,7 +17,7 @@ class StylesheetListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.stylesheet.list';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.stylesheet.list';
 
 	/**
 	 * @see	\wcf\page\SortablePage::$defaultSortField
@@ -27,7 +27,7 @@ class StylesheetListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.cms.style.canListStylesheet');
+	public $neededPermissions = array('admin.fireball.style.canListStylesheet');
 
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName

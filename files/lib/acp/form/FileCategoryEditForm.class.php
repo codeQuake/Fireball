@@ -15,12 +15,12 @@ class FileCategoryEditForm extends AbstractCategoryEditForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.file';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.file';
 
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.cms.file.canAddFile');
+	public $neededPermissions = array('admin.fireball.file.canAddFile');
 
 	/**
 	 * @see	\wcf\acp\form\AbstractCategoryAddForm::$objectTypeName

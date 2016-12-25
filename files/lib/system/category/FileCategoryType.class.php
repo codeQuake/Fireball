@@ -36,7 +36,7 @@ class FileCategoryType extends AbstractCategoryType {
 	 * @see	\wcf\system\category\ICategoryType::canEditCategory()
 	 */
 	public function canEditCategory() {
-		return WCF::getSession()->getPermission('admin.cms.file.canAddFile');
+		return WCF::getSession()->getPermission('admin.fireball.file.canAddFile');
 	}
 
 	/**

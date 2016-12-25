@@ -37,7 +37,7 @@ class PageAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.page.add';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page.add';
 
 	/**
 	 * alias of the created page
@@ -49,19 +49,19 @@ class PageAddForm extends AbstractForm {
 	 * option to allow spiders to index the created page
 	 * @var	integer
 	 */
-	public $allowIndexing = CMS_PAGES_DEFAULT_ALLOW_INDEXING;
+	public $allowIndexing = FIREBALL_PAGES_DEFAULT_ALLOW_INDEXING;
 
 	/**
 	 * option to allow subscribing the created page
 	 * @var	integer
 	 */
-	public $allowSubscribing = CMS_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
+	public $allowSubscribing = FIREBALL_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
 
 	/**
 	 * indication whether the created page is available during offline mode
 	 * @var	integer
 	 */
-	public $availableDuringOfflineMode = CMS_PAGES_DEFAULT_OFFLINE;
+	public $availableDuringOfflineMode = FIREBALL_PAGES_DEFAULT_OFFLINE;
 
 	/**
 	 * list of available styles
@@ -73,7 +73,7 @@ class PageAddForm extends AbstractForm {
 	 * create menu item
 	 * @var	integer
 	 */
-	public $createMenuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
+	public $createMenuItem = FIREBALL_PAGES_DEFAULT_MENU_ITEM;
 
 	/**
 	 * deactivation date (ISO 8601)
@@ -133,7 +133,7 @@ class PageAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.cms.page.canAddPage');
+	public $neededPermissions = array('admin.fireball.page.canAddPage');
 
 	/**
 	 * object type id of the acl
@@ -175,7 +175,7 @@ class PageAddForm extends AbstractForm {
 	 * orientation of the sidebar ('left' or 'right')
 	 * @var	string
 	 */
-	public $sidebarOrientation = CMS_PAGES_DEFAULT_SIDEBAR;
+	public $sidebarOrientation = FIREBALL_PAGES_DEFAULT_SIDEBAR;
 
 	/**
 	 * style id
@@ -554,11 +554,11 @@ class PageAddForm extends AbstractForm {
 		$this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->menuItemID = $this->parentID = $this->showOrder = $this->styleID = 0;
 		$this->stylesheetIDs = $this->specificFormParameters = array();
 
-		$this->allowIndexing = CMS_PAGES_DEFAULT_ALLOW_INDEXING;
-		$this->allowSubscribing = CMS_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
-		$this->availableDuringOfflineMode = CMS_PAGES_DEFAULT_OFFLINE;
-		$this->createMenuItem = CMS_PAGES_DEFAULT_MENU_ITEM;
-		$this->sidebarOrientation = CMS_PAGES_DEFAULT_SIDEBAR;
+		$this->allowIndexing = FIREBALL_PAGES_DEFAULT_ALLOW_INDEXING;
+		$this->allowSubscribing = FIREBALL_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
+		$this->availableDuringOfflineMode = FIREBALL_PAGES_DEFAULT_OFFLINE;
+		$this->createMenuItem = FIREBALL_PAGES_DEFAULT_MENU_ITEM;
+		$this->sidebarOrientation = FIREBALL_PAGES_DEFAULT_SIDEBAR;
 
 		I18nHandler::getInstance()->reset();
 		ACLHandler::getInstance()->disableAssignVariables();

@@ -19,7 +19,7 @@ class StylesheetAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'cms.acp.menu.link.cms.stylesheet.add';
+	public $activeMenuItem = 'fireball.acp.menu.link.fireball.stylesheet.add';
 
 	/**
 	 * less
@@ -30,7 +30,7 @@ class StylesheetAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.cms.style.canAddStylesheet');
+	public $neededPermissions = array('admin.fireball.style.canAddStylesheet');
 
 	/**
 	 * title of the stylesheet
