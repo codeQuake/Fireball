@@ -13,12 +13,10 @@ use wcf\form\AbstractForm;
  * @package	de.codequake.cms
  */
 class PagePageType extends AbstractPageType {
-	public $frontendController = PagePage::class;
-
 	/**
 	 * @inheritdoc
 	 */
-	public $frontendController = 'cms\\page\\PagePage';
+	public $frontendController = PagePage::class;
 
 	/**
 	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
