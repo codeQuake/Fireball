@@ -194,7 +194,8 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 		return LinkHandler::getInstance()->getLink('Page', array(
 			'application' => 'cms',
 			'forceFrontend' => true,
-			'appendSession' => $appendSession
+			'appendSession' => $appendSession,
+			'alias' => $this->getAlias()
 		));
 	}
 
