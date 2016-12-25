@@ -50,26 +50,6 @@
 	{capture assign='sidebar'}
 		{content}
 			{include file='contentNodeList' application='cms' contentNodeTree=$sidebarContentNodeTree position='sidebar'}
-
-			{assign var=oldDepth value=0}
-			{foreach from=$sidebarNodeTree item=content}
-				{if $content->getTypeName() != 'de.codequake.cms.content.type.dashboard'}
-					{section name=i loop=$oldDepth-$sidebarNodeTree->getDepth()}</fieldset>{/section}
-					<fieldset class="dashboardBox{if $content->getCSSClasses() != ""} {$content->getCSSClasses()}{/if}" id="cmsContent{@$content->contentID}" data-content-type="{$content->getTypeName()}">
-						<legend>{$content->getTitle()}</legend>
-
-					{@$content->getOutput()|language}
-						{if !$sidebarNodeTree->current()->hasChildren()}
-							</fieldset>
-						{/if}
-
-						{assign var=oldDepth value=$sidebarNodeTree->getDepth()}
-				{else}
-					{@$content->getOutput()|language}
-				{/if}
-			{/foreach}
-			{section name=i loop=$oldDepth}</fieldset>{/section}
-
 			{event name='boxes'}
 		{/content}
 	{/capture}
