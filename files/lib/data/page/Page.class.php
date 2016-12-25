@@ -7,6 +7,7 @@ use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
 use wcf\data\menu\item\MenuItem;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\DatabaseObject;
 use wcf\data\IPermissionObject;
 use wcf\data\ITitledLinkObject;

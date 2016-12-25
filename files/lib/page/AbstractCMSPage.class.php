@@ -51,7 +51,7 @@ abstract class AbstractCMSPage extends AbstractPage {
 	 * @var	\RecursiveIteratorIterator
 	 */
 	public $sidebarContentNodeTree = null;
-
+	
 	/**
 	 * list of contents
 	 * keys body, sidebar are arrays
