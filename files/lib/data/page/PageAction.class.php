@@ -670,11 +670,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		/** @var $page Page */
 		$page = $this->getSingleObject();
 		$position = $this->parameters['position'];
+		$contents = $page->getContents();
 
 		return array(
 			'position' => $position,
 			'template' => WCF::getTPL()->fetch('sortableContentList', 'cms', array(
-				'contentNodeTree' => $page->getContents()[$position],
+				'contentNodeTree' => $contents[$position],
 				'position' => $position
 			))
 		);
