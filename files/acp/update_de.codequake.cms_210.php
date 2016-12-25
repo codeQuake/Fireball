@@ -1,10 +1,14 @@
 <?php
+
+use cms\data\page\PageEditor;
+use cms\data\page\PageList;
 use wcf\data\acl\option\category\ACLOptionCategoryEditor;
 use wcf\data\acl\option\category\ACLOptionCategoryList;
 use wcf\data\acl\option\ACLOptionEditor;
 use wcf\data\acl\option\ACLOptionList;
 use wcf\data\language\item\LanguageItemEditor;
 use wcf\data\language\item\LanguageItemList;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\option\category\OptionCategoryEditor;
 use wcf\data\option\category\OptionCategoryList;
 use wcf\data\option\OptionEditor;
@@ -198,4 +202,13 @@ foreach ($affectedObjects as $object) {
 	$newCat = str_replace('user.cms.', 'user.fireball.', $object->categoryName);
 	$objectEditor = new ACLOptionEditor($object);
 	$objectEditor->update(array('categoryName' => $newCat));
+}
+
+$objectTypeID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page');
+$pageList = new PageList();
+$pageList->readObjects();
+$affectedObjects = $pageList->getObjects();
+foreach ($affectedObjects as $object) {
+		$objectEditor = new PageEditor($object);
+		$objectEditor->update(array('objectTypeID' => $objectTypeID));
 }
