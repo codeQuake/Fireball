@@ -57,7 +57,7 @@
 					</div>
 				</li>
 			{/if}
-			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 icon-folder-close"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
+			<li><a href="{link application='cms' controller='FileCategoryAdd'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.category.add{/lang}</span></a></li>
 			{if $categoryList|iterator_count}
 				<li><a class="button jsFileUploadButton"><span class="icon icon16 icon-upload"></span> <span>{lang}cms.acp.file.add{/lang}</span></a></li>
 			{/if}
