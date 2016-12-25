@@ -9,6 +9,7 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
+use wcf\data\page\menu\item\PageMenuItem;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\breadcrumb\IBreadcrumbProvider;
 use wcf\system\request\IRouteController;
@@ -193,8 +194,7 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 		return LinkHandler::getInstance()->getLink('Page', array(
 			'application' => 'cms',
 			'forceFrontend' => true,
-			'appendSession' => $appendSession,
-			'alias' => $this->getAlias()
+			'appendSession' => $appendSession
 		));
 	}
 
@@ -356,5 +356,20 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	public function getTypeName() {
 		$this->objectType = $this->getObjectType();
 		return $this->objectType->objectType;
+	}
+
+	public function getMenuItem() {
+		if ($this->menuItemID === null)
+			return null;
+		return new PageMenuItem($this->menuItemID);
+	}
+
+	/**
+	 * Returns the processor of the page
+	 *
+	 * @return \cms\system\page\type\AbstractPageType
+	 */
+	public function getProcessor() {
+		return ObjectTypeCache::getInstance()->getObjectType($this->objectTypeID)->getProcessor();
 	}
 }
