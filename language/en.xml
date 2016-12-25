@@ -63,10 +63,10 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Child pages]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Poll]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Enter a valid feed URL. You can use the following data-types <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
-    <item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Number of entries]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url"><![CDATA[URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.url.description"><![CDATA[Enter a valid feed URL. You can use the following data-types <em>RSS</em>, <em>Atom</em> oder <em>RDF</em> sein.]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss.limit"><![CDATA[Number of entries]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow"><![CDATA[Slideshow]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.slideshow.description"><![CDATA[All children will be arranged in a slideshow.]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.tabmenu"><![CDATA[Tabmenu]]></item>
@@ -116,20 +116,20 @@
 		<item name="cms.acp.index.news.more"><![CDATA[Further News]]></item>
 	</category>
 
-	<category name="cms.acp.menu">
-		<item name="cms.acp.menu.link.cms"><![CDATA[CMS]]></item>
-		<item name="cms.acp.menu.link.cms.file"><![CDATA[Files]]></item>
-		<item name="cms.acp.menu.link.cms.file.category.add"><![CDATA[Add Category]]></item>
-		<item name="cms.acp.menu.link.cms.file.category.list"><![CDATA[List Categories]]></item>
-		<item name="cms.acp.menu.link.cms.file.list"><![CDATA[List Files]]></item>
-		<item name="cms.acp.menu.link.cms.page"><![CDATA[Pages]]></item>
-		<item name="cms.acp.menu.link.cms.page.add"><![CDATA[Add Page]]></item>
-		<item name="cms.acp.menu.link.cms.page.importAndExport"><![CDATA[Import &amp; Export]]></item>
-		<item name="cms.acp.menu.link.cms.page.list"><![CDATA[List Pages]]></item>
-		<item name="cms.acp.menu.link.cms.page.statistics"><![CDATA[Statistics]]></item>
-		<item name="cms.acp.menu.link.cms.stylesheet"><![CDATA[Stylesheets]]></item>
-		<item name="cms.acp.menu.link.cms.stylesheet.add"><![CDATA[Add Stylesheet]]></item>
-		<item name="cms.acp.menu.link.cms.stylesheet.list"><![CDATA[List Stylesheets]]></item>
+	<category name="fireball.acp.menu">
+		<item name="fireball.acp.menu.link.fireball"><![CDATA[CMS]]></item>
+		<item name="fireball.acp.menu.link.fireball.file"><![CDATA[Files]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.category.add"><![CDATA[Add Category]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.category.list"><![CDATA[List Categories]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.list"><![CDATA[List Files]]></item>
+		<item name="fireball.acp.menu.link.fireball.page"><![CDATA[Pages]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.add"><![CDATA[Add Page]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.importAndExport"><![CDATA[Import &amp; Export]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.list"><![CDATA[List Pages]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.statistics"><![CDATA[Statistics]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet.add"><![CDATA[Add Stylesheet]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[List Stylesheets]]></item>
 	</category>
 
 	<category name="cms.acp.page">
@@ -314,6 +314,13 @@
 		<item name="cms.page.copyright"><![CDATA[<address class="copyright marginTop"><a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://codequake.de" {if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} title="">Software: <strong>Fireball CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>codeQuake</strong></a></address>]]></item>
 		<item name="cms.page.delayedPublication"><![CDATA[This page will be published on {@$page->publicationDate|plainTime}.]]></item>
 		<item name="cms.page.parents"><![CDATA[{implode from=$page->getParentPages() item=parentPage glue=' » '}{$parentPage->getTitle()}{/implode}{if $includeSelf|isset && $includeSelf}{if $page->getParentPages()} » {/if}{$page->getTitle()}{/if}]]></item>
+
+		<item name="cms.page.edit.start"><![CDATA[Start editing]]></item>
+		<item name="cms.page.edit.save"><![CDATA[Save changes]]></item>
+		<item name="cms.page.edit.finish"><![CDATA[Finish]]></item>
+		<item name="cms.page.edit.finish.confirm"><![CDATA[Are you sure you saved all changes? Changes after the last saving won't be committed.]]></item>
+		<item name="cms.page.edit.addContent"><![CDATA[Add Content]]></item>
+		<item name="cms.page.edit.acp"><![CDATA[Edit page]]></item>
 	</category>
 
 	<category name="cms.user">
@@ -342,36 +349,36 @@
 	</category>
 
 	<category name="wcf.acp.group">
-		<item name="wcf.acp.group.option.admin.cms.content.canAddContent"><![CDATA[Can add contents]]></item>
-		<item name="wcf.acp.group.option.admin.cms.content.canListContent"><![CDATA[Can list contents]]></item>
-		<item name="wcf.acp.group.option.admin.cms.file.allowedTypes"><![CDATA[Allowed file extensions]]></item>
-		<item name="wcf.acp.group.option.admin.cms.file.canAddFile"><![CDATA[Can manage files]]></item>
-		<item name="wcf.acp.group.option.admin.cms.page.canAddPage"><![CDATA[Can manage pages]]></item>
-		<item name="wcf.acp.group.option.admin.cms.page.canListPage"><![CDATA[Can list pages]]></item>
-		<item name="wcf.acp.group.option.admin.cms.style.canAddStylesheet"><![CDATA[Can add stylesheets]]></item>
-		<item name="wcf.acp.group.option.admin.cms.style.canListStylesheet"><![CDATA[Can list stylesheets]]></item>
-		<item name="wcf.acp.group.option.category.admin.cms"><![CDATA[CMS]]></item>
-		<item name="wcf.acp.group.option.category.admin.cms.content"><![CDATA[Contents]]></item>
-		<item name="wcf.acp.group.option.category.admin.cms.file"><![CDATA[Files]]></item>
-		<item name="wcf.acp.group.option.category.admin.cms.page"><![CDATA[Pages]]></item>
-		<item name="wcf.acp.group.option.category.admin.cms.style"><![CDATA[Style]]></item>
-		<item name="wcf.acp.group.option.category.mod.cms"><![CDATA[CMS]]></item>
-		<item name="wcf.acp.group.option.category.user.cms"><![CDATA[CMS]]></item>
-		<item name="wcf.acp.group.option.category.user.cms.content"><![CDATA[Contents]]></item>
-		<item name="wcf.acp.group.option.category.user.cms.page"><![CDATA[Pages]]></item>
-		<item name="wcf.acp.group.option.mod.cms.canDeleteComment"><![CDATA[Can delete comments]]></item>
-		<item name="wcf.acp.group.option.mod.cms.canEditComment"><![CDATA[Can edit comments]]></item>
-		<item name="wcf.acp.group.option.mod.cms.canModerateComment"><![CDATA[Can moderate comments]]></item>
-		<item name="wcf.acp.group.option.mod.cms.canReadUnpublishedPage"><![CDATA[Can read pages that are not published yet]]></item>
-		<item name="wcf.acp.group.option.mod.cms.canViewDisabledContent"><![CDATA[Can see disabled contents]]></item>
-		<item name="wcf.acp.group.option.mod.cms.canViewDisabledPage"><![CDATA[Can see disabled pages]]></item>
-		<item name="wcf.acp.group.option.user.cms.content.canDownloadFile"><![CDATA[Can download files]]></item>
-		<item name="wcf.acp.group.option.user.cms.content.canVotePoll"><![CDATA[Can vote poll]]></item>
-		<item name="wcf.acp.group.option.user.cms.page.canAddComment"><![CDATA[Can add comments]]></item>
-		<item name="wcf.acp.group.option.user.cms.page.canDeleteComment"><![CDATA[Can delete own comments]]></item>
-		<item name="wcf.acp.group.option.user.cms.page.canEditComment"><![CDATA[Can edit own comments]]></item>
-		<item name="wcf.acp.group.option.user.cms.page.canViewComment"><![CDATA[Can view comments]]></item>
-		<item name="wcf.acp.group.option.user.cms.page.canViewPage"><![CDATA[Can see pages]]></item>
+		<item name="wcf.acp.group.option.admin.fireball.content.canAddContent"><![CDATA[Can add contents]]></item>
+		<item name="wcf.acp.group.option.admin.fireball.content.canListContent"><![CDATA[Can list contents]]></item>
+		<item name="wcf.acp.group.option.admin.fireball.file.allowedTypes"><![CDATA[Allowed file extensions]]></item>
+		<item name="wcf.acp.group.option.admin.fireball.file.canAddFile"><![CDATA[Can manage files]]></item>
+		<item name="wcf.acp.group.option.admin.fireball.page.canAddPage"><![CDATA[Can manage pages]]></item>
+		<item name="wcf.acp.group.option.admin.fireball.page.canListPage"><![CDATA[Can list pages]]></item>
+		<item name="wcf.acp.group.option.admin.fireball.style.canAddStylesheet"><![CDATA[Can add stylesheets]]></item>
+		<item name="wcf.acp.group.option.admin.fireball.style.canListStylesheet"><![CDATA[Can list stylesheets]]></item>
+		<item name="wcf.acp.group.option.category.admin.fireball"><![CDATA[CMS]]></item>
+		<item name="wcf.acp.group.option.category.admin.fireball.content"><![CDATA[Contents]]></item>
+		<item name="wcf.acp.group.option.category.admin.fireball.file"><![CDATA[Files]]></item>
+		<item name="wcf.acp.group.option.category.admin.fireball.page"><![CDATA[Pages]]></item>
+		<item name="wcf.acp.group.option.category.admin.fireball.style"><![CDATA[Style]]></item>
+		<item name="wcf.acp.group.option.category.mod.fireball"><![CDATA[CMS]]></item>
+		<item name="wcf.acp.group.option.category.user.fireball"><![CDATA[CMS]]></item>
+		<item name="wcf.acp.group.option.category.user.fireball.content"><![CDATA[Contents]]></item>
+		<item name="wcf.acp.group.option.category.user.fireball.page"><![CDATA[Pages]]></item>
+		<item name="wcf.acp.group.option.mod.fireball.canDeleteComment"><![CDATA[Can delete comments]]></item>
+		<item name="wcf.acp.group.option.mod.fireball.canEditComment"><![CDATA[Can edit comments]]></item>
+		<item name="wcf.acp.group.option.mod.fireball.canModerateComment"><![CDATA[Can moderate comments]]></item>
+		<item name="wcf.acp.group.option.mod.fireball.canReadUnpublishedPage"><![CDATA[Can read pages that are not published yet]]></item>
+		<item name="wcf.acp.group.option.mod.fireball.canViewDisabledContent"><![CDATA[Can see disabled contents]]></item>
+		<item name="wcf.acp.group.option.mod.fireball.canViewDisabledPage"><![CDATA[Can see disabled pages]]></item>
+		<item name="wcf.acp.group.option.user.fireball.content.canDownloadFile"><![CDATA[Can download files]]></item>
+		<item name="wcf.acp.group.option.user.fireball.content.canVotePoll"><![CDATA[Can vote poll]]></item>
+		<item name="wcf.acp.group.option.user.fireball.page.canAddComment"><![CDATA[Can add comments]]></item>
+		<item name="wcf.acp.group.option.user.fireball.page.canDeleteComment"><![CDATA[Can delete own comments]]></item>
+		<item name="wcf.acp.group.option.user.fireball.page.canEditComment"><![CDATA[Can edit own comments]]></item>
+		<item name="wcf.acp.group.option.user.fireball.page.canViewComment"><![CDATA[Can view comments]]></item>
+		<item name="wcf.acp.group.option.user.fireball.page.canViewPage"><![CDATA[Can see pages]]></item>
 	</category>
 
 	<category name="wcf.acp.index">
@@ -379,32 +386,32 @@
 	</category>
 
 	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.category.cms"><![CDATA[CMS]]></item>
-		<item name="wcf.acp.option.category.cms.content"><![CDATA[Content]]></item>
-		<item name="wcf.acp.option.category.cms.content.slideshow"><![CDATA[Slideshow]]></item>
-		<item name="wcf.acp.option.category.cms.general"><![CDATA[General]]></item>
-		<item name="wcf.acp.option.category.cms.general.revision"><![CDATA[Revisions]]></item>
-		<item name="wcf.acp.option.category.cms.pages"><![CDATA[Pages]]></item>
-		<item name="wcf.acp.option.category.cms.pages.default"><![CDATA[Default values]]></item>
-		<item name="wcf.acp.option.category.cms.pages.statistics"><![CDATA[Statistics]]></item>
+		<item name="wcf.acp.option.category.fireball"><![CDATA[CMS]]></item>
+		<item name="wcf.acp.option.category.fireball.content"><![CDATA[Content]]></item>
+		<item name="wcf.acp.option.category.fireball.content.slideshow"><![CDATA[Slideshow]]></item>
+		<item name="wcf.acp.option.category.fireball.general"><![CDATA[General]]></item>
+		<item name="wcf.acp.option.category.fireball.general.revision"><![CDATA[Revisions]]></item>
+		<item name="wcf.acp.option.category.fireball.pages"><![CDATA[Pages]]></item>
+		<item name="wcf.acp.option.category.fireball.pages.default"><![CDATA[Default values]]></item>
+		<item name="wcf.acp.option.category.fireball.pages.statistics"><![CDATA[Statistics]]></item>
 		<item name="wcf.acp.option.category.dashboard.sidebar.cms"><![CDATA[CMS]]></item>
-		<item name="wcf.acp.option.cms_content_slideshow_interval"><![CDATA[Interval]]></item>
-		<item name="wcf.acp.option.cms_content_slideshow_interval.description"><![CDATA[Enter the delay after a slide in a slideshow is automatically sliding. [time in milliseconds]]]></item>
-		<item name="wcf.acp.option.cms_dashboard_sidebar_entries"><![CDATA[Number of pages]]></item>
-		<item name="wcf.acp.option.cms_pages_default_allow_indexing"><![CDATA[Search robots are allowed to index this page]]></item>
-		<item name="wcf.acp.option.cms_pages_default_allow_subscribing"><![CDATA[Allow subscription of this page]]></item>
-		<item name="wcf.acp.option.cms_pages_default_comments"><![CDATA[Enable Comments]]></item>
-		<item name="wcf.acp.option.cms_pages_default_menu_item"><![CDATA[Create menu item]]></item>
-		<item name="wcf.acp.option.cms_pages_default_offline"><![CDATA[Available during offline mode]]></item>
-		<item name="wcf.acp.option.cms_pages_default_sidebar"><![CDATA[Sidebar orientation]]></item>
-		<item name="wcf.acp.option.cms_pages_default_sidebar.left"><![CDATA[Left]]></item>
-		<item name="wcf.acp.option.cms_pages_default_sidebar.right"><![CDATA[Right]]></item>
-		<item name="wcf.acp.option.cms_pages_enable_statistics"><![CDATA[Enable Statistics]]></item>
-		<item name="wcf.acp.option.cms_pages_statistics_delete"><![CDATA[Delete Automatically]]></item>
-		<item name="wcf.acp.option.cms_pages_statistics_delete.description"><![CDATA[Old statistics will be deleted after the given period of time. [time in days, 0 to disable]]]></item>
-		<item name="wcf.acp.option.cms_revision_delete"><![CDATA[Delete Automatically]]></item>
-		<item name="wcf.acp.option.cms_revision_delete.description"><![CDATA[Old revisions will be deleted after the given period of time. [time in days, 0 to disable]]]></item>
-		<item name="cms_sitemap_enable"><![CDATA[Enable full sitemap]]></item>
+		<item name="wcf.acp.option.fireball_content_slideshow_interval"><![CDATA[Interval]]></item>
+		<item name="wcf.acp.option.fireball_content_slideshow_interval.description"><![CDATA[Enter the delay after a slide in a slideshow is automatically sliding. [time in milliseconds]]]></item>
+		<item name="wcf.acp.option.fireball_dashboard_sidebar_entries"><![CDATA[Number of pages]]></item>
+		<item name="wcf.acp.option.fireball_pages_default_allow_indexing"><![CDATA[Search robots are allowed to index this page]]></item>
+		<item name="wcf.acp.option.fireball_pages_default_allow_subscribing"><![CDATA[Allow subscription of this page]]></item>
+		<item name="wcf.acp.option.fireball_pages_default_comments"><![CDATA[Enable Comments]]></item>
+		<item name="wcf.acp.option.fireball_pages_default_menu_item"><![CDATA[Create menu item]]></item>
+		<item name="wcf.acp.option.fireball_pages_default_offline"><![CDATA[Available during offline mode]]></item>
+		<item name="wcf.acp.option.fireball_pages_default_sidebar"><![CDATA[Sidebar orientation]]></item>
+		<item name="wcf.acp.option.fireball_pages_default_sidebar.left"><![CDATA[Left]]></item>
+		<item name="wcf.acp.option.fireball_pages_default_sidebar.right"><![CDATA[Right]]></item>
+		<item name="wcf.acp.option.fireball_pages_enable_statistics"><![CDATA[Enable Statistics]]></item>
+		<item name="wcf.acp.option.fireball_pages_statistics_delete"><![CDATA[Delete Automatically]]></item>
+		<item name="wcf.acp.option.fireball_pages_statistics_delete.description"><![CDATA[Old statistics will be deleted after the given period of time. [time in days, 0 to disable]]]></item>
+		<item name="wcf.acp.option.fireball_revision_delete"><![CDATA[Delete Automatically]]></item>
+		<item name="wcf.acp.option.fireball_revision_delete.description"><![CDATA[Old revisions will be deleted after the given period of time. [time in days, 0 to disable]]]></item>
+		<item name="wcf.acp.option.fireball_sitemap_enable"><![CDATA[Enable full sitemap]]></item>
 	</category>
 
 	<category name="wcf.acp.pageMenu">
