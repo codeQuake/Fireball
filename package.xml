@@ -2,10 +2,10 @@
 <package name="de.codequake.cms" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
 	<packageinformation>
 		<packagename>Fireball CMS</packagename>
-		<packagedescription><![CDATA[CMS for WCF 2.1]]></packagedescription>
+		<packagedescription><![CDATA[Advanced CMS for WCF 2.1]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>2.2.0 Alpha 3</version>
-		<date>2016-03-02</date>
+		<version>2.2.0 Alpha 4</version>
+		<date>2016-12-25</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -54,34 +54,5 @@
 
 		<!-- scripts -->
 		<instruction type="script" installupdateserver="1">acp/install_de.codequake.cms.php</instruction>
-	</instructions>
-	
-	<instructions type="update" fromversion="2.2.0 Alpha *">
-		<instruction type="sql">update.sql</instruction>
-		<instruction type="language">language/*.xml</instruction>
-
-		<!-- files -->
-		<instruction type="file">files.tar</instruction>
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="template">templates.tar</instruction>
-
-		<!-- xml -->
-		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
-		<instruction type="bbcode">xml/bbcode.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="sitemap">xml/sitemap.xml</instruction>
-		<instruction type="pageMenu">xml/pageMenu.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
 	</instructions>
 </package>
