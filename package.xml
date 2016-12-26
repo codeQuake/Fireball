@@ -64,6 +64,10 @@
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 
+		<!-- xml -->
+		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
+		<instruction type="objectType">xml/objectType.xml</instruction>
+
 		<!-- renaming everything because of WoltLab -->
 		<instruction type="script">acp/update_de.codequake.cms_210.php</instruction>
 
@@ -71,9 +75,6 @@
 		<instruction type="language">language/*.xml</instruction>
 
 		<!-- xml -->
-		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-
 		<instruction type="aclOption">xml/aclOption.xml</instruction>
 		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
 		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
