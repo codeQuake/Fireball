@@ -2,6 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use wcf\data\package\PackageCache;
 use wcf\system\language\LanguageFactory;
 use wcf\util\StringUtil;
 
@@ -25,7 +26,15 @@ abstract class AbstractSearchableContentType extends AbstractContentType impleme
 	 * @var	array<array>
 	 */
 	public $searchIndexData = array();
-	
+
+	/**
+	 * @see \cms\system\content\type\AbstractContentType::isAvailableToAdd()
+	 */
+	public function isAvailableToAdd() {
+		$package = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.wysiwyg.acp');
+		return ($package !== null);
+	}
+
 	/**
 	 * @see \cms\system\content\type\IContentType::getPreview()
 	 * use searchableFields instead of previewFields

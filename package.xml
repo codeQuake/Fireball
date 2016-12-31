@@ -15,7 +15,6 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="2.1.0">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="1.1.0">de.codequake.wysiwyg.acp</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
