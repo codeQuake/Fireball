@@ -17,8 +17,8 @@
 			{/if}
 		{/if}
 
-	{if $position == 'sidebar'}<div class="boxContent">{/if}
-	{@$content->getOutput()|language}
+		{if $position == 'sidebar'}<div class="boxContent">{/if}
+		{@$content->getOutput()|language}
 		{if !$contentNodeTree->current()->hasChildren()}
 			{if $position == 'sidebar'}</div></fieldset>{else}</div>{/if}
 		{/if}

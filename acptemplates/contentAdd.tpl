@@ -73,6 +73,13 @@
 				</dd>
 			</dl>
 
+			<dl>
+				<dt><label for="showHeadline">{lang}cms.acp.content.title.showHeadline{/lang}</label></dt>
+				<dd>
+					<input type="checkbox" id="showHeadline" name="showHeadline" value="1"{if $showHeadline} checked="checked"{/if} />
+				</dd>
+			</dl>
+
 			{event name='dataFields'}
 		</fieldset>
 

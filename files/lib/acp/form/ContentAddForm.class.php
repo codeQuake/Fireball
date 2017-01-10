@@ -93,6 +93,12 @@ class ContentAddForm extends AbstractForm {
 	public $title = '';
 
 	/**
+	 * show title
+	 * @var boolean
+	 */
+	public $showHeadline = 0;
+
+	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -109,6 +115,7 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
 		if (isset($_REQUEST['position'])) $this->position = StringUtil::trim($_REQUEST['position']);
 		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
+		if (isset($_REQUEST['showHeadline'])) $this->showHeadline = 1;
 
 		// register i18n-values
 		I18nHandler::getInstance()->register('title');
@@ -218,7 +225,8 @@ class ContentAddForm extends AbstractForm {
 			'showOrder' => $this->showOrder,
 			'position' => $this->position,
 			'contentData' => $this->contentData,
-			'contentTypeID' => $this->objectType->objectTypeID
+			'contentTypeID' => $this->objectType->objectTypeID,
+			'showHeadline' => $this->showHeadline
 		);
 
 		$this->objectAction = new ContentAction(array(), 'create', array(
@@ -311,7 +319,8 @@ class ContentAddForm extends AbstractForm {
 			'pageList' => $this->pageList,
 			'parentID' => $this->parentID,
 			'position' => $this->position,
-			'showOrder' => $this->showOrder
+			'showOrder' => $this->showOrder,
+			'showHeadline' => $this->showHeadline
 		));
 	}
 }

@@ -1,3 +1,6 @@
 ALTER TABLE cms1_page ADD COLUMN objectTypeID INT(10);
 ALTER TABLE cms1_page ADD COLUMN additionalData MEDIUMTEXT DEFAULT NULL;
 ALTER TABLE cms1_page ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
+
+# 2.2.0 Beta 1:
+ALTER TABLE cms1_content ADD COLUMN showHeadline TINYINT(1) NOT NULL DEFAULT 0;

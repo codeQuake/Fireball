@@ -88,7 +88,8 @@ class ContentEditForm extends ContentAddForm {
 			'showOrder' => $this->showOrder,
 			'position' => $this->position,
 			'contentData' => $this->contentData,
-			'contentTypeID' => $this->objectType->objectTypeID
+			'contentTypeID' => $this->objectType->objectTypeID,
+			'showHeadline' => $this->showHeadline
 		);
 
 		$this->objectAction = new ContentAction(array($this->contentID), 'update', array(
@@ -141,6 +142,7 @@ class ContentEditForm extends ContentAddForm {
 			$this->showOrder = $this->content->showOrder;
 			$this->position = $this->content->position;
 			$this->contentData = $this->content->contentData;
+			$this->showHeadline = $this->content->showHeadline;
 
 			if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
 				PollManager::getInstance()->setObject('de.codequake.cms.content', $this->content->contentID, $this->contentData['pollID']);

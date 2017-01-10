@@ -78,6 +78,7 @@ CREATE TABLE cms1_content (
 	isDisabled TINYINT(1) DEFAULT 0,
 	position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body',
 	cssClasses VARCHAR(255),
+	showHeadline TINYINT(1) NOT NULL DEFAULT 0,
 	additionalData MEDIUMTEXT DEFAULT NULL
 );
 

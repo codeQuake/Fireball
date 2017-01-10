@@ -22,6 +22,7 @@
 		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
 		<item name="cms.acp.content.position.position.body"><![CDATA[Inhaltsbereich]]></item>
 		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Seitenleiste]]></item>
+		<item name="cms.acp.content.title.showHeadline"><![CDATA[Titel anzeigen]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Mehrspaltig]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns.column.add"><![CDATA[Spalte hinzufügen]]></item>
