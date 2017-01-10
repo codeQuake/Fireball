@@ -12,6 +12,7 @@
 	<dt><label for="contentData[pageID]">{lang}cms.acp.content.type.de.codequake.cms.content.type.menu.pageID{/lang}</label></dt>
 	<dd>
 		<select name="contentData[pageID]" id="contentData[pageID]">
+			<option value="">{lang}cms.acp.content.type.de.codequake.cms.content.type.menu.noSelection{/lang}</option>
 			{foreach from=$pageList item=$node}
 				<option{if !$contentData['pageID']|empty && $node->pageID == $contentData['pageID']} selected="selected"{/if} value="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
 			{/foreach}
