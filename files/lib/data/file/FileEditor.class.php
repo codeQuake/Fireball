@@ -41,6 +41,9 @@ class FileEditor extends DatabaseObjectEditor {
 		if (file_exists($this->getLocation())) {
 			@unlink($this->getLocation());
 		}
+		if (file_exists($this->getThumbnailLocation())) {
+			@unlink($this->getThumbnailLocation());
+		}
 	}
 
 	/**

@@ -40,6 +40,17 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	protected static $databaseTableIndexName = 'fileID';
 
 	/**
+	 * list of mime types that support thumbnail generation
+	 * @var	array<string>
+	 */
+	public static $thumbnailMimeTypes = array(
+		'image/gif',
+		'image/jpeg',
+		'image/png',
+		'image/pjpeg'
+	);
+
+	/**
 	 * Returns the category ids of this file.
 	 * 
 	 * @return	array<integer>
@@ -123,12 +134,40 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	}
 
 	/**
+	 * Generates a link to the thumbnail of the image
+	 * @return string
+	 * @throws \wcf\system\exception\SystemException
+	 */
+	public function getThumbnailLink() {
+		// fallback
+		if (!$this->hasThumbnail()) {
+			return $this->getLink();
+		}
+
+		return LinkHandler::getInstance()->getLink('FileDownload', array(
+			'application' => 'cms',
+			'forceFrontend' => true,
+			'id' => $this->fileID,
+			'thumbnail' => 1
+		));
+	}
+
+	/**
 	 * Returns the physical location of this file.
-	 * 
+	 *
 	 * @return	string
 	 */
 	public function getLocation() {
 		return CMS_DIR . 'files/' . substr($this->fileHash, 0, 2) . '/' . $this->getFilename();
+	}
+
+	/**
+	 * Returns the physical location of the thumbnail of this file.
+	 *
+	 * @return	string
+	 */
+	public function getThumbnailLocation() {
+		return CMS_DIR . 'files/thumbnails/' . substr($this->fileHash, 0, 2) . '/' . $this->getFilename();
 	}
 
 	/**
@@ -158,5 +197,13 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Indicates whether a file has a thumbnail
+	 * @return boolean
+	 */
+	public function hasThumbnail() {
+		return !empty($this->filesizeThumbnail) && $this->isImage();
 	}
 }

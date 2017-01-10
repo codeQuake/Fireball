@@ -2,7 +2,7 @@
 	{foreach from=$images item=image}
 		<div class="grid grid25 galleryImage shadow marginTop">
 			<figure>
-				<a class="imgThumb jsImageViewer" href="{$image->getLink()}"><img src="{$image->getLink()}" alt="" /></a>
+				<a class="imgThumb jsImageViewer" href="{$image->getLink()}"><img src="{$image->getThumbnailLink()}" alt="" /></a>
 			</figure>
 		</div>
 	{/foreach}
