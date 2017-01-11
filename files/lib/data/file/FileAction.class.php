@@ -369,7 +369,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 			$adapter = ImageHandler::getInstance()->getAdapter();
 			$adapter->loadFile($file->getLocation());
 
-			$updateData = [];
+			$updateData = array();
 
 			$thumbnailLocation = $file->getThumbnailLocation();
 			@unlink($thumbnailLocation);
