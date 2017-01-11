@@ -300,6 +300,11 @@
 			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
 			<classname>cms\system\worker\PageRebuildDataWorker</classname>
 		</type>
+		<type>
+			<name>de.codequake.cms.file</name>
+			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
+			<classname>cms\system\worker\FileRebuildDataWorker</classname>
+		</type>
 		<!-- /rebuild data worker -->
 
 		<!-- pages -->
