@@ -233,6 +233,14 @@
 			<name>de.codequake.cms.page</name>
 			<definitionname>com.woltlab.wcf.acl</definitionname>
 		</type>
+		<type>
+			<name>de.codequake.cms.content</name>
+			<definitionname>com.woltlab.wcf.acl</definitionname>
+		</type>
+		<type>
+			<name>de.codequake.cms.file</name>
+			<definitionname>com.woltlab.wcf.acl</definitionname>
+		</type>
 		<!-- /acl -->
 
 		<!-- comments -->

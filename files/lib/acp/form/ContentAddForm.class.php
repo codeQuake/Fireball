@@ -10,6 +10,7 @@ use cms\data\page\PageAction;
 use cms\data\page\PageNodeTree;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
+use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -99,6 +100,12 @@ class ContentAddForm extends AbstractForm {
 	public $showHeadline = 0;
 
 	/**
+	 * object type id of content
+	 * @var integer
+	 */
+	public $contentObjectTypeID = null;
+
+	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -119,6 +126,9 @@ class ContentAddForm extends AbstractForm {
 
 		// register i18n-values
 		I18nHandler::getInstance()->register('title');
+
+		// get acl object type id
+		$this->contentObjectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.file');
 
 		// read object type specific parameters
 		$this->objectType->getProcessor()->readParameters();
@@ -275,7 +285,12 @@ class ContentAddForm extends AbstractForm {
 		$objectAction = new PageAction(array($returnValues['returnValues']->pageID), 'refreshSearchIndex');
 		$objectAction->executeAction();
 
+		// save ACL values of the content
+		ACLHandler::getInstance()->save($returnValues['returnValues']->contentID, $this->contentObjectTypeID);
+		ACLHandler::getInstance()->disableAssignVariables();
+
 		$this->saved();
+
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(
 			'application' => 'cms',
 			'pageID' => $this->pageID
@@ -304,6 +319,7 @@ class ContentAddForm extends AbstractForm {
 		parent::assignVariables();
 
 		I18nHandler::getInstance()->assignVariables();
+		ACLHandler::getInstance()->assignVariables($this->contentObjectTypeID);
 
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
 			PollManager::getInstance()->assignVariables();
@@ -320,7 +336,8 @@ class ContentAddForm extends AbstractForm {
 			'parentID' => $this->parentID,
 			'position' => $this->position,
 			'showOrder' => $this->showOrder,
-			'showHeadline' => $this->showHeadline
+			'showHeadline' => $this->showHeadline,
+			'contentObjectTypeID' => $this->contentObjectTypeID
 		));
 	}
 }

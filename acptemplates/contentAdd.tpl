@@ -1,5 +1,11 @@
 {include file='header' pageTitle='cms.acp.content.'|concat:$action}
 
+{if !$contentID|empty}
+	{include file='aclPermissionJavaScript' containerID='contentPermissionsContaine' categoryName='user.*' objectTypeID=$contentObjectTypeID objectID=$contentID}
+{else}
+	{include file='aclPermissionJavaScript' containerID='contentPermissionsContaine' categoryName='user.*' objectTypeID=$contentObjectTypeID}
+{/if}
+
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
 	//<![CDATA[
@@ -150,6 +156,17 @@
 
 		{event name='fieldsets'}
 	</div>
+
+	<fieldset>
+		<legend>{lang}cms.acp.content.userPermissions{/lang}</legend>
+
+		<dl id="contentPermissionsContainer">
+			<dt>{lang}wcf.acl.permissions{/lang}</dt>
+			<dd></dd>
+		</dl>
+
+		{event name='permissionFields'}
+	</fieldset>
 
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />

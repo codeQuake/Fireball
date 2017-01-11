@@ -98,23 +98,24 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 			return false;
 		}
 
-		if (!$this->isPublished && !WCF::getSession()->getPermission('mod.fireball.canReadUnpublishedPage') && !$this->getPermission('canViewUnpublishedPage')) {
+		if (!$this->isPublished && !$this->getPermission('mod.canViewUnpublishedPage')) {
 			// user can't read unpublished pages
 			return false;
 		}
 
-		if (!$this->isPublished && $this->getPermission('canViewUnpublishedPage')) {
+		if (!$this->isPublished && $this->getPermission('mod.canViewUnpublishedPage')) {
 			// page is not published, but user is allowed to read it
 			return true;
 		}
 
-		return $this->getPermission('canViewPage');
+		return $this->getPermission('user.canViewPage');
 	}
 
 	/**
-	 * @see	\wcf\data\IPermissionObject::checkPermissions()
+	 * @see        \wcf\data\IPermissionObject::checkPermissions()
+	 * @param array $permissions
 	 */
-	public function checkPermissions(array $permissions) {
+	public function checkPermissions(array $permissions = array('user.canViewPage')) {
 		foreach ($permissions as $permission) {
 			if (!$this->getPermission($permission)) {
 				throw new PermissionDeniedException();
@@ -251,12 +252,15 @@ class Page extends DatabaseObject implements IBreadcrumbProvider, ILinkableObjec
 	 * @see	\wcf\data\IPermissionObject::getPermission()
 	 */
 	public function getPermission($permission) {
-		$permissions = PagePermissionHandler::getInstance()->getPermission($this);
-		if (isset($permissions[$permission])) {
-			return $permissions[$permission];
+		$permissions = PagePermissionHandler::getInstance()->getPermissions($this);
+
+		$aclPermission = str_replace(array('user.', 'mod.', 'admin.'), array('', '', ''), $permission);
+		if (isset($permissions[$aclPermission])) {
+			return $permissions[$aclPermission];
 		}
 
-		return WCF::getSession()->getPermission('user.fireball.page.' . $permission);
+		$globalPermission = str_replace(array('user.', 'mod.', 'admin.'), array('user.fireball.page.', 'mod.fireball.', 'user.fireball.page.'), $permission);
+		return WCF::getSession()->getPermission($globalPermission);
 	}
 
 	/**

@@ -46,11 +46,6 @@ class FileDownloadPage extends AbstractPage {
 	);
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
-	 */
-	public $neededPermissions = array('user.fireball.content.canDownloadFile');
-
-	/**
 	 * @see	\wcf\page\AbstractPage::$useTemplate
 	 */
 	public $useTemplate = false;
@@ -72,6 +67,8 @@ class FileDownloadPage extends AbstractPage {
 		if ($this->file === null) {
 			throw new IllegalLinkException();
 		}
+
+		$this->file->checkPermissions();
 
 		if (isset($_GET['thumbnail'])) $this->loadThumbnail = intval($_GET['thumbnail']);
 

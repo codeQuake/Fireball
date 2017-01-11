@@ -36,11 +36,12 @@ class PagePermissionHandler extends SingletonFactory {
 	/**
 	 * Returns the acl options for the given page and for the given user.
 	 * If no user is given, the active user is used.
-	 * 
-	 * @param	\cms\data\page\Page		$page
-	 * @param	\wcf\data\user\User		$user
+	 *
+	 * @param        \cms\data\page\Page $page
+	 * @param        \wcf\data\user\User $user
+	 * @return array
 	 */
-	public function getPermission(Page $page, User $user = null) {
+	public function getPermissions(Page $page, User $user = null) {
 		if ($user === null) {
 			$user = WCF::getUser();
 		}

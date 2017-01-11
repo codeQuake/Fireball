@@ -8,6 +8,7 @@ use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
 use wcf\form\AbstractForm;
+use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\poll\PollManager;
@@ -118,6 +119,10 @@ class ContentEditForm extends ContentAddForm {
 		// update search index
 		$objectAction = new PageAction(array($this->pageID), 'refreshSearchIndex');
 		$objectAction->executeAction();
+
+		// save ACL values of the content
+		ACLHandler::getInstance()->save($this->contentID, $this->contentObjectTypeID);
+		ACLHandler::getInstance()->disableAssignVariables();
 
 		$this->saved();
 

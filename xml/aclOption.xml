@@ -8,6 +8,14 @@
 			<category name="user.fireball.page.comment">
 				<objecttype>de.codequake.cms.page</objecttype>
 			</category>
+
+			<category name="user.fireball.content">
+				<objecttype>de.codequake.cms.content</objecttype>
+			</category>
+
+			<category name="user.fireball.file">
+				<objecttype>de.codequake.cms.file</objecttype>
+			</category>
 		</categories>
 
 		<options>
@@ -20,7 +28,6 @@
 				<categoryname>user.fireball.page</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
-			<!-- /user.fireball.page -->
 
 			<!-- user.fireball.page.comment -->
 			<option name="canViewComment">
@@ -31,7 +38,30 @@
 				<categoryname>user.fireball.page.comment</categoryname>
 				<objecttype>de.codequake.cms.page</objecttype>
 			</option>
-			<!-- /user.fireball.page.comment -->
+
+			<!-- user.fireball.file -->
+			<option name="canViewThumbnail">
+				<categoryname>user.fireball.file</categoryname>
+				<objecttype>de.codequake.cms.file</objecttype>
+			</option>
+			<option name="canViewFile">
+				<categoryname>user.fireball.file</categoryname>
+				<objecttype>de.codequake.cms.file</objecttype>
+			</option>
+
+			<!-- user.fireball.content -->
+			<option name="canViewContent">
+				<categoryname>user.fireball.content</categoryname>
+				<objecttype>de.codequake.cms.content</objecttype>
+			</option>
+			<option name="canViewDisabledContent">
+				<categoryname>user.fireball.content</categoryname>
+				<objecttype>de.codequake.cms.content</objecttype>
+			</option>
+			<option name="canViewErroredContent">
+				<categoryname>user.fireball.content</categoryname>
+				<objecttype>de.codequake.cms.content</objecttype>
+			</option>
 		</options>
 	</import>
 </data>

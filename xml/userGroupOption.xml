@@ -12,6 +12,9 @@
 			<category name="user.fireball.content">
 				<parent>user.fireball</parent>
 			</category>
+			<category name="user.fireball.file">
+				<parent>user.fireball</parent>
+			</category>
 			<!-- /user -->
 
 			<!-- mod -->
@@ -82,6 +85,14 @@
 				<defaultvalue>1</defaultvalue>
 			</option>
 			<!-- /user.fireball.content -->
+
+			<!-- user.fireball.file -->
+			<option name="user.fireball.file.canViewThumbnail">
+				<categoryname>user.fireball.file</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<!-- user.fireball.file -->
 
 			<!-- mod.fireball -->
 			<option name="mod.fireball.canReadUnpublishedPage">

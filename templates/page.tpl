@@ -76,7 +76,7 @@
 
 {include file='contentNodeList' application='cms' contentNodeTree=$contentContentNodeTree position='content'}
 
-{if $page->isCommentable && $page->getPermission('canViewComment')}
+{if $page->isCommentable && $page->getPermission('user.canViewComment')}
 	<header id="comments" class="boxHeadline boxSubHeadline">
 		<h2>{lang}cms.page.comments{/lang} <span class="badge">{@$commentList->countObjects()}</span></h2>
 	</header>

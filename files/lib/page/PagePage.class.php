@@ -69,7 +69,7 @@ class PagePage extends AbstractCMSPage {
 		WCF::getTPL()->assign(array(
 			'contentContentNodeTree' => $this->contentContentNodeTree,
 			'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : array()),
-			'commentCanAdd' => $this->page->getPermission('canAddComment'),
+			'commentCanAdd' => $this->page->getPermission('user.canAddComment'),
 			'commentList' => $this->commentList,
 			'commentObjectTypeID' => $this->commentObjectTypeID,
 			'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0)

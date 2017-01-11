@@ -1,17 +1,15 @@
 <?php
 namespace cms\data\file;
 
-use cms\data\file\FileCache;
-use cms\page\FileDownloadPage;
 use cms\system\cache\builder\FileCacheBuilder;
 use wcf\data\category\CategoryNodeTree;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\acl\ACLHandler;
 use wcf\system\category\CategoryHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\image\ImageHandler;
 use wcf\system\upload\UploadFile;
 use wcf\system\WCF;
-use wcf\util\ArrayUtil;
 use wcf\util\FileUtil;
 
 /**
@@ -62,13 +60,12 @@ class FileAction extends AbstractDatabaseObjectAction {
 	public function getDetails() {
 		$file = $this->getSingleObject();
 
-		WCF::getTPL()->assign(array(
-			'file' => $file
-		));
-
 		return array(
 			'fileID' => $file->fileID,
-			'template' => WCF::getTPL()->fetch('fileDetails', 'cms'),
+			'template' => WCF::getTPL()->fetch('fileDetails', 'cms', array(
+				'file' => $file,
+				'fileACLObjectTypeID' => ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.file')
+			)),
 			'title' => $file->getTitle()
 		);
 	}

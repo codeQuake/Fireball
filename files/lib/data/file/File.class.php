@@ -1,9 +1,12 @@
 <?php
 namespace cms\data\file;
 
+use cms\system\file\FilePermissionHandler;
 use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
+use wcf\data\IPermissionObject;
 use wcf\system\category\CategoryHandler;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -16,7 +19,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class File extends DatabaseObject implements ILinkableObject, IRouteController {
+class File extends DatabaseObject implements ILinkableObject, IRouteController, IPermissionObject {
 	/**
 	 * list of category ids
 	 * @var	array<integer>
@@ -177,13 +180,6 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 		return WCF::getLanguage()->get($this->title);
 	}
 
-	/**
-	 * @todo	Remove method
-	 */
-	public function getByID($id) {
-		return new File($id);
-	}
-
 	public function getImageSize() {
 		return getimagesize($this->getLocation());
 	}
@@ -205,5 +201,38 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	 */
 	public function hasThumbnail() {
 		return !empty($this->filesizeThumbnail) && $this->isImage();
+	}
+
+	/**
+	 * @see        \wcf\data\IPermissionObject::checkPermissions()
+	 * @param array $permissions
+	 * @throws PermissionDeniedException
+	 */
+	public function checkPermissions(array $permissions = array('user.canDownloadFile')) {
+		foreach ($permissions as $permission) {
+			if (!$this->getPermission($permission)) {
+				throw new PermissionDeniedException();
+			}
+		}
+	}
+
+	/**
+	 * @see	\wcf\data\IPermissionObject::getPermission()
+	 */
+	public function getPermission($permission) {
+		$permissions = FilePermissionHandler::getInstance()->getPermission($this);
+
+		$aclPermission = str_replace(array('user.', 'mod.', 'admin.'), array('', '', ''), $permission);
+		if (isset($permissions[$aclPermission])) {
+			return $permissions[$aclPermission];
+		}
+
+		// why the hell is this permission located under content?!
+		if ($permission == 'user.canDownloadFile') {
+			return WCF::getSession()->getPermission('user.fireball.content.canDownloadFile');
+		}
+
+		$globalPermission = str_replace(array('user.', 'mod.', 'admin.'), array('user.fireball.file.', 'mod.fireball.', 'user.fireball.file.'), $permission);
+		return WCF::getSession()->getPermission($globalPermission);
 	}
 }
