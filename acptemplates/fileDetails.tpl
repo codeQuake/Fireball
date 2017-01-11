@@ -22,6 +22,17 @@
 	</fieldset>
 
 	<fieldset>
+		<legend>{lang}cms.acp.file.data{/lang}</legend>
+
+		<dl>
+			<dt>{lang}cms.acp.file.title{/lang}</dt>
+			<dd>
+				<input type="text" name="title" id="title" class="long" value="{$file->getTitle()}" />
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset>
 		<legend>{lang}cms.acp.file.userPermissions{/lang}</legend>
 
 		<dl id="filePermissionsContainer">

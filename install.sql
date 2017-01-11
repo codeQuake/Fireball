@@ -113,7 +113,8 @@ CREATE TABLE cms1_file (
 	heightThumbnail INT(10) NOT NULL DEFAULT 0,
 	fileHash VARCHAR(40) NOT NULL DEFAULT '',
 	uploadTime INT(10) NOT NULL DEFAULT 0,
-	downloads INT(10) DEFAULT 0
+	downloads INT(10) DEFAULT 0,
+	filename VARCHAR(255) NOT NULL DEFAULT ''
 );
 
 DROP TABLE IF EXISTS cms1_file_to_category;
