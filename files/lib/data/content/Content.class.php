@@ -3,10 +3,10 @@ namespace cms\data\content;
 
 use cms\data\page\PageCache;
 use cms\system\content\ContentPermissionHandler;
-use wcf\data\IPermissionObject;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\poll\Poll;
 use wcf\data\DatabaseObject;
+use wcf\data\IPermissionObject;
 use wcf\data\IPollObject;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\IRouteController;
