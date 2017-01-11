@@ -35,7 +35,7 @@ class PHPContentType extends AbstractContentType {
 			$output = eval($content->text);
 		}
 		catch (\ParseError $e) {
-			if (WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) {
+			if ($content->getPermission('mod.canViewErroredContent')) {
 				$url = LinkHandler::getInstance()->getLink('ContentEdit', array('application' => 'cms', 'object' => $content, 'isACP' => true));
 				$output = '<div class="error">';
 				$output .= 'Please check <a href="' . $url . '">content #' . $content->contentID . '</a>. The following error occurred parsing this content at line ' . $e->getLine() . ':<br><br>';

@@ -34,7 +34,7 @@ class RssContentType extends AbstractContentType {
 			$feedData = $feedData['body'];
 		}
 		catch (SystemException $e) {
-			if (WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) {
+			if ($content->getPermission('mod.canViewErroredContent')) {
 				$url = LinkHandler::getInstance()->getLink('ContentEdit', array('application' => 'cms', 'object' => $content, 'isACP' => true));
 				return '<div class="error">Please check <a href="' . $url . '">content #' . $content->contentID . '</a>. The following error occurred fetching the feed from <span class="inlineCode">' . $content->url . '</span>:<br><br>' . $e->getMessage() . '</div>';
 			} else {
