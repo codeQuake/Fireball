@@ -231,6 +231,10 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 			return $permissions[$aclPermission];
 		}
 
+		if ($permission == 'user.canViewContent') {
+			return $this->getPage()->canRead();
+		}
+
 		$globalPermission = str_replace(array('user.', 'mod.', 'admin.'), array('user.fireball.content.', 'mod.fireball.', 'user.fireball.content.'), $permission);
 		return WCF::getSession()->getPermission($globalPermission);
 	}
