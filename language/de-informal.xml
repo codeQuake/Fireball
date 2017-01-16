@@ -24,6 +24,7 @@
 		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Seitenleiste]]></item>
 		<item name="cms.acp.content.title.showHeadline"><![CDATA[Titel anzeigen]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
+		<item name="cms.acp.content.userPermissions"><![CDATA[Berechtigungen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Mehrspaltig]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns.column.add"><![CDATA[Spalte hinzufügen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.dashboard"><![CDATA[Dashboard-Box]]></item>
@@ -64,6 +65,8 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.pageID"><![CDATA[Root]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.pageID.noSelection"><![CDATA[Aktuelle Seite]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.content"><![CDATA[Fireball CMS-Inhalt]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.contentID"><![CDATA[Anzuzeigender Inhalt]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
@@ -133,6 +136,19 @@
 		<item name="fireball.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
+		<item name="fireball.acp.menu.link.fireball.boxmatch"><![CDATA[Dashboardboxen]]></item>
+		<item name="fireball.acp.menu.link.fireball.boxmatch.add"><![CDATA[Dashboardbox hinzufügen]]></item>
+		<item name="fireball.acp.menu.link.fireball.boxmatch.list"><![CDATA[Dashboardboxen auflisten]]></item>
+	</category>
+
+	<category name="cms.acp.boxmatch">
+		<item name="cms.acp.boxmatch.list">Verknüpfungen auflisten</item>
+		<item name="cms.acp.boxmatch.add">Verknüpfung hinzufügen</item>
+		<item name="cms.acp.boxmatch.content">Inhalt (Fireball CMS)</item>
+		<item name="cms.acp.boxmatch.page">Seite (Fireball CMS)</item>
+		<item name="cms.acp.boxmatch.boxID">Dasbboardbox</item>
+		<item name="cms.acp.boxmatch.position">Position</item>
+		<item name="cms.acp.boxmatch.list.description"><![CDATA[Die hier mit Inhalten verknüpften Dashboardboxen können über die Dashboardverwaltung auf jeder Seite mit Sidebar/Dashboardbereich eingebunden werden.]]></item>
 	</category>
 
 	<category name="cms.acp.page">
