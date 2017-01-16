@@ -16,7 +16,7 @@
 			<legend>{lang}wcf.global.form.data{/lang}</legend>
 
 			<dl{if $errorField == 'contentID'} class="formError"{/if}>
-				<dt><label for="contentID">{lang}cms.boxmatch.content{/lang}</label></dt>
+				<dt><label for="contentID">{lang}cms.acp.boxmatch.content{/lang}</label></dt>
 				<dd>
 					<select id="contentID" name="contentID" required="required">
 						{foreach from=$contentNodeTree item=contentNode}
@@ -37,7 +37,7 @@
 			</dl>
 
 			<dl{if $errorField == 'position'} class="formError"{/if}>
-				<dt><label for="position">{lang}cms.boxmatch.position{/lang}</label></dt>
+				<dt><label for="position">{lang}cms.acp.boxmatch.position{/lang}</label></dt>
 				<dd>
 					<select id="position" name="position" required="required">
 						<option value="content"{if $position == 'content'} selected="selected"{/if}>content</option>
