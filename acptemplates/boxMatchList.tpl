@@ -28,6 +28,7 @@
 		<table class="table">
 			<thead>
 				<tr>
+					<th class="columnID"></th>
 					<th class="columnTitle">{lang}cms.acp.boxmatch.content{/lang}</th>
 					<th class="columnText">{lang}cms.acp.boxmatch.page{/lang}</th>
 					<th class="columnID">{lang}cms.acp.boxmatch.boxID{/lang}</th>
@@ -39,6 +40,9 @@
 			<tbody>
 				{foreach from=$objects item=match}
 					<tr class="jsMatchRow">
+						<td class="columnButtons">
+							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$match->boxID}" data-confirm-message="{lang}cms.acp.boxmatch.delete.sure{/lang}"></span>
+						</td>
 						<td class="columnTitle">
 							<span class="label badge gray idLabel">{#$match->contentID}</span>
 							{$match->getContent()->getTitle()}

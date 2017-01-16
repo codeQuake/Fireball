@@ -148,6 +148,7 @@
 		<item name="cms.acp.boxmatch.page"><![CDATA[Seite (Fireball CMS)]]></item>
 		<item name="cms.acp.boxmatch.boxID"><![CDATA[Dasbboardbox]]></item>
 		<item name="cms.acp.boxmatch.position"><![CDATA[Position]]></item>
+		<item name="cms.acp.boxmatch.delete.sure"><![CDATA[Bist du dir sicher, dass du die Dashboardbox entfernen willst?]]></item>
 		<item name="cms.acp.boxmatch.list.description"><![CDATA[Die hier mit Inhalten verknüpften Dashboardboxen können über die Dashboardverwaltung auf jeder Seite mit Sidebar/Dashboardbereich eingebunden werden.]]></item>
 	</category>
 

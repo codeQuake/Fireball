@@ -148,6 +148,7 @@
 		<item name="cms.acp.boxmatch.page"><![CDATA[Page (Fireball CMS)]]></item>
 		<item name="cms.acp.boxmatch.boxID"><![CDATA[Dasbboardbox]]></item>
 		<item name="cms.acp.boxmatch.position"><![CDATA[Position]]></item>
+		<item name="cms.acp.boxmatch.delete.sure"><![CDATA[Are you sure that you want to delete this dashboardbox?]]></item>
 		<item name="cms.acp.boxmatch.list.description"><![CDATA[Every dashboardbox matching a content can be displayed on every page using the dashboardboxmanagement.]]></item>
 	</category>
 
