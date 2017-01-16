@@ -12,15 +12,27 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class ContentNodeTree implements \IteratorAggregate {
-
 	protected $nodeClassName = 'cms\data\content\ContentNode';
 
+	/**
+	 * id of the parent's content
+	 * @var null|integer
+	 */
 	protected $parentID = null;
 
+	/**
+	 * @var null|ContentNode
+	 */
 	protected $parentNode = null;
 
+	/**
+	 * @var integer
+	 */
 	protected $pageID = 0;
 
+	/**
+	 * @var boolean
+	 */
 	protected $isACP = 0;
 
 	public function __construct($parentID = null, $pageID = 0, $isACP = 0) {
