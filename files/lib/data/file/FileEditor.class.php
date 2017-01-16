@@ -4,6 +4,7 @@ namespace cms\data\file;
 use cms\system\cache\builder\FileCacheBuilder;
 use cms\system\cache\builder\FilePermissionCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
+use wcf\data\IEditableCachedObject;
 use wcf\system\WCF;
 
 /**
