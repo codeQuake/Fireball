@@ -2,8 +2,8 @@
 
 namespace cms\data\content\match;
 
-use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\dashboard\box\DashboardBoxAction;
+use wcf\data\AbstractDatabaseObjectAction;
 
 /**
  * @author	Florian Gail
