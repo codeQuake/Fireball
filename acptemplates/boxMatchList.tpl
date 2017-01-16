@@ -24,7 +24,7 @@
 </div>
 
 {if $items}
-	<div class="container marginTop tabularBox">
+	<div class="marginTop tabularBox">
 		<table class="table">
 			<thead>
 				<tr>
