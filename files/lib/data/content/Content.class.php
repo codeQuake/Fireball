@@ -224,7 +224,7 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 	 * @see	\wcf\data\IPermissionObject::getPermission()
 	 */
 	public function getPermission($permission) {
-		$permissions = ContentPermissionHandler::getInstance()->getPermission($this);
+		$permissions = ContentPermissionHandler::getInstance()->getPermissions($this);
 
 		$aclPermission = str_replace(array('user.', 'mod.', 'admin.'), array('', '', ''), $permission);
 		if (isset($permissions[$aclPermission])) {
