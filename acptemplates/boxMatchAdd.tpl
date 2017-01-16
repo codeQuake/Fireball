@@ -12,46 +12,52 @@
 
 <form method="post" action="{link application='cms' controller='BoxMatchAdd'}{/link}">
 	<div class="container containerPadding marginTop">
-		<dl{if $errorField == 'contentID'} class="formError"{/if}>
-			<dt><label for="contentID">{lang}cms.boxmatch.content{/lang}</label></dt>
-			<dd>
-				<select id="contentID" name="contentID" required="required">
-					{foreach from=$contentNodeTree item=contentNode}
-						<option value="{$contentNode->contentID}"{if $contentID == $contentNode->contentID} selected="selected"{/if}>{section name=i loop=$contentNodeTree->getDepth()}&nbsp;&nbsp;&nbsp;&nbsp;{/section}{$contentNode->getTitle()}</option>
-					{/foreach}
-				</select>
+		<fieldset>
+			<legend>{lang}wcf.global.form.data{/lang}</legend>
 
-				{if $errorField == 'contentID'}
-					<small class="innerError">
-						{if $errorType == 'empty'}
-							{lang}wcf.global.form.error.empty{/lang}
-						{else}
-							{lang}cms.acp.boxmatch.content.error.{@$errorType}{/lang}
-						{/if}
-					</small>
-				{/if}
-			</dd>
-		</dl>
+			<dl{if $errorField == 'contentID'} class="formError"{/if}>
+				<dt><label for="contentID">{lang}cms.boxmatch.content{/lang}</label></dt>
+				<dd>
+					<select id="contentID" name="contentID" required="required">
+						{foreach from=$contentNodeTree item=contentNode}
+							<option value="{$contentNode->contentID}"{if $contentID == $contentNode->contentID} selected="selected"{/if}>{section name=i loop=$contentNodeTree->getIterator()->getDepth()}&nbsp;&nbsp;&nbsp;&nbsp;{/section}{$contentNode->getTitle()}</option>
+						{/foreach}
+					</select>
 
-		<dl{if $errorField == 'position'} class="formError"{/if}>
-			<dt><label for="position">{lang}cms.boxmatch.position{/lang}</label></dt>
-			<dd>
-				<select id="position" name="position" required="required">
-					<option value="content"{if $position == 'content'} selected="selected"{/if}>content</option>
-					<option value="sidebar"{if $position == 'sidebar'} selected="selected"{/if}>sidebar</option>
-				</select>
+					{if $errorField == 'contentID'}
+						<small class="innerError">
+							{if $errorType == 'empty'}
+								{lang}wcf.global.form.error.empty{/lang}
+							{else}
+								{lang}cms.acp.boxmatch.content.error.{@$errorType}{/lang}
+							{/if}
+						</small>
+					{/if}
+				</dd>
+			</dl>
 
-				{if $errorField == 'position'}
-					<small class="innerError">
-						{if $errorType == 'empty'}
-							{lang}wcf.global.form.error.empty{/lang}
-						{else}
-							{lang}cms.acp.boxmatch.position.error.{@$errorType}{/lang}
-						{/if}
-					</small>
-				{/if}
-			</dd>
-		</dl>
+			<dl{if $errorField == 'position'} class="formError"{/if}>
+				<dt><label for="position">{lang}cms.boxmatch.position{/lang}</label></dt>
+				<dd>
+					<select id="position" name="position" required="required">
+						<option value="content"{if $position == 'content'} selected="selected"{/if}>content</option>
+						<option value="sidebar"{if $position == 'sidebar'} selected="selected"{/if}>sidebar</option>
+					</select>
+
+					{if $errorField == 'position'}
+						<small class="innerError">
+							{if $errorType == 'empty'}
+								{lang}wcf.global.form.error.empty{/lang}
+							{else}
+								{lang}cms.acp.boxmatch.position.error.{@$errorType}{/lang}
+							{/if}
+						</small>
+					{/if}
+				</dd>
+			</dl>
+		</fieldset>
+
+		{event name='fieldsets'}
 	</div>
 
 	<div class="formSubmit">
