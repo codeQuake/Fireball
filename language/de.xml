@@ -142,12 +142,12 @@
 	</category>
 
 	<category name="cms.acp.boxmatch">
-		<item name="cms.acp.boxmatch.list">Verknüpfungen auflisten</item>
-		<item name="cms.acp.boxmatch.add">Verknüpfung hinzufügen</item>
-		<item name="cms.acp.boxmatch.content">Inhalt (Fireball CMS)</item>
-		<item name="cms.acp.boxmatch.page">Seite (Fireball CMS)</item>
-		<item name="cms.acp.boxmatch.boxID">Dasbboardbox</item>
-		<item name="cms.acp.boxmatch.position">Position</item>
+		<item name="cms.acp.boxmatch.list"><![CDATA[Verknüpfungen auflisten]]></item>
+		<item name="cms.acp.boxmatch.add"><![CDATA[Verknüpfung hinzufügen]]></item>
+		<item name="cms.acp.boxmatch.content"><![CDATA[Inhalt (Fireball CMS)]]></item>
+		<item name="cms.acp.boxmatch.page"><![CDATA[Seite (Fireball CMS)]]></item>
+		<item name="cms.acp.boxmatch.boxID"><![CDATA[Dasbboardbox]]></item>
+		<item name="cms.acp.boxmatch.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.boxmatch.list.description"><![CDATA[Die hier mit Inhalten verknüpften Dashboardboxen können über die Dashboardverwaltung auf jeder Seite mit Sidebar/Dashboardbereich eingebunden werden.]]></item>
 	</category>
 

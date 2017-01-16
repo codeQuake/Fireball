@@ -142,12 +142,12 @@
 	</category>
 
 	<category name="cms.acp.boxmatch">
-		<item name="cms.acp.boxmatch.list">List matches</item>
-		<item name="cms.acp.boxmatch.add">Add match</item>
-		<item name="cms.acp.boxmatch.content">Content (Fireball CMS)</item>
-		<item name="cms.acp.boxmatch.page">Page (Fireball CMS)</item>
-		<item name="cms.acp.boxmatch.boxID">Dasbboardbox</item>
-		<item name="cms.acp.boxmatch.position">Position</item>
+		<item name="cms.acp.boxmatch.list"><![CDATA[List matches]]></item>
+		<item name="cms.acp.boxmatch.add"><![CDATA[Add match]]></item>
+		<item name="cms.acp.boxmatch.content"><![CDATA[Content (Fireball CMS)]]></item>
+		<item name="cms.acp.boxmatch.page"><![CDATA[Page (Fireball CMS)]]></item>
+		<item name="cms.acp.boxmatch.boxID"><![CDATA[Dasbboardbox]]></item>
+		<item name="cms.acp.boxmatch.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.boxmatch.list.description"><![CDATA[Every dashboardbox matching a content can be displayed on every page using the dashboardboxmanagement.]]></item>
 	</category>
 
