@@ -2,16 +2,8 @@
 
 namespace cms\data\content\match;
 
-use cms\data\page\PageAction;
-use cms\system\cache\builder\ContentCacheBuilder;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\dashboard\box\DashboardBoxAction;
-use wcf\data\IClipboardAction;
-use wcf\data\ISortableAction;
-use wcf\data\IToggleAction;
-use wcf\system\clipboard\ClipboardHandler;
-use wcf\system\exception\UserInputException;
-use wcf\system\WCF;
 
 /**
  * @author	Florian Gail

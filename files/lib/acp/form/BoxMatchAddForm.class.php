@@ -2,9 +2,9 @@
 
 namespace cms\acp\form;
 
+use cms\data\content\match\ContentBoxMatchAction;
 use cms\data\content\Content;
 use cms\data\content\DrainedContentNodeTree;
-use cms\data\content\match\ContentBoxMatchAction;
 use wcf\data\dashboard\box\DashboardBoxAction;
 use wcf\data\language\item\LanguageItemEditor;
 use wcf\data\package\PackageCache;
