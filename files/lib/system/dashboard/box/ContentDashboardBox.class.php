@@ -18,7 +18,7 @@ use wcf\system\WCF;
  */
 class ContentDashboardBox extends AbstractSidebarDashboardBox {
 	/**
-	 * @var \cms\data\content\DrainedContentNodeTree
+	 * @var \cms\data\content\BoxContentNodeTree
 	 */
 	public $contentNodeTree = null;
 
@@ -36,7 +36,7 @@ class ContentDashboardBox extends AbstractSidebarDashboardBox {
 		if (preg_match('/de.codequake.cms.content([\d]+)/', $box->boxName, $matches)) {
 			if (!empty($matches[1])) {
 				$this->rootContentID = $matches[1];
-				$$this->contentNodeTree = new BoxContentNodeTree($this->rootContentID);
+				$this->contentNodeTree = new BoxContentNodeTree($this->rootContentID);
 			}
 		}
 	}
