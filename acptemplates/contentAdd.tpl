@@ -1,5 +1,6 @@
 {include file='header' pageTitle='cms.acp.content.'|concat:$action}
 
+{include file='aclPermissions'}
 {if !$contentID|empty}
 	{include file='aclPermissionJavaScript' containerID='contentPermissionsContainer' categoryName='user.*' objectTypeID=$contentObjectTypeID objectID=$contentID}
 {else}

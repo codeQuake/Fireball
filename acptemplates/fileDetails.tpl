@@ -1,3 +1,4 @@
+{include file='aclPermissions'}
 {include file='aclPermissionJavaScript' containerID='filePermissionsContainer' categoryName='user.*' objectTypeID=$fileACLObjectTypeID objectID=$file->fileID}
 
 <div id="fileDetailDialog" data-object-id="{#$file->fileID}">
