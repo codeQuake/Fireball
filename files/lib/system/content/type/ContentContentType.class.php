@@ -42,7 +42,7 @@ class ContentContentType extends AbstractContentType {
 	 */
 	public function getOutput(Content $content) {
 		/** @var Content $outputContent */
-		$outputContent = ContentCache::getInstance()->getContent($content->contentID);
+		$outputContent = ContentCache::getInstance()->getContent($content->contentData['contentID']);
 		if ($outputContent === null)
 			return '';
 
