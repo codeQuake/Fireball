@@ -153,6 +153,14 @@
 			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
+			<name>de.codequake.cms.content.type.googlemaps</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\GoogleMapsContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>0</allowsidebar>
+		</type>
+		<type>
 			<name>de.codequake.cms.content.type.template</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TemplateContentType</classname>

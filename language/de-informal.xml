@@ -67,6 +67,9 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.pageID.noSelection"><![CDATA[Aktuelle Seite]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.content"><![CDATA[Fireball CMS-Inhalt]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.contentID"><![CDATA[Anzuzeigender Inhalt]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.googlemaps"><![CDATA[Google Maps]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.googlemaps.latitude"><![CDATA[Breitengrad]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.googlemaps.longitude"><![CDATA[Längengrad]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
