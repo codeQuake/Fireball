@@ -12,6 +12,7 @@ use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\LanguageFactory;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Shows the add form for matchings content <> box.
@@ -57,7 +58,7 @@ class BoxMatchAddForm extends AbstractForm {
 		parent::readFormParameters();
 
 		if (isset($_POST['contentID'])) $this->contentID = intval($_POST['contentID']);
-		if (isset($_POST['position'])) $this->position = intval($_POST['position']);
+		if (isset($_POST['position'])) $this->position = StringUtil::trim($_POST['position']);
 	}
 
 	/**
