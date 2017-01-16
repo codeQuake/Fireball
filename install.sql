@@ -139,6 +139,16 @@ CREATE TABLE cms1_counter (
 	devices MEDIUMTEXT
 );
 
+-- dashboard boxes
+-- since 2.2.0 Beta 1
+DROP TABLE IF EXISTS cms1_content_to_dashboardbox;
+CREATE TABLE cms1_content_to_dashboardbox (
+	contentID INT(10),
+	boxID INT(10),
+	position VARCHAR(255) NOT NULL DEFAULT '',
+	PRIMARY KEY (contentID, boxID)
+);
+
 -- foreign keys
 ALTER TABLE cms1_content ADD FOREIGN KEY (parentID) REFERENCES cms1_content (contentID) ON DELETE SET NULL;
 ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
@@ -159,3 +169,7 @@ ALTER TABLE cms1_page_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (us
 
 ALTER TABLE cms1_stylesheet_to_page ADD FOREIGN KEY (stylesheetID) REFERENCES cms1_stylesheet (stylesheetID) ON DELETE CASCADE;
 ALTER TABLE cms1_stylesheet_to_page ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
+
+-- since 2.2.0 Beta 1
+ALTER TABLE cms1_content_to_dashboardbox ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
+ALTER TABLE cms1_content_to_dashboardbox ADD FOREIGN KEY (boxID) REFERENCES wcf1_dashboard_box (boxID) ON DELETE CASCADE;
