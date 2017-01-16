@@ -1,9 +1,9 @@
 {include file='header' pageTitle='cms.acp.content.'|concat:$action}
 
 {if !$contentID|empty}
-	{include file='aclPermissionJavaScript' containerID='contentPermissionsContaine' categoryName='user.*' objectTypeID=$contentObjectTypeID objectID=$contentID}
+	{include file='aclPermissionJavaScript' containerID='contentPermissionsContainer' categoryName='user.*' objectTypeID=$contentObjectTypeID objectID=$contentID}
 {else}
-	{include file='aclPermissionJavaScript' containerID='contentPermissionsContaine' categoryName='user.*' objectTypeID=$contentObjectTypeID}
+	{include file='aclPermissionJavaScript' containerID='contentPermissionsContainer' categoryName='user.*' objectTypeID=$contentObjectTypeID}
 {/if}
 
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
