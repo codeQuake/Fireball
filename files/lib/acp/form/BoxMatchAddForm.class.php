@@ -118,7 +118,7 @@ class BoxMatchAddForm extends AbstractForm {
 			LanguageItemEditor::create(array(
 				'languageID' => $language->languageID,
 				'languageItem' => 'wcf.dashboard.box.de.codequake.cms.content' . $this->contentID,
-				'languageItemValue' => $language->get($content->title) . ' (Fireball CMS - Content #' . $this->contentID . ')',
+				'languageItemValue' => $language->get($content->title) . ' (Content #' . $this->contentID . ')',
 				'languageItemOriginIsSystem' => 0,
 				'languageCategoryID' => $languageCategoryID,
 				'packageID' => $package->packageID
