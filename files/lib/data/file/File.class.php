@@ -220,7 +220,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	 * @see	\wcf\data\IPermissionObject::getPermission()
 	 */
 	public function getPermission($permission) {
-		$permissions = FilePermissionHandler::getInstance()->getPermission($this);
+		$permissions = FilePermissionHandler::getInstance()->getPermissions($this);
 
 		$aclPermission = str_replace(array('user.', 'mod.', 'admin.'), array('', '', ''), $permission);
 		if (isset($permissions[$aclPermission])) {
