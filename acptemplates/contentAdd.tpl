@@ -157,16 +157,18 @@
 		{event name='fieldsets'}
 	</div>
 
-	<fieldset>
-		<legend>{lang}cms.acp.content.userPermissions{/lang}</legend>
+	<div class="container containerPadding marginTop">
+		<fieldset>
+			<legend>{lang}cms.acp.content.userPermissions{/lang}</legend>
 
-		<dl id="contentPermissionsContainer">
-			<dt>{lang}wcf.acl.permissions{/lang}</dt>
-			<dd></dd>
-		</dl>
+			<dl id="contentPermissionsContainer">
+				<dt>{lang}wcf.acl.permissions{/lang}</dt>
+				<dd></dd>
+			</dl>
 
-		{event name='permissionFields'}
-	</fieldset>
+			{event name='permissionFields'}
+		</fieldset>
+	</div>
 
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
