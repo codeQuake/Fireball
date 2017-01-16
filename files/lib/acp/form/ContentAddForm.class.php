@@ -128,7 +128,7 @@ class ContentAddForm extends AbstractForm {
 		I18nHandler::getInstance()->register('title');
 
 		// get acl object type id
-		$this->contentObjectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.file');
+		$this->contentObjectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.content');
 
 		// read object type specific parameters
 		$this->objectType->getProcessor()->readParameters();
