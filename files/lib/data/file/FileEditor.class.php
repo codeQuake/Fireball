@@ -1,6 +1,8 @@
 <?php
 namespace cms\data\file;
 
+use cms\system\cache\builder\FileCacheBuilder;
+use cms\system\cache\builder\FilePermissionCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\system\WCF;
 
@@ -12,7 +14,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class FileEditor extends DatabaseObjectEditor {
+class FileEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
 	 */
@@ -72,5 +74,13 @@ class FileEditor extends DatabaseObjectEditor {
 
 			WCF::getDB()->commitTransaction();
 		}
+	}
+
+	/**
+	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 */
+	public static function resetCache() {
+		FileCacheBuilder::getInstance()->reset();
+		FilePermissionCacheBuilder::getInstance()->reset();
 	}
 }
