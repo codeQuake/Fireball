@@ -19,7 +19,7 @@ class ContentContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$icon
 	 */
-	protected $icon = 'icon-text';
+	protected $icon = 'icon-file-text-alt';
 
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$templateName
