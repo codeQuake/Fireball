@@ -145,6 +145,14 @@
 			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
+			<name>de.codequake.cms.content.type.content</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\ContentContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
 			<name>de.codequake.cms.content.type.template</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TemplateContentType</classname>
