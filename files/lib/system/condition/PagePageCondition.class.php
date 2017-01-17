@@ -42,10 +42,10 @@ class PagePageCondition extends AbstractMultiSelectCondition implements IContent
 		$pages = $this->getOptions();
 		$pageCount = count($pages);
 
-		$fieldElement = '<select name="'.$this->fieldName.'[]" id="'.$this->fieldName.'" multiple="multiple" size="'.($pageCount > 10 ? 10 : $pageCount).'">';
-		/** @var ICMSPage $page */
+		$fieldElement = '<select name="'.$this->fieldName.'[]" id="'.$this->fieldName.'" class="medium" multiple="multiple" size="'.($pageCount > 10 ? 10 : $pageCount).'">';
+		/** @var \cms\data\page\PageNode $page */
 		foreach ($pageNodeTree as $page) {
-			$fieldElement .= '<option value="'.$page->getPage()->pageID.'"'.(in_array($page->getPage()->pageID, $this->fieldValue) ? ' selected="selected"' : '').'>'.str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $page->getDepth() - 1).$page->getPage()->getTitle().'</option>';
+			$fieldElement .= '<option value="'.$page->pageID.'"'.(in_array($page->pageID, $this->fieldValue) ? ' selected="selected"' : '').'>'.str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $pageNodeTree->getIterator()->getDepth()).$page->getTitle().'</option>';
 		}
 		$fieldElement .= "</select>";
 

@@ -155,6 +155,11 @@
 		<item name="cms.acp.boxmatch.list.description"><![CDATA[Every dashboardbox matching a content can be displayed on every page using the dashboardboxmanagement.]]></item>
 	</category>
 
+	<category name="cms.acp.condition">
+		<item name="cms.condition.page.page"><![CDATA[CMS-Page]]></item>
+		<item name="cms.condition.page.page.description"><![CDATA[Select the CMS-pages where you want to display this notice.]]></item>
+	</category>
+
 	<category name="cms.acp.page">
 		<item name="cms.acp.page.add"><![CDATA[Add page]]></item>
 		<item name="cms.acp.page.alias"><![CDATA[URL-Shortcut]]></item>

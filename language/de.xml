@@ -155,6 +155,11 @@
 		<item name="cms.acp.boxmatch.list.description"><![CDATA[Die hier mit Inhalten verknüpften Dashboardboxen können über die Dashboardverwaltung auf jeder Seite mit Sidebar/Dashboardbereich eingebunden werden.]]></item>
 	</category>
 
+	<category name="cms.acp.condition">
+		<item name="cms.condition.page.page"><![CDATA[CMS-Seite]]></item>
+		<item name="cms.condition.page.page.description"><![CDATA[Wählen Sie hier die CMS-Seiten aus, auf denen der Hinweis angezeigt werden soll.]]></item>
+	</category>
+
 	<category name="cms.acp.page">
 		<item name="cms.acp.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="cms.acp.page.alias"><![CDATA[Abkürzung]]></item>
