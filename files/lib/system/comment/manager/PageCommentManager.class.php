@@ -51,7 +51,7 @@ class PageCommentManager extends AbstractCommentManager {
 	public function canAdd($objectID) {
 		if (parent::canAdd($objectID)) {
 			$page = PageCache::getInstance()->getPage($objectID);
-			return $page->getPermission('canAddComment');
+			return $page->getPermission('user.canAddComment');
 		}
 
 		return false;

@@ -46,14 +46,15 @@ class FileDownloadPage extends AbstractPage {
 	);
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
-	 */
-	public $neededPermissions = array('user.fireball.content.canDownloadFile');
-
-	/**
 	 * @see	\wcf\page\AbstractPage::$useTemplate
 	 */
 	public $useTemplate = false;
+
+	/**
+	 * If set true, this page will display a thumbnail instead of the original file
+	 * @var boolean
+	 */
+	public $loadThumbnail = false;
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -66,6 +67,10 @@ class FileDownloadPage extends AbstractPage {
 		if ($this->file === null) {
 			throw new IllegalLinkException();
 		}
+
+		$this->file->checkPermissions();
+
+		if (isset($_GET['thumbnail'])) $this->loadThumbnail = intval($_GET['thumbnail']);
 
 		// check if image file is in cache
 		if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && @strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $this->file->uploadTime && in_array($this->file->fileType, self::$inlineMimeTypes)) {
@@ -83,16 +88,29 @@ class FileDownloadPage extends AbstractPage {
 
 		VisitCountHandler::getInstance()->count();
 
-		$this->fileReader = new FileReader($this->file->getLocation(), array(
-			'filename' => $this->file->getTitle(),
-			'mimeType' => $this->file->fileType,
-			'filesize' => $this->file->filesize,
-			'showInline' => (in_array($this->file->fileType, self::$inlineMimeTypes)),
-			'enableRangeSupport' => false,
-			'lastModificationTime' => $this->file->uploadTime,
-			'expirationDate' => TIME_NOW + 31536000,
-			'maxAge' => 31536000
-		));
+		if ($this->loadThumbnail && $this->file->hasThumbnail()) {
+			$this->fileReader = new FileReader($this->file->getThumbnailLocation(), array(
+				'filename' => $this->file->getTitle(),
+				'mimeType' => $this->file->fileTypeThumbnail,
+				'filesize' => $this->file->filesizeThumbnail,
+				'showInline' => (in_array($this->file->fileTypeThumbnail, self::$inlineMimeTypes)),
+				'enableRangeSupport' => false,
+				'lastModificationTime' => $this->file->uploadTime,
+				'expirationDate' => TIME_NOW + 31536000,
+				'maxAge' => 31536000
+			));
+		} else {
+			$this->fileReader = new FileReader($this->file->getLocation(), array(
+				'filename' => $this->file->getTitle(),
+				'mimeType' => $this->file->fileType,
+				'filesize' => $this->file->filesize,
+				'showInline' => (in_array($this->file->fileType, self::$inlineMimeTypes)),
+				'enableRangeSupport' => false,
+				'lastModificationTime' => $this->file->uploadTime,
+				'expirationDate' => TIME_NOW + 31536000,
+				'maxAge' => 31536000
+			));
+		}
 
 		// count downloads
 		$fileEditor = new FileEditor($this->file);

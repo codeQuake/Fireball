@@ -145,6 +145,22 @@
 			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
+			<name>de.codequake.cms.content.type.content</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\ContentContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>1</allowsidebar>
+		</type>
+		<type>
+			<name>de.codequake.cms.content.type.googlemaps</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\GoogleMapsContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>0</allowsidebar>
+		</type>
+		<type>
 			<name>de.codequake.cms.content.type.template</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TemplateContentType</classname>
@@ -223,6 +239,14 @@
 			<name>de.codequake.cms.page</name>
 			<definitionname>com.woltlab.wcf.acl</definitionname>
 		</type>
+		<type>
+			<name>de.codequake.cms.content</name>
+			<definitionname>com.woltlab.wcf.acl</definitionname>
+		</type>
+		<type>
+			<name>de.codequake.cms.file</name>
+			<definitionname>com.woltlab.wcf.acl</definitionname>
+		</type>
 		<!-- /acl -->
 
 		<!-- comments -->
@@ -282,6 +306,11 @@
 			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
 			<classname>cms\system\worker\PageRebuildDataWorker</classname>
 		</type>
+		<type>
+			<name>de.codequake.cms.file</name>
+			<definitionname>com.woltlab.wcf.rebuildData</definitionname>
+			<classname>cms\system\worker\FileRebuildDataWorker</classname>
+		</type>
 		<!-- /rebuild data worker -->
 
 		<!-- stat handlers -->
@@ -298,6 +327,15 @@
 			<categoryname>de.codequake.cms</categoryname>
 		</type>
 		<!-- /stat handlers -->
+
+		<!-- notice conditions -->
+		<type>
+			<name>de.codequake.cms.page.page</name>
+			<definitionname>com.woltlab.wcf.condition.notice</definitionname>
+			<classname><![CDATA[cms\system\condition\PagePageCondition]]></classname>
+			<conditionobject>com.woltlab.wcf.page</conditionobject>
+		</type>
+		<!-- /notice conditions -->
 		
 		<!-- importer -->
 		<type>

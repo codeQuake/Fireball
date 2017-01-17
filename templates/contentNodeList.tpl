@@ -11,8 +11,8 @@
 		{/if}
 		{if $content->showHeadline}<h2 class="boxTitle">{$content->getTitle()}</h2>{/if}
 
-	{if $position == 'sidebar'}<div class="boxContent">{/if}
-	{@$content->getOutput()|language}
+		{if $position == 'sidebar'}<div class="boxContent">{/if}
+		{@$content->getOutput()|language}
 		{if !$contentNodeTree->current()->hasChildren()}
 			{if $position == 'sidebar'}</div></section>{else}</div>{/if}
 		{/if}

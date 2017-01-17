@@ -1,12 +1,14 @@
 <?php
 namespace cms\data\content;
 
-use cms\data\file\FileCache;
 use cms\data\page\PageCache;
+use cms\system\content\ContentPermissionHandler;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\poll\Poll;
 use wcf\data\DatabaseObject;
+use wcf\data\IPermissionObject;
 use wcf\data\IPollObject;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\IRouteController;
 use wcf\system\WCF;
 
@@ -30,7 +32,7 @@ use wcf\system\WCF;
  * @property-read	string		$cssClasses		css classes of the content
  * @property-read	array		$additionalData	additional data
  */
-class Content extends DatabaseObject implements IRouteController, IPollObject {
+class Content extends DatabaseObject implements IRouteController, IPollObject, IPermissionObject {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -69,12 +71,12 @@ class Content extends DatabaseObject implements IRouteController, IPollObject {
 	 * @return	boolean
 	 */
 	public function canRead() {
-		if ($this->isDisabled && !WCF::getSession()->getPermission('mod.fireball.canViewDisabledContent')) {
+		if ($this->isDisabled && !$this->getPermission('mod.canViewDisabledContent')) {
 			// user can't read disabled contents
 			return false;
 		}
 
-		return true;
+		return $this->getPermission('user.canViewContent');
 	}
 
 	/**
@@ -217,5 +219,35 @@ class Content extends DatabaseObject implements IRouteController, IPollObject {
 		if (!is_array($this->data['contentData'])) {
 			$this->data['contentData'] = array();
 		}
+	}
+
+	/**
+	 * @see	\wcf\data\IPermissionObject::checkPermissions()
+	 */
+	public function checkPermissions(array $permissions = array('user.canViewContent')) {
+		foreach ($permissions as $permission) {
+			if (!$this->getPermission($permission)) {
+				throw new PermissionDeniedException();
+			}
+		}
+	}
+
+	/**
+	 * @see	\wcf\data\IPermissionObject::getPermission()
+	 */
+	public function getPermission($permission) {
+		$permissions = ContentPermissionHandler::getInstance()->getPermissions($this);
+
+		$aclPermission = str_replace(array('user.', 'mod.', 'admin.'), array('', '', ''), $permission);
+		if (isset($permissions[$aclPermission])) {
+			return $permissions[$aclPermission];
+		}
+
+		if ($permission == 'user.canViewContent') {
+			return $this->getPage()->canRead();
+		}
+
+		$globalPermission = str_replace(array('user.', 'mod.', 'admin.'), array('user.fireball.content.', 'mod.fireball.', 'user.fireball.content.'), $permission);
+		return WCF::getSession()->getPermission($globalPermission);
 	}
 }

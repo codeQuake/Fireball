@@ -10,6 +10,7 @@ use cms\data\page\PageAction;
 use cms\data\page\PageNodeTree;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
+use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -93,6 +94,18 @@ class ContentAddForm extends AbstractForm {
 	public $title = '';
 
 	/**
+	 * show title
+	 * @var boolean
+	 */
+	public $showHeadline = 0;
+
+	/**
+	 * object type id of content
+	 * @var integer
+	 */
+	public $contentObjectTypeID = null;
+
+	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -109,9 +122,13 @@ class ContentAddForm extends AbstractForm {
 		if (isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
 		if (isset($_REQUEST['position'])) $this->position = StringUtil::trim($_REQUEST['position']);
 		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
+		if (isset($_REQUEST['showHeadline'])) $this->showHeadline = 1;
 
 		// register i18n-values
 		I18nHandler::getInstance()->register('title');
+
+		// get acl object type id
+		$this->contentObjectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.content');
 
 		// read object type specific parameters
 		$this->objectType->getProcessor()->readParameters();
@@ -218,7 +235,8 @@ class ContentAddForm extends AbstractForm {
 			'showOrder' => $this->showOrder,
 			'position' => $this->position,
 			'contentData' => $this->contentData,
-			'contentTypeID' => $this->objectType->objectTypeID
+			'contentTypeID' => $this->objectType->objectTypeID,
+			'showHeadline' => $this->showHeadline
 		);
 
 		$this->objectAction = new ContentAction(array(), 'create', array(
@@ -267,7 +285,12 @@ class ContentAddForm extends AbstractForm {
 		$objectAction = new PageAction(array($returnValues['returnValues']->pageID), 'refreshSearchIndex');
 		$objectAction->executeAction();
 
+		// save ACL values of the content
+		ACLHandler::getInstance()->save($returnValues['returnValues']->contentID, $this->contentObjectTypeID);
+		ACLHandler::getInstance()->disableAssignVariables();
+
 		$this->saved();
+
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(
 			'application' => 'cms',
 			'pageID' => $this->pageID
@@ -296,6 +319,7 @@ class ContentAddForm extends AbstractForm {
 		parent::assignVariables();
 
 		I18nHandler::getInstance()->assignVariables();
+		ACLHandler::getInstance()->assignVariables($this->contentObjectTypeID);
 
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
 			PollManager::getInstance()->assignVariables();
@@ -311,7 +335,9 @@ class ContentAddForm extends AbstractForm {
 			'pageList' => $this->pageList,
 			'parentID' => $this->parentID,
 			'position' => $this->position,
-			'showOrder' => $this->showOrder
+			'showOrder' => $this->showOrder,
+			'showHeadline' => $this->showHeadline,
+			'contentObjectTypeID' => $this->contentObjectTypeID
 		));
 	}
 }

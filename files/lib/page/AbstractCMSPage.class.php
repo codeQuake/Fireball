@@ -26,7 +26,7 @@ use wcf\util\HeaderUtil;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-abstract class AbstractCMSPage extends AbstractPage {
+abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	const AVAILABLE_DURING_OFFLINE_MODE = true;
 
 	/**
@@ -76,18 +76,6 @@ abstract class AbstractCMSPage extends AbstractPage {
 		else if (isset($_REQUEST['id'])) {
 			$this->pageID = intval($_REQUEST['id']);
 		}
-// 		// no indicator provided
-// 		else {
-// 			// landing page of the cms
-// 			$page = PageCache::getInstance()->getHomePage();
-// 			if ($page !== null) {
-// 				$this->pageID = $page->pageID;
-// 			} else {
-// 				// redirect to system's landing page
-// 				HeaderUtil::redirect(Linkhandler::getInstance()->getLink(), true);
-// 				exit;
-// 			}
-// 		}
 
 		$this->page = PageCache::getInstance()->getPage($this->pageID);
 		if ($this->page === null) {
@@ -187,5 +175,12 @@ abstract class AbstractCMSPage extends AbstractPage {
 	 */
 	public function getObjectID() {
 		return $this->pageID;
+	}
+
+	/**
+	 * @see \cms\page\ICMSPage::getPage()
+	 */
+	public function getPage() {
+		return $this->page;
 	}
 }

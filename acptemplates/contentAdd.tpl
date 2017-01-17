@@ -1,5 +1,12 @@
 {include file='header' pageTitle='cms.acp.content.'|concat:$action}
 
+{include file='aclPermissions'}
+{if !$contentID|empty}
+	{include file='aclPermissionJavaScript' containerID='contentPermissionsContainer' categoryName='user.*' objectTypeID=$contentObjectTypeID objectID=$contentID}
+{else}
+	{include file='aclPermissionJavaScript' containerID='contentPermissionsContainer' categoryName='user.*' objectTypeID=$contentObjectTypeID}
+{/if}
+
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
 	$(function() {
@@ -68,6 +75,13 @@
 					{/if}
 
 					{include file='multipleLanguageInputJavascript' elementIdentifier='title' forceSelection=false}
+				</dd>
+			</dl>
+
+			<dl>
+				<dt><label for="showHeadline">{lang}cms.acp.content.title.showHeadline{/lang}</label></dt>
+				<dd>
+					<input type="checkbox" id="showHeadline" name="showHeadline" value="1"{if $showHeadline} checked="checked"{/if} />
 				</dd>
 			</dl>
 
@@ -140,6 +154,19 @@
 		</section>
 
 		{event name='fieldsets'}
+	</div>
+
+	<div class="container containerPadding marginTop">
+		<fieldset>
+			<legend>{lang}cms.acp.content.userPermissions{/lang}</legend>
+
+			<dl id="contentPermissionsContainer">
+				<dt>{lang}wcf.acl.permissions{/lang}</dt>
+				<dd></dd>
+			</dl>
+
+			{event name='permissionFields'}
+		</fieldset>
 	</div>
 
 	<div class="formSubmit">

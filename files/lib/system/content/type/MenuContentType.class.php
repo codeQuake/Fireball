@@ -24,7 +24,7 @@ class MenuContentType extends AbstractStructureContentType {
 	public function getOutput(Content $content) {
 		switch ($content->type) {
 			case "children":
-				if ($content->pageID)
+				if (!empty($content->pageID))
 					$menuItems = PageCache::getInstance()->getPage($content->pageID)->getChildrenTree(($content->depth) ? intval($content->depth) - 1 : null);
 				else
 					$menuItems = $content->getPage()->getChildrenTree(($content->depth) ? intval($content->depth) - 1 : null);

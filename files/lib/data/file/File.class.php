@@ -1,9 +1,12 @@
 <?php
 namespace cms\data\file;
 
+use cms\system\file\FilePermissionHandler;
 use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
+use wcf\data\IPermissionObject;
 use wcf\system\category\CategoryHandler;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -24,7 +27,7 @@ use wcf\system\WCF;
  * @property-read	integer		$uploadTime		timestamp of upload
  * @property-read	integer		$downloads		amount of downloads
  */
-class File extends DatabaseObject implements ILinkableObject, IRouteController {
+class File extends DatabaseObject implements ILinkableObject, IRouteController, IPermissionObject {
 	/**
 	 * list of category ids
 	 * @var	array<integer>
@@ -46,6 +49,17 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'fileID';
+
+	/**
+	 * list of mime types that support thumbnail generation
+	 * @var	array<string>
+	 */
+	public static $thumbnailMimeTypes = array(
+		'image/gif',
+		'image/jpeg',
+		'image/png',
+		'image/pjpeg'
+	);
 
 	/**
 	 * Returns the category ids of this file.
@@ -131,8 +145,27 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	}
 
 	/**
+	 * Generates a link to the thumbnail of the image
+	 * @return string
+	 * @throws \wcf\system\exception\SystemException
+	 */
+	public function getThumbnailLink() {
+		// fallback
+		if (!$this->hasThumbnail()) {
+			return $this->getLink();
+		}
+
+		return LinkHandler::getInstance()->getLink('FileDownload', array(
+			'application' => 'cms',
+			'forceFrontend' => true,
+			'id' => $this->fileID,
+			'thumbnail' => 1
+		));
+	}
+
+	/**
 	 * Returns the physical location of this file.
-	 * 
+	 *
 	 * @return	string
 	 */
 	public function getLocation() {
@@ -140,17 +173,19 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 	}
 
 	/**
+	 * Returns the physical location of the thumbnail of this file.
+	 *
+	 * @return	string
+	 */
+	public function getThumbnailLocation() {
+		return CMS_DIR . 'files/thumbnails/' . substr($this->fileHash, 0, 2) . '/' . $this->getFilename();
+	}
+
+	/**
 	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
 	public function getTitle() {
 		return WCF::getLanguage()->get($this->title);
-	}
-
-	/**
-	 * @todo	Remove method
-	 */
-	public function getByID($id) {
-		return new File($id);
 	}
 
 	public function getImageSize() {
@@ -166,5 +201,46 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Indicates whether a file has a thumbnail
+	 * @return boolean
+	 */
+	public function hasThumbnail() {
+		return !empty($this->filesizeThumbnail) && $this->isImage();
+	}
+
+	/**
+	 * @see        \wcf\data\IPermissionObject::checkPermissions()
+	 * @param array $permissions
+	 * @throws PermissionDeniedException
+	 */
+	public function checkPermissions(array $permissions = array('user.canDownloadFile')) {
+		foreach ($permissions as $permission) {
+			if (!$this->getPermission($permission)) {
+				throw new PermissionDeniedException();
+			}
+		}
+	}
+
+	/**
+	 * @see	\wcf\data\IPermissionObject::getPermission()
+	 */
+	public function getPermission($permission) {
+		$permissions = FilePermissionHandler::getInstance()->getPermissions($this);
+
+		$aclPermission = str_replace(array('user.', 'mod.', 'admin.'), array('', '', ''), $permission);
+		if (isset($permissions[$aclPermission])) {
+			return $permissions[$aclPermission];
+		}
+
+		// why the hell is this permission located under content?!
+		if ($permission == 'user.canDownloadFile') {
+			return WCF::getSession()->getPermission('user.fireball.content.canDownloadFile');
+		}
+
+		$globalPermission = str_replace(array('user.', 'mod.', 'admin.'), array('user.fireball.file.', 'mod.fireball.', 'user.fireball.file.'), $permission);
+		return WCF::getSession()->getPermission($globalPermission);
 	}
 }

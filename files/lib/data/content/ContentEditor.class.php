@@ -2,9 +2,9 @@
 namespace cms\data\content;
 
 use cms\system\cache\builder\ContentCacheBuilder;
+use cms\system\cache\builder\ContentPermissionCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\WCF;
 
 /**
  * Functions to edit a content item.
@@ -25,5 +25,6 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	 */
 	public static function resetCache() {
 		ContentCacheBuilder::getInstance()->reset();
+		ContentPermissionCacheBuilder::getInstance()->reset();
 	}
 }

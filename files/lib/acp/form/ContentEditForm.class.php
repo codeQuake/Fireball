@@ -8,6 +8,7 @@ use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
 use wcf\form\AbstractForm;
+use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\poll\PollManager;
@@ -88,7 +89,8 @@ class ContentEditForm extends ContentAddForm {
 			'showOrder' => $this->showOrder,
 			'position' => $this->position,
 			'contentData' => $this->contentData,
-			'contentTypeID' => $this->objectType->objectTypeID
+			'contentTypeID' => $this->objectType->objectTypeID,
+			'showHeadline' => $this->showHeadline
 		);
 
 		$this->objectAction = new ContentAction(array($this->contentID), 'update', array(
@@ -118,6 +120,10 @@ class ContentEditForm extends ContentAddForm {
 		$objectAction = new PageAction(array($this->pageID), 'refreshSearchIndex');
 		$objectAction->executeAction();
 
+		// save ACL values of the content
+		ACLHandler::getInstance()->save($this->contentID, $this->contentObjectTypeID);
+		ACLHandler::getInstance()->disableAssignVariables();
+
 		$this->saved();
 
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(
@@ -141,6 +147,7 @@ class ContentEditForm extends ContentAddForm {
 			$this->showOrder = $this->content->showOrder;
 			$this->position = $this->content->position;
 			$this->contentData = $this->content->contentData;
+			$this->showHeadline = $this->content->showHeadline;
 
 			if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
 				PollManager::getInstance()->setObject('de.codequake.cms.content', $this->content->contentID, $this->contentData['pollID']);

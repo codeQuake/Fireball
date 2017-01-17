@@ -5,6 +5,7 @@ use cms\data\content\Content;
 use cms\data\content\ContentAction;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
+use wcf\system\request\LinkHandler;
 use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 
@@ -55,15 +56,25 @@ class TemplateContentType extends AbstractContentType {
 	public function getOutput(Content $content) {
 		$compiled = $content->compiled;
 		if (empty($compiled[WCF::getLanguage()->languageCode])) {
-			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
-			
-			$contentData = $content->contentData;
-			if (!is_array($contentData))
-				$contentData = unserialize($contentData);
-			$contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
-			
-			$contentAction = new ContentAction(array($content), 'update', array('data' => array('contentData' => $contentData)));
-			$contentAction->executeAction();
+			try {
+				$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
+
+				$contentData = $content->contentData;
+				if (!is_array($contentData)) $contentData = unserialize($contentData);
+				$contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
+
+				$contentAction = new ContentAction(array($content), 'update',
+					array('data' => array('contentData' => $contentData)));
+				$contentAction->executeAction();
+			}
+			catch (SystemException $e) {
+				if ($content->getPermission('mod.canViewErroredContent')) {
+					$url = LinkHandler::getInstance()->getLink('ContentEdit', array('application' => 'cms', 'object' => $content, 'isACP' => true));
+					return '<div class="error">Please check <a href="' . $url . '">content #' . $content->contentID . '</a> (language: ' . WCF::getLanguage()->languageCode . '). The following error occurred fetching the feed from <span class="inlineCode">' . $content->url . '</span>:<br><br>' . $e->getMessage() . '</div>';
+				} else {
+					return '';
+				}
+			}
 		} else {
 			$compiled = $content->compiled[WCF::getLanguage()->languageCode];
 		}

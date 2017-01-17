@@ -22,7 +22,9 @@
 		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
 		<item name="cms.acp.content.position.position.body"><![CDATA[Inhaltsbereich]]></item>
 		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Seitenleiste]]></item>
+		<item name="cms.acp.content.title.showHeadline"><![CDATA[Titel anzeigen]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
+		<item name="cms.acp.content.userPermissions"><![CDATA[Berechtigungen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns"><![CDATA[Mehrspaltig]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.columns.column.add"><![CDATA[Spalte hinzufügen]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.box"><![CDATA[Box]]></item>
@@ -61,6 +63,13 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type"><![CDATA[Vorlage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.all"><![CDATA[Alle Seiten]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.type.children"><![CDATA[Untergeordnete Seiten]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.pageID"><![CDATA[Root]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.menu.pageID.noSelection"><![CDATA[Aktuelle Seite]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.content"><![CDATA[Fireball CMS-Inhalt]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.contentID"><![CDATA[Anzuzeigender Inhalt]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.googlemaps"><![CDATA[Google Maps]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.googlemaps.latitude"><![CDATA[Breitengrad]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.googlemaps.longitude"><![CDATA[Längengrad]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.php"><![CDATA[PHP]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.poll"><![CDATA[Umfrage]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.rss"><![CDATA[RSS Feed]]></item>
@@ -129,6 +138,25 @@
 		<item name="fireball.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
+		<item name="fireball.acp.menu.link.fireball.boxmatch"><![CDATA[Dashboardboxen]]></item>
+		<item name="fireball.acp.menu.link.fireball.boxmatch.add"><![CDATA[Dashboardbox hinzufügen]]></item>
+		<item name="fireball.acp.menu.link.fireball.boxmatch.list"><![CDATA[Dashboardboxen auflisten]]></item>
+	</category>
+
+	<category name="cms.acp.boxmatch">
+		<item name="cms.acp.boxmatch.list"><![CDATA[Verknüpfungen auflisten]]></item>
+		<item name="cms.acp.boxmatch.add"><![CDATA[Verknüpfung hinzufügen]]></item>
+		<item name="cms.acp.boxmatch.content"><![CDATA[Inhalt (Fireball CMS)]]></item>
+		<item name="cms.acp.boxmatch.page"><![CDATA[Seite (Fireball CMS)]]></item>
+		<item name="cms.acp.boxmatch.boxID"><![CDATA[Dasbboardbox]]></item>
+		<item name="cms.acp.boxmatch.position"><![CDATA[Position]]></item>
+		<item name="cms.acp.boxmatch.delete.sure"><![CDATA[Bist du dir sicher, dass du die Dashboardbox entfernen willst?]]></item>
+		<item name="cms.acp.boxmatch.list.description"><![CDATA[Die hier mit Inhalten verknüpften Dashboardboxen können über die Dashboardverwaltung auf jeder Seite mit Sidebar/Dashboardbereich eingebunden werden.]]></item>
+	</category>
+
+	<category name="cms.acp.condition">
+		<item name="cms.condition.page.page"><![CDATA[CMS-Seite]]></item>
+		<item name="cms.condition.page.page.description"><![CDATA[Wählen Sie hier die CMS-Seiten aus, auf denen der Hinweis angezeigt werden soll.]]></item>
 	</category>
 
 	<category name="cms.acp.page">
@@ -408,8 +436,10 @@
 	</category>
 
 	<category name="wcf.acp.rebuildData">
-		<item name="wcf.acp.rebuildData.de.codequake.cms.page"><![CDATA[Seiten aktualisieren]]></item>
+		<item name="wcf.acp.rebuildData.de.codequake.cms.page"><![CDATA[Seiten aktualisieren (Fireball CMS)]]></item>
 		<item name="wcf.acp.rebuildData.de.codequake.cms.page.description"><![CDATA[Aktualisiert den Suchindex aller Fireball CMS Seiten]]></item>
+		<item name="wcf.acp.rebuildData.de.codequake.cms.file"><![CDATA[Dateien aktualisieren (Fireball CMS)]]></item>
+		<item name="wcf.acp.rebuildData.de.codequake.cms.file.description"><![CDATA[Aktualisiert Thumbnails von Dateien im Fireball CMS]]></item>
 	</category>
 
 	<category name="wcf.acp.search">

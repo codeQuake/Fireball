@@ -78,6 +78,7 @@ CREATE TABLE cms1_content (
 	isDisabled TINYINT(1) DEFAULT 0,
 	position ENUM('body', 'sidebar') NOT NULL DEFAULT 'body',
 	cssClasses VARCHAR(255),
+	showHeadline TINYINT(1) NOT NULL DEFAULT 0,
 	additionalData MEDIUMTEXT DEFAULT NULL
 );
 
@@ -104,9 +105,16 @@ CREATE TABLE cms1_file (
 	title VARCHAR(255) NOT NULL DEFAULT '',
 	filesize INT(10) NOT NULL DEFAULT 0,
 	fileType VARCHAR(255) NOT NULL DEFAULT '',
+	width INT(10) NOT NULL DEFAULT 0,
+	height INT(10) NOT NULL DEFAULT 0,
+	filesizeThumbnail INT(10) NOT NULL DEFAULT 0,
+	fileTypeThumbnail VARCHAR(255) NOT NULL DEFAULT '',
+	widthThumbnail INT(10) NOT NULL DEFAULT 0,
+	heightThumbnail INT(10) NOT NULL DEFAULT 0,
 	fileHash VARCHAR(40) NOT NULL DEFAULT '',
 	uploadTime INT(10) NOT NULL DEFAULT 0,
-	downloads INT(10) DEFAULT 0
+	downloads INT(10) DEFAULT 0,
+	filename VARCHAR(255) NOT NULL DEFAULT ''
 );
 
 DROP TABLE IF EXISTS cms1_file_to_category;
@@ -131,6 +139,16 @@ CREATE TABLE cms1_counter (
 	devices MEDIUMTEXT
 );
 
+-- dashboard boxes
+-- since 2.2.0 Beta 1
+DROP TABLE IF EXISTS cms1_content_to_dashboardbox;
+CREATE TABLE cms1_content_to_dashboardbox (
+	contentID INT(10),
+	boxID INT(10),
+	position VARCHAR(255) NOT NULL DEFAULT '',
+	PRIMARY KEY (contentID, boxID)
+);
+
 -- foreign keys
 ALTER TABLE cms1_content ADD FOREIGN KEY (parentID) REFERENCES cms1_content (contentID) ON DELETE SET NULL;
 ALTER TABLE cms1_content ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
@@ -151,3 +169,7 @@ ALTER TABLE cms1_page_revision ADD FOREIGN KEY (userID) REFERENCES wcf1_user (us
 
 ALTER TABLE cms1_stylesheet_to_page ADD FOREIGN KEY (stylesheetID) REFERENCES cms1_stylesheet (stylesheetID) ON DELETE CASCADE;
 ALTER TABLE cms1_stylesheet_to_page ADD FOREIGN KEY (pageID) REFERENCES cms1_page (pageID) ON DELETE CASCADE;
+
+-- since 2.2.0 Beta 1
+ALTER TABLE cms1_content_to_dashboardbox ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
+ALTER TABLE cms1_content_to_dashboardbox ADD FOREIGN KEY (boxID) REFERENCES wcf1_dashboard_box (boxID) ON DELETE CASCADE;

@@ -1,14 +1,15 @@
 <?php
 namespace cms\data\file;
 
-use cms\data\file\FileCache;
 use cms\system\cache\builder\FileCacheBuilder;
 use wcf\data\category\CategoryNodeTree;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\acl\ACLHandler;
 use wcf\system\category\CategoryHandler;
 use wcf\system\exception\UserInputException;
+use wcf\system\image\ImageHandler;
+use wcf\system\upload\UploadFile;
 use wcf\system\WCF;
-use wcf\util\ArrayUtil;
 use wcf\util\FileUtil;
 
 /**
@@ -59,13 +60,12 @@ class FileAction extends AbstractDatabaseObjectAction {
 	public function getDetails() {
 		$file = $this->getSingleObject();
 
-		WCF::getTPL()->assign(array(
-			'file' => $file
-		));
-
 		return array(
 			'fileID' => $file->fileID,
-			'template' => WCF::getTPL()->fetch('fileDetails', 'cms'),
+			'template' => WCF::getTPL()->fetch('fileDetails', 'cms', array(
+				'file' => $file,
+				'fileACLObjectTypeID' => ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.file')
+			)),
 			'title' => $file->getTitle()
 		);
 	}
@@ -257,6 +257,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 		$failedUploads = array();
 		$result = array('files' => array(), 'errors' => array());
 
+		/** @var UploadFile $file */
 		foreach ($files as $file) {
 			try {
 				if ($file->getValidationErrorType()) {
@@ -272,6 +273,12 @@ class FileAction extends AbstractDatabaseObjectAction {
 					'uploadTime' => TIME_NOW
 				);
 
+				$imageData = $file->getImageData();
+				if (!empty($imageData)) {
+					$data['width'] = $imageData['width'];
+					$data['height'] = $imageData['height'];
+				}
+
 				$uploadedFile = FileEditor::create($data);
 				
 				//clear cache
@@ -286,6 +293,12 @@ class FileAction extends AbstractDatabaseObjectAction {
 				// move uploaded file
 				if (@move_uploaded_file($file->getLocation(), $uploadedFile->getLocation())) {
 					@unlink($file->getLocation());
+
+					// generate thumbnails
+					if (in_array($uploadedFile->fileType, File::$thumbnailMimeTypes)) {
+						$thumbnailAction = new self(array($uploadedFile), 'generateThumbnail');
+						$thumbnailAction->executeAction();
+					}
 
 					$result['files'][$file->getInternalFileID()] = array(
 						'fileID' => $uploadedFile->fileID,
@@ -317,5 +330,64 @@ class FileAction extends AbstractDatabaseObjectAction {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Validates the generate thumbnail action
+	 * @throws UserInputException
+	 */
+	public function validateGenerateThumbnail() {
+		/** @var File $object */
+		foreach ($this->objects as $object) {
+			if (!in_array($object->fileType, File::$thumbnailMimeTypes)) {
+				throw new UserInputException('objectIDs');
+			}
+		}
+	}
+
+	/**
+	 * Generates a thumbnail with max 500x500px fot the given objects
+	 * @throws \wcf\system\exception\SystemException
+	 */
+	public function generateThumbnail() {
+		$minWidth = 500;
+		$minHeight = 500;
+
+		$thumbnailWidth = 500;
+		$thumbnailHeight = 500;
+
+		/** @var FileEditor $object */
+		foreach ($this->objects as $fileEditor) {
+			/** @var File $file */
+			$file = $fileEditor->getDecoratedObject();
+
+			// check memory limit
+			if (!FileUtil::checkMemoryLimit($file->width * $file->height * ($file->fileType == 'image/png' ? 4 : 3) * 2.1)) {
+				return;
+			}
+
+			$adapter = ImageHandler::getInstance()->getAdapter();
+			$adapter->loadFile($file->getLocation());
+
+			$updateData = array();
+
+			$thumbnailLocation = $file->getThumbnailLocation();
+			@unlink($thumbnailLocation);
+
+			if ($file->width > $minWidth || $file->height > $minHeight) {
+				$thumbnail = $adapter->createThumbnail($thumbnailWidth, $thumbnailHeight);
+				$adapter->writeImage($thumbnail, $thumbnailLocation);
+				if (file_exists($thumbnailLocation) && ($imageData = @getimagesize($thumbnailLocation)) !== false) {
+					$updateData['fileTypeThumbnail'] = $imageData['mime'];
+					$updateData['filesizeThumbnail'] = @filesize($thumbnailLocation);
+					$updateData['widthThumbnail'] = $imageData[0];
+					$updateData['heightThumbnail'] = $imageData[1];
+				}
+			}
+
+			if (!empty($updateData)) {
+				$fileEditor->update($updateData);
+			}
+		}
 	}
 }

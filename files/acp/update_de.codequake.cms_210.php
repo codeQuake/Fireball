@@ -1,5 +1,7 @@
 <?php
 
+use cms\data\content\ContentEditor;
+use cms\data\content\ContentList;
 use cms\data\page\PageEditor;
 use cms\data\page\PageList;
 use wcf\data\acl\option\category\ACLOptionCategoryEditor;
@@ -209,6 +211,23 @@ $pageList = new PageList();
 $pageList->readObjects();
 $affectedObjects = $pageList->getObjects();
 foreach ($affectedObjects as $object) {
-		$objectEditor = new PageEditor($object);
-		$objectEditor->update(array('objectTypeID' => $objectTypeID));
+	$objectEditor = new PageEditor($object);
+	$objectEditor->update(array('objectTypeID' => $objectTypeID));
+}
+
+$contentList = new ContentList();
+$contentList->readObjects();
+$contents = $contentList->getObjects();
+/** @var \cms\data\content\Content $content */
+foreach ($contents as $content) {
+	$typeName = $content->getTypeName();
+	if ($typeName != 'de.codequake.cms.content.type.headline' || $typeName != 'de.codequake.cms.content.type.dashboard'
+		|| $typeName != 'de.codequake.cms.content.type.user' || $typeName != 'de.codequake.cms.content.type.group'
+		|| $typeName != 'de.codequake.cms.content.type.tabmenu' || $typeName != 'de.codequake.cms.content.type.columns'
+		|| $typeName != 'de.codequake.cms.content.type.wsipimport') {
+		continue;
+	}
+
+	$contentEditor = new ContentEditor($content);
+	$contentEditor->update(array('showHeadline' => 1));
 }
