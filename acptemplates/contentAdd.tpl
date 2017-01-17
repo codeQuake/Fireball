@@ -56,118 +56,114 @@
 </div>
 
 <form method="post" action="{if $action == 'add'}{link application='cms' controller='ContentAdd' id=$pageID}objectType={$objectType->objectType}{/link}{else}{link application='cms' controller='ContentEdit' id=$contentID}{/link}{/if}">
-	<div class="container containerPadding marginTop">
-		<section class="section">
-			<h2 class="sectionTitle">{lang}wcf.global.form.data{/lang}</h2>
+	<section class="section">
+		<h2 class="sectionTitle">{lang}wcf.global.form.data{/lang}</h2>
 
-			<dl{if $errorField == 'title'} class="formError"{/if}>
-				<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
-				<dd>
-					<input type="text" id="title" name="title" value="{$i18nPlainValues['title']}" class="long" />
-					{if $errorField == 'title'}
-						<small class="innerError">
-							{if $errorType == 'empty' || $errorType == 'multilingual'}
-								{lang}wcf.global.form.error.{@$errorType}{/lang}
-							{else}
-								{lang}cms.acp.content.title.error.{@$errorType}{/lang}
-							{/if}
-						</small>
-					{/if}
+		<dl{if $errorField == 'title'} class="formError"{/if}>
+			<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
+			<dd>
+				<input type="text" id="title" name="title" value="{$i18nPlainValues['title']}" class="long" />
+				{if $errorField == 'title'}
+					<small class="innerError">
+						{if $errorType == 'empty' || $errorType == 'multilingual'}
+							{lang}wcf.global.form.error.{@$errorType}{/lang}
+						{else}
+							{lang}cms.acp.content.title.error.{@$errorType}{/lang}
+						{/if}
+					</small>
+				{/if}
 
-					{include file='multipleLanguageInputJavascript' elementIdentifier='title' forceSelection=false}
-				</dd>
-			</dl>
+				{include file='multipleLanguageInputJavascript' elementIdentifier='title' forceSelection=false}
+			</dd>
+		</dl>
 
+		<dl>
+			<dt><label for="showHeadline">{lang}cms.acp.content.title.showHeadline{/lang}</label></dt>
+			<dd>
+				<input type="checkbox" id="showHeadline" name="showHeadline" value="1"{if $showHeadline} checked="checked"{/if} />
+			</dd>
+		</dl>
+
+		{event name='dataFields'}
+	</section>
+
+	<section class="section">
+		<h2 class="sectionTitle">{lang}cms.acp.content.position{/lang}</h2>
+
+		<dl>
+			<dt><label for="pageID">{lang}cms.global.page{/lang}</label></dt>
+			<dd>
+				<select name="pageID" id="pageID">
+					{foreach from=$pageList item=$node}
+						<option{if $node->pageID == $pageID} selected="selected"{/if} value="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
+					{/foreach}
+				</select>
+			</dd>
+		</dl>
+
+		{hascontent}
 			<dl>
-				<dt><label for="showHeadline">{lang}cms.acp.content.title.showHeadline{/lang}</label></dt>
+				<dt><label for="parentID">{lang}cms.acp.content.position.parentID{/lang}</label></dt>
 				<dd>
-					<input type="checkbox" id="showHeadline" name="showHeadline" value="1"{if $showHeadline} checked="checked"{/if} />
-				</dd>
-			</dl>
-
-			{event name='dataFields'}
-		</section>
-
-		<section class="section">
-			<h2 class="sectionTitle">{lang}cms.acp.content.position{/lang}</h2>
-
-			<dl>
-				<dt><label for="pageID">{lang}cms.global.page{/lang}</label></dt>
-				<dd>
-					<select name="pageID" id="pageID">
-						{foreach from=$pageList item=$node}
-							<option{if $node->pageID == $pageID} selected="selected"{/if} value="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$pageList->getDepth()}{$node->getTitle()}</option>
-						{/foreach}
+					<select id="parentID" name="parentID">
+						<option value="0" {if $parentID == 0} selected="selected"{/if}>{lang}wcf.global.noSelection{/lang}</option>
+						{content}
+							{foreach from=$contentList item=$node}
+								<option{if $node->contentID == $parentID} selected="selected"{/if} value="{@$node->contentID}" data-page-id="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$contentList->getDepth()}{$node->getTitle()}</option>
+							{/foreach}
+						{/content}
 					</select>
 				</dd>
 			</dl>
+		{/hascontent}
 
-			{hascontent}
-				<dl>
-					<dt><label for="parentID">{lang}cms.acp.content.position.parentID{/lang}</label></dt>
-					<dd>
-						<select id="parentID" name="parentID">
-							<option value="0" {if $parentID == 0} selected="selected"{/if}>{lang}wcf.global.noSelection{/lang}</option>
-							{content}
-								{foreach from=$contentList item=$node}
-									<option{if $node->contentID == $parentID} selected="selected"{/if} value="{@$node->contentID}" data-page-id="{@$node->pageID}">{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$contentList->getDepth()}{$node->getTitle()}</option>
-								{/foreach}
-							{/content}
-						</select>
-					</dd>
-				</dl>
-			{/hascontent}
+		<dl>
+			<dt><label for="showOrder">{lang}cms.acp.content.position{/lang}</label></dt>
+			<dd>
+				<input type="number" name="showOrder" id="showorder" value="{$showOrder}" />
+			</dd>
+		</dl>
 
-			<dl>
-				<dt><label for="showOrder">{lang}cms.acp.content.position{/lang}</label></dt>
-				<dd>
-					<input type="number" name="showOrder" id="showorder" value="{$showOrder}" />
-				</dd>
-			</dl>
+		{event name='positionFields'}
+	</section>
 
-			{event name='positionFields'}
-		</section>
+	<section class="section">
+		<h2 class="sectionTitle">{lang}cms.acp.content.type.{$objectType->objectType}{/lang}</h2>
 
-		<section class="section">
-			<h2 class="sectionTitle">{lang}cms.acp.content.type.{$objectType->objectType}{/lang}</h2>
+		{include file=$objectType->getProcessor()->getFormTemplate() application='cms'}
+	</section>
 
-			{include file=$objectType->getProcessor()->getFormTemplate() application='cms'}
-		</section>
+	<section class="section">
+		<h2 class="sectionTitle">{lang}cms.acp.content.css{/lang}</h2>
 
-		<section class="section">
-			<h2 class="sectionTitle">{lang}cms.acp.content.css{/lang}</h2>
+		<dl{if $errorField == 'cssClasses'} class="formError"{/if}>
+			<dt><label for="cssClasses">{lang}cms.acp.content.css.cssClasses{/lang}</label></dt>
+			<dd>
+				<input type="text" id="cssClasses" name="cssClasses" value="{$cssClasses}" class="long" />
+				{if $errorField == 'cssClasses'}
+					<small class="innerError">
+						{lang}cms.acp.content.cssClasses.error.{@$errorType}{/lang}
+					</small>
+				{/if}
+				<small>{lang}cms.acp.content.css.cssClasses.description{/lang}</small>
+			</dd>
+		</dl>
 
-			<dl{if $errorField == 'cssClasses'} class="formError"{/if}>
-				<dt><label for="cssClasses">{lang}cms.acp.content.css.cssClasses{/lang}</label></dt>
-				<dd>
-					<input type="text" id="cssClasses" name="cssClasses" value="{$cssClasses}" class="long" />
-					{if $errorField == 'cssClasses'}
-						<small class="innerError">
-							{lang}cms.acp.content.cssClasses.error.{@$errorType}{/lang}
-						</small>
-					{/if}
-					<small>{lang}cms.acp.content.css.cssClasses.description{/lang}</small>
-				</dd>
-			</dl>
+		{event name='cssFields'}
+	</section>
 
-			{event name='cssFields'}
-		</section>
+	{event name='sections'}
 
-		{event name='fieldsets'}
-	</div>
+	<section class="section">
+		<h2 class="sectionTitle">{lang}cms.acp.content.userPermissions{/lang}</h2>
 
-	<div class="container containerPadding marginTop">
-		<fieldset>
-			<legend>{lang}cms.acp.content.userPermissions{/lang}</legend>
+		<dl id="contentPermissionsContainer">
+			<dt>{lang}wcf.acl.permissions{/lang}</dt>
+			<dd></dd>
+		</dl>
 
-			<dl id="contentPermissionsContainer">
-				<dt>{lang}wcf.acl.permissions{/lang}</dt>
-				<dd></dd>
-			</dl>
-
-			{event name='permissionFields'}
-		</fieldset>
-	</div>
+		{event name='permissionFields'}
+	</section>
 
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />

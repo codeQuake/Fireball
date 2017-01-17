@@ -1,11 +1,12 @@
 <div id="contentAddForm">
-	<fieldset>
-		<legend>{lang}cms.acp.content.type.{$objectType->objectType}{/lang}</legend>
+	<section class="section">
+		<h2 class="sectionTitle">{lang}cms.acp.content.type.{$objectType->objectType}{/lang}</h2>
 
 		{@$typeTemplate}
-	</fieldset>
-	<fieldset>
-		<legend>{lang}cms.acp.content.css{/lang}</legend>
+	</section>
+
+	<section class="section">
+		<h2 class="sectionTitle">{lang}cms.acp.content.css{/lang}</h2>
 
 		<dl>
 			<dt><label for="cssClasses">{lang}cms.acp.content.css.cssClasses{/lang}</label></dt>
@@ -16,7 +17,8 @@
 		</dl>
 
 		{event name='cssFields'}
-	</fieldset>
+	</section>
+
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" />
 		{@SECURITY_TOKEN_INPUT_TAG}

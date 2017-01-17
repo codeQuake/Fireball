@@ -33,60 +33,58 @@
 </div>
 
 <form method="post" action="{if $action == 'add'}{link controller='StylesheetAdd' application='cms'}{/link}{else}{link controller='StylesheetEdit' id=$stylesheetID application='cms'}{/link}{/if}">
-	<div class="container containerPadding marginTop">
-		<section class="section">
-			<h2 class="sectionTitle">{lang}wcf.global.form.data{/lang}</h2>
+	<section class="section">
+		<h2 class="sectionTitle">{lang}wcf.global.form.data{/lang}</h2>
 
-			<dl>
-				<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
-				<dd>
-					<input type="text" name="title" id="title" required="required" value="{$title}" class="long" />
-					{if $errorField == 'title'}
-						<small class="innerError">
-							{if $errorType == 'empty'}
-								{lang}wcf.global.form.error.empty{/lang}
-							{else}
-								{lang}cms.acp.stylesheet.title.error.{@$errorType}{/lang}
-							{/if}
-						</small>
-					{/if}
-				</dd>
-			</dl>
+		<dl>
+			<dt><label for="title">{lang}wcf.global.title{/lang}</label></dt>
+			<dd>
+				<input type="text" name="title" id="title" required="required" value="{$title}" class="long" />
+				{if $errorField == 'title'}
+					<small class="innerError">
+						{if $errorType == 'empty'}
+							{lang}wcf.global.form.error.empty{/lang}
+						{else}
+							{lang}cms.acp.stylesheet.title.error.{@$errorType}{/lang}
+						{/if}
+					</small>
+				{/if}
+			</dd>
+		</dl>
 
-			{event name='dataFields'}
-		</section>
+		{event name='dataFields'}
+	</section>
 
-		<section class="section marginTop">
-			<h2 class="sectionTitle">{lang}cms.acp.stylesheet.scss{/lang}</h2>
+	<section class="section marginTop">
+		<h2 class="sectionTitle">{lang}cms.acp.stylesheet.scss{/lang}</h2>
 
-			<dl class="wide">
-				<dt></dt>
-				<dd>
-					<textarea id="scss" rows="20" cols="40" name="scss">{$scss}</textarea>
-					{if $errorField == 'scss'}
-						<small class="innerError">
-							{if $errorType == 'empty'}
-								{lang}wcf.global.form.error.empty{/lang}
-							{else}
-								{lang}cms.acp.stylesheet.scss.error.{@$errorType}{/lang}
-							{/if}
-						</small>
-					{/if}
-					<small>{lang}cms.acp.stylesheet.scss.description{/lang}</small>
+		<dl class="wide">
+			<dt></dt>
+			<dd>
+				<textarea id="scss" rows="20" cols="40" name="scss">{$scss}</textarea>
+				{if $errorField == 'scss'}
+					<small class="innerError">
+						{if $errorType == 'empty'}
+							{lang}wcf.global.form.error.empty{/lang}
+						{else}
+							{lang}cms.acp.stylesheet.scss.error.{@$errorType}{/lang}
+						{/if}
+					</small>
+				{/if}
+				<small>{lang}cms.acp.stylesheet.scss.description{/lang}</small>
 
-					{if !'ACE_THEME'|defined}
-						{include file='codemirror' codemirrorMode='text/x-less' codemirrorSelector='#scss' sandbox=true}
-					{else}
-						{include file='ace' aceMode='scss' aceSelector='scss' sandbox=true}
-					{/if}
-				</dd>
-			</dl>
+				{if !'ACE_THEME'|defined}
+					{include file='codemirror' codemirrorMode='text/x-less' codemirrorSelector='#scss' sandbox=true}
+				{else}
+					{include file='ace' aceMode='scss' aceSelector='scss' sandbox=true}
+				{/if}
+			</dd>
+		</dl>
 
-			{event name='scssFields'}
-		</section>
+		{event name='scssFields'}
+	</section>
 
-		{event name='fieldsets'}
-	</div>
+	{event name='sections'}
 
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />

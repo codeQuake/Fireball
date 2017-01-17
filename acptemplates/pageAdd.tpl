@@ -355,7 +355,7 @@
 				{event name='settingsFields'}
 			</section>
 
-			{event name='fieldsets'}
+			{event name='sections'}
 		</div>
 
 		<div id="specific" class="tabMenuContent">
