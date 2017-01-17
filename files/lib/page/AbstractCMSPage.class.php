@@ -24,7 +24,7 @@ use wcf\util\HeaderUtil;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-abstract class AbstractCMSPage extends AbstractPage {
+abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	const AVAILABLE_DURING_OFFLINE_MODE = true;
 
 	/**
@@ -175,5 +175,12 @@ abstract class AbstractCMSPage extends AbstractPage {
 	 */
 	public function getObjectID() {
 		return $this->pageID;
+	}
+
+	/**
+	 * @see \cms\page\ICMSPage::getPage()
+	 */
+	public function getPage() {
+		return $this->page;
 	}
 }

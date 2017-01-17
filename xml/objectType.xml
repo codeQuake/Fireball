@@ -346,6 +346,15 @@
 			<categoryname>de.codequake.cms</categoryname>
 		</type>
 		<!-- /stat handlers -->
+
+		<!-- notice conditions -->
+		<type>
+			<name>de.codequake.cms.page.page</name>
+			<definitionname>com.woltlab.wcf.condition.notice</definitionname>
+			<classname><![CDATA[cms\system\condition\PagePageCondition]]></classname>
+			<conditionobject>com.woltlab.wcf.page</conditionobject>
+		</type>
+		<!-- /notice conditions -->
 		
 		<!-- importer -->
 		<type>
