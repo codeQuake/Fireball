@@ -14,13 +14,13 @@ use wcf\system\SingletonFactory;
  */
 class ContentCache extends SingletonFactory {
 
-	protected $contents = array();
+	protected $contents = [];
 
-	protected $tree = array();
+	protected $tree = [];
 
 	protected function init() {
-		$this->tree = ContentCacheBuilder::getInstance()->getData(array(), 'tree');
-		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$this->tree = ContentCacheBuilder::getInstance()->getData([], 'tree');
+		$this->contents = ContentCacheBuilder::getInstance()->getData([], 'contents');
 	}
 
 	public function getContent($id) {
@@ -31,7 +31,7 @@ class ContentCache extends SingletonFactory {
 	public function getChildIDs($parentID = null) {
 		if ($parentID === null) $parentID = '';
 		
-		if (!isset($this->tree[$parentID])) return array();
+		if (!isset($this->tree[$parentID])) return [];
 		
 		return $this->tree[$parentID];
 	}

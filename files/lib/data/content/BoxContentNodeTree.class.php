@@ -12,7 +12,7 @@ namespace cms\data\content;
  */
 class BoxContentNodeTree extends ContentNodeTree {
 	public function buildTree() {
-		$this->parentNode = new ContentNode(new Content(null, array('contentID' => 0)));
+		$this->parentNode = new ContentNode(new Content(null, ['contentID' => 0]));
 		$parentContent = $this->getNode($this->parentID);
 		$this->parentNode->addChild($parentContent);
 		$this->buildTreeLevel($parentContent);

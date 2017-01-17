@@ -19,12 +19,12 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
 	public function rebuild(array $parameters) {
-		$data = array(
-			'aliasToPage' => array(),
-			'pages' => array(),
-			'stylesheetsToPage' => array(),
-			'structure' => array(),
-		);
+		$data = [
+			'aliasToPage' => [],
+			'pages' => [],
+			'stylesheetsToPage' => [],
+			'structure' => [],
+		];
 
 		// fetch pages
 		$pageList = new PageList();

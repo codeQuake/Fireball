@@ -16,10 +16,10 @@ class LinkContentType extends AbstractSearchableContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
 	 */
-	public $multilingualFields = array('text', 'link');
+	public $multilingualFields = ['text', 'link'];
 	
 	/**
 	 * @see	\cms\system\content\type\AbstractSearchableContentType::$searchableFields
 	 */
-	protected $searchableFields = array('text');
+	protected $searchableFields = ['text'];
 }

@@ -28,9 +28,9 @@ class DailyCleanUpListener implements IParameterizedEventListener {
 			WHERE		file_to_category.categoryID IS NULL
 					AND	file.uploadTime < ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(TIME_NOW - 86400));
+		$statement->execute([TIME_NOW - 86400]);
 
-		$fileIDs = array();
+		$fileIDs = [];
 		while ($row = $statement->fetchArray()) {
 			$fileIDs[] = $row['fileID'];
 		}
@@ -43,7 +43,7 @@ class DailyCleanUpListener implements IParameterizedEventListener {
 			$sql = "DELETE FROM	cms".WCF_N."_page_revision
 				WHERE		time < ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(TIME_NOW - (FIREBALL_REVISION_DELETE * 86400)));
+			$statement->execute([TIME_NOW - (FIREBALL_REVISION_DELETE * 86400)]);
 		}
 
 		// delete old statistics
@@ -51,7 +51,7 @@ class DailyCleanUpListener implements IParameterizedEventListener {
 			$sql = "DELETE FROM	cms".WCF_N."_counter
 				WHERE		UNIX_TIMESTAMP(DATE_ADD(DATE_ADD(MAKEDATE(year, 1), INTERVAL (month)-1 MONTH), INTERVAL (day)-1 DAY)) < ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array(TIME_NOW - (FIREBALL_PAGES_STATISTICS_DELETE * 86400)));
+			$statement->execute([TIME_NOW - (FIREBALL_PAGES_STATISTICS_DELETE * 86400)]);
 		}
 	}
 }

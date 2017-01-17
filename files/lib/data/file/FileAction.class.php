@@ -29,22 +29,22 @@ class FileAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.fireball.file.canAddFile');
+	protected $permissionsDelete = ['admin.fireball.file.canAddFile'];
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.fireball.file.canAddFile');
+	protected $permissionsUpdate = ['admin.fireball.file.canAddFile'];
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
-	protected $requireACP = array('delete');
+	protected $requireACP = ['delete'];
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
 	 */
-	protected $allowGuestAccess = array('getFilePreview');
+	protected $allowGuestAccess = ['getFilePreview'];
 
 	/**
 	 * Validate parameters and permissions to fetch details about a file.
@@ -60,14 +60,14 @@ class FileAction extends AbstractDatabaseObjectAction {
 	public function getDetails() {
 		$file = $this->getSingleObject();
 
-		return array(
+		return [
 			'fileID' => $file->fileID,
-			'template' => WCF::getTPL()->fetch('fileDetails', 'cms', array(
+			'template' => WCF::getTPL()->fetch('fileDetails', 'cms', [
 				'file' => $file,
 				'fileACLObjectTypeID' => ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.file')
-			)),
+			]),
 			'title' => $file->getTitle()
-		);
+		];
 	}
 
 	/**
@@ -86,7 +86,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 
 		// validate file type
 		$this->readString('fileType', true);
-		$allowedTypes = array('code', 'film', 'image', 'music', 'pdf');
+		$allowedTypes = ['code', 'film', 'image', 'music', 'pdf'];
 		if ($this->parameters['fileType'] && !in_array($this->parameters['fileType'], $allowedTypes)) {
 			throw new UserInputException('fileType');
 		}
@@ -108,41 +108,41 @@ class FileAction extends AbstractDatabaseObjectAction {
 		}
 
 		// load files assigned to the category
-		$fileList = new CategoryFileList(array($category->categoryID));
+		$fileList = new CategoryFileList([$category->categoryID]);
 		$fileList->sqlOrderBy = 'title ASC';
 		if ($this->parameters['fileType']) {
-			$fileList->getConditionBuilder()->add('file.fileType LIKE ?', array($this->parameters['fileType'].'%'));
+			$fileList->getConditionBuilder()->add('file.fileType LIKE ?', [$this->parameters['fileType'].'%']);
 		}
 		$fileList->readObjects();
 
 		// output
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'category' => $category,
 			'fileList' => $fileList
-		));
+		]);
 
 		if ($this->parameters['categoryID']) {
 			// category specified => only return formatted list of
 			// files.
-			return array(
+			return [
 				'categoryID' => $category->categoryID,
 				'template' => WCF::getTPL()->fetch('categoryFileListDialog', 'cms')
-			);
+			];
 		} else {
 			// category wasn't specified => return markup for a
 			// complete dialog, not only the formatted file list.
 			$categoryNodeTree = new CategoryNodeTree('de.codequake.cms.file', 0, true);
 			$this->categoryList = $categoryNodeTree->getIterator();
 
-			WCF::getTPL()->assign(array(
+			WCF::getTPL()->assign([
 				'categoryList' => $this->categoryList
-			));
+			]);
 
-			return array(
+			return [
 				'categoryID' => $category->categoryID,
 				'template' => WCF::getTPL()->fetch('fileListDialog', 'cms'),
 				'title' => WCF::getLanguage()->get('cms.acp.file.picker')
-			);
+			];
 		}
 	}
 
@@ -160,14 +160,14 @@ class FileAction extends AbstractDatabaseObjectAction {
 	public function getFilePreview() {
 		$file = $this->getSingleObject();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'file' => $file
-		));
+		]);
 
-		return array(
+		return [
 			'template' => WCF::getTPL()->fetch('filePreview', 'cms'),
 			'fileID' => $file->fileID
-		);
+		];
 	}
 
 	/**
@@ -186,10 +186,10 @@ class FileAction extends AbstractDatabaseObjectAction {
 		$size = $file->getImageSize();
 
 		if ($file->isImage()) {
-			return array(
+			return [
 				'width' => $size[0],
 				'height' => $size[1]
-			);
+			];
 		}
 
 		return false;
@@ -216,14 +216,14 @@ class FileAction extends AbstractDatabaseObjectAction {
 		$categoryNodeTree = new CategoryNodeTree('de.codequake.cms.file', 0, true);
 		$categoryList = $categoryNodeTree->getIterator();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'categoryList' => $categoryList
-		));
+		]);
 
-		return array(
+		return [
 			'template' => WCF::getTPL()->fetch('fileUploadDialog', 'cms'),
 			'title' => WCF::getLanguage()->get('cms.acp.file.add')
-		);
+		];
 	}
 
 	/**
@@ -254,8 +254,8 @@ class FileAction extends AbstractDatabaseObjectAction {
 	 */
 	public function upload() {
 		$files = $this->parameters['__files']->getFiles();
-		$failedUploads = array();
-		$result = array('files' => array(), 'errors' => array());
+		$failedUploads = [];
+		$result = ['files' => [], 'errors' => []];
 
 		/** @var UploadFile $file */
 		foreach ($files as $file) {
@@ -265,13 +265,13 @@ class FileAction extends AbstractDatabaseObjectAction {
 					continue;
 				}
 
-				$data = array(
+				$data = [
 					'title' => $file->getFilename(),
 					'filesize' => $file->getFilesize(),
 					'fileType' => $file->getMimeType(),
 					'fileHash' => sha1_file($file->getLocation()),
 					'uploadTime' => TIME_NOW
-				);
+				];
 
 				$imageData = $file->getImageData();
 				if (!empty($imageData)) {
@@ -296,16 +296,16 @@ class FileAction extends AbstractDatabaseObjectAction {
 
 					// generate thumbnails
 					if (in_array($uploadedFile->fileType, File::$thumbnailMimeTypes)) {
-						$thumbnailAction = new self(array($uploadedFile), 'generateThumbnail');
+						$thumbnailAction = new self([$uploadedFile], 'generateThumbnail');
 						$thumbnailAction->executeAction();
 					}
 
-					$result['files'][$file->getInternalFileID()] = array(
+					$result['files'][$file->getInternalFileID()] = [
 						'fileID' => $uploadedFile->fileID,
 						'title' => $uploadedFile->getTitle(),
 						'filesize' => $uploadedFile->filesize,
 						'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->filesize)
-					);
+					];
 				} else {
 					// failure
 					$editor = new FileEditor($uploadedFile);
@@ -322,11 +322,11 @@ class FileAction extends AbstractDatabaseObjectAction {
 
 		// return results
 		foreach ($failedUploads as $failedUpload) {
-			$result['errors'][$failedUpload->getInternalFileID()] = array(
+			$result['errors'][$failedUpload->getInternalFileID()] = [
 				'title' => $failedUpload->getFilename(),
 				'filesize' => $failedUpload->getFilesize(),
 				'errorType' => $failedUpload->getValidationErrorType()
-			);
+			];
 		}
 
 		return $result;
@@ -369,7 +369,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 			$adapter = ImageHandler::getInstance()->getAdapter();
 			$adapter->loadFile($file->getLocation());
 
-			$updateData = array();
+			$updateData = [];
 
 			$thumbnailLocation = $file->getThumbnailLocation();
 			@unlink($thumbnailLocation);

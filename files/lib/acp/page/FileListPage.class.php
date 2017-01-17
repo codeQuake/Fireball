@@ -49,12 +49,12 @@ class FileListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.fireball.file.canAddFile');
+	public $neededPermissions = ['admin.fireball.file.canAddFile'];
 
 	/**
 	 * @see	\wcf\page\SortablePage::$validSortFields
 	 */
-	public $validSortFields = array('downloads', 'fileID', 'filesize', 'title', 'uploadTime');
+	public $validSortFields = ['downloads', 'fileID', 'filesize', 'title', 'uploadTime'];
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -92,7 +92,7 @@ class FileListPage extends SortablePage {
 	 * @see	\wcf\page\MultipleLinkPage::initObjectList()
 	 */
 	protected function initObjectList() {
-		$this->objectList = new CategoryFileList(array($this->categoryID));
+		$this->objectList = new CategoryFileList([$this->categoryID]);
 	}
 
 	/**
@@ -101,11 +101,11 @@ class FileListPage extends SortablePage {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'categoryID' => $this->categoryID,
 			'category' => $this->category,
 			'categoryList' => $this->categoryList,
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.file'))
-		));
+		]);
 	}
 }

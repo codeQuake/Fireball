@@ -23,7 +23,7 @@ class CMSPageMultiSelectOptionType extends AbstractOptionType {
 	 */
 	public function getData(Option $option, $newValue) {
 		if (!is_array($newValue)) {
-			$newValue = array();
+			$newValue = [];
 		}
 
 		return implode("\n", ArrayUtil::toIntegerArray($newValue));
@@ -36,11 +36,11 @@ class CMSPageMultiSelectOptionType extends AbstractOptionType {
 		$nodeTree = new PageNodeTree();
 		$nodeList = $nodeTree->getIterator();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'nodeList' => $nodeList,
 			'option' => $option,
 			'value' => (!is_array($value) ? explode("\n", $value) : $value)
-		));
+		]);
 
 		return WCF::getTPL()->fetch('pageMultiSelectOptionType', 'cms');
 	}
@@ -49,7 +49,7 @@ class CMSPageMultiSelectOptionType extends AbstractOptionType {
 	 * @see	\wcf\system\option\IOptionType::validate()
 	 */
 	public function validate(Option $option, $newValue) {
-		if (!is_array($newValue)) $newValue = array();
+		if (!is_array($newValue)) $newValue = [];
 		$newValue = ArrayUtil::toIntegerArray($newValue);
 
 		foreach ($newValue as $pageID) {

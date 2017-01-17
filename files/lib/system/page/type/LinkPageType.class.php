@@ -26,12 +26,12 @@ class LinkPageType extends AbstractPageType {
 	/**
 	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
 	 */
-	public $assignValues = array (
+	public $assignValues = [
 		'url' => '',
 		'delayedRedirect' => 0,
 		'redirectMessage' => '',
 		'delay' => 5
-	);
+	];
 	
 	/**
 	 * @see \cms\system\page\type\AbstractPageType::readFormParameters()
@@ -64,11 +64,11 @@ class LinkPageType extends AbstractPageType {
 	 * @see \cms\system\page\type\AbstractPageType::getSaveArray()
 	 */
 	public function getSaveArray() {
-		return array (
-			'data' => array(
+		return [
+			'data' => [
 				'additionalData' => $this->assignValues
-			)
-		);
+			]
+		];
 	}
 	
 	/**

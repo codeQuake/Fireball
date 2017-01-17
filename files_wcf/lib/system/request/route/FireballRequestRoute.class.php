@@ -51,7 +51,7 @@ class FireballRequestRoute implements IRequestRoute {
 
 			if ($application == 'cms') {
 				$pageList = PageCache::getInstance()->getPages();
-				$urlList = array();
+				$urlList = [];
 				foreach ($pageList as $page) {
 					$urlList[$page->getAlias()] = $page;
 				}
@@ -59,24 +59,24 @@ class FireballRequestRoute implements IRequestRoute {
 				if (!empty($matches['alias'])) {
 					$alias = FileUtil::removeTrailingSlash($matches['alias']);
 					if (!empty($urlList[$alias])) {
-						$this->routeData = array(
+						$this->routeData = [
 							'className' => $urlList[$alias]->getProcessor()->frontendController,
 							'controller' => 'page',
 							'pageType' => 'system',
 							'id' => $urlList[$alias]->pageID
-						);
+						];
 					}
 				} else if (empty($matches['id'])) {
 					if (preg_match('~(([A-Za-z0-9]+)/?){0,}$~x', $requestURL, $urlParts)) {
 						$alias = FileUtil::removeTrailingSlash($urlParts[0]);
 
 						if (!empty($urlList[$alias])) {
-							$this->routeData = array(
+							$this->routeData = [
 								'className' => $urlList[$alias]->getProcessor()->frontendController,
 								'controller' => 'page',
 								'pageType' => 'system',
 								'id' => $urlList[$alias]->pageID
-							);
+							];
 						}
 					}
 				}

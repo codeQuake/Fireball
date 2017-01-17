@@ -13,7 +13,7 @@ use wcf\data\DatabaseObjectDecorator;
  */
 class PageNode extends DatabaseObjectDecorator implements \Countable, \RecursiveIterator {
 
-	public $children = array();
+	public $children = [];
 
 	public $index = 0;
 

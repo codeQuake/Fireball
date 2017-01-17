@@ -16,7 +16,7 @@ class StylesheetCache extends SingletonFactory {
 	 * cached stylesheets
 	 * @var	array<\cms\data\stylesheet\Stylesheet>
 	 */
-	protected $stylesheets = array();
+	protected $stylesheets = [];
 
 	/**
 	 * @see	\wcf\system\SingletonFactory::init()

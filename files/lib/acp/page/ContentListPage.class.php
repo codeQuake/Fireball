@@ -27,7 +27,7 @@ class ContentListPage extends AbstractPage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.fireball.page.canListPage');
+	public $neededPermissions = ['admin.fireball.page.canListPage'];
 
 	/**
 	 * list of pages
@@ -86,7 +86,7 @@ class ContentListPage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'contentListBody' => $this->contentListBody->getIterator(),
 			'contentListSidebar' => $this->contentListSidebar->getIterator(),
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.content')),
@@ -94,6 +94,6 @@ class ContentListPage extends AbstractPage {
 			'pageID' => $this->pageID,
 			'page' => $this->page,
 			'pageList' => $this->pageList
-		));
+		]);
 	}
 }

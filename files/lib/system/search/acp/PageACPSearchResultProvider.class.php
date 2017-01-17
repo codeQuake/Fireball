@@ -22,22 +22,22 @@ class PageACPSearchResultProvider implements IACPSearchResultProvider {
 	public function search($query) {
 		// check permissions
 		if (!WCF::getSession()->getPermission('admin.fireball.page.canAddPage')) {
-			return array();
+			return [];
 		}
 
-		$results = array();
+		$results = [];
 
-		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
+		$pages = PageCacheBuilder::getInstance()->getData([], 'pages');
 		foreach ($pages as $page) {
 			if (mb_stripos($page->getTitle(), $query) !== false || mb_stripos($page->alias, $query) !== false) {
-				$link = LinkHandler::getInstance()->getLink('PageEdit', array(
+				$link = LinkHandler::getInstance()->getLink('PageEdit', [
 					'application' => 'cms',
 					'id' => $page->pageID
-				));
+				]);
 
-				$subtitle = WCF::getLanguage()->getDynamicVariable('cms.page.parents', array(
+				$subtitle = WCF::getLanguage()->getDynamicVariable('cms.page.parents', [
 					'page' => $page
-				));
+				]);
 
 				$results[] = new ACPSearchResult($page->getTitle(), $link, $subtitle);
 			}

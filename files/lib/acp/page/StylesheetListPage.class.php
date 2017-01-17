@@ -27,7 +27,7 @@ class StylesheetListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.fireball.style.canListStylesheet');
+	public $neededPermissions = ['admin.fireball.style.canListStylesheet'];
 
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
@@ -37,7 +37,7 @@ class StylesheetListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\SortablePage::$validSortFields
 	 */
-	public $validSortFields = array('stylesheetID', 'title');
+	public $validSortFields = ['stylesheetID', 'title'];
 
 	/**
 	 * @see	\wcf\page\IPage::assignVariables()
@@ -45,8 +45,8 @@ class StylesheetListPage extends SortablePage {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.stylesheet'))
-		));
+		]);
 	}
 }

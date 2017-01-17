@@ -23,7 +23,7 @@ class ContentImporter extends AbstractImporter {
 	/**
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
-	public function import($oldID, array $data, array $additionalData = array()) {
+	public function import($oldID, array $data, array $additionalData = []) {
 		unset($data['contentID']);
 
 		if (empty($data['dontUpdateParentID'])) {
@@ -55,9 +55,9 @@ class ContentImporter extends AbstractImporter {
 			$data['additionalData'] = serialize($data['additionalData']);
 		}
 
-		$action = new ContentAction(array(), 'create', array(
+		$action = new ContentAction([], 'create', [
 			'data' => $data
-		));
+		]);
 		$returnValues = $action->executeAction();
 		$newID = $returnValues['returnValues']->contentID;
 		$content = new Content($newID);

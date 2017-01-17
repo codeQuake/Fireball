@@ -30,7 +30,7 @@ class StylesheetAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.fireball.style.canAddStylesheet');
+	public $neededPermissions = ['admin.fireball.style.canAddStylesheet'];
 
 	/**
 	 * title of the stylesheet
@@ -71,14 +71,14 @@ class StylesheetAddForm extends AbstractForm {
 	public function save() {
 		parent::save();
 
-		$data = array(
+		$data = [
 			'title' => $this->title,
 			'scss' => $this->scss
-		);
+		];
 
-		$this->objectAction = new StylesheetAction(array(), 'create', array(
+		$this->objectAction = new StylesheetAction([], 'create', [
 			'data' => $data
-		));
+		]);
 		$this->objectAction->executeAction();
 
 		$this->saved();
@@ -96,10 +96,10 @@ class StylesheetAddForm extends AbstractForm {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'action' => 'add',
 			'title' => $this->title,
 			'scss' => $this->scss
-		));
+		]);
 	}
 }

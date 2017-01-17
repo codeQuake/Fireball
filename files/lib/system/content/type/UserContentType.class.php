@@ -24,7 +24,7 @@ class UserContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
 	 */
-	protected $previewFields = array('name');
+	protected $previewFields = ['name'];
 	
 
 	/**
@@ -66,9 +66,9 @@ class UserContentType extends AbstractContentType {
 			}
 		}
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'username' => $username
-		));
+		]);
 
 		return parent::getFormTemplate();
 	}
@@ -100,9 +100,9 @@ class UserContentType extends AbstractContentType {
 			}
 		}
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'user' => $user
-		));
+		]);
 
 		return parent::getOutput($content);
 	}

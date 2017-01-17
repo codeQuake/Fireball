@@ -96,7 +96,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 
 		$this->data['additionalData'] = @unserialize($this->data['additionalData']);
 		if (!is_array($this->data['additionalData'])) {
-			$this->data['additionalData'] = array();
+			$this->data['additionalData'] = [];
 		}
 	}
 
@@ -146,7 +146,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * @see        \wcf\data\IPermissionObject::checkPermissions()
 	 * @param array $permissions
 	 */
-	public function checkPermissions(array $permissions = array('user.canViewPage')) {
+	public function checkPermissions(array $permissions = ['user.canViewPage']) {
 		foreach ($permissions as $permission) {
 			if (!$this->getPermission($permission)) {
 				throw new PermissionDeniedException();
@@ -175,7 +175,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 */
 	public function getChildren() {
 		$pageList = new PageList();
-		$pageList->getConditionBuilder()->add('page.parentID = (?)', array($this->pageID));
+		$pageList->getConditionBuilder()->add('page.parentID = (?)', [$this->pageID]);
 		$pageList->readObjects();
 
 		return $pageList->getObjects();
@@ -204,10 +204,10 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 		$contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body');
 		$contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar');
 
-		$contentList = array(
+		$contentList = [
 			'body' => $contentListBody->getIterator(),
 			'sidebar' => $contentListSidebar->getIterator()
-		);
+		];
 
 		return $contentList;
 	}
@@ -216,11 +216,11 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * @see	\wcf\data\ILinkableObject::getLink()
 	 */
 	public function getLink($appendSession = true) {
-		return LinkHandler::getInstance()->getLink($this->getAlias(), array(
+		return LinkHandler::getInstance()->getLink($this->getAlias(), [
 			'application' => 'cms',
 			'forceFrontend' => true,
 			'appendSession' => $appendSession
-		));
+		]);
 	}
 
 	/**
@@ -257,7 +257,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 */
 	public function getParentPages() {
 		if ($this->isChild()) {
-			$parentPages = array();
+			$parentPages = [];
 			$parent = $this;
 
 			while ($parent = $parent->getParentPage()) {
@@ -268,7 +268,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 			return $parentPages;
 		}
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -277,12 +277,12 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	public function getPermission($permission) {
 		$permissions = PagePermissionHandler::getInstance()->getPermissions($this);
 
-		$aclPermission = str_replace(array('user.', 'mod.', 'admin.'), array('', '', ''), $permission);
+		$aclPermission = str_replace(['user.', 'mod.', 'admin.'], ['', '', ''], $permission);
 		if (isset($permissions[$aclPermission])) {
 			return $permissions[$aclPermission];
 		}
 
-		$globalPermission = str_replace(array('user.', 'mod.', 'admin.'), array('user.fireball.page.', 'mod.fireball.', 'user.fireball.page.'), $permission);
+		$globalPermission = str_replace(['user.', 'mod.', 'admin.'], ['user.fireball.page.', 'mod.fireball.', 'user.fireball.page.'], $permission);
 		return WCF::getSession()->getPermission($globalPermission);
 	}
 
@@ -294,7 +294,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	public function getRevisions() {
 		if ($this->revisions === null) {
 			$revisionList = new PageRevisionList();
-			$revisionList->getConditionBuilder()->add('page_revision.pageID = ?', array($this->pageID));
+			$revisionList->getConditionBuilder()->add('page_revision.pageID = ?', [$this->pageID]);
 			$revisionList->readObjects();
 
 			$this->revisions = $revisionList->getObjects();
@@ -318,7 +318,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * @return	array<integer>
 	 */
 	public function getStylesheets() {
-		$stylesheets = array();
+		$stylesheets = [];
 		foreach ($this->getStylesheetIDs() as $stylesheetID) {
 			$stylesheets[$stylesheetID] = StylesheetCache::getInstance()->getStylesheet($stylesheetID);
 		}
@@ -363,7 +363,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 */
 	public function hasChildren() {
 		$list = new PageList();
-		$list->getConditionBuilder()->add('page.parentID = (?)', array($this->pageID));
+		$list->getConditionBuilder()->add('page.parentID = (?)', [$this->pageID]);
 
 		if ($list->countObjects() != 0) {
 			return true;

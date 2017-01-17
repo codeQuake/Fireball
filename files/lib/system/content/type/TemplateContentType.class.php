@@ -24,7 +24,7 @@ class TemplateContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
 	 */
-	protected $previewFields = array('text');
+	protected $previewFields = ['text'];
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::validate()
@@ -36,15 +36,15 @@ class TemplateContentType extends AbstractContentType {
 		
 		// check template code
 		try {
-			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template', $data['text'], array(), true);
+			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template', $data['text'], [], true);
 			
 			// cache compiled template with content
 			RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
 		}
 		catch (SystemException $e) {
-			WCF::getTPL()->assign(array(
+			WCF::getTPL()->assign([
 				'compileError' => $e->_getMessage()
-			));
+			]);
 
 			throw new UserInputException('text', 'compileError');
 		}
@@ -63,13 +63,12 @@ class TemplateContentType extends AbstractContentType {
 				if (!is_array($contentData)) $contentData = unserialize($contentData);
 				$contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
 
-				$contentAction = new ContentAction(array($content), 'update',
-					array('data' => array('contentData' => $contentData)));
+				$contentAction = new ContentAction([$content], 'update', ['data' => ['contentData' => $contentData]]);
 				$contentAction->executeAction();
 			}
 			catch (SystemException $e) {
 				if ($content->getPermission('mod.canViewErroredContent')) {
-					$url = LinkHandler::getInstance()->getLink('ContentEdit', array('application' => 'cms', 'object' => $content, 'isACP' => true));
+					$url = LinkHandler::getInstance()->getLink('ContentEdit', ['application' => 'cms', 'object' => $content, 'isACP' => true]);
 					return '<div class="error">Please check <a href="' . $url . '">content #' . $content->contentID . '</a> (language: ' . WCF::getLanguage()->languageCode . '). The following error occurred fetching the feed from <span class="inlineCode">' . $content->url . '</span>:<br><br>' . $e->getMessage() . '</div>';
 				} else {
 					return '';

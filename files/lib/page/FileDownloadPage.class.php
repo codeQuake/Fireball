@@ -37,13 +37,13 @@ class FileDownloadPage extends AbstractPage {
 	 * list of mime types that are displayed inline
 	 * @var	array<string>
 	 */
-	public static $inlineMimeTypes = array(
+	public static $inlineMimeTypes = [
 		'image/gif',
 		'image/jpeg',
 		'image/png',
 		'application/pdf',
 		'image/pjpeg'
-	);
+	];
 
 	/**
 	 * @see	\wcf\page\AbstractPage::$useTemplate
@@ -89,7 +89,7 @@ class FileDownloadPage extends AbstractPage {
 		VisitCountHandler::getInstance()->count();
 
 		if ($this->loadThumbnail && $this->file->hasThumbnail()) {
-			$this->fileReader = new FileReader($this->file->getThumbnailLocation(), array(
+			$this->fileReader = new FileReader($this->file->getThumbnailLocation(), [
 				'filename' => $this->file->getTitle(),
 				'mimeType' => $this->file->fileTypeThumbnail,
 				'filesize' => $this->file->filesizeThumbnail,
@@ -98,9 +98,9 @@ class FileDownloadPage extends AbstractPage {
 				'lastModificationTime' => $this->file->uploadTime,
 				'expirationDate' => TIME_NOW + 31536000,
 				'maxAge' => 31536000
-			));
+			]);
 		} else {
-			$this->fileReader = new FileReader($this->file->getLocation(), array(
+			$this->fileReader = new FileReader($this->file->getLocation(), [
 				'filename' => $this->file->getTitle(),
 				'mimeType' => $this->file->fileType,
 				'filesize' => $this->file->filesize,
@@ -109,14 +109,14 @@ class FileDownloadPage extends AbstractPage {
 				'lastModificationTime' => $this->file->uploadTime,
 				'expirationDate' => TIME_NOW + 31536000,
 				'maxAge' => 31536000
-			));
+			]);
 		}
 
 		// count downloads
 		$fileEditor = new FileEditor($this->file);
-		$fileEditor->updateCounters(array(
+		$fileEditor->updateCounters([
 			'downloads' => 1
-		));
+		]);
 	}
 
 	/**

@@ -17,15 +17,15 @@ $optionUpdate = WCF::getDB()->prepareStatement($sql);
 
 // set default page title
 if (!defined('PAGE_TITLE') || !PAGE_TITLE) {
-	$optionUpdate->execute(array('Fireball CMS 3.0', 'page_title'));
+	$optionUpdate->execute(['Fireball CMS 3.0', 'page_title']);
 }
 
 // create default file category
-CategoryEditor::create(array(
+CategoryEditor::create([
 	'objectTypeID' => ObjectTypeCache::getInstance()->getObjectTypeIDByName('com.woltlab.wcf.category', 'de.codequake.cms.file'),
 	'title' => 'Default Category',
 	'time' => TIME_NOW
-));
+]);
 
 // add codequake update server
 if (isset($this->instruction['attributes']['installupdateserver']) && $this->instruction['attributes']['installupdateserver'] == 1) {
@@ -36,12 +36,14 @@ if (isset($this->instruction['attributes']['installupdateserver']) && $this->ins
 		FROM	wcf".WCF_N."_package_update_server
 		WHERE	serverURL = ?";
 	$statement = WCF::getDB()->prepareStatement($sql);
-	$statement->execute(array($serverURL));
+	$statement->execute([$serverURL]);
 	$row = $statement->fetchArray();
 	if ($row === false) {
-		$objectAction = new PackageUpdateServerAction(array(), 'create', array('data' => array(
+		$objectAction = new PackageUpdateServerAction([], 'create', [
+			'data' => [
 			'serverURL' => $serverURL
-		)));
+			]
+		]);
 		$objectAction->executeAction();
 	}
 }

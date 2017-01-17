@@ -17,12 +17,12 @@ class ContentClipboardAction extends AbstractClipboardAction {
 	/**
 	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$actionClassActions
 	 */
-	protected $actionClassActions = array('delete', 'disable', 'enable');
+	protected $actionClassActions = ['delete', 'disable', 'enable'];
 
 	/**
 	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$supportedActions
 	 */
-	protected $supportedActions = array('delete', 'disable', 'enable');
+	protected $supportedActions = ['delete', 'disable', 'enable'];
 
 	/**
 	 * @see	\wcf\system\clipboard\action\IClipboardAction::execute()
@@ -37,9 +37,9 @@ class ContentClipboardAction extends AbstractClipboardAction {
 		// handle actions
 		switch ($action->actionName) {
 			case 'delete':
-				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.codequake.cms.content.delete.confirmMessage', array(
+				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.codequake.cms.content.delete.confirmMessage', [
 					'count' => $item->getCount()
-				)));
+				]));
 			break;
 		}
 
@@ -68,7 +68,7 @@ class ContentClipboardAction extends AbstractClipboardAction {
 	protected function validateDelete() {
 		// check permissions
 		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) {
-			return array();
+			return [];
 		}
 
 		return array_keys($this->objects);
@@ -82,10 +82,10 @@ class ContentClipboardAction extends AbstractClipboardAction {
 	protected function validateDisable() {
 		// check permissions
 		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) {
-			return array();
+			return [];
 		}
 
-		$contentIDs = array();
+		$contentIDs = [];
 		foreach ($this->objects as $content) {
 			if (!$content->isDisabled) $contentIDs[] = $content->contentID;
 		}
@@ -101,10 +101,10 @@ class ContentClipboardAction extends AbstractClipboardAction {
 	protected function validateEnable() {
 		// check permissions
 		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) {
-			return array();
+			return [];
 		}
 
-		$contentIDs = array();
+		$contentIDs = [];
 		foreach ($this->objects as $content) {
 			if ($content->isDisabled) $contentIDs[] = $content->contentID;
 		}

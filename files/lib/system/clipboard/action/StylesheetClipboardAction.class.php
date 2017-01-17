@@ -17,12 +17,12 @@ class StylesheetClipboardAction extends AbstractClipboardAction {
 	/**
 	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$actionClassActions
 	 */
-	protected $actionClassActions = array('delete');
+	protected $actionClassActions = ['delete'];
 
 	/**
 	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$supportedActions
 	 */
-	protected $supportedActions = array('delete');
+	protected $supportedActions = ['delete'];
 
 	/**
 	 * @see	\wcf\system\clipboard\action\IClipboardAction::execute()
@@ -37,9 +37,9 @@ class StylesheetClipboardAction extends AbstractClipboardAction {
 		// handle actions
 		switch ($action->actionName) {
 			case 'delete':
-				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.codequake.cms.stylesheet.delete.confirmMessage', array(
+				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.codequake.cms.stylesheet.delete.confirmMessage', [
 					'count' => $item->getCount()
-				)));
+				]));
 			break;
 		}
 
@@ -70,6 +70,6 @@ class StylesheetClipboardAction extends AbstractClipboardAction {
 			return array_keys($this->objects);
 		}
 
-		return array();
+		return [];
 	}
 }

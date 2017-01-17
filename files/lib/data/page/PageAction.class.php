@@ -42,27 +42,27 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.fireball.page.canAddPage');
+	protected $permissionsCreate = ['admin.fireball.page.canAddPage'];
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.fireball.page.canAddPage');
+	protected $permissionsDelete = ['admin.fireball.page.canAddPage'];
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.fireball.page.canAddPage');
+	protected $permissionsUpdate = ['admin.fireball.page.canAddPage'];
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
-	protected $requireACP = array('delete', 'disable', 'enable', 'setAsHome');
+	protected $requireACP = ['delete', 'disable', 'enable', 'setAsHome'];
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache
 	 */
-	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'publish', 'setAsHome', 'toggle', 'update', 'updatePosition', 'frontendCreate');
+	protected $resetCache = ['copy', 'create', 'delete', 'disable', 'enable', 'publish', 'setAsHome', 'toggle', 'update', 'updatePosition', 'frontendCreate'];
 
 	/**
 	 * Validates parameters to copy a page.
@@ -100,18 +100,18 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		// copy contents
 		$contents = $object->getContents();
-		$tmp = array();
+		$tmp = [];
 
-		foreach (array('body', 'sidebar') as $position) {
+		foreach (['body', 'sidebar'] as $position) {
 			foreach ($contents[$position] as $content) {
 				//recreate
 				$data = $content->getDecoratedObject()->getData();
 				$oldID = $data['contentID'];
 				unset($data['contentID']);
 				$data['pageID'] = $pageID;
-				$action = new ContentAction(array(), 'create', array(
+				$action = new ContentAction([], 'create', [
 					'data' => $data
-				));
+				]);
 				$return = $action->executeAction();
 				$tmp[$oldID] = $return['returnValues']->contentID;
 			}
@@ -119,13 +119,13 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		// setting new IDs
 		$contents = new ContentList();
-		$contents->getConditionBuilder()->add('pageID = ?', array(
+		$contents->getConditionBuilder()->add('pageID = ?', [
 			$pageID
-		));
+		]);
 		$contents->readObjects();
 		$contents = $contents->getObjects();
 		foreach ($contents as $content) {
-			$update = array();
+			$update = [];
 			if (isset($tmp[$content->parentID])) {
 				$editor = new ContentEditor($content);
 				$update['parentID'] = $tmp[$content->parentID];
@@ -177,7 +177,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		// trigger publication
 		if (!$page->isDisabled && $page->isPublished) {
-			$action = new PageAction(array($pageEditor), 'triggerPublication');
+			$action = new PageAction([$pageEditor], 'triggerPublication');
 			$action->executeAction();
 		}
 
@@ -196,10 +196,10 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		foreach ($this->objects as $object) {
-			$contentData = array();
+			$contentData = [];
 
 			$contentList = new ContentList();
-			$contentList->getConditionBuilder()->add('content.pageID = ?', array($object->pageID));
+			$contentList->getConditionBuilder()->add('content.pageID = ?', [$object->pageID]);
 			$contentList->readObjects();
 
 			foreach ($contentList as $content) {
@@ -211,7 +211,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				$tmpContentData = $content->getData();
 				
 				$langItem = $tmpContentData['title'];
-				$tmpContentData['title'] = array();
+				$tmpContentData['title'] = [];
 				foreach ($availableLanguages as $lang) {
 					$tmpContentData['title'][$lang->countryCode] = $lang->get($langItem);
 				}
@@ -219,7 +219,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				foreach ($objectType->getProcessor()->multilingualFields as $field) {
 					if (isset($tmpContentData['contentData'][$field])) {
 						$langItem = $tmpContentData['contentData'][$field];
-						$tmpContentData['contentData'][$field] = array();
+						$tmpContentData['contentData'][$field] = [];
 						foreach ($availableLanguages as $lang) {
 							$tmpContentData['contentData'][$field][$lang->countryCode] = $lang->get($langItem);
 						}
@@ -233,14 +233,14 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			foreach ($pageData as $key => $element) {
 				if ($key == 'title' || $key == 'description' || $key == 'metaDescription' || $key == 'metaKeywords') {
 					$langItem = $pageData[$key];
-					$pageData[$key] = array();
+					$pageData[$key] = [];
 					foreach ($availableLanguages as $lang) {
 						$pageData[$key][$lang->countryCode] = $lang->get($langItem);
 					}
 				}
 			}
 			
-			call_user_func(array($this->className, 'createRevision'), array(
+			call_user_func([$this->className, 'createRevision'], [
 				'pageID' => $object->getObjectID(),
 				'action' => (isset($this->parameters['action']) ? $this->parameters['action'] : 'create'),
 				'userID' => WCF::getUser()->userID,
@@ -248,7 +248,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				'time' => TIME_NOW,
 				'data' => base64_encode(serialize($pageData)),
 				'contentData' => base64_encode(serialize($contentData))
-			));
+			]);
 		}
 	}
 
@@ -271,7 +271,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	public function delete() {
 		$returnValues = parent::delete();
 
-		$menuItemIDs = $pageIDs = array();
+		$menuItemIDs = $pageIDs = [];
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
 
@@ -281,7 +281,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		if (!empty($menuItemIDs)) {
-			$menuItemAction = new MenuItemAction(array($menuItemIDs), 'delete');
+			$menuItemAction = new MenuItemAction([$menuItemIDs], 'delete');
 			$menuItemAction->executeAction();
 		}
 
@@ -309,12 +309,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		foreach ($this->objects as $pageEditor) {
-			$pageEditor->update(array('isDisabled' => 1));
+			$pageEditor->update(['isDisabled' => 1]);
 
 			$menuItem = $pageEditor->getMenuItem();
 			if ($menuItem !== null) {
 				$menuItemEditor = new MenuItemEditor($pageEditor->getMenuItem());
-				$menuItemEditor->update(array('isDisabled' => 1));
+				$menuItemEditor->update(['isDisabled' => 1]);
 			}
 		}
 	}
@@ -335,12 +335,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		foreach ($this->objects as $pageEditor) {
-			$pageEditor->update(array('isDisabled' => 0));
+			$pageEditor->update(['isDisabled' => 0]);
 
 			$menuItem = $pageEditor->getMenuItem();
 			if ($menuItem !== null) {
 				$menuItemEditor = new MenuItemEditor($pageEditor->getMenuItem());
-				$menuItemEditor->update(array('isDisabled' => 0));
+				$menuItemEditor->update(['isDisabled' => 0]);
 			}
 		}
 	}
@@ -366,7 +366,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 		
 		//validate sidebarOrientation
-		if (!in_array($this->parameters['data']['sidebarOrientation'], array('left', 'right'))) {
+		if (!in_array($this->parameters['data']['sidebarOrientation'], ['left', 'right'])) {
 			// force default value if invalid sidebar orientation
 			// specified
 			$this->parameters['data']['sidebarOrientation'] = 'right';
@@ -440,7 +440,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		else $data['deactivationDate'] = 0;
 		
 		//get stylesheetIDs
-		$stylesheetIDs = array();
+		$stylesheetIDs = [];
 		if (isset($data['stylesheetIDs'])) $stylesheetIDs = $data['stylesheetIDs'];
 		
 		//check foreigns
@@ -464,10 +464,10 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		//finally create new page
 		$page = $this->create();
-		return array(
+		return [
 			'page' => $page,
 			'link' => $page->getLink()
-			);
+		];
 	}
 	
 	/**
@@ -529,7 +529,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$showOrder = $page ? $page->showOrder : 0;
 		$sidebarOrientation = $page ? $page->sidebarOrientation : FIREBALL_PAGES_DEFAULT_SIDEBAR;
 		$styleID = $page ? $page->styleID : 0;
-		$stylesheetIDs = $page ? $page->getStylesheetIDs() : array();
+		$stylesheetIDs = $page ? $page->getStylesheetIDs() : [];
 		$title = $page ? $page->title : '';
 		
 		//read data
@@ -542,7 +542,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		
 		// load menu items
 		$menuItemList = new PageMenuItemList();
-		$menuItemList->getConditionBuilder()->add('page_menu_item.menuPosition = ?', array('header'));
+		$menuItemList->getConditionBuilder()->add('page_menu_item.menuPosition = ?', ['header']);
 		$menuItemList->sqlOrderBy = 'page_menu_item.parentMenuItem ASC, page_menu_item.showOrder ASC';
 		$menuItemList->readObjects();
 		foreach ($menuItemList as $menuItem) {
@@ -555,7 +555,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			}
 		}
 		
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'action' => $action,
 			'alias' => $alias,
 			'allowIndexing' => $allowIndexing,
@@ -585,12 +585,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			'action' => $action,
 			'pageID' => $pageID,
 			'menuItems' => $menuItems
-		));
+		]);
 
-		return array(
+		return [
 			'pageID' => $pageID,
 			'template' => WCF::getTPL()->fetch('pageAddDialog', 'cms')
-		);
+		];
 	}
 
 	/**
@@ -598,7 +598,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateGetContentTypes() {
 		$this->readString('position');
-		if (!in_array($this->parameters['position'], array('body', 'sidebar', 'both'))) {
+		if (!in_array($this->parameters['position'], ['body', 'sidebar', 'both'])) {
 			throw new UserInputException('position');
 		}
 
@@ -619,9 +619,9 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			}
 		}
 
-		$categories = array();
+		$categories = [];
 		foreach ($types as $type) {
-			$categories[$type->category] = array();
+			$categories[$type->category] = [];
 		}
 
 		foreach ($types as $type) {
@@ -630,19 +630,19 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if ($this->parameters['position'] == 'both') array_push($categories[$type->category], $type);
 		}
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'contentTypes' => $categories,
 			'page' => $page,
 			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null,
 			'position' => $this->parameters['position']
-		));
+		]);
 
-		return array(
+		return [
 			'pageID' => $page->pageID,
 			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null,
 			'position' => $this->parameters['position'],
 			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms')
-		);
+		];
 	}
 
 	/**
@@ -650,7 +650,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateGetSortableContentList() {
 		$this->readString('position');
-		if (!in_array($this->parameters['position'], array('body', 'sidebar', 'sidebarLeft', 'sidebarRight'))) {
+		if (!in_array($this->parameters['position'], ['body', 'sidebar', 'sidebarLeft', 'sidebarRight'])) {
 			throw new UserInputException('position');
 		}
 
@@ -663,13 +663,13 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$page = $this->getSingleObject();
 		$position = $this->parameters['position'];
 
-		return array(
+		return [
 			'position' => $position,
-			'template' => WCF::getTPL()->fetch('sortableContentList', 'cms', array(
+			'template' => WCF::getTPL()->fetch('sortableContentList', 'cms', [
 				'contentNodeTree' => $page->getContents()[$position],
 				'position' => $position
-			))
-		);
+			])
+		];
 	}
 
 	/**
@@ -677,7 +677,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateGetParsedContentList() {
 		$this->readString('position');
-		if (!in_array($this->parameters['position'], array('body', 'sidebar', 'sidebarLeft', 'sidebarRight'))) {
+		if (!in_array($this->parameters['position'], ['body', 'sidebar', 'sidebarLeft', 'sidebarRight'])) {
 			throw new UserInputException('position');
 		}
 
@@ -690,13 +690,13 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$page = $this->getSingleObject();
 		$position = $this->parameters['position'];
 
-		return array(
+		return [
 			'position' => $position,
-			'template' => WCF::getTPL()->fetch('contentNodeList', 'cms', array(
+			'template' => WCF::getTPL()->fetch('contentNodeList', 'cms', [
 				'contentNodeTree' => $page->getContents()[$position],
 				'position' => $position
-			))
-		);
+			])
+		];
 	}
 
 	/**
@@ -714,16 +714,16 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$page = $this->getSingleObject();
 		$revisions = $page->getRevisions();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'pageID' => $page->pageID,
 			'revisions' => $revisions
-		));
+		]);
 
-		return array(
+		return [
 			'pageID' => $page->pageID,
 			'revisions' => $revisions,
 			'template' => WCF::getTPL()->fetch('pageRevisionList', 'cms')
-		);
+		];
 	}
 
 	/**
@@ -734,13 +734,13 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$this->readObjects();
 		}
 
-		$pageIDs = array();
+		$pageIDs = [];
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
-			$pageEditor->update(array(
+			$pageEditor->update([
 				'isPublished' => 1,
 				'publicationDate' => 0
-			));
+			]);
 		}
 
 		// trigger publication
@@ -758,7 +758,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$this->readObjects();
 		}
 
-		$pageIDs = array();
+		$pageIDs = [];
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
 		}
@@ -768,12 +768,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		foreach ($this->objects as $pageEditor) {
 			$contents = $pageEditor->getDecoratedObject()->getContents();
 
-			$metaData = array();
+			$metaData = [];
 			foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
 				$metaData[$language->languageID] = '';
 			}
 
-			foreach (array('body', 'sidebar') as $position) {
+			foreach (['body', 'sidebar'] as $position) {
 				foreach ($contents[$position] as $content) {
 					if ($content->getObjectType()->getProcessor() instanceof ISearchableContentType) {
 						$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData($content->getDecoratedObject());
@@ -813,9 +813,9 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * Validates permissions and parameters to set a page ad home.
 	 */
 	public function validateSetAsHome() {
-		WCF::getSession()->checkPermissions(array(
+		WCF::getSession()->checkPermissions([
 			'admin.fireball.page.canAddPage'
-		));
+		]);
 
 		// validate 'objectIDs' parameter
 		$page = $this->getSingleObject();
@@ -854,9 +854,9 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		foreach ($this->objects as $page) {
-			$page->update(array(
+			$page->update([
 				'isDisabled' => 1 - $page->isDisabled
-			));
+			]);
 		}
 	}
 
@@ -894,7 +894,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		// perform update
 		parent::update();
 
-		$pageIDs = $publishedPageIDs = array();
+		$pageIDs = $publishedPageIDs = [];
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
 
@@ -909,7 +909,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 			if ($pageEditor->menuItemID !== null && !empty($this->parameters['data']['title'])) {
 				$menuItemEditor = new MenuItemEditor($pageEditor->getMenuItem());
-				$menuItemEditor->update(array('title' => $this->parameters['data']['title']));
+				$menuItemEditor->update(['title' => $this->parameters['data']['title']]);
 			}
 		}
 
@@ -935,7 +935,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			throw new UserInputException('structure');
 		}
 
-		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
+		$pages = PageCacheBuilder::getInstance()->getData([], 'pages');
 		foreach ($this->parameters['data']['structure'] as $parentID => $pageIDs) {
 			if ($parentID) {
 				// validate parent page
@@ -946,7 +946,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				$this->objects[$parentID] = new PageEditor($pages[$parentID]);
 			}
 
-			$aliases = array();
+			$aliases = [];
 			foreach ($pageIDs as $pageID) {
 				// validate page
 				if (!isset($pages[$pageID])) {
@@ -974,10 +974,10 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$position = 1;
 
 			foreach ($pageIDs as $pageID) {
-				$this->objects[$pageID]->update(array(
+				$this->objects[$pageID]->update([
 					'parentID' => ($parentID != 0) ? $this->objects[$parentID]->pageID : null,
 					'showOrder' => $position++
-				));
+				]);
 			}
 		}
 
@@ -1003,8 +1003,8 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				throw new UserInputException('pageID');
 		}
 		
-		return array(
+		return [
 			'template' => $template
-		);
+		];
 	}
 }

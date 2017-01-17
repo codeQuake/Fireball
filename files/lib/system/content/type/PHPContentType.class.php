@@ -20,7 +20,7 @@ class PHPContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
 	 */
-	protected $previewFields = array('text');
+	protected $previewFields = ['text'];
 
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$templateName
@@ -36,7 +36,7 @@ class PHPContentType extends AbstractContentType {
 		}
 		catch (\ParseError $e) {
 			if ($content->getPermission('mod.canViewErroredContent')) {
-				$url = LinkHandler::getInstance()->getLink('ContentEdit', array('application' => 'cms', 'object' => $content, 'isACP' => true));
+				$url = LinkHandler::getInstance()->getLink('ContentEdit', ['application' => 'cms', 'object' => $content, 'isACP' => true]);
 				$output = '<div class="error">';
 				$output .= 'Please check <a href="' . $url . '">content #' . $content->contentID . '</a>. The following error occurred parsing this content at line ' . $e->getLine() . ':<br><br>';
 				$output .= $e->getMessage();

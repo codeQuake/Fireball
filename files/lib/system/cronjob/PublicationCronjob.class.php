@@ -25,9 +25,9 @@ class PublicationCronjob extends AbstractCronjob {
 			WHERE	isPublished = 0
 				AND publicationDate <= ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(TIME_NOW));
+		$statement->execute([TIME_NOW]);
 
-		$pageIDs = array();
+		$pageIDs = [];
 		while ($row = $statement->fetchArray()) {
 			$pageIDs[] = $row['pageID'];
 		}
@@ -41,9 +41,9 @@ class PublicationCronjob extends AbstractCronjob {
 			WHERE	isDisabled = 0
 				AND deactivationDate BETWEEN 1 AND ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(TIME_NOW));
+		$statement->execute([TIME_NOW]);
 
-		$pageIDs = array();
+		$pageIDs = [];
 		while ($row = $statement->fetchArray()) {
 			$pageIDs[] = $row['pageID'];
 		}

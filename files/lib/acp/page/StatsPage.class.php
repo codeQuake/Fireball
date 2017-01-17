@@ -26,13 +26,13 @@ class StatsPage extends AbstractPage {
 	 * list of browsers
 	 * @var	array
 	 */
-	public $browsers = array();
+	public $browsers = [];
 
 	/**
 	 * colors for the graphs
 	 * @var	array
 	 */
-	public $colors = array(
+	public $colors = [
 		'#015294',
 		'#F7464A',
 		'#E2EAE9',
@@ -42,13 +42,13 @@ class StatsPage extends AbstractPage {
 		'#F38630',
 		'#f0f0f0',
 		'#1f1f1'
-	);
+	];
 
 	/**
 	 * list of devices
 	 * @var	array
 	 */
-	public $devices = array();
+	public $devices = [];
 
 	/**
 	 * end date
@@ -59,7 +59,7 @@ class StatsPage extends AbstractPage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededModules
 	 */
-	public $neededModules = array('FIREBALL_PAGES_ENABLE_STATISTICS');
+	public $neededModules = ['FIREBALL_PAGES_ENABLE_STATISTICS'];
 
 	/**
 	 * list of most viewed pages
@@ -71,7 +71,7 @@ class StatsPage extends AbstractPage {
 	 * list of platforms
 	 * @var	array
 	 */
-	public $platforms = array();
+	public $platforms = [];
 
 	/**
 	 * start date
@@ -83,7 +83,7 @@ class StatsPage extends AbstractPage {
 	 * list of visits
 	 * @var	array
 	 */
-	public $visits = array();
+	public $visits = [];
 
 	/**
 	 * @see	\wcf\page\IPage::readData()
@@ -102,30 +102,30 @@ class StatsPage extends AbstractPage {
 
 		foreach ($this->visits as $visit) {
 			$browsers = @unserialize($visit['visitors']['browsers']);
-			if (empty($browsers)) $browsers = array();
+			if (empty($browsers)) $browsers = [];
 
 			foreach ($browsers as $key => $value) {
-				$this->browsers[$key] = array(
+				$this->browsers[$key] = [
 					'visits' => isset($this->browsers[$key]['visits']) ? $this->browsers[$key]['visits'] + $value : $value
-				);
+				];
 			}
 
 			$platforms = @unserialize($visit['visitors']['platforms']);
-			if (empty($platforms)) $platforms = array();
+			if (empty($platforms)) $platforms = [];
 
 			foreach ($platforms as $key => $value) {
-				$this->platforms[$key] = array(
+				$this->platforms[$key] = [
 					'visits' => isset($this->platforms[$key]['visits']) ? $this->platforms[$key]['visits'] + $value : $value
-				);
+				];
 			}
 
 			$devices = @unserialize($visit['visitors']['devices']);
-			if (empty($devices)) $devices = array();
+			if (empty($devices)) $devices = [];
 
 			foreach ($devices as $key => $value) {
-				$this->devices[$key] = array(
+				$this->devices[$key] = [
 					'visits' => isset($this->devices[$key]['visits']) ? $this->devices[$key]['visits'] + $value : $value
-				);
+				];
 			}
 		}
 
@@ -156,7 +156,7 @@ class StatsPage extends AbstractPage {
 		$endDate->setTimezone(WCF::getUser()->getTimeZone());
 		$endDate = $endDate->format('Y-m-d');
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'visits' => $this->visits,
 			'browsers' => $this->browsers,
 			'platforms' => $this->platforms,
@@ -166,6 +166,6 @@ class StatsPage extends AbstractPage {
 			'pages' => $this->pages,
 			'startDate' => $startDate,
 			'endDate' => $endDate
-		));
+		]);
 	}
 }

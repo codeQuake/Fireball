@@ -53,14 +53,14 @@ class PagePageHandler extends AbstractLookupPageHandler implements IOnlineLocati
 					AND languageItemValue LIKE ?
 		)";
 		$statement = WCF::getDB()->prepareStatement($sql, 10);
-		$statement->execute(array(
+		$statement->execute([
 			'%' . $searchString . '%',
 			WCF::getLanguage()->languageID,
 			'cms.page.title%',
 			'%' . $searchString . '%'
-		));
+		]);
 
-		$results = array();
+		$results = [];
 		while ($row = $statement->fetchArray()) {
 			$pageID = $row['pageID'];
 			if ($row['pageID']) {
@@ -75,13 +75,13 @@ class PagePageHandler extends AbstractLookupPageHandler implements IOnlineLocati
 
 			$page = PageCache::getInstance()->getPage($pageID);
 
-			$results[] = array(
+			$results[] = [
 				'description' => $page->description,
 				'image' => 'fa-text-o',
 				'link' => $page->getLink(),
 				'objectID' => $pageID,
 				'title' => $row['title']
-			);
+			];
 		}
 
 		return $results;

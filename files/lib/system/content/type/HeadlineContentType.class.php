@@ -16,10 +16,10 @@ class HeadlineContentType extends AbstractSearchableContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
 	 */
-	public $multilingualFields = array('text');
+	public $multilingualFields = ['text'];
 
 	/**
 	 * @see	\cms\system\content\type\AbstractSearchableContentType::$searchableFields
 	 */
-	protected $searchableFields = array('text');
+	protected $searchableFields = ['text'];
 }

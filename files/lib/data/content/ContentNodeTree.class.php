@@ -61,9 +61,9 @@ class ContentNodeTree implements \IteratorAggregate {
 	}
 
 	protected function getChildren(ContentNode $parentNode) {
-		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$contents = ContentCacheBuilder::getInstance()->getData([], 'contents');
 
-		$children = array();
+		$children = [];
 		foreach ($contents as $content) {
 			if ($content->parentID == $parentNode->contentID) {
 				$children[$content->contentID] = $content;
@@ -82,7 +82,7 @@ class ContentNodeTree implements \IteratorAggregate {
 
 	protected function getNode($contentID) {
 		if (!$contentID) {
-			$content = new Content(null, array('contentID' => 0));
+			$content = new Content(null, ['contentID' => 0]);
 		}
 		else {
 			$content = $this->getContent($contentID);

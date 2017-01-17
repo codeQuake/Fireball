@@ -17,10 +17,10 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
 	public function rebuild(array $parameters) {
-		$data = array(
-			'contents' => array(),
-			'tree' => array()
-		);
+		$data = [
+			'contents' => [],
+			'tree' => []
+		];
 
 		$list = new ContentList();
 		$list->sqlOrderBy = 'parentID ASC, showOrder ASC';

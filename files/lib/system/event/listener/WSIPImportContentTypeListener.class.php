@@ -23,7 +23,7 @@ class WSIPImportContentTypeListener implements IParameterizedEventListener {
 		
 		if (!empty($eventObj->content) && $eventObj->content->contentTypeID == $checkObjectTypeID) {
 			$contentTypeID = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.text')->objectTypeID;
-			$contentAction = new ContentAction(array($eventObj->content), 'update', array('data' => array('contentTypeID' => $contentTypeID)));
+			$contentAction = new ContentAction([$eventObj->content], 'update', ['data' => ['contentTypeID' => $contentTypeID]]);
 			$contentAction->executeAction();
 		}
 	}

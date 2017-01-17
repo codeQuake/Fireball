@@ -66,13 +66,13 @@ class PagePage extends AbstractCMSPage {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'contentContentNodeTree' => $this->contentContentNodeTree,
-			'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : array()),
+			'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : []),
 			'commentCanAdd' => $this->page->getPermission('user.canAddComment'),
 			'commentList' => $this->commentList,
 			'commentObjectTypeID' => $this->commentObjectTypeID,
 			'lastCommentTime' => ($this->commentList ? $this->commentList->getMinCommentTime() : 0)
-		));
+		]);
 	}
 }

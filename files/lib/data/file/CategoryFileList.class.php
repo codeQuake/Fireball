@@ -25,7 +25,7 @@ class CategoryFileList extends FileList {
 		$this->sqlJoins .= " LEFT JOIN cms".WCF_N."_file_to_category file_to_category ON (file.fileID = file_to_category.fileID)";
 
 		if (!empty($categoryIDs)) {
-			$this->getConditionBuilder()->add('file_to_category.categoryID IN (?)', array($categoryIDs));
+			$this->getConditionBuilder()->add('file_to_category.categoryID IN (?)', [$categoryIDs]);
 			$this->getConditionBuilder()->add('file.fileID = file_to_category.fileID');
 		} else {
 			$this->getConditionBuilder()->add('1=0');

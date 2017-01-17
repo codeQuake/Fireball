@@ -25,10 +25,10 @@ class PageCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 	public function getTitle() {
 		$count = count($this->getAuthors());
 		if ($count > 1) {
-			return $this->getLanguage()->getDynamicVariable('cms.page.comment.notification.title.stacked', array(
+			return $this->getLanguage()->getDynamicVariable('cms.page.comment.notification.title.stacked', [
 				'count' => $count,
 				'timesTriggered' => $this->notification->timesTriggered
-			));
+			]);
 		}
 		
 		return $this->getLanguage()->get('cms.page.comment.notification.title');
@@ -48,20 +48,20 @@ class PageCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 			}
 			$count = count($authors);
 			
-			return $this->getLanguage()->getDynamicVariable('cms.page.comment.notification.message.stacked', array(
+			return $this->getLanguage()->getDynamicVariable('cms.page.comment.notification.message.stacked', [
 				'page' => $page,
 				'author' => $this->author,
 				'authors' => array_values($authors),
 				'count' => $count,
 				'others' => $count - 1,
 				'guestTimesTriggered' => $this->notification->guestTimesTriggered
-			));
+			]);
 		}
 		
-		return $this->getLanguage()->getDynamicVariable('cms.page.comment.notification.message', array(
+		return $this->getLanguage()->getDynamicVariable('cms.page.comment.notification.message', [
 				'page' => $page,
 				'author' => $this->author
-		));
+		]);
 	}
 	
 	/**
@@ -78,7 +78,7 @@ class PageCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 			}
 			$count = count($authors);
 			
-			return $this->getLanguage()->getDynamicVariable('cms.page.comment.notification.mail.stacked', array(
+			return $this->getLanguage()->getDynamicVariable('cms.page.comment.notification.mail.stacked', [
 				'page' => $page,
 				'author' => $this->author,
 				'authors' => array_values($authors),
@@ -86,15 +86,15 @@ class PageCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 				'others' => $count - 1,
 				'notificationType' => $notificationType,
 				'guestTimesTriggered' => $this->notification->guestTimesTriggered
-			));
+			]);
 		}
 		
-		return $this->getLanguage()->getDynamicVariable('cms.page.comment.notification.mail', array(
+		return $this->getLanguage()->getDynamicVariable('cms.page.comment.notification.mail', [
 			'page' => $page,
 			'comment' => $comment,
 			'author' => $this->author,
 			'notificationType' => $notificationType
-		));
+		]);
 	}
 	
 	/**

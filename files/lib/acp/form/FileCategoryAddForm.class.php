@@ -20,7 +20,7 @@ class FileCategoryAddForm extends AbstractCategoryAddForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.fireball.file.canAddFile');
+	public $neededPermissions = ['admin.fireball.file.canAddFile'];
 
 	/**
 	 * @see	\wcf\acp\form\AbstractCategoryAddForm::$objectTypeName

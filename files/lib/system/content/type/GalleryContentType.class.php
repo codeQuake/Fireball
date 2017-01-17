@@ -28,15 +28,15 @@ class GalleryContentType extends AbstractContentType {
 		//neccessary for old data (version 2.0.0 Beta 7 or older)
 		if (is_string($content->imageIDs)) $imageIDs = explode(',', $content->imageIDs);
 
-		$list = array();
+		$list = [];
 		foreach ($imageIDs as $imageID) {
 			$image = FileCache::getInstance()->getFile($imageID);
 			$list[$image->fileID] = $image;
 		}
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'images' => $list
-		));
+		]);
 
 		return parent::getOutput($content);
 	}
@@ -50,7 +50,7 @@ class GalleryContentType extends AbstractContentType {
 		//neccessary for old data (version 2.0.0 Beta 7 or older)
 		if (is_string($content->imageIDs)) $imageIDs = explode(',', $content->imageIDs);
 
-		$list = array();
+		$list = [];
 		foreach ($imageIDs as $imageID) {
 			$image = FileCache::getInstance()->getFile($imageID);
 			$list[$image->fileID] = $image->getTitle();
@@ -63,12 +63,12 @@ class GalleryContentType extends AbstractContentType {
 	 * @param array $imageIDs
 	 * @return FileList
 	 */
-	public function getImageList($imageIDs = array()) {
+	public function getImageList($imageIDs = []) {
 		if (empty(imageIDs))
-			return array();
+			return [];
 
 		$imageList = new FileList();
-		$imageList->getConditionBuilder()->add('fileID in (?)', array($imageIDs));
+		$imageList->getConditionBuilder()->add('fileID in (?)', [$imageIDs]);
 		$imageList->readObjects();
 
 		return $imageList;

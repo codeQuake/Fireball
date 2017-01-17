@@ -44,28 +44,28 @@ class InfinitePortalExporter extends AbstractExporter {
 	/**
 	 * @see \wcf\system\exporter\AbstractExporter::$methods
 	 */
-	protected $methods = array(
+	protected $methods = [
 		'de.codequake.cms.page' => 'Pages',
 		'de.codequake.cms.page.acl' => 'ACLs',
 		'de.codequake.cms.content' => 'Contents'
-	);
+	];
 	
 	/**
 	 * @see	\wcf\system\exporter\AbstractExporter::$limits
 	 */
-	protected $limits = array(
+	protected $limits = [
 		'de.codequake.cms.page' => 300,
 		'de.codequake.cms.page.acl' => 50,
 		'de.codequake.cms.content' => 50
-	);
+	];
 	
-	protected $availableLanguages = array();
+	protected $availableLanguages = [];
 	
-	protected $oldLanguages = array();
+	protected $oldLanguages = [];
 
-	protected $pages = array();
+	protected $pages = [];
 	
-	protected $contents = array();
+	protected $contents = [];
 	
 	/**
 	 * @see	\wcf\system\exporter\IExporter::init()
@@ -103,12 +103,12 @@ class InfinitePortalExporter extends AbstractExporter {
 	 * @see \wcf\system\exporter\IExporter::getSupportedData()
 	 */
 	public function getSupportedData() {
-		return array(
-			'de.codequake.cms.page' => array(
+		return [
+			'de.codequake.cms.page' => [
 				'de.codequake.cms.page.acl',
 				'de.codequake.cms.content'
-			)
-		);
+			]
+		];
 	}
 	
 	/**
@@ -121,7 +121,7 @@ class InfinitePortalExporter extends AbstractExporter {
 			FROM	wcf".$this->wcfNo."_package
 			WHERE	package = ?";
 		$statement = $this->database->prepareStatement($sql, 1);
-		$statement->execute(array('com.wcfsolutions.wsip'));
+		$statement->execute(['com.wcfsolutions.wsip']);
 		$row = $statement->fetchArray();
 		
 		if ($row !== false) {
@@ -136,7 +136,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	 * @see \wcf\system\exporter\IExporter::getQueue()
 	 */
 	public function getQueue() {
-		$queue = array();
+		$queue = [];
 		
 		if (in_array('de.codequake.cms.page', $this->selectedData)) {
 			$queue[] = 'de.codequake.cms.page';
@@ -192,7 +192,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		if (!isset($this->pages[$parentID])) return;
 		
 		foreach ($this->pages[$parentID] as $row) {
-			$additionalData = array();
+			$additionalData = [];
 			
 			foreach ($this->availableLanguages as $lang) {
 				if (!empty($this->oldLanguages[$lang->languageCode]))
@@ -211,7 +211,7 @@ class InfinitePortalExporter extends AbstractExporter {
 			
 			$alias = PageUtil::buildAlias($titleValues[$language->languageID]);
 			
-			$additionalDataColumn = array();
+			$additionalDataColumn = [];
 			if ($row['contentItemType'] == 1) {
 				$pageObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.link');
 				$additionalDataColumn['url'] = $row['externalURL'];
@@ -220,7 +220,7 @@ class InfinitePortalExporter extends AbstractExporter {
 				$pageObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page');
 			}
 			
-			$pageID = ImportHandler::getInstance()->getImporter('de.codequake.cms.page')->import($row['contentItemID'], array(
+			$pageID = ImportHandler::getInstance()->getImporter('de.codequake.cms.page')->import($row['contentItemID'], [
 				'showOrder' => $row['showOrder'],
 				'parentID' => $row['parentID'],
 				'alias' => $alias,
@@ -231,7 +231,7 @@ class InfinitePortalExporter extends AbstractExporter {
 				'metaKeywords' => $this->getLangItem('wsip.contentItem.' . $row['contentItem'] . '.metaKeywords', $this->oldLanguages['default']['languageID']),
 				'metaDescription' => $this->getLangItem('wsip.contentItem.' . $row['contentItem'] . '.metaDescription', $this->oldLanguages['default']['languageID']),
 				'additionalData' => serialize($additionalDataColumn)
-			), $additionalData);
+			], $additionalData);
 			
 			if ($pageID) {
 				$this->saveI18nValue(new Page($pageID), 'page', 'title');
@@ -261,7 +261,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	 * @param	integer		$limit
 	 */
 	public function exportACLs($offset, $limit) {
-		$user = $group = array();
+		$user = $group = [];
 		$sql = "(
 				SELECT	contentItemID, 0 AS userID, groupID, 'group' AS type
 				FROM	wsip".$this->dbNo."_content_item_to_group
@@ -282,7 +282,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		if (!empty($group)) {
 			$conditionBuilder = new PreparedStatementConditionBuilder(true, 'OR');
 			foreach ($group as $row) {
-				$conditionBuilder->add('(contentItemID = ? AND groupID = ?)', array($row['contentItemID'], $row['groupID']));
+				$conditionBuilder->add('(contentItemID = ? AND groupID = ?)', [$row['contentItemID'], $row['groupID']]);
 			}
 			
 			$sql = "SELECT	*
@@ -291,7 +291,7 @@ class InfinitePortalExporter extends AbstractExporter {
 			$statement = $this->database->prepareStatement($sql);
 			$statement->execute($conditionBuilder->getParameters());
 			while ($row = $statement->fetchArray()) {
-				$data = array('objectID' => $row['contentItemID']);
+				$data = ['objectID' => $row['contentItemID']];
 				$data['groupID'] = $row['groupID'];
 				
 				unset($row['contentItemID'], $row['groupID']);
@@ -302,7 +302,7 @@ class InfinitePortalExporter extends AbstractExporter {
 					
 					$permission = $this->convertACL($permission);
 					
-					ImportHandler::getInstance()->getImporter('de.codequake.cms.page.acl')->import(0, array_merge($data, array('optionValue' => $value)), array('optionName' => $permission));
+					ImportHandler::getInstance()->getImporter('de.codequake.cms.page.acl')->import(0, array_merge($data, ['optionValue' => $value]), ['optionName' => $permission]);
 				}
 			}
 		}
@@ -311,7 +311,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		if (!empty($user)) {
 			$conditionBuilder = new PreparedStatementConditionBuilder(true, 'OR');
 			foreach ($user as $row) {
-				$conditionBuilder->add('(contentItemID = ? AND userID = ?)', array($row['contentItemID'], $row['userID']));
+				$conditionBuilder->add('(contentItemID = ? AND userID = ?)', [$row['contentItemID'], $row['userID']]);
 			}
 			
 			$sql = "SELECT	*
@@ -320,7 +320,7 @@ class InfinitePortalExporter extends AbstractExporter {
 			$statement = $this->database->prepareStatement($sql);
 			$statement->execute($conditionBuilder->getParameters());
 			while ($row = $statement->fetchArray()) {
-				$data = array('objectID' => $row['contentItemID']);
+				$data = ['objectID' => $row['contentItemID']];
 				$data['userID'] = $row['userID'];
 				
 				unset($row['contentItemID'], $row['userID']);
@@ -331,7 +331,7 @@ class InfinitePortalExporter extends AbstractExporter {
 					
 					$permission = $this->convertACL($permission);
 					
-					ImportHandler::getInstance()->getImporter('de.codequake.cms.page.acl')->import(0, array_merge($data, array('optionValue' => $value)), array('optionName' => $permission));
+					ImportHandler::getInstance()->getImporter('de.codequake.cms.page.acl')->import(0, array_merge($data, ['optionValue' => $value]), ['optionName' => $permission]);
 				}
 			}
 		}
@@ -361,7 +361,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		$statement->execute();
 		
 		while ($row = $statement->fetchArray()) {
-			$additionalData = array();
+			$additionalData = [];
 			
 			if ($row['contentItemType'] == 1) {
 				// external link >> do nothing
@@ -373,7 +373,7 @@ class InfinitePortalExporter extends AbstractExporter {
 					WHERE	item_box.contentItemID = ?
 					ORDER BY	item_box.showOrder";
 				$boxListStatement = $this->database->prepareStatement($sql);
-				$boxListStatement->execute(array($row['contentItemID']));
+				$boxListStatement->execute([$row['contentItemID']]);
 				
 				while ($box = $boxListStatement->fetchArray()) {
 					$sql = "SELECT	*
@@ -382,16 +382,16 @@ class InfinitePortalExporter extends AbstractExporter {
 							AND item_box.boxID = box.boxID
 						ORDER BY	showOrder";
 					$tabListStatement = $this->database->prepareStatement($sql);
-					$tabListStatement->execute(array($box['boxID']));
+					$tabListStatement->execute([$box['boxID']]);
 					
 					$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.tabmenu');
-					$contentID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import('b' . $box['boxID'], array(
+					$contentID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import('b' . $box['boxID'], [
 						'pageID' => $row['contentItemID'],
 						'title' => '',
 						'contentTypeID' => $contentObjectType->objectTypeID,
-						'contentData' => array(),
+						'contentData' => [],
 						'showOrder' => $box['showOrder']
-					), $additionalData);
+					], $additionalData);
 					
 					while ($tab = $tabListStatement->fetchArray()) {
 						$sql = "SELECT option_table.*, value_table.*
@@ -401,13 +401,13 @@ class InfinitePortalExporter extends AbstractExporter {
 								AND option_table.optionID = value_table.optionID
 								AND option_table.boxTabType = ?";
 						$optionStatement = $this->database->prepareStatement($sql);
-						$optionStatement->execute(array($tab['boxTabID'], $tab['boxTabType']));
-						$options = array();
+						$optionStatement->execute([$tab['boxTabID'], $tab['boxTabType']]);
+						$options = [];
 						while ($option = $optionStatement->fetchArray()) {
 							$options[$option['optionName']] = $option;
 						}
 						
-						$contentData = array();
+						$contentData = [];
 						if ($tab['boxTabType'] == 'content') {
 							$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.wsipimport');
 							$contentData['text'] = $this->getLangItem($options['text']['optionValue'], $this->oldLanguages['default']['languageID']);
@@ -423,7 +423,7 @@ class InfinitePortalExporter extends AbstractExporter {
 							continue;
 						}
 						
-						$contentTabID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import('t' . $tab['boxTabID'], array(
+						$contentTabID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import('t' . $tab['boxTabID'], [
 							'pageID' => $row['contentItemID'],
 							'title' => $this->getLangItem('wcf.box.tab.' . $tab['boxTab'], $this->oldLanguages['default']['languageID']),
 							'contentTypeID' => $contentObjectType->objectTypeID,
@@ -431,21 +431,21 @@ class InfinitePortalExporter extends AbstractExporter {
 							'showOrder' => $tab['showOrder'],
 							'parentID' => $contentID,
 							'dontUpdateParentID' => true
-						), $additionalData);
+						], $additionalData);
 					}
 				}
 			} else {
 				// html content
 				$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.wsipimport');
-				$contentID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import($row['contentItemID'], array(
+				$contentID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import($row['contentItemID'], [
 					'pageID' => $row['contentItemID'],
 					'title' => '',
 					'contentTypeID' => $contentObjectType->objectTypeID,
-					'contentData' => array(
+					'contentData' => [
 						'text' => $this->getLangItem('wsip.contentItem.' . $row['contentItem'] . '.text', $this->oldLanguages['default']['languageID'])
-					),
+					],
 					'cssClasses' => 'container containerPadding marginTop'
-				), $additionalData);
+				], $additionalData);
 			}
 		}
 	}
@@ -457,7 +457,7 @@ class InfinitePortalExporter extends AbstractExporter {
 				AND languageID = ?
 			ORDER BY	languageItemID";
 		$statement = $this->database->prepareStatement($sql);
-		$statement->execute(array($langItem, $languageID));
+		$statement->execute([$langItem, $languageID]);
 		
 		$row = $statement->fetchSingleRow();
 		
@@ -501,19 +501,19 @@ class InfinitePortalExporter extends AbstractExporter {
 					} else if (is_array($tmpContentData)) {
 						$tmpContentData['text'] = $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'};
 					} else {
-						$tmpContentData = array();
+						$tmpContentData = [];
 						$tmpContentData['text'] = $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'};
 					}
 					
 					$tmpContentData = serialize($tmpContentData);
 					
-					$editor->update(array(
+					$editor->update([
 						'contentData' => $tmpContentData
-					));
+					]);
 				} else {
-					$editor->update(array(
+					$editor->update([
 						$columnName => $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'}
-					));
+					]);
 				}
 			}
 		}

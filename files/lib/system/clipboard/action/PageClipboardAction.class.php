@@ -17,12 +17,12 @@ class PageClipboardAction extends AbstractClipboardAction {
 	/**
 	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$actionClassActions
 	 */
-	protected $actionClassActions = array('delete', 'disable', 'enable');
+	protected $actionClassActions = ['delete', 'disable', 'enable'];
 
 	/**
 	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$supportedActions
 	 */
-	protected $supportedActions = array('delete', 'disable', 'enable');
+	protected $supportedActions = ['delete', 'disable', 'enable'];
 
 	/**
 	 * @see	\wcf\system\clipboard\action\IClipboardAction::execute()
@@ -37,9 +37,9 @@ class PageClipboardAction extends AbstractClipboardAction {
 		// handle actions
 		switch ($action->actionName) {
 			case 'delete':
-				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.codequake.cms.page.delete.confirmMessage', array(
+				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.codequake.cms.page.delete.confirmMessage', [
 					'count' => $item->getCount()
-				)));
+				]));
 			break;
 		}
 
@@ -66,7 +66,7 @@ class PageClipboardAction extends AbstractClipboardAction {
 	 * @return	array<integer>
 	 */
 	protected function validateDelete() {
-		$pageIDs = array();
+		$pageIDs = [];
 		foreach ($this->objects as $page) {
 			if ($page->canDelete()) {
 				$pageIDs[] = $page->pageID;
@@ -84,10 +84,10 @@ class PageClipboardAction extends AbstractClipboardAction {
 	protected function validateDisable() {
 		// check permissions
 		if (!WCF::getSession()->getPermission('admin.fireball.page.canAddPage')) {
-			return array();
+			return [];
 		}
 
-		$pageIDs = array();
+		$pageIDs = [];
 		foreach ($this->objects as $page) {
 			if (!$page->isDisabled) $pageIDs[] = $page->pageID;
 		}
@@ -103,10 +103,10 @@ class PageClipboardAction extends AbstractClipboardAction {
 	protected function validateEnable() {
 		// check permissions
 		if (!WCF::getSession()->getPermission('admin.fireball.page.canAddPage')) {
-			return array();
+			return [];
 		}
 
-		$pageIDs = array();
+		$pageIDs = [];
 		foreach ($this->objects as $page) {
 			if ($page->isDisabled) $pageIDs[] = $page->pageID;
 		}

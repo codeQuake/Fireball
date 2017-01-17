@@ -33,7 +33,7 @@ abstract class AbstractDatabaseObjectListContentType extends AbstractContentType
 	 * additional fields for the template
 	 * @var array
 	 */
-	protected $additionalFields = array();
+	protected $additionalFields = [];
 
 	/**
 	 * template with additional fields for the content add
@@ -46,9 +46,9 @@ abstract class AbstractDatabaseObjectListContentType extends AbstractContentType
 	 * @see \cms\system\content\type\IContentType::getFormTemplate()
 	 */
 	public function getFormTemplate() {
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'additionalTemplate' => $this->additionalFormTemplate
-		));
+		]);
 	}
 
 	/**
@@ -60,11 +60,11 @@ abstract class AbstractDatabaseObjectListContentType extends AbstractContentType
 		$this->initObjectList($content);
 		$this->objectList->readObjects();
 
-		return WCF::getTPL()->fetch($this->templateName, $this->templateNameApplication, array_merge(array(
+		return WCF::getTPL()->fetch($this->templateName, $this->templateNameApplication, array_merge([
 			'items' => iterator_count($this->objectList),
 			'objects' => $this->objectList,
 			'content' => $content
-		), $this->additionalFields));
+		], $this->additionalFields));
 	}
 
 	/**

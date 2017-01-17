@@ -24,7 +24,7 @@ class FileImporter extends AbstractImporter {
 	/**
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
-	public function import($oldID, array $data, array $additionalData = array()) {
+	public function import($oldID, array $data, array $additionalData = []) {
 		unset($data['fileID']);
 
 		if (is_numeric($oldID)) {
@@ -33,22 +33,22 @@ class FileImporter extends AbstractImporter {
 				$data['fileID'] = $oldID;
 		}
 
-		$categoryIDs = array();
+		$categoryIDs = [];
 		if (!empty($additionalData['categoryIDs'])) {
 			foreach ($additionalData['categoryIDs'] as $categoryID) {
 				$categoryIDs[] = ImportHandler::getInstance()->getNewID('de.codequake.cms.file.category', $categoryID);
 			}
 		}
 
-		$action = new FileAction(array(), 'create', array(
+		$action = new FileAction([], 'create', [
 			'data' => $data
-		));
+		]);
 		$returnValues = $action->executeAction();
 		$newID = $returnValues['returnValues']->fileID;
 		$file = new File($newID);
 
 		if (!empty($categoryIDs)) {
-			$updateAction = new FileAction(array($file), 'update', array('categoryIDs' => $categoryIDs));
+			$updateAction = new FileAction([$file], 'update', ['categoryIDs' => $categoryIDs]);
 			$updateAction->executeAction();
 		}
 
@@ -63,7 +63,7 @@ class FileImporter extends AbstractImporter {
 				throw new SystemException();
 		}
 		catch (SystemException $e) {
-			$deleteAction = new FileAction(array($file), 'delete');
+			$deleteAction = new FileAction([$file], 'delete');
 			$deleteAction->executeAction();
 			return 0;
 		}

@@ -31,7 +31,7 @@ $sql = "UPDATE  wcf" . WCF_N . "_language_category
 		SET     languageCategory = ?
 		WHERE   languageCategory = ?";
 $statement = WCF::getDB()->prepareStatement($sql);
-$statement->execute(array('fireball.acp.menu', 'cms.acp.menu'));
+$statement->execute(['fireball.acp.menu', 'cms.acp.menu']);
 
 /**
  * REPLACE LANGUAGE ITEMS
@@ -48,7 +48,7 @@ $languageItemList->getConditionBuilder()->add(
 	OR languageItem LIKE ?
 	OR languageItem LIKE ?
 	OR languageItem LIKE ?)',
-	array(
+	[
 	'cms.acp.menu.link.cms%',
 	'wcf.acp.group.option.admin.cms%',
 	'wcf.acp.group.option.category.admin.cms%',
@@ -59,12 +59,12 @@ $languageItemList->getConditionBuilder()->add(
 	'wcf.acp.option.category.cms%',
 	'wcf.acp.option.cms_%',
 	'wcf.acl.option.category.de.codequake.cms%',
-));
-$languageItemList->getConditionBuilder()->add('packageID = ?', array($packageID));
+	]);
+$languageItemList->getConditionBuilder()->add('packageID = ?', [$packageID]);
 $languageItemList->readObjects();
 $affectedObjects = $languageItemList->getObjects();
 foreach ($affectedObjects as $object) {
-	$newVal = str_replace(array(
+	$newVal = str_replace([
 		'cms.acp.menu.link.cms',
 		'wcf.acp.group.option.admin.cms',
 		'wcf.acp.group.option.category.admin.cms',
@@ -76,7 +76,7 @@ foreach ($affectedObjects as $object) {
 		'wcf.acp.option.cms_',
 		'wcf.acl.option.category.de.codequake.cms.page.user.cms.page',
 		'wcf.acl.option.category.de.codequake.cms.page.user.cms.page.comment'
-	), array(
+	], [
 		'fireball.acp.menu.link.fireball',
 		'wcf.acp.group.option.admin.fireball',
 		'wcf.acp.group.option.category.admin.fireball',
@@ -88,17 +88,17 @@ foreach ($affectedObjects as $object) {
 		'wcf.acp.option.fireball_',
 		'wcf.acl.option.category.de.codequake.cms.page.user.fireball.page',
 		'wcf.acl.option.category.de.codequake.cms.page.user.fireball.page.comment'
-	), $object->languageItem);
+	], $object->languageItem);
 	$objectEditor = new LanguageItemEditor($object);
-	$objectEditor->update(array('languageItem' => $newVal));
+	$objectEditor->update(['languageItem' => $newVal]);
 }
 
 /**
  * REPLACE OPTIONS
  */
 $optionList = new OptionList();
-$optionList->getConditionBuilder()->add('option_table.optionName LIKE ?', array('cms_%'));
-$optionList->getConditionBuilder()->add('packageID = ?', array($packageID));
+$optionList->getConditionBuilder()->add('option_table.optionName LIKE ?', ['cms_%']);
+$optionList->getConditionBuilder()->add('packageID = ?', [$packageID]);
 $optionList->readObjects();
 $affectedObjects = $optionList->getObjects();
 foreach ($affectedObjects as $object) {
@@ -106,104 +106,104 @@ foreach ($affectedObjects as $object) {
 		continue;
 	$newVal = str_replace('cms_', 'fireball_', $object->optionName);
 	$objectEditor = new OptionEditor($object);
-	$objectEditor->update(array('optionName' => $newVal));
+	$objectEditor->update(['optionName' => $newVal]);
 }
 
 /**
  * REPLACE OPTION CATEGORIES
  */
 $categoryList = new OptionCategoryList();
-$categoryList->getConditionBuilder()->add('categoryName LIKE ?', array('cms%'));
-$categoryList->getConditionBuilder()->add('packageID = ?', array($packageID));
+$categoryList->getConditionBuilder()->add('categoryName LIKE ?', ['cms%']);
+$categoryList->getConditionBuilder()->add('packageID = ?', [$packageID]);
 $categoryList->readObjects();
 $affectedObjects = $categoryList->getObjects();
 
 foreach ($affectedObjects as $object) {
 	$newVal = str_replace('cms', 'fireball', $object->categoryName);
 	$objectEditor = new OptionCategoryEditor($object);
-	$objectEditor->update(array('categoryName' => $newVal));
+	$objectEditor->update(['categoryName' => $newVal]);
 }
 
 /**
  * REPLACE USER GROUP OPTIONS
  */
 $groupOptionList = new UserGroupOptionList();
-$groupOptionList->getConditionBuilder()->add('(optionName LIKE ? OR optionName LIKE ? OR optionName LIKE ?)', array(
+$groupOptionList->getConditionBuilder()->add('(optionName LIKE ? OR optionName LIKE ? OR optionName LIKE ?)', [
 	'admin.cms%',
 	'mod.cms%',
 	'user.cms%'
-));
-$groupOptionList->getConditionBuilder()->add('packageID = ?', array($packageID));
+]);
+$groupOptionList->getConditionBuilder()->add('packageID = ?', [$packageID]);
 $groupOptionList->readObjects();
 $affectedObjects = $groupOptionList->getObjects();
 foreach ($affectedObjects as $object) {
-	$old = array(
+	$old = [
 		'admin.cms',
 		'mod.cms',
 		'user.cms'
-	);
-	$new = array(
+	];
+	$new = [
 		'admin.fireball',
 		'mod.fireball',
 		'user.fireball'
-	);
+	];
 	$newName = str_replace($old, $new, $object->optionName);
 	$newCat = str_replace($old, $new, $object->categoryName);
 	$objectEditor = new UserGroupOptionEditor($object);
-	$objectEditor->update(array(
+	$objectEditor->update([
 		'optionName' => $newName,
 		'categoryName' => $newCat
-	));
+	]);
 }
 
 /**
  * REPLACE USER GROUP OPTION CATEGORIES
  */
 $categoryList = new UserGroupOptionCategoryList();
-$categoryList->getConditionBuilder()->add('(categoryName LIKE ? OR categoryName LIKE ? OR categoryName LIKE ?)', array(
+$categoryList->getConditionBuilder()->add('(categoryName LIKE ? OR categoryName LIKE ? OR categoryName LIKE ?)', [
 	'admin.cms%',
 	'mod.cms%',
 	'user.cms%'
-));
-$categoryList->getConditionBuilder()->add('packageID = ?', array($packageID));
+]);
+$categoryList->getConditionBuilder()->add('packageID = ?', [$packageID]);
 $categoryList->readObjects();
 $affectedObjects = $categoryList->getObjects();
 foreach ($affectedObjects as $object) {
 	$newCat = str_replace($old, $new, $object->categoryName);
 	$newParent = str_replace($old, $new, $object->parentCategoryName);
 	$objectEditor = new UserGroupOptionCategoryEditor($object);
-	$objectEditor->update(array(
+	$objectEditor->update([
 		'categoryName' => $newCat,
 		'parentCategoryName' => $newParent
-	));
+	]);
 }
 
 /**
  * REPLACE ACL OPTION CATEGORIES
  */
 $aclCategoryList = new ACLOptionCategoryList();
-$aclCategoryList->getConditionBuilder()->add('categoryName IN (?)', array('user.cms.page', 'user.cms.page.comment'));
-$aclCategoryList->getConditionBuilder()->add('packageID = ?', array($packageID));
+$aclCategoryList->getConditionBuilder()->add('categoryName IN (?)', ['user.cms.page', 'user.cms.page.comment']);
+$aclCategoryList->getConditionBuilder()->add('packageID = ?', [$packageID]);
 $aclCategoryList->readObjects();
 $affectedObjects = $aclCategoryList->getObjects();
 foreach ($affectedObjects as $object) {
 	$newVal = str_replace('user.cms.', 'user.fireball.', $object->categoryName);
 	$objectEditor = new ACLOptionCategoryEditor($object);
-	$objectEditor->update(array('categoryName' => $newVal));
+	$objectEditor->update(['categoryName' => $newVal]);
 }
 
 /**
  * REPLACE ACL OPTIONS
  */
 $aclList = new ACLOptionList();
-$aclList->getConditionBuilder()->add('categoryName IN (?)', array('user.cms.page', 'user.cms.page.comment'));
-$aclList->getConditionBuilder()->add('packageID = ?', array($packageID));
+$aclList->getConditionBuilder()->add('categoryName IN (?)', ['user.cms.page', 'user.cms.page.comment']);
+$aclList->getConditionBuilder()->add('packageID = ?', [$packageID]);
 $aclList->readObjects();
 $affectedObjects = $aclList->getObjects();
 foreach ($affectedObjects as $object) {
 	$newCat = str_replace('user.cms.', 'user.fireball.', $object->categoryName);
 	$objectEditor = new ACLOptionEditor($object);
-	$objectEditor->update(array('categoryName' => $newCat));
+	$objectEditor->update(['categoryName' => $newCat]);
 }
 
 $objectTypeID = ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.page.type', 'de.codequake.cms.page.type.page');
@@ -212,7 +212,7 @@ $pageList->readObjects();
 $affectedObjects = $pageList->getObjects();
 foreach ($affectedObjects as $object) {
 	$objectEditor = new PageEditor($object);
-	$objectEditor->update(array('objectTypeID' => $objectTypeID));
+	$objectEditor->update(['objectTypeID' => $objectTypeID]);
 }
 
 $contentList = new ContentList();
@@ -229,5 +229,5 @@ foreach ($contents as $content) {
 	}
 
 	$contentEditor = new ContentEditor($content);
-	$contentEditor->update(array('showHeadline' => 1));
+	$contentEditor->update(['showHeadline' => 1]);
 }

@@ -33,7 +33,7 @@ class CommentActionListener implements IParameterizedEventListener {
 		$this->eventObj = $eventObj;
 
 		if (method_exists($this, $this->eventObj->getActionName())) {
-			call_user_func(array($this, $this->eventObj->getActionName()));
+			call_user_func([$this, $this->eventObj->getActionName()]);
 		}
 	}
 

@@ -32,7 +32,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	 * list of category ids
 	 * @var	array<integer>
 	 */
-	public $categoryIDs = array();
+	public $categoryIDs = [];
 
 	/**
 	 * list of categories
@@ -54,12 +54,12 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	 * list of mime types that support thumbnail generation
 	 * @var	array<string>
 	 */
-	public static $thumbnailMimeTypes = array(
+	public static $thumbnailMimeTypes = [
 		'image/gif',
 		'image/jpeg',
 		'image/png',
 		'image/pjpeg'
-	);
+	];
 
 	/**
 	 * Returns the category ids of this file.
@@ -72,7 +72,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 				FROM	cms".WCF_N."_file_to_category
 				WHERE	fileID = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($this->fileID));
+			$statement->execute([$this->fileID]);
 
 			while ($row = $statement->fetchArray()) {
 				$this->categoryIDs[] = $row['categoryID'];
@@ -89,7 +89,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	 */
 	public function getCategories() {
 		if ($this->categories === null) {
-			$this->categories = array();
+			$this->categories = [];
 
 			foreach ($this->getCategoryIDs() as $categoryID) {
 				$this->categories[$categoryID] = CategoryHandler::getInstance()->getCategory($categoryID);
@@ -137,11 +137,11 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	 * @see	\wcf\data\ILinkableObject::getLink()
 	 */
 	public function getLink() {
-		return LinkHandler::getInstance()->getLink('FileDownload', array(
+		return LinkHandler::getInstance()->getLink('FileDownload', [
 			'application' => 'cms',
 			'forceFrontend' => true,
 			'object' => $this
-		));
+		]);
 	}
 
 	/**
@@ -155,12 +155,12 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 			return $this->getLink();
 		}
 
-		return LinkHandler::getInstance()->getLink('FileDownload', array(
+		return LinkHandler::getInstance()->getLink('FileDownload', [
 			'application' => 'cms',
 			'forceFrontend' => true,
 			'id' => $this->fileID,
 			'thumbnail' => 1
-		));
+		]);
 	}
 
 	/**
@@ -216,7 +216,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	 * @param array $permissions
 	 * @throws PermissionDeniedException
 	 */
-	public function checkPermissions(array $permissions = array('user.canDownloadFile')) {
+	public function checkPermissions(array $permissions = ['user.canDownloadFile']) {
 		foreach ($permissions as $permission) {
 			if (!$this->getPermission($permission)) {
 				throw new PermissionDeniedException();
@@ -230,7 +230,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	public function getPermission($permission) {
 		$permissions = FilePermissionHandler::getInstance()->getPermissions($this);
 
-		$aclPermission = str_replace(array('user.', 'mod.', 'admin.'), array('', '', ''), $permission);
+		$aclPermission = str_replace(['user.', 'mod.', 'admin.'], ['', '', ''], $permission);
 		if (isset($permissions[$aclPermission])) {
 			return $permissions[$aclPermission];
 		}
@@ -240,7 +240,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 			return WCF::getSession()->getPermission('user.fireball.content.canDownloadFile');
 		}
 
-		$globalPermission = str_replace(array('user.', 'mod.', 'admin.'), array('user.fireball.file.', 'mod.fireball.', 'user.fireball.file.'), $permission);
+		$globalPermission = str_replace(['user.', 'mod.', 'admin.'], ['user.fireball.file.', 'mod.fireball.', 'user.fireball.file.'], $permission);
 		return WCF::getSession()->getPermission($globalPermission);
 	}
 }

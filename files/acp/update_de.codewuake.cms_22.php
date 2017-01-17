@@ -9,5 +9,5 @@ $stylesheets = $stylesheetList->getObjects();
 
 foreach ($stylesheets as $stylesheet) {
 	$stylesheetEditor = new StylesheetEditor($stylesheet);
-	$stylesheetEditor->update(array('scss' => $stylesheet->less));
+	$stylesheetEditor->update(['scss' => $stylesheet->less]);
 }

@@ -31,17 +31,17 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache
 	 */
-	protected $resetCache = array('copy', 'create', 'delete', 'disable', 'enable', 'toggle', 'update', 'updatePosition', 'frontendCreate');
+	protected $resetCache = ['copy', 'create', 'delete', 'disable', 'enable', 'toggle', 'update', 'updatePosition', 'frontendCreate'];
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.fireball.content.canAddContent');
+	protected $permissionsDelete = ['admin.fireball.content.canAddContent'];
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.fireball.content.canAddContent');
+	protected $permissionsUpdate = ['admin.fireball.content.canAddContent'];
 
 	/**
 	 * Validates parameters to copy a content.
@@ -65,9 +65,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		$this->parameters['data'] = $data;
 		$content = $this->create();
 		$contentID = $content->contentID;
-		$tmp = array();
+		$tmp = [];
 		$tmp[$oldID] = $contentID;
-		$affectedIDs = array();
+		$affectedIDs = [];
 
 		foreach ($childs as $child) {
 			$childID = $child->getDecoratedObject()->contentID;
@@ -82,7 +82,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		}
 
 		foreach ($affectedIDs as $affectedID) {
-			$update = array();
+			$update = [];
 			$affectedObject = new Content($affectedID);
 			if (isset ($tmp[$affectedObject->parentID])) {
 				$editor = new ContentEditor($affectedObject);
@@ -120,7 +120,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		}
 
 		foreach ($this->objects as $contentEditor) {
-			$contentEditor->update(array('isDisabled' => 1));
+			$contentEditor->update(['isDisabled' => 1]);
 		}
 	}
 
@@ -140,7 +140,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		}
 
 		foreach ($this->objects as $contentEditor) {
-			$contentEditor->update(array('isDisabled' => 0));
+			$contentEditor->update(['isDisabled' => 0]);
 		}
 	}
 	
@@ -181,11 +181,11 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		
 		//finally create new page
 		$content = $this->create();
-		return array(
+		return [
 			'content' => $content,
 			'output' => $content->getOutput(),
 			'parentID' => $content->parentID ?: 0
-			);
+		];
 	}
 	
 	/**
@@ -196,7 +196,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) throw new AJAXException();
 		
 		//validate position
-		if (!isset($this->parameters['position']) || !in_array($this->parameters['position'], array('body', 'sidebar'))) throw new UserInputException('position');
+		if (!isset($this->parameters['position']) || !in_array($this->parameters['position'], ['body', 'sidebar'])) throw new UserInputException('position');
 		
 		//validate parent
 		if (isset($this->parameters['parentID']) && $this->parameters['parentID'] != 0) {
@@ -218,7 +218,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		
 		//get initial data (TODO: EDIT)
 		$action = 'add';
-		$contentData = array();
+		$contentData = [];
 		$cssClasses = '';
 		$pageID = $page->pageID;
 		if (isset($this->parameters['parentID']) && $this->parameters['parentID'] != 0) {
@@ -238,8 +238,8 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		$objectType->getProcessor()->readParameters();
 		I18nHandler::getInstance()->assignVariables();
 
-		return array(
-			'template' => WCF::getTPL()->fetch('contentAddDialog', 'cms', array(
+		return [
+			'template' => WCF::getTPL()->fetch('contentAddDialog', 'cms', [
 				'action' => $action,
 				'cssClasses' => $cssClasses,
 				'pageID' => $pageID,
@@ -248,15 +248,15 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 				'showOrder' => $showOrder,
 				'title' => $title,
 				'objectType' => $objectType,
-				'typeTemplate' => WCF::getTPL()->fetch($objectType->getProcessor()->getFormTemplate() . 'Form', 'cms', array(
+				'typeTemplate' => WCF::getTPL()->fetch($objectType->getProcessor()->getFormTemplate() . 'Form', 'cms', [
 					'contentData' => $contentData,
 					'objectType' => $objectType,
 					'errorField' => '',
 					'errorType' => '',
 					'position' => $position
-				))
-			))
-		);
+				])
+			])
+		];
 	}
 
 	/**
@@ -273,9 +273,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		if (empty($this->objects)) $this->readObjects();
 
 		foreach ($this->objects as $content) {
-			$content->update(array(
+			$content->update([
 				'isDisabled' => 1 - $content->isDisabled
-			));
+			]);
 		}
 	}
 
@@ -307,15 +307,15 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	 * @see	\wcf\data\ISortableAction::validateUpdatePosition()
 	 */
 	public function validateUpdatePosition() {
-		WCF::getSession()->checkPermissions(array(
+		WCF::getSession()->checkPermissions([
 			'admin.fireball.content.canAddContent'
-		));
+		]);
 
 		if (!isset($this->parameters['data']['structure']) || !is_array($this->parameters['data']['structure'])) {
 			throw new UserInputException('structure');
 		}
 
-		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$contents = ContentCacheBuilder::getInstance()->getData([], 'contents');
 
 		foreach ($this->parameters['data']['structure'] as $parentID => $contentIDs) {
 			if ($parentID) {
@@ -342,7 +342,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	public function updatePosition() {
 		WCF::getDB()->beginTransaction();
 
-		$pageIDs = array();
+		$pageIDs = [];
 		foreach ($this->parameters['data']['structure'] as $parentID => $contentIDs) {
 			$position = 1;
 			foreach ($contentIDs as $contentID) {
@@ -350,19 +350,19 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 					$pageIDs[] = $this->objects[$contentID]->pageID;
 				}
 
-				$this->objects[$contentID]->update(array(
+				$this->objects[$contentID]->update([
 					'parentID' => $parentID != 0 ? $this->objects[$parentID]->contentID : null,
 					'showOrder' => $position ++
-				));
+				]);
 			}
 		}
 
 		WCF::getDB()->commitTransaction();
 
 		// create revision
-		$pageAction = new PageAction($pageIDs, 'createRevision', array(
+		$pageAction = new PageAction($pageIDs, 'createRevision', [
 			'action' => 'content.updatePosition'
-		));
+		]);
 		$pageAction->executeAction();
 	}
 }

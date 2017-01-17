@@ -20,7 +20,7 @@ class YoutubeContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
 	 */
-	protected $previewFields = array('video');
+	protected $previewFields = ['video'];
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::validate()

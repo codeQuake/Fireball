@@ -52,14 +52,14 @@ class CMSFileBBCode extends AbstractBBCode {
 			$this->caption = $openingTag['attributes'][3];
 		}
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'_file' => $file,
 			'_align' => $this->align,
 			'_width' => $this->width,
 			'_isImage' => $this->isImage,
 			'_caption' => $this->caption
 
-		));
+		]);
 
 		return WCF::getTPL()->fetch('cmsFileBBCodeTag', 'cms');
 	}

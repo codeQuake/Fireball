@@ -24,7 +24,7 @@ class FileEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * @see	\wcf\data\IEditableObject::deleteAll()
 	 */
-	public static function deleteAll(array $objectIDs = array()) {
+	public static function deleteAll(array $objectIDs = []) {
 		$fileList = new FileList();
 		$fileList->setObjectIDs($objectIDs);
 		$fileList->readObjects();
@@ -54,12 +54,12 @@ class FileEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * 
 	 * @param	array<integer>		$categoryIDs
 	 */
-	public function updateCategoryIDs(array $categoryIDs = array()) {
+	public function updateCategoryIDs(array $categoryIDs = []) {
 		// remove old assigns
 		$sql = "DELETE FROM	cms".WCF_N."_file_to_category
 			WHERE		fileID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->fileID));
+		$statement->execute([$this->fileID]);
 
 		// new categories
 		if (!empty($categoryIDs)) {
@@ -70,7 +70,7 @@ class FileEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 				VALUES		(?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			foreach ($categoryIDs as $categoryID) {
-				$statement->execute(array($categoryID, $this->fileID));
+				$statement->execute([$categoryID, $this->fileID]);
 			}
 
 			WCF::getDB()->commitTransaction();

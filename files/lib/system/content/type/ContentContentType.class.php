@@ -30,9 +30,9 @@ class ContentContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
 	 */
 	public function getFormTemplate() {
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'contentNodeTree' => new DrainedContentNodeTree()
-		));
+		]);
 
 		return parent::getFormTemplate();
 	}

@@ -15,17 +15,17 @@ use wcf\system\SingletonFactory;
  */
 class FileCache extends SingletonFactory {
 
-	protected $files = array();
+	protected $files = [];
 
-	protected $filesToCategory = array();
+	protected $filesToCategory = [];
 	
-	protected $categoryIDs = array();
+	protected $categoryIDs = [];
 	
 	protected $categories = null;
 
 	protected function init() {
-		$this->filesToCategory = FileCacheBuilder::getInstance()->getData(array(), 'filesToCategory');
-		$this->files = FileCacheBuilder::getInstance()->getData(array(), 'files');
+		$this->filesToCategory = FileCacheBuilder::getInstance()->getData([], 'filesToCategory');
+		$this->files = FileCacheBuilder::getInstance()->getData([], 'files');
 	}
 
 	public function getFile($id) {
@@ -44,7 +44,7 @@ class FileCache extends SingletonFactory {
 	
 	public function getCategories($id) {
 		if ($this->categories === null) {
-			$this->categories = array();
+			$this->categories = [];
 			
 			foreach ($this->getCategoryIDs($id) as $categoryID) {
 				$this->categories[$categoryID] = CategoryHandler::getInstance()->getCategory($categoryID);

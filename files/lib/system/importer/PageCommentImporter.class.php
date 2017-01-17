@@ -27,7 +27,7 @@ class PageCommentImporter extends AbstractCommentImporter {
 	/**
 	 * @see wcf\system\importer\IImporter::import()
 	 */
-	public function import($oldID, array $data, array $additionalData = array()) {
+	public function import($oldID, array $data, array $additionalData = []) {
 		$data['objectID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.page', $data['objectID']);
 		if (!$data['objectID'])
 			return 0;

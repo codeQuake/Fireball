@@ -21,7 +21,7 @@ class RssContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
 	 */
-	protected $previewFields = array('url');
+	protected $previewFields = ['url'];
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
@@ -35,7 +35,7 @@ class RssContentType extends AbstractContentType {
 		}
 		catch (SystemException $e) {
 			if ($content->getPermission('mod.canViewErroredContent')) {
-				$url = LinkHandler::getInstance()->getLink('ContentEdit', array('application' => 'cms', 'object' => $content, 'isACP' => true));
+				$url = LinkHandler::getInstance()->getLink('ContentEdit', ['application' => 'cms', 'object' => $content, 'isACP' => true]);
 				return '<div class="error">Please check <a href="' . $url . '">content #' . $content->contentID . '</a>. The following error occurred fetching the feed from <span class="inlineCode">' . $content->url . '</span>:<br><br>' . $e->getMessage() . '</div>';
 			} else {
 				return '';
@@ -47,9 +47,9 @@ class RssContentType extends AbstractContentType {
 		}
 		$feedType = $this->getFeedType($xml);
 		
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'rssFeed' => $this->getFeedData($xml, $content->limit, $feedType)
-		));
+		]);
 		
 		return parent::getOutput($content);
 
@@ -71,7 +71,7 @@ class RssContentType extends AbstractContentType {
 	}
 	
 	public function getFeedData($xml, $i, $feedType) {
-		$feed = array();
+		$feed = [];
 
 		switch($feedType) {
 			case 'rss':
@@ -84,13 +84,13 @@ class RssContentType extends AbstractContentType {
 					$author = (string) $item->author;
 					if ($author == '') (string) $author = $dc->publisher;
 					if ($author == '') (string) $author = $dc->creator;
-					$feed[] = array(
+					$feed[] = [
 						'title' => (string) $item->title,
 						'description' => (string) $item->description,
 						'link' => (string) $item->guid,
 						'time' => strtotime((string) $item->pubDate),
 						'author' => (string) $author
-					);
+					];
 				}
 				break;
 			case 'atom':
@@ -99,13 +99,13 @@ class RssContentType extends AbstractContentType {
 						break;
 					}
 					$url = $item->link->attributes();
-					$feed[] = array(
+					$feed[] = [
 						'title' => (string) $item->children()->title,
 						'description' => (string) $item->summary,
 						'link' => (string) $url['href'],
 						'time' => strtotime((string) $item->children()->updated),
 						'author' => (string) $item->author->name
-					);
+					];
 				}
 				break;
 				
@@ -115,13 +115,13 @@ class RssContentType extends AbstractContentType {
 						break;
 					}
 					
-					$feed[] = array(
+					$feed[] = [
 						'title' => (string) $item->title,
 						'description' => (string) $item->description,
 						'link' => (string) $item->link,
 						'time' => strtotime((string) $item->children()->date),
 						'author' => (string) $item->name
-					);
+					];
 				}
 				break;
 		}

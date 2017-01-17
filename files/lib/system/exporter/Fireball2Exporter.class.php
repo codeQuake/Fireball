@@ -29,12 +29,12 @@ class Fireball2Exporter extends AbstractExporter {
 	 * array with cached categories from old installation
 	 * @var array
 	 */
-	protected $categoryCache = array();
+	protected $categoryCache = [];
 	
 	/**
 	 * @see \wcf\system\exporter\AbstractExporter::$methods
 	 */
-	protected $methods = array(
+	protected $methods = [
 		// WoltLab
 		'com.woltlab.wcf.user' => 'Users',
 		'com.woltlab.wcf.user.group' => 'UserGroups',
@@ -46,12 +46,12 @@ class Fireball2Exporter extends AbstractExporter {
 		'de.codequake.cms.page.comment' => 'Comments',
 		'de.codequake.cms.page.comment.response' => 'CommentResponses',
 		'de.codequake.cms.stylesheet' => 'Stylesheets'
-	);
+	];
 	
 	/**
 	 * @see	\wcf\system\exporter\AbstractExporter::$limits
 	 */
-	protected $limits = array(
+	protected $limits = [
 		'com.woltlab.wcf.user' => 100,
 		'de.codequake.cms.page' => 300,
 		'de.codequake.cms.content' => 100,
@@ -60,7 +60,7 @@ class Fireball2Exporter extends AbstractExporter {
 		'de.codequake.cms.page.comment' => 300,
 		'de.codequake.cms.page.comment.response' => 300,
 		'de.codequake.cms.stylesheet' => 300
-	);
+	];
 	
 	/**
 	 * @see	\wcf\system\exporter\IExporter::init()
@@ -89,21 +89,21 @@ class Fireball2Exporter extends AbstractExporter {
 	 * @see \wcf\system\exporter\IExporter::getSupportedData()
 	 */
 	public function getSupportedData() {
-		return array(
+		return [
 			// WoltLab
-			'com.woltlab.wcf.user' => array(
+			'com.woltlab.wcf.user' => [
 				'com.woltlab.wcf.user.group'
-			),
+			],
 			// Fireball
-			'de.codequake.cms.page' => array(
+			'de.codequake.cms.page' => [
 				'de.codequake.cms.page.comment',
 				'de.codequake.cms.content'
-			),
-			'de.codequake.cms.file.category' => array(
+			],
+			'de.codequake.cms.file.category' => [
 				'de.codequake.cms.file'
-			),
-			'de.codequake.cms.stylesheet' => array()
-		);
+			],
+			'de.codequake.cms.stylesheet' => []
+		];
 	}
 	
 	/**
@@ -116,7 +116,7 @@ class Fireball2Exporter extends AbstractExporter {
 			FROM	wcf".$this->dbNo."_package
 			WHERE	package = ?";
 		$statement = $this->database->prepareStatement($sql, 1);
-		$statement->execute(array('de.codequake.cms'));
+		$statement->execute(['de.codequake.cms']);
 		$row = $statement->fetchArray();
 		
 		if ($row !== false) {
@@ -131,7 +131,7 @@ class Fireball2Exporter extends AbstractExporter {
 	 * @see \wcf\system\exporter\IExporter::getQueue()
 	 */
 	public function getQueue() {
-		$queue = array();
+		$queue = [];
 
 		// user
 		if (in_array('com.woltlab.wcf.user', $this->selectedData)) {
@@ -431,7 +431,7 @@ class Fireball2Exporter extends AbstractExporter {
 			FROM	wcf".$this->dbNo."_category
 			WHERE	objectTypeID = ?";
 		$statement = $this->database->prepareStatement($sql);
-		$statement->execute(array($objectTypeID));
+		$statement->execute([$objectTypeID]);
 		$row = $statement->fetchArray();
 		
 		return $row['count'];
@@ -448,7 +448,7 @@ class Fireball2Exporter extends AbstractExporter {
 			WHERE	objectTypeID = ?
 			ORDER BY parentCategoryID, showOrder, categoryID";
 		$statement = $this->database->prepareStatement($sql, $limit, $offset);
-		$statement->execute(array($objectTypeID));
+		$statement->execute([$objectTypeID]);
 		
 	        while ($row = $statement->fetchArray()) {
 	            $this->categoryCache[$row['parentCategoryID']][] = $row;
@@ -471,15 +471,15 @@ class Fireball2Exporter extends AbstractExporter {
 			$additionalData = @unserialize($category['additionalData']);
 			
 			// import category
-			$categoryID = ImportHandler::getInstance()->getImporter('de.codequake.cms.file.category')->import($category['categoryID'], array(
+			$categoryID = ImportHandler::getInstance()->getImporter('de.codequake.cms.file.category')->import($category['categoryID'], [
 				'parentCategoryID' => $category['parentCategoryID'],
 				'title' => $category['title'],
 				'description' => $category['description'],
 				'showOrder' => $category['showOrder'],
 				'time' => $category['time'],
 				'isDisabled' => $category['isDisabled'],
-				'additionalData' => serialize(array()),
-			));
+				'additionalData' => serialize([]),
+			]);
 			
 			$this->updateCategoryI18nData($categoryID, $category);
 			
@@ -508,7 +508,7 @@ class Fireball2Exporter extends AbstractExporter {
 			FROM	wcf".$this->dbNo."_package
 			WHERE	package = ?";
 		$statement = $this->database->prepareStatement($sql, 1);
-		$statement->execute(array('de.codequake.cms'));
+		$statement->execute(['de.codequake.cms']);
 		$packageDir = $statement->fetchColumn();
 		$path = FileUtil::getRealPath($this->fileSystemPath . '/' . $packageDir);
 		
@@ -519,7 +519,7 @@ class Fireball2Exporter extends AbstractExporter {
 		$statement->execute();
 		
 		while ($row = $statement->fetchArray()) {
-			$additionalData = array();
+			$additionalData = [];
 			$additionalData['fileLocation'] = $path . 'files/' . substr($row['fileHash'], 0, 2) . '/' . $row['fileID'] . '-' . $row['fileHash'];
 			
 			ImportHandler::getInstance()->getImporter('de.codequake.cms.file')->import($row['fileID'], $row, $additionalData);
@@ -538,7 +538,7 @@ class Fireball2Exporter extends AbstractExporter {
 			FROM wcf'.$this->dbNo.'_comment
 			WHERE objectTypeID = ?';
 		$statement = $this->database->prepareStatement($sql);
-		$statement->execute(array($objectTypeID));
+		$statement->execute([$objectTypeID]);
 		$row = $statement->fetchArray();
 		
 		return $row['count'];
@@ -558,10 +558,10 @@ class Fireball2Exporter extends AbstractExporter {
 			WHERE objectTypeID = ?
 			ORDER BY commentID';
 		$statement = $this->database->prepareStatement($sql, $limit, $offset);
-		$statement->execute(array($objectTypeID));
+		$statement->execute([$objectTypeID]);
 		
 		while ($row = $statement->fetchArray()) {
-			ImportHandler::getInstance()->getImporter('de.codequake.cms.page.comment')->import($row['commentID'], array(
+			ImportHandler::getInstance()->getImporter('de.codequake.cms.page.comment')->import($row['commentID'], [
 				'objectID' => $row['objectID'],
 				'userID' => $row['userID'],
 				'username' => $row['username'],
@@ -569,8 +569,8 @@ class Fireball2Exporter extends AbstractExporter {
 				'time' => $row['time'],
 				'objectTypeID' => $objectTypeID,
 				'responses' => 0,
-				'responseIDs' => serialize(array()),
-			));
+				'responseIDs' => serialize([]),
+			]);
 		}
 	}
 	
@@ -590,7 +590,7 @@ class Fireball2Exporter extends AbstractExporter {
 	                WHERE	objectTypeID = ?
 	            )';
 		$statement = $this->database->prepareStatement($sql);
-		$statement->execute(array($objectTypeID));
+		$statement->execute([$objectTypeID]);
 		$row = $statement->fetchArray();
 		
 		return $row['count'];
@@ -614,16 +614,16 @@ class Fireball2Exporter extends AbstractExporter {
 	            )
 	            ORDER BY responseID';
 		$statement = $this->database->prepareStatement($sql, $limit, $offset);
-		$statement->execute(array($objectTypeID));
+		$statement->execute([$objectTypeID]);
 		
 		while ($row = $statement->fetchArray()) {
-			ImportHandler::getInstance()->getImporter('de.codequake.cms.page.comment.response')->import($row['responseID'], array(
+			ImportHandler::getInstance()->getImporter('de.codequake.cms.page.comment.response')->import($row['responseID'], [
 				'commentID' => $row['commentID'],
 				'time' => $row['time'],
 				'userID' => $row['userID'],
 				'username' => $row['username'],
 				'message' => $row['message'],
-			));
+			]);
 		}
 	}
 	
@@ -653,7 +653,7 @@ class Fireball2Exporter extends AbstractExporter {
 		}
 		
 		// update category
-		$updateData = array();
+		$updateData = [];
 		if (!empty($title)) {
 			$updateData['title'] = $title;
 		}
@@ -662,7 +662,7 @@ class Fireball2Exporter extends AbstractExporter {
 		}
 		
 		if (count($updateData)) {
-			$importedCategory = new Category(null, array('categoryID' => $categoryID));
+			$importedCategory = new Category(null, ['categoryID' => $categoryID]);
 			$editor = new CategoryEditor($importedCategory);
 			$editor->update($updateData);
 		}
@@ -682,9 +682,9 @@ class Fireball2Exporter extends AbstractExporter {
 	            LEFT JOIN wcf'.$this->dbNo.'_language language ON (language.languageID = language_item.languageID)
 	            WHERE language_item.languageItem = ?';
 		$statement = $this->database->prepareStatement($sql);
-		$statement->execute(array($languageItem));
+		$statement->execute([$languageItem]);
 		
-		$values = array();
+		$values = [];
 		while ($row = $statement->fetchArray()) {
 			$values[$row['languageCode']] = ($row['languageUseCustomValue'] ? $row['languageCustomItemValue'] : $row['languageItemValue']);
 		}
@@ -707,7 +707,7 @@ class Fireball2Exporter extends AbstractExporter {
 					SELECT definitionID FROM wcf".$this->dbNo."_object_type_definition WHERE definitionName = ?
 				)";
 		$statement = $this->database->prepareStatement($sql, 1);
-		$statement->execute(array($objectTypeName, $definitionName));
+		$statement->execute([$objectTypeName, $definitionName]);
 		$row = $statement->fetchArray();
 		
 		if ($row !== false)
@@ -728,7 +728,7 @@ class Fireball2Exporter extends AbstractExporter {
 			WHERE	object_type.objectTypeID = ?
 				AND object_type.definitionID = definition.definitionID";
 		$statement = $this->database->prepareStatement($sql, 1);
-		$statement->execute(array($objectTypeID));
+		$statement->execute([$objectTypeID]);
 		$row = $statement->fetchArray();
 
 		if ($row !== false)

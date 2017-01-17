@@ -20,13 +20,13 @@ class PageCommentUserActivityEvent extends SingletonFactory implements IUserActi
 	 * @see	\wcf\system\user\activity\event\IUserActivityEvent::prepare()
 	 */
 	public function prepare(array $events) {
-		$commentIDs = array();
+		$commentIDs = [];
 		foreach ($events as $event) {
 			$commentIDs[] = $event->objectID;
 		}
 
 		$commentList = new CommentList();
-		$commentList->getConditionBuilder()->add('comment.commentID IN (?)', array($commentIDs));
+		$commentList->getConditionBuilder()->add('comment.commentID IN (?)', [$commentIDs]);
 		$commentList->readObjects();
 		$comments = $commentList->getObjects();
 
@@ -42,9 +42,9 @@ class PageCommentUserActivityEvent extends SingletonFactory implements IUserActi
 
 					$event->setIsAccessible();
 
-					$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.pageComment', array(
+					$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.pageComment', [
 						'page' => $page
-					));
+					]);
 					$event->setTitle($text);
 					$event->setDescription($comment->getFormattedMessage());
 

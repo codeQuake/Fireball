@@ -20,12 +20,12 @@ class GoogleMapsContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		return WCF::getTPL()->fetch('googleMapsContentType', 'cms', array(
+		return WCF::getTPL()->fetch('googleMapsContentType', 'cms', [
 			'latitude' => $content->latitude,
 			'longitude' => $content->longitude,
 			'title' => $content->getTitle(),
 			'contentID' => $content->contentID
-		));
+		]);
 	}
 
 	/**

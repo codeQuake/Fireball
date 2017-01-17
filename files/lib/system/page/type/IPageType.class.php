@@ -68,7 +68,7 @@ interface IPageType {
 	 * 
 	 * @return	string
 	 */
-	public function getCompiledFormTemplate($assignValues = array(), $errorField = '', $errorType = '');
+	public function getCompiledFormTemplate($assignValues = [], $errorField = '', $errorType = '');
 
 	/**
 	 * Returns the controller for the page type

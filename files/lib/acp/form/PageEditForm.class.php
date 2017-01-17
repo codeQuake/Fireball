@@ -125,7 +125,7 @@ class PageEditForm extends PageAddForm {
 			$this->metaKeywords = $languageVariable;
 		}
 
-		$data = array(
+		$data = [
 			// general data
 			'title' => $this->title,
 			'alias' => $this->alias,
@@ -154,7 +154,7 @@ class PageEditForm extends PageAddForm {
 			
 			// page type
 			'objectTypeID' => $this->pageObjectTypeID
-		);
+		];
 
 		// publication
 		if ($this->enableDelayedPublication) {
@@ -170,19 +170,19 @@ class PageEditForm extends PageAddForm {
 		}
 
 		$specificPageData =  $this->pageObjectType->getProcessor()->getSaveArray();
-		$pageData = array_merge_recursive($specificPageData, array(
+		$pageData = array_merge_recursive($specificPageData, [
 			'data' => $data,
 			'stylesheetIDs' => $this->stylesheetIDs
-		));
+		]);
 
-		$this->objectAction = new PageAction(array($this->pageID), 'update', $pageData);
+		$this->objectAction = new PageAction([$this->pageID], 'update', $pageData);
 		$this->objectAction->executeAction();
 
 		// update menu item
 		if ($this->menuItemID) {
-			$menuItemAction = new MenuItemAction(array($this->menuItemID), 'update', array('data' => array(
+			$menuItemAction = new MenuItemAction([$this->menuItemID], 'update', ['data' => [
 				'title' => $this->title,
-			)));
+			]]);
 			$menuItemAction->executeAction();
 		} else {
 			$this->createMenuItem($this->page, $this->title);
@@ -192,11 +192,11 @@ class PageEditForm extends PageAddForm {
 		ACLHandler::getInstance()->save($this->pageID, $this->objectTypeID);
 
 		// create revision
-		$objectAction = new PageAction(array($this->pageID), 'createRevision', array('action' => 'update'));
+		$objectAction = new PageAction([$this->pageID], 'createRevision', ['action' => 'update']);
 		$objectAction->executeAction();
 
 		// update search index
-		$objectAction = new PageAction(array($this->pageID), 'refreshSearchIndex');
+		$objectAction = new PageAction([$this->pageID], 'refreshSearchIndex');
 		$objectAction->executeAction();
 
 		$this->saved();
@@ -275,11 +275,11 @@ class PageEditForm extends PageAddForm {
 
 		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'action' => 'edit',
 			'choosePageNodeList' => $this->choosePageNodeList,
 			'pageID' => $this->pageID,
 			'page' => $this->page
-		));
+		]);
 	}
 }

@@ -21,6 +21,6 @@ trait TPageOnlineLocationPageHandler {
 		if ($fPage === null || !$fPage->canRead())
 			return '';
 
-		return WCF::getLanguage()->getDynamicVariable('wcf.page.onlineLocation.' . $page->identifier, array('page' => $fPage));
+		return WCF::getLanguage()->getDynamicVariable('wcf.page.onlineLocation.' . $page->identifier, ['page' => $fPage]);
 	}
 }

@@ -17,14 +17,14 @@ class PageSearch extends AbstractSearchableObjectType {
 	 * page cache
 	 * @var	array<\cms\data\page\SearchResultPage>
 	 */
-	public $cache = array();
+	public $cache = [];
 
 	/**
 	 * @see	\wcf\system\search\ISearchableObjectType::cacheObjects()
 	 */
 	public function cacheObjects(array $objectIDs, array $additionalData = null) {
 		$pageList = new SearchResultPageList();
-		$pageList->getConditionBuilder()->add('page.pageID IN (?)', array($objectIDs));
+		$pageList->getConditionBuilder()->add('page.pageID IN (?)', [$objectIDs]);
 		$pageList->readObjects();
 
 		foreach ($pageList->getObjects() as $page) {

@@ -77,14 +77,14 @@ class VisitCountHandler extends SingletonFactory {
 						AND month = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n') . "
 						AND year = " . DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
 				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array(
+				$statement->execute([
 					$visits,
 					$users,
 					$spiders,
 					serialize($browsers),
 					serialize($platforms),
 					serialize($devices)
-				));
+				]);
 			}
 
 			// create new
@@ -93,23 +93,23 @@ class VisitCountHandler extends SingletonFactory {
 				$spiders = 0;
 				if ($userID != 0) $users ++;
 				if ($spider != 0) $spiders ++;
-				$browsers = array();
+				$browsers = [];
 				$browsers[$browser] = 1;
-				$platforms = array();
+				$platforms = [];
 				$platforms[$platform] = 1;
 
 				if ($isMobile) $device = 'mobile';
 				else if ($isTablet) $device = 'tablet';
 				else $device = 'desktop';
 
-				$devices = array();
+				$devices = [];
 				$devices[$device] = 1;
 
 				$sql = "INSERT INTO	cms" . WCF_N . "_counter
 							(day, month, year, visits, users, spiders, browsers, platforms, devices)
 					VALUES		(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array(
+				$statement->execute([
 					DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j'),
 					DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'n'),
 					DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y'),
@@ -119,7 +119,7 @@ class VisitCountHandler extends SingletonFactory {
 					serialize($browsers),
 					serialize($platforms),
 					serialize($devices)
-				));
+				]);
 			}
 			WCF::getSession()->register('counted', true);
 		}
@@ -139,14 +139,14 @@ class VisitCountHandler extends SingletonFactory {
 	}
 
 	public function getVisitors($start, $end) {
-		$vistors = array();
+		$vistors = [];
 		$date = $start;
 		while ($date <= $end) {
 			$months = $this->getMonths();
-			$visitors[] = array(
+			$visitors[] = [
 				'visitors' => $this->getDailyVisitors(DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'j'), DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'n'), DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'Y')),
 				'string' => DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'j') . '. ' . $months[DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'n') - 1] . ' ' . DateUtil::format(DateUtil::getDateTimeByTimestamp($date), 'Y')
-			);
+			];
 			$date = $date + 86400;
 		}
 		return $visitors;
@@ -171,11 +171,11 @@ class VisitCountHandler extends SingletonFactory {
 				AND month = ?
 				AND year = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
+		$statement->execute([
 			$day,
 			$month,
 			$year
-		));
+		]);
 		return $statement->fetchArray();
 	}
 
@@ -184,21 +184,21 @@ class VisitCountHandler extends SingletonFactory {
 		$currentYear = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'Y');
 		$currentDay = DateUtil::format(DateUtil::getDateTimeByTimestamp(TIME_NOW), 'j');
 
-		$visitors = array();
+		$visitors = [];
 		$year = $currentYear;
 		$month = $currentMonth;
 		$day = $currentDay;
 
 		for ($i = 1; $i <= 7; $i ++) {
 			$months = $this->getMonths();
-			$visitors[$i] = array(
+			$visitors[$i] = [
 				'string' => $day . '. ' . $months[$month - 1] . ' ' . $year,
 				'visitors' => $this->getDailyVisitors($day, $month, $year)
-			);
+			];
 			$day --;
 			if ($day == 0) {
 				$month --;
-				if (in_array($month, array(
+				if (in_array($month, [
 					1,
 					3,
 					5,
@@ -206,7 +206,7 @@ class VisitCountHandler extends SingletonFactory {
 					8,
 					10,
 					12
-				))) $day = 31;
+				])) $day = 31;
 				if ($month == 2) $day = 28;
 				else $day = 30;
 			}
@@ -232,7 +232,7 @@ class VisitCountHandler extends SingletonFactory {
 	}
 
 	protected function getMonths() {
-		$months = array(
+		$months = [
 			WCF::getLanguage()->get('wcf.date.month.january'),
 			WCF::getLanguage()->get('wcf.date.month.february'),
 			WCF::getLanguage()->get('wcf.date.month.march'),
@@ -245,7 +245,7 @@ class VisitCountHandler extends SingletonFactory {
 			WCF::getLanguage()->get('wcf.date.month.october'),
 			WCF::getLanguage()->get('wcf.date.month.november'),
 			WCF::getLanguage()->get('wcf.date.month.december')
-		);
+		];
 		return $months;
 	}
 }

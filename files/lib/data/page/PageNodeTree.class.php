@@ -49,9 +49,9 @@ class PageNodeTree implements \IteratorAggregate {
 	}
 
 	protected function getChildren(PageNode $parentNode) {
-		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
+		$pages = PageCacheBuilder::getInstance()->getData([], 'pages');
 
-		$children = array();
+		$children = [];
 		foreach ($pages as $page) {
 			if ($page->parentID == $parentNode->pageID) {
 				$children[$page->pageID] = $page;
@@ -73,7 +73,7 @@ class PageNodeTree implements \IteratorAggregate {
 			// @todo: This needs to be changed. It creates a
 			// pointless database query to fetch an (of course) not
 			// existing page with the id '0'
-			$page = new Page(null, array('pageID' => 0));
+			$page = new Page(null, ['pageID' => 0]);
 		}
 		else {
 			$page = $this->getPage($pageID);

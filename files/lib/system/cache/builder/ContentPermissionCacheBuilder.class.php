@@ -18,7 +18,7 @@ class ContentPermissionCacheBuilder extends AbstractCacheBuilder {
 	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
 	public function rebuild(array $parameters) {
-		$data = array();
+		$data = [];
 		$objectTypeName = 'de.codequake.cms.content';
 		$contentList = new ContentList();
 		$contentList->readObjects();
@@ -26,19 +26,19 @@ class ContentPermissionCacheBuilder extends AbstractCacheBuilder {
 
 		$aclOptions = ACLHandler::getInstance()->getPermissions(ACLHandler::getInstance()->getObjectTypeID($objectTypeName), array_keys($contentList));
 		$options = $aclOptions['options']->getObjects();
-		foreach (array(
+		foreach ([
 			'group',
 			'user'
-		) as $type) {
+		] as $type) {
 			foreach ($aclOptions[$type] as $contentID => $optionData) {
 				if (!isset($data[$contentID])) {
-					$data[$contentID] = array(
-						'group' => array(),
-						'user' => array()
-					);
+					$data[$contentID] = [
+						'group' => [],
+						'user' => []
+					];
 				}
 				foreach ($optionData as $typeID => $optionValues) {
-					$data[$contentID][$type][$typeID] = array();
+					$data[$contentID][$type][$typeID] = [];
 					
 					foreach ($optionValues as $optionID => $optionValue) {
 						$data[$contentID][$type][$typeID][$options[$optionID]->optionName] = $optionValue;

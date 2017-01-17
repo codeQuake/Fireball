@@ -24,11 +24,11 @@ class SearchResultPage extends ViewablePage implements ISearchResultObject {
 
 	public function getLink($query = '') {
 		if ($query) {
-			return LinkHandler::getInstance()->getLink('Page', array(
+			return LinkHandler::getInstance()->getLink('Page', [
 				'alias' => $this->getDecoratedObject()->getAlias(),
 				'application' => 'cms',
 				'highlight' => urlencode($query)
-			));
+			]);
 		}
 
 		return $this->getDecoratedObject()->getLink();

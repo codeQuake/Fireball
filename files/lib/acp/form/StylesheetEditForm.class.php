@@ -38,7 +38,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 	 * list of available stylesheets
 	 * @var	array<\cms\data\stylesheet\Stylesheet>
 	 */
-	public $stylesheets = array();
+	public $stylesheets = [];
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -59,14 +59,14 @@ class StylesheetEditForm extends StylesheetAddForm {
 	public function save() {
 		AbstractForm::save();
 
-		$data = array(
+		$data = [
 			'title' => $this->title,
 			'scss' => $this->scss
-		);
+		];
 
-		$this->objectAction = new StylesheetAction(array($this->stylesheet), 'update', array(
+		$this->objectAction = new StylesheetAction([$this->stylesheet], 'update', [
 			'data' => $data
-		));
+		]);
 		$this->objectAction->executeAction();
 
 		$this->saved();
@@ -103,10 +103,10 @@ class StylesheetEditForm extends StylesheetAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'action' => 'edit',
 			'stylesheetID' => $this->stylesheetID,
 			'stylesheets' => $this->stylesheets
-		));
+		]);
 	}
 }

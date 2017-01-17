@@ -18,19 +18,19 @@ class PageCache extends SingletonFactory {
 	 * alias to page assignments
 	 * @var	array<integer>
 	 */
-	protected $aliasToPage = array();
+	protected $aliasToPage = [];
 
 	/**
 	 * cached pages
 	 * @var	array<\cms\data\page\Page>
 	 */
-	protected $pages = array();
+	protected $pages = [];
 
 	/**
 	 * cached page structure
 	 * @var	array<array<integer>>
 	 */
-	protected $structure = array();
+	protected $structure = [];
 
 	/**
 	 * cached menu node tree (max depth = 1)
@@ -48,10 +48,10 @@ class PageCache extends SingletonFactory {
 	 * @see	\wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
-		$this->aliasToPage = PageCacheBuilder::getInstance()->getData(array(), 'aliasToPage');
-		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
-		$this->stylesheetsToPage = PageCacheBuilder::getInstance()->getData(array(), 'stylesheetsToPage');
-		$this->structure = PageCacheBuilder::getInstance()->getData(array(), 'structure');
+		$this->aliasToPage = PageCacheBuilder::getInstance()->getData([], 'aliasToPage');
+		$this->pages = PageCacheBuilder::getInstance()->getData([], 'pages');
+		$this->stylesheetsToPage = PageCacheBuilder::getInstance()->getData([], 'stylesheetsToPage');
+		$this->structure = PageCacheBuilder::getInstance()->getData([], 'structure');
 		
 		$this->menuNodeTree = new AccessiblePageNodeTree();
 		$this->menuNodeTree->setMaxDepth(1);
@@ -143,7 +143,7 @@ class PageCache extends SingletonFactory {
 			return $this->structure[$pageID];
 		}
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -157,6 +157,6 @@ class PageCache extends SingletonFactory {
 			return $this->stylesheetsToPage[$pageID];
 		}
 
-		return array();
+		return [];
 	}
 }

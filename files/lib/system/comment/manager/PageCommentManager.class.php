@@ -91,8 +91,8 @@ class PageCommentManager extends AbstractCommentManager {
 	public function updateCounter($objectID, $value) {
 		$page = PageCache::getInstance()->getPage($objectID);
 		$editor = new PageEditor($page);
-		$editor->updateCounters(array(
+		$editor->updateCounters([
 			'comments' => $value
-		));
+		]);
 	}
 }

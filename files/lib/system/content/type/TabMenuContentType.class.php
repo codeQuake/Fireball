@@ -36,15 +36,15 @@ class TabMenuContentType extends AbstractStructureContentType {
 	 */
 	public function getOutput(Content $content) {
 		$childIDs = ContentCache::getInstance()->getChildIDs($content->contentID);
-		$children = array();
+		$children = [];
 
 		foreach ($childIDs as $childID) {
 			$children[] = ContentCache::getInstance()->getContent($childID);
 		}
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'children' => $children
-		));
+		]);
 
 		return parent::getOutput($content);
 	}

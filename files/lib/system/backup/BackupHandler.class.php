@@ -36,7 +36,7 @@ use wcf\util\XMLWriter;
  */
 class BackupHandler extends SingletonFactory {
 
-	public $objects = array('folder', 'file', 'stylesheet', 'page', 'content');
+	public $objects = ['folder', 'file', 'stylesheet', 'page', 'content'];
 	protected $pages = null;
 	protected $contents = null;
 	protected $stylesheets = null;
@@ -46,13 +46,13 @@ class BackupHandler extends SingletonFactory {
 	protected $filename = '';
 	protected $data;
 	
-	protected $tmp = array(
-		'pages' => array(),
-		'contents' => array(),
-		'stylesheets' => array(),
-		'files' => array(),
-		'folders' => array()
-	);
+	protected $tmp = [
+		'pages' => [],
+		'contents' => [],
+		'stylesheets' => [],
+		'files' => [],
+		'folders' => []
+	];
 	
 	protected $categoryObjectType = 0;
 
@@ -61,8 +61,8 @@ class BackupHandler extends SingletonFactory {
 	protected $cmsVersion = 0;
 
 	protected function init() {
-		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
-		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$this->pages = PageCacheBuilder::getInstance()->getData([], 'pages');
+		$this->contents = ContentCacheBuilder::getInstance()->getData([], 'contents');
 
 		$list = new StylesheetList();
 		$list->readObjects();
@@ -71,7 +71,7 @@ class BackupHandler extends SingletonFactory {
 		$this->categoryObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.codequake.cms.file');
 		
 		$list = new CategoryList();
-		$list->getConditionBuilder()->add("objectTypeID = ?", array($this->categoryObjectType->objectTypeID));
+		$list->getConditionBuilder()->add("objectTypeID = ?", [$this->categoryObjectType->objectTypeID]);
 		$list->readObjects();
 		$this->folders = $list->getObjects();
 
@@ -91,10 +91,10 @@ class BackupHandler extends SingletonFactory {
 	protected function buildXML() {
 		// start doc
 		$xml = new XMLWriter();
-		$xml->beginDocument('data', '', '', array(
+		$xml->beginDocument('data', '', '', [
 			'api' => $this->cmsVersion,
 			'cmsUrl' => WCF::getPath('cms')
-		));
+		]);
 		
 		// get available languages
 		$availableLanguages = LanguageFactory::getInstance()->getLanguages();
@@ -109,9 +109,9 @@ class BackupHandler extends SingletonFactory {
 					
 					if ($object == 'file') {
 						$exportData = array_merge(
-							array(
+							[
 								'categoryIDs' => $$object->getCategoryIDs()
-							),
+							],
 							$exportData
 						);
 					}
@@ -121,7 +121,7 @@ class BackupHandler extends SingletonFactory {
 							$xml->writeElement($key, ObjectTypeCache::getInstance()->getObjectType($data)->objectType);
 						} else if (($key == 'title' || $key == 'description' || $key == 'metaDescription' ||
 								$key == 'metaKeywords') && $object != 'stylesheet' && $object != 'file') {
-							$langData = array();
+							$langData = [];
 							
 							foreach ($availableLanguages as $lang) {
 								$langData[$lang->countryCode] = $lang->get($data);
@@ -130,7 +130,7 @@ class BackupHandler extends SingletonFactory {
 							$xml->writeElement($key, base64_encode(serialize($langData)));
 						} else if (is_array($data)) {
 							if ($key == 'contentData') {
-								$langData = array();
+								$langData = [];
 								
 								if (isset($data['text'])) {
 									foreach ($availableLanguages as $lang) {
@@ -165,7 +165,7 @@ class BackupHandler extends SingletonFactory {
 		$this->filename = FileUtil::getTempFolder().'CMS-Export.' . StringUtil::getRandomID() . '.tgz';
 		$this->buildXML();
 		$this->tarFiles();
-		$files = array('cmsData.xml', 'files.tar');
+		$files = ['cmsData.xml', 'files.tar'];
 		
 		$tar = new TarWriter($this->filename, true);
 		foreach ($files as $file) {
@@ -180,7 +180,7 @@ class BackupHandler extends SingletonFactory {
 		$tar = new TarWriter(FileUtil::getTempFolder().'files.tar');
 		$fileList = $files->getFiles(SORT_ASC, new Regex('^'.CMS_DIR . 'files/$'), true);
 		
-		$newFileList = array();
+		$newFileList = [];
 		foreach ($fileList as $file) {
 			if ($file == '.gitignore')
 				continue;
@@ -208,19 +208,19 @@ class BackupHandler extends SingletonFactory {
 		}
 		
 		// delete old lang items
-		$oldLangItems = array(
+		$oldLangItems = [
 			'cms.content.text%',
 			'cms.content.title%',
 			'cms.page.description%',
 			'cms.page.metaDescription%',
 			'cms.page.metaKeywords%',
 			'cms.page.title%'
-		);
+		];
 		$sql = "DELETE FROM	wcf".WCF_N."_language_item
 			WHERE		languageItem LIKE ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		foreach ($oldLangItems as $langItem) {
-			$statement->execute(array($langItem));
+			$statement->execute([$langItem]);
 		}
 		
 		// reset language cache
@@ -235,13 +235,13 @@ class BackupHandler extends SingletonFactory {
 			// check if there is something to import 
 			if (isset($this->data[$object.'s'])) {
 				// temp store parent ids
-				$parentIDs = array();
-				$upperObjectIDs = array();
+				$parentIDs = [];
+				$upperObjectIDs = [];
 				
 				// go through every single object
 				foreach ($this->data[$object.'s'] as $import) {
 					$currentID = (isset($import[$object.'ID']) ? $import[$object.'ID'] : ($object == 'folder' ? $import['categoryID'] : null));
-					$langData = array();
+					$langData = [];
 					
 					// unset current id to be save
 					if (isset($import[$object.'ID'])) unset($import[$object.'ID']);
@@ -370,7 +370,7 @@ class BackupHandler extends SingletonFactory {
 						
 						// save folders -- compatibility mode
 						if (isset($import['folderID'])) {
-							$upperObjectIDs[$currentID] = array($import['folderID']);
+							$upperObjectIDs[$currentID] = [$import['folderID']];
 							unset($import['folderID']);
 						}
 						if (isset($import['filename'])) unset($import['filename']);
@@ -516,7 +516,7 @@ class BackupHandler extends SingletonFactory {
 							
 							// gallery
 							if (isset($tmpData['imageIDs'])) {
-								$imageIDs = array();
+								$imageIDs = [];
 								
 								if (is_array($tmpData['imageIDs'])) {
 									foreach ($tmpData['imageIDs'] as $fileID) {
@@ -569,7 +569,7 @@ class BackupHandler extends SingletonFactory {
 						$actionName = '\\cms\data\\'.$object.'\\'.ucfirst($object).'Action';
 					}
 					
-					$action = new $actionName(array(), 'create', array('data' => $import));
+					$action = new $actionName([], 'create', ['data' => $import]);
 					$new = $action->executeAction();
 					$new = $new['returnValues'];
 					
@@ -626,7 +626,7 @@ class BackupHandler extends SingletonFactory {
 						$editorName = '\\cms\data\\'.$object.'\\'.ucfirst($object).'Editor';
 						$className = '\\cms\data\\'.$object.'\\'.ucfirst($object);
 						
-						$newStylesheetIDs = array();
+						$newStylesheetIDs = [];
 						foreach ($stylesheetIDs as $stylesheet) {
 							if (isset($this->tmp['stylesheets'][$stylesheet])) $newStylesheetIDs[] = $this->tmp['stylesheets'][$stylesheet];
 						}
@@ -647,7 +647,7 @@ class BackupHandler extends SingletonFactory {
 						
 						$element = new $className($this->tmp[$object.'s'][$file]);
 						
-						$newFolders = array();
+						$newFolders = [];
 						foreach ($folders as $folder) {
 							if (isset($this->tmp['folders'][$folder])) $newFolders[] = $this->tmp['folders'][$folder];
 						}
@@ -725,11 +725,11 @@ class BackupHandler extends SingletonFactory {
 		}
 		
 		$items = $xpath->query('child::*', $root);
-		$data = array();
+		$data = [];
 		$i = 0;
 		foreach ($items as $item) {
 			foreach ($xpath->query('child::*', $item) as $child) {
-				$contentData = array();
+				$contentData = [];
 				
 				foreach ($xpath->query('child::*', $child) as $property) {
 					if ($property->tagName == 'contentTypeID') {
@@ -738,13 +738,13 @@ class BackupHandler extends SingletonFactory {
 						if (strpos($this->cmsVersion, '2.1.') !== false) {
 							if ($contentType == 'de.codequake.cms.content.type.twocolumns') {
 								$contentType = 'de.codequake.cms.content.type.columns';
-								$contentData = array('columnData' => array(50, 50));
+								$contentData = ['columnData' => [50, 50]];
 							} else if ($contentType == 'de.codequake.cms.content.type.threecolumns') {
 								$contentType = 'de.codequake.cms.content.type.columns';
-								$contentData = array('columnData' => array(33, 34, 33));
+								$contentData = ['columnData' => [33, 34, 33]];
 							} else if ($contentType == 'de.codequake.cms.content.type.fourcolumns') {
 								$contentType = 'de.codequake.cms.content.type.columns';
-								$contentData = array('columnData' => array(25, 25, 25, 25));
+								$contentData = ['columnData' => [25, 25, 25, 25]];
 							}
 						} else {
 							if ($contentType == 'de.codequake.cms.content.type.columns') {
@@ -817,19 +817,19 @@ class BackupHandler extends SingletonFactory {
 					} else if (is_array($tmpContentData)) {
 						$tmpContentData['text'] = $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'};
 					} else {
-						$tmpContentData = array();
+						$tmpContentData = [];
 						$tmpContentData['text'] = $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'};
 					}
 					
 					$tmpContentData = serialize($tmpContentData);
 					
-					$editor->update(array(
+					$editor->update([
 						'contentData' => $tmpContentData
-					));
+					]);
 				} else {
-					$editor->update(array(
+					$editor->update([
 						$columnName => $application.'.'.$type.'.'.$columnName. $object->{$type.'ID'}
-					));
+					]);
 				}
 			}
 		}

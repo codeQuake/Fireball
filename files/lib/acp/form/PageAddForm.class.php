@@ -66,7 +66,7 @@ class PageAddForm extends AbstractForm {
 	 * list of available styles
 	 * @var	array<\wcf\data\style\Style>
 	 */
-	public $availableStyles = array();
+	public $availableStyles = [];
 
 	/**
 	 * create menu item
@@ -115,7 +115,7 @@ class PageAddForm extends AbstractForm {
 	 * list of available menu items
 	 * @var	\wcf\data\menu\item\MenuItem[]
 	 */
-	public $menuItems = array();
+	public $menuItems = [];
 
 	/**
 	 * meta description of the created page
@@ -132,7 +132,7 @@ class PageAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.fireball.page.canAddPage');
+	public $neededPermissions = ['admin.fireball.page.canAddPage'];
 
 	/**
 	 * object type id of the acl
@@ -192,14 +192,14 @@ class PageAddForm extends AbstractForm {
 	 * stylesheet ids
 	 * @var	array<integer>
 	 */
-	public $stylesheetIDs = array();
+	public $stylesheetIDs = [];
 	
-	public $availablePageTypes = array();
+	public $availablePageTypes = [];
 	
 	public $pageObjectTypeID = 0;
 	public $pageObjectType = null;
 	
-	public $specificFormParameters = array();
+	public $specificFormParameters = [];
 	
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -374,13 +374,13 @@ class PageAddForm extends AbstractForm {
 		$stylesheetList->setObjectIDs($this->stylesheetIDs);
 		$stylesheetList->readObjects();
 
-		$this->stylesheetIDs = array();
+		$this->stylesheetIDs = [];
 		foreach ($stylesheetList as $stylesheet) {
 			$this->stylesheetIDs[] = $stylesheet->stylesheetID;
 		}
 
 		// validate sidebar orientation
-		if (!in_array($this->sidebarOrientation, array('left', 'right'))) {
+		if (!in_array($this->sidebarOrientation, ['left', 'right'])) {
 			// force default value if invalid sidebar orientation
 			// specified
 			$this->sidebarOrientation = 'right';
@@ -420,7 +420,7 @@ class PageAddForm extends AbstractForm {
 	public function save() {
 		parent::save();
 
-		$data = array(
+		$data = [
 			// general data
 			'title' => $this->title,
 			'alias' => $this->alias,
@@ -449,7 +449,7 @@ class PageAddForm extends AbstractForm {
 			
 			// page type
 			'objectTypeID' => $this->pageObjectTypeID
-		);
+		];
 
 		// publication
 		if ($this->enableDelayedPublication) {
@@ -463,17 +463,17 @@ class PageAddForm extends AbstractForm {
 		}
 		
 		$specificPageData =  $this->pageObjectType->getProcessor()->getSaveArray();
-		$pageData = array_merge_recursive($specificPageData, array(
+		$pageData = array_merge_recursive($specificPageData, [
 			'data' => $data,
 			'stylesheetIDs' => $this->stylesheetIDs
-		));
+		]);
 
-		$this->objectAction = new PageAction(array(), 'create', $pageData);
+		$this->objectAction = new PageAction([], 'create', $pageData);
 		$returnValues = $this->objectAction->executeAction();
 		$page = $returnValues['returnValues'];
 
 		$pageEditor = new PageEditor($returnValues['returnValues']);
-		$updateData = array();
+		$updateData = [];
 
 		// save ACL
 		ACLHandler::getInstance()->save($page->pageID, $this->objectTypeID);
@@ -499,15 +499,15 @@ class PageAddForm extends AbstractForm {
 		$this->createMenuItem($page, !empty($updateData['title']) ? $updateData['title'] : $this->title);
 
 		// save new information
-		$updateAction = new PageAction(array($page), 'update', array('data' => $updateData));
+		$updateAction = new PageAction([$page], 'update', ['data' => $updateData]);
 		$updateAction->executeAction();
 
 		// create revision
-		$objectAction = new PageAction(array($pageEditor->pageID), 'createRevision', array('action' => 'create'));
+		$objectAction = new PageAction([$pageEditor->pageID], 'createRevision', ['action' => 'create']);
 		$objectAction->executeAction();
 
 		// update search index
-		$objectAction = new PageAction(array($pageEditor->pageID), 'refreshSearchIndex');
+		$objectAction = new PageAction([$pageEditor->pageID], 'refreshSearchIndex');
 		$objectAction->executeAction();
 		
 		$this->pageObjectType->getProcessor()->save($this);
@@ -518,7 +518,7 @@ class PageAddForm extends AbstractForm {
 		// reset values
 		$this->alias = $this->deactivationDate = $this->description = $this->metaDescription = $this->metaKeywords = $this->publicationDate = '';
 		$this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->menuItemID = $this->parentID = $this->showOrder = $this->styleID = 0;
-		$this->stylesheetIDs = $this->specificFormParameters = array();
+		$this->stylesheetIDs = $this->specificFormParameters = [];
 
 		$this->allowIndexing = FIREBALL_PAGES_DEFAULT_ALLOW_INDEXING;
 		$this->allowSubscribing = FIREBALL_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
@@ -582,7 +582,7 @@ class PageAddForm extends AbstractForm {
 		I18nHandler::getInstance()->assignVariables();
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
 		
-		WCF::getTPL()->assign(array_merge_recursive($this->specificFormParameters, array(
+		WCF::getTPL()->assign(array_merge_recursive($this->specificFormParameters, [
 			'action' => 'add',
 			'availableStyles' => $this->availableStyles,
 			'menuItems' => $this->menuItems,
@@ -628,7 +628,7 @@ class PageAddForm extends AbstractForm {
 			'availablePageTypes' => $this->availablePageTypes,
 			'pageObjectTypeID' => $this->pageObjectTypeID,
 			'pageForm' => $this->pageObjectType->getProcessor()->getCompiledFormTemplate($this->specificFormParameters)
-		)));
+		]));
 	}
 
 	/**
@@ -648,7 +648,7 @@ class PageAddForm extends AbstractForm {
 				}
 			}
 
-			$menuItemData = array(
+			$menuItemData = [
 				'menuID' => MenuCache::getInstance()->getMainMenu()->menuID,
 				'parentItemID' => $parentMenuItemID,
 				'identifier' => 'de.codequake.cms.Page' . $page->pageID,
@@ -658,9 +658,9 @@ class PageAddForm extends AbstractForm {
 				'pageObjectID' => $page->pageID,
 				'isDisabled' => $this->invisible,
 				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID
-			);
+			];
 
-			$menuItemAction = new MenuItemAction(array(), 'create', array('data' => $menuItemData));
+			$menuItemAction = new MenuItemAction([], 'create', ['data' => $menuItemData]);
 			$menuItemReturnValues = $menuItemAction->executeAction();
 			$menuItem = $menuItemReturnValues['returnValues'];
 

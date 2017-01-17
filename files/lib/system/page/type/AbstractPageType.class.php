@@ -42,7 +42,7 @@ abstract class AbstractPageType implements IPageType {
 	 * array with specific form data
 	 * @var array
 	 */
-	public $assignValues = array();
+	public $assignValues = [];
 	
 	/**
 	 * Initialize a new page type instance
@@ -79,7 +79,7 @@ abstract class AbstractPageType implements IPageType {
 			if (!empty($form->page))
 				$page = $form->page;
 			
-			$return = array();
+			$return = [];
 			
 			return $return;
 		} else {
@@ -91,9 +91,9 @@ abstract class AbstractPageType implements IPageType {
 	 * @see	\cms\system\page\type\IPageType::readFormParameters()
 	 */
 	public function readFormParameters(AbstractForm $form) {
-		return array (
-			'data' => array()
-		);
+		return [
+			'data' => []
+		];
 	}
 	
 	/**
@@ -121,17 +121,17 @@ abstract class AbstractPageType implements IPageType {
 	/**
 	 * @see \cms\system\page\type\IPageType::getCompiledFormTemplate()
 	 */
-	public function getCompiledFormTemplate($assignValues = array(), $errorField = '', $errorType = '') {
+	public function getCompiledFormTemplate($assignValues = [], $errorField = '', $errorType = '') {
 		if (empty($assignValues)) {
-			$assignValues = array_merge_recursive($this->assignValues, array (
+			$assignValues = array_merge_recursive($this->assignValues, [
 				'errorField' => $errorField,
 				'errorType' => $errorType
-			));
+			]);
 		} else {
-			$assignValues = array_merge_recursive($assignValues, array (
+			$assignValues = array_merge_recursive($assignValues, [
 				'errorField' => $errorField,
 				'errorType' => $errorType
-			));
+			]);
 		}
 		return WCF::getTPL()->fetch($this->getFormTemplate(), 'cms', $assignValues);
 	}
@@ -147,8 +147,8 @@ abstract class AbstractPageType implements IPageType {
 	 * @see \cms\system\page\type\IPageType::getSaveArray()
 	 */
 	public function getSaveArray() {
-		return array (
+		return [
 			'data' => $this->assignValues
-		);
+		];
 	}
 }

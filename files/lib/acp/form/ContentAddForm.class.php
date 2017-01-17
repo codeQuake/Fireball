@@ -38,7 +38,7 @@ class ContentAddForm extends AbstractForm {
 	 * content data
 	 * @var	array<mixed>
 	 */
-	public $contentData = array();
+	public $contentData = [];
 
 	/**
 	 * list of contents
@@ -55,7 +55,7 @@ class ContentAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.fireball.content.canAddContent');
+	public $neededPermissions = ['admin.fireball.content.canAddContent'];
 
 	/**
 	 * content object type
@@ -162,7 +162,7 @@ class ContentAddForm extends AbstractForm {
 		parent::validate();
 
 		// validate position
-		if (!in_array($this->position, array('body', 'sidebar'))) {
+		if (!in_array($this->position, ['body', 'sidebar'])) {
 			throw new UserInputException('position');
 		}
 		if ($this->position == 'sidebar' && !$this->objectType->allowsidebar) {
@@ -176,7 +176,7 @@ class ContentAddForm extends AbstractForm {
 		if ($this->showOrder == 0) {
 			$childIDs = ContentCache::getInstance()->getChildIDs($this->parentID ?: null);
 			if (!empty($childIDs)) {
-				$showOrders = array();
+				$showOrders = [];
 				foreach ($childIDs as $childID) {
 					$content = ContentCache::getInstance()->getContent($childID);
 					$showOrders[] = $content->showOrder;
@@ -227,7 +227,7 @@ class ContentAddForm extends AbstractForm {
 	public function save() {
 		parent::save();
 
-		$data = array(
+		$data = [
 			'title' => $this->title,
 			'pageID' => $this->pageID,
 			'parentID' => ($this->parentID) ?  : null,
@@ -237,16 +237,16 @@ class ContentAddForm extends AbstractForm {
 			'contentData' => $this->contentData,
 			'contentTypeID' => $this->objectType->objectTypeID,
 			'showHeadline' => $this->showHeadline
-		);
+		];
 
-		$this->objectAction = new ContentAction(array(), 'create', array(
+		$this->objectAction = new ContentAction([], 'create', [
 			'data' => $data
-		));
+		]);
 		$returnValues = $this->objectAction->executeAction();
 
 		$contentID = $returnValues['returnValues']->contentID;
 		$contentData = $returnValues['returnValues']->contentData;
-		$update = array();
+		$update = [];
 
 		// save polls
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
@@ -276,13 +276,13 @@ class ContentAddForm extends AbstractForm {
 		}
 
 		// create revision
-		$objectAction = new PageAction(array($this->pageID), 'createRevision', array(
+		$objectAction = new PageAction([$this->pageID], 'createRevision', [
 			'action' => 'content.create'
-		));
+		]);
 		$objectAction->executeAction();
 
 		// update search index
-		$objectAction = new PageAction(array($returnValues['returnValues']->pageID), 'refreshSearchIndex');
+		$objectAction = new PageAction([$returnValues['returnValues']->pageID], 'refreshSearchIndex');
 		$objectAction->executeAction();
 
 		// save ACL values of the content
@@ -291,10 +291,10 @@ class ContentAddForm extends AbstractForm {
 
 		$this->saved();
 
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', [
 			'application' => 'cms',
 			'pageID' => $this->pageID
-		)));
+		]));
 	}
 
 	/**
@@ -325,7 +325,7 @@ class ContentAddForm extends AbstractForm {
 			PollManager::getInstance()->assignVariables();
 		}
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'action' => 'add',
 			'contentData' => $this->contentData,
 			'contentList' => $this->contentList,
@@ -338,6 +338,6 @@ class ContentAddForm extends AbstractForm {
 			'showOrder' => $this->showOrder,
 			'showHeadline' => $this->showHeadline,
 			'contentObjectTypeID' => $this->contentObjectTypeID
-		));
+		]);
 	}
 }

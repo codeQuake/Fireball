@@ -37,9 +37,9 @@ class MenuContentType extends AbstractStructureContentType {
 			break;
 		}
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'menuItems' => $menuItems
-		));
+		]);
 
 		return parent::getOutput($content);
 	}

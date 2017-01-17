@@ -31,18 +31,18 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.fireball.page.canAddPage');
+	protected $permissionsDelete = ['admin.fireball.page.canAddPage'];
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
-	protected $requireACP = array('delete', 'restore');
+	protected $requireACP = ['delete', 'restore'];
 
 	/**
 	 * Validates permissions to restore a specific revision.
 	 */
 	public function validateRestore() {
-		WCF::getSession()->checkPermissions(array('admin.fireball.page.canAddPage'));
+		WCF::getSession()->checkPermissions(['admin.fireball.page.canAddPage']);
 
 		// validate 'objectIDs' parameter
 		$this->getSingleObject();
@@ -62,11 +62,11 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 		$pageData = base64_decode($revision->data);
 		$pageData = @unserialize($pageData);
 		
-		$i18nfields = array();
+		$i18nfields = [];
 		// save i18n
 		foreach ($pageData as $key => $data) {
 			if (($key == 'title' || $key == 'description' || $key == 'metaDescription' || $key == 'metaKeywords') && is_array($data)) {
-				$langData = array();
+				$langData = [];
 				foreach ($availableLanguages as $lang) {
 					if (isset($data[$lang->countryCode])) {
 						$langData[$lang->languageID] = $data[$lang->countryCode];
@@ -81,7 +81,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 		}
 		
 		// restore page
-		$pageAction = new PageAction(array($revision->pageID), 'update', array('data' => $pageData));
+		$pageAction = new PageAction([$revision->pageID], 'update', ['data' => $pageData]);
 		$pageAction->executeAction();
 		
 		// save i18n
@@ -96,11 +96,11 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 		$contentData = @unserialize($contentData);
 		
 		$contentList = new ContentList();
-		$contentList->getConditionBuilder()->add('content.pageID = ?', array($revision->pageID));
+		$contentList->getConditionBuilder()->add('content.pageID = ?', [$revision->pageID]);
 		$contentList->readObjects();
 		
 		$existingContentIDs = $contentList->getObjectIDs();
-		$oldContents = array();
+		$oldContents = [];
 		foreach ($contentData as $data) {
 			$oldContents[$data['contentID']] = $data;
 		}
@@ -119,7 +119,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 				// content this exists => update
 				$i18ntitle = false;
 				if (is_array($oldContent['title'])) {
-					$langData = array();
+					$langData = [];
 					foreach ($availableLanguages as $lang) {
 						if (isset($oldContent['title'][$lang->countryCode])) {
 							$langData[$lang->languageID] = $oldContent['title'][$lang->countryCode];
@@ -132,10 +132,10 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 					$oldContent['title'] = '';
 				}
 				
-				$i18nfields = array();
+				$i18nfields = [];
 				foreach ($objectType->getProcessor()->multilingualFields as $field) {
 					if (isset($oldContent['contentData'][$field]) && is_array($oldContent['contentData'][$field])) {
-						$langData = array();
+						$langData = [];
 						foreach ($availableLanguages as $lang) {
 							if (isset($oldContent['contentData'][$field][$lang->countryCode])) {
 								$langData[$lang->languageID] = $oldContent['contentData'][$field][$lang->countryCode];
@@ -149,7 +149,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 					}
 				}
 				
-				$contentAction = new ContentAction(array($oldContent['contentID']), 'update', array('data' => $oldContent));
+				$contentAction = new ContentAction([$oldContent['contentID']], 'update', ['data' => $oldContent]);
 				$contentAction->executeAction();
 				
 				if ($i18ntitle)
@@ -162,7 +162,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 				// content was deleted => re-create
 				$i18ntitle = false;
 				if (is_array($oldContent['title'])) {
-					$langData = array();
+					$langData = [];
 					foreach ($availableLanguages as $lang) {
 						if (isset($oldContent['title'][$lang->countryCode])) {
 							$langData[$lang->languageID] = $oldContent['title'][$lang->countryCode];
@@ -175,10 +175,10 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 					$oldContent['title'] = '';
 				}
 				
-				$i18nfields = array();
+				$i18nfields = [];
 				foreach ($objectType->getProcessor()->multilingualFields as $field) {
 					if (isset($oldContent['contentData'][$field])) {
-						$langData = array();
+						$langData = [];
 						foreach ($availableLanguages as $lang) {
 							if (isset($oldContent['contentData'][$field][$lang->countryCode])) {
 								$langData[$lang->languageID] = $oldContent['contentData'][$field][$lang->countryCode];
@@ -192,7 +192,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 					}
 				}
 				
-				$contentAction = new ContentAction(array($oldContent['contentID']), 'create', array('data' => $oldContent));
+				$contentAction = new ContentAction([$oldContent['contentID']], 'create', ['data' => $oldContent]);
 				$contentAction->executeAction();
 				
 				if ($i18ntitle)
@@ -230,19 +230,19 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 					} else if (is_array($tmpContentData)) {
 						$tmpContentData['text'] = 'cms.'.$type.'.'.$columnName. $object->{$type.'ID'};
 					} else {
-						$tmpContentData = array();
+						$tmpContentData = [];
 						$tmpContentData['text'] = 'cms.'.$type.'.'.$columnName. $object->{$type.'ID'};
 					}
 					
 					$tmpContentData = serialize($tmpContentData);
 					
-					$editor->update(array(
+					$editor->update([
 						'contentData' => $tmpContentData
-					));
+					]);
 				} else {
-					$editor->update(array(
+					$editor->update([
 						$columnName => 'cms.'.$type.'.'.$columnName. $object->{$type.'ID'}
-					));
+					]);
 				}
 			}
 		}

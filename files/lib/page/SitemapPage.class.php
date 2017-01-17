@@ -37,8 +37,8 @@ class SitemapPage extends AbstractPage {
 	public function assignVariables () {
 		parent::assignVariables();
 		
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'pageNodeTree' => $this->pageNodeTree->getIterator()
-		));
+		]);
 	}
 }

@@ -20,7 +20,7 @@ class PagePermissionHandler extends SingletonFactory {
 	 * cached permissions
 	 * @var	array
 	 */
-	protected $permissions = array();
+	protected $permissions = [];
 
 	/**
 	 * @see	\wcf\system\SingletonFactory::init()
@@ -46,7 +46,7 @@ class PagePermissionHandler extends SingletonFactory {
 			$user = WCF::getUser();
 		}
 
-		$permissions = array();
+		$permissions = [];
 		if (isset($this->permissions[$page->pageID])) {
 			if (isset($this->permissions[$page->pageID]['group'])) {
 				foreach ($user->getGroupIDs() as $groupID) {

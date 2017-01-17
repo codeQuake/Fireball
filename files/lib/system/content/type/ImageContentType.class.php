@@ -22,12 +22,12 @@ class ImageContentType extends FileContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
 	 */
-	protected $previewFields = array('imageID');
+	protected $previewFields = ['imageID'];
 
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
 	 */
-	public $multilingualFields = array('text');
+	public $multilingualFields = ['text'];
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
@@ -35,10 +35,10 @@ class ImageContentType extends FileContentType {
 	public function getOutput(Content $content) {
 		$image = FileCache::getInstance()->getFile($content->imageID);
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'image' => $image,
 			'width' => $content->width
-		));
+		]);
 
 		return AbstractContentType::getOutput($content);
 	}

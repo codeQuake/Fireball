@@ -81,7 +81,7 @@ class ContentEditForm extends ContentAddForm {
 			}
 		}
 
-		$data = array(
+		$data = [
 			'title' => $this->title,
 			'pageID' => $this->pageID,
 			'parentID' => ($this->parentID) ?  : null,
@@ -91,33 +91,33 @@ class ContentEditForm extends ContentAddForm {
 			'contentData' => $this->contentData,
 			'contentTypeID' => $this->objectType->objectTypeID,
 			'showHeadline' => $this->showHeadline
-		);
+		];
 
-		$this->objectAction = new ContentAction(array($this->contentID), 'update', array(
+		$this->objectAction = new ContentAction([$this->contentID], 'update', [
 			'data' => $data
-		));
+		]);
 		$this->objectAction->executeAction();
 
 		// create revision
 		if ($this->pageID == $this->content->pageID) {
-			$objectAction = new PageAction(array($this->pageID), 'createRevision', array(
+			$objectAction = new PageAction([$this->pageID], 'createRevision', [
 				'action' => 'content.update'
-			));
+			]);
 			$objectAction->executeAction();
 		} else {
-			$objectAction = new PageAction(array($this->pageID), 'createRevision', array(
+			$objectAction = new PageAction([$this->pageID], 'createRevision', [
 				'action' => 'content.create'
-			));
+			]);
 			$objectAction->executeAction();
 
-			$objectAction = new PageAction(array($this->content->pageID), 'createRevision', array(
+			$objectAction = new PageAction([$this->content->pageID], 'createRevision', [
 				'action' => 'content.delete'
-			));
+			]);
 			$objectAction->executeAction();
 		}
 
 		// update search index
-		$objectAction = new PageAction(array($this->pageID), 'refreshSearchIndex');
+		$objectAction = new PageAction([$this->pageID], 'refreshSearchIndex');
 		$objectAction->executeAction();
 
 		// save ACL values of the content
@@ -126,10 +126,10 @@ class ContentEditForm extends ContentAddForm {
 
 		$this->saved();
 
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', array(
+		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', [
 			'application' => 'cms',
 			'pageID' => $this->pageID
-		)));
+		]));
 	}
 
 	/**
@@ -171,9 +171,9 @@ class ContentEditForm extends ContentAddForm {
 
 		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'action' => 'edit',
 			'contentID' => $this->contentID
-		));
+		]);
 	}
 }

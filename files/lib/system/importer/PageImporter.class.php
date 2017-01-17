@@ -23,7 +23,7 @@ class PageImporter extends AbstractImporter {
 	/**
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
-	public function import($oldID, array $data, array $additionalData = array()) {
+	public function import($oldID, array $data, array $additionalData = []) {
 		unset($data['pageID']);
 		unset($data['menuItemID']);
 
@@ -41,7 +41,7 @@ class PageImporter extends AbstractImporter {
 		if (isset($data['parentID']) && $data['parentID'] == 0)
 			unset($data['parentID']);
 			
-		$stylesheetIDs = array();
+		$stylesheetIDs = [];
 		if (!empty($additionalData['stylesheetIDs'])) {
 			foreach ($additionalData['stylesheetIDs'] as $stylesheetID) {
 				$stylesheetIDs[] = ImportHandler::getInstance()->getNewID('de.codequake.cms.stylesheet', $stylesheetID);
@@ -59,9 +59,9 @@ class PageImporter extends AbstractImporter {
 				$data['pageID'] = $oldID;
 		}
 		
-		$action = new PageAction(array(), 'create', array_merge($additionalData, array(
+		$action = new PageAction([], 'create', array_merge($additionalData, [
 			'data' => $data,
-		)));
+		]));
 		$returnValues = $action->executeAction();
 		$newID = $returnValues['returnValues']->pageID;
 		$page = new Page($newID);

@@ -25,7 +25,7 @@ class WSIPImportContentType extends TemplateContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
 	 */
-	protected $previewFields = array('text');
+	protected $previewFields = ['text'];
 	
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$templateName
@@ -42,15 +42,15 @@ class WSIPImportContentType extends TemplateContentType {
 		
 		// check template code
 		try {
-			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template', $data['text'], array(), true);
+			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template', $data['text'], [], true);
 			
 			// cache compiled template with content
 			RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
 		}
 		catch (SystemException $e) {
-			WCF::getTPL()->assign(array(
+			WCF::getTPL()->assign([
 				'compileError' => $e->_getMessage()
-			));
+			]);
 
 			throw new UserInputException('text', 'compileError');
 		}
@@ -80,13 +80,13 @@ class WSIPImportContentType extends TemplateContentType {
 				$width = !empty($match[5]) ? $match[5] : 0;
 				$caption = !empty($match[7]) ? $match[7] : '';
 				
-				return WCF::getTPL()->fetch('cmsFileBBCodeTag', 'cms', array(
+				return WCF::getTPL()->fetch('cmsFileBBCodeTag', 'cms', [
 					'_file' => $file,
 					'_align' => $align,
 					'_width' => $width,
 					'_isImage' => preg_match('~(image/*)+~', $file->fileType),
 					'_caption' => $caption
-				));
+				]);
 			}, $source);
 			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $source);
 			
@@ -95,7 +95,7 @@ class WSIPImportContentType extends TemplateContentType {
 				$contentData = unserialize($contentData);
 			$contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
 			
-			$contentAction = new ContentAction(array($content), 'update', array('data' => array('contentData' => $contentData)));
+			$contentAction = new ContentAction([$content], 'update', ['data' => ['contentData' => $contentData]]);
 			$contentAction->executeAction();
 		} else {
 			$compiled = $content->compiled[WCF::getLanguage()->languageCode];

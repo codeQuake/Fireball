@@ -57,7 +57,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	 * keys body, sidebar are arrays
 	 * @var array
 	 */
-	public $contents = array();
+	public $contents = [];
 
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -87,10 +87,10 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		if (OFFLINE) {
 			if (!WCF::getSession()->getPermission('admin.general.canViewPageDuringOfflineMode') && !$this->page->availableDuringOfflineMode) {
 				@header('HTTP/1.1 503 Service Unavailable');
-				WCF::getTPL()->assign(array(
+				WCF::getTPL()->assign([
 					'templateName' => 'offline',
 					'templateNameApplication' => 'wcf'
-				));
+				]);
 				WCF::getTPL()->display('offline');
 
 				exit;
@@ -140,11 +140,11 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'sidebarContentNodeTree' => $this->sidebarContentNodeTree,
 			'page' => $this->page,
 			'allowSpidersToIndexThisPage' => $this->page->allowIndexing
-		));
+		]);
 	}
 
 	/**
@@ -158,9 +158,9 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 
 		// count click
 		$pageEditor = new PageEditor($this->page);
-		$pageEditor->updateCounters(array(
+		$pageEditor->updateCounters([
 			'clicks' => 1
-		));
+		]);
 	}
 
 	/**

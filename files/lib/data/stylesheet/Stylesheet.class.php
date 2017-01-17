@@ -76,7 +76,7 @@ class Stylesheet extends DatabaseObject {
 	public function getURL($styleID = null, $rtl = null) {
 		// default values
 		if ($styleID === null) {
-			$styleID = StyleCacheBuilder::getInstance()->getData(array(), 'default');
+			$styleID = StyleCacheBuilder::getInstance()->getData([], 'default');
 		}
 		if ($rtl === null) {
 			$rtl = (WCF::getLanguage()->get('wcf.global.pageDirection') == 'rtl');

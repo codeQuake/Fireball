@@ -30,9 +30,9 @@ class LinkPage extends AbstractCMSPage {
 
 		// count click
 		$pageEditor = new PageEditor($this->page);
-		$pageEditor->updateCounters(array(
+		$pageEditor->updateCounters([
 			'clicks' => 1
-		));
+		]);
 
 		if ($this->page->delayedRedirect) {
 			if ($this->page->redirectMessage)

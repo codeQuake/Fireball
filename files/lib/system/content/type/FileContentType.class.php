@@ -22,7 +22,7 @@ class FileContentType extends AbstractContentType {
 	/**
 	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
 	 */
-	protected $previewFields = array('fileID');
+	protected $previewFields = ['fileID'];
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getOutput()
@@ -30,9 +30,9 @@ class FileContentType extends AbstractContentType {
 	public function getOutput(Content $content) {
 		$file = FileCache::getInstance()->getFile($content->fileID);
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'file' => $file
-		));
+		]);
 
 		return parent::getOutput($content);
 	}

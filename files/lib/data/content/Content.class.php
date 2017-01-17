@@ -217,14 +217,14 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 
 		$this->data['contentData'] = @unserialize($this->data['contentData']);
 		if (!is_array($this->data['contentData'])) {
-			$this->data['contentData'] = array();
+			$this->data['contentData'] = [];
 		}
 	}
 
 	/**
 	 * @see	\wcf\data\IPermissionObject::checkPermissions()
 	 */
-	public function checkPermissions(array $permissions = array('user.canViewContent')) {
+	public function checkPermissions(array $permissions = ['user.canViewContent']) {
 		foreach ($permissions as $permission) {
 			if (!$this->getPermission($permission)) {
 				throw new PermissionDeniedException();
@@ -238,7 +238,7 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 	public function getPermission($permission) {
 		$permissions = ContentPermissionHandler::getInstance()->getPermissions($this);
 
-		$aclPermission = str_replace(array('user.', 'mod.', 'admin.'), array('', '', ''), $permission);
+		$aclPermission = str_replace(['user.', 'mod.', 'admin.'], ['', '', ''], $permission);
 		if (isset($permissions[$aclPermission])) {
 			return $permissions[$aclPermission];
 		}
@@ -247,7 +247,7 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 			return $this->getPage()->canRead();
 		}
 
-		$globalPermission = str_replace(array('user.', 'mod.', 'admin.'), array('user.fireball.content.', 'mod.fireball.', 'user.fireball.content.'), $permission);
+		$globalPermission = str_replace(['user.', 'mod.', 'admin.'], ['user.fireball.content.', 'mod.fireball.', 'user.fireball.content.'], $permission);
 		return WCF::getSession()->getPermission($globalPermission);
 	}
 }

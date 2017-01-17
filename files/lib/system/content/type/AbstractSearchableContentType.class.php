@@ -19,13 +19,13 @@ abstract class AbstractSearchableContentType extends AbstractContentType impleme
 	 * list of searchable fields
 	 * @var	array<string>
 	 */
-	protected $searchableFields = array();
+	protected $searchableFields = [];
 
 	/**
 	 * search index data
 	 * @var	array<array>
 	 */
-	public $searchIndexData = array();
+	public $searchIndexData = [];
 
 	/**
 	 * @see \cms\system\content\type\AbstractContentType::isAvailableToAdd()
@@ -60,7 +60,7 @@ abstract class AbstractSearchableContentType extends AbstractContentType impleme
 	 */
 	public function getSearchableData(Content $content) {
 		foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
-			$this->searchIndexData[$language->languageID] = array();
+			$this->searchIndexData[$language->languageID] = [];
 
 			foreach ($this->searchableFields as $field) {
 				$this->searchIndexData[$language->languageID][] = $language->get($content->{$field});

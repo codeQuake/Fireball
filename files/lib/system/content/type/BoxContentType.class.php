@@ -26,11 +26,11 @@ class BoxContentType extends AbstractContentType {
 		$boxList->readObjects();
 		$boxList = $boxList->getObjects();
 
-		$boxesByPosition = array(
-			'content' => array(),
-			'sidebarLeft' => array(),
-			'sidebarRight' => array()
-		);
+		$boxesByPosition = [
+			'content' => [],
+			'sidebarLeft' => [],
+			'sidebarRight' => []
+		];
 
 		foreach ($boxList as $box) {
 			$controller = $box->getController();
@@ -40,7 +40,7 @@ class BoxContentType extends AbstractContentType {
 				$boxesByPosition[$box->position][] = $box;
 				continue;
 			}
-			$positions = call_user_func(array($controller, 'getSupportedPositions'));
+			$positions = call_user_func([$controller, 'getSupportedPositions']);
 
 			if (in_array('contentTop', $positions) || in_array('contentBottom', $positions)) {
 				$boxesByPosition['content'][] = $box;
@@ -58,10 +58,10 @@ class BoxContentType extends AbstractContentType {
 		$boxesByPosition['body'] = $boxesByPosition['content'];
 		$boxesByPosition['sidebar'] = $boxesByPosition['sidebarRight'];
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'boxList' => $boxList,
 			'boxesByPosition' => $boxesByPosition
-		));
+		]);
 
 		return parent::getFormTemplate();
 	}

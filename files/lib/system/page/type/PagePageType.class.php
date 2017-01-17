@@ -21,9 +21,9 @@ class PagePageType extends AbstractPageType {
 	/**
 	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
 	 */
-	public $assignValues = array(
+	public $assignValues = [
 		'isCommentable' => FIREBALL_PAGES_DEFAULT_COMMENTS
-	);
+	];
 	
 	/**
 	 * @see \cms\system\page\type\AbstractPageType::readFormParameters()

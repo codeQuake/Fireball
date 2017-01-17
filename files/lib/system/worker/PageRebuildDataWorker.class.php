@@ -36,7 +36,7 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 		}
 
 		// re-create search index
-		$pageAction = new PageAction($this->objectList->getObjects(), 'refreshSearchIndex', array('isBulkProcessing' => true));
+		$pageAction = new PageAction($this->objectList->getObjects(), 'refreshSearchIndex', ['isBulkProcessing' => true]);
 		$pageAction->executeAction();
 	}
 }

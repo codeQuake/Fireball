@@ -23,7 +23,7 @@ class UserRenameListener implements IParameterizedEventListener {
 		$parameters = $eventObj->getParameters();
 		$username = $parameters['data']['username'];
 		
-		$sql = array();
+		$sql = [];
 		// pages
 		$sql[] = "UPDATE		cms" . WCF_N . "_page
 			SET		authorName = ?
@@ -35,7 +35,7 @@ class UserRenameListener implements IParameterizedEventListener {
 		
 		foreach ($sql as $query) {
 			$statement = WCF::getDB()->prepareStatement($query);
-			$statement->execute(array($username, $userID));
+			$statement->execute([$username, $userID]);
 		}
 	}
 }

@@ -25,13 +25,13 @@ abstract class AbstractContentType implements IContentType {
 	 * list of multilingual fields
 	 * @var	array<string>
 	 */
-	public $multilingualFields = array();
+	public $multilingualFields = [];
 
 	/**
 	 * list of preview fields
 	 * @var array<string>
 	 */
-	protected $previewFields = array();
+	protected $previewFields = [];
 	
 	/**
 	 * content requires title
@@ -73,9 +73,9 @@ abstract class AbstractContentType implements IContentType {
 	 * @see \cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'content' => $content
-		));
+		]);
 
 		return WCF::getTPL()->fetch($this->templateName, 'cms');
 	}

@@ -15,11 +15,11 @@ class FileCategoryImporter extends AbstractCategoryImporter {
 	/**
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
-	public function import($oldID, array $data, array $additionalData = array()) {
+	public function import($oldID, array $data, array $additionalData = []) {
 		if (!empty($data['parentCategoryID'])) $data['parentCategoryID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.file.category', $data['parentCategoryID']);
 		
 		$objectTypeID = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.category', 'de.codequake.cms.file')->objectTypeID;
-		$category = CategoryEditor::create(array_merge($data, array('objectTypeID' => $objectTypeID)));
+		$category = CategoryEditor::create(array_merge($data, ['objectTypeID' => $objectTypeID]));
 		
 		ImportHandler::getInstance()->saveNewID('de.codequake.cms.file.category', $oldID, $category->categoryID);
 		

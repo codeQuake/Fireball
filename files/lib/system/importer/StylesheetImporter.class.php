@@ -23,7 +23,7 @@ class StylesheetImporter extends AbstractImporter {
 	/**
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
-	public function import($oldID, array $data, array $additionalData = array()) {
+	public function import($oldID, array $data, array $additionalData = []) {
 		unset($data['stylesheetID']);
 
 		if (is_numeric($oldID)) {
@@ -32,9 +32,9 @@ class StylesheetImporter extends AbstractImporter {
 				$data['stylesheetID'] = $oldID;
 		}
 
-		$action = new StylesheetAction(array(), 'create', array(
+		$action = new StylesheetAction([], 'create', [
 			'data' => $data
-		));
+		]);
 		$returnValues = $action->executeAction();
 		$newID = $returnValues['returnValues']->stylesheetID;
 		$stylesheet = new Stylesheet($newID);

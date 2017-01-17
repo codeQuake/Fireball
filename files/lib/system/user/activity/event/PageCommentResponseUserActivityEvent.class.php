@@ -22,7 +22,7 @@ class PageCommentResponseUserActivityEvent extends SingletonFactory implements I
 	 * @see	\wcf\system\user\activity\event\IUserActivityEvent::prepare()
 	 */
 	public function prepare(array $events) {
-		$commentsIDs = $responseIDs = $userIDs = array();
+		$commentsIDs = $responseIDs = $userIDs = [];
 
 		foreach ($events as $event) {
 			$responseIDs[] = $event->objectID;
@@ -66,10 +66,10 @@ class PageCommentResponseUserActivityEvent extends SingletonFactory implements I
 
 					$event->setIsAccessible();
 
-					$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.pageCommentResponse', array(
+					$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.pageCommentResponse', [
 						'author' => $users[$comment->userID],
 						'page' => $page
-					));
+					]);
 					$event->setTitle($text);
 					$event->setDescription($response->getFormattedMessage());
 

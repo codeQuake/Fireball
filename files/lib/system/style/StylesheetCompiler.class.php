@@ -30,7 +30,7 @@ class StylesheetCompiler extends SingletonFactory {
 	protected function init() {
 		require_once(WCF_DIR.'lib/system/style/scssphp/scss.inc.php');
 		$this->compiler = new Compiler();
-		$this->compiler->setImportDir(array(WCF_DIR));
+		$this->compiler->setImportDir([WCF_DIR]);
 	}
 
 	/**
@@ -79,7 +79,7 @@ class StylesheetCompiler extends SingletonFactory {
 
 		// add options as LESS variables
 		foreach (Option::getOptions() as $constantName => $option) {
-			if (in_array($option->optionType, array('boolean', 'integer'))) {
+			if (in_array($option->optionType, ['boolean', 'integer'])) {
 				$variables['wcf_option_'.mb_strtolower($constantName)] = '~"'.$option->optionValue.'"';
 			}
 		}

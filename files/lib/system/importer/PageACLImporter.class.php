@@ -34,7 +34,7 @@ class PageACLImporter extends AbstractACLImporter {
 	 * this has been copied from AbstractACLImporter (written by WoltLab GmbH)
 	 * the objecttype of imported acls has been chenged unless this would crash with page imports
 	 */
-	public function import($oldID, array $data, array $additionalData = array()) {
+	public function import($oldID, array $data, array $additionalData = []) {
 		if (!isset($this->options[$additionalData['optionName']])) return 0;
 		$data['optionID'] = $this->options[$additionalData['optionName']];
 		
@@ -49,7 +49,7 @@ class PageACLImporter extends AbstractACLImporter {
 							(optionID, objectID, groupID, optionValue)
 				VALUES		        (?, ?, ?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($data['optionID'], $data['objectID'], $data['groupID'], $data['optionValue']));
+			$statement->execute([$data['optionID'], $data['objectID'], $data['groupID'], $data['optionValue']]);
 			
 			return 1;
 		}
@@ -61,7 +61,7 @@ class PageACLImporter extends AbstractACLImporter {
 							(optionID, objectID, userID, optionValue)
 				VALUES		        (?, ?, ?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($data['optionID'], $data['objectID'], $data['userID'], $data['optionValue']));
+			$statement->execute([$data['optionID'], $data['objectID'], $data['userID'], $data['optionValue']]);
 			
 			return 1;
 		}

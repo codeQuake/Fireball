@@ -32,7 +32,7 @@ class FileRebuildDataWorker extends AbstractRebuildDataWorker {
 		/** @var \cms\data\file\File $file */
 		foreach ($this->objectList->getObjects() as $file) {
 			if ($file->isImage() && !$file->hasThumbnail()) {
-				$fileAction = new FileAction(array($file), 'generateThumbnail');
+				$fileAction = new FileAction([$file], 'generateThumbnail');
 				$fileAction->executeAction();
 			}
 		}

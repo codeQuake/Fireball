@@ -31,11 +31,11 @@ class CMSPageSelectOptionType extends AbstractOptionType {
 		$nodeTree = new PageNodeTree();
 		$nodeList = $nodeTree->getIterator();
 
-		WCF::getTPL()->assign(array(
+		WCF::getTPL()->assign([
 			'nodeList' => $nodeList,
 			'option' => $option,
 			'value' => $value
-		));
+		]);
 
 		return WCF::getTPL()->fetch('pageSelectOptionType', 'cms');
 	}

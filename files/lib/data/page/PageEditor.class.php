@@ -26,9 +26,9 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * 
 	 * @param	array		$parameters
 	 */
-	public static function createRevision(array $parameters = array()) {
+	public static function createRevision(array $parameters = []) {
 		$keys = $values = '';
-		$statementParameters = array();
+		$statementParameters = [];
 		foreach ($parameters as $key => $value) {
 			if (!empty($keys)) {
 				$keys .= ',';
@@ -67,13 +67,13 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		$sql = "UPDATE	cms".WCF_N."_page
 			SET	isHome = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(0));
+		$statement->execute([0]);
 
 		$sql = "UPDATE	cms".WCF_N."_page
 			SET	isHome = ?
 			WHERE	pageID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(1, $this->pageID));
+		$statement->execute([1, $this->pageID]);
 	}
 
 	/**
@@ -81,12 +81,12 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * 
 	 * @param	array<integer>		$stylesheetIDs
 	 */
-	public function updateStylesheetIDs(array $stylesheetIDs = array()) {
+	public function updateStylesheetIDs(array $stylesheetIDs = []) {
 		// remove old assigns
 		$sql = "DELETE FROM	cms".WCF_N."_stylesheet_to_page
 			WHERE		pageID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->pageID));
+		$statement->execute([$this->pageID]);
 
 		// new stylesheets
 		if (!empty($stylesheetIDs)) {
@@ -97,7 +97,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 				VALUES		(?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			foreach ($stylesheetIDs as $stylesheetID) {
-				$statement->execute(array($stylesheetID, $this->pageID));
+				$statement->execute([$stylesheetID, $this->pageID]);
 			}
 
 			WCF::getDB()->commitTransaction();

@@ -17,12 +17,12 @@ class FileClipboardAction extends AbstractClipboardAction {
 	/**
 	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$actionClassActions
 	 */
-	protected $actionClassActions = array('delete');
+	protected $actionClassActions = ['delete'];
 
 	/**
 	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$supportedActions
 	 */
-	protected $supportedActions = array('delete');
+	protected $supportedActions = ['delete'];
 
 	/**
 	 * @see	\wcf\system\clipboard\action\IClipboardAction::execute()
@@ -37,9 +37,9 @@ class FileClipboardAction extends AbstractClipboardAction {
 		// handle actions
 		switch ($action->actionName) {
 			case 'delete':
-				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.codequake.cms.file.delete.confirmMessage', array(
+				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.de.codequake.cms.file.delete.confirmMessage', [
 					'count' => $item->getCount()
-				)));
+				]));
 			break;
 		}
 
@@ -70,6 +70,6 @@ class FileClipboardAction extends AbstractClipboardAction {
 			return array_keys($this->objects);
 		}
 
-		return array();
+		return [];
 	}
 }

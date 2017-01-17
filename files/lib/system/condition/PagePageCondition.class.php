@@ -50,7 +50,7 @@ class PagePageCondition extends AbstractMultiSelectCondition implements IContent
 		$fieldElement .= "</select>";
 
 		$objectTypes = PageManager::getInstance()->getObjectTypes();
-		$pageObjectTypeIDs = array();
+		$pageObjectTypeIDs = [];
 		foreach ($objectTypes as $objectType) {
 			if (ClassUtil::isInstanceOf($objectType->className, 'cms\page\ICMSPage')) {
 				$pageObjectTypeIDs[] = $objectType->objectTypeID;
