@@ -27,10 +27,6 @@
 			<category name="fireball.content.slideshow">
 				<parent>fireball.content</parent>
 			</category>
-
-			<category name="dashboard.sidebar.fireball">
-				<parent>dashboard.sidebar</parent>
-			</category>
 		</categories>
 
 		<options>
@@ -112,14 +108,10 @@ right:wcf.acp.option.fireball_pages_default_sidebar.right]]></selectoptions>
 				<defaultvalue>5000</defaultvalue>
 			</option>
 			<!-- /fireball.content.slideshow -->
-
-			<!-- dashboard.sidebar.fireball -->
-			<option name="fireball_dashboard_sidebar_entries">
-				<categoryname>dashboard.sidebar.fireball</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue>5</defaultvalue>
-			</option>
-			<!-- /dashboard.sidebar.fireball -->
 		</options>
 	</import>
+	<delete>
+		<optioncategory name="dashboard.sidebar.fireball" />
+		<option name="fireball_dashboard_sidebar_entries" />
+	</delete>
 </data>

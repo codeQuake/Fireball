@@ -8,6 +8,7 @@
 		<!-- page -->
 		<acpmenuitem name="fireball.acp.menu.link.fireball.page">
 			<parent>fireball.acp.menu.link.cms</parent>
+			<showorder>1</showorder>
 		</acpmenuitem>
 		<acpmenuitem name="fireball.acp.menu.link.fireball.page.list">
 			<parent>fireball.acp.menu.link.fireball.page</parent>
@@ -32,26 +33,10 @@
 		</acpmenuitem>
 		<!-- /page -->
 
-		<!-- boxmatch -->
-		<acpmenuitem name="fireball.acp.menu.link.fireball.boxmatch">
-			<parent>fireball.acp.menu.link.cms</parent>
-			<showorder>2</showorder>
-		</acpmenuitem>
-		<acpmenuitem name="fireball.acp.menu.link.fireball.boxmatch.list">
-			<parent>fireball.acp.menu.link.fireball.boxmatch</parent>
-			<controller>cms\acp\page\BoxMatchListPage</controller>
-			<permissions>admin.fireball.page.canListPage</permissions>
-		</acpmenuitem>
-		<acpmenuitem name="fireball.acp.menu.link.fireball.boxmatch.add">
-			<parent>fireball.acp.menu.link.fireball.boxmatch</parent>
-			<controller>cms\acp\form\BoxMatchAddForm</controller>
-			<permissions>admin.fireball.content.canAddContent</permissions>
-		</acpmenuitem>
-		<!-- /boxmatch -->
-
 		<!-- file -->
 		<acpmenuitem name="fireball.acp.menu.link.fireball.file">
 			<parent>fireball.acp.menu.link.cms</parent>
+			<showorder>2</showorder>
 		</acpmenuitem>
 		<acpmenuitem name="fireball.acp.menu.link.fireball.file.list">
 			<parent>fireball.acp.menu.link.fireball.file</parent>
@@ -74,6 +59,7 @@
 		<!-- stylesheet -->
 		<acpmenuitem name="fireball.acp.menu.link.fireball.stylesheet">
 			<parent>fireball.acp.menu.link.cms</parent>
+			<showorder>3</showorder>
 		</acpmenuitem>
 		<acpmenuitem name="fireball.acp.menu.link.fireball.stylesheet.list">
 			<parent>fireball.acp.menu.link.fireball.stylesheet</parent>
@@ -88,4 +74,11 @@
 		</acpmenuitem>
 		<!-- /stylesheet -->
 	</import>
+	<delete>
+		<!-- boxmatch -->
+		<acpmenuitem name="fireball.acp.menu.link.fireball.boxmatch" />
+		<acpmenuitem name="fireball.acp.menu.link.fireball.boxmatch.list" />
+		<acpmenuitem name="fireball.acp.menu.link.fireball.boxmatch.add" />
+		<!-- /boxmatch -->
+	</delete>
 </data>

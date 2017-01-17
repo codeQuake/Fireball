@@ -96,12 +96,6 @@
 		<item name="cms.acp.content.type.structure"><![CDATA[Struktur]]></item>
 	</category>
 
-	<category name="cms.acp.dashboard">
-		<item name="cms.acp.dashboard.all"><![CDATA[Alle Besucher]]></item>
-		<item name="cms.acp.dashboard.registered"><![CDATA[Registrierte Benutzer]]></item>
-		<item name="cms.acp.dashboard.spiders"><![CDATA[Suchmaschinenroboter]]></item>
-	</category>
-
 	<category name="cms.acp.file">
 		<item name="cms.acp.file.add"><![CDATA[Dateien hochladen]]></item>
 		<item name="cms.acp.file.categoryIDs"><![CDATA[Kategorien]]></item>
@@ -138,20 +132,6 @@
 		<item name="fireball.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet.add"><![CDATA[Stylesheet hinzufügen]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets auflisten]]></item>
-		<item name="fireball.acp.menu.link.fireball.boxmatch"><![CDATA[Dashboardboxen]]></item>
-		<item name="fireball.acp.menu.link.fireball.boxmatch.add"><![CDATA[Dashboardbox hinzufügen]]></item>
-		<item name="fireball.acp.menu.link.fireball.boxmatch.list"><![CDATA[Dashboardboxen auflisten]]></item>
-	</category>
-
-	<category name="cms.acp.boxmatch">
-		<item name="cms.acp.boxmatch.list"><![CDATA[Verknüpfungen auflisten]]></item>
-		<item name="cms.acp.boxmatch.add"><![CDATA[Verknüpfung hinzufügen]]></item>
-		<item name="cms.acp.boxmatch.content"><![CDATA[Inhalt (Fireball CMS)]]></item>
-		<item name="cms.acp.boxmatch.page"><![CDATA[Seite (Fireball CMS)]]></item>
-		<item name="cms.acp.boxmatch.boxID"><![CDATA[Dasbboardbox]]></item>
-		<item name="cms.acp.boxmatch.position"><![CDATA[Position]]></item>
-		<item name="cms.acp.boxmatch.delete.sure"><![CDATA[Sind Sie sicher, dass sie die Dashboardbox entfernen wollen?]]></item>
-		<item name="cms.acp.boxmatch.list.description"><![CDATA[Die hier mit Inhalten verknüpften Dashboardboxen können über die Dashboardverwaltung auf jeder Seite mit Sidebar/Dashboardbereich eingebunden werden.]]></item>
 	</category>
 
 	<category name="cms.acp.condition">
@@ -289,12 +269,6 @@
 		<item name="cms.content.file.details"><![CDATA[({$file->size|filesize}, <strong>{$file->downloads}</strong> mal heruntergeladen)]]></item>
 	</category>
 
-	<category name="cms.dashboard">
-		<item name="cms.dashboard.all"><![CDATA[Alle Besucher]]></item>
-		<item name="cms.dashboard.registered"><![CDATA[Registrierte Benutzer]]></item>
-		<item name="cms.dashboard.spiders"><![CDATA[Suchmaschinenroboter]]></item>
-	</category>
-
 	<category name="cms.global">
 		<item name="cms.global.page"><![CDATA[Seite]]></item>
 	</category>
@@ -411,10 +385,8 @@
 		<item name="wcf.acp.option.category.fireball.pages"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.option.category.fireball.pages.default"><![CDATA[Standardwerte]]></item>
 		<item name="wcf.acp.option.category.fireball.pages.statistics"><![CDATA[Statistiken]]></item>
-		<item name="wcf.acp.option.category.dashboard.sidebar.cms"><![CDATA[CMS]]></item>
 		<item name="wcf.acp.option.fireball_content_slideshow_interval"><![CDATA[Intervall]]></item>
 		<item name="wcf.acp.option.fireball_content_slideshow_interval.description"><![CDATA[Geben Sie die Zeit an, nach der automatisch zum nächsten Slide gewechselt werden soll. [Zeit in Millisekunden]]]></item>
-		<item name="wcf.acp.option.fireball_dashboard_sidebar_entries"><![CDATA[Anzahl Seiten]]></item>
 		<item name="wcf.acp.option.fireball_pages_default_allow_indexing"><![CDATA[Suchmaschinen dürfen diese Seite indexieren]]></item>
 		<item name="wcf.acp.option.fireball_pages_default_allow_subscribing"><![CDATA[Seite kann abonniert werden]]></item>
 		<item name="wcf.acp.option.fireball_pages_default_comments"><![CDATA[Kommentare aktivieren]]></item>
@@ -469,12 +441,6 @@
 		<item name="wcf.clipboard.label.de.codequake.cms.file.marked"><![CDATA[{if $count == 1}Eine Datei{else}{#$count} Dateien{/if} markiert]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.page.marked"><![CDATA[{if $count == 1}Eine Seite{else}{#$count} Seiten{/if} markiert]]></item>
 		<item name="wcf.clipboard.label.de.codequake.cms.stylesheet.marked"><![CDATA[{if $count == 1}Ein Stylesheet{else}{#$count} Stylesheets{/if} markiert]]></item>
-	</category>
-
-	<category name="wcf.dashboard">
-		<item name="wcf.dashboard.box.de.codequake.cms.latestPages"><![CDATA[Zuletzt erstellte Seiten]]></item>
-		<item name="wcf.dashboard.box.de.codequake.cms.mostViewedPages"><![CDATA[Meistbesuchte Seiten]]></item>
-		<item name="wcf.dashboard.box.de.codequake.cms.visitorsWeekly"><![CDATA[Statistik der letzten 7 Tage]]></item>
 	</category>
 
 	<category name="wcf.page">
