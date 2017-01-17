@@ -161,14 +161,6 @@
 			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
-			<name>de.codequake.cms.content.type.databaseobjectlist</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-			<classname>cms\system\content\type\DatabaseObjectListContentType</classname>
-			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
-		</type>
-		<type>
 			<name>de.codequake.cms.content.type.template</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TemplateContentType</classname>
@@ -420,4 +412,14 @@
 		</type>
 		<!-- /exporter -->
 	</import>
+	<delete>
+		<type>
+			<name>de.codequake.cms.content.type.databaseobjectlist</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\DatabaseObjectListContentType</classname>
+			<category>general</category>
+			<allowcontent>1</allowcontent>
+			<allowsidebar>0</allowsidebar>
+		</type>
+	</delete>
 </data>
