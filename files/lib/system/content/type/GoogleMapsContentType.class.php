@@ -32,6 +32,6 @@ class GoogleMapsContentType extends AbstractContentType {
 	 * @see	\cms\system\content\type\IContentType::isAvailableToAdd()
 	 */
 	public function isAvailableToAdd() {
-		return !empty(GOOGLE_MAPS_API_KEY);
+		return defined('GOOGLE_MAPS_API_KEY') && GOOGLE_MAPS_API_KEY;
 	}
 }
