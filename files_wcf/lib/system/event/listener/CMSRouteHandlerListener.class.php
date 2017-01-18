@@ -21,8 +21,13 @@ class CMSRouteHandlerListener implements IParameterizedEventListener {
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		// only register routes when an application is active
 		if (PACKAGE_ID !== 1) {
-			$route = new PageRoute();
-			$eventObj->addRoute($route);
+			try {
+				$route = new PageRoute();
+				$eventObj->addRoute($route);
+			}
+			catch (\TypeError $e) {
+				// workaround during upgrade to wsc 3.0
+			}
 		}
 	}
 }
