@@ -30,7 +30,7 @@ class StylesheetCompiler extends SingletonFactory {
 	protected function init() {
 		require_once(WCF_DIR.'lib/system/style/scssphp/scss.inc.php');
 		$this->compiler = new Compiler();
-		$this->compiler->setImportDir([WCF_DIR]);
+		$this->compiler->setImportPaths([WCF_DIR]);
 	}
 
 	/**
