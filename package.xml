@@ -4,8 +4,8 @@
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[Advanced CMS for WCF 2.1]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>2.2.0 Alpha 4</version>
-		<date>2016-12-26</date>
+		<version>2.2.0 Beta 1</version>
+		<date>2017-01-18</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -69,6 +69,34 @@
 
 		<!-- renaming everything because of WoltLab -->
 		<instruction type="script">acp/update_de.codequake.cms_210.php</instruction>
+
+		<!-- language -->
+		<instruction type="language">language/*.xml</instruction>
+
+		<!-- xml -->
+		<instruction type="aclOption">xml/aclOption.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
+		<instruction type="bbcode">xml/bbcode.xml</instruction>
+		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
+		<instruction type="dashboardBox">xml/dashboardBox.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="sitemap">xml/sitemap.xml</instruction>
+		<instruction type="pageMenu">xml/pageMenu.xml</instruction>
+		<instruction type="templateListener">xml/templateListener.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+	</instructions>
+	<instructions type="update" fromversion="2.2.0 Alpha 4">
+		<instruction type="sql">update220a4.sql</instruction>
+
+		<!-- files -->
+		<instruction type="file">files.tar</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+
+		<!-- xml -->
+		<instruction type="objectType">xml/objectType.xml</instruction>
 
 		<!-- language -->
 		<instruction type="language">language/*.xml</instruction>
