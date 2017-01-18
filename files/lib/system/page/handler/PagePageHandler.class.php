@@ -41,7 +41,7 @@ class PagePageHandler extends AbstractLookupPageHandler implements IOnlineLocati
 	public function lookup($searchString) {
 		$sql = "(
 			SELECT  pageID, title, title as name
-			FROM    wcf" . WCF_N . "_page
+			FROM    cms" . WCF_N . "_page
 			WHERE   title = ?
 		)
 		UNION
