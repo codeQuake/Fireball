@@ -20,10 +20,14 @@ use wcf\util\StyleUtil;
  */
 class StylesheetCompiler extends SingletonFactory {
 	/**
-	 * scss compiler object.
-	 * @var	Compiler
+	 * @see \wcf\system\style\StyleCompiler::$compiler
 	 */
 	protected $compiler = null;
+
+	/**
+	 * @see \wcf\system\style\StyleCompiler::$supportedOptionType
+	 */
+	public static $supportedOptionType = ['boolean', 'integer'];
 
 	/**
 	 * @see	\wcf\system\SingletonFactory::init()
