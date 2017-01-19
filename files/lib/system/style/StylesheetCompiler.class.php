@@ -20,8 +20,9 @@ use wcf\util\StyleUtil;
  */
 class StylesheetCompiler extends SingletonFactory {
 	/**
-	 * less compiler object.
+	 * scss compiler object.
 	 * @var	Compiler
+	 */
 	protected $compiler = null;
 
 	/**
@@ -31,10 +32,11 @@ class StylesheetCompiler extends SingletonFactory {
 		require_once(WCF_DIR.'lib/system/style/scssphp/scss.inc.php');
 		$this->compiler = new Compiler();
 		$this->compiler->setImportPaths([WCF_DIR]);
+		$this->compiler->setFormatter('Leafo\ScssPhp\Formatter\Crunched');
 	}
 
 	/**
-	 * Compiles LESS stylesheets.
+	 * Compiles SCSS stylesheets.
 	 * 
 	 * @param	\cms\data\stylesheet\Stylesheet		$stylesheet
 	 * @param	integer					$styleID
@@ -54,8 +56,8 @@ class StylesheetCompiler extends SingletonFactory {
 
 		// get style variables
 		$variables = $style->getVariables();
-		if (isset($variables['individualLess'])) {
-			unset($variables['individualLess']);
+		if (isset($variables['individualScss'])) {
+			unset($variables['individualScss']);
 		}
 
 		// add style image path
@@ -67,31 +69,40 @@ class StylesheetCompiler extends SingletonFactory {
 		$variables['style_image_path'] = "'{$imagePath}'";
 
 		// apply overrides
-		if (isset($variables['overrideLess'])) {
-			$lines = explode("\n", StringUtil::unifyNewlines($variables['overrideLess']));
+		if (isset($variables['overrideScss'])) {
+			$lines = explode("\n", StringUtil::unifyNewlines($variables['overrideScss']));
 			foreach ($lines as $line) {
 				if (preg_match('~^@([a-zA-Z]+): ?([@a-zA-Z0-9 ,\.\(\)\%\#-]+);$~', $line, $matches)) {
 					$variables[$matches[1]] = $matches[2];
 				}
 			}
-			unset($variables['overrideLess']);
+			unset($variables['overrideScss']);
 		}
 
-		// add options as LESS variables
-		foreach (Option::getOptions() as $constantName => $option) {
-			if (in_array($option->optionType, ['boolean', 'integer'])) {
-				$variables['wcf_option_'.mb_strtolower($constantName)] = '~"'.$option->optionValue.'"';
+		// add options as SCSS variables
+		if (PACKAGE_ID) {
+			foreach (Option::getOptions() as $constantName => $option) {
+				if (in_array($option->optionType, static::$supportedOptionType)) {
+					$variables['wcf_option_'.mb_strtolower($constantName)] = is_int($option->optionValue) ? $option->optionValue : '"'.$option->optionValue.'"';
+				}
 			}
 		}
+		else {
+			// workaround during setup
+			$variables['wcf_option_attachment_thumbnail_height'] = '~"210"';
+			$variables['wcf_option_attachment_thumbnail_width'] = '~"280"';
+			$variables['wcf_option_signature_max_image_height'] = '~"150"';
+		}
+
+		$content  = "/* stylesheet for '". $stylesheet->getTitle() ."', generated on ". gmdate('r') ." -- DO NOT EDIT */\n\n";
+
+		// build SCSS bootstrap
+		$content .= $this->bootstrap($variables);
 
 		// compile
 		$this->compiler->setVariables($variables);
-		$content  = "/* stylesheet for '". $stylesheet->getTitle() ."', generated on ". gmdate('r') ." -- DO NOT EDIT */\n\n";
 		if (!empty($stylesheet->scss)) {
 			$content .= $this->compiler->compile($stylesheet->scss);
-		} else {
-			// backward compatibility to maelstrom & typhoon
-			$content .= $this->compiler->compile($stylesheet->less);
 		}
 
 		// compress stylesheet
@@ -126,5 +137,26 @@ class StylesheetCompiler extends SingletonFactory {
 		$filename = $stylesheet->getLocation($styleID, true);
 		file_put_contents($filename, $content);
 		FileUtil::makeWritable($filename);
+	}
+
+	/**
+	 * @see \wcf\system\style\StyleCompiler::bootstrap()
+	 */
+	protected function bootstrap(array $variables) {
+		// add reset like a boss
+		$content = $this->prepareFile(WCF_DIR.'style/bootstrap/reset.scss');
+
+		// apply style variables
+		$this->compiler->setVariables($variables);
+
+		// add mixins
+		$content .= $this->prepareFile(WCF_DIR.'style/bootstrap/mixin.scss');
+
+		// add newer mixins added with version 3.0
+		foreach (glob(WCF_DIR.'style/bootstrap/mixin/*.scss') as $mixin) {
+			$content .= $this->prepareFile($mixin);
+		}
+
+		return $content;
 	}
 }
