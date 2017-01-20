@@ -163,4 +163,17 @@ class StylesheetCompiler extends SingletonFactory {
 
 		return $content;
 	}
+
+	/**
+	 * @see \wcf\system\style\StyleCompiler::prepareFile()
+	 */
+	protected function prepareFile($filename) {
+		if (!file_exists($filename) || !is_readable($filename)) {
+			throw new SystemException("Unable to access '".$filename."', does not exist or is not readable");
+		}
+
+		// use a relative path
+		$filename = FileUtil::getRelativePath(WCF_DIR, dirname($filename)) . basename($filename);
+		return '@import "'.$filename.'";'."\n";
+	}
 }

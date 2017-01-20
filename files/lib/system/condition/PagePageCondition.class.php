@@ -4,11 +4,10 @@ use cms\data\page\PageCache;
 use cms\data\page\PageNodeTree;
 use cms\page\ICMSPage;
 use wcf\data\condition\Condition;
+use wcf\data\page\PageCache as WCFPageCache;
 use wcf\system\condition\AbstractMultiSelectCondition;
 use wcf\system\condition\IContentCondition;
-use wcf\system\page\PageManager;
 use wcf\system\request\RequestHandler;
-use wcf\util\ClassUtil;
 
 /**
  * Condition implementation for selecting multiple cms pages.
@@ -49,23 +48,20 @@ class PagePageCondition extends AbstractMultiSelectCondition implements IContent
 		}
 		$fieldElement .= "</select>";
 
-		$objectTypes = PageManager::getInstance()->getObjectTypes();
-		$pageObjectTypeIDs = [];
-		foreach ($objectTypes as $objectType) {
-			if (ClassUtil::isInstanceOf($objectType->className, 'cms\page\ICMSPage')) {
-				$pageObjectTypeIDs[] = $objectType->objectTypeID;
+		$pageIDs = [];
+		foreach (WCFPageCache::getInstance()->getPages() as $page) {
+			if (is_subclass_of($page->controller, ICMSPage::class)) {
+				$pageIDs[] = $page->pageID;
 			}
 		}
-		$objectTypeIDsString = implode(', ', $pageObjectTypeIDs);
+		$pageIDsString = implode(', ', $pageIDs);
 
 		return <<<HTML
 {$fieldElement}
-<script data-relocate="true">
-	//<![CDATA[
-	$(function() {
-		new WCF.Condition.PageControllerDependence('cmsPageIDs', [ {$objectTypeIDsString} ]);
+<script>
+	require(['WoltLabSuite/Core/Controller/Condition/Page/Dependence'], function(ControllerConditionPageDependence) {
+		ControllerConditionPageDependence.register(elById('cmsPageIDs').parentNode.parentNode, [ {$pageIDsString} ]);
 	});
-	//]]>
 </script>
 HTML;
 	}
