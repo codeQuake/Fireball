@@ -39,9 +39,11 @@
 				<ul class="jsPageInlineEditorContainer"
 				    data-page-id="{@$page->pageID}"
 				    data-is-disabled="{@$page->isDisabled}"
-				    data-advanced-url="{link controller='PageEdit' object=$page isACP=1 application='cms'}{/link}">
+				    {if $__wcf->session->getPermission('admin.fireball.page.canAddPage')}
+				        data-advanced-url="{link controller='PageEdit' object=$page isACP=1 application='cms'}{/link}"
+					{/if}>
 					{content}
-						<li><a href="#" class="button jsPageInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></a></li>
+						{if $__wcf->session->getPermission('admin.fireball.page.canAddPage')}<li><a href="#" class="button jsPageInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></a></li>{/if}
 						{event name='contentHeaderNavigation'}
 					{/content}
 				</ul>
