@@ -12,3 +12,5 @@ ALTER TABLE cms1_file ADD COLUMN widthThumbnail INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE cms1_file ADD COLUMN heightThumbnail INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE cms1_file ADD COLUMN filename VARCHAR(255) NOT NULL DEFAULT '';
 UPDATE cms1_file SET filename = title;
+
+ALTER TABLE cms1_page DROP FOREIGN KEY menuItemID;

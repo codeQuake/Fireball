@@ -21,3 +21,5 @@ CREATE TABLE cms1_content_to_dashboardbox (
 
 ALTER TABLE cms1_content_to_dashboardbox ADD FOREIGN KEY (contentID) REFERENCES cms1_content (contentID) ON DELETE CASCADE;
 #ALTER TABLE cms1_content_to_dashboardbox ADD FOREIGN KEY (boxID) REFERENCES wcf1_dashboard_box (boxID) ON DELETE CASCADE;
+
+ALTER TABLE cms1_page DROP FOREIGN KEY menuItemID;
