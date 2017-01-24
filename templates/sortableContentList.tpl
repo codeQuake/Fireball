@@ -34,7 +34,7 @@
 </div>
 
 <script data-relocate="true">
-	require(['WoltLabSuite/Core/Controller/Clipboard', 'Language'], function(ControllerClipboard, Language) {
+	require(['WoltLabSuite/Core/Controller/Clipboard'], function(ControllerClipboard) {
 		var actionObjects = { };
 
 		var deleteAction = new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '#sortableContentList{$position|ucfirst} .jsContentRow');
