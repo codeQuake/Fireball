@@ -12,7 +12,7 @@ use wcf\util\StyleUtil;
 
 /**
  * Compiles stylesheets.
- * 
+ *
  * @author	Jens Krumsieck, Florian Frantzen
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -41,7 +41,7 @@ class StylesheetCompiler extends SingletonFactory {
 
 	/**
 	 * Compiles SCSS stylesheets.
-	 * 
+	 *
 	 * @param	\cms\data\stylesheet\Stylesheet		$stylesheet
 	 * @param	integer					$styleID
 	 */
@@ -101,12 +101,13 @@ class StylesheetCompiler extends SingletonFactory {
 		$content  = "/* stylesheet for '". $stylesheet->getTitle() ."', generated on ". gmdate('r') ." -- DO NOT EDIT */\n\n";
 
 		// build SCSS bootstrap
-		$content .= $this->bootstrap($variables);
+		$scss = $this->bootstrap($variables);
+		$scss .= $stylesheet->scss;
 
 		// compile
 		$this->compiler->setVariables($variables);
 		if (!empty($stylesheet->scss)) {
-			$content .= $this->compiler->compile($stylesheet->scss);
+			$content .= $this->compiler->compile($scss);
 		}
 
 		// compress stylesheet
