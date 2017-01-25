@@ -51,6 +51,7 @@ class ContentRebuildDataWorker extends AbstractRebuildDataWorker {
 		foreach ($this->objectList as $content) {
 			// editor
 			$editor = new ContentEditor($content);
+			$data = [];
 
 			if ($content->getTypeName() == 'de.codequake.cms.content.type.text') {
 				if (!is_array($content->contentData)) {
