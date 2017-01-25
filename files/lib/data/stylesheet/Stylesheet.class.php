@@ -3,7 +3,7 @@ namespace cms\data\stylesheet;
 
 use cms\system\style\StylesheetCompiler;
 use wcf\data\DatabaseObject;
-use wcf\system\cache\builder\StyleCacheBuilder;
+use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
 
 /**
@@ -76,7 +76,8 @@ class Stylesheet extends DatabaseObject {
 	public function getURL($styleID = null, $rtl = null) {
 		// default values
 		if ($styleID === null) {
-			$styleID = StyleCacheBuilder::getInstance()->getData([], 'default');
+			$styleID = StyleHandler::getInstance()->getStyle()->styleID;
+			//$styleID = StyleCacheBuilder::getInstance()->getData([], 'default');
 		}
 		if ($rtl === null) {
 			$rtl = (WCF::getLanguage()->get('wcf.global.pageDirection') == 'rtl');
