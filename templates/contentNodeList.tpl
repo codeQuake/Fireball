@@ -9,7 +9,7 @@
 		{else}
 			<div{if $content->getCSSClasses()} class="{$content->getCSSClasses()}"{/if} id="cmsContent{@$content->contentID}" data-content-type="{$content->getTypeName()}">
 		{/if}
-		{if $content->showHeadline}<h2 class="boxTitle">{$content->getTitle()}</h2>{/if}
+		{if $content->showHeadline}<h2 class="sectionTitle{if $position == 'sidebar'} boxTitle{/if}">{$content->getTitle()}</h2>{/if}
 
 		{if $position == 'sidebar'}<div class="boxContent">{/if}
 		{@$content->getOutput()|language}
