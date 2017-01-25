@@ -49,7 +49,7 @@ class TextContentType extends AbstractSearchableContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		$this->loadEmbeddedObjects();
+		$this->loadEmbeddedObjects($content);
 
 		$processor = new HtmlOutputProcessor();
 		$processor->process(WCF::getLanguage()->get($content->text), 'de.codequake.cms.content.type.text', $content->contentID);
