@@ -30,14 +30,6 @@ class TextContentType extends AbstractSearchableContentType {
 	protected $searchableFields = ['text'];
 
 	/**
-	 * @see \cms\system\content\type\AbstractContentType::isAvailableToAdd()
-	 */
-	public function isAvailableToAdd() {
-		$package = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.wysiwyg.acp');
-		return ($package !== null);
-	}
-
-	/**
 	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
 	 */
 	public function getFormTemplate() {
