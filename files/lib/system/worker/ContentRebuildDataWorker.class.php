@@ -89,7 +89,11 @@ class ContentRebuildDataWorker extends AbstractRebuildDataWorker {
 
 				if (MessageEmbeddedObjectManager::getInstance()->registerObjects($this->getHtmlInputProcessor())) {
 					$contentData['hasEmbeddedObjects'] = 1;
+				} else {
+					$contentData['hasEmbeddedObjects'] = 1;
 				}
+
+				$contentData['enableHtml'] = 1;
 
 				$data['contentData'] = serialize($contentData);
 			}
