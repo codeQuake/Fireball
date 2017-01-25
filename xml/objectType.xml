@@ -9,6 +9,13 @@
 		</type>
 		<!-- /category -->
 
+		<!-- message -->
+		<type>
+			<name>de.codequake.cms.content.type.text</name>
+			<definitionname>com.woltlab.wcf.message</definitionname>
+		</type>
+		<!-- /message -->
+
 		<!-- clipboard -->
 		<type>
 			<name>de.codequake.cms.content</name>
