@@ -2,9 +2,9 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
-use wcf\data\package\PackageCache;
 use wcf\system\bbcode\BBCodeHandler;
-use wcf\system\bbcode\MessageParser;
+use wcf\system\html\output\HtmlOutputProcessor;
+use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
 
 /**
@@ -30,6 +30,12 @@ class TextContentType extends AbstractSearchableContentType {
 	protected $searchableFields = ['text'];
 
 	/**
+	 * embedded objects have been loaded already
+	 * @var boolean
+	 */
+	protected $embeddedObjectsLoaded = false;
+
+	/**
 	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
 	 */
 	public function getFormTemplate() {
@@ -43,8 +49,21 @@ class TextContentType extends AbstractSearchableContentType {
 	 * @see	\cms\system\content\type\IContentType::getOutput()
 	 */
 	public function getOutput(Content $content) {
-		MessageParser::getInstance()->setOutputType('text/html');
+		$this->loadEmbeddedObjects();
 
-		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($content->text), 1, 1, 1);
+		$processor = new HtmlOutputProcessor();
+		$processor->process(WCF::getLanguage()->get($content->text), 'de.codequake.cms.content.type.text', $content->contentID);
+
+		return $processor->getHtml();
+	}
+
+	/**
+	 * Loads the embedded objects.
+	 */
+	protected function loadEmbeddedObjects(Content $content) {
+		if ($content->hasEmbeddedObjects && !$this->embeddedObjectsLoaded) {
+			MessageEmbeddedObjectManager::getInstance()->loadObjects('de.codequake.cms.content.type.text', [$content->contentID]);
+			$this->embeddedObjectsLoaded = true;
+		}
 	}
 }
