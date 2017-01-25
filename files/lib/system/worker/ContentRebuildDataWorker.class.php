@@ -54,7 +54,7 @@ class ContentRebuildDataWorker extends AbstractRebuildDataWorker {
 			$data = [];
 
 			if ($content->getTypeName() == 'de.codequake.cms.content.type.text') {
-				if (!is_array($content->contentData) || $content->contentData['enableHtml']) {
+				if (!is_array($content->contentData) || (isset($content->contentData['enableHtml']) && $content->contentData['enableHtml'])) {
 					continue;
 				}
 
