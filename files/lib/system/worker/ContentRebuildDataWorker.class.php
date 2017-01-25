@@ -12,7 +12,7 @@ use wcf\system\WCF;
 
 /**
  * Worker implementation to rebuild the contents.
- * 
+ *
  * @author	Florian Gail
  * @copyright	2013 - 2015 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
@@ -53,10 +53,11 @@ class ContentRebuildDataWorker extends AbstractRebuildDataWorker {
 			$editor = new ContentEditor($content);
 
 			if ($content->getTypeName() == 'de.codequake.cms.content.type.text') {
-				$contentData = @unserialize($content->contentData);
-				if (!is_array($contentData)) {
+				if (!is_array($content->contentData)) {
 					continue;
 				}
+
+				$contentData = $content->contentData;
 
 				$text = $contentData['text'];
 				if ($text == WCF::getLanguage()->get($text)) {
@@ -68,7 +69,7 @@ class ContentRebuildDataWorker extends AbstractRebuildDataWorker {
 				else {
 					// is lang item
 					$sql = "SELECT  *
-							FROM    wcf" . WCF_N . "language_item
+							FROM    wcf" . WCF_N . "_language_item
 							WHERE  languageItem = ?";
 					$statement = WCF::getDB()->prepareStatement($sql);
 					$statement->execute([$text]);
