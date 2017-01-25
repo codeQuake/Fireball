@@ -32,7 +32,10 @@ class ColumnsContentType extends AbstractStructureContentType {
 		$siblingIDs = ContentCache::getInstance()->getChildIDs($parent->contentID);
 		$siblingNumber = array_search($content->contentID, $siblingIDs);
 
-		$width = $columnData[$siblingNumber % $columnCount];
+		if ($columnCount > 0)
+			$width = $columnData[$siblingNumber % $columnCount];
+		else
+			$width = $columnData[$siblingNumber];
 		return 'grid grid'.$width;
 	}
 
