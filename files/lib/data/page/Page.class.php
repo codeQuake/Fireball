@@ -2,6 +2,7 @@
 namespace cms\data\page;
 
 use cms\data\content\DrainedPositionContentNodeTree;
+use cms\data\page\revision\PageRevision;
 use cms\data\page\revision\PageRevisionList;
 use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
@@ -71,6 +72,11 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * @var	array<\cms\data\page\revision\PageRevision>
 	 */
 	protected $revisions = null;
+
+	/**
+	 * @var integer
+	 */
+	protected $latestEditTime = null;
 
 	/**
 	 * @see	\wcf\data\IStorableObject::__get()
@@ -400,5 +406,23 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 */
 	public function getProcessor() {
 		return ObjectTypeCache::getInstance()->getObjectType($this->objectTypeID)->getProcessor();
+	}
+
+	/**
+	 * Get the timestamp pf the latest edit (includes also edits of contents)
+	 * @return integer
+	 */
+	public function getLastEditTime() {
+		if ($this->latestEditTime === null) {
+			$revisions = $this->getRevisions();
+			/** @var PageRevision $latestRevision */
+			$latestRevision = end($revisions);
+			if ($latestRevision !== null)
+				$this->latestEditTime = $latestRevision->time;
+			else
+				$this->latestEditTime = 0;
+		}
+
+		return $this->latestEditTime;
 	}
 }
