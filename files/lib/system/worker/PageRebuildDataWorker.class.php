@@ -53,47 +53,55 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 		}
 
 		WCF::getDB()->beginTransaction();
-		/** @var \cms\data\content\Content $content */
-		foreach ($this->objectList as $content) {
-			// editor
-			$editor = new ContentEditor($content);
+		/** @var \cms\data\page\Page $page */
+		foreach ($this->objectList as $page) {
+			/** @var \cms\data\content\Content $content */
+			foreach ($page->getContents() as $content) {
+				// editor
+				$editor = new ContentEditor($content);
 
-			if ($content->getTypeName() == 'de.codequake.cms.content.type.text') {
-				$contentData = @unserialize($content->contentData);
-				if (!is_array($contentData)) {
-					continue;
-				}
-
-				$text = $contentData['text'];
-				if ($text == WCF::getLanguage()->get($text)) {
-					// no lang item
-					$this->getHtmlInputProcessor()->process($text, 'de.codequake.cms.content.type.text', $content->contentID, true);
-					$contentData['text'] = $this->getHtmlInputProcessor()->getHtml();
-				} else {
-					// is lang item
-					$sql = "SELECT  *
-							FROM    wcf" . WCF_N . "language_item
-							WHERE  languageItem = ?";
-					$statement = WCF::getDB()->prepareStatement($sql);
-					$statement->execute([$text]);
-
-					while ($row = $statement->fetchArray()) {
-						$this->getHtmlInputProcessor()->process($row['languageItemValue'], 'de.codequake.cms.content.type.text', $content->contentID, true);
-						$text = $this->getHtmlInputProcessor()->getHtml();
-
-						$itemEditor = new LanguageItemEditor(new LanguageItem($row['languageItemID']));
-						$itemEditor->update([
-							'languageItemValue' => $text
-						]);
+				if ($content->getTypeName() == 'de.codequake.cms.content.type.text') {
+					$contentData = @unserialize($content->contentData);
+					if (!is_array($contentData)) {
+						continue;
 					}
-				}
-				unset($contentData['compiled']);
-				$data['contentData'] = serialize($contentData);
-			}
 
-			if (!empty($data)) {
-				// update data
-				$editor->update($data);
+					$text = $contentData['text'];
+					if ($text == WCF::getLanguage()->get($text)) {
+						// no lang item
+						$this->getHtmlInputProcessor()->process($text,
+							'de.codequake.cms.content.type.text', $content->contentID,
+							true);
+						$contentData['text'] = $this->getHtmlInputProcessor()->getHtml();
+					}
+					else {
+						// is lang item
+						$sql = "SELECT  *
+								FROM    wcf" . WCF_N . "language_item
+								WHERE  languageItem = ?";
+						$statement = WCF::getDB()->prepareStatement($sql);
+						$statement->execute([$text]);
+
+						while ($row = $statement->fetchArray()) {
+							$this->getHtmlInputProcessor()->process($row['languageItemValue'],
+								'de.codequake.cms.content.type.text',
+								$content->contentID, true);
+							$text = $this->getHtmlInputProcessor()->getHtml();
+
+							$itemEditor = new LanguageItemEditor(new LanguageItem($row['languageItemID']));
+							$itemEditor->update([
+								'languageItemValue' => $text
+							]);
+						}
+					}
+					unset($contentData['compiled']);
+					$data['contentData'] = serialize($contentData);
+				}
+
+				if (!empty($data)) {
+					// update data
+					$editor->update($data);
+				}
 			}
 		}
 		WCF::getDB()->commitTransaction();
