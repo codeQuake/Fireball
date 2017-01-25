@@ -2,6 +2,7 @@
 namespace cms\system\content\type;
 
 use cms\data\content\Content;
+use wcf\data\package\PackageCache;
 use wcf\system\bbcode\BBCodeHandler;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\WCF;
@@ -27,6 +28,14 @@ class TextContentType extends AbstractSearchableContentType {
 	 * @see	\cms\system\content\type\AbstractSearchableContentType::$searchableFields
 	 */
 	protected $searchableFields = array('text');
+
+	/**
+	 * @see \cms\system\content\type\AbstractContentType::isAvailableToAdd()
+	 */
+	public function isAvailableToAdd() {
+		$package = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.wysiwyg.acp');
+		return ($package !== null);
+	}
 
 	/**
 	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
