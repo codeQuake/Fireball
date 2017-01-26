@@ -19,7 +19,7 @@ class FileEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
 	 */
-	protected static $baseClass = 'cms\data\file\File';
+	protected static $baseClass = File::class;
 
 	/**
 	 * @see	\wcf\data\IEditableObject::deleteAll()

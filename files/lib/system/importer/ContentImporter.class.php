@@ -18,7 +18,7 @@ class ContentImporter extends AbstractImporter {
 	/**
 	 * @see	\wcf\system\importer\AbstractImporter::$className
 	 */
-	protected $className = 'cms\data\content\Content';
+	protected $className = Content::class;
 
 	/**
 	 * @see	\wcf\system\importer\IImporter::import()

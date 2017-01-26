@@ -18,7 +18,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	/**
 	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
 	 */
-	protected static $baseClass = 'cms\data\content\Content';
+	protected static $baseClass = Content::class;
 
 	/**
 	 * @see	\wcf\data\IEditableCachedObject::resetCache()

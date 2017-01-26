@@ -3,6 +3,7 @@
 namespace cms\system\importer;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
+use cms\page\PagePage;
 use wcf\system\importer\AbstractImporter;
 use wcf\system\importer\ImportHandler;
 
@@ -18,7 +19,7 @@ class PageImporter extends AbstractImporter {
 	/**
 	 * @see	\wcf\system\importer\AbstractImporter::$className
 	 */
-	protected $className = 'cms\data\page\Page';
+	protected $className = PagePage::class;
 	
 	/**
 	 * @see	\wcf\system\importer\IImporter::import()

@@ -1,6 +1,7 @@
 <?php
 namespace cms\system;
 
+use cms\page\PagePage;
 use wcf\system\application\AbstractApplication;
 
 /**
@@ -15,5 +16,5 @@ class CMSCore extends AbstractApplication {
 	/**
 	 * @see \wcf\system\application\AbstractApplication::$primaryController
 	 */
-	protected $primaryController = 'cms\page\PagePage';
+	protected $primaryController = PagePage::class;
 }

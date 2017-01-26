@@ -1,6 +1,7 @@
 <?php
 
 namespace cms\system\importer;
+use wcf\data\category\Category;
 use wcf\data\category\CategoryEditor;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\importer\AbstractCategoryImporter;
@@ -10,7 +11,7 @@ class FileCategoryImporter extends AbstractCategoryImporter {
 	/**
 	 * @see	\wcf\system\importer\AbstractImporter::$className
 	 */
-	protected $className = 'wcf\data\category\Category';
+	protected $className = Category::class;
 	
 	/**
 	 * @see	\wcf\system\importer\IImporter::import()

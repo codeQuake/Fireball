@@ -1,6 +1,7 @@
 <?php
 namespace cms\acp\page;
 
+use cms\data\stylesheet\StylesheetList;
 use wcf\page\SortablePage;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\WCF;
@@ -32,7 +33,7 @@ class StylesheetListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
-	public $objectListClassName = 'cms\data\stylesheet\StylesheetList';
+	public $objectListClassName = StylesheetList::class;
 
 	/**
 	 * @see	\wcf\page\SortablePage::$validSortFields

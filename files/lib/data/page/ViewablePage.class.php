@@ -15,5 +15,5 @@ class ViewablePage extends DatabaseObjectDecorator {
 	/**
 	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
-	protected static $baseClass = 'cms\data\page\Page';
+	protected static $baseClass = Page::class;
 }

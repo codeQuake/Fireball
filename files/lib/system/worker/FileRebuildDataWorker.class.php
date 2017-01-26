@@ -2,6 +2,7 @@
 namespace cms\system\worker;
 
 use cms\data\file\FileAction;
+use cms\data\file\FileList;
 use wcf\system\worker\AbstractRebuildDataWorker;
 
 /**
@@ -21,7 +22,7 @@ class FileRebuildDataWorker extends AbstractRebuildDataWorker {
 	/**
 	 * @see	\wcf\system\worker\AbstractRebuildDataWorker::$objectListClassName
 	 */
-	protected $objectListClassName = 'cms\data\file\FileList';
+	protected $objectListClassName = FileList::class;
 
 	/**
 	 * @see	\wcf\system\worker\IWorker::execute()

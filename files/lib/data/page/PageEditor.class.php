@@ -19,7 +19,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
 	 */
-	protected static $baseClass = 'cms\data\page\Page';
+	protected static $baseClass = Page::class;
 
 	/**
 	 * Creates a revision for this page.

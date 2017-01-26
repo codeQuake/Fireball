@@ -17,7 +17,7 @@ class StylesheetEditor extends DatabaseObjectEditor implements IEditableCachedOb
 	/**
 	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
 	 */
-	protected static $baseClass = 'cms\data\stylesheet\Stylesheet';
+	protected static $baseClass = Stylesheet::class;
 
 	/**
 	 * Delete the compiled stylesheet files. The files will get recompiled

@@ -19,7 +19,7 @@ class ContentNode extends DatabaseObjectDecorator implements \Countable, \Recurs
 
 	public $parentNode = null;
 
-	protected static $baseClass = 'cms\data\content\Content';
+	protected static $baseClass = Content::class;
 
 	/**
 	 * @param ContentNode $contentNode

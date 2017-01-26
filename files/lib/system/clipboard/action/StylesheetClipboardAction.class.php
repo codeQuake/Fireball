@@ -1,6 +1,7 @@
 <?php
 namespace cms\system\clipboard\action;
 
+use cms\data\stylesheet\StylesheetAction;
 use wcf\data\clipboard\action\ClipboardAction;
 use wcf\system\clipboard\action\AbstractClipboardAction;
 use wcf\system\WCF;
@@ -50,7 +51,7 @@ class StylesheetClipboardAction extends AbstractClipboardAction {
 	 * @see	\wcf\system\clipboard\action\IClipboardAction::getClassName()
 	 */
 	public function getClassName() {
-		return 'cms\data\stylesheet\StylesheetAction';
+		return StylesheetAction::class;
 	}
 
 	/**

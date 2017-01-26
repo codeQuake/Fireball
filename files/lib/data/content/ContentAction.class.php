@@ -26,7 +26,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
 	 */
-	protected $className = 'cms\data\content\ContentEditor';
+	protected $className = ContentEditor::class;
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache

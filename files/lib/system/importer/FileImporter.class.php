@@ -19,7 +19,7 @@ class FileImporter extends AbstractImporter {
 	/**
 	 * @see	\wcf\system\importer\AbstractImporter::$className
 	 */
-	protected $className = 'cms\data\file\File';
+	protected $className = File::class;
 
 	/**
 	 * @see	\wcf\system\importer\IImporter::import()

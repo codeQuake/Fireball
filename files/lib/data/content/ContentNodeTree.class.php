@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class ContentNodeTree implements \IteratorAggregate {
-	protected $nodeClassName = 'cms\data\content\ContentNode';
+	protected $nodeClassName = ContentNode::class;
 
 	/**
 	 * id of the parent's content

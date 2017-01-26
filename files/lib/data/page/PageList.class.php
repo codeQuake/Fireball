@@ -15,5 +15,5 @@ class PageList extends DatabaseObjectList {
 	/**
 	 * @see	\wcf\data\DatabaseObjectList::$className
 	 */
-	public $className = 'cms\data\page\Page';
+	public $className = Page::class;
 }

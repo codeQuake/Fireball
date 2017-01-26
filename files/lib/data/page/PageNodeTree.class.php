@@ -13,7 +13,7 @@ use cms\system\cache\builder\PageCacheBuilder;
  */
 class PageNodeTree implements \IteratorAggregate {
 
-	protected $nodeClassName = 'cms\data\page\PageNode';
+	protected $nodeClassName = PageNode::class;
 
 	protected $parentID = null;
 

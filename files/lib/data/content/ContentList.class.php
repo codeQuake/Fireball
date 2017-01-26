@@ -15,5 +15,5 @@ class ContentList extends DatabaseObjectList {
 	/**
 	 * @see	\wcf\data\DatabaseObjectList::$className
 	 */
-	public $className = 'cms\data\content\Content';
+	public $className = Content::class;
 }

@@ -1,6 +1,9 @@
 <?php
 namespace cms\system\user\notification\object\type;
 
+use wcf\data\comment\Comment;
+use wcf\data\comment\CommentList;
+use wcf\system\user\notification\object\CommentUserNotificationObject;
 use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
 
 /**
@@ -15,15 +18,15 @@ class PageCommentUserNotificationObjectType extends AbstractUserNotificationObje
 	/**
 	 * @see	\wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$decoratorClassName
 	 */
-	protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentUserNotificationObject';
+	protected static $decoratorClassName = CommentUserNotificationObject::class;
 
 	/**
 	 * @see	\wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$objectClassName
 	 */
-	protected static $objectClassName = 'wcf\data\comment\Comment';
+	protected static $objectClassName = Comment::class;
 
 	/**
 	 * @see	\wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$objectListClassName
 	 */
-	protected static $objectListClassName = 'wcf\data\comment\CommentList';
+	protected static $objectListClassName = CommentList::class;
 }

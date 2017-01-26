@@ -18,7 +18,7 @@ class StylesheetImporter extends AbstractImporter {
 	/**
 	 * @see	\wcf\system\importer\AbstractImporter::$className
 	 */
-	protected $className = 'cms\data\stylesheet\Stylesheet';
+	protected $className = Stylesheet::class;
 
 	/**
 	 * @see	\wcf\system\importer\IImporter::import()

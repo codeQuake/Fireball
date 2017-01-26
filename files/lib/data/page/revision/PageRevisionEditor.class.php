@@ -15,5 +15,5 @@ class PageRevisionEditor extends DatabaseObjectEditor {
 	/**
 	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
 	 */
-	protected static $baseClass = 'cms\data\page\revision\PageRevision';
+	protected static $baseClass = PageRevision::class;
 }

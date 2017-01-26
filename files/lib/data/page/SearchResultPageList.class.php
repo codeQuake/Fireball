@@ -9,5 +9,5 @@ namespace cms\data\page;
  */
 class SearchResultPageList extends PageList {
 
-	public $decoratorClassName = 'cms\data\page\SearchResultPage';
+	public $decoratorClassName = SearchResultPage::class;
 }

@@ -37,7 +37,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
 	 */
-	protected $className = 'cms\data\page\PageEditor';
+	protected $className = PageEditor::class;
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsCreate

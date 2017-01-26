@@ -1,5 +1,6 @@
 <?php
 namespace cms\system\clipboard\action;
+use cms\data\content\ContentAction;
 use wcf\data\clipboard\action\ClipboardAction;
 use wcf\system\clipboard\action\AbstractClipboardAction;
 use wcf\system\request\LinkHandler;
@@ -50,7 +51,7 @@ class ContentClipboardAction extends AbstractClipboardAction {
 	 * @see	\wcf\system\clipboard\action\IClipboardAction::getClassName()
 	 */
 	public function getClassName() {
-		return 'cms\data\content\ContentAction';
+		return ContentAction::class;
 	}
 
 	/**

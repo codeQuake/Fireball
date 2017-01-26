@@ -22,7 +22,7 @@ class PageNode extends DatabaseObjectDecorator implements \Countable, \Recursive
 	/**
 	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
-	protected static $baseClass = 'cms\data\page\Page';
+	protected static $baseClass = Page::class;
 
 	public function addChild(PageNode $pageNode) {
 		$pageNode->setParentNode($this);

@@ -15,7 +15,7 @@ class StylesheetAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
 	 */
-	protected $className = 'cms\data\stylesheet\StylesheetEditor';
+	protected $className = StylesheetEditor::class;
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete

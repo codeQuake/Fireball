@@ -15,5 +15,5 @@ class FileList extends DatabaseObjectList {
 	/**
 	 * @see	\wcf\data\DatabaseObjectList::$className
 	 */
-	public $className = 'cms\data\file\File';
+	public $className = File::class;
 }

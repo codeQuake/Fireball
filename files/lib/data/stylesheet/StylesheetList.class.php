@@ -15,5 +15,5 @@ class StylesheetList extends DatabaseObjectList {
 	/**
 	 * @see	\wcf\data\DatabaseObjectList::$className
 	 */
-	public $className = 'cms\data\stylesheet\Stylesheet';
+	public $className = Stylesheet::class;
 }

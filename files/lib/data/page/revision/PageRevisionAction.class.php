@@ -26,7 +26,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
 	 */
-	protected $className = 'cms\data\page\revision\PageRevisionEditor';
+	protected $className = PageRevisionEditor::class;
 
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete

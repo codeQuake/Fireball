@@ -15,5 +15,5 @@ class PageRevisionList extends DatabaseObjectList {
 	/**
 	 * @see	\wcf\data\DatabaseObjectList::$className
 	 */
-	public $className = 'cms\data\page\revision\PageRevision';
+	public $className = PageRevision::class;
 }
