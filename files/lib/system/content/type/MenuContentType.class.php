@@ -14,12 +14,12 @@ use wcf\system\WCF;
  */
 class MenuContentType extends AbstractStructureContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-sitemap';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		switch ($content->type) {
@@ -45,7 +45,7 @@ class MenuContentType extends AbstractStructureContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
+	 * @inheritDoc
 	 */
 	public function getCSSClasses() {
 		return 'menuContainer';

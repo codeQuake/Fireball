@@ -16,12 +16,12 @@ use wcf\system\importer\ImportHandler;
  */
 class StylesheetImporter extends AbstractImporter {
 	/**
-	 * @see	\wcf\system\importer\AbstractImporter::$className
+	 * @inheritDoc
 	 */
 	protected $className = Stylesheet::class;
 
 	/**
-	 * @see	\wcf\system\importer\IImporter::import()
+	 * @inheritDoc
 	 */
 	public function import($oldID, array $data, array $additionalData = []) {
 		unset($data['stylesheetID']);

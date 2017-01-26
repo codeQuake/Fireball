@@ -13,26 +13,26 @@ use wcf\system\WCF;
  */
 class TabMenuContentType extends AbstractStructureContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-list-alt';
 
 	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
+	 * @inheritDoc
 	 */
 	public function getCSSClasses() {
 		return 'section tabMenuContainer';
 	}
 
 	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getChildCSSClasses()
+	 * @inheritDoc
 	 */
 	public function getChildCSSClasses(Content $content) {
 		return 'tabMenuContent';
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		$childIDs = ContentCache::getInstance()->getChildIDs($content->contentID);
@@ -50,7 +50,7 @@ class TabMenuContentType extends AbstractStructureContentType {
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 * @inheritDoc
 	 */
 	public function getSortableOutput(Content $content) {
 		return '';

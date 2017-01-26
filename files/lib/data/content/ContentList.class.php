@@ -13,7 +13,7 @@ use wcf\data\DatabaseObjectList;
  */
 class ContentList extends DatabaseObjectList {
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::$className
+	 * @inheritDoc
 	 */
 	public $className = Content::class;
 }

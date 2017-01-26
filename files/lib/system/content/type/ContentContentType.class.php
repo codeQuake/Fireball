@@ -17,17 +17,17 @@ use wcf\system\WCF;
  */
 class ContentContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'icon-file-text-alt';
 
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$templateName
+	 * @inheritDoc
 	 */
 	public $templateName = 'contentContentType';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 * @inheritDoc
 	 */
 	public function getFormTemplate() {
 		WCF::getTPL()->assign([
@@ -38,7 +38,7 @@ class ContentContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		/** @var Content $outputContent */
@@ -50,7 +50,7 @@ class ContentContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 * @inheritDoc
 	 */
 	public function getSortableOutput(Content $content) {
 		return 'Content #' . $content->contentID;

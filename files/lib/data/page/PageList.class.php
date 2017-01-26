@@ -13,7 +13,7 @@ use wcf\data\DatabaseObjectList;
  */
 class PageList extends DatabaseObjectList {
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::$className
+	 * @inheritDoc
 	 */
 	public $className = Page::class;
 }

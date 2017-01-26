@@ -14,12 +14,12 @@ use wcf\system\WCF;
  */
 class BoxContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-dashboard';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 * @inheritDoc
 	 */
 	public function getFormTemplate() {
 		$boxList = new BoxList();
@@ -67,7 +67,7 @@ class BoxContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		$box = new Box($content->boxID);
@@ -84,7 +84,7 @@ class BoxContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 * @inheritDoc
 	 */
 	public function getSortableOutput(Content $content) {
 		return '';

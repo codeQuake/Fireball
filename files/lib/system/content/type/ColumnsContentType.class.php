@@ -14,14 +14,14 @@ use wcf\util\ArrayUtil;
  */
 class ColumnsContentType extends AbstractStructureContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
+	 * @inheritDoc
 	 */
 	public function getCSSClasses() {
 		return 'gridContainer';
 	}
 
 	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getChildCSSClasses()
+	 * @inheritDoc
 	 */
 	public function getChildCSSClasses(Content $content) {
 		$parent = $content->getParentContent();
@@ -40,7 +40,7 @@ class ColumnsContentType extends AbstractStructureContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::validate()
+	 * @inheritDoc
 	 */
 	public function validate($data) {
 		$accumulatedColumnWidth = 0;
@@ -74,7 +74,7 @@ class ColumnsContentType extends AbstractStructureContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		return '';

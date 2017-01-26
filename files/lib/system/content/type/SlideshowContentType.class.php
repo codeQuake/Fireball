@@ -11,19 +11,19 @@ use cms\data\content\Content;
  */
 class SlideshowContentType extends AbstractStructureContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-play';
 
 	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
+	 * @inheritDoc
 	 */
 	public function getCSSClasses() {
 		return 'fireballSlideContainer';
 	}
 
 	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getChildCSSClasses()
+	 * @inheritDoc
 	 */
 	public function getChildCSSClasses(Content $content) {
 		return 'fireballSlide';

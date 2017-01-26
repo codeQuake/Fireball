@@ -14,7 +14,7 @@ use wcf\system\application\AbstractApplication;
  */
 class CMSCore extends AbstractApplication {
 	/**
-	 * @see \wcf\system\application\AbstractApplication::$primaryController
+	 * @inheritDoc
 	 */
 	protected $primaryController = PagePage::class;
 }

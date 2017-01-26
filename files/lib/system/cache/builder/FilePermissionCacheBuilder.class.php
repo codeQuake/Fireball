@@ -15,7 +15,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  */
 class FilePermissionCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
+	 * @inheritDoc
 	 */
 	public function rebuild(array $parameters) {
 		$data = [];

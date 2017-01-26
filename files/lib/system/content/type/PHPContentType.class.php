@@ -13,22 +13,22 @@ use wcf\system\WCF;
  */
 class PHPContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-code';
 
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 * @inheritDoc
 	 */
 	protected $previewFields = ['text'];
 
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$templateName
+	 * @inheritDoc
 	 */
 	public $templateName = 'phpContentType';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		try {
@@ -51,7 +51,7 @@ class PHPContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 * @inheritDoc
 	 */
 	public function getSortableOutput(Content $content) {
 		return '';

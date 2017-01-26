@@ -20,17 +20,17 @@ use wcf\util\StyleUtil;
  */
 class StylesheetCompiler extends SingletonFactory {
 	/**
-	 * @see \wcf\system\style\StyleCompiler::$compiler
+	 * @inheritDoc
 	 */
 	protected $compiler = null;
 
 	/**
-	 * @see \wcf\system\style\StyleCompiler::$supportedOptionType
+	 * @inheritDoc
 	 */
 	public static $supportedOptionType = ['boolean', 'integer'];
 
 	/**
-	 * @see	\wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		require_once(WCF_DIR.'lib/system/style/scssphp/scss.inc.php');
@@ -145,7 +145,7 @@ class StylesheetCompiler extends SingletonFactory {
 	}
 
 	/**
-	 * @see \wcf\system\style\StyleCompiler::bootstrap()
+	 * @inheritDoc
 	 */
 	protected function bootstrap(array $variables) {
 		// add reset like a boss
@@ -166,7 +166,7 @@ class StylesheetCompiler extends SingletonFactory {
 	}
 
 	/**
-	 * @see \wcf\system\style\StyleCompiler::prepareFile()
+	 * @inheritDoc
 	 */
 	protected function prepareFile($filename) {
 		if (!file_exists($filename) || !is_readable($filename)) {

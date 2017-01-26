@@ -15,17 +15,17 @@ use wcf\system\WCF;
  */
 class TextContentType extends AbstractSearchableContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-file-text-o';
 
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
+	 * @inheritDoc
 	 */
 	public $multilingualFields = ['text'];
 	
 	/**
-	 * @see	\cms\system\content\type\AbstractSearchableContentType::$searchableFields
+	 * @inheritDoc
 	 */
 	protected $searchableFields = ['text'];
 
@@ -36,7 +36,7 @@ class TextContentType extends AbstractSearchableContentType {
 	protected $embeddedObjectsLoaded = false;
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getFormTemplate()
+	 * @inheritDoc
 	 */
 	public function getFormTemplate() {
 		// init bbcodes
@@ -46,7 +46,7 @@ class TextContentType extends AbstractSearchableContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		$this->loadEmbeddedObjects($content);

@@ -30,7 +30,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	const AVAILABLE_DURING_OFFLINE_MODE = true;
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$enableTracking
+	 * @inheritDoc
 	 */
 	public $enableTracking = true;
 
@@ -60,7 +60,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	public $contents = [];
 
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -83,7 +83,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		}
 
 		// check if offline and view page or exit
-		// @see	\wcf\system\request\RequestHandler
+		// @inheritDoc
 		if (OFFLINE) {
 			if (!WCF::getSession()->getPermission('admin.general.canViewPageDuringOfflineMode') && !$this->page->availableDuringOfflineMode) {
 				@header('HTTP/1.1 503 Service Unavailable');
@@ -104,7 +104,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -135,7 +135,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -148,7 +148,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::show()
+	 * @inheritDoc
 	 */
 	public function show() {
 		parent::show();
@@ -164,21 +164,21 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	}
 
 	/**
-	 * @see	\wcf\page\ITrackablePage::getObjectType()
+	 * @inheritDoc
 	 */
 	public function getObjectType() {
 		return 'de.codequake.cms.page';
 	}
 
 	/**
-	 * @see	\wcf\page\ITrackablePage::getObjectID()
+	 * @inheritDoc
 	 */
 	public function getObjectID() {
 		return $this->pageID;
 	}
 
 	/**
-	 * @see \cms\page\ICMSPage::getPage()
+	 * @inheritDoc
 	 */
 	public function getPage() {
 		return $this->page;

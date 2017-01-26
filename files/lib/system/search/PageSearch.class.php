@@ -20,7 +20,7 @@ class PageSearch extends AbstractSearchableObjectType {
 	public $cache = [];
 
 	/**
-	 * @see	\wcf\system\search\ISearchableObjectType::cacheObjects()
+	 * @inheritDoc
 	 */
 	public function cacheObjects(array $objectIDs, array $additionalData = null) {
 		$pageList = new SearchResultPageList();
@@ -33,14 +33,14 @@ class PageSearch extends AbstractSearchableObjectType {
 	}
 
 	/**
-	 * @see	\wcf\system\search\ISearchableObjectType::getIDFieldName()
+	 * @inheritDoc
 	 */
 	public function getIDFieldName() {
 		return $this->getTableName().'.pageID';
 	}
 
 	/**
-	 * @see	\wcf\system\search\ISearchableObjectType::getObject()
+	 * @inheritDoc
 	 */
 	public function getObject($objectID) {
 		if (isset($this->cache[$objectID])) {
@@ -51,28 +51,28 @@ class PageSearch extends AbstractSearchableObjectType {
 	}
 
 	/**
-	 * @see	\wcf\system\search\ISearchableObjectType::getSubjectFieldName()
+	 * @inheritDoc
 	 */
 	public function getSubjectFieldName() {
 		return $this->getTableName().'.title';
 	}
 
 	/**
-	 * @see	\wcf\system\search\ISearchableObjectType::getTableName()
+	 * @inheritDoc
 	 */
 	public function getTableName() {
 		return 'cms'.WCF_N.'_page';
 	}
 
 	/**
-	 * @see	\wcf\system\search\ISearchableObjectType::getTimeFieldName()
+	 * @inheritDoc
 	 */
 	public function getTimeFieldName() {
 		return $this->getTableName().'.creationTime';
 	}
 
 	/**
-	 * @see	\wcf\system\search\ISearchableObjectType::getUsernameFieldName()
+	 * @inheritDoc
 	 */
 	public function getUsernameFieldName() {
 		return $this->getTableName().'.authorName';

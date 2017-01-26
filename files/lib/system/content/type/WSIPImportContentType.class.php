@@ -18,22 +18,22 @@ use wcf\system\WCF;
  */
 class WSIPImportContentType extends TemplateContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-code';
 	
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 * @inheritDoc
 	 */
 	protected $previewFields = ['text'];
 	
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$templateName
+	 * @inheritDoc
 	 */
 	public $templateName = 'wsipImportContentType';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::validate()
+	 * @inheritDoc
 	 */
 	public function validate($data) {
 		if (!isset($data['text']) || empty($data['text'])) {
@@ -57,7 +57,7 @@ class WSIPImportContentType extends TemplateContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		$compiled = $content->compiled;
@@ -105,7 +105,7 @@ class WSIPImportContentType extends TemplateContentType {
 	}
 	
 	/**
-	 * @see \cms\system\content\type\AbstractContentType::isAvailableToAdd()
+	 * @inheritDoc
 	 */
 	public function isAvailableToAdd() {
 		// only available for imported contents

@@ -41,12 +41,12 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	protected $categories = null;
 
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableName = 'file';
 
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableIndexName = 'fileID';
 
@@ -134,7 +134,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	}
 
 	/**
-	 * @see	\wcf\data\ILinkableObject::getLink()
+	 * @inheritDoc
 	 */
 	public function getLink() {
 		return LinkHandler::getInstance()->getLink('FileDownload', [
@@ -182,7 +182,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	}
 
 	/**
-	 * @see	\wcf\data\ITitledObject::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle() {
 		return WCF::getLanguage()->get($this->title);
@@ -212,7 +212,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	}
 
 	/**
-	 * @see        \wcf\data\IPermissionObject::checkPermissions()
+	 * @inheritDoc
 	 * @param array $permissions
 	 * @throws PermissionDeniedException
 	 */
@@ -225,7 +225,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	}
 
 	/**
-	 * @see	\wcf\data\IPermissionObject::getPermission()
+	 * @inheritDoc
 	 */
 	public function getPermission($permission) {
 		$permissions = FilePermissionHandler::getInstance()->getPermissions($this);

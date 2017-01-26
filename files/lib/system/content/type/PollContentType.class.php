@@ -13,12 +13,12 @@ use wcf\system\WCF;
  */
 class PollContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-bar-chart';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		WCF::getTPL()->assign('poll', $content->getPoll());
@@ -27,7 +27,7 @@ class PollContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -36,14 +36,14 @@ class PollContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::readFormParameters()
+	 * @inheritDoc
 	 */
 	public function readFormParameters() {
 		PollManager::getInstance()->readFormParameters();
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::validate()
+	 * @inheritDoc
 	 */
 	public function validate($data) {
 		PollManager::getInstance()->validate();

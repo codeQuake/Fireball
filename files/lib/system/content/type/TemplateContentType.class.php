@@ -17,17 +17,17 @@ use wcf\system\WCF;
  */
 class TemplateContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-code';
 	
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 * @inheritDoc
 	 */
 	protected $previewFields = ['text'];
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::validate()
+	 * @inheritDoc
 	 */
 	public function validate($data) {
 		if (!isset($data['text']) || empty($data['text'])) {
@@ -51,7 +51,7 @@ class TemplateContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		$compiled = $content->compiled;

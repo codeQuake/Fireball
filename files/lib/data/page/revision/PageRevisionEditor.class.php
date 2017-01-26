@@ -13,7 +13,7 @@ use wcf\data\DatabaseObjectEditor;
  */
 class PageRevisionEditor extends DatabaseObjectEditor {
 	/**
-	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = PageRevision::class;
 }

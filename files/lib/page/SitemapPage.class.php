@@ -20,7 +20,7 @@ class SitemapPage extends AbstractPage {
 	}
 
 	/**
-	 * @see \wcf\page\AbstractPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData () {
 		parent::readData();

@@ -23,7 +23,7 @@ class PagePermissionHandler extends SingletonFactory {
 	protected $permissions = [];
 
 	/**
-	 * @see	\wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		$this->permissions = PagePermissionCacheBuilder::getInstance()->getData();

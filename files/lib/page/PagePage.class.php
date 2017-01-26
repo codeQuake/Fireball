@@ -39,7 +39,7 @@ class PagePage extends AbstractCMSPage {
 	public $contentContentNodeTree = null;
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -61,7 +61,7 @@ class PagePage extends AbstractCMSPage {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

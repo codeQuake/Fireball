@@ -20,12 +20,12 @@ use wcf\system\WCF;
  */
 class ContentListPage extends AbstractPage {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page.list';
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * @inheritDoc
 	 */
 	public $neededPermissions = ['admin.fireball.page.canListPage'];
 
@@ -54,7 +54,7 @@ class ContentListPage extends AbstractPage {
 	public $page = null;
 
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -67,7 +67,7 @@ class ContentListPage extends AbstractPage {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -81,7 +81,7 @@ class ContentListPage extends AbstractPage {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

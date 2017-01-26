@@ -15,22 +15,22 @@ use wcf\system\WCF;
  */
 class ImageContentType extends FileContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-picture-o';
 
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 * @inheritDoc
 	 */
 	protected $previewFields = ['imageID'];
 
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
+	 * @inheritDoc
 	 */
 	public $multilingualFields = ['text'];
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		$image = FileCache::getInstance()->getFile($content->imageID);
@@ -44,7 +44,7 @@ class ImageContentType extends FileContentType {
 	}
 
 	/**
-	 * @see cms\system\content\type\IContentType::validate()
+	 * @inheritDoc
 	 */
 	public function validate($data) {
 		if (!isset($data['imageID'])) {

@@ -42,7 +42,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	protected $wcfNo = 0;
 	
 	/**
-	 * @see \wcf\system\exporter\AbstractExporter::$methods
+	 * @inheritDoc
 	 */
 	protected $methods = [
 		'de.codequake.cms.page' => 'Pages',
@@ -51,7 +51,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	];
 	
 	/**
-	 * @see	\wcf\system\exporter\AbstractExporter::$limits
+	 * @inheritDoc
 	 */
 	protected $limits = [
 		'de.codequake.cms.page' => 300,
@@ -68,7 +68,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	protected $contents = [];
 	
 	/**
-	 * @see	\wcf\system\exporter\IExporter::init()
+	 * @inheritDoc
 	 */
 	public function init() {
 		parent::init();
@@ -85,7 +85,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	}
 	
 	/**
-	 * @see	\wcf\system\exporter\IExporter::validateFileAccess()
+	 * @inheritDoc
 	 */
 	public function validateFileAccess() {
 		if (in_array('de.codequake.cms.file', $this->selectedData)) {
@@ -100,7 +100,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	}
 	
 	/**
-	 * @see \wcf\system\exporter\IExporter::getSupportedData()
+	 * @inheritDoc
 	 */
 	public function getSupportedData() {
 		return [
@@ -112,7 +112,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	}
 	
 	/**
-	 * @see \wcf\system\exporter\IExporter::validateDatabaseAccess()
+	 * @inheritDoc
 	 */
 	public function validateDatabaseAccess() {
 		parent::validateDatabaseAccess();
@@ -133,7 +133,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	}
 	
 	/**
-	 * @see \wcf\system\exporter\IExporter::getQueue()
+	 * @inheritDoc
 	 */
 	public function getQueue() {
 		$queue = [];
@@ -152,7 +152,7 @@ class InfinitePortalExporter extends AbstractExporter {
 	}
 	
 	/**
-	 * @see	\wcf\system\exporter\IExporter::getDefaultDatabasePrefix()
+	 * @inheritDoc
 	 */
 	public function getDefaultDatabasePrefix() {
 		return 'wsip1_1_';

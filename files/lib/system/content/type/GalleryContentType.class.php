@@ -15,12 +15,12 @@ use wcf\util\StringUtil;
  */
 class GalleryContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-picture-o';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		$imageIDs = $content->imageIDs;
@@ -42,7 +42,7 @@ class GalleryContentType extends AbstractContentType {
 	}
 	
 	/**
-	 * @see	\cms\system\content\type\IContentType::getPreview()
+	 * @inheritDoc
 	 */
 	public function getPreview(Content $content) {
 		$imageIDs = $content->imageIDs;

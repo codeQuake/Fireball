@@ -17,7 +17,7 @@ use wcf\system\user\storage\UserStorageHandler;
  */
 class PageUserObjectWatch implements IUserObjectWatch {
 	/**
-	 * @see	\wcf\system\user\object\watch\IUserObjectWatch::validateObjectID()
+	 * @inheritDoc
 	 */
 	public function validateObjectID($objectID) {
 		$page = PageCache::getInstance()->getPage($objectID);
@@ -32,7 +32,7 @@ class PageUserObjectWatch implements IUserObjectWatch {
 	}
 
 	/**
-	 * @see	\wcf\system\user\object\watch\IUserObjectWatch::resetUserStorage()
+	 * @inheritDoc
 	 */
 	public function resetUserStorage(array $userIDs) {
 		UserStorageHandler::getInstance()->reset($userIDs, 'cmsUnreadWatchedPages');

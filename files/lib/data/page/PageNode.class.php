@@ -20,7 +20,7 @@ class PageNode extends DatabaseObjectDecorator implements \Countable, \Recursive
 	public $parentNode = null;
 
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = Page::class;
 

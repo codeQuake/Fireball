@@ -14,17 +14,17 @@ use wcf\util\HTTPRequest;
  */
 class RssContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-rss';
 	
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 * @inheritDoc
 	 */
 	protected $previewFields = ['url'];
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		try {
@@ -56,7 +56,7 @@ class RssContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 * @inheritDoc
 	 */
 	public function getSortableOutput(Content $content) {
 		return '<span class="inlineCode"></span>' . $content->url . '<span>';

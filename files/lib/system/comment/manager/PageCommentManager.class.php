@@ -16,37 +16,37 @@ use wcf\system\WCF;
  */
 class PageCommentManager extends AbstractCommentManager {
 	/**
-	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionAdd
+	 * @inheritDoc
 	 */
 	protected $permissionAdd = 'user.fireball.page.canAddComment';
 
 	/**
-	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionCanModerate
+	 * @inheritDoc
 	 */
 	protected $permissionCanModerate = 'mod.fireball.canModerateComment';
 
 	/**
-	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionDelete
+	 * @inheritDoc
 	 */
 	protected $permissionDelete = 'user.fireball.canDeleteComment';
 
 	/**
-	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionEdit
+	 * @inheritDoc
 	 */
 	protected $permissionEdit = 'user.fireball.canEditComment';
 
 	/**
-	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionModDelete
+	 * @inheritDoc
 	 */
 	protected $permissionModDelete = 'mod.fireball.canDeleteComment';
 
 	/**
-	 * @see	\wcf\system\comment\manager\AbstractCommentManager::$permissionModEdit
+	 * @inheritDoc
 	 */
 	protected $permissionModEdit = 'mod.fireball.canEditComment';
 
 	/**
-	 * @see	\wcf\system\comment\manager\ICommentManager::canAdd()
+	 * @inheritDoc
 	 */
 	public function canAdd($objectID) {
 		if (parent::canAdd($objectID)) {
@@ -58,7 +58,7 @@ class PageCommentManager extends AbstractCommentManager {
 	}
 
 	/**
-	 * @see	\wcf\system\comment\manager\ICommentManager::getLink()
+	 * @inheritDoc
 	 */
 	public function getLink($objectTypeID, $objectID) {
 		$page = PageCache::getInstance()->getPage($objectID);
@@ -67,7 +67,7 @@ class PageCommentManager extends AbstractCommentManager {
 	}
 
 	/**
-	 * @see	\wcf\system\comment\manager\ICommentManager::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle($objectTypeID, $objectID, $isResponse = false) {
 		if ($isResponse) {
@@ -78,7 +78,7 @@ class PageCommentManager extends AbstractCommentManager {
 	}
 
 	/**
-	 * @see	\wcf\system\comment\manager\ICommentManager::isAccessible()
+	 * @inheritDoc
 	 */
 	public function isAccessible($objectID, $validateWritePermission = false) {
 		$page = PageCache::getInstance()->getPage($objectID);
@@ -86,7 +86,7 @@ class PageCommentManager extends AbstractCommentManager {
 	}
 
 	/**
-	 * @see	\wcf\system\comment\manager\ICommentManager::updateCounter()
+	 * @inheritDoc
 	 */
 	public function updateCounter($objectID, $value) {
 		$page = PageCache::getInstance()->getPage($objectID);

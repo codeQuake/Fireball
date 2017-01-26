@@ -23,7 +23,7 @@ class ContentPermissionHandler extends SingletonFactory {
 	protected $permissions = [];
 
 	/**
-	 * @see        \wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		$this->permissions = ContentPermissionCacheBuilder::getInstance()->getData();

@@ -34,19 +34,19 @@ use wcf\system\WCF;
  */
 class Content extends DatabaseObject implements IRouteController, IPollObject, IPermissionObject {
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableName = 'content';
 
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableIndexName = 'contentID';
 
 	public $poll = null;
 
 	/**
-	 * @see	\wcf\data\IStorableObject::__get()
+	 * @inheritDoc
 	 */
 	public function __get($name) {
 		$value = parent::__get($name);
@@ -89,7 +89,7 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 	}
 
 	/**
-	 * @see	\wcf\data\ITitledObject::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle() {
 		if ($this->title !=  '') return WCF::getLanguage()->get($this->title);
@@ -210,7 +210,7 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 	}
 
 	/**
-	 * @see	\wcf\data\DatabaseObject::handleData()
+	 * @inheritDoc
 	 */
 	protected function handleData($data) {
 		parent::handleData($data);
@@ -222,7 +222,7 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 	}
 
 	/**
-	 * @see	\wcf\data\IPermissionObject::checkPermissions()
+	 * @inheritDoc
 	 */
 	public function checkPermissions(array $permissions = ['user.canViewContent']) {
 		foreach ($permissions as $permission) {
@@ -233,7 +233,7 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 	}
 
 	/**
-	 * @see	\wcf\data\IPermissionObject::getPermission()
+	 * @inheritDoc
 	 */
 	public function getPermission($permission) {
 		$permissions = ContentPermissionHandler::getInstance()->getPermissions($this);

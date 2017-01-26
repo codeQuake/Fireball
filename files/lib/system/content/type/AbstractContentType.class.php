@@ -70,7 +70,7 @@ abstract class AbstractContentType implements IContentType {
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		WCF::getTPL()->assign([
@@ -81,14 +81,14 @@ abstract class AbstractContentType implements IContentType {
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getIcon()
+	 * @inheritDoc
 	 */
 	public function getIcon() {
 		return $this->icon;
 	}
 	
 	/**
-	 * @see \cms\system\content\type\IContentType::getPreview()
+	 * @inheritDoc
 	 */
 	public function getPreview(Content $content) {
 		if (!empty($this->previewFields)) {
@@ -108,14 +108,14 @@ abstract class AbstractContentType implements IContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::isAvailableToAdd()
+	 * @inheritDoc
 	 */
 	public function isAvailableToAdd() {
 		return true;
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		// register multilingual fields
@@ -125,17 +125,17 @@ abstract class AbstractContentType implements IContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::readFormParameters()
+	 * @inheritDoc
 	 */
 	public function readFormParameters() { /* nothing */ }
 
 	/**
-	 * @see \cms\system\content\type\IContentType::validate()
+	 * @inheritDoc
 	 */
 	public function validate($data) { /* nothing */ }
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getFormTemplate()
+	 * @inheritDoc
 	 */
 	public function getFormTemplate() {
 		return $this->templateName;
@@ -149,7 +149,7 @@ abstract class AbstractContentType implements IContentType {
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getSortableOutput()
+	 * @inheritDoc
 	 */
 	public function getSortableOutput(Content $content) {
 		return $this->getOutput($content);

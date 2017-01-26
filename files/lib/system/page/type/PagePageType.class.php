@@ -19,14 +19,14 @@ class PagePageType extends AbstractPageType {
 	public $frontendController = PagePage::class;
 
 	/**
-	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
+	 * @inheritDoc
 	 */
 	public $assignValues = [
 		'isCommentable' => FIREBALL_PAGES_DEFAULT_COMMENTS
 	];
 	
 	/**
-	 * @see \cms\system\page\type\AbstractPageType::readFormParameters()
+	 * @inheritDoc
 	 */
 	public function readFormParameters(AbstractForm $form) {
 		$formParameters = parent::readFormParameters($form);
@@ -37,7 +37,7 @@ class PagePageType extends AbstractPageType {
 	}
 	
 	/**
-	 * @see \cms\system\page\type\AbstractPageType::readData()
+	 * @inheritDoc
 	 */
 	public function readData(AbstractForm $form) {
 		$return = parent::readData($form);

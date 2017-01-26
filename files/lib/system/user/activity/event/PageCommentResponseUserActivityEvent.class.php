@@ -19,7 +19,7 @@ use wcf\system\WCF;
  */
 class PageCommentResponseUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
 	/**
-	 * @see	\wcf\system\user\activity\event\IUserActivityEvent::prepare()
+	 * @inheritDoc
 	 */
 	public function prepare(array $events) {
 		$commentsIDs = $responseIDs = $userIDs = [];

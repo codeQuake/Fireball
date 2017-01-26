@@ -19,22 +19,22 @@ use wcf\system\request\RequestHandler;
  */
 class PagePageCondition extends AbstractMultiSelectCondition implements IContentCondition {
 	/**
-	 * @see	\wcf\system\condition\AbstractSingleFieldCondition::$description
+	 * @inheritDoc
 	 */
 	protected $description = 'cms.condition.page.page.description';
 
 	/**
-	 * @see	\wcf\system\condition\AbstractSelectCondition::$fieldName
+	 * @inheritDoc
 	 */
 	protected $fieldName = 'cmsPageIDs';
 
 	/**
-	 * @see	\wcf\system\condition\AbstractSingleFieldCondition::$label
+	 * @inheritDoc
 	 */
 	protected $label = 'cms.condition.page.page';
 
 	/**
-	 * @see	\wcf\system\condition\AbstractSingleFieldCondition::getFieldElement()
+	 * @inheritDoc
 	 */
 	protected function getFieldElement() {
 		$pageNodeTree = new PageNodeTree();
@@ -67,14 +67,14 @@ HTML;
 	}
 
 	/**
-	 * @see	\wcf\system\condition\AbstractSelectCondition::getOptions()
+	 * @inheritDoc
 	 */
 	protected function getOptions() {
 		return PageCache::getInstance()->getPages();
 	}
 
 	/**
-	 * @see	\wcf\system\condition\IContentCondition::showContent()
+	 * @inheritDoc
 	 */
 	public function showContent(Condition $condition) {
 		$requestObject = RequestHandler::getInstance()->getActiveRequest()->getRequestObject();

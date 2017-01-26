@@ -19,7 +19,7 @@ use wcf\system\WCF;
  */
 class FileListPage extends SortablePage {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.file.list';
 
@@ -42,22 +42,22 @@ class FileListPage extends SortablePage {
 	public $categoryList = null;
 
 	/**
-	 * @see	\wcf\page\SortablePage::$defaultSortField
+	 * @inheritDoc
 	 */
 	public $defaultSortField = 'title';
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * @inheritDoc
 	 */
 	public $neededPermissions = ['admin.fireball.file.canAddFile'];
 
 	/**
-	 * @see	\wcf\page\SortablePage::$validSortFields
+	 * @inheritDoc
 	 */
 	public $validSortFields = ['downloads', 'fileID', 'filesize', 'title', 'uploadTime'];
 
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -78,7 +78,7 @@ class FileListPage extends SortablePage {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -89,14 +89,14 @@ class FileListPage extends SortablePage {
 	}
 
 	/**
-	 * @see	\wcf\page\MultipleLinkPage::initObjectList()
+	 * @inheritDoc
 	 */
 	protected function initObjectList() {
 		$this->objectList = new CategoryFileList([$this->categoryID]);
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

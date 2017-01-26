@@ -14,7 +14,7 @@ use wcf\action\AbstractAction;
  */
 class CMSExportAction extends AbstractAction {
 	/**
-	 * @see	\wcf\action\IAction::execute()
+	 * @inheritDoc
 	 */
 	public function execute() {
 		parent::execute();

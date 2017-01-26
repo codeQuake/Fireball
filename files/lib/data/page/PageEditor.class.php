@@ -17,7 +17,7 @@ use wcf\system\WCF;
  */
 class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = Page::class;
 
@@ -53,7 +53,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	}
 
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @inheritDoc
 	 */
 	public static function resetCache() {
 		PageCacheBuilder::getInstance()->reset();

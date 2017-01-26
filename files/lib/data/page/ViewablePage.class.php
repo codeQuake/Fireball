@@ -13,7 +13,7 @@ use wcf\data\DatabaseObjectDecorator;
  */
 class ViewablePage extends DatabaseObjectDecorator {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = Page::class;
 }

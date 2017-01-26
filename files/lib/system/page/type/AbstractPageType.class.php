@@ -60,19 +60,19 @@ abstract class AbstractPageType implements IPageType {
 	}
 	
 	/**
-	 * @see	\cms\system\page\type\IPageType::isAvailableToAdd()
+	 * @inheritDoc
 	 */
 	public function isAvailableToAdd() {
 		return $this->isAvailable;
 	}
 	
 	/**
-	 * @see	\cms\system\page\type\IPageType::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters(AbstractForm $form) { /* nothing */ }
 	
 	/**
-	 * @see \cms\system\page\type\IPageType::readData()
+	 * @inheritDoc
 	 */
 	public function readData(AbstractForm $form) {
 		if (empty($_POST)) {
@@ -88,7 +88,7 @@ abstract class AbstractPageType implements IPageType {
 	}
 	
 	/**
-	 * @see	\cms\system\page\type\IPageType::readFormParameters()
+	 * @inheritDoc
 	 */
 	public function readFormParameters(AbstractForm $form) {
 		return [
@@ -97,29 +97,29 @@ abstract class AbstractPageType implements IPageType {
 	}
 	
 	/**
-	 * @see \cms\system\page\type\IPageType::validate()
+	 * @inheritDoc
 	 */
 	public function validate(AbstractForm $form) { /* nothing */ }
 	
 	/**
-	 * @see \cms\system\page\type\IPageType::save()
+	 * @inheritDoc
 	 */
 	public function save(AbstractForm $form) { /* nothing */ }
 	
 	/**
-	 * @see \cms\system\page\type\IPageType::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables(AbstractForm $form) { /* nothing */ }
 	
 	/**
-	 * @see \cms\system\page\type\IPageType::getFormTemplate()
+	 * @inheritDoc
 	 */
 	public function getFormTemplate() {
 		return $this->templateName;
 	}
 	
 	/**
-	 * @see \cms\system\page\type\IPageType::getCompiledFormTemplate()
+	 * @inheritDoc
 	 */
 	public function getCompiledFormTemplate($assignValues = [], $errorField = '', $errorType = '') {
 		if (empty($assignValues)) {
@@ -137,14 +137,14 @@ abstract class AbstractPageType implements IPageType {
 	}
 	
 	/**
-	 * @see \cms\system\page\type\IPageType::getController()
+	 * @inheritDoc
 	 */
 	public function getController() {
 		return $this->frontendController;
 	}
 	
 	/**
-	 * @see \cms\system\page\type\IPageType::getSaveArray()
+	 * @inheritDoc
 	 */
 	public function getSaveArray() {
 		return [

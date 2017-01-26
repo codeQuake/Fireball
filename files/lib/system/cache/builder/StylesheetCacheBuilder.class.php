@@ -14,7 +14,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  */
 class StylesheetCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
+	 * @inheritDoc
 	 */
 	public function rebuild(array $parameters) {
 		$stylesheetList = new StylesheetList();

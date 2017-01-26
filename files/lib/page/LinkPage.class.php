@@ -22,7 +22,7 @@ class LinkPage extends AbstractCMSPage {
 	public $useTemplate = false;
 
 	/**
-	 * @see	\wcf\page\IPage::show()
+	 * @inheritDoc
 	 */
 	public function show() {
 		// register visit

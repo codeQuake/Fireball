@@ -20,12 +20,12 @@ use wcf\system\WCF;
  */
 class Stylesheet extends DatabaseObject {
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableName = 'stylesheet';
 
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableIndexName = 'stylesheetID';
 
@@ -59,7 +59,7 @@ class Stylesheet extends DatabaseObject {
 	}
 
 	/**
-	 * @see	\wcf\data\ITitledObject::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle() {
 		return $this->title;

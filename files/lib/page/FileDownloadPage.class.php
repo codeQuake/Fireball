@@ -46,7 +46,7 @@ class FileDownloadPage extends AbstractPage {
 	];
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$useTemplate
+	 * @inheritDoc
 	 */
 	public $useTemplate = false;
 
@@ -57,7 +57,7 @@ class FileDownloadPage extends AbstractPage {
 	public $loadThumbnail = false;
 
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -81,7 +81,7 @@ class FileDownloadPage extends AbstractPage {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -120,7 +120,7 @@ class FileDownloadPage extends AbstractPage {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::show()
+	 * @inheritDoc
 	 */
 	public function show() {
 		parent::show();

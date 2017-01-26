@@ -15,7 +15,7 @@ use wcf\system\importer\ImportHandler;
  */
 class PageCommentImporter extends AbstractCommentImporter {
 	/**
-	 * @see	\wcf\system\importer\AbstractCommentImporter::$objectTypeName
+	 * @inheritDoc
 	 */
 	protected $objectTypeName = 'de.codequake.cms.page.comment';
 	
@@ -25,7 +25,7 @@ class PageCommentImporter extends AbstractCommentImporter {
 	}
 	
 	/**
-	 * @see wcf\system\importer\IImporter::import()
+	 * @inheritDoc
 	 */
 	public function import($oldID, array $data, array $additionalData = []) {
 		$data['objectID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.page', $data['objectID']);

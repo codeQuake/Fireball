@@ -27,7 +27,7 @@ class CommentActionListener implements IParameterizedEventListener {
 	protected $eventObj;
 
 	/**
-	 * @see	\wcf\system\event\IEventListener::execute()
+	 * @inheritDoc
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		$this->eventObj = $eventObj;

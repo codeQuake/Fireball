@@ -13,7 +13,7 @@ use wcf\system\stat\AbstractStatDailyHandler;
  */
 class PageStatDailyHandler extends AbstractStatDailyHandler {
 	/**
-	 * @see	\wcf\system\stat\IStatDailyHandler::getData()
+	 * @inheritDoc
 	 */
 	public function getData($date) {
 		return [

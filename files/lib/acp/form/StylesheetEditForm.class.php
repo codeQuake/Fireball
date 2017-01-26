@@ -18,7 +18,7 @@ use wcf\system\WCF;
  */
 class StylesheetEditForm extends StylesheetAddForm {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.stylesheet';
 
@@ -41,7 +41,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 	public $stylesheets = [];
 
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -54,7 +54,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 	}
 
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -76,7 +76,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -98,7 +98,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

@@ -15,7 +15,7 @@ use wcf\system\WCF;
  */
 class UserRenameListener implements IParameterizedEventListener {
 	/**
-	 * @see \wcf\system\event\IEventListener::execute()
+	 * @inheritDoc
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		$objects = $eventObj->getObjects();

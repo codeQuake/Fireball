@@ -38,7 +38,7 @@ class ContentEditForm extends ContentAddForm {
 	public $content = null;
 
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		if (isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
@@ -53,7 +53,7 @@ class ContentEditForm extends ContentAddForm {
 	}
 
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -133,7 +133,7 @@ class ContentEditForm extends ContentAddForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -164,7 +164,7 @@ class ContentEditForm extends ContentAddForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

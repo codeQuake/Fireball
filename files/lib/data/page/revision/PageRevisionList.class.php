@@ -13,7 +13,7 @@ use wcf\data\DatabaseObjectList;
  */
 class PageRevisionList extends DatabaseObjectList {
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::$className
+	 * @inheritDoc
 	 */
 	public $className = PageRevision::class;
 }

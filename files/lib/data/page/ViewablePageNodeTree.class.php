@@ -13,7 +13,7 @@ namespace cms\data\page;
  */
 class ViewablePageNodeTree extends PageNodeTree {
 	/**
-	 * @see	\cms\data\page\PageNodeTree::isIncluded()
+	 * @inheritDoc
 	 */
 	protected function isIncluded(PageNode $pageNode) {
 		if ($pageNode->invisible) {

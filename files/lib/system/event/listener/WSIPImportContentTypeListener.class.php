@@ -16,7 +16,7 @@ use wcf\system\WCF;
  */
 class WSIPImportContentTypeListener implements IParameterizedEventListener {
 	/**
-	 * @see \wcf\system\event\IEventListener::execute()
+	 * @inheritDoc
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		$checkObjectTypeID = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.wsipimport')->objectTypeID;

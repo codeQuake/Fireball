@@ -24,7 +24,7 @@ class LinkPageType extends AbstractPageType {
 	public $canHaveContent = false;
 
 	/**
-	 * @see  \cms\system\page\type\AbstractPageType::$assignValues
+	 * @inheritDoc
 	 */
 	public $assignValues = [
 		'url' => '',
@@ -34,7 +34,7 @@ class LinkPageType extends AbstractPageType {
 	];
 	
 	/**
-	 * @see \cms\system\page\type\AbstractPageType::readFormParameters()
+	 * @inheritDoc
 	 */
 	public function readFormParameters(AbstractForm $form) {
 		$formParameters = parent::readFormParameters($form);
@@ -48,7 +48,7 @@ class LinkPageType extends AbstractPageType {
 	}
 	
 	/**
-	 * @see \cms\system\page\type\AbstractPageType::validate()
+	 * @inheritDoc
 	 */
 	public function validate(AbstractForm $form) {
 		$specificFormParameters = $form->specificFormParameters;
@@ -61,7 +61,7 @@ class LinkPageType extends AbstractPageType {
 	}
 	
 	/**
-	 * @see \cms\system\page\type\AbstractPageType::getSaveArray()
+	 * @inheritDoc
 	 */
 	public function getSaveArray() {
 		return [
@@ -72,7 +72,7 @@ class LinkPageType extends AbstractPageType {
 	}
 	
 	/**
-	 * @see \cms\system\page\type\AbstractPageType::readData()
+	 * @inheritDoc
 	 */
 	public function readData(AbstractForm $form) {
 		$return = parent::readData($form);

@@ -12,12 +12,12 @@ use wcf\system\WCF;
  */
 class GoogleMapsContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'icon-map-o';
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		return WCF::getTPL()->fetch('googleMapsContentType', 'cms', [
@@ -29,7 +29,7 @@ class GoogleMapsContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::isAvailableToAdd()
+	 * @inheritDoc
 	 */
 	public function isAvailableToAdd() {
 		return defined('GOOGLE_MAPS_API_KEY') && GOOGLE_MAPS_API_KEY;

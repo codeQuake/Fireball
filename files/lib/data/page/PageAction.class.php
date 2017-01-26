@@ -35,32 +35,32 @@ use wcf\util\DateUtil;
  */
 class PageAction extends AbstractDatabaseObjectAction implements IClipboardAction, ISortableAction, IToggleAction {
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
+	 * @inheritDoc
 	 */
 	protected $className = PageEditor::class;
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
+	 * @inheritDoc
 	 */
 	protected $permissionsCreate = ['admin.fireball.page.canAddPage'];
 	
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 * @inheritDoc
 	 */
 	protected $permissionsDelete = ['admin.fireball.page.canAddPage'];
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 * @inheritDoc
 	 */
 	protected $permissionsUpdate = ['admin.fireball.page.canAddPage'];
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
+	 * @inheritDoc
 	 */
 	protected $requireACP = ['delete', 'disable', 'enable', 'setAsHome'];
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache
+	 * @inheritDoc
 	 */
 	protected $resetCache = ['copy', 'create', 'delete', 'disable', 'enable', 'publish', 'setAsHome', 'toggle', 'update', 'updatePosition', 'frontendCreate'];
 
@@ -135,7 +135,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::create()
+	 * @inheritDoc
 	 */
 	public function create() {
 		// set default values for author and last editor
@@ -253,7 +253,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 
 	/**
-	 * @see	\wcf\data\IDeleteAction::validateDelete()
+	 * @inheritDoc
 	 */
 	public function validateDelete() {
 		parent::validateDelete();
@@ -266,7 +266,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 
 	/**
-	 * @see	\wcf\data\IDeleteAction::delete()
+	 * @inheritDoc
 	 */
 	public function delete() {
 		$returnValues = parent::delete();
@@ -839,14 +839,14 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 
 	/**
-	 * @see	\wcf\data\IToggleAction::validateToggle()
+	 * @inheritDoc
 	 */
 	public function validateToggle() {
 		$this->validateUpdate();
 	}
 
 	/**
-	 * @see	\wcf\data\IToggleAction::toggle()
+	 * @inheritDoc
 	 */
 	public function toggle() {
 		if (empty($this->objects)) {
@@ -861,19 +861,19 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 
 	/**
-	 * @see	\wcf\data\IClipboardAction::validateUnmarkAll()
+	 * @inheritDoc
 	 */
 	public function validateUnmarkAll() { /* nothing */ }
 
 	/**
-	 * @see	\wcf\data\IClipboardAction::unmarkAll()
+	 * @inheritDoc
 	 */
 	public function unmarkAll() {
 		ClipboardHandler::getInstance()->removeItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.page'));
 	}
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::update()
+	 * @inheritDoc
 	 */
 	public function update() {
 		// set default values for last editor
@@ -926,7 +926,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 
 	/**
-	 * @see	\wcf\data\ISortableAction::validateUpdatePosition()
+	 * @inheritDoc
 	 */
 	public function validateUpdatePosition() {
 		WCF::getSession()->checkPermissions($this->permissionsUpdate);
@@ -965,7 +965,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	}
 
 	/**
-	 * @see	\wcf\data\ISortableAction::updatePosition()
+	 * @inheritDoc
 	 */
 	public function updatePosition() {
 		WCF::getDB()->beginTransaction();

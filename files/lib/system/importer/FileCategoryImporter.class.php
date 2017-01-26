@@ -9,12 +9,12 @@ use wcf\system\importer\ImportHandler;
 
 class FileCategoryImporter extends AbstractCategoryImporter {
 	/**
-	 * @see	\wcf\system\importer\AbstractImporter::$className
+	 * @inheritDoc
 	 */
 	protected $className = Category::class;
 	
 	/**
-	 * @see	\wcf\system\importer\IImporter::import()
+	 * @inheritDoc
 	 */
 	public function import($oldID, array $data, array $additionalData = []) {
 		if (!empty($data['parentCategoryID'])) $data['parentCategoryID'] = ImportHandler::getInstance()->getNewID('de.codequake.cms.file.category', $data['parentCategoryID']);

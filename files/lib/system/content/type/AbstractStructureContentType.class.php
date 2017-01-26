@@ -13,7 +13,7 @@ use cms\data\content\Content;
  */
 abstract class AbstractStructureContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-columns';
 

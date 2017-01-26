@@ -17,7 +17,7 @@ use wcf\system\WCF;
  */
 class PageACPSearchResultProvider implements IACPSearchResultProvider {
 	/**
-	 * @see	\wcf\system\search\acp\IACPSearchResultProvider::search()
+	 * @inheritDoc
 	 */
 	public function search($query) {
 		// check permissions

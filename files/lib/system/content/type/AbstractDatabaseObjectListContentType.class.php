@@ -8,7 +8,7 @@ use wcf\system\WCF;
 
 abstract class AbstractDatabaseObjectListContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'icon-list';
 
@@ -43,7 +43,7 @@ abstract class AbstractDatabaseObjectListContentType extends AbstractContentType
 	protected $additionalFormTemplate = '';
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getFormTemplate()
+	 * @inheritDoc
 	 */
 	public function getFormTemplate() {
 		WCF::getTPL()->assign([
@@ -52,7 +52,7 @@ abstract class AbstractDatabaseObjectListContentType extends AbstractContentType
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		$this->objectList = new $this->objectListClassName();

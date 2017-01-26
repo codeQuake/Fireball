@@ -18,14 +18,14 @@ use wcf\system\WCF;
  */
 class CMSPageSelectOptionType extends AbstractOptionType {
 	/**
-	 * @see	\wcf\system\option\IOptionType::getData()
+	 * @inheritDoc
 	 */
 	public function getData(Option $option, $newValue) {
 		return intval($newValue);
 	}
 
 	/**
-	 * @see	\wcf\system\option\IOptionType::getFormElement()
+	 * @inheritDoc
 	 */
 	public function getFormElement(Option $option, $value) {
 		$nodeTree = new PageNodeTree();
@@ -41,7 +41,7 @@ class CMSPageSelectOptionType extends AbstractOptionType {
 	}
 
 	/**
-	 * @see	\wcf\system\option\IOptionType::validate()
+	 * @inheritDoc
 	 */
 	public function validate(Option $option, $newValue) {
 		if (!empty($newValue)) {

@@ -26,7 +26,7 @@ use wcf\util\DateUtil;
  */
 class PageEditForm extends PageAddForm {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page';
 
@@ -54,7 +54,7 @@ class PageEditForm extends PageAddForm {
 	public $createMenuItem = 0;
 
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -72,7 +72,7 @@ class PageEditForm extends PageAddForm {
 	}
 
 	/**
-	 * @see \cms\acp\form\PageAddForm::validateAlias()
+	 * @inheritDoc
 	 */
 	protected function validateAlias() {
 		if (empty($this->alias)) {
@@ -87,7 +87,7 @@ class PageEditForm extends PageAddForm {
 	}
 
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -204,7 +204,7 @@ class PageEditForm extends PageAddForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -268,7 +268,7 @@ class PageEditForm extends PageAddForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

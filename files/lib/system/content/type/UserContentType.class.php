@@ -17,18 +17,18 @@ use wcf\system\WCF;
  */
 class UserContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-user';
 	
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 * @inheritDoc
 	 */
 	protected $previewFields = ['name'];
 	
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::validate()
+	 * @inheritDoc
 	 */
 	public function validate($data) {
 		if (!isset($data['name']) || $data['name'] == '') {
@@ -48,7 +48,7 @@ class UserContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getFormTemplate()
+	 * @inheritDoc
 	 */
 	public function getFormTemplate() {
 		$username = '';
@@ -74,7 +74,7 @@ class UserContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		if ($content->userID) {

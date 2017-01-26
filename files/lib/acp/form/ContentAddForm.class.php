@@ -30,7 +30,7 @@ use wcf\util\StringUtil;
  */
 class ContentAddForm extends AbstractForm {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page.list';
 
@@ -53,7 +53,7 @@ class ContentAddForm extends AbstractForm {
 	public $cssClasses = '';
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * @inheritDoc
 	 */
 	public $neededPermissions = ['admin.fireball.content.canAddContent'];
 
@@ -106,7 +106,7 @@ class ContentAddForm extends AbstractForm {
 	public $contentObjectTypeID = null;
 
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -135,7 +135,7 @@ class ContentAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::readFormParameters()
+	 * @inheritDoc
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -156,7 +156,7 @@ class ContentAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\form\IForm::validate()
+	 * @inheritDoc
 	 */
 	public function validate() {
 		parent::validate();
@@ -222,7 +222,7 @@ class ContentAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		parent::save();
@@ -298,7 +298,7 @@ class ContentAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -313,7 +313,7 @@ class ContentAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

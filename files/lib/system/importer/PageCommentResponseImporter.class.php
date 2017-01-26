@@ -13,7 +13,7 @@ use wcf\system\importer\AbstractCommentResponseImporter;
  */
 class PageCommentResponseImporter extends AbstractCommentResponseImporter {
 	/**
-	 * @see	\wcf\system\importer\AbstractCommentResponseImporter::$objectTypeName
+	 * @inheritDoc
 	 */
 	protected $objectTypeName = 'de.codequake.cms.page.comment';
 }

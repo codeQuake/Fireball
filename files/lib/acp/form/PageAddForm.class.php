@@ -34,7 +34,7 @@ use wcf\util\StringUtil;
  */
 class PageAddForm extends AbstractForm {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page.add';
 
@@ -130,7 +130,7 @@ class PageAddForm extends AbstractForm {
 	public $metaKeywords = '';
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * @inheritDoc
 	 */
 	public $neededPermissions = ['admin.fireball.page.canAddPage'];
 
@@ -202,7 +202,7 @@ class PageAddForm extends AbstractForm {
 	public $specificFormParameters = [];
 	
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @inheritDoc
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -227,7 +227,7 @@ class PageAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\form\IForm::readFormParameters()
+	 * @inheritDoc
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -277,7 +277,7 @@ class PageAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\form\IForm::validate()
+	 * @inheritDoc
 	 */
 	public function validate() {
 		parent::validate();
@@ -415,7 +415,7 @@ class PageAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		parent::save();
@@ -531,7 +531,7 @@ class PageAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -574,7 +574,7 @@ class PageAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

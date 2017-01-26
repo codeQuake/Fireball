@@ -18,7 +18,7 @@ use wcf\util\DateUtil;
  */
 class StatsPage extends AbstractPage {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.page.statistics';
 
@@ -57,7 +57,7 @@ class StatsPage extends AbstractPage {
 	public $endDate = 0;
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededModules
+	 * @inheritDoc
 	 */
 	public $neededModules = ['FIREBALL_PAGES_ENABLE_STATISTICS'];
 
@@ -86,7 +86,7 @@ class StatsPage extends AbstractPage {
 	public $visits = [];
 
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @inheritDoc
 	 */
 	public function readData() {
 		parent::readData();
@@ -143,7 +143,7 @@ class StatsPage extends AbstractPage {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

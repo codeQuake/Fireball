@@ -17,12 +17,12 @@ use wcf\system\WCF;
  */
 class FileEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = File::class;
 
 	/**
-	 * @see	\wcf\data\IEditableObject::deleteAll()
+	 * @inheritDoc
 	 */
 	public static function deleteAll(array $objectIDs = []) {
 		$fileList = new FileList();
@@ -78,7 +78,7 @@ class FileEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	}
 
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @inheritDoc
 	 */
 	public static function resetCache() {
 		FileCacheBuilder::getInstance()->reset();

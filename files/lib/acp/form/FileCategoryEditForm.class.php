@@ -13,17 +13,17 @@ use wcf\acp\form\AbstractCategoryEditForm;
  */
 class FileCategoryEditForm extends AbstractCategoryEditForm {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.file';
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * @inheritDoc
 	 */
 	public $neededPermissions = ['admin.fireball.file.canAddFile'];
 
 	/**
-	 * @see	\wcf\acp\form\AbstractCategoryAddForm::$objectTypeName
+	 * @inheritDoc
 	 */
 	public $objectTypeName = 'de.codequake.cms.file';
 }

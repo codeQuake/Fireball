@@ -27,7 +27,7 @@ abstract class AbstractSearchableContentType extends AbstractContentType impleme
 	public $searchIndexData = [];
 
 	/**
-	 * @see \cms\system\content\type\IContentType::getPreview()
+	 * @inheritDoc
 	 * use searchableFields instead of previewFields
 	 */
 	public function getPreview(Content $content) {
@@ -47,7 +47,7 @@ abstract class AbstractSearchableContentType extends AbstractContentType impleme
 	}
 
 	/**
-	 * @see	\cms\system\content\type\ISearchableContentType::getSearchableData()
+	 * @inheritDoc
 	 */
 	public function getSearchableData(Content $content) {
 		foreach (LanguageFactory::getInstance()->getLanguages() as $language) {

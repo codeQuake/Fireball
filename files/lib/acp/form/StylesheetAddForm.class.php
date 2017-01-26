@@ -17,7 +17,7 @@ use wcf\util\StringUtil;
  */
 class StylesheetAddForm extends AbstractForm {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.stylesheet.add';
 
@@ -28,7 +28,7 @@ class StylesheetAddForm extends AbstractForm {
 	public $scss = '';
 
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * @inheritDoc
 	 */
 	public $neededPermissions = ['admin.fireball.style.canAddStylesheet'];
 
@@ -39,7 +39,7 @@ class StylesheetAddForm extends AbstractForm {
 	public $title = '';
 
 	/**
-	 * @see	\wcf\form\IForm::readFormParameters()
+	 * @inheritDoc
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -49,7 +49,7 @@ class StylesheetAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\form\IForm::validate()
+	 * @inheritDoc
 	 */
 	public function validate() {
 		parent::validate();
@@ -66,7 +66,7 @@ class StylesheetAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @inheritDoc
 	 */
 	public function save() {
 		parent::save();
@@ -91,7 +91,7 @@ class StylesheetAddForm extends AbstractForm {
 	}
 
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @inheritDoc
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

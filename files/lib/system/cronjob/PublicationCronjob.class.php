@@ -16,7 +16,7 @@ use wcf\system\WCF;
  */
 class PublicationCronjob extends AbstractCronjob {
 	/**
-	 * @see	\wcf\system\cronjob\ICronjob::execute()
+	 * @inheritDoc
 	 */
 	public function execute(Cronjob $cronjob) {
 		// publish pages

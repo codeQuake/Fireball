@@ -13,12 +13,12 @@ use wcf\acp\page\AbstractCategoryListPage;
  */
 class FileCategoryListPage extends AbstractCategoryListPage {
 	/**
-	 * @see	\wcf\page\AbstractPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $activeMenuItem = 'fireball.acp.menu.link.fireball.file.category.list';
 	
 	/**
-	 * @see	\wcf\acp\page\AbstractCategoryListPage::$activeMenuItem
+	 * @inheritDoc
 	 */
 	public $objectTypeName = 'de.codequake.cms.file';
 }

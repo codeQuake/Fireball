@@ -15,7 +15,7 @@ use wcf\data\IEditableCachedObject;
  */
 class StylesheetEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = Stylesheet::class;
 
@@ -23,7 +23,7 @@ class StylesheetEditor extends DatabaseObjectEditor implements IEditableCachedOb
 	 * Delete the compiled stylesheet files. The files will get recompiled
 	 * when user visit one of the associated pages.
 	 * 
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @inheritDoc
 	 */
 	public static function resetCache() {
 		$stylesheets = glob(CMS_DIR.'style/style-*.css');

@@ -12,7 +12,7 @@ use wcf\system\stat\AbstractCommentStatDailyHandler;
  */
 class PageCommentStatDailyHandler extends AbstractCommentStatDailyHandler {
 	/**
-	 * @see	\wcf\system\stat\AbstractCommentStatDailyHandler::$objectType
+	 * @inheritDoc
 	 */
 	protected $objectType = 'de.codequake.cms.page.comment';
 }

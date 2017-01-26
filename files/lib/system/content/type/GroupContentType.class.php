@@ -11,14 +11,14 @@ use cms\data\content\Content;
  */
 class GroupContentType extends AbstractStructureContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getCSSClasses()
+	 * @inheritDoc
 	 */
 	public function getCSSClasses() {
 		return 'contentCollection';
 	}
 	
 	/**
-	 * @see	\cms\system\content\type\AbstractStructureContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		return '';

@@ -17,7 +17,7 @@ class CategoryFileList extends FileList {
 	 * Creates a new CategoryFileList object.
 	 * 
 	 * @param	array<integer>		$categoryIDs
-	 * @see	\wcf\data\DatabaseObjectList::__construct()
+	 * @inheritDoc
 	 */
 	public function __construct(array $categoryIDs) {
 		parent::__construct();
@@ -33,7 +33,7 @@ class CategoryFileList extends FileList {
 	}
 
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::countObjects()
+	 * @inheritDoc
 	 */
 	public function countObjects() {
 		$sql = "SELECT	COUNT(*) AS count

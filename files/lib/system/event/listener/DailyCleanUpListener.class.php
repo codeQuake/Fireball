@@ -16,7 +16,7 @@ use wcf\system\WCF;
  */
 class DailyCleanUpListener implements IParameterizedEventListener {
 	/**
-	 * @see	\wcf\system\event\IEventListener::execute()
+	 * @inheritDoc
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		// delete obsolete file uploads

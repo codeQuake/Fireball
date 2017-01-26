@@ -19,7 +19,7 @@ class DrainedPageNodeTree extends PageNodeTree {
 	}
 
 	/**
-	 * @see	\cms\data\page\PageNodeTree::isIncluded()
+	 * @inheritDoc
 	 */
 	public function isIncluded(PageNode $pageNode) {
 		if ($pageNode->pageID == $this->drainedID) {

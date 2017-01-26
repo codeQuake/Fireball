@@ -45,7 +45,7 @@ class PageCache extends SingletonFactory {
 	protected $menuNodeList = null;
 
 	/**
-	 * @see	\wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		$this->aliasToPage = PageCacheBuilder::getInstance()->getData([], 'aliasToPage');

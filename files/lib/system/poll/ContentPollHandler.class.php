@@ -16,7 +16,7 @@ use wcf\system\WCF;
  */
 class ContentPollHandler extends AbstractPollHandler {
 	/**
-	 * @see	\wcf\system\poll\IPollHandler::canStartPublicPoll()
+	 * @inheritDoc
 	 * @todo	only admins with the right to create contents are
 	 * 		allowed to start a public poll.
 	 */
@@ -25,7 +25,7 @@ class ContentPollHandler extends AbstractPollHandler {
 	}
 
 	/**
-	 * @see	\wcf\system\poll\IPollHandler::canVote()
+	 * @inheritDoc
 	 * @todo	only users that can view the content are allowed to
 	 * 		vote.
 	 */
@@ -34,7 +34,7 @@ class ContentPollHandler extends AbstractPollHandler {
 	}
 
 	/**
-	 * @see	\wcf\system\poll\IPollHandler::getRelatedObject()
+	 * @inheritDoc
 	 */
 	public function getRelatedObject(Poll $poll) {
 		$content = new Content($poll->objectID);

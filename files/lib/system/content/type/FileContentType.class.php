@@ -15,17 +15,17 @@ use wcf\system\WCF;
  */
 class FileContentType extends AbstractContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-file';
 	
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$previewFields
+	 * @inheritDoc
 	 */
 	protected $previewFields = ['fileID'];
 
 	/**
-	 * @see	\cms\system\content\type\IContentType::getOutput()
+	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
 		$file = FileCache::getInstance()->getFile($content->fileID);
@@ -38,7 +38,7 @@ class FileContentType extends AbstractContentType {
 	}
 	
 	/**
-	 * @see	\cms\system\content\type\IContentType::getPreview()
+	 * @inheritDoc
 	 */
 	public function getPreview(Content $content) {
 		$file = FileCache::getInstance()->getFile($content->{$this->previewFields[0]});
@@ -47,7 +47,7 @@ class FileContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @see cms\system\content\type\IContentType::validate()
+	 * @inheritDoc
 	 */
 	public function validate($data) {
 		if (!isset($data['fileID'])) {

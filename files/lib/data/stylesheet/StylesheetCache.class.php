@@ -19,7 +19,7 @@ class StylesheetCache extends SingletonFactory {
 	protected $stylesheets = [];
 
 	/**
-	 * @see	\wcf\system\SingletonFactory::init()
+	 * @inheritDoc
 	 */
 	protected function init() {
 		$this->stylesheets = StylesheetCacheBuilder::getInstance()->getData();

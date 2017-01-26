@@ -9,17 +9,17 @@ namespace cms\system\content\type;
  */
 class LinkContentType extends AbstractSearchableContentType {
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$icon
+	 * @inheritDoc
 	 */
 	protected $icon = 'fa-link';
 
 	/**
-	 * @see	\cms\system\content\type\AbstractContentType::$multilingualFields
+	 * @inheritDoc
 	 */
 	public $multilingualFields = ['text', 'link'];
 	
 	/**
-	 * @see	\cms\system\content\type\AbstractSearchableContentType::$searchableFields
+	 * @inheritDoc
 	 */
 	protected $searchableFields = ['text'];
 }

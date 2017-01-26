@@ -14,33 +14,33 @@ use wcf\system\WCF;
  */
 class FileCategoryType extends AbstractCategoryType {
 	/**
-	 * @see	\wcf\system\category\AbstractCategoryType::$forceDescription
+	 * @inheritDoc
 	 */
 	protected $hasDescription = false;
 
 	/**
-	 * @see	\wcf\system\category\ICategoryType::canAddCategory()
+	 * @inheritDoc
 	 */
 	public function canAddCategory() {
 		return $this->canEditCategory();
 	}
 
 	/**
-	 * @see	\wcf\system\category\ICategoryType::canDeleteCategory()
+	 * @inheritDoc
 	 */
 	public function canDeleteCategory() {
 		return $this->canEditCategory();
 	}
 
 	/**
-	 * @see	\wcf\system\category\ICategoryType::canEditCategory()
+	 * @inheritDoc
 	 */
 	public function canEditCategory() {
 		return WCF::getSession()->getPermission('admin.fireball.file.canAddFile');
 	}
 
 	/**
-	 * @see	\wcf\system\category\ICategoryType::getApplication()
+	 * @inheritDoc
 	 */
 	public function getApplication() {
 		return 'cms';

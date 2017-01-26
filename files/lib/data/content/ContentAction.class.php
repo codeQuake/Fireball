@@ -24,22 +24,22 @@ use wcf\system\WCF;
  */
 class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAction, ISortableAction, IToggleAction {
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
+	 * @inheritDoc
 	 */
 	protected $className = ContentEditor::class;
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache
+	 * @inheritDoc
 	 */
 	protected $resetCache = ['copy', 'create', 'delete', 'disable', 'enable', 'toggle', 'update', 'updatePosition', 'frontendCreate'];
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 * @inheritDoc
 	 */
 	protected $permissionsDelete = ['admin.fireball.content.canAddContent'];
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 * @inheritDoc
 	 */
 	protected $permissionsUpdate = ['admin.fireball.content.canAddContent'];
 
@@ -93,7 +93,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	}
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::create()
+	 * @inheritDoc
 	 */
 	public function create() {
 		// serialize content data
@@ -260,14 +260,14 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	}
 
 	/**
-	 * @see	\wcf\data\IToggleAction::validateToggle()
+	 * @inheritDoc
 	 */
 	public function validateToggle() {
 		$this->validateUpdate();
 	}
 
 	/**
-	 * @see	\wcf\data\IToggleAction::toggle()
+	 * @inheritDoc
 	 */
 	public function toggle() {
 		if (empty($this->objects)) $this->readObjects();
@@ -280,19 +280,19 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	}
 
 	/**
-	 * @see	\wcf\data\IClipboardAction::validateUnmarkAll()
+	 * @inheritDoc
 	 */
 	public function validateUnmarkAll() { /* nothing */ }
 
 	/**
-	 * @see	\wcf\data\IClipboardAction::unmarkAll()
+	 * @inheritDoc
 	 */
 	public function unmarkAll() {
 		ClipboardHandler::getInstance()->removeItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.content'));
 	}
 
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::update()
+	 * @inheritDoc
 	 */
 	public function update() {
 		// serialize content data
@@ -304,7 +304,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	}
 
 	/**
-	 * @see	\wcf\data\ISortableAction::validateUpdatePosition()
+	 * @inheritDoc
 	 */
 	public function validateUpdatePosition() {
 		WCF::getSession()->checkPermissions([
@@ -337,7 +337,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	}
 
 	/**
-	 * @see	\wcf\data\ISortableAction::updatePosition()
+	 * @inheritDoc
 	 */
 	public function updatePosition() {
 		WCF::getDB()->beginTransaction();

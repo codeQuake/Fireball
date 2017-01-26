@@ -16,12 +16,12 @@ use wcf\data\IEditableCachedObject;
  */
 class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectEditor::$baseClass
+	 * @inheritDoc
 	 */
 	protected static $baseClass = Content::class;
 
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @inheritDoc
 	 */
 	public static function resetCache() {
 		ContentCacheBuilder::getInstance()->reset();

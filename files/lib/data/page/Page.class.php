@@ -58,12 +58,12 @@ use wcf\system\WCF;
  */
 class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObject, IRouteController {
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableName = 'page';
 
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @inheritDoc
 	 */
 	protected static $databaseTableIndexName = 'pageID';
 
@@ -79,7 +79,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	protected $latestEditTime = null;
 
 	/**
-	 * @see	\wcf\data\IStorableObject::__get()
+	 * @inheritDoc
 	 */
 	public function __get($name) {
 		$value = parent::__get($name);
@@ -95,7 +95,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	}
 
 	/**
-	 * @see	\wcf\data\DatabaseObject::handleData()
+	 * @inheritDoc
 	 */
 	protected function handleData($data) {
 		parent::handleData($data);
@@ -149,7 +149,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	}
 
 	/**
-	 * @see        \wcf\data\IPermissionObject::checkPermissions()
+	 * @inheritDoc
 	 * @param array $permissions
 	 */
 	public function checkPermissions(array $permissions = ['user.canViewPage']) {
@@ -219,7 +219,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	}
 
 	/**
-	 * @see	\wcf\data\ILinkableObject::getLink()
+	 * @inheritDoc
 	 */
 	public function getLink($appendSession = true) {
 		return LinkHandler::getInstance()->getLink($this->getAlias(), [
@@ -278,7 +278,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	}
 
 	/**
-	 * @see	\wcf\data\IPermissionObject::getPermission()
+	 * @inheritDoc
 	 */
 	public function getPermission($permission) {
 		$permissions = PagePermissionHandler::getInstance()->getPermissions($this);
@@ -333,7 +333,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	}
 
 	/**
-	 * @see	\wcf\data\ITitledObject::getTitle()
+	 * @inheritDoc
 	 */
 	public function getTitle() {
 		return WCF::getLanguage()->get($this->title);

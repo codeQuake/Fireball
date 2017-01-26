@@ -14,7 +14,7 @@ use wcf\system\importer\ImportHandler;
  */
 class PageACLImporter extends AbstractACLImporter {
 	/**
-	 * @see	\wcf\system\importer\AbstractACLImporter::$objectTypeName
+	 * @inheritDoc
 	 */
 	protected $objectTypeName = 'de.codequake.cms.page';
 	
@@ -29,7 +29,7 @@ class PageACLImporter extends AbstractACLImporter {
 	}
 	
 	/**
-	 * @see	\wcf\system\importer\AbstractACLImporter::import()
+	 * @inheritDoc
 	 * 
 	 * this has been copied from AbstractACLImporter (written by WoltLab GmbH)
 	 * the objecttype of imported acls has been chenged unless this would crash with page imports

@@ -20,12 +20,12 @@ use wcf\system\WCF;
  */
 class ContentRebuildDataWorker extends AbstractRebuildDataWorker {
 	/**
-	 * @see	\wcf\system\worker\AbstractWorker::$limit
+	 * @inheritDoc
 	 */
 	protected $limit = 100;
 
 	/**
-	 * @see	\wcf\system\worker\AbstractRebuildDataWorker::$objectListClassName
+	 * @inheritDoc
 	 */
 	protected $objectListClassName = ContentList::class;
 
@@ -35,7 +35,7 @@ class ContentRebuildDataWorker extends AbstractRebuildDataWorker {
 	protected $htmlInputProcessor;
 
 	/**
-	 * @see	\wcf\system\worker\IWorker::execute()
+	 * @inheritDoc
 	 */
 	public function execute() {
 		$this->objectList->getConditionBuilder()->add('content.contentID BETWEEN ? AND ?', [$this->limit * $this->loopCount + 1, $this->limit * $this->loopCount + $this->limit]);
