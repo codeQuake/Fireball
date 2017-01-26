@@ -7,12 +7,6 @@ use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
 class SitemapPage extends AbstractPage {
-
-	/**
-	 * @see \wcf\page\AbstractPage::$activeMenuItem
-	 */
-	public $activeMenuItem = 'cms.page.sitemap';
-
 	/**
 	 * @var \cms\data\page\AccessiblePageNodeTree
 	 */
