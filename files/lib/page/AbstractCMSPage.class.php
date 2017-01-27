@@ -162,20 +162,6 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	/**
 	 * @inheritDoc
 	 */
-	public function getObjectType() {
-		return 'de.codequake.cms.page';
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function getObjectID() {
-		return $this->pageID;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
 	public function getPage() {
 		return $this->page;
 	}
