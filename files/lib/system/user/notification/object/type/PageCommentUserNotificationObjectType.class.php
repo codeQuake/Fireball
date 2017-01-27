@@ -3,8 +3,8 @@ namespace cms\system\user\notification\object\type;
 
 use wcf\data\comment\Comment;
 use wcf\data\comment\CommentList;
-use wcf\system\user\notification\object\CommentUserNotificationObject;
 use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
+use wcf\system\user\notification\object\CommentUserNotificationObject;
 
 /**
  * Page comment notification object type.
