@@ -65,16 +65,14 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	public function readParameters() {
 		parent::readParameters();
 
-		// alias for indicating the requested page
 		if (isset($_REQUEST['alias'])) {
 			$alias = $_REQUEST['alias'];
 			$this->pageID = PageCache::getInstance()->getIDByAlias($alias);
 		}
-		// fallback to id as page indicator. Needed for backward
-		// compatibility and due to rare situations where WCF (or 3rd
-		// parties) doesn't respect link manipulation for menu items
 		else if (isset($_REQUEST['id'])) {
 			$this->pageID = intval($_REQUEST['id']);
+		} else {
+			$this->pageID = PageCache::getInstance()->getHomePage()->pageID;
 		}
 
 		$this->page = PageCache::getInstance()->getPage($this->pageID);
@@ -83,7 +81,6 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		}
 
 		// check if offline and view page or exit
-		// @inheritDoc
 		if (OFFLINE) {
 			if (!WCF::getSession()->getPermission('admin.general.canViewPageDuringOfflineMode') && !$this->page->availableDuringOfflineMode) {
 				@header('HTTP/1.1 503 Service Unavailable');
@@ -92,7 +89,6 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 					'templateNameApplication' => 'wcf'
 				]);
 				WCF::getTPL()->display('offline');
-
 				exit;
 			}
 		}
