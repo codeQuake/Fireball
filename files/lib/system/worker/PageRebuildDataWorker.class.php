@@ -5,6 +5,7 @@ use cms\data\page\PageAction;
 use cms\data\page\PageEditor;
 use cms\data\page\PageList;
 use cms\system\page\handler\PagePageHandler;
+use wcf\data\menu\item\MenuItemList;
 use wcf\data\package\PackageCache;
 use wcf\data\page\PageAction as WCFPageAction;
 use wcf\system\language\LanguageFactory;
@@ -46,6 +47,14 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 
 		if (!count($this->objectList)) {
 			return;
+		}
+
+		$menuItemList = new MenuItemList();
+		$menuItemList->getConditionBuilder()->add('menu_item.identifier LIKE ?', ['de.codequake.cms.page%']);
+		$menuItemList->readObjects();
+		$cmsMenuItems = [];
+		foreach ($menuItemList->getObjects() as $menuItem) {
+			$cmsMenuItems[$menuItem->pageObjectID] = $menuItem;
 		}
 
 		/** @var \cms\data\page\Page $page */
@@ -92,6 +101,10 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 					'content' => $contents
 				]);
 				$wcfPageAction->executeAction();
+			}
+
+			if ($page->menuItemID === null && !empty($cmsMenuItems[$page->pageID])) {
+				$pageEditor->update(['menuItemID' => $cmsMenuItems[$page->pageID]->menuItemID]);
 			}
 		}
 
