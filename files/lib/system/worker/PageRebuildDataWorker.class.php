@@ -50,11 +50,13 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 		}
 
 		$menuItemList = new MenuItemList();
-		$menuItemList->getConditionBuilder()->add('menu_item.identifier LIKE ?', ['de.codequake.cms.page%']);
 		$menuItemList->readObjects();
 		$cmsMenuItems = [];
+		/** @var \wcf\data\menu\item\MenuItem $menuItem */
 		foreach ($menuItemList->getObjects() as $menuItem) {
-			$cmsMenuItems[$menuItem->pageObjectID] = $menuItem;
+			if ($menuItem->getPage()->handler == PagePageHandler::class) {
+				$cmsMenuItems[$menuItem->pageObjectID] = $menuItem;
+			}
 		}
 
 		/** @var \cms\data\page\Page $page */
@@ -104,7 +106,7 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 			}
 
 			if ($page->menuItemID === null && !empty($cmsMenuItems[$page->pageID])) {
-				$pageEditor->update(['menuItemID' => $cmsMenuItems[$page->pageID]->menuItemID]);
+				$pageEditor->update(['menuItemID' => $cmsMenuItems[$page->pageID]->itemID]);
 			}
 		}
 
