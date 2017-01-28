@@ -7,6 +7,7 @@ use cms\data\page\PageList;
 use cms\system\page\handler\PagePageHandler;
 use wcf\data\package\PackageCache;
 use wcf\data\page\PageAction as WCFPageAction;
+use wcf\system\language\LanguageFactory;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\worker\AbstractRebuildDataWorker;
 
@@ -52,6 +53,18 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 			$pageEditor = new PageEditor($page);
 			$parentPage = $page->getParentPage();
 
+			$availableLanguages = LanguageFactory::getInstance()->getLanguages();
+			$contents = [];
+			foreach ($availableLanguages as $language) {
+				$contents[$language->languageID] = [
+					'title' => $language->get($page->title),
+					'content' => '',
+					'metaDescription' => $language->get($page->metaDescription),
+					'metaKeywords' => $language->get($page->metaKeywords),
+					'customURL' => ''
+				];
+			}
+
 			if ($page->wcfPageID === null) {
 				$wcfPageAction = new WCFPageAction([], 'update', [
 					'data' => [
@@ -63,8 +76,9 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 						'handler' => PagePageHandler::class,
 						'controllerCustomURL' => $page->getAlias(),
 						'lastUpdateTime' => $page->getLastEditTime(),
-						'parentPageID' => $parentPage === null ? null : $parentPage->pageID
-					]
+						'parentPageID' => $parentPage === null ? null : $parentPage->wcfPageID
+					],
+					'content' => $contents
 				]);
 				$wcfPage = $wcfPageAction->executeAction();
 				$pageEditor->update(['wcfPageID' => $wcfPage['returnValues']->pageID]);
@@ -73,8 +87,9 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 					'data' => [
 						'name' => $page->getTitle(),
 						'lastUpdateTime' => $page->getLastEditTime(),
-						'parentPageID' => $parentPage === null ? null : $parentPage->pageID
-					]
+						'parentPageID' => $parentPage === null ? null : $parentPage->wcfPageID
+					],
+					'content' => $contents
 				]);
 				$wcfPageAction->executeAction();
 			}

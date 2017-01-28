@@ -8,6 +8,7 @@ use cms\data\stylesheet\StylesheetEditor;
 use cms\data\stylesheet\StylesheetList;
 use cms\system\page\handler\PagePageHandler;
 use wcf\data\page\PageAction;
+use wcf\system\language\LanguageFactory;
 
 $package = $this->installation->getPackage();
 
@@ -45,6 +46,18 @@ $pages = $pageList->getObjects();
 foreach ($pages as $page) {
 	$parentPage = $page->getParentPage();
 
+	$availableLanguages = LanguageFactory::getInstance()->getLanguages();
+	$contents = [];
+	foreach ($availableLanguages as $language) {
+		$contents[$language->languageID] = [
+			'title' => $language->get($page->title),
+			'content' => '',
+			'metaDescription' => $language->get($page->metaDescription),
+			'metaKeywords' => $language->get($page->metaKeywords),
+			'customURL' => ''
+		];
+	}
+
 	$pageAction = new PageAction([], 'create', [
 		'data' => [
 			'identifier' => 'de.codequake.cms.page' . $page->pageID,
@@ -55,8 +68,9 @@ foreach ($pages as $page) {
 			'handler' => PagePageHandler::class,
 			'controllerCustomURL' => $page->getAlias(),
 			'lastUpdateTime' => $page->getLastEditTime(),
-			'parentPageID' => $parentPage === null ? null : $parentPage->pageID
-		]
+			'parentPageID' => $parentPage === null ? null : $parentPage->wcfPageID
+		],
+		'content' => $contents
 	]);
 	$wcfPage = $pageAction->executeAction();
 

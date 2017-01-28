@@ -14,8 +14,6 @@ use wcf\data\menu\item\MenuItemEditor;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
 use wcf\data\page\PageAction as WCFPageAction;
-use wcf\data\page\PageEditor as WCFPageEditor;
-use wcf\data\page\Page as WCFPage;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
@@ -173,6 +171,18 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$packageID = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID;
 		$parentPage = $page->getParentPage();
 
+		$availableLanguages = LanguageFactory::getInstance()->getLanguages();
+		$contents = [];
+		foreach ($availableLanguages as $language) {
+			$contents[$language->languageID] = [
+				'title' => $language->get($page->title),
+				'content' => '',
+				'metaDescription' => $language->get($page->metaDescription),
+				'metaKeywords' => $language->get($page->metaKeywords),
+				'customURL' => ''
+			];
+		}
+
 		$pageAction = new WCFPageAction([], 'create', [
 			'data' => [
 				'identifier' => 'de.codequake.cms.page' . $page->pageID,
@@ -184,7 +194,8 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				'controllerCustomURL' => $page->getAlias(),
 				'lastUpdateTime' => TIME_NOW,
 				'parentPageID' => $parentPage === null ? null : $parentPage->pageID
-			]
+			],
+			'content' => $contents
 		]);
 		$wcfPage = $pageAction->executeAction();
 
@@ -921,6 +932,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		parent::update();
 
 		$pageIDs = $publishedPageIDs = [];
+		/** @var PageEditor|Page $pageEditor */
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
 			$parentPage = $pageEditor->getDecoratedObject()->getParentPage();
@@ -939,13 +951,25 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				$menuItemEditor->update(['title' => $this->parameters['data']['title']]);
 			}
 
+			$availableLanguages = LanguageFactory::getInstance()->getLanguages();
+			$contents = [];
+			foreach ($availableLanguages as $language) {
+				$contents[$language->languageID] = [
+					'title' => $language->get($pageEditor->title),
+					'content' => '',
+					'metaDescription' => $language->get($pageEditor->metaDescription),
+					'metaKeywords' => $language->get($pageEditor->metaKeywords),
+					'customURL' => ''
+				];
+			}
 			if ($pageEditor->wcfPageID !== null && !empty($this->parameters['data']['title'])) {
 				$wcfPageEditor = new WCFPageAction([$pageEditor->wcfPageID], 'update', [
 					'data' => [
 						'name' => $pageEditor->getDecoratedObject()->getTitle(),
 						'lastEditTime' => TIME_NOW,
-						'parentPageID' => $parentPage === null ? null : $parentPage->pageID
-					]
+						'parentPageID' => $parentPage === null ? null : $parentPage->wcfPageID
+					],
+					'content' => $contents
 				]);
 				$wcfPageEditor->update();
 			}

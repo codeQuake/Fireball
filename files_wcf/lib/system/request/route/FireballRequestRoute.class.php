@@ -63,7 +63,9 @@ class FireballRequestRoute implements IRequestRoute {
 							'className' => $urlList[$alias]->getProcessor()->frontendController,
 							'controller' => 'page',
 							'pageType' => 'system',
-							'id' => $urlList[$alias]->pageID
+							'id' => $urlList[$alias]->pageID,
+							'cmsPageID' => $urlList[$alias]->wcfPageID,
+							'cmsPageLanguageID' => null
 						];
 					}
 				} else if (empty($matches['id'])) {
@@ -75,7 +77,9 @@ class FireballRequestRoute implements IRequestRoute {
 								'className' => $urlList[$alias]->getProcessor()->frontendController,
 								'controller' => 'page',
 								'pageType' => 'system',
-								'id' => $urlList[$alias]->pageID
+								'id' => $urlList[$alias]->pageID,
+								'cmsPageID' => $urlList[$alias]->wcfPageID,
+								'cmsPageLanguageID' => null
 							];
 						}
 					}

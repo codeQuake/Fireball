@@ -4,19 +4,12 @@ namespace cms\page;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\counter\VisitCountHandler;
-use cms\system\CMSCore;
 use wcf\data\menu\item\MenuItem;
 use wcf\page\AbstractPage;
-use wcf\system\comment\CommentHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\system\page\PageLocationManager;
-use wcf\system\request\LinkHandler;
-use wcf\system\style\StyleHandler;
-use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\MetaTagHandler;
 use wcf\system\WCF;
-use wcf\util\HeaderUtil;
 
 /**
  * Shows a created page.
@@ -108,12 +101,6 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		// set active menu item
 		$menuItem = new MenuItem($this->page->menuItemID);
 		$this->activeMenuItem = $menuItem->identifier;
-
-		// set breadcrumbs
-		PageLocationManager::getInstance()->addParentLocation('de.codequake.cms.Page', $this->pageID, $this->page);
-		foreach ($this->page->getParentPages() as $parent) {
-			PageLocationManager::getInstance()->addParentLocation('de.codequake.cms.Page', $parent->pageID, $parent);
-		}
 
 		// get contents
 		$this->contents = $this->page->getContents();
