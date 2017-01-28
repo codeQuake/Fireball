@@ -25,7 +25,7 @@ class YoutubeContentType extends AbstractContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function validate($data) {
+	public function validate(&$data) {
 		if (!isset($data['video'])) {
 			throw new UserInputException('data[video]');
 		}

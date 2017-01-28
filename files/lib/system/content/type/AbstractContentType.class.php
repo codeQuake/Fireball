@@ -132,7 +132,7 @@ abstract class AbstractContentType implements IContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function validate($data) { /* nothing */ }
+	public function validate(&$data) { /* nothing */ }
 
 	/**
 	 * @inheritDoc

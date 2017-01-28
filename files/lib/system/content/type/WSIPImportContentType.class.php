@@ -35,7 +35,7 @@ class WSIPImportContentType extends TemplateContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function validate($data) {
+	public function validate(&$data) {
 		if (!isset($data['text']) || empty($data['text'])) {
 			throw new UserInputException('text');
 		}

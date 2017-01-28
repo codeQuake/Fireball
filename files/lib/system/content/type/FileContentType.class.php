@@ -49,7 +49,7 @@ class FileContentType extends AbstractContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function validate($data) {
+	public function validate(&$data) {
 		if (!isset($data['fileID'])) {
 			throw new UserInputException('fileID');
 		}

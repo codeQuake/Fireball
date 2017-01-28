@@ -30,7 +30,7 @@ class UserContentType extends AbstractContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function validate($data) {
+	public function validate(&$data) {
 		if (!isset($data['name']) || $data['name'] == '') {
 			throw new UserInputException('data[name]');
 		}

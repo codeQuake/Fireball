@@ -63,7 +63,7 @@ interface IContentType {
 	 * Validates the submitted form data. In case of invalid inputs, throw
 	 * an instance of '\wcf\system\exception\UserInputException'
 	 */
-	public function validate($data);
+	public function validate(&$data);
 
 	/**
 	 * Returns the template name for the acp forms

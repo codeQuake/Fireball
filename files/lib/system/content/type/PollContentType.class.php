@@ -45,7 +45,7 @@ class PollContentType extends AbstractContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function validate($data) {
+	public function validate(&$data) {
 		PollManager::getInstance()->validate();
 	}
 }

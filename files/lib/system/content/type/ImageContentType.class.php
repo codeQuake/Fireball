@@ -46,7 +46,7 @@ class ImageContentType extends FileContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function validate($data) {
+	public function validate(&$data) {
 		if (!isset($data['imageID'])) {
 			throw new UserInputException('imageID');
 		}

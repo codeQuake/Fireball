@@ -42,7 +42,7 @@ class ColumnsContentType extends AbstractStructureContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function validate($data) {
+	public function validate(&$data) {
 		$accumulatedColumnWidth = 0;
 
 		if (!isset($data['columnData']) || !is_array($data['columnData'])) {
