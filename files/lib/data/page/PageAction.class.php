@@ -171,6 +171,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$pageEditor = new PageEditor($page);
 
 		$packageID = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID;
+		$parentPage = $page->getParentPage();
 
 		$pageAction = new WCFPageAction([], 'create', [
 			'data' => [
@@ -181,7 +182,8 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				'applicationPackageID' => $packageID,
 				'handler' => PagePageHandler::class,
 				'controllerCustomURL' => $page->getAlias(),
-				'lastUpdateTime' => $page->lastEditTime
+				'lastUpdateTime' => TIME_NOW,
+				'parentPageID' => $parentPage->pageID
 			]
 		]);
 		$wcfPage = $pageAction->executeAction();
@@ -921,6 +923,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$pageIDs = $publishedPageIDs = [];
 		foreach ($this->objects as $pageEditor) {
 			$pageIDs[] = $pageEditor->pageID;
+			$parentPage = $pageEditor->getDecoratedObject()->getParentPage();
 
 			// update stylesheets
 			if (isset($this->parameters['stylesheetIDs'])) {
@@ -939,7 +942,9 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if ($pageEditor->wcfPageID !== null && !empty($this->parameters['data']['title'])) {
 				$wcfPageEditor = new WCFPageAction([$pageEditor->wcfPageID], 'update', [
 					'data' => [
-						'name' => $pageEditor->getDecoratedObject()->getTitle()
+						'name' => $pageEditor->getDecoratedObject()->getTitle(),
+						'lastEditTime' => TIME_NOW,
+						'parentPageID' => $parentPage->pageID
 					]
 				]);
 				$wcfPageEditor->update();

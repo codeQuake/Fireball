@@ -50,6 +50,7 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 		/** @var \cms\data\page\Page $page */
 		foreach ($this->objectList as $page) {
 			$pageEditor = new PageEditor($page);
+			$parentPage = $page->getParentPage();
 
 			if ($page->wcfPageID === null) {
 				$wcfPageAction = new WCFPageAction([], 'update', [
@@ -61,7 +62,8 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 						'applicationPackageID' => $packageID,
 						'handler' => PagePageHandler::class,
 						'controllerCustomURL' => $page->getAlias(),
-						'lastUpdateTime' => $page->lastEditTime
+						'lastUpdateTime' => $page->getLastEditTime(),
+						'parentPageID' => $parentPage->pageID
 					]
 				]);
 				$wcfPage = $wcfPageAction->executeAction();
@@ -69,7 +71,9 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 			} else {
 				$wcfPageAction = new WCFPageAction([$page->wcfPageID], 'update', [
 					'data' => [
-						'name' => $page->getTitle()
+						'name' => $page->getTitle(),
+						'lastUpdateTime' => $page->getLastEditTime(),
+						'parentPageID' => $parentPage->pageID
 					]
 				]);
 				$wcfPageAction->executeAction();
