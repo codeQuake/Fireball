@@ -41,7 +41,7 @@ if (isset($this->instruction['attributes']['installupdateserver']) && $this->ins
 	if ($row === false) {
 		$objectAction = new PackageUpdateServerAction([], 'create', [
 			'data' => [
-			'serverURL' => $serverURL
+				'serverURL' => $serverURL
 			]
 		]);
 		$objectAction->executeAction();
