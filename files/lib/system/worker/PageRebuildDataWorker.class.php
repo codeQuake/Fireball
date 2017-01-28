@@ -66,7 +66,7 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 			}
 
 			if ($page->wcfPageID === null) {
-				$wcfPageAction = new WCFPageAction([], 'update', [
+				$wcfPageAction = new WCFPageAction([], 'create', [
 					'data' => [
 						'identifier' => 'de.codequake.cms.page' . $page->pageID,
 						'name' => $page->getTitle(),
