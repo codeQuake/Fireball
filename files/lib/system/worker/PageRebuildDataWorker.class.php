@@ -63,7 +63,7 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 						'handler' => PagePageHandler::class,
 						'controllerCustomURL' => $page->getAlias(),
 						'lastUpdateTime' => $page->getLastEditTime(),
-						'parentPageID' => $parentPage->pageID
+						'parentPageID' => $parentPage === null ? null : $parentPage->pageID
 					]
 				]);
 				$wcfPage = $wcfPageAction->executeAction();
@@ -73,7 +73,7 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 					'data' => [
 						'name' => $page->getTitle(),
 						'lastUpdateTime' => $page->getLastEditTime(),
-						'parentPageID' => $parentPage->pageID
+						'parentPageID' => $parentPage === null ? null : $parentPage->pageID
 					]
 				]);
 				$wcfPageAction->executeAction();
