@@ -3,7 +3,10 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use wcf\system\bbcode\BBCodeHandler;
+use wcf\system\exception\UserInputException;
+use wcf\system\html\input\HtmlInputProcessor;
 use wcf\system\html\output\HtmlOutputProcessor;
+use wcf\system\message\censorship\Censorship;
 use wcf\system\message\embedded\object\MessageEmbeddedObjectManager;
 use wcf\system\WCF;
 
@@ -28,6 +31,11 @@ class TextContentType extends AbstractSearchableContentType {
 	 * @inheritDoc
 	 */
 	protected $searchableFields = ['text'];
+
+	/**
+	 * @var HtmlInputProcessor
+	 */
+	protected $htmlInputProcessor = null;
 
 	/**
 	 * embedded objects have been loaded already
@@ -65,5 +73,48 @@ class TextContentType extends AbstractSearchableContentType {
 			MessageEmbeddedObjectManager::getInstance()->loadObjects('de.codequake.cms.content.type.text', [$content->contentID]);
 			$this->embeddedObjectsLoaded = true;
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function validate(&$data) {
+		parent::validate($data);
+
+		$this->validateText($data);
+	}
+
+	protected function validateText(&$data) {
+		if (empty($data['text'])) {
+			throw new UserInputException('text');
+		}
+
+		BBCodeHandler::getInstance()->setDisallowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.disallowedBBCodes')));
+
+		$this->htmlInputProcessor = new HtmlInputProcessor();
+		$this->htmlInputProcessor->process($data['text'], 'de.codequake.cms.content.type.text', 0);
+
+		// check text length
+		if ($this->htmlInputProcessor->appearsToBeEmpty()) {
+			throw new UserInputException('text');
+		}
+
+		$message = $this->htmlInputProcessor->getTextContent();
+		$disallowedBBCodes = $this->htmlInputProcessor->validate();
+		if (!empty($disallowedBBCodes)) {
+			WCF::getTPL()->assign('disallowedBBCodes', $disallowedBBCodes);
+			throw new UserInputException('text', 'disallowedBBCodes');
+		}
+
+		// search for censored words
+		if (ENABLE_CENSORSHIP) {
+			$result = Censorship::getInstance()->test($message);
+			if ($result) {
+				WCF::getTPL()->assign('censoredWords', $result);
+				throw new UserInputException('text', 'censoredWordsFound');
+			}
+		}
+
+		$data['text'] = $this->htmlInputProcessor->getHtml();
 	}
 }
