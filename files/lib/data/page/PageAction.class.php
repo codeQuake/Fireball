@@ -170,14 +170,15 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$page = parent::create();
 		$pageEditor = new PageEditor($page);
 
+		$packageID = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID;
+
 		$pageAction = new WCFPageAction([], 'create', [
 			'data' => [
 				'identifier' => 'de.codequake.cms.page' . $page->pageID,
 				'name' => $page->getTitle(),
 				'pageType' => 'system',
-				'originIsSystem' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
-				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
-				'applicationPackageID' => 0,
+				'packageID' => $packageID,
+				'applicationPackageID' => $packageID,
 				'handler' => PagePageHandler::class,
 				'controllerCustomURL' => $page->getAlias(),
 				'lastUpdateTime' => $page->lastEditTime

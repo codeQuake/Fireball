@@ -1,11 +1,8 @@
 <?php
 
-use cms\data\content\ContentEditor;
-use cms\data\content\ContentList;
 use cms\data\page\PageEditor;
 use cms\data\page\PageList;
-use cms\data\stylesheet\StylesheetEditor;
-use cms\data\stylesheet\StylesheetList;
+use cms\system\page\handler\PagePageHandler;
 use wcf\data\page\PageAction;
 
 $package = $this->installation->getPackage();
@@ -20,10 +17,9 @@ foreach ($pages as $page) {
 			'identifier' => 'de.codequake.cms.page' . $page->pageID,
 			'name' => $page->getTitle(),
 			'pageType' => 'system',
-			'originIsSystem' => $package->packageID,
 			'packageID' => $package->packageID,
-			'applicationPackageID' => 0,
-			'handler' => 'cms\\system\\page\\handler\\PagePageHandler',
+			'applicationPackageID' => $package->packageID,
+			'handler' => PagePageHandler::class,
 			'controllerCustomURL' => $page->getAlias(),
 			'lastUpdateTime' => $page->lastEditTime
 		]

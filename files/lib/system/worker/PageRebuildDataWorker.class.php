@@ -2,7 +2,11 @@
 namespace cms\system\worker;
 
 use cms\data\page\PageAction;
+use cms\data\page\PageEditor;
 use cms\data\page\PageList;
+use cms\system\page\handler\PagePageHandler;
+use wcf\data\package\PackageCache;
+use wcf\data\page\PageAction as WCFPageAction;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\worker\AbstractRebuildDataWorker;
 
@@ -30,6 +34,7 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 	 */
 	public function execute() {
 		$this->objectList->getConditionBuilder()->add('page.pageID BETWEEN ? AND ?', [$this->limit * $this->loopCount + 1, $this->limit * $this->loopCount + $this->limit]);
+		$packageID = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID;
 
 		parent::execute();
 
@@ -40,6 +45,35 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 
 		if (!count($this->objectList)) {
 			return;
+		}
+
+		/** @var \cms\data\page\Page $page */
+		foreach ($this->objectList as $page) {
+			$pageEditor = new PageEditor($page);
+
+			if ($page->wcfPageID === null) {
+				$wcfPageAction = new WCFPageAction([], 'update', [
+					'data' => [
+						'identifier' => 'de.codequake.cms.page' . $page->pageID,
+						'name' => $page->getTitle(),
+						'pageType' => 'system',
+						'packageID' => $packageID,
+						'applicationPackageID' => $packageID,
+						'handler' => PagePageHandler::class,
+						'controllerCustomURL' => $page->getAlias(),
+						'lastUpdateTime' => $page->lastEditTime
+					]
+				]);
+				$wcfPage = $wcfPageAction->executeAction();
+				$pageEditor->update(['wcfPageID' => $wcfPage['returnValues']->pageID]);
+			} else {
+				$wcfPageAction = new WCFPageAction([$page->wcfPageID], 'update', [
+					'data' => [
+						'name' => $page->getTitle()
+					]
+				]);
+				$wcfPageAction->executeAction();
+			}
 		}
 
 		// re-create search index
