@@ -1,8 +1,8 @@
 <?php
 namespace cms\data\page;
 
-use cms\data\page\AccessiblePageNodeTree;
 use cms\system\cache\builder\PageCacheBuilder;
+use wcf\data\menu\item\MenuItem;
 use wcf\system\SingletonFactory;
 
 /**
@@ -158,5 +158,33 @@ class PageCache extends SingletonFactory {
 		}
 
 		return [];
+	}
+
+	/**
+	 * Returns the first accessible menu item matching the page with the given pageID.
+	 * @param $pageID
+	 * @return MenuItem
+	 */
+	public function getActiveMenuItem($pageID) {
+		$page = $this->getPage($pageID);
+
+		if ($page->menuItemID) {
+			$menuItem = new MenuItem($page->menuItemID);
+			if ($menuItem->isVisible()) {
+				return $menuItem;
+			}
+		}
+
+		/** @var \cms\data\page\Page $page */
+		foreach ($page->getParentPages() as $page) {
+			if ($page->menuItemID) {
+				$menuItem = new MenuItem($page->menuItemID);
+				if ($menuItem->isVisible()) {
+					return $menuItem;
+				}
+			}
+		}
+
+		return null;
 	}
 }

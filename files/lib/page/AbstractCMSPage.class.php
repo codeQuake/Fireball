@@ -4,7 +4,7 @@ namespace cms\page;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\counter\VisitCountHandler;
-use wcf\data\menu\item\MenuItem;
+use wcf\data\menu\MenuCache;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
@@ -99,8 +99,17 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		parent::readData();
 
 		// set active menu item
-		$menuItem = new MenuItem($this->page->menuItemID);
-		$this->activeMenuItem = $menuItem->identifier;
+		$menuItem = PageCache::getInstance()->getActiveMenuItem($this->page->pageID);
+		if ($menuItem !== null) {
+			$mainMenu = MenuCache::getInstance()->getMainMenu();
+			$menuItemNodeList = $mainMenu->getMenuItemNodeList();
+			/** @var \wcf\data\menu\item\MenuItemNode $menuItemNode */
+			foreach ($menuItemNodeList as $menuItemNode) {
+				if ($menuItemNode->itemID == $menuItem->itemID) {
+					$menuItemNode->setIsActive();
+				}
+			}
+		}
 
 		// get contents
 		$this->contents = $this->page->getContents();
