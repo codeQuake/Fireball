@@ -55,6 +55,7 @@ use wcf\system\WCF;
  * @property-read	string		$sidebarOrientation	            orientation of the sidebar (left|right)
  * @property-read	integer		$objectTypeID		            id of the objecttype of the page type
  * @property-read	array		$additionalData		            additional data
+ * @property-read	integer		$wcfPageID		            id of the wcf's page object
  */
 class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObject, IRouteController {
 	/**
