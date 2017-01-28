@@ -86,4 +86,35 @@
 		<!-- db cleanup -->
 		<instruction type="sql">post_update.sql</instruction>
 	</instructions>
+
+	<instructions type="update" fromversion="3.0.0 Beta 1">
+		<instruction type="sql">update_300b1.sql</instruction>
+		<instruction type="language" />
+
+		<!-- files -->
+		<instruction type="file" />
+		<instruction type="file" application="wcf">files_wcf.tar</instruction>
+		<instruction type="acpTemplate" />
+		<instruction type="template" />
+
+		<!-- xml -->
+		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
+		<instruction type="objectType">xml/objectType.xml</instruction>
+		<instruction type="aclOption">xml/aclOption.xml</instruction>
+		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
+		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
+		<instruction type="bbcode">xml/bbcode.xml</instruction>
+		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
+		<instruction type="cronjob">xml/cronjob.xml</instruction>
+		<instruction type="eventListener">xml/eventlistener.xml</instruction>
+		<instruction type="option">xml/option.xml</instruction>
+		<instruction type="templateListener">xml/templateListener.xml</instruction>
+		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
+		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
+		<instruction type="page">xml/page.xml</instruction>
+		<instruction type="menuItem">xml/menuItem.xml</instruction>
+
+		<!-- scripts -->
+		<instruction type="script" installupdateserver="1">acp/update_de.codequake.cms.php</instruction>
+	</instructions>
 </package>

@@ -7,10 +7,15 @@ use cms\data\content\ContentList;
 use cms\data\stylesheet\StylesheetList;
 use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
+use cms\system\page\handler\PagePageHandler;
 use cms\util\PageUtil;
 use wcf\data\menu\item\MenuItemAction;
 use wcf\data\menu\item\MenuItemEditor;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\package\PackageCache;
+use wcf\data\page\PageAction as WCFPageAction;
+use wcf\data\page\PageEditor as WCFPageEditor;
+use wcf\data\page\Page as WCFPage;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
@@ -164,6 +169,24 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		/** @var $page Page */
 		$page = parent::create();
 		$pageEditor = new PageEditor($page);
+
+		$pageAction = new WCFPageAction([], 'create', [
+			'data' => [
+				'identifier' => 'de.codequake.cms.page' . $page->pageID,
+				'name' => $page->getTitle(),
+				'pageType' => 'system',
+				'originIsSystem' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
+				'packageID' => PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms')->packageID,
+				'applicationPackageID' => 0,
+				'handler' => PagePageHandler::class,
+				'controllerCustomURL' => $page->getAlias(),
+				'lastUpdateTime' => $page->lastEditTime
+			]
+		]);
+		$wcfPage = $pageAction->executeAction();
+
+		// set wcf page id
+		$pageEditor->update(['wcfPageID' => $wcfPage['returnValues']->pageID]);
 
 		// handle stylesheets
 		if (isset($this->parameters['stylesheetIDs']) && !empty($this->parameters['stylesheetIDs'])) {
@@ -910,6 +933,15 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if ($pageEditor->menuItemID !== null && !empty($this->parameters['data']['title'])) {
 				$menuItemEditor = new MenuItemEditor($pageEditor->getMenuItem());
 				$menuItemEditor->update(['title' => $this->parameters['data']['title']]);
+			}
+
+			if ($pageEditor->wcfPageID !== null && !empty($this->parameters['data']['title'])) {
+				$wcfPageEditor = new WCFPageAction([$pageEditor->wcfPageID], 'update', [
+					'data' => [
+						'name' => $pageEditor->getDecoratedObject()->getTitle()
+					]
+				]);
+				$wcfPageEditor->update();
 			}
 		}
 
