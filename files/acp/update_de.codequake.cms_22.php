@@ -43,6 +43,8 @@ $pageList->readObjects();
 $pages = $pageList->getObjects();
 /** @var \cms\data\page\Page $page */
 foreach ($pages as $page) {
+	$parentPage = $page->getParentPage();
+
 	$pageAction = new PageAction([], 'create', [
 		'data' => [
 			'identifier' => 'de.codequake.cms.page' . $page->pageID,
@@ -52,7 +54,8 @@ foreach ($pages as $page) {
 			'applicationPackageID' => $package->packageID,
 			'handler' => PagePageHandler::class,
 			'controllerCustomURL' => $page->getAlias(),
-			'lastUpdateTime' => $page->lastEditTime
+			'lastUpdateTime' => $page->getLastEditTime(),
+			'parentPageID' => $parentPage === null ? null : $parentPage->pageID
 		]
 	]);
 	$wcfPage = $pageAction->executeAction();

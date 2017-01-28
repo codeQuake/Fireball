@@ -183,7 +183,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				'handler' => PagePageHandler::class,
 				'controllerCustomURL' => $page->getAlias(),
 				'lastUpdateTime' => TIME_NOW,
-				'parentPageID' => $parentPage->pageID
+				'parentPageID' => $parentPage === null ? null : $parentPage->pageID
 			]
 		]);
 		$wcfPage = $pageAction->executeAction();
@@ -944,7 +944,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 					'data' => [
 						'name' => $pageEditor->getDecoratedObject()->getTitle(),
 						'lastEditTime' => TIME_NOW,
-						'parentPageID' => $parentPage->pageID
+						'parentPageID' => $parentPage === null ? null : $parentPage->pageID
 					]
 				]);
 				$wcfPageEditor->update();
