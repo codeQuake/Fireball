@@ -11,7 +11,7 @@ use wcf\system\WCF;
  * Handles the output for the page bbcode.
  * 
  * @author	Florian Gail
- * @copyright	2013 - 2016 codeQuake
+ * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */

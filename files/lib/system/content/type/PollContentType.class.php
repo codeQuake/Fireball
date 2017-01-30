@@ -7,7 +7,7 @@ use wcf\system\WCF;
 
 /**
  * @author	Jens Krumsieck
- * @copyright	2013 - 2015 codeQuake
+ * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */

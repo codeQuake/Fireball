@@ -14,7 +14,7 @@ use wcf\util\FileUtil;
  * Provides an exporter from Fireball CMS 2.0/2.1 into Fireball CMS 2.1
  *
  * @author	Florian Gail
- * @copyright	2013 - 2016 codeQuake
+ * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
