@@ -19,7 +19,7 @@ abstract class AbstractContentType implements IContentType {
 	 * available content positions
 	 * @var	string[]
 	 */
-	protected $availablePositions = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
+	public $availablePositions = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
 
 	/**
 	 * name of the icon to display
