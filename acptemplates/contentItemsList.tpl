@@ -2,7 +2,7 @@
 	<section id="contentList{$position|ucfirst}" class="sortableListContainer">
 		<ol class="contentList{$position|ucfirst} sortableList" data-object-id="0">
 			{content}
-				{foreach from=$contentList{$position|ucfirst} item=content}
+				{foreach from=$contentList[$position] item=content}
 					<li class="jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
 						<span class="sortableNodeLabel">
 							<span class="title">
