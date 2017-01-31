@@ -16,6 +16,12 @@ use wcf\util\StringUtil;
  */
 abstract class AbstractContentType implements IContentType {
 	/**
+	 * available content positions
+	 * @var	string[]
+	 */
+	protected $availablePositions = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
+
+	/**
 	 * name of the icon to display
 	 * @var	string
 	 */
@@ -110,7 +116,7 @@ abstract class AbstractContentType implements IContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function isAvailableToAdd() {
+	public function isAvailableToAdd($position) {
 		return true;
 	}
 

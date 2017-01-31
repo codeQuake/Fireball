@@ -635,9 +635,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateGetContentTypes() {
 		$this->readString('position');
-		if (!in_array($this->parameters['position'], ['body', 'sidebar', 'both'])) {
-			throw new UserInputException('position');
-		}
 
 		// validate 'objectIDs' parameter
 		$this->getSingleObject();
@@ -657,14 +654,15 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		}
 
 		$categories = [];
+		/** @var \wcf\data\object\type\ObjectType $type */
 		foreach ($types as $type) {
 			$categories[$type->category] = [];
 		}
 
+		/** @var \wcf\data\object\type\ObjectType $type */
 		foreach ($types as $type) {
-			if ($this->parameters['position'] == 'body' && $type->allowcontent) array_push($categories[$type->category], $type);
-			if ($this->parameters['position'] == 'sidebar' && $type->allowsidebar) array_push($categories[$type->category], $type);
-			if ($this->parameters['position'] == 'both') array_push($categories[$type->category], $type);
+			$positions = $type->getProcessor()->availablePositions;
+			if (in_array($this->parameters['position'], $positions)) array_push($categories[$type->category], $type);
 		}
 
 		WCF::getTPL()->assign([

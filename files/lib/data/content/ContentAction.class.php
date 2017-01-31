@@ -231,7 +231,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		$title = '';
 		
 		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $this->parameters['type']);
-		if ($objectType === null || !$objectType->getProcessor()->isAvailableToAdd()) {
+		if ($objectType === null || !$objectType->getProcessor()->isAvailableToAdd($position)) {
 			throw new UserInputException('objectType');
 		}
 

@@ -41,9 +41,9 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 
 	/**
 	 * list of sidebar nodes
-	 * @var	\RecursiveIteratorIterator
+	 * @var	\RecursiveIteratorIterator[]
 	 */
-	public $sidebarContentNodeTree = null;
+	public $contentNodeTree = null;
 	
 	/**
 	 * list of contents
@@ -112,8 +112,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		}
 
 		// get contents
-		$this->contents = $this->page->getContents();
-		$this->sidebarContentNodeTree = $this->contents['sidebar'];
+		$this->contentNodeTree = $this->page->getContents();
 
 		// meta tags
 		if ($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', WCF::getLanguage()->get($this->page->metaKeywords));
@@ -133,7 +132,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign([
-			'sidebarContentNodeTree' => $this->sidebarContentNodeTree,
+			'contentNodeTree' => $this->contentNodeTree,
 			'page' => $this->page,
 			'allowSpidersToIndexThisPage' => $this->page->allowIndexing
 		]);

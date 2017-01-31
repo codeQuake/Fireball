@@ -60,168 +60,126 @@
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TextContentType</classname>
 			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.headline</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\HeadlineContentType</classname>
 			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.box</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\BoxContentType</classname>
 			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.link</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\LinkContentType</classname>
 			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.poll</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\PollContentType</classname>
 			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.user</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\UserContentType</classname>
 			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.rss</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\RssContentType</classname>
 			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.gallery</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\GalleryContentType</classname>
 			<category>media</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.image</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\ImageContentType</classname>
 			<category>media</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.file</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\FileContentType</classname>
 			<category>media</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.youtube</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\YoutubeContentType</classname>
 			<category>media</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.php</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\PHPContentType</classname>
 			<category>code</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.content</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\ContentContentType</classname>
 			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.googlemaps</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\GoogleMapsContentType</classname>
 			<category>general</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.template</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TemplateContentType</classname>
 			<category>code</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.group</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\GroupContentType</classname>
 			<category>structure</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.slideshow</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\SlideshowContentType</classname>
 			<category>structure</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.menu</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\MenuContentType</classname>
 			<category>structure</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>1</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.tabmenu</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\TabMenuContentType</classname>
 			<category>structure</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.columns</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\ColumnsContentType</classname>
 			<category>structure</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
 		</type>
 		<type>
 			<name>de.codequake.cms.content.type.wsipimport</name>
 			<definitionname>de.codequake.cms.content.type</definitionname>
 			<classname>cms\system\content\type\WSIPImportContentType</classname>
 			<category>code</category>
-			<allowcontent>1</allowcontent>
-			<allowsidebar>0</allowsidebar>
 		</type>
 		<!-- /content types -->
 

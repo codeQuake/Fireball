@@ -52,15 +52,17 @@
 	</header>
 {/capture}
 
-{assign var=sidebarUc value=$page->sidebarOrientation|ucfirst}
-{hascontent}
-	{capture assign='sidebar'|concat:$sidebarUc}
-		{content}
-			{include file='contentNodeList' application='cms' contentNodeTree=$sidebarContentNodeTree position='sidebar'}
-			{event name='boxes'}
-		{/content}
-	{/capture}
-{/hascontent}
+{foreach from=$availablePositions item=position}
+	{if $position != 'body'}
+		{hascontent}
+			{capture assign=$position}
+				{content}
+					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTree[$position] position=$position}
+				{/content}
+			{/capture}
+		{/hascontent}
+	{/if}
+{/foreach}
 
 {include file='header'}
 
@@ -68,7 +70,7 @@
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
 {/if}
 
-{include file='contentNodeList' application='cms' contentNodeTree=$contentContentNodeTree position='content'}
+{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTree['body'] position='content'}
 
 {if $page->isCommentable && $page->getPermission('user.canViewComment')}
 	<section id="comments" class="section sectionContainerList">

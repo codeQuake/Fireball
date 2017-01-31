@@ -205,16 +205,16 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * Returns node trees of all contents that are assigned to this page.
 	 * Contents are grouped by their position ('body' and 'sidebar').
 	 * 
-	 * @return	array<\cms\data\content\DrainedPositionContentNodeTree>
+	 * @return	\cms\data\content\DrainedPositionContentNodeTree[]
 	 */
 	public function getContents() {
-		$contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body');
-		$contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar');
+		$availablePositions = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
+		$contentList = [];
 
-		$contentList = [
-			'body' => $contentListBody->getIterator(),
-			'sidebar' => $contentListSidebar->getIterator()
-		];
+		foreach ($availablePositions as $position) {
+			$nodeTree = new DrainedPositionContentNodeTree(null, $this->pageID, null, $position);
+			$contentList[$position] = $nodeTree->getIterator();
+		}
 
 		return $contentList;
 	}

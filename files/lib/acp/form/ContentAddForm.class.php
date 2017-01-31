@@ -111,18 +111,18 @@ class ContentAddForm extends AbstractForm {
 	public function readParameters() {
 		parent::readParameters();
 
-		if ($this->objectType === null) {
-			if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $_REQUEST['objectType']);
-			if ($this->objectType === null || !$this->objectType->getProcessor()->isAvailableToAdd()) {
-				throw new IllegalLinkException();
-			}
-		}
-
 		// form values that can be specified as get parameters
 		if (isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
 		if (isset($_REQUEST['position'])) $this->position = StringUtil::trim($_REQUEST['position']);
 		if (isset($_REQUEST['parentID'])) $this->parentID = intval($_REQUEST['parentID']);
 		if (isset($_REQUEST['showHeadline'])) $this->showHeadline = 1;
+
+		if ($this->objectType === null) {
+			if (isset($_REQUEST['objectType'])) $this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $_REQUEST['objectType']);
+			if ($this->objectType === null || !$this->objectType->getProcessor()->isAvailableToAdd($this->position)) {
+				throw new IllegalLinkException();
+			}
+		}
 
 		// register i18n-values
 		I18nHandler::getInstance()->register('title');
@@ -162,13 +162,7 @@ class ContentAddForm extends AbstractForm {
 		parent::validate();
 
 		// validate position
-		if (!in_array($this->position, ['body', 'sidebar'])) {
-			throw new UserInputException('position');
-		}
-		if ($this->position == 'sidebar' && !$this->objectType->allowsidebar) {
-			throw new UserInputException('position');
-		}
-		if ($this->position == 'body' && !$this->objectType->allowcontent) {
+		if (!in_array($this->position, $this->objectType->getProcessor()->availablePositions)) {
 			throw new UserInputException('position');
 		}
 

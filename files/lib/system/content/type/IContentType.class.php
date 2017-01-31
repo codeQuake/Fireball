@@ -47,7 +47,7 @@ interface IContentType {
 	 * 
 	 * @return	boolean
 	 */
-	public function isAvailableToAdd();
+	public function isAvailableToAdd($position);
 
 	/**
 	 * Reads content type specific parameters.

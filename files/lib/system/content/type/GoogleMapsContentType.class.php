@@ -31,7 +31,7 @@ class GoogleMapsContentType extends AbstractContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function isAvailableToAdd() {
+	public function isAvailableToAdd($position) {
 		return defined('GOOGLE_MAPS_API_KEY') && GOOGLE_MAPS_API_KEY;
 	}
 }

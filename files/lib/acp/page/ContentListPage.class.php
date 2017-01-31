@@ -54,6 +54,12 @@ class ContentListPage extends AbstractPage {
 	public $page = null;
 
 	/**
+	 * available content positions
+	 * @var string[]
+	 */
+	protected $availablePositions = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
+
+	/**
 	 * @inheritDoc
 	 */
 	public function readParameters() {
@@ -75,8 +81,9 @@ class ContentListPage extends AbstractPage {
 		$pageNodeTree = new PageNodeTree();
 		$this->pageList = $pageNodeTree->getIterator();
 
-		$this->contentListBody = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'body', 1);
-		$this->contentListSidebar = new DrainedPositionContentNodeTree(null, $this->pageID, null, 'sidebar', 1);
+		foreach ($this->availablePositions as $position) {
+			$this->contentList[$position] = new DrainedPositionContentNodeTree(null, $this->pageID, null, $position, 1);
+		}
 		$this->objectTypeList = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
 	}
 
@@ -87,8 +94,8 @@ class ContentListPage extends AbstractPage {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign([
-			'contentListBody' => $this->contentListBody->getIterator(),
-			'contentListSidebar' => $this->contentListSidebar->getIterator(),
+			'contentList' => $this->contentList,
+			'availablePositions' => $this->availablePositions,
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.content')),
 			'objectTypeList' => $this->objectTypeList,
 			'pageID' => $this->pageID,

@@ -23,8 +23,9 @@
 
 		WCF.Clipboard.init('cms\\acp\\page\\ContentListPage', {@$hasMarkedItems}, actionObjects);
 
-		new WCF.Sortable.List('contentListSidebar', 'cms\\data\\content\\ContentAction');
-		new WCF.Sortable.List('contentListBody', 'cms\\data\\content\\ContentAction');
+		{foreach from=availablePositions item=position}
+			new WCF.Sortable.List('contentList{$position|ucfirst}', 'cms\\data\\content\\ContentAction');
+		{/foreach}
 
 		new Fireball.ACP.Content.AddDialog();
 
@@ -68,103 +69,21 @@
 	<div class="jsClipboardContainer tabMenuContainer" data-type="de.codequake.cms.content">
 		<nav class="tabMenu">
 			<ul>
-				<li><a href="{@$__wcf->getAnchor('body')}">{lang}cms.acp.content.position.position.body{/lang}</a></li>
-				<li><a href="{@$__wcf->getAnchor('sidebar')}">{lang}cms.acp.content.position.position.sidebar{/lang}</a></li>
+				{foreach from=availablePositions item=position}
+					<li><a href="{@$__wcf->getAnchor($position)}">{lang}cms.acp.content.position.position.{$position}{/lang}</a></li>
+				{/foreach}
 
 				{event name='tabMenuTabs'}
 			</ul>
 		</nav>
 
-		<div id="body" class="tabMenuContent container containerPadding">
-			{hascontent}
-				<section id="contentListBody" class="sortableListContainer">
-					<ol class="contentListBody sortableList" data-object-id="0">
-						{content}
-							{foreach from=$contentListBody item=content}
-								<li class="jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
-									<span class="sortableNodeLabel">
-										<span class="title">
-											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
-											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
-											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=body{/link}">{@$content->getTitle()}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
-										</span>
-										<span class="statusDisplay buttons">
-											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
-											<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
-											<span class="icon icon16 fa-{if !$content->isDisabled}check-{/if}square-o jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$content->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$content->contentID}"></span>
-											<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="body" data-parent-id="{$content->contentID}"></span>
-											<span class="icon icon16 fa-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
+		{foreach from=availablePositions item=position}
+			<div id="{$position}" class="tabMenuContent container containerPadding">
+				{include file='contentItemsList' application='cms' position=$position}
+			</div>
+		{/foreach}
 
-											{event name='itemButtons'}
-										</span>
-									</span>
-
-									<ol class="contentListBody sortableList" data-object-id="{@$content->contentID}">{if !$content->hasChildren()}</ol></li>{/if}
-									{if !$content->hasChildren() && $content->isLastSibling()}
-										{@"</ol></li>"|str_repeat:$content->getOpenParentNodes()}
-									{/if}
-							{/foreach}
-						{/content}
-					</ol>
-				</section>
-
-				<div class="formSubmit">
-					<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
-					<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="body"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
-				</div>
-
-				{hascontentelse}
-					<p class="info">{lang}wcf.global.noItems{/lang}</p>
-					<div class="formSubmit">
-						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="body"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
-					</div>
-				{/hascontent}
-		</div>
-
-		<div id="sidebar" class="tabMenuContent container containerPadding">
-			{hascontent}
-				<section id="contentListSidebar" class="sortableListContainer">
-					<ol class="contentListSidebar sortableList" data-object-id="0">
-						{content}
-							{foreach from=$contentListSidebar item=content}
-								<li class="jsClipboardObject jsContentRow sortableNode" data-object-id="{$content->contentID}">
-									<span class="sortableNodeLabel">
-										<span class="title">
-											<input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" />
-											<span class="pointer collapsibleButton icon icon16 {$content->getIcon()}"></span>
-											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}position=sidebar{/link}">{@$content->getTitle()}</a> - <small>{lang}cms.acp.content.type.{$content->getTypeName()}{/lang}</small>
-										</span>
-										<span class="statusDisplay buttons">
-											<a href="{link controller='ContentEdit' application='cms' object=$content objectType=$content->getTypeName()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 fa-pencil"></span></a>
-											<span class="icon icon16 fa-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$content->contentID}" data-confirm-message="{lang}cms.acp.content.delete.sure{/lang}"></span>
-											<span class="icon icon16 fa-{if !$content->isDisabled}check-{/if}square-o jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if !$content->isDisabled}disable{else}enable{/if}{/lang}" data-object-id="{@$content->contentID}"></span>
-											<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$content->pageID}" data-position="sidebar" data-parent-id="{$content->contentID}"></span>
-											<span class="icon icon16 fa-copy jsCopyButton jsTooltip pointer" title="{lang}cms.acp.content.copy{/lang}" data-object-id="{@$content->contentID}"></span>
-
-											{event name='itemButtons'}
-										</span>
-									</span>
-
-									<ol class="contentListSidebar sortableList" data-object-id="{@$content->contentID}">{if !$content->hasChildren()}</ol></li>{/if}
-									{if !$content->hasChildren() && $content->isLastSibling()}
-										{@"</ol></li>"|str_repeat:$content->getOpenParentNodes()}
-									{/if}
-							{/foreach}
-						{/content}
-					</ol>
-				</section>
-				<div class="formSubmit">
-					<button class="button buttonPrimary" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
-					<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="sidebar"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
-				</div>
-
-				{hascontentelse}
-					<p class="info">{lang}wcf.global.noItems{/lang}</p>
-					<div class="formSubmit">
-						<button class="button jsContentAddButton" data-object-id="{$page->pageID}" data-position="sidebar"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.content.add{/lang}</span></button>
-					</div>
-				{/hascontent}
-		</div>
+		{event name='tabMenuContents'}
 	</div>
 
 	<div class="contentNavigation">

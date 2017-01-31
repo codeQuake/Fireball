@@ -107,7 +107,7 @@ class WSIPImportContentType extends TemplateContentType {
 	/**
 	 * @inheritDoc
 	 */
-	public function isAvailableToAdd() {
+	public function isAvailableToAdd($position) {
 		// only available for imported contents
 		return false;
 	}
