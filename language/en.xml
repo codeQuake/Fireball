@@ -20,8 +20,15 @@
 		<item name="cms.acp.content.list"><![CDATA[Contents]]></item>
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Parent content]]></item>
-		<item name="cms.acp.content.position.position.body"><![CDATA[Body]]></item>
-		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Sidebar]]></item>
+		<item name="cms.acp.content.position.position.body"><![CDATA[Content]]></item>
+		<item name="cms.acp.content.position.position.sidebarLeft"><![CDATA[Left sidebar]]></item>
+		<item name="cms.acp.content.position.position.sidebarRight"><![CDATA[Right sidebar]]></item>
+		<item name="cms.acp.content.position.position.hero"><![CDATA[Hero]]></item>
+		<item name="cms.acp.content.position.position.headerBoxes"><![CDATA[Kopfzeile]]></item>
+		<item name="cms.acp.content.position.position.bottom"><![CDATA[Above footer]]></item>
+		<item name="cms.acp.content.position.position.top"><![CDATA[Below header]]></item>
+		<item name="cms.acp.content.position.position.footerBoxes"><![CDATA[Footer boxes]]></item>
+		<item name="cms.acp.content.position.position.footer"><![CDATA[Footer]]></item>
 		<item name="cms.acp.content.title.showHeadline"><![CDATA[Show title]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
 		<item name="cms.acp.content.userPermissions"><![CDATA[Permissions]]></item>

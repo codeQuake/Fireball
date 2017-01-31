@@ -21,7 +21,14 @@
 		<item name="cms.acp.content.position"><![CDATA[Position]]></item>
 		<item name="cms.acp.content.position.parentID"><![CDATA[Übergeordneter Inhalt]]></item>
 		<item name="cms.acp.content.position.position.body"><![CDATA[Inhaltsbereich]]></item>
-		<item name="cms.acp.content.position.position.sidebar"><![CDATA[Seitenleiste]]></item>
+		<item name="cms.acp.content.position.position.sidebarLeft"><![CDATA[Seitenleiste Links]]></item>
+		<item name="cms.acp.content.position.position.sidebarRight"><![CDATA[Seitenleiste Rechts]]></item>
+		<item name="cms.acp.content.position.position.hero"><![CDATA[Hero]]></item>
+		<item name="cms.acp.content.position.position.headerBoxes"><![CDATA[Kopfzeile]]></item>
+		<item name="cms.acp.content.position.position.bottom"><![CDATA[Unter Inhaltsbereich]]></item>
+		<item name="cms.acp.content.position.position.top"><![CDATA[Über Inhaltsbereich]]></item>
+		<item name="cms.acp.content.position.position.footerBoxes"><![CDATA[Fußzeile]]></item>
+		<item name="cms.acp.content.position.position.footer"><![CDATA[Seitenende]]></item>
 		<item name="cms.acp.content.title.showHeadline"><![CDATA[Titel anzeigen]]></item>
 		<item name="cms.acp.content.type.code"><![CDATA[Code]]></item>
 		<item name="cms.acp.content.userPermissions"><![CDATA[Berechtigungen]]></item>
