@@ -66,7 +66,7 @@
 </div>
 
 {if $pageID}
-	<div class="jsClipboardContainer tabMenuContainer" data-type="de.codequake.cms.content">
+	<div class="jsClipboardContainer tabMenuContainer" data-active="body" data-store="activeTabMenuItem" data-type="de.codequake.cms.content">
 		<nav class="tabMenu">
 			<ul>
 				{foreach from=$availablePositions item=position}
