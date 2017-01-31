@@ -33,12 +33,6 @@ class PagePage extends AbstractCMSPage {
 	public $commentObjectTypeID = 0;
 
 	/**
-	 * list of content nodes
-	 * @var	\RecursiveIteratorIterator
-	 */
-	public $contentContentNodeTree = null;
-
-	/**
 	 * @inheritDoc
 	 */
 	public function readData() {
@@ -48,9 +42,6 @@ class PagePage extends AbstractCMSPage {
 		if ($this->page->styleID && StyleHandler::getInstance()->getStyle()->styleID != $this->page->styleID) {
 			StyleHandler::getInstance()->changeStyle($this->page->styleID, true);
 		}
-
-		// get contents
-		$this->contentContentNodeTree = $this->contents['body'];
 		
 		// comments
 		if ($this->page->isCommentable) {
@@ -67,7 +58,6 @@ class PagePage extends AbstractCMSPage {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign([
-			'contentContentNodeTree' => $this->contentContentNodeTree,
 			'likeData' => ((MODULE_LIKE && $this->commentList) ? $this->commentList->getLikeData() : []),
 			'commentCanAdd' => $this->page->getPermission('user.canAddComment'),
 			'commentList' => $this->commentList,
