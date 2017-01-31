@@ -105,8 +105,8 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$contents = $object->getContents();
 		$tmp = [];
 
-		foreach (['body', 'sidebar'] as $position) {
-			foreach ($contents[$position] as $content) {
+		foreach ($contents as $position => $contentNodeTree) {
+			foreach ($contentNodeTree as $content) {
 				//recreate
 				$data = $content->getDecoratedObject()->getData();
 				$oldID = $data['contentID'];
@@ -402,13 +402,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			throw new UserInputException('alias', 'notUnique');
 		}
 		
-		//validate sidebarOrientation
-		if (!in_array($this->parameters['data']['sidebarOrientation'], ['left', 'right'])) {
-			// force default value if invalid sidebar orientation
-			// specified
-			$this->parameters['data']['sidebarOrientation'] = 'right';
-		}
-		
 		// validate parent page
 		if ($this->parameters['data']['parentID']) {
 			$parentPage = PageCache::getInstance()->getPage($this->parameters['data']['parentID']);
@@ -564,7 +557,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$publicationDate = $page ? $page->publicationDate : $defaultDate;
 		$parentID = $page ? $page->parentID : 0;
 		$showOrder = $page ? $page->showOrder : 0;
-		$sidebarOrientation = $page ? $page->sidebarOrientation : FIREBALL_PAGES_DEFAULT_SIDEBAR;
 		$styleID = $page ? $page->styleID : 0;
 		$stylesheetIDs = $page ? $page->getStylesheetIDs() : [];
 		$title = $page ? $page->title : '';
@@ -611,7 +603,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			'publicationDate' => $publicationDate,
 			'parentID' => $parentID,
 			'showOrder' => $showOrder,
-			'sidebarOrientation' => $sidebarOrientation,
 			'styleID' => $styleID,
 			'stylesheetIDs' => $stylesheetIDs,
 			'title' => $title,
@@ -685,9 +676,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateGetSortableContentList() {
 		$this->readString('position');
-		if (!in_array($this->parameters['position'], ['body', 'sidebar', 'sidebarLeft', 'sidebarRight'])) {
-			throw new UserInputException('position');
-		}
 
 		// validate 'objectIDs' parameter
 		$this->getSingleObject();
@@ -712,9 +700,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function validateGetParsedContentList() {
 		$this->readString('position');
-		if (!in_array($this->parameters['position'], ['body', 'sidebar', 'sidebarLeft', 'sidebarRight'])) {
-			throw new UserInputException('position');
-		}
 
 		// validate 'objectIDs' parameter
 		$this->getSingleObject();
@@ -808,8 +793,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				$metaData[$language->languageID] = '';
 			}
 
-			foreach (['body', 'sidebar'] as $position) {
-				foreach ($contents[$position] as $content) {
+			/**
+			 * @var integer $position
+			 * @var \cms\data\content\ContentNodeTree $contentNodeTree
+			 */
+			foreach ($contents as $position => $contentNodeTree) {
+				foreach ($contentNodeTree as $content) {
 					if ($content->getObjectType()->getProcessor() instanceof ISearchableContentType) {
 						$searchIndexData = $content->getObjectType()->getProcessor()->getSearchableData($content->getDecoratedObject());
 
