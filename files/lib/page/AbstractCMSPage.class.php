@@ -133,6 +133,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 
 		WCF::getTPL()->assign([
 			'contentNodeTree' => $this->contentNodeTree,
+			'availablePositions' => empty($this->contentNodeTree) ? [] : array_keys($this->contentNodeTree),
 			'page' => $this->page,
 			'allowSpidersToIndexThisPage' => $this->page->allowIndexing
 		]);
