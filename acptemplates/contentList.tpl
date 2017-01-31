@@ -23,7 +23,7 @@
 
 		WCF.Clipboard.init('cms\\acp\\page\\ContentListPage', {@$hasMarkedItems}, actionObjects);
 
-		{foreach from=availablePositions item=position}
+		{foreach from=$availablePositions item=position}
 			new WCF.Sortable.List('contentList{$position|ucfirst}', 'cms\\data\\content\\ContentAction');
 		{/foreach}
 
@@ -69,7 +69,7 @@
 	<div class="jsClipboardContainer tabMenuContainer" data-type="de.codequake.cms.content">
 		<nav class="tabMenu">
 			<ul>
-				{foreach from=availablePositions item=position}
+				{foreach from=$availablePositions item=position}
 					<li><a href="{@$__wcf->getAnchor($position)}">{lang}cms.acp.content.position.position.{$position}{/lang}</a></li>
 				{/foreach}
 
@@ -77,7 +77,7 @@
 			</ul>
 		</nav>
 
-		{foreach from=availablePositions item=position}
+		{foreach from=$availablePositions item=position}
 			<div id="{$position}" class="tabMenuContent container containerPadding">
 				{include file='contentItemsList' application='cms' position=$position}
 			</div>
