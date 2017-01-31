@@ -57,7 +57,7 @@
 		{hascontent}
 			{capture assign=$position}
 				{content}
-					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTree[$position] position=$position}
+					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
 				{/content}
 			{/capture}
 		{/hascontent}
@@ -70,7 +70,7 @@
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
 {/if}
 
-{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTree['body'] position='content'}
+{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees['body'] position='content'}
 
 {if $page->isCommentable && $page->getPermission('user.canViewComment')}
 	<section id="comments" class="section sectionContainerList">
