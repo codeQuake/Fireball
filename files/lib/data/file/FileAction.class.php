@@ -372,7 +372,11 @@ class FileAction extends AbstractDatabaseObjectAction {
 			$updateData = [];
 
 			$thumbnailLocation = $file->getThumbnailLocation();
-			@unlink($thumbnailLocation);
+			if (!file_exists(dirname($thumbnailLocation))) {
+				FileUtil::makePath(dirname($thumbnailLocation));
+			} else {
+				@unlink($thumbnailLocation);
+			}
 
 			if ($file->width > $minWidth || $file->height > $minHeight) {
 				$thumbnail = $adapter->createThumbnail($thumbnailWidth, $thumbnailHeight);
