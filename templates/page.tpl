@@ -53,9 +53,41 @@
 {/capture}
 
 {foreach from=$availablePositions item=position}
-	{if $position != 'body'}
+	{if $position == 'sidebarLeft' || $position == 'sidebarRight' || $position == 'footerBoxes'}
 		{hascontent}
 			{capture assign=$position}
+				{content}
+					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
+				{/content}
+			{/capture}
+		{/hascontent}
+	{elseif $position == 'bottom'}
+		{hascontent}
+			{capture assign='boxesBottom'}
+				{content}
+					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
+				{/content}
+			{/capture}
+		{/hascontent}
+	{elseif $position == 'top'}
+		{hascontent}
+			{capture assign='boxesTop'}
+				{content}
+					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
+				{/content}
+			{/capture}
+		{/hascontent}
+	{elseif $position == 'footer'}
+		{hascontent}
+			{capture assign='boxesFooter'}
+				{content}
+					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
+				{/content}
+			{/capture}
+		{/hascontent}
+	{elseif $position == 'hero'}
+		{hascontent}
+			{capture assign='heroBoxes'}
 				{content}
 					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
 				{/content}
@@ -64,7 +96,7 @@
 	{/if}
 {/foreach}
 
-{include file='header'}
+{include file='header' application='cms'}
 
 {if !$page->isPublished && $page->publicationDate}
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
@@ -122,4 +154,4 @@
 	});
 </script>
 
-{include file='footer'}
+{include file='footer' application='cms'}
