@@ -495,7 +495,7 @@ class PageAddForm extends AbstractForm {
 			I18nHandler::getInstance()->save('metaKeywords', $updateData['metaKeywords'], 'cms.page');
 		}
 
-		$this->createMenuItem($page, !empty($updateData['title']) ? $updateData['title'] : $this->title);
+		$this->createMenuItem($page->pageID, !empty($updateData['title']) ? $updateData['title'] : $this->title);
 
 		// save new information
 		$updateAction = new PageAction([$page], 'update', ['data' => $updateData]);
@@ -629,12 +629,15 @@ class PageAddForm extends AbstractForm {
 			'pageForm' => $this->pageObjectType->getProcessor()->getCompiledFormTemplate($this->specificFormParameters)
 		]));
 	}
-
+	
 	/**
 	 * Creates the menu item for this page
-	 * @param \cms\data\page\Page $page
+	 * @param integer $pageID
+	 * @param string  $title
 	 */
-	public function createMenuItem(Page $page, $title) {
+	public function createMenuItem($pageID, $title) {
+		$page = new Page($pageID);
+		
 		// create menu item for page
 		if ($this->createMenuItem) {
 			// set menu item of parent page as parent menu item

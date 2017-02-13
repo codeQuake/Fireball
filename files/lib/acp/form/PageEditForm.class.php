@@ -185,7 +185,7 @@ class PageEditForm extends PageAddForm {
 			]]);
 			$menuItemAction->executeAction();
 		} else {
-			$this->createMenuItem($this->page, $this->title);
+			$this->createMenuItem($this->page->pageID, $this->title);
 		}
 
 		// save ACL
