@@ -288,7 +288,7 @@ class ContentAddForm extends AbstractForm {
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', [
 			'application' => 'cms',
 			'pageID' => $this->pageID
-		]));
+		], '#' . $this->position));
 	}
 
 	/**
