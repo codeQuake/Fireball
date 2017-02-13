@@ -639,7 +639,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		$types = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
 		foreach ($types as $key => $type) {
-			if (!$type->getProcessor()->isAvailableToAdd()) {
+			if (!$type->getProcessor()->isAvailableToAdd($this->parameters['position'])) {
 				unset($types[$key]);
 			}
 		}
