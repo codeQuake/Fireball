@@ -953,7 +953,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				$wcfPageEditor = new WCFPageAction([$pageEditor->wcfPageID], 'update', [
 					'data' => [
 						'name' => $pageEditor->getDecoratedObject()->getTitle(),
-						'lastEditTime' => TIME_NOW,
+						'lastUpdateTime' => TIME_NOW,
 						'parentPageID' => $parentPage === null ? null : $parentPage->wcfPageID
 					],
 					'content' => $contents
