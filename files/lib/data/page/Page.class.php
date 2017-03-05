@@ -9,6 +9,7 @@ use cms\system\page\PagePermissionHandler;
 use wcf\data\menu\item\MenuItem;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\page\menu\item\PageMenuItem;
+use wcf\data\page\PageCache as WCFPageCache;
 use wcf\data\DatabaseObject;
 use wcf\data\IPermissionObject;
 use wcf\data\ITitledLinkObject;
@@ -223,6 +224,13 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * @inheritDoc
 	 */
 	public function getLink($appendSession = true) {
+		if ($this->isHome) {
+			$root = WCFPageCache::getInstance()->getLandingPage();
+			if ($root->getApplication()->getAbbreviation() == 'cms' && $root->originIsSystem == 0) {
+				return $root->getApplication()->getPageURL();
+			}
+		}
+		
 		return LinkHandler::getInstance()->getLink($this->getAlias(), [
 			'application' => 'cms',
 			'forceFrontend' => true,
