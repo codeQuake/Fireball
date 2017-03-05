@@ -8,7 +8,6 @@ use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
 use wcf\data\menu\item\MenuItem;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\data\page\menu\item\PageMenuItem;
 use wcf\data\page\PageCache as WCFPageCache;
 use wcf\data\DatabaseObject;
 use wcf\data\IPermissionObject;
