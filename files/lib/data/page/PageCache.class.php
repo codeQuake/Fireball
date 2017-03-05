@@ -120,7 +120,7 @@ class PageCache extends SingletonFactory {
 	 * Returns a node list with max depth 1
 	 * can be used for an automatic page menu or sitemap
 	 *
-	 * @return \cms\data\page\AccessiblePageNodeTree
+	 * @return \cms\data\page\Page
 	 */
 	public function getHomePage() {
 		foreach ($this->pages as $page) {

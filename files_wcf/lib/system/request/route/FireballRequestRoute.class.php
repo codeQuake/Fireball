@@ -3,7 +3,7 @@
 namespace wcf\system\request\route;
 
 use cms\data\page\PageCache;
-use cms\page\PagePage;
+use wcf\data\page\PageCache as WCFPageCache;
 use wcf\system\application\ApplicationHandler;
 use wcf\util\FileUtil;
 
@@ -21,8 +21,24 @@ class FireballRequestRoute implements IRequestRoute {
 		$requestURL = FileUtil::removeLeadingSlash($requestURL);
 
 		if ($requestURL === '') {
-			// ignore empty urls and let them be handled by regular routes
-			return false;
+			$root = PageCache::getInstance()->getHomePage();
+			$rootAbs = WCFPageCache::getInstance()->getLandingPage();
+			
+			if ($rootAbs->getApplication()->getAbbreviation() == 'cms' && $rootAbs->originIsSystem == 0) {
+				$this->routeData = [
+					'className' => $root->getProcessor()->frontendController,
+					'controller' => 'page',
+					'pageType' => 'system',
+					'id' => $root->pageID,
+					'cmsPageID' => $root->wcfPageID,
+					'cmsPageLanguageID' => null,
+					'isDefaultController' => false
+				];
+				return true;
+			} else {
+				// ignore empty urls and let them be handled by regular routes
+				return false;
+			}
 		}
 
 		$regex = '~^(
