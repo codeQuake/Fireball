@@ -419,6 +419,8 @@
 		<item name="wcf.acp.rebuildData.de.codequake.cms.page.description"><![CDATA[Aktualisiert den Suchindex aller Fireball CMS Seiten]]></item>
 		<item name="wcf.acp.rebuildData.de.codequake.cms.file"><![CDATA[Dateien aktualisieren (Fireball CMS)]]></item>
 		<item name="wcf.acp.rebuildData.de.codequake.cms.file.description"><![CDATA[Aktualisiert Thumbnails von Dateien im Fireball CMS]]></item>
+		<item name="wcf.acp.rebuildData.de.codequake.cms.content"><![CDATA[Inhalte aktualisieren (Fireball CMS)]]></item>
+		<item name="wcf.acp.rebuildData.de.codequake.cms.content.description"><![CDATA[Aktualisiert die Inhalte aller Fireball CMS Seiten]]></item>
 	</category>
 
 	<category name="wcf.acp.search">
