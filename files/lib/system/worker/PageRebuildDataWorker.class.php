@@ -54,7 +54,7 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 		$cmsMenuItems = [];
 		/** @var \wcf\data\menu\item\MenuItem $menuItem */
 		foreach ($menuItemList->getObjects() as $menuItem) {
-			if ($menuItem->getPage()->handler == PagePageHandler::class) {
+			if ($menuItem->getPage() !== null && $menuItem->getPage()->handler == PagePageHandler::class) {
 				$cmsMenuItems[$menuItem->pageObjectID] = $menuItem;
 			}
 		}
