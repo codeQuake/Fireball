@@ -3,6 +3,7 @@
 namespace wcf\system\request\route;
 
 use cms\data\page\PageCache;
+use wcf\data\package\PackageCache;
 use wcf\data\page\PageCache as WCFPageCache;
 use wcf\system\application\ApplicationHandler;
 use wcf\util\FileUtil;
@@ -13,14 +14,19 @@ class FireballRequestRoute implements IRequestRoute {
 	 * @var	array
 	 */
 	protected $routeData = [];
-
+	
 	/**
 	 * @inheritDoc
 	 */
 	public function matches($requestURL) {
 		$requestURL = FileUtil::removeLeadingSlash($requestURL);
-
+		
 		if ($requestURL === '') {
+			$cmsID = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms');
+			if (PACKAGE_ID !== $cmsID) {
+				return false;
+			}
+			
 			$root = PageCache::getInstance()->getHomePage();
 			$rootAbs = WCFPageCache::getInstance()->getLandingPage();
 			
@@ -40,7 +46,7 @@ class FireballRequestRoute implements IRequestRoute {
 				return false;
 			}
 		}
-
+		
 		$regex = '~^(
 			(
 				(?P<controller>.+?)
@@ -61,17 +67,17 @@ class FireballRequestRoute implements IRequestRoute {
 				)
 			)
 		)$~x';
-
+		
 		if (preg_match($regex, $requestURL, $matches)) {
 			$application = ApplicationHandler::getInstance()->getActiveApplication()->getAbbreviation();
-
+			
 			if ($application == 'cms') {
 				$pageList = PageCache::getInstance()->getPages();
 				$urlList = [];
 				foreach ($pageList as $page) {
 					$urlList[$page->getAlias()] = $page;
 				}
-
+				
 				if (!empty($matches['alias'])) {
 					$alias = FileUtil::removeTrailingSlash($matches['alias']);
 					if (!empty($urlList[$alias])) {
@@ -87,7 +93,7 @@ class FireballRequestRoute implements IRequestRoute {
 				} else if (empty($matches['id'])) {
 					if (preg_match('~(([A-Za-z0-9]+)/?){0,}$~x', $requestURL, $urlParts)) {
 						$alias = FileUtil::removeTrailingSlash($urlParts[0]);
-
+						
 						if (!empty($urlList[$alias])) {
 							$this->routeData = [
 								'className' => $urlList[$alias]->getProcessor()->frontendController,
@@ -100,32 +106,32 @@ class FireballRequestRoute implements IRequestRoute {
 						}
 					}
 				}
-
+				
 				if (!empty($this->routeData)) {
 					$this->routeData['isDefaultController'] = false;
-
+					
 					return true;
 				}
 			}
 		}
-
+		
 		return false;
 	}
-
+	
 	/**
 	 * @inheritDoc
 	 */
 	public function getRouteData() {
 		return $this->routeData;
 	}
-
+	
 	/**
 	 * @inheritDoc
 	 */
 	public function setIsACP($isACP) {
 		throw new \BadMethodCallException('lookups are not supported for ACP requests');
 	}
-
+	
 	/**
 	 * @inheritDoc
 	 * @throws	\BadMethodCallException
@@ -133,7 +139,7 @@ class FireballRequestRoute implements IRequestRoute {
 	public function buildLink(array $components) {
 		throw new \BadMethodCallException('LookupRequestRoute cannot build links, please verify capabilities by calling canHandle() first.');
 	}
-
+	
 	/**
 	 * @inheritDoc
 	 */
@@ -141,7 +147,7 @@ class FireballRequestRoute implements IRequestRoute {
 		// this route cannot build routes, it is a one-way resolver
 		return false;
 	}
-
+	
 	/**
 	 * @inheritDoc
 	 */
