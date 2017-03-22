@@ -14,17 +14,11 @@
 						<a href="#" class="jsButtonStyleChanger">{lang}wcf.style.changeStyle{/lang}</a>
 					</span>
 				{/if}
-				{if $__boxesFooter|count || !$heroBoxes|empty}
+				{if $__boxesFooter|count}
 					<div class="boxContainer">
-						{if !$boxesFooter|empty}
-							{@$boxesFooter}
-						{/if}
-
-						{if !$__boxesFooter|empty}
-							{foreach from=$__boxesFooter item=box}
-								{@$box->render()}
-							{/foreach}
-						{/if}
+						{foreach from=$__boxesFooter item=box}
+							{@$box->render()}
+						{/foreach}
 					</div>
 				{/if}
 			</div>
