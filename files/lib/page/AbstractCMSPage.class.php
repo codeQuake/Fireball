@@ -61,11 +61,14 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		if (isset($_REQUEST['alias'])) {
 			$alias = $_REQUEST['alias'];
 			$this->pageID = PageCache::getInstance()->getIDByAlias($alias);
-		}
-		else if (isset($_REQUEST['id'])) {
+		} else if (isset($_REQUEST['id'])) {
 			$this->pageID = intval($_REQUEST['id']);
 		} else {
-			$this->pageID = PageCache::getInstance()->getHomePage()->pageID;
+			$home = PageCache::getInstance()->getHomePage();
+			if ($home === null) {
+				throw new IllegalLinkException();
+			}
+			$this->pageID = $home->pageID;
 		}
 
 		$this->page = PageCache::getInstance()->getPage($this->pageID);
