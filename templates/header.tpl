@@ -28,7 +28,7 @@
 <div id="pageContainer" class="pageContainer">
 	{event name='beforePageHeader'}
 	
-	{include file='pageHeader'}
+	{include file='pageHeader' application='cms'}
 	
 	{event name='afterPageHeader'}
 	
@@ -37,6 +37,10 @@
 			<div class="layoutBoundary">
 				<div class="boxContainer">
 					{content}
+						{if !$headerBoxes|empty}
+							{@$headerBoxes}
+						{/if}
+
 						{foreach from=$__wcf->getBoxHandler()->getBoxes('headerBoxes') item=box}
 							{@$box->render()}
 						{/foreach}
@@ -55,7 +59,7 @@
 					{if !$boxesTop|empty}
 						{@$boxesTop}
 					{/if}
-				
+
 					{foreach from=$__wcf->getBoxHandler()->getBoxes('top') item=box}
 						{@$box->render()}
 					{/foreach}

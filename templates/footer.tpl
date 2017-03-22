@@ -95,8 +95,8 @@
 			</div>
 		</div>
 	{/hascontent}
-	
-	{include file='pageFooter'}
+
+	{include file='pageFooter' application='cms'}
 </div>
 
 {include file='pageMenuMobile'}
