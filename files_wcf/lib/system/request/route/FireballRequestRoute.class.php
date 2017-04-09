@@ -137,15 +137,31 @@ class FireballRequestRoute implements IRequestRoute {
 	 * @throws	\BadMethodCallException
 	 */
 	public function buildLink(array $components) {
-		throw new \BadMethodCallException('LookupRequestRoute cannot build links, please verify capabilities by calling canHandle() first.');
+		if (!empty($components['id'])) {
+			$page = PageCache::getInstance()->getPage($components['id']);
+		}
+		
+		if (!empty($components['alias'])) {
+			$pageID = PageCache::getInstance()->getIDByAlias($components['alias']);
+			$page = PageCache::getInstance()->getPage($pageID);
+		}
+		
+		if (empty($components['id']) && empty($components['alias'])) {
+			$page = PageCache::getInstance()->getHomePage();
+		}
+		
+		if ($page === null || !$page->pageID) {
+			return '';
+		}
+		
+		return FileUtil::addTrailingSlash($page->getAlias());
 	}
 	
 	/**
 	 * @inheritDoc
 	 */
 	public function canHandle(array $components) {
-		// this route cannot build routes, it is a one-way resolver
-		return false;
+		return ($components['application'] == 'cms' && $components['controller'] == 'Page');
 	}
 	
 	/**
