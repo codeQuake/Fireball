@@ -83,38 +83,72 @@ class TextContentType extends AbstractSearchableContentType {
 
 		$this->validateText($data);
 	}
-
+	
+	/**
+	 * Validates the given text (plain and i18n)
+	 *
+	 * @param $data
+	 * @throws \wcf\system\exception\UserInputException
+	 */
 	protected function validateText(&$data) {
-		if (empty($data['text'])) {
+		if (empty($data['text']) && empty($data['i18nValues']['text'])) {
 			throw new UserInputException('text');
 		}
-
+		
 		BBCodeHandler::getInstance()->setDisallowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.disallowedBBCodes')));
-
+		
 		$this->htmlInputProcessor = new HtmlInputProcessor();
-		$this->htmlInputProcessor->process($data['text'], 'de.codequake.cms.content.type.text', 0);
-
-		// check text length
-		if ($this->htmlInputProcessor->appearsToBeEmpty()) {
-			throw new UserInputException('text');
-		}
-
-		$message = $this->htmlInputProcessor->getTextContent();
-		$disallowedBBCodes = $this->htmlInputProcessor->validate();
-		if (!empty($disallowedBBCodes)) {
-			WCF::getTPL()->assign('disallowedBBCodes', $disallowedBBCodes);
-			throw new UserInputException('text', 'disallowedBBCodes');
-		}
-
-		// search for censored words
-		if (ENABLE_CENSORSHIP) {
-			$result = Censorship::getInstance()->test($message);
-			if ($result) {
-				WCF::getTPL()->assign('censoredWords', $result);
-				throw new UserInputException('text', 'censoredWordsFound');
+		
+		if (empty($data['i18nValues']['text'])) {
+			$this->htmlInputProcessor->process($data['text'], 'de.codequake.cms.content.type.text', 0);
+			
+			// check text length
+			if ($this->htmlInputProcessor->appearsToBeEmpty()) {
+				throw new UserInputException('text');
+			}
+			
+			$message = $this->htmlInputProcessor->getTextContent();
+			$disallowedBBCodes = $this->htmlInputProcessor->validate();
+			if (!empty($disallowedBBCodes)) {
+				WCF::getTPL()->assign('disallowedBBCodes', $disallowedBBCodes);
+				throw new UserInputException('text', 'disallowedBBCodes');
+			}
+			
+			// search for censored words
+			if (ENABLE_CENSORSHIP) {
+				$result = Censorship::getInstance()->test($message);
+				if ($result) {
+					WCF::getTPL()->assign('censoredWords', $result);
+					throw new UserInputException('text', 'censoredWordsFound');
+				}
+			}
+			
+			$data['text'] = $this->htmlInputProcessor->getHtml();
+		} else {
+			foreach ($data['i18nValues']['text'] as $text) {
+				$this->htmlInputProcessor->process($text, 'de.codequake.cms.content.type.text', 0);
+				
+				// check text length
+				if ($this->htmlInputProcessor->appearsToBeEmpty()) {
+					throw new UserInputException('text');
+				}
+				
+				$message = $this->htmlInputProcessor->getTextContent();
+				$disallowedBBCodes = $this->htmlInputProcessor->validate();
+				if (!empty($disallowedBBCodes)) {
+					WCF::getTPL()->assign('disallowedBBCodes', $disallowedBBCodes);
+					throw new UserInputException('text', 'disallowedBBCodes');
+				}
+				
+				// search for censored words
+				if (ENABLE_CENSORSHIP) {
+					$result = Censorship::getInstance()->test($message);
+					if ($result) {
+						WCF::getTPL()->assign('censoredWords', $result);
+						throw new UserInputException('text', 'censoredWordsFound');
+					}
+				}
 			}
 		}
-
-		$data['text'] = $this->htmlInputProcessor->getHtml();
 	}
 }

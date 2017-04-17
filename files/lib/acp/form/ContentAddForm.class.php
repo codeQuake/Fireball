@@ -210,9 +210,18 @@ class ContentAddForm extends AbstractForm {
 		if (!$page->pageID) {
 			throw new UserInputException('pageID', 'invalid');
 		}
-
+		
+		$this->contentData['i18nValues'] = [];
+		foreach ($this->objectType->getProcessor()->multilingualFields as $field) {
+			if (!I18nHandler::getInstance()->isPlainValue($field)) {
+				$this->contentData['i18nValues'][$field] = StringUtil::trim(I18nHandler::getInstance()->getValues($field));
+			}
+		}
+		
 		// validate object type specific parameters
 		$this->objectType->getProcessor()->validate($this->contentData);
+		
+		unset($this->contentData['i18nValues']);
 	}
 
 	/**
