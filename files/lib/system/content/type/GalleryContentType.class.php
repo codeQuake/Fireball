@@ -64,7 +64,7 @@ class GalleryContentType extends AbstractContentType {
 	 * @return FileList
 	 */
 	public function getImageList($imageIDs = []) {
-		if (empty(imageIDs))
+		if (empty($imageIDs))
 			return [];
 
 		$imageList = new FileList();
