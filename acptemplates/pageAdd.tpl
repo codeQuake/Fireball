@@ -1,4 +1,4 @@
-{include file='header' pageTitle='cms.acp.page.'|concat:$action}
+{include file='header' pageTitle='fireball.acp.menu.link.fireball.page.'|concat:$action}
 
 {include file='aclPermissions'}
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
@@ -34,7 +34,7 @@
 {/if}
 
 <header class="boxHeadline">
-	<h1>{lang}cms.acp.page.{@$action}{/lang}</h1>
+	<h1>{lang}fireball.acp.menu.link.fireball.page.{@$action}{/lang}</h1>
 </header>
 
 {include file='formError'}
@@ -63,7 +63,7 @@
 					</div>
 				</li>
 			{/if}
-			<li><a href="{link application='cms' controller='PageList'}{/link}" title="{lang}fireball.acp.menu.link.fireball.page.list{/lang}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}cms.acp.menu.link.fireball.page.list{/lang}</span></a></li>
+			<li><a href="{link application='cms' controller='PageList'}{/link}" title="{lang}fireball.acp.menu.link.fireball.page.list{/lang}" class="button"><span class="icon icon16 fa-list"></span> <span>{lang}fireball.acp.menu.link.fireball.page.list{/lang}</span></a></li>
 
 			{event name='contentNavigationButtons'}
 		</ul>

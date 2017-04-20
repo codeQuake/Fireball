@@ -126,19 +126,19 @@
 	</category>
 
 	<category name="fireball.acp.menu">
-		<item name="fireball.acp.menu.link.fireball"><![CDATA[Fireball CMS]]></item>
+		<item name="fireball.acp.menu.link.cms"><![CDATA[Fireball CMS]]></item>
 		<item name="fireball.acp.menu.link.fireball.file"><![CDATA[Files]]></item>
 		<item name="fireball.acp.menu.link.fireball.file.category.add"><![CDATA[Add Category]]></item>
-		<item name="fireball.acp.menu.link.fireball.file.category.list"><![CDATA[List Categories]]></item>
-		<item name="fireball.acp.menu.link.fireball.file.list"><![CDATA[List Files]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.category.list"><![CDATA[Categories]]></item>
+		<item name="fireball.acp.menu.link.fireball.file.list"><![CDATA[Files]]></item>
 		<item name="fireball.acp.menu.link.fireball.page"><![CDATA[Pages]]></item>
 		<item name="fireball.acp.menu.link.fireball.page.add"><![CDATA[Add Page]]></item>
 		<item name="fireball.acp.menu.link.fireball.page.importAndExport"><![CDATA[Import &amp; Export]]></item>
-		<item name="fireball.acp.menu.link.fireball.page.list"><![CDATA[List Pages]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.list"><![CDATA[Pages]]></item>
 		<item name="fireball.acp.menu.link.fireball.page.statistics"><![CDATA[Statistics]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet.add"><![CDATA[Add Stylesheet]]></item>
-		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[List Stylesheets]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets]]></item>
 	</category>
 
 	<category name="cms.acp.condition">
@@ -322,6 +322,12 @@
 		<item name="cms.page.edit.acp"><![CDATA[Edit page]]></item>
 	</category>
 
+	<category name="cms.stats">
+		<item name="cms.stats.usersOnline.all"><![CDATA[All]]></item>
+		<item name="cms.stats.usersOnline.registered"><![CDATA[Registered users]]></item>
+		<item name="cms.stats.usersOnline.spiders"><![CDATA[Spiders]]></item>
+	</category>
+
 	<category name="cms.user">
 		<item name="cms.user.usersOnline.location.page"><![CDATA[Views the page <a href="{$page->getLink()}">{@$page->getTitle()}</a>]]></item>
 	</category>
@@ -364,6 +370,7 @@
 		<item name="wcf.acp.group.option.category.user.fireball"><![CDATA[Fireball CMS]]></item>
 		<item name="wcf.acp.group.option.category.user.fireball.content"><![CDATA[Contents]]></item>
 		<item name="wcf.acp.group.option.category.user.fireball.page"><![CDATA[Pages]]></item>
+		<item name="wcf.acp.group.option.category.user.fireball.file"><![CDATA[Files]]></item>
 		<item name="wcf.acp.group.option.mod.fireball.canDeleteComment"><![CDATA[Can delete comments]]></item>
 		<item name="wcf.acp.group.option.mod.fireball.canEditComment"><![CDATA[Can edit comments]]></item>
 		<item name="wcf.acp.group.option.mod.fireball.canModerateComment"><![CDATA[Can moderate comments]]></item>
@@ -377,6 +384,7 @@
 		<item name="wcf.acp.group.option.user.fireball.page.canEditComment"><![CDATA[Can edit own comments]]></item>
 		<item name="wcf.acp.group.option.user.fireball.page.canViewComment"><![CDATA[Can view comments]]></item>
 		<item name="wcf.acp.group.option.user.fireball.page.canViewPage"><![CDATA[Can see pages]]></item>
+		<item name="wcf.acp.group.option.user.fireball.file.canViewThumbnail"><![CDATA[Can view file preview]]></item>
 	</category>
 
 	<category name="wcf.acp.index">

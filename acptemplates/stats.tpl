@@ -86,7 +86,7 @@
 
 	function drawArea() {
 		var data = google.visualization.arrayToDataTable([
-			['Visits', '{lang}cms.acp.dashboard.all{/lang}', '{lang}cms.acp.dashboard.registered{/lang}', '{lang}cms.acp.dashboard.spiders{/lang}'],
+			['Visits', '{lang}cms.stats.usersOnline.all{/lang}', '{lang}cms.stats.usersOnline.registered{/lang}', '{lang}cms.stats.usersOnline.spiders{/lang}'],
 			{foreach from=$visits item=visit}
 			['{$visit['string']}', {if $visit['visitors']['visits']|isset}{$visit['visitors']['visits']}{else}0{/if}, {if $visit['visitors']['users']|isset}{$visit['visitors']['users']}{else}0{/if}, {if $visit['visitors']['spiders']|isset}{$visit['visitors']['spiders']}{else}0{/if}],
 			{/foreach}

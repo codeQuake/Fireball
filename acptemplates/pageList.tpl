@@ -1,4 +1,4 @@
-{include file='header' pageTitle='cms.acp.page.list'}
+{include file='header' pageTitle='fireball.acp.menu.link.fireball.page.list'}
 
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
@@ -64,14 +64,14 @@
 </script>
 
 <header class="boxHeadline">
-	<h1>{lang}cms.acp.page.list{/lang}</h1>
+	<h1>{lang}fireball.acp.menu.link.fireball.page.list{/lang}</h1>
 	<p>{lang}cms.acp.page.list.description{/lang}</p>
 </header>
 
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
+			<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.menu.link.fireball.page.add{/lang}</span></a></li>
 
 			{event name='contentNavigationButtonsTop'}
 		</ul>
@@ -141,7 +141,7 @@
 	<div class="contentNavigation">
 		<nav>
 			<ul>
-				<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}cms.acp.page.add{/lang}</span></a></li>
+				<li><a href="{link controller='PageAdd' application='cms'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}fireball.acp.menu.link.fireball.page.add{/lang}</span></a></li>
 
 				{event name='contentNavigationButtonsBottom'}
 			</ul>
