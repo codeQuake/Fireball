@@ -109,12 +109,12 @@ class PageAddForm extends AbstractForm {
 	 * @var	integer
 	 */
 	public $menuItemID = 0;
-
+	
 	/**
-	 * list of available menu items
-	 * @var	\wcf\data\menu\item\MenuItem[]
+	 * list of available menu item nodes
+	 * @var	\wcf\data\menu\item\MenuItemNode[]
 	 */
-	public $menuItems = [];
+	public $menuItemNodeList = [];
 
 	/**
 	 * meta description of the created page
@@ -557,17 +557,7 @@ class PageAddForm extends AbstractForm {
 		
 		// load menu items
 		$mainMenu = MenuCache::getInstance()->getMainMenu();
-		$menuItemList = $mainMenu->getMenuItemNodeList();
-
-		foreach ($menuItemList as $menuItem) {
-			if ($menuItem->parentMenuItem) {
-				if (isset($this->menuItems[$menuItem->parentMenuItem])) {
-					$this->menuItems[$menuItem->parentMenuItem]->addChild($menuItem);
-				}
-			} else {
-				$this->menuItems[$menuItem->menuItem] = $menuItem;
-			}
-		}
+		$this->menuItemNodeList = $mainMenu->getMenuItemNodeList();
 		
 		$this->specificFormParameters = $this->pageObjectType->getProcessor()->readData($this);
 	}
@@ -584,7 +574,7 @@ class PageAddForm extends AbstractForm {
 		WCF::getTPL()->assign(array_merge_recursive($this->specificFormParameters, [
 			'action' => 'add',
 			'availableStyles' => $this->availableStyles,
-			'menuItems' => $this->menuItems,
+			'menuItemNodeList' => $this->menuItemNodeList,
 			'objectTypeID' => $this->objectTypeID,
 			'pageList' => $this->pageList,
 			'stylesheetList' => $this->stylesheetList->getObjects(),

@@ -321,11 +321,8 @@
 					<dd>
 						<select id="menuItemID" name="menuItemID">
 							<option value="0">{lang}wcf.global.noSelection{/lang}</option>
-							{foreach from=$menuItems item=menuItem}
-								<option value="{@$menuItem->menuItemID}"{if $menuItemID == $menuItem->menuItemID} selected="selected"{/if}>{$menuItem->menuItem|language}</option>
-								{foreach from=$menuItem item=childMenuItem}
-									<option value="{@$childMenuItem->menuItemID}"{if $menuItemID == $childMenuItem->menuItemID} selected="selected"{/if}>&nbsp;&nbsp;&nbsp;&nbsp;{$childMenuItem->menuItem|language}</option>
-								{/foreach}
+							{foreach from=$menuItemNodeList item=menuItem}
+								<option value="{@$menuItem->getDecoratedObject()->itemID}"{if $menuItemID == $menuItem->getDecoratedObject()->itemID} selected="selected"{/if}>{section name=i loop=$menuItemNodeList->getDepth()}&nbsp;&nbsp;&nbsp;&nbsp;{/section}{$menuItem->getDecoratedObject()->title|language}</option>
 							{/foreach}
 						</select>
 						{if $errorField == 'menuItemID'}
