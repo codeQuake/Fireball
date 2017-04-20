@@ -22,8 +22,8 @@ class FireballRequestRoute implements IRequestRoute {
 		$requestURL = FileUtil::removeLeadingSlash($requestURL);
 		
 		if ($requestURL === '') {
-			$cmsID = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms');
-			if (PACKAGE_ID !== $cmsID) {
+			$cms = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms');
+			if (PACKAGE_ID !== $cms->packageID) {
 				return false;
 			}
 			
