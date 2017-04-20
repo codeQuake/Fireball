@@ -3,7 +3,7 @@
 	<dd>
 		<select name="contentData[boxID]" id="contentData[boxID]">
 			{foreach from=$boxesByPosition.$position item=box}
-				<option value="{$box->boxID}" {if $contentData['boxID']|isset && $box->boxID == $contentData['boxID']}selected="selected"{/if}>{$box->getTitle()}</option>
+				<option value="{$box->boxID}" {if $contentData['boxID']|isset && $box->boxID == $contentData['boxID']}selected="selected"{/if}>{if $box->name}{$box->name}{else}{$box->getTitle()}{/if}</option>
 			{/foreach}
 		<select>
 	</dd>
