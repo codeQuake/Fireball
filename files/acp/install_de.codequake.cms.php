@@ -1,16 +1,15 @@
 <?php
 use wcf\data\category\CategoryEditor;
-use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\update\server\PackageUpdateServerAction;
 use wcf\system\WCF;
 
 /**
- * @author	Jens Krumsieck
- * @copyright	2013 - 2017 codeQuake
- * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
- * @package	de.codequake.cms
+ * @author           Jens Krumsieck
+ * @copyright        2013 - 2017 codeQuake
+ * @license          GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
+ * @package          de.codequake.cms
  */
-$sql = "UPDATE	wcf".WCF_N."_option
+$sql = "UPDATE	wcf" . WCF_N . "_option
 	SET	optionValue = ?
 	WHERE	optionName = ?";
 $optionUpdate = WCF::getDB()->prepareStatement($sql);
@@ -20,9 +19,25 @@ if (!defined('PAGE_TITLE') || !PAGE_TITLE) {
 	$optionUpdate->execute(['Fireball CMS 3.0', 'page_title']);
 }
 
+$sql = "SELECT	objectTypeID
+	FROM	wcf" . WCF_N . "_object_type
+	WHERE	objectType = ?
+		AND definitionID = (
+			SELECT	definitionID
+			FROM	wcf" . WCF_N . "_object_type_definition
+			WHERE	definitionName = ?
+		)";
+$statement = WCF::getDB()->prepareStatement($sql);
+$statement->execute([
+	'de.codequake.cms.file',
+	'com.woltlab.wcf.category'
+]);
+$row = $statement->fetchArray();
+$categoryObjectTypeID = $row['objectTypeID'];
+
 // create default file category
 CategoryEditor::create([
-	'objectTypeID' => ObjectTypeCache::getInstance()->getObjectTypeIDByName('com.woltlab.wcf.category', 'de.codequake.cms.file'),
+	'objectTypeID' => $categoryObjectTypeID,
 	'title' => 'Default Category',
 	'time' => TIME_NOW
 ]);
@@ -30,10 +45,10 @@ CategoryEditor::create([
 // add codequake update server
 if (isset($this->instruction['attributes']['installupdateserver']) && $this->instruction['attributes']['installupdateserver'] == 1) {
 	$serverURL = 'https://update.mysterycode.de/vortex/';
-
+	
 	// check if update server already exists
 	$sql = "SELECT	packageUpdateServerID
-		FROM	wcf".WCF_N."_package_update_server
+		FROM	wcf" . WCF_N . "_package_update_server
 		WHERE	serverURL = ?";
 	$statement = WCF::getDB()->prepareStatement($sql);
 	$statement->execute([$serverURL]);
