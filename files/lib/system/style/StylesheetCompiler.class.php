@@ -148,8 +148,10 @@ class StylesheetCompiler extends SingletonFactory {
 	 * @inheritDoc
 	 */
 	protected function bootstrap(array $variables) {
+		$content = '';
+		
 		// add reset like a boss
-		$content = $this->prepareFile(WCF_DIR.'style/bootstrap/reset.scss');
+		//$content = $this->prepareFile(WCF_DIR.'style/bootstrap/reset.scss');
 
 		// apply style variables
 		$this->compiler->setVariables($variables);
