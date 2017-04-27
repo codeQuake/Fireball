@@ -569,7 +569,11 @@ class BackupHandler extends SingletonFactory {
 						$actionName = '\\cms\data\\'.$object.'\\'.ucfirst($object).'Action';
 					}
 					
-					$action = new $actionName(array(), 'create', array('data' => $import));
+					if (isset($import['oldID'])) {
+						unset($import['oldID']);
+					}
+					
+					$action = new $actionName(array(), 'create', ['data' => $import]);
 					$new = $action->executeAction();
 					$new = $new['returnValues'];
 					
