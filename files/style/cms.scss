@@ -112,7 +112,6 @@
 
   .fireballSlideContainer {
 	position: relative;
-	//margin-bottom: @wcfGapLarge;
 	overflow: hidden;
 	> div {
 	  position: absolute;
@@ -144,7 +143,7 @@
 
 		&.active > a > span {
 		  transition: 0.5s all ease-in-out;
-		  //color: @wcfContainerHoverBackgroundColor;
+		  color: #fff;
 		}
 	  }
 	}
