@@ -133,11 +133,13 @@
 		<item name="fireball.acp.menu.link.fireball.file.list"><![CDATA[Files]]></item>
 		<item name="fireball.acp.menu.link.fireball.page"><![CDATA[Pages]]></item>
 		<item name="fireball.acp.menu.link.fireball.page.add"><![CDATA[Add Page]]></item>
+		<item name="fireball.acp.menu.link.fireball.page.edit"><![CDATA[Edit Page]]></item>
 		<item name="fireball.acp.menu.link.fireball.page.importAndExport"><![CDATA[Import &amp; Export]]></item>
 		<item name="fireball.acp.menu.link.fireball.page.list"><![CDATA[Pages]]></item>
 		<item name="fireball.acp.menu.link.fireball.page.statistics"><![CDATA[Statistics]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet"><![CDATA[Stylesheets]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet.add"><![CDATA[Add Stylesheet]]></item>
+		<item name="fireball.acp.menu.link.fireball.stylesheet.edit"><![CDATA[Edit Stylesheet]]></item>
 		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets]]></item>
 	</category>
 
