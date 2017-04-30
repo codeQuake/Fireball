@@ -24,5 +24,6 @@
 					formattedFilesize: '{@$file->filesize|filesize}'
 			}
 		{/if}
+		}, { });
 	});
 </script>
