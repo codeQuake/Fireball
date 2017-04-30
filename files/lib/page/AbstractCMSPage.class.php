@@ -118,14 +118,16 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		$this->contentNodeTrees = $this->page->getContents();
 
 		// meta tags
-		if ($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', WCF::getLanguage()->get($this->page->metaKeywords));
-		if ($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('description', 'description', WCF::getLanguage()->get($this->page->metaDescription));
-		if ($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('og:description', 'og:description', WCF::getLanguage()->get($this->page->metaDescription), true);
-		MetaTagHandler::getInstance()->addTag('generator', 'generator', 'Fireball CMS');
-		MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->page->getTitle() . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
-		MetaTagHandler::getInstance()->addTag('og:url', 'og:url', $this->page->getLink(false), true);
-		if (FACEBOOK_PUBLIC_KEY != '') MetaTagHandler::getInstance()->addTag('fb:app_id', 'fb:app_id', FACEBOOK_PUBLIC_KEY, true);
-		MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'website', true);
+		if ($this->page->canRead()) {
+			if ($this->page->metaKeywords !== '') MetaTagHandler::getInstance()->addTag('keywords', 'keywords', WCF::getLanguage()->get($this->page->metaKeywords));
+			if ($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('description', 'description', WCF::getLanguage()->get($this->page->metaDescription));
+			if ($this->page->metaDescription !== '') MetaTagHandler::getInstance()->addTag('og:description', 'og:description', WCF::getLanguage()->get($this->page->metaDescription), true);
+			MetaTagHandler::getInstance()->addTag('generator', 'generator', 'Fireball CMS');
+			MetaTagHandler::getInstance()->addTag('og:title', 'og:title', $this->page->getTitle() . ' - ' . WCF::getLanguage()->get(PAGE_TITLE), true);
+			MetaTagHandler::getInstance()->addTag('og:url', 'og:url', $this->page->getLink(false), true);
+			if (FACEBOOK_PUBLIC_KEY != '') MetaTagHandler::getInstance()->addTag('fb:app_id', 'fb:app_id', FACEBOOK_PUBLIC_KEY, true);
+			MetaTagHandler::getInstance()->addTag('og:type', 'og:type', 'website', true);
+		}
 	}
 
 	/**
