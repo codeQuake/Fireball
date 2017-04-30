@@ -3,6 +3,7 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use cms\data\content\ContentAction;
+use cms\system\template\EnvironmentTemplateEngine;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
@@ -36,7 +37,11 @@ class TemplateContentType extends AbstractContentType {
 		
 		// check template code
 		try {
-			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template', $data['text'], [], true);
+			$test = EnvironmentTemplateEngine::getInstance();
+			
+			$test->setEnvironment('user');
+			$compiled = $test->getCompiler()->compileString('de.codequake.cms.content.type.template', $data['text'], [], true);
+			$test->setEnvironment('admin');
 			
 			// cache compiled template with content
 			RequestHandler::getInstance()->getActiveRequest()->getRequestObject()->contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
