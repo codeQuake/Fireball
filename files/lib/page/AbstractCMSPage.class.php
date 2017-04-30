@@ -5,10 +5,12 @@ use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\counter\VisitCountHandler;
 use wcf\data\menu\MenuCache;
+use wcf\data\page\PageCache as WCFPageCache;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\MetaTagHandler;
+use wcf\system\page\PageLocationManager;
 use wcf\system\WCF;
 
 /**
@@ -74,6 +76,14 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		$this->page = PageCache::getInstance()->getPage($this->pageID);
 		if ($this->page === null) {
 			throw new IllegalLinkException();
+		}
+		
+		// set breadcrumbs manually since wsc's automatic generation returns the root url only
+		foreach ($this->page->getParentPages() as $parentPage) {
+			if ($parentPage->wcfPageID) {
+				$page = WCFPageCache::getInstance()->getPage($parentPage->wcfPageID);
+				PageLocationManager::getInstance()->addParentLocation($page->identifier, $parentPage->pageID, $parentPage);
+			}
 		}
 
 		// check if offline and view page or exit

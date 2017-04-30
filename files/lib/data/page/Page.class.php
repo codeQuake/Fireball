@@ -267,7 +267,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	/**
 	 * Returns the parent pages of this page.
 	 * 
-	 * @return	array<\cms\data\page\Page>
+	 * @return	\cms\data\page\Page[]
 	 */
 	public function getParentPages() {
 		if ($this->isChild()) {
