@@ -2,7 +2,7 @@
 
 <script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
 <script data-relocate="true">
-	require(['Language'], function(Language) {
+	require(['Language', 'codeQuake/Acp/FileInlineEdit'], function(Language, FileInlineEditor) {
 		Language.addObject({
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
@@ -25,7 +25,8 @@
 
 		new WCF.Table.EmptyTableHandler($('#fileListTableContainer'), 'jsFileRow', options);
 
-		new Fireball.ACP.File.Details();
+		new FileInlineEditor();
+
 		new Fireball.ACP.File.Preview();
 		Fireball.ACP.File.Upload.init(function() {
 			window.location.reload();
