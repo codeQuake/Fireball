@@ -15,6 +15,13 @@
 			<eventname>menuItems</eventname>
 			<templatecode><![CDATA[{include file='__pageAddButton' application='cms'}]]></templatecode>
 		</templatelistener>
+
+		<templatelistener name="requirejsPaths">
+			<environment>user</environment>
+			<templatename>headIncludeJavaScript</templatename>
+			<eventname>requirePaths</eventname>
+			<templatecode><![CDATA["Fireball": "{$__wcf->getPath('cms')}js/",]]></templatecode>
+		</templatelistener>
 		<!-- /user -->
 
 		<!-- admin -->
@@ -37,6 +44,13 @@
 			<templatename>header</templatename>
 			<eventname>javascriptInclude</eventname>
 			<templatecode>{if $templateName == 'menuItemAdd'}{include file='__menuItemAddJavascript' application='cms'}{/if}</templatecode>
+		</templatelistener>
+
+		<templatelistener name="requirejsPaths">
+			<environment>admin</environment>
+			<templatename>header</templatename>
+			<eventname>requirePaths</eventname>
+			<templatecode><![CDATA["Fireball": "{$__wcf->getPath('cms')}js/",]]></templatecode>
 		</templatelistener>
 		<!-- /admin -->
 	</import>
