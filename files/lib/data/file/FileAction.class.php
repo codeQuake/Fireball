@@ -264,9 +264,15 @@ class FileAction extends AbstractDatabaseObjectAction {
 					$failedUploads[] = $file;
 					continue;
 				}
-
+				
+				$title = $file->getFilename();
+				if (($position = mb_strrpos($title, '.')) !== false) {
+					$title = mb_substr($title, 0, $position - 1);
+				}
+				
 				$data = [
-					'title' => $file->getFilename(),
+					'title' => $title,
+					'filename' => $file->getFilename(),
 					'filesize' => $file->getFilesize(),
 					'fileType' => $file->getMimeType(),
 					'fileHash' => sha1_file($file->getLocation()),
@@ -302,7 +308,8 @@ class FileAction extends AbstractDatabaseObjectAction {
 
 					$result['files'][$file->getInternalFileID()] = [
 						'fileID' => $uploadedFile->fileID,
-						'title' => $uploadedFile->getTitle(),
+						'title' => $uploadedFile->title,
+						'filename' => $uploadedFile->filename,
 						'filesize' => $uploadedFile->filesize,
 						'formattedFilesize' => FileUtil::formatFilesize($uploadedFile->filesize)
 					];
@@ -324,6 +331,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 		foreach ($failedUploads as $failedUpload) {
 			$result['errors'][$failedUpload->getInternalFileID()] = [
 				'title' => $failedUpload->getFilename(),
+				'filename' => $failedUpload->getFilename(),
 				'filesize' => $failedUpload->getFilesize(),
 				'errorType' => $failedUpload->getValidationErrorType()
 			];

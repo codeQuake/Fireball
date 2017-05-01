@@ -20,12 +20,13 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  *
  * @property-read	integer		$fileID		    id of the file
- * @property-read	string		$title		    filename
+ * @property-read	string		$title		    title of the file
  * @property-read	integer		$filesize		filesize in bytes
  * @property-read	string		$fileType		mime type of the file
  * @property-read	string		$fileHash		hash of the file
  * @property-read	integer		$uploadTime		timestamp of upload
  * @property-read	integer		$downloads		amount of downloads
+ * @property-read	string		$filename		filename
  */
 class File extends DatabaseObject implements ILinkableObject, IRouteController, IPermissionObject {
 	/**

@@ -2,6 +2,8 @@
 
 use cms\data\content\ContentEditor;
 use cms\data\content\ContentList;
+use cms\data\file\FileEditor;
+use cms\data\file\FileList;
 use cms\data\page\PageEditor;
 use cms\data\page\PageList;
 use cms\data\stylesheet\StylesheetEditor;
@@ -76,4 +78,19 @@ foreach ($pages as $page) {
 
 	$pageEditor = new PageEditor($page);
 	$pageEditor->update(['wcfPageID' => $wcfPage['returnValues']->pageID]);
+}
+
+$fileList = new FileList();
+$fileList->readObjects();
+$files = $fileList->getObjects();
+/** @var \cms\data\file\File $file */
+foreach ($files as $file) {
+	if ($file->filename) {
+		continue;
+	}
+	
+	$fileEditor = new FileEditor($file);
+	$fileEditor->update([
+		'filename' => $file->title
+	]);
 }

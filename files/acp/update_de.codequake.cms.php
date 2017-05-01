@@ -1,5 +1,7 @@
 <?php
 
+use cms\data\file\FileEditor;
+use cms\data\file\FileList;
 use cms\data\page\PageEditor;
 use cms\data\page\PageList;
 use cms\system\page\handler\PagePageHandler;
@@ -13,6 +15,10 @@ $pageList->readObjects();
 $pages = $pageList->getObjects();
 /** @var \cms\data\page\Page $page */
 foreach ($pages as $page) {
+	if ($page->wcfPageID) {
+		continue;
+	}
+	
 	$parentPage = $page->getParentPage();
 
 	$availableLanguages = LanguageFactory::getInstance()->getLanguages();
@@ -44,4 +50,19 @@ foreach ($pages as $page) {
 
 	$pageEditor = new PageEditor($page);
 	$pageEditor->update(['wcfPageID' => $wcfPage['returnValues']->pageID]);
+}
+
+$fileList = new FileList();
+$fileList->readObjects();
+$files = $fileList->getObjects();
+/** @var \cms\data\file\File $file */
+foreach ($files as $file) {
+	if ($file->filename) {
+		continue;
+	}
+	
+	$fileEditor = new FileEditor($file);
+	$fileEditor->update([
+		'filename' => $file->title
+	]);
 }
