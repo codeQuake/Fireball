@@ -115,7 +115,7 @@
 								<!-- content controls -->
 								{if $page->getProcessor()->canHaveContent}
 									<span class="icon icon16 fa-plus jsContentAddButton jsTooltip pointer" title="{lang}cms.acp.content.add{/lang}" data-object-id="{@$page->pageID}" data-position="body"></span>
-									<a href="{link controller='ContentList' pageID=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 fa-file"></span></a>
+									<a href="{link controller='ContentList' id=$page->pageID application='cms'}{/link}" title="{lang}cms.acp.page.content.list{/lang}" class="jsTooltip"><span class="icon icon16 fa-file"></span></a>
 								{else}
 									<span class="icon icon16 fa-plus jsTooltip pointer disabled" title="{lang}cms.acp.content.add{/lang}"></span>
 									<span class="icon icon16 fa-file jsTooltip pointer disabled" title="{lang}cms.acp.page.content.list{/lang}"></span>

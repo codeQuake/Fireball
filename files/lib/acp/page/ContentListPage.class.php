@@ -65,7 +65,7 @@ class ContentListPage extends AbstractPage {
 	public function readParameters() {
 		parent::readParameters();
 
-		if (isset($_REQUEST['pageID'])) $this->pageID = intval($_REQUEST['pageID']);
+		if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
 		$this->page = PageCache::getInstance()->getPage($this->pageID);
 		if ($this->page === null) {
 			throw new IllegalLinkException();

@@ -48,7 +48,7 @@
 		<ul>
 			{if $action == 'edit'}
 				<li>
-					<a class="button" href="{link application='cms' controller='ContentList' pageID=$pageID}{/link}"><span class="icon icon16 fa-file"></span> <span>{lang}cms.acp.content.list{/lang}</span></a>
+					<a class="button" href="{link application='cms' controller='ContentList' id=$pageID}{/link}"><span class="icon icon16 fa-file"></span> <span>{lang}cms.acp.content.list{/lang}</span></a>
 				</li>
 			{/if}
 			{if $action == 'edit' && $choosePageNodeList|iterator_count > 1}

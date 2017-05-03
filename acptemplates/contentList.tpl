@@ -54,7 +54,7 @@
 				<div class="dropdownMenu">
 					<ul class="scrollableDropdownMenu">
 						{foreach from=$pageList item=node}
-							<li{if $node->pageID == $pageID} class="active"{/if}><a href="{link application='cms' controller='ContentList' pageID=$node->pageID}{/link}">{@'&nbsp;&nbsp;&nbsp;&nbsp;'|str_repeat:$pageList->getDepth()}{$node->getTitle()}</a></li>
+							<li{if $node->pageID == $pageID} class="active"{/if}><a href="{link application='cms' controller='ContentList' id=$node->pageID}{/link}">{@'&nbsp;&nbsp;&nbsp;&nbsp;'|str_repeat:$pageList->getDepth()}{$node->getTitle()}</a></li>
 						{/foreach}
 					</ul>
 				</div>
