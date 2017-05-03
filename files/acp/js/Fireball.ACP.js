@@ -382,6 +382,54 @@ Fireball.ACP.Content.Type['de.codequake.cms.content.type.columns'] = Class.exten
 });
 
 /**
+ * Pie chart content type.
+ *
+ * @param	array		columnData
+ */
+Fireball.ACP.Content.Type['de.codequake.cms.content.type.graph.pie'] = Class.extend({
+	/**
+	 * Initializes a form for a pie chart content type.
+	 *
+	 * @param	array		columnData
+	 */
+	init: function() {
+		this._columnData = [ ];
+
+		this._addButton = $('.jsAddGraphOption');
+		this._container = $('.graphOptionContainer > ul');
+		$('.graphOptionContainer .jsLineRemoveButton').click($.proxy(this._deleteGraphOption, this));
+
+		// bind events
+		this._addButton.click($.proxy(this._addGraphOption, this));
+	},
+
+	/**
+	 * Adds a new column.
+	 *
+	 * @param	integer		width
+	 */
+	_addGraphOption: function() {
+		var counter = this._container.find('li:last-child').data('counter') + 1;
+		var newRow = $('<li class="left" data-counter="'+counter+'">' +
+			'<input type="text" name="contentData[graphOptions][title][]" value="" class="long" required />' +
+			'</li>' +
+			'<li class="right" data-counter="'+counter+'">' +
+			'<input type="number" name=contentData[graphOptions][value][]" value="" class="tiny" required />' +
+			'</li>' +
+			'<li class="iconList" data-counter="'+counter+'">' +
+			'<span class="icon icon16 fa-remove pointer jsLineRemoveButton"></span>' +
+			'</li>');
+		$(newRow[2]).find('.jsLineRemoveButton').click($.proxy(this._deleteGraphOption, this));
+		this._container.append(newRow);
+	},
+
+	_deleteGraphOption: function(event) {
+		var counter = $(event.currentTarget).parent().data('counter');
+		this._container.find('li[data-counter="'+counter+'"]').remove();
+	}
+});
+
+/**
  * Initialize Fireball.ACP.File namespace
  */
 Fireball.ACP.File = { };

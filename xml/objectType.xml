@@ -181,6 +181,12 @@
 			<classname>cms\system\content\type\WSIPImportContentType</classname>
 			<category>code</category>
 		</type>
+		<type>
+			<name>de.codequake.cms.content.type.graph.pie</name>
+			<definitionname>de.codequake.cms.content.type</definitionname>
+			<classname>cms\system\content\type\graph\PieChartContentType</classname>
+			<category>graph</category>
+		</type>
 		<!-- /content types -->
 
 		<!-- search -->

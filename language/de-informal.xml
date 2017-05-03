@@ -98,6 +98,13 @@
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube"><![CDATA[Youtube]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video"><![CDATA[Video-URL]]></item>
 		<item name="cms.acp.content.type.de.codequake.cms.content.type.youtube.video.error.notValid"><![CDATA[Keine gültige URL]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.graph.pie"><![CDATA[Kreis-Diagramm]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.graph.pie.showInlineTitle"><![CDATA[Titel inline (zusätzlich) anzeigen]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.graph.pie.showIn3D"><![CDATA[Dreidimensional anzeigen]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.graph.pie.title"><![CDATA[Bezeichnung]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.graph.pie.value"><![CDATA[Absoluter Anteil]]></item>
+		<item name="cms.acp.content.type.de.codequake.cms.content.type.graph.option.add"><![CDATA[Datensatz hinzufügen]]></item>
+		<item name="cms.acp.content.type.graph"><![CDATA[Diagramme]]></item>
 		<item name="cms.acp.content.type.general"><![CDATA[Allgemein]]></item>
 		<item name="cms.acp.content.type.media"><![CDATA[Medien]]></item>
 		<item name="cms.acp.content.type.structure"><![CDATA[Struktur]]></item>
