@@ -19,7 +19,7 @@ class ContentContentType extends AbstractContentType {
 	/**
 	 * @inheritDoc
 	 */
-	protected $icon = 'icon-file-text-alt';
+	protected $icon = 'fa-files-o';
 
 	/**
 	 * @inheritDoc
