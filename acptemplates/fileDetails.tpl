@@ -32,9 +32,20 @@
 	<h2 class="sectionTitle">{lang}cms.acp.file.data{/lang}</h2>
 
 	<dl>
-		<dt>{lang}cms.acp.file.title{/lang}</dt>
+		<dt><label for="title">{lang}cms.acp.file.title{/lang}</label></dt>
 		<dd>
 			<input type="text" name="title" id="title" class="long" value="{$file->getTitle()}" />
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="categoryID">{lang}cms.acp.file.categoryIDs{/lang}</label></dt>
+		<dd>
+			<select id="categoryIDs" name="categoryIDs" multiple="multiple" class="long" size="10">
+				{foreach from=$availableCategoryNodeList item=node}
+					<option value="{@$node->categoryID}"{if $node->categoryID|in_array:$categoryIDs} selected{/if}>{@"&nbsp;&nbsp;&nbsp;&nbsp;"|str_repeat:$availableCategoryNodeList->getDepth()}{$node->getTitle()}</option>
+				{/foreach}
+			</select>
 		</dd>
 	</dl>
 </section>

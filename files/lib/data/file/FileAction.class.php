@@ -59,11 +59,14 @@ class FileAction extends AbstractDatabaseObjectAction {
 	 */
 	public function getDetails() {
 		$file = $this->getSingleObject();
-
+		$categoryNodeTree = new CategoryNodeTree('de.codequake.cms.file', 0, true);
+		
 		return [
 			'fileID' => $file->fileID,
 			'template' => WCF::getTPL()->fetch('fileDetails', 'cms', [
 				'file' => $file,
+				'categoryIDs' => $file->getCategoryIDs(),
+				'availableCategoryNodeList' => $categoryNodeTree->getIterator(),
 				'fileACLObjectTypeID' => ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.file')
 			]),
 			'title' => $file->getTitle()

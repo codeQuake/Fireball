@@ -25,13 +25,23 @@ define(['Ajax', 'Language', 'Ui/Dialog', 'ObjectMap', 'Dom/Util', 'Core'], funct
 		},
 
 		_ajaxSuccess: function (data) {
-			var dialog = UiDialog.open(this, data.returnValues.template);
+			UiDialog.open(this, data.returnValues.template);
 			var submit = elBySel('.fileEditSubmit');
 			submit.addEventListener(WCF_CLICK_EVENT, this._saveForm.bind(this, submit));
 		},
 
 		_saveForm: function () {
 			var title = elBySel('input#title');
+			var categoryIDsSelect = elBySel('select#categoryIDs');
+
+			if (title == '' || categoryIDsSelect.selectedOptions.length == 0) {
+				return;
+			}
+
+			var categoryIDs = [], i;
+			for (i = 0; i < categoryIDsSelect.selectedOptions.length; i++) {
+				categoryIDs.push(categoryIDsSelect.selectedOptions[i].value);
+			}
 
 			Ajax.apiOnce({
 				data: {
@@ -41,15 +51,15 @@ define(['Ajax', 'Language', 'Ui/Dialog', 'ObjectMap', 'Dom/Util', 'Core'], funct
 					parameters: {
 						data: {
 							title: (title == undefined) ? '' : title.value
-						}
+						},
+						categoryIDs: categoryIDs
 					}
 				},
 				success: function () {
-					alert('Success!');
-					//window.location.reload();
+					window.location.reload();
 				},
 				failure: function () {
-					alert('Update Failed!');
+					elBySel('.formSubmit');
 				}
 			});
 		},
@@ -85,7 +95,7 @@ define(['Ajax', 'Language', 'Ui/Dialog', 'ObjectMap', 'Dom/Util', 'Core'], funct
 		init: function () {
 			this._details = new ObjectMap();
 
-			var element, elements = elBySelAll('.jsFileDetails'), elementData, triggerChange = false;
+			var element, elements = elBySelAll('.jsFileDetails');
 			for (var i = 0, length = elements.length; i < length; i++) {
 				element = elements[i];
 				element.addEventListener(WCF_CLICK_EVENT, this._showDetails.bind(this, element));
