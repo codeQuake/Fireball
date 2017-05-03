@@ -6,6 +6,7 @@ use wcf\data\DatabaseObject;
 use wcf\data\ILinkableObject;
 use wcf\data\IPermissionObject;
 use wcf\system\category\CategoryHandler;
+use wcf\system\event\EventHandler;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
@@ -116,7 +117,7 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 	 */
 	public function getIconTag($width = 16) {
 		if (preg_match('/image/i', $this->fileType)) {
-			return '<span class="icon icon' . $width . ' fa-picture"></span>';
+			return '<span class="icon icon' . $width . ' fa-image"></span>';
 		}
 		if (preg_match('/audio/i', $this->fileType)) {
 			return '<span class="icon icon' . $width . ' fa-music"></span>';
@@ -124,14 +125,16 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 		if (preg_match('/video/i', $this->fileType)) {
 			return '<span class="icon icon' . $width . ' fa-film"></span>';
 		}
-		if (preg_match('/pdf/i', $this->fileType)) {
+		if (preg_match('/(pdf|wordprocessingml)/i', $this->fileType)) {
 			return '<span class="icon icon' . $width . ' fa-file-text"></span>';
 		}
 		if (preg_match('/html/i', $this->fileType) || preg_match('/java/i', $this->fileType) || preg_match('/x-c/i', $this->fileType) || preg_match('/css/i', $this->fileType) || preg_match('/javascript/i', $this->fileType)) {
 			return '<span class="icon icon' . $width . ' fa-code"></span>';
 		}
-
-		return '<span class="icon icon' . $width . ' fa-file"></span>';
+		
+		$tag = '<span class="icon icon' . $width . ' fa-file"></span>';
+		EventHandler::getInstance()->fireAction($this, 'getIconTag', $tag);
+		return $tag;
 	}
 
 	/**
