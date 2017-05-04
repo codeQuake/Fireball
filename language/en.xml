@@ -455,6 +455,10 @@
 		<item name="wcf.clipboard.item.de.codequake.cms.content.delete.confirmMessage"><![CDATA[Do you really want to delete {#$count} content{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.disable"><![CDATA[Deactivate ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.enable"><![CDATA[Activate ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.content.copyTo"><![CDATA[Duplicate onto this page ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.content.copyTo.confirmMessage"><![CDATA[Do you really want to duplicate the marked contents onto this page?{if !$contents|empty}<br><br><ul>{foreach from=$contents item=$content}<li>({$content->contentID] @ {$content->getPage()->getTitle()}) {$content->getTitle()}</li>{/foreach}</ul>{/if}]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.content.moveTo"><![CDATA[Move to this page ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.content.moveTo.confirmMessage"><![CDATA[Do you really want to move the marked contents to this page?{if !$contents|empty}<br><br><ul>{foreach from=$contents item=$content}<li>({$content->contentID] @ {$content->getPage()->getTitle()}) {$content->getTitle()}</li>{/foreach}</ul>{/if}]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.file.delete"><![CDATA[Delete ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.file.delete.confirmMessage"><![CDATA[Do you really want to delete {#$count} file{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete"><![CDATA[Delete ({#$count})]]></item>

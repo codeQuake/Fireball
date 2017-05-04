@@ -455,6 +455,10 @@
 		<item name="wcf.clipboard.item.de.codequake.cms.content.delete.confirmMessage"><![CDATA[{if $count == 1}Einen Inhalt{else}{#$count} Inhalte{/if} löschen?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.disable"><![CDATA[Deaktivieren ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.content.enable"><![CDATA[Aktivieren ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.content.copyTo"><![CDATA[Auf diese Seite kopieren ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.content.copyTo.confirmMessage"><![CDATA[Willst du die gewählten Inhalte wirklich auf diese Seite duplizieren?{if !$contents|empty}<br><br><ul>{foreach from=$contents item=$content}<li>({$content->contentID] @ {$content->getPage()->getTitle()}) {$content->getTitle()}</li>{/foreach}</ul>{/if}]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.content.moveTo"><![CDATA[Auf diese Seite verschieben ({#$count})]]></item>
+		<item name="wcf.clipboard.item.de.codequake.cms.content.moveTo.confirmMessage"><![CDATA[Willst du die gewählten Inhalte wirklich auf diese Seite verschieben?{if !$contents|empty}<br><br><ul>{foreach from=$contents item=$content}<li>({$content->contentID] @ {$content->getPage()->getTitle()}) {$content->getTitle()}</li>{/foreach}</ul>{/if}]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.file.delete"><![CDATA[Löschen ({#$count})]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.file.delete.confirmMessage"><![CDATA[{if $count == 1}Eine Datei{else}{#$count} Dateien{/if} löschen?]]></item>
 		<item name="wcf.clipboard.item.de.codequake.cms.page.delete"><![CDATA[Löschen ({#$count})]]></item>

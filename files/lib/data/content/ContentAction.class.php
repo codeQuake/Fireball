@@ -21,6 +21,8 @@ use wcf\system\WCF;
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @method getDecoratedObject() Content
  */
 class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAction, ISortableAction, IToggleAction {
 	/**
@@ -31,7 +33,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	/**
 	 * @inheritDoc
 	 */
-	protected $resetCache = ['copy', 'create', 'delete', 'disable', 'enable', 'toggle', 'update', 'updatePosition', 'frontendCreate'];
+	protected $resetCache = ['copy', 'create', 'delete', 'disable', 'enable', 'toggle', 'update', 'updatePosition', 'frontendCreate', 'copyTo', 'moveTo'];
 
 	/**
 	 * @inheritDoc
@@ -364,5 +366,63 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 			'action' => 'content.updatePosition'
 		]);
 		$pageAction->executeAction();
+	}
+	
+	public function validateCopyTo() {
+		$this->readInteger('pageID');
+	}
+	
+	public function copyTo() {
+		$sql = "SELECT  *
+				FROM    cms" . WCF_N . "_content
+				WHERE   contentID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		
+		$objectIDMapping = [];
+		
+		foreach ($this->objectIDs as $objectID) {
+			$statement->execute([$objectID]);
+			$data = $statement->fetchArray();
+			
+			unset($data['contentID']);
+			if (!empty($data['parentID'])) {
+				// set new parent or tmp store old one
+				if (!empty($objectIDMapping[$data['parentID']])) {
+					$data['parentID'] = $objectIDMapping[$data['parentID']]['objectID'];
+				}
+				else {
+					$objectIDMapping[$objectID]['parentID'] = $data['parentID'];
+					unset($data['parentID']);
+				}
+			}
+			$data['pageID'] = $this->parameters['pageID'];
+			
+			$newContent = ContentEditor::create($data);
+			$objectIDMapping[$objectID]['objectID'] = $newContent->contentID;
+		}
+		
+		foreach ($objectIDMapping as $oldID => $item) {
+			if (!empty($item['parentID']) && !empty($objectIDMapping[$item['parentID']])) {
+				$updateAction = new self([$item['objectID']], 'update', ['data' => [
+					'parentID' => $objectIDMapping[$item['parentID']]['objectID']
+				]]);
+				$updateAction->executeAction();
+			}
+		}
+		
+		ClipboardHandler::getInstance()->unmark($this->objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.content'));
+	}
+	
+	public function validateMoveTo() {
+		$this->readInteger('pageID');
+	}
+	
+	public function moveTo() {
+		$updateAction = new self($this->objectIDs, 'update', ['data' => [
+			'pageID' => $this->parameters['pageID']
+		]]);
+		$updateAction->executeAction();
+		
+		ClipboardHandler::getInstance()->unmark($this->objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.codequake.cms.content'));
 	}
 }

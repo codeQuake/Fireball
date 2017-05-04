@@ -13,6 +13,7 @@
 
 		WCF.TabMenu.init();
 
+		var movementAction = new Fireball.ACP.Content.Clipboard.ContentMovement({$pageID}, '.jsContentRow');
 		var deleteAction = new WCF.Action.NestedDelete('cms\\data\\content\\ContentAction', '.jsContentRow');
 		var toggleAction = new WCF.Action.Toggle('cms\\data\\content\\ContentAction', '.jsContentRow', '> .sortableNodeLabel > .buttons > .jsToggleButton');
 
@@ -20,8 +21,10 @@
 		actionObjects['de.codequake.cms.content'] = { };
 		actionObjects['de.codequake.cms.content']['disable'] = actionObjects['de.codequake.cms.content']['enable'] = toggleAction;
 		actionObjects['de.codequake.cms.content']['delete'] = deleteAction;
+		actionObjects['de.codequake.cms.content']['copyTo'] = movementAction;
+		actionObjects['de.codequake.cms.content']['moveTo'] = movementAction;
 
-		WCF.Clipboard.init('cms\\acp\\page\\ContentListPage', {@$hasMarkedItems}, actionObjects);
+		WCF.Clipboard.init('cms\\acp\\page\\ContentListPage', {@$hasMarkedItems}, actionObjects, {$pageID});
 
 		{foreach from=$availablePositions item=position}
 			new WCF.Sortable.List('contentList{$position|ucfirst}', 'cms\\data\\content\\ContentAction');

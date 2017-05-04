@@ -65,6 +65,57 @@ Fireball.ACP.Content.AddDialog = Class.extend({
 	}
 });
 
+Fireball.ACP.Content.Clipboard = {};
+
+Fireball.ACP.Content.Clipboard.ContentMovement = Class.extend({
+	_pageID: 0,
+
+	init: function (pageID) {
+		this._pageID = pageID;
+
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+
+		var self = this;
+		require(['EventHandler', 'WoltLabSuite/Core/Controller/Clipboard'], function(EventHandler, ControllerClipboard) {
+			EventHandler.add('com.woltlab.wcf.clipboard', 'de.codequake.cms.content', function (data) {
+				if (data.data.actionName == 'de.codequake.cms.content.copyTo') {
+					var objectIDs = data.data.parameters.objectIDs;
+					self._proxy.setOption('data', {
+						actionName: 'copyTo',
+						className: 'cms\\data\\content\\ContentAction',
+						objectIDs: objectIDs ,
+						parameters: {
+							pageID: self._pageID
+						}
+					});
+					self._proxy.sendRequest();
+				} else if (data.data.actionName == 'de.codequake.cms.content.moveTo') {
+					var objectIDs = data.data.parameters.objectIDs;
+					self._proxy.setOption('data', {
+						actionName: 'moveTo',
+						className: 'cms\\data\\content\\ContentAction',
+						objectIDs: objectIDs ,
+						parameters: {
+							pageID: self._pageID
+						}
+					});
+					self._proxy.sendRequest();
+				}
+			});
+		});
+	},
+
+	triggerEffect: function(objectIDs) {
+		console.log('triggerEffect');
+	},
+
+	_success: function (data) {
+		window.location.reload();
+	}
+});
+
 /**
  * Initialize Fireball.ACP.Content.Type namespace
  */

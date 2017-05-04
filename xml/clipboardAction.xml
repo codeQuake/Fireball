@@ -23,6 +23,20 @@
 				<page>cms\acp\page\ContentListPage</page>
 			</pages>
 		</action>
+		<action name="copyTo">
+			<actionclassname>cms\system\clipboard\action\ContentClipboardAction</actionclassname>
+			<showorder>4</showorder>
+			<pages>
+				<page>cms\acp\page\ContentListPage</page>
+			</pages>
+		</action>
+		<action name="moveTo">
+			<actionclassname>cms\system\clipboard\action\ContentClipboardAction</actionclassname>
+			<showorder>5</showorder>
+			<pages>
+				<page>cms\acp\page\ContentListPage</page>
+			</pages>
+		</action>
 		<!-- /content -->
 
 		<!-- file -->
