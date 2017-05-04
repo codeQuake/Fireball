@@ -9,8 +9,8 @@ use wcf\data\page\PageCache as WCFPageCache;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\PermissionDeniedException;
-use wcf\system\MetaTagHandler;
 use wcf\system\page\PageLocationManager;
+use wcf\system\MetaTagHandler;
 use wcf\system\WCF;
 
 /**
