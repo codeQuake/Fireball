@@ -1,6 +1,6 @@
 {include file='header' pageTitle='cms.acp.content.list'}
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
+{js application='cms' file='Fireball.ACP' acp='true'}
 <script data-relocate="true">
 	require(['Language'], function(Language) {
 		Language.addObject({

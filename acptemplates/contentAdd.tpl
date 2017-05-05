@@ -7,7 +7,7 @@
 	{include file='aclPermissionJavaScript' containerID='contentPermissionsContainer' categoryName='user.*' objectTypeID=$contentObjectTypeID}
 {/if}
 
-<script data-relocate="true" src="{@$__wcf->getPath('cms')}acp/js/Fireball.ACP.js?v={@LAST_UPDATE_TIME}"></script>
+{js application='cms' file='Fireball.ACP' acp='true'}
 <script data-relocate="true">
 	$(function() {
 		var $parentContentContainer = [ ];
