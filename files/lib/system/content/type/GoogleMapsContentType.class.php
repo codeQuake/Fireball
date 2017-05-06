@@ -14,7 +14,7 @@ class GoogleMapsContentType extends AbstractContentType {
 	/**
 	 * @inheritDoc
 	 */
-	protected $icon = 'icon-map-o';
+	protected $icon = 'fa-map-o';
 
 	/**
 	 * @inheritDoc
