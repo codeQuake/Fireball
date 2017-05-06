@@ -8,7 +8,6 @@
 
 				{if !$menuItems->current()->hasChildren()}</ul></li>{/if}
 				{assign var=oldDepth value=$menuItems->getDepth()}
-	</li>
 	{/foreach}
 	{section name=i loop=$oldDepth}</ul></li>{/section}
 </ul>
