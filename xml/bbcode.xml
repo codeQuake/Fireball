@@ -15,9 +15,7 @@
 				<attribute name="2">
 					<validationpattern><![CDATA[^\d+$]]></validationpattern>
 				</attribute>
-				<attribute name="3">
-					<usetext>1</usetext>
-				</attribute>
+				<attribute name="3" />
 			</attributes>
 		</bbcode>
 
