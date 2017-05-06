@@ -2,10 +2,10 @@
 	<div class="rssFeedContainer">
 		<ul class="articleList">
 			{content}
-			{if $rssFeed|isset}
-				{foreach from=$rssFeed item=item}
-					<li class="rssItemContainer">
-						<a href="{$item['link']}"><a href="{$item['link']}">
+				{if $rssFeed|isset}
+					{foreach from=$rssFeed item=item}
+						<li class="rssItemContainer">
+							<a href="{$item['link']}">
 								<div>
 									<div class="containerHeadline">
 										<h3 class="articleListTitle">{$item['title']}</h3>
@@ -20,6 +20,7 @@
 												<span class="icon icon16 fa-user"></span>
 												{$item['author']}
 											</li>
+										</ul>
 									</div>
 
 									<div class="containerContent articleListTeaser">
@@ -27,9 +28,9 @@
 									</div>
 								</div>
 							</a>
-					</li>
-				{/foreach}
-			{/if}
+						</li>
+					{/foreach}
+				{/if}
 			{/content}
 		</ul>
 	</div>
