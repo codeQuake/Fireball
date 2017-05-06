@@ -1,6 +1,6 @@
 {include file='header'}
 
-<section class="section">
+<div class="section">
 	{assign var=oldDepth value=0}
 	<ul class="sitemapList">
 		{foreach from=$pageNodeTree item=node}
@@ -18,6 +18,6 @@
 		{/foreach}
 		{section name=i loop=$oldDepth}</ul></li>{/section}
 	</ul>
-</section>
+</div>
 
 {include file='footer'}
