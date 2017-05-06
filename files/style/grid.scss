@@ -2,30 +2,30 @@
  *	Fireball Grid System for WCF
  */
 .gridContainer {
+	display: flex;
+	flex-flow: row wrap;
+
 	&::before, &::after {
-		display: table;
-		content: '';
+		//display: table;
+		//content: '';
 	}
 
 	&::after {
-		clear: both;
+		//clear: both;
 	}
 }
 
 @media all and (min-width: 801px) {
 	.grid {
-		float: left;
-		box-sizing: border-box;
-		-moz-box-sizing: border-box;
-
-		&:not(:last-child) {
-			//padding-right: @wcfGapMedium;
-		}
+		//float: left;
+		//box-sizing: border-box;
+		//-moz-box-sizing: border-box;
 	}
 
 	@for $i from 1 through 100 {
 		.grid#{$i} {
-			width: percentage($i/100);
+			//width: percentage($i/100);
+			flex: 0 0 percentage($i/100);
 		}
 	}
 }
