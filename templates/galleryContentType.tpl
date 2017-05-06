@@ -1,9 +1,7 @@
-<div class="gridContainer galleryContainer center">
+<div class="galleryContainer center">
 	{foreach from=$images item=image}
-		<div class="grid grid25 galleryImage shadow marginTop">
-			<figure>
-				<a class="imgThumb jsImageViewer" href="{$image->getLink()}"><img src="{$image->getThumbnailLink()}" alt="" /></a>
-			</figure>
+		<div class="galleryImage">
+			<a class="embeddedAttachmentLink jsImageViewer" href="{$image->getLink()}"><img src="{$image->getThumbnailLink()}" alt="" /></a>
 		</div>
 	{/foreach}
 </div>
