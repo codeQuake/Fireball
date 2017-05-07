@@ -573,7 +573,7 @@ class BackupHandler extends SingletonFactory {
 						unset($import['oldID']);
 					}
 					
-					$action = new $actionName(array(), 'create', ['data' => $import]);
+					$action = new $actionName(array(), 'create', array('data' => $import));
 					$new = $action->executeAction();
 					$new = $new['returnValues'];
 					
