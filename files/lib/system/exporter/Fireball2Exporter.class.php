@@ -450,11 +450,11 @@ class Fireball2Exporter extends AbstractExporter {
 		$statement = $this->database->prepareStatement($sql, $limit, $offset);
 		$statement->execute([$objectTypeID]);
 		
-	        while ($row = $statement->fetchArray()) {
-	            $this->categoryCache[$row['parentCategoryID']][] = $row;
-	        }
+		while ($row = $statement->fetchArray()) {
+			$this->categoryCache[$row['parentCategoryID']][] = $row;
+		}
 		
-	        $this->exportCategoriesRecursively();
+		$this->exportCategoriesRecursively();
 	}
 	
 	/**
@@ -582,13 +582,13 @@ class Fireball2Exporter extends AbstractExporter {
 	public function countCommentResponses() {
 		$objectTypeID = $this->getObjectTypeID('com.woltlab.wcf.comment.commentableContent', 'de.codequake.cms.page.comment');
 		
-		$sql = 'SELECT COUNT(*) AS count
-	            FROM wcf'.$this->dbNo.'_comment_response
-	            WHERE commentID IN (
-	                SELECT commentID
-	                FROM wcf'.$this->dbNo.'_comment
-	                WHERE	objectTypeID = ?
-	            )';
+		$sql = 'SELECT  COUNT(*) AS count
+			FROM    wcf'.$this->dbNo.'_comment_response
+			WHERE   commentID IN (
+				SELECT  commentID
+				FROM    wcf'.$this->dbNo.'_comment
+				WHERE	objectTypeID = ?
+			)';
 		$statement = $this->database->prepareStatement($sql);
 		$statement->execute([$objectTypeID]);
 		$row = $statement->fetchArray();
@@ -605,14 +605,14 @@ class Fireball2Exporter extends AbstractExporter {
 	public function exportCommentResponses($offset, $limit) {
 		$objectTypeID = $this->getObjectTypeID('com.woltlab.wcf.comment.commentableContent', 'de.codequake.cms.page.comment');
 		
-		$sql = 'SELECT *
-	            FROM wcf'.$this->dbNo.'_comment_response
-	            WHERE commentID IN (
-	                SELECT commentID
-	                FROM wcf'.$this->dbNo.'_comment
-	                WHERE objectTypeID = ?
-	            )
-	            ORDER BY responseID';
+		$sql = 'SELECT  *
+			FROM    wcf'.$this->dbNo.'_comment_response
+			WHERE   commentID IN (
+				SELECT  commentID
+				FROM    wcf'.$this->dbNo.'_comment
+				WHERE   objectTypeID = ?
+			)
+			ORDER BY responseID';
 		$statement = $this->database->prepareStatement($sql, $limit, $offset);
 		$statement->execute([$objectTypeID]);
 		
@@ -676,11 +676,10 @@ class Fireball2Exporter extends AbstractExporter {
 	 * @return array
 	 */
 	private function getLanguageItemValues($languageItem) {
-		$sql = '
-	            SELECT language_item.languageItemValue, language_item.languageCustomItemValue, language_item.languageUseCustomValue, language.languageCode
-	            FROM wcf'.$this->dbNo.'_language_item language_item
-	            LEFT JOIN wcf'.$this->dbNo.'_language language ON (language.languageID = language_item.languageID)
-	            WHERE language_item.languageItem = ?';
+		$sql = 'SELECT language_item.languageItemValue, language_item.languageCustomItemValue, language_item.languageUseCustomValue, language.languageCode
+			FROM wcf'.$this->dbNo.'_language_item language_item
+			LEFT JOIN wcf'.$this->dbNo.'_language language ON (language.languageID = language_item.languageID)
+			WHERE language_item.languageItem = ?';
 		$statement = $this->database->prepareStatement($sql);
 		$statement->execute([$languageItem]);
 		
