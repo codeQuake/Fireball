@@ -7,7 +7,7 @@ before_install:
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
 before_script:
-  - git clone --branch=master --depth=1 --quiet git://github.com/WoltLab/WCF.git WCF
+  - git clone --branch=2.1 --depth=1 --quiet git://github.com/WoltLab/WCF.git WCF
 script:
   - find . -type f -name '*.php' -not -path './WCF/*' -print0 |xargs -0 -I file -P 4 php -l file > /dev/null
   - phpcs -p --extensions=php --standard="`pwd`/WCF/CodeSniff/WCF" . --ignore="/WCF/*"
