@@ -43,6 +43,12 @@ class PageCache extends SingletonFactory {
 	 * @var	\cms\data\page\AccessiblePageNodeTree
 	 */
 	protected $menuNodeList = null;
+	
+	/**
+	 * amount of available pages
+	 * @var integer
+	 */
+	protected $pageCount = null;
 
 	/**
 	 * @inheritDoc
@@ -52,6 +58,7 @@ class PageCache extends SingletonFactory {
 		$this->pages = PageCacheBuilder::getInstance()->getData([], 'pages');
 		$this->stylesheetsToPage = PageCacheBuilder::getInstance()->getData([], 'stylesheetsToPage');
 		$this->structure = PageCacheBuilder::getInstance()->getData([], 'structure');
+		$this->pageCount = count($this->pages);
 		
 		$this->menuNodeTree = new AccessiblePageNodeTree();
 		$this->menuNodeTree->setMaxDepth(1);
@@ -186,5 +193,17 @@ class PageCache extends SingletonFactory {
 		}
 
 		return null;
+	}
+	
+	/**
+	 * Returns the amount of available pages
+	 * @return integer
+	 */
+	public function getPageCount() {
+		if ($this->pageCount === null) {
+			$this->pageCount = count($this->pages);
+		}
+		
+		return $this->pageCount;
 	}
 }

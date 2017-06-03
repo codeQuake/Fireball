@@ -117,8 +117,8 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 			return false;
 		}
 
-		if ($this->isHome) {
-			// user can't delete landing page
+		if ($this->isHome && PageCache::getInstance()->getPageCount() > 1) {
+			// user can't delete landing page if other pages exist
 			return false;
 		}
 
