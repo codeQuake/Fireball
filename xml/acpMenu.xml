@@ -74,11 +74,4 @@
 		</acpmenuitem>
 		<!-- /stylesheet -->
 	</import>
-	<delete>
-		<!-- boxmatch -->
-		<acpmenuitem name="fireball.acp.menu.link.fireball.boxmatch" />
-		<acpmenuitem name="fireball.acp.menu.link.fireball.boxmatch.list" />
-		<acpmenuitem name="fireball.acp.menu.link.fireball.boxmatch.add" />
-		<!-- /boxmatch -->
-	</delete>
 </data>

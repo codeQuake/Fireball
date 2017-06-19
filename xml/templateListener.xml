@@ -54,28 +54,4 @@
 		</templatelistener>
 		<!-- /admin -->
 	</import>
-	<delete>
-		<templatelistener name="newsTabMenuTabs">
-			<environment>admin</environment>
-			<templatename>__indexNewsInjection</templatename>
-			<eventname>newsTabMenuTabs</eventname>
-		</templatelistener>
-		<templatelistener name="newsTabMenuContents">
-			<environment>admin</environment>
-			<templatename>__indexNewsInjection</templatename>
-			<eventname>newsTabMenuContents</eventname>
-		</templatelistener>
-		<templatelistener name="logo">
-			<environment>user</environment>
-			<templatename>header</templatename>
-			<eventname>headerLogo</eventname>
-			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
-		</templatelistener>
-		<templatelistener name="headerLogo">
-			<environment>admin</environment>
-			<templatename>header</templatename>
-			<eventname>headerLogo</eventname>
-			<templatecode><![CDATA[{include file='__logo' application='cms'}]]></templatecode>
-		</templatelistener>
-	</delete>
 </data>

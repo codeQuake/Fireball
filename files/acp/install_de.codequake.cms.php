@@ -4,7 +4,7 @@ use wcf\data\package\update\server\PackageUpdateServerAction;
 use wcf\system\WCF;
 
 /**
- * @author           Jens Krumsieck
+ * @author           Jens Krumsieck, Florian Gail
  * @copyright        2013 - 2017 codeQuake
  * @license          GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package          de.codequake.cms
@@ -16,7 +16,7 @@ $optionUpdate = WCF::getDB()->prepareStatement($sql);
 
 // set default page title
 if (!defined('PAGE_TITLE') || !PAGE_TITLE) {
-	$optionUpdate->execute(['Fireball CMS 3.0', 'page_title']);
+	$optionUpdate->execute(['Fireball CMS 3.1', 'page_title']);
 }
 
 $sql = "SELECT	objectTypeID
@@ -42,9 +42,9 @@ CategoryEditor::create([
 	'time' => TIME_NOW
 ]);
 
-// add codequake update server
+// add MysteryCode update server
 if (isset($this->instruction['attributes']['installupdateserver']) && $this->instruction['attributes']['installupdateserver'] == 1) {
-	$serverURL = 'https://update.mysterycode.de/vortex/';
+	$serverURL = 'https://update.mysterycode.de/tornado/';
 	
 	// check if update server already exists
 	$sql = "SELECT	packageUpdateServerID

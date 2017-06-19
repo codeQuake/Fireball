@@ -369,10 +369,4 @@
 		</type>
 		<!-- /exporter -->
 	</import>
-	<delete>
-		<type name="de.codequake.cms.content.type.dashboard">
-			<name>de.codequake.cms.content.type.dashboard</name>
-			<definitionname>de.codequake.cms.content.type</definitionname>
-		</type>
-	</delete>
 </data>

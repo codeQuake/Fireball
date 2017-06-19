@@ -110,8 +110,4 @@ right:wcf.acp.option.fireball_pages_default_sidebar.right]]></selectoptions>
 			<!-- /fireball.content.slideshow -->
 		</options>
 	</import>
-	<delete>
-		<optioncategory name="dashboard.sidebar.fireball" />
-		<option name="fireball_dashboard_sidebar_entries" />
-	</delete>
 </data>
