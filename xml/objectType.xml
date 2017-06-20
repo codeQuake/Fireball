@@ -312,6 +312,17 @@
 			<conditionobject>com.woltlab.wcf.page</conditionobject>
 		</type>
 		<!-- /notice conditions -->
+
+		<!-- sitemap -->
+		<type>
+			<name>de.codequake.cms.sitemap.object.page</name>
+			<definitionname>com.woltlab.wcf.sitemap.object</definitionname>
+			<classname>cms\system\sitemap\object\PageSitemapObject</classname>
+			<priority>0.5</priority>
+			<changeFreq>monthly</changeFreq>
+			<rebuildTime>259200</rebuildTime>
+		</type>
+		<!-- /sitemap -->
 		
 		<!-- importer -->
 		<type>

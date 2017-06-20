@@ -448,6 +448,10 @@
 		<item name="wcf.acp.search.provider.de.codequake.cms.page"><![CDATA[CMS-Seiten]]></item>
 	</category>
 
+	<category name="wcf.acp.sitemap">
+		<item name="wcf.acp.sitemap.objectType.de.codequake.cms.sitemap.object.page"><![CDATA[Fireball CMS Seiten]]></item>
+	</category>
+
 	<category name="wcf.acp.stat">
 		<item name="wcf.acp.stat.category.de.codequake.cms"><![CDATA[Fireball CMS]]></item>
 		<item name="wcf.acp.stat.de.codequake.cms.page"><![CDATA[Seiten]]></item>
