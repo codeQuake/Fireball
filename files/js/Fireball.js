@@ -86,7 +86,7 @@ $.widget('ui.fireSlide', {
 		this._buttonList = $('<ul class="slideshowButtonList" />').appendTo(this.element);
 
 		for (var $i = 0; $i < this._count; $i++) {
-			if ($(this._items.get($i)).outerHeight() >= max_height) max_height = $(this._items.get($i)).outerHeight();
+			if ($(this._items.get($i)).outerHeight() >= max_height) max_height = $(this._items.get($i)).outerHeight() + 7;
 			var $icon = $('<li><a><span class="icon icon16 fa-circle"></span></a></li>').click($.proxy(this._click, this)).appendTo(this._buttonList);
 			if ($i == 0) $icon.addClass('active');
 		}
