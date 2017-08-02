@@ -1,6 +1,6 @@
 <script data-relocate="true">
 	$(function() {
-		handleFireballPage();
+		{if $action == 'edit'}handleFireballPage();{/if}
 		$('#pageID').change(handleFireballPage);
 		function handleFireballPage () {
 			var identifier = $('#pageID option:selected').data('identifier');
