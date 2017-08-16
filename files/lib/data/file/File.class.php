@@ -132,9 +132,11 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 			return '<span class="icon icon' . $width . ' fa-code"></span>';
 		}
 		
-		$tag = '<span class="icon icon' . $width . ' fa-file"></span>';
-		EventHandler::getInstance()->fireAction($this, 'getIconTag', $tag);
-		return $tag;
+		$parameters = [
+			'tag' => '<span class="icon icon' . $width . ' fa-file"></span>'
+		];
+		EventHandler::getInstance()->fireAction($this, 'getIconTag', $parameters);
+		return $parameters['tag'];
 	}
 
 	/**
