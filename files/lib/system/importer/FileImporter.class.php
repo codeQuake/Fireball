@@ -54,7 +54,7 @@ class FileImporter extends AbstractImporter {
 
 		$dir = dirname($file->getLocation());
 		if (!@file_exists($dir)) {
-			FileUtil::makePath($dir, 0777);
+			FileUtil::makePath($dir);
 		}
 
 		// copy file

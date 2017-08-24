@@ -296,7 +296,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 				// create subdirectory if necessary
 				$dir = dirname($uploadedFile->getLocation());
 				if (!@file_exists($dir)) {
-					FileUtil::makePath($dir, 0777);
+					FileUtil::makePath($dir);
 				}
 
 				// move uploaded file
