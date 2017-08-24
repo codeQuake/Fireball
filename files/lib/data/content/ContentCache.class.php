@@ -17,7 +17,10 @@ class ContentCache extends SingletonFactory {
 	protected $contents = [];
 
 	protected $tree = [];
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	protected function init() {
 		$this->tree = ContentCacheBuilder::getInstance()->getData([], 'tree');
 		$this->contents = ContentCacheBuilder::getInstance()->getData([], 'contents');

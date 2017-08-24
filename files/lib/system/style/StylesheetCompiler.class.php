@@ -4,6 +4,7 @@ namespace cms\system\style;
 use cms\data\stylesheet\Stylesheet;
 use Leafo\ScssPhp\Compiler;
 use wcf\data\option\Option;
+use wcf\system\exception\SystemException;
 use wcf\system\style\StyleHandler;
 use wcf\system\SingletonFactory;
 use wcf\util\FileUtil;
@@ -20,7 +21,7 @@ use wcf\util\StyleUtil;
  */
 class StylesheetCompiler extends SingletonFactory {
 	/**
-	 * @inheritDoc
+	 * @var Compiler
 	 */
 	protected $compiler = null;
 

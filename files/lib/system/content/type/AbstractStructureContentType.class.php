@@ -25,11 +25,12 @@ abstract class AbstractStructureContentType extends AbstractContentType {
 	public function getCSSClasses() {
 		return '';
 	}
-
+	
 	/**
 	 * Returns the css classes for child elements
-	 * 
-	 * @return	string
+	 *
+	 * @param \cms\data\content\Content $content
+	 * @return string
 	 */
 	public function getChildCSSClasses(Content $content) {
 		return '';

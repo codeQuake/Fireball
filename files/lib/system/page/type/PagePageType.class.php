@@ -1,9 +1,7 @@
 <?php
 
 namespace cms\system\page\type;
-use cms\data\page\Page;
 use cms\page\PagePage;
-use cms\system\page\type\AbstractPageType;
 use wcf\form\AbstractForm;
 
 /**

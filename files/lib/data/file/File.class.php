@@ -112,7 +112,8 @@ class File extends DatabaseObject implements ILinkableObject, IRouteController, 
 
 	/**
 	 * Returns an icon tag representing the mime type of this file.
-	 * 
+	 *
+	 * @param integer $width
 	 * @return	string
 	 */
 	public function getIconTag($width = 16) {

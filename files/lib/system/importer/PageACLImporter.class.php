@@ -3,6 +3,7 @@ namespace cms\system\importer;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\importer\AbstractACLImporter;
 use wcf\system\importer\ImportHandler;
+use wcf\system\WCF;
 
 /**
  * Imports ACLs of pages.
@@ -65,5 +66,7 @@ class PageACLImporter extends AbstractACLImporter {
 			
 			return 1;
 		}
+		
+		return 0;
 	}
 }

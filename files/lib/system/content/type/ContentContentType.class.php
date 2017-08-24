@@ -4,8 +4,6 @@ namespace cms\system\content\type;
 use cms\data\content\Content;
 use cms\data\content\ContentCache;
 use cms\data\content\DrainedContentNodeTree;
-use wcf\system\cache\builder\DashboardBoxCacheBuilder;
-use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 
 /**

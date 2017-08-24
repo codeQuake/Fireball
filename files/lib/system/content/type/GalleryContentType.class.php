@@ -61,7 +61,7 @@ class GalleryContentType extends AbstractContentType {
 
 	/**
 	 * @param array $imageIDs
-	 * @return FileList
+	 * @return FileList|\cms\data\file\File[]
 	 */
 	public function getImageList($imageIDs = []) {
 		if (empty($imageIDs))

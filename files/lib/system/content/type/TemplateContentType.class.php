@@ -48,7 +48,7 @@ class TemplateContentType extends AbstractContentType {
 		}
 		catch (SystemException $e) {
 			WCF::getTPL()->assign([
-				'compileError' => $e->_getMessage()
+				'compileError' => $e->getMessage()
 			]);
 
 			throw new UserInputException('text', 'compileError');
@@ -65,7 +65,10 @@ class TemplateContentType extends AbstractContentType {
 				$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $content->text);
 
 				$contentData = $content->contentData;
-				if (!is_array($contentData)) $contentData = unserialize($contentData);
+				if (!is_array($contentData)) {
+					/** @noinspection PhpParamsInspection */
+					$contentData = unserialize($contentData);
+				}
 				$contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
 
 				$contentAction = new ContentAction([$content], 'update', ['data' => ['contentData' => $contentData]]);

@@ -12,6 +12,9 @@ class SitemapPage extends AbstractPage {
 	 */
 	public $pageNodeTree = null;
 	
+	/**
+	 * @inheritDoc
+	 */
 	public function checkPermissions() {
 		parent::checkPermissions();
 		
@@ -27,7 +30,10 @@ class SitemapPage extends AbstractPage {
 		
 		$this->pageNodeTree = new AccessiblePageNodeTree();
 	}
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function assignVariables () {
 		parent::assignVariables();
 		

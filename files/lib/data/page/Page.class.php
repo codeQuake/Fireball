@@ -13,6 +13,7 @@ use wcf\data\page\PageCache as WCFPageCache;
 use wcf\data\DatabaseObject;
 use wcf\data\IPermissionObject;
 use wcf\data\ITitledLinkObject;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -433,5 +434,12 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 		}
 
 		return $this->latestEditTime;
+	}
+	
+	/**
+	 * @see	\wcf\data\IStorableObject::getData()
+	 */
+	public function getObjectData() {
+		return $this->data;
 	}
 }

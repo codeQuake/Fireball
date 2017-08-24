@@ -17,7 +17,10 @@ use wcf\system\bbcode\BBCodeParser;
 class CMSFileUrlBBCode extends AbstractBBCode {
 	public $fileID = 0;
 	public $file = null;
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser) {
 		$this->fileID = $content;
 		$this->file = FileCache::getInstance()->getFile($this->fileID);

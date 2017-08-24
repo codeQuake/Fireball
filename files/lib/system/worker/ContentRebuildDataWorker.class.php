@@ -65,7 +65,6 @@ class ContentRebuildDataWorker extends AbstractRebuildDataWorker {
 					// no lang item
 					$this->getHtmlInputProcessor()->process($text, 'de.codequake.cms.content.type.text', $content->contentID, true);
 					$contentData['text'] = $this->getHtmlInputProcessor()->getHtml();
-					$text = $contentData['text'];
 				}
 				else {
 					// is lang item

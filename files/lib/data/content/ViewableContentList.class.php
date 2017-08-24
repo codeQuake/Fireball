@@ -1,8 +1,6 @@
 <?php
 namespace cms\data\content;
 
-use cms\data\content\ContentList;
-
 /**
  * Represents a list of viewable content items.
  * 

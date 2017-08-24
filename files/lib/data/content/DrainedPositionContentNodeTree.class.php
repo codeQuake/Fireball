@@ -6,9 +6,9 @@ class DrainedPositionContentNodeTree extends DrainedContentNodeTree {
 	public $position = 'body';
 
 	public function __construct($parentID = null, $pageID = 0, $drainedID = null, $position = 'body', $isACP = 0) {
+		parent::__construct($parentID, $pageID);
+		
 		$this->drainedID = $drainedID;
-		$this->pageID = $pageID;
-		$this->parentID = $parentID;
 		$this->position = $position;
 		$this->isACP = $isACP;
 	}

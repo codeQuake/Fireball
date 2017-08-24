@@ -13,6 +13,9 @@ use wcf\data\IEditableCachedObject;
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @mixin Content
+ * @method Content getDecoratedObject()
  */
 class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**

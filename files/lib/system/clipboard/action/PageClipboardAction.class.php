@@ -3,7 +3,6 @@ namespace cms\system\clipboard\action;
 use cms\data\page\PageAction;
 use wcf\data\clipboard\action\ClipboardAction;
 use wcf\system\clipboard\action\AbstractClipboardAction;
-use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
@@ -13,6 +12,8 @@ use wcf\system\WCF;
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @property \cms\data\page\Page[] $objects
  */
 class PageClipboardAction extends AbstractClipboardAction {
 	/**

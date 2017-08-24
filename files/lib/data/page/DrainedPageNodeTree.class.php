@@ -14,7 +14,8 @@ class DrainedPageNodeTree extends PageNodeTree {
 	public $drainedID = null;
 
 	public function __construct($parentID = null, $drainedID = null) {
-		$this->parentID = $parentID;
+		parent::__construct($parentID);
+		
 		$this->drainedID = $drainedID;
 	}
 

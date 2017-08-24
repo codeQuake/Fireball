@@ -10,8 +10,10 @@ use cms\system\cache\builder\PageCacheBuilder;
 use cms\system\content\type\ISearchableContentType;
 use cms\system\page\handler\PagePageHandler;
 use cms\util\PageUtil;
+use wcf\data\menu\item\MenuItem;
 use wcf\data\menu\item\MenuItemAction;
 use wcf\data\menu\item\MenuItemEditor;
+use wcf\data\menu\item\MenuItemList;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
 use wcf\data\page\PageAction as WCFPageAction;
@@ -37,6 +39,10 @@ use wcf\util\DateUtil;
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @property PageEditor[] $objects
+ * @method PageEditor[] getObjects()
+ * @method PageEditor getSingleObject()
  */
 class PageAction extends AbstractDatabaseObjectAction implements IClipboardAction, ISortableAction, IToggleAction {
 	/**
@@ -82,7 +88,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 */
 	public function copy() {
 		$object = $this->getSingleObject();
-		$data = $object->getDecoratedObject()->getData();
+		$data = $object->getDecoratedObject()->getObjectData();
 
 		// remove unique or irrelevant properties
 		unset($data['pageID']);
@@ -141,6 +147,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 	/**
 	 * @inheritDoc
+	 * @return Page
 	 */
 	public function create() {
 		// set default values for author and last editor
@@ -241,13 +248,13 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$contentList->getConditionBuilder()->add('content.pageID = ?', [$object->pageID]);
 			$contentList->readObjects();
 
-			foreach ($contentList as $content) {
+			foreach ($contentList->getObjects() as $content) {
 				if ($content->getObjectType() === null)
 					continue;
 				
 				$objectType = $content->getObjectType();
 				
-				$tmpContentData = $content->getData();
+				$tmpContentData = $content->getObjectData();
 				
 				$langItem = $tmpContentData['title'];
 				$tmpContentData['title'] = [];
@@ -268,7 +275,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				$contentData[] = $tmpContentData;
 			}
 			
-			$pageData = $object->getDecoratedObject()->getData();
+			$pageData = $object->getDecoratedObject()->getObjectData();
 			foreach ($pageData as $key => $element) {
 				if ($key == 'title' || $key == 'description' || $key == 'metaDescription' || $key == 'metaKeywords') {
 					$langItem = $pageData[$key];
@@ -427,6 +434,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		// validate deactivation date
 		if ($this->parameters['data']['enableDelayedDeactivation']) {
 			$deactivationDateTimestamp = @strtotime($this->parameters['data']['deactivationDate']);
+			$publicationDateTimestamp = @strtotime($this->parameters['data']['publicationDate']);
 			if ($deactivationDateTimestamp === false || $deactivationDateTimestamp <= TIME_NOW) {
 				throw new UserInputException('deactivationDate', 'notValid');
 			}
@@ -435,7 +443,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 				throw new UserInputException('deactivationDate', 'notValid');
 			}
 			// deactivation date needs to be after publication date
-			if ($this->enableDelayedPublication && $deactivationDateTimestamp < $publicationDateTimestamp) {
+			if ($this->parameters['data']['enableDelayedPublication'] && $deactivationDateTimestamp < $publicationDateTimestamp) {
 				throw new UserInputException('deactivationDate', 'beforePublication');
 			}
 		}
@@ -445,8 +453,8 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			$this->parameters['data']['menuItemID'] = 0;
 		}
 		if ($this->parameters['data']['menuItemID']) {
-			$menuItem = new PageMenuItem($this->parameters['data']['menuItemID']);
-			if (!$menuItem->menuItemID) {
+			$menuItem = new MenuItem($this->parameters['data']['menuItemID']);
+			if (!$menuItem->itemID) {
 				// silently ignore menu item, user shouldn't be
 				// able to select this menu item in first place
 				$this->parameters['data']['menuItemID'] = 0;
@@ -572,17 +580,15 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$pageList = $pageNodeTree->getIterator();
 		
 		// load menu items
-		$menuItemList = new PageMenuItemList();
-		$menuItemList->getConditionBuilder()->add('page_menu_item.menuPosition = ?', ['header']);
-		$menuItemList->sqlOrderBy = 'page_menu_item.parentMenuItem ASC, page_menu_item.showOrder ASC';
+		$menuItems = [];
+		$menuItemList = new MenuItemList();
+		$menuItemList->sqlOrderBy = 'page_menu_item.parentItemID ASC, page_menu_item.showOrder ASC';
 		$menuItemList->readObjects();
 		foreach ($menuItemList as $menuItem) {
-			if ($menuItem->parentMenuItem) {
-				if (isset($menuItems[$menuItem->parentMenuItem])) {
-					$menuItems[$menuItem->parentMenuItem]->addChild($menuItem);
-				}
+			if ($menuItem->parentItemID && isset($menuItems[$menuItem->parentItemID])) {
+				$menuItems[$menuItem->parentItemID]->addChild($menuItem);
 			} else {
-				$menuItems[$menuItem->menuItem] = new ViewablePageMenuItem($menuItem);
+				$menuItems[$menuItem->itemID] = new $menuItem;
 			}
 		}
 		
@@ -612,7 +618,6 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			'stylesheetList' => $stylesheetList,
 			'availableStyles' => $availableStyles,
 			'pageList' => $pageList,
-			'action' => $action,
 			'pageID' => $pageID,
 			'menuItems' => $menuItems
 		]);
@@ -817,7 +822,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			}
 
 			foreach (LanguageFactory::getInstance()->getLanguages() as $language) {
-				SearchIndexManager::getInstance()->add(
+				SearchIndexManager::getInstance()->set(
 					'de.codequake.cms.page',
 					$pageEditor->pageID,
 					$language->get($pageEditor->description),

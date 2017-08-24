@@ -139,7 +139,7 @@ class VisitCountHandler extends SingletonFactory {
 	}
 
 	public function getVisitors($start, $end) {
-		$vistors = [];
+		$visitors = [];
 		$date = $start;
 		while ($date <= $end) {
 			$months = $this->getMonths();

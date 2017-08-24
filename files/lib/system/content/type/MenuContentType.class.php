@@ -22,6 +22,8 @@ class MenuContentType extends AbstractStructureContentType {
 	 * @inheritDoc
 	 */
 	public function getOutput(Content $content) {
+		$menuItems = [];
+		
 		switch ($content->type) {
 			case "children":
 				if (!empty($content->pageID))

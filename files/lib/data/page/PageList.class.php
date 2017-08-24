@@ -10,6 +10,9 @@ use wcf\data\DatabaseObjectList;
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @property Page[] $objects
+ * @method Page[] getObjects()
  */
 class PageList extends DatabaseObjectList {
 	/**

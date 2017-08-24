@@ -1,9 +1,6 @@
 <?php
 namespace wcf\system\event\listener;
 
-use wcf\data\package\PackageCache;
-// use wcf\system\event\listener\IEventListener;
-use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\request\route\FireballRequestRoute;
 
 /**
@@ -17,7 +14,7 @@ use wcf\system\request\route\FireballRequestRoute;
  */
 class FireballRouteListener implements IParameterizedEventListener {
 	/**
-	 * @see	\wcf\system\event\IEventListener::execute()
+	 * @inheritDoc
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		/** @var $eventObj \wcf\system\request\RouteHandler */

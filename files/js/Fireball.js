@@ -686,7 +686,7 @@ Fireball.Content.Dragging = Class.extend({
 	_drop: function (event, ui) {
 		//check if element comes from contenttype list
 		if (typeof ui.draggable.attr('id') !== 'undefined' && ui.draggable.attr('id').match('^de.codequake.cms')) {
-			$(event.target).append('<div class="draggedContent ' + ui.draggable.attr('id') + '" />')
+			$(event.target).append('<div class="draggedContent ' + ui.draggable.attr('id') + '" />');
 			var type = ui.draggable.attr('id');
 			var position = 'body';
 			if (typeof $(event.target).data('position') !== 'undefined')

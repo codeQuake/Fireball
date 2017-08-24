@@ -6,9 +6,9 @@ class DrainedContentNodeTree extends ContentNodeTree {
 	public $drainedID = null;
 
 	public function __construct($parentID = null, $pageID = 0, $drainedID = null) {
+		parent::__construct($parentID, $pageID);
+		
 		$this->drainedID = $drainedID;
-		$this->pageID = $pageID;
-		$this->parentID = $parentID;
 	}
 
 	public function isIncluded(ContentNode $contentNode) {

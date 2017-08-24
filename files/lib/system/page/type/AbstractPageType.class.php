@@ -16,7 +16,7 @@ use wcf\system\WCF;
 abstract class AbstractPageType implements IPageType {
 	/**
 	 * controller of the frontend page
-	 * @var Class
+	 * @var string
 	 */
 	public $frontendController;
 
@@ -76,12 +76,7 @@ abstract class AbstractPageType implements IPageType {
 	 */
 	public function readData(AbstractForm $form) {
 		if (empty($_POST)) {
-			if (!empty($form->page))
-				$page = $form->page;
-			
-			$return = [];
-			
-			return $return;
+			return [];
 		} else {
 			return $form->specificFormParameters;
 		}

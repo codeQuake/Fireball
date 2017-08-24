@@ -139,7 +139,8 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 
 	/**
 	 * Returns the formatted output for this content.
-	 * 
+	 *
+	 * @param       boolean $sortableOutput
 	 * @return	string
 	 */
 	public function getOutput($sortableOutput = false) {
@@ -284,5 +285,12 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 
 		$globalPermission = str_replace(['user.', 'mod.', 'admin.'], ['user.fireball.content.', 'mod.fireball.', 'user.fireball.content.'], $permission);
 		return WCF::getSession()->getPermission($globalPermission);
+	}
+	
+	/**
+	 * @see	\wcf\data\IStorableObject::getData()
+	 */
+	public function getObjectData() {
+		return $this->data;
 	}
 }

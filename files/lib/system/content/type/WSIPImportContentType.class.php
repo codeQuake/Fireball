@@ -49,7 +49,7 @@ class WSIPImportContentType extends TemplateContentType {
 		}
 		catch (SystemException $e) {
 			WCF::getTPL()->assign([
-				'compileError' => $e->_getMessage()
+				'compileError' => $e->getMessage()
 			]);
 
 			throw new UserInputException('text', 'compileError');
@@ -91,8 +91,10 @@ class WSIPImportContentType extends TemplateContentType {
 			$compiled = WCF::getTPL()->getCompiler()->compileString('de.codequake.cms.content.type.template' . $content->contentID, $source);
 			
 			$contentData = $content->contentData;
-			if (!is_array($contentData))
+			if (!is_array($contentData)) {
+				/** @noinspection PhpParamsInspection */
 				$contentData = unserialize($contentData);
+			}
 			$contentData['compiled'][WCF::getLanguage()->languageCode] = $compiled;
 			
 			$contentAction = new ContentAction([$content], 'update', ['data' => ['contentData' => $contentData]]);

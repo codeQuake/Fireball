@@ -22,7 +22,10 @@ class FileCache extends SingletonFactory {
 	protected $categoryIDs = [];
 	
 	protected $categories = null;
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	protected function init() {
 		$this->filesToCategory = FileCacheBuilder::getInstance()->getData([], 'filesToCategory');
 		$this->files = FileCacheBuilder::getInstance()->getData([], 'files');

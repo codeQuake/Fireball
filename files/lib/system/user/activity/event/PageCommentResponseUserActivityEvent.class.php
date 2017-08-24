@@ -22,7 +22,7 @@ class PageCommentResponseUserActivityEvent extends SingletonFactory implements I
 	 * @inheritDoc
 	 */
 	public function prepare(array $events) {
-		$commentsIDs = $responseIDs = $userIDs = [];
+		$commentIDs = $responseIDs = $userIDs = [];
 
 		foreach ($events as $event) {
 			$responseIDs[] = $event->objectID;

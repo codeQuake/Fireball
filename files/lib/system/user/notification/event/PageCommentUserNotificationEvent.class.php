@@ -38,7 +38,6 @@ class PageCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 	 * @inheritDoc
 	 */
 	public function getMessage() {
-		$comment = new Comment($this->userNotificationObject->commentID);
 		$page = PageCache::getInstance()->getPage($this->userNotificationObject->objectID);
 		
 		$authors = $this->getAuthors();
@@ -101,7 +100,6 @@ class PageCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 	 * @inheritDoc
 	 */
 	public function getLink() {
-		$comment = new Comment($this->userNotificationObject->commentID);
 		$page = PageCache::getInstance()->getPage($this->userNotificationObject->objectID);
 		
 		return $page->getLink();

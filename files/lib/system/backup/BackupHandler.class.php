@@ -4,13 +4,9 @@ namespace cms\system\backup;
 use cms\system\cache\builder\ContentCacheBuilder;
 use cms\system\cache\builder\FileCacheBuilder;
 use cms\system\cache\builder\PageCacheBuilder;
-use cms\data\content\ContentAction;
-use cms\data\file\FileAction;
 use cms\data\file\FileList;
-use cms\data\page\PageAction;
 use cms\data\stylesheet\StylesheetList;
 use wcf\data\category\CategoryList;
-use wcf\data\category\CategoryNodeTree;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
 use wcf\data\DatabaseObject;
@@ -59,7 +55,10 @@ class BackupHandler extends SingletonFactory {
 	protected $cmsUrl = '';
 	protected $api = '';
 	protected $cmsVersion = 0;
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	protected function init() {
 		$this->pages = PageCacheBuilder::getInstance()->getData([], 'pages');
 		$this->contents = ContentCacheBuilder::getInstance()->getData([], 'contents');
@@ -859,11 +858,15 @@ class BackupHandler extends SingletonFactory {
 			case 's':
 				if ($value[$length - 2] !== '"')
 					return false;
+				break;
+				
 			case 'b':
 			case 'i':
 			case 'd':
 				// This looks odd but it is quicker than isset()ing
 				$end .= ';';
+				break;
+				
 			case 'a':
 			case 'O':
 				$end .= '}';
@@ -886,6 +889,7 @@ class BackupHandler extends SingletonFactory {
 					
 					default:
 						return false;
+						break;
 				}
 			case 'N':
 				$end .= ';';
@@ -896,6 +900,7 @@ class BackupHandler extends SingletonFactory {
 			
 			default:
 				return false;
+				break;
 		}
 		
 		if (($result = @unserialize($value)) === false) {

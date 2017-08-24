@@ -40,7 +40,7 @@ class PieChartContentType extends AbstractContentType {
 			$total += $value;
 		}
 		
-		$data['total'] = $value;
+		$data['total'] = $total;
 	}
 	
 	/**

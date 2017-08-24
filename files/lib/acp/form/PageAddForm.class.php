@@ -9,6 +9,7 @@ use cms\data\page\PageNodeTree;
 use cms\data\stylesheet\StylesheetList;
 use cms\util\PageUtil;
 use wcf\acp\form\AbstractAcpForm;
+use wcf\data\menu\item\MenuItem;
 use wcf\data\menu\item\MenuItemAction;
 use wcf\data\menu\MenuCache;
 use wcf\data\object\type\ObjectTypeCache;
@@ -194,11 +195,24 @@ class PageAddForm extends AbstractAcpForm {
 	 */
 	public $stylesheetIDs = [];
 	
+	/**
+	 * @var string[]
+	 */
 	public $availablePageTypes = [];
 	
+	/**
+	 * @var integer
+	 */
 	public $pageObjectTypeID = 0;
+	
+	/**
+	 * @var \wcf\data\object\type\ObjectType
+	 */
 	public $pageObjectType = null;
 	
+	/**
+	 * @var mixed[]
+	 */
 	public $specificFormParameters = [];
 	
 	/**
@@ -319,6 +333,7 @@ class PageAddForm extends AbstractAcpForm {
 		// validate deactivation date
 		if ($this->enableDelayedDeactivation) {
 			$deactivationDateTimestamp = @strtotime($this->deactivationDate);
+			$publicationDateTimestamp = @strtotime($this->publicationDate);
 			if ($deactivationDateTimestamp === false || $deactivationDateTimestamp <= TIME_NOW) {
 				throw new UserInputException('deactivationDate', 'notValid');
 			}
@@ -340,7 +355,7 @@ class PageAddForm extends AbstractAcpForm {
 		}
 		if ($this->menuItemID) {
 			$menuItem = new MenuItem($this->menuItemID);
-			if (!$menuItem->menuItemID) {
+			if (!$menuItem->itemID) {
 				// silently ignore menu item, user shouldn't be
 				// able to select this menu item in first place
 				$this->menuItemID = 0;

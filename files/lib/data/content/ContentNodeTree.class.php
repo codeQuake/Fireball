@@ -2,7 +2,6 @@
 namespace cms\data\content;
 
 use cms\system\cache\builder\ContentCacheBuilder;
-use wcf\system\WCF;
 
 /**
  * Builds the content tree
@@ -71,7 +70,10 @@ class ContentNodeTree implements \IteratorAggregate {
 		}
 		return $children;
 	}
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getIterator() {
 		if ($this->parentNode === null) {
 			$this->buildTree();

@@ -59,7 +59,10 @@ class PageNodeTree implements \IteratorAggregate {
 		}
 		return $children;
 	}
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getIterator() {
 		if ($this->parentNode === null) {
 			$this->buildTree();

@@ -3,6 +3,7 @@ namespace cms\system\content\type;
 
 use cms\data\content\Content;
 use wcf\system\exception\SystemException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HTTPRequest;
 
@@ -82,8 +83,8 @@ class RssContentType extends AbstractContentType {
 					
 					$dc = $item->children('http://purl.org/dc/elements/1.1/');
 					$author = (string) $item->author;
-					if ($author == '') (string) $author = $dc->publisher;
-					if ($author == '') (string) $author = $dc->creator;
+					if ($author == '') $author = (string) $dc->publisher;
+					if ($author == '') $author = (string) $dc->creator;
 					$feed[] = [
 						'title' => (string) $item->title,
 						'description' => (string) $item->description,
