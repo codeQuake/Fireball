@@ -8,12 +8,14 @@ use cms\data\content\ContentNodeTree;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
 use cms\data\page\PageNodeTree;
+use wcf\acp\form\AbstractAcpForm;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\form\AbstractForm;
+use wcf\data\package\PackageCache;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
+use wcf\system\language\I18nValue;
 use wcf\system\poll\PollManager;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -23,12 +25,12 @@ use wcf\util\StringUtil;
 /**
  * Shows the content add form.
  * 
- * @author	Jens Krumsieck, Florian Frantzen
+ * @author	Jens Krumsieck, Florian Frantzen, Florian Gail
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class ContentAddForm extends AbstractForm {
+class ContentAddForm extends AbstractAcpForm {
 	/**
 	 * @inheritDoc
 	 */
@@ -123,9 +125,20 @@ class ContentAddForm extends AbstractForm {
 				throw new IllegalLinkException();
 			}
 		}
-
-		// register i18n-values
-		I18nHandler::getInstance()->register('title');
+		
+		$packageID = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms');
+		
+		$parentIsTabMenu = false;
+		if ($this->parentID) {
+			$parent = ContentCache::getInstance()->getContent($this->parentID);
+			//check if parent is tab menu
+			$parentIsTabMenu = ($parent->contentTypeID == ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.tabmenu'));
+		}
+		
+		$i18nTitle = new I18nValue('title');
+		$i18nTitle->setLanguageItem('cms.page.title', 'cms.page', $packageID);
+		if (!($this->objectType->getProcessor()->requiresTitle || in_array($this->position, ['sidebarLeft', 'sidebarRight']) || $parentIsTabMenu)) $i18nTitle->setFlags(I18nValue::ALLOW_EMPTY);
+		$this->registerI18nValue($i18nTitle);
 
 		// get acl object type id
 		$this->contentObjectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.content');
@@ -139,10 +152,7 @@ class ContentAddForm extends AbstractForm {
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
-
-		I18nHandler::getInstance()->readValues();
-
-		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
+		
 		if (isset($_POST['cssClasses'])) $this->cssClasses = StringUtil::trim($_POST['cssClasses']);
 		if (isset($_POST['showOrder'])) $this->showOrder = intval($_POST['showOrder']);
 		if (isset($_POST['contentData']) && is_array($_POST['contentData'])) $this->contentData = $_POST['contentData'];
@@ -189,23 +199,7 @@ class ContentAddForm extends AbstractForm {
 		}
 
 		$parent = null;
-		$parentIsTabMenu = false;
 		
-		if ($this->parentID) {
-			$parent = ContentCache::getInstance()->getContent($this->parentID);
-			//check if parent is tab menu
-			if ($parent->contentTypeID == ObjectTypeCache::getInstance()->getObjectTypeIDByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.tabmenu')) $parentIsTabMenu = true;
-		}
-		
-		if (!I18nHandler::getInstance()->validateValue('title', false, (!$this->objectType->getProcessor()->requiresTitle && $this->position != 'sidebar' && !$parentIsTabMenu))) {
-			if (I18nHandler::getInstance()->isPlainValue('title')) {
-				throw new UserInputException('title');
-			}
-			else {
-				throw new UserInputException('title', 'multilingual');
-			}
-		}
-
 		$page = new Page($this->pageID);
 		if (!$page->pageID) {
 			throw new UserInputException('pageID', 'invalid');
@@ -258,12 +252,9 @@ class ContentAddForm extends AbstractForm {
 				$contentData['pollID'] = $pollID;
 			}
 		}
-
-		if (!I18nHandler::getInstance()->isPlainValue('title')) {
-			I18nHandler::getInstance()->save('title', 'cms.content.title' . $contentID, 'cms.content', PACKAGE_ID);
-			$update['title'] = 'cms.content.title' . $contentID;
-		}
-
+		
+		$this->saveI18n($returnValues['returnValues'], ContentEditor::class);
+		
 		foreach ($this->objectType->getProcessor()->multilingualFields as $field) {
 			if (!I18nHandler::getInstance()->isPlainValue($field)) {
 				I18nHandler::getInstance()->save($field, 'cms.content.' . $field . $contentID, 'cms.content', PACKAGE_ID);
@@ -291,15 +282,22 @@ class ContentAddForm extends AbstractForm {
 		// save ACL values of the content
 		ACLHandler::getInstance()->save($returnValues['returnValues']->contentID, $this->contentObjectTypeID);
 		ACLHandler::getInstance()->disableAssignVariables();
-
-		$this->saved();
-
+		
+		$this->reset();
+	}
+	
+	/**
+	 * @inheritDoc
+	 */
+	public function reset() {
+		parent::reset();
+		
 		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', [
 			'application' => 'cms',
 			'id' => $this->pageID
 		], '#' . $this->position));
 	}
-
+	
 	/**
 	 * @inheritDoc
 	 */
@@ -321,7 +319,6 @@ class ContentAddForm extends AbstractForm {
 	public function assignVariables() {
 		parent::assignVariables();
 
-		I18nHandler::getInstance()->assignVariables();
 		ACLHandler::getInstance()->assignVariables($this->contentObjectTypeID);
 
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {

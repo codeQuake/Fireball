@@ -2,7 +2,7 @@
 namespace cms\acp\form;
 
 use cms\data\stylesheet\StylesheetAction;
-use wcf\form\AbstractForm;
+use wcf\acp\form\AbstractAcpForm;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -10,12 +10,12 @@ use wcf\util\StringUtil;
 /**
  * Shows the stylesheet add form.
  * 
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Gail
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class StylesheetAddForm extends AbstractForm {
+class StylesheetAddForm extends AbstractAcpForm {
 	/**
 	 * @inheritDoc
 	 */
@@ -80,16 +80,20 @@ class StylesheetAddForm extends AbstractForm {
 			'data' => $data
 		]);
 		$this->objectAction->executeAction();
-
-		$this->saved();
-
-		// show success message
-		WCF::getTPL()->assign('success', true);
-
+		
+		$this->reset();
+	}
+	
+	/**
+	 * @inheritDoc
+	 */
+	public function reset() {
+		parent::reset();
+		
 		// reset variables
 		$this->title = $this->scss = '';
 	}
-
+	
 	/**
 	 * @inheritDoc
 	 */

@@ -5,21 +5,18 @@ use cms\data\content\Content;
 use cms\data\content\ContentAction;
 use cms\data\content\ContentEditor;
 use cms\data\content\DrainedPositionContentNodeTree;
-use cms\data\page\Page;
 use cms\data\page\PageAction;
-use wcf\form\AbstractForm;
+use wcf\acp\form\AbstractAcpForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\poll\PollManager;
-use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
-use wcf\util\HeaderUtil;
 
 /**
  * Shows the content edit form.
  * 
- * @author	Jens Krumsieck, Florian Frantzen
+ * @author	Jens Krumsieck, Florian Frantzen, Florian Gail
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -56,20 +53,13 @@ class ContentEditForm extends ContentAddForm {
 	 * @inheritDoc
 	 */
 	public function save() {
-		AbstractForm::save();
+		AbstractAcpForm::save();
 
 		if ($this->objectType->objectType == 'de.codequake.cms.content.type.poll') {
 			$this->contentData['pollID'] = PollManager::getInstance()->save($this->contentID);
 		}
 
-		// save multilingual inputs
-		$languageVariable = 'cms.content.title'.$this->contentID;
-		if (I18nHandler::getInstance()->isPlainValue('title')) {
-			I18nHandler::getInstance()->remove($languageVariable);
-		} else {
-			I18nHandler::getInstance()->save('title', $languageVariable, 'cms.content', PACKAGE_ID);
-			$this->title = $languageVariable;
-		}
+		$this->beforeSaveI18n($this->content);
 
 		foreach ($this->objectType->getProcessor()->multilingualFields as $field) {
 			$languageVariable = 'cms.content.' . $field . $this->contentID;
@@ -97,6 +87,8 @@ class ContentEditForm extends ContentAddForm {
 			'data' => $data
 		]);
 		$this->objectAction->executeAction();
+		
+		$this->saveI18n($this->content, ContentEditor::class);
 
 		// create revision
 		if ($this->pageID == $this->content->pageID) {
@@ -124,12 +116,7 @@ class ContentEditForm extends ContentAddForm {
 		ACLHandler::getInstance()->save($this->contentID, $this->contentObjectTypeID);
 		ACLHandler::getInstance()->disableAssignVariables();
 
-		$this->saved();
-
-		HeaderUtil::redirect(LinkHandler::getInstance()->getLink('ContentList', [
-			'application' => 'cms',
-			'id' => $this->pageID
-		], '#' . $this->position));
+		$this->reset();
 	}
 
 	/**
@@ -139,8 +126,8 @@ class ContentEditForm extends ContentAddForm {
 		parent::readData();
 
 		if (empty($_POST)) {
-			$this->title = $this->content->getTitle();
-			I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->content->title, 'cms.content.title\d+');
+			$this->readDataI18n($this->content);
+			
 			$this->pageID = $this->content->pageID;
 			$this->cssClasses = $this->content->cssClasses;
 			$this->parentID = $this->content->parentID;
@@ -168,8 +155,6 @@ class ContentEditForm extends ContentAddForm {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-
-		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 
 		WCF::getTPL()->assign([
 			'action' => 'edit',

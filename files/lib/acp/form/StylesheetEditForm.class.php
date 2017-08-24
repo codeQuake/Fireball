@@ -4,14 +4,14 @@ namespace cms\acp\form;
 use cms\data\stylesheet\Stylesheet;
 use cms\data\stylesheet\StylesheetAction;
 use cms\data\stylesheet\StylesheetList;
-use wcf\form\AbstractForm;
+use wcf\acp\form\AbstractAcpForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
 /**
  * Shows the stylesheet edit form.
  * 
- * @author	Jens Krumsieck
+ * @author	Jens Krumsieck, Florian Gail
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -57,7 +57,7 @@ class StylesheetEditForm extends StylesheetAddForm {
 	 * @inheritDoc
 	 */
 	public function save() {
-		AbstractForm::save();
+		AbstractAcpForm::save();
 
 		$data = [
 			'title' => $this->title,

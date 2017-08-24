@@ -4,22 +4,22 @@ namespace cms\acp\form;
 use cms\data\page\DrainedPageNodeTree;
 use cms\data\page\Page;
 use cms\data\page\PageAction;
+use cms\data\page\PageEditor;
 use cms\data\page\PageNodeTree;
 use cms\util\PageUtil;
+use wcf\acp\form\AbstractAcpForm;
 use wcf\data\menu\item\MenuItemAction;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
-use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 
 /**
  * Shows the page edit form.
  * 
- * @author	Jens Krumsieck, Florian Frantzen
+ * @author	Jens Krumsieck, Florian Frantzen, Florian Gail
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
@@ -90,40 +90,9 @@ class PageEditForm extends PageAddForm {
 	 * @inheritDoc
 	 */
 	public function save() {
-		AbstractForm::save();
+		AbstractAcpForm::save();
 
-		// save multilingual inputs
-		$languageVariable = 'cms.page.title'.$this->pageID;
-		if (I18nHandler::getInstance()->isPlainValue('title')) {
-			I18nHandler::getInstance()->remove($languageVariable);
-		} else {
-			I18nHandler::getInstance()->save('title', $languageVariable, 'cms.page');
-			$this->title = $languageVariable;
-		}
-
-		$languageVariable = 'cms.page.description'.$this->pageID;
-		if (I18nHandler::getInstance()->isPlainValue('description')) {
-			I18nHandler::getInstance()->remove($languageVariable);
-		} else {
-			I18nHandler::getInstance()->save('description', $languageVariable, 'cms.page');
-			$this->description = $languageVariable;
-		}
-
-		$languageVariable = 'cms.page.metaDescription'.$this->pageID;
-		if (I18nHandler::getInstance()->isPlainValue('metaDescription')) {
-			I18nHandler::getInstance()->remove($languageVariable);
-		} else {
-			I18nHandler::getInstance()->save('metaDescription', $languageVariable, 'cms.page');
-			$this->metaDescription = $languageVariable;
-		}
-
-		$languageVariable = 'cms.page.metaKeywords'.$this->pageID;
-		if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
-			I18nHandler::getInstance()->remove($languageVariable);
-		} else {
-			I18nHandler::getInstance()->save('metaKeywords', $languageVariable, 'cms.page');
-			$this->metaKeywords = $languageVariable;
-		}
+		$this->beforeSaveI18n($this->page);
 
 		$data = [
 			// general data
@@ -177,6 +146,8 @@ class PageEditForm extends PageAddForm {
 
 		$this->objectAction = new PageAction([$this->pageID], 'update', $pageData);
 		$this->objectAction->executeAction();
+		
+		$this->saveI18n($this->page, PageEditor::class);
 
 		// update menu item
 		if ($this->menuItemID) {
@@ -200,6 +171,7 @@ class PageEditForm extends PageAddForm {
 		$objectAction->executeAction();
 
 		$this->saved();
+		
 		WCF::getTPL()->assign('success', true);
 	}
 
@@ -218,14 +190,12 @@ class PageEditForm extends PageAddForm {
 		$this->choosePageNodeList = $choosePageNodeTree->getIterator();
 
 		if (empty($_POST)) {
+			$this->readDataI18n($this->page);
+			
 			// general data
-			I18nHandler::getInstance()->setOptions('title', PACKAGE_ID, $this->page->title, 'cms.page.title\d+');
 			$this->alias = $this->page->alias;
-			I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->page->description, 'cms.page.description\d+');
-
+			
 			// meta information
-			I18nHandler::getInstance()->setOptions('metaDescription', PACKAGE_ID, $this->page->metaDescription, 'cms.page.metaDescription\d+');
-			I18nHandler::getInstance()->setOptions('metaKeywords', PACKAGE_ID, $this->page->metaKeywords, 'cms.page.metaKeywords\d+');
 			$this->allowIndexing = $this->page->allowIndexing;
 
 			// position
@@ -272,8 +242,6 @@ class PageEditForm extends PageAddForm {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-
-		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 
 		WCF::getTPL()->assign([
 			'action' => 'edit',

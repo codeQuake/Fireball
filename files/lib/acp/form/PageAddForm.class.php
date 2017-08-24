@@ -8,14 +8,15 @@ use cms\data\page\PageEditor;
 use cms\data\page\PageNodeTree;
 use cms\data\stylesheet\StylesheetList;
 use cms\util\PageUtil;
+use wcf\acp\form\AbstractAcpForm;
 use wcf\data\menu\item\MenuItemAction;
 use wcf\data\menu\MenuCache;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\package\PackageCache;
-use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
+use wcf\system\language\I18nValue;
 use wcf\system\language\LanguageFactory;
 use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
@@ -26,12 +27,12 @@ use wcf\util\StringUtil;
 /**
  * Shows the page add form.
  * 
- * @author	Jens Krumsieck, Florian Frantzen
+ * @author	Jens Krumsieck, Florian Frantzen, Florian Gail
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class PageAddForm extends AbstractForm {
+class PageAddForm extends AbstractAcpForm {
 	/**
 	 * @inheritDoc
 	 */
@@ -215,12 +216,24 @@ class PageAddForm extends AbstractForm {
 
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
 
-		// register i18n-values
-		I18nHandler::getInstance()->register('title');
-		I18nHandler::getInstance()->register('description');
-		I18nHandler::getInstance()->register('metaDescription');
-		I18nHandler::getInstance()->register('metaKeywords');
-
+		$packageID = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms');
+		
+		$i18nTitle = new I18nValue('title');
+		$i18nTitle->setLanguageItem('cms.page.title', 'cms.page', $packageID);
+		$this->registerI18nValue($i18nTitle);
+		
+		$i18nDescription = new I18nValue('description');
+		$i18nDescription->setLanguageItem('cms.page.description', 'cms.page', $packageID);
+		$this->registerI18nValue($i18nDescription);
+		
+		$i18nMetaDescription = new I18nValue('metaDescription');
+		$i18nMetaDescription->setLanguageItem('cms.page.metaDescription', 'cms.page', $packageID);
+		$this->registerI18nValue($i18nMetaDescription);
+		
+		$i18nMetaKeywords = new I18nValue('metaKeywords');
+		$i18nMetaKeywords->setLanguageItem('cms.page.metaKeywords', 'cms.page', $packageID);
+		$this->registerI18nValue($i18nMetaKeywords);
+		
 		// get available styles
 		$this->availableStyles = StyleHandler::getInstance()->getStyles();
 	}
@@ -231,17 +244,11 @@ class PageAddForm extends AbstractForm {
 	public function readFormParameters() {
 		parent::readFormParameters();
 
-		I18nHandler::getInstance()->readValues();
-
 		// general data
-		if (I18nHandler::getInstance()->isPlainValue('title')) $this->title = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
 		if (isset($_POST['alias'])) $this->alias = StringUtil::trim($_POST['alias']);
-		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
 		$this->createMenuItem = (isset($_POST['createMenuItem'])) ? 1 : 0;
 
 		// meta information
-		if (I18nHandler::getInstance()->isPlainValue('metaDescription')) $this->metaDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('metaDescription'));
-		if (I18nHandler::getInstance()->isPlainValue('metaKeywords')) $this->metaKeywords = StringUtil::trim(I18nHandler::getInstance()->getValue('metaKeywords'));
 		$this->allowIndexing = (isset($_POST['allowIndexing'])) ? 1 : 0;
 
 		// position
@@ -284,32 +291,8 @@ class PageAddForm extends AbstractForm {
 		if (empty($this->pageObjectType) || $this->pageObjectType === null)
 			throw new UserInputException('objectTypeID');
 
-		// validate title
-		if (!I18nHandler::getInstance()->validateValue('title')) {
-			if (I18nHandler::getInstance()->isPlainValue('title')) {
-				throw new UserInputException('title');
-			} else {
-				throw new UserInputException('title', 'multilingual');
-			}
-		}
-
 		// validate alias
 		$this->validateAlias();
-
-		// validate description
-		if (!I18nHandler::getInstance()->validateValue('description', false, true)) {
-			throw new UserInputException('description', 'multilingual');
-		}
-
-		// validate meta description
-		if (!I18nHandler::getInstance()->validateValue('metaDescription', false, true)) {
-			throw new UserInputException('metaDescription', 'multilingual');
-		}
-
-		// validate meta keywords
-		if (!I18nHandler::getInstance()->validateValue('metaKeywords', false, true)) {
-			throw new UserInputException('metaKeywords', 'multilingual');
-		}
 
 		// validate parent page
 		if ($this->parentID) {
@@ -476,25 +459,9 @@ class PageAddForm extends AbstractForm {
 
 		// save ACL
 		ACLHandler::getInstance()->save($page->pageID, $this->objectTypeID);
-
-		// save multilingual inputs
-		if (!I18nHandler::getInstance()->isPlainValue('title')) {
-			$updateData['title'] = 'cms.page.title'.$page->pageID;
-			I18nHandler::getInstance()->save('title', $updateData['title'], 'cms.page');
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('description')) {
-			$updateData['description'] = 'cms.page.description'.$page->pageID;
-			I18nHandler::getInstance()->save('description', $updateData['description'], 'cms.page');
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('metaDescription')) {
-			$updateData['metaDescription'] = 'cms.page.metaDescription'.$page->pageID;
-			I18nHandler::getInstance()->save('metaDescription', $updateData['metaDescription'], 'cms.page');
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('metaKeywords')) {
-			$updateData['metaKeywords'] = 'cms.page.metaKeywords'.$page->pageID;
-			I18nHandler::getInstance()->save('metaKeywords', $updateData['metaKeywords'], 'cms.page');
-		}
-
+		
+		$this->saveI18n($page, PageEditor::class);
+		
 		$this->createMenuItem($page->pageID, !empty($updateData['title']) ? $updateData['title'] : $this->title);
 
 		// save new information
@@ -510,25 +477,30 @@ class PageAddForm extends AbstractForm {
 		$objectAction->executeAction();
 		
 		$this->pageObjectType->getProcessor()->save($this);
-
-		$this->saved();
-		WCF::getTPL()->assign('success', true);
-
+		
+		$this->reset();
+	}
+	
+	/**
+	 * @inheritDoc
+	 */
+	public function reset() {
+		parent::reset();
+		
 		// reset values
-		$this->alias = $this->deactivationDate = $this->description = $this->metaDescription = $this->metaKeywords = $this->publicationDate = '';
+		$this->alias = $this->deactivationDate = $this->publicationDate = '';
 		$this->enableDelayedDeactivation = $this->enableDelayedPublication = $this->invisible = $this->menuItemID = $this->parentID = $this->showOrder = $this->styleID = 0;
 		$this->stylesheetIDs = $this->specificFormParameters = [];
-
+		
 		$this->allowIndexing = FIREBALL_PAGES_DEFAULT_ALLOW_INDEXING;
 		$this->allowSubscribing = FIREBALL_PAGES_DEFAULT_ALLOW_SUBSCRIBING;
 		$this->availableDuringOfflineMode = FIREBALL_PAGES_DEFAULT_OFFLINE;
 		$this->createMenuItem = FIREBALL_PAGES_DEFAULT_MENU_ITEM;
 		$this->sidebarOrientation = FIREBALL_PAGES_DEFAULT_SIDEBAR;
-
-		I18nHandler::getInstance()->reset();
+		
 		ACLHandler::getInstance()->disableAssignVariables();
 	}
-
+	
 	/**
 	 * @inheritDoc
 	 */
@@ -568,7 +540,6 @@ class PageAddForm extends AbstractForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		I18nHandler::getInstance()->assignVariables();
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
 		
 		WCF::getTPL()->assign(array_merge_recursive($this->specificFormParameters, [

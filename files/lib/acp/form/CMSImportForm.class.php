@@ -2,10 +2,9 @@
 namespace cms\acp\form;
 
 use cms\system\backup\BackupHandler;
-use wcf\form\AbstractForm;
+use wcf\acp\form\AbstractAcpForm;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
-use wcf\system\WCF;
 use wcf\util\FileUtil;
 use wcf\util\StringUtil;
 
@@ -17,7 +16,7 @@ use wcf\util\StringUtil;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  */
-class CMSImportForm extends AbstractForm {
+class CMSImportForm extends AbstractAcpForm {
 	/**
 	 * @inheritDoc
 	 */
@@ -96,7 +95,6 @@ class CMSImportForm extends AbstractForm {
 		//perform import
 		BackupHandler::getInstance()->handleImport($this->backup);
 
-		$this->saved();
-		WCF::getTPL()->assign('success', true);
+		$this->reset();
 	}
 }
