@@ -12,7 +12,6 @@ use wcf\system\exporter\AbstractExporter;
 use wcf\system\importer\ImportHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
-use wcf\system\WCF;
 
 /**
  * Provides an exporter from Infinite Portal 1.1 into Fireball CMS 2.1

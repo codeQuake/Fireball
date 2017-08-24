@@ -3,7 +3,6 @@ namespace cms\system\clipboard\action;
 use cms\data\page\PageAction;
 use wcf\data\clipboard\action\ClipboardAction;
 use wcf\system\clipboard\action\AbstractClipboardAction;
-use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**

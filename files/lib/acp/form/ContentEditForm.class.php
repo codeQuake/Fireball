@@ -3,9 +3,7 @@ namespace cms\acp\form;
 
 use cms\data\content\Content;
 use cms\data\content\ContentAction;
-use cms\data\content\ContentEditor;
 use cms\data\content\DrainedPositionContentNodeTree;
-use cms\data\page\Page;
 use cms\data\page\PageAction;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;

@@ -1,9 +1,6 @@
 <?php
 namespace wcf\system\event\listener;
 
-use wcf\data\package\PackageCache;
-// use wcf\system\event\listener\IEventListener;
-use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\request\route\FireballRequestRoute;
 
 /**

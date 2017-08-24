@@ -1,12 +1,9 @@
 <?php
 namespace cms\system\cache\builder;
 
-use cms\data\page\Page;
 use cms\data\page\PageList;
 use wcf\system\acl\ACLHandler;
 use wcf\system\cache\builder\AbstractCacheBuilder;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\WCF;
 
 /**
  * Caches page permissions.

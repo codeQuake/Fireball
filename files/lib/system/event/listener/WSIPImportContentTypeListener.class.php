@@ -4,7 +4,6 @@ namespace cms\system\event\listener;
 use cms\data\content\ContentAction;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\event\listener\IParameterizedEventListener;
-use wcf\system\WCF;
 
 /**
  * Updates the content type from wsip import to text
