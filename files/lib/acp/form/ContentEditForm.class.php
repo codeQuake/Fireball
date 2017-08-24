@@ -32,7 +32,12 @@ class ContentEditForm extends ContentAddForm {
 	 * @var	\cms\data\content\Content
 	 */
 	public $content = null;
-
+	
+	/**
+	 * @inheritDoc
+	 */
+	public $action = 'edit';
+	
 	/**
 	 * @inheritDoc
 	 */
@@ -156,7 +161,6 @@ class ContentEditForm extends ContentAddForm {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign([
-			'action' => 'edit',
 			'contentID' => $this->contentID
 		]);
 	}

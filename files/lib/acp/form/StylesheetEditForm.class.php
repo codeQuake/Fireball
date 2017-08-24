@@ -39,7 +39,12 @@ class StylesheetEditForm extends StylesheetAddForm {
 	 * @var	array<\cms\data\stylesheet\Stylesheet>
 	 */
 	public $stylesheets = [];
-
+	
+	/**
+	 * @inheritDoc
+	 */
+	public $action = 'edit';
+	
 	/**
 	 * @inheritDoc
 	 */
@@ -104,7 +109,6 @@ class StylesheetEditForm extends StylesheetAddForm {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign([
-			'action' => 'edit',
 			'stylesheetID' => $this->stylesheetID,
 			'stylesheets' => $this->stylesheets
 		]);

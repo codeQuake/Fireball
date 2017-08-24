@@ -101,7 +101,6 @@ class StylesheetAddForm extends AbstractAcpForm {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign([
-			'action' => 'add',
 			'title' => $this->title,
 			'scss' => $this->scss
 		]);

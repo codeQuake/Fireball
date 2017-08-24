@@ -559,7 +559,6 @@ class PageAddForm extends AbstractAcpForm {
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
 		
 		WCF::getTPL()->assign(array_merge_recursive($this->specificFormParameters, [
-			'action' => 'add',
 			'availableStyles' => $this->availableStyles,
 			'menuItemNodeList' => $this->menuItemNodeList,
 			'objectTypeID' => $this->objectTypeID,

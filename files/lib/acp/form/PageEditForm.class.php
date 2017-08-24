@@ -52,7 +52,12 @@ class PageEditForm extends PageAddForm {
 	 * @inheritdoc
 	 */
 	public $createMenuItem = 0;
-
+	
+	/**
+	 * @inheritDoc
+	 */
+	public $action = 'edit';
+	
 	/**
 	 * @inheritDoc
 	 */
@@ -244,7 +249,6 @@ class PageEditForm extends PageAddForm {
 		parent::assignVariables();
 
 		WCF::getTPL()->assign([
-			'action' => 'edit',
 			'choosePageNodeList' => $this->choosePageNodeList,
 			'pageID' => $this->pageID,
 			'page' => $this->page

@@ -324,7 +324,6 @@ class ContentAddForm extends AbstractAcpForm {
 		}
 
 		WCF::getTPL()->assign([
-			'action' => 'add',
 			'contentData' => $this->contentData,
 			'contentList' => $this->contentList,
 			'cssClasses' => $this->cssClasses,
