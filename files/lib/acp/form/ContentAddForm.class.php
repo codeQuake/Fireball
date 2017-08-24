@@ -126,8 +126,6 @@ class ContentAddForm extends AbstractAcpForm {
 			}
 		}
 		
-		$packageID = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms');
-		
 		$parentIsTabMenu = false;
 		if ($this->parentID) {
 			$parent = ContentCache::getInstance()->getContent($this->parentID);
@@ -136,7 +134,7 @@ class ContentAddForm extends AbstractAcpForm {
 		}
 		
 		$i18nTitle = new I18nValue('title');
-		$i18nTitle->setLanguageItem('cms.page.title', 'cms.page', $packageID);
+		$i18nTitle->setLanguageItem('cms.page.title', 'cms.page', 'de.codequake.cms');
 		if (!($this->objectType->getProcessor()->requiresTitle || in_array($this->position, ['sidebarLeft', 'sidebarRight']) || $parentIsTabMenu)) $i18nTitle->setFlags(I18nValue::ALLOW_EMPTY);
 		$this->registerI18nValue($i18nTitle);
 

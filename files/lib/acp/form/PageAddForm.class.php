@@ -216,24 +216,22 @@ class PageAddForm extends AbstractAcpForm {
 
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.codequake.cms.page');
 
-		$packageID = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms');
-		
 		$i18nTitle = new I18nValue('title');
-		$i18nTitle->setLanguageItem('cms.page.title', 'cms.page', $packageID);
+		$i18nTitle->setLanguageItem('cms.page.title', 'cms.page', 'de.codequake.cms');
 		$this->registerI18nValue($i18nTitle);
 		
 		$i18nDescription = new I18nValue('description');
-		$i18nDescription->setLanguageItem('cms.page.description', 'cms.page', $packageID);
+		$i18nDescription->setLanguageItem('cms.page.description', 'cms.page', 'de.codequake.cms');
 		$i18nDescription->setFlags(I18nValue::ALLOW_EMPTY);
 		$this->registerI18nValue($i18nDescription);
 		
 		$i18nMetaDescription = new I18nValue('metaDescription');
-		$i18nMetaDescription->setLanguageItem('cms.page.metaDescription', 'cms.page', $packageID);
+		$i18nMetaDescription->setLanguageItem('cms.page.metaDescription', 'cms.page', 'de.codequake.cms');
 		$i18nMetaDescription->setFlags(I18nValue::ALLOW_EMPTY);
 		$this->registerI18nValue($i18nMetaDescription);
 		
 		$i18nMetaKeywords = new I18nValue('metaKeywords');
-		$i18nMetaKeywords->setLanguageItem('cms.page.metaKeywords', 'cms.page', $packageID);
+		$i18nMetaKeywords->setLanguageItem('cms.page.metaKeywords', 'cms.page', 'de.codequake.cms');
 		$i18nMetaKeywords->setFlags(I18nValue::ALLOW_EMPTY);
 		$this->registerI18nValue($i18nMetaKeywords);
 		
