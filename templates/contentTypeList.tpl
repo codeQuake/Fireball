@@ -1,6 +1,8 @@
 <div id="contentTypeList" class="contentTypeList leftSide allowScroll">
 	<div class="section">
-		<a id="contentTypeListMove" class="button buttonPrimary"><span class="icon icon24 fa-angle-right"></span></a>
+		<a id="contentTypeListToggle" class="button buttonPrimary jsTooltip" title="{lang}wcf.global.button.close{/lang}"><span class="icon icon24 fa-remove"></span></a>
+		<a id="contentTypeListMove" class="button buttonPrimary jsTooltip" title="{lang}cms.acp.content.typelist.toggleside{/lang}"><span class="icon icon24 fa-angle-right"></span></a>
+
 		<h2 class="sectionTitle">{lang}cms.acp.content.add{/lang}</h2>
 
 		{foreach from=$contentTypes key=category item=types}

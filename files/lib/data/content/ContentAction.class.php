@@ -10,6 +10,7 @@ use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
 use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\exception\AJAXException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
@@ -152,8 +153,18 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	 public function validateFrontendCreate() {
 		//check permission
 		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) throw new AJAXException();
-		//TODO I18n & other error handling
-		if (!isset($this->parameters['data']['parentID'])) $this->parameters['data']['parentID'] = null;
+		
+		if (empty($this->parameters['data']['parentID'])) $this->parameters['data']['parentID'] = null;
+		
+		 $objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $this->parameters['objectType']);
+		 if ($objectType === null || !$objectType->getProcessor()->isAvailableToAdd($this->parameters['data']['position'])) {
+			 throw new UserInputException('objectType');
+		 }
+		 
+		 // validate object type specific parameters
+		 if (!empty($this->parameters['data']['contentData'])) {
+			 $objectType->getProcessor()->validate($this->parameters['data']['contentData']);
+		 }
 	 }
 	 
 	/**
@@ -165,15 +176,8 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		if ($data['parentID'] == 0) $data['parentID'] = null;
 		
 		//content type
-		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $data['objectType']);
-		if ($objectType === null || !$objectType->getProcessor()->isAvailableToAdd()) {
-			throw new UserInputException('objectType');
-		}
+		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', $this->parameters['objectType']);
 		$data['contentTypeID'] = $objectType->objectTypeID;
-		
-		//unset unused
-		unset($data['t']);
-		unset($data['objectType']);
 		
 		//unset bullshit
 		unset($data['undefined']);
@@ -181,10 +185,11 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		//set params
 		$this->parameters['data'] = $data;
 		
-		//finally create new page
+		//finally create new content
 		$content = $this->create();
 		return [
 			'content' => $content,
+			'position' => $data['position'],
 			'output' => $content->getOutput(),
 			'parentID' => $content->parentID ?: 0
 		];
@@ -198,7 +203,8 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		if (!WCF::getSession()->getPermission('admin.fireball.content.canAddContent')) throw new AJAXException();
 		
 		//validate position
-		if (!isset($this->parameters['position']) || !in_array($this->parameters['position'], ['body', 'sidebar'])) throw new UserInputException('position');
+		else if (!empty($this->parameters['position']) && $this->parameters['position'] == 'sidebar') $this->parameters['position'] = 'sidebarRight';
+		if (!isset($this->parameters['position']) || !in_array($this->parameters['position'], Content::AVAILABLE_POSITIONS)) throw new UserInputException('position');
 		
 		//validate parent
 		if (isset($this->parameters['parentID']) && $this->parameters['parentID'] != 0) {
@@ -239,6 +245,8 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 
 		$objectType->getProcessor()->readParameters();
 		I18nHandler::getInstance()->assignVariables();
+		
+		$i18nFields = $objectType->getProcessor()->multilingualFields;
 
 		return [
 			'template' => WCF::getTPL()->fetch('contentAddDialog', 'cms', [
@@ -257,7 +265,8 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 					'errorType' => '',
 					'position' => $position
 				])
-			])
+			]),
+			'i18nFields' => $i18nFields
 		];
 	}
 

@@ -1,4 +1,4 @@
-{if $position|empty}{assign var=position value='content'}{/if}
+{if $position|empty}{assign var=position value='body'}{/if}
 
 {assign var=oldDepth value=0}
 {foreach from=$contentNodeTree item=content}

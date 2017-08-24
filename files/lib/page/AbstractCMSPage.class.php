@@ -1,6 +1,7 @@
 <?php
 namespace cms\page;
 
+use cms\data\content\Content;
 use cms\data\page\PageCache;
 use cms\data\page\PageEditor;
 use cms\system\counter\VisitCountHandler;
@@ -53,6 +54,12 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	 * @var array
 	 */
 	public $contents = [];
+	
+	/**
+	 * inline editor activated
+	 * @var boolean
+	 */
+	public $editOnInit = false;
 
 	/**
 	 * @inheritDoc
@@ -103,6 +110,10 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		if (!$this->page->canRead()) {
 			throw new PermissionDeniedException();
 		}
+		
+		if (isset($_GET['editOnInit']) && $_GET['editOnInit']) {
+			$this->editOnInit = true;
+		}
 	}
 
 	/**
@@ -123,9 +134,16 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 				}
 			}
 		}
-
+		
 		// get contents
-		$this->contentNodeTrees = $this->page->getContents();
+		if ($this->editOnInit) {
+			$this->contentNodeTrees = $this->page->getContents();
+		} else {
+			$contents = $this->page->getContents();
+			foreach (Content::AVAILABLE_POSITIONS as $position) {
+				$this->contentNodeTrees[$position] = !empty($contents[$position]) ? $contents[$position] : [];
+			}
+		}
 
 		// meta tags
 		if ($this->page->canRead()) {
@@ -158,16 +176,20 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 	 * @inheritDoc
 	 */
 	public function show() {
+		if ($this->editOnInit) {
+			$this->templateName = 'pageEditor';
+		} else {
+			// register visit
+			VisitCountHandler::getInstance()->count();
+			
+			// count click
+			$pageEditor = new PageEditor($this->page);
+			$pageEditor->updateCounters([
+				'clicks' => 1
+			]);
+		}
+		
 		parent::show();
-
-		// register visit
-		VisitCountHandler::getInstance()->count();
-
-		// count click
-		$pageEditor = new PageEditor($this->page);
-		$pageEditor->updateCounters([
-			'clicks' => 1
-		]);
 	}
 
 	/**

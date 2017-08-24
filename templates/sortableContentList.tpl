@@ -15,7 +15,7 @@
 				<li><span class="icon icon16 fa{if !$contentNode->isDisabled}-check{/if}-square-o jsToggleButton jsTooltip pointer" data-object-id="{$contentNode->contentID}" title="{lang}wcf.global.button.{if !$contentNode->isDisabled}disable{else}enable{/if}{/lang}"></span></li>
 			</ul>
 
-			<span class="{if $position == 'sidebar'}boxTitle{else}sectionTitle{/if}">{$contentNode->getTitle()} <small>({$contentNode->getTypeName()})</small></span>
+			<span class="{if $position == 'sidebar'}boxTitle{else}sectionTitle{/if}">{$contentNode->getTitle()} <small>({$contentNode->getTypeName(true)})</small></span>
 
 			{if $position == 'sidebar'}
 				<div class="boxContent">{@$contentNode->getOutput(true)|language}</div>
@@ -47,5 +47,10 @@
 		actionObjects['de.codequake.cms.content']['delete'] = deleteAction;
 
 		WCF.Clipboard.init('cms\\page\\AbstractPagePage', 0, actionObjects);
+
+		$('#sortableContentList{$position|ucfirst} .jsContentRow .jsEditButton').click(function (event) {
+			var target = $(event.currentTarget);
+			console.log(target.data('objectID'));
+		});
 	});
 </script>

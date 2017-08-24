@@ -1,6 +1,7 @@
 <?php
 namespace cms\data\page;
 
+use cms\data\content\Content;
 use cms\data\content\ContentAction;
 use cms\data\content\ContentEditor;
 use cms\data\content\ContentList;
@@ -19,6 +20,7 @@ use wcf\data\IClipboardAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
 use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\exception\AJAXException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\LanguageFactory;
@@ -639,7 +641,11 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 
 		$types = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
 		foreach ($types as $key => $type) {
-			if (!$type->getProcessor()->isAvailableToAdd($this->parameters['position'])) {
+			if (!$this->parameters['position'] == 'both') {
+				foreach (Content::AVAILABLE_POSITIONS as $position) {
+					if (!$type->getProcessor()->isAvailableToAdd($position)) break;
+				}
+			} else if (!$type->getProcessor()->isAvailableToAdd($this->parameters['position'])) {
 				unset($types[$key]);
 			}
 		}
@@ -647,7 +653,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$categories = [];
 		/** @var \wcf\data\object\type\ObjectType $type */
 		foreach ($types as $type) {
-			$categories[$type->category] = [];
+			$categories[$type->category][] = $type;
 		}
 
 		/** @var \wcf\data\object\type\ObjectType $type */
@@ -656,18 +662,16 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 			if (in_array($this->parameters['position'], $positions)) array_push($categories[$type->category], $type);
 		}
 
-		WCF::getTPL()->assign([
-			'contentTypes' => $categories,
-			'page' => $page,
-			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null,
-			'position' => $this->parameters['position']
-		]);
-
 		return [
 			'pageID' => $page->pageID,
 			'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null,
 			'position' => $this->parameters['position'],
-			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms')
+			'template' => WCF::getTPL()->fetch('contentTypeList', 'cms', [
+				'contentTypes' => $categories,
+				'page' => $page,
+				'parentID' => isset($this->parameters['parentID']) ? intval($this->parameters['parentID']) : null,
+				'position' => $this->parameters['position']
+			])
 		];
 	}
 
@@ -685,11 +689,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		/** @var $page Page */
 		$page = $this->getSingleObject();
 		$position = $this->parameters['position'];
+		$contentNodeTree = isset($page->getContents()[$position]) ? $page->getContents()[$position] : [];
 
 		return [
 			'position' => $position,
 			'template' => WCF::getTPL()->fetch('sortableContentList', 'cms', [
-				'contentNodeTree' => $page->getContents()[$position],
+				'contentNodeTree' => $contentNodeTree,
 				'position' => $position
 			])
 		];
@@ -709,11 +714,12 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		/** @var $page Page */
 		$page = $this->getSingleObject();
 		$position = $this->parameters['position'];
+		$contentNodeTree = isset($page->getContents()[$position]) ? $page->getContents()[$position] : [];
 
 		return [
 			'position' => $position,
 			'template' => WCF::getTPL()->fetch('contentNodeList', 'cms', [
-				'contentNodeTree' => $page->getContents()[$position],
+				'contentNodeTree' => $contentNodeTree,
 				'position' => $position
 			])
 		];

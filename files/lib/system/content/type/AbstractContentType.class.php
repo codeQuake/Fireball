@@ -151,7 +151,7 @@ abstract class AbstractContentType implements IContentType {
 	 * @inheritdoc
 	 */
 	public function getInlineFormTemplate() {
-		return $this->inlineTemplateName;
+		return $this->inlineTemplateName ?: 'inlineEditor_' . $this->templateName;
 	}
 
 	/**
