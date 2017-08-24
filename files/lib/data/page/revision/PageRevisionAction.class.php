@@ -21,6 +21,10 @@ use wcf\system\WCF;
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @property PageRevision[] $objects
+ * @method  PageRevision[] getObjects()
+ * @method PageRevision getSingleObject()
  */
 class PageRevisionAction extends AbstractDatabaseObjectAction {
 	/**
@@ -92,6 +96,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 		}
 		
 		// restore contents
+		/** @noinspection PhpParamsInspection */
 		$contentData = base64_decode($revision->contentData);
 		$contentData = @unserialize($contentData);
 		
@@ -127,7 +132,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 							$langData[$lang->languageID] = '';
 						}
 					}
-					I18nHandler::getInstance()->setValues($key, $langData);
+					I18nHandler::getInstance()->setValues('title', $langData);
 					$i18ntitle = true;
 					$oldContent['title'] = '';
 				}
@@ -170,7 +175,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 							$langData[$lang->languageID] = '';
 						}
 					}
-					I18nHandler::getInstance()->setValues($field, $langData);
+					I18nHandler::getInstance()->setValues('title', $langData);
 					$i18ntitle = true;
 					$oldContent['title'] = '';
 				}
@@ -186,7 +191,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 								$langData[$lang->languageID] = '';
 							}
 						}
-						I18nHandler::getInstance()->setValues($key, $langData);
+						I18nHandler::getInstance()->setValues($field, $langData);
 						$i18nfields[] = $field;
 						$oldContent['contentData'][$field] = '';
 					}
@@ -219,6 +224,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 			$editorName = '\\cms\\data\\'.$type.'\\'.ucfirst($type).'Editor';
 			
 			if ($object !== null) {
+				/** @var \cms\data\page\PageEditor|\cms\data\content\ContentEditor $editor */
 				$editor = new $editorName($object);
 				
 				if ($inContentData) {
@@ -268,11 +274,15 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 			case 's':
 				if ($value[$length - 2] !== '"')
 					return false;
+				break;
+				
 			case 'b':
 			case 'i':
 			case 'd':
 				// This looks odd but it is quicker than isset()ing
 				$end .= ';';
+				break;
+				
 			case 'a':
 			case 'O':
 				$end .= '}';
@@ -295,7 +305,10 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 						
 					default:
 						return false;
+						break;
 				}
+				break;
+				
 			case 'N':
 				$end .= ';';
 				
@@ -305,6 +318,7 @@ class PageRevisionAction extends AbstractDatabaseObjectAction {
 				
 			default:
 				return false;
+				break;
 		}
 		
 		if (($result = @unserialize($value)) === false) {

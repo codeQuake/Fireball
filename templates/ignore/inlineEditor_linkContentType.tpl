@@ -5,7 +5,7 @@
 			<option value="link" {if $contentData['type']|isset && $contentData['type'] == 'link'}selected="selected"{/if}>{lang}cms.acp.content.type.de.codequake.cms.content.type.link.type.link{/lang}</option>
 			<option value="button" {if $contentData['type']|isset && $contentData['type'] == 'button'}selected="selected"{/if}>{lang}cms.acp.content.type.de.codequake.cms.content.type.link.type.button{/lang}</option>
 			<option value="smallbutton" {if $contentData['type']|isset && $contentData['type'] == 'smallbutton'}selected="selected"{/if}>{lang}cms.acp.content.type.de.codequake.cms.content.type.link.type.smallbutton{/lang}</option>
-		<select>
+		</select>
 	</dd>
 </dl>
 

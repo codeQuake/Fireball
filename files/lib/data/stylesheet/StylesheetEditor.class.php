@@ -12,6 +12,9 @@ use wcf\data\IEditableCachedObject;
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @mixin Stylesheet
+ * @method Stylesheet getDecoratedObject()
  */
 class StylesheetEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**

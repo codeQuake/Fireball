@@ -30,7 +30,7 @@ $contents = $contentList->getObjects();
 /** @var \cms\data\content\Content $content */
 foreach ($contents as $content) {
 	$typeName = $content->getTypeName();
-	if ($typeName != 'de.codequake.cms.content.type.headline' || $typeName != 'de.codequake.cms.content.type.dashboard'
+	if ($typeName != 'de.codequake.cms.content.type.headline' || $typeName != 'de.codequake.cms.content.type.box'
 		|| $typeName != 'de.codequake.cms.content.type.user' || $typeName != 'de.codequake.cms.content.type.group'
 		|| $typeName != 'de.codequake.cms.content.type.tabmenu' || $typeName != 'de.codequake.cms.content.type.columns'
 		|| $typeName != 'de.codequake.cms.content.type.wsipimport') {

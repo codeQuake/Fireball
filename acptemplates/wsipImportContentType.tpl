@@ -21,8 +21,8 @@
 		$(function() {
 			console.l
 			WCF.System.Dependency.Manager.register('Redactor_text', function() {
-				$converted = $('#text').redactor('wbbcode.convertFromHtml', $('#html').val());
-				$('#text').redactor('wutil.replaceText', $converted);
+				var converted = $('#text').redactor('wbbcode.convertFromHtml', $('#html').val());
+				$('#text').redactor('wutil.replaceText', converted);
 			});
 		});
 </script>

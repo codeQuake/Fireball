@@ -79,10 +79,10 @@ class Fireball2Exporter extends AbstractExporter {
 		if (in_array('de.codequake.cms.file', $this->selectedData)) {
 			if (empty($this->fileSystemPath) || !@file_exists($this->fileSystemPath.'lib/core.functions.php')) {
 				return false;
-			} else {
-				return true;
 			}
 		}
+		
+		return true;
 	}
 	
 	/**
@@ -339,6 +339,9 @@ class Fireball2Exporter extends AbstractExporter {
 	
 	/**
 	 * Exports pages.
+	 *
+	 * @param integer $offset
+	 * @param integer $limit
 	 */
 	public function exportPages($offset, $limit) {
 		$sql = "SELECT	*
@@ -372,6 +375,9 @@ class Fireball2Exporter extends AbstractExporter {
 	
 	/**
 	 * Exports contents.
+	 *
+	 * @param integer $offset
+	 * @param integer $limit
 	 */
 	public function exportContents($offset, $limit) {
 		$sql = "SELECT	*
@@ -408,6 +414,9 @@ class Fireball2Exporter extends AbstractExporter {
 	
 	/**
 	 * Exports stylesheets.
+	 *
+	 * @param integer $offset
+	 * @param integer $limit
 	 */
 	public function exportStylesheets($offset, $limit) {
 		$sql = "SELECT	*
@@ -439,6 +448,9 @@ class Fireball2Exporter extends AbstractExporter {
 	
 	/**
 	 * Exports categories.
+	 *
+	 * @param integer $offset
+	 * @param integer $limit
 	 */
 	public function exportFileCategories($offset, $limit) {
 		$objectTypeID = $this->getObjectTypeID('com.woltlab.wcf.category', 'de.codequake.cms.file');
@@ -478,7 +490,7 @@ class Fireball2Exporter extends AbstractExporter {
 				'showOrder' => $category['showOrder'],
 				'time' => $category['time'],
 				'isDisabled' => $category['isDisabled'],
-				'additionalData' => serialize([]),
+				'additionalData' => serialize((!empty($additionalData) && is_array($additionalData)) ? $additionalData : [])
 			]);
 			
 			$this->updateCategoryI18nData($categoryID, $category);
@@ -502,6 +514,9 @@ class Fireball2Exporter extends AbstractExporter {
 	
 	/**
 	 * Exports files.
+	 *
+	 * @param integer $offset
+	 * @param integer $limit
 	 */
 	public function exportFiles($offset, $limit) {
 		$sql = "SELECT	packageDir

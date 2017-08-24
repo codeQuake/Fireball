@@ -172,6 +172,9 @@ class InfinitePortalExporter extends AbstractExporter {
 	
 	/**
 	 * Exports pages.
+	 *
+	 * @param integer $offset
+	 * @param integer $limit
 	 */
 	public function exportPages($offset, $limit) {
 		$sql = "SELECT	*
@@ -193,6 +196,7 @@ class InfinitePortalExporter extends AbstractExporter {
 		foreach ($this->pages[$parentID] as $row) {
 			$additionalData = [];
 			
+			$titleValues = [];
 			foreach ($this->availableLanguages as $lang) {
 				if (!empty($this->oldLanguages[$lang->languageCode]))
 					$titleValues[$lang->languageID] = $this->getLangItem('wsip.contentItem.' . $row['contentItem'], $this->oldLanguages[$lang->languageCode]['languageID']);
@@ -351,6 +355,9 @@ class InfinitePortalExporter extends AbstractExporter {
 	
 	/**
 	 * Exports contents (pages, boxes, etc).
+	 *
+	 * @param integer $offset
+	 * @param integer $limit
 	 */
 	public function exportContents($offset, $limit) {
 		$sql = "SELECT	*
@@ -422,7 +429,7 @@ class InfinitePortalExporter extends AbstractExporter {
 							continue;
 						}
 						
-						$contentTabID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import('t' . $tab['boxTabID'], [
+						ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import('t' . $tab['boxTabID'], [
 							'pageID' => $row['contentItemID'],
 							'title' => $this->getLangItem('wcf.box.tab.' . $tab['boxTab'], $this->oldLanguages['default']['languageID']),
 							'contentTypeID' => $contentObjectType->objectTypeID,
@@ -436,7 +443,7 @@ class InfinitePortalExporter extends AbstractExporter {
 			} else {
 				// html content
 				$contentObjectType = ObjectTypeCache::getInstance()->getObjectTypeByName('de.codequake.cms.content.type', 'de.codequake.cms.content.type.wsipimport');
-				$contentID = ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import($row['contentItemID'], [
+				ImportHandler::getInstance()->getImporter('de.codequake.cms.content')->import($row['contentItemID'], [
 					'pageID' => $row['contentItemID'],
 					'title' => '',
 					'contentTypeID' => $contentObjectType->objectTypeID,
@@ -489,6 +496,7 @@ class InfinitePortalExporter extends AbstractExporter {
 			$editorName = '\\'.$application.'\\data\\'.$type.'\\'.ucfirst($type).'Editor';
 			
 			if ($object !== null) {
+				/** @var \cms\data\page\PageEditor $editor */
 				$editor = new $editorName($object);
 				
 				if ($type == 'content' && $columnName == 'text') {

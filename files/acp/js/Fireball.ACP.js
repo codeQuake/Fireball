@@ -692,13 +692,11 @@ Fireball.ACP.File.Picker = Class.extend({
 		var fileID = $input.val();
 
 		if ($input.is(':checked')) {
-			var fileData = {
+			this._selected[fileID] = fileData = {
 				fileID: fileID,
 				title: $tr.data('fileTitle'),
 				formattedFilesize: $tr.data('fileFormattedSize')
-			}
-
-			this._selected[fileID] = fileData;
+			};
 		} else {
 			delete this._selected[fileID];
 		}
@@ -734,9 +732,9 @@ Fireball.ACP.File.Picker = Class.extend({
 			$tabularBox.show();
 
 			// update dropdown
-			$dropdownMenu = WCF.Dropdown.getDropdownMenu($('.filePickerCategoryDropdown').wcfIdentify());
-			$dropdownMenu.find('li.active').removeClass('active');
-			$dropdownMenu.find('li[data-category-id="'+ categoryID +'"]').addClass('active');
+			var dropdownMenu = WCF.Dropdown.getDropdownMenu($('.filePickerCategoryDropdown').wcfIdentify());
+			dropdownMenu.find('li.active').removeClass('active');
+			dropdownMenu.find('li[data-category-id="'+ categoryID +'"]').addClass('active');
 
 			// redraw dialog
 			this._dialog.wcfDialog('render');
@@ -1128,12 +1126,12 @@ Fireball.ACP.File.Upload.Handler = WCF.Upload.Parallel.extend({
 	 * @see	WCF.Upload._initFile()
 	 */
 	_initFile: function(file) {
-		$li = $('<li class="box32"><span class="icon icon32 fa-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
+		var li = $('<li class="box32"><span class="icon icon32 fa-spinner" /><div><div><p>'+ file.name +'</p><small><progress max="100"></progress></small></div></div></li>').appendTo(this._fileListSelector);
 
 		// redraw dialog
 		Fireball.ACP.File.Upload.redraw();
 
-		return $li;
+		return li;
 	},
 
 	/**
@@ -1363,12 +1361,12 @@ Fireball.ACP.Page.Revisions.Restore = Class.extend({
 	},
 
 	_sendRequest: function(object) {
-		$versionID = $(object).data('objectID');
+		var versionID = $(object).data('objectID');
 
 		this._proxy.setOption('data', {
 			actionName: 'restore',
 			className: 'cms\\data\\page\\revision\\PageRevisionAction',
-			objectIDs: [ $versionID ]
+			objectIDs: [ versionID ]
 		});
 		this._proxy.sendRequest();
 	},
@@ -1419,13 +1417,13 @@ Fireball.ACP.Page.TypePicker = Class.extend({
 	},
 
 	_click: function(event) {
-		$objectTypeID = $('#pageObjectTypeID').val();
+		var objectTypeID = $('#pageObjectTypeID').val();
 
 		this._proxy.setOption('data', {
 			actionName: 'getTypeSpecificForm',
 			className: 'cms\\data\\page\\PageAction',
 			parameters: {
-				'objectTypeID': $objectTypeID,
+				'objectTypeID': objectTypeID,
 				'pageID' : this._pageID
 			}
 		});

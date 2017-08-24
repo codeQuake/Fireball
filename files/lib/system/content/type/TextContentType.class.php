@@ -67,6 +67,7 @@ class TextContentType extends AbstractSearchableContentType {
 
 	/**
 	 * Loads the embedded objects.
+	 * @param Content $content
 	 */
 	protected function loadEmbeddedObjects(Content $content) {
 		if ($content->hasEmbeddedObjects && !$this->embeddedObjectsLoaded) {

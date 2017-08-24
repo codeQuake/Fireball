@@ -19,6 +19,10 @@ use wcf\util\FileUtil;
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @property FileEditor[] $objects
+ * @method FileEditor[] getObjects()
+ * @method FileEditor getSingleObject()
  */
 class FileAction extends AbstractDatabaseObjectAction {
 	/**
@@ -45,6 +49,11 @@ class FileAction extends AbstractDatabaseObjectAction {
 	 * @inheritDoc
 	 */
 	protected $allowGuestAccess = ['getFilePreview'];
+	
+	/**
+	 * @var \Traversable
+	 */
+	protected $categoryList;
 
 	/**
 	 * Validate parameters and permissions to fetch details about a file.
@@ -296,7 +305,7 @@ class FileAction extends AbstractDatabaseObjectAction {
 				// create subdirectory if necessary
 				$dir = dirname($uploadedFile->getLocation());
 				if (!@file_exists($dir)) {
-					FileUtil::makePath($dir, 0777);
+					FileUtil::makePath($dir);
 				}
 
 				// move uploaded file

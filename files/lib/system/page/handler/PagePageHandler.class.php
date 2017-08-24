@@ -24,15 +24,6 @@ class PagePageHandler extends AbstractLookupPageHandler implements IOnlineLocati
 	}
 
 	/**
-	 * @inheritDoc
-	 */
-	public function getOutstandingItemCount($objectID = null) {
-		$page = PageCache::getInstance()->getPage($objectID);
-
-		return 0;
-	}
-
-	/**
 	 * @inheritdoc
 	 */
 	public function isVisible($objectID = null) {

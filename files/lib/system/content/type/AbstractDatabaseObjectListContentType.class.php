@@ -70,6 +70,7 @@ abstract class AbstractDatabaseObjectListContentType extends AbstractContentType
 	/**
 	 * special operations to avoid overriding getOutput
 	 * directly before readObjects()
+	 * @param Content $content
 	 */
 	public function initObjectList(Content $content) {
 		// does nothing

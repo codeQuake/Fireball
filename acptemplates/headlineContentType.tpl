@@ -7,7 +7,7 @@
 			<option value="h3" {if $contentData['type']|isset && $contentData['type'] == 'h3'}selected="selected"{/if}>{lang}cms.acp.content.type.de.codequake.cms.content.type.headline.type.h3{/lang}</option>
 			<option value="h4" {if $contentData['type']|isset && $contentData['type'] == 'h4'}selected="selected"{/if}>{lang}cms.acp.content.type.de.codequake.cms.content.type.headline.type.h4{/lang}</option>
 			<option value="h5" {if $contentData['type']|isset && $contentData['type'] == 'h5'}selected="selected"{/if}>{lang}cms.acp.content.type.de.codequake.cms.content.type.headline.type.h5{/lang}</option>
-		<select>
+		</select>
 	</dd>
 </dl>
 

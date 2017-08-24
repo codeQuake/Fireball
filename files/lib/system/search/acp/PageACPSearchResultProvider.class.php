@@ -27,6 +27,7 @@ class PageACPSearchResultProvider implements IACPSearchResultProvider {
 
 		$results = [];
 
+		/** @var \cms\data\page\Page[] $pages */
 		$pages = PageCacheBuilder::getInstance()->getData([], 'pages');
 		foreach ($pages as $page) {
 			if (mb_stripos($page->getTitle(), $query) !== false || mb_stripos($page->alias, $query) !== false) {

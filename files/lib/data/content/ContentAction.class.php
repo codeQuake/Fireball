@@ -23,7 +23,9 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
  *
- * @method getDecoratedObject() Content
+ * @property ContentEditor[] $objects
+ * @method ContentEditor[] getObjects()
+ * @method ContentEditor getSingleObject()
  */
 class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAction, ISortableAction, IToggleAction {
 	/**
@@ -59,7 +61,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	 */
 	public function copy() {
 		$object = $this->getSingleObject();
-		$data = $object->getDecoratedObject()->getData();
+		$data = $object->getDecoratedObject()->getObjectData();
 		$childs = $object->getDecoratedObject()->getChildren();
 
 		$oldID = $data['contentID'];
@@ -97,6 +99,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 
 	/**
 	 * @inheritDoc
+	 * @return Content
 	 */
 	public function create() {
 		// serialize content data

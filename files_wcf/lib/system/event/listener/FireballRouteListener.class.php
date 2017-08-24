@@ -14,7 +14,7 @@ use wcf\system\request\route\FireballRequestRoute;
  */
 class FireballRouteListener implements IParameterizedEventListener {
 	/**
-	 * @see	\wcf\system\event\IEventListener::execute()
+	 * @inheritDoc
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		/** @var $eventObj \wcf\system\request\RouteHandler */

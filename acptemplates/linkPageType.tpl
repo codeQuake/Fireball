@@ -4,7 +4,7 @@
 	<dl id="url"{if $errorField == 'url'} class="formError"{/if}>
 		<dt><label for="url">{lang}cms.acp.page.settings.url{/lang}</label></dt>
 		<dd>
-			<input type="url" id="url" name="url" class="long" value="{$url}"></input>
+			<input type="url" id="url" name="url" class="long" value="{$url}" />
 			{if $errorField == 'url'}
 				<small class="innerError">
 					{if $errorType == 'empty'}
@@ -29,7 +29,7 @@
 	<dl id="delay"{if $errorField == 'url'} class="formError"{/if}>
 		<dt><label for="url">{lang}cms.acp.page.settings.delay{/lang}</label></dt>
 		<dd>
-			<input type="number" min="1" max="60" id="delay" name="delay" class="short" value="{$delay}"></input>
+			<input type="number" min="1" max="60" id="delay" name="delay" class="short" value="{$delay}" />
 			{if $errorField == 'delay'}
 				<small class="innerError">
 					{if $errorType == 'empty'}

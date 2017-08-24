@@ -15,13 +15,21 @@ use wcf\system\WCF;
  * @package	de.codequake.cms
  */
 class SearchResultPage extends ViewablePage implements ISearchResultObject {
-
+	/**
+	 * @var UserProfile
+	 */
 	protected $userProfile = null;
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getFormattedMessage() {
 		return SearchResultTextParser::getInstance()->parse(WCF::getLanguage()->get($this->description));
 	}
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getLink($query = '') {
 		if ($query) {
 			return LinkHandler::getInstance()->getLink('Page', [
@@ -33,11 +41,17 @@ class SearchResultPage extends ViewablePage implements ISearchResultObject {
 
 		return $this->getDecoratedObject()->getLink();
 	}
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getSubject() {
 		return WCF::getLanguage()->get($this->title);
 	}
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getUserProfile() {
 		if ($this->userProfile === null) {
 			$this->userProfile = new UserProfile(new User($this->authorID));
@@ -45,19 +59,31 @@ class SearchResultPage extends ViewablePage implements ISearchResultObject {
 
 		return $this->userProfile;
 	}
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getTime() {
 		return $this->creationTime;
 	}
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getObjectTypeName() {
 		return 'de.codequake.cms.page';
 	}
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getContainerLink() {
 		return '';
 	}
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getContainerTitle() {
 		return '';
 	}

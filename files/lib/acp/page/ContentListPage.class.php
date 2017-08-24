@@ -34,6 +34,11 @@ class ContentListPage extends AbstractPage {
 	 * @var	\RecursiveIteratorIterator
 	 */
 	public $pageList = null;
+	
+	/**
+	 * @var DrainedPositionContentNodeTree[]
+	 */
+	public $contentList = [];
 
 	/**
 	 * list of content types

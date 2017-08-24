@@ -42,7 +42,7 @@ abstract class AbstractSearchableContentType extends AbstractContentType impleme
 			return StringUtil::truncate(substr($preview, 3), 70);
 		}
 		else {
-			parent::getPreview($content);
+			return parent::getPreview($content);
 		}
 	}
 

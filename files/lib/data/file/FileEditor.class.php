@@ -14,6 +14,9 @@ use wcf\system\WCF;
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @mixin File
+ * @method File getDecoratedObject()
  */
 class FileEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**

@@ -14,6 +14,9 @@ use wcf\system\WCF;
  * @copyright	2013 - 2017 codeQuake
  * @license	GNU Lesser General Public License <http://www.gnu.org/licenses/lgpl-3.0.txt>
  * @package	de.codequake.cms
+ *
+ * @mixin Page
+ * @method Page getDecoratedObject()
  */
 class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
@@ -25,6 +28,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * Creates a revision for this page.
 	 * 
 	 * @param	array		$parameters
+	 * @return Page
 	 */
 	public static function createRevision(array $parameters = []) {
 		$keys = $values = '';

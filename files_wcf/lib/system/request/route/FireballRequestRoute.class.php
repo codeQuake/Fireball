@@ -137,16 +137,16 @@ class FireballRequestRoute implements IRequestRoute {
 	 * @throws	\BadMethodCallException
 	 */
 	public function buildLink(array $components) {
+		$page = null;
+		
 		if (!empty($components['id'])) {
 			$page = PageCache::getInstance()->getPage($components['id']);
 		}
-		
-		if (!empty($components['alias'])) {
+		else if (!empty($components['alias'])) {
 			$pageID = PageCache::getInstance()->getIDByAlias($components['alias']);
 			$page = PageCache::getInstance()->getPage($pageID);
 		}
-		
-		if (empty($components['id']) && empty($components['alias'])) {
+		else if (empty($components['id']) && empty($components['alias'])) {
 			$page = PageCache::getInstance()->getHomePage();
 		}
 		

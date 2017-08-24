@@ -36,16 +36,18 @@ interface IContentType {
 	
 	/**
 	 * Returns a short preview for this content type.
-	 * 
+	 *
+	 * @param Content $content
 	 * @return	string
 	 */
 	public function getPreview(Content $content);
-
+	
 	/**
 	 * Returns whether it's currently possible to create a content of this
 	 * type.
-	 * 
-	 * @return	boolean
+	 *
+	 * @param string $position
+	 * @return bool
 	 */
 	public function isAvailableToAdd($position);
 
@@ -62,6 +64,7 @@ interface IContentType {
 	/**
 	 * Validates the submitted form data. In case of invalid inputs, throw
 	 * an instance of '\wcf\system\exception\UserInputException'
+	 * @param mixed[] $data
 	 */
 	public function validate(&$data);
 

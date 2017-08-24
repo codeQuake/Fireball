@@ -3,6 +3,7 @@
 namespace cms\system\importer;
 use cms\data\file\File;
 use cms\data\file\FileAction;
+use wcf\system\exception\SystemException;
 use wcf\system\importer\AbstractImporter;
 use wcf\system\importer\ImportHandler;
 use wcf\util\FileUtil;
@@ -54,13 +55,12 @@ class FileImporter extends AbstractImporter {
 
 		$dir = dirname($file->getLocation());
 		if (!@file_exists($dir)) {
-			FileUtil::makePath($dir, 0777);
+			FileUtil::makePath($dir);
 		}
 
 		// copy file
 		try {
-			if (!copy($additionalData['fileLocation'], $file->getLocation()))
-				throw new SystemException();
+			if (!copy($additionalData['fileLocation'], $file->getLocation())) throw new SystemException();
 		}
 		catch (SystemException $e) {
 			$deleteAction = new FileAction([$file], 'delete');

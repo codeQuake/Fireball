@@ -22,35 +22,41 @@ interface IPageType {
 
 	/**
 	 * Reads page type specific parameters.
+	 * @param AbstractForm $form
 	 */
 	public function readParameters(AbstractForm $form);
 
 	/**
 	 * Reads page type specific form parameters.
-	 * 
+	 *
+	 * @param AbstractForm $form
 	 * @return	array
 	 */
 	public function readFormParameters(AbstractForm $form);
 
 	/**
 	 * Reads page type specific data.
+	 * @param AbstractForm $form
 	 */
 	public function readData(AbstractForm $form);
 
 	/**
 	 * Assigns page type specific variables.
+	 * @param AbstractForm $form
 	 */
 	public function assignVariables(AbstractForm $form);
 
 	/**
 	 * Executes additional save methods.
+	 * @param AbstractForm $form
 	 */
 	public function save(AbstractForm $form);
 
 	/**
 	 * Validates the submitted form data. In case of invalid inputs, throw
 	 * an instance of '\wcf\system\exception\UserInputException'
-	 * 
+	 *
+	 * @param AbstractForm $form
 	 * @throws	\wcf\system\exception\UserInputException
 	 */
 	public function validate(AbstractForm $form);
@@ -61,11 +67,14 @@ interface IPageType {
 	 * @return	string
 	 */
 	public function getFormTemplate();
-
+	
 	/**
 	 * Returns the template for the acp forms
-	 * 
-	 * @return	string
+	 *
+	 * @param array  $assignValues
+	 * @param string $errorField
+	 * @param string $errorType
+	 * @return string
 	 */
 	public function getCompiledFormTemplate($assignValues = [], $errorField = '', $errorType = '');
 

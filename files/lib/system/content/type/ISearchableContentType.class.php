@@ -14,7 +14,8 @@ use cms\data\content\Content;
 interface ISearchableContentType {
 	/**
 	 * Return data for the search index
-	 * 
+	 *
+	 * @param       Content $content
 	 * @return	array
 	 */
 	public function getSearchableData(Content $content);

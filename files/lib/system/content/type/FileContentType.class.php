@@ -43,7 +43,7 @@ class FileContentType extends AbstractContentType {
 	public function getPreview(Content $content) {
 		$file = FileCache::getInstance()->getFile($content->{$this->previewFields[0]});
 		if ($file !== null) return $file->getTitle();
-		else parent::getPreview($content);
+		else return parent::getPreview($content);
 	}
 
 	/**
@@ -61,7 +61,7 @@ class FileContentType extends AbstractContentType {
 	}
 
 	/**
-	 * @param $fileID  image id
+	 * @param integer $fileID  image id
 	 * @return File
 	 */
 	public function getFile($fileID) {

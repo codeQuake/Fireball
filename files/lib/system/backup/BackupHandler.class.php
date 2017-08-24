@@ -55,7 +55,10 @@ class BackupHandler extends SingletonFactory {
 	protected $cmsUrl = '';
 	protected $api = '';
 	protected $cmsVersion = 0;
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	protected function init() {
 		$this->pages = PageCacheBuilder::getInstance()->getData([], 'pages');
 		$this->contents = ContentCacheBuilder::getInstance()->getData([], 'contents');
@@ -855,11 +858,15 @@ class BackupHandler extends SingletonFactory {
 			case 's':
 				if ($value[$length - 2] !== '"')
 					return false;
+				break;
+				
 			case 'b':
 			case 'i':
 			case 'd':
 				// This looks odd but it is quicker than isset()ing
 				$end .= ';';
+				break;
+				
 			case 'a':
 			case 'O':
 				$end .= '}';
@@ -882,6 +889,7 @@ class BackupHandler extends SingletonFactory {
 					
 					default:
 						return false;
+						break;
 				}
 			case 'N':
 				$end .= ';';
@@ -892,6 +900,7 @@ class BackupHandler extends SingletonFactory {
 			
 			default:
 				return false;
+				break;
 		}
 		
 		if (($result = @unserialize($value)) === false) {

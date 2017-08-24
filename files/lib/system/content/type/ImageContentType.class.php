@@ -58,7 +58,7 @@ class ImageContentType extends FileContentType {
 	}
 
 	/**
-	 * @param $imageID  image id
+	 * @param integer $imageID  image id
 	 * @return File
 	 */
 	public function getImage($imageID) {

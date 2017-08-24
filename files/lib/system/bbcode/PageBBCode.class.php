@@ -18,7 +18,10 @@ use wcf\system\WCF;
 class PageBBCode extends AbstractBBCode {
 	public $pageID = 0;
 	public $page = null;
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser) {
 		if (isset($openingTag['attributes'][0])) {
 			$this->pageID = $openingTag['attributes'][0];

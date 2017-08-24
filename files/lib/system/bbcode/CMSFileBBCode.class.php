@@ -21,7 +21,10 @@ class CMSFileBBCode extends AbstractBBCode {
 	public $align = '';
 	public $width = 0;
 	public $caption = '';
-
+	
+	/**
+	 * @inheritDoc
+	 */
 	public function getParsedTag(array $openingTag, $content, array $closingTag, BBCodeParser $parser) {
 		$this->isImage = false;
 		$this->align = $this->caption = '';

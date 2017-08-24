@@ -46,7 +46,6 @@ class CommentActionListener implements IParameterizedEventListener {
 		$comment = $this->eventObj->createdComment;
 		
 		if ($comment !== null && $objectType->objectType == self::OBJECT_TYPE) {
-			$notificationObjectType = UserNotificationHandler::getInstance()->getObjectTypeProcessor(self::OBJECT_TYPE);
 			$notificationObject = new CommentUserNotificationObject($comment);
 			
 			UserObjectWatchHandler::getInstance()->updateObject('de.codequake.cms.page', $comment->objectID, 'comment', self::OBJECT_TYPE, $notificationObject);

@@ -84,6 +84,11 @@ class StatsPage extends AbstractPage {
 	 * @var	array
 	 */
 	public $visits = [];
+	
+	/**
+	 * @var UsersOnlineList
+	 */
+	public $usersOnlineList;
 
 	/**
 	 * @inheritDoc
