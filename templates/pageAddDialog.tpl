@@ -1,12 +1,12 @@
 ﻿<div id="pageAddForm">
 	{js application='cms' file='Fireball.ACP' acp='true'}
 <script data-relocate="true">
-	require(['Language'], function(Language) {
+	require(['Language', 'WoltLabSuite/Core/Ui/TabMenu'], function(Language, UiTabMenu) {
 		Language.addObject({
 			'cms.acp.page.alias.preview': '{lang}cms.acp.page.alias.preview{/lang}'
 		});
 
-		WCF.TabMenu.init();
+		UiTabMenu.setup();
 		{if $action == 'add'}
 			$('#createMenuItem').click(function() {
 				$('#menuItemID').parents('dl:eq(0)').toggle();

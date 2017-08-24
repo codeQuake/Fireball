@@ -10,7 +10,7 @@
 </nav>
 
 <script data-relocate="true">
-	$(function() {
-		WCF.TabMenu.init();
+	require(['WoltLabSuite/Core/Ui/TabMenu'], function(UiTabMenu) {
+		UiTabMenu.setup();
 	});
 </script>
