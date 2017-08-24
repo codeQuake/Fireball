@@ -98,7 +98,7 @@
 	{/if}
 {/foreach}
 
-{include file='header' application='cms'}
+{include file='header'}
 
 {if !$page->isPublished && $page->publicationDate}
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
@@ -156,4 +156,4 @@
 	});
 </script>
 
-{include file='footer' application='cms'}
+{include file='footer'}
