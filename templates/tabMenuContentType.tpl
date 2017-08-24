@@ -8,9 +8,3 @@
 		{event name='tabMenuTabs'}
 	</ul>
 </nav>
-
-<script data-relocate="true">
-	require(['WoltLabSuite/Core/Ui/TabMenu'], function(UiTabMenu) {
-		UiTabMenu.setup();
-	});
-</script>
