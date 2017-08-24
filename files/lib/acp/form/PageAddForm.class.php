@@ -224,14 +224,17 @@ class PageAddForm extends AbstractAcpForm {
 		
 		$i18nDescription = new I18nValue('description');
 		$i18nDescription->setLanguageItem('cms.page.description', 'cms.page', $packageID);
+		$i18nDescription->setFlags(I18nValue::ALLOW_EMPTY);
 		$this->registerI18nValue($i18nDescription);
 		
 		$i18nMetaDescription = new I18nValue('metaDescription');
 		$i18nMetaDescription->setLanguageItem('cms.page.metaDescription', 'cms.page', $packageID);
+		$i18nMetaDescription->setFlags(I18nValue::ALLOW_EMPTY);
 		$this->registerI18nValue($i18nMetaDescription);
 		
 		$i18nMetaKeywords = new I18nValue('metaKeywords');
 		$i18nMetaKeywords->setLanguageItem('cms.page.metaKeywords', 'cms.page', $packageID);
+		$i18nMetaKeywords->setFlags(I18nValue::ALLOW_EMPTY);
 		$this->registerI18nValue($i18nMetaKeywords);
 		
 		// get available styles
