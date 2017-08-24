@@ -41,8 +41,8 @@
 				    data-is-disabled="{@$page->isDisabled}"
 				    {if $__wcf->session->getPermission('admin.fireball.page.canAddPage')}
 				        data-advanced-url="{link controller='PageEdit' object=$page isACP=1 application='cms'}{/link}"
-				        data-editor-url="{$page->getLink()}&editOnInit=true"
-				        data-url="{$page->getLink()}"
+					data-editor-url="{$page->getLink()}&editOnInit=true"
+					data-url="{$page->getLink()}"
 					{/if}>
 					{content}
 						{if $__wcf->session->getPermission('admin.fireball.page.canAddPage')}<li><a href="#" class="button jsPageInlineEditor jsOnly"><span class="icon icon16 fa-pencil"></span> <span>{lang}cms.acp.page.edit{/lang}</span></a></li>{/if}
@@ -59,7 +59,7 @@
 		{hascontent}
 			{capture assign=$position}
 				{content}
-					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
+					{include file='sortableContentList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
 				{/content}
 			{/capture}
 		{/hascontent}
@@ -67,7 +67,7 @@
 		{hascontent}
 			{capture assign='boxesBottom'}
 				{content}
-					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
+					{include file='sortableContentList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
 				{/content}
 			{/capture}
 		{/hascontent}
@@ -75,7 +75,7 @@
 		{hascontent}
 			{capture assign='boxesTop'}
 				{content}
-					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
+					{include file='sortableContentList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
 				{/content}
 			{/capture}
 		{/hascontent}
@@ -83,7 +83,7 @@
 		{hascontent}
 			{capture assign='boxesFooter'}
 				{content}
-					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
+					{include file='sortableContentList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
 				{/content}
 			{/capture}
 		{/hascontent}
@@ -91,7 +91,7 @@
 		{hascontent}
 			{capture assign='heroBoxes'}
 				{content}
-					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
+					{include file='sortableContentList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
 				{/content}
 			{/capture}
 		{/hascontent}
@@ -104,7 +104,7 @@
 	<p class="info">{lang}cms.page.delayedPublication{/lang}</p>
 {/if}
 
-{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees['body'] position='body'}
+{include file='sortableContentList' application='cms' contentNodeTree=$contentNodeTrees['body'] position='body'}
 
 {if $page->isCommentable && $page->getPermission('user.canViewComment')}
 	<section id="comments" class="section sectionContainerList">
@@ -152,6 +152,8 @@
 			var $updateHandler = new Fireball.Page.UpdateHandler({@$page->pageID});
 			$inlineEditor.setUpdateHandler($updateHandler);
 			$inlineEditor.setEnvironment('page', {@$page->pageID});
+			$inlineEditor._setForced();
+			$inlineEditor._execute($('.jsPageInlineEditorContainer').id, 'initEdit')
 		{/if}
 	});
 </script>

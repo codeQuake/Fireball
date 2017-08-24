@@ -9,6 +9,7 @@ use wcf\data\DatabaseObject;
 use wcf\data\IPermissionObject;
 use wcf\data\IPollObject;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\html\output\HtmlOutputProcessor;
 use wcf\system\request\IRouteController;
 use wcf\system\WCF;
 
@@ -42,8 +43,21 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 	 * @inheritDoc
 	 */
 	protected static $databaseTableIndexName = 'contentID';
-
+	
+	/**
+	 * @var Poll|null
+	 */
 	public $poll = null;
+	
+	/**
+	 * @var string[]
+	 */
+	public const AVAILABLE_POSITIONS = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
+	
+	/**
+	 * @var \wcf\data\object\type\ObjectType
+	 */
+	protected $objectType = null;
 
 	/**
 	 * @inheritDoc
@@ -95,7 +109,11 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 		if ($this->title !=  '') return WCF::getLanguage()->get($this->title);
 		else {
 			$this->objectType = $this->getObjectType();
-			return $this->objectType->getProcessor()->getPreview($this);
+			$htmlOutputProcessor = new HtmlOutputProcessor();
+			$htmlOutputProcessor->setOutputType('text/plain');
+			$title = $this->objectType->getProcessor()->getPreview($this) ?: 'Content #' . $this->contentID;
+			$htmlOutputProcessor->process($title, 'de.codequake.cms.content.type.text', $this->contentID);
+			return $htmlOutputProcessor->getHtml();
 		}
 	}
 
@@ -181,16 +199,27 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 
 		return $this->cssClasses;
 	}
-
+	
+	/**
+	 * @return \wcf\data\object\type\ObjectType
+	 */
 	public function getObjectType() {
 		return ObjectTypeCache::getInstance()->getObjectType($this->contentTypeID);
 	}
-
-	public function getTypeName() {
+	
+	/**
+	 * Returns the name of the content type
+	 * @param boolean $short
+	 * @return string
+	 */
+	public function getTypeName($short = false) {
 		$this->objectType = $this->getObjectType();
-		return $this->objectType->objectType;
+		return $short ? WCF::getLanguage()->get('cms.acp.content.type.' . $this->objectType->objectType) : $this->objectType->objectType;
 	}
-
+	
+	/**
+	 * @return null|\wcf\data\poll\Poll
+	 */
 	public function getPoll() {
 		if ($this->pollID && $this->poll === null) {
 			$this->poll = new Poll($this->pollID);
@@ -199,12 +228,18 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 
 		return $this->poll;
 	}
-
+	
+	/**
+	 * @param \wcf\data\poll\Poll $poll
+	 */
 	public function setPoll(Poll $poll) {
 		$this->poll = $poll;
 		$this->poll->setRelatedObject($this);
 	}
-
+	
+	/**
+	 * @return boolean
+	 */
 	public function canVote() {
 		return (WCF::getSession()->getPermission('user.fireball.content.canVotePoll') ? true : false);
 	}

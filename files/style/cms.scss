@@ -208,7 +208,56 @@
  * Frontend Content Management
  */
 
+#tpl_cms_pageEditor .ui-droppable {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	min-width: 100px;
+}
+
+.sortableContentList {
+	.jsContentRow {
+		&.htmlContent::before {
+			display: none;
+		}
+
+		.buttonList {
+			list-style: none;
+		}
+
+		> span.sectionTitle {
+			display: block;
+			width: 100%;
+
+			margin-bottom: 20px;
+			border-bottom: 1px solid $wcfContentBorderInner;
+			padding-bottom: 10px;
+
+			color: $wcfContentHeadlineText;
+
+			@include wcfFontSection;
+
+			a {
+				color: $wcfContentHeadlineLink;
+
+				&:hover {
+					color: $wcfContentHeadlineLinkActive;
+				}
+			}
+
+			.badge {
+				top: -2px;
+			}
+		}
+	}
+}
+
 #contentTypeListMove {
+	float: right;
+	padding: 2px;
+	margin-right: 8px;
+}
+
+#contentTypeListToggle {
 	float: right;
 	padding: 2px;
 	margin-right: 8px;

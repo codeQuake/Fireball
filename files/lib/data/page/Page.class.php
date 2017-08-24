@@ -1,6 +1,7 @@
 <?php
 namespace cms\data\page;
 
+use cms\data\content\Content;
 use cms\data\content\DrainedPositionContentNodeTree;
 use cms\data\page\revision\PageRevision;
 use cms\data\page\revision\PageRevisionList;
@@ -208,7 +209,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * @return	\cms\data\content\DrainedPositionContentNodeTree[]
 	 */
 	public function getContents() {
-		$availablePositions = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
+		$availablePositions = Content::AVAILABLE_POSITIONS;
 		$contentList = [];
 
 		foreach ($availablePositions as $position) {

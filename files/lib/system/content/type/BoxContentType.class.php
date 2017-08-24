@@ -27,7 +27,7 @@ class BoxContentType extends AbstractContentType {
 		$boxList = $boxList->getObjects();
 
 		$boxesByPosition = [
-			'content' => [],
+			'body' => [],
 			'sidebarLeft' => [],
 			'sidebarRight' => []
 		];
@@ -43,7 +43,7 @@ class BoxContentType extends AbstractContentType {
 			$positions = call_user_func([$controller, 'getSupportedPositions']);
 
 			if (in_array('contentTop', $positions) || in_array('contentBottom', $positions)) {
-				$boxesByPosition['content'][] = $box;
+				$boxesByPosition['body'][] = $box;
 			}
 
 			if (in_array('sidebarLeft', $positions)) {
@@ -55,7 +55,6 @@ class BoxContentType extends AbstractContentType {
 			}
 		}
 
-		$boxesByPosition['body'] = $boxesByPosition['content'];
 		$boxesByPosition['sidebar'] = $boxesByPosition['sidebarRight'];
 
 		WCF::getTPL()->assign([

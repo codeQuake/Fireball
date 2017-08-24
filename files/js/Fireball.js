@@ -223,10 +223,10 @@ Fireball.Page.Add = Class.extend({
 
 	_submit: function (event) {
 		event.preventDefault();
-		parameters = {};
+		var parameters = {};
 
 		//get all inputs
-		$('#pageAddForm input, #pageAddForm textarea, #pageAddForm select').each(function (index) {
+		$('#pageAddForm input:not([type="submit"]), #pageAddForm textarea, #pageAddForm select').each(function (index) {
 			var input = $(this);
 			if (input.attr('type') != 'checkbox') {
 				parameters[input.attr('name')] = $.trim(input.val())
@@ -250,10 +250,8 @@ Fireball.Page.Add = Class.extend({
 
 	_executed: function (data, textStatus, jqXHR) {
 		if (typeof this._cache[data.returnValues.errors] === 'undefined') {
-			var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-			$notification.show(function () {
-				window.location = data.returnValues.link;
-			});
+			var notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+			notification.show();
 		}
 	},
 
@@ -294,9 +292,7 @@ Fireball.Page.ContentTypes = Class.extend({
 
 	_success: function (data, textStatus, jqXHR) {
 		$('body').append(data.returnValues.template);
-		$('body').append($('<a id="contentTypeListOpen" class="button buttonPrimary"><span class="icon icon32 fa-angle-right"></span></a>'));
-		$('#contentTypeListOpen').click($.proxy(this._toggleSidebar, this));
-		$('#contentTypeListClose').click($.proxy(this._toggleSidebar, this));
+		$('#contentTypeListToggle').click($.proxy(this._toggleSidebar, this));
 	},
 
 	_toggleSidebar: function () {
@@ -314,6 +310,22 @@ Fireball.Page.ContentTypes = Class.extend({
 	}
 });
 
+Fireball.Page.ContentEditor = Class.extend({
+	_editStarted : false,
+	_contentTypeOverlay : null,
+	_dragging : null,
+	_proxy: null,
+
+	init: function () {
+		if (this._editStarted) return;
+
+		this._contentTypeOverlay = new Fireball.Page.ContentTypes(this._pageID);
+		this._dragging = new Fireball.Content.Dragging(this._pageID);
+
+		this._editStarted = true;
+	}
+});
+
 /**
  * Handles inline edits of pages and basic content edits
  */
@@ -327,6 +339,7 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 	_contentTypeOverlay : null,
 	_dragging : null,
 	_proxy: null,
+	_forcedEditor : false,
 
 	/**
 	 * @see	WCF.InlineEditor._setOptions()
@@ -362,6 +375,10 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 		return element.find('.jsPageInlineEditor');
 	},
 
+	_setForced: function() {
+		this._forcedEditor = true;
+	},
+
 	/**
 	 * @see	WCF.InlineEditor._validate()
 	 */
@@ -371,6 +388,7 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 				return this._editStarted;
 				break;
 
+			case 'initEdit':
 			case 'start':
 				return !this._editStarted;
 				break;
@@ -405,9 +423,17 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 				if (this._editStarted)
 					return;
 
-				var self = this;
+				window.location = $('#' + elementID).data('editorUrl');
+
+				this._editStarted = true;
+				break;
+
+			case 'initEdit':
+				if (this._editStarted)
+					return;
+
 				this._contentTypeOverlay = new Fireball.Page.ContentTypes(this._pageID);
-				this._dragging = new Fireball.Content.Dragging(this._pageID);
+				this._dragging = new Fireball.Content.Dragging(this._pageID, this._forcedEditor);
 
 				this._editStarted = true;
 				break;
@@ -427,8 +453,12 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 				break;
 
 			case 'save':
-				this._dragging.getSortableListObject('body')._submit();
-				this._dragging.getSortableListObject('sidebar')._submit();
+				var positions = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
+				var self = this;
+
+				positions.forEach(function (k, v) {
+					if (self._dragging.getSortableListObject(k)) self._dragging.getSortableListObject(k)._submit();
+				});
 				break;
 
 			case 'finish':
@@ -436,32 +466,27 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 				WCF.System.Confirmation.show(WCF.Language.get('cms.page.edit.finish.confirm'), function(action) {
 					if (action === 'confirm') {
 						self._contentTypeOverlay._closeSidebar();
+						//var positions = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
+						//self._proxy = new WCF.Action.Proxy({
+						//	success: $.proxy(self._loadParsedContents, self)
+						//});
 
-						this._proxy = new WCF.Action.Proxy({
-							success: $.proxy(self._loadParsedContents, self)
-						});
+						self._execute(elementID, 'save');
 
-						this._proxy.setOption('data', {
-							actionName: 'getParsedContentList',
-							className: 'cms\\data\\page\\PageAction',
-							objectIDs: [self._pageID],
-							parameters: {
-								position: 'body'
-							}
-						});
-						this._proxy.sendRequest();
-
-						this._proxy.setOption('data', {
-							actionName: 'getParsedContentList',
-							className: 'cms\\data\\page\\PageAction',
-							objectIDs: [self._pageID],
-							parameters: {
-								position: 'sidebar'
-							}
-						});
-						this._proxy.sendRequest();
+						//positions.forEach(function (k, v) {
+						//	self._proxy.setOption('data', {
+						//		actionName: 'getParsedContentList',
+						//		className: 'cms\\data\\page\\PageAction',
+						//		objectIDs: [self._pageID],
+						//		parameters: {
+						//			position: k
+						//		}
+						//	});
+						//	self._proxy.sendRequest();
+						//});
 
 						self._editStarted = false;
+						window.location = $('#' + elementID).data('url');
 					}
 				});
 				break;
@@ -473,7 +498,7 @@ Fireball.Page.InlineEditor = WCF.InlineEditor.extend({
 	},
 
 	_loadParsedContents: function (data, textStatus, jqXHR) {
-		position = data.returnValues.position;
+		var position = data.returnValues.position;
 
 		// remove draggable stuff
 		$('.ui-droppable[data-position="' + position + '"]').remove();
@@ -586,144 +611,68 @@ Fireball.Page.UpdateHandler = Class.extend({
 Fireball.Content = {};
 
 /**
- * Handles the content specific add dialog
- */
-Fireball.Content.AddForm = Class.extend({
-	_pageID: 0,
-	_cache: {},
-	_dialog: null,
-
-	init: function (pageID, position, type, parentID) {
-		this._pageID = pageID;
-
-		//show content settings dialog
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
-		});
-		this._proxy.setOption('data', {
-			actionName: 'getAddDialog',
-			className: 'cms\\data\\content\\ContentAction',
-			objectIDs: [],
-			parameters: {
-				position: position,
-				type: type,
-				parentID: parentID,
-				pageID: this._pageID
-			}
-		});
-		this._proxy.sendRequest();
-	},
-
-	_show: function (pageID) {
-		this._dialog = $('<div id="contentAddDialog">' + this._cache[pageID] + '</div>').appendTo(document.body);
-
-		this._dialog.wcfDialog({
-			title: WCF.Language.get('cms.content.add')
-		});
-
-		//bind submit event
-		this._dialog.find('input[type=submit]').click($.proxy(this._submit, this));
-	},
-
-	_executed: function (data, textStatus, jqXHR) {
-		if (typeof data.returnValues.errors === 'undefined') {
-			this._dialog.wcfDialog('close');
-			var $notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
-			$notification.show(function () {
-				window.location = location;
-			});
-		}
-
-	},
-
-	_submit: function (event) {
-		event.preventDefault();
-		parameters = {};
-
-		//get all inputs
-		parameters['contentData'] = {};
-		parameters['contentData']['columnData'] = [];
-		$('#contentAddForm input, #contentAddForm textarea, #contentAddForm select').each(function (index) {
-			var input = $(this);
-			if (input.attr('type') != 'checkbox') {
-				parameters[input.attr('name')] = $.trim(input.val())
-			}
-			else parameters[input.attr('name')] = input.prop('checked') ? 1 : 0;
-
-			//fill contentData arra
-			if (typeof input.attr('name') !== 'undefined' && input.attr('name').match('^contentData')) {
-				delete parameters[input.attr('name')];
-				if (input.attr('name').match('columnData')) {
-					parameters['contentData']['columnData'].push($.trim(input.val()));
-				}
-				else parameters['contentData'][input.attr('id')] = $.trim(input.val());
-
-				if (typeof parameters['contentData']['columnData'] !== 'undefined' && parameters['contentData']['columnData'].length == 0) {
-					delete parameters['contentData']['columnData'];
-				}
-			}
-		});
-
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._executed, this)
-		});
-		this._proxy.setOption('data', {
-			actionName: 'frontendCreate',
-			className: 'cms\\data\\content\\ContentAction',
-			objectIDs: [],
-			parameters: {
-				data: parameters
-			}
-		});
-		this._proxy.sendRequest();
-	},
-
-	_success: function (data, textStatus, jqXHR) {
-		this._cache[this._pageID] = data.returnValues.template;
-		this._show(this._pageID);
-	}
-});
-
-/**
  * Handles the preparation for sorting contents
  */
 Fireball.Content.Dragging = Class.extend({
 	_sortableList : {},
 	_proxy : null,
+	_dialog : null,
 	_pageID : 0,
+	_forcedEditor: false,
+	_cache: {},
+	_i18nFields: {},
 
-	init: function (pageID) {
+	init: function (pageID, forcedEditor) {
 		this._pageID = pageID;
+		this._forcedEditor = forcedEditor;
 
-		$("div[id^='cmsContent']").each(function () {
-			$(this).remove();
-		});
-		$("section[id^='cmsContent']").each(function () {
-			$(this).remove();
-		});
+		if (!this._forcedEditor) {
+			$("div[id^='cmsContent']").each(function () {
+				$(this).remove();
+			});
+			$("section[id^='cmsContent']").each(function () {
+				$(this).remove();
+			});
 
-		this._proxy = new WCF.Action.Proxy({
-			success: $.proxy(this._success, this)
-		});
-		this._proxy.setOption('data', {
-			actionName: 'getSortableContentList',
-			className: 'cms\\data\\page\\PageAction',
-			objectIDs: [this._pageID],
-			parameters: {
-				position: 'body'
-			}
-		});
-		this._proxy.sendRequest();
+			this._proxy = new WCF.Action.Proxy({
+				success: $.proxy(this._success, this)
+			});
+			this._proxy.setOption('data', {
+				actionName: 'getSortableContentList',
+				className: 'cms\\data\\page\\PageAction',
+				objectIDs: [this._pageID],
+				parameters: {
+					position: 'body'
+				}
+			});
+			this._proxy.sendRequest();
 
-		this._proxy.setOption('data', {
-			actionName: 'getSortableContentList',
-			className: 'cms\\data\\page\\PageAction',
-			objectIDs: [this._pageID],
-			parameters: {
-				position: 'sidebar'
-			}
-		});
-		this._proxy.sendRequest();
+			this._proxy.setOption('data', {
+				actionName: 'getSortableContentList',
+				className: 'cms\\data\\page\\PageAction',
+				objectIDs: [this._pageID],
+				parameters: {
+					position: 'sidebar'
+				}
+			});
+			this._proxy.sendRequest();
+		} else {
+			var positions = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
+			var self = this;
+
+			positions.forEach(function (k, v) {
+				var container = $('#sortableContentList' + k.charAt(0).toUpperCase() + k.slice(1));
+				self._sortableList[k] = new Fireball.Content.Sortable.List('sortableContentList' + k.charAt(0).toUpperCase() + k.slice(1));
+
+				if (container !== undefined) {
+					container.parent().find('.ui-droppable').droppable({
+						activeClass: "droppable-state-active",
+						greedy: true,
+						drop: $.proxy(self._drop, self)
+					});
+				}
+			});
+		}
 	},
 
 	_drag: function (event, ui) {
@@ -749,29 +698,140 @@ Fireball.Content.Dragging = Class.extend({
 			if (typeof data !== 'undefined') {
 				parentID = data;
 			}
+
 			//call add form
-			new Fireball.Content.AddForm(this._pageID, position, type, parentID);
+			this._addDialogInit(position, type, parentID);
+		}
+	},
+
+	_addDialogInit: function (position, type, parentID) {
+		//show content settings dialog
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._addDialogSuccess, this)
+		});
+		this._proxy.setOption('data', {
+			actionName: 'getAddDialog',
+			className: 'cms\\data\\content\\ContentAction',
+			objectIDs: [],
+			parameters: {
+				position: position,
+				type: type,
+				parentID: parentID,
+				pageID: this._pageID
+			}
+		});
+		this._proxy.sendRequest();
+	},
+
+	_addDialogSuccess: function (data, textStatus, jqXHR) {
+		this._cache[this._pageID] = data.returnValues.template;
+		this._dialog = $('<div id="contentAddDialog">' + this._cache[this._pageID] + '</div>').appendTo(document.body);
+
+		this._dialog.wcfDialog({
+			title: WCF.Language.get('cms.content.add')
+		});
+
+		if (data.returnValues.i18nFields) this._i18nFields = data.returnValues.i18nFields;
+		else this._i18nFields = {};
+
+		//bind submit event
+		this._dialog.find('input[type=submit]').click($.proxy(this._addDialogSubmit, this));
+	},
+
+	_addDialogSubmit: function (event) {
+		console.log(event.default);
+		console.log(event.defaultActions);
+		console.log(event.defaultPrevented);
+		console.log(event._default(event));
+		event.preventDefault();
+		var parameters = {};
+		var i18nValues = {};
+
+		//get all inputs
+		parameters['contentData'] = {};
+		parameters['contentData']['columnData'] = [];
+		$('#contentAddForm .dataPart input, #contentAddForm .dataPart textarea, #contentAddForm .dataPart select').each(function (index) {
+			var input = $(this);
+			if (input.attr('type') != 'checkbox') {
+				parameters[input.attr('name')] = $.trim(input.val())
+			}
+			else parameters[input.attr('name')] = input.prop('checked') ? 1 : 0;
+
+			//fill contentData array
+			if (typeof input.attr('name') !== 'undefined' && input.attr('name').match('^contentData')) {
+				delete parameters[input.attr('name')];
+				if (input.attr('name').match('columnData')) {
+					parameters['contentData']['columnData'].push($.trim(input.val()));
+				}
+				else parameters['contentData'][input.attr('id')] = $.trim(input.val());
+
+				if (typeof parameters['contentData']['columnData'] !== 'undefined' && parameters['contentData']['columnData'].length == 0) {
+					delete parameters['contentData']['columnData'];
+				}
+			}
+		});
+		parameters['pageID'] = this._pageID;
+		parameters['position'] = $('#contentAddForm .formSubmit input[name="position"]').val();
+		parameters['parentID'] = $('#contentAddForm .formSubmit input[name="parentID"]').val();
+
+		this._i18nFields.forEach(function (k, v) {
+			console.log('should read i18nValues for ' + k);
+			//TODO
+		});
+
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._addDialogExecuted, this)
+		});
+		this._proxy.setOption('data', {
+			actionName: 'frontendCreate',
+			className: 'cms\\data\\content\\ContentAction',
+			objectIDs: [],
+			parameters: {
+				data: parameters,
+				objectType: $('#contentAddForm .formSubmit input[name="objectType"]').val(),
+				i18nValues: i18nValues
+			}
+		});
+		this._proxy.sendRequest();
+	},
+
+	_addDialogExecuted: function (data, textStatus, jqXHR) {
+		if (typeof data.returnValues.errors === 'undefined') {
+			this._dialog.wcfDialog('close');
+			var notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success'));
+			var self = this;
+			var position = data.returnValues.position;
+			notification.show();
+
+			if (self.getSortableListObject(position)) self.getSortableListObject(position)._submit();
+
+			this._proxy = new WCF.Action.Proxy({
+				success: $.proxy(this._success, this)
+			});
+			this._proxy.setOption('data', {
+				actionName: 'getSortableContentList',
+				className: 'cms\\data\\page\\PageAction',
+				objectIDs: [this._pageID],
+				parameters: {
+					position: position
+				}
+			});
+			this._proxy.sendRequest();
 		}
 	},
 
 	_success: function (data, textStatus, jqXHR) {
-		template = data.returnValues.template;
+		var containerID = 'sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1);
+		var parent = $('#'+containerID).parent();
+		$('#'+containerID).remove();
+		$('div.ui-droppable[data-position="'+data.returnValues.position+'"]').remove();
 
-		if (data.returnValues.position == 'body')
-			$(template).insertAfter($('.content .contentHeader'));
-		else if (data.returnValues.position == 'sidebar')
-			$('aside.sidebar').append(template);
-		else if (data.returnValues.position == 'sidebarLeft')
-			$('aside.boxesSidebarLeft').append(template);
-		else if (data.returnValues.position == 'sidebarRight')
-			$('aside.boxesSidebarRight').append(template);
+		parent.append(data.returnValues.template);
 
-		$container = $('#sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1));
-
-		this._sortableList[data.returnValues.position] = new Fireball.Content.Sortable.List('sortableContentList' + data.returnValues.position.charAt(0).toUpperCase() + data.returnValues.position.slice(1));
-
-		if ($container !== undefined) {
-			$container.parent().find('.ui-droppable').droppable({
+		var container = $('#'+containerID);
+		this._sortableList[data.returnValues.position] = new Fireball.Content.Sortable.List(containerID);
+		if (container !== undefined) {
+			container.parent().find('.ui-droppable').droppable({
 				activeClass: "droppable-state-active",
 				greedy: true,
 				drop: $.proxy(this._drop, this)
@@ -794,8 +854,7 @@ Fireball.Content.Sortable = {};
  */
 Fireball.Content.Sortable.List = WCF.Sortable.List.extend({
 	init: function (container) {
-		this._super(container);
-		this._className = 'cms\\data\\content\\ContentAction';
+		this._super(container, 'cms\\data\\content\\ContentAction');
 	},
 
 	/**
@@ -842,5 +901,5 @@ Fireball.Content.Sortable.List = WCF.Sortable.List.extend({
 			parameters: $parameters
 		});
 		this._proxy.sendRequest();
-	},
+	}
 });
