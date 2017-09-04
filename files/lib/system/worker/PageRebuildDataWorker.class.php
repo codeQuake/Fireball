@@ -1,6 +1,7 @@
 <?php
 namespace cms\system\worker;
 
+use cms\data\page\Page;
 use cms\data\page\PageAction;
 use cms\data\page\PageEditor;
 use cms\data\page\PageList;
@@ -62,7 +63,11 @@ class PageRebuildDataWorker extends AbstractRebuildDataWorker {
 		/** @var \cms\data\page\Page $page */
 		foreach ($this->objectList as $page) {
 			$pageEditor = new PageEditor($page);
-			$parentPage = $page->getParentPage();
+			if ($page->parentID) {
+				$parentPage = new Page($page->parentID);
+			} else {
+				$parentPage = null;
+			}
 
 			$availableLanguages = LanguageFactory::getInstance()->getLanguages();
 			$contents = [];
