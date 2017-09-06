@@ -384,3 +384,24 @@
 		}
 	}
 }
+
+.sitemapList {
+	li {
+		padding: 5px 0;
+
+		&:not(:last-child) {
+			border-bottom: 1px solid $wcfContentBorderInner;
+		}
+
+		ul {
+			li:first-child {
+				margin-top: 5px;
+				border-top: 1px solid $wcfContentBorderInner;
+			}
+
+			li:last-child {
+				padding-bottom: 0;
+			}
+		}
+	}
+}
