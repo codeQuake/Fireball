@@ -86,7 +86,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 		}
 		
 		// set breadcrumbs manually since wsc's automatic generation returns the root url only
-		foreach ($this->page->getParentPages() as $parentPage) {
+		foreach ($this->page->getParentPages(false) as $parentPage) {
 			if ($parentPage->wcfPageID) {
 				$page = WCFPageCache::getInstance()->getPage($parentPage->wcfPageID);
 				PageLocationManager::getInstance()->addParentLocation($page->identifier, $parentPage->pageID, $parentPage);

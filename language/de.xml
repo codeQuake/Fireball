@@ -398,6 +398,7 @@
 		<item name="wcf.acp.group.option.user.fireball.page.canEditComment"><![CDATA[Kann eigene Kommentare bearbeiten]]></item>
 		<item name="wcf.acp.group.option.user.fireball.page.canViewComment"><![CDATA[Kann Kommentare sehen]]></item>
 		<item name="wcf.acp.group.option.user.fireball.page.canViewPage"><![CDATA[Kann Seiten sehen]]></item>
+		<item name="wcf.acp.group.option.user.fireball.file.canViewThumbnail"><![CDATA[Kann Dateivorschau sehen]]></item>
 	</category>
 
 	<category name="wcf.acp.index">

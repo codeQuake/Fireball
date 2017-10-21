@@ -268,10 +268,11 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 
 	/**
 	 * Returns the parent pages of this page.
-	 * 
+	 *
+	 * @param       boolean $invertArray
 	 * @return	\cms\data\page\Page[]
 	 */
-	public function getParentPages() {
+	public function getParentPages($invertArray = true) {
 		if ($this->isChild()) {
 			$parentPages = [];
 			$parent = $this;
@@ -280,7 +281,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 				$parentPages[] = $parent;
 			}
 
-			$parentPages = array_reverse($parentPages);
+			if ($invertArray) $parentPages = array_reverse($parentPages);
 			return $parentPages;
 		}
 

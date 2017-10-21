@@ -56,14 +56,14 @@ class FireballRequestRoute implements IRequestRoute {
 						-
 						(?P<title>[^/]+)
 					)?
-					/
+					/?
 				)
 			)
 		|
 			(
 				(?:
 					(?P<alias>.*)
-					/
+					/?
 				)
 			)
 		)$~x';
