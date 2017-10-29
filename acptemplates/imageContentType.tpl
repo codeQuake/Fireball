@@ -42,8 +42,8 @@
 	<dt></dt>
 	<dd>
 		<label>
-			{lang}cms.acp.content.type.de.codequake.cms.content.type.image.useThumbnail{/lang}
 			<input name="contentData[useThumbnail]" id="contentData[useThumbnail]" type="checkbox" value="1" {if $contentData['useThumbnail']|isset && $contentData['useThumbnail']|isset} checked{/if}" />
+			{lang}cms.acp.content.type.de.codequake.cms.content.type.image.useThumbnail{/lang}
 		</label>
 	</dd>
 </dl>
