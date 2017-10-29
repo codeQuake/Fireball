@@ -51,7 +51,7 @@ class FireballRequestRoute implements IRequestRoute {
 			(
 				(?P<controller>.+?)
 				(?:
-					(?P<id>[0-9]+)
+					\/(?P<id>[0-9]+)
 					(?:
 						-
 						(?P<title>[^/]+)
