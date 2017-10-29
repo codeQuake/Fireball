@@ -25,7 +25,7 @@ class GalleryContentType extends AbstractContentType {
 	public function getOutput(Content $content) {
 		$imageIDs = $content->imageIDs;
 		
-		//neccessary for old data (version 2.0.0 Beta 7 or older)
+		// necessary for old data (version 2.0.0 Beta 7 or older)
 		if (is_string($content->imageIDs)) $imageIDs = explode(',', $content->imageIDs);
 
 		$list = [];
@@ -47,7 +47,7 @@ class GalleryContentType extends AbstractContentType {
 	public function getPreview(Content $content) {
 		$imageIDs = $content->imageIDs;
 		
-		//neccessary for old data (version 2.0.0 Beta 7 or older)
+		// necessary for old data (version 2.0.0 Beta 7 or older)
 		if (is_string($content->imageIDs)) $imageIDs = explode(',', $content->imageIDs);
 
 		$list = [];
