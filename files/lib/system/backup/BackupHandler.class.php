@@ -242,8 +242,9 @@ class BackupHandler extends SingletonFactory {
 					$currentID = (isset($import[$object.'ID']) ? $import[$object.'ID'] : ($object == 'folder' ? $import['categoryID'] : null));
 					$langData = [];
 					
-					// unset current id to be save
+					// unset current id(s) to be save
 					if (isset($import[$object.'ID'])) unset($import[$object.'ID']);
+					if (isset($import['wcfPageID'])) unset($import['wcfPageID']);
 					
 					// check parent ids
 					if ($object == 'page' || $object == 'content') {
