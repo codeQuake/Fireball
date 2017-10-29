@@ -602,6 +602,12 @@ Fireball.ACP.File.Picker = Class.extend({
 	_selected: null,
 
 	/**
+	 * sort order of files
+	 * @var integer[]
+	 */
+	_sortOrder: null,
+
+	/**
 	 * Initialises a new file picker.
 	 *
 	 * @param	jQuery		selectButton
@@ -633,7 +639,9 @@ Fireball.ACP.File.Picker = Class.extend({
 		// bind select event
 		this._selectButton.click($.proxy(this._openPicker, this));
 
-		this._updateSelectedFilesList();
+		if (options.sortOrder != undefined) this._sortOrder = options.sortOrder;
+
+		this._updateSelectedFilesList(true);
 	},
 
 	/**
@@ -835,10 +843,14 @@ Fireball.ACP.File.Picker = Class.extend({
 				$fileID = $td.parent().data('fileID'),
 				$input;
 
+			if ($td.children('.filePickerCheckBox').val() !== undefined) {
+				return;
+			}
+
 			if (this._options.multiple) {
-				$input = $('<input type="checkbox" name="'+ this._inputName +'Picker[]" value="'+ $fileID +'" />').appendTo($td);
+				$input = $('<input type="checkbox" class="filePickerCheckBox" name="'+ this._inputName +'[]" value="'+ $fileID +'" />').appendTo($td);
 			} else {
-				$input = $('<input type="radio" name="'+ this._inputName +'Picker" value="'+ $fileID +'" />').appendTo($td);
+				$input = $('<input type="radio" class="filePickerCheckBox" name="'+ this._inputName +'" value="'+ $fileID +'" />').appendTo($td);
 			}
 
 			// handle default values
@@ -851,16 +863,53 @@ Fireball.ACP.File.Picker = Class.extend({
 		}, this));
 	},
 
-	_updateSelectedFilesList: function() {
-		var $ul = this._selectButton.parent().children('.formAttachmentList');
+	_updateSelectedFilesList: function(initial) {
+		var $ul = this._selectButton.parent().children('#filePickerList');
 
 		// remove old files
 		$ul.html('');
 
-		// insert new files
-		$.each(this._selected, function(fileID, file) {
-			$('<li class="box32"><span class="icon icon32 fa-paperclip" /><div><div><p>' + file.title + '</p><small>' + file.formattedFilesize + '</small></div></div></li>').appendTo($ul);
-		});
+		var self = this;
+		if (initial) {
+			// insert selected files
+			$.each(this._sortOrder, function(sortOrder, fileID) {
+				var file = self._selected[fileID];
+				if (file.imageUrl) {
+					$('<li class="sortableNode filePickerItem" data-object-id="' + fileID + '">' +
+						'<span class="sortableNodeLabel">' +
+							'<img src="' + file.imageUrl + '" />' +
+							'<div><p class="cmsFileLink" data-file-id="'+fileID+'">[' + fileID + '] ' + file.title + '</p><small>' + file.formattedFilesize + '</small><input type="hidden" name="'+ self._inputName +'[ordered][]" value="' + fileID + '" /></div>' +
+						'</span>' +
+					'</li>').appendTo($ul);
+				} else {
+					$('<li class="sortableNode filePickerItem" data-object-id="' + fileID + '">' +
+						'<span class="sortableNodeLabel">' +
+							'<span class="icon icon64 fa-paperclip"></span>' +
+							'<div><p class="cmsFileLink" data-file-id="'+fileID+'">[' + fileID + '] ' + file.title + '</p><small>' + file.formattedFilesize + '</small><input type="hidden" name="'+ self._inputName +'[ordered][]" value="' + fileID + '" /></div>' +
+						'</span>' +
+					'</li>').appendTo($ul);
+				}
+			});
+		} else {
+			// insert new files
+			$.each(this._selected, function(fileID, file) {
+				if (file.imageUrl) {
+					$('<li class="sortableNode filePickerItem" data-object-id="' + fileID + '">' +
+						'<span class="sortableNodeLabel">' +
+							'<img src="' + file.imageUrl + '" />' +
+							'<div><p class="cmsFileLink" data-file-id="'+fileID+'">[' + fileID + '] ' + file.title + '</p><small>' + file.formattedFilesize + '</small><input type="hidden" name="'+ self._inputName +'[ordered][]" value="' + fileID + '" /></div>' +
+						'</span>' +
+					'</li>').appendTo($ul);
+				} else {
+					$('<li class="sortableNode filePickerItem" data-object-id="' + fileID + '">' +
+						'<span class="sortableNodeLabel">' +
+							'<span class="icon icon64 fa-paperclip"></span>' +
+							'<div><p class="cmsFileLink" data-file-id="'+fileID+'">[' + fileID + '] ' + file.title + '</p><small>' + file.formattedFilesize + '</small><input type="hidden" name="'+ self._inputName +'[ordered][]" value="' + fileID + '" /></div>' +
+						'</span>' +
+					'</li>').appendTo($ul);
+				}
+			});
+		}
 	},
 
 	/**

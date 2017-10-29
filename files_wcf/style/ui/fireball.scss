@@ -1,0 +1,23 @@
+#filePicker {
+	.filePickerItem {
+		.sortableNodeLabel {
+			display: flex;
+			padding: 2px 0;
+			margin-top: -20px;
+
+			> img {
+				height: 64px;
+				width: auto;
+				max-width: 80px;
+			}
+
+			> div {
+				padding-left: 10px;
+			}
+		}
+	}
+
+	span.button.small {
+		margin-top: 14px;
+	}
+}
