@@ -3,10 +3,15 @@
 	<packageinformation>
 		<packagename>Fireball CMS</packagename>
 		<packagedescription><![CDATA[Advanced CMS for WSC 3.0]]></packagedescription>
+		<packagedescription language="de"><![CDATA[Erweitertes CMS für Ihre personalisierte Website auf Basis von WCF/WSC]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>3.0.0 Beta 3</version>
-		<date>2017-05-06</date>
+		<version>3.0.0 RC 1</version>
+		<date>2017-10-05</date>
 	</packageinformation>
+
+	<compatibility>
+		<api version="2017" />
+	</compatibility>
 
 	<authorinformation>
 		<author><![CDATA[Jens Krumsieck, Florian Gail]]></author>
@@ -19,7 +24,7 @@
 	</requiredpackages>
 
 	<excludedpackages>
-		<excludedpackage version="3.1.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+		<excludedpackage version="3.2.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 	</excludedpackages>
 
 	<instructions type="install">
@@ -81,13 +86,13 @@
 		<instruction type="menuItem">xml/menuItem.xml</instruction>
 
 		<!-- scripts -->
-		<instruction type="script" installupdateserver="1">acp/update_de.codequake.cms_22.php</instruction>
+		<instruction type="script">acp/update_de.codequake.cms_22.php</instruction>
 
 		<!-- db cleanup -->
 		<instruction type="sql">post_update.sql</instruction>
 	</instructions>
 
-	<instructions type="update" fromversion="3.0.0 Beta 2">
+	<instructions type="update" fromversion="3.0.0 Beta 3">
 		<instruction type="language" />
 
 		<!-- files -->
@@ -95,16 +100,5 @@
 		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="acpTemplate" />
 		<instruction type="template" />
-
-		<!-- xml -->
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="bbcode">xml/bbcode.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-
-		<!-- scripts -->
-		<instruction type="script" installupdateserver="1">acp/update_de.codequake.cms.php</instruction>
 	</instructions>
 </package>
