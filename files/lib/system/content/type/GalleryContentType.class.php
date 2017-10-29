@@ -25,8 +25,13 @@ class GalleryContentType extends AbstractContentType {
 	public function getOutput(Content $content) {
 		$imageIDs = $content->imageIDs;
 		
-		//neccessary for old data (version 2.0.0 Beta 7 or older)
+		// necessary for old data (version 2.0.0 Beta 7 or older)
 		if (is_string($content->imageIDs)) $imageIDs = explode(',', $content->imageIDs);
+		
+		// support for ordered images since 3.0.0 Beta 4
+		if (!empty($imageIDs['ordered']) && is_array($imageIDs['ordered'])) {
+			$imageIDs = $imageIDs['ordered'];
+		}
 
 		$list = [];
 		foreach ($imageIDs as $imageID) {
@@ -47,7 +52,7 @@ class GalleryContentType extends AbstractContentType {
 	public function getPreview(Content $content) {
 		$imageIDs = $content->imageIDs;
 		
-		//neccessary for old data (version 2.0.0 Beta 7 or older)
+		// necessary for old data (version 2.0.0 Beta 7 or older)
 		if (is_string($content->imageIDs)) $imageIDs = explode(',', $content->imageIDs);
 
 		$list = [];
@@ -66,11 +71,21 @@ class GalleryContentType extends AbstractContentType {
 	public function getImageList($imageIDs = []) {
 		if (empty($imageIDs))
 			return [];
+		
+		if (isset($imageIDs['ordered'])) $orderedIDs = $imageIDs = $imageIDs['ordered'];
 
 		$imageList = new FileList();
 		$imageList->getConditionBuilder()->add('fileID in (?)', [$imageIDs]);
 		$imageList->readObjects();
+		$images = $imageList->getObjects();
+		
+		if (empty($orderedIDs)) return $images;
+		
+		$orderedImages = [];
+		foreach ($orderedIDs as $order => $imageID) {
+			$orderedImages[$order] = $images[$imageID];
+		}
 
-		return $imageList;
+		return $orderedImages;
 	}
 }

@@ -18,14 +18,14 @@
 </dl>
 
 <dl>
-	<dt><label for="width">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.width{/lang}</label></dt>
+	<dt><label for="contentData[width]">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.width{/lang}</label></dt>
 	<dd>
 		<input name="contentData[width]" id="width" type="number" value="{if $contentData['width']|isset}{$contentData['width']}{else}0{/if}"  />
 	</dd>
 </dl>
 
 <dl>
-	<dt><label for="height">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.height{/lang}</label></dt>
+	<dt><label for="contentData[height]">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.height{/lang}</label></dt>
 	<dd>
 		<input name="contentData[height]" id="height" type="number" value="{if $contentData['height']|isset}{$contentData['height']}{else}0{/if}" />
 	</dd>
@@ -35,6 +35,16 @@
 	<dt><label for="contentData[link]">{lang}cms.acp.content.type.de.codequake.cms.content.type.image.hyperlink{/lang}</label></dt>
 	<dd>
 		<input name="contentData[link]" id="contentData[link]" type="text" value="{if $contentData['link']|isset}{$contentData['link']}{/if}"  class="long" />
+	</dd>
+</dl>
+
+<dl>
+	<dt></dt>
+	<dd>
+		<label>
+			{lang}cms.acp.content.type.de.codequake.cms.content.type.image.useThumbnail{/lang}
+			<input name="contentData[useThumbnail]" id="contentData[useThumbnail]" type="checkbox" value="1" {if $contentData['useThumbnail']|isset && $contentData['useThumbnail']|isset} checked{/if}" />
+		</label>
 	</dd>
 </dl>
 

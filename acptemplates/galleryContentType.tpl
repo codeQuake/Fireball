@@ -1,15 +1,15 @@
 <dl class="images">
-	<dt><label for="images">{lang}cms.acp.content.type.de.codequake.cms.content.type.gallery.images{/lang}</label></dt>
-	<dd>
-		<div id="filePicker">
-			<ul class="formAttachmentList clearfix"></ul>
+	<dt></dt>
+	<dd class="wide">
+		<div id="filePicker" class="sortableListContainer">
+			<ol id="filePickerList" class="sortableList"></ol>
 			<span class="button small">{lang}cms.acp.file.picker{/lang}</span>
 		</div>
 	</dd>
 </dl>
 
 <script data-relocate="true">
-	require(['Language'], function(Language) {
+	require(['Language', 'WoltLabSuite/Core/Ui/Sortable/List'], function(Language, UiSortableList) {
 		Language.addObject({
 			'wcf.global.button.upload': '{lang}wcf.global.button.upload{/lang}'
 		});
@@ -22,10 +22,18 @@
 				{@$image->fileID}: {
 					fileID: {@$image->fileID},
 					title: '{$image->getTitle()}',
-						formattedFilesize: '{@$image->filesize|filesize}'
+					formattedFilesize: '{@$image->filesize|filesize}',
+					imageUrl: '{$image->getLink()}'
 				}
 			{/implode}
 		{/if}
-		}, { multiple: true, fileType: 'image' });
+		}, { multiple: true, fileType: 'image'{if !$contentData[imageIDs][ordered]|empty}, sortOrder: [ {', '|implode:$contentData[imageIDs][ordered]} ]{/if} });
+
+		new UiSortableList({
+			containerId: 'filePicker',
+			className: 'cms\\data\\file\\FileAction',
+			isSimpleSorting: true
+		});
+
 	});
 </script>
