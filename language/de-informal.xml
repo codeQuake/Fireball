@@ -13,6 +13,7 @@
 	<li><code class="inlineCode">sectionPadding</code>: Zusammen mit section wird der Inhalt mit einem Abstand zum Rahmen versehen</li>
 	<li><code class="inlineCode">sectionBorder</code>: Legt einen Rahmen um das Element</li>
 	<li><code class="inlineCode">sectionCenter</code>: Zentriert den Inhalt des Elements</li>
+	<li><code class="inlineCode">htmlContent</code>: Benötigt für die korrekte Darstellung bei formatierten Inhalten des Typs „Text“ (z.B. für Listen, Tabellen, Bilder, …)</li>
 </ul>]]>
 		</item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Willst du diesen Inhalt wirklich löschen?]]></item>

@@ -6,7 +6,7 @@
 		<packagedescription language="de"><![CDATA[Erweitertes CMS für Ihre personalisierte Website auf Basis von WCF/WSC]]></packagedescription>
 		<isapplication>1</isapplication>
 		<version>3.1.0 Beta 1</version>
-		<date>2017-10-05</date>
+		<date>2017-11-05</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -20,7 +20,7 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="3.1.0 Beta 2">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="1.0.0 Alpha 1">de.mysterycode.wcf.redactor.extended</requiredpackage>
+		<requiredpackage minversion="1.0.0">de.mysterycode.wcf.redactor.extended</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>

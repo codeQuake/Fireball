@@ -13,6 +13,7 @@
 	<li><code class="inlineCode">sectionPadding</code>: Use it with section to add some padding</li>
 	<li><code class="inlineCode">sectionBorder</code>: Adds a border to your content</li>
 	<li><code class="inlineCode">sectionCenter</code>: Centers the content</li>
+	<li><code class="inlineCode">htmlContent</code>: Required for correct appearance of contents of the type "text" (e.g. for lists, tables, images, …)</li>
 </ul>]]>
 		</item>
 		<item name="cms.acp.content.delete.sure"><![CDATA[Are you sure you want to delete this content?]]></item>
