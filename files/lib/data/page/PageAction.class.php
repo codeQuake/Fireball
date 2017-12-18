@@ -658,7 +658,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$categories = [];
 		/** @var \wcf\data\object\type\ObjectType $type */
 		foreach ($types as $type) {
-			$categories[$type->category][] = $type;
+			$categories[$type->category] = [];
 		}
 
 		/** @var \wcf\data\object\type\ObjectType $type */
