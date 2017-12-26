@@ -5,8 +5,8 @@
 		<packagedescription><![CDATA[Advanced CMS for WSC - since WCF 2.0]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Erweitertes CMS für Ihre personalisierte Website auf Basis von WCF/WSC - seit WCF 2.0]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>3.1.0 Beta 1</version>
-		<date>2017-11-05</date>
+		<version>3.1.0 Beta 2</version>
+		<date>2017-12-26</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -19,7 +19,7 @@
 	</compatibility>
 
 	<requiredpackages>
-		<requiredpackage minversion="3.1.0 Beta 2">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="3.1.0 Beta 4">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.0.0">de.mysterycode.wcf.redactor.extended</requiredpackage>
 	</requiredpackages>
 
@@ -58,7 +58,7 @@
 		<instruction type="script" installupdateserver="1">acp/install_de.codequake.cms.php</instruction>
 	</instructions>
 
-	<instructions type="update" fromversion="3.0.0 RC 1">
+	<instructions type="update" fromversion="3.0.0 RC 2">
 		<instruction type="language" />
 
 		<!-- files -->
@@ -84,30 +84,12 @@
 		<instruction type="page">xml/page.xml</instruction>
 		<instruction type="menuItem">xml/menuItem.xml</instruction>
 	</instructions>
-	<instructions type="update" fromversion="3.1.0 Alpha 1">
+	<instructions type="update" fromversion="3.1.0 Beta 1">
 		<instruction type="language" />
 
 		<!-- files -->
 		<instruction type="file" />
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="acpTemplate" />
 		<instruction type="template" />
-
-		<!-- xml -->
-		<instruction type="objectTypeDefinition">xml/objectTypeDefinition.xml</instruction>
-		<instruction type="objectType">xml/objectType.xml</instruction>
-		<instruction type="aclOption">xml/aclOption.xml</instruction>
-		<instruction type="acpMenu">xml/acpMenu.xml</instruction>
-		<instruction type="acpSearchProvider">xml/acpSearchProvider.xml</instruction>
-		<instruction type="bbcode">xml/bbcode.xml</instruction>
-		<instruction type="clipboardAction">xml/clipboardAction.xml</instruction>
-		<instruction type="cronjob">xml/cronjob.xml</instruction>
-		<instruction type="eventListener">xml/eventlistener.xml</instruction>
-		<instruction type="option">xml/option.xml</instruction>
-		<instruction type="templateListener">xml/templateListener.xml</instruction>
-		<instruction type="userGroupOption">xml/userGroupOption.xml</instruction>
-		<instruction type="userNotificationEvent">xml/userNotificationEvent.xml</instruction>
-		<instruction type="page">xml/page.xml</instruction>
-		<instruction type="menuItem">xml/menuItem.xml</instruction>
 	</instructions>
 </package>
