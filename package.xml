@@ -5,8 +5,8 @@
 		<packagedescription><![CDATA[Advanced CMS for WSC 3.0]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Erweitertes CMS für Ihre personalisierte Website auf Basis von WCF/WSC]]></packagedescription>
 		<isapplication>1</isapplication>
-		<version>3.0.0 RC 1</version>
-		<date>2017-11-05</date>
+		<version>3.0.0 RC 2</version>
+		<date>2017-12-26</date>
 	</packageinformation>
 
 	<compatibility>
@@ -92,12 +92,11 @@
 		<instruction type="sql">post_update.sql</instruction>
 	</instructions>
 
-	<instructions type="update" fromversion="3.0.0 Beta 3">
+	<instructions type="update" fromversion="3.0.0 RC 1">
 		<instruction type="language" />
 
 		<!-- files -->
 		<instruction type="file" />
-		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="acpTemplate" />
 		<instruction type="template" />
 	</instructions>
