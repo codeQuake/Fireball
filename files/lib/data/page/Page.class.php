@@ -210,7 +210,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 	 * @return	\cms\data\content\DrainedPositionContentNodeTree[]
 	 */
 	public function getContents() {
-		$availablePositions = Content::AVAILABLE_POSITIONS;
+		$availablePositions = Content::$AVAILABLE_POSITIONS;
 		$contentList = [];
 
 		foreach ($availablePositions as $position) {

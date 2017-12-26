@@ -52,7 +52,7 @@ class Content extends DatabaseObject implements IRouteController, IPollObject, I
 	/**
 	 * @var string[]
 	 */
-	const AVAILABLE_POSITIONS = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
+	public static $AVAILABLE_POSITIONS = ['hero', 'headerBoxes', 'top', 'sidebarLeft', 'body', 'sidebarRight', 'bottom', 'footerBoxes', 'footer'];
 	
 	/**
 	 * @var \wcf\data\object\type\ObjectType
