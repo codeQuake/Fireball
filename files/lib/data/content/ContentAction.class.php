@@ -207,7 +207,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 		
 		//validate position
 		else if (!empty($this->parameters['position']) && $this->parameters['position'] == 'sidebar') $this->parameters['position'] = 'sidebarRight';
-		if (!isset($this->parameters['position']) || !in_array($this->parameters['position'], Content::AVAILABLE_POSITIONS)) throw new UserInputException('position');
+		if (!isset($this->parameters['position']) || !in_array($this->parameters['position'], Content::$AVAILABLE_POSITIONS)) throw new UserInputException('position');
 		
 		//validate parent
 		if (isset($this->parameters['parentID']) && $this->parameters['parentID'] != 0) {

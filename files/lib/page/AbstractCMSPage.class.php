@@ -140,7 +140,7 @@ abstract class AbstractCMSPage extends AbstractPage implements ICMSPage {
 			$this->contentNodeTrees = $this->page->getContents();
 		} else {
 			$contents = $this->page->getContents();
-			foreach (Content::AVAILABLE_POSITIONS as $position) {
+			foreach (Content::$AVAILABLE_POSITIONS as $position) {
 				$this->contentNodeTrees[$position] = !empty($contents[$position]) ? $contents[$position] : [];
 			}
 		}

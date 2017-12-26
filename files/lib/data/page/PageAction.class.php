@@ -647,7 +647,7 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 		$types = ObjectTypeCache::getInstance()->getObjectTypes('de.codequake.cms.content.type');
 		foreach ($types as $key => $type) {
 			if (!$this->parameters['position'] == 'both') {
-				foreach (Content::AVAILABLE_POSITIONS as $position) {
+				foreach (Content::$AVAILABLE_POSITIONS as $position) {
 					if (!$type->getProcessor()->isAvailableToAdd($position)) break;
 				}
 			} else if (!$type->getProcessor()->isAvailableToAdd($this->parameters['position'])) {
