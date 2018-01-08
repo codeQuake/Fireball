@@ -89,7 +89,7 @@
 		{/hascontent}
 	{elseif $position == 'hero'}
 		{hascontent}
-			{capture assign='heroBoxes'}
+			{capture assign='boxesHero'}
 				{content}
 					{include file='contentNodeList' application='cms' contentNodeTree=$contentNodeTrees[$position] position=$position}
 				{/content}
