@@ -33,6 +33,18 @@ class PageCache extends SingletonFactory {
 	protected $structure = [];
 
 	/**
+	 * maps a fireball page id to the corresponding wsc page id
+	 * @var	integer[]
+	 */
+	protected $wcfMapping;
+
+	/**
+	 * maps a wsc page id to the corresponding fireball page id
+	 * @var	integer[]
+	 */
+	protected $wcfMappingInvert;
+
+	/**
 	 * cached menu node tree (max depth = 1)
 	 * @var	\cms\data\page\AccessiblePageNodeTree
 	 */
@@ -205,5 +217,34 @@ class PageCache extends SingletonFactory {
 		}
 		
 		return $this->pageCount;
+	}
+
+	/**
+	 * Returns the ID of the corresponding WSC-Page
+	 *
+	 * @param integer $pageID
+	 * @return integer|null
+	 */
+	public function getWCFPageID($pageID) {
+		if ($this->wcfMapping === null) {
+			$this->wcfMapping = PageCacheBuilder::getInstance()->getData([], 'wcfPageIDs');
+		}
+
+		return isset($this->wcfMapping[$pageID]) ? $this->wcfMapping[$pageID] : null;
+	}
+
+	/**
+	 * Returns the ID of the corresponding Fireball-Page by the WSC's page id
+	 *
+	 * @param integer $pageID
+	 * @return integer|null
+	 */
+	public function getFireballPageID($pageID) {
+		if ($this->wcfMappingInvert === null) {
+			if ($this->wcfMapping === null) $this->wcfMapping = PageCacheBuilder::getInstance()->getData([], 'wcfPageIDs');
+			$this->wcfMappingInvert = array_flip($this->wcfMapping);
+		}
+
+		return isset($this->wcfMappingInvert[$pageID]) ? $this->wcfMappingInvert[$pageID] : null;
 	}
 }

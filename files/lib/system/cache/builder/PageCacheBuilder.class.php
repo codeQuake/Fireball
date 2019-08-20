@@ -45,6 +45,7 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 
 			// page structure
 			$data['structure'][$page->parentID][] = $page->pageID;
+			$data['wcfPageIDs'][$page->pageID] = $page->wcfPageID;
 		}
 
 		// stylesheets
