@@ -152,7 +152,7 @@
 		<item name="fireball.acp.menu.link.fireball.stylesheet.list"><![CDATA[Stylesheets]]></item>
 	</category>
 
-	<category name="cms.acp.condition">
+	<category name="cms.condition">
 		<item name="cms.condition.page.page"><![CDATA[CMS-Seite]]></item>
 		<item name="cms.condition.page.page.description"><![CDATA[Wählen Sie hier die CMS-Seiten aus, auf denen der Hinweis angezeigt werden soll.]]></item>
 	</category>
@@ -281,6 +281,10 @@
 		<item name="cms.acp.stylesheet.scss.description"><![CDATA[Die Eingabe kann vollständig aus CSS bestehen. Du hast zusätzlich den Zugriff auf SCSS und alle von Community Framework zur Verfügung gestellten Mixins und SCSS-Variablen.]]></item>
 		<item name="cms.acp.stylesheet.list"><![CDATA[Stylesheets]]></item>
 		<item name="cms.acp.stylesheet.list.description"><![CDATA[Stylesheets oder auch Cascading Stylesheets werden zur individuellen Gestaltung von CMS Seiten benutzt - dazu werden Sie einer Seite zugewiesen. Zum Erlernen empfiehlt sich das <a href="{@$__wcf->getPath()}acp/dereferrer.php?url=http://www.w3schools.com/css/default.asp">CSS Tutorial von W3Schools</a>.]]></item>
+	</category>
+
+	<category name="cms.bbcode">
+		<item name="cms.bbcode.button.page"><![CDATA[Fireball Seite]]></item>
 	</category>
 
 	<category name="cms.content">
