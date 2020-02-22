@@ -20,7 +20,7 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="5.2.0">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="1.0.0">de.mysterycode.wcf.redactor.extended</requiredpackage>
+		<requiredpackage minversion="1.1.0">de.mysterycode.wcf.redactor.extended</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
