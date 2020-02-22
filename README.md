@@ -2,7 +2,7 @@ Fireball CMS
 ========
 The Fireball CMS is a very powerful CMS solution, based on WoltLab Suite Core 3.0. It's full responsive, so you can use the CMS on any device you want (PC, Smartphones or Tablet-PCs). With Fireball CMS you can easily build up your own professional website with all features you like. You can use the latest technologies of CSS3, HTML5, SCSS & PHP.
 
-[![Build Status](https://travis-ci.org/codeQuake/Fireball.svg?branch=v3.1)](https://travis-ci.org/codeQuake/Fireball)
+[![Build Status](https://travis-ci.org/codeQuake/Fireball.svg?branch=v3.2)](https://travis-ci.org/codeQuake/Fireball)
 
 DANGER
 ---------------------------------------------------------------------------------------
