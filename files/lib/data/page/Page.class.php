@@ -7,12 +7,15 @@ use cms\data\page\revision\PageRevision;
 use cms\data\page\revision\PageRevisionList;
 use cms\data\stylesheet\StylesheetCache;
 use cms\system\page\PagePermissionHandler;
+use wcf\data\application\Application;
 use wcf\data\menu\item\MenuItem;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\package\PackageCache;
 use wcf\data\page\PageCache as WCFPageCache;
 use wcf\data\DatabaseObject;
 use wcf\data\IPermissionObject;
 use wcf\data\ITitledLinkObject;
+use wcf\system\cache\builder\ApplicationCacheBuilder;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
@@ -231,9 +234,29 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 				return $root->getApplication()->getPageURL();
 			}
 		}
+
+		/** @var \wcf\data\application\Application[] $applicationList */
+		$applicationList = ApplicationCacheBuilder::getInstance()->getData([], 'application');
+		foreach ($applicationList as $application) {
+			if ($application->landingPageID == $this->wcfPageID) {
+				return $application->getPageURL();
+			}
+		}
+
+		$application = 'cms';
+		$alias = $this->getAlias();
+		$cms = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms');
+		foreach ($this->getParentPages() as $page) {
+			$map = \wcf\data\page\PageCache::getInstance()->getPage($page->wcfPageID);
+			if ($map->applicationPackageID !== $cms->packageID) {
+				$app = new Application($map->applicationPackageID);
+				$application = $app->getAbbreviation();
+				$alias = str_replace($page->getAlias() . '/', '', $alias);
+			}
+		}
 		
-		return LinkHandler::getInstance()->getLink($this->getAlias(), [
-			'application' => 'cms',
+		return LinkHandler::getInstance()->getLink($alias, [
+			'application' => $application,
 			'forceFrontend' => true,
 			'appendSession' => $appendSession
 		]);
