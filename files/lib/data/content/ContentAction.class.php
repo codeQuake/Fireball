@@ -296,7 +296,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IClipboardAc
 	/**
 	 * @inheritDoc
 	 */
-	public function validateUnmarkAll() { /* nothing */ }
+	public function validateUnmarkAll() {
+		/* nothing */
+	}
 
 	/**
 	 * @inheritDoc

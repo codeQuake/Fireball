@@ -842,7 +842,9 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	 * Triggers the publication of pages. You may listen for this action to
 	 * execute certain code once the relevant pages are publicly available.
 	 */
-	public function triggerPublication() { /* nothing */ }
+	public function triggerPublication() {
+		/* nothing */
+	}
 
 	/**
 	 * Validates permissions and parameters to set a page ad home.
@@ -898,7 +900,9 @@ class PageAction extends AbstractDatabaseObjectAction implements IClipboardActio
 	/**
 	 * @inheritDoc
 	 */
-	public function validateUnmarkAll() { /* nothing */ }
+	public function validateUnmarkAll() {
+		/* nothing */
+	}
 
 	/**
 	 * @inheritDoc
