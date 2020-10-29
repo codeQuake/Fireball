@@ -247,7 +247,7 @@ class Page extends DatabaseObject implements ITitledLinkObject, IPermissionObjec
 		$alias = $this->getAlias();
 		$cms = PackageCache::getInstance()->getPackageByIdentifier('de.codequake.cms');
 		foreach ($this->getParentPages() as $page) {
-			$map = \wcf\data\page\PageCache::getInstance()->getPage($page->wcfPageID);
+			$map = WCFPageCache::getInstance()->getPage($page->wcfPageID);
 			if ($map->applicationPackageID !== $cms->packageID) {
 				$app = new Application($map->applicationPackageID);
 				$application = $app->getAbbreviation();

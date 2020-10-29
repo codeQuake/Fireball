@@ -69,7 +69,9 @@ abstract class AbstractPageType implements IPageType {
 	/**
 	 * @inheritDoc
 	 */
-	public function readParameters(AbstractForm $form) { /* nothing */ }
+	public function readParameters(AbstractForm $form) {
+		/* nothing */
+	}
 	
 	/**
 	 * @inheritDoc
@@ -94,17 +96,23 @@ abstract class AbstractPageType implements IPageType {
 	/**
 	 * @inheritDoc
 	 */
-	public function validate(AbstractForm $form) { /* nothing */ }
+	public function validate(AbstractForm $form) {
+		/* nothing */
+	}
 	
 	/**
 	 * @inheritDoc
 	 */
-	public function save(AbstractForm $form) { /* nothing */ }
+	public function save(AbstractForm $form) {
+		/* nothing */
+	}
 	
 	/**
 	 * @inheritDoc
 	 */
-	public function assignVariables(AbstractForm $form) { /* nothing */ }
+	public function assignVariables(AbstractForm $form) {
+		/* nothing */
+	}
 	
 	/**
 	 * @inheritDoc

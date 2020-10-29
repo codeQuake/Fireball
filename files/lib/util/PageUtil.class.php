@@ -110,5 +110,7 @@ final class PageUtil {
 		return (preg_match('~^' . self::ALIAS_PATTERN . '$~', $alias) == 1);
 	}
 
-	private function __construct() { /* nothing */ }
+	private function __construct() {
+		/* nothing */
+	}
 }
