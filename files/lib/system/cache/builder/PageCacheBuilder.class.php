@@ -23,6 +23,7 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 			'pages' => [],
 			'stylesheetsToPage' => [],
 			'structure' => [],
+			'wcfPageIDs' => [],
 		];
 
 		// fetch pages
